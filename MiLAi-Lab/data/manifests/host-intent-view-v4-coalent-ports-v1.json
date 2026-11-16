@@ -1,0 +1,54 @@
+{
+  "status": "STORE_AND_METERED_PROVIDER_PORTS_MECHANICALLY_PASSED",
+  "source_version": "d5abcd7b",
+  "research_core": "artifacts/host-intent-retrieval-v3/upstream/coalent-native-versions-v1",
+  "implementation": [
+    "src/milai_lab/baselines/coalent_store.py",
+    "src/milai_lab/baselines/coalent_providers.py"
+  ],
+  "tests": "tests/unit/test_coalent_store.py",
+  "store": {
+    "persistence": "Existing service.store under owner-specific derived namespace, no new persistent backend/service. Full upstream cognition serialization retains raw evidence and native provenance.",
+    "source_unit": "One captured Source ID/native revision per chunk; full body, role/origin/object_ref/session, separate reported/captured clocks and original calendar_context.",
+    "opportunity": "Caller supplies source-ID search function. Exact returned set/order retained after deduplication and actual owner/visibility checks; no widening or semantic filtering by this port.",
+    "freshness": "sync_sources applies native revisions/deletions only to actual bound sources. New unbound sources are still discoverable via normal cache retrieval; no blanket global invalidation. Caller must invoke sync before serving cached results.",
+    "limitation": "Immutable-message source granularity is explicit; this is not a mutable whole-document connector or a guarantee of discovering every new correction for repeated queries."
+  },
+  "providers": {
+    "generation": "Existing VLLMClient.native_post chat/completions, no tool parser; original owned ledger, Host admission callback, upstream prompt/model/max_tokens/temperature and existing thinking setting. Returns actual usage to upstream without rebilling.",
+    "embedding": "Existing MeteredEmbeddings query/batch methods, original capacity/tokenizer/normalization/ledger path.",
+    "retry": "Upstream LLMSynthesizer configured with retries=0 in the checked recipe. No retry implemented in ports.",
+    "failure": "Malformed JSON through actual upstream synthesizer produces ok=False with no claims, retaining usage; mock HTTP only."
+  },
+  "validation": {
+    "result": "artifacts/host-intent-retrieval-v3/view-v4-coalent-store-port-check-v3/result.json",
+    "tests_passed": 7,
+    "skipped": 0,
+    "ruff": "PASS",
+    "mypy": "PASS two implementation files",
+    "architecture": "199 passed tests/architecture/test_import_boundaries.py",
+    "coverage": [
+      "Actual Store close/reopen and cached reuse without retrieval/synthesis",
+      "Native forget handle evicts derived cache and blocks hidden source retrieval",
+      "New unbound source found through same supplied retriever",
+      "513 cognition units paginate and remain owner scoped",
+      "Original roles, tool origin, exact bodies, object refs, unknown report clocks and calendar context; exact candidate opportunity",
+      "Actual VLLMClient mock wire preserves upstream prompts/parameters and charges known usage once",
+      "Metered embedding batch preserves order and reports exactly its actual mock tokens"
+    ],
+    "measured_check_compute": {
+      "wall_seconds": 12.022557265125215,
+      "cpu_seconds": 8.615369744999999
+    },
+    "architecture_cpu": "Unknown; architecture check was outside measured subprocess wrapper."
+  },
+  "actual_model_calls": 0,
+  "actual_external_HTTP": 0,
+  "accounting": "Measured checks appended pending-v32; synthetic HTTP uses temporary test ledgers only. No real offline settlement while D runs.",
+  "remaining": [
+    "Integrate ports into common registered retrieval/Host lifecycle",
+    "Enforce full outer return token budget, actual per-turn allowance and reusable delivery refs",
+    "Freeze configuration and execute actual existing Qwen/BGE after D is idle",
+    "Matched source-opportunity/cost comparison; no efficacy claim from these checks"
+  ]
+}

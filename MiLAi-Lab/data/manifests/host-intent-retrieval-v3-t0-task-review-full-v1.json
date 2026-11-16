@@ -1,0 +1,84 @@
+{
+  "status": "ALL_MAIN_POSITIONS_REVIEWED",
+  "positions": 272,
+  "source_groups": 64,
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-task-reviews-v1.json",
+  "collection": "artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2/collection-cost-summary-v1.json",
+  "grades": {
+    "CORRECT": 107,
+    "FAILED": 22,
+    "QUALIFIED": 59,
+    "UNFULFILLED": 1,
+    "WRONG": 83
+  },
+  "by_interface": {
+    "query_only": {
+      "CORRECT": 51,
+      "FAILED": 12,
+      "QUALIFIED": 26,
+      "WRONG": 47
+    },
+    "rich": {
+      "CORRECT": 56,
+      "FAILED": 10,
+      "QUALIFIED": 33,
+      "UNFULFILLED": 1,
+      "WRONG": 36
+    }
+  },
+  "by_request_kind": {
+    "stage-0": {
+      "CORRECT": 84,
+      "FAILED": 6,
+      "QUALIFIED": 19,
+      "WRONG": 5
+    },
+    "stage-2": {
+      "CORRECT": 9,
+      "FAILED": 3,
+      "QUALIFIED": 33,
+      "UNFULFILLED": 1,
+      "WRONG": 68
+    },
+    "stored_version": {
+      "CORRECT": 6,
+      "FAILED": 2,
+      "WRONG": 8
+    },
+    "corpus": {
+      "CORRECT": 8,
+      "FAILED": 11,
+      "QUALIFIED": 7,
+      "WRONG": 2
+    }
+  },
+  "rubric": {
+    "CORRECT": "Requested source facts and material status distinctions correct; permitted unknowns preserved.",
+    "WRONG": "Material false claim, wrong object/version, or missed critical update.",
+    "QUALIFIED": "Main requested state is largely right but a secondary detail/inventory item is missing, ambiguous or unsupported; kept separate from full success.",
+    "UNFULFILLED": "Accepted final response does not provide the requested answer despite task scope.",
+    "FAILED": "No accepted final answer; first failure receipt retained."
+  },
+  "limitations": [
+    "Exploratory author review of training/development collection; not independent or pre-registered holdout score.",
+    "CORRECT alone counts full task-content success; QUALIFIED remains separate.",
+    "Task-content judgment does not certify every returned view field or causal mechanism.",
+    "MuSiQue source-qualified judgments are separate from unchanged native gold and metrics.",
+    "Same-source interfaces are paired; no independent-sample significance claim.",
+    "Raw results, first failures, frozen fitting source and fitting data unchanged.",
+    "Human reading/annotation effort not timed and not reported as zero."
+  ],
+  "validation": {
+    "unique_position_keys": 272,
+    "exact_registered_position_coverage": true,
+    "failed_receipt_consistency": 22
+  },
+  "model_calls": 0,
+  "http_requests": 0,
+  "aggregation_compute": {
+    "wall_seconds": 0.00949844066053629,
+    "cpu_seconds": 0.009497973000000003,
+    "ledger_recorded": false,
+    "phase": "host_intent_t0_main_task_review_aggregation_v1"
+  }
+}

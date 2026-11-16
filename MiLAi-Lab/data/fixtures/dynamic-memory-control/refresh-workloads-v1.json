@@ -1,0 +1,515 @@
+{
+  "version": "dynamic-memory-control-refresh-workloads-v1",
+  "scope": "Three authored functional-development workloads: prior12-task multitopic switching plus6related-dense and6unrelated-dense arrivals.24correlated tasks per arm; not24independent families or heldout evidence.",
+  "histories": [
+    {
+      "id": "multitopic_switching",
+      "source_family": "multitopic_switching",
+      "split": "functional_development",
+      "task_count": 12,
+      "steps": [
+        {
+          "id": "a-cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T09:10:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "砂桥项目普通无电池样品可以空运，当前这批样品原登记为普通无电池样品。",
+              "occurred_at": "2032-08-20T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "溪港团队文稿发布前由编辑审核，使用中文。",
+              "occurred_at": "2032-08-20T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "苇原档案室每周三闭馆维护，维护负责人是贺青。",
+              "occurred_at": "2032-08-20T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "能空运。"
+        },
+        {
+          "id": "b-cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，溪港团队的文稿发布前由谁审核，使用什么语言？",
+          "occurred_at": "2032-08-20T09:20:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "编辑审核，中文。"
+        },
+        {
+          "id": "a-return",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T09:30:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "能空运。"
+        },
+        {
+          "id": "c-cold",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，苇原档案室每周哪天闭馆维护，谁负责？",
+          "occurred_at": "2032-08-20T09:40:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "周三，贺青。"
+        },
+        {
+          "id": "a-after-third-topic",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T09:50:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "能空运。"
+        },
+        {
+          "id": "b-return",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，溪港团队的文稿发布前由谁审核，使用什么语言？",
+          "occurred_at": "2032-08-20T10:00:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "编辑审核，中文。"
+        },
+        {
+          "id": "a-related",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T10:10:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a-u",
+              "content": "砂桥当前这批样品经核查实际含锂电池；含锂电池样品只能陆运且不能空运。普通无电池样品规则不变。",
+              "occurred_at": "2032-08-20T10:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能空运，只能陆运。"
+        },
+        {
+          "id": "a-unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T10:20:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c-n",
+              "content": "苇原档案室更换了门外海报，这不改变维护日期和负责人。",
+              "occurred_at": "2032-08-20T10:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能空运，只能陆运。"
+        },
+        {
+          "id": "a-repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T10:30:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "不能空运，只能陆运。"
+        },
+        {
+          "id": "b-related",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，溪港团队的文稿发布前由谁审核，使用什么语言？",
+          "occurred_at": "2032-08-20T10:40:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b-u",
+              "content": "溪港团队文稿从现在起改用英文发布，发布前仍由编辑审核。",
+              "occurred_at": "2032-08-20T10:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "编辑审核，英文。"
+        },
+        {
+          "id": "c-return",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，苇原档案室每周哪天闭馆维护，谁负责？",
+          "occurred_at": "2032-08-20T10:50:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "周三，贺青。"
+        },
+        {
+          "id": "a-final-return",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T11:00:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "不能空运，只能陆运。"
+        }
+      ]
+    },
+    {
+      "id": "m3_capacity_changes",
+      "source_family": "m3_capacity_changes",
+      "split": "functional_development",
+      "task_count": 6,
+      "steps": [
+        {
+          "id": "phase-0",
+          "kind": "task",
+          "session": "query",
+          "content": "根据目前已提供的记录，今天榆湾共享工位还有多少个可用名额？按当前总上限和当前已确认占用总数计算，区分今天与未来安排。",
+          "occurred_at": "2032-10-04T09:10:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch0-0",
+              "content": "榆湾共享工位今天的同时使用总上限为12个。",
+              "occurred_at": "2032-10-04T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch0-1",
+              "content": "榆湾共享工位当前已确认占用总数为9个；这是一份当前总数快照，不与此前的快照相加。",
+              "occurred_at": "2032-10-04T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "3个。"
+        },
+        {
+          "id": "phase-1",
+          "kind": "task",
+          "session": "query",
+          "content": "根据目前已提供的记录，今天榆湾共享工位还有多少个可用名额？按当前总上限和当前已确认占用总数计算，区分今天与未来安排。",
+          "occurred_at": "2032-10-04T09:20:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [],
+          "expected": "3个。"
+        },
+        {
+          "id": "phase-2",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据目前已提供的记录，今天榆湾共享工位还有多少个可用名额？按当前总上限和当前已确认占用总数计算，区分今天与未来安排。",
+          "occurred_at": "2032-10-04T09:30:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch2-0",
+              "content": "榆湾共享工位当前已确认占用总数改为11个，新增的2个已经确认。",
+              "occurred_at": "2032-10-04T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch2-1",
+              "content": "榆湾共享工位明天10月5日才把总上限提高到18个；今天仍按12个执行。",
+              "occurred_at": "2032-10-04T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "1个；明天的18个上限尚未生效。"
+        },
+        {
+          "id": "phase-3",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据目前已提供的记录，今天榆湾共享工位还有多少个可用名额？按当前总上限和当前已确认占用总数计算，区分今天与未来安排。",
+          "occurred_at": "2032-10-04T09:40:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch3-0",
+              "content": "榆湾共享工位刚取消3个已确认名额，当前已确认占用总数现在是8个。",
+              "occurred_at": "2032-10-04T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch3-1",
+              "content": "取消发生在今天这批榆湾名额；今天的总上限仍为12个，明天的计划没有提前生效。",
+              "occurred_at": "2032-10-04T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "4个。"
+        },
+        {
+          "id": "phase-4",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据目前已提供的记录，今天榆湾共享工位还有多少个可用名额？按当前总上限和当前已确认占用总数计算，区分今天与未来安排。",
+          "occurred_at": "2032-10-04T09:50:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch4-0",
+              "content": "榆湾共享工位因两个位置临时维修，今天剩余时段的总上限即刻调整为10个。",
+              "occurred_at": "2032-10-04T09:50:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch4-1",
+              "content": "当前已确认占用总数仍为8个，没有因维修自动取消已确认占用。",
+              "occurred_at": "2032-10-04T09:50:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "2个。"
+        },
+        {
+          "id": "phase-5",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据目前已提供的记录，今天榆湾共享工位还有多少个可用名额？按当前总上限和当前已确认占用总数计算，区分今天与未来安排。",
+          "occurred_at": "2032-10-04T10:00:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [],
+          "expected": "2个。"
+        }
+      ]
+    },
+    {
+      "id": "m3_unrelated_arrivals",
+      "source_family": "m3_unrelated_arrivals",
+      "split": "functional_development",
+      "task_count": 6,
+      "steps": [
+        {
+          "id": "phase-0",
+          "kind": "task",
+          "session": "query",
+          "content": "根据现有记录，枫港档案客户端今天应使用的接口路径和认证头字段名是什么？只按这个客户端当前有效的安排回答。",
+          "occurred_at": "2032-10-04T09:10:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch0-0",
+              "content": "枫港档案客户端当前接口路径是/v2/archive，认证头字段名为X-Archive-Key。",
+              "occurred_at": "2032-10-04T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch0-1",
+              "content": "该客户端旧版/v1/archive和旧认证头Archive-Token已停用。其他客户端的版本和字段不决定枫港的安排。",
+              "occurred_at": "2032-10-04T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "/v2/archive；X-Archive-Key。"
+        },
+        {
+          "id": "phase-1",
+          "kind": "task",
+          "session": "query",
+          "content": "根据现有记录，枫港档案客户端今天应使用的接口路径和认证头字段名是什么？只按这个客户端当前有效的安排回答。",
+          "occurred_at": "2032-10-04T09:20:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch1-0",
+              "content": "支付客户端当前路径为/v3/payments，认证头为X-Pay-Key。",
+              "occurred_at": "2032-10-04T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch1-1",
+              "content": "配送客户端仍使用/v1/ship；其迁移还未定日期。",
+              "occurred_at": "2032-10-04T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "/v2/archive；X-Archive-Key。"
+        },
+        {
+          "id": "phase-2",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据现有记录，枫港档案客户端今天应使用的接口路径和认证头字段名是什么？只按这个客户端当前有效的安排回答。",
+          "occurred_at": "2032-10-04T09:30:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch2-0",
+              "content": "海堤监测应用新增/v2/water接口，用于每日水位记录。",
+              "occurred_at": "2032-10-04T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch2-1",
+              "content": "林地巡检应用的X-Inspect-Key轮换已完成。",
+              "occurred_at": "2032-10-04T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch2-2",
+              "content": "图书借阅客户端的/v2/loans只接受已登记读者。",
+              "occurred_at": "2032-10-04T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch2-3",
+              "content": "河谷统计服务的/v3/reports下周才开放，今天仍用/v2/reports。",
+              "occurred_at": "2032-10-04T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "/v2/archive；X-Archive-Key。"
+        },
+        {
+          "id": "phase-3",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据现有记录，枫港档案客户端今天应使用的接口路径和认证头字段名是什么？只按这个客户端当前有效的安排回答。",
+          "occurred_at": "2032-10-04T09:40:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch3-0",
+              "content": "仓储盘点客户端已启用/v3/stock。",
+              "occurred_at": "2032-10-04T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch3-1",
+              "content": "供应商目录服务新增X-Vendor-Key认证头。",
+              "occurred_at": "2032-10-04T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch3-2",
+              "content": "舟港公示系统的/v1/notices保持不变。",
+              "occurred_at": "2032-10-04T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch3-3",
+              "content": "实验仪器预约平台取消了一个尚未批准的接口变更提案。",
+              "occurred_at": "2032-10-04T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch3-4",
+              "content": "翻译任务客户端改用/v2/translations，旧任务仍可只读查看。",
+              "occurred_at": "2032-10-04T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch3-5",
+              "content": "展馆票务应用今晚暂停维护，明天恢复原有接口。",
+              "occurred_at": "2032-10-04T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "/v2/archive；X-Archive-Key。"
+        },
+        {
+          "id": "phase-4",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据现有记录，枫港档案客户端今天应使用的接口路径和认证头字段名是什么？只按这个客户端当前有效的安排回答。",
+          "occurred_at": "2032-10-04T09:50:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "batch4-0",
+              "content": "枫港档案客户端计划明天10月5日切换到/v3/archive；今天仍使用/v2/archive。认证头继续叫X-Archive-Key，不作变更。",
+              "occurred_at": "2032-10-04T09:50:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "/v2/archive；X-Archive-Key。"
+        },
+        {
+          "id": "phase-5",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据现有记录，枫港档案客户端今天应使用的接口路径和认证头字段名是什么？只按这个客户端当前有效的安排回答。",
+          "occurred_at": "2032-10-04T10:00:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [],
+          "expected": "/v2/archive；X-Archive-Key。"
+        }
+      ]
+    }
+  ]
+}

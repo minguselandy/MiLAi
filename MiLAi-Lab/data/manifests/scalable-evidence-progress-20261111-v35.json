@@ -1,0 +1,152 @@
+{
+  "status": "PHASE35_PROGRESS_ALL_ADAPTED_APPLICATIONS_CLOSED_CONFIRMATION_FIRST_READER_AND_TARGETED_REGULARIZATION_ACTIVE",
+  "observed_at_utc": "2026-11-11T20:01:38.824627+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v34.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "qasper-confirm96-fixed-context-readouts-v1",
+      "owner_pid": 1765940,
+      "child_pid": 1765942,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "process_alive": true,
+      "actual_argv_checked": true,
+      "closed_readouts": 38,
+      "failed_readouts": 0
+    },
+    {
+      "name": "m2-first160-feedback-head-only-seed0-v1",
+      "owner_pid": 1740131,
+      "child_pid": 1740175,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "process_alive": true,
+      "actual_argv_checked": true,
+      "optimizer_updates": 34,
+      "freeze_encoder": true
+    }
+  ],
+  "adapted_application_full_result": {
+    "status": "ALL16_ADAPTED_PAIRED_APPLICATIONS_CLOSED_AND_SOURCE_REVIEWED",
+    "conditions": {
+      "source-reference": {
+        "positions": 80,
+        "families": 16,
+        "answer_grades": {
+          "C": 17,
+          "W": 28,
+          "Q": 21,
+          "F": 14
+        },
+        "relevant_update_positions": 31,
+        "relevant_update_grades": {
+          "W": 24,
+          "Q": 2,
+          "F": 5
+        },
+        "selected_operations": {
+          "SEARCH": 20,
+          "READ": 148,
+          "HANDOFF": 28
+        },
+        "generation_delta": {
+          "charged_tokens": 702309,
+          "known_tokens": 702309,
+          "unknown_usage": 0
+        },
+        "HTTP": 122,
+        "NN": 196,
+        "retrievals": 45
+      },
+      "continued-replay": {
+        "positions": 80,
+        "families": 16,
+        "answer_grades": {
+          "C": 22,
+          "W": 23,
+          "F": 19,
+          "Q": 16
+        },
+        "relevant_update_positions": 31,
+        "relevant_update_grades": {
+          "W": 19,
+          "F": 11,
+          "Q": 1
+        },
+        "selected_operations": {
+          "SEARCH": 22,
+          "READ": 114,
+          "HANDOFF": 19
+        },
+        "generation_delta": {
+          "charged_tokens": 665290,
+          "known_tokens": 665290,
+          "unknown_usage": 0
+        },
+        "HTTP": 103,
+        "NN": 155,
+        "retrievals": 23
+      }
+    },
+    "source_mean_complete_difference": -0.0625,
+    "source_bootstrap_95pct": [
+      -0.25,
+      0.12499999999999999
+    ],
+    "scope": "SameGPU3/FP32/Host/new80positions each,16excluded-from-adaptationTRAINhistories, generated/exposednotblind. Allfirstfailuresretained. Rootnonblind/nonindependent; bootstrapconditionalonjudgments, noHostRNG/seed/judge-errorcontrol. Overallbenefitnotestablished; C01initialstatuswitness/answerimprovement islocaloneSource evidence, notglobalgain. NeitherarmhasC on31target-changingpositions. No traininglabelsynthesized.",
+    "no_sha_validation": true
+  },
+  "local_source_example": {
+    "family": "memops_C01",
+    "positions": [
+      "initial",
+      "same-sources",
+      "additional-arrival"
+    ],
+    "source_reference": [
+      "C",
+      "C",
+      "C"
+    ],
+    "continued_replay": [
+      "Q",
+      "F",
+      "Q"
+    ],
+    "source_evidence": "Referencearmactuallydelivereduser-shelved/revisitedstatuswitness; replaymissingthatwitness. Rootsourcecheckedtireexpensewhenquoted.",
+    "scope": "Oneexposedgeneratedsource, repeatedpositionsrelated; Hostquery/RNGunmatched. Localmaterial/answerimprovement, notcausaloverallgeneralization orcompletegoalproof."
+  },
+  "completion_requirement_rechecked": {
+    "plan_section": 16,
+    "requirement": "Atleastoneclear chain: effectiveexperience/method -> fullactionchange -> betterdelivery/appropriateStop -> Hosttaskorcompletecostbenefit -> explicitgeneralization scope.",
+    "status": "Notprovedbyexperimentsmerelyclosing orreferenceaccuracy. Currentglobalgainnotestablished; confirmation/externalchainpending.",
+    "response": "Targetedupdatescope/regularization control per same section; do notstopallresearch orclaimnegativechecklistcompletion."
+  },
+  "head_only_control": {
+    "plan": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-feedback-head-only-seed0-v1-plan.json",
+    "init": "s1-op3k-seed0-v1/update-101",
+    "same_data": "450rows=131knownfeedback+319replay",
+    "updates": 51,
+    "draws": 1632,
+    "only_training_change": "--freeze-encoder",
+    "development_only": true,
+    "frozen_confirmation_nominees_changed": false,
+    "predeclared_final_DEV_plan": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-head-only-dev64-plan-v1.json",
+    "u17_full_reference": {
+      "accepted": 133,
+      "labelled": 278,
+      "family_macro": 0.48244240878169453
+    },
+    "scope": "Noearly/bestcheckpointselection; existingfullfeedbacksamebudgetcomparator remains. Differentbackwardcompute, notFLOPs-equivalent; noHostgain inferred."
+  },
+  "confirmation_firsts": "Baseline96Readerstarted; no scores/answersinspected forselection. Allmodels/Host/96SourceIDs/protocol frozen. Head-onlytrial not addedtoconfirmation ortrainedfromit.",
+  "next": [
+    "Finishfrozenencoder51/controlDEVactualchoices; preservefirstfullfeedbackcomparator andno confirmationtuning",
+    "Afterbaseline96Reader closes, runother3fixedfirstconditions then32predeclaredrepeats; scoreonlyclosedmatrix",
+    "LME32fixednominees/nativeJudge, fullcost/generalization/finalreport; completionnotyetproved"
+  ],
+  "cost_scope": "Allappsclosed, whole-minus-native inventory mustrebuildfor8runs beforeonce-onlysettlement; no ledgerwritewhileReaderholdsHTTP. Nativefits/readers/evaluatorsselfbill. Otherwhole/prep/author/test/importCPU pending/unknown.",
+  "validation": "No codechanges; actualSourceC04lastresults andSourceC01status/tirewitness checked. Existing30tests/Ruff/packagePASS/tools6oldfindings unchanged. Newhead-onlyflag confirmedinactualrun.json andargv.",
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push. Firstfailuresunknownsrolespreserved; goalACTIVE/incomplete."
+}

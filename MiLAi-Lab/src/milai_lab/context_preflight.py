@@ -2,10 +2,14 @@ from __future__ import annotations
 
 import hashlib
 import json
-from collections import Counter, defaultdict
+from collections import defaultdict
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any, Literal
+
+from milai_lab.datasets.edit_benchmarks import (
+    source_session_instance_keys as source_session_instance_keys,
+)
 
 FailureClass = Literal[
     "INFRASTRUCTURE",
@@ -163,26 +167,6 @@ def classify_terminal_failure(error: BaseException) -> FailureClass:
 
 def semantic_terminal(status: object) -> bool:
     return status in {"ABSENT", "ABSTAINED", "AMBIGUOUS", "INSUFFICIENT"}
-
-
-def source_session_instance_keys(session_ids: Sequence[object]) -> tuple[str, ...]:
-    """Preserve source IDs while disambiguating repeated session instances."""
-
-    if any(not isinstance(value, str) or not value for value in session_ids):
-        raise ValueError("LongMemEval source session identity is invalid")
-    typed_ids = [str(value) for value in session_ids]
-    totals = Counter(typed_ids)
-    seen: Counter[str] = Counter()
-    keys: list[str] = []
-    for source_session_id in typed_ids:
-        occurrence = seen[source_session_id]
-        seen[source_session_id] += 1
-        keys.append(
-            source_session_id
-            if totals[source_session_id] == 1
-            else f"{source_session_id}\x1fduplicate-occurrence:{occurrence}"
-        )
-    return tuple(keys)
 
 
 def material_turn_ordinals(session: object) -> tuple[int, ...]:

@@ -1,0 +1,197 @@
+{
+  "status": "PHASE34_PROGRESS_THIRD_ADAPTED_PAIR_AND_FIRST12_REVIEW_CLOSED_LAST4_REPLAY_ACTIVE",
+  "observed_at_utc": "2026-11-11T19:40:14.265171+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v33.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "m6-adapted-continued-replay-families12to16-v1",
+      "owner_pid": 1681664,
+      "child_pid": 1681666,
+      "process_alive": true,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "closed_positions": 14,
+      "active": {
+        "history": "memops_C02-d-update32-v1-content",
+        "policy": "laya",
+        "interface": "rich",
+        "profile": "laya",
+        "request": "final-arrivals"
+      }
+    }
+  ],
+  "third_pair_closed": {
+    "status": "THIRD4_ADAPTED_APPLICATION_PAIRS_SOURCE_REVIEWED",
+    "conditions": {
+      "source-reference": {
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "Q": 8,
+          "F": 5,
+          "C": 1,
+          "W": 6
+        },
+        "delivery_status": {
+          "complete": 6,
+          "partial": 14
+        },
+        "HTTP": 28,
+        "NN": 47,
+        "retrievals": 8,
+        "selected_operations": {
+          "READ": 37,
+          "HANDOFF": 5,
+          "SEARCH": 5
+        },
+        "generation_delta": {
+          "charged_tokens": 173364,
+          "known_tokens": 173364,
+          "unknown_usage": 0
+        },
+        "relevant_update_grades": {
+          "W": 6,
+          "F": 2
+        },
+        "review": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-source-reference-families8to12-v1-review/author-decisions-v1.json"
+      },
+      "continued-replay": {
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "Q": 5,
+          "F": 6,
+          "W": 7,
+          "C": 2
+        },
+        "delivery_status": {
+          "complete": 7,
+          "partial": 13
+        },
+        "HTTP": 26,
+        "NN": 40,
+        "retrievals": 6,
+        "selected_operations": {
+          "SEARCH": 6,
+          "READ": 30,
+          "HANDOFF": 4
+        },
+        "generation_delta": {
+          "charged_tokens": 179693,
+          "known_tokens": 179693,
+          "unknown_usage": 0
+        },
+        "relevant_update_grades": {
+          "W": 5,
+          "F": 3
+        },
+        "review": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-continued-replay-families8to12-v1-review/author-decisions-v1.json"
+      }
+    },
+    "scope": "Fixedthird4of16, Rootnonblind/nonindependent, allfirstfailures retained; no traininglabels orposthocselection."
+  },
+  "first12_closed": {
+    "status": "FIRST12_CLOSED_LAST4_RUNNING",
+    "conditions": {
+      "source-reference": {
+        "positions": 60,
+        "families": 12,
+        "answer_grades": {
+          "C": 13,
+          "W": 21,
+          "Q": 16,
+          "F": 10
+        },
+        "relevant_update_positions": 23,
+        "relevant_update_grades": {
+          "W": 17,
+          "Q": 2,
+          "F": 4
+        },
+        "selected_operations": {
+          "SEARCH": 16,
+          "READ": 118,
+          "HANDOFF": 23
+        },
+        "generation_delta": {
+          "charged_tokens": 554599,
+          "known_tokens": 554599,
+          "unknown_usage": 0
+        },
+        "HTTP": 94,
+        "NN": 157,
+        "retrievals": 37
+      },
+      "continued-replay": {
+        "positions": 60,
+        "families": 12,
+        "answer_grades": {
+          "C": 19,
+          "W": 17,
+          "F": 15,
+          "Q": 9
+        },
+        "relevant_update_positions": 23,
+        "relevant_update_grades": {
+          "W": 13,
+          "F": 9,
+          "Q": 1
+        },
+        "selected_operations": {
+          "SEARCH": 16,
+          "READ": 80,
+          "HANDOFF": 13
+        },
+        "generation_delta": {
+          "charged_tokens": 485476,
+          "known_tokens": 485476,
+          "unknown_usage": 0
+        },
+        "HTTP": 76,
+        "NN": 109,
+        "retrievals": 16
+      }
+    },
+    "scope": "No earlystop. SameGPUnewarms, Rootnonblind/nonindependent/RNGunmatched, relatedpositions notindependent. No taskbenefit established.",
+    "no_sha_validation": true
+  },
+  "last4_partial_review": {
+    "directory": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-continued-replay-families12to16-v1-review",
+    "saved_families": [
+      "B26",
+      "C01"
+    ],
+    "B26_grades": [
+      "C",
+      "C",
+      "C",
+      "W",
+      "W"
+    ],
+    "C01_grades": [
+      "Q",
+      "F",
+      "Q",
+      "W",
+      "W"
+    ],
+    "C02_first3_inspected": [
+      "Q",
+      "Q",
+      "F"
+    ],
+    "remaining": "C02last2/C04 awaitclosedactualresults; no imputation oroldlabeltransfer"
+  },
+  "confirmation_resources": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-retrieval-resources-v1.json",
+  "confirmation_scope": "All4policyrollouts closed, no Readeranswers/scoresyet. Retrievaloperationstatuses/packetlengthsdescriptive only; fewerREAD/tokensnotquality orfullcostbenefit. Frozenmodels/firstmatrix/repetition/scoringunchanged.",
+  "next": [
+    "Finishlast4replaythenlaunchm6-adapted-source-reference-families12to16-v1, closeall160newapplicationpositions andsourcejudgments",
+    "Run384confirmationfirstreadouts and32predeclaredrepeatdraws, thenfixednativeF1/Source8spots/uncertainty",
+    "LME32bothfixednomineesandnativeJudgechain; reconcilewholecost andfinalgeneralizationreport"
+  ],
+  "validation": "No runtimecodechanges/newtests. Actualclosedthird4outcomes source-reviewed, finalresultbound beforegrading. FinalS1figurealreadyclosed. Earlier30tests/Ruff/packagePASS/tools6oldLMEfindings unchanged.",
+  "cost_scope": "No newledgerwritewhileapplicationactive; priorpaidphaseinventorynotfulltotal, closedappresidualinventorystillunpaid. Wholechild/native/sourcefirstoverlaps preserved; unmeasuredcostsunknown.",
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push. Firstfailuresunknownsrolespreserved, goalACTIVE/incomplete."
+}

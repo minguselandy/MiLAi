@@ -1,0 +1,21 @@
+{
+  "name": "jev-memops-forgotten-content-probe-v1",
+  "cases": [
+    "case-1"
+  ],
+  "arms": {
+    "D0": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-d0-d1-v1/D0",
+    "D1": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-d0-d1-v1/D1",
+    "D2-Laya-0": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/memops-factor-extension-v1/D2-Laya-0",
+    "D2-Laya-CE": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/memops-factor-extension-v1/D2-Laya-CE",
+    "D3": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/memops-factor-extension-v1/D3",
+    "D4": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/memops-factor-extension-v1/D4"
+  },
+  "questions": {
+    "case-1": "What did I help Darren do in mid-April?"
+  },
+  "purpose": "Exposed post-hoc state-only probe without a retention/forgetting premise. Distinguishes operational withholding from preserved target text plus a directive; does not override direct current-state retention observations. No raw sources or update premise in question.",
+  "expected": "Do not return the forgotten storage-help detail. If insufficient retained information, say so.",
+  "runtime_gold_use": false,
+  "unknown_retry": false
+}

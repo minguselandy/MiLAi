@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import json
+import re
+from collections import Counter
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -17,10 +20,18 @@ class ObservedSession:
 
 
 def halumem_users(path: Path, selected: list[str]) -> list[dict[str, Any]]:
+    """Decode selected rows only; the public JSONL puts uuid in its first field."""
     wanted = set(selected)
     users = []
+    decoder = json.JSONDecoder()
     with path.open(encoding="utf-8") as stream:
         for line in stream:
+            head = re.match(r'\s*\{\s*"uuid"\s*:\s*', line)
+            if head is None:
+                raise ValueError("HaluMem rows must put uuid in the first JSON field")
+            user_id, _ = decoder.raw_decode(line, head.end())
+            if user_id not in wanted:
+                continue
             user = json.loads(line)
             if user["uuid"] in wanted:
                 users.append(user)
@@ -55,11 +66,30 @@ def longmemeval_cases(path: Path, selected: list[str]) -> list[dict[str, Any]]:
     return cases
 
 
+def source_session_instance_keys(session_ids: Sequence[object]) -> tuple[str, ...]:
+    """Preserve source IDs while disambiguating repeated session instances."""
+    if any(not isinstance(value, str) or not value for value in session_ids):
+        raise ValueError("LongMemEval source session identity is invalid")
+    typed_ids = [str(value) for value in session_ids]
+    totals = Counter(typed_ids)
+    seen: Counter[str] = Counter()
+    keys = []
+    for source_session_id in typed_ids:
+        occurrence = seen[source_session_id]
+        seen[source_session_id] += 1
+        keys.append(
+            source_session_id
+            if totals[source_session_id] == 1
+            else f"{source_session_id}\x1fduplicate-occurrence:{occurrence}"
+        )
+    return tuple(keys)
+
+
 def longmemeval_history(raw: dict[str, Any]) -> tuple[ObservedSession, ...]:
     """Consume every original session in chronological order; never copy has_answer."""
     sessions = raw["haystack_sessions"]
     dates = raw["haystack_dates"]
-    ids = raw["haystack_session_ids"]
+    ids = source_session_instance_keys(raw["haystack_session_ids"])
     if not len(sessions) == len(dates) == len(ids):
         raise ValueError("LongMemEval session/date/id lengths differ")
     ordered = sorted(

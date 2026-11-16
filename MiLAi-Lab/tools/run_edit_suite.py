@@ -6,8 +6,12 @@ import argparse
 import copy
 from pathlib import Path
 
-from milai_lab.harness.artifact_io import read_json, write_json
-from milai_lab.runners.edit_benchmarks import run
+from milai_lab.harness.artifact_io import (
+    configure_runtime_directory,
+    entrypoint_settings,
+    read_json,
+    write_json,
+)
 
 
 def main() -> None:
@@ -16,8 +20,14 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--benchmark", choices=["halumem", "longmemeval", "all"], default="halumem")
     parser.add_argument("--phase", choices=["all", "predict", "score"], default="all")
+    parser.add_argument("--runtime-dir", type=Path,
+                        help="Writable temporary directory for this run and its workers")
     args = parser.parse_args()
-    settings = read_json(args.config)
+    if args.runtime_dir is not None:
+        configure_runtime_directory(args.runtime_dir)
+    from milai_lab.runners.edit_benchmarks import run
+
+    settings = entrypoint_settings(read_json(args.config), "benchmark")
     completed = []
     for arm in settings["arms"]:
         configured = copy.deepcopy(settings)

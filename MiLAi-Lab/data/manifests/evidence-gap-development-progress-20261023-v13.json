@@ -1,0 +1,136 @@
+{
+  "status": "ACTIVE;HOST_ONLY_DIAGNOSTIC_READY_NOT_DISPATCHED;ORIGINAL_SAVEDCPU393_RUNNING",
+  "observed_at": "2026-10-23T12:38:47.238183+00:00",
+  "source_version": "f1e8b9ce",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v12.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: CPU262verified/settled,three realSTATEarms plus conditionalreadouts closed,original393dispatched",
+  "Host_only": {
+    "entrypoint": "tools/run_state_bench_local_pilot.py --memory-protocol none",
+    "behavior": "No memory schemas/handlers/forcedretrievalinstruction/corpus read/Source capture/Store/policy/model load/empty retrieval receipt. Current-task conversation/domain tools and original Host/simulator/ledger retained.",
+    "default_dynamic_readonly": "unchanged",
+    "constraints": "No memory artifact,initial forced retrieval or retrieval snapshots in none mode",
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-task3-v1/plan.json",
+    "status": "FROZEN_NOT_DISPATCHED",
+    "task": "3-delay_no_free_rebook_cheaper_paid_path_state",
+    "scope": "Post-hoc common-Host diagnostic on exposed task3; not confirmation or a retry/repair of the original memory arms",
+    "dispatch": "After original393terminal/verified/accounted when idle,then continue original524"
+  },
+  "validation": {
+    "SDK_and_CLI_tests": {
+      "passed": 18,
+      "skipped": 1
+    },
+    "readout_regression_tests": {
+      "passed": 7
+    },
+    "skip": "optional MemPursuit dependency absent",
+    "CLI_evidence": "Real upstream native task/sandbox with scripted HTTP; existing ledger receives3requests/45tokens; forbid corpus/Store/policy helpers and verify no memory files/receipts created",
+    "ruff": "PASS",
+    "scoped_mypy": "2 modules PASS with existing exclusions",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "new_v3_capacity": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/laya/compact-capacity-analysis.json",
+    "recorded_states": 5,
+    "paired_representations": 10,
+    "actual_old_failed_total": 16978,
+    "shared_actions_failed_total": 17012,
+    "compact_actions_total": 15290,
+    "request_text_failed_total": 17306,
+    "compact_actions_request_text_total": 15613,
+    "limit": 16384,
+    "all_literal_JSON_head_actions_equal": true,
+    "new_model_forwards": 0,
+    "old_task_retry": false,
+    "scope": "Recorded v3 states only. New compact serialization not applied to the old checkpoint,failed trajectory not replayed or repaired. Actual learned/Host effect still unmeasured."
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u393-v1",
+      "driver_pid": 3654617,
+      "child_pid": 3654665,
+      "session": 24298,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 59,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_ORIGINAL_SAVEDCPU393_LIVES",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-validation-v1/package-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 3.768532,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-validation-v1/readout-regression.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 7.141896999999999,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-validation-v1/ruff-final.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.039406,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-validation-v1/ruff.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.7917189999999992,
+        "exit_code": 1
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-validation-v1/tests.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 7.120214000000001,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-validation-v1/tools-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 7.858267999999999,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-validation-v1/typing.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 4.706797,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-task3-v1/preparation-compute.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 1.334692757
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/laya/compact-capacity-analysis.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 10.247757688
+      }
+    ],
+    "measured_cpu_seconds": 43.009283444999994,
+    "ledger_recorded": false,
+    "previous_pending_status": "Allv7-v11pending andSTATEv3closedoverhead settled once;see u262settlement andSTATEv3offline-settlement. Do not rebill.",
+    "unknown": "Authoring/reporting and prior unmeasured work remain unknown.",
+    "no_sha_validation": true
+  },
+  "remaining": "Original393/524/selection/matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic and compact-model quality comparison not yet executed.",
+  "scheduling": "Original393 is sole neuraljob. No new neural dispatch or offline settlement whilelive;never restart on stale observation. Allpriorclosedjobs/results remain closed.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_interfaces_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

@@ -1,0 +1,266 @@
+{
+  "status": "FIRST_CANDIDATE_BOUNDARY_DIAGNOSIS_NOT_TRAINING_ADMISSION",
+  "candidate_train_families": 128,
+  "retained_train_families": 114,
+  "retained_by_dataset": {
+    "musique_train_mirror": 50,
+    "two_wiki_author_train": 64
+  },
+  "conflicting_families": [
+    "musique-family-000019",
+    "musique-family-000020",
+    "musique-family-000021",
+    "musique-family-000067",
+    "musique-family-000156",
+    "musique-family-000221",
+    "musique-family-000304",
+    "musique-family-000539",
+    "musique-family-000554",
+    "musique-family-000566",
+    "musique-family-000642",
+    "musique-family-000756",
+    "musique-family-000763",
+    "musique-family-000843"
+  ],
+  "conflicts": [
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 13598,
+      "family": "musique-family-000763",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 28623,
+      "family": "musique-family-000763",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 21140,
+      "family": "musique-family-000020",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 29101,
+      "family": "musique-family-000020",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 10698,
+      "family": "musique-family-000554",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 35483,
+      "family": "musique-family-000554",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 20410,
+      "family": "musique-family-000539",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 27549,
+      "family": "musique-family-000539",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 27549,
+      "family": "musique-family-000539",
+      "panel": "old_reserved_regression",
+      "reasons": [
+        "train_target_title_in_evaluation_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 17724,
+      "family": "musique-family-000304",
+      "panel": "old_reserved_regression",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 32256,
+      "family": "musique-family-000304",
+      "panel": "old_reserved_regression",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 19016,
+      "family": "musique-family-000566",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 27250,
+      "family": "musique-family-000566",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 23962,
+      "family": "musique-family-000156",
+      "panel": "new_reserved",
+      "reasons": [
+        "train_target_title_in_evaluation_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 3097,
+      "family": "musique-family-000642",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 27161,
+      "family": "musique-family-000756",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 36263,
+      "family": "musique-family-000756",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 2001,
+      "family": "musique-family-000843",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 17255,
+      "family": "musique-family-000843",
+      "panel": "new_reserved",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 6548,
+      "family": "musique-family-000221",
+      "panel": "old_reserved_regression",
+      "reasons": [
+        "train_target_title_in_evaluation_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 27796,
+      "family": "musique-family-000067",
+      "panel": "old_reserved_regression",
+      "reasons": [
+        "evaluation_target_title_in_train_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 25987,
+      "family": "musique-family-000021",
+      "panel": "new_reserved",
+      "reasons": [
+        "train_target_title_in_evaluation_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 25987,
+      "family": "musique-family-000021",
+      "panel": "old_reserved_regression",
+      "reasons": [
+        "evaluation_target_title_in_train_pool",
+        "train_target_title_in_evaluation_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 17860,
+      "family": "musique-family-000019",
+      "panel": "new_reserved",
+      "reasons": [
+        "train_target_title_in_evaluation_pool"
+      ]
+    },
+    {
+      "dataset": "musique_train_mirror",
+      "source_row": 19701,
+      "family": "musique-family-000019",
+      "panel": "new_reserved",
+      "reasons": [
+        "train_target_title_in_evaluation_pool"
+      ]
+    }
+  ],
+  "evaluation_rows": {
+    "new_dev": 41,
+    "new_reserved_entire_selected_families": 96,
+    "old_reserved_original_cases": 28
+  },
+  "comparison": "Exact native target-to-pool title/text tuples and exact titles in both directions, plus questions. Title overlap conservatively covers different extracts of the same named article. TwoWiki sentences joined by one space.",
+  "scope": "Native supports only, not reviewed alternatives or semantic duplicate certification. Candidate selection unchanged. Recheck after source annotation. Reserved sources used privately for boundary only, not displayed.",
+  "source_text_or_answers_emitted": false,
+  "model_calls": 0,
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "wall_seconds": 18.22362642735243,
+  "cpu_seconds": 18.223329961
+}

@@ -1,0 +1,235 @@
+{
+  "status": "COMPLETED_ZERO_MODEL",
+  "source_version": "a2a91ea8",
+  "protocol": "configs/milai-innovation-value-supervision-v2.json",
+  "cases": [
+    {
+      "question_id": "1e043500",
+      "sessions": 50,
+      "sources": 510,
+      "materials": 257,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 34.05719917174429
+    },
+    {
+      "question_id": "19b5f2b3",
+      "sessions": 43,
+      "sources": 482,
+      "materials": 243,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 32.29848003014922
+    },
+    {
+      "question_id": "10d9b85a",
+      "sessions": 44,
+      "sources": 466,
+      "materials": 234,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 29.642281100153923
+    },
+    {
+      "question_id": "0edc2aef",
+      "sessions": 46,
+      "sources": 475,
+      "materials": 239,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 32.51938927639276
+    },
+    {
+      "question_id": "0a34ad58",
+      "sessions": 42,
+      "sources": 485,
+      "materials": 243,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 30.578249629586935
+    },
+    {
+      "question_id": "0ea62687",
+      "sessions": 43,
+      "sources": 460,
+      "materials": 233,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 32.17489349655807
+    },
+    {
+      "question_id": "0db4c65d",
+      "sessions": 44,
+      "sources": 462,
+      "materials": 233,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 29.73980171326548
+    },
+    {
+      "question_id": "2a1811e2",
+      "sessions": 46,
+      "sources": 479,
+      "materials": 242,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 30.96137513499707
+    },
+    {
+      "question_id": "08e075c7",
+      "sessions": 45,
+      "sources": 484,
+      "materials": 243,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 31.054871019907296
+    },
+    {
+      "question_id": "07741c45",
+      "sessions": 49,
+      "sources": 527,
+      "materials": 266,
+      "conditions": 6,
+      "semantic_records": 0,
+      "wall_seconds": 34.27619591820985
+    }
+  ],
+  "totals": {
+    "sessions": 452,
+    "sources": 4830,
+    "materials": 2433,
+    "conditions": 60,
+    "semantic_records": 0,
+    "wall_seconds": 317.3027364909649
+  },
+  "history_overlap_components": [
+    [
+      "1e043500"
+    ],
+    [
+      "19b5f2b3"
+    ],
+    [
+      "10d9b85a"
+    ],
+    [
+      "0edc2aef"
+    ],
+    [
+      "0a34ad58"
+    ],
+    [
+      "0ea62687"
+    ],
+    [
+      "0db4c65d"
+    ],
+    [
+      "2a1811e2"
+    ],
+    [
+      "08e075c7"
+    ],
+    [
+      "07741c45"
+    ]
+  ],
+  "source_verification": {
+    "status": "PASS",
+    "cases": [
+      {
+        "question_id": "1e043500",
+        "sources": 510,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "19b5f2b3",
+        "sources": 482,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "10d9b85a",
+        "sources": 466,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "0edc2aef",
+        "sources": 475,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "0a34ad58",
+        "sources": 485,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "0ea62687",
+        "sources": 460,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "0db4c65d",
+        "sources": 462,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "2a1811e2",
+        "sources": 479,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "08e075c7",
+        "sources": 484,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      },
+      {
+        "question_id": "07741c45",
+        "sources": 527,
+        "exact_original_content_role_date_instance_match": true,
+        "semantic_records": 0,
+        "equivalent_parent_source_ranges_equal": true
+      }
+    ],
+    "total_sources": 4830,
+    "model_calls": 0,
+    "source_mutations": 0,
+    "basis": "Read actual Source rows and compare literal original content, role, date, session-instance tuples; compare expanded Source ranges for equivalent nominations."
+  },
+  "failed_preparation": {
+    "run": "artifacts/innovation-v4/value-supervision-v2",
+    "source_version": "f2c0f4d5",
+    "failure": "V13_SOURCE_OCCURRENCE_TIME_CHANGED",
+    "reason": "Repeated original session ID at distinct original dates; fixed once in common dataset adapter, not by weakening Source replay checks.",
+    "model_calls": 0,
+    "preserved": true
+  },
+  "teacher_queue": {
+    "run": "artifacts/innovation-v4/value-outcomes-corpus-v1",
+    "predecessor": "range-v1",
+    "source_version": "a2a91ea8",
+    "questions": 10,
+    "conditions": 60,
+    "generation_call_bound": 120,
+    "state_at_recording": "WAITING_FOR_RANGE"
+  },
+  "scope": "Ten external development questions; no new teacher outcomes or parameter updates yet. Original-session overlap components do not certify global absence of exposure or independent users. Support nomination is offline supervision only.",
+  "source_pre_review": "data/manifests/innovation-v4-value-supervision-source-review-v3.json"
+}

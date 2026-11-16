@@ -1,0 +1,13 @@
+{
+  "status": "PREPARED_BEFORE_MODEL_FORWARD",
+  "contexts": 44,
+  "labelled_contexts": 42,
+  "pairs": 31,
+  "families": 18,
+  "disjoint_target_pairs": 31,
+  "max_tokens": 5091,
+  "model_calls": 0,
+  "scope": "Same candidate bodies/actions and question, different observed literal premises. Neutral observed IDs do not reveal original candidate IDs. Acceptance on both views is primary; require a switch only when admissible target sets are disjoint. Not natural trajectories or a proof of arbitrary semantic intervention robustness.",
+  "sha_checks": false,
+  "content_fingerprints": false
+}

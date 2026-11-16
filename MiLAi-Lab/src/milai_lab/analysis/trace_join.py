@@ -11,7 +11,7 @@ import hashlib
 import json
 from typing import Any
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
 SCHEMA_VERSION = "milai-trace-join-v1"
 CACHE_SCHEMA_VERSION = "milai-trace-join-v2"

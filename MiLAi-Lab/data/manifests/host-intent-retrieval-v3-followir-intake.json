@@ -1,0 +1,54 @@
+{
+  "schema": "followir_group_allocation_v1",
+  "source": {
+    "source": "jhu-clsp/FollowIR-train",
+    "url": "https://huggingface.co/datasets/jhu-clsp/FollowIR-train/resolve/main/train.jsonl",
+    "readme_url": "https://huggingface.co/datasets/jhu-clsp/FollowIR-train/raw/main/README.md",
+    "retrieved_utc": "2026-10-19T13:18:09Z",
+    "http_last_modified": null,
+    "bytes": 2306389,
+    "rows": 1776,
+    "fields": [
+      "score",
+      "label",
+      "id",
+      "query",
+      "document",
+      "instruction"
+    ],
+    "label_counts": {
+      "true": 878,
+      "false": 898
+    },
+    "unique_ids": 1277,
+    "unique_queries": 1209,
+    "declared_license": "Apache-2.0",
+    "purpose": "instruction applicability auxiliary training; not operation trajectory gold",
+    "checksum_verification": false,
+    "download_wall_seconds": 12.165761261247098
+  },
+  "seed": 0,
+  "dev_fraction": 0.2,
+  "grouping": "connected components of original TREC id, case/whitespace-normalized query, and literal identical document; no fingerprints",
+  "group_count": 1206,
+  "label_sets": {
+    "true": 356,
+    "false,true": 492,
+    "false": 358
+  },
+  "status": "SOURCE_GROUPED_NOT_OPERATION_TRAJECTORIES_OR_FITTING",
+  "split_selection_uses_labels": false,
+  "human_source_review": "not yet performed; metadata/grouping only",
+  "model_calls": 0,
+  "splits": {
+    "train": {
+      "groups": 965,
+      "rows": 1427
+    },
+    "dev": {
+      "groups": 241,
+      "rows": 349
+    }
+  },
+  "local_allocation": "artifacts/host-intent-retrieval-v3/data/followir-train/groups.json"
+}

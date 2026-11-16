@@ -12,7 +12,7 @@ import hashlib
 import json
 from typing import Any
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
 from milai_lab.methods.controlled_workspace import MemoryCard
 from milai_lab.methods.experience_utility import VersionUtility, version_key

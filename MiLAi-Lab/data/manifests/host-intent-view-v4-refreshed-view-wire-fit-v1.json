@@ -1,0 +1,28 @@
+{
+  "status": "CAPACITY_AUDIT_ONLY_NOT_EXECUTED",
+  "source_trace": "artifacts/host-intent-retrieval-v3/view-v4-source-check-followups-v1/case-05/runtime/banks/eff2803d-908b-4fce-bac6-38877fa91c1b/5ea3d4f2-b429-4bca-ba2c-bba346ba828e-trace-0.jsonl",
+  "actual_failed_refresh": "Writer produced correct7742; actual wire evidence empty, material_budget_rejections1.",
+  "source_version": "d8447495",
+  "all_bindings": 30,
+  "bindings_referenced_in_interpretation": 6,
+  "retained_aliases": [
+    "e1",
+    "e2",
+    "e20",
+    "e25",
+    "e26",
+    "e3"
+  ],
+  "full_wire_tokens": 2176,
+  "referenced_binding_wire_tokens": 871,
+  "budget": 2048,
+  "interpretation_unchanged": true,
+  "scope": "Candidate rendering only, no actual receipt issued, snapshot changed or Host score. No code fix implemented yet. Preserve full cache/snapshot bindings and controller observations when implementing wire-only compaction.",
+  "compute": {
+    "wall_seconds": 0.8550058472901583,
+    "cpu_seconds": 0.8629988019999999
+  },
+  "model_calls": 0,
+  "ledger_recorded": true,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v23.json"
+}

@@ -1,0 +1,31 @@
+{
+  "version": "dynamic-memory-control-followups-v5-admission",
+  "status": "STARTED_SERIAL",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/prepared-after-v4-current.json",
+  "runtime_versions": {
+    "multitopic-four-slots-v1": "5052477f",
+    "refresh-common-before-results-v1": "8eb07410"
+  },
+  "dispatcher": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/reviewed-followups-dispatch-v5.json",
+  "observed_pid": 893293,
+  "observed_child_pid": 893299,
+  "observed_active": "multitopic-four-slots-v1",
+  "settlement": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/pending-offline-settlement-v5.json",
+  "offline_phases_settled_once": 17,
+  "new_budget": false,
+  "automatic_retry": false,
+  "prior_v4": "COMPLETED13jobs, no live prior coordinator/child; original first outcomes retained",
+  "tests": {
+    "host_full_initial": "396passed,1stale optional-field assertion also failed on frozen2cfb6dcc",
+    "host_followup": "7passed including corrected source-delivery assertion and4handoff goals",
+    "refresh_and_view": "20passed",
+    "ruff": "passed",
+    "mypy": "2source files passed",
+    "package_tools_boundaries": "passed"
+  },
+  "limitations": [
+    "Four-slot fixed_context is the unchanged original shared reference, not a new replicate.",
+    "Common-before states are actual training-history snapshots, not repaired oracle graphs or heldout examples.",
+    "New Host live-query repair still needs separate real sandbox validation; this queue does not certify that repair."
+  ]
+}

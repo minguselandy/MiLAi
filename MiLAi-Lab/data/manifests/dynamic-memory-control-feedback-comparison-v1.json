@@ -1,0 +1,2059 @@
+{
+  "version": "dynamic-memory-control-feedback-comparison-v1",
+  "status": "ALL64FIRST_POSITIONS_REVIEWED",
+  "runtime_source": "5052477f",
+  "checkpoint": "same T0seed0final96",
+  "families": 8,
+  "positions_per_arm": 32,
+  "reviewer": "Codex author, method visible; no independent Judge",
+  "arms": {
+    "feedback-full": {
+      "source": "artifacts/dynamic-memory-control/feedback-full-v1",
+      "counts": {
+        "correct": 19,
+        "wrong": 12,
+        "no_answer": 1
+      },
+      "phase_counts": {
+        "cold": {
+          "correct": 8
+        },
+        "repeat": {
+          "correct": 5,
+          "wrong": 2,
+          "no_answer": 1
+        },
+        "unrelated": {
+          "correct": 4,
+          "wrong": 4
+        },
+        "changed": {
+          "wrong": 6,
+          "correct": 2
+        }
+      },
+      "costs": {
+        "attempted": 32,
+        "host_completed": 31,
+        "task_positions": 32,
+        "explicit_positions": 0,
+        "generation_known_tokens": 231871,
+        "generation_charged_tokens": 231871,
+        "generation_unknown_usage": 0,
+        "embedding_known_tokens": 0,
+        "embedding_charged_tokens": 0,
+        "embedding_unknown_usage": 0,
+        "dynamic_memory_laya_cpu_seconds": 1463.308837578994,
+        "dynamic_memory_laya_forwards": 98,
+        "dynamic_memory_laya_input_tokens": 198293,
+        "dynamic_memory_laya_sequence_rows": 98,
+        "dynamic_memory_laya_state_tokenizations": 98,
+        "dynamic_memory_laya_state_tokens": 174113,
+        "dynamic_memory_laya_wall_seconds": 403.67462374828756,
+        "dynamic_memory_laya_load_cpu_seconds": 125.66897857900017,
+        "dynamic_memory_laya_load_loads": 32,
+        "dynamic_memory_laya_load_wall_seconds": 90.7677478864789
+      },
+      "actions": {
+        "search": 27,
+        "read_2": 10,
+        "context_2": 8,
+        "handoff": 32,
+        "read_3": 3,
+        "context_3": 5,
+        "context_5": 1,
+        "read_1": 2,
+        "context_4": 2,
+        "refresh_view": 2,
+        "use_view": 4,
+        "read_4": 2
+      },
+      "full_authored_raw_proof_positions": 17,
+      "correct_with_full_authored_raw_proof": 17,
+      "rows": [
+        {
+          "history": "quota_reallocation",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已提供的转移记录：竹组原剩余5张，转出2张后剩余3张；梅组原剩余1张，转入2张后剩余3张。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/034604dc-ea2f-4a72-aa5b-4638e9b524ae/d4587aa7-24d4-4774-93fb-be921a1d0f4d-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/034604dc-ea2f-4a72-aa5b-4638e9b524ae/d4587aa7-24d4-4774-93fb-be921a1d0f4d-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "quota_reallocation",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据提供的记录计算：\n1. 竹组原剩余5张，转出2张，剩余：5 - 2 = 3张。\n2. 梅组原剩余1张，转入2张，剩余：1 + 2 = 3张。\n\n所以，竹组还可发3张，梅组还可发3张。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/034604dc-ea2f-4a72-aa5b-4638e9b524ae/465abbd5-0130-4979-828e-a304b366c5ac-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/034604dc-ea2f-4a72-aa5b-4638e9b524ae/465abbd5-0130-4979-828e-a304b366c5ac-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_3",
+            "context_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "quota_reallocation",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据记录计算：竹组原剩余5张，转给梅组2张，现剩余3张；梅组原剩余1张，收到2张，现剩余3张。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/034604dc-ea2f-4a72-aa5b-4638e9b524ae/e94d4ab8-7593-42fc-9f52-98f75f9d4e21-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/034604dc-ea2f-4a72-aa5b-4638e9b524ae/e94d4ab8-7593-42fc-9f52-98f75f9d4e21-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_5",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "quota_reallocation",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据记录计算：竹组原剩余5张，转给梅组2张，现剩余3张；梅组原剩余1张，收到2张，现剩余3张。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/034604dc-ea2f-4a72-aa5b-4638e9b524ae/9fba510e-9bcf-41e2-a49b-a1edf39525af-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/034604dc-ea2f-4a72-aa5b-4638e9b524ae/9fba510e-9bcf-41e2-a49b-a1edf39525af-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_1",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "missing_required_originals"
+        },
+        {
+          "history": "ordered_precedence",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据现有记录，紫沙样品当前应使用硬壳盒包装。依据如下：\n1. 紫沙样品专项指令明确要求使用硬壳盒。\n2. 规则明确专项指令优先于通用指南。\n3. 尽管通用包装指南要求纸盒，但根据优先权规则，应执行专项指令。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/110ba3f6-a5f1-4d6b-a1cd-ef6a1879a7ea/dd807d85-c980-43ce-86ad-39b16acb261f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/110ba3f6-a5f1-4d6b-a1cd-ef6a1879a7ea/dd807d85-c980-43ce-86ad-39b16acb261f-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "ordered_precedence",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "通用包装指南要求纸盒，紫沙样品专项指令要求硬壳盒，且专项指令优先于通用指南，因此紫沙样品当前应使用硬壳盒。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/110ba3f6-a5f1-4d6b-a1cd-ef6a1879a7ea/75792be2-8d3a-4ff6-a099-94ae23590c40-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/110ba3f6-a5f1-4d6b-a1cd-ef6a1879a7ea/75792be2-8d3a-4ff6-a099-94ae23590c40-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_3",
+            "context_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "ordered_precedence",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据提供的记录，紫沙专项包装指令已撤销，且没有替代专项指令。因此，现有记录中未规定紫沙样品的当前包装要求，表明该专项要求已失效。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/110ba3f6-a5f1-4d6b-a1cd-ef6a1879a7ea/0a4ddffa-508e-4ada-8a5b-bb0cfd15efa4-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/110ba3f6-a5f1-4d6b-a1cd-ef6a1879a7ea/0a4ddffa-508e-4ada-8a5b-bb0cfd15efa4-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "c",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "missing_required_originals"
+        },
+        {
+          "history": "ordered_precedence",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，未发现关于紫沙样品当前包装要求的相关信息。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/110ba3f6-a5f1-4d6b-a1cd-ef6a1879a7ea/5b8865cd-cebd-4872-8ee5-4cc5c9225c40-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/110ba3f6-a5f1-4d6b-a1cd-ef6a1879a7ea/5b8865cd-cebd-4872-8ee5-4cc5c9225c40-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "no_material_handoff"
+        },
+        {
+          "history": "fraction_scope",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "不一定。已知条件仅说明全天收到的箱子中有一半贴蓝标，且全天分为上午和下午两个批次。但这并未对上午和下午各自贴蓝标的比例作出限制。上午贴蓝标的比例可能高于一半、低于一半或恰好等于一半，具体取决于上午与下午的总箱数及蓝标箱数是如何分布的。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/8b59aafb-f7fc-4efa-af80-79a0a669b6ed/46fb339a-8253-41b9-8c16-59303fb8b443-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/8b59aafb-f7fc-4efa-af80-79a0a669b6ed/46fb339a-8253-41b9-8c16-59303fb8b443-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "fraction_scope",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "否，当前记录仅提供了全天收货的整体比例，并未提供上午批次的具体蓝标比例，因此无法确定上午收到的箱子是否也一定有一半贴了蓝标。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/8b59aafb-f7fc-4efa-af80-79a0a669b6ed/9944caf3-7ab8-456e-b086-df9d4ba78dd7-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/8b59aafb-f7fc-4efa-af80-79a0a669b6ed/9944caf3-7ab8-456e-b086-df9d4ba78dd7-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "fraction_scope",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已提供的记录，无法确定青湾组上午收到的箱子中有一半贴了蓝标。记录仅指出“青湾组全天收到的箱子中有一半贴了蓝标”，并说明“全天收货分上午和下午两个批次”。记录中明确记载“记录未提供各批次的蓝标比例”，因此全天的整体比例（50%）不能证明上午批次也保持了相同的比例。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/8b59aafb-f7fc-4efa-af80-79a0a669b6ed/85629b70-55e2-4578-acd6-99b3a6dd7e16-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/8b59aafb-f7fc-4efa-af80-79a0a669b6ed/85629b70-55e2-4578-acd6-99b3a6dd7e16-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "fraction_scope",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前可见记录（记忆证据为空），无法获取青湾组上午收货箱数与蓝标张贴情况的相关信息，因此无法判断是否满足一半贴蓝标的条件。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/8b59aafb-f7fc-4efa-af80-79a0a669b6ed/28c48bbc-50a3-424f-abd1-562aa8375fc5-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/8b59aafb-f7fc-4efa-af80-79a0a669b6ed/28c48bbc-50a3-424f-abd1-562aa8375fc5-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "no_material_handoff"
+        },
+        {
+          "history": "nonunique_identity",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，无法确定具体应该通知哪个项目。记录明确显示：\n1. 光帆项目有一位联络员昵称阿林；\n2. 影帆项目有一位**不同**的联络员昵称阿林；\n3. 当前通知单仅写了“阿林”，缺乏项目或其他身份字段。\n\n因此，现有的通知单信息不足以区分这两位不同的人，也就无法确定归属。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/4522fccd-3a31-480c-a75c-12d0c583696d/54e40de6-e54b-4f31-8214-fa22570e0d68-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/4522fccd-3a31-480c-a75c-12d0c583696d/54e40de6-e54b-4f31-8214-fa22570e0d68-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "nonunique_identity",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，无法确定“阿林”应该通知哪个项目。因为现有记录显示“光帆项目”和“影帆项目”均有一位联络员昵称同为“阿林”，而当前通知单仅写有“阿林”，缺乏项目标识或其他身份字段，无法唯一确定具体人员及对应项目。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/4522fccd-3a31-480c-a75c-12d0c583696d/72b0c0cd-00f7-4114-81e1-e50936322f55-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/4522fccd-3a31-480c-a75c-12d0c583696d/72b0c0cd-00f7-4114-81e1-e50936322f55-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": true,
+          "failure_attribution": null
+        },
+        {
+          "history": "nonunique_identity",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已提供的记录，光帆项目和影帆项目均有一位昵称同为“阿林”的联络员。由于当前记录中的通知仅提及“阿林”，缺乏具体的项目标识或其他身份字段，无法唯一确定该联络员属于哪个项目，因此无法确定应当通知的具体项目。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/4522fccd-3a31-480c-a75c-12d0c583696d/87a5730f-a726-46b3-920f-49adbb574b47-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/4522fccd-3a31-480c-a75c-12d0c583696d/87a5730f-a726-46b3-920f-49adbb574b47-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "stale_view_handoff"
+        },
+        {
+          "history": "nonunique_identity",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，无法确定“阿林”应该通知哪个项目。因为现有记录显示，在“光帆项目”和“影帆项目”中各有一位联络员昵称同为“阿林”，而当前提供的通知单信息中仅包含“阿林”这一称呼，缺乏足以唯一确定具体人员及归属项目的其他身份或项目标识。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/4522fccd-3a31-480c-a75c-12d0c583696d/99b3328a-f3a0-4bc3-8ae6-10f3d565f924-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/4522fccd-3a31-480c-a75c-12d0c583696d/99b3328a-f3a0-4bc3-8ae6-10f3d565f924-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "stale_view_handoff"
+        },
+        {
+          "history": "joint_schedule",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "15:00至16:00",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/10ad3497-9733-4f31-8099-e1ecf0a03254/04bce761-9fd8-46bb-9c99-c6395f01dbc1-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/10ad3497-9733-4f31-8099-e1ecf0a03254/04bce761-9fd8-46bb-9c99-c6395f01dbc1-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "joint_schedule",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据现有记录，仅知沈岚可参加14:00至16:00，因缺失邵石的日程信息，无法确定两人同时参加的具体区间。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/10ad3497-9733-4f31-8099-e1ecf0a03254/1ec54ac3-9388-488e-be91-de01d9a7d569-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/10ad3497-9733-4f31-8099-e1ecf0a03254/1ec54ac3-9388-488e-be91-de01d9a7d569-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_1",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "missing_required_originals"
+        },
+        {
+          "history": "joint_schedule",
+          "step": "repeat",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/10ad3497-9733-4f31-8099-e1ecf0a03254/6a746428-9f7c-4383-b7b1-2bb1ec646b97-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/10ad3497-9733-4f31-8099-e1ecf0a03254/6a746428-9f7c-4383-b7b1-2bb1ec646b97-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "c",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "joint_schedule",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录（来源s0），邵石的可用时段被调整为**16:30至17:00**。对于另一位必要参与者沈岚，记录仅指出其“时段不变”，但未提供该时段的原始具体信息。此外，记录中（来源s1）也未明确“流云讨论”所需的持续时间。因此，基于现有信息无法确定两位必要参与者的共同可用时段。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/10ad3497-9733-4f31-8099-e1ecf0a03254/eda11175-d6ef-4236-8f48-081cb216afad-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/10ad3497-9733-4f31-8099-e1ecf0a03254/eda11175-d6ef-4236-8f48-081cb216afad-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "n",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "missing_required_originals"
+        },
+        {
+          "history": "negated_exception",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已提供的记录，雾岭这批含磁片的轻件**不可以**走加急通道。\n\n**依据如下：**\n1. **一般规则与例外**：虽然记录指出“雾岭轻件一般可以走加急通道”，但同时也明确限定了例外情况——“含磁片的轻件**不得**走加急通道”。\n2. **货物属性确认**：记录已确认“本批货是含磁片的轻件”。\n\n综上，该批次货物属于被明确禁止走加急通道的类别，不符合加急条件。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/53136106-2ada-4655-97ef-074b32b42239/479b245a-7b29-4099-96e0-4a1416651d48-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/53136106-2ada-4655-97ef-074b32b42239/479b245a-7b29-4099-96e0-4a1416651d48-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "negated_exception",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据提供的记录，这批货物可以走加急通道。尽管该批次为含磁片的轻件（通常受限），但最新说明指出，已使用指定屏蔽盒封装的轻件不适用含磁片禁用加急的规则，且记录确认本批已完成该封装。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/53136106-2ada-4655-97ef-074b32b42239/d710c746-2bb2-4fe1-919a-a6d9dad23477-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/53136106-2ada-4655-97ef-074b32b42239/d710c746-2bb2-4fe1-919a-a6d9dad23477-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "negated_exception",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，这批含磁片的轻件**不可**走加急通道。\n\n依据如下：\n1. **规则（记录s0）**：明确规定“但含磁片的轻件不得走加急通道”。\n2. **事实（记录s1）**：确认“本批货是含磁片的轻件”。\n\n综上，该货物属于受禁止品类，不能走加急通道。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/53136106-2ada-4655-97ef-074b32b42239/15dc2402-d299-4f82-ae3e-0eb99d0fdd2b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/53136106-2ada-4655-97ef-074b32b42239/15dc2402-d299-4f82-ae3e-0eb99d0fdd2b-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "missing_required_originals"
+        },
+        {
+          "history": "negated_exception",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，无法确认雾岭含磁片轻件是否可以走加急通道。由于已提供的证据列表为空，缺乏关于该批次物品的具体属性记录以及加急通道的准入条件说明，因此无法核实其是否符合准入要求。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/53136106-2ada-4655-97ef-074b32b42239/5b881624-bd4f-498f-9124-c521ca14f4c8-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/53136106-2ada-4655-97ef-074b32b42239/5b881624-bd4f-498f-9124-c521ca14f4c8-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "no_material_handoff"
+        },
+        {
+          "history": "serial_responsibility",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据提供的记录，现任保管人为吴庭，原作者为俞青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/35a79287-39c0-42e9-b0ed-24318ca76aa0/17380e3e-d6a3-4ed9-b323-09c270595e5c-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/35a79287-39c0-42e9-b0ed-24318ca76aa0/17380e3e-d6a3-4ed9-b323-09c270595e5c-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "serial_responsibility",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据记录，现在鸣沙档案的保管人是吴庭，原作者是俞青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/35a79287-39c0-42e9-b0ed-24318ca76aa0/77011949-7523-4cfc-a43c-8404c442de20-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/35a79287-39c0-42e9-b0ed-24318ca76aa0/77011949-7523-4cfc-a43c-8404c442de20-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "serial_responsibility",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，鸣沙档案的当前保管人是吴庭，原作者是俞青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/35a79287-39c0-42e9-b0ed-24318ca76aa0/3ef8a86e-899c-447c-a72d-f8f324581e90-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/35a79287-39c0-42e9-b0ed-24318ca76aa0/3ef8a86e-899c-447c-a72d-f8f324581e90-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "serial_responsibility",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已提供的记录，鸣沙档案的当前保管人是连舒，原作者是俞青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/35a79287-39c0-42e9-b0ed-24318ca76aa0/a20ffebc-25bd-44e8-a0fa-ffe092594f2f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/35a79287-39c0-42e9-b0ed-24318ca76aa0/a20ffebc-25bd-44e8-a0fa-ffe092594f2f-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "count_distinct",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据提供的记录，银禾实际有2个不同的样品（S11和S12）。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/a312e4c0-68b0-4baa-b637-7a244bcda086/c064e54b-e339-4e26-a065-9dc0ecf68dc5-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/a312e4c0-68b0-4baa-b637-7a244bcda086/c064e54b-e339-4e26-a065-9dc0ecf68dc5-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "count_distinct",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，银禾实际有2个不同的样品，编号分别为S11和S12。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/a312e4c0-68b0-4baa-b637-7a244bcda086/fa6145f6-f884-4968-9d17-1faa2bec84e7-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/a312e4c0-68b0-4baa-b637-7a244bcda086/fa6145f6-f884-4968-9d17-1faa2bec84e7-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "refresh_view",
+            "context_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": true,
+          "failure_attribution": null
+        },
+        {
+          "history": "count_distinct",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，银禾实际有2个不同的样品，分别是S11和S12。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/a312e4c0-68b0-4baa-b637-7a244bcda086/b983dabd-0473-4231-b50d-9f7347004646-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/a312e4c0-68b0-4baa-b637-7a244bcda086/b983dabd-0473-4231-b50d-9f7347004646-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "stale_view_handoff"
+        },
+        {
+          "history": "count_distinct",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，银禾实际有2个不同的样品（S11和S12）。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/a312e4c0-68b0-4baa-b637-7a244bcda086/e1a851ed-50aa-42f4-b566-ce93c081b6be-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1/laya/banks/a312e4c0-68b0-4baa-b637-7a244bcda086/e1a851ed-50aa-42f4-b566-ce93c081b6be-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "stale_view_handoff"
+        }
+      ]
+    },
+    "one-shot": {
+      "source": "artifacts/dynamic-memory-control/one-shot-v1",
+      "counts": {
+        "correct": 23,
+        "wrong": 6,
+        "no_answer": 3
+      },
+      "phase_counts": {
+        "cold": {
+          "correct": 7,
+          "wrong": 1
+        },
+        "repeat": {
+          "correct": 7,
+          "wrong": 1
+        },
+        "unrelated": {
+          "correct": 5,
+          "wrong": 1,
+          "no_answer": 2
+        },
+        "changed": {
+          "wrong": 3,
+          "correct": 4,
+          "no_answer": 1
+        }
+      },
+      "costs": {
+        "attempted": 32,
+        "host_completed": 29,
+        "task_positions": 32,
+        "explicit_positions": 0,
+        "generation_known_tokens": 242234,
+        "generation_charged_tokens": 242234,
+        "generation_unknown_usage": 0,
+        "embedding_known_tokens": 0,
+        "embedding_charged_tokens": 0,
+        "embedding_unknown_usage": 0,
+        "dynamic_memory_laya_cpu_seconds": 295.7707700580031,
+        "dynamic_memory_laya_forwards": 32,
+        "dynamic_memory_laya_input_tokens": 50216,
+        "dynamic_memory_laya_sequence_rows": 32,
+        "dynamic_memory_laya_state_tokenizations": 32,
+        "dynamic_memory_laya_state_tokens": 44456,
+        "dynamic_memory_laya_wall_seconds": 80.23213003668934,
+        "dynamic_memory_laya_load_cpu_seconds": 103.52918146000047,
+        "dynamic_memory_laya_load_loads": 32,
+        "dynamic_memory_laya_load_wall_seconds": 75.19382637459785
+      },
+      "actions": {
+        "search": 30,
+        "read_0": 30,
+        "read_1": 21,
+        "handoff": 32,
+        "read_3": 19,
+        "read_2": 19,
+        "read_5": 1,
+        "read_4": 11
+      },
+      "full_authored_raw_proof_positions": 24,
+      "correct_with_full_authored_raw_proof": 21,
+      "rows": [
+        {
+          "history": "quota_reallocation",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据提供的记录，竹组原剩余5张，转出2张，剩余3张；梅组原剩余1张，转入2张，剩余3张。因此竹组还可以发3张票，梅组还可以发3张票。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/546bff79-01d7-4cf6-bd6e-e9859154be1c/ff76d208-241c-4b49-b97e-31dfcfb85a8b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/546bff79-01d7-4cf6-bd6e-e9859154be1c/ff76d208-241c-4b49-b97e-31dfcfb85a8b-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "quota_reallocation",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，竹组原剩余5张，转出2张后剩3张；梅组原剩余1张，转入2张后剩3张。因此，竹组与梅组分别还可发3张票。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/546bff79-01d7-4cf6-bd6e-e9859154be1c/d161a6a3-1074-4a90-abb6-a40cc0c0e0d8-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/546bff79-01d7-4cf6-bd6e-e9859154be1c/d161a6a3-1074-4a90-abb6-a40cc0c0e0d8-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "quota_reallocation",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已提供的记录，竹组原剩余5张，转出2张后剩余3张；梅组原剩余1张，转入2张后剩余3张。因此，竹组与梅组分别还可发3张票。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/546bff79-01d7-4cf6-bd6e-e9859154be1c/663ab81e-19ad-4d65-aab1-e49116b6254d-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/546bff79-01d7-4cf6-bd6e-e9859154be1c/663ab81e-19ad-4d65-aab1-e49116b6254d-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "read_3",
+            "read_5",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "quota_reallocation",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "竹组还可发3张票，梅组还可发3张票。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/546bff79-01d7-4cf6-bd6e-e9859154be1c/77c7bde2-0b19-4893-b03f-7fca0c89e707-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/546bff79-01d7-4cf6-bd6e-e9859154be1c/77c7bde2-0b19-4893-b03f-7fca0c89e707-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "missing_required_originals"
+        },
+        {
+          "history": "ordered_precedence",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据记录，紫沙样品当前应使用硬壳盒。依据如下：\n1. 记录s1明确指出“紫沙样品专项指令要求硬壳盒”。\n2. 记录s2规定“专项指令优先于通用指南”。\n3. 记录s0提到的“纸盒”仅适用于通用情况，因此在紫沙样品的专项指令面前不适用。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/f210b0d5-3a28-41c6-803c-63e9e77415b1/75a32d8d-49b8-405e-b6da-03d1a2241da1-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/f210b0d5-3a28-41c6-803c-63e9e77415b1/75a32d8d-49b8-405e-b6da-03d1a2241da1-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "ordered_precedence",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，紫沙样品当前应使用硬壳盒。依据是紫沙样品的专项指令要求硬壳盒，且规则明确专项指令优先于通用指南（通用指南要求纸盒）。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/f210b0d5-3a28-41c6-803c-63e9e77415b1/55589c0b-15b3-48fc-8b6b-529fa4accf90-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/f210b0d5-3a28-41c6-803c-63e9e77415b1/55589c0b-15b3-48fc-8b6b-529fa4accf90-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "ordered_precedence",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，紫沙样品当前应使用纸盒。依据如下：1. 记录s5明确指出“紫沙专项包装指令已撤销，没有替代专项指令”，因此原专项指令要求的硬壳盒已失效不再适用。2. 在专项指令撤销的情况下，应遵循通用包装指南。3. 记录s6规定“通用包装指南要求纸盒”。综合判断，当前应使用纸盒。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/f210b0d5-3a28-41c6-803c-63e9e77415b1/2e6c3c63-c094-4698-8e9b-28f4bf49e8f9-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/f210b0d5-3a28-41c6-803c-63e9e77415b1/2e6c3c63-c094-4698-8e9b-28f4bf49e8f9-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "ordered_precedence",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，紫沙样品当前应使用**纸盒**。理由如下：1. 虽然原记录中有关于“紫沙样品专项指令要求硬壳盒”的规定（记录s7），但该指令明确已被撤销（记录s8）。2. 在专项指令撤销且没有替代指令的情况下，应当执行通用包装指南。3. 通用包装指南明确规定应使用纸盒（记录s6）。因此，当前应使用纸盒包装紫沙样品。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/f210b0d5-3a28-41c6-803c-63e9e77415b1/f858654a-e3b7-4aaf-b433-81f3e4e89efa-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/f210b0d5-3a28-41c6-803c-63e9e77415b1/f858654a-e3b7-4aaf-b433-81f3e4e89efa-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "n",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "fraction_scope",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "不一定。根据现有记录，虽然青湾组全天收到的箱子中有一半贴了蓝标，且全天收货分为上午和下午两个批次，但记录明确指出并未提供各批次的具体蓝标比例。因此，无法确定上午收到的箱子中是否一定有一半贴了蓝标。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/c93d6e17-f778-41cc-8b9c-bdf42e7ac430/603569e2-d5e8-46c5-a576-40310e45595c-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/c93d6e17-f778-41cc-8b9c-bdf42e7ac430/603569e2-d5e8-46c5-a576-40310e45595c-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "fraction_scope",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "不一定。根据现有记录，虽然青湾组全天收到的箱子中有一半贴了蓝标，且全天收货分为上午和下午两个批次，但记录并未提供各批次的具体蓝标比例。因此，无法确定上午收到的箱子中是否一定有一半贴了蓝标。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/c93d6e17-f778-41cc-8b9c-bdf42e7ac430/0ff091eb-b1c0-4b60-9086-004b1f1fe1bc-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/c93d6e17-f778-41cc-8b9c-bdf42e7ac430/0ff091eb-b1c0-4b60-9086-004b1f1fe1bc-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "fraction_scope",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "不一定。现有记录仅表明青湾组全天收到的箱子中有一半贴了蓝标，虽然全天收货分为上午和下午两个批次，但记录并未提供各批次具体的蓝标比例，因此无法确定上午收到的箱子是否也一定有一半贴了蓝标。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/c93d6e17-f778-41cc-8b9c-bdf42e7ac430/bd89a4b2-4215-4cd1-9ed3-4af983fa37ff-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/c93d6e17-f778-41cc-8b9c-bdf42e7ac430/bd89a4b2-4215-4cd1-9ed3-4af983fa37ff-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "fraction_scope",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，没有任何关于青湾组上午收到箱子的信息，因此无法确认是否一半贴了蓝标。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/c93d6e17-f778-41cc-8b9c-bdf42e7ac430/1c829d22-73d1-4f2d-be82-1ff02d14aa18-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/c93d6e17-f778-41cc-8b9c-bdf42e7ac430/1c829d22-73d1-4f2d-be82-1ff02d14aa18-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "no_material_handoff"
+        },
+        {
+          "history": "nonunique_identity",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，'阿林'应通知**光帆项目**。记录明确指出光帆项目有一位联络员昵称阿林；而影帆项目虽然也有一位联络员昵称阿林，但特别标注其为'不同的'联络员，暗示'阿林'这一未加限定的称呼主要指代光帆项目的联络员。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/5432937a-a384-4c4d-8f63-a2b48c682568/bdce668b-f48d-4e66-bb8c-be991d6a3106-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/5432937a-a384-4c4d-8f63-a2b48c682568/bdce668b-f48d-4e66-bb8c-be991d6a3106-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "reader_use_error_with_full_authored_proof"
+        },
+        {
+          "history": "nonunique_identity",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "光帆项目",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/5432937a-a384-4c4d-8f63-a2b48c682568/0f79e003-4fab-402b-b97d-ff3855a07367-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/5432937a-a384-4c4d-8f63-a2b48c682568/0f79e003-4fab-402b-b97d-ff3855a07367-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "reader_use_error_with_full_authored_proof"
+        },
+        {
+          "history": "nonunique_identity",
+          "step": "changed",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/5432937a-a384-4c4d-8f63-a2b48c682568/b34edb61-da5c-4acd-bc24-a31e13281c26-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/5432937a-a384-4c4d-8f63-a2b48c682568/b34edb61-da5c-4acd-bc24-a31e13281c26-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "nonunique_identity",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "光帆项目",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/5432937a-a384-4c4d-8f63-a2b48c682568/dc9c0b74-d45c-4075-bd4c-00c1435dbb90-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/5432937a-a384-4c4d-8f63-a2b48c682568/dc9c0b74-d45c-4075-bd4c-00c1435dbb90-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "b",
+            "c",
+            "n",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "joint_schedule",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据现有记录，流云讨论在两位参与者均可用的时段应安排在 15:00 至 16:00。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/e86fd660-ab48-48f9-8a42-2ff2e80ede53/275fc37e-eaa0-4ceb-abc3-1ea0dd92db39-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/e86fd660-ab48-48f9-8a42-2ff2e80ede53/275fc37e-eaa0-4ceb-abc3-1ea0dd92db39-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "joint_schedule",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前最新记录，两位参与者没有共同可用的时段。沈岚的可用时间为14:00至16:00，而邵石的可用时段已更新为16:30至17:00，两者时间不重合。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/e86fd660-ab48-48f9-8a42-2ff2e80ede53/d66d76a7-ebd5-4415-a5d8-be8b7aac24e7-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/e86fd660-ab48-48f9-8a42-2ff2e80ede53/d66d76a7-ebd5-4415-a5d8-be8b7aac24e7-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "joint_schedule",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前最新记录，两位参与者没有共同可用的时段。沈岚的可用时间为14:00至16:00，邵石的可用时段已更新为16:30至17:00，两者时间不重合。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/e86fd660-ab48-48f9-8a42-2ff2e80ede53/3ca666f1-11d0-4aba-a8c3-462bacf5bb32-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/e86fd660-ab48-48f9-8a42-2ff2e80ede53/3ca666f1-11d0-4aba-a8c3-462bacf5bb32-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "b",
+            "c",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "joint_schedule",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，两位参与者没有共同可用的时段。沈岚的可用时间为14:00至16:00，邵石的可用时段已更新为16:30至17:00，两者时间不重合。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/e86fd660-ab48-48f9-8a42-2ff2e80ede53/c138c126-c624-4566-9b89-1044a9ae4836-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/e86fd660-ab48-48f9-8a42-2ff2e80ede53/c138c126-c624-4566-9b89-1044a9ae4836-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "n",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "negated_exception",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "不能。根据已有记录，虽然雾岭轻件一般可以走加急通道，但含磁片的轻件不得走加急通道。本批货确认为含磁片的轻件，因此不符合走加急通道的条件。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/bafc3bd5-3c01-4068-bc74-9ee5d8fc77a0/fda768d7-ba94-4ea1-a4b3-fcbe950772db-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/bafc3bd5-3c01-4068-bc74-9ee5d8fc77a0/fda768d7-ba94-4ea1-a4b3-fcbe950772db-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "negated_exception",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "可以。根据最新提供的记录说明，虽然含磁片的轻件通常不得走加急通道，但已使用指定屏蔽盒封装的轻件不受此限制。鉴于本批货物已完成这种封装，因此可以走加急通道。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/bafc3bd5-3c01-4068-bc74-9ee5d8fc77a0/eb12e47f-752d-41ba-bd55-3a3eae7c56b4-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/bafc3bd5-3c01-4068-bc74-9ee5d8fc77a0/eb12e47f-752d-41ba-bd55-3a3eae7c56b4-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "negated_exception",
+          "step": "unrelated",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/bafc3bd5-3c01-4068-bc74-9ee5d8fc77a0/2d23fb0a-b1c8-47ab-b88c-79cdb3cfbc00-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/bafc3bd5-3c01-4068-bc74-9ee5d8fc77a0/2d23fb0a-b1c8-47ab-b88c-79cdb3cfbc00-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "negated_exception",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "不能。根据已有记录，虽然雾岭轻件一般可以走加急通道，但含磁片的轻件不得走加急通道。本批货确认为含磁片的轻件，因此不符合走加急通道的条件。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/bafc3bd5-3c01-4068-bc74-9ee5d8fc77a0/230263d9-4531-418f-b676-9898b2a51f4b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/bafc3bd5-3c01-4068-bc74-9ee5d8fc77a0/230263d9-4531-418f-b676-9898b2a51f4b-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "missing_required_originals"
+        },
+        {
+          "history": "serial_responsibility",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已有记录，鸣沙档案的原作者是俞青，目前的档案保管人是吴庭。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/1c015a09-46cf-4d48-831e-70b5db93b246/0b67fa07-0f0b-4535-b779-2c3cfd4aca71-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/1c015a09-46cf-4d48-831e-70b5db93b246/0b67fa07-0f0b-4535-b779-2c3cfd4aca71-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "serial_responsibility",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已有记录，鸣沙档案的原作者是俞青，目前的档案保管人是吴庭。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/1c015a09-46cf-4d48-831e-70b5db93b246/306663cf-4f10-4416-91ed-67098e418c4f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/1c015a09-46cf-4d48-831e-70b5db93b246/306663cf-4f10-4416-91ed-67098e418c4f-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "serial_responsibility",
+          "step": "unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已有记录，鸣沙档案的原作者是俞青，目前的档案保管人是吴庭。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/1c015a09-46cf-4d48-831e-70b5db93b246/0a3df343-f3be-4ae2-93d6-efb48fb35efc-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/1c015a09-46cf-4d48-831e-70b5db93b246/0a3df343-f3be-4ae2-93d6-efb48fb35efc-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "serial_responsibility",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，鸣沙档案的原作者是俞青，目前的档案保管人是吴庭。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/1c015a09-46cf-4d48-831e-70b5db93b246/ad524cfd-f401-4134-b643-0f6b0704f06b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/1c015a09-46cf-4d48-831e-70b5db93b246/ad524cfd-f401-4134-b643-0f6b0704f06b-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "c",
+            "n"
+          ],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": "missing_required_originals"
+        },
+        {
+          "history": "count_distinct",
+          "step": "cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "2",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/6127eabb-0584-4979-a184-7c49286e71ae/037bf436-1041-4c85-acc8-a7dcea26696f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/6127eabb-0584-4979-a184-7c49286e71ae/037bf436-1041-4c85-acc8-a7dcea26696f-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "count_distinct",
+          "step": "repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "2",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/6127eabb-0584-4979-a184-7c49286e71ae/bb51cb79-3f40-46df-9884-75444c38e229-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/6127eabb-0584-4979-a184-7c49286e71ae/bb51cb79-3f40-46df-9884-75444c38e229-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "before",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "count_distinct",
+          "step": "changed",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，银禾实际有3个不同的样品。初始记录为S11和S12，后续新增登记了S13（S11的再次登记确认为重复），因此去重后的样品清单包含S11、S12、S13。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/6127eabb-0584-4979-a184-7c49286e71ae/79e1cdbb-2032-458c-aad9-646d535d1305-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/6127eabb-0584-4979-a184-7c49286e71ae/79e1cdbb-2032-458c-aad9-646d535d1305-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_2",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "grade": "correct",
+          "source_context": "after",
+          "delivered_original_ids": [
+            "a",
+            "b",
+            "c",
+            "u"
+          ],
+          "reviewed_raw_proof_delivered": true,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        },
+        {
+          "history": "count_distinct",
+          "step": "unrelated",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/6127eabb-0584-4979-a184-7c49286e71ae/7c9ce825-e4bd-4f55-95e8-7589e41300e9-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/one-shot-v1/laya/banks/6127eabb-0584-4979-a184-7c49286e71ae/7c9ce825-e4bd-4f55-95e8-7589e41300e9-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "source_context": "after",
+          "delivered_original_ids": [],
+          "reviewed_raw_proof_delivered": false,
+          "original_identity_ambiguous": false,
+          "view_task_sufficient": false,
+          "failure_attribution": null
+        }
+      ]
+    }
+  },
+  "view_reviews": [
+    {
+      "arm": "feedback-full",
+      "family": "nonunique_identity",
+      "revision": 1,
+      "context": "before",
+      "task_sufficient": true,
+      "current_view_state_valid": false,
+      "view": {
+        "scope": "当前已提供的记录中，存在两个不同的项目（光帆项目和影帆项目）均有一位昵称同为'阿林'的联络员。由于仅凭'阿林'这一昵称且缺乏其他身份字段或项目标识，无法唯一确定通知单所指的具体人员及对应项目。",
+        "nodes": {
+          "n0": {
+            "text": "光帆项目有一位联络员昵称阿林",
+            "evidence": [
+              "e0"
+            ],
+            "kind": "reported",
+            "temporal": "2032-07-02"
+          },
+          "n1": {
+            "text": "影帆项目有一位不同的联络员昵称阿林",
+            "evidence": [
+              "e3"
+            ],
+            "kind": "reported",
+            "temporal": "2032-07-02"
+          },
+          "n2": {
+            "text": "当前通知单仅写了'阿林'，没有项目或其他身份字段",
+            "evidence": [
+              "e1"
+            ],
+            "kind": "reported",
+            "temporal": "2032-07-02"
+          },
+          "n3": {
+            "text": "根据现有记录无法确定具体应该通知哪个项目",
+            "evidence": [
+              "e4"
+            ],
+            "kind": "inferred",
+            "temporal": "2032-07-02"
+          }
+        },
+        "rules": {
+          "g0": {
+            "target": "n3",
+            "all": [
+              "n0",
+              "n1",
+              "n2"
+            ],
+            "any": [],
+            "evidence": [
+              "e4"
+            ]
+          }
+        },
+        "unresolved": [
+          "在光帆项目和影帆项目均有名为'阿林'的联络员的情况下，仅凭'阿林'无法确定唯一归属项目"
+        ]
+      },
+      "note": "Literal ambiguity/current count is adequate before update but stale afterward. Empty OR supplies no route to the asserted ambiguity conclusion."
+    },
+    {
+      "arm": "feedback-full",
+      "family": "nonunique_identity",
+      "revision": 1,
+      "context": "after",
+      "task_sufficient": false,
+      "current_view_state_valid": false,
+      "view": {
+        "scope": "当前已提供的记录中，存在两个不同的项目（光帆项目和影帆项目）均有一位昵称同为'阿林'的联络员。由于仅凭'阿林'这一昵称且缺乏其他身份字段或项目标识，无法唯一确定通知单所指的具体人员及对应项目。",
+        "nodes": {
+          "n0": {
+            "text": "光帆项目有一位联络员昵称阿林",
+            "evidence": [
+              "e0"
+            ],
+            "kind": "reported",
+            "temporal": "2032-07-02"
+          },
+          "n1": {
+            "text": "影帆项目有一位不同的联络员昵称阿林",
+            "evidence": [
+              "e3"
+            ],
+            "kind": "reported",
+            "temporal": "2032-07-02"
+          },
+          "n2": {
+            "text": "当前通知单仅写了'阿林'，没有项目或其他身份字段",
+            "evidence": [
+              "e1"
+            ],
+            "kind": "reported",
+            "temporal": "2032-07-02"
+          },
+          "n3": {
+            "text": "根据现有记录无法确定具体应该通知哪个项目",
+            "evidence": [
+              "e4"
+            ],
+            "kind": "inferred",
+            "temporal": "2032-07-02"
+          }
+        },
+        "rules": {
+          "g0": {
+            "target": "n3",
+            "all": [
+              "n0",
+              "n1",
+              "n2"
+            ],
+            "any": [],
+            "evidence": [
+              "e4"
+            ]
+          }
+        },
+        "unresolved": [
+          "在光帆项目和影帆项目均有名为'阿林'的联络员的情况下，仅凭'阿林'无法确定唯一归属项目"
+        ]
+      },
+      "note": "Literal ambiguity/current count is adequate before update but stale afterward. Empty OR supplies no route to the asserted ambiguity conclusion."
+    },
+    {
+      "arm": "feedback-full",
+      "family": "count_distinct",
+      "revision": 1,
+      "context": "before",
+      "task_sufficient": true,
+      "current_view_state_valid": false,
+      "view": {
+        "scope": "基于银禾提供的原始登记记录及统计要求，确定实际存在的不同样品编号数量。",
+        "nodes": {
+          "n1": {
+            "text": "银禾清单初始全部样品编号为S11和S12，没有其他样品编号。",
+            "evidence": [
+              "e2"
+            ],
+            "kind": "reported",
+            "temporal": "2026-10-18T11:22:50.475585+00:00"
+          },
+          "n2": {
+            "text": "另一条登记再次提到S11，明确是重复登记。",
+            "evidence": [
+              "e0"
+            ],
+            "kind": "reported",
+            "temporal": "2026-10-18T11:22:50.510886+00:00"
+          },
+          "n3": {
+            "text": "统计要求按不同样品编号计数。",
+            "evidence": [
+              "e1"
+            ],
+            "kind": "reported",
+            "temporal": "2026-10-18T11:22:50.547634+00:00"
+          },
+          "n4": {
+            "text": "银禾实际有2个不同的样品（S11和S12）。",
+            "evidence": [
+              "e3"
+            ],
+            "kind": "inferred",
+            "temporal": "2026-10-18T11:23:23.002201+00:00"
+          }
+        },
+        "rules": {
+          "g1": {
+            "target": "n4",
+            "all": [
+              "n1",
+              "n2"
+            ],
+            "any": [
+              [
+                "n3"
+              ]
+            ],
+            "evidence": [
+              "e0",
+              "e1",
+              "e2"
+            ]
+          }
+        },
+        "unresolved": []
+      },
+      "note": "Literal ambiguity/current count is adequate before update but stale afterward. Bare temporal fields copy capture dates rather than the reported source date."
+    },
+    {
+      "arm": "feedback-full",
+      "family": "count_distinct",
+      "revision": 1,
+      "context": "after",
+      "task_sufficient": false,
+      "current_view_state_valid": false,
+      "view": {
+        "scope": "基于银禾提供的原始登记记录及统计要求，确定实际存在的不同样品编号数量。",
+        "nodes": {
+          "n1": {
+            "text": "银禾清单初始全部样品编号为S11和S12，没有其他样品编号。",
+            "evidence": [
+              "e2"
+            ],
+            "kind": "reported",
+            "temporal": "2026-10-18T11:22:50.475585+00:00"
+          },
+          "n2": {
+            "text": "另一条登记再次提到S11，明确是重复登记。",
+            "evidence": [
+              "e0"
+            ],
+            "kind": "reported",
+            "temporal": "2026-10-18T11:22:50.510886+00:00"
+          },
+          "n3": {
+            "text": "统计要求按不同样品编号计数。",
+            "evidence": [
+              "e1"
+            ],
+            "kind": "reported",
+            "temporal": "2026-10-18T11:22:50.547634+00:00"
+          },
+          "n4": {
+            "text": "银禾实际有2个不同的样品（S11和S12）。",
+            "evidence": [
+              "e3"
+            ],
+            "kind": "inferred",
+            "temporal": "2026-10-18T11:23:23.002201+00:00"
+          }
+        },
+        "rules": {
+          "g1": {
+            "target": "n4",
+            "all": [
+              "n1",
+              "n2"
+            ],
+            "any": [
+              [
+                "n3"
+              ]
+            ],
+            "evidence": [
+              "e0",
+              "e1",
+              "e2"
+            ]
+          }
+        },
+        "unresolved": []
+      },
+      "note": "Literal ambiguity/current count is adequate before update but stale afterward. Bare temporal fields copy capture dates rather than the reported source date."
+    }
+  ],
+  "comparison": {
+    "one_shot_minus_feedback_correct": 4,
+    "paired_family_accuracy_difference_interval": [
+      -0.09375,
+      0.375
+    ],
+    "bootstrap_samples": 20000,
+    "bootstrap_seed": 20261018,
+    "controller_input_ratio_one_shot_to_full": 0.25324141548113144,
+    "controller_forward_ratio_one_shot_to_full": 0.32653061224489793,
+    "generation_token_delta_one_shot_minus_full": 10363
+  },
+  "qualifications": [
+    "Same frozen runtime, one slot, actions, Reader budget and8control-step ceiling; separate empty banks evolve independently. Later state/Host-declared read goals and source IDs are not identical inputs.",
+    "One-shot makes one learned first route and then fixed4normal reads or handoff after a successful view action. Mechanical failure/capacity feedback remains; this ablates learned semantic feedback, not all program feedback.",
+    "No net full-feedback advantage established here. One-shot improves core answers and cuts controller work but uses10363more generation tokens; do not invent one combined cost unit.",
+    "Four feedback errors use stale views. Other misses occur without a view. Two one-shot identity errors occur despite the full original proof, so not all errors can be assigned to retrieval.",
+    "Original first length failures retained. Empty handoff/available-source refusal is a policy/task loss even if the final answer truthfully describes its empty packet.",
+    "Authored sufficient proof sets are witnesses, not exhaustive minimal proofs. Correct answers with incomplete original witness delivery are separately reported.",
+    "Eight exposed development families; clustered intervals describe this small sample, not independent-template or population generalization.",
+    "All offline export/review CPU stays pending while the current serial model queue lives."
+  ]
+}

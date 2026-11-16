@@ -1,0 +1,336 @@
+--- a/src/coalent/__init__.py
++++ b/src/coalent/__init__.py
+@@ -1 +1 @@
+-"""coalent — a real-time, provenance-invalidated cognitive cache for AI.
++"""Coalent semantic core research variant; native source versions, explicit providers.
+@@ -3,16 +3,2 @@
+-Coalent caches the *understanding* your LLM builds, keyed by query meaning (a
+-semantic cache), keeps the raw evidence with every unit, and invalidates surgically
+-by provenance as sources change — so context stays cheap, fresh, and reusable across
+-queries and agents. It is the freshness/reuse layer ABOVE retrieval: bring any
+-retriever (vector DB, GraphRAG, tools, APIs).
+-
+-Quickstart::
+-
+-    from coalent import SemanticCache, InMemoryRetriever, StubSynthesizer
+-
+-    retriever = InMemoryRetriever()
+-    retriever.add("confluence:hr-handbook", "Leave policy: 21 days of annual leave...")
+-
+-    cache = SemanticCache(retriever, StubSynthesizer())
+-    ctx = cache.get("what is our leave policy?")     # ask by meaning — just the query
+-    cache.source_changed("confluence:hr-handbook", text="Leave policy: now 25 days...")
++Original upstream version 0.7.0.post1. See the adjacent preparation.json and patch.
++No event/webhook/MCP/CLI layer is imported by this standalone research package.
+@@ -20,133 +6,3 @@
+-from __future__ import annotations
+-
+-# --- The cache (primary API) ---
+-from .semantic import (
+-    PRESETS,
+-    BaseVectorRetriever,
+-    Chunk,
+-    ChromaRetriever,
+-    ClaimIndex,
+-    ClaimRef,
+-    Cognition,
+-    CognitionStore,
+-    CompositeRetriever,
+-    ContextStrategy,
+-    Embedder,
+-    FreshnessPolicy,
+-    FunctionEmbedder,
+-    FunctionRetriever,
+-    HashingEmbedder,
+-    EXTRACTIVE_INSTRUCTION,
+-    Generation,
+-    InMemoryCognitionStore,
+-    InMemoryRetriever,
+-    InvalidationResult,
+-    JSONPassthroughSynthesizer,
+-    LLMProvider,
+-    LLMSynthesizer,
+-    LocalClaimIndex,
+-    OpenAIEmbedder,
+-    PgVectorRetriever,
+-    QdrantRetriever,
+-    QueryKey,
+-    RedisCognitionStore,
+-    Related,
+-    RepairReport,
+-    ResidualSpan,
+-    Result,
+-    Retriever,
+-    SemanticCache,
+-    SQLiteCognitionStore,
+-    StubSynthesizer,
+-    Synthesis,
+-    Synthesizer,
+-    Usage,
+-    calibrate_thresholds,
+-    cosine,
+-    default_thresholds_for,
+-    suggest_thresholds,
+-)
+-
+-# --- Shared primitives (provenance + change events) ---
+-from .domain.models import ChangeEvent, ProvenanceManifest, SourceSpan, Status
+-
+-# --- Integrations & infrastructure ---
+-from .integrations import build_mcp_tools, make_cognition_node
+-from .adapters.providers import AnthropicProvider, OpenAIProvider, StubProvider
+-from .events import (
+-    DeployConnector,
+-    EventDispatcher,
+-    GenericCDCConnector,
+-    GitHubConnector,
+-    JiraConnector,
+-    verify_github_signature,
+-)
+-
+-__version__ = "0.7.0.post1"
+-
+-__all__ = [
+-    "__version__",
+-    # --- The cache ---
+-    "PRESETS",
+-    "SemanticCache",
+-    "ContextStrategy",
+-    "FreshnessPolicy",
+-    "RepairReport",
+-    "Result",
+-    "Related",
+-    "InvalidationResult",
+-    "Cognition",
+-    "QueryKey",
+-    "ResidualSpan",
+-    "ClaimIndex",
+-    "ClaimRef",
+-    "LocalClaimIndex",
+-    "Chunk",
+-    "Retriever",
+-    "Synthesizer",
+-    "Synthesis",
+-    "Usage",
+-    "Generation",
+-    "LLMProvider",
+-    "LLMSynthesizer",
+-    "EXTRACTIVE_INSTRUCTION",
+-    "JSONPassthroughSynthesizer",
+-    "Embedder",
+-    "HashingEmbedder",
+-    "OpenAIEmbedder",
+-    "FunctionEmbedder",
+-    "cosine",
+-    "default_thresholds_for",
+-    "calibrate_thresholds",
+-    "suggest_thresholds",
+-    "InMemoryRetriever",
+-    "FunctionRetriever",
+-    "CompositeRetriever",
+-    "BaseVectorRetriever",
+-    "QdrantRetriever",
+-    "ChromaRetriever",
+-    "PgVectorRetriever",
+-    "StubSynthesizer",
+-    "CognitionStore",
+-    "InMemoryCognitionStore",
+-    "SQLiteCognitionStore",
+-    "RedisCognitionStore",
+-    # --- primitives ---
+-    "SourceSpan",
+-    "ProvenanceManifest",
+-    "ChangeEvent",
+-    "Status",
+-    # --- infrastructure ---
+-    "EventDispatcher",
+-    "GitHubConnector",
+-    "DeployConnector",
+-    "JiraConnector",
+-    "GenericCDCConnector",
+-    "verify_github_signature",
+-    "StubProvider",
+-    "OpenAIProvider",
+-    "AnthropicProvider",
+-    # --- integrations ---
+-    "make_cognition_node",
+-    "build_mcp_tools",
+-]
++from .semantic import SemanticCache, FunctionEmbedder, FunctionRetriever, Chunk, Synthesis, FreshnessPolicy
++from .domain.models import ChangeEvent, SourceSpan, Status
++__version__ = "0.7.0.post1+milai.nativeversions1"
+--- a/src/coalent/domain/models.py
++++ b/src/coalent/domain/models.py
+@@ -11 +10,0 @@
+-import hashlib
+@@ -26,3 +24,0 @@
+-def _hash_text(text: str) -> str:
+-    """Stable short content hash used to detect whether a span changed."""
+-    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
+@@ -54,11 +50,7 @@
+-    def from_text(
+-        cls,
+-        artifact_id: str,
+-        text: str,
+-        *,
+-        version: str = "",
+-        span: str | None = None,
+-    ) -> SourceSpan:
+-        """Build a span and compute its content hash from raw text."""
+-        return cls(artifact_id=artifact_id, version=version, span=span,
+-                   content_hash=_hash_text(text))
++    def from_text(cls, artifact_id: str, text: str, *, version: str = "", span: str | None = None) -> SourceSpan:
++        """Retain the caller's native source version; never compute a content digest.
++
++        The adapter supplies one addressable source revision per chunk. The text
++        argument remains for the upstream API; freshness uses its native version.
++        """
++        return cls(artifact_id=artifact_id, version=version, span=span)
+@@ -98,8 +89,0 @@
+-    def fingerprint(self) -> str:
+-        """A deterministic fingerprint of the whole derivation context."""
+-        hasher = hashlib.sha256()
+-        hasher.update(self.model_version.encode("utf-8"))
+-        hasher.update(self.prompt_version.encode("utf-8"))
+-        for span in sorted(self.source_spans, key=lambda s: s.artifact_id):
+-            hasher.update(span.identity().encode("utf-8"))
+-        return hasher.hexdigest()[:16]
+--- a/src/coalent/semantic/cache.py
++++ b/src/coalent/semantic/cache.py
+@@ -11 +11 @@
+-import hashlib
++import json
+@@ -337,2 +337,2 @@
+-    re-fetching + hashing via ``revalidate(artifact_id) -> (text, version) | None``:
+-    unchanged content stays fresh (no rebuild — content_hash earns its keep),
++    re-fetching + native version comparison via ``revalidate(artifact_id) -> (text, version) | None``:
++    unchanged native revisions stay fresh (no content checksum),
+@@ -1376 +1376 @@
+-        key = hashlib.sha1(f"{ns}|{query}".encode("utf-8")).hexdigest()[:16]
++        key = json.dumps([ns, "query", query], ensure_ascii=False, separators=(",", ":"))
+@@ -1787 +1787 @@
+-        (every previously-cited span's content hash for a re-fetched artifact is still present
++        (every previously-cited span's native version for a re-fetched artifact is still present
+@@ -1789 +1789 @@
+-        ``_SPAN_DEDUP_SIM`` — old claims are NEVER lost, coverage is monotone. A CHANGED hash
++        ``_SPAN_DEDUP_SIM`` — old claims are NEVER lost, coverage is monotone. A CHANGED native version
+@@ -1794 +1794 @@
+-        new_hashes: dict[str, set[str]] = {}
++        new_versions: dict[str, set[str]] = {}
+@@ -1796,2 +1796,2 @@
+-            h = c.content_hash or SourceSpan.from_text(c.artifact_id, c.text).content_hash
+-            new_hashes.setdefault(c.artifact_id, set()).add(h)
++            h = c.version
++            new_versions.setdefault(c.artifact_id, set()).add(h)
+@@ -1800 +1800 @@
+-            any(span.artifact_id in new_hashes for span in prov_spans)   # can't prove -> changed
++            any(span.artifact_id in new_versions for span in prov_spans)   # can't prove -> changed
+@@ -1802 +1802 @@
+-                span.content_hash in new_hashes[span.artifact_id]
++                bool(span.version) and span.version in new_versions[span.artifact_id]
+@@ -1804 +1804 @@
+-                if span.artifact_id in new_hashes
++                if span.artifact_id in new_versions
+@@ -2660 +2660 @@
+-        """Hash-revalidate one owner's artifacts under a call budget. Returns
++        """Version-revalidate one owner's artifacts under a call budget. Returns
+@@ -2677 +2676,0 @@
+-                content_hash=SourceSpan.from_text(artifact_id, text).content_hash,
+@@ -2781 +2780 @@
+-                key = hashlib.sha1(f"{ns}|artifact:{aid}".encode("utf-8")).hexdigest()[:16]
++                key = json.dumps([ns, "artifact", aid], ensure_ascii=False, separators=(",", ":"))
+@@ -3095,10 +3094,7 @@
+-        """The per-unit hydration key: a digest of the unit's evidence (artifact + text).
+-        A rebuild that changes the evidence changes the key, so exactly the changed unit
+-        re-splits and re-embeds — everything else stays warm in the side store."""
+-        h = hashlib.sha256()
+-        for c in unit.evidence:
+-            h.update(c.artifact_id.encode("utf-8", "ignore"))
+-            h.update(b"\x1f")
+-            h.update(c.text.encode("utf-8", "ignore"))
+-            h.update(b"\x1e")
+-        return h.hexdigest()[:16]
++        """Literal source identities and native revisions for the hydration cache.
++
++        Each adapter chunk is a uniquely addressable revision. No text digest or
++        provenance fingerprint is created or checked.
++        """
++        return json.dumps([(c.artifact_id, c.version) for c in unit.evidence],
++                          ensure_ascii=False, separators=(",", ":"))
+@@ -4786,10 +4782,4 @@
+-    def source_changed(
+-        self, artifact_id: str, *, text: str | None = None, version: str | None = None
+-    ) -> InvalidationResult:
+-        """Convenience: hash the new content (if given) and fire a change event."""
+-        content_hash = ""
+-        if text is not None:
+-            content_hash = SourceSpan.from_text(artifact_id, text).content_hash
+-        return self.invalidate(
+-            ChangeEvent(artifact_id=artifact_id, version=version or "", content_hash=content_hash)
+-        )
++    def source_changed(self, artifact_id: str, *, text: str | None = None,
++                       version: str | None = None) -> InvalidationResult:
++        """Apply the caller's native source revision; text is not checked or hashed."""
++        return self.invalidate(ChangeEvent(artifact_id=artifact_id, version=version or ""))
+@@ -4825 +4815 @@
+-        """On TTL expiry, revalidate feed-less sources by hash; skip no-op rebuilds."""
++        """On TTL expiry, compare native revisions; skip unchanged revisions."""
+@@ -4847 +4836,0 @@
+-                content_hash=SourceSpan.from_text(artifact_id, text).content_hash,
+@@ -4867,2 +4855,0 @@
+-        if event.content_hash and span.content_hash:
+-            return event.content_hash != span.content_hash
+@@ -4871 +4858 @@
+-        return True  # cannot prove unchanged -> conservatively changed
++        return True
+--- a/src/coalent/semantic/embedding.py
++++ b/src/coalent/semantic/embedding.py
+@@ -12 +11,0 @@
+-import hashlib
+@@ -49,2 +48 @@
+-    """Deterministic, dependency-free bag-of-words embedder (default)."""
+-
++    """Legacy type marker; this research copy requires an explicit semantic embedder."""
+@@ -52,12 +50 @@
+-        self._dim = dim
+-
+-    def embed(self, text: str) -> list[float]:
+-        vec = [0.0] * self._dim
+-        for token in tokenize(text):
+-            digest = hashlib.md5(token.encode("utf-8")).digest()
+-            index = int.from_bytes(digest[:4], "big") % self._dim
+-            vec[index] += 1.0
+-        norm = math.sqrt(sum(value * value for value in vec))
+-        if norm == 0.0:
+-            return vec
+-        return [value / norm for value in vec]
++        raise ValueError("Provide an explicit semantic embedder in the native-version research copy")
+@@ -142,26 +129,2 @@
+-    """The best embedder available without explicit config.
+-
+-    Uses ``OpenAIEmbedder`` when the ``openai`` package is installed AND
+-    ``OPENAI_API_KEY`` is set (accurate, semantic). Otherwise falls back to the
+-    lexical ``HashingEmbedder`` and WARNS — because keyword-overlap matching will
+-    miss semantically-similar queries. Always override with ``embedder=``.
+-    """
+-    if os.environ.get("OPENAI_API_KEY"):
+-        try:
+-            return OpenAIEmbedder()
+-        except ImportError:
+-            warnings.warn(
+-                "coalent: OPENAI_API_KEY is set but the 'openai' package isn't installed — "
+-                "run `pip install coalent[openai]` for semantic embeddings. "
+-                "Falling back to the lexical HashingEmbedder for now.",
+-                stacklevel=2,
+-            )
+-            return HashingEmbedder()
+-    warnings.warn(
+-        "coalent: no `embedder` was provided and OPENAI_API_KEY is not set, so the cache is using "
+-        "HashingEmbedder — which matches on KEYWORD OVERLAP, not meaning, so semantically-similar "
+-        "queries can miss the cache. For accurate semantic hits: `pip install coalent[openai]` and set "
+-        "OPENAI_API_KEY, or pass embedder=YourEmbedder(...). See https://coalent.ai/docs/retriever.",
+-        stacklevel=2,
+-    )
+-    return HashingEmbedder()
++    """Model selection belongs to the MiLAi adapter, not upstream auto-discovery."""
++    raise ValueError("Provide the existing metered semantic embedder explicitly")

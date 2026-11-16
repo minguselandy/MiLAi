@@ -1,0 +1,24 @@
+{
+  "status": "ACTUAL_BANK_COPY_FROZEN_SUFFIX_QUEUED",
+  "source_commit": "f8257f46",
+  "source_root": "artifacts/method-architecture/host-ab-source-v2/MiLAi-Lab",
+  "parent_source_commit": "b33d5690",
+  "run_root": "artifacts/method-architecture/host-ab-v1/continuation-v1",
+  "driver_path": "artifacts/method-architecture/host-ab-v1/continuation-v1-driver.json",
+  "driver_pid": 2459124,
+  "exec_session": 61667,
+  "indices": [
+    7,
+    8,
+    9
+  ],
+  "copy": "Complete actual original execution bank/checkpoints/receipts/admission; original namespace run_id execution retained, frozen source provenance updated only in new copy",
+  "readiness": "New source has9related tests, Ruff/mypy/DAG; actual failed snapshot0HTTP replay7910/8192,2bodyunits1candidate,16pendingrefs2continuations, semantic record values equal",
+  "handoff": "Wait for Nativefull driver and children exit, predictions/firstscores normal closure, sealed ledger matches current, no added unknown",
+  "original_failure_reissued": false,
+  "original_failures_unchanged": true,
+  "bank_new_or_oracle_seed": false,
+  "not_single_version_cold_success": true,
+  "model_recovery_not_yet_observed": true,
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+}

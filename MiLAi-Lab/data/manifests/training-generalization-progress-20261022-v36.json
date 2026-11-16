@@ -1,0 +1,89 @@
+{
+  "status": "ACTIVE_SAVED_CPU_AND_PUBLIC_PATH_AUDIT_LIVE;FOUR_MORE_PUBLIC_SOURCE_REVIEWS",
+  "observed_at": "2026-10-22T06:06:35.086824+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v35.json",
+  "previous_turn_classification": "PROGRESS: two complete public-source reviews and exact evidence-prefix records saved and committed",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 0,
+    "completed_states": 408,
+    "planned_states": 876,
+    "completed_candidates": 0,
+    "deployment_selection": null,
+    "condition": "All7savedCPU candidates then matching selected train;CPUFP32loaded,reference_compileFalse,MHAfastpathFalse,shared_actions12288/head2048;unchanged"
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 101,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "public_source_review": {
+    "manifest": "data/manifests/training-generalization-feedback-source-review-v2.json",
+    "new_notes_families": [
+      "memops_E11",
+      "memops_C29",
+      "memops_A14",
+      "memops_E07"
+    ],
+    "new_source_units": 92,
+    "new_public_requests": 8,
+    "cumulative_new_note_families": 6,
+    "cumulative_source_units": 138,
+    "cumulative_public_requests": 12,
+    "prefix_sizes": {
+      "memops_E11": [
+        7,
+        23
+      ],
+      "memops_C29": [
+        15,
+        23
+      ],
+      "memops_A14": [
+        7,
+        23
+      ],
+      "memops_E07": [
+        7,
+        23
+      ]
+    },
+    "all_sources_read_including_assistant": true,
+    "source_copies_literal_equal": true,
+    "scope": "Existing exposed train histories only;new-note coverage,not all historical review coverage. No outputs/labels/source-selection changes. Actual captured requests/Views/branches/answers still require later review.",
+    "findings": [
+      "E11confirmed750boxes is distinct from unaccepted1000offer,old500sleeves and JarSource12cases;delivery not established. Historicalassistant GreenBox600claim lacks visible user/document support.",
+      "C29firstprefix already15sources:chosenrecipebox notpaid then;lastturn explicitlypaid65butfuture shipsinthreedays notarrival. Quotes and other peoples gifts separate.",
+      "A14currentreport correction and future/foreign-template identifiers remain distinct;pendingcitizenship/filecomplete is notapproval. Legalprocess statements remain attributed narrative,not externallyvalidated law.",
+      "E07reported groupregistration happened,but actualtrial and adoptingweeklygrouphikes remain tentative. Personalreported2.5Ltarget not replaced bygeneric3Lsuggestion;not medicalrecommendation."
+    ]
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "feedback_public_source_reviews_batches006_009_save_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v2.json",
+      "cpu_seconds": 0.006230720000000002,
+      "wall_seconds": 0.00627072062343359,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.006230720000000002,
+  "costs": "Only newfour-note mechanicalsave/referencechecksCPU0.006230720pending. Priorv35CPU0.002314110andv34CPU0.042770830separate;74phaseinventory10663.791232191notnewcharge. All priorpending/closedv1/v2/v3unchanged. No offline settlement while savedCPU lives. Semanticreading/authoring/inspectionunknown,not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active."
+}

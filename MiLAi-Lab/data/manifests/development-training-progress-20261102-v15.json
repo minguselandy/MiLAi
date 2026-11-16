@@ -1,0 +1,295 @@
+{
+  "status": "ACTIVE_FULL_NOV2_PLAN;E2_POINT702_DIAGNOSED_FIT_RUNNING;QUERY_FORMAT32_READY_NOT_EXECUTED",
+  "timestamp_utc": "2026-11-02T20:23:00.352318+00:00",
+  "goal_complete": false,
+  "previous_goal_turn_classification": "progress",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_TRAINING_PLAN_20261102.md",
+  "previous_progress": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v14.json",
+  "source": {
+    "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab",
+    "base_version": "b66a5024",
+    "frozen_fit_runtime_changed": false,
+    "runtime_tool_change": "tools/run_bound_optimization_host.py registers the specific new query-format worker as a model owner",
+    "test_change": "tests/unit/test_bound_optimization_host_runner.py validates this real argv shape with a temporary proc tree",
+    "Product_changed": false,
+    "commit_or_remote_write": false
+  },
+  "live_model": {
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/driver.json",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-fitting-v1/ordinary-unit",
+    "coordinator_pid": 3789446,
+    "child_pid": 3789458,
+    "exec_session": 69731,
+    "owners": [
+      3789458
+    ],
+    "status": "RUNNING",
+    "observed_updates": 883,
+    "planned_updates": 2805,
+    "observed_train_sequence_rows": 14128,
+    "observed_train_input_tokens": 11999279,
+    "history_points": [
+      0,
+      702
+    ],
+    "automatic_retry": false,
+    "second_fit_queued": false,
+    "offline_ledger_writes_allowed": false
+  },
+  "point702": {
+    "analysis": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point702-analysis-v1.json",
+    "behavior_diagnosis": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point702-behavior-diagnosis-v1.json",
+    "condition_family_balanced_accuracy": 0.8882637652772459,
+    "condition_delta_pp": 13.570065070238634,
+    "operation_family_macro_acceptance": 0.8049888628369768,
+    "operation_delta_pp": 2.613815683109144,
+    "supported_changes_correct": 1,
+    "supported_changes_total": 8,
+    "initial_supported_changes_correct": 6,
+    "supported_change_family_macro_joint": 0.1,
+    "stable_positive_family_macro_joint": 0.896551724137931,
+    "stable_negative_family_macro_joint": 0.863782991202346,
+    "feedback_answer_family_macro_pair": 0.5992063492063491,
+    "feedback_delivery_family_macro_pair": 0.6875000000000001,
+    "supported_change_logit_behavior": {
+      "initial": {
+        "pairs": 8,
+        "joint_correct": 6,
+        "both_predict_satisfies": 0,
+        "signed_margin_positive": 7,
+        "mean_relative_softplus_diagnostic": 0.2594360715304639
+      },
+      "update702": {
+        "pairs": 8,
+        "joint_correct": 1,
+        "both_predict_satisfies": 7,
+        "signed_margin_positive": 6,
+        "mean_relative_softplus_diagnostic": 0.5545417777791319
+      }
+    },
+    "old64_feedback_full_binding_changes": 8,
+    "old64_feedback_same_complete_bindings": 56,
+    "both_points_action_kind_counts": {
+      "SEARCH": 40,
+      "READ": 19,
+      "HANDOFF": 5
+    },
+    "nomination": null,
+    "scope": "A fully closed partial native point, not full curve selection, saved CPU validation, actual answer quality or autonomous Host performance."
+  },
+  "rare_change_exposure702": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/change-exposure702-v1.json",
+    "known_training_change_pairs": 6,
+    "seen_by702": 2,
+    "remaining_after702": 4,
+    "scheduled_updates": [
+      476,
+      1176,
+      516,
+      2373,
+      2500,
+      1260
+    ],
+    "interpretation": "The quarter-point context collapse is real, but only2/6 known training changes have appeared. Complete the predeclared pass before claiming the result after paired exposure or admitting the optional second fit."
+  },
+  "query_format_comparison": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/plan.json",
+    "preflight": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preflight-v1.json",
+    "worker": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/run_query_format_dev32_v1.py",
+    "coordinator": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/run_collection_v1.py",
+    "status": "QUERY_FORMAT_PLAN_AND_REAL_INPUT_BINDINGS_READY_NOT_EXECUTED",
+    "positions": 32,
+    "source_units": 2031,
+    "verified_original_search_prefix_choices": 64,
+    "baseline": "All32 closed raw-query fixed-prefix first outcomes, including the original failure; no control readout repeated.",
+    "Source_bank": "Actual original pre-call snapshot copied with same namespace, Source IDs/content/revisions; no final answer present.",
+    "fresh_execution_identity": "New session suffix; original message/question ID, public content and bank retained. Old/new tagged given-request Sources stay excluded from domain evidence.",
+    "method": "Existing FixedMemoryPolicy4, full trajectory,8 steps/read8/return2048; only known adapter prefix removed from literal query.",
+    "reader_scope": "Existing given_readout_frame includes retrieval_request in the Reader payload. Thus the query string changes there as well as in retrieval. Same Reader/model/system prompt/schema/temperature/budgets, but not an identical Reader wire except memory. Report this as whole-pipeline query-format treatment; distinguish new evidence from Reader variation with actual Source-range and packet audits.",
+    "real_reader_wires_checked": 32,
+    "real_offline_native_prepare_copy_checked": true,
+    "model_calls": 0,
+    "new_retrieval_executions": 0,
+    "started": false,
+    "new_source_store_writes": 0,
+    "idle_requirements": "Original E2 coordinator/child terminal and absent, no active model owners, and pending CPU settled once before manual launch. No background waiter.",
+    "preparation_reflection": [
+      "Initial draft assumed an optional task_context was serialized; switched to the existing typed DTO property.",
+      "Initial draft assumed a host-site-packages flag, but original dispatch already uses the complete HTTP environment; reused that exact environment.",
+      "Fresh session identity preserves original native question/message and bank alignment."
+    ]
+  },
+  "tests": {
+    "process_owner_and_settlement": "12 passed",
+    "Ruff": "passed changed runner and test",
+    "artifact_syntax": "compiled",
+    "frozen_imports_and_actual_frame_binding": "passed in the original HTTP environment; no model weights or requests"
+  },
+  "scientific_reflection": "Aggregate unit accuracy and old-operation acceptance can improve while condition changes and known feedback ordering deteriorate. At702,7/8 supported change pairs predict satisfies for both conditions; signed-order accuracy is6/8 and the relative softplus diagnostic rises from0.2594 to0.5545. Action-kind counts are unchanged even though8 complete bindings changed. Do not equate these offline scores with Reader quality or react by silently changing the declared fitting schedule.",
+  "cost": {
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "new_measured_pending_cpu_this_turn": 16.39,
+    "total_measured_pending_cpu_seconds": 42.49,
+    "pending_commands": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/analysis-tests.time.txt",
+        "cpu_seconds": 1.2400000000000002,
+        "wall_seconds": 1.26
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/initial-analysis.time.txt",
+        "cpu_seconds": 1.28,
+        "wall_seconds": 1.29
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/fixed-prefix-feedback-tests.time.txt",
+        "cpu_seconds": 5.16,
+        "wall_seconds": 2.76
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/initial-cpu-gpu-comparison.time.txt",
+        "cpu_seconds": 1.3599999999999999,
+        "wall_seconds": 1.36
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/analysis-and-baseline-boundaries.time.txt",
+        "cpu_seconds": 13.82,
+        "wall_seconds": 13.84
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/preparation.time.txt",
+        "cpu_seconds": 0.42,
+        "wall_seconds": 0.43
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/recorded-binding-check.time.txt",
+        "cpu_seconds": 1.52,
+        "wall_seconds": 1.52
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/scoring-preparation.time.txt",
+        "cpu_seconds": 0.1,
+        "wall_seconds": 0.11
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide-compilation.time.txt",
+        "cpu_seconds": 0.11,
+        "wall_seconds": 0.11
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide16-compilation.time.txt",
+        "cpu_seconds": 0.14,
+        "wall_seconds": 0.14
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide24-compilation.time.txt",
+        "cpu_seconds": 0.13,
+        "wall_seconds": 0.14
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide32-compilation.time.txt",
+        "cpu_seconds": 0.1,
+        "wall_seconds": 0.1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide40-compilation.time.txt",
+        "cpu_seconds": 0.09000000000000001,
+        "wall_seconds": 0.1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide48-compilation.time.txt",
+        "cpu_seconds": 0.17,
+        "wall_seconds": 0.17
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide56-compilation.time.txt",
+        "cpu_seconds": 0.08,
+        "wall_seconds": 0.09
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/all56-reference-audit.time.txt",
+        "cpu_seconds": 0.38,
+        "wall_seconds": 0.38
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preparation.time.txt",
+        "cpu_seconds": 0.45,
+        "wall_seconds": 0.46,
+        "failure_retained": true
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preparation-v2.time.txt",
+        "cpu_seconds": 0.75,
+        "wall_seconds": 0.75,
+        "failure_retained": true
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preparation-v3.time.txt",
+        "cpu_seconds": 0.6699999999999999,
+        "wall_seconds": 0.67,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preparation-v4.time.txt",
+        "cpu_seconds": 0.65,
+        "wall_seconds": 0.66,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preflight.time.txt",
+        "cpu_seconds": 6.090000000000001,
+        "wall_seconds": 3.39,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/queue-tests.time.txt",
+        "cpu_seconds": 5.74,
+        "wall_seconds": 3.14,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point702-analysis.time.txt",
+        "cpu_seconds": 1.29,
+        "wall_seconds": 1.3,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/change-exposure702.time.txt",
+        "cpu_seconds": 0.32,
+        "wall_seconds": 0.33,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point702-behavior-diagnosis.time.txt",
+        "cpu_seconds": 0.43,
+        "wall_seconds": 0.44,
+        "failure_retained": false
+      }
+    ],
+    "ledger_written_this_turn": false,
+    "old307_56_prelaunch_not_repeated": true,
+    "nested_compute_not_added": true,
+    "unmetered_cost": "inspection, source/API reading, author reasoning, syntax/style checks and reporting unknown not zero",
+    "limits_and_historic_unknown_preserved": true
+  },
+  "next_actions": [
+    "Observe original E2 through full0/702/1403/2104/2805 completion; do not select from the closed partial point.",
+    "After full closure, run complete native audit, quantify change/stable and feedback retention, nominate only under the original rule, then savedCPU and actual task selection.",
+    "At actual idle settle all listed pending CPU once and run the prepared32 clean-query trajectories; retain raw-query control outcomes and independently review actual new packets/answers.",
+    "Use actual query/quality evidence before binding E3 collector. New56Source fixtures and all56 reference guides are complete; any clean-query E3 variant must be separately declared, never mutate E3v1 silently.",
+    "Decide optional E2 relative-loss fit only from the complete exposure/result; then E3 matched aggregation/continued-old, autonomous Host and remaining full-scope confirmation."
+  ],
+  "remaining": [
+    "E2 closed selection and possible matched conditional arm",
+    "E3 real new trajectories/branches/one aggregation round/continued-old-data control",
+    "E4 strong baselines and actual autonomous Host",
+    "E5 evidence-based View/lifecycle",
+    "final3seeds/source-family confirmation",
+    "LME451 Reader/Judge then Mem2Act",
+    "full paper tables/figures and only effective Product changes"
+  ],
+  "no_sha_validation": true,
+  "subagents": false,
+  "remote_written": false,
+  "Product_changed": false
+}

@@ -1,0 +1,214 @@
+{
+  "status": "FIRST_SEED_PAIR_CLOSED_FULL_MATRIX_STILL_RUNNING",
+  "seed": 0,
+  "jobs": {
+    "reference": {
+      "train_final_counts": {
+        "labelled": 1495,
+        "accepted": 1494,
+        "first_remaining_candidate_accepted": 292
+      },
+      "compute_already_charged": {
+        "wall_seconds": 1048.4879624368623,
+        "cpu_seconds": 1520.7094710869999,
+        "runs": 1,
+        "train_sequence_rows": 3008,
+        "train_input_tokens": 5937015,
+        "train_batch_forwards": 752,
+        "train_device_forwards": 1504,
+        "train_batch_attempts": 752,
+        "train_offered_rows": 3008,
+        "train_offered_tokens": 5937015,
+        "dev_forwards": 1284,
+        "dev_sequence_rows": 1284,
+        "dev_input_tokens": 2835618,
+        "dev_state_tokenizations": 1284,
+        "dev_state_tokens": 2531772,
+        "train_eval_forwards": 1495,
+        "train_eval_sequence_rows": 1495,
+        "train_eval_input_tokens": 2952432,
+        "train_eval_state_tokenizations": 1495,
+        "train_eval_state_tokens": 2617286,
+        "peak_rss_kib": 5489876,
+        "peak_cuda_allocated_bytes": [
+          21009314816,
+          16994122240
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_audit": {
+        "phase": "source_selection_v2_train_reference_seed0",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "runs": 0,
+          "train_sequence_rows": 0,
+          "train_input_tokens": 0,
+          "train_batch_forwards": 0,
+          "train_device_forwards": 0,
+          "train_batch_attempts": 0,
+          "train_offered_rows": 0,
+          "train_offered_tokens": 0,
+          "dev_forwards": 0,
+          "dev_sequence_rows": 0,
+          "dev_input_tokens": 0,
+          "dev_state_tokenizations": 0,
+          "dev_state_tokens": 0,
+          "train_eval_forwards": 0,
+          "train_eval_sequence_rows": 0,
+          "train_eval_input_tokens": 0,
+          "train_eval_state_tokenizations": 0,
+          "train_eval_state_tokens": 0
+        },
+        "matches": true
+      },
+      "updates": 188,
+      "training_examples": 3008,
+      "source_dev": {
+        "counts": {
+          "states": 428,
+          "labelled": 255,
+          "accepted": 171,
+          "bm25_next_accepted": 150,
+          "masked": 173
+        },
+        "strata": {
+          "dataset/musique_train_mirror": {
+            "labelled": 117,
+            "accepted": 61
+          },
+          "source/supported": {
+            "labelled": 185,
+            "accepted": 141
+          },
+          "source/pool_insufficient": {
+            "labelled": 70,
+            "accepted": 30
+          },
+          "dataset/two_wiki_author_train": {
+            "labelled": 138,
+            "accepted": 110
+          }
+        }
+      },
+      "reference_dev_counts": {
+        "states": 428,
+        "labelled": 354,
+        "accepted": 251,
+        "bm25_next_accepted": 207,
+        "masked": 74
+      }
+    },
+    "source": {
+      "train_final_counts": {
+        "labelled": 1228,
+        "accepted": 1228,
+        "first_remaining_candidate_accepted": 250
+      },
+      "compute_already_charged": {
+        "wall_seconds": 1023.8855660445988,
+        "cpu_seconds": 1490.9016358509998,
+        "runs": 1,
+        "train_sequence_rows": 3008,
+        "train_input_tokens": 5751633,
+        "train_batch_forwards": 752,
+        "train_device_forwards": 1504,
+        "train_batch_attempts": 752,
+        "train_offered_rows": 3008,
+        "train_offered_tokens": 5751633,
+        "dev_forwards": 1284,
+        "dev_sequence_rows": 1284,
+        "dev_input_tokens": 2835618,
+        "dev_state_tokenizations": 1284,
+        "dev_state_tokens": 2531772,
+        "train_eval_forwards": 1228,
+        "train_eval_sequence_rows": 1228,
+        "train_eval_input_tokens": 2338110,
+        "train_eval_state_tokenizations": 1228,
+        "train_eval_state_tokens": 2069924,
+        "peak_rss_kib": 5522912,
+        "peak_cuda_allocated_bytes": [
+          21090278400,
+          16994064896
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_audit": {
+        "phase": "source_selection_v2_train_source_seed0",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "runs": 0,
+          "train_sequence_rows": 0,
+          "train_input_tokens": 0,
+          "train_batch_forwards": 0,
+          "train_device_forwards": 0,
+          "train_batch_attempts": 0,
+          "train_offered_rows": 0,
+          "train_offered_tokens": 0,
+          "dev_forwards": 0,
+          "dev_sequence_rows": 0,
+          "dev_input_tokens": 0,
+          "dev_state_tokenizations": 0,
+          "dev_state_tokens": 0,
+          "train_eval_forwards": 0,
+          "train_eval_sequence_rows": 0,
+          "train_eval_input_tokens": 0,
+          "train_eval_state_tokenizations": 0,
+          "train_eval_state_tokens": 0
+        },
+        "matches": true
+      },
+      "updates": 188,
+      "training_examples": 3008,
+      "source_dev": {
+        "counts": {
+          "states": 428,
+          "labelled": 255,
+          "accepted": 195,
+          "bm25_next_accepted": 150,
+          "masked": 173
+        },
+        "strata": {
+          "dataset/musique_train_mirror": {
+            "labelled": 117,
+            "accepted": 71
+          },
+          "source/supported": {
+            "labelled": 185,
+            "accepted": 147
+          },
+          "source/pool_insufficient": {
+            "labelled": 70,
+            "accepted": 48
+          },
+          "dataset/two_wiki_author_train": {
+            "labelled": 138,
+            "accepted": 124
+          }
+        }
+      },
+      "reference_dev_counts": {
+        "states": 428,
+        "labelled": 354,
+        "accepted": 256,
+        "bm25_next_accepted": 207,
+        "masked": 74
+      }
+    }
+  },
+  "transitions": {
+    "states": 428,
+    "canonical_choice_equal": 268,
+    "input_changed": 0,
+    "labelled": 255,
+    "both_accepted": 164,
+    "left_only_accepted": 7,
+    "right_only_accepted": 31,
+    "masked": 173
+  },
+  "base_choice_agreement": 428,
+  "interpretation": "Single paired seed, pre-saveFP32 prefix diagnostics only. No tuning/checkpoint/seed choice; remaining4jobs and all actualQA/probes unchanged.",
+  "source": "artifacts/jev-reader/selection-v2/first-pair-learning-v1/report.json",
+  "sha_checks": false
+}

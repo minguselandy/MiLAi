@@ -1,0 +1,41 @@
+{
+  "status": "SOURCE_INSPECTED_NO_BENCHMARK_RUN",
+  "source_version": "5644b1838d96bc4483da29642d058ecaa6f80f7f",
+  "repository": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-5644b18/source/STATE-Bench-5644b1838d96bc4483da29642d058ecaa6f80f7f",
+  "source_url": "https://codeload.github.com/microsoft/STATE-Bench/tar.gz/5644b1838d96bc4483da29642d058ecaa6f80f7f",
+  "train_trajectory_files": {
+    "travel": 100,
+    "customer_support": 100,
+    "shopping_assistant": 100
+  },
+  "test_task_contents_inspected": false,
+  "official_runtime_requirement": "Python >=3.12; existing execution interpreters here are3.11.13. Syntax parse alone passed under3.10, not runtime compatibility evidence.",
+  "official_evaluation_client_configuration": {
+    "STATE_BENCH_EVAL_ENDPOINT": false,
+    "STATE_BENCH_EVAL_DEPLOYMENTS": false,
+    "STATE_BENCH_EVAL_API_KEY": false
+  },
+  "official_entrypoint_sha_validation": "protocol.py validate_prompt_hashes calls hashlib.sha256; official run_task/run_batch/score invoke it. Read statically, never executed.",
+  "sha_validation_executed": false,
+  "model_calls": 0,
+  "official_evaluation_run": false,
+  "integration": "Public custom BaseAgent memory_tool_schemas/memory_tool_handlers and run_task orchestrator support thin adaptation; sandbox domain tools remain executed by benchmark. No adapter implemented yet.",
+  "return_contract": "retrieve_learnings returns at most3strings; any MiLAi package still obeys the existing complete2048token budget.",
+  "oracle_boundary": "AgentRuntimeContext carries task_summary/state_requirements/task_requirements. Adapter must not send those hidden evaluation fields to Host or retrieval model; use visible conversation and allowed public identity/time only.",
+  "next": "Implement explicitly labelled local research variant without SHA validation if official conditions remain unavailable. Preserve original tasks/domain tools/prompts; report changed simulator/judge/transport and actual complete costs. Do not claim official score.",
+  "provider_discovery": "No configured STATE endpoint/deployments. Plugin search returned developer docs/services, no connected GPT5.4 inference client identified; no installation or credential changes.",
+  "official_sources": {
+    "learning_track": "https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/docs/AGENT_LEARNING_TRACK.md",
+    "eval_client": "https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/docs/setup/eval-client.md",
+    "custom_hook": "https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/docs/memory/custom-hook.md",
+    "protocol": "https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/state_bench/protocol.py",
+    "orchestrator": "https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/state_bench/orchestrator.py"
+  },
+  "compute": {
+    "wall_seconds": 0.0015676496550440788,
+    "cpu_seconds": 0.0015675770000000006
+  },
+  "ledger_recorded": true,
+  "unmeasured": "Interactive source review, syntax check and web/plugin inspection costs not separately metered; unknown, not zero.",
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v22.json"
+}

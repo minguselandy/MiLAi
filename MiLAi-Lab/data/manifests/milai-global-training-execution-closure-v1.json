@@ -1,0 +1,193 @@
+{
+  "status": "EXECUTION_CLOSURE_CHECKS_PASSED",
+  "checked_epoch": 1792233621.6693428,
+  "checks": {
+    "training_driver_12_closed": true,
+    "train/32/0/native": true,
+    "train/32/0/linear": true,
+    "train/32/1/native": true,
+    "train/32/1/linear": true,
+    "train/32/2/native": true,
+    "train/32/2/linear": true,
+    "train/128/0/native": true,
+    "train/128/0/linear": true,
+    "train/128/1/native": true,
+    "train/128/1/linear": true,
+    "train/128/2/native": true,
+    "train/128/2/linear": true,
+    "training_updates1152": true,
+    "training_original_ledger_matches": true,
+    "all_encoder_head_parameter_probes_changed": true,
+    "six_matched_head_inputs_sampling": true,
+    "same_initial_models_across_sizes": true,
+    "small_paired_four_jobs_closed": true,
+    "small_initial_and_sampling_matched": true,
+    "small_original_ledger_matches": true,
+    "global-reader-policy-qa-v1/all_stages_closed": true,
+    "global-reader-policy-qa-v1/matrix_closed": true,
+    "global-reader-policy-qa-v1/no_unconfirmed_requests": true,
+    "global-reader-policy-qa-v1/frozen_actual_config": true,
+    "global-reader-policy-qa-v1/logical_request_contract": true,
+    "global-reader-policy-qa-v1/receipt_model_identity": true,
+    "global-reader-policy-qa-v1/actual_prompt_capacity": true,
+    "global-reader-policy-qa-v1/all_unique_annotations": true,
+    "global-reader-policy-qa-v1/annotation_freeze_preserved": true,
+    "global-reader-policy-qa-v1/annotations_bound_to_every_position": true,
+    "global-reader-policy-qa-v1/generation_ledger": true,
+    "global-reader-policy-qa-v1/embedding_ledger": true,
+    "global-reader-policy-qa-v1/local_stage_ledger": true,
+    "global-reader-policy-qa-v1/stream_cost_recorded_once": true,
+    "global-reader-policy-qa-v1/failure_retained": true,
+    "global-reserved-policy-qa-v1/all_stages_closed": true,
+    "global-reserved-policy-qa-v1/matrix_closed": true,
+    "global-reserved-policy-qa-v1/no_unconfirmed_requests": true,
+    "global-reserved-policy-qa-v1/frozen_actual_config": true,
+    "global-reserved-policy-qa-v1/logical_request_contract": true,
+    "global-reserved-policy-qa-v1/receipt_model_identity": true,
+    "global-reserved-policy-qa-v1/actual_prompt_capacity": true,
+    "global-reserved-policy-qa-v1/all_unique_annotations": true,
+    "global-reserved-policy-qa-v1/annotation_freeze_preserved": true,
+    "global-reserved-policy-qa-v1/annotations_bound_to_every_position": true,
+    "global-reserved-policy-qa-v1/generation_ledger": true,
+    "global-reserved-policy-qa-v1/embedding_ledger": true,
+    "global-reserved-policy-qa-v1/local_stage_ledger": true,
+    "global-reserved-policy-qa-v1/stream_cost_recorded_once": true,
+    "global-reserved-policy-qa-v1/failure_retained": true,
+    "all_final_inference_processes_absent": true,
+    "only_lab_changes": true,
+    "no_runtime_src_changes": true,
+    "both_cohort_aggregation_closed": true,
+    "figure_png_pdf_exist": true,
+    "writer_physical_review_closed": true,
+    "no_model_billing_after_final_reader": true
+  },
+  "failed_checks": [],
+  "details": {
+    "small_objectives": [
+      "set",
+      "soft-ce"
+    ],
+    "small_seeds": [
+      0,
+      1
+    ],
+    "global-reader-policy-qa-v1": {
+      "stages": 41,
+      "cases": 31,
+      "positions": 837,
+      "unique_requests": 570,
+      "max_provider_prompt_tokens": 4306,
+      "frozen_client_model_config": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1.0,
+        "max_tokens": 8192,
+        "timeout": 300,
+        "enable_thinking": true,
+        "max_calls": 12
+      },
+      "actual_usage": {
+        "responses": 570,
+        "known_prompt_tokens": 390105,
+        "known_completion_tokens": 848375,
+        "known_total_tokens": 1238480
+      },
+      "embedding_usage": {
+        "responses": 24,
+        "known_prompt_tokens": 42325,
+        "known_total_tokens": 42325
+      },
+      "reviewer": "development_assistant",
+      "method_blinding": "Names hidden before annotation freeze; document counts can expose policy types. Not independent adjudication.",
+      "request_setting_evidence": "Per-call logical messages/schema/thinking flags plus frozen actual-config and static client path. HTTP wire bodies were not independently captured."
+    },
+    "global-reserved-policy-qa-v1": {
+      "stages": 40,
+      "cases": 28,
+      "positions": 756,
+      "unique_requests": 504,
+      "max_provider_prompt_tokens": 3679,
+      "frozen_client_model_config": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1.0,
+        "max_tokens": 8192,
+        "timeout": 300,
+        "enable_thinking": true,
+        "max_calls": 12
+      },
+      "actual_usage": {
+        "responses": 504,
+        "known_prompt_tokens": 378817,
+        "known_completion_tokens": 788759,
+        "known_total_tokens": 1167576
+      },
+      "embedding_usage": {
+        "responses": 23,
+        "known_prompt_tokens": 45834,
+        "known_total_tokens": 45834
+      },
+      "reviewer": "development_assistant",
+      "method_blinding": "Names hidden before annotation freeze; document counts can expose policy types. Not independent adjudication.",
+      "request_setting_evidence": "Per-call logical messages/schema/thinking flags plus frozen actual-config and static client path. HTTP wire bodies were not independently captured."
+    }
+  },
+  "source_versions": {
+    "training": "2346bb57",
+    "dev_posttrain": "8ce5d09b",
+    "reserved_posttrain": "d5261e45",
+    "final_analysis": "a5e94389"
+  },
+  "remote_refs_read_only_observed": {
+    "main": "518aee4190f3abdd6f902baeb59454f49cd0b22b",
+    "prior_research": "e832e2d437b4b640976a4f5b459e51b5281f5c2e",
+    "current_audit_branch_published": false
+  },
+  "initial_audit_attempt": {
+    "error": "KeyError from indexing the annotation document instead of its annotations member",
+    "stopped_before_writes_or_ledger_record": true,
+    "model_calls": 0,
+    "failed_attempt_cpu_not_captured": true
+  },
+  "new_model_calls": 0,
+  "sha_or_content_fingerprint_checks": false,
+  "scope": "Actual finite execution, artifact/configuration, input/annotation coverage and accounting closure. Not a claim of positive generalization, natural-population performance, exhaustive semantic isolation, independent gold, remote CI or production co-resident latency.",
+  "compute": {
+    "wall_seconds": 0.32240892108529806,
+    "cpu_seconds": 0.299759895,
+    "audits": 1
+  },
+  "protected_services_final_metadata": {
+    "observed_epoch": 1792233980.1846828,
+    "method": "GET /v1/models only; zero inference requests",
+    "services": [
+      {
+        "port": 7860,
+        "status": 200,
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "max_model_len": 65536
+      },
+      {
+        "port": 7861,
+        "status": 200,
+        "model": "bge-m3",
+        "max_model_len": 8192
+      },
+      {
+        "port": 7961,
+        "status": 200,
+        "model": "bge-reranker",
+        "max_model_len": 8192
+      }
+    ]
+  },
+  "final_report_local_links": {
+    "checked": 13,
+    "missing": []
+  },
+  "final_delivery_path_scope": {
+    "changed_tracked_paths": 99,
+    "outside_lab": [],
+    "lab_runtime_src": []
+  }
+}

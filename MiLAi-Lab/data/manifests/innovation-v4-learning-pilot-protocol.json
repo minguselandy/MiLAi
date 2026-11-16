@@ -1,0 +1,35 @@
+{
+  "status": "PREDECLARED_SMALL_LEARNING_PILOT",
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_card": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+  "runtime": "existing system Python 3.10 / Torch 2.7.0 / Transformers 4.52.3; CPU only, 4 threads; no deployed service or GPU change",
+  "training_references": "data/fixtures/milai-innovation-matched-training-v2.jsonl",
+  "reference_examples": 8,
+  "source_chains": 6,
+  "auxiliary_consequence_examples": 1,
+  "evaluation": "data/fixtures/milai-innovation-learning-eval-v1.json",
+  "conditions": [
+    "untrained base evaluation",
+    "imitation",
+    "quality_weighted",
+    "relation_consequence"
+  ],
+  "epochs": 1,
+  "steps_per_training_condition": 8,
+  "seed": 20261016,
+  "rank": 4,
+  "alpha": 8,
+  "learning_rate": 0.0005,
+  "target_modules": [
+    "q_proj",
+    "v_proj"
+  ],
+  "matching": "identical model, sequences, order, initial adapters, optimizer and steps; objective token weights only",
+  "quality_weighting": "2x text/kind/evidence-alias/applicability value spans, normalized loss; proxy, not a learned correctness reward",
+  "relation_weighting": "quality weighting plus 2x rules and nonempty consequence labels; empty unknown labels not trained as true empty answers",
+  "evaluation_max_new_tokens": 1024,
+  "evaluation_sampling": "greedy, same source inputs and output limit for all conditions",
+  "completion_rule": "Parameter updates/adapter files alone do not prove semantic benefit. Inspect actual generations and committed states, retaining invalid and missing results.",
+  "larger_scope": "Expand source-reviewed transformations and unseen combinations; this eight-example pilot does not close D4 or prove generalization.",
+  "cost": "Training/evaluation CPU work and token counts separately reported; authoring/review cost unmetered, not zero."
+}

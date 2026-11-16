@@ -1,0 +1,782 @@
+{
+  "status": "CLOSED",
+  "source_version": "92337978",
+  "initial_sources": 100,
+  "total_sources": 102,
+  "independent_target_scenarios": 1,
+  "arms": {
+    "source-first": {
+      "first_labels": {
+        "Correct": 24
+      },
+      "stages": {
+        "reader_packet": {
+          "responses": 24,
+          "input_tokens": 87463,
+          "output_tokens": 26618,
+          "total_tokens": 114081
+        },
+        "judge": {
+          "responses": 24,
+          "input_tokens": 23343,
+          "output_tokens": 24353,
+          "total_tokens": 47696
+        }
+      },
+      "prediction_tokens": 114081,
+      "reuse_prefixes_before_updates": {
+        "1": {
+          "query_opportunities": 1,
+          "construction_tokens": 0,
+          "reading_tokens": 5221,
+          "total_tokens": 5221
+        },
+        "4": {
+          "query_opportunities": 4,
+          "construction_tokens": 0,
+          "reading_tokens": 19289,
+          "total_tokens": 19289
+        },
+        "16": {
+          "query_opportunities": 16,
+          "construction_tokens": 0,
+          "reading_tokens": 75557,
+          "total_tokens": 75557
+        }
+      },
+      "queries": [
+        {
+          "session": 99,
+          "question": 0,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 5221,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.04194207116961479
+        },
+        {
+          "session": 99,
+          "question": 1,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4210,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.031308154575526714
+        },
+        {
+          "session": 99,
+          "question": 2,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 5229,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.032190640456974506
+        },
+        {
+          "session": 99,
+          "question": 3,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4629,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03265039436519146
+        },
+        {
+          "session": 99,
+          "question": 4,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4307,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03389173187315464
+        },
+        {
+          "session": 99,
+          "question": 5,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4642,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03135882504284382
+        },
+        {
+          "session": 99,
+          "question": 6,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4700,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03315533231943846
+        },
+        {
+          "session": 99,
+          "question": 7,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4756,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03324719239026308
+        },
+        {
+          "session": 99,
+          "question": 8,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4985,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.032198174856603146
+        },
+        {
+          "session": 99,
+          "question": 9,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4763,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03143640514463186
+        },
+        {
+          "session": 99,
+          "question": 10,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4436,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03146932274103165
+        },
+        {
+          "session": 99,
+          "question": 11,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4701,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03157761599868536
+        },
+        {
+          "session": 99,
+          "question": 12,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4586,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03195938467979431
+        },
+        {
+          "session": 99,
+          "question": 13,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4834,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03455984778702259
+        },
+        {
+          "session": 99,
+          "question": 14,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4563,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03164438810199499
+        },
+        {
+          "session": 99,
+          "question": 15,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4995,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.032884315587580204
+        },
+        {
+          "session": 100,
+          "question": 0,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4965,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03205566853284836
+        },
+        {
+          "session": 100,
+          "question": 1,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4768,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03154923673719168
+        },
+        {
+          "session": 100,
+          "question": 2,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4805,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03213885426521301
+        },
+        {
+          "session": 100,
+          "question": 3,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 5295,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03227602504193783
+        },
+        {
+          "session": 101,
+          "question": 0,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4420,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.05735107138752937
+        },
+        {
+          "session": 101,
+          "question": 1,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4522,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03226970136165619
+        },
+        {
+          "session": 101,
+          "question": 2,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4796,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03245608601719141
+        },
+        {
+          "session": 101,
+          "question": 3,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "reading_tokens": 4953,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03220219071954489
+        }
+      ],
+      "structure_actions": {},
+      "visible_sources_enumerated_for_structure": 0,
+      "source_bodies_sent_for_structure": 0,
+      "source_retrieval_total_seconds": 0.8097726311534643,
+      "timing_limit": "Observed shared machine time, including concurrent CPU adapter work; not exclusive hardware speed or monetary cost."
+    },
+    "incremental-first": {
+      "first_labels": {
+        "Correct": 23,
+        "Hallucination": 1
+      },
+      "stages": {
+        "reader_packet": {
+          "responses": 28,
+          "input_tokens": 112933,
+          "output_tokens": 45667,
+          "total_tokens": 158600
+        },
+        "judge": {
+          "responses": 24,
+          "input_tokens": 23514,
+          "output_tokens": 23933,
+          "total_tokens": 47447
+        },
+        "query_structure": {
+          "responses": 3,
+          "input_tokens": 15232,
+          "output_tokens": 13351,
+          "total_tokens": 28583
+        }
+      },
+      "prediction_tokens": 187183,
+      "reuse_prefixes_before_updates": {
+        "1": {
+          "query_opportunities": 1,
+          "construction_tokens": 10829,
+          "reading_tokens": 5624,
+          "total_tokens": 16453
+        },
+        "4": {
+          "query_opportunities": 4,
+          "construction_tokens": 10829,
+          "reading_tokens": 22956,
+          "total_tokens": 33785
+        },
+        "16": {
+          "query_opportunities": 16,
+          "construction_tokens": 10829,
+          "reading_tokens": 100754,
+          "total_tokens": 111583
+        }
+      },
+      "queries": [
+        {
+          "session": 99,
+          "question": 0,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5624,
+          "construction_tokens": 10829,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03522264491766691
+        },
+        {
+          "session": 99,
+          "question": 1,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5331,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03315664082765579
+        },
+        {
+          "session": 99,
+          "question": 2,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 6264,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03206061851233244
+        },
+        {
+          "session": 99,
+          "question": 3,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5737,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03130373265594244
+        },
+        {
+          "session": 99,
+          "question": 4,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5318,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03403019439429045
+        },
+        {
+          "session": 99,
+          "question": 5,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 7335,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.059758469462394714
+        },
+        {
+          "session": 99,
+          "question": 6,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5230,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.032457057386636734
+        },
+        {
+          "session": 99,
+          "question": 7,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5287,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.032649267464876175
+        },
+        {
+          "session": 99,
+          "question": 8,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5502,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03344081621617079
+        },
+        {
+          "session": 99,
+          "question": 9,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5837,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.04837682005017996
+        },
+        {
+          "session": 99,
+          "question": 10,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5258,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.032683584839105606
+        },
+        {
+          "session": 99,
+          "question": 11,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5312,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.031368386931717396
+        },
+        {
+          "session": 99,
+          "question": 12,
+          "reader_calls": 3,
+          "opened_kinds": [
+            "query_structure",
+            "original_source"
+          ],
+          "reading_tokens": 15882,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03258769493550062
+        },
+        {
+          "session": 99,
+          "question": 13,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5775,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03251812048256397
+        },
+        {
+          "session": 99,
+          "question": 14,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5420,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03516961541026831
+        },
+        {
+          "session": 99,
+          "question": 15,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5642,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.0323305269703269
+        },
+        {
+          "session": 100,
+          "question": 0,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5919,
+          "construction_tokens": 9535,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03235358651727438
+        },
+        {
+          "session": 100,
+          "question": 1,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5467,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03314710222184658
+        },
+        {
+          "session": 100,
+          "question": 2,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 6026,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03199328016489744
+        },
+        {
+          "session": 100,
+          "question": 3,
+          "reader_calls": 3,
+          "opened_kinds": [
+            "query_structure",
+            "original_source",
+            "original_source"
+          ],
+          "reading_tokens": 18334,
+          "construction_tokens": 0,
+          "first_input_contains_white": false,
+          "first_input_contains_drawer": false,
+          "source_retrieval_seconds": 0.03312826622277498
+        },
+        {
+          "session": 101,
+          "question": 0,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5057,
+          "construction_tokens": 8219,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03408028930425644
+        },
+        {
+          "session": 101,
+          "question": 1,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5665,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.0334230437874794
+        },
+        {
+          "session": 101,
+          "question": 2,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 6141,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.03246041759848595
+        },
+        {
+          "session": 101,
+          "question": 3,
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "reading_tokens": 5237,
+          "construction_tokens": 0,
+          "first_input_contains_white": true,
+          "first_input_contains_drawer": true,
+          "source_retrieval_seconds": 0.036067286506295204
+        }
+      ],
+      "structure_actions": {
+        "reuse": 21,
+        "build": 1,
+        "refresh": 2
+      },
+      "visible_sources_enumerated_for_structure": 2412,
+      "source_bodies_sent_for_structure": 60,
+      "source_retrieval_total_seconds": 0.8357674637809396,
+      "timing_limit": "Observed shared machine time, including concurrent CPU adapter work; not exclusive hardware speed or monetary cost."
+    }
+  },
+  "scope": "One scenario with 99 unrelated depot sources. Sixteen initial questions precede either update. Not 100 independent cases or external confirmation.",
+  "ledger_delta": {
+    "generation_requests": 103,
+    "generation": {
+      "known_tokens": 396407,
+      "charged_tokens": 396407,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "receipt_ledger_difference": 0,
+  "author_review": {
+    "scope": "All48 answers and allthree constructed cache versions read against target sources; selected failure/correct-but-unsupported packets inspected in full.",
+    "source_first": "All24 core answers match the source. Initial query15 additionally says the folio access route also applies to the index, which is not stated. Some outputs also infer female gender without source support.",
+    "incremental_first": "Initial query5 falsely reports no reference-index information and answers about unrelated depot crates, despite raw candidate0 being the correct source. It neither opens that body nor states a gap.",
+    "unsupported_correct_answers": [
+      {
+        "session": 99,
+        "question": 12
+      },
+      {
+        "session": 100,
+        "question": 3
+      }
+    ],
+    "unsupported_correct_explanation": "These answers name the white drawer, but the entire saved Reader request contains neither white nor drawer; the cached interpretation omits the fact and raw excerpts stop before it. Correct labels do not demonstrate evidence use. This observation does not establish the cause of the model output.",
+    "structure": [
+      "Initial5-node cache omits the white-drawer fact and incorrectly makes the reported expired badge a positive alternative support for eligibility. The valid-voucher route makes the current conclusion true but does not justify that alternative.",
+      "January3 refresh correctly removes the voucher policy route and changes the eligibility claim to denial, preserving orientation and voucher validity.",
+      "January4 refresh adds a source-bound black-cabinet node without changing eligibility.",
+      "Both updates resend20 raw source bodies because the retrieved set changes. Cache reuse still enumerates all 100-102 Sources; full locality is not established."
+    ]
+  },
+  "decision": "No advantage for this cached graph against retrieved-first raw reading at100sources. Do not expand the unchanged graph condition to1000/5000 merely to seek a win; those inputs remain prepared, not measured. Prioritize scope/value decisions and learned source-faithful formation. Retain simple controls and full lifecycle costs.",
+  "official_scores_modified": false,
+  "independent_blind_review": false,
+  "full_goal_complete": false
+}

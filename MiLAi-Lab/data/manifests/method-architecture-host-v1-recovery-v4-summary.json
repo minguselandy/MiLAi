@@ -1,0 +1,910 @@
+{
+  "status": "RECOVERY_AND_REMAINING_THREE_MESSAGES_COMPLETED",
+  "source_commit": "a47035f6",
+  "configuration_commit": "255fe5e7",
+  "dependency_read_thinking": false,
+  "driver": {
+    "status": "BOUNDED_SELECTION_LANE_CLOSED",
+    "driver_pid": 1636323,
+    "source_commit": "a47035f6",
+    "configuration_commit": "255fe5e7",
+    "dependency_read_thinking": false,
+    "started_at": "2026-10-15T09:29:24.985690+00:00",
+    "steps": [
+      {
+        "phase": "recovery",
+        "pid": 1636349,
+        "started_at": "2026-10-15T09:29:24.986790+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:29:50.151355+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "phase": 5,
+        "pid": 1637959,
+        "started_at": "2026-10-15T09:29:50.153291+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:31:23.500228+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "phase": 6,
+        "pid": 1643837,
+        "started_at": "2026-10-15T09:31:23.502882+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:31:54.772560+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "phase": 7,
+        "pid": 1645871,
+        "started_at": "2026-10-15T09:31:54.777313+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:32:51.704239+00:00",
+        "message_status": "COMPLETED"
+      }
+    ],
+    "unknown_retry": false,
+    "closed_at": "2026-10-15T09:32:51.707484+00:00"
+  },
+  "phases": [
+    {
+      "phase": "recovery",
+      "status": "COMPLETED",
+      "answer": "\n\n根据已保存的记录，回答如下：\n\n## 1. 领取资格与依据\n**会员卡失效后，许澄仍能领取稀有资料。**\n\n**依据：**\n- 领取资格条目规定：领取稀有资料需要满足两个条件：\n  1. **完成培训** ✓（许澄已完成）\n  2. **会员卡或借阅凭条至少一种有效** ✓（会员卡失效，但借阅凭条仍有效）\n\n- 凭证台账记载：**许澄的会员卡失效了，借阅凭条仍有效。**\n\n因此，许澄凭借\"培训完成 + 有效的借阅凭条\"满足领取条件，可以领取。\n\n## 2. 会员卡失效的影响\n**会员卡失效不影响以下事项：**\n\n| 项目 | 状态 | 说明 |\n|------|------|------|\n| 培训完成状态 | 不变 | 培训已完成的事实不变 |\n| 柜签颜色 | 蓝色（不变） | 柜签颜色保持蓝色 |\n\n**总结：** 会员卡失效不影响许澄的领取资格（因为借阅凭条仍有效），也不影响其培训完成状态或柜签颜色。",
+      "maintenance": []
+    },
+    {
+      "phase": 5,
+      "status": "COMPLETED",
+      "answer": "\n\n根据您的指令，系统已同步完成两项核心记录的更新与保存，当前实际状态如下：\n\n**1. 凭据台账（已更新保存）**\n- **会员卡**：失效\n- **借阅凭条**：已取消无效\n- **凭据柜标签**：蓝色（保持不变）\n- **保存要求**：台账与后续活动资格记录保持独立保存，不合并\n\n**2. 领取资格条目（已更新保存）**\n- **当前资格结论**：**不能领取**。\n- **判定依据**：资格要求为“完成培训，且会员卡或借阅凭条至少一种有效”。许澄的培训完成事实虽未改变，但由于会员卡与借阅凭条均已无效，不再满足“至少一种凭据有效”的硬性条件。\n\n上述凭据状态与资格结论的变更已实时写入语义记忆。如您后续凭据状态恢复或有其他调整，可随时再次通知更新。\n\n本轮语义记忆: 已提交, 已确认 2 项提交。这里只确认保存回执, 不确认全部请求或语义覆盖。",
+      "maintenance": [
+        {
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "reason": null,
+              "id": "9a98338b-e88d-5be1-bc74-097e7908984f",
+              "revision": 3
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "reason": null,
+              "id": "3aecfaf9-ef4e-5d42-981d-124af84f31bf",
+              "revision": 2
+            }
+          ],
+          "unprocessed": []
+        }
+      ]
+    },
+    {
+      "phase": 6,
+      "status": "COMPLETED",
+      "answer": "\n\n根据2034年7月4日记录的实际状态，回答如下：\n\n1. **现在能领取吗？**：**不能**。借阅凭条也已取消无效，许澄的两种凭据（会员卡、借阅凭条）均已失效。按规定领取稀有资料需要完成培训且至少一种凭据有效，因此凭据已失效的她目前无法领取。\n2. **培训状态目前怎样？**：**已完成**（该事实保持不变，不受凭据失效影响）。\n3. **柜签颜色目前怎样？**：**蓝色**（该颜色保持不变）。",
+      "maintenance": []
+    },
+    {
+      "phase": 7,
+      "status": "COMPLETED",
+      "answer": "\n\n根据已读取的已保存记录，回答如下：\n\n---\n\n## 1. 领取资格条目**最初保存时的文字**（第1版）\n\n> **领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。**\n\n---\n\n## 2. 后来哪些凭据失效\n\n凭据台账经历了两次状态变更：\n\n| 时间 | 会员卡 | 借阅凭条 |\n|------|--------|----------|\n| 初始保存 | 有效 | 有效 |\n| 第2次更新（2034-07-03） | **失效** | 仍有效 |\n| 第3次更新（2034-07-04） | 已失效 | **已取消无效** |\n\n---\n\n## 3. 目前（第2版）的领取资格条目文字\n\n> **领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，但两种凭据均已无效，因此依照台账不能领取。**\n\n---\n\n**总结**：初存版本中，凭据均为有效，资格结论为\"可以领取\"。后续会员卡先失效，随后借阅凭条也被取消，导致目前凭据全部无效，资格结论更新为\"不能领取\"。",
+      "maintenance": []
+    }
+  ],
+  "final_records": [
+    {
+      "ok": true,
+      "status": "found",
+      "id": "9a98338b-e88d-5be1-bc74-097e7908984f",
+      "value": {
+        "revision": 3,
+        "content": "Matter: credentials\nunit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de — Content: 许澄的会员卡失效了，借阅凭条也已取消无效。 [Assertion: reported; speaker=user; occurred_at=2034-07-04T09:00:00+08:00]\n  Applies under: 凭据台账应单独保存，不与后续活动资格记录合并。 [Assertion: reported; speaker=user; occurred_at=2034-07-01T09:00:00+08:00]\nunit-4775b61e-20be-45ae-b568-b34da84359e1 — Content: 凭据柜的标签用蓝色。 [Assertion: reported; speaker=user; occurred_at=2034-07-01T09:00:00+08:00]",
+        "kind": "semantic",
+        "scope": {},
+        "basis": "user_statement",
+        "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+        "object_ref": null,
+        "fields": {},
+        "mode": "field_grounded",
+        "content_verification": "unchecked",
+        "source_status": "captured",
+        "fields_verification": "unchecked",
+        "observed_at": "2026-10-15T09:29:52.814078+00:00",
+        "committed_at": "2026-10-15T09:30:56.336799+00:00",
+        "session": "cross-event-3",
+        "retracted": false,
+        "removed_field_support": {},
+        "edit_state": {
+          "matter_description": "credentials",
+          "relations": [
+            {
+              "evidence_refs": [
+                {
+                  "end": 52,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                  "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "relation_id": "relation-7ab9cf0f-c549-46e6-9ca3-6624593be11e",
+              "relation_type": "modifies",
+              "source_unit": "unit-669a8ec7-0907-40b0-ac15-18c8fbfd78bc",
+              "target_unit": "unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de"
+            }
+          ],
+          "representation": "conditioned_v1",
+          "units": [
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T09:29:52.814078+00:00",
+                "occurred_at": "2034-07-04T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 53,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+                  "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                  "source_revision": 1,
+                  "start": 0
+                },
+                {
+                  "end": 73,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a\",1,0,73]",
+                  "source_ref": "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "许澄的会员卡失效了，借阅凭条也已取消无效。",
+              "unit_id": "unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de"
+            },
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T08:12:53.842831+00:00",
+                "occurred_at": "2034-07-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 52,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                  "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "condition",
+              "text": "凭据台账应单独保存，不与后续活动资格记录合并。",
+              "unit_id": "unit-669a8ec7-0907-40b0-ac15-18c8fbfd78bc"
+            },
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T08:12:53.842831+00:00",
+                "occurred_at": "2034-07-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 52,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                  "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "凭据柜的标签用蓝色。",
+              "unit_id": "unit-4775b61e-20be-45ae-b568-b34da84359e1"
+            }
+          ]
+        },
+        "edit_operations": [
+          {
+            "attach_to": [],
+            "condition": null,
+            "evidence": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a\",1,0,73]"
+            ],
+            "operation": "replace",
+            "role": "content",
+            "shared_conditions": [],
+            "target_unit": "unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de",
+            "text": "许澄的会员卡失效了，借阅凭条也已取消无效。"
+          }
+        ],
+        "method_version": "milai_edit_v2",
+        "method_arm": "M",
+        "revision_evidence": [
+          "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]"
+        ],
+        "functional_support": {
+          "basis": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+            ],
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1,
+                "start": 0,
+                "end": 52,
+                "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          },
+          "content": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a\",1,0,73]",
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+            ],
+            "source_refs": [
+              "source-093713b4-9195-4dc1-91b7-77af7131e096",
+              "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+                "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                "source_revision": 1,
+                "start": 0,
+                "end": 53,
+                "content": "借阅凭条现在也取消了，两种凭据都已无效，因此许澄现在不能领取稀有资料。她已完成培训的事实和蓝色柜签均不变。"
+              },
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a\",1,0,73]",
+                "source_ref": "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+                "source_revision": 1,
+                "start": 0,
+                "end": 73,
+                "content": "台账更新：许澄的会员卡失效了，借阅凭条仍有效，培训完成的事实不变。凭条加培训仍支持她领取稀有资料。台账和资格记录要分别保持这些事实；柜子标签不变。"
+              },
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1,
+                "start": 0,
+                "end": 52,
+                "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          },
+          "kind": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+            ],
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1,
+                "start": 0,
+                "end": 52,
+                "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          }
+        },
+        "source_refs": [
+          "source-093713b4-9195-4dc1-91b7-77af7131e096",
+          "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+          "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+        ],
+        "source_bindings": [
+          {
+            "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+            "role": "user",
+            "source_revision": 1
+          },
+          {
+            "source_ref": "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+            "role": "user",
+            "source_revision": 1
+          },
+          {
+            "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+            "role": "user",
+            "source_revision": 1
+          }
+        ],
+        "mutation_contract": "event_bound_v1",
+        "support_contract": "direct_support_v1",
+        "trigger_binding": {
+          "bank": [
+            "functional",
+            "run-first",
+            "cross-record-host",
+            "method-cross-host"
+          ],
+          "config_version": "milai-method-architecture-host-v2",
+          "message_id": "source",
+          "origin_phase": "start",
+          "owner": "method-cross-host",
+          "session": "cross-event-3",
+          "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+          "source_revision": 1,
+          "support_contract": "direct_support_v1",
+          "trigger_ref": "turn-f52cdc54-2201-4b71-a83a-85f87c892fa7"
+        },
+        "field_support": {
+          "basis": {
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "reused_equal_whole_field",
+            "content_verification": "unchecked",
+            "reused_from": {
+              "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"9a98338b-e88d-5be1-bc74-097e7908984f\",2]",
+              "record_id": "9a98338b-e88d-5be1-bc74-097e7908984f",
+              "revision": 2,
+              "field": "basis",
+              "lineage_scope": "field_map"
+            }
+          },
+          "content": {
+            "source_refs": [
+              "source-093713b4-9195-4dc1-91b7-77af7131e096",
+              "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                "role": "user",
+                "source_revision": 1
+              },
+              {
+                "source_ref": "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+                "role": "user",
+                "source_revision": 1
+              },
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "model_selected",
+            "content_verification": "unchecked"
+          },
+          "kind": {
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "reused_equal_whole_field",
+            "content_verification": "unchecked",
+            "reused_from": {
+              "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"9a98338b-e88d-5be1-bc74-097e7908984f\",2]",
+              "record_id": "9a98338b-e88d-5be1-bc74-097e7908984f",
+              "revision": 2,
+              "field": "kind",
+              "lineage_scope": "field_map"
+            }
+          },
+          "scope": {
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "reused_equal_whole_field",
+            "content_verification": "unchecked",
+            "reused_from": {
+              "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"9a98338b-e88d-5be1-bc74-097e7908984f\",2]",
+              "record_id": "9a98338b-e88d-5be1-bc74-097e7908984f",
+              "revision": 2,
+              "field": "scope",
+              "lineage_scope": "field_map"
+            }
+          }
+        }
+      },
+      "observation_only": true,
+      "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"9a98338b-e88d-5be1-bc74-097e7908984f\",3]"
+    },
+    {
+      "ok": true,
+      "status": "found",
+      "id": "3aecfaf9-ef4e-5d42-981d-124af84f31bf",
+      "value": {
+        "revision": 2,
+        "content": "Matter: eligibility\nunit-838e362a-1a17-4bf6-a8ce-6955ce989d5b — Content: 领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，但两种凭据均已无效，因此依照台账不能领取。 [Assertion: reported; speaker=user; occurred_at=2034-07-04T09:00:00+08:00]\nSupport for 领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，但两种凭据均已无效，因此依照台账不能领取。: (External record 9a98338b-e88d-5be1-bc74-097e7908984f unit unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de at revision 3)",
+        "kind": "semantic",
+        "scope": {},
+        "basis": "user_statement",
+        "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+        "object_ref": null,
+        "fields": {},
+        "mode": "field_grounded",
+        "content_verification": "unchecked",
+        "source_status": "captured",
+        "fields_verification": "unchecked",
+        "observed_at": "2026-10-15T09:29:52.814078+00:00",
+        "committed_at": "2026-10-15T09:30:56.728069+00:00",
+        "session": "cross-event-3",
+        "retracted": false,
+        "removed_field_support": {},
+        "edit_state": {
+          "matter_description": "eligibility",
+          "relations": [],
+          "representation": "conditioned_v1",
+          "support_groups": [
+            {
+              "alternatives": [
+                [
+                  "external:9a98338b-e88d-5be1-bc74-097e7908984f:unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de"
+                ]
+              ],
+              "evidence_refs": [
+                {
+                  "end": 53,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+                  "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                  "source_revision": 1,
+                  "start": 0
+                },
+                {
+                  "end": 73,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a\",1,0,73]",
+                  "source_ref": "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "external_units": {
+                "external:9a98338b-e88d-5be1-bc74-097e7908984f:unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de": {
+                  "record_id": "9a98338b-e88d-5be1-bc74-097e7908984f",
+                  "revision": 3,
+                  "unit_id": "unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de"
+                }
+              },
+              "group_id": "support-954188bb-1224-4d28-bbad-fd2a228b608e",
+              "target_unit": "unit-838e362a-1a17-4bf6-a8ce-6955ce989d5b"
+            }
+          ],
+          "units": [
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T09:29:52.814078+00:00",
+                "occurred_at": "2034-07-04T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 53,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+                  "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                  "source_revision": 1,
+                  "start": 0
+                },
+                {
+                  "end": 81,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-cdcb901f-b0aa-444f-b54d-44bbe2e76211\",1,0,81]",
+                  "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，但两种凭据均已无效，因此依照台账不能领取。",
+              "unit_id": "unit-838e362a-1a17-4bf6-a8ce-6955ce989d5b"
+            }
+          ]
+        },
+        "edit_operations": [
+          {
+            "attach_to": [],
+            "condition": null,
+            "evidence": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-cdcb901f-b0aa-444f-b54d-44bbe2e76211\",1,0,81]"
+            ],
+            "operation": "replace",
+            "role": "content",
+            "shared_conditions": [],
+            "target_unit": "unit-838e362a-1a17-4bf6-a8ce-6955ce989d5b",
+            "text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，但两种凭据均已无效，因此依照台账不能领取。"
+          }
+        ],
+        "method_version": "milai_edit_v2",
+        "method_arm": "M",
+        "revision_evidence": [
+          "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]"
+        ],
+        "functional_support": {
+          "basis": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-cdcb901f-b0aa-444f-b54d-44bbe2e76211\",1,0,81]",
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+            ],
+            "source_refs": [
+              "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-cdcb901f-b0aa-444f-b54d-44bbe2e76211\",1,0,81]",
+                "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+                "source_revision": 1,
+                "start": 0,
+                "end": 81,
+                "content": "请另建领取资格条目，引用已有台账中的具体凭据，不要复制一份台账：领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。"
+              },
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1,
+                "start": 0,
+                "end": 52,
+                "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          },
+          "content": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-cdcb901f-b0aa-444f-b54d-44bbe2e76211\",1,0,81]",
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a\",1,0,73]"
+            ],
+            "source_refs": [
+              "source-093713b4-9195-4dc1-91b7-77af7131e096",
+              "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+              "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-093713b4-9195-4dc1-91b7-77af7131e096\",1,0,53]",
+                "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                "source_revision": 1,
+                "start": 0,
+                "end": 53,
+                "content": "借阅凭条现在也取消了，两种凭据都已无效，因此许澄现在不能领取稀有资料。她已完成培训的事实和蓝色柜签均不变。"
+              },
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-cdcb901f-b0aa-444f-b54d-44bbe2e76211\",1,0,81]",
+                "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+                "source_revision": 1,
+                "start": 0,
+                "end": 81,
+                "content": "请另建领取资格条目，引用已有台账中的具体凭据，不要复制一份台账：领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。"
+              },
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a\",1,0,73]",
+                "source_ref": "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+                "source_revision": 1,
+                "start": 0,
+                "end": 73,
+                "content": "台账更新：许澄的会员卡失效了，借阅凭条仍有效，培训完成的事实不变。凭条加培训仍支持她领取稀有资料。台账和资格记录要分别保持这些事实；柜子标签不变。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          },
+          "kind": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-cdcb901f-b0aa-444f-b54d-44bbe2e76211\",1,0,81]",
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+            ],
+            "source_refs": [
+              "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-cdcb901f-b0aa-444f-b54d-44bbe2e76211\",1,0,81]",
+                "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+                "source_revision": 1,
+                "start": 0,
+                "end": 81,
+                "content": "请另建领取资格条目，引用已有台账中的具体凭据，不要复制一份台账：领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。"
+              },
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1,
+                "start": 0,
+                "end": 52,
+                "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          }
+        },
+        "source_refs": [
+          "source-093713b4-9195-4dc1-91b7-77af7131e096",
+          "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+          "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+          "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+        ],
+        "source_bindings": [
+          {
+            "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+            "role": "user",
+            "source_revision": 1
+          },
+          {
+            "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+            "role": "user",
+            "source_revision": 1
+          },
+          {
+            "source_ref": "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+            "role": "user",
+            "source_revision": 1
+          },
+          {
+            "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+            "role": "user",
+            "source_revision": 1
+          }
+        ],
+        "mutation_contract": "event_bound_v1",
+        "support_contract": "direct_support_v1",
+        "trigger_binding": {
+          "bank": [
+            "functional",
+            "run-first",
+            "cross-record-host",
+            "method-cross-host"
+          ],
+          "config_version": "milai-method-architecture-host-v2",
+          "message_id": "source",
+          "origin_phase": "start",
+          "owner": "method-cross-host",
+          "session": "cross-event-3",
+          "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+          "source_revision": 1,
+          "support_contract": "direct_support_v1",
+          "trigger_ref": "turn-f52cdc54-2201-4b71-a83a-85f87c892fa7"
+        },
+        "field_support": {
+          "basis": {
+            "source_refs": [
+              "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+                "role": "user",
+                "source_revision": 1
+              },
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "reused_equal_whole_field",
+            "content_verification": "unchecked",
+            "reused_from": {
+              "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"3aecfaf9-ef4e-5d42-981d-124af84f31bf\",1]",
+              "record_id": "3aecfaf9-ef4e-5d42-981d-124af84f31bf",
+              "revision": 1,
+              "field": "basis",
+              "lineage_scope": "field_map"
+            }
+          },
+          "content": {
+            "source_refs": [
+              "source-093713b4-9195-4dc1-91b7-77af7131e096",
+              "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+              "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-093713b4-9195-4dc1-91b7-77af7131e096",
+                "role": "user",
+                "source_revision": 1
+              },
+              {
+                "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+                "role": "user",
+                "source_revision": 1
+              },
+              {
+                "source_ref": "source-9a25e0c4-e4fe-48da-91c8-a17cca62d59a",
+                "role": "user",
+                "source_revision": 1
+              },
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "model_selected",
+            "content_verification": "unchecked"
+          },
+          "kind": {
+            "source_refs": [
+              "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+                "role": "user",
+                "source_revision": 1
+              },
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "reused_equal_whole_field",
+            "content_verification": "unchecked",
+            "reused_from": {
+              "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"3aecfaf9-ef4e-5d42-981d-124af84f31bf\",1]",
+              "record_id": "3aecfaf9-ef4e-5d42-981d-124af84f31bf",
+              "revision": 1,
+              "field": "kind",
+              "lineage_scope": "field_map"
+            }
+          },
+          "scope": {
+            "source_refs": [
+              "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-cdcb901f-b0aa-444f-b54d-44bbe2e76211",
+                "role": "user",
+                "source_revision": 1
+              },
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "reused_equal_whole_field",
+            "content_verification": "unchecked",
+            "reused_from": {
+              "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"3aecfaf9-ef4e-5d42-981d-124af84f31bf\",1]",
+              "record_id": "3aecfaf9-ef4e-5d42-981d-124af84f31bf",
+              "revision": 1,
+              "field": "scope",
+              "lineage_scope": "field_map"
+            }
+          }
+        }
+      },
+      "observation_only": true,
+      "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"3aecfaf9-ef4e-5d42-981d-124af84f31bf\",2]"
+    }
+  ],
+  "read_only_record_values_unchanged": true,
+  "historical_evidence": {
+    "actual_first_eligibility_text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。",
+    "delivered_via": "read_evidence returned actual historical_exact_revision1 body",
+    "current_and_old_bodies_both_delivered": true,
+    "additional_reads": "one current read succeeded, two further tool calls unavailable after shared read cap; final answer used already delivered old body"
+  },
+  "source_review": {
+    "reviewer": "same source author/developer",
+    "core_facts_all_four_outputs_correct": true,
+    "state_text_obligations": "both credentials invalid, current denial, training completed and blue label retained",
+    "issues": [
+      "initial model record still attaches organization instruction as credential validity condition",
+      "initial/final eligibility merge rule, training and outcome; no complete independent-premise graph demonstrated",
+      "final compound assertion points to withdrawal Source while retaining an older governing rule; record-level source preservation does not by itself establish precise clause attribution",
+      "history answer calls record revisions2/3 second/third updates; actual postformation changes are first/second",
+      "history candidate navigation lacked version_view, so was labelled current even when pack body was historical; actual old body had already been delivered. Development navigation fix is separate and not in this frozen run"
+    ]
+  },
+  "selector_diagnostic": {
+    "messages_equal": true,
+    "schema_equal": true,
+    "on": {
+      "usage": {
+        "prompt_tokens": 4232,
+        "total_tokens": 12424,
+        "completion_tokens": 8192,
+        "prompt_tokens_details": null
+      },
+      "finish": "length",
+      "content": null
+    },
+    "off": {
+      "usage": {
+        "prompt_tokens": 4234,
+        "total_tokens": 4371,
+        "completion_tokens": 137,
+        "prompt_tokens_details": null
+      },
+      "finish": "stop",
+      "content": "{\n  \"r0\": {\n    \"roots\": [\n      0,\n      2\n    ],\n    \"excluded\": [\n      1\n    ],\n    \"history_revisions\": [\n      2\n    ]\n  },\n  \"r1\": {\n    \"roots\": [\n      0\n    ],\n    \"excluded\": [\n      0\n    ],\n    \"history_revisions\": [\n      1\n    ],\n    \"support_choices\": {\n      \"u0\": [\n        0\n      ]\n    }\n  }\n}"
+    },
+    "limitation": "one exposed selected-failure pair, different stochastic draws; not an unbiased population effect or training result"
+  },
+  "costs": {
+    "generation": {
+      "responses": 16,
+      "tokens": 123270
+    },
+    "embedding": {
+      "responses": 15,
+      "tokens": 1595
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 16,
+    "generation": {
+      "known_tokens": 123270,
+      "charged_tokens": 123270,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 1595,
+      "charged_tokens": 1595,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciled": true,
+  "original_first_attempt": "message0FAILED and7NOT_RUN, unchanged",
+  "development_path": "original indices0/1 needed read-only recovery; index4 known selector length needed newpolicy recovery; indices2/3/5/6/7 completed across changed frozen versions. Not a single-version cold first-pass story.",
+  "full_W5_E5_complete": false,
+  "unknown_retry": false,
+  "next": "new single-version normal Host story remains needed; shared writer/selector/reading/old-version mechanisms now have actual evidence"
+}

@@ -1,0 +1,111 @@
+{
+  "status": "CLOSED_FUNCTIONAL_REPLAY_AND_NATIVE_EXECUTION_DIAGNOSTIC",
+  "source_versions": {
+    "functional": "ba35b9da",
+    "complete_bindings": "d8447495"
+  },
+  "functional": {
+    "raw": "artifacts/host-intent-retrieval-v3/view-v4-w4-source-replay-v2",
+    "status": "COMPLETED",
+    "source_groups": 1,
+    "split": "exposed_train",
+    "positions": 1,
+    "controller": "Scripted legal prefix and explicit selection; not model policy performance.",
+    "action_space_changed": true,
+    "selected_indices": [
+      4,
+      16
+    ],
+    "actual_packet_tokens": 1362,
+    "limit": 2048,
+    "control_steps": 8,
+    "read_operations": 5,
+    "snapshots_and_known_refs_checked": true,
+    "conditional_host_grade": "C",
+    "grade_basis": "Actual selected user source ranges support last joint Elara, wife's proposed Iris switch and user not agreeing; Lily Anne is a form template.",
+    "reviewer": "Current author/source review, not independent or blind.",
+    "generation_requests": 1,
+    "generation": {
+      "charged_tokens": 7446,
+      "known_tokens": 7446,
+      "unknown_usage": 0
+    },
+    "wall_seconds": 17.86254988051951,
+    "cpu_seconds_nested": 2.816930934,
+    "prior_fixture_failure": "artifacts/host-intent-retrieval-v3/view-v4-w4-source-replay-v1",
+    "prior_fixture_failure_model_calls": 0
+  },
+  "native": {
+    "raw": "artifacts/host-intent-retrieval-v3/view-v4-w4-native-capacity-sdpa-v1",
+    "original_run_status": "FAILED",
+    "forward_completed": true,
+    "attempted_forwards": 1,
+    "post_forward_failure": "Wrapper omitted tools from sys.path; unconditional retrieval_mixture import failed during summary. Original FAILED run preserved.",
+    "input_equal_to_original_failed_attempt_and_audit": true,
+    "finite_outputs": true,
+    "input_tokens": 16310,
+    "truncated": false,
+    "choice": "context_2",
+    "process_backend": "torch.backends.mha.set_fastpath_enabled(False)",
+    "backend_scope": "This diagnostic process only; no installed SDK/service changes.",
+    "loaded_dtype": "torch.float32",
+    "compute": {
+      "wall_seconds": 11.478696595877409,
+      "cpu_seconds": 14.703552475,
+      "runs": 1,
+      "forwards": 1,
+      "sequence_rows": 1,
+      "input_tokens": 16310,
+      "state_tokenizations": 1,
+      "state_tokens": 14913,
+      "peak_rss_kib": 5566528,
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    },
+    "offline_metrics_from_saved_output": {
+      "counts": {
+        "masked": 1
+      },
+      "strata": {},
+      "selected_operations": {},
+      "families": 0,
+      "family_macro_acceptance": null,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    },
+    "prior_failure": {
+      "raw": "artifacts/host-intent-retrieval-v3/view-v4-w4-native-capacity-v1",
+      "reason": "CUDA OutOfMemoryError in fused Transformer path",
+      "attempted_forwards": 1,
+      "completed_forwards": 0,
+      "counter_limitation": "Native counters count successful forwards only; partial encoder work occurred.",
+      "compute": {
+        "wall_seconds": 14.066799047403038,
+        "cpu_seconds": 22.304236863,
+        "runs": 1,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 1,
+        "state_tokens": 14913,
+        "peak_rss_kib": 5567060,
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      }
+    },
+    "limitation": "One input execution feasibility, no accuracy label or long-context generalization claim. Encoder/tokenizer advertised maximum is 8192; declared diagnostic maximum is 16384."
+  },
+  "projection": {
+    "action_bindings": "Complete parameters in state; option head contains actual id and operation kind.",
+    "search_queries": "Resolve actual request/required-point/acquired/known text by typed local reference.",
+    "audit": "artifacts/host-intent-retrieval-v3/view-v4-w4-native-input-audit-bound-v1/audit.json",
+    "states": 8,
+    "max_option_tokens": 18,
+    "max_head_tokens": 1396,
+    "max_total_input_tokens": 16310,
+    "state_and_binding_truncation": false,
+    "additional_quality_evidence": false
+  },
+  "next": "Normal autonomous generative Host short flow with W4, then broader own-state collection and matched feedback training.",
+  "review_compute": {
+    "wall_seconds": 0.006108900532126427,
+    "cpu_seconds": 0.006107796999999998
+  }
+}

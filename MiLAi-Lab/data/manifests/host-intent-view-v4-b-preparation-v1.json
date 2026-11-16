@@ -1,0 +1,62 @@
+{
+  "status": "PREPARED_NOT_STARTED",
+  "source_version": "d8447495",
+  "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab",
+  "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1",
+  "histories": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/view-v4-b-streams-v1/histories.json",
+  "recipe": "data/fixtures/host-intent-view-v4-b-streams.json",
+  "positions_per_arm": 32,
+  "total_positions": 160,
+  "groups": 4,
+  "own_cold_bank_per_stream_and_arm": true,
+  "common_wire_tokens": 2048,
+  "common_control_steps": 8,
+  "source_preparation": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-preparation-v1.json",
+  "native_scope": "Frozen checkpoints with changed W4 observation/actions and process-local backend. Not original T1 static scores. Model-specific context limit failures retained, not cropped.",
+  "automatic_retry": false,
+  "compute": {
+    "wall_seconds": 0.0015509482473134995,
+    "cpu_seconds": 0.0015505040000000012
+  },
+  "ledger_recorded": true,
+  "arms": [
+    {
+      "name": "generative",
+      "policy": "generative",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/generative",
+      "checkpoint": null,
+      "mha_fastpath": null
+    },
+    {
+      "name": "rules",
+      "policy": "rules",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/rules",
+      "checkpoint": null,
+      "mha_fastpath": null
+    },
+    {
+      "name": "fixed-context",
+      "policy": "fixed_context",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/fixed-context",
+      "checkpoint": null,
+      "mha_fastpath": null
+    },
+    {
+      "name": "t1-main-seed0",
+      "policy": "laya",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/t1-main-seed0",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/t1-native-shared-seed0-v1/checkpoint",
+      "mha_fastpath": false
+    },
+    {
+      "name": "t1-control-seed0",
+      "policy": "laya",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/t1-control-seed0",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/t1-matched-operation-control-seed0-v1/checkpoint",
+      "mha_fastpath": false
+    }
+  ],
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-plan-v1.json",
+  "scope": "Development on exposed training sources; not independent confirmation. Source groups, not request positions, are sampling units.",
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v21.json"
+}

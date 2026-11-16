@@ -1,0 +1,150 @@
+{
+  "status": "ACTIVE;ACTUAL_STATE_DECISIONS_AND_UNKNOWN_PAIR_EXPORTED;SAVEDCPU393_RUNNING",
+  "observed_at": "2026-10-23T13:02:15.930287+00:00",
+  "source_version": "86daa6e9",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v14.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: actual auxiliary4940candidates/newprofiles and partition identities verified",
+  "STATE_export": {
+    "entrypoint": "tools/export_host_intent_states.py RUNS --protocol state_dynamic --output OUTPUT",
+    "raw_root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-v3-decision-export-v1",
+    "feedback_root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-v3-feedback-unknown-v1",
+    "existing_compiler": "tools/prepare_retrieval_feedback.py now reads actualSTATEbranch layout and common declared continuation",
+    "states": 18,
+    "by_policy": {
+      "fixed_context": 5,
+      "rules": 8,
+      "laya": 5
+    },
+    "source_groups": 1,
+    "CE_labels_created": 0,
+    "actual_Jev_inputs_literal_equal": 4,
+    "failed_pre_prediction_state_retained": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/laya/state-retrieve-1/4",
+    "reviewed_states": 1,
+    "unreviewed_states_retained_in_raw": 17,
+    "feedback_counts": {
+      "answer": {
+        "feedback_states": 1,
+        "states_with_direction": 0,
+        "unknown_pairs": 1
+      },
+      "delivery": {
+        "feedback_states": 1,
+        "states_with_direction": 0,
+        "unknown_pairs": 1
+      }
+    },
+    "source_grouping": "Conservative export-local components from recorded native task/history IDs; no new roleledger or independent-family claim. Native split preserved; connected crosssplit export rejected.",
+    "zero_decision_calls": "Retained in separate call inventory; no fabricated row",
+    "scope": "All actual decisions retained; source grouping conservative over shared native identities. No directional labels,training or new-source-family claim."
+  },
+  "validation": {
+    "native_environment_tests_passed": 28,
+    "scope": "Real SQLite failed-decision capture and native small-tensor loss tests; no modelweights or forward",
+    "initial_HTTP_env_tests": {
+      "passed": 23,
+      "skipped": 4
+    },
+    "initial_skip": "torch absent in HTTP environment; covered by native environment run",
+    "ruff": "PASS",
+    "scoped_mypy": "2toolsPASS with existing exclusions;loop variabletype corrected",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u393-v1",
+      "driver_pid": 3654617,
+      "child_pid": 3654665,
+      "session": 24298,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 148,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_ORIGINAL_SAVEDCPU393_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v14.json",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-export-validation-v1/package-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 3.7127470000000016,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-export-validation-v1/ruff-final.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.039136999999999644,
+        "exit_code": 1
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-export-validation-v1/ruff.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.21110500000000093,
+        "exit_code": 1
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-export-validation-v1/tests-native.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 8.706178,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-export-validation-v1/tests.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 4.427103,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-export-validation-v1/tools-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 7.661390000000002,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-export-validation-v1/typing-final.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 1.1390759999999993,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-export-validation-v1/typing.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 1.3530719999999996,
+        "exit_code": 1
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-v3-decision-export-v1/compute.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.6747449999999999
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-v3-decision-export-v1/verification.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.347647569
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-v3-feedback-unknown-v1/command-compute.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.39797
+      }
+    ],
+    "measured_cpu_seconds": 28.670170569000003,
+    "ledger_recorded": false,
+    "scope": "Validation plus actual export/compile/verification. Compiler subprocess includes its internal preparation compute; not added twice. No models/HTTP. Other unmeasured work remains unknown.",
+    "no_sha_validation": true
+  },
+  "remaining": "Original393/524/selection/matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic and compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion.",
+  "scheduling": "Original393 is sole neuraljob. No new neural dispatch or offline settlement whilelive;never restart on stale observation. Allpriorclosedjobs/results remain closed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

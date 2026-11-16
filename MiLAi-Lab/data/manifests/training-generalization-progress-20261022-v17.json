@@ -1,0 +1,139 @@
+{
+  "status": "ACTIVE_GOAL_NOT_COMPLETE",
+  "observed_at": "2026-10-21T21:07:34.988262+00:00",
+  "source_versions": {
+    "curve_audit_saved_evaluation_statistics": "41bff5d4",
+    "all_six_baseline_pairing": "1df7669d",
+    "legacy_fit": "490c683e",
+    "queued_STATE_collector": "074ee79e"
+  },
+  "active_fit": {
+    "session": 42364,
+    "parent_pid": 2089181,
+    "child_pid": 2089186,
+    "parent_alive": true,
+    "child_alive": true,
+    "status": "RUNNING",
+    "updates": 524,
+    "planned": 524,
+    "final_evaluation_written_rows": {
+      "train": 345,
+      "dev": 860,
+      "feedback-dev": 16
+    },
+    "scope": "Legacy shared representation control; update524 is not terminal while final evaluation/save/processes remain"
+  },
+  "precision_amendment": {
+    "manifest": "data/manifests/training-generalization-checkpoint-persistence-plan-v1.json",
+    "declared_before_current_post_update_scores_read": true,
+    "observed_saved_dtype_counts": {
+      "F16": 170
+    },
+    "training_precision": "float32",
+    "scope": "Original native serialization explicitly rounds tohalf; loadedfloat32 doesnotrecoverprecision. CPU evaluation alsochangesdevice so differencesarenot isolated quantization.",
+    "selection": "Same fixed operation-dev family macro/earliest tie/0eligible on actual savedCPU candidates for downstream binding;retain in-memory choice separately.",
+    "candidate_updates": [
+      0,
+      32,
+      64,
+      128,
+      262,
+      393,
+      524
+    ],
+    "secondary_feedback": "16 unchanged states,both targets,notusedforoperationselection",
+    "matching_train_gap": "Selectedsavedmodel separatelyevaluateslabelledtrain inthesameCPU condition",
+    "seeds": "Freeze decisive seed0 selectedupdate forseed1/2, no perseed/test/Hostreselection",
+    "inference": {
+      "device": "cpu",
+      "reference_compile": false,
+      "mha_fastpath": false,
+      "loaded_dtype": "float32",
+      "projection": "sameaseachfit",
+      "max_len": "sameaseachfit",
+      "head_max_len": 2048
+    }
+  },
+  "tools": {
+    "analyzer": "Terminal-only complete evidence joins: actualdraws/weights/order/lengths,predictions andaggregates,allcheckpointmetadata/F16header,finalcopyliteralbytes,uniqueexistingledgerphase. NoSHAormodelload/rebilling.",
+    "saved_evaluator": "Serialexistingmeteredevaluatoroncepercandidate;literalinputchecks,fullcoverage,exactconditionandledgercostverification. Selectiononlyafterallcandidates;matchingselectedtrain. Firstfailure retained,noautomaticretry.",
+    "statistics": "10000bootstrapreplicates seed0;pairedstatesandseedsaveragedinsidesourcefamily. Unknownsretained withcoverage andallplannedbounds. Degenerateinterval notpopulationequivalence.",
+    "baseline_comparison": "All6prespecified recordedstatebaselines;staticdevconditionalcomparisonwithselectionoptimism,notrolloutsorprotectedconfirmation",
+    "plot": "PNG/SVG standalone export;syntheticartifact visiblylabelled mechanical,not real effect"
+  },
+  "validation": {
+    "audit_statistics_saved_curve_tests": 22,
+    "native_evaluator_cli_tests": 5,
+    "six_baseline_pairing_tests": 4,
+    "total_unique_passed": 31,
+    "skipped": 0,
+    "ruff_python_files": 11,
+    "mypy_implementation_files": 5,
+    "mypy_scope": "follow-imports=silent,ignore-missing-imports",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS;6inheritedprivateedgesunchanged",
+    "synthetic_plot": "PNG/SVG generated and visually inspected",
+    "actual_saved_model_evaluations": 0
+  },
+  "frozen_analysis": {
+    "source_version": "1df7669d",
+    "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab",
+    "literal_equal_files": [
+      "tools/analyze_operation_curve.py",
+      "tools/evaluate_saved_operation_curve.py",
+      "tools/compare_operation_baselines.py",
+      "tools/evaluate_bounded_laya.py",
+      "tools/plot_operation_curve.py",
+      "src/milai_lab/analysis/paired_sources.py"
+    ],
+    "no_sha_validation": true,
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "compute_scope": "Archive and direct comparison unmetered;not zero"
+  },
+  "serial_successor": {
+    "session": 62733,
+    "pid": 3337827,
+    "status": "WAITING_FOR_EXISTING_FIT",
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/run_after_legacy_fit_v1.py",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/after-legacy-fit-v1/driver.json",
+    "automatic_retry": false,
+    "new_model_jobs_started": 0,
+    "ordering": [
+      "Waitexistingparentandchildexit",
+      "RequirebothCOMPLETEDand524",
+      "Frozenfullcurveaudit",
+      "Allsixbaselinepairedstatistics",
+      "PNG/SVGplots",
+      "Actualknownmodelprocessscanandoriginalledger/configchecks",
+      "RunexactSTATEv2planonce"
+    ],
+    "actual_STATE_output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-v2",
+    "important": "Revalidate thisdriverbeforeanymanualSTATEdispatch;doNOTlaunchduplicate. Failurehaltschain,preservesartifacts. Noautomaticfurtherfit/feedback/CPUmodeldispatch."
+  },
+  "external_readiness_review": {
+    "scope": "Protocol/previousmetadataonly;no newquestion/testtask/environmentbody/modeloutputopened",
+    "longmemeval_v2": "All200Small histories previousprojectcontact,451questions originalfullimageconditionrequired;notfreshhistoryholdout. Existing snapshotsandvalidationreused.",
+    "mem2act": "Useexistingv3capture-onlyrunner/full429session16843turnbank/400GivenToolcases. v2earlierstatementrunnerpendingissupersededbyv3. Nomodelrunyet.",
+    "state": "ReadreleasedAgentLearningTrackguide:300train,150test,official5runs/topk3/readonlyretrieval/lockedGPT5.4simulatorjudge. Domainactionsremainbenchmarkowned. ExistingQwenorinternalmutableViewadaptationmustbeexplicitmodifiedprotocol,not official comparable score. Testbodiesremainunread.",
+    "remaining": "Finalmethod/configfreeze and actual full external adapters/evaluations stillrequired;metadatareviewnotprotocolcompletion"
+  },
+  "new_measured_cpu_pending": {
+    "phases": [
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/curve-plot-mechanical-v1/plots/plot.json",
+        "cpu_seconds": 3.843663422,
+        "scope": "Actual syntheticplot processmeasurement only;syntheticfixtureledger/compute numbersARENOTmeasurements"
+      }
+    ],
+    "total_cpu_seconds": 3.843663422,
+    "unmeasured": "Header/sourceinspection,archiveprep includingfailedrelativepathattempt,tests/imports/debug/authoring unknown,notzero;successordriverCPU notfinalyet"
+  },
+  "closed_settlements": "v1/v2/v3CLOSED;neverappendorresettle. Oldpending35/priorv11-v16pendinguntouched. Fitbillsitselfonceatterminal. Noofflinesettlementwhilemodelalive.",
+  "remaining": "Closelegacyfit;correctednested/parameter/aux/E3fits andactualsavedCPUselection;STATEv2 realViews/E2/delivery;factorialv2;feedbackv2collection/labels/fits/T2/common-support;actualstrongsimple/full/noView/textHostlifecycle;protected/externalandseeds0/1/2 confirmation.",
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_service_or_Product_schema_permission_change": true,
+  "new_real_model_jobs": 0,
+  "no_generalization_or_Host_gain_claimed": true
+}

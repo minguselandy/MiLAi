@@ -1,0 +1,33 @@
+{
+  "status": "NEW_SOURCE_INPUTS_PREPARED_NOT_COLLECTED",
+  "allocation": "data/manifests/host-intent-retrieval-v3-t1-allocation.json",
+  "preparation": {
+    "status": "PREPARED_NEW_SOURCES_NOT_COLLECTED",
+    "allocation": "data/manifests/host-intent-retrieval-v3-t1-allocation.json",
+    "t0_public_histories": "artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
+    "t0_histories_unchanged": true,
+    "primary_source_groups": {
+      "train": 128,
+      "dev": 32
+    },
+    "new_positions_two_interfaces": {
+      "train": 228,
+      "dev": 52
+    },
+    "collection_input": "artifacts/host-intent-retrieval-v3/data/t1-sources-v1/new-histories.json",
+    "rule": "Collect only new histories; reuse closed T0 trajectories and preserve first failures. Offline references never enter Host input. Native support/answers are not operation labels; all new pools and actual requests need review.",
+    "model_calls": 0,
+    "http_requests": 0,
+    "ledger_recorded": false,
+    "wall_seconds": 0.18705581966787577,
+    "cpu_seconds": 0.187014988
+  },
+  "validation": {
+    "source_projection_tests": "4 passed",
+    "ruff": "passed",
+    "mypy": "passed",
+    "tools_boundary": "passed"
+  },
+  "source_review": "All new pools and actual requests remain to be reviewed. No new operation gold or trained T1 weights.",
+  "next_model_job": "Still registered T0seed0 dev64 evaluation after current fit; T1 new collection not started."
+}

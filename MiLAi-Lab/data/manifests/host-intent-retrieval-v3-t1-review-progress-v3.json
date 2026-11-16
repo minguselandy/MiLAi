@@ -1,0 +1,24 @@
+{
+  "status": "COLLECTION_RUNNING_SOURCE_REVIEW_PROGRESS",
+  "previous": "data/manifests/host-intent-retrieval-v3-t1-review-progress-v2.json",
+  "source_version": "c6b1f3bd",
+  "pid": 1429403,
+  "exec_session": 94846,
+  "observed_closed_positions": 26,
+  "planned_positions": 228,
+  "program_statuses": {
+    "COMPLETED": 21,
+    "FAILED": 5
+  },
+  "source_notes": "artifacts/host-intent-retrieval-v3/data/t1-source-review-notes-v1.json",
+  "reviewed_pools": 62,
+  "reviewed_new_train_families": 33,
+  "next_source_history_index": 33,
+  "review_boundary": "All20 source documents for each recorded pool reviewed; exact repetitions referenced earlier full texts. Source notes are an incrementally maintained author document, so earlier manifests record only their stated prefix counts.",
+  "operation_labels": "Unchanged prefixv3:128states/24calls/81labelled/47masked; actual request reviews only first16positions. No later actualrequest is approved automatically from source notes.",
+  "task_reviews": "Unchanged prefixv2:first16positions,4C/6Q/2W/4F. Later results unreviewed.",
+  "failure_check": "All5 observed length failures retained; each generation/embedding unknown_usage delta0. No retries.",
+  "pending_costs": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v10.json",
+  "pending_measured_cpu_seconds": 16.107059174,
+  "constraints": "One actual model job; originalledger only; no settlement whilelive, noSHA/newservice/subagents/remote. NativeE0permission pending. Full goal remainsactive."
+}

@@ -1,0 +1,109 @@
+{
+  "status": "COMPLETED",
+  "source_version": "a97f7994",
+  "run": "artifacts/innovation-v4/format-v2",
+  "protocol": {
+    "name": "milai-innovation-format-v2",
+    "model_config": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/format-source-v2/MiLAi-Lab/configs/milai-innovation-common-before-delta-short-v1.json",
+    "references": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/format-source-v2/MiLAi-Lab/data/fixtures/milai-innovation-matched-training-v3.jsonl",
+    "example_ids": [
+      "innovation-harbor-formation-reference-001",
+      "innovation-catalog-formation-reference-v3"
+    ],
+    "cases": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/format-source-v2/MiLAi-Lab/data/fixtures/milai-innovation-learning-eval-v1.json",
+    "source_banks": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/sft-pilot-v2/evaluation/source-banks",
+    "scope": "Four exposed author formation cases, cloned identical actual source-only banks. Two identical reviewed demonstrations, common semantic instructions, native ordinary action versus indexed delta encoding;2048output,temperature0,thinkingFalse. Not full lifecycle, independent confirmation or a trained model comparison.",
+    "prompt_schema": "Both formats use the existing lossless repeated-schema factoring; wire schema remains full."
+  },
+  "cases": [
+    {
+      "case_id": "learning-eval-future-two-scopes",
+      "actual_delivery_identical": true,
+      "demonstration_inputs_identical": true,
+      "both_actual_initial_records_empty": true,
+      "author_review": {
+        "both": "All original facts and the future boundary represented. Duplicate old owner has no explicit end while a second copy does; this is redundant and potentially ambiguous for later use, not demonstrated temporal QA success.",
+        "operations": "Future date bound and non-target area/registration preserved.",
+        "delta": "Same future/non-target coverage and extra scope metadata; no structure advantage established."
+      }
+    },
+    {
+      "case_id": "learning-eval-or-unknown-alternative",
+      "actual_delivery_identical": true,
+      "demonstration_inputs_identical": true,
+      "both_actual_initial_records_empty": true,
+      "author_review": {
+        "both": "Both make the reported unknown electronic-certificate state a sufficient OR premise. The valid-paper route supports current eligibility, but the alternate relation is wrong for later paper invalidation. Both preserve training, source rule and copper-box fact.",
+        "operations": "Uses source rule+training with either valid paper or unknown-electronic-state clause.",
+        "delta": "Same wrong unknown route; conclusion additionally copies safety-training wording from the demonstration although actual Source says introductory training."
+      }
+    },
+    {
+      "case_id": "learning-eval-history-and-exception",
+      "actual_delivery_identical": true,
+      "demonstration_inputs_identical": true,
+      "both_actual_initial_records_empty": true,
+      "author_review": {
+        "both": "Historical correction, other contact, temporary visitor/date restriction and other-date requirement are present. Some standalone wording loses explicit subject; event_atFeb14 on the approval conflates targeted visitor date with event timing. No historical QA measured.",
+        "operations": "No support groups added.",
+        "delta": "Adds any=[] support group to the other-date registration claim, declaring no stored support route despite its direct reported source; unneeded incorrect structure."
+      }
+    },
+    {
+      "case_id": "learning-eval-total-proposal-nontarget",
+      "actual_delivery_identical": true,
+      "demonstration_inputs_identical": true,
+      "both_actual_initial_records_empty": true,
+      "author_review": {
+        "both": "All five source dimensions retained:480total,6members,only-this-update unchanged,900pending proposal,silvercover. No permanent independence claim.",
+        "operations": "Six clauses; total and non-per-member together.",
+        "delta": "Seven nodes; total and non-per-member separated. No demonstrated downstream gain from node count."
+      }
+    }
+  ],
+  "arms": {
+    "operations": {
+      "costs": {
+        "responses": 4,
+        "input_tokens": 10686,
+        "output_tokens": 2146,
+        "total_tokens": 12832,
+        "length": 0
+      },
+      "applied": 4,
+      "empty": 0,
+      "failed": 0
+    },
+    "delta": {
+      "costs": {
+        "responses": 4,
+        "input_tokens": 6990,
+        "output_tokens": 1387,
+        "total_tokens": 8377,
+        "length": 0
+      },
+      "applied": 4,
+      "empty": 0,
+      "failed": 0
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 8,
+    "generation": {
+      "known_tokens": 21209,
+      "charged_tokens": 21209,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "receipt_ledger_difference": 0,
+  "first_failure": "innovation-v4-format-first-failure.json:1HTTP400,0outputs,30525charged reservation,newunknown1 retained. These costs are additional to this successful8-response run; no ledger reset.",
+  "decision": "Indexed format is cheaper in this matched common-prompt formation diagnostic. Both formats preserve source facts but fail the unknown-alternative relation; delta also adds unsupported support semantics and demonstration wording. This supports interface compression only, not stronger semantic composition, trained learning or stable lifecycle advantage.",
+  "official_judge_calls": 0,
+  "independent_blind_review": false,
+  "full_goal_complete": false
+}

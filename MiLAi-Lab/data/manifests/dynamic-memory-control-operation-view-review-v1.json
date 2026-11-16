@@ -1,0 +1,583 @@
+{
+  "reviewer": "assistant author, not independent/blinded human gold",
+  "source": "artifacts/dynamic-memory-control/operation-collection-v2",
+  "reviews": [
+    {
+      "family": "sealed_parcel",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rule wrongly uses not-sealed to imply permission; changed positive premises are correct, with conservative uncertain target.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "sealed_parcel",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rule wrongly uses not-sealed to imply permission; changed positive premises are correct, with conservative uncertain target.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "room_capacity",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Reported numbers and13/10 arithmetic adequate. Empty OR disables redundant rules; graph validity not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "room_capacity",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Reported numbers and13/10 arithmetic adequate. Empty OR disables redundant rules; graph validity not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "contingent_editor",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold plain facts adequate. Changed view retains current-present n3 while absent n6 and substitute n7 coexist; n3 mis-cites update.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "contingent_editor",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold plain facts adequate. Changed view retains current-present n3 while absent n6 and substitute n7 coexist; n3 mis-cites update.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "partial_delivery",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "40ordered/34received/6remaining then40/0 are sourced. Completeness is bounded to provided records.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "partial_delivery",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "40ordered/34received/6remaining then40/0 are sourced. Completeness is bounded to provided records.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "publication_revision",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold v1 approved/v2draft and latest-approved rule adequate. Changed view retains current-latest-v1 and v2-unapproved alongside v2approved on the same date.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "publication_revision",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold v1 approved/v2draft and latest-approved rule adequate. Changed view retains current-latest-v1 and v2-unapproved alongside v2approved on the same date.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "route_closure",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold open-south facts adequate despite unsupported extra rule. Changed view preserves current-open/available-south alongside closed/none and uses capture clocks as fact times.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "route_closure",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold open-south facts adequate despite unsupported extra rule. Changed view preserves current-open/available-south alongside closed/none and uses capture clocks as fact times.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "target_measurement",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Target20→21 distinct from unchanged observation22; literal facts sufficient. Empty-OR rules are not useful proofs.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "target_measurement",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Target20→21 distinct from unchanged observation22; literal facts sufficient. Empty-OR rules are not useful proofs.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "access_window",
+      "phase": "cold",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed actual old/new windows and target14:00 suffice; inferred n5 cites questions and empty-OR graph is not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "access_window",
+      "phase": "changed",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed actual old/new windows and target14:00 suffice; inferred n5 cites questions and empty-OR graph is not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "allocation_consumption",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "10cap,6+3=9 then8+3=11 correctly stated. Empty-OR graph not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "allocation_consumption",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "10cap,6+3=9 then8+3=11 correctly stated. Empty-OR graph not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "tool_permission",
+      "phase": "cold",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed graph incorrectly derives publication from no-submission n2, while retaining that claim beside success receipt.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "tool_permission",
+      "phase": "changed",
+      "revision": 1,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed graph incorrectly derives publication from no-submission n2, while retaining that claim beside success receipt.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "reservation_scope",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold graph uses not-confirmed as premise for confirmed; unsafe. Changed actual administrator confirmation and requirement agree.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "reservation_scope",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold graph uses not-confirmed as premise for confirmed; unsafe. Changed actual administrator confirmation and requirement agree.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "alias_binding",
+      "phase": "cold",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed P17/Chenye identity and XuYao/current versus DuQing/history are properly distinguished from P71.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "alias_binding",
+      "phase": "changed",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed P17/Chenye identity and XuYao/current versus DuQing/history are properly distinguished from P71.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "relative_order",
+      "phase": "cold",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Both generation attempts rejected; no actual stored interpretation exists.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "relative_order",
+      "phase": "changed",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Both generation attempts rejected; no actual stored interpretation exists.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "priority_exception",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold cross-border July3 facts adequate. Changed view still asserts July3 exception alongside withdrawal/July5 with no resolved temporal boundary.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "priority_exception",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold cross-border July3 facts adequate. Changed view still asserts July3 exception alongside withdrawal/July5 with no resolved temporal boundary.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "source_correction",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Initial East registration explicitly historical; no-correction asof09:00 retained alongside formal West correction09:40. Prior state is time qualified.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "source_correction",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Initial East registration explicitly historical; no-correction asof09:00 retained alongside formal West correction09:40. Prior state is time qualified.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "delegation_boundary",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold reviewer and final approver distinct. Changed view still states Han final approver while transferring it to Cheng on same date.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "delegation_boundary",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold reviewer and final approver distinct. Changed view still states Han final approver while transferring it to Cheng on same date.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "component_compatibility",
+      "phase": "cold",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed version4.3,enabled mode and complete compatibility rule suffice; empty-OR graph not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "component_compatibility",
+      "phase": "changed",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed version4.3,enabled mode and complete compatibility rule suffice; empty-OR graph not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "unit_conversion",
+      "phase": "cold",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed1box×4+3 raw facts suffice. Inferred placeholder nodes cite a question and have no numeric values; do not credit those as proof.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "unit_conversion",
+      "phase": "changed",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed1box×4+3 raw facts suffice. Inferred placeholder nodes cite a question and have no numeric values; do not credit those as proof.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "coverage_gap",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold explicit missing-west total unknown; changed8+5+7=20. Facts and support links sufficient.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "coverage_gap",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold explicit missing-west total unknown; changed8+5+7=20. Facts and support links sufficient.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "conditional_reminder",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold night in-site exception clear. Changed view preserves night in-site requirement alongside cancellation/all-email on same date.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "conditional_reminder",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold night in-site exception clear. Changed view preserves night in-site requirement alongside cancellation/all-email on same date.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "return_receipt",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold plan/no receipt is explicit uncertainty. Changed later09:40 receipt supersedes09:00 no-receipt claim. Redundant rules are not task proof or live-world verification.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "return_receipt",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold plan/no receipt is explicit uncertainty. Changed later09:40 receipt supersedes09:00 no-receipt claim. Redundant rules are not task proof or live-world verification.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "membership_expiry",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold June30 expiry/no extension adequate. Changed contains both invalid and valid July2 claims; bad rule requires no-extension and extension simultaneously.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "membership_expiry",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold June30 expiry/no extension adequate. Changed contains both invalid and valid July2 claims; bad rule requires no-extension and extension simultaneously.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "disjoint_constraints",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold Wind2/Sea1 adequate. Changed retains Sea1 plus Sea3 as current without a distinguishing boundary.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "disjoint_constraints",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold Wind2/Sea1 adequate. Changed retains Sea1 plus Sea3 as current without a distinguishing boundary.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "measurement_replacement",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Values18/19 and correction17 are clear and sourced for the value-only task. Incorrect capture-year2026 temporal annotations are separately invalid; do not reuse for date questions.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "measurement_replacement",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Values18/19 and correction17 are clear and sourced for the value-only task. Incorrect capture-year2026 temporal annotations are separately invalid; do not reuse for date questions.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "quota_reallocation",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "5/1 minus/plus2 gives3/3; corrected transfer1 gives4/2. Original balances explicitly pre-transfer.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "quota_reallocation",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "5/1 minus/plus2 gives3/3; corrected transfer1 gives4/2. Original balances explicitly pre-transfer.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "ordered_precedence",
+      "phase": "cold",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed withdrawal/no replacement plus generic paper-box requirement gives paper. Graph is not a full priority derivation.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "ordered_precedence",
+      "phase": "changed",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed withdrawal/no replacement plus generic paper-box requirement gives paper. Graph is not a full priority derivation.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "fraction_scope",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold missing subgroup rate preserves uncertainty. Changed2/10 contradicts50% subgroup claim without treating overall rate as subgroup rate.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "fraction_scope",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold missing subgroup rate preserves uncertainty. Changed2/10 contradicts50% subgroup claim without treating overall rate as subgroup rate.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "nonunique_identity",
+      "phase": "cold",
+      "revision": null,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed ambiguity is explicitly time bounded and the later notice identifies Guangfan.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "nonunique_identity",
+      "phase": "changed",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold rejected. Changed ambiguity is explicitly time bounded and the later notice identifies Guangfan.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "joint_schedule",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Actual intervals support15–16 then no intersection. Empty-OR graph not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "joint_schedule",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Actual intervals support15–16 then no intersection. Empty-OR graph not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "negated_exception",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": false,
+      "full_semantic_state_validated": false,
+      "reason": "Cold explicitly permits despite prohibition. Changed shielding/exemption/general permission facts support express; graph and conclusion citation have qualifications.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "negated_exception",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Cold explicitly permits despite prohibition. Changed shielding/exemption/general permission facts support express; graph and conclusion citation have qualifications.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "serial_responsibility",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "AuthorYu unchanged; custodianWu→Lian. Redundant/unsupported dependency edges not credited as separate semantic state success.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "serial_responsibility",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "AuthorYu unchanged; custodianWu→Lian. Redundant/unsupported dependency edges not credited as separate semantic state success.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "count_distinct",
+      "phase": "cold",
+      "revision": 1,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Distinct IDs S11/S12 then plusS13, duplicateS11 not new. Empty-OR graph not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    },
+    {
+      "family": "count_distinct",
+      "phase": "changed",
+      "revision": 2,
+      "task_text_sufficient": true,
+      "full_semantic_state_validated": false,
+      "reason": "Distinct IDs S11/S12 then plusS13, duplicateS11 not new. Empty-OR graph not credited.",
+      "scope": "Specific source-contained current question; not universal graph correctness, future reuse validity or actual Reader success."
+    }
+  ],
+  "rule": "Task evidence adequacy and graph/state correctness are separate. False/contradictory task claims excluded; graph defects retained and disclosed."
+}

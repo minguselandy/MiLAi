@@ -1,0 +1,176 @@
+{
+  "status": "ACTIVE_REAL_DEV_BRANCHES_CLOSED_PARTIAL_REVIEW_NEW_TRAIN_SOURCES_NOT_COLLECTED",
+  "previous_goal_turn": "progress: implementation/data/commit9f153b68",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "source_version_for_actual_feedback": "9f153b68",
+  "feedback_execution": {
+    "status": "COMPLETED_WITH_MISSING_READOUTS",
+    "exec_session": 71390,
+    "exec_exit_code": 0,
+    "process_pid": 956232,
+    "process_terminal_confirmed": true,
+    "source_groups": 8,
+    "states": 16,
+    "branches": 48,
+    "before_equal": 48,
+    "tool_statuses": {
+      "COMPLETED": 48
+    },
+    "readout_statuses": {
+      "COMPLETED": 42,
+      "FAILED": 6
+    },
+    "usage_delta": {
+      "generation_requests": 64,
+      "generation": {
+        "known_tokens": 287903,
+        "charged_tokens": 287903,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "known_tokens": 0,
+        "charged_tokens": 0,
+        "unknown_usage": 0
+      }
+    },
+    "all_per_case_usage_reconciles": true,
+    "driver_wall_seconds": 896.1516871657223,
+    "driver_cpu_seconds_nested": 94.711639334
+  },
+  "feedback_review": {
+    "raw_states": 16,
+    "reviewed_states": 8,
+    "unreviewed_states": 8,
+    "families": 4,
+    "split": "dev",
+    "feedback": {
+      "answer": {
+        "feedback_states": 8,
+        "states_with_direction": 6,
+        "unknown_pairs": 8,
+        "directional_pairs": 11,
+        "tie_pairs": 5
+      },
+      "delivery": {
+        "feedback_states": 8,
+        "states_with_direction": 8,
+        "directional_pairs": 17,
+        "tie_pairs": 6,
+        "unknown_pairs": 1
+      }
+    },
+    "model_input_unchanged": true,
+    "full_option_ce_labels_added": false
+  },
+  "feedback_review_artifact": "artifacts/generalization-20261021/feedback-dev-review-v1",
+  "feedback_data": "artifacts/generalization-20261021/feedback-dev-partial-000-007-v1/feedback.jsonl",
+  "source_expansion": {
+    "status": "LITERAL_BOUNDARY_ADMITTED_SOURCE_REVIEW_AND_COLLECTION_PENDING",
+    "metadata_rows": 3978,
+    "candidate_families": 280,
+    "eligible_families": 204,
+    "requested_new_families": 128,
+    "selected_families": 128,
+    "selected_source_rows": 240,
+    "shortfall": 0,
+    "selected_native_max_steps": {
+      "2": 115,
+      "3": 12,
+      "4": 1
+    },
+    "existing_operation_train_families": 128,
+    "combined_registered_train_families": 256,
+    "combined_target_title_clusters": 256,
+    "protected_panels": {
+      "all_prior_declared_reserved_groups": {
+        "pool": 3862,
+        "target": 348,
+        "pool_titles": 3434,
+        "target_titles": 328,
+        "questions": 349
+      },
+      "registered_prior_evaluation": {
+        "pool": 3142,
+        "target": 309,
+        "pool_titles": 2922,
+        "target_titles": 306,
+        "questions": 150
+      },
+      "source_selection_v2_dev": {
+        "pool": 446,
+        "target": 77,
+        "pool_titles": 432,
+        "target_titles": 76,
+        "questions": 30
+      }
+    },
+    "protected_bodies_exported": false,
+    "scope": "Exact question, native target/pool and title boundary only. Known training exposure is allowed and retained. No semantic/pretraining isolation claim; source review, actual tool states and operation supervision remain pending."
+  },
+  "public_input_audit": {
+    "status": "PUBLIC_SOURCE_PROJECTION_VERIFIED_NOT_DISPATCHED",
+    "requests": 240,
+    "histories": 128,
+    "literal_sources_and_questions_preserved": true,
+    "native_gold_support_and_answerability_excluded": true,
+    "existing_train_families_with_native_target_records": 71,
+    "existing_train_families_without_native_target_records": 57,
+    "cluster_scope": "Native title comparison covers the normalized Wiki-source training families. Other registered source families remain singleton; no proof of cross-domain semantic independence.",
+    "compute": {
+      "wall_seconds": 0.07913811411708593,
+      "cpu_seconds": 0.079120008
+    },
+    "ledger_recorded": false
+  },
+  "source_review": {
+    "reviewed_families": 1,
+    "planned_families": 128,
+    "reviewed_rows": 2,
+    "planned_rows": 240,
+    "status": "Both reviewed visible pools insufficient; no automatic HANDOFF target",
+    "artifact": "artifacts/generalization-20261021/source-expansion-v1/source-review-first-family-v1.json"
+  },
+  "source_protocol": "data/manifests/training-generalization-source-expansion-protocol-v1.json",
+  "new_training_operation_trajectories": 0,
+  "new_research_fits": 0,
+  "validation": {
+    "latest_focused_tests": {
+      "passed": 7,
+      "skipped": 0,
+      "failed": 0
+    },
+    "broader_preparation_regression": {
+      "passed": 32,
+      "skipped": 4,
+      "failed": 0,
+      "skip_reason": "torch absent in this interpreter; unchanged tensor tests had passed in prior67test GPU run",
+      "junit": "artifacts/generalization-20261021/validation/source-expansion-tests.xml"
+    },
+    "ruff": "PASS 4 changed Python files",
+    "mypy": "PASS 3 implementation files",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS, no new private dependency",
+    "diff_check": "PASS"
+  },
+  "compute_settlement": {
+    "status": "SETTLED_ONCE",
+    "phase": "training_generalization_20261021_preparation_and_feedback_dev_v1",
+    "cpu_seconds": 106.28886522499998,
+    "measured_phases": 19,
+    "artifact": "artifacts/generalization-20261021/compute-settlement-v1.json",
+    "old_pending35_modified": false,
+    "unknown_costs": "Semantic author review, test/GPU diagnostic overhead, source freeze, initial download, unmeasured setup/debug/lint/typecheck; not claimed zero"
+  },
+  "no_sha_verification": true,
+  "no_retries": true,
+  "pushed": false,
+  "merged": false,
+  "goal_complete": false,
+  "next": [
+    "Review remaining feedback states8-15, compile complete independent dev and common-support diagnostics",
+    "Review remaining238 new source records; preserve insufficiency and actual tool opportunities",
+    "Collect actual new operation/reached states and implement execution-after-state reconstruction",
+    "Freeze nested64/128/256actual source pools, matched524update curves and parameter/auxiliary/feedback controls",
+    "Complete factorial/long-context/E3/Host/cost/external/multi-seed requirements of original plan"
+  ]
+}

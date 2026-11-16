@@ -1,0 +1,75 @@
+{
+  "status": "CLOSED_WRONG_EXECUTION_PATH",
+  "source_version": "b9b35bae",
+  "intended_comparison": "Replay identical saved original-source and query-structure materials with different delivery policies.",
+  "actual_comparison": "Generic BenchmarkRun ignored evidence_replay; both arms ran new source-only ingestion and ordinary direct QA. No query structure was present, so no structure-first mechanism was exercised.",
+  "arms": {
+    "alongside": {
+      "stages": {
+        "reader": {
+          "responses": 16,
+          "input_tokens": 10345,
+          "output_tokens": 25061,
+          "total_tokens": 35406
+        },
+        "judge": {
+          "responses": 16,
+          "input_tokens": 16756,
+          "output_tokens": 25701,
+          "total_tokens": 42457
+        }
+      },
+      "saved_pool_kind_counts": {
+        "original_source": 28
+      },
+      "first_labels": {
+        "Correct": 15,
+        "Omission": 1
+      },
+      "query_structure_calls": 0,
+      "replay_banks_created": false
+    },
+    "first": {
+      "stages": {
+        "reader": {
+          "responses": 16,
+          "input_tokens": 10345,
+          "output_tokens": 25843,
+          "total_tokens": 36188
+        },
+        "judge": {
+          "responses": 16,
+          "input_tokens": 16865,
+          "output_tokens": 24404,
+          "total_tokens": 41269
+        }
+      },
+      "saved_pool_kind_counts": {
+        "original_source": 28
+      },
+      "first_labels": {
+        "Correct": 15,
+        "Hallucination": 1
+      },
+      "query_structure_calls": 0,
+      "replay_banks_created": false
+    }
+  },
+  "semantic_review": "Not reviewed as a method comparison; original predictions and first scores preserved.",
+  "ledger_delta": {
+    "generation_requests": 64,
+    "generation": {
+      "known_tokens": 155320,
+      "charged_tokens": 155320,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "receipt_ledger_difference": 0,
+  "next_execution": "72f1bf35 moves replay dispatch to common BenchmarkRun entry; corrected new rootstructure-delivery-v2, original outputs never replaced.",
+  "full_goal_complete": false
+}

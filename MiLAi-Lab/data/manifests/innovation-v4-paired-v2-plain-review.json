@@ -1,0 +1,233 @@
+{
+  "status": "PLAIN_PREDICTION_CLOSED; PAIR_AND_FIRST_SCORES_RUNNING",
+  "source_version": "08de761d",
+  "coverage": "All 24 rendered post-arrival states and 24 full Reader answers read against the frozen author sources; selected rejection receipts inspected. Full structured support-binding audit remains pending.",
+  "stages_from_actual_receipts": {
+    "maintenance": {
+      "responses": 24,
+      "prompt_tokens": 61421,
+      "completion_tokens": 93513,
+      "total_tokens": 154934,
+      "length": 2
+    },
+    "reader": {
+      "responses": 24,
+      "prompt_tokens": 33486,
+      "completion_tokens": 42446,
+      "total_tokens": 75932,
+      "length": 0
+    },
+    "embedding": {
+      "responses": 61,
+      "prompt_tokens": 2696,
+      "completion_tokens": 0,
+      "total_tokens": 2696,
+      "length": 0
+    }
+  },
+  "ledger_reconciliation": "Pending whole queue closure; these per-stage receipt totals are not independent new ledgers.",
+  "source_author_issues": [
+    {
+      "id": "orchid-weekday-scope",
+      "owner": "innovation-orchid",
+      "session": 1,
+      "scope": "both methods and original reference",
+      "finding": "The source calls this a weekend window, but Apr 5/6 2035 are Thursday/Friday. The expected names follow the effective-date transition but actual availability on those weekdays is unspecified. Plain additionally asserted that both days are weekends.",
+      "treatment": "Keep frozen input and first Judge labels. Annotate question/source scope ambiguity; do not count it as clean temporal confirmation."
+    },
+    {
+      "id": "shared-catalog-availability",
+      "owner": "innovation-shared",
+      "session": 1,
+      "scope": "both methods and original reference",
+      "finding": "Source says catalog access is independent of cooling and ventilation, not that the catalog is currently online. Reference says catalog remains available. Plain distinguishes independence from unreported operational status.",
+      "treatment": "Preserve original reference/Judge; do not mark this source-grounded distinction a model failure solely from reference mismatch."
+    }
+  ],
+  "state_notes": {
+    "innovation-harbor": [
+      "Initial rule, credential/training compound and independent battery are present.",
+      "Card cancellation committed; voucher/training/battery preserved.",
+      "Actual rejection EDIT_TIME_SOURCE_NOT_SELECTED; state still says voucher valid instead of newly unknown. Reader answers unknown from Source.",
+      "Day/night distinction added; earlier stale voucher update recovered."
+    ],
+    "innovation-orchid": [
+      "Initial two roles present.",
+      "Editor length, no proposal or semantic update; future assignment absent.",
+      "Later input adds the handover boundary and names; positive post-boundary assignment is indirect in retained wording.",
+      "Historical key-holder correction explicitly says from project start; earlier boundary unchanged."
+    ],
+    "innovation-studio": [
+      "Initial full record covers the rules contextually, but the northern unit omits the camera noun. Self-contained proposition coverage is ambiguous.",
+      "Editor length; temporary exception never formed.",
+      "Current general rule is appropriate after cancellation, but no previously formed exception was actually removed; not mechanism proof.",
+      "Sticker fact added; other units retained."
+    ],
+    "innovation-grant": [
+      "Initial totals and not-per-member meaning present.",
+      "The durable unapproved 900 proposal is not represented in state; raw Source answers it.",
+      "Before/after 600/750 meanings retained.",
+      "Five members added without multiplying grant or changing Elm."
+    ],
+    "innovation-catalog": [
+      "Initial two editors and cover color present.",
+      "Current editor changed, but from-the-beginning correction meaning is absent in current clause.",
+      "Past completed work and future new work both in one clause; effective_from binds that whole clause, so temporal eligibility merits structured audit.",
+      "Unconfirmed cover rumor added without changing confirmed dark blue."
+    ],
+    "innovation-shared": [
+      "Distinct scanner/archive requirements and catalog independence present.",
+      "Cooling failure changes scanner context while retaining other rules.",
+      "Cooling recovery and East-only ventilation failure present; assertion kind became observed despite user-reported source, attribution interpretation remains unconfirmed.",
+      "Separate West uncertainty added without inventing East-derived permissions."
+    ]
+  },
+  "qa_author_review": {
+    "innovation-harbor": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ],
+    "innovation-orchid": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": null,
+        "notes": [
+          "Correct date-split names, unsupported claim that both dates are weekend days; source/question ambiguity recorded symmetrically."
+        ]
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ],
+    "innovation-studio": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": [
+          "Calls usually an uncertainty expression; the source states a default rule, not uncertain evidence."
+        ]
+      },
+      {
+        "session": 1,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ],
+    "innovation-grant": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": null,
+        "notes": [
+          "Gives both correct Elm totals, then treats hypothetical Moss funding effects as indeterminate despite the actual source saying no funding decision changed; current-question answer is ambiguous."
+        ]
+      }
+    ],
+    "innovation-catalog": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": [
+          "Correct named editors, but adds unsupported uncertainty about whether the initial current record may have changed."
+        ]
+      },
+      {
+        "session": 1,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ],
+    "innovation-shared": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": null,
+        "notes": [
+          "Scanner/archive clauses correct; catalog availability reference is stronger than source."
+        ]
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ]
+  },
+  "independent_blind_review": false,
+  "official_labels_modified": false,
+  "rejudged": false,
+  "claims": "Exploratory author review only. No paired advantage, UJS interval or independent-benchmark claim."
+}

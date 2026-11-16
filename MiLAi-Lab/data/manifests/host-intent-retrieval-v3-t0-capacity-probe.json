@@ -1,0 +1,46 @@
+{
+  "status": "COMPLETED",
+  "pid": 383065,
+  "purpose": "Capacity only, not task accuracy or fitting",
+  "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "physical_gpu": 2,
+  "event_id": "generative-query_only/memops_A07/stage-2/chatcmpl-badcd88b8c8c9e38:tool:0/2",
+  "audited_sequence_tokens": 9723,
+  "max_len": 12288,
+  "head_max_len": 2048,
+  "changed_encoder_capacity": false,
+  "model_forwards": 1,
+  "loading": {
+    "wall_seconds": 8.352482080459595,
+    "cpu_seconds": 12.027125303000002,
+    "loads": 1
+  },
+  "tokenizer_declared_limit": 8192,
+  "encoder_max_position_embeddings": 8192,
+  "attention_implementation": "sdpa",
+  "dtype": "torch.float32",
+  "peak_allocated_bytes": 19618862080,
+  "peak_reserved_bytes": 21103640576,
+  "compute": {
+    "wall_seconds": 1.951736536808312,
+    "cpu_seconds": 3.748571809999998,
+    "predict_attempts": 1,
+    "forwards": 1,
+    "sequence_rows": 1,
+    "input_tokens": 9723,
+    "state_tokenizations": 1,
+    "state_tokens": 8966
+  },
+  "http_counters_unchanged": true,
+  "ledger_recorded": true,
+  "qualification": "One forward demonstrates execution at the longest observed sequence. It does not establish long-context task quality or backward-pass memory feasibility.",
+  "artifact": "artifacts/host-intent-retrieval-v3/capacity-probe-v1/run.json",
+  "result_summary": {
+    "input_tokens": 9723,
+    "truncated": false,
+    "preparation_seconds": 0.038006617687642574,
+    "inference_seconds": 1.9086023811250925,
+    "calibrated": false
+  },
+  "local_code_observation": "Installed ModernBERT uses token embeddings and RoPE calculated from supplied position_ids, not a fixed learned position lookup. Metadata warning retained; no encoder/tokenizer capacity values were changed."
+}

@@ -1,0 +1,307 @@
+{
+  "status": "ALL_TWELVE_TRAINING_JOBS_TERMINAL_AND_PAIRED",
+  "training_source_version": "2346bb57",
+  "jobs": [
+    {
+      "cohort": "families32",
+      "backend": "native",
+      "seed": 0,
+      "status": "COMPLETED",
+      "updates": 38,
+      "train_states": 304,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607829
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769469
+        }
+      }
+    },
+    {
+      "cohort": "families32",
+      "backend": "linear",
+      "seed": 0,
+      "status": "COMPLETED",
+      "updates": 38,
+      "train_states": 304,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607838
+        },
+        "head": {
+          "parameter": "scorer.weight",
+          "changed_elements": 768
+        }
+      }
+    },
+    {
+      "cohort": "families32",
+      "backend": "linear",
+      "seed": 1,
+      "status": "COMPLETED",
+      "updates": 38,
+      "train_states": 304,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607802
+        },
+        "head": {
+          "parameter": "scorer.weight",
+          "changed_elements": 768
+        }
+      }
+    },
+    {
+      "cohort": "families32",
+      "backend": "native",
+      "seed": 1,
+      "status": "COMPLETED",
+      "updates": 38,
+      "train_states": 304,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607845
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769470
+        }
+      }
+    },
+    {
+      "cohort": "families32",
+      "backend": "native",
+      "seed": 2,
+      "status": "COMPLETED",
+      "updates": 38,
+      "train_states": 304,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607839
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769469
+        }
+      }
+    },
+    {
+      "cohort": "families32",
+      "backend": "linear",
+      "seed": 2,
+      "status": "COMPLETED",
+      "updates": 38,
+      "train_states": 304,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607825
+        },
+        "head": {
+          "parameter": "scorer.weight",
+          "changed_elements": 768
+        }
+      }
+    },
+    {
+      "cohort": "families128",
+      "backend": "native",
+      "seed": 0,
+      "status": "COMPLETED",
+      "updates": 154,
+      "train_states": 1223,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607802
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769472
+        }
+      }
+    },
+    {
+      "cohort": "families128",
+      "backend": "linear",
+      "seed": 0,
+      "status": "COMPLETED",
+      "updates": 154,
+      "train_states": 1223,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607808
+        },
+        "head": {
+          "parameter": "scorer.weight",
+          "changed_elements": 768
+        }
+      }
+    },
+    {
+      "cohort": "families128",
+      "backend": "linear",
+      "seed": 1,
+      "status": "COMPLETED",
+      "updates": 154,
+      "train_states": 1223,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607789
+        },
+        "head": {
+          "parameter": "scorer.weight",
+          "changed_elements": 768
+        }
+      }
+    },
+    {
+      "cohort": "families128",
+      "backend": "native",
+      "seed": 1,
+      "status": "COMPLETED",
+      "updates": 154,
+      "train_states": 1223,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607801
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769470
+        }
+      }
+    },
+    {
+      "cohort": "families128",
+      "backend": "native",
+      "seed": 2,
+      "status": "COMPLETED",
+      "updates": 154,
+      "train_states": 1223,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607813
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769471
+        }
+      }
+    },
+    {
+      "cohort": "families128",
+      "backend": "linear",
+      "seed": 2,
+      "status": "COMPLETED",
+      "updates": 154,
+      "train_states": 1223,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607808
+        },
+        "head": {
+          "parameter": "scorer.weight",
+          "changed_elements": 768
+        }
+      }
+    }
+  ],
+  "matched_head_pairs": [
+    {
+      "cohort": "families32",
+      "seed": 0,
+      "sampling_lengths_option_orders_equal": true
+    },
+    {
+      "cohort": "families32",
+      "seed": 1,
+      "sampling_lengths_option_orders_equal": true
+    },
+    {
+      "cohort": "families32",
+      "seed": 2,
+      "sampling_lengths_option_orders_equal": true
+    },
+    {
+      "cohort": "families128",
+      "seed": 0,
+      "sampling_lengths_option_orders_equal": true
+    },
+    {
+      "cohort": "families128",
+      "seed": 1,
+      "sampling_lengths_option_orders_equal": true
+    },
+    {
+      "cohort": "families128",
+      "seed": 2,
+      "sampling_lengths_option_orders_equal": true
+    }
+  ],
+  "initial_model_comparison": [
+    {
+      "backend": "native",
+      "seed": 0,
+      "max_initial_logit_delta_across_cohort_size": 0.0,
+      "same_initial_choices": 168,
+      "states": 168
+    },
+    {
+      "backend": "native",
+      "seed": 1,
+      "max_initial_logit_delta_across_cohort_size": 0.0,
+      "same_initial_choices": 168,
+      "states": 168
+    },
+    {
+      "backend": "native",
+      "seed": 2,
+      "max_initial_logit_delta_across_cohort_size": 0.0,
+      "same_initial_choices": 168,
+      "states": 168
+    },
+    {
+      "backend": "linear",
+      "seed": 0,
+      "max_initial_logit_delta_across_cohort_size": 0.0,
+      "same_initial_choices": 168,
+      "states": 168
+    },
+    {
+      "backend": "linear",
+      "seed": 1,
+      "max_initial_logit_delta_across_cohort_size": 0.0,
+      "same_initial_choices": 168,
+      "states": 168
+    },
+    {
+      "backend": "linear",
+      "seed": 2,
+      "max_initial_logit_delta_across_cohort_size": 0.0,
+      "same_initial_choices": 168,
+      "states": 168
+    }
+  ],
+  "checkpoint_storage": "Both architecturesF16, trainingevalFP32; reload measured with freshprobeoriginal",
+  "new_model_calls": 0,
+  "sha_checks": false,
+  "initial_validation_attempt": "Shell-heredoc closure check had a Python syntax typo before execution; no writes, model calls or ledger charge occurred. Corrected standalone checker ran once.",
+  "compute": {
+    "wall_seconds": 0.1550249345600605,
+    "cpu_seconds": 0.15496207499999998,
+    "validations": 1
+  }
+}

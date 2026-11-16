@@ -1,0 +1,474 @@
+{
+  "status": "PHASE30_PROGRESS_ALL_MAIN_FITS_AND_S3_DEV_CLOSED_SOURCEVIEW_APPLICATION_STARTED_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T17:02:10.571118+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v29.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "m6-adapted-continued-replay-families0to4-v1",
+      "owner_pid": 1356536,
+      "child_pid": 1356537,
+      "owner_status": "RUNNING",
+      "process_alive": true,
+      "run_status": "RUNNING",
+      "closed_positions": 5,
+      "active": {
+        "history": "memops_A02-d-update32-v1-content",
+        "policy": "laya",
+        "interface": "rich",
+        "profile": "laya",
+        "request": "initial"
+      }
+    }
+  ],
+  "resume_check": "Userpaused/resumedgoal; authoritativeowners/processes/artifacts rechecked, no jobsrestarted. Interruptedturn leftpreparedS3data/last4reviews/costdiagnostic, no quality_feedback codepatch wasapplied.",
+  "S1_three_seed_final": {
+    "file": "/data/milai-experiments/20261111-scalable-evidence/s1-three-seed-final-paired-reference-comparison-v1.json",
+    "accepted_large_repeat": [
+      [
+        126,
+        104
+      ],
+      [
+        107,
+        102
+      ],
+      [
+        105,
+        113
+      ]
+    ],
+    "source_macro_mean_difference": 0.006290584415584411,
+    "source_bootstrap_95pct": [
+      -0.052083333333333336,
+      0.06101190476190476
+    ],
+    "joint_resampling_95pct_descriptive": [
+      -0.0726461038961039,
+      0.08581349206349206
+    ],
+    "scope": "Pairedsource-leveldifferences averagedwithinsourceacross3trainingseeds; not84independentsources. Jointresamplingdrawsseeds globallyandSourcefamilies, only3seedslimited. Conditionalon28reference-labelledoldDEVfamilies, notall32/Hostsuccess/newconfirmation. Final303fixedforeacharm; earlierpointsretainedseparately. Seed1/2tokenreuse/recoveryengineeringdeclared, data/init/optimizerrecipeunchanged."
+  },
+  "S3_data": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-source-matched-state-data-v1/manifest.json",
+  "S3_own_fit_closed": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-own-closed-curve-v1.json",
+  "S3_control_plan": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-old-s1-states-seed0-v1-plan.json",
+  "S3_data_counts": {
+    "source_opportunities": 32,
+    "labelled_families_each": 23,
+    "new_rows_each": 108,
+    "unique_own_states": 108,
+    "unique_old_S1_states": 87,
+    "old_S1_repeat_rows": 21,
+    "shared_old_replay": 108,
+    "rows_each": 216,
+    "exact_passes": 3,
+    "draws_each": 648,
+    "updates_each": 21,
+    "scope": "ReferenceonlyS3, commonS2u51init andmatchedSourcecounts/lossweights; differentuniquestates/tokenlengths, notpureactor/FLOPs. Actualstate/questionsunchanged, actorqualifiedmetadataIDs."
+  },
+  "S3_DEV_preparation": {
+    "status": "CLOSED_WITH_103_TRANSFERRED_AND_5_NEW_JUDGMENTS_PLUS_3_PREDECLARED_ROOT_SPOTS",
+    "plan": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-dev64-score-pair-v1-plan.json",
+    "owner_entry": "/data/milai-experiments/20261111-scalable-evidence/run_s3_first319_dev64_score_pair_v1.py",
+    "packet_union": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-existing-dev-packet-union-v1",
+    "actual_native_packets": 193,
+    "first_cache": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-existing-dev-first-cache-v1",
+    "canonical_firsts": 144,
+    "states": 64,
+    "source_families": 32,
+    "scope": "CommonS1reachedDEVstates/fixedcontext4, fourmethods; Rootsameexecutionagent notoriginalpaperauthor/independenthuman. Sourcegroundedcorrections keepincompletelimitationanswersincomplete butsupported; Doc2Vecresolvedfromactualpacket. No newtraininglabels.",
+    "actual_device": "GPU2bothnewu21scorers; commonu51init reusespriorGPU3scores",
+    "methods": [
+      "fixed_context",
+      "own",
+      "old-s1",
+      "initial_feedback_u51"
+    ],
+    "actual_comparison_packets": 108,
+    "new_native_packets": 5,
+    "reused_native_packets": 103,
+    "new_Host_calls": 5,
+    "reused_firsts": 103,
+    "transferred_judgments": 103,
+    "transfer_conflicts": 0,
+    "Root_status_field_changes": 5
+  },
+  "continuous16": {
+    "status": "ALL16_CONTINUOUS_TRAJECTORIES_CLOSED_AND_SOURCE_REVIEWED",
+    "sources": [
+      "/data/milai-experiments/20261111-scalable-evidence/m6-continuous-first4-review-v1/summary.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m6-continuous-families4to8-review-v1/summary.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m6-continuous-families8to12-review-v1/summary.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m6-continuous-families12to16-review-v1/summary.json"
+    ],
+    "conditions": [
+      {
+        "condition": "new32-view_cache",
+        "positions": 80,
+        "families": 16,
+        "answer_grades": {
+          "C": 23,
+          "F": 16,
+          "W": 23,
+          "Q": 18
+        },
+        "relevant_update_positions": 31,
+        "relevant_update_grades": {
+          "W": 20,
+          "F": 9,
+          "Q": 2
+        },
+        "generation_delta": {
+          "charged_tokens": 763219,
+          "known_tokens": 763219,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "new32-view_cache_incremental",
+        "positions": 80,
+        "families": 16,
+        "answer_grades": {
+          "C": 24,
+          "W": 29,
+          "F": 19,
+          "Q": 8
+        },
+        "relevant_update_positions": 31,
+        "relevant_update_grades": {
+          "W": 22,
+          "F": 8,
+          "Q": 1
+        },
+        "generation_delta": {
+          "charged_tokens": 718067,
+          "known_tokens": 718067,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "new32-e3-aggregate-u32",
+        "positions": 80,
+        "families": 16,
+        "answer_grades": {
+          "W": 24,
+          "C": 25,
+          "F": 19,
+          "Q": 12
+        },
+        "relevant_update_positions": 31,
+        "relevant_update_grades": {
+          "W": 19,
+          "F": 11,
+          "Q": 1
+        },
+        "generation_delta": {
+          "charged_tokens": 710236,
+          "known_tokens": 710236,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "s1-op36k-u1130",
+        "positions": 80,
+        "families": 16,
+        "answer_grades": {
+          "C": 25,
+          "F": 11,
+          "W": 28,
+          "Q": 16
+        },
+        "relevant_update_positions": 31,
+        "relevant_update_grades": {
+          "F": 3,
+          "W": 26,
+          "Q": 2
+        },
+        "generation_delta": {
+          "charged_tokens": 633200,
+          "known_tokens": 633200,
+          "unknown_usage": 0
+        }
+      }
+    ],
+    "paired_complete_differences_new_minus_baseline": {
+      "new32-view_cache": {
+        "source_mean_difference": 0.024999999999999994,
+        "source_bootstrap_95pct": [
+          -0.125,
+          0.175
+        ]
+      },
+      "new32-view_cache_incremental": {
+        "source_mean_difference": 0.01249999999999999,
+        "source_bootstrap_95pct": [
+          -0.1125,
+          0.13749999999999998
+        ]
+      },
+      "new32-e3-aggregate-u32": {
+        "source_mean_difference": -6.938893903907228e-18,
+        "source_bootstrap_95pct": [
+          -0.1375,
+          0.13749999999999998
+        ]
+      }
+    },
+    "new_actual_HTTP_responses": 105,
+    "new_actual_NN_predictions": 180,
+    "new_retrieval_calls": 26,
+    "new_selected_operations": {
+      "SEARCH": 25,
+      "READ": 138,
+      "HANDOFF": 17
+    },
+    "new_USE_VIEW_offered_states": 0,
+    "new_REFRESH_VIEW_offered_states": 179,
+    "relevant_update_exclusion": {
+      "family": "memops_A02",
+      "request": "intermediate-arrivals",
+      "reason": "Originalsourcecriterion: target-irrelevant job-sheet additions; requested employer/department/manager unchanged."
+    },
+    "scope": "80positions within16generatedTRAINsourcehistories, not80independentsources/natural/unseenconfirmation. Rootnonblind/nonindependent; priorbaselinejudgmentsretained, HostRNGunmatched; oldE3CUDA/newCPU. Bootstrapconditionalonthesejudgments, excludesHost/seed/judgebias. Initial/no-change correctness doesnotestablishupdatehandling; allfourmethods0C on31target-changingpositions. No semanticfitlabels inferred.",
+    "no_sha_validation": true
+  },
+  "SourceView_application_preparation": {
+    "manifest": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-continuous16-plan-v1/manifest.json",
+    "status": "SOURCE_REFERENCE_FIRST4_CLOSED20_TRANSPORT_COMPLETE_MATCHED_REPLAY_FIRST4_RUNNING",
+    "conditions": 2,
+    "positions_each": 80,
+    "families_each": 16,
+    "device": "GPU3FP32bothnewarms",
+    "scope": "Ownbanks/chronology/oldHost/sourcebody/rolesunchanged; alternatearmorder by4sourceblock. Excludedfromadaptationfit only; generated/exposednotblind. OldCPUbase historical, newGPUarmsmatched forlearningcomparison.",
+    "first_batch_closed": "m6-adapted-source-reference-families0to4-v1",
+    "first_batch_quality_review": "pending; transportcompletionnotqualitysuccess"
+  },
+  "quality_qualified_cost_diagnostic": {
+    "file": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-quality-qualified-cost-profile-v1.json",
+    "counts": {
+      "coarse_equal_sufficient_and_complete_supported_pairs": 138,
+      "resource_pareto_pairs": 115,
+      "observed_reader_total_and_resource_pareto_pairs": 94,
+      "READ > SEARCH": 21,
+      "READ > READ": 47,
+      "HANDOFF > READ": 18,
+      "SEARCH > READ": 6,
+      "HANDOFF > HANDOFF": 2
+    },
+    "states": 69,
+    "families": 53,
+    "scope": "All319previousTRAINcomparisonstates inspected. Pareto relations onlywithinbothcompleted/sufficient/supportedbranches. One stochasticReaderfirst; noexpectedcost/CPU/GPU/FLOPs dominanceclaim. Fixedcontext4continuation, notlearnedfullpolicy. Originalqualityties unchanged andunknowns notnegative. Diagnosticforstopping-supervisiongap, no newfit/objective/runtimechange.",
+    "existing_quality_cost_entry": "tools/quality_feedback.py already supportsquality-cost; no newtarget/runtimepatch/fitting performed"
+  },
+  "figures": {
+    "directory": "/data/milai-experiments/20261111-scalable-evidence/closed-learning-and-application-figures-v1",
+    "pngs": [
+      "paired-feedback.png",
+      "continuous16.png"
+    ],
+    "pdfs": [
+      "paired-feedback.pdf",
+      "continuous16.pdf"
+    ],
+    "source_data": "source-data.json",
+    "visually_inspected": true,
+    "scope": "Reference/action/taskdenominators separate; unknowns retained. Render1/2 CPU retained andpaid onceeach."
+  },
+  "settlement": {
+    "recorded": true,
+    "preparations": [
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-source-matched-state-data-v1/manifest.json",
+        "cpu_seconds": 7.936375400999999
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/s1-three-seed-final-paired-reference-comparison-v1.json",
+        "cpu_seconds": 1.4604915950000001
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/closed-learning-and-application-figures-v1/manifest-render1.json",
+        "cpu_seconds": 2.8017245319999997
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/closed-learning-and-application-figures-v1/manifest.json",
+        "cpu_seconds": 2.7389168959999997
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-quality-qualified-cost-profile-v1.json",
+        "cpu_seconds": 2.377563195
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-dev32-choices-v1/run.json",
+        "cpu_seconds": 41.035866212
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-dev32-comparison-witness-v1/manifest.json",
+        "cpu_seconds": 1.537173483
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-dev32-transferred-reviews-v1/manifest.json",
+        "cpu_seconds": 0.7989904
+      }
+    ],
+    "preparation_cpu_seconds": 60.68710171399999,
+    "collector_cpu_seconds": 357.382998,
+    "collector_calls": 326,
+    "M6_last4_residual_CPU": 53.72976584800608,
+    "scope": "Onlylistedpreviouslyunbilled8preparations/renderings, bothS3wholechildren(notplusnested), last4M6residual. Training/evaluators/readers/teachers/nativeM6 alreadyselfbilled. Otherprep/binding/author/import/testCPU remainpending/unknown. Firstplanconstruction failedPath/stringtypebeforewrite/ledger; corrected, no doublecharge.",
+    "phases": {
+      "milai_scalable_phase30_selected_preparation_20261112_v1": {
+        "cpu_seconds": 60.68710171399999,
+        "runs": 8
+      },
+      "milai_scalable_s3_first319_two_collectors_20261112_v1": {
+        "cpu_seconds": 357.382998,
+        "runs": 2,
+        "model_calls": 326
+      },
+      "milai_scalable_m6_continuous12to16_whole_minus_native_20261112_v1": {
+        "cpu_seconds": 53.72976584800608,
+        "runs": 1
+      }
+    }
+  },
+  "next": [
+    "Continue8predeclaredSourceViewGPU3applicationblocks serially, preservefirsts, SourceRootreviewactualresults",
+    "S3DEVclosed: teacherfixed/init/own/old33/32/30/29, Roothybrid32/32/32/31; no stabletaskgain established",
+    "LME32twofixednominees andfreshconfirmation96 afterfinalnomination; completefullstudyreport/cost/generalization"
+  ],
+  "validation": "No trackedruntimechangephase30; datasetSourcecounts/weights/exactdraws andnativeuntruncatedlengths checked; existingpredictionsto278labelled/28sourcecurve summaries matched for6finalruns. Finiteowner/entrysyntax checks, figuresrenderedandviewed. No broadtests rerun; priorpackagePASS/tools6oldLMEissues unchanged.",
+  "cost_scope": "Paid8selectedprep/renderings60.687101714CPU +S3collectorwhole357.382998CPU(326NN) +M6last4whole-minus-native53.729765848CPU. Nativefit/scorers/readers/teachers notaddedagain. AdditionalS3DEVunion prep,binding/author/import/testCPU pendingorunknown. InitialsettlementplanPath/stringerror occurredbeforeledger, correctedwithoutdoublecharge.",
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push. Originalfirstfailuresunknownsrolespreserved; fullgoalunfinished.",
+  "full36k_closed": "/data/milai-experiments/20261111-scalable-evidence/s1-op36k-closed-curve-v1.json",
+  "S3_pair_closed": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-paired-closed-curves-v1.json",
+  "S3_full_DEV": {
+    "own": [
+      123,
+      121
+    ],
+    "old_S1": [
+      118,
+      124
+    ],
+    "updates": [
+      7,
+      21
+    ],
+    "denominator": 278
+  },
+  "final36k_length_strata": "/data/milai-experiments/20261111-scalable-evidence/s1-op36k-final-length-strata-v1.json",
+  "SourceView_reference_fit_closed": "/data/milai-experiments/20261111-scalable-evidence/m6-adaptation-source-reference-seed0-v1",
+  "SourceView_reference_fit_diagnostics": {
+    "aux62": [
+      25,
+      31,
+      38,
+      37
+    ],
+    "aux_updates": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "final_paper": 124,
+    "scope": "Referencecompatibilityonly, noapplicationgain; prescheduled12retained overhigheru8."
+  },
+  "SourceView_pair_closed": "/data/milai-experiments/20261111-scalable-evidence/m6-adaptation-paired-closed-curves-v1.json",
+  "SourceView_retention": {
+    "source-reference": {
+      "directory": "/data/milai-experiments/20261111-scalable-evidence/m6-adaptation-source-reference-musique-dev-v1",
+      "metrics": {
+        "counts": {
+          "masked": 265,
+          "labelled": 423,
+          "accepted": 322,
+          "handoff_outside_reviewed_preference": 32
+        },
+        "strata": {
+          "reference_acquisition": {
+            "labelled": 377,
+            "accepted": 293
+          },
+          "reference_preserving_handoff": {
+            "labelled": 46,
+            "accepted": 29
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 57,
+            "accepted": 57
+          },
+          "READ": {
+            "selected": 305,
+            "accepted": 236
+          },
+          "HANDOFF": {
+            "selected": 61,
+            "accepted": 29
+          }
+        },
+        "families": 29,
+        "family_macro_acceptance": 0.7672413793103449,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "scope": "Fixedu12 exposedMuSiQueDEV referenceacceptance; no newHost orblindconfirmation."
+    },
+    "continued-replay": {
+      "directory": "/data/milai-experiments/20261111-scalable-evidence/m6-adaptation-continued-replay-musique-dev-v1",
+      "metrics": {
+        "counts": {
+          "masked": 265,
+          "labelled": 423,
+          "accepted": 316,
+          "handoff_outside_reviewed_preference": 26
+        },
+        "strata": {
+          "reference_acquisition": {
+            "labelled": 377,
+            "accepted": 294
+          },
+          "reference_preserving_handoff": {
+            "labelled": 46,
+            "accepted": 22
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 56,
+            "accepted": 56
+          },
+          "READ": {
+            "selected": 319,
+            "accepted": 238
+          },
+          "HANDOFF": {
+            "selected": 48,
+            "accepted": 22
+          }
+        },
+        "families": 29,
+        "family_macro_acceptance": 0.7495689655172414,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "scope": "Fixedu12 exposedMuSiQueDEV referenceacceptance; no newHost orblindconfirmation."
+    }
+  },
+  "reviewer_clarification": "Root is this execution agent doing source-grounded review, not an original paper author or independent human reviewer. Historical source_author_corrected filenames are retained as labels; allRootcorrectionsnonblind/nonindependent.",
+  "S3_DEV_closed": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-dev32-closed-comparison-v1/summary.json",
+  "S3_DEV_counts": {
+    "teacher_only": {
+      "fixed_context": 33,
+      "initial_feedback_u51": 32,
+      "own": 30,
+      "old-s1": 29
+    },
+    "source_author_corrected": {
+      "fixed_context": 32,
+      "initial_feedback_u51": 32,
+      "own": 32,
+      "old-s1": 31
+    }
+  }
+}

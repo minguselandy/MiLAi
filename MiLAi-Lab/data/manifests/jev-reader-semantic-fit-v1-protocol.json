@@ -1,0 +1,57 @@
+{
+  "training_tool": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/tools/train_bounded_laya.py",
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "seeds": [
+    0,
+    1
+  ],
+  "max_len": 8192,
+  "head_max_len": 512,
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "precision": "float32",
+  "batch_size": 4,
+  "gradient_accumulation": 4,
+  "learning_rates": {
+    "encoder": 2.5e-05,
+    "head": 0.0001
+  },
+  "weight_decay": 0.01,
+  "name": "jev-reader-semantic-fit-v1",
+  "status": "SUPERSEDED_BEFORE_DISPATCH",
+  "data_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/semantic-fit-v1/data",
+  "output_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/semantic-fit-v1/runs",
+  "epochs": 8,
+  "optimizer_updates_per_job": 80,
+  "objective": "soft-ce",
+  "evaluate_train": true,
+  "shuffle_options": true,
+  "training_rows": 155,
+  "training_semantic_questions": 36,
+  "training_source_rows": 8,
+  "training_families": 8,
+  "train_status_counts": {
+    "reviewed_missing_complement": 80,
+    "reviewed_proof_complete": 67,
+    "reviewed_pool_insufficient": 8
+  },
+  "max_train_sequence_tokens": 933,
+  "train_dev_family_overlap": 0,
+  "dev_positions": 30,
+  "dev_labelled": 22,
+  "family_and_question_normalized": true,
+  "primary": "Fixed finalepoch8 training fit by complement/sufficient/exhausted and question/family, plus retained full curves. This asks whether clear short evidence tasks can be fitted while option positions vary, not whether a longer training run beats the86-state study.",
+  "secondary": "Same30exposedC20devpositions/22labelled/3effectivefamilies, reported separately as long-pool transfer. No bestdev/epoch selection; no evaluation content enters gradients.",
+  "factor_scope": "Different questions, shorter candidate pools, family/question weighting and80updates. This is a declared capacity/semantic-fit diagnosis, not an isolated data-augmentation causal comparison or heldout matched benchmark.",
+  "scheduling": "After option-shuffle policy QA closes and its first answers are reviewed; two serial fresh BASE trainings, seeds0/1, original ledger, GPUs2/3. Other worktrees remain user-paused.",
+  "limits": [
+    "155states are36semantic questions from8originaltrainfamilies, not155independent observations.",
+    "Only8pool-insufficient states; total fit cannot replace per-class counts.",
+    "All source text/labels already reviewed; author review is not independent adjudication.",
+    "No newSHA/fingerprints/ledger/services/defaultadoption; preserve first failures and all checkpoints."
+  ],
+  "reason": "User explicitly requires global task/distribution analysis and generalization, not repeated narrow-case tuning. This155-state fit-only training is not scheduled; retain source-reviewed examples for a broader predeclared training design."
+}

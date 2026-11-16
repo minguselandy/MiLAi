@@ -1,0 +1,87 @@
+{
+  "source_code": "97bf6e92",
+  "status": "CLOSED",
+  "selection_only_thinking": false,
+  "reader_thinking": "unchanged",
+  "cases": [
+    {
+      "case_id": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/7/qa/4/complete.json",
+      "label": "Correct",
+      "execution": "answered",
+      "cost": {
+        "models": {
+          "Qwen3.6-35B-A3B-FP8": {
+            "calls": 3,
+            "input_tokens": 49376,
+            "output_tokens": 4551
+          }
+        },
+        "stages": {
+          "paging": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 3,
+              "input_tokens": 49376,
+              "output_tokens": 4551
+            }
+          }
+        },
+        "embedding_tokens": 0,
+        "elapsed_seconds": 39.73246458731592
+      },
+      "evidence": {
+        "pool": 142,
+        "read": 2,
+        "final": 2,
+        "linked_candidates": 0,
+        "semantic_candidates": 10,
+        "semantic_in_pool": 0,
+        "semantic_final": 0,
+        "linked_final": 0,
+        "final_item_indices": [
+          0,
+          2
+        ]
+      }
+    },
+    {
+      "case_id": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/3/complete.json",
+      "label": "Hallucination",
+      "execution": "answered",
+      "cost": {
+        "models": {
+          "Qwen3.6-35B-A3B-FP8": {
+            "calls": 2,
+            "input_tokens": 35538,
+            "output_tokens": 2287
+          }
+        },
+        "stages": {
+          "paging": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 2,
+              "input_tokens": 35538,
+              "output_tokens": 2287
+            }
+          }
+        },
+        "embedding_tokens": 0,
+        "elapsed_seconds": 21.74821860715747
+      },
+      "evidence": {
+        "pool": 155,
+        "read": 1,
+        "final": 1,
+        "linked_candidates": 0,
+        "semantic_candidates": 6,
+        "semantic_in_pool": 0,
+        "semantic_final": 0,
+        "linked_final": 0,
+        "final_item_indices": [
+          0
+        ]
+      }
+    }
+  ],
+  "finding": "The original confirmed selector-length missing answer now returns text, but the retained success changed official label C->H. Not a new quality win; old read8 labels preserved. Selector thinking remains an explicit option.",
+  "prior_v2_setup_failure": "STAGE_ENABLE_THINKING_INVALID before client setup or model HTTP; runtime allowlist repaired, original failure retained."
+}

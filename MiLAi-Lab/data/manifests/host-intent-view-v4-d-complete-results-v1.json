@@ -1,0 +1,2319 @@
+{
+  "status": "ALL_TEN_D_ARMS_CLOSED_AND_SOURCE_AUTHOR_REVIEWED",
+  "logical_positions": 640,
+  "source_groups": 8,
+  "streams_per_arm": 16,
+  "positions_per_arm": 64,
+  "arms": {
+    "generative": {
+      "host_grades": {
+        "Q": 19,
+        "W": 14,
+        "C": 15,
+        "F": 16
+      },
+      "complete_Host_primary": 15,
+      "complete_Host_upper": 16,
+      "material": {
+        "partial": 43,
+        "complete": 18,
+        "insufficient": 3
+      },
+      "generation_requests": 220,
+      "generation_tokens": 1221393,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 36,
+      "completed_returns": 36,
+      "final_arrivals": {
+        "host": {
+          "W": 7,
+          "F": 7,
+          "Q": 2
+        },
+        "requested": 1,
+        "returns": 1
+      },
+      "whole_driver_cpu_seconds": 85.252563737,
+      "whole_driver_wall_seconds": 2276.578471420333,
+      "local_compute_directly_billed": {},
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "Q": 3,
+            "W": 2,
+            "C": 1,
+            "F": 2
+          },
+          "delivery": {
+            "partial": 7,
+            "complete": 1
+          },
+          "generation_tokens": 141402
+        },
+        "memops_A32": {
+          "host": {
+            "C": 2,
+            "W": 5,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 3,
+            "partial": 5
+          },
+          "generation_tokens": 213262
+        },
+        "memops_B30": {
+          "host": {
+            "C": 2,
+            "Q": 3,
+            "W": 1,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 3,
+            "partial": 5
+          },
+          "generation_tokens": 151388
+        },
+        "memops_C03": {
+          "host": {
+            "C": 3,
+            "F": 3,
+            "Q": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 150174
+        },
+        "memops_D25": {
+          "host": {
+            "Q": 5,
+            "F": 2,
+            "W": 1
+          },
+          "delivery": {
+            "partial": 8
+          },
+          "generation_tokens": 106271
+        },
+        "memops_E08": {
+          "host": {
+            "F": 5,
+            "C": 2,
+            "Q": 1
+          },
+          "delivery": {
+            "insufficient": 1,
+            "complete": 2,
+            "partial": 5
+          },
+          "generation_tokens": 185376
+        },
+        "memops_E15": {
+          "host": {
+            "Q": 3,
+            "W": 4,
+            "C": 1
+          },
+          "delivery": {
+            "insufficient": 2,
+            "partial": 5,
+            "complete": 1
+          },
+          "generation_tokens": 162362
+        },
+        "memops_F01": {
+          "host": {
+            "C": 4,
+            "F": 1,
+            "Q": 2,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 111158
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 9,
+          "complete_material": 9,
+          "generation_tokens": 417278,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 13,
+          "complete_material": 15,
+          "generation_tokens": 721766,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 15,
+          "complete_material": 18,
+          "generation_tokens": 1037645,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 15,
+          "complete_material": 18,
+          "generation_tokens": 1221393,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/generative/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/generative/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-v2/generative"
+      ]
+    },
+    "rules": {
+      "host_grades": {
+        "C": 19,
+        "W": 22,
+        "Q": 18,
+        "F": 5
+      },
+      "complete_Host_primary": 19,
+      "complete_Host_upper": 19,
+      "material": {
+        "complete": 36,
+        "partial": 28
+      },
+      "generation_requests": 100,
+      "generation_tokens": 551227,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 19,
+      "completed_returns": 19,
+      "final_arrivals": {
+        "host": {
+          "W": 11,
+          "Q": 1,
+          "F": 4
+        },
+        "requested": 1,
+        "returns": 1
+      },
+      "whole_driver_cpu_seconds": 84.060736934,
+      "whole_driver_wall_seconds": 1596.1456794040278,
+      "local_compute_directly_billed": {},
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 4,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 48256
+        },
+        "memops_A32": {
+          "host": {
+            "W": 4,
+            "Q": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 63905
+        },
+        "memops_B30": {
+          "host": {
+            "Q": 4,
+            "W": 2,
+            "C": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 59669
+        },
+        "memops_C03": {
+          "host": {
+            "C": 4,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 55619
+        },
+        "memops_D25": {
+          "host": {
+            "Q": 3,
+            "W": 2,
+            "F": 2,
+            "C": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 77226
+        },
+        "memops_E08": {
+          "host": {
+            "C": 1,
+            "F": 2,
+            "Q": 4,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 96249
+        },
+        "memops_E15": {
+          "host": {
+            "C": 1,
+            "Q": 3,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 72452
+        },
+        "memops_F01": {
+          "host": {
+            "C": 6,
+            "F": 1,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 77851
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 10,
+          "complete_material": 16,
+          "generation_tokens": 169831,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 17,
+          "complete_material": 32,
+          "generation_tokens": 274066,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 19,
+          "complete_material": 36,
+          "generation_tokens": 393582,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 19,
+          "complete_material": 36,
+          "generation_tokens": 551227,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/rules/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/rules/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules"
+      ]
+    },
+    "fixed-context": {
+      "host_grades": {
+        "C": 21,
+        "W": 17,
+        "Q": 14,
+        "F": 12
+      },
+      "complete_Host_primary": 21,
+      "complete_Host_upper": 22,
+      "material": {
+        "complete": 38,
+        "partial": 26
+      },
+      "generation_requests": 88,
+      "generation_tokens": 513678,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 24,
+      "completed_returns": 24,
+      "final_arrivals": {
+        "host": {
+          "W": 11,
+          "F": 4,
+          "Q": 1
+        },
+        "requested": 1,
+        "returns": 1
+      },
+      "whole_driver_cpu_seconds": 76.823128998,
+      "whole_driver_wall_seconds": 1667.778053865768,
+      "local_compute_directly_billed": {},
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 4,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 51801
+        },
+        "memops_A32": {
+          "host": {
+            "Q": 2,
+            "F": 3,
+            "W": 3
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 61037
+        },
+        "memops_B30": {
+          "host": {
+            "C": 2,
+            "Q": 2,
+            "W": 2,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 49643
+        },
+        "memops_C03": {
+          "host": {
+            "C": 4,
+            "W": 3,
+            "Q": 1
+          },
+          "delivery": {
+            "complete": 5,
+            "partial": 3
+          },
+          "generation_tokens": 58224
+        },
+        "memops_D25": {
+          "host": {
+            "Q": 7,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 71341
+        },
+        "memops_E08": {
+          "host": {
+            "C": 3,
+            "W": 2,
+            "Q": 2,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 5,
+            "partial": 3
+          },
+          "generation_tokens": 85573
+        },
+        "memops_E15": {
+          "host": {
+            "C": 3,
+            "F": 3,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 69212
+        },
+        "memops_F01": {
+          "host": {
+            "C": 5,
+            "F": 2,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 66847
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 11,
+          "complete_material": 16,
+          "generation_tokens": 120342,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 18,
+          "complete_material": 32,
+          "generation_tokens": 237814,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 21,
+          "complete_material": 38,
+          "generation_tokens": 375026,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 21,
+          "complete_material": 38,
+          "generation_tokens": 513678,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/fixed-context/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/fixed-context/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-v2/fixed-context"
+      ]
+    },
+    "t1-main-seed0": {
+      "host_grades": {
+        "C": 19,
+        "W": 19,
+        "Q": 13,
+        "F": 13
+      },
+      "complete_Host_primary": 19,
+      "complete_Host_upper": 19,
+      "material": {
+        "complete": 37,
+        "partial": 27
+      },
+      "generation_requests": 88,
+      "generation_tokens": 537603,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 24,
+      "completed_returns": 24,
+      "final_arrivals": {
+        "host": {
+          "W": 12,
+          "F": 3,
+          "Q": 1
+        },
+        "requested": 1,
+        "returns": 1
+      },
+      "whole_driver_cpu_seconds": 134.06792016699998,
+      "whole_driver_wall_seconds": 1920.250695114024,
+      "local_compute_directly_billed": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 48.286085705971345,
+          "forwards": 94,
+          "input_tokens": 401840,
+          "sequence_rows": 94,
+          "state_tokenizations": 94,
+          "state_tokens": 359693,
+          "wall_seconds": 30.606733455322683
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 8.244063149999874,
+          "loads": 1,
+          "wall_seconds": 6.349448472261429
+        }
+      },
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 4,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 53060
+        },
+        "memops_A32": {
+          "host": {
+            "W": 4,
+            "Q": 2,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 62565
+        },
+        "memops_B30": {
+          "host": {
+            "C": 2,
+            "Q": 3,
+            "F": 1,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 55825
+        },
+        "memops_C03": {
+          "host": {
+            "C": 5,
+            "F": 1,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 5,
+            "partial": 3
+          },
+          "generation_tokens": 74173
+        },
+        "memops_D25": {
+          "host": {
+            "C": 1,
+            "Q": 3,
+            "W": 2,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 79978
+        },
+        "memops_E08": {
+          "host": {
+            "Q": 4,
+            "F": 2,
+            "C": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 88590
+        },
+        "memops_E15": {
+          "host": {
+            "C": 2,
+            "F": 2,
+            "W": 3,
+            "Q": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 61663
+        },
+        "memops_F01": {
+          "host": {
+            "F": 3,
+            "C": 3,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 61749
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 10,
+          "complete_material": 16,
+          "generation_tokens": 128309,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 17,
+          "complete_material": 32,
+          "generation_tokens": 267458,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 19,
+          "complete_material": 37,
+          "generation_tokens": 411575,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 19,
+          "complete_material": 37,
+          "generation_tokens": 537603,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/t1-main-seed0/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/t1-main-seed0/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-v2/t1-main-seed0"
+      ]
+    },
+    "t1-control-seed0": {
+      "host_grades": {
+        "C": 16,
+        "W": 20,
+        "Q": 19,
+        "F": 9
+      },
+      "complete_Host_primary": 16,
+      "complete_Host_upper": 16,
+      "material": {
+        "complete": 36,
+        "partial": 28
+      },
+      "generation_requests": 89,
+      "generation_tokens": 525203,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 25,
+      "completed_returns": 25,
+      "final_arrivals": {
+        "host": {
+          "W": 13,
+          "Q": 3
+        },
+        "requested": 1,
+        "returns": 1
+      },
+      "whole_driver_cpu_seconds": 137.249810309,
+      "whole_driver_wall_seconds": 1848.7991101043299,
+      "local_compute_directly_billed": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 57.957624349008256,
+          "forwards": 111,
+          "input_tokens": 484251,
+          "sequence_rows": 111,
+          "state_tokenizations": 111,
+          "state_tokens": 434109,
+          "wall_seconds": 36.74164289049804
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 6.9764223950001,
+          "loads": 1,
+          "wall_seconds": 5.679080648347735
+        }
+      },
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 3,
+            "W": 4,
+            "Q": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 55773
+        },
+        "memops_A32": {
+          "host": {
+            "Q": 5,
+            "F": 2,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 63486
+        },
+        "memops_B30": {
+          "host": {
+            "C": 3,
+            "Q": 3,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 41392
+        },
+        "memops_C03": {
+          "host": {
+            "C": 4,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 63494
+        },
+        "memops_D25": {
+          "host": {
+            "C": 2,
+            "Q": 4,
+            "F": 1,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 61914
+        },
+        "memops_E08": {
+          "host": {
+            "Q": 4,
+            "F": 2,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 92830
+        },
+        "memops_E15": {
+          "host": {
+            "W": 4,
+            "Q": 2,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 78954
+        },
+        "memops_F01": {
+          "host": {
+            "C": 4,
+            "F": 2,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 67360
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 9,
+          "complete_material": 16,
+          "generation_tokens": 117764,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 15,
+          "complete_material": 32,
+          "generation_tokens": 266297,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 16,
+          "complete_material": 36,
+          "generation_tokens": 393933,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 16,
+          "complete_material": 36,
+          "generation_tokens": 525203,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/t1-control-seed0/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/t1-control-seed0/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-v2/t1-control-seed0"
+      ]
+    },
+    "continued-ce-seed0": {
+      "host_grades": {
+        "C": 18,
+        "W": 19,
+        "Q": 17,
+        "F": 10
+      },
+      "complete_Host_primary": 18,
+      "complete_Host_upper": 18,
+      "material": {
+        "complete": 36,
+        "partial": 28
+      },
+      "generation_requests": 85,
+      "generation_tokens": 539523,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 23,
+      "completed_returns": 23,
+      "final_arrivals": {
+        "host": {
+          "W": 11,
+          "Q": 3,
+          "F": 2
+        },
+        "requested": 1,
+        "returns": 1
+      },
+      "whole_driver_cpu_seconds": 129.455290788,
+      "whole_driver_wall_seconds": 1940.7114105354995,
+      "local_compute_directly_billed": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 50.703383911000856,
+          "forwards": 83,
+          "input_tokens": 369416,
+          "sequence_rows": 83,
+          "state_tokenizations": 83,
+          "state_tokens": 332390,
+          "wall_seconds": 31.175007527694106
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 6.987748168000053,
+          "loads": 1,
+          "wall_seconds": 5.879229704849422
+        }
+      },
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 4,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 51224
+        },
+        "memops_A32": {
+          "host": {
+            "Q": 6,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 59932
+        },
+        "memops_B30": {
+          "host": {
+            "C": 4,
+            "Q": 2,
+            "W": 1,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 55670
+        },
+        "memops_C03": {
+          "host": {
+            "C": 3,
+            "F": 1,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 64337
+        },
+        "memops_D25": {
+          "host": {
+            "Q": 3,
+            "F": 3,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 73769
+        },
+        "memops_E08": {
+          "host": {
+            "Q": 3,
+            "F": 2,
+            "W": 2,
+            "C": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 82674
+        },
+        "memops_E15": {
+          "host": {
+            "Q": 2,
+            "F": 2,
+            "W": 2,
+            "C": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 75524
+        },
+        "memops_F01": {
+          "host": {
+            "C": 4,
+            "F": 1,
+            "W": 2,
+            "Q": 1
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 76393
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 9,
+          "complete_material": 16,
+          "generation_tokens": 118793,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 16,
+          "complete_material": 32,
+          "generation_tokens": 248671,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 18,
+          "complete_material": 36,
+          "generation_tokens": 406400,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 18,
+          "complete_material": 36,
+          "generation_tokens": 539523,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/continued-ce-seed0/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/continued-ce-seed0/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-v2/continued-ce-seed0"
+      ]
+    },
+    "answer-seed0": {
+      "host_grades": {
+        "C": 17,
+        "W": 17,
+        "F": 12,
+        "Q": 18
+      },
+      "complete_Host_primary": 17,
+      "complete_Host_upper": 19,
+      "material": {
+        "complete": 26,
+        "partial": 38
+      },
+      "generation_requests": 143,
+      "generation_tokens": 740852,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 54,
+      "completed_returns": 53,
+      "final_arrivals": {
+        "host": {
+          "W": 8,
+          "F": 6,
+          "Q": 2
+        },
+        "requested": 1,
+        "returns": 0
+      },
+      "whole_driver_cpu_seconds": 285.03184741999996,
+      "whole_driver_wall_seconds": 2194.552722470835,
+      "local_compute_directly_billed": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 177.08737889701297,
+          "forwards": 169,
+          "input_tokens": 1063440,
+          "sequence_rows": 169,
+          "state_tokenizations": 170,
+          "state_tokens": 984964,
+          "wall_seconds": 106.93847624398768
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 14.342073546000393,
+          "loads": 2,
+          "wall_seconds": 11.754322442226112
+        }
+      },
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 4,
+            "W": 3,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 72657
+        },
+        "memops_A32": {
+          "host": {
+            "Q": 5,
+            "F": 1,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 59606
+        },
+        "memops_B30": {
+          "host": {
+            "C": 3,
+            "F": 1,
+            "W": 2,
+            "Q": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 66894
+        },
+        "memops_C03": {
+          "host": {
+            "C": 4,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 82915
+        },
+        "memops_D25": {
+          "host": {
+            "Q": 4,
+            "W": 4
+          },
+          "delivery": {
+            "partial": 8
+          },
+          "generation_tokens": 139645
+        },
+        "memops_E08": {
+          "host": {
+            "F": 4,
+            "Q": 4
+          },
+          "delivery": {
+            "partial": 8
+          },
+          "generation_tokens": 165639
+        },
+        "memops_E15": {
+          "host": {
+            "F": 3,
+            "C": 1,
+            "Q": 3,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 2,
+            "partial": 6
+          },
+          "generation_tokens": 89219
+        },
+        "memops_F01": {
+          "host": {
+            "C": 5,
+            "F": 2,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 64277
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 7,
+          "complete_material": 11,
+          "generation_tokens": 224271,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 14,
+          "complete_material": 22,
+          "generation_tokens": 403499,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 17,
+          "complete_material": 26,
+          "generation_tokens": 586506,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 17,
+          "complete_material": 26,
+          "generation_tokens": 740852,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/answer-seed0/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/answer-seed0/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-v2/answer-seed0",
+        "artifacts/host-intent-retrieval-v3/view-v4-d-continuation-v1/answer-seed0-remaining20"
+      ]
+    },
+    "delivery-seed0": {
+      "host_grades": {
+        "C": 21,
+        "W": 15,
+        "F": 10,
+        "Q": 18
+      },
+      "complete_Host_primary": 21,
+      "complete_Host_upper": 21,
+      "material": {
+        "complete": 33,
+        "partial": 31
+      },
+      "generation_requests": 93,
+      "generation_tokens": 588121,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 21,
+      "completed_returns": 21,
+      "final_arrivals": {
+        "host": {
+          "F": 4,
+          "W": 9,
+          "Q": 3
+        },
+        "requested": 0,
+        "returns": 0
+      },
+      "whole_driver_cpu_seconds": 148.368329975,
+      "whole_driver_wall_seconds": 2219.4909794237465,
+      "local_compute_directly_billed": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 59.53226487100619,
+          "forwards": 110,
+          "input_tokens": 500353,
+          "sequence_rows": 110,
+          "state_tokenizations": 110,
+          "state_tokens": 449895,
+          "wall_seconds": 37.33382021076977
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 6.455153267999776,
+          "loads": 1,
+          "wall_seconds": 5.593262968584895
+        }
+      },
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 4,
+            "W": 2,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 66905
+        },
+        "memops_A32": {
+          "host": {
+            "C": 2,
+            "F": 1,
+            "Q": 4,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 66592
+        },
+        "memops_B30": {
+          "host": {
+            "C": 5,
+            "F": 3
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 72645
+        },
+        "memops_C03": {
+          "host": {
+            "C": 4,
+            "W": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 51139
+        },
+        "memops_D25": {
+          "host": {
+            "Q": 6,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 2,
+            "partial": 6
+          },
+          "generation_tokens": 76333
+        },
+        "memops_E08": {
+          "host": {
+            "Q": 6,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 102518
+        },
+        "memops_E15": {
+          "host": {
+            "F": 2,
+            "Q": 2,
+            "W": 3,
+            "C": 1
+          },
+          "delivery": {
+            "partial": 5,
+            "complete": 3
+          },
+          "generation_tokens": 91680
+        },
+        "memops_F01": {
+          "host": {
+            "C": 5,
+            "W": 1,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 60309
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 10,
+          "complete_material": 14,
+          "generation_tokens": 131425,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 19,
+          "complete_material": 29,
+          "generation_tokens": 258384,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 21,
+          "complete_material": 33,
+          "generation_tokens": 431231,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 21,
+          "complete_material": 33,
+          "generation_tokens": 588121,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/delivery-seed0/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/delivery-seed0/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-continuation-v1/delivery-seed0"
+      ]
+    },
+    "view-cache": {
+      "host_grades": {
+        "C": 20,
+        "Q": 19,
+        "F": 10,
+        "W": 15
+      },
+      "complete_Host_primary": 20,
+      "complete_Host_upper": 23,
+      "material": {
+        "complete": 31,
+        "partial": 33
+      },
+      "generation_requests": 112,
+      "generation_tokens": 631125,
+      "embedding_tokens": 0,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 24,
+      "completed_returns": 24,
+      "final_arrivals": {
+        "host": {
+          "Q": 3,
+          "W": 9,
+          "C": 1,
+          "F": 3
+        },
+        "requested": 1,
+        "returns": 1
+      },
+      "whole_driver_cpu_seconds": 84.40011443499999,
+      "whole_driver_wall_seconds": 2110.53049107641,
+      "local_compute_directly_billed": {},
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 3,
+            "Q": 3,
+            "F": 1,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 5,
+            "partial": 3
+          },
+          "generation_tokens": 97775
+        },
+        "memops_A32": {
+          "host": {
+            "C": 1,
+            "Q": 4,
+            "W": 2,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 3,
+            "partial": 5
+          },
+          "generation_tokens": 67276
+        },
+        "memops_B30": {
+          "host": {
+            "C": 3,
+            "W": 2,
+            "Q": 3
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 77094
+        },
+        "memops_C03": {
+          "host": {
+            "C": 6,
+            "F": 1,
+            "W": 1
+          },
+          "delivery": {
+            "complete": 5,
+            "partial": 3
+          },
+          "generation_tokens": 70412
+        },
+        "memops_D25": {
+          "host": {
+            "Q": 3,
+            "W": 4,
+            "F": 1
+          },
+          "delivery": {
+            "partial": 8
+          },
+          "generation_tokens": 82865
+        },
+        "memops_E08": {
+          "host": {
+            "C": 1,
+            "F": 3,
+            "Q": 4
+          },
+          "delivery": {
+            "complete": 2,
+            "partial": 6
+          },
+          "generation_tokens": 80327
+        },
+        "memops_E15": {
+          "host": {
+            "Q": 2,
+            "F": 2,
+            "W": 3,
+            "C": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 85058
+        },
+        "memops_F01": {
+          "host": {
+            "C": 5,
+            "F": 1,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 70318
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 8,
+          "complete_material": 13,
+          "generation_tokens": 155979,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 15,
+          "complete_material": 25,
+          "generation_tokens": 296245,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 19,
+          "complete_material": 31,
+          "generation_tokens": 476584,
+          "embedding_tokens": 0
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 20,
+          "complete_material": 31,
+          "generation_tokens": 631125,
+          "embedding_tokens": 0
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/view-cache/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/view-cache/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-continuation-v1/view-cache"
+      ]
+    },
+    "mempursuit": {
+      "host_grades": {
+        "C": 16,
+        "W": 19,
+        "F": 14,
+        "Q": 15
+      },
+      "complete_Host_primary": 16,
+      "complete_Host_upper": 19,
+      "material": {
+        "complete": 36,
+        "partial": 27,
+        "insufficient": 1
+      },
+      "generation_requests": 87,
+      "generation_tokens": 544446,
+      "embedding_tokens": 66045,
+      "unknown_generation_delta": 0,
+      "unknown_embedding_delta": 0,
+      "actual_Host_requested_calls": 24,
+      "completed_returns": 24,
+      "final_arrivals": {
+        "host": {
+          "F": 5,
+          "W": 10,
+          "Q": 1
+        },
+        "requested": 0,
+        "returns": 0
+      },
+      "whole_driver_cpu_seconds": 163.60850564499998,
+      "whole_driver_wall_seconds": 2832.6043822430074,
+      "local_compute_directly_billed": {
+        "memory_control_mempursuit_pool": {
+          "candidate_embedding_cache_misses": 102,
+          "candidates": 109,
+          "cpu_seconds": 1.4996761100000082,
+          "pools": 24,
+          "wall_seconds": 12.642015921883285
+        }
+      },
+      "by_group": {
+        "memops_A19": {
+          "host": {
+            "C": 4,
+            "W": 2,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 63104
+        },
+        "memops_A32": {
+          "host": {
+            "W": 2,
+            "F": 2,
+            "Q": 4
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 59752
+        },
+        "memops_B30": {
+          "host": {
+            "C": 2,
+            "Q": 4,
+            "W": 2
+          },
+          "delivery": {
+            "complete": 6,
+            "partial": 2
+          },
+          "generation_tokens": 48592
+        },
+        "memops_C03": {
+          "host": {
+            "C": 3,
+            "F": 2,
+            "W": 3
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 82430
+        },
+        "memops_D25": {
+          "host": {
+            "W": 4,
+            "Q": 2,
+            "F": 2
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 65261
+        },
+        "memops_E08": {
+          "host": {
+            "C": 4,
+            "W": 1,
+            "F": 3
+          },
+          "delivery": {
+            "complete": 5,
+            "partial": 3
+          },
+          "generation_tokens": 83239
+        },
+        "memops_E15": {
+          "host": {
+            "Q": 4,
+            "W": 3,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 4,
+            "partial": 4
+          },
+          "generation_tokens": 68838
+        },
+        "memops_F01": {
+          "host": {
+            "F": 2,
+            "C": 3,
+            "W": 2,
+            "Q": 1
+          },
+          "delivery": {
+            "complete": 5,
+            "insufficient": 1,
+            "partial": 2
+          },
+          "generation_tokens": 73230
+        }
+      },
+      "cumulative_windows": [
+        {
+          "through_request": 1,
+          "positions": 16,
+          "complete_Host": 7,
+          "complete_material": 16,
+          "generation_tokens": 133197,
+          "embedding_tokens": 45840
+        },
+        {
+          "through_request": 2,
+          "positions": 32,
+          "complete_Host": 12,
+          "complete_material": 31,
+          "generation_tokens": 246032,
+          "embedding_tokens": 48519
+        },
+        {
+          "through_request": 3,
+          "positions": 48,
+          "complete_Host": 16,
+          "complete_material": 36,
+          "generation_tokens": 403297,
+          "embedding_tokens": 66045
+        },
+        {
+          "through_request": 4,
+          "positions": 64,
+          "complete_Host": 16,
+          "complete_material": 36,
+          "generation_tokens": 544446,
+          "embedding_tokens": 66045
+        }
+      ],
+      "source_review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/mempursuit/final-review-v1.json",
+      "closed_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/mempursuit/summary-v1.json",
+      "original_roots": [
+        "artifacts/host-intent-retrieval-v3/view-v4-d-continuation-v1/mempursuit"
+      ]
+    }
+  },
+  "paired_against_fixed_context": {
+    "generative": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": -3,
+          "complete_material_delta": -3,
+          "generation_tokens_delta": 89601
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 2,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 152225
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -3,
+          "generation_tokens_delta": 101745
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 91950
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -4,
+          "generation_tokens_delta": 34930
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -3,
+          "generation_tokens_delta": 99803
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -3,
+          "generation_tokens_delta": 93150
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -2,
+          "generation_tokens_delta": 44311
+        }
+      ],
+      "groups_more_C": 1,
+      "groups_equal_C": 2,
+      "groups_fewer_C": 5
+    },
+    "rules": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -3545
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 2868
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 10026
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": -2605
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 5885
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 10676
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 3240
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 11004
+        }
+      ],
+      "groups_more_C": 2,
+      "groups_equal_C": 4,
+      "groups_fewer_C": 2
+    },
+    "t1-main-seed0": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 1259
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 1528
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 6182
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 15949
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 8637
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 3017
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -7549
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": -2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -5098
+        }
+      ],
+      "groups_more_C": 2,
+      "groups_equal_C": 3,
+      "groups_fewer_C": 3
+    },
+    "t1-control-seed0": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 3972
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 2449
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -8251
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 5270
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -9427
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -3,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 7257
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -3,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 9742
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 513
+        }
+      ],
+      "groups_more_C": 2,
+      "groups_equal_C": 2,
+      "groups_fewer_C": 4
+    },
+    "continued-ce-seed0": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -577
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -1105
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 6027
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 6113
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 2428
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": -2899
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 6312
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 9546
+        }
+      ],
+      "groups_more_C": 1,
+      "groups_equal_C": 3,
+      "groups_fewer_C": 4
+    },
+    "answer-seed0": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 20856
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -1431
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 17251
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 24691
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -4,
+          "generation_tokens_delta": 68304
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -3,
+          "complete_material_delta": -5,
+          "generation_tokens_delta": 80066
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -2,
+          "generation_tokens_delta": 20007
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -2570
+        }
+      ],
+      "groups_more_C": 1,
+      "groups_equal_C": 5,
+      "groups_fewer_C": 2
+    },
+    "delivery-seed0": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 15104
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 5555
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 3,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 23002
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": -7085
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -2,
+          "generation_tokens_delta": 4992
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -3,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 16945
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 22468
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -6538
+        }
+      ],
+      "groups_more_C": 2,
+      "groups_equal_C": 4,
+      "groups_fewer_C": 2
+    },
+    "view-cache": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 1,
+          "generation_tokens_delta": 45974
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 6239
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 27451
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 12188
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -4,
+          "generation_tokens_delta": 11524
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -3,
+          "generation_tokens_delta": -5246
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 15846
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 3471
+        }
+      ],
+      "groups_more_C": 3,
+      "groups_equal_C": 2,
+      "groups_fewer_C": 3
+    },
+    "mempursuit": {
+      "reference": "fixed-context",
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 11303
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -1285
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -1051
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 24206
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -6080
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -2334
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -3,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -374
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 6383
+        }
+      ],
+      "groups_more_C": 1,
+      "groups_equal_C": 4,
+      "groups_fewer_C": 3
+    }
+  },
+  "reviewer": "Current source-author review, exposed development; not independent/blind or official benchmark scoring.",
+  "statistical_unit": "Eight source groups, not640independent positions. Annotation alternatives explicitly retained; autonomous Host trajectories differ.",
+  "cost_scope": "Actual native generation/embedding deltas and local compute separately; whole-driver CPU includes directly charged compute and must not be added again. Wall components overlap; no scalar FLOP/cost equivalence across models. Original answer capacity failure and continuation reload retained. Manual review/unmeasured overhead unknown.",
+  "scope": "D core training and simple/native-selector comparisons complete at2048. No selected-cache superiority or independent generalization claim. Coalent actualpilot, missingE5workloads, budgetpoints, selectedE3 and externalconfirmation still incomplete.",
+  "stream_costs": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/stream-costs-all10-v1.json",
+  "mempursuit_vector_audit": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/mempursuit/candidate-vector-audit-full64-v1.json",
+  "model_calls": 0,
+  "compute": {
+    "wall_seconds": 2.432635549455881,
+    "cpu_seconds": 2.43247492
+  },
+  "ledger_recorded": false
+}

@@ -1,0 +1,583 @@
+{
+  "status": "EIGHT_CLOSED_NEW_GOAL_TRAINING_PROFILE_JOBS_RECONCILED_FROM_ACTUAL_SCHEDULES_AND_NATIVE_RECORDS",
+  "rows": [
+    {
+      "label": "P0 FP32",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-float32",
+      "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-float32/run.json",
+      "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-float32/compute.json",
+      "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-float32-driver.json",
+      "actual_training_schedule": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-float32/training-plan.json",
+      "actual_lengths": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-float32/lengths.json",
+      "physical_GPUs": [
+        2
+      ],
+      "parallel_mode": "single",
+      "precision": "float32",
+      "seed": 0,
+      "Torch": "2.7.0+cu126",
+      "CUDA": "12.6",
+      "TF32": {
+        "matmul": false,
+        "cudnn": true,
+        "scope": "Recorded in actual training run"
+      },
+      "configured_max_len": 16384,
+      "configured_head_max_len": 2048,
+      "encoder_max_position_embeddings": 8192,
+      "microbatch": 2,
+      "accumulation": 8,
+      "train_slots": 512,
+      "actual_optimizer_updates": 32,
+      "actual_draws": 512,
+      "actual_update_group_sizes": {
+        "16": 32
+      },
+      "actual_train_input_tokens": 639380,
+      "actual_train_padded_input_tokens": 1057788,
+      "actual_train_max_sequence_tokens": 9869,
+      "all_train_length_projection_drops_zero": true,
+      "recorded_evaluation_input_tokens": {
+        "dev_input_tokens": 116608,
+        "train_eval_input_tokens": 1278760
+      },
+      "sum_recorded_evaluation_input_tokens": 1395368,
+      "native_CPU_seconds": 506.889849941,
+      "native_wall_seconds": 389.9639710513875,
+      "native_GPU_job_interval_hours": 0.10832332529205208,
+      "native_stage_wall_seconds": {
+        "prepare": 10.153551238588989,
+        "evaluation": 128.74942206032574,
+        "training": 245.75396827980876,
+        "save": 3.044717863202095
+      },
+      "stage_wall_unallocated_seconds": 2.2623116094619036,
+      "native_peak_allocated_bytes": [
+        11013770752
+      ],
+      "native_peak_reserved_bytes": [
+        19570622464
+      ],
+      "memory_measurement_scope": "Peak reset once before native prepare/train/evaluation/save; covers all updates, including Adam allocation. Not a training-only peak.",
+      "whole_child_CPU_seconds_if_measured": null,
+      "whole_child_wall_seconds_if_measured": null,
+      "whole_child_GPU_job_interval_hours_if_measured": null,
+      "whole_child_CPU_residual_over_native_if_measured": null,
+      "unmeasured_parent_and_outside_child_cleanup_CPU": "unknown_not_zero; not filled from native or whole-child timing",
+      "fixed_evaluated_cut": null,
+      "profile_only": true,
+      "native_test_loaded": false,
+      "new_model_HTTP_or_ledger_calls": 0
+    },
+    {
+      "label": "P0 BF16",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-bf16",
+      "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-bf16/run.json",
+      "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-bf16/compute.json",
+      "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-bf16-driver.json",
+      "actual_training_schedule": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-bf16/training-plan.json",
+      "actual_lengths": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-bf16/lengths.json",
+      "physical_GPUs": [
+        3
+      ],
+      "parallel_mode": "single",
+      "precision": "bf16",
+      "seed": 0,
+      "Torch": "2.7.0+cu126",
+      "CUDA": "12.6",
+      "TF32": {
+        "matmul": false,
+        "cudnn": true,
+        "scope": "Recorded in actual training run"
+      },
+      "configured_max_len": 16384,
+      "configured_head_max_len": 2048,
+      "encoder_max_position_embeddings": 8192,
+      "microbatch": 2,
+      "accumulation": 8,
+      "train_slots": 512,
+      "actual_optimizer_updates": 32,
+      "actual_draws": 512,
+      "actual_update_group_sizes": {
+        "16": 32
+      },
+      "actual_train_input_tokens": 639380,
+      "actual_train_padded_input_tokens": 1057788,
+      "actual_train_max_sequence_tokens": 9869,
+      "all_train_length_projection_drops_zero": true,
+      "recorded_evaluation_input_tokens": {
+        "dev_input_tokens": 116608,
+        "train_eval_input_tokens": 1278760
+      },
+      "sum_recorded_evaluation_input_tokens": 1395368,
+      "native_CPU_seconds": 363.57047499600003,
+      "native_wall_seconds": 248.3093734746799,
+      "native_GPU_job_interval_hours": 0.06897482596518886,
+      "native_stage_wall_seconds": {
+        "prepare": 9.984790657646954,
+        "evaluation": 128.00139415822923,
+        "training": 105.75765964388847,
+        "save": 2.5323073156177998
+      },
+      "stage_wall_unallocated_seconds": 2.033221699297428,
+      "native_peak_allocated_bytes": [
+        9932060672
+      ],
+      "native_peak_reserved_bytes": [
+        18775801856
+      ],
+      "memory_measurement_scope": "Peak reset once before native prepare/train/evaluation/save; covers all updates, including Adam allocation. Not a training-only peak.",
+      "whole_child_CPU_seconds_if_measured": null,
+      "whole_child_wall_seconds_if_measured": null,
+      "whole_child_GPU_job_interval_hours_if_measured": null,
+      "whole_child_CPU_residual_over_native_if_measured": null,
+      "unmeasured_parent_and_outside_child_cleanup_CPU": "unknown_not_zero; not filled from native or whole-child timing",
+      "fixed_evaluated_cut": null,
+      "profile_only": true,
+      "native_test_loaded": false,
+      "new_model_HTTP_or_ledger_calls": 0
+    },
+    {
+      "label": "A0",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0",
+      "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/run.json",
+      "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/compute.json",
+      "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0-driver.json",
+      "actual_training_schedule": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/training-plan.json",
+      "actual_lengths": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/lengths.json",
+      "physical_GPUs": [
+        2
+      ],
+      "parallel_mode": "single",
+      "precision": "bf16",
+      "seed": 0,
+      "Torch": "2.7.0+cu126",
+      "CUDA": "12.6",
+      "TF32": {
+        "matmul": false,
+        "cudnn": true,
+        "scope": "Recorded in actual training run"
+      },
+      "configured_max_len": 16384,
+      "configured_head_max_len": 2048,
+      "encoder_max_position_embeddings": 8192,
+      "microbatch": 2,
+      "accumulation": 8,
+      "train_slots": 44868,
+      "actual_optimizer_updates": 2805,
+      "actual_draws": 44868,
+      "actual_update_group_sizes": {
+        "16": 2804,
+        "4": 1
+      },
+      "actual_train_input_tokens": 37502475,
+      "actual_train_padded_input_tokens": 61754792,
+      "actual_train_max_sequence_tokens": 9869,
+      "all_train_length_projection_drops_zero": true,
+      "recorded_evaluation_input_tokens": {
+        "dev_input_tokens": 23961630,
+        "feedback-dev_input_tokens": 1210405
+      },
+      "sum_recorded_evaluation_input_tokens": 25172035,
+      "native_CPU_seconds": 11110.194332096999,
+      "native_wall_seconds": 8434.87831990514,
+      "native_GPU_job_interval_hours": 2.343021755529205,
+      "native_stage_wall_seconds": {
+        "prepare": 276.6995511902496,
+        "evaluation": 1981.9798662597314,
+        "training": 6160.927247879095,
+        "save": 7.492368418723345
+      },
+      "stage_wall_unallocated_seconds": 7.779286157339811,
+      "native_peak_allocated_bytes": [
+        9963294720
+      ],
+      "native_peak_reserved_bytes": [
+        19935526912
+      ],
+      "memory_measurement_scope": "Peak reset once before native prepare/train/evaluation/save; covers all updates, including Adam allocation. Not a training-only peak.",
+      "whole_child_CPU_seconds_if_measured": null,
+      "whole_child_wall_seconds_if_measured": null,
+      "whole_child_GPU_job_interval_hours_if_measured": null,
+      "whole_child_CPU_residual_over_native_if_measured": null,
+      "unmeasured_parent_and_outside_child_cleanup_CPU": "unknown_not_zero; not filled from native or whole-child timing",
+      "fixed_evaluated_cut": 2104,
+      "profile_only": false,
+      "native_test_loaded": false,
+      "new_model_HTTP_or_ledger_calls": 0
+    },
+    {
+      "label": "A1",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0",
+      "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/run.json",
+      "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/compute.json",
+      "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0-driver.json",
+      "actual_training_schedule": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/training-plan.json",
+      "actual_lengths": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/lengths.json",
+      "physical_GPUs": [
+        3
+      ],
+      "parallel_mode": "single",
+      "precision": "bf16",
+      "seed": 0,
+      "Torch": "2.7.0+cu126",
+      "CUDA": "12.6",
+      "TF32": {
+        "matmul": false,
+        "cudnn": true,
+        "scope": "Recorded in actual training run"
+      },
+      "configured_max_len": 16384,
+      "configured_head_max_len": 2048,
+      "encoder_max_position_embeddings": 8192,
+      "microbatch": 2,
+      "accumulation": 8,
+      "train_slots": 44868,
+      "actual_optimizer_updates": 2805,
+      "actual_draws": 44868,
+      "actual_update_group_sizes": {
+        "16": 2804,
+        "4": 1
+      },
+      "actual_train_input_tokens": 37318166,
+      "actual_train_padded_input_tokens": 63310836,
+      "actual_train_max_sequence_tokens": 9869,
+      "all_train_length_projection_drops_zero": true,
+      "recorded_evaluation_input_tokens": {
+        "dev_input_tokens": 23961630,
+        "feedback-dev_input_tokens": 1210405
+      },
+      "sum_recorded_evaluation_input_tokens": 25172035,
+      "native_CPU_seconds": 11333.849931993002,
+      "native_wall_seconds": 8571.690696814097,
+      "native_GPU_job_interval_hours": 2.3810251935594717,
+      "native_stage_wall_seconds": {
+        "prepare": 274.2105318913236,
+        "evaluation": 2008.6978732980788,
+        "training": 6274.90580055397,
+        "save": 6.900460345670581
+      },
+      "stage_wall_unallocated_seconds": 6.976030725054443,
+      "native_peak_allocated_bytes": [
+        9969528320
+      ],
+      "native_peak_reserved_bytes": [
+        21367881728
+      ],
+      "memory_measurement_scope": "Peak reset once before native prepare/train/evaluation/save; covers all updates, including Adam allocation. Not a training-only peak.",
+      "whole_child_CPU_seconds_if_measured": null,
+      "whole_child_wall_seconds_if_measured": null,
+      "whole_child_GPU_job_interval_hours_if_measured": null,
+      "whole_child_CPU_residual_over_native_if_measured": null,
+      "unmeasured_parent_and_outside_child_cleanup_CPU": "unknown_not_zero; not filled from native or whole-child timing",
+      "fixed_evaluated_cut": 2104,
+      "profile_only": false,
+      "native_test_loaded": false,
+      "new_model_HTTP_or_ledger_calls": 0
+    },
+    {
+      "label": "B0",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0",
+      "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0/run.json",
+      "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0/compute.json",
+      "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0-driver.json",
+      "actual_training_schedule": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0/training-plan.json",
+      "actual_lengths": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0/lengths.json",
+      "physical_GPUs": [
+        2
+      ],
+      "parallel_mode": "single",
+      "precision": "bf16",
+      "seed": 0,
+      "Torch": "2.7.0+cu126",
+      "CUDA": "12.6",
+      "TF32": {
+        "matmul": false,
+        "cudnn": true,
+        "scope": "Recorded in actual training run"
+      },
+      "configured_max_len": 16384,
+      "configured_head_max_len": 2048,
+      "encoder_max_position_embeddings": 8192,
+      "microbatch": 2,
+      "accumulation": 8,
+      "train_slots": 528,
+      "actual_optimizer_updates": 66,
+      "actual_draws": 1056,
+      "actual_update_group_sizes": {
+        "16": 66
+      },
+      "actual_train_input_tokens": 5756552,
+      "actual_train_padded_input_tokens": 6878474,
+      "actual_train_max_sequence_tokens": 11882,
+      "all_train_length_projection_drops_zero": true,
+      "recorded_evaluation_input_tokens": {
+        "dev_input_tokens": 17043732,
+        "feedback-dev_input_tokens": 968324
+      },
+      "sum_recorded_evaluation_input_tokens": 18012056,
+      "native_CPU_seconds": 3053.692197958,
+      "native_wall_seconds": 1917.5264803888276,
+      "native_GPU_job_interval_hours": 0.5326462445524521,
+      "native_stage_wall_seconds": {
+        "prepare": 35.4532161578536,
+        "evaluation": 1334.2734569571912,
+        "training": 535.6508019436151,
+        "save": 9.717017393559217
+      },
+      "stage_wall_unallocated_seconds": 2.4319879366084933,
+      "native_peak_allocated_bytes": [
+        11281912320
+      ],
+      "native_peak_reserved_bytes": [
+        22961717248
+      ],
+      "memory_measurement_scope": "Peak reset once before native prepare/train/evaluation/save; covers all updates, including Adam allocation. Not a training-only peak.",
+      "whole_child_CPU_seconds_if_measured": 3072.901417,
+      "whole_child_wall_seconds_if_measured": 1925.8384178122506,
+      "whole_child_GPU_job_interval_hours_if_measured": 0.5349551160589585,
+      "whole_child_CPU_residual_over_native_if_measured": 19.20921904199986,
+      "unmeasured_parent_and_outside_child_cleanup_CPU": "unknown_not_zero; not filled from native or whole-child timing",
+      "fixed_evaluated_cut": 33,
+      "profile_only": false,
+      "native_test_loaded": false,
+      "new_model_HTTP_or_ledger_calls": 0
+    },
+    {
+      "label": "B1",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0",
+      "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0/run.json",
+      "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0/compute.json",
+      "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0-driver.json",
+      "actual_training_schedule": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0/training-plan.json",
+      "actual_lengths": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0/lengths.json",
+      "physical_GPUs": [
+        3
+      ],
+      "parallel_mode": "single",
+      "precision": "bf16",
+      "seed": 0,
+      "Torch": "2.7.0+cu126",
+      "CUDA": "12.6",
+      "TF32": {
+        "matmul": false,
+        "cudnn": true,
+        "scope": "Recorded in actual training run"
+      },
+      "configured_max_len": 16384,
+      "configured_head_max_len": 2048,
+      "encoder_max_position_embeddings": 8192,
+      "microbatch": 2,
+      "accumulation": 8,
+      "train_slots": 528,
+      "actual_optimizer_updates": 66,
+      "actual_draws": 1056,
+      "actual_update_group_sizes": {
+        "16": 66
+      },
+      "actual_train_input_tokens": 5756552,
+      "actual_train_padded_input_tokens": 6878474,
+      "actual_train_max_sequence_tokens": 11882,
+      "all_train_length_projection_drops_zero": true,
+      "recorded_evaluation_input_tokens": {
+        "dev_input_tokens": 17043732,
+        "feedback-dev_input_tokens": 968324
+      },
+      "sum_recorded_evaluation_input_tokens": 18012056,
+      "native_CPU_seconds": 3078.9243623390003,
+      "native_wall_seconds": 1937.8633939437568,
+      "native_GPU_job_interval_hours": 0.5382953872065991,
+      "native_stage_wall_seconds": {
+        "prepare": 35.74234597850591,
+        "evaluation": 1351.209796667099,
+        "training": 542.9866047725081,
+        "save": 5.505548591725528
+      },
+      "stage_wall_unallocated_seconds": 2.4190979339182377,
+      "native_peak_allocated_bytes": [
+        11281912320
+      ],
+      "native_peak_reserved_bytes": [
+        22961717248
+      ],
+      "memory_measurement_scope": "Peak reset once before native prepare/train/evaluation/save; covers all updates, including Adam allocation. Not a training-only peak.",
+      "whole_child_CPU_seconds_if_measured": 3097.5778270000005,
+      "whole_child_wall_seconds_if_measured": 1944.3195996321738,
+      "whole_child_GPU_job_interval_hours_if_measured": 0.5400887776756038,
+      "whole_child_CPU_residual_over_native_if_measured": 18.65346466100027,
+      "unmeasured_parent_and_outside_child_cleanup_CPU": "unknown_not_zero; not filled from native or whole-child timing",
+      "fixed_evaluated_cut": 33,
+      "profile_only": false,
+      "native_test_loaded": false,
+      "new_model_HTTP_or_ledger_calls": 0
+    },
+    {
+      "label": "E3 seed1",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-1",
+      "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-1/run.json",
+      "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-1/compute.json",
+      "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/driver.json",
+      "actual_training_schedule": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-1/training-plan.json",
+      "actual_lengths": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-1/lengths.json",
+      "physical_GPUs": [
+        2,
+        3
+      ],
+      "parallel_mode": "original two-GPU DataParallel",
+      "precision": "float32",
+      "seed": 1,
+      "Torch": "2.7.0+cu126",
+      "CUDA": "12.6",
+      "TF32": {
+        "matmul": null,
+        "cudnn": null,
+        "scope": "Not captured in this original recipe run.json"
+      },
+      "configured_max_len": 16384,
+      "configured_head_max_len": 2048,
+      "encoder_max_position_embeddings": null,
+      "microbatch": 2,
+      "accumulation": 8,
+      "train_slots": 457,
+      "actual_optimizer_updates": 128,
+      "actual_draws": 2048,
+      "actual_update_group_sizes": {
+        "16": 128
+      },
+      "actual_train_input_tokens": 10549642,
+      "actual_train_padded_input_tokens": null,
+      "actual_train_max_sequence_tokens": 11882,
+      "all_train_length_projection_drops_zero": true,
+      "recorded_evaluation_input_tokens": {
+        "dev_input_tokens": 21304665,
+        "feedback-dev_input_tokens": 1210405
+      },
+      "sum_recorded_evaluation_input_tokens": 22515070,
+      "native_CPU_seconds": 6058.777762636,
+      "native_wall_seconds": 3457.37002253253,
+      "native_GPU_job_interval_hours": 1.9207611236291835,
+      "native_stage_wall_seconds": null,
+      "stage_wall_unallocated_seconds": null,
+      "native_peak_allocated_bytes": [
+        8789169152,
+        4669743104
+      ],
+      "native_peak_reserved_bytes": null,
+      "memory_measurement_scope": "Original trainer records max_memory_allocated since process CUDA initialization; no reset_peak_memory_stats in its source. Reserved peak not recorded.",
+      "whole_child_CPU_seconds_if_measured": 6086.632939,
+      "whole_child_wall_seconds_if_measured": 3465.129720834084,
+      "whole_child_GPU_job_interval_hours_if_measured": 1.9250720671300465,
+      "whole_child_CPU_residual_over_native_if_measured": 27.855176363999817,
+      "unmeasured_parent_and_outside_child_cleanup_CPU": "unknown_not_zero; not filled from native or whole-child timing",
+      "fixed_evaluated_cut": 32,
+      "profile_only": false,
+      "native_test_loaded": false,
+      "new_model_HTTP_or_ledger_calls": 0
+    },
+    {
+      "label": "E3 seed2",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-2",
+      "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-2/run.json",
+      "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-2/compute.json",
+      "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/driver.json",
+      "actual_training_schedule": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-2/training-plan.json",
+      "actual_lengths": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-2/lengths.json",
+      "physical_GPUs": [
+        2,
+        3
+      ],
+      "parallel_mode": "original two-GPU DataParallel",
+      "precision": "float32",
+      "seed": 2,
+      "Torch": "2.7.0+cu126",
+      "CUDA": "12.6",
+      "TF32": {
+        "matmul": null,
+        "cudnn": null,
+        "scope": "Not captured in this original recipe run.json"
+      },
+      "configured_max_len": 16384,
+      "configured_head_max_len": 2048,
+      "encoder_max_position_embeddings": null,
+      "microbatch": 2,
+      "accumulation": 8,
+      "train_slots": 457,
+      "actual_optimizer_updates": 128,
+      "actual_draws": 2048,
+      "actual_update_group_sizes": {
+        "16": 128
+      },
+      "actual_train_input_tokens": 10607432,
+      "actual_train_padded_input_tokens": null,
+      "actual_train_max_sequence_tokens": 11882,
+      "all_train_length_projection_drops_zero": true,
+      "recorded_evaluation_input_tokens": {
+        "dev_input_tokens": 21304665,
+        "feedback-dev_input_tokens": 1210405
+      },
+      "sum_recorded_evaluation_input_tokens": 22515070,
+      "native_CPU_seconds": 6168.7437423050005,
+      "native_wall_seconds": 3506.6201312635094,
+      "native_GPU_job_interval_hours": 1.9481222951463941,
+      "native_stage_wall_seconds": null,
+      "stage_wall_unallocated_seconds": null,
+      "native_peak_allocated_bytes": [
+        8789337600,
+        4667451392
+      ],
+      "native_peak_reserved_bytes": null,
+      "memory_measurement_scope": "Original trainer records max_memory_allocated since process CUDA initialization; no reset_peak_memory_stats in its source. Reserved peak not recorded.",
+      "whole_child_CPU_seconds_if_measured": 6192.970832999999,
+      "whole_child_wall_seconds_if_measured": 3514.3854256421328,
+      "whole_child_GPU_job_interval_hours_if_measured": 1.9524363475789626,
+      "whole_child_CPU_residual_over_native_if_measured": 24.22709069499888,
+      "unmeasured_parent_and_outside_child_cleanup_CPU": "unknown_not_zero; not filled from native or whole-child timing",
+      "fixed_evaluated_cut": 32,
+      "profile_only": false,
+      "native_test_loaded": false,
+      "new_model_HTTP_or_ledger_calls": 0
+    }
+  ],
+  "totals": {
+    "jobs": 8,
+    "profile_jobs": 2,
+    "full_fit_jobs": 6,
+    "optimizer_updates": 6062,
+    "draws": 96968,
+    "train_input_tokens": 108769579,
+    "recorded_evaluation_input_tokens": 134189058,
+    "native_CPU_seconds": 41674.642654265,
+    "native_GPU_job_interval_hours": 9.841170150880545,
+    "whole_child_instrumentation_jobs": 4
+  },
+  "P0_steady_28_update_profile": {
+    "float32": {
+      "warmup_updates_retained_in_cost": 4,
+      "steady_updates": 28,
+      "mean_update_wall_seconds": 7.570171330423493,
+      "measured_update_wall_seconds": 211.96479725185782,
+      "input_tokens": 557273
+    },
+    "bf16": {
+      "warmup_updates_retained_in_cost": 4,
+      "steady_updates": 28,
+      "mean_update_wall_seconds": 3.2287066461784497,
+      "measured_update_wall_seconds": 90.4037860929966,
+      "input_tokens": 557273
+    },
+    "FP32_over_BF16_mean_update_time": 2.3446451350368647
+  },
+  "paired_treatment_facts": {
+    "A1_minus_A0_actual_train_tokens": -184309,
+    "A1_minus_A0_padded_train_tokens": 1556044,
+    "B0_B1_draws_updates_and_train_tokens_equal": true
+  },
+  "cost_scope": "Native CPU and GPU intervals already included in prior paid evidence; this report adds no charge. Whole child, native and residual are alternative nested views and must never be added together. GPU interval includes load/evaluation/save/waits and is not active kernel time.",
+  "missing_scope": "E3 padded tokens, reserved peak, native stage times and recorded TF32 flags absent; P0/A whole-child/parent startup cleanup unmeasured here. These stay unknown, not zero.",
+  "excludes": "Historical E3 seed0/common E1 upstream training; P0 reloaded inference; data/branch preparation and feedback; all task inference, Source/storage, analysis and external jobs. Not final all-project costs, FLOPs, Host GPU busy time or currency.",
+  "conditional_A20k_B192_J_not_triggered_and_twelve_fit_cap_not_quota": true,
+  "original_results_labels_weights_frozen_protocols_or_recipes_changed": false,
+  "new_model_HTTP_or_ledger_calls": 0,
+  "no_sha_validation": true,
+  "goal_complete": false
+}

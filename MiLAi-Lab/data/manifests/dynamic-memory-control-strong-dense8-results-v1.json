@@ -1,0 +1,920 @@
+{
+  "version": "strong-dense8-first-results-v1",
+  "source": "artifacts/dynamic-memory-control/strong-dense8-v1",
+  "runtime_source": "2b1766e8",
+  "status": "COMPLETED_WITH_FAILURES",
+  "reviewer": "Codex author, method visible; no independent Judge",
+  "independent_dev_families": 8,
+  "positions": 32,
+  "counts": {
+    "correct": 29,
+    "no_answer": 3
+  },
+  "phase_counts": {
+    "cold": {
+      "correct": 8
+    },
+    "repeat": {
+      "no_answer": 1,
+      "correct": 7
+    },
+    "changed": {
+      "correct": 6,
+      "no_answer": 2
+    },
+    "unrelated": {
+      "correct": 8
+    }
+  },
+  "full_authored_raw_proof_positions": 31,
+  "correct_with_full_authored_raw_proof": 29,
+  "costs": {
+    "attempted": 32,
+    "host_completed": 29,
+    "task_positions": 32,
+    "explicit_positions": 0,
+    "generation_known_tokens": 245768,
+    "generation_charged_tokens": 245768,
+    "generation_unknown_usage": 0,
+    "embedding_known_tokens": 46897,
+    "embedding_charged_tokens": 46897,
+    "embedding_unknown_usage": 0
+  },
+  "rows": [
+    {
+      "history": "count_distinct",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "2",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/0eff48f9-317d-4e93-b9f5-50b65af3b657/d4059125-91de-4caf-8329-a8a7009dfb4d-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/0eff48f9-317d-4e93-b9f5-50b65af3b657/d4059125-91de-4caf-8329-a8a7009dfb4d-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "count_distinct",
+      "step": "repeat",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/0eff48f9-317d-4e93-b9f5-50b65af3b657/ce6e5cb5-307f-45f8-b682-bfd1802628b1-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/0eff48f9-317d-4e93-b9f5-50b65af3b657/ce6e5cb5-307f-45f8-b682-bfd1802628b1-trace-0.jsonl",
+      "control_path": [],
+      "grade": "no_answer",
+      "source_context": "before",
+      "delivered_source_ids": [],
+      "reviewed_raw_proof_delivered": false,
+      "note": "Original first length failure preserved; fallback receipt is not the requested answer."
+    },
+    {
+      "history": "count_distinct",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，银禾共有3个不同的样品，分别为：初始登记的S11和S12，以及后续新增登记的S13。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/0eff48f9-317d-4e93-b9f5-50b65af3b657/acfdc351-5fa0-4e8c-a1c8-1e8bd470812b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/0eff48f9-317d-4e93-b9f5-50b65af3b657/acfdc351-5fa0-4e8c-a1c8-1e8bd470812b-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "read_5",
+        "read_1",
+        "read_4",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "count_distinct",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "3",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/0eff48f9-317d-4e93-b9f5-50b65af3b657/aa667e27-4328-443c-b8a5-57d9bf888930-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/0eff48f9-317d-4e93-b9f5-50b65af3b657/aa667e27-4328-443c-b8a5-57d9bf888930-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_0",
+        "read_3",
+        "read_7",
+        "read_2",
+        "read_4",
+        "read_6",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "fraction_scope",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "不一定（无法确定）。根据记录显示，青湾组全天收到的箱子中只有一半贴了蓝标，且明确说明“记录未提供各批次的蓝标比例”。整体数据（全天）的平均状况不能直接等同于部分数据（上午）的状况，因此无法确定上午收到的箱子是否也恰好有一半贴了蓝标。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/9be6d425-425e-4f40-b657-1b1b254b2b07/ca3e5af8-839d-4e08-b014-cd33d17ed319-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/9be6d425-425e-4f40-b657-1b1b254b2b07/ca3e5af8-839d-4e08-b014-cd33d17ed319-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "fraction_scope",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "不一定。根据记录，虽然青湾组全天收到的一半箱子贴了蓝标，且收货分为上午和下午两个批次，但记录明确指出未提供各批次的蓝标比例。因此，无法仅根据全天的总体数据确定上午收到的箱子是否恰好有一半贴了蓝标。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/9be6d425-425e-4f40-b657-1b1b254b2b07/0cf1e504-c650-4fbb-95dd-10116d1f7840-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/9be6d425-425e-4f40-b657-1b1b254b2b07/0cf1e504-c650-4fbb-95dd-10116d1f7840-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "read_4",
+        "read_2",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "fraction_scope",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "不一定（无法确定）。根据记录显示，青湾组全天收到的箱子中只有一半贴了蓝标，且明确说明“记录未提供各批次的蓝标比例”。整体数据（全天）的平均状况不能直接等同于部分数据（上午）的状况，因此无法确定上午收到的箱子是否也恰好有一半贴了蓝标。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/9be6d425-425e-4f40-b657-1b1b254b2b07/7d090d15-329b-4d03-b325-b5b1089eac5e-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/9be6d425-425e-4f40-b657-1b1b254b2b07/7d090d15-329b-4d03-b325-b5b1089eac5e-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_0",
+        "read_5",
+        "read_4",
+        "read_2",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "fraction_scope",
+      "step": "changed",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/9be6d425-425e-4f40-b657-1b1b254b2b07/2c351bcc-c28b-45f3-b7e7-44a665866999-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/9be6d425-425e-4f40-b657-1b1b254b2b07/2c351bcc-c28b-45f3-b7e7-44a665866999-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_2",
+        "read_0",
+        "read_7",
+        "read_6",
+        "read_4",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Original first length failure preserved; fallback receipt is not the requested answer."
+    },
+    {
+      "history": "joint_schedule",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "15:00至16:00",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/b6c9ef73-6cf1-402d-930b-cc6b9c2c22ae/271ccae4-d320-459f-8f01-68982b6863f3-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/b6c9ef73-6cf1-402d-930b-cc6b9c2c22ae/271ccae4-d320-459f-8f01-68982b6863f3-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "joint_schedule",
+      "step": "changed",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/b6c9ef73-6cf1-402d-930b-cc6b9c2c22ae/95b3d6ce-8c38-4662-96a1-1b1210f0cb1b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/b6c9ef73-6cf1-402d-930b-cc6b9c2c22ae/95b3d6ce-8c38-4662-96a1-1b1210f0cb1b-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_4",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Original first length failure preserved; fallback receipt is not the requested answer."
+    },
+    {
+      "history": "joint_schedule",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据最新记录，沈岚的可用时间为14:00至16:00，邵石的可用时间已更新为16:30至17:00，此时两人没有共同可用时段，无法安排。此前（邵石时间为15:00-17:00时）的共同可用区间为15:00至16:00。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/b6c9ef73-6cf1-402d-930b-cc6b9c2c22ae/f9cf99e1-3997-49b8-a943-686ba2ad9082-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/b6c9ef73-6cf1-402d-930b-cc6b9c2c22ae/f9cf99e1-3997-49b8-a943-686ba2ad9082-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "read_5",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "joint_schedule",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据最新提供的记录，沈岚的可用时间为14:00至16:00，邵石的可用时间已更新为16:30至17:00，此时两人没有共同可用时段，无法安排。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/b6c9ef73-6cf1-402d-930b-cc6b9c2c22ae/cc1936fd-70f6-46ba-bc89-1439f2e04291-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/b6c9ef73-6cf1-402d-930b-cc6b9c2c22ae/cc1936fd-70f6-46ba-bc89-1439f2e04291-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "read_2",
+        "read_4",
+        "read_3",
+        "read_6",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "negated_exception",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，雾岭这批含磁片的轻件**不可以**走加急通道。依据记录显示，虽然雾岭轻件一般可以走加急通道，但明确规定“含磁片的轻件不得走加急通道”，且该批货已被确认为“含磁片的轻件”。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/e0a17f3e-665d-42b5-90db-6f439d203959/54c091db-5a68-4bd0-a8a9-543396f8e2e8-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/e0a17f3e-665d-42b5-90db-6f439d203959/54c091db-5a68-4bd0-a8a9-543396f8e2e8-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "negated_exception",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "可以。根据当前提供的最新记录，虽然含磁片的轻件一般不得走加急通道，但已有新说明指出该禁令不适用于已用指定屏蔽盒封装的轻件。由于本批货物已完成这种屏蔽盒封装，因此符合加急通道的条件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/e0a17f3e-665d-42b5-90db-6f439d203959/ace8c66d-cfd6-4c49-9bc9-49d8d66c2d58-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/e0a17f3e-665d-42b5-90db-6f439d203959/ace8c66d-cfd6-4c49-9bc9-49d8d66c2d58-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "read_3",
+        "read_4",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "negated_exception",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "可以。虽然通常含磁片的轻件不得走加急通道，但最新提供的记录（s7）明确说明该禁令不适用于已用指定屏蔽盒封装的轻件，而本批货物已完成了此类封装，因此符合加急通道的准入条件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/e0a17f3e-665d-42b5-90db-6f439d203959/8f69962d-520c-45bc-a0c7-f9ba043bf4a3-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/e0a17f3e-665d-42b5-90db-6f439d203959/8f69962d-520c-45bc-a0c7-f9ba043bf4a3-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "read_1",
+        "read_4",
+        "read_5",
+        "read_6",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "negated_exception",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "可以。虽然通常规定含磁片的轻件不得走加急通道，但根据最新记录说明，已用指定屏蔽盒封装的轻件不适用该禁令。由于本批货物已完成此类屏蔽盒封装，因此符合加急通道的准入条件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/e0a17f3e-665d-42b5-90db-6f439d203959/5906d864-1d5f-4391-a1d8-e2bb06888ba4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/e0a17f3e-665d-42b5-90db-6f439d203959/5906d864-1d5f-4391-a1d8-e2bb06888ba4-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_3",
+        "read_2",
+        "read_1",
+        "read_4",
+        "read_6",
+        "read_7",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "nonunique_identity",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，**光帆项目**和**影帆项目**均有一位联络员昵称“阿林”，且记录明确指出是两位不同的联络员。当前通知单仅写了“阿林”，没有注明项目或其他身份字段，因此无法根据现有记录唯一确定应通知哪个项目，存在歧义。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/bec2b69c-0ac1-4ca4-bb99-bc04502f0803/317429b0-beef-4635-b192-56d3f3cf6b90-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/bec2b69c-0ac1-4ca4-bb99-bc04502f0803/317429b0-beef-4635-b192-56d3f3cf6b90-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "nonunique_identity",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据现有记录，**无法确定**具体应通知哪个项目。因为**光帆项目**和**影帆项目**均有一位联络员昵称“阿林”，且记录明确指出是两位不同的联络员。当前通知单仅写了“阿林”，没有注明具体的项目或其他身份字段，导致存在歧义。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/bec2b69c-0ac1-4ca4-bb99-bc04502f0803/bd849ef7-e427-4d18-a90a-507c710ae5d9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/bec2b69c-0ac1-4ca4-bb99-bc04502f0803/bd849ef7-e427-4d18-a90a-507c710ae5d9-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "read_1",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "nonunique_identity",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的最新记录（报告时间为09:30），通知单已补充项目编号，明确指**光帆项目**的阿林。因此，该记录中的“阿林”应该通知光帆项目。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/bec2b69c-0ac1-4ca4-bb99-bc04502f0803/54b45ee5-ef91-4ac0-b8a6-5362b776bb52-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/bec2b69c-0ac1-4ca4-bb99-bc04502f0803/54b45ee5-ef91-4ac0-b8a6-5362b776bb52-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "read_2",
+        "read_4",
+        "read_5",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "nonunique_identity",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据目前提供的记录（特别是报告时间为09:30的记录），通知单已补充项目编号，明确指**光帆项目**的阿林。因此，该记录中的阿林应该通知光帆项目。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/bec2b69c-0ac1-4ca4-bb99-bc04502f0803/3264c8a7-a064-4a23-806e-9626b1dc24e5-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/bec2b69c-0ac1-4ca4-bb99-bc04502f0803/3264c8a7-a064-4a23-806e-9626b1dc24e5-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "read_2",
+        "read_4",
+        "read_7",
+        "read_5",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "ordered_precedence",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据现有记录，紫沙样品应使用硬壳盒。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/650a0780-4bcb-42e7-900a-61a395ec0ebb/1a1c35b4-f452-4869-9d85-116966875825-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/650a0780-4bcb-42e7-900a-61a395ec0ebb/1a1c35b4-f452-4869-9d85-116966875825-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "ordered_precedence",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，紫沙样品应使用硬壳盒。因为“紫沙样品专项指令要求硬壳盒”，且“规则明确专项指令优先于通用指南”（通用包装指南要求纸盒）。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/650a0780-4bcb-42e7-900a-61a395ec0ebb/b1979e33-f5a9-488a-b204-ad9f0dd9f16c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/650a0780-4bcb-42e7-900a-61a395ec0ebb/b1979e33-f5a9-488a-b204-ad9f0dd9f16c-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "ordered_precedence",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，紫沙样品当前应使用**纸盒**。依据如下：\n1. 通用包装指南规定使用纸盒（来源s4）。\n2. 尽管之前曾有专项指令要求使用硬壳盒（来源s5），但记录（来源s7）明确指出“紫沙专项包装指令已撤销，没有替代专项指令”。\n3. 根据“专项指令优先于通用指南”的规则（来源s6），由于专项指令已撤销，当前应回归执行通用包装指南。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/650a0780-4bcb-42e7-900a-61a395ec0ebb/aa79783b-a8c3-4b31-8b10-fb4f19d3b7a7-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/650a0780-4bcb-42e7-900a-61a395ec0ebb/aa79783b-a8c3-4b31-8b10-fb4f19d3b7a7-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "read_4",
+        "read_5",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "ordered_precedence",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，紫沙样品当前应使用**纸盒**。\n\n理由如下：\n1. **通用包装指南**规定使用**纸盒**（来源s8）。\n2. 规则明确**专项指令优先于通用指南**（来源s10）。曾有**紫沙样品专项指令**要求使用**硬壳盒**（来源s9）。\n3. 但是，记录（来源s6）明确指出“**紫沙专项包装指令已撤销**，没有替代专项指令”。\n4. 由于专项指令已撤销，不再适用优先规则，因此当前应回归执行通用包装指南，即使用纸盒。\n\n另外，记录（来源s7）指出“**白沙样品**的专项指令仍要求硬壳盒”，需注意区分。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/650a0780-4bcb-42e7-900a-61a395ec0ebb/d43e0452-72db-49a5-bf58-3483b014742e-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/650a0780-4bcb-42e7-900a-61a395ec0ebb/d43e0452-72db-49a5-bf58-3483b014742e-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "read_2",
+        "read_4",
+        "read_3",
+        "read_7",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "quota_reallocation",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "竹组还可发3张，梅组还可发3张。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/258cd7ea-437c-4f67-91fa-52e1eb647383/7189c42d-d55a-4146-af39-2317a5b5bbfe-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/258cd7ea-437c-4f67-91fa-52e1eb647383/7189c42d-d55a-4146-af39-2317a5b5bbfe-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "quota_reallocation",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "竹组还可发3张，梅组还可发3张。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/258cd7ea-437c-4f67-91fa-52e1eb647383/6c2a2d4e-b346-49e7-92d0-5c564cba2b82-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/258cd7ea-437c-4f67-91fa-52e1eb647383/6c2a2d4e-b346-49e7-92d0-5c564cba2b82-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_3",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "quota_reallocation",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，竹组原剩余5张票，梅组原剩余1张票。已执行从竹组向梅组转移2张票。因此，竹组还可发3张（5-2=3），梅组还可发3张（1+2=3）。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/258cd7ea-437c-4f67-91fa-52e1eb647383/915a6afe-82a0-4b0c-9fc0-a741a654a79a-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/258cd7ea-437c-4f67-91fa-52e1eb647383/915a6afe-82a0-4b0c-9fc0-a741a654a79a-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_0",
+        "read_2",
+        "read_5",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "quota_reallocation",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据最新更正记录，实际转移只有1张票。竹组原剩余5张，转出1张，还可发4张；梅组原剩余1张，接收1张，还可发2张。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/258cd7ea-437c-4f67-91fa-52e1eb647383/d609768c-f850-40d8-a9dc-32b66b4a0971-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/258cd7ea-437c-4f67-91fa-52e1eb647383/d609768c-f850-40d8-a9dc-32b66b4a0971-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "read_1",
+        "read_0",
+        "read_3",
+        "read_6",
+        "read_5",
+        "read_7",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "serial_responsibility",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，鸣沙档案现在的保管人是吴庭，原作者是俞青。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/46af97e2-2049-46f0-9558-176ebbc54d4c/3781955e-ecb1-4dcb-81f5-b18352d0d329-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/46af97e2-2049-46f0-9558-176ebbc54d4c/3781955e-ecb1-4dcb-81f5-b18352d0d329-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "serial_responsibility",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，鸣沙档案现在的保管人是吴庭，原作者是俞青。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/46af97e2-2049-46f0-9558-176ebbc54d4c/1efe0987-e857-4e1d-882a-9d1f13e3b69a-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/46af97e2-2049-46f0-9558-176ebbc54d4c/1efe0987-e857-4e1d-882a-9d1f13e3b69a-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "read_1",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "serial_responsibility",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，鸣沙档案现在的保管人是吴庭，原作者是俞青。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/46af97e2-2049-46f0-9558-176ebbc54d4c/b5d59058-a43d-4df7-b596-14e105006b71-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/46af97e2-2049-46f0-9558-176ebbc54d4c/b5d59058-a43d-4df7-b596-14e105006b71-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_0",
+        "read_3",
+        "read_4",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "before",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    },
+    {
+      "history": "serial_responsibility",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，现在鸣沙档案的保管人是连舒，原作者是俞青。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/46af97e2-2049-46f0-9558-176ebbc54d4c/7d8d44c0-8208-4576-bf68-130edc087e69-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/strong-dense8-v1/fixed/banks/46af97e2-2049-46f0-9558-176ebbc54d4c/7d8d44c0-8208-4576-bf68-130edc087e69-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "read_1",
+        "read_0",
+        "read_4",
+        "read_6",
+        "read_3",
+        "read_5",
+        "handoff"
+      ],
+      "grade": "correct",
+      "source_context": "after",
+      "delivered_source_ids": [
+        "a",
+        "b",
+        "c",
+        "u",
+        "n"
+      ],
+      "reviewed_raw_proof_delivered": true,
+      "note": "Author-reviewed core answer matches source contract and actual sufficient raw proof is delivered."
+    }
+  ],
+  "qualifications": [
+    "All29completed answers match the reviewed source task;3first length failures remain failed. One failed before control and two after actual sufficient source delivery.",
+    "Fixedk8 allows10controlsteps versus6for dense4/context4 and4for dense2; this is the predeclared extra-budget point, not matched eight-step dynamic policy efficiency.",
+    "Same8exposed development families;32positions are correlated, not32independent cases. No generalization claim.",
+    "No generated views or local learned controller; real dense embedding work is charged separately.",
+    "Offline export/review CPU remains pending until a serial idle boundary."
+  ]
+}

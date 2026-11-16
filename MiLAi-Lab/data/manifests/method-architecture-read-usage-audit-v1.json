@@ -1,0 +1,43 @@
+{
+  "status": "ALIGNED_READ_USAGE_FLAG_REPAIRED",
+  "finding": "AlignmentRun.answer always recorded use for unified MiLAi, ignoring read_usage_updates=False; base BenchmarkRun already honors it",
+  "read_only_sqlite_observation": {
+    "screening-v1/plain": {
+      "read_usage_updates": false,
+      "memory_ranking": "dense",
+      "actual_use_entries": 64,
+      "records_with_use_entries": 16
+    },
+    "screening-v1/candidate": {
+      "read_usage_updates": false,
+      "memory_ranking": "dense",
+      "actual_use_entries": 48,
+      "records_with_use_entries": 14
+    },
+    "cross-v1/execution/control": {
+      "read_usage_updates": false,
+      "memory_ranking": "dense",
+      "actual_use_entries": 12,
+      "records_with_use_entries": 2
+    },
+    "cross-v1/execution/candidate": {
+      "read_usage_updates": false,
+      "memory_ranking": "dense",
+      "actual_use_entries": 12,
+      "records_with_use_entries": 2
+    }
+  },
+  "interpretation": "old semantic record values remain unchanged; actual activation uses were written. These audited runs use dense ranking, whose current and frozen service path does not consult activation. This does not establish a future activation-ranking result.",
+  "repair": "same read_usage_updates/evidence_replay conditions as base BenchmarkRun; no old bank changes",
+  "tests": {
+    "actual_store_cases": 3,
+    "seconds": 1.72,
+    "mypy_files": 1,
+    "ruff": "pass"
+  },
+  "affected_result_annotations": [
+    "method-architecture-screening-v1-summary.json",
+    "method-architecture-cross-v1-summary.json"
+  ],
+  "scores_or_model_outputs_replaced": false
+}

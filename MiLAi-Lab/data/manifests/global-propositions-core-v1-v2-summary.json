@@ -1,0 +1,505 @@
+{
+  "status": "C_EXPERIMENTS_CLOSED_ACCEPTANCE_NOT_MET",
+  "runs": [
+    {
+      "name": "propositions-core-v1",
+      "cases": [
+        {
+          "event": 1,
+          "maintenance_status": "completed",
+          "receipts": [],
+          "record_count": 0,
+          "revisions": [],
+          "unit_counts": [],
+          "unprocessed": []
+        },
+        {
+          "event": 2,
+          "maintenance_status": "completed",
+          "receipts": [],
+          "record_count": 0,
+          "revisions": [],
+          "unit_counts": [],
+          "unprocessed": []
+        },
+        {
+          "event": 3,
+          "maintenance_status": "completed",
+          "receipts": [],
+          "record_count": 0,
+          "revisions": [],
+          "unit_counts": [],
+          "unprocessed": []
+        },
+        {
+          "event": 4,
+          "maintenance_status": "completed",
+          "receipts": [],
+          "record_count": 0,
+          "revisions": [],
+          "unit_counts": [],
+          "unprocessed": []
+        },
+        {
+          "event": 5,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            1
+          ],
+          "unit_counts": [
+            3
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 6,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            2
+          ],
+          "unit_counts": [
+            1
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 7,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 2,
+          "revisions": [
+            1,
+            2
+          ],
+          "unit_counts": [
+            1,
+            1
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 8,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            },
+            {
+              "status": "no_change",
+              "reason": null,
+              "effect": "none"
+            }
+          ],
+          "record_count": 3,
+          "revisions": [
+            1,
+            1,
+            2
+          ],
+          "unit_counts": [
+            1,
+            1,
+            1
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 9,
+          "maintenance_status": "completed",
+          "receipts": [],
+          "record_count": 3,
+          "revisions": [
+            1,
+            1,
+            2
+          ],
+          "unit_counts": [
+            1,
+            1,
+            1
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 10,
+          "maintenance_status": "completed",
+          "receipts": [],
+          "record_count": 3,
+          "revisions": [
+            1,
+            1,
+            2
+          ],
+          "unit_counts": [
+            1,
+            1,
+            1
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 11,
+          "maintenance_status": "incomplete",
+          "receipts": [],
+          "record_count": 3,
+          "revisions": [
+            1,
+            1,
+            2
+          ],
+          "unit_counts": [
+            1,
+            1,
+            1
+          ],
+          "unprocessed": [
+            {
+              "phase": "select_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ]
+        },
+        {
+          "event": 12,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 4,
+          "revisions": [
+            1,
+            1,
+            1,
+            2
+          ],
+          "unit_counts": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "unprocessed": []
+        }
+      ],
+      "cost": {
+        "generation_calls": 18,
+        "input_tokens": 36862,
+        "output_tokens": 33055,
+        "embedding_calls": 11,
+        "embedding_tokens": 601
+      },
+      "stages": {
+        "edit": 11,
+        "select": 7
+      },
+      "terminal": "PREDICTIONS_SAVED",
+      "resources_settled": true,
+      "history_versions": 5,
+      "history_readable": 5
+    },
+    {
+      "name": "propositions-core-v2",
+      "cases": [
+        {
+          "event": 1,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            1
+          ],
+          "unit_counts": [
+            4
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 2,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "no_change",
+              "reason": null,
+              "effect": "none"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            1
+          ],
+          "unit_counts": [
+            4
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 3,
+          "maintenance_status": "incomplete",
+          "receipts": [
+            {
+              "status": "rejected",
+              "reason": "EDIT_UNIT_SUPPORT_BINDING_INVALID",
+              "effect": "none"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            1
+          ],
+          "unit_counts": [
+            4
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/global-propositions-dev/2:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_UNIT_SUPPORT_BINDING_INVALID"
+              }
+            }
+          ]
+        },
+        {
+          "event": 4,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "no_change",
+              "reason": null,
+              "effect": "none"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            1
+          ],
+          "unit_counts": [
+            4
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 5,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            2
+          ],
+          "unit_counts": [
+            6
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 6,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            3
+          ],
+          "unit_counts": [
+            3
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 7,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            4
+          ],
+          "unit_counts": [
+            4
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 8,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            5
+          ],
+          "unit_counts": [
+            5
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 9,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            6
+          ],
+          "unit_counts": [
+            6
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 10,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "no_change",
+              "reason": null,
+              "effect": "none"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            6
+          ],
+          "unit_counts": [
+            6
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 11,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null,
+              "effect": "memory_only"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            7
+          ],
+          "unit_counts": [
+            6
+          ],
+          "unprocessed": []
+        },
+        {
+          "event": 12,
+          "maintenance_status": "incomplete",
+          "receipts": [
+            {
+              "status": "rejected",
+              "reason": "EDIT_CHANGED_ASSERTION_REQUIRES_NEW_EVIDENCE",
+              "effect": "none"
+            }
+          ],
+          "record_count": 1,
+          "revisions": [
+            7
+          ],
+          "unit_counts": [
+            6
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/global-propositions-dev/11:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_CHANGED_ASSERTION_REQUIRES_NEW_EVIDENCE"
+              }
+            }
+          ]
+        }
+      ],
+      "cost": {
+        "generation_calls": 12,
+        "input_tokens": 48366,
+        "output_tokens": 2236,
+        "embedding_calls": 18,
+        "embedding_tokens": 2627
+      },
+      "stages": {
+        "edit": 12
+      },
+      "terminal": "PREDICTIONS_SAVED",
+      "resources_settled": true,
+      "history_versions": 7,
+      "history_readable": 7
+    }
+  ],
+  "findings": {
+    "core_v1": "Initial formation and the future update returned empty proposals; later state cannot be treated as an ideal before. One selector ended at confirmed output length.",
+    "core_v2": "Initial formation produced a compound overview plus duplicated claims/conditions. Events3/12 rejected invalid support/assertion binding. The old overview retained stale B/Wang after the unit changed to Chen. Cancellation removed the direct A unit without restoring its future Zhao rule. Recent/undecided SMS propositions copied report timestamps into event_at.",
+    "time_attribution": "Incorrect event_at values already occur in saved model proposals; not injected by the compiler.",
+    "successful_submechanisms": "Explicit keep/no-change events2/4/10 retained actual revisions; ambiguous SMS modality stayed undecided in literal text; stored historical versions remain readable.",
+    "scope": "Authored synthetic diagnostic only, no real-user C cohort, matched-recipe comparison, final holdout or full Host acceptance yet."
+  }
+}

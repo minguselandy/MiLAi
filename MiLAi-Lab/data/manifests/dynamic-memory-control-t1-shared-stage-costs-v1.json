@@ -1,0 +1,180 @@
+{
+  "version": "dynamic-memory-control-t1-shared-stage-costs-v1",
+  "status": "ALL160FIRST_POSITIONS_ACCOUNTED",
+  "costs": {
+    "original": {
+      "original_development": {
+        "generation_stages": {
+          "request_interpretation": {
+            "requests": 32,
+            "known_tokens": 117237,
+            "completion_tokens": 83693,
+            "http_wall_seconds": 550.9241643920541
+          },
+          "reader_and_agent": {
+            "requests": 30,
+            "known_tokens": 105090,
+            "completion_tokens": 56214,
+            "http_wall_seconds": 370.9506680322811
+          },
+          "view_generation": {
+            "requests": 7,
+            "known_tokens": 18334,
+            "completion_tokens": 4492,
+            "http_wall_seconds": 31.178409977816045
+          }
+        },
+        "operation_elapsed": {
+          "SEARCH": {
+            "calls": 19,
+            "wall_seconds": 0.9067153353244066
+          },
+          "READ": {
+            "calls": 19,
+            "wall_seconds": 0.5154679846018553
+          },
+          "REFRESH_VIEW": {
+            "calls": 7,
+            "wall_seconds": 32.19102221168578
+          },
+          "USE_VIEW": {
+            "calls": 6,
+            "wall_seconds": 0.1523953890427947
+          }
+        },
+        "source_inventory_wall_seconds": 0.04889286961406469,
+        "whole_message_wall_seconds": 1397.2707476466894
+      },
+      "external_development": {
+        "generation_stages": {
+          "request_interpretation": {
+            "requests": 48,
+            "known_tokens": 209686,
+            "completion_tokens": 157822,
+            "http_wall_seconds": 1028.1796075999737
+          },
+          "reader_and_agent": {
+            "requests": 48,
+            "known_tokens": 251986,
+            "completion_tokens": 161088,
+            "http_wall_seconds": 1057.3774642748758
+          },
+          "view_generation": {
+            "requests": 3,
+            "known_tokens": 14228,
+            "completion_tokens": 2120,
+            "http_wall_seconds": 15.422617265023291
+          }
+        },
+        "operation_elapsed": {
+          "SEARCH": {
+            "calls": 26,
+            "wall_seconds": 15.341145537793636
+          },
+          "READ": {
+            "calls": 28,
+            "wall_seconds": 1.1297707380726933
+          },
+          "REFRESH_VIEW": {
+            "calls": 3,
+            "wall_seconds": 15.809118972159922
+          },
+          "USE_VIEW": {
+            "calls": 1,
+            "wall_seconds": 0.03407234884798527
+          }
+        },
+        "source_inventory_wall_seconds": 0.17049924470484257,
+        "whole_message_wall_seconds": 4312.574750473723
+      }
+    },
+    "broader": {
+      "original_development": {
+        "generation_stages": {
+          "request_interpretation": {
+            "requests": 32,
+            "known_tokens": 105690,
+            "completion_tokens": 72146,
+            "http_wall_seconds": 471.9218878047541
+          },
+          "reader_and_agent": {
+            "requests": 32,
+            "known_tokens": 159398,
+            "completion_tokens": 107357,
+            "http_wall_seconds": 704.9768007779494
+          },
+          "view_generation": {
+            "requests": 2,
+            "known_tokens": 5008,
+            "completion_tokens": 1344,
+            "http_wall_seconds": 9.309235158376396
+          }
+        },
+        "operation_elapsed": {
+          "SEARCH": {
+            "calls": 21,
+            "wall_seconds": 1.005943431518972
+          },
+          "READ": {
+            "calls": 36,
+            "wall_seconds": 1.0523698311299086
+          },
+          "REFRESH_VIEW": {
+            "calls": 2,
+            "wall_seconds": 9.489647638052702
+          },
+          "USE_VIEW": {
+            "calls": 4,
+            "wall_seconds": 0.11856029648333788
+          }
+        },
+        "source_inventory_wall_seconds": 0.053424970246851444,
+        "whole_message_wall_seconds": 1721.7831051331013
+      },
+      "external_development": {
+        "generation_stages": {
+          "request_interpretation": {
+            "requests": 48,
+            "known_tokens": 248698,
+            "completion_tokens": 196834,
+            "http_wall_seconds": 1282.1263474253938
+          },
+          "view_generation": {
+            "requests": 27,
+            "known_tokens": 179343,
+            "completion_tokens": 26207,
+            "http_wall_seconds": 191.12173921708018
+          },
+          "reader_and_agent": {
+            "requests": 47,
+            "known_tokens": 247560,
+            "completion_tokens": 136295,
+            "http_wall_seconds": 897.0535274837166
+          }
+        },
+        "operation_elapsed": {
+          "SEARCH": {
+            "calls": 19,
+            "wall_seconds": 1.34427304379642
+          },
+          "REFRESH_VIEW": {
+            "calls": 27,
+            "wall_seconds": 195.0412523727864
+          },
+          "USE_VIEW": {
+            "calls": 20,
+            "wall_seconds": 0.6856000414118171
+          },
+          "READ": {
+            "calls": 11,
+            "wall_seconds": 0.495384031906724
+          }
+        },
+        "source_inventory_wall_seconds": 0.1764891892671585,
+        "whole_message_wall_seconds": 4450.8588160108775
+      }
+    }
+  },
+  "scope": "Generation phase boundaries come from actual control/handoff event order; token sums match per-message ledger deltas. REFRESHoperationwall includes its generationHTTPtime, so these nested clocks must not be added together. Whole-messagewall includes orchestration/localread/capture/load work; native forward/load metrics remain in matched comparison. No unified FLOPs or co-resident production latency claimed.",
+  "model_calls_by_analysis": 0
+}

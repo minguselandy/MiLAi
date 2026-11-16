@@ -1,0 +1,1068 @@
+{
+  "status": "S1_303_CURVES_AND_AUTONOMOUS_DEV_CLOSED_LARGER_FITS_RUNNING",
+  "goal_complete": false,
+  "no_sha_validation": true,
+  "previous_turn": "progress",
+  "current_turn": "progress",
+  "code_commit": "4bab6388",
+  "original_303_training_source": "cececfb7",
+  "closed_3k_comparison": {
+    "s1-op3k": {
+      "status": "COMPLETED",
+      "updates": 303,
+      "draws": 9606,
+      "input_tokens": 62441307,
+      "cpu_seconds": 10128.150891588,
+      "wall_seconds": 6759.311104902998,
+      "stages": {
+        "prepare": 141.85101801529527,
+        "evaluation": 815.6829253109172,
+        "training": 5620.938719413243,
+        "save": 178.30014527682215
+      },
+      "curve": [
+        {
+          "update": 0,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 25,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 25
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 0
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "READ": {
+                "selected": 56,
+                "accepted": 3
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.3364197530864197,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": null
+        },
+        {
+          "update": 51,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 43,
+              "handoff_outside_reviewed_preference": 13,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 29
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 14
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "READ": {
+                "selected": 29,
+                "accepted": 7
+              },
+              "HANDOFF": {
+                "selected": 27,
+                "accepted": 14
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.574074074074074,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": null
+        },
+        {
+          "update": 101,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 43,
+              "handoff_outside_reviewed_preference": 15,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 29
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 14
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "READ": {
+                "selected": 27,
+                "accepted": 7
+              },
+              "HANDOFF": {
+                "selected": 29,
+                "accepted": 14
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.5462962962962963,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": {
+            "counts": {
+              "labelled": 278,
+              "accepted": 133,
+              "handoff_outside_reviewed_preference": 52,
+              "masked": 202
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 203,
+                "accepted": 79
+              },
+              "reference_preserving_handoff": {
+                "labelled": 75,
+                "accepted": 54
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 42,
+                "accepted": 42
+              },
+              "READ": {
+                "selected": 130,
+                "accepted": 37
+              },
+              "HANDOFF": {
+                "selected": 106,
+                "accepted": 54
+              }
+            },
+            "families": 28,
+            "family_macro_acceptance": 0.48244240878169453,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          }
+        },
+        {
+          "update": 202,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 44,
+              "handoff_outside_reviewed_preference": 13,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 28
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 16
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "READ": {
+                "selected": 27,
+                "accepted": 6
+              },
+              "HANDOFF": {
+                "selected": 29,
+                "accepted": 16
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.5648148148148148,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": {
+            "counts": {
+              "labelled": 278,
+              "accepted": 132,
+              "handoff_outside_reviewed_preference": 55,
+              "masked": 202
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 203,
+                "accepted": 73
+              },
+              "reference_preserving_handoff": {
+                "labelled": 75,
+                "accepted": 59
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 42,
+                "accepted": 42
+              },
+              "READ": {
+                "selected": 122,
+                "accepted": 31
+              },
+              "HANDOFF": {
+                "selected": 114,
+                "accepted": 59
+              }
+            },
+            "families": 28,
+            "family_macro_acceptance": 0.4861400999793856,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          }
+        },
+        {
+          "update": 303,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 44,
+              "handoff_outside_reviewed_preference": 11,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 30
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 14
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "READ": {
+                "selected": 31,
+                "accepted": 8
+              },
+              "HANDOFF": {
+                "selected": 25,
+                "accepted": 14
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.5555555555555556,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": {
+            "counts": {
+              "labelled": 278,
+              "accepted": 126,
+              "handoff_outside_reviewed_preference": 49,
+              "masked": 202
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 203,
+                "accepted": 75
+              },
+              "reference_preserving_handoff": {
+                "labelled": 75,
+                "accepted": 51
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 42,
+                "accepted": 42
+              },
+              "READ": {
+                "selected": 136,
+                "accepted": 33
+              },
+              "HANDOFF": {
+                "selected": 100,
+                "accepted": 51
+              }
+            },
+            "families": 28,
+            "family_macro_acceptance": 0.46828295712224277,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          }
+        }
+      ]
+    },
+    "s1-repeat32": {
+      "status": "COMPLETED",
+      "updates": 303,
+      "draws": 9696,
+      "input_tokens": 61819154,
+      "cpu_seconds": 10734.063435718,
+      "wall_seconds": 7065.645561867394,
+      "stages": {
+        "prepare": 27.97514950763434,
+        "evaluation": 830.1529086893424,
+        "training": 6020.106410737149,
+        "save": 185.0059806033969
+      },
+      "curve": [
+        {
+          "update": 0,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 25,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 25
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 0
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "READ": {
+                "selected": 56,
+                "accepted": 3
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.3364197530864197,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": null
+        },
+        {
+          "update": 51,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 45,
+              "handoff_outside_reviewed_preference": 18,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 26
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 19
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "HANDOFF": {
+                "selected": 37,
+                "accepted": 19
+              },
+              "READ": {
+                "selected": 19,
+                "accepted": 4
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.5771604938271605,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": null
+        },
+        {
+          "update": 101,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 41,
+              "handoff_outside_reviewed_preference": 15,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 26
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 15
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "HANDOFF": {
+                "selected": 30,
+                "accepted": 15
+              },
+              "READ": {
+                "selected": 26,
+                "accepted": 4
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.5277777777777778,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": {
+            "counts": {
+              "labelled": 278,
+              "accepted": 113,
+              "handoff_outside_reviewed_preference": 69,
+              "masked": 202
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 203,
+                "accepted": 56
+              },
+              "reference_preserving_handoff": {
+                "labelled": 75,
+                "accepted": 57
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 42,
+                "accepted": 42
+              },
+              "READ": {
+                "selected": 110,
+                "accepted": 14
+              },
+              "HANDOFF": {
+                "selected": 126,
+                "accepted": 57
+              }
+            },
+            "families": 28,
+            "family_macro_acceptance": 0.4300885126777984,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          }
+        },
+        {
+          "update": 202,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 39,
+              "handoff_outside_reviewed_preference": 15,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 26
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 13
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "HANDOFF": {
+                "selected": 28,
+                "accepted": 13
+              },
+              "READ": {
+                "selected": 28,
+                "accepted": 4
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.5061728395061729,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": {
+            "counts": {
+              "labelled": 278,
+              "accepted": 104,
+              "handoff_outside_reviewed_preference": 59,
+              "masked": 202
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 203,
+                "accepted": 57
+              },
+              "reference_preserving_handoff": {
+                "labelled": 75,
+                "accepted": 47
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 42,
+                "accepted": 42
+              },
+              "READ": {
+                "selected": 130,
+                "accepted": 15
+              },
+              "HANDOFF": {
+                "selected": 106,
+                "accepted": 47
+              }
+            },
+            "families": 28,
+            "family_macro_acceptance": 0.4077445372088229,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          }
+        },
+        {
+          "update": 303,
+          "fast": {
+            "counts": {
+              "labelled": 78,
+              "accepted": 39,
+              "handoff_outside_reviewed_preference": 15,
+              "masked": 50
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 58,
+                "accepted": 26
+              },
+              "reference_preserving_handoff": {
+                "labelled": 20,
+                "accepted": 13
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 22,
+                "accepted": 22
+              },
+              "HANDOFF": {
+                "selected": 28,
+                "accepted": 13
+              },
+              "READ": {
+                "selected": 28,
+                "accepted": 4
+              }
+            },
+            "families": 27,
+            "family_macro_acceptance": 0.5061728395061729,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "full": {
+            "counts": {
+              "labelled": 278,
+              "accepted": 104,
+              "handoff_outside_reviewed_preference": 59,
+              "masked": 202
+            },
+            "strata": {
+              "reference_acquisition": {
+                "labelled": 203,
+                "accepted": 57
+              },
+              "reference_preserving_handoff": {
+                "labelled": 75,
+                "accepted": 47
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 42,
+                "accepted": 42
+              },
+              "READ": {
+                "selected": 130,
+                "accepted": 15
+              },
+              "HANDOFF": {
+                "selected": 106,
+                "accepted": 47
+              }
+            },
+            "families": 28,
+            "family_macro_acceptance": 0.4077445372088229,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          }
+        }
+      ]
+    }
+  },
+  "autonomous_Host": {
+    "planned_unique_positions": 40,
+    "source_families": 8,
+    "rules_reused_once": true,
+    "summary": {
+      "rules": {
+        "positions": 8,
+        "task_resolution": {
+          "complete": 3,
+          "uncertain": 2,
+          "execution_failed": 2,
+          "incomplete": 1
+        },
+        "strict_supported_success": 2,
+        "answer_support": {
+          "supported": 3,
+          "qualified": 3,
+          "unscored": 2
+        },
+        "known_generation_tokens": 60090,
+        "unknown_generation_usage": 0,
+        "known_embedding_tokens": 0,
+        "unknown_embedding_usage": 0,
+        "tool_attempts": 9,
+        "tool_returns": 9,
+        "tool_errors": 0,
+        "bound_completed_final_inputs": 6
+      },
+      "large-u101": {
+        "positions": 8,
+        "task_resolution": {
+          "complete": 3,
+          "uncertain": 1,
+          "execution_failed": 3,
+          "incomplete": 1
+        },
+        "strict_supported_success": 3,
+        "answer_support": {
+          "supported": 4,
+          "qualified": 1,
+          "unscored": 3
+        },
+        "known_generation_tokens": 81171,
+        "unknown_generation_usage": 0,
+        "known_embedding_tokens": 0,
+        "unknown_embedding_usage": 0,
+        "tool_attempts": 14,
+        "tool_returns": 14,
+        "tool_errors": 0,
+        "bound_completed_final_inputs": 5
+      },
+      "repeat-u101": {
+        "positions": 8,
+        "task_resolution": {
+          "complete": 2,
+          "execution_failed": 2,
+          "incomplete": 3,
+          "uncertain": 1
+        },
+        "strict_supported_success": 2,
+        "answer_support": {
+          "supported": 6,
+          "unscored": 2
+        },
+        "known_generation_tokens": 75599,
+        "unknown_generation_usage": 0,
+        "known_embedding_tokens": 0,
+        "unknown_embedding_usage": 0,
+        "tool_attempts": 18,
+        "tool_returns": 18,
+        "tool_errors": 0,
+        "bound_completed_final_inputs": 6
+      },
+      "large-u303": {
+        "positions": 8,
+        "task_resolution": {
+          "complete": 3,
+          "execution_failed": 4,
+          "uncertain": 1
+        },
+        "strict_supported_success": 2,
+        "answer_support": {
+          "supported": 3,
+          "unscored": 4,
+          "qualified": 1
+        },
+        "known_generation_tokens": 78431,
+        "unknown_generation_usage": 0,
+        "known_embedding_tokens": 0,
+        "unknown_embedding_usage": 0,
+        "tool_attempts": 15,
+        "tool_returns": 15,
+        "tool_errors": 0,
+        "bound_completed_final_inputs": 4
+      },
+      "repeat-u303": {
+        "positions": 8,
+        "task_resolution": {
+          "complete": 1,
+          "uncertain": 1,
+          "incomplete": 4,
+          "execution_failed": 1,
+          "incorrect": 1
+        },
+        "strict_supported_success": 1,
+        "answer_support": {
+          "supported": 5,
+          "qualified": 1,
+          "unscored": 1,
+          "unsupported_attribution": 1
+        },
+        "known_generation_tokens": 88711,
+        "unknown_generation_usage": 0,
+        "known_embedding_tokens": 0,
+        "unknown_embedding_usage": 0,
+        "tool_attempts": 20,
+        "tool_returns": 20,
+        "tool_errors": 0,
+        "bound_completed_final_inputs": 7
+      }
+    },
+    "literal_native_F1": {
+      "rules": 0.04623089008399299,
+      "large-u101": 0.07454099395351038,
+      "repeat-u101": 0.06112150598208058,
+      "large-u303": 0.02531914893617021,
+      "repeat-u303": 0.08013910653749443
+    },
+    "mechanism_observation": "At both checkpoints, larger-source training delivers the substantive WSJ result paragraph and Host answers correctly; repeated small-pool training returns only a heading and fails the task. This is a bounded observed chain, not proof of general superiority or superiority over rules.",
+    "limitations": "Length failures, truth-support errors, and inadequate retrieval remain. More training did not monotonically improve held development or Host outcomes. No confirmation/adoption claim.",
+    "scope": "Eight fixed DEV families, first outcomes, no matched Host RNG. Within each checkpoint learned arms share inference device;u101CPU andu303GPU are not an isolated training-length contrast. Rules are reused once, not replicated as new experiments. Completed final inputs are bound by actual response IDs; failed positions are not given fabricated completed final frames.",
+    "reviewer": "Root, source-grounded, not blinded/independent",
+    "artifacts": "/data/milai-experiments/20261111-scalable-evidence/s1-autonomous-dev8-review-v1"
+  },
+  "large_data": {
+    "status": "FIXED_OPERATION_SHARD_RELEASED",
+    "no_sha_validation": true,
+    "train_collections": [
+      "/data/milai-experiments/20261111-scalable-evidence/operation-pilot-v3",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-new-a-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-new-b-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-replay-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-a-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-b-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-c-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-additional-pilot-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-expanded-additional-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/musique-public-pilot-v2",
+      "/data/milai-experiments/20261111-scalable-evidence/musique-public-shard-0-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/musique-public-shard-1-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/musique-public-shard-2-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/musique-public-shard-3-v1"
+    ],
+    "dev_collection": "/data/milai-experiments/20261111-scalable-evidence/operation-dev-v1",
+    "train_source_families": 1000,
+    "train_native_source_groups": 1004,
+    "parent_data": "/data/milai-experiments/20261111-scalable-evidence/op-10k-v1",
+    "parent_fit_rows_retained_as_prefix": 10070,
+    "train_labelled_families": 912,
+    "train_raw_states": 71512,
+    "train_fit_states": 36150,
+    "train_unknown_states_retained_in_collections": 35363,
+    "newly_supervised_states": 1,
+    "remaining_unknown_states": 35362,
+    "new_supervision_source": "/data/milai-experiments/20261111-scalable-evidence/observed-pool-label-updates-v2.jsonl",
+    "dev_families": 32,
+    "dev_fast_states": 128,
+    "dev_full_states": 480,
+    "train_labels": {
+      "reference_acquisition": 28959,
+      "reference_preserving_handoff": 7191
+    },
+    "train_stages": {
+      "initial": 4927,
+      "post_search": 1268,
+      "post_read": 7246,
+      "post_operation": 22709
+    },
+    "supervision_scope": "Reference-witness operation preferences, not exhaustive semantic proofs or measured Host success",
+    "selection": "Completed family order, then known supervision; fast dev uses evenly spaced states in every family without outcome or predicted-score selection"
+  },
+  "parent_10k_prefix": {
+    "parent_fit_rows": 10070,
+    "literal_prefix_equal": true,
+    "no_sha_validation": true
+  },
+  "native_population": {
+    "status": "LEGAL_NATIVE_CONTEXT_POPULATION_EXPORTED_NOT_OPERATION_STATES",
+    "candidate_rows": 4844,
+    "candidate_question_groups": 2573,
+    "eligible_native_variants": 3418,
+    "eligible_questions": 1820,
+    "eligible_families": 283,
+    "target_title_clusters": 279,
+    "shared_family_clusters": [
+      [
+        "musique-family-000139",
+        "musique-family-000255"
+      ],
+      [
+        "musique-family-000262",
+        "musique-family-000476"
+      ],
+      [
+        "musique-family-000314",
+        "musique-family-000441",
+        "musique-family-000526"
+      ]
+    ],
+    "source_units": 22061,
+    "answerability": {
+      "True": 1731,
+      "False": 1687
+    },
+    "native_step_rows": {
+      "2": 3125,
+      "3": 289,
+      "4": 4
+    },
+    "new_operation_states": 0,
+    "no_sha_validation": true,
+    "source_jsonl": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/data/musique_full_v1.0_train.jsonl",
+    "scope": "Inherited TRAIN and exact question/target-to-pool/title boundaries preserved. Each native variant has its own visible context; family banks cannot repair missing support by exposing another variant. Variants/questions are not independent families. This adds a source domain to QASPER, not a pure-size-only intervention.",
+    "compute": {
+      "cpu_seconds": 2.7754529510000006,
+      "wall_seconds": 35.02326590940356
+    }
+  },
+  "native_development": {
+    "source": "/data/milai-experiments/20261111-scalable-evidence/musique-public-dev-v2",
+    "families": 30,
+    "states": 688,
+    "labelled": 423,
+    "role": "previously exposed DEV, never TRAIN or renamed blind confirmation"
+  },
+  "new_learning_relation": "Cold and known-first from actual public retrieval receipts, source masks preserve missing-support variants. Only executed SEARCH bindings with observed useful candidate scope receive search preference; unknown alternative queries/limits do not inherit labels.",
+  "pilot_annotation_conversion": {
+    "original": "/data/milai-experiments/20261111-scalable-evidence/musique-public-pilot-v1",
+    "fit_view": "/data/milai-experiments/20261111-scalable-evidence/musique-public-pilot-v2",
+    "raw_states": 384,
+    "labelled": 176,
+    "changed_target_sets": 128,
+    "original_traces_reexecuted": false,
+    "reason": "Remove unsupported type-level credit for unexecuted SEARCH bindings"
+  },
+  "one_TRAIN_family_diagnostic": {
+    "status": "CLOSED_ONE_TRAIN_FAMILY_FUNCTIONAL_DIAGNOSIS",
+    "results": {
+      "large303": {
+        "cold": {
+          "counts": {
+            "masked": 104,
+            "labelled": 88,
+            "accepted": 28,
+            "handoff_outside_reviewed_preference": 10
+          },
+          "strata": {
+            "reference_acquisition": {
+              "labelled": 68,
+              "accepted": 19
+            },
+            "reference_preserving_handoff": {
+              "labelled": 20,
+              "accepted": 9
+            }
+          },
+          "selected_operations": {
+            "SEARCH": {
+              "selected": 11,
+              "accepted": 0
+            },
+            "READ": {
+              "selected": 58,
+              "accepted": 19
+            },
+            "HANDOFF": {
+              "selected": 19,
+              "accepted": 9
+            }
+          },
+          "families": 1,
+          "family_macro_acceptance": 0.3181818181818182,
+          "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+        },
+        "known-first": {
+          "counts": {
+            "masked": 104,
+            "labelled": 88,
+            "accepted": 26,
+            "handoff_outside_reviewed_preference": 12
+          },
+          "strata": {
+            "reference_acquisition": {
+              "labelled": 60,
+              "accepted": 8
+            },
+            "reference_preserving_handoff": {
+              "labelled": 28,
+              "accepted": 18
+            }
+          },
+          "selected_operations": {
+            "SEARCH": {
+              "selected": 10,
+              "accepted": 0
+            },
+            "READ": {
+              "selected": 48,
+              "accepted": 8
+            },
+            "HANDOFF": {
+              "selected": 30,
+              "accepted": 18
+            }
+          },
+          "families": 1,
+          "family_macro_acceptance": 0.29545454545454547,
+          "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+        }
+      },
+      "repeat303": {
+        "cold": {
+          "counts": {
+            "masked": 104,
+            "labelled": 88,
+            "accepted": 30,
+            "handoff_outside_reviewed_preference": 12
+          },
+          "strata": {
+            "reference_acquisition": {
+              "labelled": 68,
+              "accepted": 26
+            },
+            "reference_preserving_handoff": {
+              "labelled": 20,
+              "accepted": 4
+            }
+          },
+          "selected_operations": {
+            "READ": {
+              "selected": 70,
+              "accepted": 26
+            },
+            "SEARCH": {
+              "selected": 2,
+              "accepted": 0
+            },
+            "HANDOFF": {
+              "selected": 16,
+              "accepted": 4
+            }
+          },
+          "families": 1,
+          "family_macro_acceptance": 0.3409090909090909,
+          "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+        },
+        "known-first": {
+          "counts": {
+            "masked": 104,
+            "labelled": 88,
+            "accepted": 23,
+            "handoff_outside_reviewed_preference": 4
+          },
+          "strata": {
+            "reference_acquisition": {
+              "labelled": 60,
+              "accepted": 15
+            },
+            "reference_preserving_handoff": {
+              "labelled": 28,
+              "accepted": 8
+            }
+          },
+          "selected_operations": {
+            "READ": {
+              "selected": 70,
+              "accepted": 15
+            },
+            "SEARCH": {
+              "selected": 6,
+              "accepted": 0
+            },
+            "HANDOFF": {
+              "selected": 12,
+              "accepted": 8
+            }
+          },
+          "families": 1,
+          "family_macro_acceptance": 0.26136363636363635,
+          "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+        }
+      }
+    },
+    "source_families": 1,
+    "native_variants": 24,
+    "scope": "Actual cold versus supplied-known-reference states; different legal menus and prefix trajectories. Not evidence of causal conditional reasoning or held-out generalization.",
+    "no_sha_validation": true
+  },
+  "active_jobs": [
+    {
+      "name": "s1-op10k-seed0-v1",
+      "owner": "/data/milai-experiments/20261111-scalable-evidence/s1-op10k-seed0-v1-owner.json",
+      "pid": 468718,
+      "exists_in_proc": true,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "updates": 208,
+      "planned_updates": 945,
+      "physical_gpu": "3"
+    },
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner": "/data/milai-experiments/20261111-scalable-evidence/s1-op36k-seed0-v1-owner.json",
+      "pid": 769163,
+      "exists_in_proc": true,
+      "owner_status": "RUNNING",
+      "run_status": "PREPARING_BEFORE_RUN_RECORD",
+      "updates": null,
+      "planned_updates": 3390,
+      "physical_gpu": "2"
+    }
+  ],
+  "tests": {
+    "latest_related": 16,
+    "real_GPU_recovery_with_auxiliary_dev": true,
+    "context_mask_and_actual_reference_tests": true,
+    "public_native_pilot_rows": 384,
+    "pilot_max_tokens": 8849,
+    "pilot_truncations": 0,
+    "ruff": "pass",
+    "package_boundary": "pass"
+  },
+  "cost_receipt": "/data/milai-experiments/20261111-scalable-evidence/native-known-stage-compute-v1.json",
+  "remaining": [
+    "Finish the original10k and36k trajectories; do not restart active jobs on polling timeouts",
+    "Compare actual cold/known behavior on separate native DEV and original paper DEV, preserving all masks",
+    "Real TRAIN feedback from selected S1 states versus continued SFT; include constrained material and known-reference conditions",
+    "Learner-state aggregation and continuous-source/View update experiments in declared scope",
+    "Decisive seed repeats and frozen new-source confirmation96, full task/cost/generalization interpretation",
+    "No product default adoption or full-goal completion is proven by one small DEV example"
+  ]
+}

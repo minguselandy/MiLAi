@@ -1,0 +1,182 @@
+{
+  "status": "POSTHOC_COMPACT_READER_PROBE_CLOSED",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-compact-v1",
+  "run": {
+    "status": "COMPLETED",
+    "pid": 1265115,
+    "planned_calls": 16,
+    "completed_calls": 16,
+    "new_writer_calls": 0,
+    "new_retrieval_calls": 0,
+    "temperature": 0.0,
+    "source_version": "a724c5eb7864daca9751e6680edadbb6ca9d826e",
+    "wall_seconds": 139.8508322229609
+  },
+  "model_config": {
+    "base_url": "http://127.0.0.1:7860/v1",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0.0,
+    "max_tokens": 8192,
+    "timeout": 300,
+    "enable_thinking": true,
+    "max_calls": 16
+  },
+  "review": {
+    "status": "ALL16FIRSTANSWERS_REVIEWED",
+    "reviewer": "Rootauthor,exposed,notindependent",
+    "judgments": [
+      {
+        "episode": "pl_011",
+        "id": "before-0",
+        "phase": "before",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Beforevalue correct; futureconditions keptconditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "before-1",
+        "phase": "before",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Beforevalue correct; futureconditions keptconditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "before-2",
+        "phase": "before",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Beforevalue correct; futureconditions keptconditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-1",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Rule-consequence orcurrentuncertainty derived from suppliedchange"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-2",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Rule-consequence orcurrentuncertainty derived from suppliedchange"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-3",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Rule-consequence orcurrentuncertainty derived from suppliedchange"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-6",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Exactquotedtext retained"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-0",
+        "phase": "before",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Beforevalue correct; futureconditions keptconditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-1",
+        "phase": "before",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Beforevalue correct; futureconditions keptconditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-2",
+        "phase": "before",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Beforevalue correct; futureconditions keptconditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-3",
+        "phase": "before",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Beforevalue correct; futureconditions keptconditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-1",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "fail",
+        "rationale": "Oldbuildtool/testcommand assertedcurrent; update notapplied"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-2",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Rule-consequence orcurrentuncertainty derived from suppliedchange"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-3",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Rule-consequence orcurrentuncertainty derived from suppliedchange"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-4",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "fail",
+        "rationale": "Oldbuildtool/testcommand assertedcurrent; update notapplied"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-7",
+        "phase": "after",
+        "variant": "compact",
+        "judgment": "pass",
+        "rationale": "Exactquotedtext retained"
+      }
+    ],
+    "before_pass": 7,
+    "before_denominator": 7,
+    "after_dynamic_pass": 5,
+    "after_dynamic_denominator": 7,
+    "exact_recall_pass": 2,
+    "exact_recall_denominator": 2,
+    "within_episode_inconsistency": "sw_001after1returnsoldZelthraPack whileafter2derivesnewQuorixcommand. Currentstateapplication is not consistent acrossquestions."
+  },
+  "costs": {
+    "generation_responses": 16,
+    "generation_tokens": 173672,
+    "generation_unknown": 0
+  },
+  "ledger_differences": {
+    "generation_known_token_difference": 0,
+    "generation_new_unknown_usage": 0,
+    "embedding_known_token_difference": 0,
+    "embedding_new_unknown_usage": 0,
+    "generation_request_difference": 0
+  },
+  "input_audit_errors": [],
+  "comparison_baseline": "ParentfrozenT0firstanswers, not rerun or replaced",
+  "scope": "Oneposthocpromptreplacement,16sameexposeddeliveries; alluserpayloadsunmodified. No defaultchange,training,Writer,retrievalorindependentgeneralizationclaim.",
+  "sampling_limit": "T0chosenforpairedinstructiondiagnostic. LocalQwenREADME general-thinking recommendation usesT1/presence1.5. These probes are not that recommended samplingprofile; unsupported causal attribution to decoding is avoided.",
+  "next_check": "Confirm frozenprompt on separately selected stories and appropriate declared decoding before adopting; retaintwo remaining dynamic failures."
+}

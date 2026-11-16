@@ -1,0 +1,771 @@
+{
+  "status": "CLOSED_RECEIPT_AUDIT",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/memops-factor-extension-v1",
+  "driver": {
+    "status": "COMPLETED",
+    "pid": 990479,
+    "source_version": "caddcc152f3e25e65ed476d37f6bd043dd998d31",
+    "started_epoch": 1792178936.5844877,
+    "arms": [
+      {
+        "arm": "D2-Laya-0",
+        "returncode": 0,
+        "wall_seconds": 271.6824342980981
+      },
+      {
+        "arm": "D2-Laya-CE",
+        "returncode": 0,
+        "wall_seconds": 267.5364356972277
+      },
+      {
+        "arm": "D3",
+        "returncode": 0,
+        "wall_seconds": 255.66829216014594
+      },
+      {
+        "arm": "D4",
+        "returncode": 0,
+        "wall_seconds": 293.53084483463317
+      }
+    ],
+    "http_retry": false,
+    "arm": "D4",
+    "finished_epoch": 1792180025.0139875
+  },
+  "arms": {
+    "D0": {
+      "totals": {
+        "generation_responses": 21,
+        "generation_tokens": 93321,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 22168,
+        "writer_completion_tokens": 12541,
+        "embedding_responses": 18,
+        "embedding_tokens": 2378,
+        "embedding_unknown": 0,
+        "wall_seconds": 248.05014337506145,
+        "closed_cases": 3,
+        "completed_maintenance": 3
+      },
+      "cases": {
+        "case-0": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 27950,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 7023,
+            "writer_completion_tokens": 4078,
+            "embedding_responses": 6,
+            "embedding_tokens": 622,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        },
+        "case-1": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 38053,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 8169,
+            "writer_completion_tokens": 5040,
+            "embedding_responses": 6,
+            "embedding_tokens": 1188,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        },
+        "case-2": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 27318,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 6976,
+            "writer_completion_tokens": 3423,
+            "embedding_responses": 6,
+            "embedding_tokens": 568,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        }
+      },
+      "role_confusion": [],
+      "standalone_warm_seconds": 248.05014337506145,
+      "reused_controller_tokens": 0
+    },
+    "D1": {
+      "totals": {
+        "generation_responses": 24,
+        "generation_tokens": 106452,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 20111,
+        "writer_completion_tokens": 11188,
+        "embedding_responses": 18,
+        "embedding_tokens": 2334,
+        "embedding_unknown": 0,
+        "wall_seconds": 322.1893029054627,
+        "closed_cases": 3,
+        "completed_maintenance": 3
+      },
+      "cases": {
+        "case-0": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 8,
+            "generation_tokens": 31985,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 6574,
+            "writer_completion_tokens": 4024,
+            "embedding_responses": 6,
+            "embedding_tokens": 630,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        },
+        "case-1": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 8,
+            "generation_tokens": 44805,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 7446,
+            "writer_completion_tokens": 4583,
+            "embedding_responses": 6,
+            "embedding_tokens": 1164,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        },
+        "case-2": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 8,
+            "generation_tokens": 29662,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 6091,
+            "writer_completion_tokens": 2581,
+            "embedding_responses": 6,
+            "embedding_tokens": 540,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        }
+      },
+      "role_confusion": [],
+      "standalone_warm_seconds": 322.1893029054627,
+      "reused_controller_tokens": 0
+    },
+    "D2-Laya-0": {
+      "totals": {
+        "generation_responses": 21,
+        "generation_tokens": 94195,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 18452,
+        "writer_completion_tokens": 12384,
+        "embedding_responses": 18,
+        "embedding_tokens": 2556,
+        "embedding_unknown": 0,
+        "typed_responses": 3,
+        "typed_unit_questions": 26,
+        "typed_input_tokens": 68665,
+        "typed_output_tokens": 0,
+        "typed_wall_seconds": 1.9089417597278953,
+        "typed_truncated_responses": 0,
+        "wall_seconds": 264.20461015123874,
+        "closed_cases": 3,
+        "completed_maintenance": 3
+      },
+      "cases": {
+        "case-0": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 28039,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 5989,
+            "writer_completion_tokens": 4661,
+            "embedding_responses": 6,
+            "embedding_tokens": 559,
+            "embedding_unknown": 0,
+            "typed_responses": 1,
+            "typed_unit_questions": 5,
+            "typed_input_tokens": 8440,
+            "typed_output_tokens": 0,
+            "typed_wall_seconds": 0.9525062013417482,
+            "typed_truncated_responses": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        },
+        "case-1": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 39000,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 6779,
+            "writer_completion_tokens": 3714,
+            "embedding_responses": 6,
+            "embedding_tokens": 1448,
+            "embedding_unknown": 0,
+            "typed_responses": 1,
+            "typed_unit_questions": 11,
+            "typed_input_tokens": 38414,
+            "typed_output_tokens": 0,
+            "typed_wall_seconds": 0.5921538462862372,
+            "typed_truncated_responses": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        },
+        "case-2": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 27156,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 5684,
+            "writer_completion_tokens": 4009,
+            "embedding_responses": 6,
+            "embedding_tokens": 549,
+            "embedding_unknown": 0,
+            "typed_responses": 1,
+            "typed_unit_questions": 10,
+            "typed_input_tokens": 21811,
+            "typed_output_tokens": 0,
+            "typed_wall_seconds": 0.3642817120999098,
+            "typed_truncated_responses": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        }
+      },
+      "role_confusion": [
+        {
+          "gold": "direct_root",
+          "predicted": "other",
+          "count": 2
+        },
+        {
+          "gold": "other",
+          "predicted": "other",
+          "count": 13
+        },
+        {
+          "gold": "other",
+          "predicted": "preserve_successor",
+          "count": 9
+        },
+        {
+          "gold": "direct_root",
+          "predicted": "preserve_successor",
+          "count": 1
+        }
+      ],
+      "standalone_warm_seconds": 264.20461015123874,
+      "reused_controller_tokens": 0
+    },
+    "D2-Laya-CE": {
+      "totals": {
+        "generation_responses": 21,
+        "generation_tokens": 93533,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 18418,
+        "writer_completion_tokens": 12981,
+        "embedding_responses": 17,
+        "embedding_tokens": 2070,
+        "embedding_unknown": 0,
+        "typed_responses": 3,
+        "typed_unit_questions": 26,
+        "typed_input_tokens": 68665,
+        "typed_output_tokens": 0,
+        "typed_wall_seconds": 1.1337034422904253,
+        "typed_truncated_responses": 0,
+        "wall_seconds": 260.5513347601518,
+        "closed_cases": 3,
+        "completed_maintenance": 2
+      },
+      "cases": {
+        "case-0": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 27538,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 5989,
+            "writer_completion_tokens": 4333,
+            "embedding_responses": 6,
+            "embedding_tokens": 643,
+            "embedding_unknown": 0,
+            "typed_responses": 1,
+            "typed_unit_questions": 5,
+            "typed_input_tokens": 8440,
+            "typed_output_tokens": 0,
+            "typed_wall_seconds": 0.19437184743583202,
+            "typed_truncated_responses": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        },
+        "case-1": {
+          "maintenance_status": "incomplete",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 37520,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 6745,
+            "writer_completion_tokens": 4434,
+            "embedding_responses": 5,
+            "embedding_tokens": 854,
+            "embedding_unknown": 0,
+            "typed_responses": 1,
+            "typed_unit_questions": 11,
+            "typed_input_tokens": 38414,
+            "typed_output_tokens": 0,
+            "typed_wall_seconds": 0.5966330086812377,
+            "typed_truncated_responses": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        },
+        "case-2": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 28475,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 5684,
+            "writer_completion_tokens": 4214,
+            "embedding_responses": 6,
+            "embedding_tokens": 573,
+            "embedding_unknown": 0,
+            "typed_responses": 1,
+            "typed_unit_questions": 10,
+            "typed_input_tokens": 21811,
+            "typed_output_tokens": 0,
+            "typed_wall_seconds": 0.3426985861733556,
+            "typed_truncated_responses": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 0,
+            "original_controller_seconds": 0.0,
+            "reused_calls": 0,
+            "new_controller_calls": 0
+          }
+        }
+      },
+      "role_confusion": [
+        {
+          "gold": "direct_root",
+          "predicted": "other",
+          "count": 3
+        },
+        {
+          "gold": "other",
+          "predicted": "other",
+          "count": 22
+        }
+      ],
+      "standalone_warm_seconds": 260.5513347601518,
+      "reused_controller_tokens": 0
+    },
+    "D3": {
+      "totals": {
+        "generation_responses": 21,
+        "generation_tokens": 83448,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 11272,
+        "writer_completion_tokens": 9521,
+        "embedding_responses": 18,
+        "embedding_tokens": 2435,
+        "embedding_unknown": 0,
+        "wall_seconds": 248.22835741378367,
+        "closed_cases": 3,
+        "completed_maintenance": 3
+      },
+      "cases": {
+        "case-0": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 24150,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 3864,
+            "writer_completion_tokens": 3154,
+            "embedding_responses": 6,
+            "embedding_tokens": 635,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 8440,
+            "original_controller_seconds": 0.19437184743583202,
+            "reused_calls": 1,
+            "new_controller_calls": 0
+          }
+        },
+        "case-1": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 33923,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 3774,
+            "writer_completion_tokens": 4080,
+            "embedding_responses": 6,
+            "embedding_tokens": 1374,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 38414,
+            "original_controller_seconds": 0.5966330086812377,
+            "reused_calls": 1,
+            "new_controller_calls": 0
+          }
+        },
+        "case-2": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 25375,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 3634,
+            "writer_completion_tokens": 2287,
+            "embedding_responses": 6,
+            "embedding_tokens": 426,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 21811,
+            "original_controller_seconds": 0.3426985861733556,
+            "reused_calls": 1,
+            "new_controller_calls": 0
+          }
+        }
+      },
+      "role_confusion": [],
+      "standalone_warm_seconds": 249.3620608560741,
+      "reused_controller_tokens": 68665
+    },
+    "D4": {
+      "totals": {
+        "generation_responses": 21,
+        "generation_tokens": 90839,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 15056,
+        "writer_completion_tokens": 19234,
+        "embedding_responses": 16,
+        "embedding_tokens": 1889,
+        "embedding_unknown": 0,
+        "wall_seconds": 285.74097313079983,
+        "closed_cases": 3,
+        "completed_maintenance": 1
+      },
+      "cases": {
+        "case-0": {
+          "maintenance_status": "incomplete",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 30873,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 5363,
+            "writer_completion_tokens": 8192,
+            "embedding_responses": 5,
+            "embedding_tokens": 409,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 3691,
+            "original_controller_seconds": 14.491808951832354,
+            "reused_calls": 1,
+            "new_controller_calls": 0
+          }
+        },
+        "case-1": {
+          "maintenance_status": "completed",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 31156,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 5141,
+            "writer_completion_tokens": 2850,
+            "embedding_responses": 6,
+            "embedding_tokens": 1072,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 5536,
+            "original_controller_seconds": 18.161742576397955,
+            "reused_calls": 1,
+            "new_controller_calls": 0
+          }
+        },
+        "case-2": {
+          "maintenance_status": "incomplete",
+          "same_actual_before": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "receipts": {
+            "generation_responses": 7,
+            "generation_tokens": 28810,
+            "generation_unknown": 0,
+            "writer_prompt_tokens": 4552,
+            "writer_completion_tokens": 8192,
+            "embedding_responses": 5,
+            "embedding_tokens": 408,
+            "embedding_unknown": 0
+          },
+          "ledger_difference": {
+            "generation_known_token_difference": 0,
+            "generation_new_unknown_usage": 0,
+            "embedding_known_token_difference": 0,
+            "embedding_new_unknown_usage": 0,
+            "generation_request_difference": 0
+          },
+          "reused_controller": {
+            "original_controller_tokens": 3850,
+            "original_controller_seconds": 13.895712397992611,
+            "reused_calls": 1,
+            "new_controller_calls": 0
+          }
+        }
+      },
+      "role_confusion": [],
+      "standalone_warm_seconds": 332.29023705702275,
+      "reused_controller_tokens": 13077
+    }
+  },
+  "audit_errors": [],
+  "semantic_review": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/memops-factor-extension-v1/author-review-progress.json",
+  "scope": "Three exposed training families; shared actual before, single Writer draw. No independent trajectories, blind benchmark or net-benefit claim.",
+  "cost_scope": "Update plus18QA per arm. Source formation costs remain in original run; D3/D4 standalone adds original controller work without recharging ledger.",
+  "typed_encoding": {
+    "http_requests": 6,
+    "unit_questions": 52,
+    "sequence_layout": "One native encoded sequence per unit question",
+    "batch_forward_count": null,
+    "batch_forward_note": "Not instrumented by server"
+  },
+  "sha_validation": false
+}

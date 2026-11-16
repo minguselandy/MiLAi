@@ -1,0 +1,293 @@
+{
+  "status": "EXECUTION_EVIDENCE_COMPLETE_WITH_MIXED_QA_AND_NEGATIVE_SOURCE_CONDITIONING_FINDINGS",
+  "goal_complete": true,
+  "created_epoch": 1792262517.1081643,
+  "checks": [
+    {
+      "name": "six_trainings_closed",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/training-v1/driver.json"
+    },
+    {
+      "name": "training_ledgers_match",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/learning-analysis-v1/report.json"
+    },
+    {
+      "name": "training_updates_1128",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/learning-analysis-v1/report.json"
+    },
+    {
+      "name": "all_40_evaluation_stages_exit_zero",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/driver.json"
+    },
+    {
+      "name": "six_reloaded_probe_models",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/probe-analysis-v1/report.json"
+    },
+    {
+      "name": "no_automatic_retry",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/driver.json"
+    },
+    {
+      "name": "no_sha_checks_in_frozen_matrix",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/protocol.json"
+    },
+    {
+      "name": "single_original_budget",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/protocol.json"
+    },
+    {
+      "name": "train_dev_source_review_complete",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/source-review/all228-before-reference.json"
+    },
+    {
+      "name": "reserved_source_review_complete",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/reserved-source-review/all28-before-reference.json"
+    },
+    {
+      "name": "dev_reader_complete",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/reader/run.json"
+    },
+    {
+      "name": "dev_exact_first_response_coverage",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/response-review/annotations.json"
+    },
+    {
+      "name": "dev_sealed_before_mapping",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/response-review"
+    },
+    {
+      "name": "dev_all_13_methods_joined",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/semantic-final/report.json"
+    },
+    {
+      "name": "dev_requests_and_reuse",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/reader/run.json"
+    },
+    {
+      "name": "dev_generation_receipt_ledger",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/receipt-review/report.json"
+    },
+    {
+      "name": "dev_dense_receipt_ledger",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/receipt-review/report.json"
+    },
+    {
+      "name": "dev_local_ledgers",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/receipt-review/report.json"
+    },
+    {
+      "name": "dev_fixed4_budget",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/receipt-review/report.json"
+    },
+    {
+      "name": "dev_masked_not_forced_negative",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/semantic-final/report.json"
+    },
+    {
+      "name": "reserved_reader_complete",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/reader/run.json"
+    },
+    {
+      "name": "reserved_exact_first_response_coverage",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/response-review/annotations.json"
+    },
+    {
+      "name": "reserved_sealed_before_mapping",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/response-review"
+    },
+    {
+      "name": "reserved_all_13_methods_joined",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/semantic-final/report.json"
+    },
+    {
+      "name": "reserved_requests_and_reuse",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/reader/run.json"
+    },
+    {
+      "name": "reserved_generation_receipt_ledger",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/receipt-review/report.json"
+    },
+    {
+      "name": "reserved_dense_receipt_ledger",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/receipt-review/report.json"
+    },
+    {
+      "name": "reserved_local_ledgers",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/receipt-review/report.json"
+    },
+    {
+      "name": "reserved_fixed4_budget",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/receipt-review/report.json"
+    },
+    {
+      "name": "reserved_masked_not_forced_negative",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/semantic-final/report.json"
+    },
+    {
+      "name": "923_positions_731_calls_192_reuse",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/evaluation-v2/both-reviews-before-mapping.json"
+    },
+    {
+      "name": "citation_sensitivity_all_arms",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/qa-analysis-v1/report.json"
+    },
+    {
+      "name": "citation_primary_preserved",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/qa-analysis-v1/report.json"
+    },
+    {
+      "name": "four_rendered_figures",
+      "passed": true,
+      "evidence": "docs/figures/source-selection-v2; PNGs visually inspected"
+    },
+    {
+      "name": "summary_no_new_model_calls",
+      "passed": true,
+      "evidence": "artifacts/jev-reader/selection-v2/qa-analysis-v1/report.json"
+    },
+    {
+      "name": "process_terminated_1145336",
+      "passed": true,
+      "evidence": "OS process lookup after terminal drivers"
+    },
+    {
+      "name": "process_terminated_1500140",
+      "passed": true,
+      "evidence": "OS process lookup after terminal drivers"
+    },
+    {
+      "name": "process_terminated_1209651",
+      "passed": true,
+      "evidence": "OS process lookup after terminal drivers"
+    },
+    {
+      "name": "process_terminated_1989337",
+      "passed": true,
+      "evidence": "OS process lookup after terminal drivers"
+    },
+    {
+      "name": "process_terminated_2182548",
+      "passed": true,
+      "evidence": "OS process lookup after terminal drivers"
+    }
+  ],
+  "passed_checks": 40,
+  "requirements": [
+    {
+      "requirement": "§5.2 navigation/publication",
+      "status": "EXECUTED",
+      "evidence": "docs/LAB_CURRENT_STATUS.md",
+      "limits": "New commits local; published base is provenance, no remote CI claim."
+    },
+    {
+      "requirement": "§6.1 source contract/new families",
+      "status": "EXECUTED_WITH_COVERAGE_LIMITS",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "128 admitted families,116/127 fitted;23 four-read families mainly parallel comparisons; broad long serial chains not established; assistant not independent gold."
+    },
+    {
+      "requirement": "§6.2 fixed-budget selection before STOP",
+      "status": "EXECUTED_WITH_MIXED_FINDINGS",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "Local QA improvement over controls in both recipes; no consistent source-over-reference advantage; no STOP adoption."
+    },
+    {
+      "requirement": "§6.3 updates/pretraining/architecture",
+      "status": "EXECUTED_WITH_DECLARED_CONFOUNDS",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "Same BASE/native head and188updates; masks,tokens,fitted families differ; shared source-aware prefixes; not pure-label or equal-FLOP causality."
+    },
+    {
+      "requirement": "§6.4 new reserved identity",
+      "status": "EXECUTED_WITH_EXPLICIT_EXCEPTION",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_EXECUTION_20261017.md",
+      "limits": "Actual28 input boundaries closed; unused4318 whole-family title exception retained; public same-domain DEV, not officialtest/pretraining-unseen; future exposed regression."
+    },
+    {
+      "requirement": "§4.3 presentation/evidence response",
+      "status": "EXECUTED_WITH_NEGATIVE_MECHANISM_FINDING",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "Source7/5/10 vs reference10/12/12 of31 authored evidence pairs; naturalvariants separately evaluated; not universal invariance."
+    },
+    {
+      "requirement": "all first-response review before mapping",
+      "status": "EXECUTED",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "731unique firstresponses,923positions;2length failures plus2nonempty abstention contract failures preserved; partial assistant blinding."
+    },
+    {
+      "requirement": "all-method citation sensitivity",
+      "status": "EXECUTED_PRIMARY_UNCHANGED",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "Only prior128_seed1 dev16 improves7→8/23 under alternative citation; new models/reserved unchanged."
+    },
+    {
+      "requirement": "§4.5 full cost disclosure",
+      "status": "EXECUTED_WITH_UNMETERED_OVERHEAD_DISCLOSED",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "Original ledger and model costs once; all receipts reconcile. Review/preparation/coordination not fully metered; no equivalent-FLOP or production-latency claim."
+    },
+    {
+      "requirement": "§4.6 Writer/product/historical boundaries",
+      "status": "PRESERVED",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "No old jobs rerun, Writer adoption, publicAPI/schema/default change or other-worktree resume."
+    },
+    {
+      "requirement": "software/figures/final audit",
+      "status": "EXECUTED",
+      "evidence": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+      "limits": "Training39/evaluation22/semantic6/receipt2 targeted groups overlap, not summed. Ruff,mypy,both boundaries pass; not fullrepo/remoteCI."
+    }
+  ],
+  "default_adoption": false,
+  "source_supervision_advantage_established": false,
+  "local_fixed4_qa_positive_signal": true,
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "new_services": false,
+  "new_ledger": false,
+  "automatic_retries": false,
+  "new_model_calls_in_final_analysis": 0,
+  "figures_visually_inspected": true,
+  "final_report": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+  "retained_audit_setup_failure": "Initial audit read nonexistent run.updates instead of optimizer_updates; stopped before accounting/mutations. Corrected read only, no model/analysis rerun. Failed setup timing not persisted.",
+  "audit_compute_recorded_once": {
+    "wall_seconds": 0.07577407453209162,
+    "cpu_seconds": 0.075764426,
+    "audits": 1
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "host_intent_stream_recipe_v1",
+  "scope": "Development only: two previously exposed train groups from the existing T2 selection. Original source sequence, roles and unknown clocks retained. New request positions do not create independent samples. No prebuilt View, forced model action or future request is supplied to the controller.",
+  "streams": [
+    {
+      "id": "memops_A29-view-v4-a",
+      "history_id": "memops_A29",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 4,
+          "content": "What vocabulary placement score should I currently use for my WriteInPT track, based on my own reports so far? Explain any reported correction or applicability condition, and keep other people's scores and course progress separate."
+        },
+        {
+          "id": "original-evidence",
+          "after_sources": 4,
+          "content": "Give my reported WriteInPT vocabulary placement score and quote my own statement that supports it. Keep the original quotation distinct from your interpretation."
+        },
+        {
+          "id": "after-unrelated-arrivals",
+          "after_sources": 10,
+          "content": "What vocabulary placement score should I currently use for my WriteInPT track, based on my own reports so far? Explain any reported correction or applicability condition, and keep other people's scores and course progress separate."
+        },
+        {
+          "id": "after-relevant-arrivals",
+          "after_sources": 23,
+          "content": "What vocabulary placement score should I currently use for my WriteInPT track, based on my own reports so far? Explain any reported correction or applicability condition, and keep other people's scores and course progress separate."
+        }
+      ]
+    },
+    {
+      "id": "memops_B05-view-v4-a",
+      "history_id": "memops_B05",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 4,
+          "content": "Where does our daughter's first-name decision stand based on my reports so far? Identify the last jointly agreed first choice and any current disagreement or proposed switch. Distinguish my view, my wife's view and other people's or template names; do not turn one person's proposal into a joint final decision."
+        },
+        {
+          "id": "original-evidence",
+          "after_sources": 4,
+          "content": "Quote my own reported statement supporting our last jointly agreed first-choice name for our daughter. Keep the quotation separate from your interpretation and from other people's names."
+        },
+        {
+          "id": "after-unrelated-arrivals",
+          "after_sources": 6,
+          "content": "Where does our daughter's first-name decision stand based on my reports so far? Identify the last jointly agreed first choice and any current disagreement or proposed switch. Distinguish my view, my wife's view and other people's or template names; do not turn one person's proposal into a joint final decision."
+        },
+        {
+          "id": "after-relevant-arrivals",
+          "after_sources": 23,
+          "content": "Where does our daughter's first-name decision stand based on my reports so far? Identify the last jointly agreed first choice and any current disagreement or proposed switch. Distinguish my view, my wife's view and other people's or template names; do not turn one person's proposal into a joint final decision."
+        }
+      ]
+    }
+  ]
+}

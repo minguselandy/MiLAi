@@ -1,0 +1,188 @@
+{
+  "status": "PHASE27_PROGRESS_FEEDBACK_CURVE_NEW78_FIRSTS_CLOSED_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T13:11:39.808156+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v26.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2685
+    },
+    {
+      "name": "m2-first160-feedback-seed0-v1",
+      "owner_pid": 192644,
+      "child_pid": 192645,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 49
+    },
+    {
+      "name": "m2-fixed-context-train177-families0to16-teacher-v1",
+      "owner_pid": 263964,
+      "child_pid": 263965,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_states": 13,
+      "planned_states": 32,
+      "unresolved_states": 0,
+      "masked_teacher_candidates": 5
+    }
+  ],
+  "new_train_first78_closed": {
+    "status": "COMPLETED_WITH_FAILURES",
+    "pid": 195468,
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-v1",
+    "planned_families": 16,
+    "planned_states": 32,
+    "planned_unique_packets": 78,
+    "planned_policy_positions": 96,
+    "closed_readouts": 78,
+    "failed_readouts": 1,
+    "chat_invocations": 78,
+    "reused_readouts": 0,
+    "reuse_source": null,
+    "response_callbacks": 78,
+    "error_callbacks": 0,
+    "automatic_retry": false,
+    "no_sha_validation": true,
+    "answer_persisted_as_source": false,
+    "scope": "Conditional public task plus actual packet with empty known refs; not autonomous Host conversation or business execution",
+    "generation_before": {
+      "charged_tokens": 450149252,
+      "known_tokens": 449524087,
+      "unknown_usage": 16
+    },
+    "generation_requests_before": 91049,
+    "active": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-readouts-v1/case-031/packet-0/readout.json",
+    "compute": {
+      "cpu_seconds": 5.9279399150000005,
+      "wall_seconds": 1028.3154750689864,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 265128,
+      "known_tokens": 265128,
+      "unknown_usage": 0
+    }
+  },
+  "new_train32_witness": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-witness-v1",
+  "feedback_curve_closed_points": [
+    {
+      "update": 17,
+      "counts": {
+        "labelled": 278,
+        "accepted": 89,
+        "masked": 202,
+        "handoff_outside_reviewed_preference": 2
+      },
+      "family_macro_acceptance": 0.3603735054627912
+    },
+    {
+      "update": 34,
+      "counts": {
+        "labelled": 278,
+        "accepted": 117,
+        "handoff_outside_reviewed_preference": 35,
+        "masked": 202
+      },
+      "family_macro_acceptance": 0.43951311585240155
+    }
+  ],
+  "feedback_support_profile": {
+    "status": "DESCRIPTIVE_TRAIN_SUPPORT_ONLY",
+    "source": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-feedback-sft-data-v1",
+    "counts": {
+      "raw_states": 319,
+      "known_states": 131,
+      "directional_states": 42,
+      "tie_only_states": 89,
+      "unknown_only_states": 188,
+      "unknown_pairs": 399,
+      "left_pairs": 48,
+      "tie_pairs": 142,
+      "right_pairs": 14
+    },
+    "known_families": 90,
+    "directional_families": 40,
+    "by_stage": {
+      "initial": {
+        "raw_states": 160,
+        "known_states": 57,
+        "directional_states": 14
+      },
+      "post": {
+        "raw_states": 159,
+        "known_states": 74,
+        "directional_states": 28
+      }
+    },
+    "directional_pair_action_types": {
+      "READ > HANDOFF": 29,
+      "READ > READ": 17,
+      "SEARCH > READ": 11,
+      "HANDOFF > HANDOFF": 2,
+      "READ > SEARCH": 3
+    },
+    "tie_pair_action_types": {
+      "READ = SEARCH": 43,
+      "READ = READ": 72,
+      "HANDOFF = READ": 21,
+      "HANDOFF = HANDOFF": 6
+    },
+    "states_per_100_actual_first_outcomes": {
+      "known_states": 16.794871794871796,
+      "directional_states": 5.384615384615385,
+      "tie_only_states": 11.41025641025641,
+      "unknown_only_states": 24.102564102564102
+    },
+    "actual_first_outcomes": 780,
+    "scope": "Descriptive counts from all319actualcomparisonstates, same reviewed labels used for existingfit; correlatedpairs are notindependentsamples. No relabeling, balancing, filtering or runtimechange. Continuation outcome belongs to fullfirstbinding underfixedcontext4; not globaloptimality.",
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 0.112691197,
+      "wall_seconds": 0.11274271924048662
+    }
+  },
+  "dev_endpoint_preparation": {
+    "score_plan": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-dev64-score-pair-v1-plan.json",
+    "owned_launcher": "/data/milai-experiments/20261111-scalable-evidence/run_m2_first160_dev64_score_pair_v1.py",
+    "status": "PREPARED_NOT_LAUNCHED",
+    "states": 64,
+    "source_families": 32,
+    "previously_executed_packets": 188,
+    "canonical_first_outcomes": 137,
+    "packet_union": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-existing-dev-packet-union-v1",
+    "first_cache": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-existing-dev-first-cache-v1",
+    "scope": "Prescheduledu51 endpoints; exactsamefullbindings/wires reusephysicalfirsts includingfailures. Onlymissingmodelchosenbindings execute. OldexposedDEV, notconfirmation."
+  },
+  "s3_preparation": {
+    "manifest": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-fixed-train32-plan-v1/manifest.json",
+    "owned_launcher": "/data/milai-experiments/20261111-scalable-evidence/run_s3_first319_collection_v1.py",
+    "status": "PREPARED_NOT_LAUNCHED",
+    "families": 32,
+    "current_S2_source_pool": 16,
+    "outside_current_S2_fit_source_pool": 16,
+    "max_calls_per_actor": 256,
+    "actors": [
+      "m2-first160-feedback-seed0-v1/checkpoints/update-51",
+      "m2-first160-continued-sft-seed0-v1/checkpoints/update-51"
+    ],
+    "scope": "OriginalTRAINfirstquestions/originalbanks, actualpostS2 trajectories notyetcollected. No unseen/sourceindependenceorcompletedS3claim."
+  },
+  "next": [
+    "Feedback51 closure then matchedSFT51 onGPU3; noautomaticqueue",
+    "Compile32teacher afterclose; next78firstreadouts andremainingcontinuous8families whilefitting",
+    "AfterSFT endpoint choices andpostS2 actualcollection; frozenrepeatseed2 remainsrequired",
+    "36k3390endpoint, Source/Viewlearning, selectedexternal/newconfirmation96 andfullcost/generalization remainunfinished"
+  ],
+  "validation": "No trackedruntimechange inphase27; two finiteownerlaunchers syntaxchecked; actualfirst78 bound successfully. ExistingpackagePASS/tools6oldLMEdynamicimports unchanged; no newfullsuite.",
+  "cost_scope": "Reader/teacher/fit selfmeter; reader265128knownGentokens0unknown,CPU5.927939915s/wall1028.315475069s notaddedagain. Newpreparation measuredCPU pendingaggregate; unmeasuredauthor/import/testCPUunknown.",
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonical/service restart/push. Firstfailuresunknownsrolespreserved."
+}

@@ -1,0 +1,74 @@
+{
+  "status": "ACTIVE_PRIMARY_FIT_LIVE_STATE_VIEW_ACCEPTANCE_PREPARED_NOT_DISPATCHED",
+  "previous_goal_turn": "Progress:newsourcequeueclosed,fullreviews/nesteddata/primaryfitlaunch",
+  "implementation_commit": "074ee79e",
+  "active_fit": {
+    "observed_at": "2026-10-21T16:21:51.286890+00:00",
+    "exec_session": 42364,
+    "parent_pid": 2089181,
+    "child_pid": 2089186,
+    "parent_live": true,
+    "child_live": true,
+    "source_version": "490c683e",
+    "status": "RUNNING",
+    "optimizer_updates": 22,
+    "planned_optimizer_updates": 524,
+    "zero_update_predictions": {
+      "dev": 860,
+      "feedback-dev": 16,
+      "train": 4886
+    },
+    "zero_update_summaries": {
+      "dev": true,
+      "feedback-dev": true,
+      "train": true
+    }
+  },
+  "state_view_manifest": "data/manifests/training-generalization-state-view-acceptance-v1.json",
+  "state_view_execution_plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-execution-plan-v1.json",
+  "prepared_calls": 36,
+  "actual_STATE_model_calls_this_turn": 0,
+  "new_STATE_labels": 0,
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "boundaries": {
+    "active_training_source_unchanged": "490c683e",
+    "no_second_model_job": true,
+    "no_offline_settlement_while_fit_live": true,
+    "closed_settlements_v1_v2_v3_unchanged": true,
+    "old_pending35_untouched": true,
+    "no_sha_validation": true,
+    "no_subagents": true,
+    "no_new_services": true,
+    "pushed": false,
+    "merged": false
+  },
+  "remaining": "Finishfirst524updatefit andremainingdeclaredcurves/controls;executeSTATEViewandpost-operationacceptance,thenfullfeedback/selftrajectory/common-support,factorial/E3/Host/protectedexternal/seeds0,1,2. No generalizationgainclaimed.",
+  "goal_complete": false,
+  "request_text_contrast": {
+    "status": "PREPARED_NOT_DISPATCHED_EQUAL_INFORMATION_INPUT_AUDIT_PASSED",
+    "plan": "data/manifests/training-generalization-source256-request-text-plan-v1.json",
+    "literal_rows_checked": 8744,
+    "new_model_calls": 0,
+    "new_research_fit": false
+  },
+  "initial_operation_metrics": {
+    "train": {
+      "counts": {
+        "labelled": 4886,
+        "accepted": 1307,
+        "handoff_outside_reviewed_preference": 13
+      },
+      "family_macro_acceptance": 0.2472701959344005
+    },
+    "dev": {
+      "counts": {
+        "labelled": 616,
+        "accepted": 206,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 16
+      },
+      "family_macro_acceptance": 0.33756768765750494
+    }
+  },
+  "initial_metrics_scope": "Pre-update static preference baseline;not a learned improvement or Host success"
+}

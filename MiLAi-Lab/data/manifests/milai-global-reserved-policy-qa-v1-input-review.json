@@ -1,0 +1,20 @@
+{
+  "status": "EVALUATION_INPUTS_BOUND_NO_MODEL_CALLS",
+  "cases": 28,
+  "families": 14,
+  "states": 158,
+  "all560paragraphs_literal_source_match": true,
+  "all_exported_states_test_and_training_forbidden": true,
+  "empty_payloads_exact": true,
+  "dense_unique_inputs": 363,
+  "dense_max_tokens": 442,
+  "dense_total_tokens_with_specials": 45834,
+  "expected_dense_batch16_requests": 23,
+  "new_model_calls": 0,
+  "source_views_read_by_author": false,
+  "compute": {
+    "wall_seconds": 0.9780829790979624,
+    "cpu_seconds": 0.9780281190000001,
+    "validations": 1
+  }
+}

@@ -1,0 +1,1226 @@
+{
+  "status": "READ_ONLY_ACTUAL_STATE_RECONCILIATION_CLOSED",
+  "source_protocol": "configs/milai-jev-memops-factor-extension-v1.json",
+  "cases": 3,
+  "families": [
+    "A01",
+    "B01",
+    "D02"
+  ],
+  "arms": 6,
+  "saved_before_after_pairs": 18,
+  "original_seed_records_checked": 4,
+  "committed_record_values_checked": 25,
+  "original_before_unit_counts": {
+    "case-0": 5,
+    "case-1": 11,
+    "case-2": 10
+  },
+  "original_before_relation_counts": {
+    "case-0": 0,
+    "case-1": 0,
+    "case-2": 0
+  },
+  "results": {
+    "D0": {
+      "case-0": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 5,
+        "after_units": 6,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-1": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 11,
+        "after_units": 9,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "direct_root",
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u9": {
+            "label": null,
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u10": {
+            "label": "other",
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u11": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-2": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 10,
+        "after_units": 11,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      }
+    },
+    "D1": {
+      "case-0": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 5,
+        "after_units": 6,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-1": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 11,
+        "after_units": 9,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "direct_root",
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u9": {
+            "label": null,
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u10": {
+            "label": "other",
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u11": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-2": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 10,
+        "after_units": 10,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      }
+    },
+    "D2-Laya-0": {
+      "case-0": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 5,
+        "after_units": 7,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-1": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 11,
+        "after_units": 15,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": null,
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u11": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-2": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 10,
+        "after_units": 11,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      }
+    },
+    "D2-Laya-CE": {
+      "case-0": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 5,
+        "after_units": 7,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-1": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 11,
+        "after_units": 11,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": true,
+        "maintenance_status": "incomplete",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": null,
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u11": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-2": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 10,
+        "after_units": 12,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      }
+    },
+    "D3": {
+      "case-0": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 5,
+        "after_units": 7,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-1": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 11,
+        "after_units": 14,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": null,
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u11": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-2": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 10,
+        "after_units": 11,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      }
+    },
+    "D4": {
+      "case-0": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 5,
+        "after_units": 5,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": true,
+        "maintenance_status": "incomplete",
+        "mapped_label_units": {
+          "u1": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-1": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 11,
+        "after_units": 8,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": false,
+        "maintenance_status": "completed",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "direct_root",
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u9": {
+            "label": null,
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u10": {
+            "label": "other",
+            "present_after": false,
+            "unit_unchanged_after": false,
+            "text_unchanged_after": false
+          },
+          "u11": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      },
+      "case-2": {
+        "same_actual_before": true,
+        "sqlite_current_equals_saved_after": true,
+        "before_units": 10,
+        "after_units": 10,
+        "before_relations": 0,
+        "after_relations": 0,
+        "after_equals_before": true,
+        "maintenance_status": "incomplete",
+        "mapped_label_units": {
+          "u1": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u2": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u3": {
+            "label": "direct_root",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u4": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u5": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u6": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u7": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u8": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u9": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          },
+          "u10": {
+            "label": "other",
+            "present_after": true,
+            "unit_unchanged_after": true,
+            "text_unchanged_after": true
+          }
+        },
+        "semantic_grading": "See original source/answer review; physical replacement is not required for a valid new temporal assertion."
+      }
+    }
+  },
+  "no_model_calls": true,
+  "no_bank_mutations": true,
+  "no_old_costs_rebilled": true,
+  "sha_checks": false,
+  "findings": [
+    "All18arms/cases retain identical genuine before values and currentSQLite matches saved after.",
+    "All3 before states have zero stored relations; these states do not supply demonstrated conditional/alternative-support preserve-successor positives.",
+    "D3forget keeps the original storage-help unit and appends a forget directive; instruction retention is not target removal.",
+    "D0/D1/D4forget remove the independent general bar-preference unit as well as the target; the ambiguous afterward-beer unit remains a separate masked judgment.",
+    "D2CEforget andD4role/resolution failures leave before unchanged; successful parsing/flow status is not semantic-state quality.",
+    "Keep strongD0, source-scope and state-only probes. Reader-trained weights are not Writer-root/preserve supervision. Do not fabricate preserve positives or broadenImpact training from majority-other accuracy."
+  ],
+  "scope": "Previously exposed three-family research states, not new independent Writer generalization, a service change or default adoption.",
+  "compute": {
+    "wall_seconds": 0.3789364490658045,
+    "cpu_seconds": 0.09456843000000001,
+    "audits": 1
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "status": "EXISTING_BM25_NEXT_BASELINE_SOURCE_AND_REFERENCE_DIAGNOSTICS",
+  "cohorts": {
+    "global-reader-policy-qa-v1": {
+      "counts": {
+        "source_missing_complement_states": 30,
+        "bm25_remaining_source_useful": 13,
+        "reference_complement_states": 117,
+        "bm25_remaining_reference_accepted": 50
+      },
+      "families": {
+        "musique-family-000493": {
+          "states": 5,
+          "accepted": 4
+        },
+        "musique-family-000804": {
+          "states": 5,
+          "accepted": 0
+        },
+        "musique-family-000730": {
+          "states": 5,
+          "accepted": 0
+        },
+        "musique-family-000657": {
+          "states": 5,
+          "accepted": 3
+        },
+        "musique-family-000012": {
+          "states": 5,
+          "accepted": 3
+        },
+        "musique-family-000719": {
+          "states": 5,
+          "accepted": 3
+        }
+      },
+      "source_family_macro": 0.43333333333333335
+    },
+    "global-reserved-policy-qa-v1": {
+      "counts": {
+        "source_missing_complement_states": 49,
+        "bm25_remaining_source_useful": 21,
+        "reference_complement_states": 126,
+        "bm25_remaining_reference_accepted": 49
+      },
+      "families": {
+        "candidate-family-000466": {
+          "states": 4,
+          "accepted": 4
+        },
+        "candidate-family-000484": {
+          "states": 5,
+          "accepted": 4
+        },
+        "candidate-family-000173": {
+          "states": 5,
+          "accepted": 3
+        },
+        "candidate-family-000520": {
+          "states": 4,
+          "accepted": 3
+        },
+        "candidate-family-000421": {
+          "states": 6,
+          "accepted": 0
+        },
+        "candidate-family-000485": {
+          "states": 5,
+          "accepted": 1
+        },
+        "candidate-family-000434": {
+          "states": 5,
+          "accepted": 0
+        },
+        "candidate-family-000443": {
+          "states": 5,
+          "accepted": 3
+        },
+        "candidate-family-000506": {
+          "states": 5,
+          "accepted": 3
+        },
+        "candidate-family-000482": {
+          "states": 5,
+          "accepted": 0
+        }
+      },
+      "source_family_macro": 0.45499999999999996
+    }
+  },
+  "scope": "The already-declared question-only BM25 ranking is applied to each frozen reference prefix after excluding opened documents. Source-useful means a missing member of a recorded complete proof, not optimal remaining-budget utility or QA success. Qualified author sources retained; no change to model decisions or primary reference metrics.",
+  "new_model_calls": 0,
+  "compute": {
+    "wall_seconds": 0.053929698653519154,
+    "cpu_seconds": 0.053919492,
+    "analyses": 1
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "CODE_FROZEN;FULL_PUBLIC_SEARCH_EQUIVALENCE_DECLARED_BEFORE_EXECUTION",
+  "declared_at": "2026-10-22T02:25:59.467248+00:00",
+  "source_version": "8e2178bd",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-source-search-cache-8e2178bd/MiLAi-Lab",
+  "literal_files_equal": [
+    "src/milai_lab/memory/retrieval.py",
+    "src/milai_lab/memory/service.py",
+    "src/milai_lab/runners/functional.py",
+    "src/milai_lab/runners/lme_v2.py"
+  ],
+  "change": "Caller-owned single latest native BM25 corpus cache. Exact ordered current strings and owner/bank/granularity/tokenization compared directly, no fingerprints. Only corpus statistics reused. Current Source visibility, exclusions, assembly, bindings and actual reads still execute. No queries/results/answers/provenance cached. LME keeps one cache per backend across fresh question Store clones.",
+  "version_contract": "Pinned rank-bm25 0.2.2 verified on misses and hits; native tokenization/scoring/argsort ties unchanged. Other callers default cacheNone.",
+  "validation": {
+    "passed": 21,
+    "new_cache_tests": 10,
+    "skipped": 0,
+    "ruff_files": 6,
+    "mypy_implementation_files": 4,
+    "package_tools_boundaries": "PASS;6grandfatheredprivateedges unchanged",
+    "scope": "Native score/tie/empty/Unicode comparisons, literal text/scope/runtime changes, fresh visibility/exclusions/order, newly bound same-text replacements, actual isolated backend queries without prior-query retention; mocked HTTP only."
+  },
+  "actual_audit": {
+    "questions": 451,
+    "limits": [
+      8,
+      16
+    ],
+    "planned_searches": 902,
+    "banks": "Both complete native100trajectory stores; exact public query and native pool mapping, current probe excluded. No reference answer/eval fields.",
+    "reference": "Run the frozen c85eb6d3 old flat function through actual service once per bank, capturing its native BM25 corpus/ordered units. All451queries and bothlimits compared to that independently built pinned native index; current material text/ranges/revisions compared to actual reopened expected descriptors. Direct old flat integration equality additionally checked on each bank first public query. Not902independent old re-indexings.",
+    "cost": "Measure actual source search receipts, separating cold builds/hot lookups from validation-side reference reads. No model/HTTP/embedding or policy/Reader. Full phase CPU pending, no offline settlement while fit lives.",
+    "failure": "First mismatch stops with all partial outputs retained; no automatic retry."
+  },
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "new_training_labels": 0,
+  "new_model_jobs": 0,
+  "scope": "Computation reuse only, not retrieval quality or model generalization. Full histories/cohorts retained; source-range256/View budgets/labels/live fit unchanged. Storage compression/retention changes still not implemented."
+}

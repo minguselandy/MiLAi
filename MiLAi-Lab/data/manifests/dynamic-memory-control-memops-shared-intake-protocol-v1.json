@@ -1,0 +1,24 @@
+{
+  "version": "dynamic-memory-control-memops-shared-intake-v1",
+  "status": "PREPARED_NOT_RUN",
+  "runtime_source": "freeze current shared implementation before execution",
+  "config": "configs/dynamic-memory-operation-memops-generative-shared-v1.json",
+  "fixture": "artifacts/dynamic-memory-control/prepared-next-0593c57c/memops-histories.json",
+  "offline_source_contract": "artifacts/dynamic-memory-control/prepared-next-0593c57c/memops-source-review.json",
+  "policy": "generative",
+  "positions": 36,
+  "background_families": 6,
+  "source_split": "unchanged jointly-train A02/B01/C02/D02/E01/F07; no test/calibration",
+  "source_fidelity": "Same138literal original turns, roles, unknown report dates, chronological cuts, questions and repeats as0593c57c. No family IDs, offline answers or operation labels enter model state.",
+  "projection": "shared/literal_tables_v1, actual raw state remains in operation traces; plain Reader evidence and execution contracts unchanged",
+  "admission_evidence": "shared-projection-audit-v3:181source-only states all fit8192/head2048,max8003; generated views and actual own-policy states must be checked separately after collection.",
+  "labels": "Review actual generated view revisions in each source context. Derive preferences from source proofs and actual results; never copy chosen actions or repair stored interpretations.",
+  "native_followup": "Original36native positions remain planned but held until a shared-input checkpoint is actually fitted and its input-length review closes. No silent zero-shot format substitution.",
+  "training": "T1 allocation/updates declared after actual labelled state counts and lengths; this36position intake alone does not complete broad training.",
+  "queue": "Ready after the sole existing coordinator reaches a reviewed terminal boundary; no extra coordinator started. Keep known failures and all costs.",
+  "related_protocols": [
+    "dynamic-memory-control-memops-control-protocol-v1.json",
+    "dynamic-memory-control-memops-capacity-v1.json",
+    "dynamic-memory-control-shared-projection-v1.json"
+  ]
+}

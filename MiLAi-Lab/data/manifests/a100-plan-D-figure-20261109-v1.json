@@ -1,0 +1,51 @@
+{
+  "status": "D_DEVELOPMENT_ACTUAL_VIEW_DECISIONS_AND_SEPARATE_OLD_OUTPUT_FIRST_CONTROL_FIGURE",
+  "PNG": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-evidence-v2.png",
+  "PDF": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-evidence-v2.pdf",
+  "PNG_size": [
+    3000,
+    1240
+  ],
+  "new32_complete": [
+    67,
+    65,
+    95
+  ],
+  "new32_denominator_each": 320,
+  "REFRESH_VIEW_offered": [
+    602,
+    611,
+    779
+  ],
+  "REFRESH_VIEW_selected": [
+    59,
+    54,
+    0
+  ],
+  "old_output_complete_searchable": [
+    4,
+    4,
+    2
+  ],
+  "old_output_complete_excluded": [
+    4,
+    6,
+    2
+  ],
+  "old_output_denominator_each": 7,
+  "known_View_complete": 0,
+  "known_View_denominator": 9,
+  "source_author_not_independent_or_blind": true,
+  "original_firsts_and_failures_retained": true,
+  "PNG_actual_visual_inspection_passed": true,
+  "PNG_visual_inspection_pending": false,
+  "new_model_tokenizer_GPU_HTTP_or_original_ledger_calls": 0,
+  "no_sha_validation": true,
+  "full763_line_completion_proven": false,
+  "goal_complete": false,
+  "actual_visual_inspection": "Viewedv1 annotation/bar-label overlap, increased annotation headroom in v2, then actually viewed final3000x1240 PNG.",
+  "PDF_same_figure_single_page_structure_verified": true,
+  "PDF_separately_rendered": false,
+  "published_PNG": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-plan-D-evidence-20261109-v1.png",
+  "published_PDF": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-plan-D-evidence-20261109-v1.pdf"
+}

@@ -1,0 +1,212 @@
+{
+  "status": "CLOSED_INTERNAL_PANELS_RECONCILED_WITH_ORIGINAL_EXISTING_REVIEWS",
+  "panels": [
+    {
+      "id": "development64",
+      "title": "A  Exposed autonomous development",
+      "subtitle": "64 source families | task C / 64",
+      "metric": "implementation-assistant Source-reviewed complete task success",
+      "rows": [
+        {
+          "method": "fixed-prefix",
+          "label": "Fixed prefix",
+          "count": 25,
+          "denominator": 64,
+          "percent": 39.0625,
+          "color": "#737b86"
+        },
+        {
+          "method": "incumbent-delivery-u16",
+          "label": "Initial E1",
+          "count": 25,
+          "denominator": 64,
+          "percent": 39.0625,
+          "color": "#a2a9b1"
+        },
+        {
+          "method": "b0-u33",
+          "label": "B0",
+          "count": 33,
+          "denominator": 64,
+          "percent": 51.5625,
+          "color": "#4a6f91"
+        },
+        {
+          "method": "b1-u33",
+          "label": "B1",
+          "count": 32,
+          "denominator": 64,
+          "percent": 50.0,
+          "color": "#7a9bb8"
+        },
+        {
+          "method": "e3-aggregate-u32",
+          "label": "E3 seed0",
+          "count": 40,
+          "denominator": 64,
+          "percent": 62.5,
+          "color": "#197e78"
+        },
+        {
+          "method": "e3-aggregate-seed1-u32",
+          "label": "E3 seed1",
+          "count": 33,
+          "denominator": 64,
+          "percent": 51.5625,
+          "color": "#4a9d8f"
+        },
+        {
+          "method": "e3-aggregate-seed2-u32",
+          "label": "E3 seed2",
+          "count": 29,
+          "denominator": 64,
+          "percent": 45.3125,
+          "color": "#83b8a8"
+        }
+      ],
+      "sources": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/task-dev64/source-author-reviews.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/source-author-reviews.json"
+      ],
+      "scope": "Exposed DEVELOPMENT; different training recipes and u32/u33 checkpoints. No cross-stage causal contrast."
+    },
+    {
+      "id": "confirmation256",
+      "title": "B  Frozen autonomous confirmation",
+      "subtitle": "256 source families | task C / 256",
+      "metric": "implementation-assistant Source-reviewed complete task success",
+      "rows": [
+        {
+          "method": "fixed-prefix",
+          "label": "Fixed prefix",
+          "count": 149,
+          "denominator": 256,
+          "percent": 58.203125,
+          "color": "#737b86"
+        },
+        {
+          "method": "e3-aggregate-u32",
+          "label": "E3 seed0",
+          "count": 148,
+          "denominator": 256,
+          "percent": 57.8125,
+          "color": "#197e78"
+        },
+        {
+          "method": "e3-aggregate-seed1-u32",
+          "label": "E3 seed1",
+          "count": 131,
+          "denominator": 256,
+          "percent": 51.171875,
+          "color": "#4a9d8f"
+        },
+        {
+          "method": "e3-aggregate-seed2-u32",
+          "label": "E3 seed2",
+          "count": 115,
+          "denominator": 256,
+          "percent": 44.921875,
+          "color": "#83b8a8"
+        }
+      ],
+      "sources": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-confirmation256-quality-results-20261107-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-first256-source-author-review-reconciliation-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first256-source-author-review-reconciliation-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32/first256-source-author-review-reconciliation-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/first256-source-author-review-reconciliation-v1.json"
+      ],
+      "scope": "Fixed seed0 is primary; all three saved fits shown. Reviewer is the implementation assistant, not independent or blind. Native DEV185/TRAIN71 differs from the research role."
+    },
+    {
+      "id": "update32",
+      "title": "C  Update trajectories: development",
+      "subtitle": "32 families x 10 requests | task C / 320",
+      "metric": "implementation-assistant Source-reviewed complete task success",
+      "rows": [
+        {
+          "method": "view_cache",
+          "label": "View cache",
+          "count": 67,
+          "denominator": 320,
+          "percent": 20.9375,
+          "color": "#737b86"
+        },
+        {
+          "method": "view_cache_incremental",
+          "label": "Cache + incremental",
+          "count": 65,
+          "denominator": 320,
+          "percent": 20.3125,
+          "color": "#7a9bb8"
+        },
+        {
+          "method": "e3-aggregate-u32",
+          "label": "E3 seed0",
+          "count": 95,
+          "denominator": 320,
+          "percent": 29.6875,
+          "color": "#197e78"
+        }
+      ],
+      "sources": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-D-new32-Source-View-operation-synthesis-20261107-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-D-audit-20261109-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache/answer-review-closeout-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache_incremental/answer-review-closeout-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-e3-aggregate-u32/answer-review-closeout-v1.json"
+      ],
+      "scope": "32 clusters, not 320 independent sources. All three method pairs have equal first Provider request dicts for all64 requests; retrieval arguments and later trajectories differ and Host generation RNG is unmatched. E3 received no View in this panel."
+    },
+    {
+      "id": "reserved64",
+      "title": "D  Reserved native conditional queries",
+      "subtitle": "64 query families | native balanced accuracy",
+      "metric": "native family macro balanced accuracy",
+      "rows": [
+        {
+          "method": "initial",
+          "label": "Initial E1",
+          "percent": 66.50875986728705,
+          "color": "#a2a9b1"
+        },
+        {
+          "method": "a0",
+          "label": "A0 legacy",
+          "percent": 85.3114447743328,
+          "color": "#4a6f91"
+        },
+        {
+          "method": "a1",
+          "label": "A1 native priority",
+          "percent": 79.94292058838623,
+          "color": "#197e78"
+        }
+      ],
+      "sources": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-reserved64-native-results-20261107-v1.json"
+      ],
+      "constant_reference_percent": {
+        "constant-satisfies": 50.0,
+        "constant-does_not_satisfy": 50.0
+      },
+      "scope": "Shared corpus, not independent Source histories or Host success. 4066 known cells, 267 unjudged; no judged change pairs. No new fit or reselection."
+    }
+  ],
+  "label_provenance": "This execution assistant, acting as the implementation author; no independent human or blind review evidence.",
+  "existing_labels_first_results_or_masks_changed": false,
+  "pooled_score_or_cross_panel_causal_comparison": false,
+  "external_full_results_or_final_project_costs_closed": false,
+  "model_HTTP_or_ledger_calls": 0,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "scope_correction_20261109": {
+    "source": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-D-audit-20261109-v1.json",
+    "historical_summary_retained": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-closed-internal-overview-20261107-v1.json",
+    "all_original_panel_rows_and_numeric_results_literal_equal": true,
+    "first_Provider_dicts_match_but_later_tool_arguments_and_trajectories_differ": true,
+    "Host_generation_RNG_unmatched": true,
+    "LME_all_six_native_stage_closures_now_closed": true,
+    "Mem2Act_and_final_project_costs_still_open": true
+  }
+}

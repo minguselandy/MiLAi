@@ -1,0 +1,129 @@
+{
+  "status": "ACTIVE_SAVED_CPU_LIVE;FOUR_W5_ANCHOR_PREFIX_REVIEWS_ADDED",
+  "observed_at": "2026-10-22T08:10:28.754125+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v47.json",
+  "previous_turn_classification": "PROGRESS:49nonanchor coverage closed and savedCPU candidate0 closure audited",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 1589315,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 32,
+    "completed_states": 71,
+    "planned_states": 876,
+    "completed_candidates": 1,
+    "deployment_selection": null,
+    "condition": "All seven saved CPU candidates, then matching selected train; CPU FP32 loaded, reference_compile=False, MHA fastpath=False, shared_actions12288/head2048. Unchanged.",
+    "automatic_candidate_transition_within_original_job": true,
+    "current_inference_fields_verified": true
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 197,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "public_source_review": {
+    "manifest": "data/manifests/training-generalization-feedback-source-review-v14.json",
+    "new_notes_families": [
+      "memops_A29",
+      "memops_B05",
+      "memops_B06",
+      "memops_C23"
+    ],
+    "new_source_units": 92,
+    "new_public_requests": 8,
+    "cumulative_new_note_families": 53,
+    "cumulative_source_units": 1219,
+    "cumulative_public_requests": 114,
+    "new_independent_record_requests": 0,
+    "cumulative_independent_record_requests": 8,
+    "all_sources_read_including_assistant": true,
+    "source_copies_literal_equal": true,
+    "scope": "Existing exposed train histories only. New-note coverage is not all historical review coverage. No outputs, labels, source selection or conditions changed. Actual captured requests, Views, branches and answers still require later review.",
+    "findings": [
+      "A29首阶段已有72纠正；78重校不适用巴西轨道而撤回，作业进步不是新分数。",
+      "B05最后共同首选Elara仍有分歧，妻子提Iris用户未同意，中间名未定。",
+      "B06偏小型活动但已认可未来大烧烤例外，不是绝对禁止或已出席。",
+      "C23五月第一周是确认计划窗口，不是已订预约，4月11日空位已放弃，儿子日期未核实。"
+    ],
+    "new_prefix_sizes": {
+      "memops_A29": [
+        11,
+        23
+      ],
+      "memops_B05": [
+        7,
+        23
+      ],
+      "memops_B06": [
+        7,
+        23
+      ],
+      "memops_C23": [
+        7,
+        23
+      ]
+    },
+    "new_repeated_source_entries_checked_not_added_to_units": 0
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "feedback_public_source_reviews_anchors000_001_save_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v14.json",
+      "cpu_seconds": 0.006198000000000002,
+      "wall_seconds": 0.006202253513038158,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.006198000000000002,
+  "costs": "Only new note-save/literal/code-check CPU0.006198000 pending. V47pending0.041111181 and all earlier phases separate. Candidate0 CPU43688.529695180 already billed once, never settle again. V34inventory10663.791232191 is existing74phases, not new cost. Original ledger only; closedv1/v2/v3 unchanged. No settlement while model live. Semantic/unmeasured work unknown,not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active.",
+  "coverage_audit": {
+    "manifest": "data/manifests/training-generalization-feedback-nonanchor-source-review-coverage-v1.json",
+    "all49_nonanchor_histories_literal_equal": true,
+    "new_prefix_notes_remaining_anchors": [
+      "memops_C26",
+      "memops_D11",
+      "memops_D23",
+      "memops_F08"
+    ],
+    "scope": "Closed49nonanchor audit retained unchanged. Current new-note inventory additionally covers four originalW5anchors; four remain. OldW5reviews/labels retained, no independent confirmation claimed.",
+    "remaining_anchors_recomputed_from": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v14.json",
+    "earlier_nonanchor_audit_not_rewritten": true
+  },
+  "closed_saved_cpu_candidate_already_billed": {
+    "update": 0,
+    "planned_and_completed_states": 876,
+    "old_pid": 893516,
+    "old_pid_absent": true,
+    "canonical_run": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/update-0/run.json",
+    "canonical_compute": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/update-0/compute.json",
+    "original_ledger_phase": "training_generalization_source256_actions_full_seed0_u524_v1_saved_cpu_u0",
+    "compute": {
+      "wall_seconds": 11132.235744120553,
+      "cpu_seconds": 43688.529695180005,
+      "runs": 1,
+      "forwards": 876,
+      "sequence_rows": 876,
+      "input_tokens": 4314812,
+      "state_tokenizations": 876,
+      "state_tokens": 4077231
+    },
+    "unique_runs_1_and_exact_ledger_measures_verified": true,
+    "partial_quality_metrics_read_this_turn": false,
+    "accounting": "Already billed once by evaluator, not pending and never re-settle."
+  }
+}

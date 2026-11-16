@@ -1,0 +1,143 @@
+{
+  "status": "ACTIVE;EMPTY_DELIVERY_CHOICE_IMPLEMENTED;SAVEDCPU393_RUNNING",
+  "observed_at": "2026-10-23T13:14:21.700018+00:00",
+  "source_version": "e1e99dae",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v15.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: actual18STATEstates andunknownpair exported through existingpipeline,failedprediction retained",
+  "acquisition_coverage": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/laya/acquisition-coverage.json",
+    "seed_sources": 31,
+    "stored_sources": 32,
+    "last_state": {
+      "step": 4,
+      "observed_materials": 3,
+      "complete_seed_sources": 31,
+      "all_seed_sources_observed": true,
+      "acquired_span_characters_with_repetition": 11182,
+      "complete_unique_source_characters": 11059,
+      "empty_delivery_action_offered": false,
+      "selected_material_count": 1
+    },
+    "scope": "Literal source-range acquisition coverage,not semantic relevance or answer sufficiency. All31memoryhistorySources acquired before failed5thdecision;currentuserrequest is not new policy evidence. No label/retry/forward/HTTP/ledgerwrite."
+  },
+  "new_empty_delivery": {
+    "action": "HANDOFF handoff_select_none with delivery_indices=[]",
+    "semantics": "Clear selecteddelivery only;retain full observations and spent allowance;no new read,refund,source mutation or sufficiency claim",
+    "legacy_plain_handoff": "unchanged",
+    "original_frozen_actions_runs": "unchanged;oldcapturedstate had no new action,so no retroactive label or replay claim",
+    "probe": {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/empty-delivery-v3-checkpoint-v1",
+      "status": "NEW_EMPTY_DELIVERY_OPTION_EXECUTED_ON_ACTUAL_CHECKPOINT_COPY",
+      "before_observation_equal": true,
+      "added_actions": [
+        {
+          "id": "handoff_select_none",
+          "kind": "HANDOFF",
+          "target": "no selected material",
+          "parameters": {
+            "delivery_indices": []
+          }
+        }
+      ],
+      "removed_actions": [],
+      "tokens": 63,
+      "reads_before": 4,
+      "reads_after": 4,
+      "observations_retained": 3,
+      "old_capture_bytes_unchanged": true,
+      "scope": "New executor action-set condition in a copied actual checkpoint,not replay of old legal options or old model outcome. Scripted selection,no semantic label/Host/model/HTTP."
+    },
+    "model_quality": "not_measured;scripted executor choice only"
+  },
+  "validation": {
+    "related_tests": {
+      "passed": 57,
+      "skipped": 1
+    },
+    "skip": "optionalMemPursuit absent",
+    "ruff": "PASS",
+    "scoped_mypy": "executor modulePASS with existingexclusions",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u393-v1",
+      "driver_pid": 3654617,
+      "child_pid": 3654665,
+      "session": 24298,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 194,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_ORIGINAL_SAVEDCPU393_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v15.json",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/empty-delivery-validation-v1/package-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 3.6486019999999995,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/empty-delivery-validation-v1/ruff-final.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.044909000000000004,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/empty-delivery-validation-v1/ruff.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.09817199999999993,
+        "exit_code": 1
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/empty-delivery-validation-v1/tests.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 7.341231,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/empty-delivery-validation-v1/tools-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 7.755681999999999,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/empty-delivery-validation-v1/typing.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 1.1135410000000006,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/laya/acquisition-coverage.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 3.25926039
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/empty-delivery-v3-checkpoint-v1/probe.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 5.216736204
+      }
+    ],
+    "measured_cpu_seconds": 28.478133594000003,
+    "ledger_recorded": false,
+    "scope": "Actual range coverage,unit checks and copied-checkpoint executor probe only. No model/HTTP. Other unmeasured work remains unknown.",
+    "no_sha_validation": true
+  },
+  "remaining": "Original393/524/selection/matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic and compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured.",
+  "scheduling": "Original393 is sole neuraljob. No new neural dispatch or offline settlement whilelive;never restart on stale observation. Allpriorclosedjobs/results remain closed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

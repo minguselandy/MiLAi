@@ -1,0 +1,30 @@
+{
+  "status": "RUNNING_CPU_SYNTHETIC_PROBE_PERFORMANCE_INVESTIGATION",
+  "pid": 2523750,
+  "exec_session": 74656,
+  "source_version": "8bae8f28",
+  "run": "artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v1",
+  "scope": "Single synthetic request over full actual sourceStore; fixed-context/no embedding, no official benchmarkquery/qrels or model evaluation.",
+  "observations": {
+    "source_inventory_wall_seconds": 9.586698072962463,
+    "first_search_closed": false,
+    "closed_queries": 0,
+    "logical_cached_read_bytes_at_one_observation": 307078874798,
+    "read_syscalls_at_one_observation": 75119538,
+    "physical_read_bytes_at_one_observation": 0,
+    "store_namespaces": 4,
+    "rows_per_namespace": 16072,
+    "query_plan": "SCAN store USING INDEX milai_store_updated_at_idx for prefix LIKE + ORDER BY updated_at DESC + LIMIT/OFFSET",
+    "exact_namespace_filter": "MemoryService._rows applies exact namespace equality after SDK prefix-search materialization."
+  },
+  "conclusion": "Large-bank query latency needs diagnosis before fullcohort execution. Scan shape is verified; exclusive bottleneck attribution remains unproven. Preserve live process/first output; do not restart on observation timeout.",
+  "model_fit": {
+    "pid": 2070802,
+    "exec_session": 15108,
+    "status": "RUNNING",
+    "optimizer_updates": 524,
+    "final_evaluations_pending": true
+  },
+  "no_sha_checks": true,
+  "observed_epoch": 1792471608.9259803
+}

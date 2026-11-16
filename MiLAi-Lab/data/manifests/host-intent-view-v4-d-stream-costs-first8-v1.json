@@ -1,0 +1,456 @@
+{
+  "status": "FIRST_EIGHT_CLOSED_ARMS_FOUR_ACTUAL_REQUEST_WINDOWS",
+  "actual_streams": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/stream-costs-first8-v1.json",
+  "arms": {
+    "generative": {
+      "windows": [
+        {
+          "through_request_per_stream": 1,
+          "positions": 16,
+          "complete_Host": 9,
+          "complete_material": 9,
+          "generation_tokens": 417278,
+          "embedding_tokens": 0,
+          "generation_requests": 101,
+          "message_wall_seconds": 485.8280557068065,
+          "returned_wire_tokens": 15414
+        },
+        {
+          "through_request_per_stream": 2,
+          "positions": 32,
+          "complete_Host": 13,
+          "complete_material": 15,
+          "generation_tokens": 721766,
+          "embedding_tokens": 0,
+          "generation_requests": 154,
+          "message_wall_seconds": 1103.008935507387,
+          "returned_wire_tokens": 19999
+        },
+        {
+          "through_request_per_stream": 3,
+          "positions": 48,
+          "complete_Host": 15,
+          "complete_material": 18,
+          "generation_tokens": 1037645,
+          "embedding_tokens": 0,
+          "generation_requests": 200,
+          "message_wall_seconds": 1689.9181009251624,
+          "returned_wire_tokens": 27460
+        },
+        {
+          "through_request_per_stream": 4,
+          "positions": 64,
+          "complete_Host": 15,
+          "complete_material": 18,
+          "generation_tokens": 1221393,
+          "embedding_tokens": 0,
+          "generation_requests": 220,
+          "message_wall_seconds": 2273.6198424873874,
+          "returned_wire_tokens": 28931
+        }
+      ],
+      "whole_arm_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/generative/summary-v1.json",
+      "generation_saving_vs_fixed_context": [
+        -296936,
+        -483952,
+        -662619,
+        -707715
+      ]
+    },
+    "rules": {
+      "windows": [
+        {
+          "through_request_per_stream": 1,
+          "positions": 16,
+          "complete_Host": 10,
+          "complete_material": 16,
+          "generation_tokens": 169831,
+          "embedding_tokens": 0,
+          "generation_requests": 48,
+          "message_wall_seconds": 421.9851322649047,
+          "returned_wire_tokens": 28581
+        },
+        {
+          "through_request_per_stream": 2,
+          "positions": 32,
+          "complete_Host": 17,
+          "complete_material": 32,
+          "generation_tokens": 274066,
+          "embedding_tokens": 0,
+          "generation_requests": 64,
+          "message_wall_seconds": 753.8873513247818,
+          "returned_wire_tokens": 28581
+        },
+        {
+          "through_request_per_stream": 3,
+          "positions": 48,
+          "complete_Host": 19,
+          "complete_material": 36,
+          "generation_tokens": 393582,
+          "embedding_tokens": 0,
+          "generation_requests": 83,
+          "message_wall_seconds": 1052.5642262967303,
+          "returned_wire_tokens": 32404
+        },
+        {
+          "through_request_per_stream": 4,
+          "positions": 64,
+          "complete_Host": 19,
+          "complete_material": 36,
+          "generation_tokens": 551227,
+          "embedding_tokens": 0,
+          "generation_requests": 100,
+          "message_wall_seconds": 1593.3558541489765,
+          "returned_wire_tokens": 34066
+        }
+      ],
+      "whole_arm_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/rules/summary-v1.json",
+      "generation_saving_vs_fixed_context": [
+        -49489,
+        -36252,
+        -18556,
+        -37549
+      ]
+    },
+    "fixed-context": {
+      "windows": [
+        {
+          "through_request_per_stream": 1,
+          "positions": 16,
+          "complete_Host": 11,
+          "complete_material": 16,
+          "generation_tokens": 120342,
+          "embedding_tokens": 0,
+          "generation_requests": 35,
+          "message_wall_seconds": 323.5465341983363,
+          "returned_wire_tokens": 23948
+        },
+        {
+          "through_request_per_stream": 2,
+          "positions": 32,
+          "complete_Host": 18,
+          "complete_material": 32,
+          "generation_tokens": 237814,
+          "embedding_tokens": 0,
+          "generation_requests": 53,
+          "message_wall_seconds": 729.2787278667092,
+          "returned_wire_tokens": 26991
+        },
+        {
+          "through_request_per_stream": 3,
+          "positions": 48,
+          "complete_Host": 21,
+          "complete_material": 38,
+          "generation_tokens": 375026,
+          "embedding_tokens": 0,
+          "generation_requests": 71,
+          "message_wall_seconds": 1187.5211032135412,
+          "returned_wire_tokens": 29785
+        },
+        {
+          "through_request_per_stream": 4,
+          "positions": 64,
+          "complete_Host": 21,
+          "complete_material": 38,
+          "generation_tokens": 513678,
+          "embedding_tokens": 0,
+          "generation_requests": 88,
+          "message_wall_seconds": 1664.7582203643396,
+          "returned_wire_tokens": 30752
+        }
+      ],
+      "whole_arm_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/fixed-context/summary-v1.json",
+      "generation_saving_vs_fixed_context": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "t1-main-seed0": {
+      "windows": [
+        {
+          "through_request_per_stream": 1,
+          "positions": 16,
+          "complete_Host": 10,
+          "complete_material": 16,
+          "generation_tokens": 128309,
+          "embedding_tokens": 0,
+          "generation_requests": 35,
+          "message_wall_seconds": 403.77808373514563,
+          "returned_wire_tokens": 23954
+        },
+        {
+          "through_request_per_stream": 2,
+          "positions": 32,
+          "complete_Host": 17,
+          "complete_material": 32,
+          "generation_tokens": 267458,
+          "embedding_tokens": 0,
+          "generation_requests": 54,
+          "message_wall_seconds": 935.66246463079,
+          "returned_wire_tokens": 26238
+        },
+        {
+          "through_request_per_stream": 3,
+          "positions": 48,
+          "complete_Host": 19,
+          "complete_material": 37,
+          "generation_tokens": 411575,
+          "embedding_tokens": 0,
+          "generation_requests": 71,
+          "message_wall_seconds": 1489.1898025721312,
+          "returned_wire_tokens": 27644
+        },
+        {
+          "through_request_per_stream": 4,
+          "positions": 64,
+          "complete_Host": 19,
+          "complete_material": 37,
+          "generation_tokens": 537603,
+          "embedding_tokens": 0,
+          "generation_requests": 88,
+          "message_wall_seconds": 1916.9329007454216,
+          "returned_wire_tokens": 28353
+        }
+      ],
+      "whole_arm_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/t1-main-seed0/summary-v1.json",
+      "generation_saving_vs_fixed_context": [
+        -7967,
+        -29644,
+        -36549,
+        -23925
+      ]
+    },
+    "t1-control-seed0": {
+      "windows": [
+        {
+          "through_request_per_stream": 1,
+          "positions": 16,
+          "complete_Host": 9,
+          "complete_material": 16,
+          "generation_tokens": 117764,
+          "embedding_tokens": 0,
+          "generation_requests": 34,
+          "message_wall_seconds": 351.848335089162,
+          "returned_wire_tokens": 22783
+        },
+        {
+          "through_request_per_stream": 2,
+          "positions": 32,
+          "complete_Host": 15,
+          "complete_material": 32,
+          "generation_tokens": 266297,
+          "embedding_tokens": 0,
+          "generation_requests": 55,
+          "message_wall_seconds": 910.7692568618804,
+          "returned_wire_tokens": 24896
+        },
+        {
+          "through_request_per_stream": 3,
+          "positions": 48,
+          "complete_Host": 16,
+          "complete_material": 36,
+          "generation_tokens": 393933,
+          "embedding_tokens": 0,
+          "generation_requests": 72,
+          "message_wall_seconds": 1376.8117461716756,
+          "returned_wire_tokens": 25408
+        },
+        {
+          "through_request_per_stream": 4,
+          "positions": 64,
+          "complete_Host": 16,
+          "complete_material": 36,
+          "generation_tokens": 525203,
+          "embedding_tokens": 0,
+          "generation_requests": 89,
+          "message_wall_seconds": 1845.5374732967466,
+          "returned_wire_tokens": 27301
+        }
+      ],
+      "whole_arm_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/t1-control-seed0/summary-v1.json",
+      "generation_saving_vs_fixed_context": [
+        2578,
+        -28483,
+        -18907,
+        -11525
+      ]
+    },
+    "continued-ce-seed0": {
+      "windows": [
+        {
+          "through_request_per_stream": 1,
+          "positions": 16,
+          "complete_Host": 9,
+          "complete_material": 16,
+          "generation_tokens": 118793,
+          "embedding_tokens": 0,
+          "generation_requests": 34,
+          "message_wall_seconds": 347.24845402128994,
+          "returned_wire_tokens": 24177
+        },
+        {
+          "through_request_per_stream": 2,
+          "positions": 32,
+          "complete_Host": 16,
+          "complete_material": 32,
+          "generation_tokens": 248671,
+          "embedding_tokens": 0,
+          "generation_requests": 50,
+          "message_wall_seconds": 866.7648507356644,
+          "returned_wire_tokens": 24177
+        },
+        {
+          "through_request_per_stream": 3,
+          "positions": 48,
+          "complete_Host": 18,
+          "complete_material": 36,
+          "generation_tokens": 406400,
+          "embedding_tokens": 0,
+          "generation_requests": 68,
+          "message_wall_seconds": 1476.8198040844873,
+          "returned_wire_tokens": 27948
+        },
+        {
+          "through_request_per_stream": 4,
+          "positions": 64,
+          "complete_Host": 18,
+          "complete_material": 36,
+          "generation_tokens": 539523,
+          "embedding_tokens": 0,
+          "generation_requests": 85,
+          "message_wall_seconds": 1937.4622401352972,
+          "returned_wire_tokens": 28936
+        }
+      ],
+      "whole_arm_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/continued-ce-seed0/summary-v1.json",
+      "generation_saving_vs_fixed_context": [
+        1549,
+        -10857,
+        -31374,
+        -25845
+      ]
+    },
+    "answer-seed0": {
+      "windows": [
+        {
+          "through_request_per_stream": 1,
+          "positions": 16,
+          "complete_Host": 7,
+          "complete_material": 11,
+          "generation_tokens": 224271,
+          "embedding_tokens": 0,
+          "generation_requests": 64,
+          "message_wall_seconds": 608.92301793769,
+          "returned_wire_tokens": 23402
+        },
+        {
+          "through_request_per_stream": 2,
+          "positions": 32,
+          "complete_Host": 14,
+          "complete_material": 22,
+          "generation_tokens": 403499,
+          "embedding_tokens": 0,
+          "generation_requests": 100,
+          "message_wall_seconds": 1107.4745797375217,
+          "returned_wire_tokens": 30625
+        },
+        {
+          "through_request_per_stream": 3,
+          "positions": 48,
+          "complete_Host": 17,
+          "complete_material": 26,
+          "generation_tokens": 586506,
+          "embedding_tokens": 0,
+          "generation_requests": 125,
+          "message_wall_seconds": 1671.9251134721562,
+          "returned_wire_tokens": 33557
+        },
+        {
+          "through_request_per_stream": 4,
+          "positions": 64,
+          "complete_Host": 17,
+          "complete_material": 26,
+          "generation_tokens": 740852,
+          "embedding_tokens": 0,
+          "generation_requests": 143,
+          "message_wall_seconds": 2190.980528288521,
+          "returned_wire_tokens": 33557
+        }
+      ],
+      "whole_arm_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/answer-seed0/summary-v1.json",
+      "generation_saving_vs_fixed_context": [
+        -103929,
+        -165685,
+        -211480,
+        -227174
+      ]
+    },
+    "delivery-seed0": {
+      "windows": [
+        {
+          "through_request_per_stream": 1,
+          "positions": 16,
+          "complete_Host": 10,
+          "complete_material": 14,
+          "generation_tokens": 131425,
+          "embedding_tokens": 0,
+          "generation_requests": 36,
+          "message_wall_seconds": 440.78180010523647,
+          "returned_wire_tokens": 21176
+        },
+        {
+          "through_request_per_stream": 2,
+          "positions": 32,
+          "complete_Host": 19,
+          "complete_material": 29,
+          "generation_tokens": 258384,
+          "embedding_tokens": 0,
+          "generation_requests": 56,
+          "message_wall_seconds": 884.3865244053304,
+          "returned_wire_tokens": 25752
+        },
+        {
+          "through_request_per_stream": 3,
+          "positions": 48,
+          "complete_Host": 21,
+          "complete_material": 33,
+          "generation_tokens": 431231,
+          "embedding_tokens": 0,
+          "generation_requests": 77,
+          "message_wall_seconds": 1546.8738529514521,
+          "returned_wire_tokens": 28687
+        },
+        {
+          "through_request_per_stream": 4,
+          "positions": 64,
+          "complete_Host": 21,
+          "complete_material": 33,
+          "generation_tokens": 588121,
+          "embedding_tokens": 0,
+          "generation_requests": 93,
+          "message_wall_seconds": 2216.6251018373296,
+          "returned_wire_tokens": 28687
+        }
+      ],
+      "whole_arm_summary": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/delivery-seed0/summary-v1.json",
+      "generation_saving_vs_fixed_context": [
+        -11083,
+        -20570,
+        -56205,
+        -74443
+      ]
+    }
+  },
+  "unit": "Eight source groups, two cold-cache bank streams each, four requests per stream.",
+  "scope": "Actual per-position ledger deltas, including failed positions; no free prewarming. Whole-driver overhead and directly billed model load remain separately reported in arm summaries. Weights load once per process, not once per cold bank; answer continuation required another load.",
+  "cost_note": "Generation, embedding and local-model input tokens are separate dimensions. Nested compute/HTTP/message wall times must not be added together. Manual review and unmeasured preparation cost remain unknown, not zero. No amortization extrapolation beyond the four actual requests.",
+  "model_calls": 0,
+  "ledger_recorded": false,
+  "interpretation": "Generation token savings are separate from embeddings/local inference and must be read with paired quality. In all four actual cumulative windows, generative, answer and delivery exceed fixed-context generation cost; no generation-token break-even observed for these arms. Final source updates are usually not re-retrieved, so cheap warm answers do not establish valid cache maintenance.",
+  "compute": {
+    "wall_seconds": 0.007703620009124279,
+    "cpu_seconds": 0.007703344000000001
+  }
+}

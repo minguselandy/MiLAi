@@ -1,0 +1,42 @@
+{
+  "status": "EVALUATION_INPUTS_VALIDATED_BEFORE_DISPATCH",
+  "cohorts": {
+    "dev": {
+      "cases": 43,
+      "families": 30,
+      "candidate_counts": [
+        10,
+        20
+      ],
+      "datasets": [
+        "musique_train_mirror",
+        "two_wiki_author_train"
+      ]
+    },
+    "reserved": {
+      "cases": 28,
+      "families": 14,
+      "candidate_counts": [
+        19,
+        20
+      ],
+      "datasets": [
+        "musique_dev_mirror"
+      ]
+    }
+  },
+  "models": 10,
+  "new_probe_models": 6,
+  "reserved_prefixes_for_preparation_only": 295,
+  "reserved_max_tokens": {
+    "original_task": 3936,
+    "selection_task": 3905
+  },
+  "runtime_source_fields_only": true,
+  "v1_v2_runtime_cases_identical": true,
+  "native_answers_unchanged": true,
+  "model_forwards": 0,
+  "sha_checks": false,
+  "wall_seconds": 7.855075956322253,
+  "cpu_seconds": 7.857599724000001
+}

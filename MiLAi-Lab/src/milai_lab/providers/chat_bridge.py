@@ -7,9 +7,9 @@ import uuid
 from contextlib import nullcontext
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, cast
 
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessage, BaseMessage, convert_to_openai_messages
 from langchain_core.outputs import ChatGeneration, ChatResult
@@ -68,6 +68,8 @@ def _action_schema(
         "required": ["answer"],
         "additionalProperties": False,
     }
+    if not tools:
+        return final
     return {
         "oneOf": [
             final,
@@ -211,6 +213,10 @@ class VLLMChatModel(BaseChatModel):
             state[self.active_message_key] = self.calls_in_message
             write_json(self.capacity_path, state)
 
+    def reserve_external_request(self, origin: str) -> None:
+        """Share the public-message call allowance with a typed decision provider."""
+        self._reserve_request(origin=origin)
+
     def bind_tools(self, tools: Any, **kwargs: Any) -> Any:
         converted = [convert_to_openai_tool(tool) for tool in tools]
         return self.bind(tools=converted, **kwargs)
@@ -232,7 +238,8 @@ class VLLMChatModel(BaseChatModel):
         if not isinstance(wire_messages, list):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
-        native = self.client.config.tool_mode == "native"
+        schema_only = not tools and kwargs.get("response_format") is not None
+        native = self.client.config.tool_mode == "native" or schema_only
         if self.preserve_tool_reasoning:
             if not native:
                 raise ValueError("TOOL_REASONING_HISTORY_REQUIRES_NATIVE")
@@ -249,9 +256,9 @@ class VLLMChatModel(BaseChatModel):
                     wire["reasoning_content"] = reasoning
         selected_communication = communication_profile(self.tool_schema_communication)
         if native and selected_communication != "legacy":
-            wire_messages = _protocol_messages(
-                wire_messages, shape_guidance(tools, selected_communication)
-            )
+            guidance = shape_guidance(tools, selected_communication)
+            if guidance:
+                wire_messages = _protocol_messages(wire_messages, guidance)
             tools = present_catalog(tools, selected_communication)
         selected_save = profile("tool_save_communication", self.tool_save_communication)
         if native and selected_save != "legacy":
@@ -260,8 +267,11 @@ class VLLMChatModel(BaseChatModel):
         request = ChatRequest(wire_messages, messages, tools, native, kwargs)
         if self.request_transform is not None:
             self.request_transform.validate(request)
+        tool_choice = kwargs.get("tool_choice")
+        named_tool = any(tool_choice == {"type": "function", "function": {
+            "name": tool["function"]["name"]}} for tool in tools)
         if native and (
-            kwargs.get("tool_choice") not in (None, "auto", "none", "required")
+            (tool_choice not in (None, "auto", "none", "required") and not named_tool)
             or (kwargs.get("tool_choice") == "required"
                 and (not self.allow_required_tool_choice or not tools))
             or self.client.config.response_format is not None
@@ -292,9 +302,13 @@ class VLLMChatModel(BaseChatModel):
             else nullcontext()
         )
         with scope:
+            thinking = ({"enable_thinking": kwargs["enable_thinking"]}
+                        if kwargs.get("enable_thinking") is not None else {})
             if native:
                 receipt = self.client.chat(
-                    prepared.messages, tools=tools, tool_choice=kwargs.get("tool_choice")
+                    prepared.messages, tools=tools, tool_choice=kwargs.get("tool_choice"),
+                    response_format=kwargs.get("response_format"),
+                    **thinking,
                 )
             else:
                 receipt = self.client.chat(
@@ -307,6 +321,7 @@ class VLLMChatModel(BaseChatModel):
                             "schema": prepared.schema,
                         },
                     },
+                    **thinking,
                 )
             if self.delivery_observer is not None:
                 self.delivery_observer.record_delivery(prepared, receipt, self.calls_in_message)
@@ -326,7 +341,7 @@ class VLLMChatModel(BaseChatModel):
         message_id = receipt.get("id") or uuid.uuid4().hex
         calls = []
         completion_metadata: dict[str, Any] = {}
-        if self.client.config.tool_mode == "json_action":
+        if self.client.config.tool_mode == "json_action" and not schema_only:
             if wire_message.get("tool_calls"):
                 raise IncompleteChatResponse("JSON_ACTION_UNEXPECTED_NATIVE_TOOL_CALL")
             try:
@@ -342,7 +357,7 @@ class VLLMChatModel(BaseChatModel):
                 completion_metadata=completion_metadata,
             )
             try:
-                validate(action, prepared.schema)
+                validate(action, cast(dict[str, Any], prepared.schema))
             except ValidationError as exc:
                 event.schema_error = exc
                 self._notify_response(event)

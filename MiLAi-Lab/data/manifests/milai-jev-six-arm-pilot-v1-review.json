@@ -1,0 +1,153 @@
+{
+  "reviewer": "assistant author; unblinded source/state/answer review",
+  "independent_review": false,
+  "coverage": {
+    "actual_before_after_positions": 18,
+    "full_first_answers_read": 108
+  },
+  "labels_are_not_training_input": true,
+  "state_reviews": {
+    "D0": {
+      "exception-withdrawal": {
+        "current_content_assessment": "stored",
+        "reason": "Removed the temporary exception and its condition; general gloves/digital/loan rules retained."
+      },
+      "alternative-support": {
+        "current_content_assessment": "stored",
+        "reason": "Added the actual battery/fan/mains update; old dated observation retained. New user statement was labelled observed, an attribution caveat."
+      },
+      "shared-condition": {
+        "current_content_assessment": "stored",
+        "reason": "Replaced old day-limited state with current pier/guide/routes/display state; general rules retained."
+      }
+    },
+    "D1": {
+      "exception-withdrawal": {
+        "current_content_assessment": "stored",
+        "reason": "The selected exception/condition were removed with preserved general rules."
+      },
+      "alternative-support": {
+        "current_content_assessment": "missing",
+        "reason": "Writer ended with length; no new state committed despite a saved Impact choice."
+      },
+      "shared-condition": {
+        "current_content_assessment": "missing",
+        "reason": "Writer ended with length while generating support_groups.target_unit; old state unchanged."
+      }
+    },
+    "D2-Laya-0": {
+      "exception-withdrawal": {
+        "current_content_assessment": "stored",
+        "reason": "All four units selected as roots, including two unchanged units; Writer nevertheless removed only exception/condition."
+      },
+      "alternative-support": {
+        "current_content_assessment": "missing",
+        "reason": "Writer did not complete; current update absent from retained state."
+      },
+      "shared-condition": {
+        "current_content_assessment": "stored_with_relation_caveat",
+        "reason": "Current bridge/routes/display facts appended; explicit empty support groups require a separate dependency-semantics review."
+      }
+    },
+    "D2-Laya-CE": {
+      "exception-withdrawal": {
+        "current_content_assessment": "incorrect",
+        "reason": "Empty roots; appended an unconditional no-gloves claim dated at the cancellation, retained the old exception, and omitted the cancellation."
+      },
+      "alternative-support": {
+        "current_content_assessment": "missing",
+        "reason": "Completed no-change; mains-disabled/battery/fan update absent."
+      },
+      "shared-condition": {
+        "current_content_assessment": "stored_with_omission_caveat",
+        "reason": "Appended current pier/lake/roof/display facts. Guide presence is not explicitly retained; only inferable from roof continuation plus its necessary condition."
+      }
+    },
+    "D3": {
+      "exception-withdrawal": {
+        "current_content_assessment": "missing",
+        "reason": "Reused empty CE roots, partial Writer selected no change; actual cancellation absent."
+      },
+      "alternative-support": {
+        "current_content_assessment": "stored",
+        "reason": "New matter stores five separate current facts, preserving all old rules and old dated observation."
+      },
+      "shared-condition": {
+        "current_content_assessment": "missing",
+        "reason": "Reused empty CE roots and selected no change; current route/guide/pier update absent."
+      }
+    },
+    "D4": {
+      "exception-withdrawal": {
+        "current_content_assessment": "stored",
+        "reason": "Reused D1 choice; removed exception and condition while hidden loan rule remained unchanged."
+      },
+      "alternative-support": {
+        "current_content_assessment": "stored",
+        "reason": "Reused D1 choice; appended current power/fan and subtitle state, old dated observation preserved. observed attribution remains a caveat."
+      },
+      "shared-condition": {
+        "current_content_assessment": "stored_with_relation_caveat",
+        "reason": "Current complete update replaces old state; an empty declared support group remains a relation-semantics concern."
+      }
+    }
+  },
+  "answer_fidelity_issues": [
+    {
+      "arm": "D0",
+      "case": "exception-withdrawal",
+      "query": "mixed/preserved",
+      "issue": "Final sentence misdates June reports as March 1–3 despite otherwise correct answer."
+    },
+    {
+      "arm": "D1",
+      "case": "alternative-support",
+      "query": "mixed/remaining-route",
+      "issue": "Adds automatic switching; source says switched to battery without an automation claim."
+    },
+    {
+      "arm": "D1",
+      "case": "shared-condition",
+      "query": "state_only/prerequisite",
+      "issue": "Applies the old observation expiry to timeless general rules."
+    },
+    {
+      "arm": "D2-Laya-0",
+      "case": "shared-condition",
+      "query": "state_only/prerequisite",
+      "issue": "Again conflates rule validity with old observation expiry."
+    },
+    {
+      "arm": "D2-Laya-CE",
+      "case": "exception-withdrawal",
+      "query": "state_only/withdrawn",
+      "issue": "Calls the incorrect appended no-gloves claim a June 3 reconfirmation."
+    },
+    {
+      "arm": "D2-Laya-CE",
+      "case": "exception-withdrawal",
+      "query": "mixed/preserved",
+      "issue": "Says digital/loan rules changed by confusing them with the copy-only exception."
+    },
+    {
+      "arm": "D3",
+      "case": "shared-condition",
+      "query": "mixed/prerequisite",
+      "issue": "Misattributes the original June 1 rule to a June 2 report."
+    },
+    {
+      "arm": "D4",
+      "case": "alternative-support",
+      "query": "state_only/remaining-route",
+      "issue": "Adds automatic battery switching, unsupported by retained/source wording."
+    }
+  ],
+  "question_design_issue": "Original current questions supply the changed premises (course ended; mains disabled; pier closed and guide present). They cannot alone demonstrate state maintenance. A separate fixed current-state probe asks without those premises.",
+  "not_claimed": [
+    "independent or blind evaluation",
+    "all-dimensional joint state success from execution status",
+    "a method-quality or latency win",
+    "full goal completion"
+  ],
+  "authoring_cost": "Assistant review is not separately metered in the experiment ledger; it is not zero."
+}

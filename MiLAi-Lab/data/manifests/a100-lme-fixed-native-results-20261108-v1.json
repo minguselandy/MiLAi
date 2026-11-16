@@ -1,0 +1,250 @@
+{
+  "status": "FIXED451_FIRST_PREDICTION_AND_NATIVE_SCORING_OPERATIONS_COST_CENSUS_CLOSED",
+  "method": "fixed-prefix",
+  "planned_positions": 451,
+  "prediction_status_counts": {
+    "COMPLETED": 401,
+    "FAILED_READING": 50
+  },
+  "scoring_status_counts": {
+    "COMPLETED": 401,
+    "UNSCORED_FAILED_READING": 50
+  },
+  "native_aggregate": {
+    "planned": 451,
+    "scored": 401,
+    "unscored": 50,
+    "status_counts": {
+      "COMPLETED": 401,
+      "UNSCORED_FAILED_READING": 50
+    },
+    "correct_scored": 75,
+    "valid_model_UNKNOWN_answers": 250,
+    "native_complete_cohort_metrics": null,
+    "native_scored_subset_metrics": {
+      "overall": {
+        "overall_full_set": 0.18703241895261846,
+        "overall_non_abstention_only": 0.21305841924398625,
+        "overall_abstention_only": 0.11818181818181818,
+        "count_all_questions": 401,
+        "count_non_abstention": 291,
+        "count_abstention": 110
+      },
+      "non_abstention_by_category": {
+        "static": {
+          "count": 130,
+          "pct_correct": 0.14615384615384616,
+          "pct_answered_wrong": 0.14615384615384616,
+          "pct_unknown": 0.7076923076923077
+        },
+        "dynamic": {
+          "count": 79,
+          "pct_correct": 0.25316455696202533,
+          "pct_answered_wrong": 0.10126582278481013,
+          "pct_unknown": 0.6455696202531646
+        },
+        "procedure": {
+          "count": 61,
+          "pct_correct": 0.26229508196721313,
+          "pct_answered_wrong": 0.3770491803278688,
+          "pct_unknown": 0.36065573770491804
+        },
+        "gotchas": {
+          "count": 21,
+          "pct_correct": 0.3333333333333333,
+          "pct_answered_wrong": 0.5238095238095238,
+          "pct_unknown": 0.14285714285714285
+        }
+      },
+      "abstention_by_category": {
+        "static-abs": {
+          "count": 47,
+          "pct_correct": 0.1276595744680851,
+          "pct_answered_wrong": 0.0851063829787234,
+          "pct_unknown": 0.7872340425531915
+        },
+        "dynamic-abs": {
+          "count": 36,
+          "pct_correct": 0.1388888888888889,
+          "pct_answered_wrong": 0.08333333333333333,
+          "pct_unknown": 0.7777777777777778
+        },
+        "procedure-abs": {
+          "count": 27,
+          "pct_correct": 0.07407407407407407,
+          "pct_answered_wrong": 0.2962962962962963,
+          "pct_unknown": 0.6296296296296297
+        }
+      },
+      "combined_abstention_by_category": {
+        "static": {
+          "count": 177,
+          "pct_correct": 0.14124293785310735,
+          "pct_answered_wrong": 0.12994350282485875,
+          "pct_unknown": 0.7288135593220338
+        },
+        "dynamic": {
+          "count": 115,
+          "pct_correct": 0.21739130434782608,
+          "pct_answered_wrong": 0.09565217391304348,
+          "pct_unknown": 0.6869565217391305
+        },
+        "procedure": {
+          "count": 88,
+          "pct_correct": 0.20454545454545456,
+          "pct_answered_wrong": 0.3522727272727273,
+          "pct_unknown": 0.4431818181818182
+        }
+      },
+      "abstention_overall": {
+        "count": 110,
+        "pct_correct": 0.11818181818181818,
+        "pct_answered_wrong": 0.13636363636363635,
+        "pct_unknown": 0.7454545454545455
+      }
+    },
+    "all_planned_score_bounds": [
+      0.1662971175166297,
+      0.2771618625277162
+    ],
+    "scope": "Unscored program/Judge failures are not negative labels or invented UNKNOWN answers. A valid model UNKNOWN is scored by the original benchmark rule. Subset metrics are conditional, not a full-cohort score. Shared histories and repeated seeds do not create independent source families."
+  },
+  "Reader": {
+    "actual_HTTP_attempts": 451,
+    "prompt_tokens": 1683622,
+    "completion_tokens": 1182893,
+    "total_tokens": 2866515,
+    "provider_response_wall_seconds": 8029.273680763319,
+    "whole_call_wall_seconds": 8225.378895219415,
+    "call_CPU_seconds_nested": 143.03186724800238,
+    "status_counts": {
+      "COMPLETED": 401,
+      "FAILED": 50
+    },
+    "finish_reason_counts": {
+      "stop": 401,
+      "length": 50
+    },
+    "absent_final_content": 49,
+    "present_final_content": 402,
+    "max_total_reserved_tokens": 15540,
+    "context_tokens": 65536,
+    "actual_prompt_estimate_error_tokens": 0,
+    "new_unknown_generation_or_embedding_usage": 0
+  },
+  "failed_Readers": {
+    "actual_HTTP_attempts": 50,
+    "prompt_tokens": 247982,
+    "completion_tokens": 409600,
+    "total_tokens": 657582,
+    "provider_response_wall_seconds": 2709.614956865087,
+    "whole_call_wall_seconds": 2732.931436899118,
+    "call_CPU_seconds_nested": 20.95963116399973,
+    "status_counts": {
+      "FAILED": 50
+    },
+    "finish_reason_counts": {
+      "length": 50
+    },
+    "absent_final_content": 49,
+    "present_final_content": 1,
+    "max_total_reserved_tokens": 15540,
+    "context_tokens": 65536,
+    "actual_prompt_estimate_error_tokens": 0,
+    "new_unknown_generation_or_embedding_usage": 0
+  },
+  "Judge": {
+    "actual_HTTP_attempts": 130,
+    "prompt_tokens": 64731,
+    "completion_tokens": 109499,
+    "total_tokens": 174230,
+    "provider_response_wall_seconds": 716.6219151234254,
+    "whole_call_wall_seconds": 742.921997022815,
+    "call_CPU_seconds_nested": 19.370344063999994,
+    "status_counts": {
+      "COMPLETED": 130
+    },
+    "finish_reason_counts": {
+      "stop": 130
+    },
+    "absent_final_content": 0,
+    "present_final_content": 130,
+    "max_total_reserved_tokens": 9499,
+    "context_tokens": 65536,
+    "actual_prompt_estimate_error_tokens": 0,
+    "new_unknown_generation_or_embedding_usage": 0
+  },
+  "selected_action_counts": {
+    "SEARCH": 902,
+    "READ": 1804,
+    "HANDOFF": 451
+  },
+  "operation_kind_status_counts": {
+    "SEARCH:searched": 902,
+    "READ:opened": 1804
+  },
+  "termination_reason_counts": {
+    "policy_handoff": 451
+  },
+  "native_retrieval_usage_counts": {
+    "control_steps": 3157,
+    "known_reference_reads": 0,
+    "operations": 2706,
+    "material_budget_rejections": 0,
+    "read_operations": 1804
+  },
+  "returned_packet_evidence_kind_counts": {
+    "original_source": 1804
+  },
+  "owner_totals": {
+    "prediction": {
+      "segments": 51,
+      "whole_child_CPU_seconds": 38079.610866999996,
+      "measured_parent_CPU_seconds": 8.631621524000002,
+      "whole_child_plus_measured_parent_CPU_seconds": 38088.242488523996,
+      "actual_owner_wall_seconds_sum": 48909.66772857495,
+      "native_CPU_already_included": 0
+    },
+    "scoring": {
+      "segments": 1,
+      "whole_child_CPU_seconds": 35.715858,
+      "measured_parent_CPU_seconds": 0.157451301,
+      "whole_child_plus_measured_parent_CPU_seconds": 35.873309301,
+      "actual_owner_wall_seconds_sum": 762.0288509326056,
+      "native_CPU_already_included": 0
+    }
+  },
+  "actual_NN_forwards": 0,
+  "local_NN_input_tokens": 0,
+  "local_model_loads": 0,
+  "GPU_job_interval_hours": null,
+  "Host_GPU_busy_hours": null,
+  "scope": "Closed fixed-prefix prediction and scoring invocation costs only. Complete child CPU includes native model/client work; never add nested call, native or residual CPU again. Source preparation, offline audits, archive, training and author/launch/inspection costs are outside this subtotal. The archive stage may still be live; its cost is not inferred here. This is a report, not a ledger or a full-project total. Reader failures stay unscored; valid model UNKNOWN is distinct. No autonomous Host or original-paper model reproduction claim.",
+  "unmetered_author_inspection_launch_cleanup_CPU": "unknown_not_zero",
+  "original_first_outcomes_rewritten": false,
+  "new_model_or_HTTP_calls": 0,
+  "ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "timestamp_utc": "2026-11-08T10:45:19.843791+00:00",
+  "full_private_census": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/lme-fixed-native-operations-cost-census-v1.json",
+  "analyzer": "tools/analyze_a100_lme_fixed_native_operations_cost.py",
+  "Source_fidelity_audit": {
+    "positions": 451,
+    "Source_comparisons": 9364144,
+    "restored_full_snapshots": 3157,
+    "whole_native_SDK_contexts_equal": 451,
+    "whole_Reader_requests_equal": 451,
+    "source_fidelity_not_answer_truth": true
+  },
+  "native_score_audit": {
+    "positions": 451,
+    "completed_scores": 401,
+    "unscored_failed_Readers": 50,
+    "whole_retained_Judge_requests_verified": 130,
+    "all_Reader_first_records_unchanged": true
+  },
+  "native_stage_CPU_already_paid_once": true,
+  "new_report_CPU_pending_actual_idle": true,
+  "full_external_comparison_and_all_project_costs_complete": false
+}

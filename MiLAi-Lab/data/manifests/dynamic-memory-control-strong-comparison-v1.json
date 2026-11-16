@@ -1,0 +1,174 @@
+{
+  "version": "strong-baselines-comparison-v1",
+  "status": "ALL128FIRST_POSITIONS_CLOSED_AND_AUTHOR_REVIEWED",
+  "method_runtime": "2b1766e8",
+  "reviewer": "Codex author, method visible; source-task core correctness, not independent Judge",
+  "families": [
+    "count_distinct",
+    "fraction_scope",
+    "joint_schedule",
+    "negated_exception",
+    "nonunique_identity",
+    "ordered_precedence",
+    "quota_reallocation",
+    "serial_responsibility"
+  ],
+  "summary": [
+    {
+      "arm": "dense2",
+      "correct": 13,
+      "positions": 32,
+      "family_macro_accuracy": 0.40625,
+      "family_bootstrap_95_percentile": [
+        0.3125,
+        0.46875
+      ],
+      "difference_from_context4": -0.46875,
+      "paired_family_difference_interval": [
+        -0.5,
+        -0.40625
+      ],
+      "generation_tokens": 223376,
+      "embedding_tokens": 48872,
+      "host_message_wall_seconds": 1024.2418927829713,
+      "full_authored_proof_positions": 6,
+      "correct_with_full_authored_proof": 6,
+      "counts": {
+        "no_answer": 4,
+        "correct": 13,
+        "wrong": 15
+      },
+      "family_rates": {
+        "count_distinct": 0.25,
+        "fraction_scope": 0.5,
+        "joint_schedule": 0.25,
+        "negated_exception": 0.25,
+        "nonunique_identity": 0.5,
+        "ordered_precedence": 0.5,
+        "quota_reallocation": 0.5,
+        "serial_responsibility": 0.5
+      }
+    },
+    {
+      "arm": "dense4",
+      "correct": 19,
+      "positions": 32,
+      "family_macro_accuracy": 0.59375,
+      "family_bootstrap_95_percentile": [
+        0.4375,
+        0.71875
+      ],
+      "difference_from_context4": -0.28125,
+      "paired_family_difference_interval": [
+        -0.4375,
+        -0.125
+      ],
+      "generation_tokens": 235403,
+      "embedding_tokens": 48202,
+      "host_message_wall_seconds": 1033.5711567867547,
+      "full_authored_proof_positions": 19,
+      "correct_with_full_authored_proof": 16,
+      "counts": {
+        "correct": 19,
+        "wrong": 9,
+        "qualified_incomplete": 1,
+        "no_answer": 3
+      },
+      "family_rates": {
+        "count_distinct": 0.5,
+        "fraction_scope": 0.75,
+        "joint_schedule": 0.25,
+        "negated_exception": 0.75,
+        "nonunique_identity": 0.25,
+        "ordered_precedence": 0.75,
+        "quota_reallocation": 0.75,
+        "serial_responsibility": 0.75
+      }
+    },
+    {
+      "arm": "dense8",
+      "correct": 29,
+      "positions": 32,
+      "family_macro_accuracy": 0.90625,
+      "family_bootstrap_95_percentile": [
+        0.8125,
+        0.96875
+      ],
+      "difference_from_context4": 0.03125,
+      "paired_family_difference_interval": [
+        -0.0625,
+        0.125
+      ],
+      "generation_tokens": 245768,
+      "embedding_tokens": 46897,
+      "host_message_wall_seconds": 1085.3780888756737,
+      "full_authored_proof_positions": 31,
+      "correct_with_full_authored_proof": 29,
+      "counts": {
+        "correct": 29,
+        "no_answer": 3
+      },
+      "family_rates": {
+        "count_distinct": 0.75,
+        "fraction_scope": 0.75,
+        "joint_schedule": 0.75,
+        "negated_exception": 1,
+        "nonunique_identity": 1,
+        "ordered_precedence": 1,
+        "quota_reallocation": 1,
+        "serial_responsibility": 1
+      }
+    },
+    {
+      "arm": "context4",
+      "correct": 28,
+      "positions": 32,
+      "family_macro_accuracy": 0.875,
+      "family_bootstrap_95_percentile": [
+        0.75,
+        0.96875
+      ],
+      "difference_from_context4": 0.0,
+      "paired_family_difference_interval": [
+        0.0,
+        0
+      ],
+      "generation_tokens": 233799,
+      "embedding_tokens": 0,
+      "host_message_wall_seconds": 1019.5362902395427,
+      "full_authored_proof_positions": 30,
+      "correct_with_full_authored_proof": 28,
+      "counts": {
+        "correct": 28,
+        "no_answer": 3,
+        "wrong": 1
+      },
+      "family_rates": {
+        "count_distinct": 0.5,
+        "fraction_scope": 1,
+        "joint_schedule": 0.75,
+        "negated_exception": 0.75,
+        "nonunique_identity": 1,
+        "ordered_precedence": 1,
+        "quota_reallocation": 1,
+        "serial_responsibility": 1
+      }
+    }
+  ],
+  "intervals": {
+    "unit": "resample8whole source families jointly across arms, all4positions stay together",
+    "samples": 20000,
+    "seed": 20261018,
+    "method": "percentile95%, discrete small-sample descriptive intervals; not evidence of population representativeness or preregistered significance tests"
+  },
+  "qualifications": [
+    "Dense8 has10controlsteps versus6for dense4/context4 and4for dense2; it is the declared extra-budget point.",
+    "All four share frozen runtime, original sources and Reader capacity; independent evolving histories and stochastic first responses. No identical per-step input or multi-seed causal claim.",
+    "Failure and incomplete-answer positions count as unsuccessful in these accuracy proportions; original separate grades are preserved.",
+    "Token types remain separate; no invented unified FLOPs, dollar costs or equivalence between generation and embedding tokens.",
+    "Wall time sums actual Host message durations and includes model waits; excludes process startup/preparation. Not warm production latency.",
+    "Authored sufficient proof sets are witnesses, not exhaustive minimal proofs.",
+    "These are8exposed authored development families. Fewer source/controller tokens alone cannot establish learned-policy net benefit.",
+    "No old failed positions retried or billed again; offline assembly CPU remains pending until an idle serial boundary."
+  ]
+}

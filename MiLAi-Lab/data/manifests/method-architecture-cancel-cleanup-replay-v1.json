@@ -1,0 +1,108 @@
+{
+  "status": "ORIGINAL_PROPOSALS_REPLAYED_IN_COPIES",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/cancel-cleanup-replay-v1",
+  "original_root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/factorial-v1/exception-withdrawal",
+  "source_parent": "fd988d14",
+  "implementation": "idempotent local retractions and removal of support groups for deleted base units",
+  "new_model_calls": 0,
+  "original_bank_writes": 0,
+  "original_model_outputs_changed": false,
+  "new_qa_scores": 0,
+  "arms": {
+    "U0": {
+      "original_maintenance_status": "incomplete",
+      "original_receipts": [
+        {
+          "status": "rejected",
+          "reason": "EDIT_TARGET_NOT_IN_BASE_REVISION"
+        }
+      ],
+      "verbatim_first_envelope": {
+        "creates": [],
+        "records": {
+          "r1": {
+            "action": "edit",
+            "edits": [
+              {
+                "operation": "remove_exception",
+                "target_unit": "u3",
+                "evidence": [
+                  "e1"
+                ]
+              },
+              {
+                "operation": "remove_exception",
+                "target_unit": "u3",
+                "evidence": [
+                  "e1"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "general_and_registration_unchanged": true,
+      "exception_and_condition_removed": true,
+      "old_revision_unchanged": true
+    },
+    "U1": {
+      "original_maintenance_status": "incomplete",
+      "original_receipts": [
+        {
+          "status": "rejected",
+          "reason": "EDIT_SUPPORT_UNIT_UNAVAILABLE"
+        }
+      ],
+      "verbatim_first_envelope": {
+        "creates": [],
+        "records": {
+          "r1": {
+            "action": "edit",
+            "edits": [
+              {
+                "operation": "retract",
+                "evidence": [
+                  "e1"
+                ],
+                "target_unit": "u3"
+              },
+              {
+                "operation": "retract",
+                "evidence": [
+                  "e1"
+                ],
+                "target_unit": "u4"
+              }
+            ],
+            "support_groups": [
+              {
+                "operation": "remove",
+                "target_unit": "u3",
+                "evidence": [
+                  "e1"
+                ]
+              },
+              {
+                "operation": "remove",
+                "target_unit": "u4",
+                "evidence": [
+                  "e1"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "general_and_registration_unchanged": true,
+      "exception_and_condition_removed": true,
+      "old_revision_unchanged": true
+    }
+  },
+  "checks": {
+    "affected_tests": "100 passed,15.78s",
+    "ruff": "pass",
+    "mypy": "2files pass",
+    "scope": "repeat deletion still validates evidence; mixed replace/retract overlap and unknown group targets still rejected"
+  },
+  "interpretation": "Deterministic replay of original model proposals after compiler/commit fix, not new model quality scores. Original factorial outcomes remain first failures."
+}

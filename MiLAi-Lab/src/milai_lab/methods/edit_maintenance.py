@@ -11,7 +11,7 @@ import json
 from collections.abc import Callable
 from typing import Any, Literal
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 from jsonschema import ValidationError as SchemaError
 from pydantic import ValidationError
 
@@ -21,13 +21,25 @@ from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.retrieval import merge_candidates
 from milai_lab.memory.working_set import record_candidate
+from milai_lab.methods.dependency_memory import impact_request, plan_regions, scoped_edit_schema
 from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.methods.writer_locality import local_writer_view
 
 MaintenanceRecipe = Literal["single_pass", "extract_then_edit"]
 ModelCall = Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]]
-Commit = Callable[[str, dict[str, Any], dict[str, Any]], dict[str, Any]]
+StageFit = Callable[[str, list[dict[str, str]]], bool]
+Commit = Callable[[str, dict[str, Any], dict[str, Any], list[dict[str, Any]]], dict[str, Any]]
 CandidateMode = Literal["combined_dense", "per_candidate_dense"]
 MemoryViewMode = Literal["legacy", "staged", "state_driven"]
+
+
+def _fits(
+    stage: str, messages: list[dict[str, str]],
+    fit: Callable[[list[dict[str, str]]], bool] | None, stage_fit: StageFit | None,
+) -> bool:
+    if stage_fit is not None:
+        return stage_fit(stage, messages)
+    return fit(messages) if fit is not None else True
 
 
 def parse_object(text: str, *, reject_duplicate_keys: bool = False) -> dict[str, Any]:
@@ -100,6 +112,10 @@ def _located_delivery(
                 limit=retrieval_limit, mode=candidate_mode,
             )
         )
+    if method.features.cross_record_dependencies:
+        from milai_lab.memory.external_support import dependent_record_candidates
+
+        selected_records = dependent_record_candidates(method.service, selected_records)
     located = method.prepare(
         list(dict.fromkeys(s["source_ref"] for s in sources)), "",
         selected_records=selected_records,
@@ -112,7 +128,7 @@ def _located_delivery(
         prior_context=copy.deepcopy(delivery.get("prior_context", [])),
         candidate_changes=changes,
     )
-    for key in ("episode_context", "replay", "new_independent_support"):
+    for key in ("episode_context", "replay", "new_independent_support", "result_maintenance"):
         if key in delivery:
             located[key] = copy.deepcopy(delivery[key])
     return prepare_delivery(located) if prepare_delivery is not None else located
@@ -192,7 +208,8 @@ def plan_source_batches(
     *,
     date: str,
     recipe: MaintenanceRecipe,
-    fit: Callable[[list[dict[str, str]]], bool],
+    fit: Callable[[list[dict[str, str]]], bool] | None,
+    stage_fit: StageFit | None = None,
     retrieval_limit: int = 10,
     selected_record_ids: list[str] | None = None,
     candidate_mode: CandidateMode = "combined_dense",
@@ -216,7 +233,7 @@ def plan_source_batches(
         trial = {**delivery, "sources": sources}
         if recipe == "extract_then_edit":
             request = method.change_request(trial, date)
-            if not fit(_replay_context(request["messages"], trial)):
+            if not _fits("extract", _replay_context(request["messages"], trial), fit, stage_fit):
                 return False
         preview_delivery = _located_delivery(
             method, trial, None, retrieval_limit=retrieval_limit,
@@ -224,10 +241,10 @@ def plan_source_batches(
             prepare_delivery=prepare_delivery, selected_records=selected,
         )
         request = method.preview_writer_request(preview_delivery)
-        return fit(_replay_context(method.edit_messages(
+        return _fits("edit", _replay_context(method.edit_messages(
             request["packet"], date, allow_create=True, schema=request["schema"],
             prior_context=delivery.get("prior_context", []),
-        ), trial))
+        ), trial), fit, stage_fit)
 
     if fits(delivery["sources"]):
         return [delivery]
@@ -314,6 +331,83 @@ def has_semantic_receipt(receipts: list[dict[str, Any]]) -> bool:
     )
 
 
+def merge_maintenance_results(
+    *groups: list[dict[str, Any]],
+    source_visible: Callable[[str], bool] | None = None,
+) -> list[dict[str, Any]]:
+    """Retain this public request's actual maintenance outcomes across refreshes.
+
+    Callers supply only batches associated with the current public request,
+    including its explicitly selected continuations. An empty later preview does
+    not undo an earlier operation receipt. Exact request IDs and proposal slots
+    identify progress; unrelated requests never share confirmation. This is a
+    result projection, not new execution state or permission to resume a batch.
+    Visibility withdrawal retains body-free effect receipts while removing the
+    cached directory descriptions that could otherwise redisclose old content.
+    """
+    result: list[dict[str, Any]] = []
+    positions: dict[str, int] = {}
+    for group in groups:
+        for value in group:
+            current = copy.deepcopy(value)
+            request_id = current.get("request_id")
+            if not isinstance(request_id, str):
+                if current not in result:
+                    result.append(current)
+                continue
+            if request_id not in positions:
+                positions[request_id] = len(result)
+                result.append(current)
+                continue
+            index = positions[request_id]
+            previous = result[index]
+            if set(previous.get("source_refs", [])) != set(current.get("source_refs", [])):
+                raise ValueError("EDIT_MAINTENANCE_RESULT_SOURCES_CHANGED")
+            # Inspection may produce a start/permission preview without having
+            # observed the old checkpoint. Such a preview has no contrary effect.
+            if current.get("phase") in {"start", "permission"} and not current.get("receipts"):
+                continue
+            receipts = current.setdefault("receipts", [])
+            for slot, receipt in enumerate(previous.get("receipts", [])):
+                if slot >= len(receipts):
+                    receipts.append(receipt)
+                elif has_semantic_receipt([receipt]):
+                    # Replayed no_change or a later visibility limit cannot turn
+                    # the original, confirmed operation into a fresh non-effect.
+                    receipts[slot] = receipt
+            if "batches" in previous or "batches" in current:
+                current["batches"] = merge_maintenance_results(
+                    previous.get("batches", []), current.get("batches", [])
+                )
+            current["semantic_write_performed"] = bool(
+                previous.get("semantic_write_performed") or current.get("semantic_write_performed")
+            )
+            result[index] = current
+    if source_visible is not None:
+        for batch in result:
+            if any(not source_visible(ref) for ref in batch.get("source_refs", [])):
+                retained = {key: batch[key] for key in (
+                    "request_id", "source_refs", "status", "phase", "outcome",
+                    "semantic_write_performed", "memory_save_requested", "batches",
+                    "unprocessed_count",
+                ) if key in batch}
+                retained["source_visibility"] = "visibility_revoked"
+                retained["receipts"] = [{key: receipt[key] for key in (
+                    "ok", "status", "id", "revision", "source_ref", "effect",
+                    "replayed", "original_status",
+                ) if key in receipt} for receipt in batch.get("receipts", [])]
+                retained["unprocessed"] = [{key: item[key] for key in (
+                    "operation_id", "phase", "batch",
+                ) if key in item} for item in batch.get("unprocessed", [])]
+                batch.clear()
+                batch.update(retained)
+            if "batches" in batch:
+                batch["batches"] = merge_maintenance_results(
+                    batch["batches"], source_visible=source_visible
+                )
+    return result
+
+
 def has_pending_save(state: dict[str, Any]) -> bool:
     """An explicit save is pending when any actual work scope lacks confirmation."""
     if not state.get("memory_save_requested"):
@@ -348,6 +442,7 @@ def _maintain_views(
     session: str, request_id: str, date: str, recipe: MaintenanceRecipe,
     memory_view_mode: MemoryViewMode, model_call: ModelCall, commit: Commit | None,
     retrieval_limit: int, fit: Callable[[list[dict[str, str]]], bool] | None,
+    stage_fit: StageFit | None,
     prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None,
     candidate_mode: CandidateMode, save: Callable[[], None],
     call: Callable[[str, list[dict[str, str]], dict[str, Any]], Any],
@@ -450,6 +545,8 @@ def _maintain_views(
                 "changes": copy.deepcopy(state["changes"]),
                 "prior_context": copy.deepcopy(state.get("prior_context", [])), "date": date,
                 "allow_create": pending["create"],
+                **({"result_maintenance": copy.deepcopy(state["result_maintenance"])}
+                   if "result_maintenance" in state else {}),
                 **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
             }, index=False)
             save()
@@ -464,6 +561,7 @@ def _maintain_views(
             method, {**delivery, "materialize_selected_support": True},
             session=session, request_id=child_id, date=date, recipe=recipe,
             model_call=work_call, commit=commit, retrieval_limit=retrieval_limit, fit=fit,
+            stage_fit=stage_fit,
             prepare_delivery=prepare_delivery, candidate_mode=candidate_mode,
             selected_record_ids=[ref["record_id"] for ref in pending["records"]],
             batch_sources=False,
@@ -488,6 +586,7 @@ def maintain_event(
     commit: Commit | None = None,
     retrieval_limit: int = 10,
     fit: Callable[[list[dict[str, str]]], bool] | None = None,
+    stage_fit: StageFit | None = None,
     prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     execute: bool = True,
     selected_record_ids: list[str] | None = None,
@@ -509,6 +608,9 @@ def maintain_event(
     """
     if recipe not in {"single_pass", "extract_then_edit"}:
         raise ValueError("EDIT_MAINTENANCE_RECIPE_INVALID")
+    if method.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"} \
+            and recipe != "single_pass":
+        raise ValueError("SEMANTIC_DELTA_REQUIRES_SINGLE_PASS")
     if memory_view_mode not in {"legacy", "staged", "state_driven"}:
         raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
     service = method.service
@@ -519,6 +621,17 @@ def maintain_event(
             raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
     ns = (*service.namespace, "edit_maintenance")
     key = json.dumps([session, request_id], ensure_ascii=False)
+    prior = service.store.get(ns, key)
+    if prior is not None and "result_maintenance" in prior.value:
+        # A continuation reopens the original field ranges without re-projecting
+        # the Source or repeating any already confirmed extraction.
+        delivery = {**delivery, "result_maintenance": copy.deepcopy(
+            prior.value["result_maintenance"]
+        )}
+    execution_refs = delivery.get("result_maintenance", {}).get("execution_source_refs", [])
+    for ref in execution_refs:
+        if service.source(ref) is None:
+            raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
     binding = {
         "recipe": recipe, "arm": method.method_name, "interface": method.interface_version,
         "features": method.features.settings(),
@@ -533,13 +646,23 @@ def maintain_event(
         binding["memory_view_mode"] = memory_view_mode
     if candidate_record_ids is not None:
         binding["candidate_record_ids"] = list(dict.fromkeys(candidate_record_ids))
+    if "result_maintenance" in delivery:
+        binding["result_maintenance_mode"] = delivery["result_maintenance"]["mode"]
+    if method.maintenance_mode != "legacy":
+        binding["maintenance_mode"] = method.maintenance_mode
+    if method.writer_input != "full":
+        binding["writer_input"] = method.writer_input
+    if execution_refs:
+        binding["execution_source_refs"] = execution_refs
     locating_ids = selected_record_ids if selected_record_ids is not None else candidate_record_ids
-    prior = service.store.get(ns, key)
     state: dict[str, Any] = copy.deepcopy(prior.value) if prior else {
         "binding": binding, "phase": "start", "receipts": [], "unprocessed": [],
-        "prior_context": copy.deepcopy(delivery.get("prior_context", [])),
+        "prior_context": (copy.deepcopy(delivery.get("prior_context", []))
+                          if sources or not execution_refs else []),
         "date": date,
         **({"memory_save_requested": True} if memory_save_requested else {}),
+        **({"result_maintenance": copy.deepcopy(delivery["result_maintenance"])}
+           if "result_maintenance" in delivery else {}),
     }
     date = state.get("date", date)
     if state["binding"] != binding:
@@ -560,7 +683,9 @@ def maintain_event(
             "phase": state["phase"], "recipe": recipe,
             "request_id": request_id,
             "date": date,
-            "source_refs": list(dict.fromkeys(s["source_ref"] for s in sources)),
+            "source_refs": list(dict.fromkeys([
+                *(s["source_ref"] for s in sources), *execution_refs,
+            ])),
             "receipts": copy.deepcopy(state["receipts"]),
             "unprocessed": copy.deepcopy(state["unprocessed"]) + (
                 [{"phase": state["phase"], "reason": "model_outcome_unconfirmed"}]
@@ -572,6 +697,13 @@ def maintain_event(
                 and (r.get("status") == "committed" or r.get("original_status") == "committed")
                 for r in state["receipts"]
             ),
+            **({"outcome": state["outcome"]} if "outcome" in state else {}),
+            **({"dependency_selection": copy.deepcopy(state["dependency_selection"]),
+                "dependency_regions": copy.deepcopy(state["dependency_regions"])}
+               if "dependency_regions" in state else {}),
+            **({"writer_projection": copy.deepcopy(state["writer_projection"])}
+               if "writer_projection" in state else {}),
+            **({"execution_source_refs": list(execution_refs)} if execution_refs else {}),
             **({"batches": copy.deepcopy(batches),
                 "source_batch_count": len(state["batches"])} if "batches" in state else {}),
             **({"prior_request_id": state["prior_request_id"]}
@@ -580,6 +712,10 @@ def maintain_event(
             **({"episode_index": copy.deepcopy(state["episode_index"])}
                if "episode_index" in state else {}),
             **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
+            **({"result_maintenance_mode": state["result_maintenance"]["mode"],
+                "literal_observation_candidate_count": len(
+                    state["result_maintenance"]["literal_changes"]
+                )} if "result_maintenance" in state else {}),
             **({"batches": copy.deepcopy(batches), "source_batch_count": 1,
                 "memory_view": {
                     "mode": memory_view_mode,
@@ -591,6 +727,9 @@ def maintain_event(
                 }} if "work_items" in state else {}),
         }
 
+    if execute and state["phase"] == "start" and not sources and execution_refs:
+        state.update(phase="complete", outcome="no_domain_observation")
+        save()
     if execute and state["phase"] == "complete" and service.memory_profile == "unified_v1" \
             and "episode_index" not in state:
         state["episode_index"] = _index_episode_descriptions(method, sources, state["receipts"])
@@ -600,7 +739,7 @@ def maintain_event(
         return result()
 
     def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
-        if fit is not None and not fit(messages):
+        if not _fits(stage, messages, fit, stage_fit):
             raise FunctionalRejection("EDIT_MAINTENANCE_REQUEST_EXCEEDS_CAPACITY")
         state["phase"] = stage.split(":", 1)[0] + "_pending"
         if memory_view_mode != "legacy":
@@ -610,11 +749,13 @@ def maintain_event(
         return model_call(stage, messages, schema)
 
     try:
-        if memory_view_mode == "legacy" and state["phase"] == "start" and fit is not None and (
+        if memory_view_mode == "legacy" and state["phase"] == "start" \
+                and (fit is not None or stage_fit is not None) \
+                and "result_maintenance" not in state and (
             batch_sources if batch_sources is not None else service.memory_profile == "unified_v1"
         ):
             batches = plan_source_batches(
-                method, delivery, date=date, recipe=recipe, fit=fit,
+                method, delivery, date=date, recipe=recipe, fit=fit, stage_fit=stage_fit,
                 retrieval_limit=retrieval_limit, selected_record_ids=locating_ids,
                 candidate_mode=candidate_mode, prepare_delivery=prepare_delivery,
             )
@@ -632,7 +773,8 @@ def maintain_event(
                     method, state["batches"][index], session=session,
                     request_id=f"{request_id}:batch:{index}", date=date, recipe=recipe,
                     model_call=model_call, commit=commit, retrieval_limit=retrieval_limit,
-                    fit=fit, prepare_delivery=prepare_delivery, execute=execute,
+                    fit=fit, stage_fit=stage_fit, prepare_delivery=prepare_delivery,
+                    execute=execute,
                     selected_record_ids=locating_ids, candidate_mode=candidate_mode,
                     batch_sources=False,
                     memory_save_requested=state.get("memory_save_requested", False),
@@ -651,16 +793,22 @@ def maintain_event(
             save()
             return result()
         if state["phase"] == "start":
+            literal_changes = copy.deepcopy(
+                state.get("result_maintenance", {}).get("literal_changes", [])
+            )
             if recipe == "extract_then_edit":
                 request = method.change_request(
                     {**delivery, "prior_context": state.get("prior_context", [])}, date
                 )
-                envelope = call(
+                # Fields already literal under a public profile need no second
+                # generation. Prose still uses the same existing extractor.
+                envelope = (call(
                     "extract", _replay_context(request["messages"], delivery), request["schema"]
-                )
-                state["changes"] = method.decode_changes(envelope, request)
+                ) if "result_maintenance" not in state or request["mapping"]["evidence"]
+                    else {"changes": []})
+                state["changes"] = [*literal_changes, *method.decode_changes(envelope, request)]
             else:
-                state["changes"] = None
+                state["changes"] = literal_changes if "result_maintenance" in state else None
             state["phase"] = "locate"
             save()
         if state["phase"] == "locate":
@@ -676,7 +824,23 @@ def maintain_event(
                     directory=[_directory_ref(row) for row in selected],
                     work_items=[], phase="views",
                 )
-                if selected_record_ids is not None or not selected:
+                direct = selected_record_ids is not None or not selected
+                if not direct and recipe == "single_pass" and method.features.proposition_updates:
+                    located = _located_delivery(
+                        method, {**delivery, "prior_context": state.get("prior_context", [])},
+                        state["changes"], retrieval_limit=retrieval_limit,
+                        selected_record_ids=locating_ids, selected_records=selected,
+                        candidate_mode=candidate_mode, prepare_delivery=prepare_delivery,
+                        materialize_support=True,
+                    )
+                    preview = method.preview_writer_request(located)
+                    direct = _fits("edit", _replay_context(method.edit_messages(
+                        preview["packet"], date, allow_create=True, schema=preview["schema"],
+                        prior_context=state.get("prior_context", []),
+                    ), delivery), fit, stage_fit)
+                    if direct:
+                        state["selection_policy"] = "complete_candidate_input_fits"
+                if direct:
                     _append_work(state, request_id, state["directory"], create=True, done=True)
                 save()
             else:
@@ -697,7 +861,8 @@ def maintain_event(
                 method, delivery, state, session=session, request_id=request_id,
                 date=date, recipe=recipe, memory_view_mode=memory_view_mode,
                 model_call=model_call, commit=commit, retrieval_limit=retrieval_limit,
-                fit=fit, prepare_delivery=prepare_delivery, candidate_mode=candidate_mode,
+                fit=fit, stage_fit=stage_fit,
+                prepare_delivery=prepare_delivery, candidate_mode=candidate_mode,
                 save=save, call=call,
             )
             if state["phase"] == "complete" and service.memory_profile == "unified_v1":
@@ -708,14 +873,44 @@ def maintain_event(
             return result()
         if state["phase"] == "edit":
             view = state["view"]
+            packet, schema = view["packet"], view["schema"]
+            prior_context = state.get("prior_context", [])
+            if method.features.dependency_updates and view["mapping"]["units"]:
+                if "dependency_selection" not in state:
+                    request = impact_request(packet, view["mapping"], date)
+                    selection = call("impact", request["messages"], request["schema"])
+                    Draft202012Validator(request["schema"]).validate(selection)
+                    state.update(dependency_selection=selection,
+                                 dependency_regions=plan_regions(view["mapping"], selection),
+                                 phase="edit")
+                    save()
+                packet = {**packet, "dependency_regions": state["dependency_regions"]}
+                if method.writer_input == "dependency_region_v1":
+                    local = local_writer_view(packet, view["mapping"],
+                                              state["dependency_regions"], prior_context)
+                    packet, prior_context = local["packet"], local["prior_context"]
+                    schema = method.envelope_schema(
+                        allow_create=state.get("allow_create", True),
+                        mapping=local["schema_mapping"])
+                    state["writer_projection"] = local["selection"]
+                schema = scoped_edit_schema(schema, state["dependency_regions"])
             messages = method.edit_messages(
-                view["packet"], date, allow_create=state.get("allow_create", True),
-                schema=view["schema"],
+                packet, date, allow_create=state.get("allow_create", True),
+                schema=schema,
                 change_candidates=(method.writer_changes(state["changes"], view["mapping"])
                                    if state["changes"] is not None else None),
-                prior_context=state.get("prior_context", []),
+                prior_context=prior_context,
             )
-            envelope = call("edit", _replay_context(messages, delivery), view["schema"])
+            if method.writer_input == "dependency_region_v1":
+                messages[0]["content"] += (
+                    " Records marked partial_units expose only selected units and read-only "
+                    "boundary conditions. Omitted units still exist and are preserved by the "
+                    "service. Propose local operations only; never treat a slice as a whole "
+                    "record replacement. Current evidence may support new clauses even when "
+                    "no old unit is visible.")
+            envelope = call("edit", _replay_context(messages, delivery), schema)
+            if method.features.dependency_updates:
+                Draft202012Validator(schema).validate(envelope)
             state.update(
                 proposals=method.envelope_proposals(envelope, view["mapping"]),
                 phase="commit",
@@ -727,8 +922,11 @@ def maintain_event(
             try:
                 mapping = state["view"]["mapping"]
                 receipt = (
-                    commit(operation_id, proposal, mapping) if commit else method.apply(
-                        session, operation_id, method.decode_proposal(proposal, mapping)
+                    commit(operation_id, proposal, mapping, copy.deepcopy(state["receipts"]))
+                    if commit else method.apply(
+                        session, operation_id, method.decode_proposal(proposal, mapping),
+                        **({"dependency_receipts": state["receipts"]}
+                           if method.features.cross_record_dependencies else {}),
                     )
                 )
             except (FunctionalRejection, ValidationError, SchemaError) as error:
@@ -761,6 +959,7 @@ def resume_maintenance(
     commit: Commit | None = None,
     retrieval_limit: int = 10,
     fit: Callable[[list[dict[str, str]]], bool] | None = None,
+    stage_fit: StageFit | None = None,
     prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     selected_record_ids: list[str] | None = None,
     candidate_mode: CandidateMode = "combined_dense",
@@ -790,7 +989,7 @@ def resume_maintenance(
     options: dict[str, Any] = {
         "session": session, "date": prior.value.get("date", date),
         "recipe": recipe, "model_call": model_call,
-        "commit": commit, "retrieval_limit": retrieval_limit, "fit": fit,
+        "commit": commit, "retrieval_limit": retrieval_limit, "fit": fit, "stage_fit": stage_fit,
         "prepare_delivery": prepare_delivery, "selected_record_ids": selected_record_ids,
         "candidate_mode": candidate_mode,
         "memory_view_mode": memory_view_mode,
@@ -959,6 +1158,8 @@ def resume_maintenance(
             "prior_context": copy.deepcopy(state.get("prior_context", [])),
             "prior_request_id": prior_request_id,
             "date": state.get("date", date),
+            **({"result_maintenance": copy.deepcopy(state["result_maintenance"])}
+               if "result_maintenance" in state else {}),
             **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
             **({"prior_session": session} if attempt_session != session else {}),
         }

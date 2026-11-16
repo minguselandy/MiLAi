@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 
 
 class ReconstructionError(ValueError):

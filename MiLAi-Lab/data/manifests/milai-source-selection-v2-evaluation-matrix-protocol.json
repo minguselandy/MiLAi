@@ -1,0 +1,127 @@
+{
+  "status": "PREPARED_FROM_FROZEN_TRAINING_PROTOCOL",
+  "training_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1",
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "models": [
+    {
+      "name": "reference_seed0",
+      "condition": "reference",
+      "seed": 0,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/0/checkpoint",
+      "selection_only": true,
+      "probe": true
+    },
+    {
+      "name": "reference_seed1",
+      "condition": "reference",
+      "seed": 1,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/1/checkpoint",
+      "selection_only": true,
+      "probe": true
+    },
+    {
+      "name": "reference_seed2",
+      "condition": "reference",
+      "seed": 2,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/2/checkpoint",
+      "selection_only": true,
+      "probe": true
+    },
+    {
+      "name": "source_seed0",
+      "condition": "source",
+      "seed": 0,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/source/0/checkpoint",
+      "selection_only": true,
+      "probe": true
+    },
+    {
+      "name": "source_seed1",
+      "condition": "source",
+      "seed": 1,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/source/1/checkpoint",
+      "selection_only": true,
+      "probe": true
+    },
+    {
+      "name": "source_seed2",
+      "condition": "source",
+      "seed": 2,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/source/2/checkpoint",
+      "selection_only": true,
+      "probe": true
+    },
+    {
+      "name": "base_zero",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+      "selection_only": true,
+      "probe": false
+    },
+    {
+      "name": "prior128_seed0",
+      "seed": 0,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/0/native/checkpoint",
+      "selection_only": false,
+      "probe": false
+    },
+    {
+      "name": "prior128_seed1",
+      "seed": 1,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/native/checkpoint",
+      "selection_only": false,
+      "probe": false
+    },
+    {
+      "name": "prior128_seed2",
+      "seed": 2,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/2/native/checkpoint",
+      "selection_only": false,
+      "probe": false
+    }
+  ],
+  "cohorts": [
+    {
+      "name": "dev",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evaluation-v2/dev",
+      "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evaluation-v2/dev/protocol.json"
+    },
+    {
+      "name": "reserved",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evaluation-v2/reserved",
+      "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evaluation-v2/reserved/protocol.json"
+    }
+  ],
+  "robustness": {
+    "presentation_variants": [
+      "original",
+      "aliases",
+      "candidate_order",
+      "option_order",
+      "title_frame",
+      "evidence_order"
+    ],
+    "models": "all6new final checkpoints",
+    "states": 428,
+    "scope": "Acceptance in both views primary,canonical exact-choice invariance secondary;mask/qualified denominators explicit.",
+    "evidence_contrasts": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evidence-contrasts-v1/contrasts.jsonl",
+    "evidence_pairs": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evidence-contrasts-v1/pairs.json",
+    "contrast_counts": {
+      "contexts": 44,
+      "labelled": 42,
+      "families": 18,
+      "disjoint_target_pairs": 31
+    },
+    "contrast_scope": "Identical questions,candidates and actions;neutral-ID literal observed-premise copies change. Controlled complement-selection diagnosis,not natural counterfactual coverage. Natural positive/insufficient variants also compared in actualQA."
+  },
+  "common_dev": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/states-v2/source/dev.jsonl",
+  "reference_dev": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/states-v2/reference/dev.jsonl",
+  "max_len": 8192,
+  "head_max_len": 512,
+  "training_protocol": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/data/manifests/milai-source-selection-v2-training-protocol.json",
+  "cuda_python": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+  "http_python": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+  "planned_arms_per_cohort": 13,
+  "planned_reader_positions": 923,
+  "automatic_retry": false,
+  "sha_checks": false
+}

@@ -15,7 +15,7 @@ from typing import Any
 
 from milai_lab.harness.contextual_artifacts import BudgetExceeded
 from milai_lab.providers.contextual_capacity import HostCapacity
-from milai_lab.providers.contextual_vllm import VLLMClient
+from milai_lab.providers.contextual_vllm import Emit, VLLMClient
 
 
 class FunctionalQueue:
@@ -106,17 +106,27 @@ class FunctionalVLLMClient(VLLMClient):
     declaration_temperature: float | None = None
 
     def _post(
-        self, path: str, request: dict[str, Any], *, capacity_receipt: dict[str, Any] | None = None
+        self,
+        path: str,
+        request: dict[str, Any],
+        *,
+        capacity_receipt: dict[str, Any] | None = None,
+        accounting_request: dict[str, Any] | None = None,
+        on_event: Emit | None = None,
     ) -> dict[str, Any]:
         if path != "chat/completions" or capacity_receipt is None:
             raise ValueError("FUNCTIONAL_GENERATION_CAPACITY_REQUIRED")
         self._check_owner()
         catalog = request.get("tools", [])
+        response_format = request.get("response_format") or {}
         if (
             self.declaration_capacity is not None
-            and request.get("tool_choice") == "required"
-            and len(catalog) == 1
-            and catalog[0].get("function", {}).get("name") in self.declaration_tool_names
+            and ((request.get("tool_choice") in ("auto", "required")
+                  and len(catalog) == 1
+                  and catalog[0].get("function", {}).get("name") in self.declaration_tool_names)
+                 or (not catalog and response_format.get("type") == "json_schema"
+                     and response_format.get("json_schema", {}).get("name")
+                     == "milai_request_scope"))
         ):
             # Runner opts in exact public declaration phases. The initial host
             # check remains conservative; recompute the actual final wire template
@@ -130,4 +140,7 @@ class FunctionalVLLMClient(VLLMClient):
                 request["messages"], self.config.max_tokens, catalog
             )
         self.queue.reserve(request, capacity_receipt)
-        return super()._post(path, request, capacity_receipt=capacity_receipt)
+        return super()._post(
+            path, request, capacity_receipt=capacity_receipt,
+            accounting_request=accounting_request, on_event=on_event,
+        )

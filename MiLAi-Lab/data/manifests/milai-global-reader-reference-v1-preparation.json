@@ -1,0 +1,119 @@
+{
+  "preparation": {
+    "status": "PREPARED_REFERENCE_SUPERVISION_ONLY",
+    "cohorts": {
+      "families32": {
+        "train": {
+          "states": 304,
+          "labelled": 304,
+          "families": 32,
+          "questions": 32,
+          "source_rows": 57,
+          "family_steps": {
+            "2": 24,
+            "3": 7,
+            "4": 1
+          },
+          "label_status": {
+            "missing_complement": 208,
+            "official_unanswerable_pool": 67,
+            "reference_proof_complete": 29
+          }
+        },
+        "dev": {
+          "states": 168,
+          "labelled": 168,
+          "families": 17,
+          "questions": 17,
+          "source_rows": 31,
+          "family_steps": {
+            "2": 14,
+            "3": 3
+          },
+          "label_status": {
+            "missing_complement": 117,
+            "official_unanswerable_pool": 34,
+            "reference_proof_complete": 17
+          }
+        }
+      },
+      "families128": {
+        "train": {
+          "states": 1223,
+          "labelled": 1223,
+          "families": 128,
+          "questions": 128,
+          "source_rows": 229,
+          "family_steps": {
+            "2": 95,
+            "3": 32,
+            "4": 1
+          },
+          "label_status": {
+            "missing_complement": 838,
+            "official_unanswerable_pool": 266,
+            "reference_proof_complete": 119
+          }
+        },
+        "dev": {
+          "states": 168,
+          "labelled": 168,
+          "families": 17,
+          "questions": 17,
+          "source_rows": 31,
+          "family_steps": {
+            "2": 14,
+            "3": 3
+          },
+          "label_status": {
+            "missing_complement": 117,
+            "official_unanswerable_pool": 34,
+            "reference_proof_complete": 17
+          }
+        }
+      }
+    },
+    "length_excluded_question_ids": [],
+    "length_rule": "Entire paired question removed, no backfill, no truncation",
+    "wall_seconds": 22.37102905474603,
+    "cpu_seconds": 22.369304543,
+    "model_forwards": 0,
+    "heldout_candidate_file_loaded": false,
+    "calibration_loaded": false,
+    "source_semantic_labels_generated": false
+  },
+  "full_input_lengths": {
+    "train": {
+      "states": 1223,
+      "max_tokens": 4512,
+      "total_tokens": 3476096,
+      "truncated_states": 0
+    },
+    "dev": {
+      "states": 168,
+      "max_tokens": 4515,
+      "total_tokens": 496458,
+      "truncated_states": 0
+    }
+  },
+  "cohorts": {
+    "families32": {
+      "optimizer_updates_each_job": 38,
+      "all_targets_match_visible_actions": true,
+      "offline_metadata_excluded_from_model_payload": true,
+      "family_loss_mass_equal": true,
+      "family_mass": 9.499999999999998,
+      "training_labelled_states": 304
+    },
+    "families128": {
+      "optimizer_updates_each_job": 154,
+      "all_targets_match_visible_actions": true,
+      "offline_metadata_excluded_from_model_payload": true,
+      "family_loss_mass_equal": true,
+      "family_mass": 9.554687500000004,
+      "training_labelled_states": 1223
+    }
+  },
+  "nested_cohort_inputs_exact": true,
+  "dev_inputs_exact_across_cohorts": true
+}

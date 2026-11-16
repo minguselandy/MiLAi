@@ -1,0 +1,327 @@
+{
+  "version": "dynamic-memory-control-memops-six-train-source-v1",
+  "scope": "Six original MemOps background families, all previously assigned train in both worktrees; external synthetic source intake for T1. Three chronological cuts plus repeats per family:36 correlated tasks, not36 independent families. No test/calibration sources and no current method efficacy claim.",
+  "source": "https://github.com/MemTensor/MemOps",
+  "license": "MIT; original literal sources retained locally with upstream LICENSE",
+  "source_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main/generated_result/2-evidence_conversation",
+  "family_assignments": [
+    {
+      "A02": "train",
+      "B01": "train",
+      "C02": "train",
+      "D02": "train",
+      "E01": "train",
+      "F07": "train"
+    },
+    {
+      "A02": "train",
+      "B01": "train",
+      "C02": "train",
+      "D02": "train",
+      "E01": "train",
+      "F07": "train"
+    }
+  ],
+  "reviewer": "Codex author, source visible; own task-specific answers and sufficient user-source witnesses, not independent gold or native benchmark scores",
+  "source_boundary": "Use chronological original role/content only. No target_fact, operations, difficulty knobs, segment descriptions or source answer fields in Host input. Stop each cut on the actual user turn before the next assistant response. Unknown calendar dates remain unknown.",
+  "cases": [
+    {
+      "family": "A02",
+      "file": "A02_update.json",
+      "query": "According to the conversation so far, what is my confirmed current department at Meridian Consulting Group, who is my direct manager, and is any department name change still only planned? Distinguish current, proposed and cancelled information.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            5
+          ],
+          "answer": "Strategic Analytics, corrected from Strategy & Insights; Rachel Tseng is the direct manager. No pending department rename has yet been established.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            3
+          ],
+          "answer": "Current department remains Strategic Analytics and manager Rachel Tseng. Applied Strategy & Analytics is reported as a next-quarter rebrand, not an already effective current name; calendar anchor is unknown.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s3t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Strategic Analytics remains current and Rachel Tseng remains the manager. The planned rebrand was shelved; Strategy & Insights on the old form is stale.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "family": "B01",
+      "file": "B01_reflect.json",
+      "query": "Based on what I have actually said so far, what kind of social setting do I prefer, and which examples support that? Keep the inference bounded to the described situations; distinguish my preferences from other people’s plans.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Quiet, low-key one-on-one hangouts such as the corner-booth ramen visits with Darren; do not infer a diagnosis or an absolute preference covering every setting.",
+          "support_sets": [
+            [
+              "s1t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Intimate, quiet settings with one or two people: ramen corner booth and a small dive bar with conversation, preferred over crowded trendy bars and large outings.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "The same bounded quiet/intimate preference remains supported; Darren’s possible move and offers do not reverse the user’s social preference.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s2t5"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "family": "C02",
+      "file": "C02_trajectory_ops.json",
+      "query": "From the records so far, what is the currently confirmed deadline for my community arts grant application, and what completion date follows from my personal buffer rule? Keep other deadlines and unconfirmed proposals separate.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Grant deadline April 18; the three-day early-completion rule implies April 15. The lease and workshop deadlines are separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            1
+          ],
+          "answer": "Grant deadline moved to April 14; personal completion target April 11.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Confirmed grant deadline April 14 and personal target April 11. April 22 grant extension was a rejected proposal, distinct from lease planning.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s3t5"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "family": "D02",
+      "file": "D02_update.json",
+      "query": "According to my own latest confirmed reports in this conversation, what laptop model and native screen resolution should the spec sheet currently show? Distinguish this from proposed or third-party alternatives and old incorrect entries.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            5
+          ],
+          "answer": "ThinkPad X1 Carbon Gen 11; resolution corrected to 2560 by 1600. The earlier 2560 by 1440 entry was wrong.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            3
+          ],
+          "answer": "ThinkPad X1 Carbon Gen 11; user now reports 1920 by 1200 from both OS display checks. This is a report in the source, not independent hardware verification.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "ThinkPad X1 Carbon Gen 11; keep 1920 by 1200 following the user’s direct recheck. Priya’s 2880 by 1800 lookup is disputed; 2560 by 1440 in an old email is explicitly stale.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "family": "E01",
+      "file": "E01_remember.json",
+      "query": "How do I prefer to communicate dates, and what is established so far about my use of written aids during meetings? Separate an expressed preference or intention from a strategy I have actually reported using.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers written dates so they can be checked; would rather prepare notes than improvise verbal dates under pressure. Actual use of a sticky-note system is not yet reported.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Still prefers written communication. Has actually used monitor sticky notes for about two weeks, writes them fresh each morning and updates them as dates change; reports catching a verbal mistake using a note. Anti-month notation is only something to try.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Written communication remains preferred and sticky notes are an established helpful habit. Slower pacing and repeating dates are discussed supports; direct evidence of trying the repetition technique is not supplied. Keep intentions for the next client meeting distinct from past effects.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t7"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "family": "F07",
+      "file": "F07_reflect.json",
+      "query": "From my descriptions so far, what environment and activity characteristics seem to help me unwind, and what concrete examples support that? Keep this about my reported preferences rather than a medical recommendation or someone else’s needs.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Reports calming overcast solo evening walks and feeling overwhelmed by bright crowded settings. The broader inference should remain limited to these reports.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "A bounded preference for quiet, low-stimulation activities: overcast solo walks, calm-voice-only meditation without layered sounds, and handwritten night journaling rather than screens.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "The same low-stimulation pattern remains supported, including quiet one-on-one conversations. Prefers solo walks for decompression while tolerating some social walks; Marcus’s high-energy group recommendation concerns Marcus, not the user.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s2t5",
+              "s3t3",
+              "s3t7"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

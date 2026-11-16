@@ -1,0 +1,80 @@
+{
+  "version": "dynamic-memory-control-t2-aggregation-fit-v1",
+  "status": "PREREGISTERED_BEFORE_FITTING",
+  "purpose": "Test actual own-prefix aggregation against equal additional training on original supervision. No claim that extra optimizer steps alone demonstrate DAgger benefit.",
+  "initial_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+  "initial_updates": 96,
+  "jobs": [
+    {
+      "id": "t0-continued-full-native-seed0",
+      "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/operation-labels-v1",
+      "labelled_train_states": 373,
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-fitting-v1/t0-continued-full-native-seed0"
+    },
+    {
+      "id": "t2-aggregate-full-native-seed0",
+      "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-aggregate-v1",
+      "labelled_train_states": 656,
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-fitting-v1/t2-aggregate-full-native-seed0"
+    }
+  ],
+  "common": {
+    "seed": 0,
+    "additional_optimizer_updates": 96,
+    "cumulative_updates": 192,
+    "selection": "fixed final96 of this continuation, no best checkpoint selection",
+    "micro_batch_size": 2,
+    "gradient_accumulation": 8,
+    "effective_batch": 16,
+    "backend": "native",
+    "operation_state": "full",
+    "objective": "soft-ce",
+    "max_len": 8192,
+    "head_max_len": 2048,
+    "shuffle_options": true,
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "optimizer": "same original learning rates/scheduler/weight decay, newly initialized optimizer for both continuations",
+    "evaluate_train": "final only"
+  },
+  "data": {
+    "status": "PREPARED_ACTUAL_T2_AGGREGATION_NOT_FITTED",
+    "total_train_states": 702,
+    "labelled_train_states": 656,
+    "train_families": 24,
+    "dev_states": 139,
+    "dev_families": 8,
+    "origins": {
+      "original_supervision": 418,
+      "actual_own_prefix": 284
+    },
+    "label_statuses": {
+      "acquire_evidence_preference": 458,
+      "ready_handoff_preference": 198,
+      "forced_single_action_masked": 46
+    },
+    "max_labelled_sequence_tokens": 5238,
+    "truncated_rows": 0,
+    "labels_or_inputs_changed": false,
+    "state_id_change": "Only offline aggregate permutation IDs reset uniquely; original ID and source retained.",
+    "weighting": "Same existing family+training_event normalization; both sources for one family/phase remain one correlated event, not two independent tasks.",
+    "dev_policy": "Original8development families copied unchanged, no dev row fitted.",
+    "model_calls": 0,
+    "model_forwards": 0
+  },
+  "weighting": "Existing family+training_event normalization. Original demonstration and actual visited prefixes for the same source task stay in the same event; not counted as independent families.",
+  "capacity": "All656labelled aggregate states fit; longest5238. Smaller microbatch lowers peak activation memory without dropping/truncating examples or changing16-example windows. Actual peak memory/cost must still be reported.",
+  "source_review": "dynamic-memory-control-t2-view-review-v1.json;46contexts,23task-sufficient,8valid current states. Actual choices are never copied into gold.",
+  "native_qa": {
+    "runtime": "5052477f",
+    "fixture": "data/fixtures/dynamic-memory-control/t0-dev-rollouts-v1.json",
+    "positions_per_new_arm": 32,
+    "baseline": "already queued feedback-full-v1 T0final96 first results, preserved without rerun",
+    "compare": "T0final96 versus T0+96original-only versus T0+96aggregated, same Host/actions/Reader, independent banks",
+    "gate": "actual COMPLETED final checkpoint and projection=full"
+  },
+  "scope": "Initial24training-family T2 diagnosis; it does not replace broad T1 fitting or confirmation seeds0/1/2. No dev/calibration/test rows fitted.",
+  "queue": "After terminal reviewed current coordinator, before the already prepared matchedQA/source intake. No parallel worker started. Same original continuous budget; no reset or replay."
+}

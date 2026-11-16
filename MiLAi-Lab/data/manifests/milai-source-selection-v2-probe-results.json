@@ -1,0 +1,1341 @@
+{
+  "status": "ALL_SIX_SAVED_CHECKPOINT_PROBES_ANALYZED",
+  "models": [
+    {
+      "model": "reference_seed0",
+      "presentation_source": {
+        "original": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 171,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.6819692653025986
+        },
+        "aliases": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 173,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.6921535254868588
+        },
+        "candidate_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 193,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7889067722401055
+        },
+        "option_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 175,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.702854963966075
+        },
+        "title_frame": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 177,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7061669297780409
+        },
+        "evidence_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 173,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.6932861377305821
+        }
+      },
+      "original_reference": {
+        "counts": {
+          "states": 428,
+          "labelled": 354,
+          "accepted": 251,
+          "bm25_next_accepted": 207,
+          "masked": 74
+        },
+        "family_question_macro": 0.7426667392634885
+      },
+      "presentation_pairs": {
+        "aliases": {
+          "states": 428,
+          "canonical_choice_equal": 336,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 164,
+          "left_only_accepted": 7,
+          "right_only_accepted": 9,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 164,
+          "masked": 173
+        },
+        "candidate_order": {
+          "states": 428,
+          "canonical_choice_equal": 254,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 160,
+          "left_only_accepted": 11,
+          "right_only_accepted": 33,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 160,
+          "masked": 173
+        },
+        "option_order": {
+          "states": 428,
+          "canonical_choice_equal": 367,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 167,
+          "left_only_accepted": 4,
+          "right_only_accepted": 8,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 167,
+          "masked": 173
+        },
+        "title_frame": {
+          "states": 428,
+          "canonical_choice_equal": 315,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 157,
+          "left_only_accepted": 14,
+          "right_only_accepted": 20,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 157,
+          "masked": 173
+        },
+        "evidence_order": {
+          "states": 428,
+          "canonical_choice_equal": 385,
+          "input_changed": 252,
+          "labelled": 255,
+          "both_accepted": 168,
+          "left_only_accepted": 3,
+          "right_only_accepted": 5,
+          "masked": 173,
+          "changed_input_labelled": 132,
+          "changed_input_both_accepted": 85
+        }
+      },
+      "pre_save_vs_reload": {
+        "states": 428,
+        "canonical_choice_equal": 428,
+        "input_changed": 0,
+        "labelled": 255,
+        "both_accepted": 171,
+        "left_only_accepted": 0,
+        "right_only_accepted": 0,
+        "masked": 173
+      },
+      "evidence_contexts": {
+        "counts": {
+          "states": 44,
+          "labelled": 42,
+          "accepted": 24,
+          "bm25_next_accepted": 20,
+          "masked": 2
+        },
+        "family_question_macro": 0.5972222222222222
+      },
+      "evidence_pairs": {
+        "pairs": 31,
+        "both_accepted": 10,
+        "choice_changed": 15,
+        "requires_choice_change": 31,
+        "required_change_and_both_accepted": 10,
+        "changed_but_not_both_accepted": 5
+      },
+      "compute_already_charged": {
+        "presentation": {
+          "wall_seconds": 311.69846690725535,
+          "cpu_seconds": 485.463800682,
+          "runs": 1,
+          "forwards": 2568,
+          "sequence_rows": 2568,
+          "input_tokens": 5690813,
+          "state_tokenizations": 2568,
+          "state_tokens": 5083151
+        },
+        "evidence": {
+          "wall_seconds": 10.929703725501895,
+          "cpu_seconds": 14.478754787,
+          "runs": 1,
+          "forwards": 44,
+          "sequence_rows": 44,
+          "input_tokens": 80035,
+          "state_tokenizations": 44,
+          "state_tokens": 70803
+        }
+      }
+    },
+    {
+      "model": "reference_seed1",
+      "presentation_source": {
+        "original": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 191,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7698476420698643
+        },
+        "aliases": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 181,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7342864953976065
+        },
+        "candidate_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 190,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7928767220433887
+        },
+        "option_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 192,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7742219714441937
+        },
+        "title_frame": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 188,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.771816917650251
+        },
+        "evidence_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 188,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7602075907631464
+        }
+      },
+      "original_reference": {
+        "counts": {
+          "states": 428,
+          "labelled": 354,
+          "accepted": 276,
+          "bm25_next_accepted": 207,
+          "masked": 74
+        },
+        "family_question_macro": 0.8063547694995064
+      },
+      "presentation_pairs": {
+        "aliases": {
+          "states": 428,
+          "canonical_choice_equal": 314,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 172,
+          "left_only_accepted": 19,
+          "right_only_accepted": 9,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 172,
+          "masked": 173
+        },
+        "candidate_order": {
+          "states": 428,
+          "canonical_choice_equal": 269,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 169,
+          "left_only_accepted": 22,
+          "right_only_accepted": 21,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 169,
+          "masked": 173
+        },
+        "option_order": {
+          "states": 428,
+          "canonical_choice_equal": 344,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 180,
+          "left_only_accepted": 11,
+          "right_only_accepted": 12,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 180,
+          "masked": 173
+        },
+        "title_frame": {
+          "states": 428,
+          "canonical_choice_equal": 329,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 174,
+          "left_only_accepted": 17,
+          "right_only_accepted": 14,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 174,
+          "masked": 173
+        },
+        "evidence_order": {
+          "states": 428,
+          "canonical_choice_equal": 382,
+          "input_changed": 252,
+          "labelled": 255,
+          "both_accepted": 185,
+          "left_only_accepted": 6,
+          "right_only_accepted": 3,
+          "masked": 173,
+          "changed_input_labelled": 132,
+          "changed_input_both_accepted": 95
+        }
+      },
+      "pre_save_vs_reload": {
+        "states": 428,
+        "canonical_choice_equal": 427,
+        "input_changed": 0,
+        "labelled": 255,
+        "both_accepted": 191,
+        "left_only_accepted": 1,
+        "right_only_accepted": 0,
+        "masked": 173
+      },
+      "evidence_contexts": {
+        "counts": {
+          "states": 44,
+          "labelled": 42,
+          "accepted": 26,
+          "bm25_next_accepted": 20,
+          "masked": 2
+        },
+        "family_question_macro": 0.6111111111111112
+      },
+      "evidence_pairs": {
+        "pairs": 31,
+        "both_accepted": 12,
+        "choice_changed": 24,
+        "requires_choice_change": 31,
+        "required_change_and_both_accepted": 12,
+        "changed_but_not_both_accepted": 12
+      },
+      "compute_already_charged": {
+        "presentation": {
+          "wall_seconds": 313.87726196926087,
+          "cpu_seconds": 491.590429362,
+          "runs": 1,
+          "forwards": 2568,
+          "sequence_rows": 2568,
+          "input_tokens": 5690813,
+          "state_tokenizations": 2568,
+          "state_tokens": 5083151
+        },
+        "evidence": {
+          "wall_seconds": 11.490951905958354,
+          "cpu_seconds": 15.565843960999999,
+          "runs": 1,
+          "forwards": 44,
+          "sequence_rows": 44,
+          "input_tokens": 80035,
+          "state_tokenizations": 44,
+          "state_tokens": 70803
+        }
+      }
+    },
+    {
+      "model": "reference_seed2",
+      "presentation_source": {
+        "original": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 185,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7649570594015038
+        },
+        "aliases": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 191,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7795574281685392
+        },
+        "candidate_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 191,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7855428008205786
+        },
+        "option_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 184,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7565007009451454
+        },
+        "title_frame": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 193,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7866978700312034
+        },
+        "evidence_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 185,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7635741830186275
+        }
+      },
+      "original_reference": {
+        "counts": {
+          "states": 428,
+          "labelled": 354,
+          "accepted": 244,
+          "bm25_next_accepted": 207,
+          "masked": 74
+        },
+        "family_question_macro": 0.735236546133605
+      },
+      "presentation_pairs": {
+        "aliases": {
+          "states": 428,
+          "canonical_choice_equal": 343,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 179,
+          "left_only_accepted": 6,
+          "right_only_accepted": 12,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 179,
+          "masked": 173
+        },
+        "candidate_order": {
+          "states": 428,
+          "canonical_choice_equal": 275,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 174,
+          "left_only_accepted": 11,
+          "right_only_accepted": 17,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 174,
+          "masked": 173
+        },
+        "option_order": {
+          "states": 428,
+          "canonical_choice_equal": 348,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 174,
+          "left_only_accepted": 11,
+          "right_only_accepted": 10,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 174,
+          "masked": 173
+        },
+        "title_frame": {
+          "states": 428,
+          "canonical_choice_equal": 325,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 177,
+          "left_only_accepted": 8,
+          "right_only_accepted": 16,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 177,
+          "masked": 173
+        },
+        "evidence_order": {
+          "states": 428,
+          "canonical_choice_equal": 389,
+          "input_changed": 252,
+          "labelled": 255,
+          "both_accepted": 182,
+          "left_only_accepted": 3,
+          "right_only_accepted": 3,
+          "masked": 173,
+          "changed_input_labelled": 132,
+          "changed_input_both_accepted": 90
+        }
+      },
+      "pre_save_vs_reload": {
+        "states": 428,
+        "canonical_choice_equal": 428,
+        "input_changed": 0,
+        "labelled": 255,
+        "both_accepted": 185,
+        "left_only_accepted": 0,
+        "right_only_accepted": 0,
+        "masked": 173
+      },
+      "evidence_contexts": {
+        "counts": {
+          "states": 44,
+          "labelled": 42,
+          "accepted": 25,
+          "bm25_next_accepted": 20,
+          "masked": 2
+        },
+        "family_question_macro": 0.6157407407407407
+      },
+      "evidence_pairs": {
+        "pairs": 31,
+        "both_accepted": 12,
+        "choice_changed": 20,
+        "requires_choice_change": 31,
+        "required_change_and_both_accepted": 12,
+        "changed_but_not_both_accepted": 8
+      },
+      "compute_already_charged": {
+        "presentation": {
+          "wall_seconds": 306.42535407468677,
+          "cpu_seconds": 473.187427557,
+          "runs": 1,
+          "forwards": 2568,
+          "sequence_rows": 2568,
+          "input_tokens": 5690813,
+          "state_tokenizations": 2568,
+          "state_tokens": 5083151
+        },
+        "evidence": {
+          "wall_seconds": 10.379655790515244,
+          "cpu_seconds": 13.179350958,
+          "runs": 1,
+          "forwards": 44,
+          "sequence_rows": 44,
+          "input_tokens": 80035,
+          "state_tokenizations": 44,
+          "state_tokens": 70803
+        }
+      }
+    },
+    {
+      "model": "source_seed0",
+      "presentation_source": {
+        "original": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 195,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7750293944738389
+        },
+        "aliases": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 190,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7485877291432848
+        },
+        "candidate_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 190,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7659411576078243
+        },
+        "option_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 191,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7666248360692806
+        },
+        "title_frame": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 190,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7598034167478612
+        },
+        "evidence_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 192,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7657503504725727
+        }
+      },
+      "original_reference": {
+        "counts": {
+          "states": 428,
+          "labelled": 354,
+          "accepted": 256,
+          "bm25_next_accepted": 207,
+          "masked": 74
+        },
+        "family_question_macro": 0.7546699703804967
+      },
+      "presentation_pairs": {
+        "aliases": {
+          "states": 428,
+          "canonical_choice_equal": 334,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 184,
+          "left_only_accepted": 11,
+          "right_only_accepted": 6,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 184,
+          "masked": 173
+        },
+        "candidate_order": {
+          "states": 428,
+          "canonical_choice_equal": 291,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 182,
+          "left_only_accepted": 13,
+          "right_only_accepted": 8,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 182,
+          "masked": 173
+        },
+        "option_order": {
+          "states": 428,
+          "canonical_choice_equal": 388,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 190,
+          "left_only_accepted": 5,
+          "right_only_accepted": 1,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 190,
+          "masked": 173
+        },
+        "title_frame": {
+          "states": 428,
+          "canonical_choice_equal": 338,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 184,
+          "left_only_accepted": 11,
+          "right_only_accepted": 6,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 184,
+          "masked": 173
+        },
+        "evidence_order": {
+          "states": 428,
+          "canonical_choice_equal": 393,
+          "input_changed": 252,
+          "labelled": 255,
+          "both_accepted": 192,
+          "left_only_accepted": 3,
+          "right_only_accepted": 0,
+          "masked": 173,
+          "changed_input_labelled": 132,
+          "changed_input_both_accepted": 98
+        }
+      },
+      "pre_save_vs_reload": {
+        "states": 428,
+        "canonical_choice_equal": 428,
+        "input_changed": 0,
+        "labelled": 255,
+        "both_accepted": 195,
+        "left_only_accepted": 0,
+        "right_only_accepted": 0,
+        "masked": 173
+      },
+      "evidence_contexts": {
+        "counts": {
+          "states": 44,
+          "labelled": 42,
+          "accepted": 22,
+          "bm25_next_accepted": 20,
+          "masked": 2
+        },
+        "family_question_macro": 0.537037037037037
+      },
+      "evidence_pairs": {
+        "pairs": 31,
+        "both_accepted": 7,
+        "choice_changed": 15,
+        "requires_choice_change": 31,
+        "required_change_and_both_accepted": 7,
+        "changed_but_not_both_accepted": 8
+      },
+      "compute_already_charged": {
+        "presentation": {
+          "wall_seconds": 303.0949721513316,
+          "cpu_seconds": 473.54798482399997,
+          "runs": 1,
+          "forwards": 2568,
+          "sequence_rows": 2568,
+          "input_tokens": 5690813,
+          "state_tokenizations": 2568,
+          "state_tokens": 5083151
+        },
+        "evidence": {
+          "wall_seconds": 10.273177564144135,
+          "cpu_seconds": 13.056970853000001,
+          "runs": 1,
+          "forwards": 44,
+          "sequence_rows": 44,
+          "input_tokens": 80035,
+          "state_tokenizations": 44,
+          "state_tokens": 70803
+        }
+      }
+    },
+    {
+      "model": "source_seed1",
+      "presentation_source": {
+        "original": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 192,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7755520713854047
+        },
+        "aliases": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 192,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7751980015868905
+        },
+        "candidate_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 189,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7497207524985303
+        },
+        "option_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 193,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7791960611405055
+        },
+        "title_frame": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 199,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7994437661104328
+        },
+        "evidence_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 190,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7695395653728987
+        }
+      },
+      "original_reference": {
+        "counts": {
+          "states": 428,
+          "labelled": 354,
+          "accepted": 257,
+          "bm25_next_accepted": 207,
+          "masked": 74
+        },
+        "family_question_macro": 0.7547587149692413
+      },
+      "presentation_pairs": {
+        "aliases": {
+          "states": 428,
+          "canonical_choice_equal": 343,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 186,
+          "left_only_accepted": 6,
+          "right_only_accepted": 6,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 186,
+          "masked": 173
+        },
+        "candidate_order": {
+          "states": 428,
+          "canonical_choice_equal": 305,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 180,
+          "left_only_accepted": 12,
+          "right_only_accepted": 9,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 180,
+          "masked": 173
+        },
+        "option_order": {
+          "states": 428,
+          "canonical_choice_equal": 379,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 190,
+          "left_only_accepted": 2,
+          "right_only_accepted": 3,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 190,
+          "masked": 173
+        },
+        "title_frame": {
+          "states": 428,
+          "canonical_choice_equal": 340,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 187,
+          "left_only_accepted": 5,
+          "right_only_accepted": 12,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 187,
+          "masked": 173
+        },
+        "evidence_order": {
+          "states": 428,
+          "canonical_choice_equal": 396,
+          "input_changed": 252,
+          "labelled": 255,
+          "both_accepted": 188,
+          "left_only_accepted": 4,
+          "right_only_accepted": 2,
+          "masked": 173,
+          "changed_input_labelled": 132,
+          "changed_input_both_accepted": 97
+        }
+      },
+      "pre_save_vs_reload": {
+        "states": 428,
+        "canonical_choice_equal": 428,
+        "input_changed": 0,
+        "labelled": 255,
+        "both_accepted": 192,
+        "left_only_accepted": 0,
+        "right_only_accepted": 0,
+        "masked": 173
+      },
+      "evidence_contexts": {
+        "counts": {
+          "states": 44,
+          "labelled": 42,
+          "accepted": 22,
+          "bm25_next_accepted": 20,
+          "masked": 2
+        },
+        "family_question_macro": 0.5277777777777778
+      },
+      "evidence_pairs": {
+        "pairs": 31,
+        "both_accepted": 5,
+        "choice_changed": 17,
+        "requires_choice_change": 31,
+        "required_change_and_both_accepted": 5,
+        "changed_but_not_both_accepted": 12
+      },
+      "compute_already_charged": {
+        "presentation": {
+          "wall_seconds": 301.10712947603315,
+          "cpu_seconds": 465.377690532,
+          "runs": 1,
+          "forwards": 2568,
+          "sequence_rows": 2568,
+          "input_tokens": 5690813,
+          "state_tokenizations": 2568,
+          "state_tokens": 5083151
+        },
+        "evidence": {
+          "wall_seconds": 10.628191383555532,
+          "cpu_seconds": 13.360176669000001,
+          "runs": 1,
+          "forwards": 44,
+          "sequence_rows": 44,
+          "input_tokens": 80035,
+          "state_tokenizations": 44,
+          "state_tokens": 70803
+        }
+      }
+    },
+    {
+      "model": "source_seed2",
+      "presentation_source": {
+        "original": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 201,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7993943299498855
+        },
+        "aliases": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 196,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7754258087591421
+        },
+        "candidate_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 200,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.8001723585056918
+        },
+        "option_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 204,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.8140501473834807
+        },
+        "title_frame": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 197,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7757161562717119
+        },
+        "evidence_order": {
+          "counts": {
+            "states": 428,
+            "labelled": 255,
+            "accepted": 197,
+            "bm25_next_accepted": 150,
+            "masked": 173
+          },
+          "family_question_macro": 0.7846369679703012
+        }
+      },
+      "original_reference": {
+        "counts": {
+          "states": 428,
+          "labelled": 354,
+          "accepted": 260,
+          "bm25_next_accepted": 207,
+          "masked": 74
+        },
+        "family_question_macro": 0.7723946608946609
+      },
+      "presentation_pairs": {
+        "aliases": {
+          "states": 428,
+          "canonical_choice_equal": 314,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 189,
+          "left_only_accepted": 12,
+          "right_only_accepted": 7,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 189,
+          "masked": 173
+        },
+        "candidate_order": {
+          "states": 428,
+          "canonical_choice_equal": 298,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 188,
+          "left_only_accepted": 13,
+          "right_only_accepted": 12,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 188,
+          "masked": 173
+        },
+        "option_order": {
+          "states": 428,
+          "canonical_choice_equal": 380,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 199,
+          "left_only_accepted": 2,
+          "right_only_accepted": 5,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 199,
+          "masked": 173
+        },
+        "title_frame": {
+          "states": 428,
+          "canonical_choice_equal": 348,
+          "input_changed": 428,
+          "labelled": 255,
+          "both_accepted": 192,
+          "left_only_accepted": 9,
+          "right_only_accepted": 5,
+          "changed_input_labelled": 255,
+          "changed_input_both_accepted": 192,
+          "masked": 173
+        },
+        "evidence_order": {
+          "states": 428,
+          "canonical_choice_equal": 401,
+          "input_changed": 252,
+          "labelled": 255,
+          "both_accepted": 196,
+          "left_only_accepted": 5,
+          "right_only_accepted": 1,
+          "masked": 173,
+          "changed_input_labelled": 132,
+          "changed_input_both_accepted": 101
+        }
+      },
+      "pre_save_vs_reload": {
+        "states": 428,
+        "canonical_choice_equal": 428,
+        "input_changed": 0,
+        "labelled": 255,
+        "both_accepted": 201,
+        "left_only_accepted": 0,
+        "right_only_accepted": 0,
+        "masked": 173
+      },
+      "evidence_contexts": {
+        "counts": {
+          "states": 44,
+          "labelled": 42,
+          "accepted": 27,
+          "bm25_next_accepted": 20,
+          "masked": 2
+        },
+        "family_question_macro": 0.6574074074074074
+      },
+      "evidence_pairs": {
+        "pairs": 31,
+        "both_accepted": 10,
+        "choice_changed": 21,
+        "requires_choice_change": 31,
+        "required_change_and_both_accepted": 10,
+        "changed_but_not_both_accepted": 11
+      },
+      "compute_already_charged": {
+        "presentation": {
+          "wall_seconds": 301.63904802594334,
+          "cpu_seconds": 462.70662605300004,
+          "runs": 1,
+          "forwards": 2568,
+          "sequence_rows": 2568,
+          "input_tokens": 5690813,
+          "state_tokenizations": 2568,
+          "state_tokens": 5083151
+        },
+        "evidence": {
+          "wall_seconds": 10.336054896004498,
+          "cpu_seconds": 13.166717264999999,
+          "runs": 1,
+          "forwards": 44,
+          "sequence_rows": 44,
+          "input_tokens": 80035,
+          "state_tokenizations": 44,
+          "state_tokens": 70803
+        }
+      }
+    }
+  ],
+  "input_scope": {
+    "presentation_states": 428,
+    "source_labelled": 255,
+    "source_masked": 173,
+    "variants_per_model": 6,
+    "evidence_order_changed_input_states": 252,
+    "evidence_order_changed_input_labelled": 132,
+    "evidence_contexts": 44,
+    "evidence_labelled": 42,
+    "disjoint_target_pairs": 31,
+    "models": 6
+  },
+  "compute_totals_already_charged": {
+    "wall_seconds": 1901.8799678701907,
+    "cpu_seconds": 2934.681773503,
+    "runs": 12,
+    "forwards": 15672,
+    "sequence_rows": 15672,
+    "input_tokens": 34625088,
+    "state_tokenizations": 15672,
+    "state_tokens": 30923724
+  },
+  "ledger_audits": [
+    {
+      "stage": "presentation-reference_seed0",
+      "phase": "source_selection_v2_presentation-reference_seed0",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "evidence-reference_seed0",
+      "phase": "source_selection_v2_evidence-reference_seed0",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "presentation-reference_seed1",
+      "phase": "source_selection_v2_presentation-reference_seed1",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "evidence-reference_seed1",
+      "phase": "source_selection_v2_evidence-reference_seed1",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "presentation-reference_seed2",
+      "phase": "source_selection_v2_presentation-reference_seed2",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "evidence-reference_seed2",
+      "phase": "source_selection_v2_evidence-reference_seed2",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "presentation-source_seed0",
+      "phase": "source_selection_v2_presentation-source_seed0",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "evidence-source_seed0",
+      "phase": "source_selection_v2_evidence-source_seed0",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "presentation-source_seed1",
+      "phase": "source_selection_v2_presentation-source_seed1",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "evidence-source_seed1",
+      "phase": "source_selection_v2_evidence-source_seed1",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "presentation-source_seed2",
+      "phase": "source_selection_v2_presentation-source_seed2",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    },
+    {
+      "stage": "evidence-source_seed2",
+      "phase": "source_selection_v2_evidence-source_seed2",
+      "differences": {
+        "wall_seconds": 0.0,
+        "cpu_seconds": 0.0,
+        "runs": 0,
+        "forwards": 0,
+        "sequence_rows": 0,
+        "input_tokens": 0,
+        "state_tokenizations": 0,
+        "state_tokens": 0
+      },
+      "matches": true
+    }
+  ],
+  "analysis_compute": {
+    "wall_seconds": 8.115724315866828,
+    "cpu_seconds": 8.091756849,
+    "analyses": 1
+  },
+  "new_model_calls_by_analysis": 0,
+  "sha_checks": false,
+  "raw_report": "artifacts/jev-reader/selection-v2/probe-analysis-v1/report.json",
+  "interpretation": "Higher source both-view acceptance does not establish uniformly better conditional invariance. On authored observed-premise contrasts with actions/candidates unchanged, source both-correct pairs7/5/10 are below reference10/12/12 for allseeds. This does not establish a natural-QA result; continue frozen QA.",
+  "precision_note": "reference_seed1 original reload191/255 vs pre-save192/255; one canonical choice changed. Other five models choices match428/428. These are savedFP16/reloadedFP32 observations, not weight identity or a SHA check."
+}

@@ -1,0 +1,87 @@
+{
+  "status": "ALL28_SOURCE_POOLS_REVIEWED_BEFORE_REFERENCE_AND_RESERVED_PREDICTIONS",
+  "families": 14,
+  "source_rows": 28,
+  "paragraph_positions": 560,
+  "unique_literal_title_texts": 349,
+  "dispositions": {
+    "pool_insufficient": 15,
+    "supported": 10,
+    "masked": 3
+  },
+  "native_by_review": {
+    "False/pool_insufficient": 12,
+    "True/supported": 9,
+    "True/masked": 2,
+    "False/masked": 1,
+    "False/supported": 1,
+    "True/pool_insufficient": 3
+  },
+  "by_max_decomposition_steps": {
+    "2": {
+      "pool_insufficient": 4,
+      "supported": 5,
+      "masked": 3
+    },
+    "3": {
+      "pool_insufficient": 5,
+      "supported": 3
+    },
+    "4": {
+      "pool_insufficient": 6,
+      "supported": 2
+    }
+  },
+  "supported_source_rows": [
+    1967,
+    119,
+    2203,
+    3314,
+    3911,
+    4524,
+    4403,
+    2382,
+    2141,
+    1067
+  ],
+  "shortest_recorded_support_paragraph_counts": {
+    "2": 3,
+    "1": 3,
+    "3": 4
+  },
+  "notable_source_dimensions": [
+    "nonunique children including the named child himself",
+    "alternative biography versus original marked supports",
+    "formal charge/trial/proceedings stage and conflicting chronology",
+    "country total derived from subgroup count/fraction, not literal copying",
+    "brand parent versus physical concept builder; design/patent/unveiling/sales dates",
+    "award not citizenship; sharedOlympics not geographic proximity",
+    "performance location not birthplace",
+    "oneparagraph may supply multiple relation steps"
+  ],
+  "qualified_support_rows": {
+    "119": "Original-character authorship reading",
+    "3314": "Proceedings interval rather than precise formal charge date",
+    "2382": "NamedRX350facelift and distinct timing stages",
+    "2141": "Contextual reformer/geographic coreference and shorter proof"
+  },
+  "derived_numeric_row": {
+    "source_row": 4403,
+    "calculation": "6000000 / 0.754",
+    "derived_value": 7957559.681697613,
+    "report_precision": "approximately8million; no exact census/current-year claim"
+  },
+  "same_source_controls_required": true,
+  "source_labels_added_to_training": false,
+  "new_model_calls": 0,
+  "reviewer_is_independent": false,
+  "source_blind_snapshot": "artifacts/jev-reader/global-reserved-source-v1/source-annotations-before-reference.json",
+  "manual_review_compute": "Not fully metered, not zero. Validation and preparation measured separately; no training costs rebilled.",
+  "scope": "Qualified source semantics on fixed14sourcegroups. Initial10supported includes interpretive cases; not independent gold, corpus noise rate, universal generalization or proof all14native positives are false/true. Paragraph count is not relation-hop count.",
+  "mechanical_validation_compute": {
+    "wall_seconds": 0.00864385161548853,
+    "cpu_seconds": 0.00864356999999999,
+    "validations": 1,
+    "source_rows": 28
+  }
+}

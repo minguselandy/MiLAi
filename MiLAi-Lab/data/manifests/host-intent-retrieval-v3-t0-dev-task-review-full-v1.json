@@ -1,0 +1,74 @@
+{
+  "status": "ALL_RULES_DEV_POSITIONS_REVIEWED",
+  "positions": 64,
+  "source_groups": 16,
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-dev-task-reviews-v1.json",
+  "collection": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2/collection-cost-summary-v1.json",
+  "grades": {
+    "CORRECT": 38,
+    "FAILED": 6,
+    "QUALIFIED": 9,
+    "WRONG": 11
+  },
+  "by_interface": {
+    "query_only": {
+      "CORRECT": 20,
+      "FAILED": 3,
+      "QUALIFIED": 5,
+      "WRONG": 4
+    },
+    "rich": {
+      "CORRECT": 18,
+      "FAILED": 3,
+      "QUALIFIED": 4,
+      "WRONG": 7
+    }
+  },
+  "by_source": {
+    "memops": {
+      "CORRECT": 15,
+      "FAILED": 1,
+      "QUALIFIED": 8,
+      "WRONG": 8
+    },
+    "authored": {
+      "CORRECT": 21,
+      "FAILED": 1,
+      "WRONG": 2
+    },
+    "musique": {
+      "CORRECT": 2,
+      "FAILED": 4,
+      "QUALIFIED": 1,
+      "WRONG": 1
+    }
+  },
+  "rubric": {
+    "CORRECT": "Requested source facts and material status distinctions correct; permitted unknowns preserved.",
+    "WRONG": "Material false claim, wrong object/version, or missed critical update.",
+    "QUALIFIED": "Main requested state is largely right but a secondary detail/inventory item is missing, ambiguous or unsupported; kept separate from full success.",
+    "UNFULFILLED": "Accepted final response does not provide the requested answer despite task scope.",
+    "FAILED": "No accepted final answer; first failure receipt retained."
+  },
+  "scope": "Exploratory source-author review of fixed rules dev collection before final-weight Laya tool evaluation; not independent holdout.",
+  "limitations": [
+    "Rules answers reviewed before planned final-weight Laya tool outputs; scorer is still the same author, not independent.",
+    "No dev examples added to train; frozen fitting files unchanged.",
+    "QUALIFIED separate from full task-content success; view validity separate.",
+    "MuSiQue source-qualified semantics separate from unchanged native metrics.",
+    "One rules run per interface; no causal or significance claim.",
+    "Untimed human annotation not reported as zero."
+  ],
+  "validation": {
+    "exact_unique_position_coverage": 64,
+    "failure_receipt_agreement": 6
+  },
+  "model_calls": 0,
+  "http_requests": 0,
+  "aggregation_compute": {
+    "wall_seconds": 0.004468192346394062,
+    "cpu_seconds": 0.0044679,
+    "ledger_recorded": false,
+    "phase": "host_intent_t0_dev_task_review_aggregation_v1"
+  }
+}

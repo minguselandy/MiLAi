@@ -1,0 +1,43 @@
+{
+  "status": "FOUR_PREPARATIONS_ALREADY_CHARGED_ONCE",
+  "phase": "global_reader_qa_v1_preparation",
+  "entries": [
+    {
+      "path": "artifacts/jev-reader/selection-v2/evaluation-v1/dev/preparation.json",
+      "wall_seconds": 0.15389335341751575,
+      "cpu_seconds": 0.15386523299999988,
+      "preparations": 1,
+      "cases": 43
+    },
+    {
+      "path": "artifacts/jev-reader/selection-v2/evaluation-v1/reserved/preparation.json",
+      "wall_seconds": 0.09954866208136082,
+      "cpu_seconds": 0.09953739899999992,
+      "preparations": 1,
+      "cases": 28
+    },
+    {
+      "path": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/preparation.json",
+      "wall_seconds": 0.15026435442268848,
+      "cpu_seconds": 0.1502500040000001,
+      "preparations": 1,
+      "cases": 43
+    },
+    {
+      "path": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/preparation.json",
+      "wall_seconds": 0.0979677690193057,
+      "cpu_seconds": 0.09795461300000019,
+      "preparations": 1,
+      "cases": 28
+    }
+  ],
+  "delta": {
+    "wall_seconds": 0.5016741389408708,
+    "cpu_seconds": 0.5016072490000001,
+    "preparations": 4,
+    "cases": 142
+  },
+  "no_rebilling": true,
+  "scope": "Original phase name retained by reused preparation tool; v1 is superseded pre-model data, v2 active. Failed v1 token audit timing was not persisted and is not claimed free.",
+  "sha_checks": false
+}

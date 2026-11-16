@@ -1,0 +1,48 @@
+{
+  "status": "COLLECTION_RUNNING_PREFIX_REVIEW_ONLY",
+  "source_version": "c6b1f3bd",
+  "pid": 1429403,
+  "exec_session": 94846,
+  "run": "artifacts/host-intent-retrieval-v3/runs/t1-new-train-fixed-context-v1",
+  "observed_closed_positions": 21,
+  "planned_positions": 228,
+  "observed_program_statuses": {
+    "COMPLETED": 16,
+    "FAILED": 5
+  },
+  "source_review_notes": "artifacts/host-intent-retrieval-v3/data/t1-source-review-notes-v1.json",
+  "reviewed_new_train_pools": 54,
+  "reviewed_new_train_families": 29,
+  "next_source_history_index": 29,
+  "closed_prefix_export": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v3",
+  "actual_request_reviews": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v3/request-witness-reviews-v1.json",
+  "labels": {
+    "states": 128,
+    "reviewed_requests": 24,
+    "reviewed_states": 128,
+    "labelled": 81,
+    "reasons": {
+      "reviewed_missing_original_progress": 68,
+      "no_reviewed_source_proof_masked": 31,
+      "reviewed_originals_sufficient": 13,
+      "reviewed_partial_evidence_only_masked": 16
+    },
+    "families_labelled": 4,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v3/train.jsonl",
+    "reviews_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v3/request-witness-reviews-v1.json"
+  },
+  "public_inputs_unchanged": 128,
+  "task_review_prefix": "artifacts/host-intent-retrieval-v3/data/t1-new-train-task-reviews-prefix-v2.json",
+  "task_review_prefix_counts": {
+    "QUALIFIED": 6,
+    "FAILED": 4,
+    "CORRECT": 4,
+    "WRONG": 2
+  },
+  "pending_offline_measurements": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v10.json",
+  "pending_measured_cpu_seconds": 16.107059174,
+  "scope": "Partial development collection/source-author supervision only; no expanded T1 fitting or efficacy conclusion. Closed prefix v3 supersedes v2 for future merge; never concatenate duplicates. Continue full new228train then serial52dev.",
+  "next": "Poll actual PID/driver, preserve first failures. Review remaining new source pools from history index29 and actual requests after first16positions. Final export/labels must cover closed full run before mixture freeze."
+}

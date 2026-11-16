@@ -1,0 +1,28 @@
+{
+  "status": "LITERAL_BOUNDARY_ADMITTED_WITH_EXPLICIT_LIMITS",
+  "method_source_version": "539e3ad3",
+  "training_source_version": "2346bb57",
+  "checked_selected_source_rows": 28,
+  "checked_groups": 14,
+  "compared_rows_by_role": {
+    "train": 5454,
+    "dev": 119,
+    "calibration": 229,
+    "registered_and_current_seen": 864
+  },
+  "registered_prior_rows": 631,
+  "conflicts": [],
+  "question_and_decomposition_ID_binding": true,
+  "original_answer_fields_used": false,
+  "question_or_paragraph_text_emitted": false,
+  "new_model_calls": 0,
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "scope": "Literal targets versus pools both directions plus exact questions. Author, semantic duplicate, unregistered history and pretraining guarantees are NOT established. Admission is only to the declared qualified evaluation.",
+  "source_review_completed": false,
+  "compute": {
+    "wall_seconds": 1.2593476045876741,
+    "cpu_seconds": 1.259303083,
+    "checks": 1
+  }
+}

@@ -1,0 +1,2328 @@
+{
+  "name": "milai-global-training-source-audit-v1",
+  "status": "FULL_SOURCE_REVIEW_COMPLETE_REFERENCE_COMPARISON_ADDED",
+  "selection": "data/manifests/milai-global-training-source-audit-v1-selection.json",
+  "reviewer_is_independent": false,
+  "protocol": "Review complete visible pools before original answer/support/decomposition labels. Preserve ordinary coreference and explicit temporal qualification; unsupported joins do not become complete proofs. Paired literal duplicates are linked to their full reading. No model output drives selection or labels.",
+  "cases": [
+    {
+      "review_id": "global-source-audit-v1-9324",
+      "source_row": 9324,
+      "family": "musique-family-000068",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          0,
+          17
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "answer_supported": "1920",
+      "qualifications": [],
+      "rationale": "0 names United States Railroad Administration as the design controller;17 states its duration ending March1,1920. Numeric sports tables are unrelated to this agency.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__115615_120682",
+      "original_reference": {
+        "answerable": true,
+        "answer": "1920",
+        "support_indices": [
+          0,
+          17
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-16106",
+      "source_row": 16106,
+      "family": "musique-family-000068",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        10
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "10 still identifies the design controller, but the agency-duration passage is absent. Dates in sports tables cannot supply its end year.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__115615_120682",
+      "original_reference": {
+        "answerable": false,
+        "answer": "1920",
+        "support_indices": [
+          10
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-12065",
+      "source_row": 12065,
+      "family": "musique-family-000148",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          8,
+          0
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "answer_supported": "175,155",
+      "qualifications": [
+        "Estimated2016population, not a claim about current population.",
+        "Company based in the city is the ordinary headquarters-city reading of this query."
+      ],
+      "rationale": "8 places Malfador Machinations in Santa Rosa,California;0 supplies its estimated2016population. Other cities and other company headquarters do not answer.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__589649_83687",
+      "original_reference": {
+        "answerable": true,
+        "answer": "175,155",
+        "support_indices": [
+          0,
+          8
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-12568",
+      "source_row": 12568,
+      "family": "musique-family-000148",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        0
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "0 identifies Santa Rosa as the company base, but no Santa Rosa population appears in the pool; unrelated city/county populations do not fill it.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__589649_83687",
+      "original_reference": {
+        "answerable": false,
+        "answer": "175,155",
+        "support_indices": [
+          0
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-26964",
+      "source_row": 26964,
+      "family": "musique-family-000002",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        19
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "19 places Wang Shu in Hangzhou. No former name of Hangzhou is supplied; buildings designed elsewhere or a different Wang do not establish it.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__329904_10038",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Qiantang",
+        "support_indices": [
+          19
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-34770",
+      "source_row": 34770,
+      "family": "musique-family-000002",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          2,
+          11
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "answer_supported": "Qiantang",
+      "qualifications": [
+        "The second sentence spells Qiangtang; retain the explicit former-name statement rather than silently normalizing all spellings."
+      ],
+      "rationale": "2 identifies Hangzhou as Wang Shu's base;11 explicitly calls Qiantang the former name of Hangzhou.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__329904_10038",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Qiantang",
+        "support_indices": [
+          2,
+          11
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-9812",
+      "source_row": 9812,
+      "family": "musique-family-000170",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [
+        "Township and licensed community are not assumed identical; this is source insufficiency, not a claim the proposed county is false in the world."
+      ],
+      "rationale": "5 names the licensed community Cape Girardeau;11 names Cape Girardeau Township and its county. The text does not resolve whether the community and township are the same administrative entity. The intended name match is plausible but not uniquely established; mask this scope ambiguity rather than force either sufficiency or exhaustion.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_proofs": [
+        [
+          5,
+          11
+        ]
+      ],
+      "conditional_answer": "Cape Girardeau County",
+      "max_hops_stratum": 2,
+      "question_id": "2hop__128772_745471",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Cape Girardeau County",
+        "support_indices": [
+          5,
+          11
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-10100",
+      "source_row": 10100,
+      "family": "musique-family-000170",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        18
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "18 retains the licensed community, but no passage locates it in a county; foreign administrative centres are unrelated.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__128772_745471",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Cape Girardeau County",
+        "support_indices": [
+          18
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-25256",
+      "source_row": 25256,
+      "family": "musique-family-000826",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The pool contains other medals, people named Elliott and Cresson town, but no awarding institute for Elliott Cresson Medal or its opening date.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__96945_155490",
+      "original_reference": {
+        "answerable": false,
+        "answer": "1824",
+        "support_indices": []
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-24139",
+      "source_row": 24139,
+      "family": "musique-family-000813",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "Film cast fragments do not locate the visited restaurant.9 locates Cherry Hill Township in Camden County but does not bind this White Castle to that municipality.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__92840_542979",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Camden County",
+        "support_indices": [
+          9
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-38308",
+      "source_row": 38308,
+      "family": "musique-family-000813",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "1 says they reach the former New Brunswick site, now Burger Shack, and learn about another White Castle in Cherry Hill.19 locates Cherry Hill in Camden County, but the excerpt does not establish a visit to that second restaurant. Preserve the conditional chain while masking the unresolved visit/referent premise.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_proofs": [
+        [
+          1,
+          19
+        ]
+      ],
+      "conditional_answer": "Camden County if the intended venue is the Cherry Hill restaurant",
+      "max_hops_stratum": 2,
+      "question_id": "2hop__92840_542979",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Camden County",
+        "support_indices": [
+          1,
+          19
+        ]
+      },
+      "review_uncertainty": "An intended-Cherry-Hill reading yields a plausible county chain; the stricter visit/referent reading remains masked. This is interpretation uncertainty, not proof that Camden County is false."
+    },
+    {
+      "review_id": "global-source-audit-v1-5418",
+      "source_row": 5418,
+      "family": "musique-family-000058",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          0,
+          15
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "answer_supported": "19th century",
+      "qualifications": [],
+      "rationale": "0 identifies Edward Burne-Jones as the painting creator;15 explicitly describes his noted nineteenth-century mosaics.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__109254_37364",
+      "original_reference": {
+        "answerable": true,
+        "answer": "19th",
+        "support_indices": [
+          0,
+          15
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-33747",
+      "source_row": 33747,
+      "family": "musique-family-000058",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        16
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "16 identifies the artist and dates the painting, not his mosaics. The Edward Burne-Jones mosaic passage is absent; other artists, ancient mosaics and the Mosaic browser do not supply the missing date.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 2,
+      "question_id": "2hop__109254_37364",
+      "original_reference": {
+        "answerable": false,
+        "answer": "19th",
+        "support_indices": [
+          16
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-2563",
+      "source_row": 2563,
+      "family": "musique-family-000420",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The query ambiguously names It's a Wonderful World and asks when its singer wrote What a Wonderful World. Visible sources distinguish performers from composers: the Armstrong recording is written by Thiele/Weiss; the Cooke song is a different work and gives recording/release dates. Do not silently repair write into record or merge different titles. Mask the malformed work/role/time premise.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "Armstrong_recording_release": [
+          15,
+          12
+        ],
+        "Cooke_other_song": [
+          10
+        ]
+      },
+      "max_hops_stratum": 2,
+      "question_id": "2hop__70236_84254",
+      "original_reference": {
+        "answerable": true,
+        "answer": "August 16, 1967",
+        "support_indices": [
+          12,
+          15
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-36500",
+      "source_row": 36500,
+      "family": "musique-family-000420",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The query ambiguously names It's a Wonderful World and asks when its singer wrote What a Wonderful World. Visible sources distinguish performers from composers: the Armstrong recording is written by Thiele/Weiss; the Cooke song is a different work and gives recording/release dates. Do not silently repair write into record or merge different titles. Mask the malformed work/role/time premise.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "Armstrong_recording_release": [
+          7
+        ],
+        "Cooke_other_song": [
+          11
+        ]
+      },
+      "max_hops_stratum": 2,
+      "question_id": "2hop__70236_84254",
+      "original_reference": {
+        "answerable": false,
+        "answer": "August 16, 1967",
+        "support_indices": [
+          7
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-38693",
+      "source_row": 38693,
+      "family": "musique-family-000878",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        1,
+        13
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "1 identifies Ben Stephens birthplace Romeo and13 locates Romeo in Macomb County. No passage identifies an adjacent county; adjacent townships are not county boundaries.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__428944_194186_611260",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Oakland County",
+        "support_indices": [
+          1,
+          13
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-38872",
+      "source_row": 38872,
+      "family": "musique-family-000878",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        12,
+        2
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "12 and2 identify Romeo and Macomb County.16 says a school district serves parts of Oakland and Macomb, not that the counties share a border; shared service coverage does not supply the missing boundary relation.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__428944_194186_611260",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Oakland County",
+        "support_indices": [
+          2,
+          12,
+          16
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-19509",
+      "source_row": 19509,
+      "family": "musique-family-000855",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "18 lists several Babbitt cast members without selecting one or giving their citizenship.10 names a shared actor in a different American film, which does not establish her nationality. The hidden composition must not choose a cast member/country for an otherwise underdetermined query.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "issue_types": [
+        "underspecified_member",
+        "missing_nationality_link"
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__221048_280519_81233",
+      "original_reference": {
+        "answerable": true,
+        "answer": "September 14, 1814",
+        "support_indices": [
+          10,
+          14,
+          18
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-32488",
+      "source_row": 32488,
+      "family": "musique-family-000739",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The question itself places the target in a US state, leaking the requested country. Its county bridge also conflates Phillips County,Montana (Whitewater) with the Arkansas county rather than establishing one county. Do not require a false multi-hop proof or use this as clean evidence-selection supervision. No Walnut Corner passage is present in this variant.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "issue_types": [
+        "question_answer_leakage",
+        "administrative_entity_mismatch"
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop2__360318_64618_807056",
+      "original_reference": {
+        "answerable": false,
+        "answer": "U.S.",
+        "support_indices": [
+          3,
+          10
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-37552",
+      "source_row": 37552,
+      "family": "musique-family-000739",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The question itself places the target in a US state, leaking the requested country. Its county bridge also conflates Phillips County,Montana (Whitewater) with the Arkansas county rather than establishing one county. Do not require a false multi-hop proof or use this as clean evidence-selection supervision. Paragraph5 independently gives Walnut Corner,Arkansas,United States; retain that qualified direct fact without declaring the composed query consistent.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_proofs": [
+        [
+          5
+        ]
+      ],
+      "conditional_answer": "United States for the directly named Arkansas community",
+      "issue_types": [
+        "question_answer_leakage",
+        "administrative_entity_mismatch"
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop2__360318_64618_807056",
+      "original_reference": {
+        "answerable": true,
+        "answer": "U.S.",
+        "support_indices": [
+          2,
+          5,
+          9
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-1048",
+      "source_row": 1048,
+      "family": "musique-family-000881",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The query does not identify which functional constituency is meant for a birthplace. Rice Rhapsody names Kenneth Bi as director, not screenwriter or birthplace; the politicians and their functional constituencies are not linked to that filmmaker. Neither role, birthplace nor constituency chain can be supplied by hidden decomposition.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "film_director": [
+          14
+        ]
+      },
+      "issue_types": [
+        "underspecified_relation",
+        "creator_role_mismatch",
+        "missing_entity_link"
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__606072_383061_565778",
+      "original_reference": {
+        "answerable": true,
+        "answer": "China",
+        "support_indices": [
+          1,
+          13,
+          14
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-20611",
+      "source_row": 20611,
+      "family": "musique-family-000881",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The query does not identify which functional constituency is meant for a birthplace. Rice Rhapsody names Kenneth Bi as director, not screenwriter or birthplace; the politicians and their functional constituencies are not linked to that filmmaker. Neither role, birthplace nor constituency chain can be supplied by hidden decomposition. Kenneth Leung in14 is not Kenneth Bi.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "film_director": [
+          11
+        ]
+      },
+      "issue_types": [
+        "underspecified_relation",
+        "creator_role_mismatch",
+        "missing_entity_link"
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__606072_383061_565778",
+      "original_reference": {
+        "answerable": false,
+        "answer": "China",
+        "support_indices": [
+          7,
+          11
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-37121",
+      "source_row": 37121,
+      "family": "musique-family-000847",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "No Edward Bok identity/citizenship source is present. Other Boks,colonial ventures and British citizenship passages do not bind the question's company or its successor.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__179514_89345_618532",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Somers Isles Company",
+        "support_indices": [
+          7,
+          9
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-37786",
+      "source_row": 37786,
+      "family": "musique-family-000847",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        14,
+        1
+      ],
+      "answer_supported": null,
+      "qualifications": [
+        "American is read in the ordinary nationality sense; the company succession still lacks support."
+      ],
+      "rationale": "14 identifies Edward Bok as Dutch-born American;1 gives London/Virginia Company settlements. No passage establishes the relevant company succession.15 concerns Bermuda and later Crown administration, not a stated successor to the company involved in the US settlement.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__179514_89345_618532",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Somers Isles Company",
+        "support_indices": [
+          1,
+          14,
+          15
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-3645",
+      "source_row": 3645,
+      "family": "musique-family-000882",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The owner passage distinguishes Time Inc acquisition in2000 from Howard Milstein acquisition in2018. The present-tense owner-company founder is therefore not uniquely established by the old Time Inc chain. Do not treat a former owner as the current one without a time scope. 9 identifies Henry Luce as Time Inc founder and12 calls him American, yielding only a conditional historical-owner answer.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_proofs": [
+        [
+          8,
+          9,
+          12
+        ]
+      ],
+      "conditional_answer": "United States if the intended period is Time Inc ownership",
+      "issue_types": [
+        "temporal_scope",
+        "owner_identity"
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__615885_623201_357168",
+      "original_reference": {
+        "answerable": true,
+        "answer": "the United States",
+        "support_indices": [
+          8,
+          9,
+          12
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-9378",
+      "source_row": 9378,
+      "family": "musique-family-000882",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The owner passage distinguishes Time Inc acquisition in2000 from Howard Milstein acquisition in2018. The present-tense owner-company founder is therefore not uniquely established by the old Time Inc chain. Do not treat a former owner as the current one without a time scope. 16 retains the ownership changes but the explicit Time Inc founder passage is also absent.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "issue_types": [
+        "temporal_scope",
+        "owner_identity",
+        "missing_founder_link"
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__615885_623201_357168",
+      "original_reference": {
+        "answerable": false,
+        "answer": "the United States",
+        "support_indices": [
+          2,
+          16
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-683",
+      "source_row": 683,
+      "family": "musique-family-000840",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "No passage names Großbottwar or locates it. A school in a different German town and generic German administrative structure do not establish the target location.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__415702_226789_844905",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Germany",
+        "support_indices": [
+          6
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-4497",
+      "source_row": 4497,
+      "family": "musique-family-000840",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          11
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "answer_supported": "Germany",
+      "qualifications": [],
+      "rationale": "11 directly locates Großbottwar in Baden-Württemberg,Germany. Other geography passages are unnecessary for this stated question.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "issue_types": [
+        "shorter_than_reference_hop_label"
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__415702_226789_844905",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Germany",
+        "support_indices": [
+          8,
+          11,
+          19
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-32433",
+      "source_row": 32433,
+      "family": "musique-family-000025",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          6,
+          5,
+          1
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "answer_supported": "3000 BC",
+      "qualifications": [
+        "Earliest evidence of habitation, not proof that no humans were present earlier.",
+        "Publisher link is the explicitly supplied revised English edition."
+      ],
+      "rationale": "6 names Ignatius Press as publisher of the revised English editions;5 places the publisher in San Francisco;1 dates earliest evidence of habitation there to3000BC.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__150746_803683_87372",
+      "original_reference": {
+        "answerable": true,
+        "answer": "3000 BC",
+        "support_indices": [
+          1,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-36742",
+      "source_row": 36742,
+      "family": "musique-family-000025",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        12
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "12 names Ignatius Press for the revised editions, but neither its city nor that city's habitation date is given; other headquarters and locations are unrelated.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 3,
+      "question_id": "3hop1__150746_803683_87372",
+      "original_reference": {
+        "answerable": false,
+        "answer": "3000 BC",
+        "support_indices": [
+          12
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-2466",
+      "source_row": 2466,
+      "family": "musique-family-000000",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        6,
+        8
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "6 identifies Lom as a Bulgarian town;8 identifies Italy as receiving the Ottoman Libyan provinces. No source states what the Italian presidential office represents.4 names a president in2007 but does not supply that role; the intermediate Bulgaria/Ottoman history link is also absent.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__642304_829000_51791_796745",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Italian Republic",
+        "support_indices": [
+          4,
+          8,
+          15
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-18834",
+      "source_row": 18834,
+      "family": "musique-family-000000",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        0,
+        3,
+        10,
+        11
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "0 identifies Bulgaria;3 supplies Ottoman Bulgarian history;10 gives cession of the Libyan provinces to Italy, with11 corroborating conquest of Italian Tripolitania. No source supplies the presidential representation role.10/11 are alternative country-link evidence, not a required conjunction.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "alternative_partial_paths": [
+        [
+          0,
+          3,
+          10
+        ],
+        [
+          0,
+          3,
+          11
+        ]
+      ],
+      "partial_supervision_note": "Do not mechanically require consuming both alternative country-link passages before exhaustion.",
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__642304_829000_51791_796745",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Italian Republic",
+        "support_indices": [
+          1,
+          2,
+          3,
+          10
+        ]
+      },
+      "review_uncertainty": "The word represents could mean the presidential office's country rather than a more specific constitutional function. The source-first insufficiency judgment is retained as a diagnostic reading, not a definitive refutation of the native Italian Republic answer; this row needs adjudication before training."
+    },
+    {
+      "review_id": "global-source-audit-v1-23338",
+      "source_row": 23338,
+      "family": "musique-family-000008",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        4,
+        10,
+        7
+      ],
+      "answer_supported": null,
+      "qualifications": [
+        "Fleet in the question appears to refer to Flett in the pool; this normalization is explicit, not a rewritten source.",
+        "Band base and formation location are not independently established; the final album-origin link is absent regardless."
+      ],
+      "rationale": "4 binds Subtle Ways to Maktub;10 gives Seattle,Washington;7 locates Flett Glacier in Washington,US. There is no source for the target11/6/00album or its country of origin; television time slots and other albums do not supply it.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop3__695568_769559_129926_718885",
+      "original_reference": {
+        "answerable": false,
+        "answer": "America",
+        "support_indices": [
+          4,
+          7,
+          10
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-34957",
+      "source_row": 34957,
+      "family": "musique-family-000200",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          10,
+          15,
+          9,
+          0
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "answer_supported": "Greene County, Tennessee",
+      "qualifications": [],
+      "rationale": "10 locates Yakataga Airport in Alaska;15 identifies Andrew Johnson as president signing the purchase;9 places his National Historic Site in Greeneville;0 locates Greeneville in Greene County,Tennessee.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__129710_74386_444296_179769",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Greene County",
+        "support_indices": [
+          0,
+          9,
+          10,
+          15
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-38399",
+      "source_row": 38399,
+      "family": "musique-family-000200",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The airport/state and purchase/president links are absent.5/6 provide a coherent Andrew Johnson site-to-county tail, but the pool does not establish him as the president specified by the question.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "unbound_tail_paths": [
+        [
+          5,
+          6
+        ]
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__129710_74386_444296_179769",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Greene County",
+        "support_indices": [
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-21819",
+      "source_row": 21819,
+      "family": "musique-family-000083",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        1
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "1 binds The Adventurer to Clifford Jordan.0 states he performed in Chicago and moved to New York, not where he was born.13/15 establish Chicago's water source and Wrigley distance to Lake Michigan, but cannot replace the missing birth-city link.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "Chicago_water": [
+          13
+        ],
+        "Lake_Michigan_distance": [
+          15
+        ]
+      },
+      "issue_types": [
+        "birthplace_vs_activity_location"
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__187479_301282_65293_48285",
+      "original_reference": {
+        "answerable": true,
+        "answer": "less than a mile to the east",
+        "support_indices": [
+          0,
+          1,
+          13,
+          15
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-23165",
+      "source_row": 23165,
+      "family": "musique-family-000083",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "No passage binds The Adventurer to its performer;14 also lacks a birthplace.3/10 give Chicago water and Wrigley distance facts only conditional on an unproved target-lake identification.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "unbound_tail_paths": [
+        [
+          3,
+          10
+        ]
+      ],
+      "issue_types": [
+        "missing_performer_link",
+        "missing_birthplace_link"
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__187479_301282_65293_48285",
+      "original_reference": {
+        "answerable": false,
+        "answer": "less than a mile to the east",
+        "support_indices": [
+          3,
+          10,
+          14
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-4600",
+      "source_row": 4600,
+      "family": "musique-family-000206",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The query does not identify which Plainfield Township/adjacent county is meant, and asks a first civic chartered company whereas the visible fact is specifically Michigan's first chartered ballet company. No county-border relation is stated. Do not silently add ballet or equate a shared congressional district/highway with a county border. No Plainfield location passage is present.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "Michigan_first_chartered_ballet_company": [
+          19
+        ]
+      },
+      "issue_types": [
+        "underspecified_entity",
+        "category_omission",
+        "missing_county_border"
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__531733_185356_328647_21625",
+      "original_reference": {
+        "answerable": false,
+        "answer": "Ann Arbor Civic Ballet",
+        "support_indices": [
+          13,
+          19
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-12750",
+      "source_row": 12750,
+      "family": "musique-family-000206",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The query does not identify which Plainfield Township/adjacent county is meant, and asks a first civic chartered company whereas the visible fact is specifically Michigan's first chartered ballet company. No county-border relation is stated. Do not silently add ballet or equate a shared congressional district/highway with a county border. Both Michigan and Pennsylvania Plainfield Townships occur, and2 only lists congressional-district counties.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "Michigan_first_chartered_ballet_company": [
+          9
+        ]
+      },
+      "issue_types": [
+        "underspecified_entity",
+        "category_omission",
+        "missing_county_border"
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__531733_185356_328647_21625",
+      "original_reference": {
+        "answerable": true,
+        "answer": "Ann Arbor Civic Ballet",
+        "support_indices": [
+          2,
+          7,
+          9,
+          15
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-10687",
+      "source_row": 10687,
+      "family": "musique-family-000158",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        8,
+        19
+      ],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "8 identifies Charlie Mariano as Jyothi saxophonist;19 gives Harvard Law's state. No Crawford House business passage or Mariano birthplace is present.1 concerns Joe Gordon gigs with Mariano, not Mariano's birth.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop3__778278_796114_88276_242202",
+      "original_reference": {
+        "answerable": false,
+        "answer": "hotels",
+        "support_indices": [
+          1,
+          8,
+          19
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-22014",
+      "source_row": 22014,
+      "family": "musique-family-000158",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          14
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "answer_supported": "hotel and restaurant",
+      "qualifications": [
+        "Historical business; the building was demolished in1962.",
+        "Direct named-subject property is supported; do not claim the performer-birth descriptor was verified."
+      ],
+      "rationale": "14 directly describes the uniquely named Crawford House in Boston,Massachusetts as a hotel and restaurant. It answers the requested business attribute without requiring the entire descriptive chain;2 confirms Harvard Law's state. The Mariano-birth clause is not independently verified and must not be asserted as a new fact.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "issue_types": [
+        "shorter_answer_proof",
+        "unverified_auxiliary_descriptor"
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop3__778278_796114_88276_242202",
+      "original_reference": {
+        "answerable": true,
+        "answer": "hotels",
+        "support_indices": [
+          0,
+          2,
+          10,
+          14
+        ]
+      },
+      "review_uncertainty": "Direct named-subject business information supports a qualified answer, but the full birthplace descriptor is not proven. Do not equate this shorter attribute proof with verification of every query premise."
+    },
+    {
+      "review_id": "global-source-audit-v1-7101",
+      "source_row": 7101,
+      "family": "musique-family-000895",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The composed wording does not clearly distinguish the performer from an album title/genre. Al Green has RCA and Blue Note releases in the visible pool, so the record-label relation is not unique without a release scope. Do not silently rewrite this into a specific album-genre question. The complete Ronnie Foster Live album source is absent.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "On_the_Avenue_performer": [
+          19
+        ],
+        "Al_Green_releases": [
+          2,
+          17
+        ]
+      },
+      "issue_types": [
+        "malformed_composition",
+        "nonunique_record_label",
+        "performer_vs_album_genre"
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop3__484585_769404_544850_170163",
+      "original_reference": {
+        "answerable": false,
+        "answer": "jaz",
+        "support_indices": [
+          2,
+          17,
+          19
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-25143",
+      "source_row": 25143,
+      "family": "musique-family-000895",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "answer_supported": null,
+      "qualifications": [],
+      "rationale": "The composed wording does not clearly distinguish the performer from an album title/genre. Al Green has RCA and Blue Note releases in the visible pool, so the record-label relation is not unique without a release scope. Do not silently rewrite this into a specific album-genre question. 0 describes Ronnie Foster as a jazz organist and names the live album, but the query's intended target/label scope remains unclear. Preserve this conditional information rather than a forced genre label.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "conditional_source_facts": {
+        "Ronnie_Foster_live_album_and_jazz_descriptor": [
+          0
+        ],
+        "On_the_Avenue_performer": [
+          12
+        ],
+        "Al_Green_releases": [
+          17,
+          10
+        ]
+      },
+      "issue_types": [
+        "malformed_composition",
+        "nonunique_record_label",
+        "performer_vs_album_genre"
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop3__484585_769404_544850_170163",
+      "original_reference": {
+        "answerable": true,
+        "answer": "jaz",
+        "support_indices": [
+          0,
+          10,
+          12,
+          17
+        ]
+      }
+    },
+    {
+      "review_id": "global-source-audit-v1-19075",
+      "source_row": 19075,
+      "family": "musique-family-000045",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        19
+      ],
+      "answer_supported": null,
+      "qualifications": [
+        "The playing-club country is read from the explicit Dutch-clubs description, not from the separate Toronto coaching-business affiliation."
+      ],
+      "rationale": "19 identifies the player and his Dutch playing clubs. No visible source supplies the further country-alias link and that country's independence from France. Ghana/UK,Guinea-Bissau/Portugal and Ceylon/UK dates are not substitutes.",
+      "full_pool_reviewed": true,
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_hops_stratum": 4,
+      "question_id": "4hop1__133590_631695_74047_4239",
+      "original_reference": {
+        "answerable": false,
+        "answer": "1813",
+        "support_indices": [
+          12,
+          19
+        ]
+      }
+    }
+  ],
+  "source_rows_reviewed": 44,
+  "families_reviewed": 24,
+  "source_first_snapshot": "artifacts/jev-reader/global-training-design-v1/source-annotations-before-reference.json",
+  "paragraph_positions_reviewed": 880,
+  "distinct_title_texts_reviewed": 563,
+  "comparison_scope": "Original reference fields were inspected only after all44 source-first dispositions were saved; no original inputs/labels were overwritten.",
+  "summary": {
+    "cross_reference_answerability": {
+      "True/supported": 8,
+      "False/pool_insufficient": 17,
+      "True/masked": 9,
+      "False/masked": 6,
+      "True/pool_insufficient": 4
+    },
+    "strata": {
+      "2": {
+        "supported": 4,
+        "pool_insufficient": 7,
+        "masked": 4
+      },
+      "3": {
+        "pool_insufficient": 6,
+        "masked": 7,
+        "supported": 2
+      },
+      "4": {
+        "pool_insufficient": 8,
+        "supported": 2,
+        "masked": 4
+      }
+    },
+    "source_dispositions": {
+      "supported": 8,
+      "pool_insufficient": 21,
+      "masked": 15
+    }
+  },
+  "training_admission": "AUDIT_ONLY_NOT_A_READY_TRAINING_GOLD_SET: resolve noted interpretation uncertainty and represent alternative partial information before compiling decision states. Do not replace original labels wholesale or automatically train these44rows."
+}

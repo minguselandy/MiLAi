@@ -1,0 +1,703 @@
+{
+  "source": "https://github.com/MemTensor/MemOps",
+  "license": "MIT; original literal sources retained locally with upstream LICENSE",
+  "reviewer": "Codex author, method visible; task/source contracts and sufficient original-user witnesses, not model-view grades or operation gold",
+  "source_boundary": "Use chronological original role/content only. No target_fact, operations, difficulty knobs, segment descriptions or source answer fields in Host input. Stop each cut on the actual user turn before the next assistant response. Unknown calendar dates remain unknown.",
+  "version": "dynamic-memory-control-memops-expanded-wave-a-v1",
+  "status": "SOURCE_REVIEWED_NOT_MODEL_COLLECTED_OR_FITTED",
+  "declared_split": "train",
+  "scope": "First12of all45predeclared remaining source-task backgrounds,36user cuts plus repeats. Original background grouping retained; not12new independent reasoning templates. No outcomes used to select.",
+  "source_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main/generated_result/2-evidence_conversation",
+  "family_assignments": [
+    {
+      "A04": "train",
+      "A05": "train",
+      "A07": "train",
+      "A13": "train",
+      "A14": "train",
+      "A16": "train",
+      "A20": "train",
+      "A22": "train",
+      "A27": "train",
+      "A28": "train",
+      "A29": "train",
+      "A33": "train"
+    },
+    {
+      "A04": "train",
+      "A05": "train",
+      "A07": "train",
+      "A13": "train",
+      "A14": "train",
+      "A16": "train",
+      "A20": "train",
+      "A22": "train",
+      "A27": "train",
+      "A28": "train",
+      "A29": "train",
+      "A33": "train"
+    }
+  ],
+  "assignment_evidence": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/memops-families-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-memops-families-v1.json"
+  ],
+  "cases": [
+    {
+      "family": "A04",
+      "file": "A04_remember.json",
+      "query": "Based on my own reports so far, what is my current city and apartment cross-street, when does my lease end, and what written-notice requirement have I actually reported? Keep my neighbor’s dates and my past city separate, and preserve an unknown calendar year rather than guessing it.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Portland; SE Division Street near26th, not30th. Own lease ends January31of next year. No notice interval has yet been supplied. Tucson is the prior city; no reliable absolute year is established.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            1
+          ],
+          "answer": "Same Portland/Division-near26th residence and January31next-year lease end. User now reports90days written notice for renew/vacate. State the reported lead time without inventing an absolute year or treating assistant scheduling suggestions as contract terms.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same current address area, January31next-year lease end and90-day written-notice requirement. Greg’s March31is a different lease. Mid-October decision timing and loose November2/3wording were assistant suggestions, not newly reported lease terms.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s3t3",
+              "s3t5"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported housing information, not legal advice or independent lease verification. Relative-year/weekday/duration statements do not provide a consistent absolute-year anchor."
+    },
+    {
+      "family": "A05",
+      "file": "A05_trajectory_ops.json",
+      "query": "What full current address and lease end have I reported for myself, and which unit-label change is still planned or has been cancelled? Separate my former address, relatives’ addresses and assistant-only details from my own confirmed reports.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "742Birchwood Lane,Unit3B,Ashford Heights,60143. No end date for the current lease is yet supplied; January31belongs to the former Caldwell Street lease. No unit relabeling plan is established yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            3
+          ],
+          "answer": "742Birchwood Lane,Unit3A,Ashford Heights,60143; corrected from3B. Current lease ends March14next year.3Cis proposed for next month, not current and no paperwork yet. Do not use the assistant-only3Ddelivery detail or the closed PO Box as the current address.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t5",
+              "s3t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same full address withUnit3Aand60143. Planned3Crelabeling was cancelled; own lease end remains March14next year. Mother’s Greenleaf address and former Caldwell address are separate. Do not invent an absolute year.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t5",
+              "s3t5"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Public synthetic address reports, not a real delivery, insurance update or legal deadline. Historical request to forget a closed PO Box is not executed Store deletion in this source-only task."
+    },
+    {
+      "family": "A07",
+      "file": "A07_reflect.json",
+      "query": "What dining setting do I generally prefer, which experiences support that preference, and what have I said about making an exception for Daniel's birthday? Keep a tentative birthday idea separate from a confirmed plan and from a change in my usual preference.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers small, quiet, uncrowded places where conversation is easy. Enjoyed a nearly empty Vietnamese restaurant on Birch Avenue on an early-March weeknight anniversary dinner. No birthday exception or plan supplied yet.",
+          "support_sets": [
+            [
+              "s1t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Same quiet, uncrowded dining preference, reinforced by wanting to try the downtown Ethiopian restaurant on Tuesday or Wednesday to avoid noise/crowds. The anniversary dinner is a supporting experience. No birthday exception or plan supplied yet.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Still generally prefers quiet uncrowded weeknights. Daniel is considering a big Friday-night group birthday dinner at the Ethiopian restaurant; nothing is confirmed. User is happy to make an exception for his birthday and hopes for a quiet corner; this does not replace the general preference.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t5",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "An interpretation of explicit user preference and stated exception, not a personality diagnosis. Historical medication-disregard text does not execute deletion. Assistant callback dates/role extrapolations are not evidence for this task."
+    },
+    {
+      "family": "A13",
+      "file": "A13_reflect.json",
+      "query": "Based on my own reports, how do I feel about managing my health and medication routine, what specific experiences support that interpretation, and what routine change is only being considered? Distinguish my experiences from my relatives and keep current treatment separate from an unconfirmed plan. Summarize my reports, without giving medical advice.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Frustrated and discouraged that dietary efforts did not avoid the metformin increase; tried tea/antacids for reflux before contacting the doctor after about a week. Now enjoys lighter plain dinners and reports improved sleep after starting omeprazole. No proposed routine change has been reported. Avoid a firm global trait from just these initial reports.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Explicitly values control and self-sufficiency in health decisions, dislikes depending on doctors/medication. Evidence includes delaying the reflux call until sleep deprivation impaired work, feeling good about stopping ibuprofen after the knee recovered, and wanting diet rather than a dose increase to solve glucose problems. No planned regimen change yet. Emily's lisinopril is her medication, not the user's.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Still values autonomy and a simple routine. Morning routine is acceptable; evening metformin feels intrusive but user uses a dinner alarm and still takes it. Current metformin remains750mg twice daily; office is considering extended-release1500mg once each morning, awaiting confirmation in two weeks. User hopes for it; it has not happened. Prior reflux delay/dose-increase frustration support autonomy interpretation; family blood-pressure treatments do not establish the user takes those drugs.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Source-grounded account of reported feelings/behavior, not clinical advice, diagnosis or proof of drug efficacy. Alternative representative evidence accepted; planned extended-release switch never treated as current."
+    },
+    {
+      "family": "A14",
+      "file": "A14_trajectory_ops.json",
+      "query": "What nationality and passport number are current in my own reports, what is the status and reference of my Portuguese citizenship application, and which alternative numbers are mistakes or merely future projections? Keep colleagues' details and unconfirmed future documents separate.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Brazilian, born São Paulo; reported passport HG284913. Portuguese citizenship application submitted March3this year in São Paulo, reference PT-2025-04417; still an application, not an established second nationality. No replacement number supplied yet. The reference string alone is not an independent calendar-year anchor.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Brazilian only, Portuguese citizenship pending PT-2025-04417. Current passport corrected to HG284193; HG284913 was a transposition error. Mariana's Spanish citizenship does not belong to the user. No active new passport number yet.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Brazilian only, Portuguese citizenship still pending PT-2025-04417. Current passport HG284193; old HG284913 was wrong. HG291843 is only projected for possible future reissue after citizenship finalization, not active until an actual new document is issued. HG248193 appeared in the company template and user thinks it came from Rafael's old application; it is not the user's number.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Synthetic reported document history; no independent validation of nationality/passport issuance rules and no immigration advice. Keep user uncertainty about template provenance."
+    },
+    {
+      "family": "A16",
+      "file": "A16_trajectory_ops.json",
+      "query": "Which Edinburgh master's degree title am I currently asking to use, why do other titles appear in my reports, and what are my student ID, completion and ceremony dates, and overall classification? Distinguish accepted corrections from proposed future renaming and my friend's credentials.",
+      "cuts": [
+        {
+          "through": [
+            2,
+            3
+          ],
+          "answer": "User now requests MSc in Computational Linguistics and Natural Language Processing, based on transcript, replacing the earlier shortened MSc in Computational Linguistics. Student ID s2145837; requirements completed September2022, ceremony November2022; overall merit, not distinction.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            5
+          ],
+          "answer": "User reverts to MSc in Computational Linguistics after consulting the certificate and explicitly gives it precedence over the transcript's extended title. ID s2145837; September2022requirements, November2022ceremony; merit.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7",
+              "s2t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Canonical requested title remains MSc in Computational Linguistics. Transcript extended title was superseded by the certificate correction. MSc in Language Technology is a proposed optional future rename; user has not opted in and will await details. ID s2145837, requirements September2022, ceremony November2022, merit. Callum's distinction/PhD are his, and user has not committed to a PhD.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7",
+              "s2t3",
+              "s2t5",
+              "s3t1",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Document priority follows this user's explicit instruction; not a general rule that certificates always override transcripts. Historical contact-forget text is not actual Store deletion."
+    },
+    {
+      "family": "A20",
+      "file": "A20_reflect.json",
+      "query": "What priorities and experiences explain my emergency-contact setup, and am I currently relying on the wallet card or a replacement app? Keep my confirmed actions and preferences separate from suggestions, future plans, and other people's forms.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "The late-March fender bender left user rattled and briefly unable to recall the number, motivating contact readiness. Mother's landline is familiar; workplace HR was updated to Karen's current number and Dave removed from HR. User says the old doctor ICE entry needs removal, not that removal is complete. No wallet card or app has been reported yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "User explicitly prioritizes dependable redundant backups, proximity and prompt answering after feeling unprepared in the accident. Marco was added as secondary at work because he is near the office and answers calls. A wallet card contains mother, Karen and Marco and works without a phone battery. No replacement app has been reported; Theo's form is separate.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same priorities: reliable redundancy, responsiveness, proximity and preparedness after the accident. User considered an app and possibly ditching the card but has not downloaded it; explicitly keeps and trusts the wallet card now. Theo's planned correction to Karen's number is his form, not a completed update to the user's system. Do not infer a globally completed deletion from an assistant assurance.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported preferences/actions, not a live emergency system audit or a diagnosis. Representative source-grounded examples suffice; do not claim real-world readiness."
+    },
+    {
+      "family": "A22",
+      "file": "A22_reflect.json",
+      "query": "Using only my own reported weigh-ins, what is my latest confirmed weight and how does the overall loss compare with the recent pace? Separate measured values from hopes, targets and other people's numbers, and preserve any missing timing information. This is a summary of my reports, not health advice.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "187.4lb on March12, down from194.2lb on January6:6.8lb total, approximately0.7lb/week over9–10weeks. User reports roughly stable around the current range for two weeks; no intermediate numeric weigh-in is supplied yet to compute a separate recent rate. Under180by endApril is a goal, not attained weight; year unspecified.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Latest confirmed187.4lb on March12; total6.8lb since January6, about0.7lb/week.191.0aroundFebruary5and188.6aroundFebruary20provide intermediate points: roughly3.2lb in the first month versus1.2lb over aboutthreeweeks recently (~0.4lb/week), so recent pace is slower. Laura142and target135are hers; Kevin's12lb is his. No assured future result or exact year.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Latest confirmed stays187.4lb on March12, overall6.8lb loss (~0.7lb/week) but recent1.2lb over aboutthreeweeks (~0.4lb/week), slower than the first month.186nextweek is expressly a hopeful prediction, not a weigh-in; under180endApril is a goal. User's tentative reconsideration of fasting is not a completed change or evidence of future loss. Laura's numbers and Kevin's results stay separate; exact year unavailable.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t1",
+              "s2t5",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Arithmetic over reported approximate dates, not medical assessment, recommendation, forecast or verified measurements. Do not treat the assistant's physiological explanations as user evidence."
+    },
+    {
+      "family": "A27",
+      "file": "A27_reflect.json",
+      "query": "What recurring preferences do my own workplace choices show, and what reported examples support that interpretation? Distinguish my actual choices from coworkers' choices and anticipated badge changes; do not invent a new current credential.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers understated appearance and simple easy-to-remember formats: swapped neon-green lanyard for plain black, and appreciates concise Meridian ID format versus cluttered former university format. Own ID A27-4183; Priya's A27-4201 and old student A27-0076 are separate. No new badge plan yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Explicitly prefers clean/simple environments with fewer steps, less visual clutter and friction. Supporting examples include black lanyard, concise ID, badge tap-to-pay, bare desk and six visible home-screen apps;40minutes resolving a benefits-portal problem disrupted the schedule and mood. Own credential remains A27-4183; representative examples suffice.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same preference for minimal, efficient routines, reinforced by quick parking setup, wanting a minimal ticketing profile and a five-minute tap-door/tap-coffee/clear-desk morning. April22photo-badge issuance is reported as planned; new number/prefix only probable/possible, not issued or active. User still explicitly keeps A27-4183; coworkers' choices do not define the user's.",
+          "support_sets": [
+            [
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "A source-grounded preference summary, not diagnosis or universal personality prediction. Accept representative evidence rather than requiring every example."
+    },
+    {
+      "family": "A28",
+      "file": "A28_remember.json",
+      "query": "What is my current thesis supervision arrangement, including the advisor's name and start date, regular meeting slot, sabbatical plan, interim cover and statistics support? Keep current roles, upcoming cover, former advisors and other people's supervisors separate, and state what has not yet been supplied.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Current Dr.Renata Voss, Cognitive Science at Leiden, sinceFebruary14; weeklyThursday10:30AM. Sabbatical aroundJune15at UC San Diego is upcoming. Duration and interim advisor name not yet provided. Former Professor Anil Mehta ended lateJanuary; no statistics-support person supplied yet. No absolute year/timezone given.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Voss remains current sinceFebruary14withThursday10:30meetings; upcoming UC San Diego sabbatical aroundJune15for sixmonths. Dr.Lena Brandt will cover during it, not current replacement yet. James Okoro is Voss's postdoc helping statistics, ad hoc after email, usually within a day or two. Sara's Dr.Kim is not the user's advisor. No absolute year/timezone.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same currentVoss/February14/Thursday10:30arrangement. Mid-June sixmonth UC San Diego sabbatical upcoming, Brandt interim during absence, Okoro postdoc statistics help with ad hoc meetings. Dr.Renata Vogt is explicitly a different person, not Voss. The proposed revision schedule is not proof that feedback/reviews have already happened; year/timezone remain unknown.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "User-reported supervision, not verified university data. Approximate mid-December return can be inferred from approximate start+duration, never upgraded to an exact announced return date."
+    },
+    {
+      "family": "A29",
+      "file": "A29_trajectory_ops.json",
+      "query": "What vocabulary placement score should I currently use for my WriteInPT track, and how do the other numbers in the conversation relate to it? Explain which correction or recalibration is currently applicable, keeping other people's scores and course progress separate.",
+      "cuts": [
+        {
+          "through": [
+            2,
+            3
+          ],
+          "answer": "72/100for the Brazilian Portuguese track, corrected after checking WriteInPT email.74was a misremembered initial report, not a separate assessment. No recalibrated score has yet been reported.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            3
+          ],
+          "answer": "Latest user report says Professor Cláudia Mendes's note recalibrates the Brazilian-track vocabulary score to78; prior corrected72and earlier misremembered74are historical. This is a reported rubric adjustment, not a new test result or measured improvement. No contrary support follow-up yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t3",
+              "s3t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "72/100stands for the user's Brazilian track. WriteInPT support clarified recalibration applies only to European-track test takers and Cláudia's notice was mistakenly sent to all;78is inapplicable,74was the original misremembering. Pedro's85belongs to him and a similar European-track test. Encouraging assignment feedback does not replace the placement score.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Applicability follows explicit local scope and correction in the source; no universal authority-ranking rule is injected into the controller. Historical group closure is not actual Store deletion."
+    },
+    {
+      "family": "A33",
+      "file": "A33_update.json",
+      "query": "What heights have I actually reported as measured, with their dates or measurement conditions, and which numbers are stale beliefs, another person's measurement or an unconfirmed prediction? Do not collapse measurements taken in different conditions into one unconditional fact, and do not give medical advice.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "User reports5ft11in at March12physical, repeated with same result.6ft was longstanding assumption/old driver's-license entry, superseded as a measured claim. Kevin5ft8.5in and mother5ft4in are other people. No home measurement or future height prediction supplied yet; year/clinic measurement conditions unspecified.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Clinic5ft11in onMarch12and later home5ft11.25in first thing in morning, barefoot, straight against door frame with tape. Preserve both scopes; do not invent clinic time or barefoot condition from the assistant.6ft is old belief/license. No measured treatment gain; curiosity about future remeasurement is not a result.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t3",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Actual reported measurements remain clinic5ft11in March12and home5ft11.25in morning/barefoot/door-frame tape. No new post-treatment measurement yet.5ft11.5in is chiropractor's projected future result; second round undecided.6ft in gym prefill is stale and user says corrected it, but exact replacement entry unspecified; license update still future. Derek5ft11.75in was with shoes and is his.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported observations only; no endorsement of treatment claims, inference of clinical measurement protocol, causal attribution or real-world verification. Alternative valid unit conversions accepted."
+    }
+  ],
+  "model_calls": 0
+}

@@ -1,0 +1,66 @@
+{
+  "study": "state-view-v1",
+  "runtime_code": "6c0de441",
+  "status": "CLOSED",
+  "questions": 4,
+  "arms": 3,
+  "generation_calls": 12,
+  "generation_tokens": 61857,
+  "embedding_calls": 0,
+  "embedding_tokens": 0,
+  "judge_calls": 0,
+  "new_unknown": 0,
+  "per_arm_cost": {
+    "originals": {
+      "calls": 4,
+      "prompt_tokens": 9328,
+      "total_tokens": 18432,
+      "completion_tokens": 9104
+    },
+    "view_only_diagnostic": {
+      "calls": 4,
+      "prompt_tokens": 9938,
+      "total_tokens": 20305,
+      "completion_tokens": 10367
+    },
+    "supported_view": {
+      "calls": 4,
+      "prompt_tokens": 12191,
+      "total_tokens": 23120,
+      "completion_tokens": 10929
+    }
+  },
+  "latency_seconds": null,
+  "latency_reason": "existing call artifacts have no wall_seconds/metrics for these direct calls; not reconstructed from file mtimes",
+  "shared_formation_cost": {
+    "generation_calls": 12,
+    "generation_tokens": 90748,
+    "embedding_calls": 19,
+    "embedding_tokens": 1180
+  },
+  "review_kind": "root source/state review, no official or independent judge, synthetic story only",
+  "review": {
+    "before": {
+      "originals": "answers Li with explicit before-effective source",
+      "supported_view": "answers Li using original support; current semantic unit alone does not retain pre-effective Li",
+      "view_only_diagnostic": "faithful abstention but task unanswered; missing previous A rule"
+    },
+    "after": {
+      "originals": "A Zhao/B Chen and external confirmation correct",
+      "supported_view": "core answer correct; verbose temporal and scope restatement",
+      "view_only_diagnostic": "core answer correct"
+    },
+    "exception": {
+      "originals": "explicitly recognizes Du exception withdrawal, continuing Zhao general rule and C-only scope",
+      "supported_view": "current selected supports omit creation/cancellation; partial current Zhao and C scope, cannot explain withdrawal",
+      "view_only_diagnostic": "answers confirmation rule instead of post-cancellation contact rule; overstates absence of Du from current view"
+    },
+    "history": {
+      "originals": "names correct but falsely treats original user request as proof of actual stored r1",
+      "supported_view": "actual r1 and r8 names correct; table wrongly labels later Chen correction as original statement rather than original Wang report",
+      "view_only_diagnostic": "actual initial/current names correct, original source statement cannot be established from view alone; limitation partly acknowledged"
+    }
+  },
+  "decision": "No whole-record state-view quality/cost advantage on these four questions. Keep views optional and on demand; exact saved-history and cancellation explanations need actual old versions and originals. Do not add automatic summary hierarchy. Semantic-only remains diagnostic, never default.",
+  "artifact_root": "artifacts/global-development/state-view-v1"
+}

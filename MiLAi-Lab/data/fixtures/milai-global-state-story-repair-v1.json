@@ -1,0 +1,67 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "global-state-story",
+      "owner": "global-state-story-dev",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "session_id": "followup-event-9",
+          "message_id": "followup-event-9",
+          "content": "上一轮B项目联系人更正未完成。请现在完成这次更正：应当是陈琴，而不是王芳，最初约定就是陈琴。只更正当前解释，保留当时误存王芳的历史；不要把更正时间当作联系人变更的生效日期，其他事项不变。",
+          "occurred_at": "2030-10-14T11:10:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2030-10-14T11:10:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "followup-before-effective",
+          "message_id": "followup-before-effective",
+          "content": "只查询，不保存也不发送通知：在2030年10月19日，A项目应当通知谁？明确区分已经保存的未来安排和当天适用的安排。",
+          "occurred_at": "2030-10-15T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2030-10-19",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "followup-after-effective",
+          "message_id": "followup-after-effective",
+          "content": "只查询，不保存也不发通知：在2030年10月20日，A、B项目分别通知谁？共同外部通知规则与C项目周末内部通知规则分别是什么？",
+          "occurred_at": "2030-10-15T10:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2030-10-20",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "followup-saved-history",
+          "message_id": "followup-saved-history",
+          "content": "只查询：请读取最初保存的真实历史版本，说明当时A、B联系人各是谁；再说明更正后的B联系人，以及2030年10月21日的临时例外是否还有效。不要把现在的解释冒充最初存下的内容。",
+          "occurred_at": "2030-10-15T11:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2030-10-21",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "followup-forget-finance",
+          "message_id": "followup-forget-finance",
+          "content": "请忘记财务组那个李明的报销职责记录及其原始来源；不要动A项目以前联系人李明的信息，也不要改变各项目通知规则。说明实际撤销范围，不要声称物理擦除。",
+          "occurred_at": "2030-10-15T12:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2030-10-21",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "followup-reopen-after-forget",
+          "message_id": "followup-reopen-after-forget",
+          "content": "只查询，不保存：现在还能重开财务组李明的职责原文或其历史记录吗？同时核对A在10月20日前和10月20日起的通知对象，确认未误删另一个李明的项目历史。",
+          "occurred_at": "2030-10-15T13:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2030-10-21",
+          "query_calendar_context": "Asia/Shanghai"
+        }
+      ]
+    }
+  ]
+}

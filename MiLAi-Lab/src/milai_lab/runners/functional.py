@@ -17,9 +17,10 @@ import unicodedata
 import uuid
 from collections.abc import Callable
 from contextlib import AbstractContextManager, ExitStack
+from copy import deepcopy
 from dataclasses import asdict, replace
 from pathlib import Path
-from typing import Any, Literal, cast
+from typing import Annotated, Any, Literal, cast
 
 import httpx
 from langchain_core.messages import (
@@ -28,23 +29,28 @@ from langchain_core.messages import (
     RemoveMessage,
     SystemMessage,
     ToolMessage,
+    messages_from_dict,
 )
 from langchain_core.runnables import RunnableConfig
-from langchain_core.tools import BaseTool
+from langchain_core.tools import BaseTool, InjectedToolCallId
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
-from langgraph.store.sqlite import SqliteStore
+from pydantic import ConfigDict, Field, create_model, model_validator
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.host_requests import HostRequestProgress, visible_cards
 from milai_lab.application.recovery import UnknownModelRequest, resume_request
+from milai_lab.application.refs import maintenance_observation_profiles, observation_profile
 from milai_lab.application.request_plans import (
+    application_operation_catalog,
     application_requests_schema,
     compile_application_requests,
 )
 from milai_lab.baselines.langmem_agent import build_agent
+from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
+from milai_lab.contracts.memory import VerifiedObjectRef
 from milai_lab.contracts.scope import FoundationScope
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import entrypoint_settings, read_json, write_json
 from milai_lab.harness.contextual_artifacts import (
     BudgetExceeded,
     RunLimits,
@@ -54,17 +60,24 @@ from milai_lab.harness.contextual_artifacts import (
 )
 from milai_lab.harness.functional_faults import FunctionalFaults
 from milai_lab.memory.activation import ActivationIndex
-from milai_lab.memory.functional import FunctionalMemory
+from milai_lab.memory.functional import (
+    FunctionalMemory,
+    ReadSelector,
+    ReadSelectorTool,
+    StructuredReadGoal,
+)
 from milai_lab.memory.functional_state import FunctionalIntegrityError as FunctionalIntegrityError
-from milai_lab.memory.functional_state import FunctionalRejection, visibility
+from milai_lab.memory.functional_state import FunctionalRejection, note_exposure, visibility
 from milai_lab.memory.functional_state import namespace as functional_namespace
 from milai_lab.memory.functional_state import reference_key as functional_reference_key
-from milai_lab.memory.retrieval import SemanticRetriever
+from milai_lab.memory.reader_projection import expand_host_packet
+from milai_lab.memory.retrieval import SemanticRetriever, SourceSearchCache
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import (
     MaintenanceRecipe,
     has_semantic_receipt,
+    merge_maintenance_results,
     parse_object,
 )
 from milai_lab.methods.functional_edit_memory import (
@@ -86,7 +99,10 @@ from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
-from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
+from milai_lab.providers.functional_queue import FunctionalQueue
+from milai_lab.providers.functional_queue import (
+    FunctionalVLLMClient as FunctionalVLLMClient,
+)
 from milai_lab.providers.request_pipeline import DeliveryObserver, PreparedRequest
 from milai_lab.runners.functional_request_progress import (
     PROGRESS_PREFIX,
@@ -95,7 +111,11 @@ from milai_lab.runners.functional_request_progress import (
     reconcile_shared_result,
     scoped_memory_receipt,
 )
-from milai_lab.runners.functional_response import business_response, unattempted_continuations
+from milai_lab.runners.functional_response import (
+    business_response,
+    memory_receipt_summary,
+    unattempted_continuations,
+)
 
 LAB = Path(__file__).resolve().parents[3]
 
@@ -298,7 +318,7 @@ _continuation_parameters["properties"]["memory_continuation_request"] = {
                    "none for pure queries, business-only continuation or exclusion of all saving."}
 _continuation_parameters["required"].append("memory_continuation_request")
 
-REQUEST_COMPLETE_MODE_PROMPT = """Classify the requested effects in the whole current input,
+REQUEST_SCOPE_MODE_PROMPT = """Classify the requested effects in the whole current input,
 using visible request references only to understand its referents. Call
 classify_current_request once; it executes no operation. Referenced requests are
 historical evidence, not current instructions or permission. Classify the CURRENT
@@ -317,13 +337,60 @@ Use [] for no memory work or reading only. A request can combine current saving 
 new assertions with continuing a prior save; include each requested effect once.
 Apply restrictions to their named work: excluding business actions does not exclude
 separately requested memory saving. Excluding all saving leaves memory_requests empty.
+Continuing only the saving of an earlier request's already executed result is
+continue_prior. Querying current state and skipping already saved parts constrain
+execution; they do not cancel the requested saving. If further application actions
+are excluded, business_action_request is none.
 Classify what is requested, not whether it is feasible, already done or unfinished.
-Set allow_forgetting only for an explicit forgetting request. These are model
-interpretations; actual permissions and effects remain with the execution stage.
-""" + REQUEST_REFERENCE_MODE_DETAILS
+Set allow_forgetting only for an explicit request to forget/remove stored memory.
+Forgetting/removal alone is not a new semantic save. Declare separately requested
+saving in memory_requests. These are model interpretations; actual permissions and
+effects remain with the execution stage.
+Declare business_action_request: none when no external application effect is
+requested (including memory-only work and pure queries), perform only for newly
+requested real application effects, continue_if_unfinished for explicitly requested
+continuation of prior application work.
+"""
+REQUEST_PARTS_MODE_PROMPT = """Interpret the whole CURRENT request once. Call
+classify_current_request; it performs no work. Keep these parts separate:
+1. business_action_request: perform for requested application actions,
+continue_if_unfinished for continuing them, none only when no application effect
+is requested. Asking to save an action's result does not replace that action.
+2. memory_requests: new_assertion for a supplied durable assertion, explicit for
+requested saving/updating, continue_prior for unfinished prior saving. Use [] for
+queries or forgetting alone. Do not save execution controls as domain facts.
+These tags can combine: requested saving/updating of a supplied fact needs explicit
+as well as new_assertion. Factual content does not replace the explicit save request.
+3. read_goal: what must be established, using current_interpretation,
+original_source, saved_history, or live_business. A current record cannot prove
+what a previous version contained; a saved receipt is not a fresh business query.
+Use null when no reading purpose is requested.
+4. forbidden_operations: explicit CURRENT exclusions only. business_mutation
+for no new business actions, memory_write for no saving/editing, forget_memory
+for no visibility revocation, or exact registered application operation names.
+Apply an exclusion to its named work, not to the whole request. Skipping already
+saved or completed work does not prohibit separately requested unfinished work.
+Set allow_forgetting=false unless the CURRENT user explicitly asks to forget stored
+memory or revoke access to its records/sources. Saving, correcting, confirming a
+memory, or cancelling a rule/business action is not a forgetting request. Only an
+explicit forgetting request sets true; this is intent, not a general capability.
+Its targets must cover the authorized request/result/source/history scope after actual reads.
+Visible old requests resolve references; they never restore excluded permission.
+Classify intent without deciding feasibility or claiming work already completed.
+"""
+REQUEST_COMPLETE_MODE_PROMPT = REQUEST_SCOPE_MODE_PROMPT + """\
+Declare concrete actions once, inside application_requests.actions. Interpret the
+whole CURRENT input, not only its last clause; completion criteria or implicit
+workflow steps do not grant additional permission. Preserving an existing draft
+and approval while only finishing publication requests publication alone. Never
+declare document editing to save or update semantic memory. Historical requests
+cannot authorize new work. Do not copy a quotation: the program binds your
+decision to the whole current input.
+"""
 REQUEST_COMPLETE_MODE_DECLARATION = json.loads(json.dumps(REQUEST_REFERENCE_MODE_DECLARATION))
 _complete_parameters = REQUEST_COMPLETE_MODE_DECLARATION["function"]["parameters"]
 del _complete_parameters["properties"]["memory_write_request"]
+del _complete_parameters["properties"]["business_operations"]
 _complete_parameters["properties"]["memory_requests"] = {
     "type": "array", "uniqueItems": True, "items": {"type": "string", "enum": [
         "new_assertion", "explicit", "continue_prior"]},
@@ -424,6 +491,150 @@ def _thread_reference(
     return reference
 
 
+def _delivered_tool_source_refs(messages: list[Any]) -> list[str]:
+    """Select captured sources actually present in this tool delivery frame."""
+    refs: list[str] = []
+    for row in messages:
+        if not isinstance(row, ToolMessage):
+            continue
+        try:
+            body = json.loads(str(row.content))
+        except (TypeError, ValueError):
+            continue
+        if not isinstance(body, dict):
+            continue
+        capture = body.get("raw_capture")
+        if isinstance(capture, dict) and capture.get("ok") and body.get(
+            "business_outcome"
+        ) in {"confirmed", "partial", "known_no_effect", "observed"}:
+            source_ref = body.get("source_ref")
+            if isinstance(source_ref, str) and source_ref not in refs:
+                refs.append(source_ref)
+        query = body.get("query_source")
+        if isinstance(query, dict) and query.get("origin") in {
+            "get_reservation", "get_document_status"
+        }:
+            source_ref = query.get("source_ref")
+            if isinstance(source_ref, str) and source_ref not in refs:
+                refs.append(source_ref)
+    return refs
+
+
+def _business_query_targets(
+    memory: FunctionalMemory, config: RunnableConfig, material: dict[str, Any],
+    app: FunctionalApplication,
+) -> list[dict[str, Any]]:
+    """Advertise only delivered Source targets with actual verified object metadata."""
+    targets = []
+    seen = set()
+    expanded = expand_host_packet(material)
+    for item in [*expanded.get("items", []), *expanded.get("request_targets", [])]:
+        target = item.get("target")
+        if item.get("target_kind") != "delivered_source" or target in seen:
+            continue
+        resolved = memory.resolve_request_target(config, target, kind="delivered_source")
+        source = memory.service.source(resolved["identity"]["source_ref"])
+        ref = source.get("object_ref") if source is not None else None
+        if not isinstance(ref, dict) or ref.get("owner") != app.owner or ref.get(
+            "application"
+        ) != app.observation_profile.application:
+            continue
+        seen.add(target)
+        targets.append({"target": target, "object_id": ref["external_id"],
+                        "query": "get_document_status" if app.workflow == "document_publication_v1"
+                        else "get_reservation", "basis": "delivered_verified_object",
+                        "observation": "requires_new_query_not_a_live_state_claim"})
+    return targets
+
+
+def _observe_query_target(
+    memory: FunctionalMemory, app: FunctionalApplication, adapter: Any,
+    config: RunnableConfig, target: str, call_id: str, name: str,
+    *, request: Any = None, execute: Callable[[Any], Any] | None = None,
+) -> ToolMessage:
+    try:
+        resolved = memory.resolve_request_target(config, target, kind="delivered_source")
+        source_ref = resolved["identity"]["source_ref"]
+        source = memory.service.source(source_ref)
+        if source is None or not isinstance(source.get("object_ref"), dict):
+            raise FunctionalRejection("FUNCTIONAL_DELIVERED_VERIFIED_OBJECT_REQUIRED")
+        ref = VerifiedObjectRef(**source["object_ref"])
+    except (FunctionalRejection, TypeError, ValueError) as error:
+        return ToolMessage(name=name, tool_call_id=call_id, status="error", content=json.dumps(
+            {"ok": False, "status": "query_target_rejected", "reason": str(error),
+             "effect": "none", "retryable": False}, ensure_ascii=False,
+        ))
+    observed = app.observe_delivered(
+        adapter, ref, delivered_source_refs=[source_ref], attempt_id=call_id,
+        request=request, execute=execute,
+    )
+    delivery = observed.get("delivery_response")
+    if not isinstance(delivery, dict):
+        return ToolMessage(name=name, tool_call_id=call_id, status="error", content=json.dumps(
+            {"ok": False, "status": observed["status"], "effect": observed["business_effect"],
+             "executed": observed["executed"], "retryable": False}, ensure_ascii=False,
+        ))
+    return ToolMessage.model_validate(delivery).model_copy(
+        update={"name": name, "tool_call_id": call_id},
+    )
+
+
+def _query_reference_catalog(
+    memory: FunctionalMemory, app: FunctionalApplication, adapter: Any,
+    targets: list[dict[str, Any]], tools: tuple[BaseTool, ...],
+) -> tuple[BaseTool, ...]:
+    """Use the existing query tool name with an actually issued object target."""
+    def replacement(original: BaseTool) -> BaseTool:
+        issued = [row["target"] for row in targets if row["query"] == original.name]
+        if not issued:
+            return original
+
+        lookup_key = "title" if original.name == "get_document_status" else "item_key"
+
+        class QuerySelectorBase(ReadSelector):
+            target: str | None = None
+            model_config = ConfigDict(extra="forbid", strict=True, json_schema_extra={
+                "oneOf": [
+                    {"required": ["target"], "properties": {lookup_key: {"type": "null"}}},
+                    {"required": [lookup_key], "properties": {"target": {"type": "null"}}},
+                ],
+            })
+
+            @model_validator(mode="after")
+            def one_selector(self) -> Any:
+                if (self.target is None) == (getattr(self, lookup_key) is None):
+                    raise ValueError("one_delivered_target_or_public_lookup_required")
+                return self
+
+        fields: dict[str, Any] = {
+            "target": (str | None, Field(default=None, min_length=1,
+                                         json_schema_extra={"enum": [*issued, None]})),
+            lookup_key: (str | None, Field(default=None, min_length=1)),
+        }
+        query_selector = create_model("QuerySelector", __base__=QuerySelectorBase, **fields)
+
+        def query(
+            config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
+            target: str | None = None, **arguments: Any,
+        ) -> ToolMessage:
+            if target is not None:
+                return _observe_query_target(memory, app, adapter, config, target,
+                                             tool_call_id, original.name)
+            observed = adapter.lookup({lookup_key: arguments[lookup_key]}, attempt_id=tool_call_id)
+            return ToolMessage.model_validate(observed["delivery_response"])
+
+        return ReadSelectorTool.from_function(
+            query, name=original.name, args_schema=query_selector,
+            description=("Obtain a new actual business observation for one delivered verified "
+                         "object target. Select target from business_observation_targets; the "
+                         "program resolves its actual identity. A saved Source is an old receipt, "
+                         "not this query. Query status and object state remain separate; this "
+                         "read performs no business mutation. For a different object use the "
+                         "original public lookup argument instead of target."),
+        )
+    return tuple(replacement(tool) for tool in tools)
+
+
 def _note_edit_tool_delivery(
     memory: FunctionalEditMemory, config: RunnableConfig, messages: list[Any]
 ) -> None:
@@ -484,10 +695,12 @@ def prepare(
     settings_path: Path,
     fixture_path: Path | None = None,
     controls_path: Path | None = None,
-    *, source_version: str | None = None,
+    *, source_version: str | None = None, run_id: str | None = None,
 ) -> dict[str, Any]:
-    settings = read_json(settings_path)
+    settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
+        "laya_impact", "writer_input", "memory_control", "retrieval_tool", "business_tools",
+        "host_source_arrivals", "host_evidence_presentation",
         "profile",
         "host",
         "capacity",
@@ -505,6 +718,7 @@ def prepare(
         "revision",
         "change_intent",
         "request_mode",
+        "request_failure_policy",
         "business_attempt_policy",
         "formation_interface",
         "finalization",
@@ -531,8 +745,13 @@ def prepare(
         "edit_features",
         "maintenance_recipe",
         "memory_view_mode",
+        "result_maintenance_mode",
         "memory_profile",
         "memory_ranking",
+        "retrieval_granularity", "stage_enable_thinking",
+        "source_access", "source_top_k", "semantic_top_k", "max_evidence_queries",
+        "source_tokenization", "source_granularity", "evidence_policy", "dependency_reading",
+        "maintenance_mode",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
     if set(settings) - allowed:
@@ -542,8 +761,34 @@ def prepare(
         raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
     if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
         raise ValueError("FUNCTIONAL_MEMORY_VIEW_MODE_INVALID")
+    if settings.get("source_access", "legacy") not in {"legacy", "independent_v1"} or any(
+        type(settings.get(key, default)) is not int or settings.get(key, default) < 1
+        for key, default in (("source_top_k", 20), ("semantic_top_k", 10))
+    ):
+        raise ValueError("FUNCTIONAL_SOURCE_RETRIEVAL_INVALID")
+    if "max_evidence_queries" in settings and (
+        type(settings["max_evidence_queries"]) is not int
+        or not 0 <= settings["max_evidence_queries"] <= 2
+    ):
+        raise ValueError("FUNCTIONAL_EVIDENCE_QUERY_LIMIT_INVALID")
+    if settings.get("maintenance_mode", "legacy") not in {
+        "legacy", "event_delta_v1", "semantic_delta_v1", "semantic_delta_v2",
+    }:
+        raise ValueError("FUNCTIONAL_MAINTENANCE_MODE_INVALID")
+    if settings.get("result_maintenance_mode", "legacy") not in {
+        "legacy", "literal_observations_v1",
+    }:
+        raise ValueError("FUNCTIONAL_RESULT_MAINTENANCE_MODE_INVALID")
     if settings.get("memory_ranking", "dense") not in {"dense", "activation"}:
         raise ValueError("MEMORY_RANKING_INVALID")
+    if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
+        raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
+    stage_modes = settings.get("stage_enable_thinking", {})
+    if (not isinstance(stage_modes, dict)
+            or set(stage_modes) - {"extract", "select", "edit", "impact", "reader",
+                                  "dependency_read", "memory_control", "query_structure"}
+            or any(type(value) is not bool for value in stage_modes.values())):
+        raise ValueError("STAGE_ENABLE_THINKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
             and settings["memory_method"] not in FUNCTIONAL_ARMS):
         raise ValueError("FUNCTIONAL_MEMORY_METHOD_INVALID")
@@ -552,7 +797,35 @@ def prepare(
         raise ValueError("FUNCTIONAL_EDIT_INTERFACE_INVALID")
     if edit_interface != "v1" and settings.get("memory_method") not in FUNCTIONAL_ARMS:
         raise ValueError("FUNCTIONAL_EDIT_INTERFACE_REQUIRES_EDIT_METHOD")
+    if type(settings.get("dependency_reading", False)) is not bool or (
+        settings.get("dependency_reading") and (
+            settings.get("evidence_policy") != "question_pack_v1"
+            or settings.get("memory_method") not in FUNCTIONAL_ARMS)
+    ):
+        raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_EDIT_PACKS")
     edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
+    if settings.get("memory_control") and (
+        settings.get("evidence_policy") != "question_pack_v1"
+        or settings.get("memory_method") not in FUNCTIONAL_ARMS
+    ):
+        raise ValueError("MEMORY_CONTROL_REQUIRES_EDIT_EVIDENCE_PACKS")
+    if "retrieval_tool" in settings and (
+        settings["retrieval_tool"] not in {"rich", "query_only"}
+        or not settings.get("memory_control")
+    ):
+        raise ValueError("RETRIEVAL_TOOL_REQUIRES_CONTROL_AND_REQUEST_INTERFACE")
+    range_tokens = (settings.get("memory_control") or {}).get("source_range_tokens")
+    if range_tokens is not None and (
+        not settings.get("retrieval_tool") or type(range_tokens) is not int or range_tokens < 1
+    ):
+        raise ValueError("SOURCE_RANGE_TOKENS_REQUIRE_RETRIEVAL_AND_POSITIVE_INTEGER")
+    if settings.get("host_source_arrivals") and not settings.get("retrieval_tool"):
+        raise ValueError("HOST_SOURCE_ARRIVALS_REQUIRES_RETRIEVAL_PROFILE")
+    if "host_evidence_presentation" in settings and (
+        settings["host_evidence_presentation"] != "request_adjacent_metadata_v1"
+        or not settings.get("retrieval_tool")
+    ):
+        raise ValueError("HOST_EVIDENCE_PRESENTATION_REQUIRES_RETRIEVAL_AND_DECLARED_MODE")
     if edit_features.enabled and (
         edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
     ):
@@ -606,6 +879,14 @@ def prepare(
             "unavailable_v1", "receipt_status_v1", "receipt_status_v2", "receipt_status_v3",
             "receipt_status_v4"}:
         raise ValueError("FUNCTIONAL_FAILURE_DELIVERY_INVALID")
+    if settings.get("request_failure_policy", "fail_fast") not in {
+            "fail_fast", "independent_memory"}:
+        raise ValueError("FUNCTIONAL_REQUEST_FAILURE_POLICY_INVALID")
+    if settings.get("request_failure_policy") == "independent_memory" and (
+            settings.get("request_mode") not in {
+                "current_request_native_v9", "current_request_json_v9"}
+            or not settings.get("maintenance_recipe")):
+        raise ValueError("FUNCTIONAL_INDEPENDENT_MEMORY_REQUIRES_SCOPED_MAINTENANCE")
     if settings.get("business_completion", "disabled") not in {
             "disabled", "observed_continuation_v1"}:
         raise ValueError("FUNCTIONAL_BUSINESS_COMPLETION_INVALID")
@@ -672,8 +953,7 @@ def prepare(
         raise ValueError("FUNCTIONAL_REASONING_HISTORY_REQUIRES_NATIVE")
     if settings.get("declaration_thinking") == "disabled" and (
             host.tool_mode != "native" or host.enable_thinking is not True
-            or settings.get("capacity", {}).get("enable_thinking") is not True
-            or settings.get("declaration_tool_choice") != "required"):
+            or settings.get("capacity", {}).get("enable_thinking") is not True):
         raise ValueError("FUNCTIONAL_DECLARATION_THINKING_INCONSISTENT")
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
@@ -682,11 +962,16 @@ def prepare(
         "current_request_native_v6",
         "current_request_native_v7",
         "current_request_native_v8",
+        "current_request_native_v9",
+        "current_request_json_v9",
     }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
-    if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
+    if settings.get("request_mode", "disabled") not in {"disabled", "current_request_json_v9"} \
+            and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
-    if settings.get("request_mode") == "current_request_native_v8" and (
+    if settings.get("request_mode") in {
+        "current_request_native_v8", "current_request_native_v9", "current_request_json_v9",
+    } and (
         settings.get("memory_profile") != "unified_v1" or not settings.get("maintenance_recipe")
     ):
         raise ValueError("FUNCTIONAL_COMPLETE_REQUEST_REQUIRES_UNIFIED_MAINTENANCE")
@@ -746,7 +1031,7 @@ def prepare(
         "evaluator_controls_version": controls_path.stem if controls_path else None,
         "capacity_identity": capacity.identity,
         "budget_before": ledger,
-        "run_id": root.resolve().name,
+        "run_id": root.resolve().name if run_id is None else run_id,
         "backend": "public_sdk_sqlite",
         "formation": "host_tool_commit_before_final",
         "format_reproposals": settings["format_reproposals"],
@@ -761,6 +1046,8 @@ def prepare(
         existing = read_json(target)
         if existing.get("config_version") != config_version:
             raise ValueError("FUNCTIONAL_EXISTING_CONFIGURATION_VERSION_CHANGED")
+        if run_id is not None and existing["run_id"] != run_id:
+            raise ValueError("FUNCTIONAL_EXISTING_SOURCE_NAMESPACE_CHANGED")
         return cast(dict[str, Any], existing)
     write_json(target, frozen)
     return frozen
@@ -780,7 +1067,9 @@ def _status(error: Exception) -> tuple[str, str]:
         return "BUDGET_EXHAUSTED", "budget"
     if isinstance(error, httpx.HTTPError):
         return "PROVIDER_ERROR", "provider"
-    if isinstance(error, CapacityExceeded):
+    if isinstance(error, CapacityExceeded) or (
+        isinstance(error, FunctionalRejection) and text == "V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT"
+    ):
         return "FAILED", "request_capacity"
     if "UNKNOWN" in text or isinstance(error, OSError):
         return "UNKNOWN", "storage_or_business_unknown"
@@ -810,6 +1099,7 @@ def finalize_response(
     resume: bool,
     remaining_reproposals: int,
     trace: Trace,
+    enable_thinking: bool | None = None,
 ) -> tuple[AIMessage, dict[str, Any]]:
     """One declared response stage, without tools; persist reservation and result.
 
@@ -863,7 +1153,9 @@ def finalize_response(
         state.update(attempts=state["attempts"] + 1, status="reserved_before_dispatch",
                      tools_available=False, execution_candidate_delivered=False)
         write_json(path, state)
-        answer = model.invoke(prompt, tools=[], tool_choice="none")
+        sampling: dict[str, Any] = ({"enable_thinking": enable_thinking}
+                                   if enable_thinking is not None else {})
+        answer = model.invoke(prompt, tools=[], tool_choice="none", **sampling)
         if (not isinstance(answer, AIMessage) or answer.tool_calls or answer.invalid_tool_calls
                 or final_delivery(answer.content)["status"] != "available"):
             state.update(status="unusable_response",
@@ -895,21 +1187,74 @@ def request_mode(
     independent_capabilities: bool = False,
     memory_continuation: bool = False,
     application_workflow: str | None = None,
+    scope_only: bool = False,
+    request_parts: bool = False,
     referenced_requests: list[dict[str, Any]] | None = None,
     reference_fit: Callable[[str], bool] | None = None,
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
-    V8 can refer to the existing visible original requests. Current input alone
+    V8/V9 can refer to the existing visible original requests. Current input alone
     supplies requested effects and restrictions. The call shares the actual
     provider, ledger and quota, and is never a semantic correctness oracle.
+    V9 declares scopes first; concrete current actions use the operations entry.
     """
     flags = {"allow_memory_maintenance", "allow_forgetting", "allow_business_mutation",
              "requires_memory_result"}
 
+    def explicit_operations(value: dict[str, Any]) -> list[str]:
+        # Called only after the existing application schema has validated actions.
+        # Completion criteria may contain other steps; those are not permission.
+        return list(dict.fromkeys(action["operation"]
+            for item in value["application_requests"] for action in item["actions"]))
+
     def valid(value: Any, *, saved: bool = False) -> bool:
+        if scope_only and (not saved or (isinstance(value, dict)
+                                        and "application_requests" not in value)):
+            # Saved full V8 decisions keep their original validation and meaning.
+            optional = {"response_scope", *({"read_goal", "forbidden_operations"}
+                                           if request_parts else set())}
+            if not isinstance(value, dict) or set(value) - optional != {
+                "memory_requests", "allow_forgetting", "business_action_request",
+                "application_continuation_request",
+            } or not isinstance(value.get("response_scope", "substantive"), str) or (
+                value.get("response_scope", "substantive") not in {
+                    "memory_status_only", "substantive",
+                }
+            ):
+                return False
+            if request_parts:
+                goal = value.get("read_goal")
+                try:
+                    if goal is not None:
+                        StructuredReadGoal.model_validate(goal)
+                except ValueError:
+                    return False
+                forbidden = value.get("forbidden_operations", [])
+                if (not isinstance(forbidden, list)
+                        or any(not isinstance(op, str) or op not in {
+                            "memory_write", "forget_memory", "business_mutation",
+                            *BUSINESS_MUTATIONS} for op in forbidden)
+                        or len(forbidden) != len(set(forbidden))):
+                    return False
+            requests = value["memory_requests"]
+            return (isinstance(requests, list)
+                and all(isinstance(item, str) and item in {
+                    "new_assertion", "explicit", "continue_prior"} for item in requests)
+                and len(requests) == len(set(requests))
+                and type(value["allow_forgetting"]) is bool
+                and isinstance(value["business_action_request"], str)
+                and value["business_action_request"] in {
+                    "none", "perform", "continue_if_unfinished"}
+                and isinstance(value["application_continuation_request"], str)
+                and value["application_continuation_request"] in {
+                    "none", "resolve_prior_request"})
+        action_declaration = (not saved and application_workflow is not None
+            and isinstance(value, dict) and "memory_requests" in value
+            and "business_operations" not in value)
+        operations = value.get("business_operations") if isinstance(value, dict) else None
         if application_workflow is not None:
-            from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
+            from jsonschema.exceptions import ValidationError
 
             if not isinstance(value, dict) or "application_requests" not in value:
                 return False
@@ -922,13 +1267,14 @@ def request_mode(
                     application_workflow, value["application_requests"], save_result=False)
             except (ValidationError, ValueError, TypeError):
                 return False
+            if action_declaration:
+                operations = explicit_operations(value)
             if plans and (value.get("business_action_request") == "none" or any(
-                action["operation"] not in value.get("business_operations", [])
+                action["operation"] not in (operations or [])
                 for item in value["application_requests"] for action in item["actions"]
             )):
                 return False
         if operation_mode_declaration:
-            operations = value.get("business_operations") if isinstance(value, dict) else None
             if (not isinstance(operations, list)
                     or not all(isinstance(op, str) and op in BUSINESS_MUTATIONS
                                for op in operations)
@@ -977,7 +1323,8 @@ def request_mode(
                 *memory_fields, "allow_forgetting", *(
                     ["business_action_request", *([] if reference_mode_declaration else
                         ["business_action_quote"]), *(
-                        ["business_operations"] if operation_mode_declaration else [])]
+                        ["business_operations"] if operation_mode_declaration
+                        and not action_declaration else [])]
                     if action_mode_declaration
                     else ["allow_business_mutation"]), *(
                     ["application_requests", "application_continuation_request"]
@@ -1005,13 +1352,23 @@ def request_mode(
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        prompt = (REQUEST_COMPLETE_MODE_PROMPT if application_workflow is not None else
+        prompt = (REQUEST_PARTS_MODE_PROMPT if scope_only and request_parts else
+                  REQUEST_SCOPE_MODE_PROMPT if scope_only else
+                  REQUEST_COMPLETE_MODE_PROMPT if application_workflow is not None else
                   REQUEST_CONTINUATION_MODE_PROMPT if memory_continuation else
                   REQUEST_REFERENCE_MODE_PROMPT if reference_mode_declaration else
                   REQUEST_OPERATION_MODE_PROMPT if operation_mode_declaration else
                   REQUEST_ACTION_MODE_PROMPT if action_mode_declaration else
                   REQUEST_WRITE_MODE_PROMPT if write_mode_declaration else
                   REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT)
+        if scope_only and not native_declaration:
+            prompt = prompt.replace(
+                "Call\nclassify_current_request once; it executes no operation.",
+                "Return exactly one JSON object matching the response schema. This declaration\n"
+                "executes no operation.")
+            if request_parts:
+                prompt = prompt.replace("Call\nclassify_current_request; it performs no work.",
+                    "Return one JSON object matching the response schema; it performs no work.")
         declaration = (REQUEST_COMPLETE_MODE_DECLARATION if application_workflow is not None else
                        REQUEST_CONTINUATION_MODE_DECLARATION if memory_continuation else
                        REQUEST_REFERENCE_MODE_DECLARATION if reference_mode_declaration else
@@ -1022,9 +1379,10 @@ def request_mode(
         if application_workflow is not None:
             declaration = json.loads(json.dumps(declaration))
             parameters = declaration["function"]["parameters"]
-            parameters["properties"]["application_requests"] = application_requests_schema(
-                application_workflow)
-            parameters["required"].append("application_requests")
+            if not scope_only:
+                parameters["properties"]["application_requests"] = application_requests_schema(
+                    application_workflow)
+                parameters["required"].append("application_requests")
             parameters["properties"]["application_continuation_request"] = {
                 "type": "string", "enum": ["none", "resolve_prior_request"],
                 "description": "CURRENT request asks to inspect or resume an original registered "
@@ -1032,34 +1390,91 @@ def request_mode(
                                "permission."
             }
             parameters["required"].append("application_continuation_request")
-            prompt += (
-                "\nAlso declare application_requests, one target with its requested actions and "
-                "literal parameters from the CURRENT user input. Include all requested workflow "
-                "stages. reserve_and_label already includes labeling; do not add a second "
-                "complete_label action for it. Do not invent a reservation ID, document version, "
-                "completed field, outcome or permission. This is an intent interpretation; the "
-                "program compiles completion criteria and binds actual identities after queries. "
-                "For a reference to earlier work whose target/parameters are absent here, use "
-                "an empty list; the separate bounded continuation resolves the original registered "
-                "request. Pure queries also use an empty list. Do not create a new task from "
-                "history. Saving the actual result is separately controlled by the memory request."
-                " Set application_continuation_request=resolve_prior_request when the current "
-                "request asks to inspect or resume earlier requested work. A pure status query "
-                "may resolve request identity while retaining business_action_request=none and "
-                "memory_requests=[]; do not turn a query into authorization."
-            )
+            if scope_only:
+                if request_parts:
+                    parameters["properties"]["read_goal"] = {"anyOf": [
+                        StructuredReadGoal.model_json_schema(), {"type": "null"}]}
+                    parameters["properties"]["forbidden_operations"] = {
+                        "type": "array", "uniqueItems": True, "items": {"type": "string",
+                            "enum": ["memory_write", "forget_memory", "business_mutation",
+                                     *sorted(BUSINESS_MUTATIONS)]}}
+                # Existing saved V9 decisions omit this field and retain their
+                # ordinary answer path without another classification call.
+                parameters["properties"]["response_scope"] = {
+                    "type": "string", "enum": ["memory_status_only", "substantive"],
+                    "description": "memory_status_only only when the whole requested reply "
+                    "is a narrow save-status confirmation; substantive for explanation, recall, "
+                    "comparison, saved content/history, business status or any other answer."
+                }
+                prompt += (
+                    "\nDeclare response_scope=memory_status_only only when the whole requested "
+                    "reply needs solely confirmation of memory saving. A save request that also "
+                    "asks for an explanation, recalled content, history, a comparison or another "
+                    "task needs substantive. Pure reading/querying can always receive a "
+                    "substantive answer. This declares reply scope, never that a save happened "
+                    "or that its meaning is correct; only actual receipts establish effects. "
+                    "When unclear or omitted, substantive applies."
+                )
+                prompt += ("\nAPPLICATION OPERATIONS:\n" + json.dumps(
+                    application_operation_catalog(application_workflow),
+                    ensure_ascii=False, separators=(",", ":")) + "\n")
+                prompt += (
+                    "Set application_continuation_request=resolve_prior_request when the CURRENT "
+                    "request asks to inspect or resume earlier requested work. A pure status "
+                    "query may resolve request identity while retaining "
+                    "business_action_request=none "
+                    "and memory_requests=[]; resolving identity grants no permission."
+                )
+            else:
+                prompt += (
+                    "\nDeclare application_requests only when the CURRENT user input requests "
+                    "a change "
+                    "to an external application object: one target with its requested actions and "
+                    "literal parameters. Otherwise use an empty list. Include all requested "
+                    "workflow "
+                    "stages. reserve_and_label already includes labeling; do not add a second "
+                    "complete_label action for it. Do not invent a reservation ID, document "
+                    "version, "
+                    "completed field, outcome or permission. This is an intent interpretation; the "
+                    "program compiles completion criteria and binds actual identities after "
+                    "queries. "
+                    "For a reference to earlier work whose target/parameters are absent here, use "
+                    "an empty list; the separate bounded continuation resolves the original "
+                    "registered "
+                    "request. Pure queries also use an empty list. Do not create a new task from "
+                    "history. Saving the actual result is separately controlled by the memory "
+                    "request."
+                    " Set application_continuation_request=resolve_prior_request when the current "
+                    "request asks to inspect or resume earlier requested work. A pure status query "
+                    "may resolve request identity while retaining business_action_request=none and "
+                    "memory_requests=[]; do not turn a query into authorization."
+                )
         if state["attempts"] > 1:
             prompt += ("\nThe preceding response did not meet the declared schema. "
                        "Use exactly the declared fields, enum values and types; no extra fields. "
                        + ("Return one classify_current_request call." if native_declaration
                           else "Return one valid JSON object."))
-        candidates = [{
-            "request_id": card["request_id"],
-            "requirements": card["requirements"],
-            "progress": {part: card["progress"][part]["status"]
-                         for part in ("business", "memory", "feedback")},
-            "user_fragments": card["user_fragments"],
-        } for card in (referenced_requests or [])] if application_workflow is not None else []
+        candidates = []
+        if application_workflow is not None:
+            for card in referenced_requests or []:
+                # Classification identifies requested effects, not read targets.
+                # Full issued handles stay in the original card for resolution.
+                fragments = [{key: value for key, value in part.items()
+                              if key not in {"namespace", "bank", "owner", "fragment_handle"}}
+                             for part in card["user_fragments"]]
+                if card.get("kind") == "memory_maintenance":
+                    candidates.append({**{key: card[key] for key in (
+                        "kind", "request_id", "maintenance_phase", "pending_refs",
+                        "confirmed_receipt_count",
+                    )}, "user_fragments": fragments})
+                else:
+                    candidates.append({
+                        "request_id": card["request_id"],
+                        "requirements": card["requirements"],
+                        "progress": {part: card["progress"][part]["status"]
+                                     for part in ("business", "memory", "feedback")},
+                        "user_fragments": fragments,
+                    })
         references: list[dict[str, Any]] = []
         omitted = 0
         for reference in reversed(candidates):
@@ -1069,14 +1484,24 @@ def request_mode(
                 omitted += 1
             else:
                 references = proposed
+        if scope_only and not native_declaration:
+            # Grammar constraints do not put field descriptions into model
+            # context. JSON declarations need the same contract native tools show.
+            prompt += "\nRESPONSE_SCHEMA:\n" + json.dumps(
+                declaration["function"]["parameters"], ensure_ascii=False, separators=(",", ":"))
         if references or omitted:
             prompt += (
                 "\nVISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n"
                 + json.dumps({"requests": references, "omitted_reference_count": omitted},
                              ensure_ascii=False, separators=(",", ":")))
+        generation_options: dict[str, Any] = ({"response_format": {
+            "type": "json_schema", "json_schema": {
+                "name": "milai_request_scope", "schema": declaration["function"]["parameters"]}}}
+            if scope_only and not native_declaration else {})
         response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
             tools=[declaration] if native_declaration else [],
-            tool_choice=declaration_tool_choice if native_declaration else "none")
+            tool_choice=declaration_tool_choice if native_declaration else "none",
+            **generation_options)
         try:
             if native_declaration:
                 decision = (response.tool_calls[0]["args"] if isinstance(response, AIMessage)
@@ -1087,13 +1512,26 @@ def request_mode(
                     and isinstance(response.content, str) and not response.tool_calls else None)
         except ValueError as error:
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID") from error
+        if isinstance(decision, dict):
+            # These fields are category/restriction sets, not ordered application
+            # actions. Repeated tags add no permission or work; normalize once at
+            # the model input boundary and still validate every remaining value.
+            for field in ("memory_requests", "forbidden_operations"):
+                tags = decision.get(field)
+                if isinstance(tags, list) and all(isinstance(tag, str) for tag in tags):
+                    decision[field] = list(dict.fromkeys(tags))
         if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
+        if (application_workflow is not None and not scope_only and isinstance(decision, dict)
+                and "business_operations" not in decision):
+            decision = {**decision, "business_operations": explicit_operations(decision)}
         state.update(decision=decision)
         if references:
             state["reference_request_ids"] = [row["request_id"] for row in references]
         write_json(path, state)
     decision = state["decision"]
+    scope_decision = scope_only and "application_requests" not in decision
+    operations = decision.get("business_operations", [])
     memory_requests = decision.get("memory_requests")
     memory_write_request = (
         "explicit" if "explicit" in memory_requests else
@@ -1103,7 +1541,7 @@ def request_mode(
         "allow_memory_maintenance": memory_write_request != "none",
         "requires_memory_result": memory_write_request == "explicit",
         "allow_forgetting": decision["allow_forgetting"],
-        "allow_business_mutation": (bool(decision["business_operations"])
+        "allow_business_mutation": (bool(operations)
                                     if independent_capabilities else
                                     decision["business_action_request"] != "none"
                                     if action_mode_declaration
@@ -1113,7 +1551,8 @@ def request_mode(
     summary = {**interpreted,
                "interpretation": "same_host_model_current_request_with_visible_references"
                if state.get("reference_request_ids") else "same_host_model_current_request_only",
-               "protocol": "native_complete_requests_v8" if application_workflow is not None else
+               "protocol": "native_scope_requests_v9" if scope_decision else
+               "native_complete_requests_v8" if application_workflow is not None else
                "native_continuation_capabilities_v7" if memory_continuation else
                "native_independent_capabilities_v6" if independent_capabilities else
                "native_reference_declaration_v5" if reference_mode_declaration else
@@ -1128,21 +1567,26 @@ def request_mode(
         if not reference_mode_declaration:
             summary["business_action_quote"] = decision["business_action_quote"]
     if operation_mode_declaration:
-        summary["business_operations"] = decision["business_operations"]
+        summary["business_operations"] = operations
     if memory_continuation:
         summary["memory_continuation_request"] = (
             "resolve_prior_explicit" if "continue_prior" in memory_requests else "none"
         ) if memory_requests is not None else decision["memory_continuation_request"]
     if memory_requests is not None:
         summary["memory_requests"] = memory_requests
+    if "response_scope" in decision:
+        summary["response_scope"] = decision["response_scope"]
+    for key in ("read_goal", "forbidden_operations"):
+        if key in decision:
+            summary[key] = decision[key]
     if application_workflow is not None:
-        summary["application_requests"] = decision["application_requests"]
+        summary["application_requests"] = decision.get("application_requests", [])
         summary["application_continuation_request"] = decision["application_continuation_request"]
         if state.get("reference_request_ids"):
             summary["reference_request_ids"] = state["reference_request_ids"]
     if independent_capabilities:
         summary["business_declaration_status"] = (
-            "concrete_operations" if decision["business_operations"] else
+            "concrete_operations" if operations else
             "none" if decision["business_action_request"] == "none" else
             "unresolved_no_business_permission")
     trace({"event": "functional_request_mode", **summary, "attempt_id": path.stem})
@@ -1161,16 +1605,27 @@ def continuation_operations(
     *,
     declaration_tool_choice: str = "auto",
     source_fragment: Callable[[str], dict[str, Any]] | None = None,
+    application_workflow: str | None = None,
 ) -> dict[str, Any]:
-    """Resolve references only after a current-only continuation decision.
+    """Resolve the accepted current scope using its original request binding.
 
     Uses the ordinary bounded delivery, not a full checkpoint or evaluator world.
     V5/V6 preserve memory permissions. V7 can resume an explicitly requested memory
     task only when the current declaration permits resolution and actual delivered
     archived user fragments identify it. No historical source grants new business
     or forgetting permission. Request identity is not semantic authorization proof.
+    V9's CURRENT branch supplies literal application parameters after perform;
+    neither this stage nor its compiled plan proves effects or target identity.
     """
-    request_protocol = mode["protocol"] == "native_complete_requests_v8"
+    request_protocol = mode["protocol"] in {
+        "native_complete_requests_v8", "native_scope_requests_v9",
+    }
+    current_plan = (application_workflow is not None
+                    and mode["protocol"] == "native_scope_requests_v9"
+                    and mode["business_action_request"] == "perform"
+                    and not mode["business_operations"])
+    if application_workflow is not None and not current_plan:
+        raise ValueError("FUNCTIONAL_CURRENT_OPERATIONS_SCOPE_REQUIRED")
     memory_protocol = request_protocol or mode["protocol"] == "native_continuation_capabilities_v7"
     resolve_business = (mode["business_action_request"] == "continue_if_unfinished"
                         and not mode["business_operations"])
@@ -1179,14 +1634,16 @@ def continuation_operations(
     resolve_request = request_protocol and (
         mode["business_action_request"] == "continue_if_unfinished" or resolve_memory
         or mode.get("application_continuation_request") == "resolve_prior_request")
-    if not resolve_business and not resolve_memory and not resolve_request:
+    if not current_plan and not resolve_business and not resolve_memory and not resolve_request:
         raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_NOT_REQUESTED")
-    bound = {**binding, "snapshot_id": material.get("snapshot_id"), "mode_attempt_id": path.stem}
+    bound = {**binding, "snapshot_id": None if current_plan else material.get("snapshot_id"),
+             "mode_attempt_id": path.stem}
     if memory_protocol:
-        bound["resolution_contract"] = "explicit_resolution_scope_v1"
+        bound["resolution_contract"] = ("current_application_plan_v1" if current_plan else
+                                        "explicit_resolution_scope_v1")
     state: dict[str, Any] = (read_json(path) if path.exists()
                              else {"binding": bound, "attempts": 0})
-    if request_protocol and "decision" in state:
+    if request_protocol and not current_plan and "decision" in state:
         # A later maintenance commit can refresh the ordinary Reader view. The
         # already delivered resolution keeps its own snapshot and original input;
         # current source visibility and registered request bindings are rechecked.
@@ -1196,6 +1653,17 @@ def continuation_operations(
         raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_BINDING_CHANGED")
 
     def valid(value: Any) -> bool:
+        if current_plan:
+            from jsonschema.exceptions import ValidationError
+
+            if not isinstance(value, dict) or set(value) != {"application_requests"}:
+                return False
+            try:
+                compile_application_requests(cast(str, application_workflow),
+                                             value["application_requests"], save_result=False)
+            except (ValidationError, ValueError, TypeError):
+                return False
+            return True
         if not (isinstance(value, dict) and set(value) == {"business_operations", *(
                     ["prior_memory_request_fragments"] if memory_protocol else []), *(
                     ["prior_request_ids"] if request_protocol else [])}
@@ -1221,6 +1689,21 @@ def continuation_operations(
                 and (resolve_business
                      or value["business_operations"] == mode["business_operations"]))
 
+    prior_user_choices = [unit for unit in material.get("items", [])
+                          if unit.get("type") == "fragment" and unit.get("role") == "user"
+                          and unit.get("source_ref") != binding["source_ref"]]
+    if ("decision" not in state and request_protocol and not current_plan
+            and not resolve_business and (not resolve_memory or not prior_user_choices)
+            and not material.get("registered_application_requests")):
+        # Every output is fixed by the accepted current scope and the actually
+        # issued choices. No model can select an unissued request. This does not
+        # establish that no earlier request exists outside the delivered view.
+        state.update(material=material, decision={
+            "business_operations": list(mode["business_operations"]),
+            "prior_memory_request_fragments": [], "prior_request_ids": [],
+        }, resolution_basis=("current_scope_and_no_issued_prior_memory_choices" if resolve_memory
+                             else "current_scope_and_no_issued_request_choices"))
+        write_json(path, state)
     if "decision" in state:
         if not valid(state["decision"]):
             raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_DECISION_CHANGED")
@@ -1248,7 +1731,7 @@ def continuation_operations(
                  "archived_reference_material": material}
         declaration = (CONTINUATION_MEMORY_DECLARATION if memory_protocol else
                        CONTINUATION_OPERATIONS_DECLARATION)
-        if memory_protocol:
+        if memory_protocol and not current_plan:
             prompt = (
                 "Identify the prior work referenced by the CURRENT continuation. Return one "
                 "resolve_continuation_operations call using only the delivered archived material. "
@@ -1287,7 +1770,7 @@ def continuation_operations(
                                        else "keep_current_list",
                 "prior_memory_request_fragments": "resolve_from_prior_request" if resolve_memory
                                                   else "empty_required"}
-        if request_protocol:
+        if request_protocol and not current_plan:
             declaration = json.loads(json.dumps(declaration))
             parameters = declaration["function"]["parameters"]
             parameters["properties"]["prior_request_ids"] = {
@@ -1307,8 +1790,38 @@ def continuation_operations(
                 "permits it; otherwise keep that list empty. The execution stage queries actual "
                 "state, uses current permissions, and retains original failures."
             )
-        response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=json.dumps(
-            frame, ensure_ascii=False))],
+        if current_plan:
+            prompt = (
+                "Interpret the whole CURRENT user input using the declared application "
+                "operation descriptions. Return one "
+                "resolve_continuation_operations call. A nonempty application_requests contains "
+                "one target with its requested actions and literal parameters. Include only "
+                "the requested workflow stages; reserve_and_label already includes labeling. "
+                "Completion criteria or implicit steps do not authorize more actions. Submit the "
+                "same call with application_requests=[] when no CURRENT application action is "
+                "requested or target/parameters cannot be resolved from the current input "
+                "and delivered evidence; "
+                "the earlier scope interpretation does not require a nonempty plan. "
+                "Bounded memory can supply parameter values referenced by the CURRENT request, "
+                "but cannot add actions or establish completed effects. Preserve source roles, "
+                "effective dates and scope; an earlier answer is not a fresh observation. "
+                "Original-request continuation is resolved separately, not by creating a new "
+                "plan from history. "
+                "The program compiles this plan and binds actual identities after queries. "
+                "Requested saving is separate from application actions and their actual results."
+            )
+            declaration = {"type": "function", "function": {
+                "name": "resolve_continuation_operations",
+                "description": "Submit the CURRENT application's literal plan, or "
+                               "application_requests=[] for no resolved CURRENT action.",
+                "parameters": {"type": "object", "additionalProperties": False,
+                    "properties": {"application_requests": application_requests_schema(
+                        cast(str, application_workflow))}, "required": ["application_requests"]}}}
+            if material:
+                prompt += "\nBOUNDED PARAMETER EVIDENCE:\n" + json.dumps(
+                    material, ensure_ascii=False)
+        response = model.invoke([SystemMessage(content=prompt), HumanMessage(
+            content=content if current_plan else json.dumps(frame, ensure_ascii=False))],
             tools=[declaration], tool_choice=declaration_tool_choice)
         decision = (response.tool_calls[0]["args"] if isinstance(response, AIMessage)
             and len(response.tool_calls) == 1 and not response.invalid_tool_calls
@@ -1317,6 +1830,23 @@ def continuation_operations(
             raise IncompleteChatResponse("FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID")
         state.update(decision=decision)
         write_json(path, state)
+    if current_plan:
+        requests = state["decision"]["application_requests"]
+        operations = list(dict.fromkeys(action["operation"]
+            for item in requests for action in item["actions"]))
+        resolved = {
+            **mode, "application_requests": requests, "business_operations": operations,
+            "allow_business_mutation": bool(operations),
+            "business_declaration_status": "resolved_concrete_operations" if operations
+                                           else "unresolved_no_business_permission",
+            "interpretation": "current_request_with_literal_application_plan",
+            "format_reproposals_used": mode["format_reproposals_used"]
+                                       + max(0, state["attempts"] - 1),
+            "current_operation_resolution": {"attempts": state["attempts"],
+                "attempt_id": path.stem, "semantic_correctness": "unchecked"},
+        }
+        trace({"event": "functional_current_operation_resolution", **resolved})
+        return resolved
     handles = state["decision"].get("prior_memory_request_fragments", [])
     selected = []
     if handles:
@@ -1353,6 +1883,8 @@ def continuation_operations(
             "snapshot_id": bound["snapshot_id"],
             "attempt_id": path.stem,
             "semantic_correctness": "unchecked",
+            **({"resolution_basis": state["resolution_basis"]}
+               if state.get("resolution_basis") else {}),
         },
     }
     if mode["protocol"] == "native_independent_capabilities_v6" or memory_protocol:
@@ -1370,10 +1902,19 @@ def continuation_operations(
                 "source_refs": list(dict.fromkeys(row["source_ref"] for row in selected)),
                 "semantic_correctness": "unchecked", "completion": "not_proven_by_resolution"})
         selected_refs = {fragment["source_ref"] for fragment in selected}
+        result_request_refs = {
+            card["binding"]["source_ref"]
+            for card in material.get("registered_application_requests", [])
+            if card["request_id"] in prior_request_ids and card["requirements"]["save_result"]
+        }
         resolved["prior_maintenance_requests"] = [
             {name: card[name] for name in ("session", "request_id", "checkpoint")}
             for card in material.get("pending_maintenance", [])
             if selected_refs.intersection(card["source_refs"])
+            # The selected application result uses an actual Tool observation.
+            # Its original User plan remains context, rather than another result
+            # save attempt. Unrelated memory-only work retains its own checkpoint.
+            and not set(card["source_refs"]).issubset(result_request_refs)
         ]
     trace({"event": "functional_continuation_resolution", **resolved})
     return resolved
@@ -1393,6 +1934,8 @@ def operation_status(
            "unknown" if output.get("capture_attempted") else "not_attempted"}
     if capture.get("ok"):
         raw["source_ref"] = capture["source_ref"]
+        if "source_visibility" in capture:
+            raw["source_visibility"] = capture["source_visibility"]
     snapshot = output.get("world")
     if not isinstance(snapshot, dict):
         status = "unknown" if execution_started else "not_executed"
@@ -1466,7 +2009,9 @@ def operation_status(
                            **({"receipt_ref": f"{batch['request_id']}:proposal:{index}"}
                               if "request_id" in batch else {}),
                            **{k: receipt[k] for k in ("id", "revision", "effect", "replayed")
-                              if k in receipt}})
+                              if k in receipt},
+                           **({"source_visibility": batch["source_visibility"]}
+                              if "source_visibility" in batch else {})})
         empty_scopes = [scope for scope in batch.get("batches", [])
                         if batch.get("memory_save_requested")
                         and scope["status"] == "completed" and not scope["receipts"]]
@@ -1479,15 +2024,30 @@ def operation_status(
         for scope in unknown_scopes:
             memory.append({"tool": "maintain_event", "status": "unknown",
                            "receipt_ref": scope["request_id"], "phase": scope["phase"],
-                           "unprocessed": scope["unprocessed"]})
+                           "unprocessed": scope.get("unprocessed", []),
+                           **({"unprocessed_count": scope["unprocessed_count"]}
+                              if "unprocessed_count" in scope else {})})
         root_unknown = (batch["phase"].endswith("_pending") or batch["phase"] == "commit"
                         or batch.get("outcome") == "semantic_outcome_unconfirmed")
         if batch["status"] != "completed" and (root_unknown or not unknown_scopes):
             memory.append({"tool": "maintain_event",
                            "status": "unknown" if root_unknown else "not_committed",
-                           "phase": batch["phase"], "unprocessed": batch["unprocessed"]})
+                           "phase": batch["phase"], "unprocessed": batch.get("unprocessed", []),
+                           **({"unprocessed_count": batch["unprocessed_count"]}
+                              if "unprocessed_count" in batch else {})})
         elif batch["status"] == "completed" and not batch["receipts"] and not empty_scopes:
             memory.append({"tool": "maintain_event", "status": "not_committed", "effect": "none"})
+    unique_memory = []
+    committed_versions: set[tuple[str, int]] = set()
+    for operation in memory:
+        if (operation["status"] == "committed" and isinstance(operation.get("id"), str)
+                and type(operation.get("revision")) is int):
+            identity = (operation["id"], operation["revision"])
+            if identity in committed_versions:
+                continue
+            committed_versions.add(identity)
+        unique_memory.append(operation)
+    memory = unique_memory
     semantic_states = {row["status"] for row in memory}
     semantic = ("unknown" if "unknown" in semantic_states else
                 "partial" if semantic_states & {"committed", "no_change"}
@@ -1530,7 +2090,11 @@ def operation_status(
             "visibility": {"operations": visibility_effects},
             "business": {"status": business_status, "operations": business,
                          "observations": observations},
-            "receipt_snapshot_available": True, "request_completion": "unchecked",
+            "receipt_snapshot_available": True,
+            "request_completion": "incomplete" if output.get("request_part_failures")
+            else "unchecked",
+            **({"request_part_failures": output["request_part_failures"]}
+               if output.get("request_part_failures") else {}),
             "status_scope": "listed_current_message_operations_only",
             **({"application_requests": output["application_requests"]}
                if "application_requests" in output else {}),
@@ -1615,9 +2179,70 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
     }
 
 
+def _model_memory_effects(effects: dict[str, Any]) -> dict[str, Any]:
+    """Reference exact parent receipts in model input; keep audit results intact."""
+    projected = deepcopy(effects)
+    confirmed: list[str] = []
+    versions: set[tuple[str, int]] = set()
+
+    def confirm(ref: str, receipt: dict[str, Any]) -> None:
+        record_id, revision = receipt.get("id"), receipt.get("revision")
+        if (receipt.get("ok") is not True or receipt.get("status") != "committed"
+                or receipt.get("effect") != "memory_only"
+                or not isinstance(record_id, str) or not record_id
+                or type(revision) is not int or revision < 1):
+            return
+        version = (record_id, revision)
+        if version not in versions:
+            versions.add(version)
+            confirmed.append(ref)
+
+    for receipt in projected.get("mutation_receipts", []):
+        ref = receipt.get("receipt_ref")
+        if (receipt.get("transport_status") == "success"
+                and receipt.get("tool") in {"save_memory", "update_memory"}
+                and isinstance(ref, str) and ref):
+            confirm(ref, receipt)
+
+    def project_batches(
+        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]], path: str,
+    ) -> None:
+        for index, batch in enumerate(result.get("batches", [])):
+            batch_path = f"{path}/batches/{index}"
+            for receipt_index, receipt in enumerate(batch.get("receipts", [])):
+                confirm(f"{batch_path}/receipts/{receipt_index}", receipt)
+            batch["receipts"] = [
+                next(({"receipt_ref": ref} for ref, original in references
+                      if receipt == original), receipt)
+                for receipt in batch.get("receipts", [])
+            ]
+            project_batches(batch, references, batch_path)
+
+    for index, result in enumerate(projected.get("maintenance", [])):
+        references = [(f"#/maintenance/{index}/receipts/{receipt_index}", receipt)
+                      for receipt_index, receipt in enumerate(result.get("receipts", []))]
+        for ref, receipt in references:
+            confirm(ref, receipt)
+        project_batches(result, references, f"#/maintenance/{index}")
+    projected["confirmed_semantic_commit_receipt_refs"] = confirmed
+    projected["confirmed_semantic_commit_count"] = len(confirmed)
+    if projected.get("maintenance"):
+        projected["interpretation"] = (
+            "Actual Agent tool receipts and shared maintenance receipts confirm listed write "
+            "effects. Repeated receipts for one record/version count once; no_change, rejection "
+            "and unknown receipts are not commits. A missing save/update tool or a rejected "
+            "extra call does not undo a shared maintenance commit. Raw capture and read-only "
+            "hits do not confirm saving. Commit receipts do not verify content, fields or "
+            "completion of the whole request."
+        )
+    return projected
+
+
 def seed_sources(
     service: MemoryService, rows: list[dict[str, Any]], path: Path,
     *, preserve_occurrence: bool = False,
+    progress: Callable[[int], None] | None = None,
+    mark_new_sources: bool = False,
 ) -> list[dict[str, Any]]:
     """Capture supplied events once; a later import cannot resurrect forgotten text."""
     if path.exists():
@@ -1627,6 +2252,10 @@ def seed_sources(
     for row in rows:
         if row.get("object_ref") is not None:
             raise ValueError("FUNCTIONAL_IMPORTED_OBJECT_AUTHORITY_FORBIDDEN")
+        if row["role"] not in {"user", "assistant", "tool"}:
+            raise ValueError("FUNCTIONAL_IMPORTED_ROLE_INVALID")
+        new_source = mark_new_sources and service.source(
+            service.event_id(row["session_id"], row["event_key"], row["role"])) is None
         if row["role"] == "user":
             capture = (
                 service.capture_user(row["session_id"], row["event_key"], row["content"],
@@ -1643,15 +2272,13 @@ def seed_sources(
                 if preserve_occurrence or row.get("calendar_context") is not None else
                 service.capture_assistant(row["session_id"], row["event_key"], row["content"])
             )
-        elif row["role"] == "tool":
+        else:
             capture = service.capture_tool(
                 row["session_id"], row["event_key"], row["origin"], row["content"], None,
                 calendar_context=row.get("calendar_context"),
                 **({"occurred_at": row.get("occurred_at", row.get("timestamp"))}
                    if preserve_occurrence or row.get("calendar_context") is not None else {}),
             )
-        else:
-            raise ValueError("FUNCTIONAL_IMPORTED_ROLE_INVALID")
         if not capture.get("ok"):
             raise ValueError("FUNCTIONAL_IMPORTED_SOURCE_UNAVAILABLE")
         actual = service.source(capture["source_ref"])
@@ -1662,8 +2289,11 @@ def seed_sources(
                 "original_event_id": row.get("original_event_id"),
                 "original_observed_at": row.get("observed_at"),
                 "receipt": capture,
+                **({"newly_captured": new_source} if mark_new_sources else {}),
             }
         )
+        if progress is not None:
+            progress(len(receipts))
     write_json(path, {"import_id": path.stem, "receipts": receipts})
     return receipts
 
@@ -1921,10 +2551,25 @@ def message(
     workflow: str = "reservation",
     initial_world: dict[str, Any] | None = None,
     initial_sources: list[dict[str, Any]] | None = None,
+    incoming_sources: list[dict[str, Any]] | None = None,
     retrieval_candidates: list[dict[str, Any]] | None = None,
     evaluator_control: dict[str, Any] | None = None,
     message_index: int = 0,
     resume: bool = False,
+    control_models: dict[tuple[Any, ...], Any] | None = None,
+    source_search_cache: SourceSearchCache | None = None,
+    model_tool_choice: Callable[[list[Any]], Any] | None = None,
+    recorded_tool_schemas: list[dict[str, Any]] | None = None,
+    given_retrieval_request: dict[str, Any] | None = None,
+    retrieval_snapshots: Path | None = None,
+    retrieval_step_snapshots: bool = False,
+    replay_retrieval: dict[str, Any] | None = None,
+    control_policy_override: dict[str, Any] | None = None,
+    previous_host_message: str | None = None,
+    host_snapshots: Path | None = None,
+    replay_host_message: dict[str, Any] | None = None,
+    host_presentation_override: str | None = None,
+    host_enable_thinking_override: bool | None = None,
 ) -> dict[str, Any]:
     freeze = frozen(root)
     workflow = {"reservation_v1": "reservation", "document_publication_v1": "document"}.get(
@@ -1935,12 +2580,49 @@ def message(
     profile_state = root / "profile-state.json"
     if profile_state.exists() and read_json(profile_state).get("disabled"):
         raise ValueError("FUNCTIONAL_PROFILE_DISABLED")
-    settings = freeze["config"]
+    settings = deepcopy(freeze["config"]) if replay_host_message is not None else freeze["config"]
+    if host_snapshots is not None or replay_host_message is not None:
+        if (not settings.get("retrieval_tool") or settings["request_mode"] != "disabled"
+                or settings.get("business_tools") != []
+                or settings.get("memory_view_mode", "legacy") == "legacy"
+                or given_retrieval_request is not None or replay_retrieval is not None
+                or recorded_tool_schemas is not None
+                or model_tool_choice is not None
+                or settings.get("completion_tool_choice", "auto") != "auto"
+                or (host_snapshots is not None and replay_host_message is not None)
+                or not freeze["source_version"].get("git_commit")):
+            raise ValueError("PRE_HOST_CAPTURE_REQUIRES_DECLARED_VERSION_AND_AUTONOMOUS_RETRIEVAL")
+    if replay_host_message is not None:
+        if (host_presentation_override not in {"current", "request_adjacent_metadata_v1"}
+                or replay_host_message["source_version"] != freeze["source_version"]):
+            raise ValueError("FROZEN_HOST_PRESENTATION_OR_VERSION_INVALID")
+        if host_presentation_override == "current":
+            settings.pop("host_evidence_presentation", None)
+        else:
+            settings["host_evidence_presentation"] = host_presentation_override
+    elif host_presentation_override is not None:
+        raise ValueError("HOST_PRESENTATION_OVERRIDE_REQUIRES_PRE_HOST_SNAPSHOT")
+    if host_enable_thinking_override is not None:
+        if replay_host_message is None or type(host_enable_thinking_override) is not bool:
+            raise ValueError("HOST_THINKING_OVERRIDE_REQUIRES_PRE_HOST_SNAPSHOT_AND_BOOL")
+    if retrieval_step_snapshots and retrieval_snapshots is None:
+        raise ValueError("CONTROL_STEP_CAPTURE_REQUIRES_RETRIEVAL_SNAPSHOTS")
+    if ((retrieval_snapshots is not None or replay_retrieval is not None)
+            and (not settings.get("retrieval_tool") or settings["request_mode"] != "disabled")):
+        raise ValueError("FROZEN_RETRIEVAL_REQUIRES_RETRIEVAL_PROFILE")
+    if (control_policy_override is not None
+            and replay_retrieval is None and replay_host_message is None):
+        raise ValueError("CONTROL_POLICY_OVERRIDE_REQUIRES_FROZEN_CALL_OR_HOST")
+    if previous_host_message is not None and (
+            not settings.get("retrieval_tool") or settings["request_mode"] != "disabled"):
+        raise ValueError("HOST_HISTORY_REQUIRES_RETRIEVAL_PROFILE")
+    direct_request = (replay_retrieval["request"] if replay_retrieval is not None
+                      else given_retrieval_request)
     edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
     bank_id = _bank_reference(root, freeze["run_id"], bank, owner)
     bank_root = root / "banks" / bank_id
     bank_root.mkdir(parents=True, exist_ok=True)
-    public = {
+    public: dict[str, Any] = {
         "owner": owner,
         "session": session,
         "message_id": message_id,
@@ -1955,6 +2637,25 @@ def message(
         public["query_time"] = query_time
     if query_calendar_context is not None:
         public["query_calendar_context"] = query_calendar_context
+    if incoming_sources is not None:
+        public["incoming_sources"] = incoming_sources
+    if previous_host_message is not None:
+        public["previous_host_message"] = previous_host_message
+    if recorded_tool_schemas is not None:
+        if settings["request_mode"] != "disabled" or not settings.get("retrieval_tool"):
+            raise ValueError("ACTION_INTENT_CATALOG_REQUIRES_RETRIEVAL_PROFILE")
+        public["recorded_tool_schemas"] = deepcopy(recorded_tool_schemas)
+    if given_retrieval_request is not None:
+        if (settings["request_mode"] != "disabled" or not settings.get("retrieval_tool")
+                or recorded_tool_schemas is not None):
+            raise ValueError("GIVEN_RETRIEVAL_REQUIRES_RETRIEVAL_ONLY_PROFILE")
+        if settings["retrieval_tool"] == "query_only" and set(given_retrieval_request) != {"query"}:
+            raise ValueError("GIVEN_QUERY_ONLY_REQUEST_REQUIRES_QUERY_ONLY")
+        public["given_retrieval_request"] = deepcopy(given_retrieval_request)
+    if replay_retrieval is not None and public != replay_retrieval["public_message"]:
+        raise ValueError("FROZEN_RETRIEVAL_PUBLIC_MESSAGE_CHANGED")
+    if replay_host_message is not None and public != replay_host_message["public_message"]:
+        raise ValueError("FROZEN_HOST_PUBLIC_MESSAGE_CHANGED")
     identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
@@ -1983,6 +2684,17 @@ def message(
         "status": "UNKNOWN",
         "capture_attempted": False,
     }
+    if host_enable_thinking_override is not None:
+        output["host_enable_thinking_override"] = host_enable_thinking_override
+    if recorded_tool_schemas is not None:
+        output["recorded_tool_calls"] = []
+    if given_retrieval_request is not None:
+        output.update(request_transport="programmatic_given_request", host_request_generated=False)
+    if replay_retrieval is not None:
+        output.update(request_transport="frozen_actual_tool_call",
+            host_request_generated=replay_retrieval["host_request_generated"],
+            host_request_regenerated=False, control_policy_override=control_policy_override,
+            original_call_id=replay_retrieval["call_id"])
     execution_started = False
     scope = FoundationScope(
         freeze["run_id"], bank, owner, session + ":" + message_id,
@@ -1998,6 +2710,11 @@ def message(
         v13_turn_id=message_id,
         v13_config_version=freeze["config_version"],
     )
+    if (retrieval_snapshots is not None or host_snapshots is not None
+            or replay_host_message is not None):
+        # E2 collection takes a consistent before for each actual tool call.
+        # LangGraph's tool executor honors this per-invocation concurrency.
+        cfg["max_concurrency"] = 1
     with ExitStack() as stack:
         stack.enter_context(
             http_budget_scope(
@@ -2012,6 +2729,13 @@ def message(
             RunLimits(**freeze["budget_before"]["limits"]), Path(settings["budget_path"])
         )
         before = json.loads(json.dumps(budget.state))
+
+        def persist_result() -> dict[str, Any]:
+            output.update(usage=trace.usage, budget_before=before,
+                          budget_after=json.loads(json.dumps(budget.state)))
+            write_json(bank_root / f"{identity}-attempt-{attempt}.json", output)
+            write_json(result_path, output)
+            return output
 
         def persist_visibility_stop(receipt: dict[str, Any]) -> dict[str, Any]:
             if settings.get("memory_completion") != "declared_operations_v3":
@@ -2048,7 +2772,10 @@ def message(
                     settings["embedding_capacity"], dimension=settings["embedding_dimension"],
                     batch_size=settings["embedding_batch_size"],
                 )
-                retriever = SemanticRetriever(embeddings, settings["embedding_dimension"])
+                retriever = SemanticRetriever(
+                    embeddings, settings["embedding_dimension"],
+                    granularity=settings.get("retrieval_granularity", "record"),
+                )
             service = MemoryService(
                 store,
                 namespace,
@@ -2062,6 +2789,7 @@ def message(
                 ),
                 observer=trace,
                 semantic_retriever=retriever,
+                source_search_cache=source_search_cache,
                 memory_profile=settings.get("memory_profile", "ordinary"),
                 memory_ranking=settings.get("memory_ranking", "dense"),
             )
@@ -2073,33 +2801,34 @@ def message(
             )
             if seed_receipts:
                 output["source_import_receipts"] = seed_receipts
+            if incoming_sources:
+                output["incoming_source_receipts"] = seed_sources(
+                    service, incoming_sources, bank_root / f"{identity}-source-imports.json",
+                    preserve_occurrence=edit_features.source_metadata,
+                    mark_new_sources=settings.get("host_source_arrivals", False))
             output["capture_attempted"] = True
+            request_context = ({"capture_context": "given_retrieval_request"}
+                               if given_retrieval_request is not None else {})
             capture = (
                 service.capture_user(session, message_id, content, occurred_at=occurred_at,
-                                     calendar_context=calendar_context)
+                                     calendar_context=calendar_context, **request_context)
                 if edit_features.source_metadata or calendar_context is not None else
-                service.capture_user(session, message_id, content)
+                service.capture_user(session, message_id, content, **request_context)
             )
             output["capture"] = capture
             trace({"event": "functional_capture", "receipt": capture})
             if not capture.get("ok"):
                 raise ValueError("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:" + str(capture))
             service.bind_source_boundary(session, message_id, [capture["source_ref"]])
-            if settings.get("failure_delivery") in {
-                "receipt_status_v2",
-                "receipt_status_v3",
-                "receipt_status_v4",
-            }:
-                # Bind the incoming event before classification, without retrieving
-                # anything. A pre-Agent failure delivery must inherit this input's
-                # visibility, never the preceding public turn's exposure.
-                service.bind_public_turn(
-                    session,
-                    message_id,
-                    capture["source_ref"],
-                    config_version=freeze["config_version"],
-                    phase="start",
-                )
+            # Bind the captured event before classification or pending-request
+            # lookup. Neither step retrieves memory or creates semantic facts.
+            service.bind_public_turn(
+                session,
+                message_id,
+                capture["source_ref"],
+                config_version=freeze["config_version"],
+                phase="start",
+            )
             capacity = HostCapacity(settings["capacity"])
 
             def support_review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
@@ -2121,19 +2850,159 @@ def message(
                     contract=settings.get("support_review_contract", "legacy"))
 
             edit_arm = FUNCTIONAL_ARMS.get(settings.get("memory_method", "functional_v1"))
-            memory_class = FunctionalEditMemory if edit_arm is not None else FunctionalMemory
+            memory_class: type[FunctionalMemory] = (
+                FunctionalEditMemory if edit_arm is not None else FunctionalMemory)
             memory_options: dict[str, Any] = {}
-            if memory_class is FunctionalEditMemory:
+            if settings.get("retrieval_tool"):
+                from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
+
+                memory_class = IntentRetrievalMemory
+                memory_options["retrieval_interface"] = settings["retrieval_tool"]
+                memory_options["capture_control_steps"] = retrieval_step_snapshots
+                if replay_retrieval is not None:
+                    memory_options["replay_initial_observation"] = replay_retrieval[
+                        "initial_observation"]
+                    memory_options["replay_admission_policy"] = replay_retrieval[
+                        "admission_policy"]
+                    memory_options["replay_control_checkpoint"] = replay_retrieval.get(
+                        "execution_checkpoint")
+                    if replay_retrieval.get("intervention") is not None:
+                        from milai_lab.methods.memory_control import (
+                            FirstActionIntervention,
+                            MemoryAction,
+                        )
+
+                        branch = replay_retrieval["intervention"]
+                        memory_options["control_intervention"] = FirstActionIntervention(
+                            MemoryAction(**branch["first_action"]), branch["continuation_steps"])
+                elif replay_host_message is not None and control_policy_override is not None:
+                    memory_options["replay_admission_policy"] = replay_host_message[
+                        "ready_state"]["admission_policy"]
+            if issubclass(memory_class, FunctionalEditMemory):
+                def dependency_read_call(
+                    stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
+                ) -> dict[str, Any]:
+                    try:
+                        response = model.invoke(
+                            messages, tools=[], tool_choice="none",
+                            response_format={"type": "json_schema", "json_schema": {
+                                "name": "dependency_reads", "schema": schema}},
+                            **({"enable_thinking": settings["stage_enable_thinking"][stage]}
+                               if stage in settings.get("stage_enable_thinking", {}) else {}))
+                    except CapacityExceeded as error:
+                        if stage != "query_structure":
+                            raise
+                        # The client rejected the complete input before HTTP. View construction
+                        # has not committed; return its existing definite-rejection outcome.
+                        # The read and generation-admission attempts remain consumed.
+                        limits = {key: error.receipt[key] for key in (
+                            "prompt_tokens", "output_reserve_tokens", "context_tokens",
+                            "total_reserved_tokens")}
+                        raise FunctionalRejection("QUERY_STRUCTURE_INPUT_CAPACITY_EXCEEDED:"
+                            + json.dumps(limits, separators=(",", ":"))) from error
+                    if not isinstance(response, AIMessage) or not isinstance(response.content, str):
+                        raise ValueError("FUNCTIONAL_DEPENDENCY_RESPONSE_MISSING")
+                    value = parse_object(response.content, reject_duplicate_keys=True)
+                    trace({"event": "functional_dependency_read_envelope", "envelope": value})
+                    return value
+
+                memory_options["evidence_policy"] = settings.get("evidence_policy", "legacy")
+                memory_options["dependency_reading"] = settings.get("dependency_reading", False)
+                memory_options["dependency_read_call"] = dependency_read_call
+                if settings.get("memory_control"):
+                    from milai_lab.runners.memory_control import dense_control_pool, memory_policy
+
+                    control = settings["memory_control"]
+                    if control["policy"] == "coalent":
+                        from milai_lab.baselines.coalent_memory import CoalentRetrievalMemory
+                        from milai_lab.runners.coalent_memory import coalent_factory
+
+                        if retriever is None or not settings.get("retrieval_tool"):
+                            raise ValueError("COALENT_REQUIRES_RETRIEVAL_TOOL_AND_EMBEDDINGS")
+                        memory_class = CoalentRetrievalMemory
+                        thinking = settings.get("stage_enable_thinking", {}).get("query_structure")
+                        coalent_embeddings = retriever.embeddings
+
+                        def build_coalent(retriever_port: Any, persistence: Any) -> Any:
+                            # The Host model is bound below after memory construction.
+                            return coalent_factory(control, model, coalent_embeddings, trace,
+                                enable_thinking=thinking)(retriever_port, persistence)
+
+                        memory_options["coalent_factory"] = build_coalent
+                        memory_options["coalent_settings"] = {
+                            **control, "synthesis_thinking": thinking, "retries": 0}
+                    else:
+                        memory_options["control_policy"] = memory_policy(
+                            control_policy_override
+                            if control_policy_override is not None else control,
+                            budget,
+                            call=dependency_read_call,
+                            admit=lambda: model.reserve_external_request("memory_control"),
+                            record=trace, models=control_models)
+                    memory_options["control_steps"] = control.get("max_control_steps", 8)
+                    memory_options["control_source_observation_tokens"] = control.get(
+                        "source_observation_tokens")
+                    memory_options["control_view_capacity"] = control.get("view_capacity", 1)
+                    memory_options["control_view_policy"] = control.get(
+                        "view_policy", "incremental")
+                    memory_options["control_view_builder"] = control.get(
+                        "view_builder", "generated")
+                    memory_options["control_internal_views"] = control.get("internal_views", True)
+                    if settings.get("retrieval_tool"):
+                        memory_options["control_delivery_selection"] = control.get(
+                            "delivery_selection", False)
+                        memory_options["control_exclude_given_requests"] = control.get(
+                            "exclude_given_requests", False)
+                        memory_options["control_excluded_source_refs"] = tuple(control.get(
+                            "excluded_source_refs", ()))
+                        if control.get("source_range_tokens") is not None:
+                            from milai_lab.methods.source_ranges import SourceRangeBudget
+
+                            memory_options["control_source_ranges"] = SourceRangeBudget(
+                                control["source_range_tokens"], capacity.text_tokens,
+                                capacity.text_offsets)
+                    if control.get("pool_order", "shared") == "dense":
+                        if retriever is None:
+                            raise ValueError("DENSE_CONTROL_POOL_REQUIRES_EMBEDDINGS")
+                        pool_retriever = SemanticRetriever(
+                            retriever.embeddings, settings["embedding_dimension"])
+
+                        def rank_pool(
+                            query: str, materials: list[dict[str, Any]],
+                        ) -> list[dict[str, Any]]:
+                            return dense_control_pool(query, materials,
+                                                      retriever=pool_retriever, record=trace)
+
+                        memory_options["control_rank_pool"] = rank_pool
+                    elif control.get("pool_order") == "mempursuit":
+                        from milai_lab.baselines.mempursuit import MemPursuitPool
+
+                        if retriever is None:
+                            raise ValueError("MEMPURSUIT_POOL_REQUIRES_EMBEDDINGS")
+                        memory_options["control_rank_pool"] = MemPursuitPool(
+                            retriever.embeddings, budget, selected_limit=control.get("reads", 4),
+                            adaptive=control.get("pursuit_adaptive", True), record=trace)
+                    memory_options["control_record"] = trace
+                    memory_options["control_available"] = lambda: (
+                        model.calls_in_message < settings["max_calls_per_message"] - 2)
                 memory_options["arm"] = edit_arm
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features
                 memory_options["maintenance_recipe"] = settings.get("maintenance_recipe")
+                memory_options["maintenance_mode"] = settings.get("maintenance_mode", "legacy")
+                memory_options["writer_input"] = settings.get("writer_input", "full")
                 memory_options["query_time"] = query_time
                 memory_options["query_calendar_context"] = query_calendar_context
             memory = memory_class(
                 service,
                 capacity.text_tokens,
                 read_limit=settings["additional_reads"],
+                source_access=settings.get("source_access", "legacy"),
+                source_top_k=settings.get("source_top_k", 20),
+                source_tokenization=settings.get("source_tokenization", "rawrag_space"),
+                source_granularity=settings.get("source_granularity", "session"),
+                semantic_top_k=settings.get("semantic_top_k", 10),
+                max_evidence_queries=settings.get("max_evidence_queries"),
                 material_limit=settings["ordinary_material_tokens"],
                 memory_view_mode=settings.get("memory_view_mode", "legacy"),
                 formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
@@ -2200,7 +3069,7 @@ def message(
             client.queue = FunctionalQueue(
                 root / "queue-admission.json", **settings["queue_limits"]
             )
-            model = LangMemRecipeChatModel(
+            model: LangMemRecipeChatModel = LangMemRecipeChatModel(
                 client=client,
                 allow_required_tool_choice=(settings.get("declaration_tool_choice") == "required"
                     or settings.get("completion_tool_choice") in {
@@ -2242,6 +3111,100 @@ def message(
                     "config_version": freeze["config_version"],
                 },
             )
+            from milai_lab.runners.frozen_host_message import HostMessageRecorder
+
+            host_recorder: HostMessageRecorder | None = None
+            host_context_verified = host_catalog_verified = False
+            if retrieval_snapshots is not None or host_snapshots is not None:
+                from milai_lab.runners.frozen_retrieval import RetrievalRecorder, copy_call_root
+
+                def capture_call(destination: Path) -> None:
+                    with service._locked():
+                        copy_call_root(root, bank_root, destination)
+
+                assert isinstance(memory, IntentRetrievalMemory)
+                if retrieval_snapshots is not None:
+                    memory.retrieval_observer = RetrievalRecorder(
+                        retrieval_snapshots, root, bank_root,
+                        lambda: {"bank": bank, "public_message": public,
+                            "host_request_generated": given_retrieval_request is None,
+                            "source_version": freeze["source_version"],
+                            "admission_policy": memory._read_admission_policy(),
+                            "host_prefix_trace": str(trace.path.relative_to(root)),
+                            "host_result_path": str((bank_root / (
+                                f"{identity}-attempt-{attempt}.json")).relative_to(root)),
+                            "host": settings["host"],
+                            "generation_calls_before": model.calls_in_message},
+                        capture_call, capture_control_steps=retrieval_step_snapshots)
+                if host_snapshots is not None:
+                    host_recorder = HostMessageRecorder(host_snapshots, root, bank_root, {
+                        "bank": bank, "public_message": public,
+                        "source_version": freeze["source_version"],
+                        "host_prefix_trace": str(trace.path.relative_to(root)),
+                        "host_result_path": str((bank_root / (
+                            f"{identity}-attempt-{attempt}.json")).relative_to(root)),
+                        "collected_presentation": settings.get(
+                            "host_evidence_presentation", "current"),
+                    }, capture_call)
+            if replay_retrieval is not None:
+                assert isinstance(memory, IntentRetrievalMemory)
+                memory._read_admission_policy()
+                if model.calls_in_message != replay_retrieval["generation_calls_before"]:
+                    raise ValueError("FROZEN_RETRIEVAL_GENERATION_ALLOWANCE_CHANGED")
+
+                def verify_replay(event: dict[str, Any]) -> None:
+                    if event["phase"] == "start":
+                        if (event["request"] != replay_retrieval["request"]
+                                or event["binding"] != replay_retrieval["binding"]
+                                or event["read_allowance"] != replay_retrieval["read_allowance"]):
+                            raise ValueError("FROZEN_RETRIEVAL_REQUEST_OR_ALLOWANCE_CHANGED")
+                        output["frozen_request_and_allowance_equal"] = True
+                    start_step = (replay_retrieval["execution_checkpoint"]["step"]
+                                  if "execution_checkpoint" in replay_retrieval else 0)
+                    if event["phase"] == "decision_input" and event["step"] == start_step:
+                        if (event["before"] != replay_retrieval["initial_observation"]
+                                or event["actions"] != replay_retrieval["initial_actions"]):
+                            raise ValueError("FROZEN_RETRIEVAL_FIRST_DECISION_CHANGED")
+                        output["frozen_initial_observation_and_actions_equal"] = True
+                        output["frozen_start_step"] = start_step
+
+                memory.retrieval_observer = verify_replay
+            if direct_request is not None:
+                # Native backends and frozen E2 calls already supply the request.
+                # Invoke the same registered tool without another Host rewrite.
+                execution_started = True
+                tool = next(t for t in memory.tools() if t.name == "milai_retrieve")
+                retrieval_receipt = cast(ToolMessage, tool.invoke({"type": "tool_call",
+                    "name": "milai_retrieve", "id": (
+                        replay_retrieval["call_id"] if replay_retrieval is not None
+                        else "given-request"),
+                    "args": direct_request}, config=cfg))
+                packet = json.loads(str(retrieval_receipt.content))
+                output.update(status="COMPLETED" if packet["ok"] else "FAILED",
+                    messages=[public_message_record(retrieval_receipt)], retrieval_result=packet,
+                    final_answer=None, final_delivery={"status": "not_requested",
+                        "reason": "retrieval packet only; no Host answer was requested"},
+                    generation_calls=model.calls_in_message, records=service.records(),
+                    sources=service.sources(), world=app.snapshot(), memory_mutation_receipts=[],
+                    formation_stage="given_retrieval_only", snapshot_before_close=True)
+                if not packet["ok"]:
+                    output.update(error_category="retrieval_tool",
+                                  error=packet["termination_reason"])
+                blocked = _visibility_replay(
+                    service, output, session=session, message_id=message_id)
+                if blocked is not None:
+                    trace({"event": "functional_given_retrieval_visibility_revoked", **blocked})
+                    output = {**blocked, "bank": bank, "owner": owner, "session": session,
+                        "message_id": message_id, "attempt": attempt, "process_id": os.getpid(),
+                        "request_transport": "programmatic_given_request",
+                        "host_request_generated": False, "content_retained": False}
+                    return persist_result()
+                output["capture"]["source_visibility"] = "visible"
+                output["operation_status"] = operation_status(output,
+                    thread_id=cfg["configurable"]["thread_id"], execution_started=True)
+                trace({"event": "functional_given_retrieval", "host_generation": False,
+                       "request": direct_request, "result": packet})
+                return persist_result()
             mode: dict[str, Any] | None = None
             mode_path = bank_root / f"{identity}-request-mode.json"
             request_cards: list[dict[str, Any]] | None = None
@@ -2256,8 +3219,16 @@ def message(
                         session=session, message_id=message_id)
                     if blocked is not None:
                         raise _VisibilityReplayRevoked(blocked)
-                    if settings["request_mode"] == "current_request_native_v8":
-                        request_cards = visible_cards(app, service, capture["source_ref"])
+                    if settings["request_mode"] in {
+                        "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9",
+                    }:
+                        request_cards = visible_cards(
+                            app, service, capture["source_ref"],
+                            pending_maintenance=(memory.pending_maintenance(cfg)
+                                                 if isinstance(memory, FunctionalEditMemory)
+                                                 else None),
+                        )
                 mode = request_mode(
                     model,
                     mode_path,
@@ -2279,6 +3250,7 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
                     },
                     write_mode_declaration=settings["request_mode"]
                     in {
@@ -2289,6 +3261,8 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     action_mode_declaration=settings["request_mode"]
                     in {
@@ -2298,6 +3272,8 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     operation_mode_declaration=settings["request_mode"]
                     in {
@@ -2306,6 +3282,8 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     reference_mode_declaration=settings["request_mode"]
                     in {
@@ -2313,31 +3291,130 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     independent_capabilities=settings["request_mode"]
                     in {"current_request_native_v6", "current_request_native_v7",
-                        "current_request_native_v8"},
+                        "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9"},
                     memory_continuation=settings["request_mode"] in {
-                        "current_request_native_v7", "current_request_native_v8"},
+                        "current_request_native_v7", "current_request_native_v8",
+                        "current_request_native_v9", "current_request_json_v9"},
                     application_workflow=(app.workflow if settings["request_mode"]
-                                          == "current_request_native_v8" else None),
+                        in {"current_request_native_v8", "current_request_native_v9",
+                            "current_request_json_v9"} else None),
+                    scope_only=settings["request_mode"] in {
+                        "current_request_native_v9", "current_request_json_v9"},
+                    request_parts=settings.get("source_access") == "independent_v1",
                     referenced_requests=request_cards,
                     reference_fit=lambda text: capacity.text_tokens(text)
                     <= settings["ordinary_material_tokens"],
                     declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
                 )
+                if mode["protocol"] == "native_scope_requests_v9":
+                    output["request_mode"] = mode
+                if "business_mutation" in mode.get("forbidden_operations", []):
+                    mode.update(business_action_request="none", business_operations=[],
+                                application_requests=[], allow_business_mutation=False)
+                if mode.get("read_goal") is not None and memory.memory_view_mode != "legacy":
+                    view = memory.view_state(cfg)
+                    if view["read_goal"] is None:
+                        memory.focus_view(cfg, focus=view["focus"], read_goal=mode["read_goal"])
+                memory.forget_requested = bool(mode["allow_forgetting"]
+                    and "forget_memory" not in mode.get("forbidden_operations", []))
+                if (mode["protocol"] == "native_scope_requests_v9"
+                        and mode["business_action_request"] == "perform"):
+                    blocked = _visibility_replay(
+                        service, read_json(result_path) if result_path.exists() else {},
+                        session=session, message_id=message_id)
+                    if blocked is not None:
+                        raise _VisibilityReplayRevoked(blocked)
+                    previous = read_json(result_path) if result_path.exists() else {}
+                    failure = next((deepcopy(part) for part in previous.get(
+                        "request_part_failures", []) if (
+                            settings.get("request_failure_policy") == "independent_memory"
+                            and part.get("part") == "business_plan"
+                            and part.get("status") == "failed" and part.get("effect") == "none"
+                            and part.get("error") in {
+                                "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID",
+                                "VLLM_CHAT_TRUNCATED"}
+                            and part.get("usage_confirmation") == "known"
+                            and part.get("accepted_scope") == mode
+                            and previous.get("capture", {}).get("source_ref")
+                            == capture["source_ref"])), None)
+                    planning_unknown_before = tuple(
+                        budget.state[kind]["unknown_usage"] for kind in ("generation", "embedding"))
+                    try:
+                        if failure is None:
+                            material = (memory.model_material(cfg)
+                                if isinstance(memory, FunctionalEditMemory) else memory.context(
+                                    session, message_id, freeze["config_version"], query=content))
+                            trace({"event": "functional_material_delivery", "material": material,
+                                   "consumer": "current_application_plan"})
+                            mode = continuation_operations(
+                                model, bank_root / f"{identity}-current-operations.json",
+                                {"source_ref": capture["source_ref"], "source_revision": 1,
+                                 "config_version": freeze["config_version"]},
+                                content, mode, material, settings["format_reproposals"], trace,
+                                declaration_tool_choice=settings.get(
+                                    "declaration_tool_choice", "auto"),
+                                application_workflow=app.workflow,
+                            )
+                    except IncompleteChatResponse as error:
+                        independent_memory = (
+                            mode["allow_memory_maintenance"]
+                            and mode["memory_write_request"] in {"explicit", "new_assertion"}
+                        ) or mode.get("memory_continuation_request") == "resolve_prior_explicit"
+                        source = service.source(capture["source_ref"])
+                        if (settings.get("request_failure_policy") != "independent_memory"
+                                or str(error) not in {
+                                    "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID",
+                                    "VLLM_CHAT_TRUNCATED"}
+                                or tuple(budget.state[kind]["unknown_usage"]
+                                         for kind in ("generation", "embedding"))
+                                != planning_unknown_before
+                                or not independent_memory or source is None
+                                or source["role"] != "user"):
+                            raise
+                        failure = {
+                            "part": "business_plan", "status": "failed", "effect": "none",
+                            "error_type": type(error).__name__, "error": str(error),
+                            "usage_confirmation": "known",
+                            "accepted_scope": deepcopy(mode),
+                            "attempt_ref": f"{identity}-current-operations.json",
+                            "memory_reference_resolution": "still_required"
+                            if mode.get("memory_continuation_request") == "resolve_prior_explicit"
+                            else "current_independent_intent",
+                        }
+                    if failure is not None:
+                        output.setdefault("request_part_failures", []).append(failure)
+                        # A failed business interpretation grants no operation.
+                        # The accepted memory scope and its original-reference
+                        # validation continue through their existing boundaries.
+                        mode = {**mode, "business_action_request": "none",
+                                "business_operations": [], "application_requests": [],
+                                "allow_business_mutation": False,
+                                "business_declaration_status": "failed_no_business_permission",
+                                "current_operation_resolution": failure}
+                        trace({"event": "functional_request_part_failure", **failure})
+                    output["request_mode"] = mode
                 if settings["request_mode"] in {
                     "current_request_native_v5",
                     "current_request_native_v6",
                     "current_request_native_v7",
                     "current_request_native_v8",
+                    "current_request_native_v9",
+                    "current_request_json_v9",
                 } and (
                     (
                         mode["business_action_request"] == "continue_if_unfinished"
                         and not mode["business_operations"]
                     )
                     or mode.get("memory_continuation_request") == "resolve_prior_explicit"
-                    or (settings["request_mode"] == "current_request_native_v8"
+                    or (settings["request_mode"] in {
+                            "current_request_native_v8", "current_request_native_v9",
+                            "current_request_json_v9"}
                         and (mode["business_action_request"] == "continue_if_unfinished"
                              or mode["application_continuation_request"]
                              == "resolve_prior_request"))
@@ -2353,11 +3430,22 @@ def message(
                     material = memory.context(
                         session, message_id, freeze["config_version"], query=content
                     )
-                    if settings["request_mode"] == "current_request_native_v8":
+                    if settings["request_mode"] in {
+                        "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9",
+                    }:
                         cards = (request_cards if request_cards is not None else
-                                 visible_cards(app, service, capture["source_ref"]))
+                                 visible_cards(
+                                     app, service, capture["source_ref"],
+                                     pending_maintenance=(memory.pending_maintenance(cfg)
+                                                          if isinstance(memory,
+                                                                        FunctionalEditMemory)
+                                                          else None),
+                                 ))
                         material = {**material, "items": list(material.get("items", [])),
-                                    "registered_application_requests": cards}
+                                    "registered_application_requests": [
+                                        card for card in cards
+                                        if card.get("kind") != "memory_maintenance"]}
                         delivered = {row.get("fragment_handle") for row in material["items"]}
                         for card in cards:
                             for part in card["user_fragments"]:
@@ -2392,50 +3480,117 @@ def message(
                                 delivered.add(part["fragment_handle"])
                     trace({"event": "functional_material_delivery", "material": material,
                            "consumer": "continuation_reference_resolution"})
-                    mode = continuation_operations(
-                        model,
-                        bank_root / f"{identity}-continuation-operations.json",
-                        {
-                            "source_ref": capture["source_ref"],
-                            "source_revision": 1,
-                            "config_version": freeze["config_version"],
-                        },
-                        content,
-                        mode,
-                        material,
-                        settings["format_reproposals"],
-                        trace,
-                        declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
-                        source_fragment=service.source_fragment,
-                    )
+                    unknown_before = tuple(budget.state[kind]["unknown_usage"]
+                                           for kind in ("generation", "embedding"))
+                    try:
+                        mode = continuation_operations(
+                            model,
+                            bank_root / f"{identity}-continuation-operations.json",
+                            {
+                                "source_ref": capture["source_ref"],
+                                "source_revision": 1,
+                                "config_version": freeze["config_version"],
+                            },
+                            content,
+                            mode,
+                            material,
+                            settings["format_reproposals"],
+                            trace,
+                            declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
+                            source_fragment=service.source_fragment,
+                        )
+                    except ValueError as error:
+                        if (str(error) != "FUNCTIONAL_CONTINUATION_REFERENCE_UNRESOLVED"
+                                or settings.get("request_failure_policy") != "independent_memory"
+                                or not mode["allow_memory_maintenance"]
+                                or mode["memory_write_request"] not in {"explicit", "new_assertion"}
+                                or mode.get("memory_continuation_request")
+                                == "resolve_prior_explicit"
+                                or tuple(budget.state[kind]["unknown_usage"]
+                                         for kind in ("generation", "embedding"))
+                                != unknown_before):
+                            raise
+                        failure = {
+                            "part": "business_plan", "status": "failed", "effect": "none",
+                            "error_type": type(error).__name__, "error": str(error),
+                            "usage_confirmation": "known", "accepted_scope": deepcopy(mode),
+                            "attempt_ref": f"{identity}-continuation-operations.json",
+                            "memory_reference_resolution": "current_independent_intent",
+                        }
+                        output.setdefault("request_part_failures", []).append(failure)
+                        mode = {**mode, "business_action_request": "none",
+                                "business_operations": [], "application_requests": [],
+                                "application_continuation_request": "none",
+                                "allow_business_mutation": False,
+                                "business_declaration_status": "failed_no_business_permission"}
+                        trace({"event": "functional_request_part_failure", **failure})
+                forbidden = set(mode.get("forbidden_operations", []))
+                if "memory_write" in forbidden:
+                    mode["allow_memory_maintenance"] = False
+                if "forget_memory" in forbidden:
+                    mode["allow_forgetting"] = False
+                if forbidden and "business_operations" in mode:
+                    mode["business_operations"] = [op for op in mode["business_operations"]
+                        if op not in forbidden and "business_mutation" not in forbidden]
+                    mode["allow_business_mutation"] = bool(mode["business_operations"])
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {
                     "save_memory", "update_memory", "confirm_existing_memory"}
                 else mode["allow_forgetting"] if tool.name == "forget_memory" else True))
+            if (settings.get("evidence_policy") == "question_pack_v1" and mode is not None
+                    and not mode["allow_forgetting"] and (
+                        settings.get("maintenance_recipe") or not mode["allow_memory_maintenance"]
+                    )):
+                # Pack lookup already supplies navigation and scoped body reads.
+                # A second search catalog encouraged answering unopened excerpts.
+                # Shared maintenance already locates its own write targets. Direct
+                # Writer and forgetting requests retain their target discovery.
+                selected_memory = tuple(t for t in selected_memory if t.name != "search_memory")
             maintenance_recipe = settings.get("maintenance_recipe")
             maintenance_allowed = mode is None or mode["allow_memory_maintenance"]
 
             def prior_request_fragments() -> list[dict[str, Any]]:
                 if not maintenance_allowed or mode is None:
                     return []
+                resumed = mode.get("resumed_memory_request", {})
+                if set(resumed.get("source_refs", [])) & set(service.forgotten_source_refs()):
+                    # Withdrawn context cannot be redelivered as part of a save.
+                    # This does not erase the earlier body-free operation receipt.
+                    return []
                 return [service.source_fragment(handle) for handle in
-                        mode.get("resumed_memory_request", {}).get("fragment_handles", [])]
+                        resumed.get("fragment_handles", [])]
 
             if maintenance_recipe:
                 selected_memory = tuple(t for t in selected_memory if t.name not in {
                     "save_memory", "update_memory", "confirm_existing_memory"})
 
-            def maintenance_call(
+            def generative_maintenance_call(
                 stage: str, messages: list[dict[str, str]], schema: dict[str, Any]
             ) -> dict[str, Any]:
-                response = model.invoke(messages, tools=[], tool_choice="none")
+                response = model.invoke(
+                    messages, tools=[], tool_choice="none",
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "milai_" + stage.partition(":")[0], "schema": schema}},
+                    **({"enable_thinking": settings["stage_enable_thinking"][
+                        stage.partition(":")[0]]}
+                       if stage.partition(":")[0] in settings.get("stage_enable_thinking", {})
+                       else {}),
+                )
                 if not isinstance(response, AIMessage) or not isinstance(response.content, str):
                     raise ValueError("FUNCTIONAL_MAINTENANCE_RESPONSE_MISSING")
                 value = parse_object(response.content, reject_duplicate_keys=True)
                 trace({"event": "functional_maintenance_envelope", "stage": stage,
                        "envelope": value})
                 return value
+
+            from milai_lab.runners.laya_impact import impact_model_call
+
+            maintenance_call = impact_model_call(
+                generative_maintenance_call, settings, budget=budget,
+                root=bank_root / f"{identity}-laya",
+                admit=lambda: model.reserve_external_request("laya_impact"),
+            )
 
             def maintenance_fit(messages: list[dict[str, str]]) -> bool:
                 try:
@@ -2444,10 +3599,33 @@ def message(
                     return False
                 return True
 
-            selected_business = tuple(tool for tool in app.tools if mode is None
-                or tool.name in {"get_reservation", "get_document_status"}
-                or (tool.name in mode["business_operations"] if "business_operations" in mode
-                    else mode["allow_business_mutation"]))
+            def maintenance_stage_fit(stage: str, messages: list[dict[str, str]]) -> bool:
+                try:
+                    capacity.check(messages, enable_thinking=settings.get(
+                        "stage_enable_thinking", {}).get(stage.partition(":")[0]))
+                except CapacityExceeded:
+                    return False
+                return True
+
+            recorded_names: set[str] = set()
+            if recorded_tool_schemas is None:
+                selected_business = tuple(tool for tool in app.tools if mode is None
+                    or tool.name in {"get_reservation", "get_document_status"}
+                    or (tool.name in mode["business_operations"] if "business_operations" in mode
+                        else mode["allow_business_mutation"]))
+                if "business_tools" in settings:
+                    selected_business = tuple(tool for tool in selected_business
+                                              if tool.name in settings["business_tools"])
+            else:
+                from milai_lab.runners.action_intents import recording_tools
+
+                def record_intent(call: dict[str, Any]) -> None:
+                    output["recorded_tool_calls"].append(deepcopy(call))
+                    trace({"event": "functional_action_intent", **call,
+                           "business_executed": False})
+
+                selected_business = recording_tools(recorded_tool_schemas, record_intent)
+                recorded_names = {tool.name for tool in selected_business}
             allowed_tools = {tool.name for tool in (*selected_memory, *selected_business)}
             mode_reproposals = mode["format_reproposals_used"] if mode else 0
             completion_path = bank_root / f"{identity}-completion-feedback.json"
@@ -2466,32 +3644,137 @@ def message(
                             for tool in (*selected_memory, *selected_business)]
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
             read_exhausted = False
+            business_query_targets: list[dict[str, Any]] = []
+
+            def available_tool_names(config: RunnableConfig) -> set[str]:
+                nonlocal read_exhausted
+                names = allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
+                if (isinstance(memory, FunctionalEditMemory) and memory.control_handed_off
+                        and mode is not None and mode["business_action_request"] == "none"
+                        and not mode["allow_forgetting"]):
+                    # HANDOFF completes memory retrieval, not a declared live
+                    # application observation. Both still share the read allowance.
+                    names -= set(memory.read_tool_names)
+                    if "live_business" not in (mode.get("read_goal") or {}).get("evidence", []):
+                        names -= {"get_reservation", "get_document_status"}
+                if memory.max_evidence_queries is not None:
+                    allowance = memory.read_allowance(config)
+                    if allowance["reads_remaining"] == 0:
+                        if settings.get("read_exhaustion") == "answer_from_delivered_v1":
+                            read_exhausted = True
+                            output.setdefault("read_completion", {
+                                "reason": "read_limit_exhausted", "reads_remaining": 0,
+                                "next_step": "answer_from_delivered_material",
+                                "effects_preserved": True,
+                            })
+                        names -= set(memory.read_tool_names) | {
+                            "get_reservation", "get_document_status"}
+                    elif allowance["evidence_queries_remaining"] == 0:
+                        names -= {"search_memory", "get_reservation", "get_document_status"}
+                return names
 
             def maintain_current(execute: bool) -> list[dict[str, Any]]:
                 assert isinstance(memory, FunctionalEditMemory)
-                results = [memory.maintain_prior(
-                    cfg, prior_session=prior["session"], prior_request_id=prior["request_id"],
-                    new_attempt_id="maintenance-resume:" + json.dumps([
-                        session, message_id, freeze["config_version"],
-                        prior["session"], prior["request_id"],
-                    ], ensure_ascii=False, separators=(",", ":")),
-                    model_call=maintenance_call, allowed=maintenance_allowed,
-                    execute=execute, fit=maintenance_fit,
-                ) for prior in (mode or {}).get("prior_maintenance_requests", [])]
-                skip_current = bool(results and mode
-                                    and mode.get("current_memory_write_request") == "none")
-                return [*results, *memory.maintain_sources(
+                previous_results: list[dict[str, Any]] = output.get("maintenance", [])
+                if "maintenance" not in output:
+                    # This identity names only the original public message. Old
+                    # trace receipts are effects, never a source or new permission.
+                    prior_traces = sorted(bank_root.glob(f"{identity}-trace-*.jsonl"),
+                        key=lambda path: int(path.stem.rsplit("-", 1)[1]))
+                    for prior_trace in prior_traces:
+                        for line in prior_trace.read_text().splitlines():
+                            try:
+                                event = json.loads(line)
+                            except json.JSONDecodeError:
+                                continue
+                            if event.get("event") == "functional_maintenance_result":
+                                previous_results = merge_maintenance_results(
+                                    previous_results, event.get("batches", []))
+                    if previous_results:
+                        # Keep already confirmed effects if a later Store read
+                        # fails before this refresh can return. No cached bodies
+                        # enter that failure snapshot.
+                        output["maintenance"] = Trace._minimal({
+                            "event": "functional_maintenance_result",
+                            "batches": previous_results,
+                        })["batches"]
+                hidden_refs = set(service.forgotten_source_refs())
+
+                def observe_result(result: dict[str, Any]) -> None:
+                    # Publish each confirmed batch before the next Source can
+                    # fail. These original receipts grant no fresh permission.
+                    nonlocal previous_results
+                    previous_results = merge_maintenance_results(
+                        previous_results, [result],
+                        source_visible=lambda ref: ref not in hidden_refs,
+                    )
+                    output["maintenance"] = previous_results
+                    trace({"event": "functional_maintenance_result",
+                           "batches": previous_results})
+
+                for prior in (mode or {}).get("prior_maintenance_requests", []):
+                    checkpoint = service.store.get((*service.namespace, "edit_maintenance"),
+                        json.dumps([prior["session"], prior["request_id"]], ensure_ascii=False))
+                    if checkpoint is not None:
+                        prior_refs = {source["source_ref"] for source in (
+                            checkpoint.value["binding"]["sources"]
+                            + checkpoint.value.get("prior_context", []))}
+                        if prior_refs & hidden_refs:
+                            trace({"event": "functional_maintenance_visibility_blocked",
+                                   "request_id": prior["request_id"],
+                                   "source_visibility": "visibility_revoked", "effect": "none"})
+                            continue
+                    prior_result = memory.maintain_prior(
+                        cfg, prior_session=prior["session"], prior_request_id=prior["request_id"],
+                        new_attempt_id="maintenance-resume:" + json.dumps([
+                            session, message_id, freeze["config_version"],
+                            prior["session"], prior["request_id"],
+                        ], ensure_ascii=False, separators=(",", ":")),
+                        model_call=maintenance_call, allowed=maintenance_allowed,
+                        execute=execute, fit=maintenance_fit,
+                        stage_fit=maintenance_stage_fit if settings.get("stage_enable_thinking")
+                        else None,
+                    )
+                    if (not execute and prior_result.get("request_id") == prior["request_id"]
+                            and prior_result.get("phase") == "complete"
+                            and not prior_result.get("receipts")):
+                        # Inspecting the earlier empty attempt is not an attempt
+                        # by this continuation. Its original trace stays intact;
+                        # the authorized new attempt reports its own outcome.
+                        trace({"event": "functional_prior_maintenance_preview",
+                               "request_id": prior["request_id"], "effect": "none"})
+                    else:
+                        observe_result(prior_result)
+                skip_current = bool(mode and mode.get(
+                    "current_memory_write_request", mode.get("memory_write_request")) == "none")
+                memory.maintain_sources(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=execute,
-                    fit=maintenance_fit, prior_request_fragments=prior_request_fragments(),
+                    fit=maintenance_fit,
+                    stage_fit=maintenance_stage_fit if settings.get("stage_enable_thinking")
+                    else None,
+                    prior_request_fragments=prior_request_fragments(),
                     skip_source_refs=[capture["source_ref"]] if skip_current else None,
                     memory_save_requested=bool(memory.memory_view_mode != "legacy"
-                                               and mode and mode["requires_memory_result"]))]
+                                               and mode and mode["requires_memory_result"]),
+                    maintenance_scope=content,
+                    prepare_source_delivery=(
+                        (lambda delivery: memory.writer.observation_delivery(
+                            delivery, maintenance_observation_profiles(app.workflow)
+                            if settings.get("maintenance_mode") == "event_delta_v1" else
+                            [observation_profile(app.workflow, maintenance=True)],
+                            execution_only_origins=tuple(tool.name for tool in memory.tools())))
+                        if settings.get("result_maintenance_mode", "legacy")
+                        == "literal_observations_v1" else None),
+                    result_observer=observe_result,
+                )
+                return previous_results
 
             def context_hook(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
             ) -> dict[str, Any]:
-                nonlocal read_exhausted
+                nonlocal read_exhausted, business_query_targets
+                nonlocal host_context_verified
                 messages = list(state["messages"])
                 blocked = _visibility_replay(service, {
                     "status": "PENDING", "messages": [row.model_dump(mode="json")
@@ -2596,6 +3879,28 @@ def message(
                         execute_maintenance = not for_finalization and forgotten_at is None
                         dispatched = False
                         if tracker is not None:
+                            # Request recovery already queries the selected object.
+                            # Admit that actual observation before preparing its
+                            # maintenance binding; Agent ToolMessages are only one
+                            # producer of source deliveries.
+                            refresh_requests()
+                            if execute_maintenance and mode and mode["requires_memory_result"]:
+                                for _, request_row in tracker.rows():
+                                    progress = request_row["request_progress"]
+                                    attempts = progress["memory"]["attempts"]
+                                    if progress["business"]["status"] != "completed" or (
+                                        progress["memory"]["status"] == "committed"
+                                    ) or (
+                                        attempts and attempts[-1].get("binding", {}).get(
+                                            "source_ref") == capture["source_ref"]
+                                    ):
+                                        continue
+                                    observation = progress["business"].get("observation", {})
+                                    if "delivery_response" in observation:
+                                        _note_edit_tool_delivery(memory, config, [
+                                            ToolMessage.model_validate(
+                                                observation["delivery_response"])
+                                        ])
                             # Record original semantic bindings before the shared
                             # Writer can commit or lose its response. These are
                             # the actual source batch IDs, without another Writer.
@@ -2624,17 +3929,43 @@ def message(
                         material = memory.model_material(config, for_write=(
                             not maintenance_recipe and not for_finalization
                             and bool({"save_memory", "update_memory"}.intersection(allowed_tools))
+                        ), fresh_observations=call_wrapper.fresh_query_evidence(
+                            _delivered_tool_source_refs(wire_messages)
                         ))
                         wire_messages = memory.project_model_messages(config, wire_messages)
+                if settings.get("host_source_arrivals"):
+                    incoming_refs = {row["receipt"]["source_ref"]
+                        for row in output.get("incoming_source_receipts", [])
+                        if row["newly_captured"]}
+                    material["source_arrivals"] = {
+                        "new_visible_sources": sum(
+                            service.source(ref) is not None for ref in incoming_refs),
+                        "semantics": "New, still visible sources captured from the incoming "
+                            "batch before this request. This is an arrival count, not remaining "
+                            "unread work. Bodies are not included; relevance and effects on "
+                            "earlier evidence have not been assessed."}
+                business_query_targets = (
+                    _business_query_targets(memory, config, material, app)
+                    if memory.memory_view_mode != "legacy" and adapter is not None else []
+                )
+                if business_query_targets:
+                    material["business_observation_targets"] = business_query_targets
                 trace({"event": "functional_material_delivery", "material": material})
                 trace({"event": "functional_memory_effects", "effects": effects})
                 refresh_requests()
+                progress_observations = tracker.observation_messages() if tracker else []
+                if adapter is not None:
+                    adapter.delivered_observations = progress_observations
+                delivered_calls = {row.tool_call_id for row in wire_messages
+                                   if isinstance(row, ToolMessage)}
+                receipt_messages = [*wire_messages, *(row for row in progress_observations
+                                    if row.tool_call_id not in delivered_calls)]
                 if settings.get("capability_delivery") == "actual_catalog_v1":
-                    active = [] if for_finalization else sorted(
-                        allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
-                    )
+                    active = [] if for_finalization else sorted(available_tool_names(config))
                     capability_text = (
                         "CURRENT EXECUTION CAPABILITIES: " + json.dumps(active) + ". "
+                        "This catalog limits the Agent's next actions; it does not report "
+                        "already completed effects. "
                         "Only these tools are available in this phase. An earlier request or "
                         "an earlier phase cannot enable a missing tool. "
                     )
@@ -2645,12 +3976,9 @@ def message(
                             "plainly when it prevents an answer. Available business tools still "
                             "follow the current request permissions. "
                         )
-                    if maintenance_recipe:
-                        capability_text += (
-                            "The shared maintenance recipe reports its actual results below. "
-                            "The Agent does not need a save/update tool to confirm those receipts. "
-                        )
-                    elif not {"save_memory", "update_memory"}.intersection(active):
+                    if not maintenance_recipe and not {
+                        "save_memory", "update_memory"
+                    }.intersection(active):
                         capability_text += (
                             "Memory saving/updating is unavailable in this phase. Do not search "
                             "or read repeatedly to try to enable it. Report the actually observed "
@@ -2665,7 +3993,37 @@ def message(
                         and any(row.id == identity + ":required-memory-receipt"
                                 for row in completion_feedback)
                         and not effects["mutation_receipts"])))
-                return {
+                if for_finalization and settings.get("evidence_policy") == "question_pack_v1":
+                    from milai_lab.methods.evidence_reading import answer_only_context
+
+                    results = []
+                    for row in wire_messages:
+                        if not isinstance(row, ToolMessage) or row.name == "read_evidence":
+                            continue
+                        try:
+                            body = json.loads(str(row.content))
+                        except ValueError:
+                            body = str(row.content)
+                        results.append({"name": row.name, "result": body,
+                                        "memory_read": row.name in memory.read_tool_names})
+                    final_input = answer_only_context(
+                        content, material, _model_memory_effects(effects), results,
+                        pending=[*request_progress, *output.get("request_part_failures", [])],
+                    )
+                    return {"llm_input_messages": [
+                        SystemMessage(content=final_input[0]["content"]),
+                        HumanMessage(content=final_input[1]["content"]),
+                    ], "receipt_messages": receipt_messages, "receipt_material": material}
+                presented_messages = wire_messages
+                if settings.get("host_evidence_presentation") == "request_adjacent_metadata_v1":
+                    from milai_lab.runners.host_evidence_presentation import (
+                        request_adjacent_metadata,
+                    )
+
+                    presented_messages, presentation = request_adjacent_metadata(
+                        wire_messages, _model_memory_effects(effects), material)
+                    trace(presentation)
+                projected_context = {
                     "llm_input_messages": [
                         SystemMessage(
                             # LangGraph projects llm_input_messages before resolving
@@ -2673,15 +4031,30 @@ def message(
                             # this checkpointed ID; IDs do not enter provider text.
                             id=(identity + ":required-memory-proposal"
                                 if require_proposal else None),
-                            content=capability_text + settings["system_prompt"]
+                            content=settings["system_prompt"]
                             + ("\n" + memory.instructions()
                                if isinstance(memory, FunctionalEditMemory)
                                and not maintenance_recipe else "")
+                            + "\nACTUAL EFFECTS AND RECEIPT EVIDENCE:\n"
+                            + "Confirmed receipts establish the listed effects, even when a "
+                              "save/update tool is absent now or an extra call is rejected. "
+                              "Commit counts do not verify content, fields or the whole request. "
+                              "Keep committed, unchanged, rejected and unknown outcomes distinct."
                             + ("\nMemory maintenance for this event is handled by the shared "
                                "recipe. Use its actual receipts below to report saved, unchanged "
                                "or unfinished work. Raw capture is not a semantic save. "
                                "Do not duplicate maintenance through other tools."
                                if maintenance_recipe else "")
+                            + "\n" + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
+                            + "\nCURRENT TOOLS AND ACTION LIMITS:\n"
+                            + capability_text
+                            + ("Shared reading allowance: " + json.dumps(
+                                memory.read_allowance(config)) + ". New source searches and "
+                                "business queries share this allowance with body/history "
+                                "reads and pagination. A denial is not evidence of nonexistence.\n"
+                                if memory.max_evidence_queries is not None else "")
+                            + "Use only the tools actually supplied for this phase. This limits "
+                              "next actions; it cannot establish that a prior effect did not occur."
                             + (MAINTENANCE_LIMIT_PROMPT if not for_finalization
                                and settings.get("semantic_reproposal_policy")
                                == "maintenance_two_proposals_v1"
@@ -2691,20 +4064,49 @@ def message(
                                and settings.get("support_input") == "selected_sources_v1"
                                and {"save_memory", "update_memory"}.intersection(allowed_tools)
                                else "")
+                            + "\nCURRENT REQUEST PROGRESS AND OUTSTANDING WORK:\n"
+                            + ("For this forgetting request, consider the authorized temporary "
+                               "set of result records, original requests, their Source links and "
+                               "saved history. Related navigation is not authorization: open "
+                               "actual targets before selecting effects. Source revocation here "
+                               "covers whole Sources, not excerpts; preserve unrelated contents "
+                               "and report a remaining Source limitation when only record scope "
+                               "is authorized. After revocation, unavailable does not mean never "
+                               "saved.\n" if memory.forget_requested
+                               and memory.source_access == "independent_v1" else "")
+                            + "Request interpretation describes intent, not completed effects. "
+                              "Use actual progress, pending calls, unprocessed maintenance and "
+                              "reading gaps to identify unfinished or unknown work. A confirmed "
+                              "operation does not prove unattempted parts; semantic completion "
+                              "remains unchecked."
                             + (("\nPersisted current-request interpretation: " if capability_text
                                 else "\nCurrent request interpretation and enforced tool limits: ")
                                + json.dumps(mode, ensure_ascii=False) if mode else "")
                             + ("\n" + PROGRESS_PREFIX + json.dumps(request_progress,
                                 ensure_ascii=False, separators=(",", ":")) if tracker else "")
+                            + ("\nCurrent request part failures: " + json.dumps(
+                                output["request_part_failures"], ensure_ascii=False)
+                               if output.get("request_part_failures") else "")
                             + "".join("\n" + str(row.content) for row in completion_feedback)
-                            + "\n"
-                            + json.dumps(effects, ensure_ascii=False)
+                            + "\nDelivered memory evidence and reading requirements:"
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),
-                        *wire_messages,
-                    ]
+                        *presented_messages,
+                    ], "receipt_messages": receipt_messages,
                 }
+                if host_recorder is not None or (
+                        replay_host_message is not None and not host_context_verified):
+                    baseline_context = [projected_context["llm_input_messages"][0], *wire_messages]
+                    if host_recorder is not None:
+                        host_recorder.context(baseline_context)
+                    if replay_host_message is not None:
+                        if [row.model_dump(mode="json") for row in baseline_context] != (
+                                replay_host_message["initial_baseline_context"]):
+                            raise ValueError("FROZEN_HOST_INITIAL_CONTEXT_CHANGED")
+                        host_context_verified = True
+                        output["frozen_host_baseline_context_equal"] = True
+                return projected_context
 
             call_wrapper = app.call_wrapper(
                 service, session, message_id, trace, cfg, boundary_hook=faults.boundary,
@@ -2715,11 +4117,16 @@ def message(
                                          in {"inline_fragments_v1", "inline_receipt_units_v2"}),
                 complete_receipt_units=(settings.get("source_selection")
                                         == "inline_receipt_units_v2"),
+                evidence_query=(lambda request, execute: memory.query_observation(
+                    cfg, request.tool_call["id"], request.tool_call["name"],
+                    request.tool_call["args"], execute))
+                if settings.get("max_evidence_queries") is not None else None,
             )
             adapter = None
-            if service.memory_profile == "unified_v1":
+            if service.memory_profile == "unified_v1" and recorded_tool_schemas is None:
                 adapter = app.adapter(
                     service, session, message_id, runtime_config=cfg,
+                    reuse_current_observations=settings.get("max_evidence_queries") is not None,
                     allowed_operations=tuple(
                         tool.name for tool in selected_business
                         if tool.name not in {"get_reservation", "get_document_status"}
@@ -2732,7 +4139,9 @@ def message(
             request_binding = {"session": session, "turn_id": message_id,
                                "config_version": freeze["config_version"],
                                "source_ref": capture["source_ref"]}
-            if mode and mode["protocol"] == "native_complete_requests_v8" and adapter is not None:
+            if (mode and mode["protocol"] in {
+                "native_complete_requests_v8", "native_scope_requests_v9",
+            } and adapter is not None):
                 tracker = HostRequestProgress(app, adapter, service, request_binding, mode,
                     compile_application_requests(app.workflow, mode["application_requests"],
                                                  save_result=mode["requires_memory_result"]),
@@ -2814,7 +4223,8 @@ def message(
                                      != capture["source_ref"]
                                      and mode.get("current_memory_write_request",
                                          mode["memory_write_request"]) == "explicit"))},
-                        save_result=save_result, reconcile_memory=reconcile,
+                        save_result=save_result if perform_maintenance else None,
+                        reconcile_memory=reconcile,
                         feedback=feedback if acknowledged_messages is not None else None,
                         semantic_attempt_binding={**request_binding,
                                                   "maintenance": new_batches or batches})
@@ -2831,10 +4241,41 @@ def message(
                                        tool_call_id=request.tool_call["id"], status="error",
                                        content=json.dumps({"ok": False,
                                            "status": "request_mode_rejected", "effect": "none"}))
+                if request.tool_call["name"] in recorded_names:
+                    # Capture-only catalogs cannot dispatch into the local application,
+                    # even when a released tool shares one of its operation names.
+                    return execute(request)
                 def native(current: Any) -> Any:
                     faults.before_native(current)
                     return execute(current)
 
+                if (memory.memory_view_mode != "legacy" and adapter is not None
+                        and request.tool_call["name"] in {"get_reservation", "get_document_status"}
+                        and "target" in request.tool_call["args"]):
+                    arguments = request.tool_call["args"]
+                    lookup_key = ("title" if request.tool_call["name"] == "get_document_status"
+                                  else "item_key")
+                    selected = {key: value for key, value in arguments.items() if value is not None}
+                    if (selected.keys() == {lookup_key} and arguments["target"] is None
+                            and set(arguments) <= {"target", lookup_key}):
+                        request = request.override(
+                            tool_call={**request.tool_call, "args": selected})
+                    elif (set(arguments) - {"target", lookup_key}
+                          or selected.keys() != {"target"}
+                          or not isinstance(selected["target"], str)):
+                        return ToolMessage(name=request.tool_call["name"],
+                            tool_call_id=request.tool_call["id"], status="error",
+                            content=json.dumps({"ok": False, "status": "query_target_rejected",
+                                "reason": "one_delivered_target_required", "effect": "none",
+                                "retryable": False}))
+                    else:
+                        try:
+                            return _observe_query_target(memory, app, adapter, cfg,
+                                selected["target"], request.tool_call["id"],
+                                request.tool_call["name"], request=request, execute=native)
+                        finally:
+                            if tracker is not None:
+                                tracker.dirty = True
                 if adapter is not None and request.tool_call["name"] in app.tool_names:
                     if tracker is not None:
                         return tracker.wrap_call(request, native)
@@ -2854,26 +4295,39 @@ def message(
                     return "required"
                 return "auto"
 
-            choice_selector = (execution_tool_choice
+            choice_selector = model_tool_choice or (execution_tool_choice
                                if settings.get("completion_tool_choice", "auto") != "auto"
                                else None)
 
             def current_tool_catalog(config: RunnableConfig) -> tuple[BaseTool, ...]:
+                nonlocal host_catalog_verified
                 memory_catalog = (
                     memory.writer_tools(config) if isinstance(memory, FunctionalEditMemory)
                     else memory.tools()
                 )
-                catalog = tuple(tool for tool in memory_catalog
-                                if tool.name in allowed_tools and (
-                                    not read_exhausted or tool.name not in memory.read_tool_names
-                                )) + selected_business
-                trace({"event": "functional_bound_tool_catalog",
-                       "tools": [convert_to_openai_tool(tool) for tool in catalog]})
+                business_catalog = (
+                    _query_reference_catalog(memory, app, adapter,
+                                             business_query_targets, selected_business)
+                    if memory.memory_view_mode != "legacy" and adapter is not None
+                    else selected_business
+                )
+                available = available_tool_names(config)
+                catalog = tuple(tool for tool in memory_catalog if tool.name in available) + tuple(
+                    tool for tool in business_catalog if tool.name in available)
+                schemas = [convert_to_openai_tool(tool) for tool in catalog]
+                trace({"event": "functional_bound_tool_catalog", "tools": schemas})
+                if host_recorder is not None:
+                    host_recorder.catalog(schemas)
+                if replay_host_message is not None and not host_catalog_verified:
+                    if schemas != replay_host_message["initial_tool_catalog"]:
+                        raise ValueError("FROZEN_HOST_INITIAL_TOOL_CATALOG_CHANGED")
+                    host_catalog_verified = True
+                    output["frozen_host_tool_catalog_equal"] = True
                 return catalog
 
             tools_provider = current_tool_catalog if edit_features.enabled or (
                 settings.get("read_exhaustion") == "answer_from_delivered_v1"
-            ) else None
+            ) or memory.memory_view_mode != "legacy" else None
             if service.memory_profile == "unified_v1" and model.delivery_observer is not None:
                 model.delivery_observer = _MemoryUseDelivery(
                     model.delivery_observer, service,
@@ -2881,6 +4335,10 @@ def message(
                 )
             if tracker is not None and model.delivery_observer is not None:
                 model.delivery_observer = RequestProgressDelivery(model.delivery_observer, tracker)
+            if host_recorder is not None:
+                from milai_lab.runners.frozen_host_message import HostResponseRecorder
+
+                model.response_hook = HostResponseRecorder(host_recorder, model.response_hook)
             agent = build_agent(
                 model,
                 store,
@@ -2893,6 +4351,8 @@ def message(
                 business_call_wrapper=dispatch,
                 model_tool_choice=choice_selector,
                 model_tools_provider=tools_provider,
+                model_enable_thinking=host_enable_thinking_override,
+                schema_feedback_fingerprints=not bool(settings.get("retrieval_tool")),
             )
 
             def invoke_execution(value: Any) -> list[Any]:
@@ -2903,6 +4363,23 @@ def message(
                     # and all effects intact; an explicit resume meets the same
                     # terminal receipt before it can dispatch or generate again.
                     return cast(list[Any], agent.get_state(cfg).values["messages"])
+
+            receipt_status_requested = bool(
+                settings.get("finalization") == "receipt_or_agent_response_v1"
+                and mode and mode.get("response_scope") == "memory_status_only"
+                and mode["business_action_request"] == "none" and not mode["allow_forgetting"]
+            )
+
+            def confirmed_memory_status(effects: dict[str, Any]) -> bool:
+                return bool(receipt_status_requested
+                    and effects["semantic_memory"]["status"] in {"committed", "no_change"}
+                    and effects["semantic_memory"]["operations"]
+                    and not any((effects["business"]["operations"],
+                                 effects["business"]["observations"],
+                                 effects["visibility"]["operations"],
+                                 effects.get("application_requests"),
+                                 effects.get("request_part_failures"),
+                                 output.get("execution_stop"))))
 
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
@@ -2924,6 +4401,27 @@ def message(
             app.recover_pending(agent, scope, call_wrapper)
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
+            if (not prior and receipt_status_requested and maintenance_recipe
+                    and isinstance(memory, FunctionalEditMemory)
+                    and settings.get("evidence_policy") == "question_pack_v1"
+                    and not request_progress and not output.get("request_part_failures")):
+                # The shared Writer owns this explicit memory-only request.
+                # A confirmed status receipt needs no subsequent Host generation.
+                memory.context(session, message_id, freeze["config_version"], query=content)
+                output["maintenance"] = maintain_current(True)
+                actual = operation_status({**output, "world": app.snapshot()},
+                    thread_id=cfg["configurable"]["thread_id"], execution_started=True)
+                if confirmed_memory_status(actual):
+                    receipt = AIMessage(content=memory_receipt_summary(actual),
+                        id=identity + ":memory-status-receipt",
+                        response_metadata={"milai_origin": "program_receipt"})
+                    agent.update_state(cfg, {"messages": [
+                        HumanMessage(content=content, id=message_id), receipt,
+                    ]}, as_node="agent")
+                    trace({"event": "functional_memory_status_shortcut",
+                           "host_generation": False, "semantic_effects": "confirmed_receipts"})
+                    snapshot = agent.get_state(cfg)
+                    prior = snapshot.values["messages"]
             recovery_path = bank_root / f"{identity}-answer-recovery.json"
             previous_result = read_json(result_path) if result_path.exists() else {}
             invalid_provider_content = (
@@ -2957,7 +4455,9 @@ def message(
                     repair_history = prior[:-1] if bad_checkpoint_text else prior
                     repair_input = context_hook({"messages": repair_history}, cfg,
                         for_finalization=(settings.get("capability_delivery")
-                                          == "actual_catalog_v1"))[
+                                          == "actual_catalog_v1"
+                                          or settings.get("evidence_policy")
+                                          == "question_pack_v1"))[
                         "llm_input_messages"]
                     repair_input[0] = SystemMessage(content=(
                         "The preceding final response was unusable. Report the already observed "
@@ -2981,9 +4481,53 @@ def message(
                 else:
                     messages = prior
             else:
-                messages = invoke_execution(
-                    None if prior else {"messages": [HumanMessage(content=content, id=message_id)]}
-                )
+                initial_messages = []
+                if not prior and previous_host_message is not None:
+                    previous_id = _message_reference(bank_root, session, previous_host_message)
+                    previous = read_json(bank_root / (previous_id + "-result.json"))
+                    if previous["status"] != "COMPLETED":
+                        raise ValueError("HOST_HISTORY_REQUIRES_COMPLETED_MESSAGE")
+                    blocked = _visibility_replay(service, {
+                        "status": previous["status"], "messages": previous["messages"]},
+                        session=session, message_id=previous_host_message)
+                    if blocked is not None:
+                        return persist_visibility_stop(blocked)
+                    initial_messages = messages_from_dict([
+                        {"type": row["type"], "data": row} for row in previous["messages"]])
+                    with service._locked():
+                        note_exposure(service, capture["source_ref"], [
+                            service.event_id(session, previous_host_message, "user"),
+                            service.event_id(
+                                session, previous_host_message + ":final", "assistant")])
+                    trace({"event": "functional_host_history", "previous_message": previous_id,
+                           "messages": len(initial_messages), "source": "actual_completed_result"})
+                graph_input = (None if prior else {"messages": [
+                    *initial_messages, HumanMessage(content=content, id=message_id)]})
+                if host_recorder is not None or replay_host_message is not None:
+                    from milai_lab.runners.frozen_host_message import memory_store_values
+
+                    if prior or not isinstance(memory, IntentRetrievalMemory):
+                        raise ValueError("PRE_HOST_SNAPSHOT_REQUIRES_FIRST_MODEL_OF_NEW_MESSAGE")
+                    assert graph_input is not None
+                    ready_state = {
+                        "initial_messages": [m.model_dump(mode="json")
+                                             for m in graph_input["messages"]],
+                        "world": app.snapshot(),
+                        "generation_calls_before": model.calls_in_message,
+                        "read_allowance": memory.read_allowance(cfg),
+                        "admission_policy": memory._read_admission_policy(),
+                        "public_source_ref": capture["source_ref"],
+                        "incoming_source_receipts": output.get("incoming_source_receipts", []),
+                        "memory_store_values": memory_store_values(service),
+                    }
+                    if host_recorder is not None:
+                        host_recorder.ready(ready_state)
+                    if replay_host_message is not None:
+                        if ready_state != replay_host_message["ready_state"]:
+                            raise ValueError("FROZEN_PRE_HOST_STATE_CHANGED")
+                        output["frozen_pre_host_state_equal"] = True
+                        output["host_presentation_override"] = host_presentation_override
+                messages = invoke_execution(graph_input)
 
             if maintenance_recipe and isinstance(memory, FunctionalEditMemory):
                 # A completed graph can reopen without running its model hook.
@@ -3030,7 +4574,7 @@ def message(
                 # Necessary condition only: one receipt does not prove that every
                 # requested item, its meaning or the final prose is correct.
                 effects = memory_effects(current)
-                if maintenance_recipe and output.get("maintenance") and not (
+                if maintenance_recipe and not (
                     mode and mode["allow_forgetting"]
                 ):
                     return False
@@ -3076,7 +4620,9 @@ def message(
                     memory_tools=selected_memory, system_prompt=settings["system_prompt"],
                     benchmark_view_hook=context_hook, tool_schema_communication="shape_feedback_v1",
                     business_call_wrapper=dispatch, model_tool_choice=choice_selector,
-                    model_tools_provider=tools_provider)
+                    model_tools_provider=tools_provider,
+                    model_enable_thinking=host_enable_thinking_override,
+                    schema_feedback_fingerprints=not bool(settings.get("retrieval_tool")))
                 trace({"event": "functional_completion_feedback", **completion,
                        "candidate_answer_delivered": False})
                 expected = ("The current continuation includes prior explicit memory work"
@@ -3110,6 +4656,10 @@ def message(
                 messages = invoke_execution({"messages": [feedback]})
                 if missing_requested_memory_attempt(messages):
                     raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
+            if output.get("capture", {}).get("ok"):
+                output["capture"]["source_visibility"] = (
+                    "visibility_revoked" if output["capture"]["source_ref"]
+                    in service.forgotten_source_refs() else "visible")
             if settings.get("finalization") in {
                 "readonly_response_v1",
                 "receipt_business_response_v1",
@@ -3126,16 +4676,36 @@ def message(
                 )
                 # Context hook applies visibility checks before any cached response
                 # can be reused. The model sees exactly the same bounded material.
-                response_input = context_hook({"messages": messages}, cfg,
-                    for_finalization=True)["llm_input_messages"]
-                if settings.get("finalization") in {
+                response_context = context_hook({"messages": messages}, cfg,
+                    for_finalization=True)
+                response_input = response_context["llm_input_messages"]
+                receipt_input = response_context.get("receipt_messages", response_input)
+                if confirmed_memory_status(effects):
+                    # The undelivered model draft remains in execution_candidate_answer.
+                    # Render only confirmed listed effects, not content fidelity or
+                    # complete semantic coverage, without a corrective model call.
+                    final = (messages[-1]
+                        if messages[-1].response_metadata.get("milai_origin") == "program_receipt"
+                        else AIMessage(content=memory_receipt_summary(effects)))
+                    output["finalization"] = {
+                        "status": "response_rendered", "attempts": 0,
+                        "tools_available": False, "execution_candidate_delivered": False,
+                        "protocol": "receipt_business_response_v1", "model_generation": False,
+                    }
+                    trace({"event": "functional_receipt_finalization",
+                           **output["finalization"], "response_id": identity})
+                elif settings.get("finalization") in {
                     "receipt_business_response_v1",
                     "receipt_business_response_v2",
                     "receipt_business_response_v3",
                     "receipt_or_agent_response_v1",
                 } and (
                     effects["business"]["operations"]
-                    or effects["business"]["observations"]
+                    or (effects["business"]["observations"]
+                        and settings.get("finalization") != "receipt_or_agent_response_v1")
+                    or (effects.get("application_requests")
+                        and settings.get("finalization") == "receipt_or_agent_response_v1"
+                        and mode and mode["business_action_request"] != "none")
                     or (
                         settings.get("finalization") == "receipt_business_response_v1"
                         and mode
@@ -3147,10 +4717,20 @@ def message(
                         and effects["visibility"]["operations"]
                     )
                     or output.get("execution_stop")
+                    or (
+                        mode and mode["requires_memory_result"]
+                        and effects["semantic_memory"]["status"]
+                        in {"not_committed", "partial", "unknown"}
+                    )
                 ):
-                    final = business_response(response_input, effects,
-                        json.loads(str(response_input[0].content).splitlines()[-1]),
-                        execution_stop=output.get("execution_stop"))
+                    final = business_response(receipt_input, effects,
+                        (response_context["receipt_material"]
+                         if settings.get("evidence_policy") == "question_pack_v1" else
+                         json.loads(str(response_input[0].content).splitlines()[-1])),
+                        execution_stop=output.get("execution_stop"), current_mode=mode,
+                        include_business=bool(effects["business"]["operations"]
+                            or effects["business"]["observations"]
+                            or effects.get("application_requests")))
                     output["finalization"] = {"status": "response_rendered", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": False,
                         "protocol": "receipt_business_response_v1", "model_generation": False}
@@ -3169,10 +4749,31 @@ def message(
                     if (not isinstance(final, AIMessage) or final.tool_calls
                             or final_delivery(final.content)["status"] != "available"):
                         raise IncompleteChatResponse("FUNCTIONAL_AGENT_FINAL_UNAVAILABLE")
+                    observations_appended = bool(effects["business"]["observations"])
+                    request_failures_appended = bool(effects.get("request_part_failures"))
+                    memory_receipts_appended = bool(
+                        settings.get("request_failure_policy") == "independent_memory"
+                        and mode and mode["requires_memory_result"]
+                        and effects["semantic_memory"]["operations"])
+                    if observations_appended or request_failures_appended:
+                        # A query alone does not define the user's whole task.
+                        # Preserve the answer and separately report its actual
+                        # matched observations, without a new model call.
+                        observed = business_response(receipt_input, effects, {},
+                            include_business=observations_appended,
+                            include_memory_feedback=bool(effects.get("application_requests")))
+                        final = final.model_copy(update={
+                            "content": str(final.content) + "\n\n" + str(observed.content)})
+                    if memory_receipts_appended:
+                        final = final.model_copy(update={"content": str(final.content)
+                            + "\n\n" + memory_receipt_summary(effects)})
                     output["finalization"] = {
                         "status": "agent_response_retained", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": True,
-                        "protocol": "agent_response_v1", "model_generation": False}
+                        "protocol": "agent_response_v1", "model_generation": False,
+                        "observation_receipts_appended": observations_appended,
+                        "request_failures_appended": request_failures_appended,
+                        "memory_receipts_appended": memory_receipts_appended}
                     trace(
                         {
                             "event": "functional_agent_finalization",
@@ -3185,8 +4786,11 @@ def message(
                         model, bank_root / f"{identity}-finalization.json", response_input, effects,
                         resume=resume, remaining_reproposals=settings["format_reproposals"]
                         - len(format_failures(messages)) - mode_reproposals - completion_used
-                        - answer_repairs - continuation_used, trace=trace)
-                output["execution_candidate_answer"] = messages[-1].content
+                        - answer_repairs - continuation_used, trace=trace,
+                        enable_thinking=settings.get("stage_enable_thinking", {}).get("reader"))
+                output["execution_candidate_answer"] = (
+                    None if messages[-1].response_metadata.get("milai_origin") == "program_receipt"
+                    else messages[-1].content)
                 # Do not alter the completed execution checkpoint. The response has
                 # its own durable receipt, so restart cannot repeat business work.
                 if final is not messages[-1]:
@@ -3318,6 +4922,20 @@ def message(
             if "model" in locals():
                 output["generation_calls"] = model.calls_in_message
         output.setdefault("final_delivery", final_delivery(output.get("final_answer")))
+        if "service" in locals() and output.get("capture", {}).get("ok"):
+            try:
+                output["capture"]["source_visibility"] = (
+                    "visible" if service.source(output["capture"]["source_ref"]) is not None
+                    else "visibility_revoked" if output["capture"]["source_ref"]
+                    in service.forgotten_source_refs() else "unknown")
+            except Exception as visibility_error:
+                output["capture"]["source_visibility"] = "unknown"
+                output["capture_visibility_error"] = type(visibility_error).__name__
+                if "error" not in output:
+                    status, category = _status(visibility_error)
+                    output.update(status=status, error_category=category,
+                                  error_type=type(visibility_error).__name__,
+                                  error=str(visibility_error))
         output["operation_status"] = operation_status(
             output, thread_id=cfg["configurable"]["thread_id"],
             execution_started=execution_started,
@@ -3329,7 +4947,7 @@ def message(
                                 "FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED"})
         exhausted_format = (settings.get("failure_delivery") == "receipt_status_v4"
                             and output.get("error") == "FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED")
-        if (settings.get("failure_delivery") in {
+        if (direct_request is None and settings.get("failure_delivery") in {
                 "receipt_status_v1", "receipt_status_v2", "receipt_status_v3", "receipt_status_v4"}
                 and (output.get("error_category") == "provider_protocol"
                      or known_incomplete or exhausted_format)
@@ -3338,7 +4956,8 @@ def message(
                          "receipt_status_v2", "receipt_status_v3", "receipt_status_v4"})
                 and "service" in locals() and "snapshot_error" not in output
                 and "checkpoint_snapshot_error" not in output
-                and "application_snapshot_error" not in output):
+                and "application_snapshot_error" not in output
+                and "capture_visibility_error" not in output):
             blocked = _visibility_replay(service, output, session=session, message_id=message_id)
             if blocked is not None:
                 return persist_visibility_stop(blocked)
@@ -3346,7 +4965,8 @@ def message(
             # to COMPLETED. Only already delivered, paired receipts are rendered.
             evidence = (agent.get_state(cfg).values.get("messages", [])
                         if "agent" in locals() else [])
-            final = business_response(evidence, output["operation_status"], {})
+            final = business_response(evidence, output["operation_status"], {},
+                                      current_mode=output.get("request_mode"))
             output["final_answer"] = (
                 ("请求未完成, 执行已停止; 以下是已确认的操作状态。" if known_incomplete else
                  "回答协议失败, 执行已停止; 以下是已确认的操作状态。") +
@@ -3372,13 +4992,7 @@ def message(
                 output["final_delivery"] = final_delivery(None)
         if "faults" in locals() and evaluator_control:
             output["evaluator_control_state"] = faults.state
-        output.update(
-            usage=trace.usage,
-            budget_before=before,
-            budget_after=json.loads(json.dumps(budget.state)),
-        )
-        write_json(bank_root / f"{identity}-attempt-{attempt}.json", output)
-        write_json(result_path, output)
+        persist_result()
     return output
 
 

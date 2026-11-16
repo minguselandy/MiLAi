@@ -1,0 +1,188 @@
+{
+  "version": "dynamic-memory-control-sandbox-evidence-plan-v2",
+  "scope": "One new authored functional history with actual local reservation state and a declared label-service outage/recovery. Source requirements, application effects and future changes are distinct. Not heldout efficacy; old sandbox16first outcomes remain unchanged.",
+  "histories": [
+    {
+      "id": "sandbox_evidence_plan_partial_label",
+      "source_family": "sandbox_evidence_plan_partial_label",
+      "split": "functional_development",
+      "task_count": 3,
+      "steps": [
+        {
+          "id": "recorded-requirements",
+          "kind": "task",
+          "session": "work",
+          "content": "只核对记录：榆风仪器箱（校准批）今天应办理多少件，送到哪里，用什么包装？不要预留或制作标签。",
+          "occurred_at": "2032-10-04T09:10:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "requirements-stream",
+              "event_key": "identity-quantity",
+              "content": "本次完整物品名为“榆风仪器箱（校准批）”，需要4件。",
+              "occurred_at": "2032-10-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "requirements-stream",
+              "event_key": "initial-destination",
+              "content": "榆风仪器箱（校准批）目前收货点是校准间3号台。",
+              "occurred_at": "2032-10-04T09:01:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "requirements-stream",
+              "event_key": "packing",
+              "content": "榆风仪器箱校准批使用缓冲盒，展示批使用纸套；这两个批次分别办理。",
+              "occurred_at": "2032-10-04T09:02:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "requirements-stream",
+              "event_key": "other-batch",
+              "content": "榆风仪器箱（展示批）需要9件，送到展厅。",
+              "occurred_at": "2032-10-04T09:03:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "message_index": 0,
+          "expected": {
+            "answer": "4件，校准间3号台，缓冲盒",
+            "business_mutations": 0
+          },
+          "initial_world": {
+            "label_available": false
+          }
+        },
+        {
+          "id": "reserve-with-label-outage",
+          "kind": "explicit_operation",
+          "session": "work",
+          "content": "现在按今天有效的登记要求，为榆风仪器箱（校准批）实际预留并制作标签。先查实际状态，已经完成的部分不要重复；若标签暂时做不了，保留已成功的预留并明确说明未完成部分。",
+          "occurred_at": "2032-10-04T09:20:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "requirements-stream",
+              "event_key": "current-destination",
+              "content": "榆风仪器箱（校准批）今天的收货点即刻改为检验区5号台，校准间3号台不再使用；数量和包装不变。",
+              "occurred_at": "2032-10-04T09:18:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "requirements-stream",
+              "event_key": "future-destination",
+              "content": "明天10月5日起，榆风仪器箱（校准批）才改送仓库8号台；这项计划今天还不生效。",
+              "occurred_at": "2032-10-04T09:19:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "message_index": 1,
+          "expected": {
+            "state": {
+              "item_key": "榆风仪器箱（校准批）",
+              "quantity": 4,
+              "destination": "检验区5号台",
+              "packing": "缓冲盒",
+              "label_status": "not_created"
+            },
+            "reservation_rows": 1,
+            "successful_reservations_total": 1,
+            "label_created": false,
+            "report_partial_effect": true
+          }
+        },
+        {
+          "id": "reopened-live-status",
+          "kind": "task",
+          "session": "work-reopened",
+          "content": "重新查询榆风仪器箱（校准批）的实际预留与标签状态，报告数量、目的地、包装和标签情况。这次只查，不执行或修改。",
+          "occurred_at": "2032-10-04T09:30:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "requirements-stream",
+              "event_key": "future-new-reservations",
+              "content": "10月5日起新建的榆风仪器箱预留统一改用加固箱；既有预留不会因此自动改动。",
+              "occurred_at": "2032-10-04T09:29:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "message_index": 2,
+          "expected": {
+            "state": {
+              "item_key": "榆风仪器箱（校准批）",
+              "quantity": 4,
+              "destination": "检验区5号台",
+              "packing": "缓冲盒",
+              "label_status": "not_created"
+            },
+            "live_query_required": true,
+            "new_business_mutations": 0
+          }
+        },
+        {
+          "id": "finish-original-label",
+          "kind": "explicit_operation",
+          "session": "work-reopened",
+          "content": "请继续榆风仪器箱（校准批）的原办理，只补完其中未完成的标签。先核查真实状态；不再新建预留，也不要更改既有数量、目的地或包装。若已完成，就只核对并报告。",
+          "occurred_at": "2032-10-04T09:40:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [],
+          "message_index": 3,
+          "expected": {
+            "state": {
+              "item_key": "榆风仪器箱（校准批）",
+              "quantity": 4,
+              "destination": "检验区5号台",
+              "packing": "缓冲盒",
+              "label_status": "created"
+            },
+            "reservation_rows": 1,
+            "successful_reservations_total": 1,
+            "duplicate_reservation_attempts": 0
+          },
+          "evaluator_control": {
+            "before_message_events": [
+              {
+                "event_id": "label-service-restored",
+                "before_message_index": 3,
+                "operation": "reservation.set_label_available",
+                "available": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "confirmed-state",
+          "kind": "task",
+          "session": "work-reopened",
+          "content": "再查一次榆风仪器箱（校准批）的实际状态，说明预留及标签是否完成，并报告现有参数。只查询，不执行新操作。",
+          "occurred_at": "2032-10-04T09:50:00+08:00",
+          "query_time": "2032-10-04",
+          "incoming_sources": [],
+          "message_index": 4,
+          "expected": {
+            "state": {
+              "item_key": "榆风仪器箱（校准批）",
+              "quantity": 4,
+              "destination": "检验区5号台",
+              "packing": "缓冲盒",
+              "label_status": "created"
+            },
+            "live_query_required": true,
+            "reservation_rows": 1,
+            "new_business_mutations": 0
+          }
+        }
+      ]
+    }
+  ]
+}

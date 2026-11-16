@@ -1,0 +1,152 @@
+{
+  "status": "ACTUAL_SOURCE_RANGE_PACKET_FIT_AUDITED",
+  "result_path": "artifacts/host-intent-retrieval-v3/view-v4-source-arrivals-v1/generative-rich/banks/e1ba7cb2-e755-41a0-8231-cd9d54c5de6c/fe993c90-2908-425a-960b-6658a9379370-result.json",
+  "actual_return_reproduced_exactly": true,
+  "return_limit": 2048,
+  "packets": {
+    "actual_final": {
+      "max_full_packet_tokens": 1542,
+      "fits_original_limit": true,
+      "material_indices": [
+        -1,
+        0,
+        1,
+        5
+      ]
+    },
+    "append_rejected_4": {
+      "max_full_packet_tokens": 2258,
+      "fits_original_limit": false,
+      "material_indices": [
+        -1,
+        0,
+        1,
+        5,
+        4
+      ]
+    },
+    "append_latest_16": {
+      "max_full_packet_tokens": 2133,
+      "fits_original_limit": false,
+      "material_indices": [
+        -1,
+        0,
+        1,
+        5,
+        16
+      ]
+    },
+    "only_4": {
+      "max_full_packet_tokens": 772,
+      "fits_original_limit": true,
+      "material_indices": [
+        4
+      ]
+    },
+    "only_16": {
+      "max_full_packet_tokens": 647,
+      "fits_original_limit": true,
+      "material_indices": [
+        16
+      ]
+    },
+    "originals_4_16": {
+      "max_full_packet_tokens": 1363,
+      "fits_original_limit": true,
+      "material_indices": [
+        4,
+        16
+      ]
+    },
+    "view_plus_16": {
+      "max_full_packet_tokens": 1600,
+      "fits_original_limit": true,
+      "material_indices": [
+        -1,
+        16
+      ]
+    }
+  },
+  "candidate_source_witnesses": {
+    "4": [
+      {
+        "capture_key": "s2t3",
+        "role": "user",
+        "source_ref": "source-ee90b778-05e9-47de-8fc9-bfdbd48ea90b",
+        "range": [
+          0,
+          344
+        ]
+      },
+      {
+        "capture_key": "s2t4",
+        "role": "assistant",
+        "source_ref": "source-6f2a508b-5f57-4341-b4ed-037c682a213b",
+        "range": [
+          0,
+          533
+        ]
+      },
+      {
+        "capture_key": "s2t5",
+        "role": "user",
+        "source_ref": "source-4f94c6ff-a0be-429e-b282-0329cea63bf7",
+        "range": [
+          0,
+          363
+        ]
+      },
+      {
+        "capture_key": "s2t6",
+        "role": "assistant",
+        "source_ref": "source-22ecac9a-a4ec-4abf-87b7-66c02d5d1e17",
+        "range": [
+          0,
+          525
+        ]
+      }
+    ],
+    "16": [
+      {
+        "capture_key": "s3t5",
+        "role": "user",
+        "source_ref": "source-6db9f7ed-169a-44c8-a203-6353d82eb0ec",
+        "range": [
+          0,
+          295
+        ]
+      },
+      {
+        "capture_key": "s3t6",
+        "role": "assistant",
+        "source_ref": "source-7b707027-589f-4af2-8093-2d078cc4a242",
+        "range": [
+          0,
+          624
+        ]
+      },
+      {
+        "capture_key": "s3t7",
+        "role": "user",
+        "source_ref": "source-54205c6b-ba29-4457-808b-21f02c935f20",
+        "range": [
+          0,
+          555
+        ]
+      }
+    ]
+  },
+  "actual_rejections": [
+    "read_4",
+    "context_2"
+  ],
+  "scope": "Only wire capacity and actual source ranges. Alternate selections were NOT executed by the controller or delivered to Host. Their semantic outcome is unmeasured. Original source/code/model outputs unchanged.",
+  "finding": "Current append-only delivery rejects candidate4 after old View/materials. Check finite reselection/observation-vs-delivery support under W4; do not attribute all failures to missing source retrieval.",
+  "model_calls": 0,
+  "compute": {
+    "wall_seconds": 0.9362207306548953,
+    "cpu_seconds": 0.9246048900000003
+  },
+  "ledger_recorded": true,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v19.json"
+}

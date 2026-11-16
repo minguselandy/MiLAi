@@ -1,0 +1,205 @@
+{
+  "status": "HALF_TRAIN_REVIEWED;CAPTURE_ORDER_ALIAS_CHANGE_TESTED;FULL_PLAN_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-26T20:30:05.249892+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v135.json",
+  "previous_turn_classification": "progress:40 states/120pairs and source/record boundary review persisted; runtime entrypoints inspected.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": {
+    "development_parent": "7aece29d",
+    "candidate": "Uncommitted tested working-tree alias allocation change; freeze before real-model use.",
+    "frozen_feedback_method": "2a179b58 unchanged"
+  },
+  "active_processes": [],
+  "branch_execution": "Original train2285/dev142 attempts remain closed. No new actual model calls or outcome repair. Original unknown interrupted usage retained.",
+  "train_quality_reviews": {
+    "status": "RULES_INITIAL_POST_AND_LAYA_INITIAL_ALL128_REVIEWED;FULLPOOL_OPEN",
+    "reviewed_states": 384,
+    "pairs": 1152,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 128
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 96,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 32
+        },
+        "remaining_states": 96
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 192,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 64
+        },
+        "remaining_states": 192
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 384,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 128
+        },
+        "remaining_states": 384
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 323,
+        "unknown": 422,
+        "tie": 238,
+        "left": 169
+      },
+      "delivery": {
+        "right": 410,
+        "unknown": 103,
+        "tie": 435,
+        "left": 204
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 372,
+        "unknown": 422,
+        "tie": 93,
+        "left": 265
+      },
+      "delivery": {
+        "right": 522,
+        "unknown": 103,
+        "tie": 145,
+        "left": 382
+      }
+    },
+    "new_chunks": [
+      "336-351",
+      "352-367",
+      "368-383"
+    ],
+    "new_states": 48,
+    "new_pairs": 144,
+    "new_cost_only_directions": 45,
+    "next_source_first_state": 384,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.075585184,
+    "scope": "Exactly half of selected train states; three of six collector/phase strata, not a complete source32/64 cohort. No independent semantic validation or neural gain claim."
+  },
+  "dev_quality_review_states": 0,
+  "compiled_feedback_rows": 0,
+  "feedback_fits_started": 0,
+  "source_review_method": {
+    "new_states": 48,
+    "same_request_source_reuse": 31,
+    "new_request_or_frontier_reviews": 17,
+    "actual_record339": {
+      "revision": 2,
+      "unit_characters": 629,
+      "all_three_answers_exact": true,
+      "target_message_index": 3,
+      "fixed_later_exact_receipt_index": 4
+    },
+    "reviewer": "Source author, not independent/blind. Exact full-frame success is not target acquisition/decision-time sufficiency."
+  },
+  "semantic_boundary_artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/semantic-boundaries-states-336-383-v1.json",
+  "development_change": {
+    "status": "IMPLEMENTED_AND_MECHANICALLY_VERIFIED;MODEL_EFFECT_UNTESTED",
+    "paths": [
+      "src/milai_lab/methods/query_structure.py",
+      "tests/unit/test_query_structure.py"
+    ],
+    "behavior": "Allocate new aliases while traversing actual capture/presentation order instead of opaque-source-ID order. Existing cached bindings remain unchanged; no text/role/time rewrite or fallback.",
+    "public_schema_API_permissions_canonical_changed": false,
+    "frozen_inputs_outputs_changed": false,
+    "regression_before_change": {
+      "test": "test_new_aliases_follow_capture_order_and_existing_aliases_stay_stable",
+      "exec_session": 95475,
+      "exit_code": 1,
+      "actual_ids": [
+        "e2",
+        "e1",
+        "e0"
+      ],
+      "expected_new_behavior_ids": [
+        "e0",
+        "e1",
+        "e2"
+      ],
+      "CPU": "unmeasured"
+    },
+    "validation": {
+      "query_structure_tests_passed": 25,
+      "related_regressions_passed": 89,
+      "skipped": 1,
+      "skip_reason": "Optional mempursuit dependency absent in test environment.",
+      "ruff": "passed",
+      "mypy": "passed one changed source module",
+      "package_boundary": "passed",
+      "tools_boundary": "passed; existing6grandfathered private dependencies unchanged",
+      "artifacts": [
+        "artifacts/evidence-gap-20261023/alias-order-query-tests-v1.json",
+        "artifacts/evidence-gap-20261023/alias-order-validation-v1.json"
+      ]
+    },
+    "actual_input_probe": {
+      "artifact": "artifacts/evidence-gap-20261023/alias-order-actual-input-v1/result.json",
+      "source_state": 352,
+      "sources": 20,
+      "candidate_order": "e0..e19 matches document0..19 capture presentation",
+      "information_equal_after_explicit_alias_resolution": true,
+      "original_response_not_reinterpreted": true,
+      "real_model_calls": 0,
+      "scripted_callbacks": 2,
+      "original_store_untouched": true
+    },
+    "limitations": "No demonstrated reduction in neural citation errors yet; fresh-cache alias behavior differs, legacy cached aliases retained. F3 extractive View baseline still not implemented."
+  },
+  "semantic_findings": [
+    "Wrong source aliases verified in8delivered Views; changing an alias mapping after generation would be invalid retrospective repair and was not done.",
+    "355 View collapses different credit-score providers;361 Host invents absolute leaseyear while View retains relative date.",
+    "342 historicalteamdate does not supply player career tenures; originalfabrications retained.",
+    "350 Niobe actually listsMarieLeonard as cast, so literal checking avoided a false error label.",
+    "354/374/375/378 have source-supported complementary/multi-hop View results, not blanket View rejection."
+  ],
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-reviews336-383-and-alias-tests-settlement.json",
+    "settled_cpu_seconds": 50.353284997,
+    "settled_fields": 14,
+    "only_expected_compute_delta": true,
+    "generation_embedding_limits_match_last_closed_dev_readout": true,
+    "new_generation_requests": 0,
+    "new_known_generation_tokens": 0,
+    "new_unknown_generation_usage": 0,
+    "unmeasured": "Pre-change expectedfailing test, environment probes, semantic reading/authoring and other exploratory work outside explicit fields remain unknown.",
+    "progress_processing_cpu_pending": 0.0011642910000000013
+  },
+  "next_actions": [
+    "Continue source-first train384:remaining128laya post,128fixedinitial,128fixedpost plus48dev reviews.",
+    "Compile largest full pool once andderive source32/64 beforeallnine192-update fits and saved-modelHostevaluation.",
+    "Freeze tested new development source before separate real-model comparison; retain original2a feedback pipeline and all remainingF1/F2/F3/compact/data/seed/lifecycle/external/figure requirements."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "verification": [
+    "384disjoint states/1152pairs; exactly three of six strata; source32=96/192,source64=192/384.",
+    "45new cost-only directions are not45new task successes; unknown/directional quality unchanged.",
+    "RealSQLite reverse-ID test failedbefore/passedafter; existing cached aliases andReaderreferences preserved.",
+    "14processing fields settledonce; all other ledger fields unchanged and model counters match terminaldev readout."
+  ]
+}

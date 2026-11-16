@@ -1,0 +1,169 @@
+{
+  "status": "PHASE15_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T06:31:43.766957+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v14.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 1505,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed1-v1",
+      "owner_pid": 2963709,
+      "child_pid": 2963710,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 0,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m2-fixed-context-families64to96-teacher-v1",
+      "owner_pid": 2983627,
+      "child_pid": 2983628,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "closed_states": 4,
+      "unresolved_states": 0,
+      "masked_teacher_candidates": 3
+    }
+  ],
+  "M4_DEV32_firsts_closed": {
+    "status": "COMPLETED_WITH_FAILURES",
+    "closed_readouts": 102,
+    "failed_readouts": 3,
+    "chat_invocations": 14,
+    "reused_readouts": 88,
+    "generation_delta": {
+      "charged_tokens": 51445,
+      "known_tokens": 51445,
+      "unknown_usage": 0
+    },
+    "compute": {
+      "cpu_seconds": 1.8649067490000002,
+      "wall_seconds": 206.83650902379304,
+      "runs": 1
+    }
+  },
+  "M4_bound_evaluation": "/data/milai-experiments/20261111-scalable-evidence/m4-dev32-comparison-witness-v1",
+  "M4_new_native_packets": 13,
+  "M4_reused_native_packets": 89,
+  "M4_scope": "64commonDEVstates, 102logicaloutcomes.14newHostcalls because one reused native packet had no previous Host outcome;88actualfirstHostoutcomes reused including failures. Semanticreview stillpending; do not infer gain from execution.",
+  "M6_notice_closed": {
+    "source": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-arrival-notice-v1",
+    "records": [
+      {
+        "family": "memops_A05",
+        "status": "FAILED",
+        "new_HTTP_responses": 1,
+        "new_controller_decisions": 0,
+        "notice_metadata": {
+          "source_events_supplied_this_turn": 1,
+          "roles": {
+            "user": 1
+          }
+        },
+        "generation_delta": {
+          "charged_tokens": 24213,
+          "known_tokens": 24213,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "family": "memops_C01",
+        "status": "COMPLETED",
+        "new_HTTP_responses": 2,
+        "new_controller_decisions": 8,
+        "notice_metadata": {
+          "source_events_supplied_this_turn": 6,
+          "roles": {
+            "assistant": 3,
+            "user": 3
+          }
+        },
+        "generation_delta": {
+          "charged_tokens": 10618,
+          "known_tokens": 10618,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "family": "memops_C23",
+        "status": "COMPLETED",
+        "new_HTTP_responses": 1,
+        "new_controller_decisions": 0,
+        "notice_metadata": {
+          "source_events_supplied_this_turn": 1,
+          "roles": {
+            "user": 1
+          }
+        },
+        "generation_delta": {
+          "charged_tokens": 7830,
+          "known_tokens": 7830,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "family": "memops_D19",
+        "status": "COMPLETED",
+        "new_HTTP_responses": 2,
+        "new_controller_decisions": 3,
+        "notice_metadata": {
+          "source_events_supplied_this_turn": 8,
+          "roles": {
+            "assistant": 4,
+            "user": 4
+          }
+        },
+        "generation_delta": {
+          "charged_tokens": 15770,
+          "known_tokens": 15770,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "family": "memops_D21",
+        "status": "COMPLETED",
+        "new_HTTP_responses": 2,
+        "new_controller_decisions": 8,
+        "notice_metadata": {
+          "source_events_supplied_this_turn": 1,
+          "roles": {
+            "user": 1
+          }
+        },
+        "generation_delta": {
+          "charged_tokens": 8856,
+          "known_tokens": 8856,
+          "unknown_usage": 0
+        }
+      }
+    ],
+    "author_review": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-arrival-notice-v1/author-review-v1.json",
+    "grades": {
+      "execution_failed": 1,
+      "incorrect_stale_or_missing_scope": 3,
+      "incomplete": 1
+    },
+    "scope": "Exact firstproviderwire equals declaredmetadata-only condition. Increased retrieval inC01/D19 didnotdelivercurrentupdates: actualnewpackets containoldassistant echoes/pastquestions oroldassistant summary+irrelevantsource. No View operations; no taskbenefit established. No-noticefirsts retained, Sourceauthor nonblind/nonindependent, HostRNGunmatched."
+  },
+  "seed1_replication": {
+    "large_plan": "/data/milai-experiments/20261111-scalable-evidence/s1-op3k-seed1-v1-plan.json",
+    "repeat_plan": "/data/milai-experiments/20261111-scalable-evidence/s1-repeat32-seed1-v1-plan.json",
+    "repeat_status": "prepared_not_launched",
+    "scope": "Original3kvs254repeat approximate-compute comparison, same sourcefiles/init/semanticrecipe, newseed1. Both usevalidatedtokenizationreuse andextra recovery saves asdeclaredengine changes. All original evaluationpoints retained, no newconfirmation."
+  },
+  "remaining": [
+    "Finish M4DEV semantic comparison usingpriorcanonicaljudgments andannotatingonly14newHostoutcomes",
+    "Close next64TRAINteacher andexpandremaining1171preparedfirstendpoints/adequateS2",
+    "Finish seed1large thenrepeatcontrol, seed2decisive comparison stillpending",
+    "Finish original36k3390, fullSource/Viewcontinuityandrole/timelearning, frozennewconfirmation96andfullcost/generalization"
+  ],
+  "cost_scope": "Nativejobs self-meter; pendingprep/entryresiduals must be settled without doublecounting wholechild/nativeCPU. Unknown unmeasured overhead notzero."
+}

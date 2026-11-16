@@ -1,0 +1,149 @@
+{
+  "status": "ACTIVE;AUDITED_DEVELOPMENT_CURVE_PNG_SVG_CSV_EXPORTED;MATCHING_TRAIN_RUNNING",
+  "observed_at": "2026-10-23T19:44:58.852684+00:00",
+  "source_version": "fb50dd1d",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v23.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "verified wait; this turn improved existingplot exporter and renderedchecked actualdevelopment data",
+  "figure": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v1",
+    "png": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v1/curve.png",
+    "svg": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v1/curve.svg",
+    "primary_csv": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v1/curve.csv",
+    "source_metadata": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v1/plot.json",
+    "verification": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v1/verification.json",
+    "scope": "Original source256 complete-action seed0 development curve only. In-memoryGPU train/dev and matchingGPU gap labelled separately fromsavedCPUdev/selection. CPUmatchingtrain/gap notinvented; u64unknown791 annotated. Secondaryfeedback is diagnostic,not selection. Not allsource-scaling/Host/state-binding/lifecycle mainresults.",
+    "primary_csv_rows": 21,
+    "gpu_rows": 14,
+    "saved_cpu_dev_rows": 7,
+    "saved_cpu_train_rows": 0,
+    "visual_review": "MainPNG inspected, threepanels/legends/caveats legible withnoclipping"
+  },
+  "plot_exporter": {
+    "path": "tools/plot_operation_curve.py",
+    "change": "PrimaryCSV export plus explicit saved runtimegap andpendingtrain notes. Missing savedresults are labelled notsupplied andtrainstatus null,not false. Default GPUpath remains available. No model/scorer/selection condition changes."
+  },
+  "validation": {
+    "actual_render": "PASS PNG/SVG",
+    "primary_csv_source_values": "PASS all21rows",
+    "default_no_saved_results": "PASS14GPUrows/pendingstatusnull",
+    "ruff": "PASS",
+    "scoped_mypy": "PASS oneplottool withactualsystemPython andexisting exclusions",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "new_unit_tests": "none;actualartifact validation used",
+    "full_suite": "NOT_RUN",
+    "remote_CI": "NOT_RUN"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train",
+      "driver_json": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-driver.json",
+      "driver_pid": 798921,
+      "child_pid": 798926,
+      "session": 52857,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 244,
+      "planned": 4886,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_MATCHING_SELECTED_TRAIN_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v23.json",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v1/plot.json",
+        "field": "compute.cpu_seconds",
+        "cpu_seconds": 4.847607986
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v1/verification.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0029806749999999986
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/operation-curve-plot-validation-v1/default-render/plot.json",
+        "field": "compute.cpu_seconds",
+        "cpu_seconds": 4.197527434
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/operation-curve-plot-validation-v1/default-verification.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.00025857599999999994
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/operation-curve-plot-validation-v1/package-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 3.912638,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/operation-curve-plot-validation-v1/ruff-final.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.04112299999999999,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/operation-curve-plot-validation-v1/ruff.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.5191979999999999,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/operation-curve-plot-validation-v1/tools-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 7.929686,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/operation-curve-plot-validation-v1/typing-final.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.532617,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/operation-curve-plot-validation-v1/typing.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 5.0407649999999995,
+        "exit_code": 0
+      }
+    ],
+    "measured_cpu_seconds": 27.024401671,
+    "ledger_recorded": false,
+    "scope": "Main actual plot/default-path plot, CSV verification and static/boundary checks only. No model weights/forward/HTTP; original inference CPU not rebilled. Other unmeasured authoring/startup/reporting remains unknown.",
+    "no_sha_validation": true
+  },
+  "remaining": "Matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured. New Host instruction condition still needs a declared real comparison; no F1/F2/Host quality fix claimed. Originalfeedback initialization now bound; collection, state/source-grounded review and allfits remain unexecuted.",
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Matching4886selected-train is sole neuraljob. No secondneural or offline settlement whilelive; verify actualPID/files, never stale-session restart. Afterterminal run verify_selected_train_v1.py using originalfrozenhelpers, reconcile terminalcosts, then unchanged remaining plan. Allolddevcandidates and Host-only diagnostic stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

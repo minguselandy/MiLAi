@@ -1,0 +1,119 @@
+{
+  "status": "PHASE5_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-10T20:59:30.692699+00:00",
+  "previous_phase": "/data/milai-experiments/20261111-scalable-evidence/progress-v4.json",
+  "code_commit": "2306a4f2",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op10k-seed0-v1",
+      "exec_session": 33781,
+      "pid": 468718,
+      "actual_argv": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/train_bounded_laya.py /data/milai-experiments/20261111-scalable-evidence/op-10k-v1 /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only/checkpoints/update-16 /data/milai-experiments/20261111-scalable-evidence/s1-op10k-seed0-v1 --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --compute-phase milai_scalable_s1_op10k_seed0_20261111_v1 --task memory_operation --objective set --operation-state shared_actions --max-len 16384 --head-max-len 2048 --parallel-mode single --precision bf16 --epochs 3 --optimizer-updates 945 --eval-at-updates 158 315 630 945 --effective-batch-rows 32 --micro-batch-size 8 --length-bucketed-microbatches --microbatch-padded-token-target 8192 --eval-batch-size 4 --log-every-updates 25 --encoder-lr 1e-5 --head-lr 1e-4 --shuffle-options --gradient-checkpointing --scheduler warmup-cosine --save-training-state-every 250 --dev-data /data/milai-experiments/20261111-scalable-evidence/op-3k-v1/dev.jsonl --full-dev-data /data/milai-experiments/20261111-scalable-evidence/op-3k-v1/dev-full.jsonl --full-dev-at 315 630 945 --full-passes ",
+      "loaded_source_commit": "cececfb7",
+      "physical_gpu": "3",
+      "status": "RUNNING",
+      "optimizer_updates": 283,
+      "planned_optimizer_updates": 945,
+      "owner": "/data/milai-experiments/20261111-scalable-evidence/s1-op10k-seed0-v1-owner.json"
+    },
+    {
+      "name": "s1-op36k-seed0-v1",
+      "exec_session": 52995,
+      "pid": 769163,
+      "actual_argv": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/train_bounded_laya.py /data/milai-experiments/20261111-scalable-evidence/op-36k-v1 /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only/checkpoints/update-16 /data/milai-experiments/20261111-scalable-evidence/s1-op36k-seed0-v1 --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --compute-phase milai_scalable_s1_op36k_seed0_20261111_v1 --task memory_operation --objective set --operation-state shared_actions --max-len 16384 --head-max-len 2048 --parallel-mode single --precision bf16 --epochs 3 --optimizer-updates 3390 --eval-at-updates 565 1130 2260 3390 --effective-batch-rows 32 --micro-batch-size 8 --length-bucketed-microbatches --microbatch-padded-token-target 8192 --eval-batch-size 4 --log-every-updates 25 --encoder-lr 1e-5 --head-lr 1e-4 --shuffle-options --gradient-checkpointing --scheduler warmup-cosine --save-training-state-every 250 --dev-data /data/milai-experiments/20261111-scalable-evidence/op-3k-v1/dev.jsonl --full-dev-data /data/milai-experiments/20261111-scalable-evidence/op-3k-v1/dev-full.jsonl --full-dev-at 1130 2260 3390 --full-passes --aux-dev-data /data/milai-experiments/20261111-scalable-evidence/musique-public-dev-v2/states.jsonl ",
+      "loaded_source_commit": "4bab6388",
+      "physical_gpu": "2",
+      "status": "RUNNING",
+      "optimizer_updates": 0,
+      "planned_optimizer_updates": 3390,
+      "owner": "/data/milai-experiments/20261111-scalable-evidence/s1-op36k-seed0-v1-owner.json"
+    },
+    {
+      "name": "s1-learner-train160-v1",
+      "exec_session": 31902,
+      "pid": 818846,
+      "actual_argv": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/collect_qasper_operation_states.py /data/milai-experiments/20261111-scalable-evidence/qasper-expanded-population-v1/new-family-histories.json /data/milai-experiments/20261111-scalable-evidence/qasper-expanded-population-v1/new-family-controls.jsonl /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b64-collection-plan-v2/pilot8/config.json /data/milai-experiments/20261111-scalable-evidence/s1-learner-train160-v1 --families 160 --requests-per-family 1 --max-steps 8 --branch-families 64 --collector-checkpoint /data/milai-experiments/20261111-scalable-evidence/s1-op3k-seed0-v1/checkpoints/update-101 --collector-device cpu --reuse-source-collections /data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-a-v1 /data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-b-v1 /data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-c-v1 ",
+      "loaded_source_commit": "17269285",
+      "physical_gpu": null,
+      "status": "RUNNING",
+      "completed_families": 8,
+      "planned_families": 160,
+      "raw_states": 37,
+      "branch_packets": 21,
+      "model_calls": 37,
+      "owner": "/data/milai-experiments/20261111-scalable-evidence/s1-learner-train160-v1-owner.json"
+    },
+    {
+      "name": "s2-reached-train160-families2to8-readouts-v1",
+      "exec_session": 50832,
+      "pid": 862591,
+      "status": "RUNNING",
+      "planned_readouts": 30,
+      "closed_readouts": 3,
+      "failed_readouts": 0,
+      "source_families": 6,
+      "actual_states": 12,
+      "run": "/data/milai-experiments/20261111-scalable-evidence/s2-reached-train160-families2to8-readouts-v1/run.json",
+      "cost": "native Host runner bills CPU/generation once"
+    }
+  ],
+  "feedback_plan": "/data/milai-experiments/20261111-scalable-evidence/s1-learner-train160-v1-plan.json",
+  "new_capability": "Frozen learner reached-state collection with original bank reuse; exact prefix replay; current/rules/parameter alternative with shared finite continuation; one original outcome per full binding; matched source/state/menu and option-shuffle IDs for feedback versus SFT.",
+  "closed_prefix": {
+    "families": 2,
+    "states": 4,
+    "actual_unique_bindings": 10,
+    "policy_positions": 12,
+    "completed_first_readouts": 10,
+    "failed_readouts": 0,
+    "known_generation_tokens": 44373,
+    "unknown_generation_usage": 0,
+    "reviewer": "Root, nonblind/nonindependent source-grounded author review",
+    "complete_and_supported_unique_readouts": 1,
+    "material_sufficient_unique_packets": 1,
+    "semantic_directional_pairs": 2,
+    "semantic_unknown_pairs": 6,
+    "states_with_direction": 1,
+    "matched_sft_states": 1,
+    "witness_feedback": "/data/milai-experiments/20261111-scalable-evidence/s2-reached-train160-prefix2-witness-v2",
+    "semantic_feedback": "/data/milai-experiments/20261111-scalable-evidence/s2-reached-train160-prefix2-reviewed-v2",
+    "author_review": "/data/milai-experiments/20261111-scalable-evidence/s2-reached-train160-prefix2-author-review-v1.json",
+    "official_scoring": "/data/milai-experiments/20261111-scalable-evidence/s2-reached-train160-prefix2-native-scoring-v1/summary.json",
+    "observation": "Learner READ obtains actual CAIS dataset paragraph and Host correctly names real-world Chinese AI speaker-system utterances. Rules/alternative do not deliver that domain here. Other source remains unresolved; no feedback model has been fitted.",
+    "limitations": "2 TRAIN families, correlated states, not held-out or autonomous Host. Supports collection/feedback functionality, not learning increment or generalized advantage.",
+    "retained_previous_compilations": "v1 retained; v2 only aligns SFT state IDs used for option permutations. No new execution, gold or labels changed."
+  },
+  "validation": {
+    "latest_related_tests": 14,
+    "prior_native_reference_tests": 3,
+    "actual_prefix_replays": 4,
+    "matched_before_menu_and_sampling_ids": true,
+    "ruff": "pass",
+    "package_boundary": "pass",
+    "tools_boundary": "six unchanged old dynamic-import findings in own_a100_lme_execution_v2.py and own_a100_lme_observation_v3.py"
+  },
+  "compute_receipt": "/data/milai-experiments/20261111-scalable-evidence/s2-prefix2-compute-v1.json",
+  "remaining": [
+    "Finish live10k/36k curves without restarting active processes",
+    "Finish learner TRAIN160 and the30 active readouts; next preparation starts offset8, preserve prior first8 families",
+    "Grow real feedback from actual states, report shortfalls; fit matched SFT/pair models only after adequate known support; keep proxy and semantic targets distinct",
+    "Extend constrained/known-evidence I2; one empty-K TRAIN success is not conditional generalization",
+    "Close own-state and continuous-source/View applications, decisive seeds and frozen new confirmation96",
+    "Retain all first failures, unknowns, source roles and full task/cost scope; no Product adoption proven"
+  ],
+  "external_changes": {
+    "Product_API_permissions_Canonical": false,
+    "remote_push": false,
+    "services_restarted": false
+  },
+  "next_feedback_family_offset": 8,
+  "pending_measured_preparation_cost": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/s2-reached-train160-families2to8-v1/run.json",
+    "compute": {
+      "cpu_seconds": 5.832851179,
+      "wall_seconds": 5.83270528446883
+    },
+    "recorded": false
+  }
+}

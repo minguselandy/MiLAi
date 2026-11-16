@@ -1,0 +1,250 @@
+{
+  "status": "PHASE39_PROGRESS_CONTINUOUS_COST_QUALITY_JOIN_AND_STOPPING_SUPPORT_DIAGNOSTIC",
+  "observed_at_utc": "2026-11-11T20:57:25.364355+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v38.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "qasper-confirm96-s3-own-readouts-v1",
+      "owner_pid": 1948359,
+      "child_pid": 1948360,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "actual_argv_checked": true,
+      "process_alive": true,
+      "closed_readouts": 46,
+      "failed_readouts": 3
+    },
+    {
+      "name": "m2-first160-adequate-cost-seed0-v1",
+      "owner_pid": 1941204,
+      "child_pid": 1941205,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "actual_argv_checked": true,
+      "process_alive": true,
+      "optimizer_updates": 34,
+      "planned_optimizer_updates": 51
+    }
+  ],
+  "continuous_cost_quality": {
+    "artifact": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-resource-quality-v1/summary.json",
+    "conditions": {
+      "source-reference": {
+        "positions": 80,
+        "sources": 16,
+        "answer_grades": {
+          "C": 17,
+          "W": 28,
+          "Q": 21,
+          "F": 14
+        },
+        "execution_failed_positions": 14,
+        "generation": {
+          "charged_tokens": 702309,
+          "known_tokens": 702309,
+          "unknown_usage": 0
+        },
+        "receipt_prompt_tokens": 405282,
+        "receipt_completion_tokens": 297027,
+        "HTTP_responses": 122,
+        "NN": 196,
+        "retrievals": 45,
+        "application_whole_child_cpu_seconds": 401.189158,
+        "application_native_cpu_contained": 176.11494685092703,
+        "application_paid_residual_cpu_contained": 225.07421114907297,
+        "application_sum_job_wall_seconds": 2381.740609973669,
+        "message_wall_all_firsts_seconds": {
+          "median": 22.67291888408363,
+          "p90_linear_interpolation": 56.004777336400004,
+          "maximum": 132.4055554009974,
+          "sum": 2336.9642580254003
+        },
+        "incremental_fit": {
+          "cpu_seconds": 939.1752889149999,
+          "wall_seconds": 871.3696263534948,
+          "train_sequence_rows": 378,
+          "train_input_tokens": 2208654
+        },
+        "measured_fit_plus_application_cpu_seconds": 1340.364446915,
+        "cost_scope": "CPU fit includes its own declared evaluation; application whole child includes native CPU plus already-paid residual, not an added third charge. Fits initialized from shared36ku1130; shared upstream training/data/Host server GPU time and parent preparation are outside these totals."
+      },
+      "continued-replay": {
+        "positions": 80,
+        "sources": 16,
+        "answer_grades": {
+          "C": 22,
+          "W": 23,
+          "F": 19,
+          "Q": 16
+        },
+        "execution_failed_positions": 19,
+        "generation": {
+          "charged_tokens": 665290,
+          "known_tokens": 665290,
+          "unknown_usage": 0
+        },
+        "receipt_prompt_tokens": 315297,
+        "receipt_completion_tokens": 349993,
+        "HTTP_responses": 103,
+        "NN": 155,
+        "retrievals": 23,
+        "application_whole_child_cpu_seconds": 355.43048200000004,
+        "application_native_cpu_contained": 153.0182253691005,
+        "application_paid_residual_cpu_contained": 202.41225663089955,
+        "application_sum_job_wall_seconds": 2654.2982616210356,
+        "message_wall_all_firsts_seconds": {
+          "median": 27.07195677421987,
+          "p90_linear_interpolation": 55.53573753964156,
+          "maximum": 113.90554494131356,
+          "sum": 2610.5191914187744
+        },
+        "incremental_fit": {
+          "cpu_seconds": 944.52961999,
+          "wall_seconds": 877.2325583137572,
+          "train_sequence_rows": 378,
+          "train_input_tokens": 2214057
+        },
+        "measured_fit_plus_application_cpu_seconds": 1299.96010199,
+        "cost_scope": "CPU fit includes its own declared evaluation; application whole child includes native CPU plus already-paid residual, not an added third charge. Fits initialized from shared36ku1130; shared upstream training/data/Host server GPU time and parent preparation are outside these totals."
+      }
+    },
+    "ratios": {
+      "HTTP_responses": 1.1844660194174756,
+      "NN": 1.264516129032258,
+      "retrievals": 1.9565217391304348,
+      "application_whole_child_cpu_seconds": 1.1287415635893603,
+      "application_sum_job_wall_seconds": 0.8973146101972316,
+      "measured_fit_plus_application_cpu_seconds": 1.031081219233689,
+      "known_generation_tokens": 1.0556434036284927
+    },
+    "receipt_ledger_mismatches": 0,
+    "cost_scope": "Matched GPU3 FP32/4-thread application arms, same16 exogenous Sources and80 positions each; first failures retained, Host RNG unmatched. Whole application CPU and client latency, provider tokens and separate incremental fit shown jointly. No conversion of job wall into GPU busy time or currency. Source review is Root nonblind/nonindependent; these exposed generated Sources do not establish natural or unseen-source generalization. No full-cost benefit inferred from one component.",
+    "not_included_or_unknown": [
+      "Shared S1 training/data-production allocation",
+      "Host-server GPU activity/energy/money",
+      "Parent orchestration and unmeasured author/preparation CPU",
+      "Separate post-fit retention evaluation; independent of this application comparison"
+    ],
+    "interpretation": "Source-reference fewercompleteanswers17vs22 withmoreknownGen5.56pct andapplicationCPU12.87pct; jobwall10.27pctless. No overallquality/costbenefit; lowerwall notGPUbusyandRNGunmatched. Measuredincrementalfit+appCPU1340.364vs1299.960 excludescommonupstream/HostGPU/unmeasuredparents."
+  },
+  "existing_model_cost_train_diagnostic": {
+    "status": "CLOSED_EXISTING_MODEL_TRAIN_SUPPORT_DIAGNOSTIC",
+    "methods": {
+      "original_full_feedback": {
+        "all94": {
+          "pairs": 94,
+          "ordered_cost_winner_above_loser": 41,
+          "equal_scores": 0,
+          "selected_cost_winner": 16,
+          "selected_cost_loser": 28,
+          "selected_outside_this_pair": 50
+        },
+        "HANDOFF_over_READ18": {
+          "pairs": 18,
+          "ordered_cost_winner_above_loser": 10,
+          "equal_scores": 0,
+          "selected_cost_winner": 0,
+          "selected_cost_loser": 1,
+          "selected_outside_this_pair": 17
+        }
+      },
+      "head_only": {
+        "all94": {
+          "pairs": 94,
+          "ordered_cost_winner_above_loser": 41,
+          "equal_scores": 0,
+          "selected_cost_winner": 34,
+          "selected_cost_loser": 41,
+          "selected_outside_this_pair": 19
+        },
+        "HANDOFF_over_READ18": {
+          "pairs": 18,
+          "ordered_cost_winner_above_loser": 8,
+          "equal_scores": 0,
+          "selected_cost_winner": 8,
+          "selected_cost_loser": 4,
+          "selected_outside_this_pair": 6
+        }
+      }
+    },
+    "source": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-adequate-observed-cost-data-v1/changes.json",
+    "scope": "Both existingmodels evaluated on same450originalrows beforenewcostfitcloses;94derivedquality-qualifiedobserved-costpairs. Pairwise relationships sharestates/sources; outsidepair choices areunjudged, notfailures. TRAINdiagnostic notDEV/Hostadvantage orconfirmationselection. Newcostfit final51 remainsfixed. No newmodelcalls orrawlabelchange.",
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 0.244540107,
+      "wall_seconds": 0.2446043062955141
+    }
+  },
+  "new_cost_fit_closed_intermediate_points": [
+    {
+      "update": 17,
+      "counts": {
+        "labelled": 278,
+        "accepted": 87,
+        "handoff_outside_reviewed_preference": 10,
+        "masked": 202
+      },
+      "family_macro": 0.363056586270872
+    }
+  ],
+  "cost_dev_ready": {
+    "native_plan": "/data/milai-experiments/20261111-scalable-evidence/adequate-cost-dev32-choices-v1-plan.json",
+    "scorers": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-adequate-cost-dev64-scorers-v1.json",
+    "existing_native_union": "/data/milai-experiments/20261111-scalable-evidence/head-only-existing-dev-packet-union-v1",
+    "native_packets": 198,
+    "first_cache": "/data/milai-experiments/20261111-scalable-evidence/adequate-cost-existing-dev-first-cache-v1",
+    "canonical_physical_firsts": 151,
+    "scope": "Ready only; endpointscorer first aftercostfitcloses. Fullbindingselection fixed64oldDEV/4methods. Existingfirstcache149+2 newlyclosedheadoutcomes, no retries. Nativepreparer onlynewbindings, thenactualReaderreuse/2newteacherspriortransfer."
+  },
+  "confirmation": "S3own96active; baseline96closed0fail/scale96closed5fail; S3old96notstarted. No quality/answers inspected. Frozenfirst/repetition/8Sourcepanel unchanged. LME32stillready notstarted.",
+  "validation": "160unique result paths andnonoverlappingmessage ledgerrevisionintervals; receipt knownusage exactlymatchesmessageledger inall160, nativeCPU+already-paidresidual equalsclosedwholechildperall8runs. Qualitycounts/knownGen matchexistingfull16closedcomparison. ExistingTRAINpredictionsrow/order/fullmenuIDs verified; no newmodelcalls todiagnostic. No trackedruntimecodechange ornewfullsuite.",
+  "cost_scope": "Read-only originalledger, no newbilling whileReaderholdslease. Newcostjoin2.143477424CPU/cache.033501543CPU/diagnostic measuredCPU pendingstagebatch; nativefit/Reader selfbill. No whole/native duplication.",
+  "next": [
+    "Atcostfitclosed run run_adequate_cost_dev64_score_v1.py; afterendpointscoreclosed use run_owned_plan_v1.py adequate-cost-dev32-choices-v1; thencompareactualbinding/readout/judgments withcache151",
+    "WaitactualS3ownReaderterminal; ensurecostfitfinalbillingnotpending beforeS3old96Reader; no automaticqueue",
+    "Closeconfirmationfullfirstmatrix, preplanned32secondcalls, nativeF1/8Sourceactualreview; runLME32bothfixednominees/nativeJudge; synthesizefullcost/generalizationchain"
+  ],
+  "boundaries": "GoalACTIVE/incomplete, priorgoalturnprogress. NoSHA/fingerprints/subagents/Product/API/permissions/Canonicalchange/service restart/push. ActualfirstfailuresunknownsSource rolesretained. No confirmationtuning.",
+  "closed_fit_resource_table": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/closed-fit-resource-table-v1",
+    "summary": {
+      "status": "MEASURED_CLOSED_TOP_LEVEL_FIT_SEGMENTS_INDEXED",
+      "jobs": 28,
+      "by_status": {
+        "FAILED": 1,
+        "COMPLETED": 27
+      },
+      "by_category": {
+        "research": 21,
+        "startup": 2,
+        "engineering": 5
+      },
+      "measured_cpu_seconds_sum": 237841.05394154903,
+      "gpu_job_resource_hours_sum_NOT_busy_hours": 44.017195697034346,
+      "pending_jobs": [
+        {
+          "run": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-adequate-cost-seed0-v1",
+          "status": "RUNNING",
+          "updates_observed": 34,
+          "compute_exists": false
+        }
+      ],
+      "resumed_segment_rows": [],
+      "scope": "Snapshot of closed native fit compute files directly under the study artifact root, including startup/engineering/retained failure as separate categories. A measured resource table, not the entire goal cost or a hardware-matched method comparison. Initial model lineage is recorded per row; shared upstream fitting is not silently charged again for every descendant. Evaluation schedules differ. No cost from live or billing-wait jobs counted as closed.",
+      "excluded_or_unknown": [
+        "Data production, retrieval/Host/teacher and standalone evaluation",
+        "Historical shared initialization and any nested resume-equivalence engineering jobs",
+        "Parent process/unmeasured author work",
+        "Actual GPU activity, energy, monetary prices"
+      ],
+      "no_sha_validation": true,
+      "ledger_write": false,
+      "compute": {
+        "cpu_seconds": 0.015186702999999996,
+        "wall_seconds": 0.015191333368420601
+      }
+    },
+    "scope": "Nativefitcostinventoryonly; notadditiveto samealreadyrecordedledger phases orwholechildowners, no fullgoaltotalclaim."
+  }
+}

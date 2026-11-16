@@ -1,0 +1,29 @@
+{
+  "status": "ACTUAL_SELECTED_INPUT_BOUNDARY_CLEAR_WITH_UNUSED_FAMILY_TITLE_EXCEPTION",
+  "timing": "Recorded after source-first train/dev review and before any new model forward or training.",
+  "original_family_reservation_unchanged": true,
+  "selected_questions_unchanged": true,
+  "whole_family_rows_reserved": 96,
+  "actual_evaluation_rows": 28,
+  "whole_family_native_target_boundary_clear": true,
+  "whole_family_reviewed_target_article_title_disjoint": false,
+  "actual_selected_train_dev_reference_and_reviewed_target_boundary_clear": true,
+  "exception": {
+    "development_row": 16,
+    "development_family": "musique-family-000503",
+    "already_reviewed_article_title": "Territorial evolution of the United States",
+    "reserved_family": "candidate-family-000523",
+    "unused_family_variant_row": 4318,
+    "actual_selected_rows_for_that_family": [
+      671,
+      2486
+    ],
+    "same_literal_text": false,
+    "article_absent_from_all28selected_reserved_pools": true
+  },
+  "execution_scope": "Retain full-family ID quarantine and record the broader article-title finding. The frozen28model inputs pass both directions of native/reviewed target-to-pool checks by literal text and title. An unused family variant sharing a different extract of a broad article is disclosed rather than changing the frozen cohort or claiming all family text is unexposed.",
+  "remaining_check": "Reserved source-semantic proofs are reviewed only after method freeze,then checked against actual train/dev inputs before interpreting transfer results.",
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "model_calls": 0
+}

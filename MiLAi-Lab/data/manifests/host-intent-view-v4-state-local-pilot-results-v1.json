@@ -1,0 +1,115 @@
+{
+  "status": "RESEARCH_TRAJECTORY_CLOSED_FUNCTIONAL_MEMORY_DELIVERY_INCOMPLETE",
+  "source_version": "e19ae28f",
+  "pid": 2357783,
+  "exec_session": 45776,
+  "exit_code": 0,
+  "upstream_version": "5644b1838d96bc4483da29642d058ecaa6f80f7f",
+  "domain": "travel",
+  "split": "train",
+  "task_id": "1-cancel_economy_domestic",
+  "runs": 1,
+  "official_protocol": false,
+  "sha_validation_executed": false,
+  "models": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 1,
+    "max_tokens": 8192,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 24,
+    "response_format": null,
+    "enable_thinking": true
+  },
+  "judge": "No LLM task/UX judge; original deterministic state-requirement check only",
+  "memory_calls": 1,
+  "delivered_materials": 0,
+  "complete_wire_tokens": [
+    63
+  ],
+  "model_requests": 10,
+  "generation_tokens": 35155,
+  "unknown_usage_delta": 0,
+  "embedding_tokens": 0,
+  "domain_tool_calls": [
+    {
+      "name": "get_user_details",
+      "arguments": {
+        "user_id": "user_002"
+      }
+    },
+    {
+      "name": "get_user_reservations",
+      "arguments": {
+        "user_id": "user_002"
+      }
+    },
+    {
+      "name": "get_booking",
+      "arguments": {
+        "booking_id": "BK-1000"
+      }
+    },
+    {
+      "name": "get_booking",
+      "arguments": {
+        "booking_id": "BK-1001"
+      }
+    },
+    {
+      "name": "cancel_booking",
+      "arguments": {
+        "booking_id": "BK-1000"
+      }
+    },
+    {
+      "name": "cancel_booking",
+      "arguments": {
+        "booking_id": "BK-1000",
+        "confirm": true
+      }
+    }
+  ],
+  "state_score": {
+    "score": 0,
+    "reasoning": "State requirements failed: missing_assertions=3",
+    "details": {
+      "missing_assertions": [
+        {
+          "entity_type": "bookings",
+          "record_key": "BK-1001",
+          "field": "cancellation_fee",
+          "value": 50
+        },
+        {
+          "entity_type": "bookings",
+          "record_key": "BK-1001",
+          "field": "refund_amount",
+          "value": 130
+        },
+        {
+          "entity_type": "bookings",
+          "record_key": "BK-1001",
+          "field": "status",
+          "value": "cancelled"
+        }
+      ]
+    }
+  },
+  "actual_change": "BK-1000 cancelled with52 fee/298 refund after explicit simulated-user confirmation. BK-1001 connection remained confirmed; three required assertions missing.",
+  "memory_failure": "fixed_context chose context_0 and context_2; both whole historical conversations exceeded2048-token envelope. They became observed but not selected, and range dedup left no further READ actions; HANDOFF returned empty evidence.",
+  "separate_failures": [
+    "Material packaging/control: no substantive MiLAi evidence reached Host.",
+    "Task scope: Host omitted the connecting flight despite retrieving its live booking record. Local simulator did not press for the missing connection."
+  ],
+  "scope": "Tool registration, receipt transport, real sandbox effects and metering work. Empty receipt consumption is not successful evidence support. One exposed train research variant, not official or learned-policy efficacy.",
+  "compute": {
+    "wall_seconds": 47.64807691797614,
+    "cpu_seconds": 1.8272456090000002,
+    "runs": 1
+  },
+  "compute_directly_recorded": true,
+  "artifacts": "artifacts/host-intent-retrieval-v3/view-v4-state-local-travel-pilot-v1",
+  "next": "Inspect smaller existing legal packs/source-fragment delivery on the same public historical material; preserve this first result. Do not add case IDs, connecting-flight answers or hidden state requirements to the retrieval/Host inputs."
+}

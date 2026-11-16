@@ -1,0 +1,94 @@
+{
+  "status": "COMPLETED",
+  "independent_queries": 1,
+  "conditions": [
+    {
+      "condition": "empty",
+      "indices": [],
+      "correct": false,
+      "reader_input_tokens": 365
+    },
+    {
+      "condition": "old_only",
+      "indices": [
+        2
+      ],
+      "correct": false,
+      "reader_input_tokens": 5041
+    },
+    {
+      "condition": "new_only",
+      "indices": [
+        0
+      ],
+      "correct": true,
+      "reader_input_tokens": 5764
+    },
+    {
+      "condition": "both",
+      "indices": [
+        2,
+        0
+      ],
+      "correct": true,
+      "reader_input_tokens": 10451
+    },
+    {
+      "condition": "equivalent_new",
+      "indices": [
+        2,
+        9
+      ],
+      "correct": true,
+      "reader_input_tokens": 10451
+    },
+    {
+      "condition": "both_plus_unrelated",
+      "indices": [
+        2,
+        0,
+        108
+      ],
+      "correct": true,
+      "reader_input_tokens": 14997
+    }
+  ],
+  "equivalent_source_intervals": true,
+  "costs": {
+    "stages": {
+      "reader": {
+        "responses": 6,
+        "known_tokens": 54409,
+        "unknown_usage_responses": 0
+      },
+      "judge": {
+        "responses": 6,
+        "known_tokens": 4437,
+        "unknown_usage_responses": 0
+      }
+    },
+    "requests_without_response": [],
+    "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+  },
+  "ledger_delta": {
+    "generation_requests": 12,
+    "generation": {
+      "known_tokens": 58846,
+      "charged_tokens": 58846,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "source_review": "May23 reports27:12; May30 says the existing personal best is25:50 and hopes to beat it. The hope is about a future improvement, not uncertainty in the stated existing record. Both sources and allsix complete answers reviewed.",
+  "findings": [
+    "New-only and old+new answer25:50; old-only incorrectly retains27:12 for the current task.",
+    "Equivalent parent entry also gives25:50; do not mark one pack index uniquely necessary.",
+    "Unrelated-party source adds input and the Reader no longer selects a latest record, yet original Judge returnsYes. Keep both the original label and author disagreement; this transition is not admitted as a clean training label."
+  ],
+  "no_old_score_replacement": true,
+  "claims": "Offline result-supervision pilot on an exposed query; no main-method quality or generalization claim."
+}

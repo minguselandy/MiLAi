@@ -1,0 +1,221 @@
+{
+  "status": "ACTIVE_FIRST96_SOURCE_REQUEST_REVIEW_AND_OPERATION_LABELS_CLOSED_COLLECTION_LIVE",
+  "implementation_commit": "aaa0885a",
+  "prior_progress_commit": "073e898a",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "source_review": {
+    "families": 96,
+    "rows": 180,
+    "planned_families": 128,
+    "planned_rows": 240,
+    "pool_paragraph_count_distribution": {
+      "20": 179,
+      "19": 1
+    },
+    "dispositions": {
+      "source_pool_insufficient": 119,
+      "supported_with_qualification": 29,
+      "qualified_alternative": 8,
+      "supported": 24
+    },
+    "progress": "artifacts/generalization-20261021/source-expansion-v1/source-review-progress-v49.json",
+    "new_batch_snapshot": "artifacts/generalization-20261021/source-expansion-v1/batch-2-source-review-before-reference-v1.json",
+    "native_answers_and_model_outputs_not_used_to_decide_source_judgments": true
+  },
+  "new_batch_native_comparison": {
+    "status": "THIRD32_SOURCE_REVIEW_FROZEN_THEN_NATIVE_COMPARISON",
+    "review_snapshot": "artifacts/generalization-20261021/source-expansion-v1/batch-2-source-review-before-reference-v1.json",
+    "rows": 61,
+    "families": 32,
+    "cross_table": {
+      "native_False__source_pool_insufficient": 30,
+      "native_True__supported": 7,
+      "native_True__source_pool_insufficient": 13,
+      "native_True__supported_with_qualification": 9,
+      "native_True__qualified_alternative": 2
+    },
+    "annotation_rewritten_to_match_native": false,
+    "not_corpus_error_rate": true
+  },
+  "new_batch_actual_request_review": {
+    "requests": 181,
+    "partial": 63,
+    "none": 62,
+    "complete": 56,
+    "artifact": "artifacts/generalization-20261021/source-expansion-batch-2-request-reviews-v1/requests.json"
+  },
+  "new_batch_operation_labels": {
+    "states": 957,
+    "reviewed_requests": 181,
+    "reviewed_states": 957,
+    "labelled": 544,
+    "reasons": {
+      "reviewed_missing_original_progress": 439,
+      "reviewed_partial_evidence_only_masked": 122,
+      "no_reviewed_source_proof_masked": 254,
+      "reviewed_originals_sufficient": 105,
+      "no_reviewed_progress_masked": 37
+    },
+    "families_labelled": 32,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/generalization-20261021/source-expansion-batch-2-states-v1/train.jsonl",
+    "reviews_source": "artifacts/generalization-20261021/source-expansion-batch-2-request-reviews-v1/requests.json",
+    "compute": {
+      "wall_seconds": 4.328964596614242,
+      "cpu_seconds": 4.346326383999999
+    },
+    "ledger_recorded": false
+  },
+  "new_batch_input_and_mask_audit": {
+    "status": "PASS_ACTUAL_INPUT_BINDINGS_AND_PARTIAL_MASKS",
+    "states": 957,
+    "labelled": 544,
+    "families": 32,
+    "labelled_families": 32,
+    "families_without_labels": [],
+    "positive_action_occurrences": {
+      "SEARCH": 127,
+      "READ": 401,
+      "HANDOFF": 105
+    },
+    "partial_proof_handoff_labels": 0,
+    "inputs_questions_bindings_equal": true,
+    "native_reference_truth_not_used_for_labels": true,
+    "request_count": 181,
+    "requests_with_known_evidence_refs": 0,
+    "qualification": "Inherited static original-source CE preferences;not full legality,causal utility or Host success. All raw masks/failures retained.",
+    "compute": {
+      "cpu_seconds": 0.8677357519999997,
+      "wall_seconds": 0.8677666252478957
+    },
+    "ledger_recorded": false
+  },
+  "new_batch_original_source_audit": {
+    "status": "PASS_LITERAL_ORIGINAL_SOURCE_MATCH",
+    "result_paths": 119,
+    "source_paragraph_comparisons": 2378,
+    "hashes_used": false,
+    "compute": {
+      "cpu_seconds": 0.4665624079999997,
+      "wall_seconds": 0.466586172580719
+    },
+    "ledger_recorded": false
+  },
+  "new_batch_input_lengths": {
+    "status": "AUDITED_NOT_FITTED",
+    "states": 957,
+    "labelled_states": 544,
+    "operation_state": "shared",
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "max_encoded_tokens": 6637,
+    "state_truncations": 0,
+    "head_truncations": 0,
+    "labelled_over_8192": 0,
+    "model_forwards": 0,
+    "gpu_used": false,
+    "compute": {
+      "wall_seconds": 16.046124872751534,
+      "cpu_seconds": 16.050691086
+    },
+    "ledger_recorded": false
+  },
+  "cumulative_new_source_supervision": {
+    "raw_states": 2812,
+    "labelled_states": 1574,
+    "masked_states": 1238,
+    "labelled_families": 94,
+    "registered_families": 96,
+    "reviewed_actual_requests": 536,
+    "source_rows": 180,
+    "final_mixture_and_stable_ids_built": false
+  },
+  "collection": {
+    "observed_at": "2026-10-21T14:41:11.879985+00:00",
+    "exec_session": 93727,
+    "parent_pid": 1131060,
+    "parent_status": "RUNNING",
+    "parent_live": true,
+    "batches": [
+      {
+        "batch": "batch-0",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1131065,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "COMPLETED": 87,
+          "FAILED": 35
+        }
+      },
+      {
+        "batch": "batch-1",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1381395,
+        "live": false,
+        "closed_positions": 116,
+        "planned_positions": 116,
+        "program_statuses": {
+          "FAILED": 30,
+          "COMPLETED": 86
+        }
+      },
+      {
+        "batch": "batch-2",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1591077,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "FAILED": 31,
+          "COMPLETED": 91
+        }
+      },
+      {
+        "batch": "batch-3",
+        "status": "RUNNING",
+        "pid": 1798815,
+        "live": true,
+        "closed_positions": 35,
+        "planned_positions": 120,
+        "program_statuses": {
+          "COMPLETED": 27,
+          "FAILED": 8
+        }
+      }
+    ],
+    "closed_positions": 395,
+    "planned_positions": 480,
+    "live_method_version": "890dbdd0",
+    "unreviewed_model_outputs_displayed": false
+  },
+  "validation": {
+    "all180_source_pools_actual_paragraph_indices_checked": true,
+    "third_batch181_literal_request_contracts_checked": true,
+    "three_batch_families_disjoint": true,
+    "all2812_event_ids_unique": true,
+    "code_changed": false,
+    "unrelated_tests_repeated": false
+  },
+  "boundaries": {
+    "new_research_fits": 0,
+    "new_real_post_operation_checkpoint_branches": 0,
+    "program_statuses_are_not_semantic_success": true,
+    "all_failed_and_masked_states_retained": true,
+    "explicit_known_refs_nonempty_requests": 0,
+    "source_judgments_are_author_reviews_not_independent_truth": true,
+    "offline_settlements_v1_v2_closed": true,
+    "new_offline_compute_pending_while_collection_live": true,
+    "semantic_review_and_unmeasured_inspection_cpu": "unmeasured,not zero",
+    "no_sha_verification": true,
+    "no_subagents": true,
+    "no_new_services": true,
+    "pushed": false,
+    "merged": false
+  },
+  "remaining": "32newsourcefamilies/60sourcepools then actualrequest/witness labels;finish480positions;actual post-operation acceptance;full nested-source524update curves/parametercontrols;auxiliary matched operation stage;expanded feedback/self-trajectories/STATE/factorial/E3/Host/external/seeds0,1,2.",
+  "goal_complete": false
+}

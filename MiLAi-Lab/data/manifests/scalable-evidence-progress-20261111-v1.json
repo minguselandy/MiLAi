@@ -1,0 +1,187 @@
+{
+  "status": "ENGINEERING_SLICE_MEASURED_MAIN_LEARNING_AND_HOST_PENDING",
+  "goal_complete": false,
+  "no_sha_validation": true,
+  "evaluation": {
+    "profile": "/data/milai-experiments/20261111-scalable-evidence/eval-profile-v2",
+    "rows": 64,
+    "sequence_length_min_max": [
+      126,
+      9869
+    ],
+    "rows_above8192": 4,
+    "largest_menu": 43,
+    "scalar_seconds_mean": 7.880626877769828,
+    "cached_batch_seconds_mean": 5.852505879942328,
+    "encoding_seconds_once": 0.29378322791308165,
+    "cached_speedup": 1.3465389081928587,
+    "first_pass_speedup_including_encoding": 1.282176405873555,
+    "choice_mismatches": 0,
+    "binding_order_mismatches": 0,
+    "max_logit_error": 1.0311603546142578e-05
+  },
+  "paired_v2_input_equivalence": {
+    "training-plan.json": true,
+    "sampling.json": true,
+    "option-orders/1.json": true,
+    "lengths.json": true
+  },
+  "paired_v2_training_speedup": 1.1775618154365524,
+  "paired_v2_evaluation_speedup": 1.282461079243023,
+  "paired_v2_wall_speedup": 1.1560743784333452,
+  "limits": [
+    "Engineering input panel only; not Host quality or deployment evidence.",
+    "Microbatch regrouping changes floating-point/dropout order; no bitwise-training claim.",
+    "Physical cards2/3 and concurrent jobs in v2; not a crossover device study.",
+    "3k effective operation states, resume state, main scale curves and new Host comparisons still pending.",
+    "Historical feedback seed8 is TRAIN data; only3 states have directional delivery targets."
+  ],
+  "tests": {
+    "related_unit_and_real_GPU": 73,
+    "ruff": "passed",
+    "active_package_boundary": "passed",
+    "active_tools_boundary": "6 pre-existing unresolved dynamic imports in own_a100_lme_execution_v2.py and own_a100_lme_observation_v3.py; unchanged"
+  },
+  "previous_goal_turn_classification": "No prior execution turn in current goal context; this turn is progress.",
+  "artifact_root": "/data/milai-experiments/20261111-scalable-evidence",
+  "training": {
+    "baseline-v1": {
+      "output": "/data/milai-experiments/20261111-scalable-evidence/train-baseline-v1",
+      "updates": 32,
+      "draws": 512,
+      "tokens": 639380,
+      "padded_tokens": 1057788,
+      "padding_fraction": 0.39554995897098477,
+      "forwards": 256,
+      "stages": {
+        "prepare": 9.694125244393945,
+        "evaluation": 7.425431005656719,
+        "training": 107.64821798168123,
+        "save": 3.2053515361621976
+      },
+      "wall_seconds": 130.26381967775524,
+      "cpu_seconds": 175.6383586,
+      "effective_training_tokens_per_second": 5939.531670731465,
+      "dev_forwards": 64,
+      "dev_state_tokenizations": 64
+    },
+    "efficient-v1": {
+      "output": "/data/milai-experiments/20261111-scalable-evidence/train-efficient-v1",
+      "updates": 32,
+      "draws": 512,
+      "tokens": 639380,
+      "padded_tokens": 1309436,
+      "padding_fraction": 0.5117134399848484,
+      "forwards": 128,
+      "stages": {
+        "prepare": 9.156570333987474,
+        "evaluation": 5.413010534830391,
+        "training": 107.13028187304735,
+        "save": 2.9928725054487586
+      },
+      "wall_seconds": 127.3733255667612,
+      "cpu_seconds": 155.074294484,
+      "effective_training_tokens_per_second": 5968.247154970476,
+      "dev_forwards": 16,
+      "dev_state_tokenizations": 32
+    },
+    "adaptive-v1": {
+      "output": "/data/milai-experiments/20261111-scalable-evidence/train-adaptive-v1",
+      "updates": 32,
+      "draws": 512,
+      "tokens": 639380,
+      "padded_tokens": 1076648,
+      "padding_fraction": 0.4061383107570905,
+      "forwards": 129,
+      "stages": {
+        "prepare": 8.728896244429052,
+        "evaluation": 5.20875486638397,
+        "training": 86.84008443634957,
+        "save": 2.42500876262784
+      },
+      "wall_seconds": 105.03522702213377,
+      "cpu_seconds": 138.759544856,
+      "effective_training_tokens_per_second": 7362.728907393462,
+      "dev_forwards": 16,
+      "dev_state_tokenizations": 32
+    },
+    "baseline-v2": {
+      "output": "/data/milai-experiments/20261111-scalable-evidence/train-baseline-v2",
+      "updates": 32,
+      "draws": 512,
+      "tokens": 639380,
+      "padded_tokens": 1057788,
+      "padding_fraction": 0.39554995897098477,
+      "forwards": 256,
+      "stages": {
+        "prepare": 9.355794937349856,
+        "evaluation": 7.47372976783663,
+        "training": 104.10844913311303,
+        "save": 2.581133684143424
+      },
+      "wall_seconds": 125.45322775747627,
+      "cpu_seconds": 165.43888806200002,
+      "effective_training_tokens_per_second": 6141.480401676995,
+      "dev_forwards": 64,
+      "dev_state_tokenizations": 64
+    },
+    "adaptive-v2": {
+      "output": "/data/milai-experiments/20261111-scalable-evidence/train-adaptive-v2",
+      "updates": 32,
+      "draws": 512,
+      "tokens": 639380,
+      "padded_tokens": 1076648,
+      "padding_fraction": 0.4061383107570905,
+      "forwards": 129,
+      "stages": {
+        "prepare": 9.28905809018761,
+        "evaluation": 5.827646459452808,
+        "training": 88.41017751116306,
+        "save": 2.6690203910693526
+      },
+      "wall_seconds": 108.51657133642584,
+      "cpu_seconds": 146.040298866,
+      "effective_training_tokens_per_second": 7231.972811266769,
+      "dev_forwards": 16,
+      "dev_state_tokenizations": 32
+    }
+  },
+  "source_population": {
+    "status": "SOURCES_RELEASED_OPERATION_COLLECTION_PENDING",
+    "families": 384,
+    "new_operation_collection_families": 256,
+    "requests": 672,
+    "new_requests": 451,
+    "development_families": 32,
+    "operation_states": 0,
+    "valid_operation_labels": 0
+  },
+  "i2_initial_feedback": {
+    "status": "ACTUAL_HANDOFF_FEEDBACK_COMPILED_NOT_FITTED",
+    "states": 8,
+    "source_families": 8,
+    "delivery_direction_fit_states": 3,
+    "relations": {
+      "answer": {
+        "tie": 4,
+        "left": 4,
+        "unknown": 14
+      },
+      "delivery": {
+        "tie": 4,
+        "left": 6,
+        "unknown": 12
+      }
+    },
+    "new_host_calls": 0
+  },
+  "execution_plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261111_2XA10040GB_v2.md",
+  "remaining": [
+    "~3k effective real operation states and fixed source-disjoint dev panel",
+    "optimizer/scheduler/RNG/sampling recovery and warmup",
+    "10k/30k nested-source scale curves and compute-matched control",
+    "I2 same-pool feedback fit and real held-source Host comparison",
+    "S2 feedback vs continued SFT; selected conditional/self-state experiments",
+    "cross-seed and new-source confirmation with full cost/generalization scope"
+  ]
+}

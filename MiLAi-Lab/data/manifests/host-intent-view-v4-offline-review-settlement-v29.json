@@ -1,0 +1,8 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "measurement_file": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v29.json",
+  "phases": 4,
+  "total_cpu_seconds": 3.8047938799999996,
+  "generation_embedding_unchanged": true
+}

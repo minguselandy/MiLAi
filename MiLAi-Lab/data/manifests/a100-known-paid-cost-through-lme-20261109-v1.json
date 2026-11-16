@@ -1,0 +1,1666 @@
+{
+  "status": "KNOWN_PAID_GOAL_COST_THROUGH_ALL_SIX_LME_CLOSURES_AND_IDLE137_BEFORE_MEM2ACT",
+  "timestamp_utc": "2026-11-09T05:18:53.638569+00:00",
+  "previous_exact_cutoff": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/known-paid-cost-cutoff-before-LME007-v1.json",
+  "previous_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-007-budget-before.json",
+  "closed_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-budget-before.json",
+  "cutoff": "Immediately before frozen Mem2Act fixed400 child launch; all LME native stages and idle137 closed. No current ledger read.",
+  "previous_known_paid_goal_CPU_seconds": 87091.84096111101,
+  "previous_cutoff_all20_generic_native_attribution_edges_reread_from_actual_sources": true,
+  "new_named_phases": 295,
+  "named_phase_count_through_cutoff": 418,
+  "excluded_carried_old_debt_CPU_seconds": 45.39000000000001,
+  "new_named_CPU_seconds": 65205.149075364054,
+  "new_generic_native_CPU_seconds": 4475.3146589998705,
+  "new_whole_CPU_seconds": 69680.46373436392,
+  "named_goal_CPU_seconds": 141983.85306005453,
+  "generic_goal_CPU_seconds": 14788.451635420422,
+  "known_paid_goal_CPU_seconds": 156772.30469547494,
+  "known_paid_goal_CPU_hours": 43.5478624154097,
+  "mutually_exclusive_new_named_CPU_by_group": {
+    "native_LME_client_residual_plus_measured_parent": 51591.72752861613,
+    "ordinary_offline_closed_GNU_timers": 8992.050000000001,
+    "separate_whole_storage_client_and_measured_parent": 4621.3715467480015
+  },
+  "new_native_LME_whole_child_and_parent_CPU_seconds": 56067.042187616,
+  "old_cutoff_native_LME_segments_excluded_from_delta": 7,
+  "all_closed_native_LME_client_phases": 106,
+  "newly_closed_native_LME_client_phases": 99,
+  "all_closed_LME_native_HTTP": 1164,
+  "all_closed_LME_native_known_tokens": 6111718,
+  "new_Host_known_generation_tokens": 5343665,
+  "new_generation_reservation_counter": 999,
+  "known_Host_generation_tokens_since_first_functional_request": 30712462,
+  "generation_reservation_counter_since_first_functional_request": 6766,
+  "reservation_counter_scope": "Original RunBudget reserve count. This LME delta independently equals actual owner admissions; do not rename all historical reserves as HTTP or local NN calls.",
+  "generic_native_field_deltas": {
+    "dynamic_memory_laya": {
+      "cpu_seconds": 4139.53828435787,
+      "forwards": 3594,
+      "input_tokens": 25070604,
+      "sequence_rows": 3594,
+      "state_tokenizations": 3594,
+      "state_tokens": 22265944,
+      "wall_seconds": 2540.8717430057004
+    },
+    "dynamic_memory_laya_load": {
+      "cpu_seconds": 335.77637464200006,
+      "loads": 51,
+      "wall_seconds": 291.63542751874775
+    }
+  },
+  "all_generic_CPU_delta_explained_by_closed_native_owners": true,
+  "all295_added_compute_phases_explained_once": true,
+  "ordinary_idle_settlements": 101,
+  "separate_storage_phases": 95,
+  "closed_ordinary_GNU_timers": 465,
+  "retained_failed_GNU_timers": 10,
+  "no_ordinary_timer_paid_twice_across_cutoff": true,
+  "all_source_timers_literal_equal_actual_closed_files": true,
+  "new_unknown_generation_usage": 0,
+  "legacy_unknown_generation_retained": 15,
+  "embedding_state_literal_unchanged": true,
+  "legacy_unknown_embedding_retained": 1,
+  "limits_literal_unchanged": true,
+  "all_six_LME_canonical_closures_closed": true,
+  "named_phase_groups": {
+    "native_LME_client_residual_plus_measured_parent": [
+      "a100-lme-native451-20261107-v1-fixed-prefix-archive451-v1-whole-client-minus-native-and-parent",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-007",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-008",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-009",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-010",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-011",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-012",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-013",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-014",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-015",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-016",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-017",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-018",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-019",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-020",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-021",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-022",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-023",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-024",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-025",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-026",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-027",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-028",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-029",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-030",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-031",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-032",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-033",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-034",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-035",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-036",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-037",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-038",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-039",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-040",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-041",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-042",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-043",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-044",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-045",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-046",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-047",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-048",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-049",
+      "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-050",
+      "a100-lme-native451-20261107-v1-fixed-prefix-scoring451-v1-whole-client-minus-native-and-parent",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-archive451-v1-whole-client-minus-native-and-parent",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-001",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-002",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-003",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-004",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-005",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-006",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-007",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-008",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-009",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-010",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-011",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-012",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-013",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-014",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-015",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-016",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-017",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-018",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-019",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-020",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-021",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-022",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-023",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-024",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-025",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-026",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-027",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-028",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-029",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-030",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-031",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-032",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-033",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-034",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-035",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-036",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-037",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-038",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-039",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-040",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-041",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-042",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-043",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-044",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-045",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-046",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-047",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-048",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-049",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-050",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent",
+      "a100-lme-native451-20261107-v1-primary-seed0-u32-scoring451-v1-whole-client-minus-native-and-parent"
+    ],
+    "ordinary_offline_closed_GNU_timers": [
+      "milai_a100_lme_continuation007_cost_reconciliation_offline_20261107_v37",
+      "milai_a100_lme_continuation008_after_known_cost_offline_20261107_v38",
+      "milai_a100_lme_continuation009_after_known_cost_offline_20261107_v39",
+      "milai_a100_lme_continuation010_after_known_cost_offline_20261107_v40",
+      "milai_a100_lme_continuation011_after_known_cost_offline_20261107_v41",
+      "milai_a100_lme_continuation012_after_known_cost_offline_20261107_v42",
+      "milai_a100_lme_continuation013_after_known_cost_offline_20261107_v43",
+      "milai_a100_lme_continuation014_after_known_cost_offline_20261107_v44",
+      "milai_a100_lme_continuation015_after_known_cost_offline_20261107_v45",
+      "milai_a100_lme_continuation016_after_known_cost_offline_20261107_v46",
+      "milai_a100_lme_continuation017_after_known_cost_offline_20261107_v47",
+      "milai_a100_lme_continuation018_after_known_cost_offline_20261107_v48",
+      "milai_a100_lme_continuation019_after_known_cost_offline_20261107_v49",
+      "milai_a100_lme_continuation020_after_known_cost_offline_20261107_v50",
+      "milai_a100_lme_continuation021_after_known_cost_offline_20261107_v51",
+      "milai_a100_lme_continuation022_after_known_cost_offline_20261107_v52",
+      "milai_a100_lme_continuation023_after_known_cost_offline_20261107_v53",
+      "milai_a100_lme_continuation024_after_known_cost_offline_20261107_v54",
+      "milai_a100_lme_continuation025_after_known_cost_offline_20261107_v55",
+      "milai_a100_lme_continuation026_after_known_cost_offline_20261107_v56",
+      "milai_a100_lme_continuation027_after_known_cost_offline_20261107_v57",
+      "milai_a100_lme_continuation028_after_known_cost_offline_20261107_v58",
+      "milai_a100_lme_continuation029_after_known_cost_offline_20261107_v59",
+      "milai_a100_lme_continuation030_after_known_cost_offline_20261107_v60",
+      "milai_a100_lme_continuation031_after_known_cost_offline_20261107_v61",
+      "milai_a100_lme_continuation032_after_known_cost_offline_20261107_v62",
+      "milai_a100_lme_continuation033_after_known_cost_offline_20261107_v63",
+      "milai_a100_lme_continuation034_after_known_cost_offline_20261107_v64",
+      "milai_a100_lme_continuation035_after_known_cost_offline_20261107_v65",
+      "milai_a100_lme_continuation036_after_known_cost_offline_20261107_v66",
+      "milai_a100_lme_continuation037_after_known_cost_offline_20261107_v67",
+      "milai_a100_lme_continuation038_after_known_cost_offline_20261107_v68",
+      "milai_a100_lme_continuation039_after_known_cost_offline_20261107_v69",
+      "milai_a100_lme_continuation040_after_known_cost_offline_20261107_v70",
+      "milai_a100_lme_continuation041_after_known_cost_offline_20261107_v71",
+      "milai_a100_lme_continuation042_after_known_cost_offline_20261107_v72",
+      "milai_a100_lme_continuation043_after_known_cost_offline_20261107_v73",
+      "milai_a100_lme_continuation044_after_known_cost_offline_20261107_v74",
+      "milai_a100_lme_continuation045_after_known_cost_offline_20261107_v75",
+      "milai_a100_lme_continuation046_after_known_cost_offline_20261107_v76",
+      "milai_a100_lme_continuation047_after_known_cost_offline_20261107_v77",
+      "milai_a100_lme_continuation048_after_known_cost_offline_20261107_v78",
+      "milai_a100_lme_continuation049_after_known_cost_offline_20261107_v79",
+      "milai_a100_lme_fixed_prefix_full451_before_source_audit_offline_20261107_v80",
+      "milai_a100_lme_fixed_full451_source_audit_and_prediction_finalization_offline_20261107_v81",
+      "milai_a100_lme_fixed_full451_native_score_audit_and_finalization_offline_20261107_v82",
+      "milai_a100_lme_fixed_full451_archive_and_native_results_offline_20261107_v83",
+      "milai_a100_lme_primary_load_wiring_correction_and_retained_source_audit_offline_20261107_v84",
+      "milai_a100_lme_observer_composition_and_retained_source_sdk_reader_recovery_offline_20261107_v85",
+      "milai_a100_lme_primary_continuation002_closure_before003_offline_20261107_v86",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v87",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v88",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v89",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v90",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v91",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v92",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v93",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v94",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v95",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v96",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v97",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v98",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v99",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v100",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v101",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v102",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v103",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v104",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v105",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v106",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v107",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v108",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v109",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v110",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v111",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v112",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v113",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v114",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v115",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v116",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v117",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v118",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v119",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v120",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v121",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v122",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v123",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v124",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v125",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v126",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v127",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v128",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v129",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v130",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v131",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v132",
+      "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v133",
+      "milai_a100_lme_primary_full451_before_source_audit_offline_20261107_v134",
+      "milai_a100_lme_primary_full451_source_audit_and_prediction_finalization_offline_20261107_v135",
+      "milai_a100_lme_primary_full451_native_score_audit_and_finalization_offline_20261107_v136",
+      "milai_a100_lme_primary_full451_native_comparison_and_archive_finalization_offline_20261107_v137"
+    ],
+    "separate_whole_storage_client_and_measured_parent": [
+      "milai_a100_lme_lossless_closed_storage_continuation007_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation008_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation009_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation010_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation011_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation012_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation013_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation014_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation015_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation016_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation017_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation018_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation019_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation020_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation021_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation022_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation023_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation024_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation025_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation026_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation027_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation028_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation029_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation030_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation031_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation032_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation033_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation034_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation035_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation036_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation037_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation038_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation039_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation040_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation041_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation042_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation043_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation044_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation045_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation046_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation047_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation048_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation049_cpu_20261107_v3",
+      "milai_a100_lme_lossless_closed_storage_continuation050_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation001_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation002_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation003_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation004_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation005_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation006_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation007_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation008_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation009_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation010_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation011_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation012_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation013_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation014_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation015_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation016_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation017_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation018_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation019_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation020_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation021_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation022_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation023_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation024_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation025_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation026_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation027_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation028_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation029_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation030_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation031_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation032_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation033_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation034_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation035_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation036_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation037_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation038_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation039_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation040_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation041_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation042_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation043_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation044_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation045_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation046_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation047_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation048_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation049_cpu_20261107_v3",
+      "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation050_cpu_20261107_v3"
+    ]
+  },
+  "added_named_compute_records": {
+    "a100-lme-native451-20261107-v1-fixed-prefix-archive451-v1-whole-client-minus-native-and-parent": {
+      "cpu_seconds": 1965.505107002,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-007": {
+      "cpu_seconds": 975.917600316,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-008": {
+      "cpu_seconds": 346.325732023,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-009": {
+      "cpu_seconds": 3005.9649966750003,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-010": {
+      "cpu_seconds": 341.624272851,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-011": {
+      "cpu_seconds": 847.253264293,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-012": {
+      "cpu_seconds": 713.629271989,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-013": {
+      "cpu_seconds": 176.731810484,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-014": {
+      "cpu_seconds": 508.367109767,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-015": {
+      "cpu_seconds": 88.235085255,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-016": {
+      "cpu_seconds": 259.43242121500003,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-017": {
+      "cpu_seconds": 432.09078758,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-018": {
+      "cpu_seconds": 125.22518124599999,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-019": {
+      "cpu_seconds": 800.855888215,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-020": {
+      "cpu_seconds": 76.282593152,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-021": {
+      "cpu_seconds": 237.44965036600001,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-022": {
+      "cpu_seconds": 144.500387372,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-023": {
+      "cpu_seconds": 1036.335739319,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-024": {
+      "cpu_seconds": 456.09611946900003,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-025": {
+      "cpu_seconds": 287.347888119,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-026": {
+      "cpu_seconds": 86.95800798100001,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-027": {
+      "cpu_seconds": 1301.925020311,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-028": {
+      "cpu_seconds": 792.783229063,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-029": {
+      "cpu_seconds": 349.225202807,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-030": {
+      "cpu_seconds": 145.935271782,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-031": {
+      "cpu_seconds": 253.703780741,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-032": {
+      "cpu_seconds": 256.408702007,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-033": {
+      "cpu_seconds": 142.63800617,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-034": {
+      "cpu_seconds": 492.273370828,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-035": {
+      "cpu_seconds": 95.16454331400001,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-036": {
+      "cpu_seconds": 279.16441459000004,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-037": {
+      "cpu_seconds": 74.32581881899999,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-038": {
+      "cpu_seconds": 455.441879704,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-039": {
+      "cpu_seconds": 851.6558273689999,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-040": {
+      "cpu_seconds": 78.07727033399999,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-041": {
+      "cpu_seconds": 451.71798130300004,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-042": {
+      "cpu_seconds": 307.060117595,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-043": {
+      "cpu_seconds": 118.390656822,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-044": {
+      "cpu_seconds": 395.093617163,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-045": {
+      "cpu_seconds": 719.418472168,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-046": {
+      "cpu_seconds": 189.975505397,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-047": {
+      "cpu_seconds": 73.19718057,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-048": {
+      "cpu_seconds": 148.241753615,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-049": {
+      "cpu_seconds": 126.584798244,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-prediction451-v1-whole-client-minus-native-and-parent-continuation-050": {
+      "cpu_seconds": 704.9342410219999,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-fixed-prefix-scoring451-v1-whole-client-minus-native-and-parent": {
+      "cpu_seconds": 35.873309301,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent": {
+      "cpu_seconds": 21.314602342000097,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-001": {
+      "cpu_seconds": 344.5329423400519,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-002": {
+      "cpu_seconds": 2817.2900074661093,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-003": {
+      "cpu_seconds": 1569.3818791873184,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-004": {
+      "cpu_seconds": 2917.5341033554027,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-005": {
+      "cpu_seconds": 1217.5327592280155,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-006": {
+      "cpu_seconds": 453.02000808795657,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-007": {
+      "cpu_seconds": 385.02046794678637,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-008": {
+      "cpu_seconds": 3185.4346744770473,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-009": {
+      "cpu_seconds": 2152.705742061938,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-010": {
+      "cpu_seconds": 435.60957420992924,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-011": {
+      "cpu_seconds": 518.196549436363,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-012": {
+      "cpu_seconds": 410.04984527410676,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-013": {
+      "cpu_seconds": 163.23086145996328,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-014": {
+      "cpu_seconds": 82.28144293605159,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-015": {
+      "cpu_seconds": 550.1881999242008,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-016": {
+      "cpu_seconds": 78.76562112109586,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-017": {
+      "cpu_seconds": 312.6134809421531,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-018": {
+      "cpu_seconds": 308.1691469349859,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-019": {
+      "cpu_seconds": 251.73196288014617,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-020": {
+      "cpu_seconds": 81.13362000701397,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-021": {
+      "cpu_seconds": 287.7319095990115,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-022": {
+      "cpu_seconds": 501.58326181401776,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-023": {
+      "cpu_seconds": 259.41282389008467,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-024": {
+      "cpu_seconds": 122.20566551295342,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-025": {
+      "cpu_seconds": 501.8006418979712,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-026": {
+      "cpu_seconds": 431.5908949611951,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-027": {
+      "cpu_seconds": 205.81372589598666,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-028": {
+      "cpu_seconds": 863.7624463739121,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-029": {
+      "cpu_seconds": 128.52470644595104,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-030": {
+      "cpu_seconds": 128.68922353093305,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-031": {
+      "cpu_seconds": 351.5986757100868,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-032": {
+      "cpu_seconds": 120.56048682200219,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-033": {
+      "cpu_seconds": 117.9689505760933,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-034": {
+      "cpu_seconds": 980.9739218339239,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-035": {
+      "cpu_seconds": 252.14519395704468,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-036": {
+      "cpu_seconds": 85.7892408470384,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-037": {
+      "cpu_seconds": 80.19532391203093,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-038": {
+      "cpu_seconds": 216.26314015397963,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-039": {
+      "cpu_seconds": 77.72568863200881,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-040": {
+      "cpu_seconds": 75.62605740401844,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-041": {
+      "cpu_seconds": 345.61668870786474,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-042": {
+      "cpu_seconds": 177.33043328400865,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-043": {
+      "cpu_seconds": 484.87013448515825,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-044": {
+      "cpu_seconds": 121.79620109793807,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-045": {
+      "cpu_seconds": 170.10648394883407,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-046": {
+      "cpu_seconds": 512.5335786707824,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-047": {
+      "cpu_seconds": 982.9502043875148,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-048": {
+      "cpu_seconds": 120.53140904995479,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-049": {
+      "cpu_seconds": 77.45648761201713,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-prediction451-v1-whole-client-minus-native-and-parent-continuation-050": {
+      "cpu_seconds": 795.2560439221771,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation007_cost_reconciliation_offline_20261107_v37": {
+      "cpu_seconds": 2.98,
+      "measured_commands": 22,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation008_after_known_cost_offline_20261107_v38": {
+      "cpu_seconds": 0.24000000000000002,
+      "measured_commands": 6,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation009_after_known_cost_offline_20261107_v39": {
+      "cpu_seconds": 4.890000000000001,
+      "measured_commands": 6,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation010_after_known_cost_offline_20261107_v40": {
+      "cpu_seconds": 4.8100000000000005,
+      "measured_commands": 6,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation011_after_known_cost_offline_20261107_v41": {
+      "cpu_seconds": 1.2000000000000002,
+      "measured_commands": 8,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation012_after_known_cost_offline_20261107_v42": {
+      "cpu_seconds": 0.23,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation013_after_known_cost_offline_20261107_v43": {
+      "cpu_seconds": 0.22000000000000003,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation014_after_known_cost_offline_20261107_v44": {
+      "cpu_seconds": 0.24000000000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation015_after_known_cost_offline_20261107_v45": {
+      "cpu_seconds": 0.24000000000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation016_after_known_cost_offline_20261107_v46": {
+      "cpu_seconds": 0.27,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation017_after_known_cost_offline_20261107_v47": {
+      "cpu_seconds": 0.24,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation018_after_known_cost_offline_20261107_v48": {
+      "cpu_seconds": 0.24999999999999997,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation019_after_known_cost_offline_20261107_v49": {
+      "cpu_seconds": 0.24000000000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation020_after_known_cost_offline_20261107_v50": {
+      "cpu_seconds": 0.27,
+      "measured_commands": 3,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation021_after_known_cost_offline_20261107_v51": {
+      "cpu_seconds": 0.31,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation022_after_known_cost_offline_20261107_v52": {
+      "cpu_seconds": 0.29000000000000004,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation023_after_known_cost_offline_20261107_v53": {
+      "cpu_seconds": 0.23,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation024_after_known_cost_offline_20261107_v54": {
+      "cpu_seconds": 0.25,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation025_after_known_cost_offline_20261107_v55": {
+      "cpu_seconds": 0.27,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation026_after_known_cost_offline_20261107_v56": {
+      "cpu_seconds": 0.26,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation027_after_known_cost_offline_20261107_v57": {
+      "cpu_seconds": 0.27,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation028_after_known_cost_offline_20261107_v58": {
+      "cpu_seconds": 0.28,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation029_after_known_cost_offline_20261107_v59": {
+      "cpu_seconds": 0.27,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation030_after_known_cost_offline_20261107_v60": {
+      "cpu_seconds": 0.46,
+      "measured_commands": 5,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation031_after_known_cost_offline_20261107_v61": {
+      "cpu_seconds": 0.41000000000000003,
+      "measured_commands": 6,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation032_after_known_cost_offline_20261107_v62": {
+      "cpu_seconds": 0.25,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation033_after_known_cost_offline_20261107_v63": {
+      "cpu_seconds": 0.27,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation034_after_known_cost_offline_20261107_v64": {
+      "cpu_seconds": 0.30000000000000004,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation035_after_known_cost_offline_20261107_v65": {
+      "cpu_seconds": 0.26,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation036_after_known_cost_offline_20261107_v66": {
+      "cpu_seconds": 0.26,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation037_after_known_cost_offline_20261107_v67": {
+      "cpu_seconds": 0.38,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation038_after_known_cost_offline_20261107_v68": {
+      "cpu_seconds": 0.26,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation039_after_known_cost_offline_20261107_v69": {
+      "cpu_seconds": 0.27,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation040_after_known_cost_offline_20261107_v70": {
+      "cpu_seconds": 0.26,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation041_after_known_cost_offline_20261107_v71": {
+      "cpu_seconds": 0.31,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation042_after_known_cost_offline_20261107_v72": {
+      "cpu_seconds": 0.32,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation043_after_known_cost_offline_20261107_v73": {
+      "cpu_seconds": 0.41,
+      "measured_commands": 5,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation044_after_known_cost_offline_20261107_v74": {
+      "cpu_seconds": 0.38,
+      "measured_commands": 5,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation045_after_known_cost_offline_20261107_v75": {
+      "cpu_seconds": 0.31,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation046_after_known_cost_offline_20261107_v76": {
+      "cpu_seconds": 0.3,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation047_after_known_cost_offline_20261107_v77": {
+      "cpu_seconds": 0.3,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation048_after_known_cost_offline_20261107_v78": {
+      "cpu_seconds": 0.31,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_continuation049_after_known_cost_offline_20261107_v79": {
+      "cpu_seconds": 0.33000000000000007,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_fixed_full451_archive_and_native_results_offline_20261107_v83": {
+      "cpu_seconds": 6.91,
+      "measured_commands": 9,
+      "runs": 1
+    },
+    "milai_a100_lme_fixed_full451_native_score_audit_and_finalization_offline_20261107_v82": {
+      "cpu_seconds": 5.17,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_fixed_full451_source_audit_and_prediction_finalization_offline_20261107_v81": {
+      "cpu_seconds": 3827.9900000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_fixed_prefix_full451_before_source_audit_offline_20261107_v80": {
+      "cpu_seconds": 5.67,
+      "measured_commands": 3,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation007_cpu_20261107_v3": {
+      "cpu_seconds": 62.620116737,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation008_cpu_20261107_v3": {
+      "cpu_seconds": 21.984731559000004,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation009_cpu_20261107_v3": {
+      "cpu_seconds": 189.37438896299997,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation010_cpu_20261107_v3": {
+      "cpu_seconds": 22.307924042000003,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation011_cpu_20261107_v3": {
+      "cpu_seconds": 38.566542551000005,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation012_cpu_20261107_v3": {
+      "cpu_seconds": 63.645677356,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation013_cpu_20261107_v3": {
+      "cpu_seconds": 15.920724215,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation014_cpu_20261107_v3": {
+      "cpu_seconds": 47.125815543,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation015_cpu_20261107_v3": {
+      "cpu_seconds": 6.575861649999999,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation016_cpu_20261107_v3": {
+      "cpu_seconds": 23.369629064999998,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation017_cpu_20261107_v3": {
+      "cpu_seconds": 36.871982855999995,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation018_cpu_20261107_v3": {
+      "cpu_seconds": 11.109936775,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation019_cpu_20261107_v3": {
+      "cpu_seconds": 75.19489691899999,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation020_cpu_20261107_v3": {
+      "cpu_seconds": 6.590526134999999,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation021_cpu_20261107_v3": {
+      "cpu_seconds": 21.870740091,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation022_cpu_20261107_v3": {
+      "cpu_seconds": 11.720660276,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation023_cpu_20261107_v3": {
+      "cpu_seconds": 91.080253967,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation024_cpu_20261107_v3": {
+      "cpu_seconds": 40.406119905000004,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation025_cpu_20261107_v3": {
+      "cpu_seconds": 26.764608687,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation026_cpu_20261107_v3": {
+      "cpu_seconds": 6.7550797110000005,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation027_cpu_20261107_v3": {
+      "cpu_seconds": 120.01770023799999,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation028_cpu_20261107_v3": {
+      "cpu_seconds": 66.52775610200001,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation029_cpu_20261107_v3": {
+      "cpu_seconds": 31.921026096,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation030_cpu_20261107_v3": {
+      "cpu_seconds": 13.800693170999999,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation031_cpu_20261107_v3": {
+      "cpu_seconds": 21.536028843999997,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation032_cpu_20261107_v3": {
+      "cpu_seconds": 20.856521255,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation033_cpu_20261107_v3": {
+      "cpu_seconds": 6.177318318,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation034_cpu_20261107_v3": {
+      "cpu_seconds": 45.365677603,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation035_cpu_20261107_v3": {
+      "cpu_seconds": 6.586127608,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation036_cpu_20261107_v3": {
+      "cpu_seconds": 28.000474903,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation037_cpu_20261107_v3": {
+      "cpu_seconds": 6.78134198,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation038_cpu_20261107_v3": {
+      "cpu_seconds": 42.581879702,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation039_cpu_20261107_v3": {
+      "cpu_seconds": 75.15284198500001,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation040_cpu_20261107_v3": {
+      "cpu_seconds": 6.454063151000001,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation041_cpu_20261107_v3": {
+      "cpu_seconds": 42.24621410899999,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation042_cpu_20261107_v3": {
+      "cpu_seconds": 27.662033040999997,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation043_cpu_20261107_v3": {
+      "cpu_seconds": 6.462519707,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation044_cpu_20261107_v3": {
+      "cpu_seconds": 36.824453240000004,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation045_cpu_20261107_v3": {
+      "cpu_seconds": 62.844269586,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation046_cpu_20261107_v3": {
+      "cpu_seconds": 17.00234493,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation047_cpu_20261107_v3": {
+      "cpu_seconds": 6.442931458,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation048_cpu_20261107_v3": {
+      "cpu_seconds": 11.488903880999999,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation049_cpu_20261107_v3": {
+      "cpu_seconds": 11.782763016,
+      "runs": 1
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation050_cpu_20261107_v3": {
+      "cpu_seconds": 65.305282144,
+      "runs": 1
+    },
+    "milai_a100_lme_observer_composition_and_retained_source_sdk_reader_recovery_offline_20261107_v85": {
+      "cpu_seconds": 47.34,
+      "measured_commands": 9,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_continuation002_closure_before003_offline_20261107_v86": {
+      "cpu_seconds": 58.23,
+      "measured_commands": 7,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_full451_before_source_audit_offline_20261107_v134": {
+      "cpu_seconds": 23.79,
+      "measured_commands": 3,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_full451_source_audit_and_prediction_finalization_offline_20261107_v135": {
+      "cpu_seconds": 4367.0,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_load_wiring_correction_and_retained_source_audit_offline_20261107_v84": {
+      "cpu_seconds": 13.29,
+      "measured_commands": 7,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v100": {
+      "cpu_seconds": 1.7900000000000003,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v101": {
+      "cpu_seconds": 7.029999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v102": {
+      "cpu_seconds": 7.16,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v103": {
+      "cpu_seconds": 7.3,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v104": {
+      "cpu_seconds": 1.7900000000000003,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v105": {
+      "cpu_seconds": 7.029999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v106": {
+      "cpu_seconds": 12.25,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v107": {
+      "cpu_seconds": 6.1,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v108": {
+      "cpu_seconds": 2.95,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v109": {
+      "cpu_seconds": 12.15,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v110": {
+      "cpu_seconds": 10.299999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v111": {
+      "cpu_seconds": 5.28,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v112": {
+      "cpu_seconds": 19.810000000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v113": {
+      "cpu_seconds": 3.13,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v114": {
+      "cpu_seconds": 3.28,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v115": {
+      "cpu_seconds": 9.0,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v116": {
+      "cpu_seconds": 2.94,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v117": {
+      "cpu_seconds": 2.89,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v118": {
+      "cpu_seconds": 21.770000000000003,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v119": {
+      "cpu_seconds": 6.029999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v120": {
+      "cpu_seconds": 1.8800000000000003,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v121": {
+      "cpu_seconds": 1.9700000000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v122": {
+      "cpu_seconds": 5.059999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v123": {
+      "cpu_seconds": 1.7800000000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v124": {
+      "cpu_seconds": 1.86,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v125": {
+      "cpu_seconds": 8.300000000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v126": {
+      "cpu_seconds": 4.069999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v127": {
+      "cpu_seconds": 11.27,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v128": {
+      "cpu_seconds": 3.2499999999999996,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v129": {
+      "cpu_seconds": 4.13,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v130": {
+      "cpu_seconds": 12.649999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v131": {
+      "cpu_seconds": 22.6,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v132": {
+      "cpu_seconds": 2.9199999999999995,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v133": {
+      "cpu_seconds": 2.38,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v87": {
+      "cpu_seconds": 18.59,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v88": {
+      "cpu_seconds": 31.200000000000003,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v89": {
+      "cpu_seconds": 14.14,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v90": {
+      "cpu_seconds": 6.359999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v91": {
+      "cpu_seconds": 5.59,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v92": {
+      "cpu_seconds": 39.67999999999999,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v93": {
+      "cpu_seconds": 27.250000000000004,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v94": {
+      "cpu_seconds": 4.23,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v95": {
+      "cpu_seconds": 10.53,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v96": {
+      "cpu_seconds": 9.19,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v97": {
+      "cpu_seconds": 3.9399999999999995,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v98": {
+      "cpu_seconds": 1.7500000000000002,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_reader_closed_tail_offline_20261107_v99": {
+      "cpu_seconds": 13.55,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation001_cpu_20261107_v3": {
+      "cpu_seconds": 0.133648045,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation002_cpu_20261107_v3": {
+      "cpu_seconds": 312.603644906,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation003_cpu_20261107_v3": {
+      "cpu_seconds": 161.915407198,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation004_cpu_20261107_v3": {
+      "cpu_seconds": 276.496264056,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation005_cpu_20261107_v3": {
+      "cpu_seconds": 120.654066123,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation006_cpu_20261107_v3": {
+      "cpu_seconds": 50.353559912,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation007_cpu_20261107_v3": {
+      "cpu_seconds": 41.481622103999996,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation008_cpu_20261107_v3": {
+      "cpu_seconds": 344.674700249,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation009_cpu_20261107_v3": {
+      "cpu_seconds": 229.36778992700002,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation010_cpu_20261107_v3": {
+      "cpu_seconds": 31.970983447000002,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation011_cpu_20261107_v3": {
+      "cpu_seconds": 62.49400030699999,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation012_cpu_20261107_v3": {
+      "cpu_seconds": 46.687313189,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation013_cpu_20261107_v3": {
+      "cpu_seconds": 18.484957229,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation014_cpu_20261107_v3": {
+      "cpu_seconds": 7.054733695,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation015_cpu_20261107_v3": {
+      "cpu_seconds": 70.426170188,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation016_cpu_20261107_v3": {
+      "cpu_seconds": 6.910657677,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation017_cpu_20261107_v3": {
+      "cpu_seconds": 35.979949173,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation018_cpu_20261107_v3": {
+      "cpu_seconds": 37.745863896,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation019_cpu_20261107_v3": {
+      "cpu_seconds": 29.227440962,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation020_cpu_20261107_v3": {
+      "cpu_seconds": 7.310121468,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation021_cpu_20261107_v3": {
+      "cpu_seconds": 35.48293945299999,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation022_cpu_20261107_v3": {
+      "cpu_seconds": 63.612178934999996,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation023_cpu_20261107_v3": {
+      "cpu_seconds": 29.736828831,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation024_cpu_20261107_v3": {
+      "cpu_seconds": 12.750315883999999,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation025_cpu_20261107_v3": {
+      "cpu_seconds": 64.510464319,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation026_cpu_20261107_v3": {
+      "cpu_seconds": 52.671696250000004,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation027_cpu_20261107_v3": {
+      "cpu_seconds": 23.842733712,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation028_cpu_20261107_v3": {
+      "cpu_seconds": 103.022875007,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation029_cpu_20261107_v3": {
+      "cpu_seconds": 13.17354795,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation030_cpu_20261107_v3": {
+      "cpu_seconds": 12.790226417,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation031_cpu_20261107_v3": {
+      "cpu_seconds": 41.144453039,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation032_cpu_20261107_v3": {
+      "cpu_seconds": 13.17299522,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation033_cpu_20261107_v3": {
+      "cpu_seconds": 12.657494855000001,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation034_cpu_20261107_v3": {
+      "cpu_seconds": 114.997892832,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation035_cpu_20261107_v3": {
+      "cpu_seconds": 29.717882864,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation036_cpu_20261107_v3": {
+      "cpu_seconds": 7.099857233000001,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation037_cpu_20261107_v3": {
+      "cpu_seconds": 7.1883740959999995,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation038_cpu_20261107_v3": {
+      "cpu_seconds": 24.535372947999996,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation039_cpu_20261107_v3": {
+      "cpu_seconds": 7.004482644,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation040_cpu_20261107_v3": {
+      "cpu_seconds": 7.3393651680000005,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation041_cpu_20261107_v3": {
+      "cpu_seconds": 41.980085244,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation042_cpu_20261107_v3": {
+      "cpu_seconds": 18.326906495000003,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation043_cpu_20261107_v3": {
+      "cpu_seconds": 58.628779695000006,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation044_cpu_20261107_v3": {
+      "cpu_seconds": 12.605144522,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation045_cpu_20261107_v3": {
+      "cpu_seconds": 19.554433638,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation046_cpu_20261107_v3": {
+      "cpu_seconds": 63.683292766,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation047_cpu_20261107_v3": {
+      "cpu_seconds": 119.270095517,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation048_cpu_20261107_v3": {
+      "cpu_seconds": 12.655632458,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation049_cpu_20261107_v3": {
+      "cpu_seconds": 7.154307783,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_continuation050_cpu_20261107_v3": {
+      "cpu_seconds": 99.34595313300001,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_seed0_u32_lossless_closed_storage_cpu_20261107_v3": {
+      "cpu_seconds": 0.064661018,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-scoring451-v1-whole-client-minus-native-and-parent": {
+      "cpu_seconds": 40.002333217,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_full451_native_score_audit_and_finalization_offline_20261107_v136": {
+      "cpu_seconds": 5.29,
+      "measured_commands": 4,
+      "runs": 1
+    },
+    "a100-lme-native451-20261107-v1-primary-seed0-u32-archive451-v1-whole-client-minus-native-and-parent": {
+      "cpu_seconds": 1966.239173116,
+      "runs": 1
+    },
+    "milai_a100_lme_primary_full451_native_comparison_and_archive_finalization_offline_20261107_v137": {
+      "cpu_seconds": 186.17000000000002,
+      "measured_commands": 19,
+      "runs": 1
+    }
+  },
+  "exclusions": "Current Mem2Act fixed400/primary400 and post137 ordinary timers remain outside this snapshot, including v175/v176 and actual failed-row Source audit/v2 observation freeze. Unmetered author/launcher/inspection/cleanup CPU remains unknown_not_zero; lost old-output parent/cleanup remains unknown, not upgraded from the199.51 child lower bound. Historical base model/data amortization, HostGPU0/1 busy time and monetary cost unmeasured or separate. This is a known-paid cutoff, not complete true project cost or a second operational ledger.",
+  "new_charge_reset_refund_or_operational_ledger": false,
+  "new_model_HTTP_or_business_calls": 0,
+  "original_live_ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "full_private_reconciliation": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/known-paid-cost-through-LME-closed-before-Mem2Act-v2.json",
+  "analyzer": "tools/reconcile_a100_cost_through_lme_closed.py",
+  "all106_LME_native_whole_child_and_parent_CPU_seconds": 74405.32420671501,
+  "seven_LME_segments_already_in_previous_cutoff_CPU_seconds": 18338.282019099002,
+  "new_analysis_and_writer_CPU_pending_actual_idle": true,
+  "actual_cutoff_idle": 137,
+  "current_Mem2Act_or_full_project_costs_complete": false,
+  "unmetered_author_launch_inspection_cleanup_CPU": "unknown_not_zero"
+}

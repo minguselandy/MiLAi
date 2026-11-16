@@ -1,0 +1,537 @@
+{
+  "name": "jev-reader-option-shuffle-invariance-v1",
+  "status": "CLOSED",
+  "results": [
+    {
+      "model": {
+        "seed": 0,
+        "objective": "shuffled-ce",
+        "checkpoint": "artifacts/jev-reader/option-shuffle-v1/runs/0/checkpoint"
+      },
+      "versions": {
+        "original": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 8,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8,
+            "unnecessary_continue": 1
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 8
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3194444444444444,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 30,
+            "open_positions": 30,
+            "same_best_open": 30,
+            "same_open_ranking": 30,
+            "complement_states": 8,
+            "best_open_complement_hit": 4
+          },
+          "action_changes": []
+        },
+        "aliases": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 9,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3611111111111111,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 29,
+            "open_positions": 30,
+            "same_best_open": 9,
+            "same_open_ranking": 0,
+            "complement_states": 8,
+            "best_open_complement_hit": 3
+          },
+          "action_changes": [
+            {
+              "event_id": "row-14496-prefix-1",
+              "family": "musique-family-000138",
+              "gold": {
+                "next": {
+                  "probabilities": {
+                    "stop_exhausted": 1.0
+                  }
+                }
+              },
+              "original": "open_p1",
+              "transformed": "stop_exhausted",
+              "original_accepted": false,
+              "transformed_accepted": true
+            }
+          ]
+        },
+        "candidate_order": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 9,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3611111111111111,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 29,
+            "open_positions": 30,
+            "same_best_open": 17,
+            "same_open_ranking": 0,
+            "complement_states": 8,
+            "best_open_complement_hit": 2
+          },
+          "action_changes": [
+            {
+              "event_id": "row-14496-prefix-1",
+              "family": "musique-family-000138",
+              "gold": {
+                "next": {
+                  "probabilities": {
+                    "stop_exhausted": 1.0
+                  }
+                }
+              },
+              "original": "open_p1",
+              "transformed": "stop_exhausted",
+              "original_accepted": false,
+              "transformed_accepted": true
+            }
+          ]
+        },
+        "option_order": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 9,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3611111111111111,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 29,
+            "open_positions": 30,
+            "same_best_open": 13,
+            "same_open_ranking": 0,
+            "complement_states": 8,
+            "best_open_complement_hit": 6
+          },
+          "action_changes": [
+            {
+              "event_id": "row-14496-prefix-1",
+              "family": "musique-family-000138",
+              "gold": {
+                "next": {
+                  "probabilities": {
+                    "stop_exhausted": 1.0
+                  }
+                }
+              },
+              "original": "open_p1",
+              "transformed": "stop_exhausted",
+              "original_accepted": false,
+              "transformed_accepted": true
+            }
+          ]
+        },
+        "title_frame": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 8,
+            "unsupported_exhaustion_stop": 12,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8,
+            "unnecessary_continue": 1
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 8
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3194444444444444,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 29,
+            "open_positions": 30,
+            "same_best_open": 23,
+            "same_open_ranking": 0,
+            "complement_states": 8,
+            "best_open_complement_hit": 5
+          },
+          "action_changes": [
+            {
+              "event_id": "row-14496-prefix-0",
+              "family": "musique-family-000138",
+              "gold": {
+                "next": {
+                  "probabilities": {
+                    "open_p0": 1.0
+                  }
+                }
+              },
+              "original": "stop_exhausted",
+              "transformed": "open_p1",
+              "original_accepted": false,
+              "transformed_accepted": false
+            }
+          ]
+        }
+      },
+      "saved_final_epoch_reproduction": {
+        "same_choices": 30,
+        "positions": 30,
+        "max_abs_logit_difference": 0.02500605583190918
+      },
+      "compute": {
+        "wall_seconds": 25.20049175620079,
+        "cpu_seconds": 34.560646122,
+        "runs": 1,
+        "forwards": 150,
+        "sequence_rows": 150,
+        "input_tokens": 390909,
+        "state_tokenizations": 150,
+        "state_tokens": 341799
+      },
+      "original_ledger_delta_verified": true
+    },
+    {
+      "model": {
+        "seed": 1,
+        "objective": "shuffled-ce",
+        "checkpoint": "artifacts/jev-reader/option-shuffle-v1/runs/1/checkpoint"
+      },
+      "versions": {
+        "original": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 9,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3611111111111111,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 30,
+            "open_positions": 30,
+            "same_best_open": 30,
+            "same_open_ranking": 30,
+            "complement_states": 8,
+            "best_open_complement_hit": 2
+          },
+          "action_changes": []
+        },
+        "aliases": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 9,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3611111111111111,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 30,
+            "open_positions": 30,
+            "same_best_open": 4,
+            "same_open_ranking": 0,
+            "complement_states": 8,
+            "best_open_complement_hit": 1
+          },
+          "action_changes": []
+        },
+        "candidate_order": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 9,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3611111111111111,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 30,
+            "open_positions": 30,
+            "same_best_open": 21,
+            "same_open_ranking": 0,
+            "complement_states": 8,
+            "best_open_complement_hit": 1
+          },
+          "action_changes": []
+        },
+        "option_order": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 9,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3611111111111111,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 30,
+            "open_positions": 30,
+            "same_best_open": 8,
+            "same_open_ranking": 0,
+            "complement_states": 8,
+            "best_open_complement_hit": 2
+          },
+          "action_changes": []
+        },
+        "title_frame": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 9,
+            "unsupported_exhaustion_stop": 13,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 0
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.3611111111111111,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "invariance": {
+            "positions": 30,
+            "same_choice": 30,
+            "open_positions": 30,
+            "same_best_open": 27,
+            "same_open_ranking": 0,
+            "complement_states": 8,
+            "best_open_complement_hit": 1
+          },
+          "action_changes": []
+        }
+      },
+      "saved_final_epoch_reproduction": {
+        "same_choices": 30,
+        "positions": 30,
+        "max_abs_logit_difference": 0.003946781158447266
+      },
+      "compute": {
+        "wall_seconds": 25.83530646096915,
+        "cpu_seconds": 35.396890051,
+        "runs": 1,
+        "forwards": 150,
+        "sequence_rows": 150,
+        "input_tokens": 390909,
+        "state_tokenizations": 150,
+        "state_tokens": 341799
+      },
+      "original_ledger_delta_verified": true
+    }
+  ],
+  "compute_totals": {
+    "wall_seconds": 51.03579821716994,
+    "cpu_seconds": 69.957536173,
+    "runs": 2,
+    "forwards": 300,
+    "sequence_rows": 300,
+    "input_tokens": 781818,
+    "state_tokenizations": 300,
+    "state_tokens": 683598
+  },
+  "scope": "Presentation sensitivity on30exposedprefixes/22labelledstates/3effectivefamilies. No policy QA, training or generic semantic paraphrase claim.",
+  "analysis_compute": {
+    "wall_seconds": 0.040063800290226936,
+    "cpu_seconds": 0.04005645099999999
+  }
+}

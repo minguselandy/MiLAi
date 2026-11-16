@@ -1,0 +1,1747 @@
+{
+  "status": "ACTIVE_E1_THREE_ARM_QUEUE_RUNNING_DELIVERY_FIRST",
+  "timestamp_utc": "2026-11-02T10:08:07.189433+00:00",
+  "goal_complete": false,
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_TRAINING_PLAN_20261102.md",
+  "source": {
+    "branch": "feat/evidence-gap-development-20261023",
+    "base_commit": "b66a5024",
+    "new_code": "uncommitted_worktree",
+    "changed": [
+      "tools/prepare_view_feedback_branches.py",
+      "tools/feedback_choices.py",
+      "tools/analyze_feedback_choices.py",
+      "tests/unit/test_feedback_choices.py",
+      "tools/quality_feedback.py",
+      "tools/train_bounded_laya.py",
+      "tools/analyze_feedback_fit.py",
+      "tests/unit/test_answer_first_feedback.py",
+      "src/milai_lab/datasets/qasper.py",
+      "tools/prepare_qasper_sources.py",
+      "tests/unit/test_qasper.py",
+      "src/milai_lab/runners/given_host_readout.py",
+      "tools/run_frozen_retrieval_calls.py",
+      "tests/unit/test_given_host_readout.py",
+      "tools/feedback_outcomes.py",
+      "tools/prepare_retrieval_feedback.py",
+      "tests/unit/test_feedback_outcomes.py"
+    ]
+  },
+  "prior_evidence": {
+    "original_closure": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/protocol-closure-v1.json",
+    "native_fits": 9,
+    "saved_jobs": 54,
+    "Host_arms": 13,
+    "Host_positions": 208,
+    "scope": "Original protocol closed, not new-plan E1 or independent confirmation"
+  },
+  "live_model": {
+    "coordinator_pid": 1843109,
+    "pid": 1843114,
+    "owner_status": "RUNNING",
+    "status": "RUNNING",
+    "run_id": "delivery-only",
+    "updates": 16,
+    "planned_updates": 128,
+    "train_draws": 256,
+    "train_input_tokens": 1282528,
+    "proc_cmdline_observed": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-three-arm-v1/runtime/tools/train_bounded_laya.py /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-matched-data-v1 /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262 /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --compute-phase milai_e1_20261102_delivery_only_seed0_u128_v1 --task memory_operation --objective pair --optimizer-updates 128 --eval-at-updates 16 32 64 128 --seed 0 --operation-state shared_actions --max-len 16384 --head-max-len 2048 --micro-batch-size 2 --encoder-lr 5e-6 --head-lr 1e-4 --shuffle-options --gradient-checkpointing --feedback-dev-data /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-matched-data-v1/feedback-dev.jsonl --feedback-target delivery --replay-weight .25 --replay-objective set --pair-supervision quality-tie --pair-mass-mode component-sum ",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-three-arm-v1/driver.json",
+    "exec_session": 62239,
+    "automatic_retry": false,
+    "serial_remaining_arms": [
+      "answer-first-full",
+      "answer-first-head"
+    ]
+  },
+  "D1": {
+    "status": "IMPLEMENTED_TESTED_PREPARED_NOT_NEW_BRANCH_EXECUTED",
+    "families": 8,
+    "states": 16,
+    "unique_bindings": 25,
+    "singleton_states": 7,
+    "same_kind_different_parameters_states": 4,
+    "closed_bindings_reusable": 11,
+    "unexecuted_bindings": 14,
+    "new_train_families": 0,
+    "new_model_calls": 0,
+    "selection": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d1-dev-nominations-v2/selection.json",
+    "comparison_plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d1-dev-comparison-plan-v1.json"
+  },
+  "E0_D2": {
+    "status": "OBSERVED_CHOICES_AND_PRE_COST_RELATIVE_QUALITY_ONLY",
+    "reports": {
+      "base-u262": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e0-base-u262-v3.json",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+        "summary": {
+          "states": 64,
+          "targets": {
+            "answer": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 20
+                  },
+                  "known_states": 0,
+                  "families_with_known_comparison": 0,
+                  "conditional_family_macro_signed_preference": null
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 46,
+                    "unknown": 17,
+                    "loss": 1
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "win": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": 0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 9,
+                "unknown": 31,
+                "none_observed": 24
+              }
+            },
+            "delivery": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 20
+                  },
+                  "known_states": 0,
+                  "families_with_known_comparison": 0,
+                  "conditional_family_macro_signed_preference": null
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 46,
+                    "unknown": 17,
+                    "loss": 1
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "loss": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 4,
+                "none_observed": 42,
+                "unknown": 18
+              }
+            }
+          },
+          "coverage": {
+            "full_menu_executed": 45,
+            "baseline_executed": 47,
+            "full_menu_readout_completed": 41
+          }
+        }
+      },
+      "answer32-u192": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e0-answer32-u192-v3.json",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source32-answer-seed0-u192-v1/checkpoints/update-192",
+        "summary": {
+          "states": 64,
+          "targets": {
+            "answer": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 34,
+                    "tie": 2,
+                    "unknown": 26,
+                    "loss": 2
+                  },
+                  "known_states": 4,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.3333333333333333
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 41,
+                    "tie": 2,
+                    "unknown": 19,
+                    "loss": 2
+                  },
+                  "known_states": 4,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.3333333333333333
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "win": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": 0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 9,
+                "unknown": 31,
+                "none_observed": 24
+              }
+            },
+            "delivery": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 34,
+                    "tie": 2,
+                    "unknown": 25,
+                    "loss": 3
+                  },
+                  "known_states": 5,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.6666666666666666
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 41,
+                    "tie": 2,
+                    "unknown": 18,
+                    "loss": 3
+                  },
+                  "known_states": 5,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.6666666666666666
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "loss": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 4,
+                "none_observed": 42,
+                "unknown": 18
+              }
+            }
+          },
+          "coverage": {
+            "full_menu_executed": 42,
+            "baseline_executed": 47,
+            "full_menu_readout_completed": 41
+          }
+        }
+      },
+      "delivery32-u48": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e0-delivery32-u48-v3.json",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source32-delivery-seed0-u192-v1/checkpoints/update-48",
+        "summary": {
+          "states": 64,
+          "targets": {
+            "answer": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 44,
+                    "loss": 1,
+                    "unknown": 19
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 46,
+                    "loss": 1,
+                    "unknown": 17
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "win": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": 0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 9,
+                "unknown": 31,
+                "none_observed": 24
+              }
+            },
+            "delivery": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 44,
+                    "loss": 1,
+                    "unknown": 19
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 46,
+                    "loss": 1,
+                    "unknown": 17
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "loss": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 4,
+                "none_observed": 42,
+                "unknown": 18
+              }
+            }
+          },
+          "coverage": {
+            "full_menu_executed": 46,
+            "baseline_executed": 47,
+            "full_menu_readout_completed": 43
+          }
+        }
+      }
+    },
+    "pending": [
+      "absolute_answer_success_paired_gain",
+      "conditional_change_stable_correctness",
+      "execute_missing_choices_under_matched_conditions"
+    ],
+    "exposure": "64 existing dev states / 8 exposed families; not independent confirmation"
+  },
+  "tests": {
+    "pytest": "30 passed",
+    "ruff": "passed",
+    "mypy": "3 modules passed --follow-imports=silent",
+    "package_boundary": "passed",
+    "tools_boundary": "passed; existing grandfathered dependencies unchanged",
+    "full_repository_tests": "not run; unrelated",
+    "model_benefit_validation": "not completed",
+    "D3": "42 passed",
+    "QASPER": "7 passed",
+    "new_mypy": "D3 3 modules with existing CUDA Python types; QASPER 2 modules; passed",
+    "new_boundaries": "both D3 and QASPER package/tools checks passed"
+  },
+  "failure_reflection": [
+    "Full input equality initially included the separate action_bindings table; fixed by existing observation expansion plus separate exact action binding equality.",
+    "Current exports separate capture ID/path; older exports stored absolute path in capture; both native forms now read explicitly.",
+    "Initial same-binding tie counts corrected to separate identity from known quality tie; old report retained, v3 authoritative.",
+    "First D1 preparation used one collection batch; v2 uses all four real batches without fabricating absent states.",
+    "Ruff and mypy errors corrected; final focused checks pass.",
+    "D3 initial tensor collection lacked langchain_core in CUDA env; reused prior site.addsitedir existing Lab packages, no installation. First type check used no-torch interpreter; corrected and fixed a real mixed-counter type error.",
+    "QASPER native 4 untitled sections raised TypeError; preserved body without invented heading. Failed v1 allocation kept and unchanged in v3.",
+    "Native TRAIN92 unmatched evidence audited: title units and official newline/strip matching restored79; remaining13 stay unknown. v1/v2 data preserved; no paper filtering, source rewriting, test download or fabricated operation labels.",
+    "Real SDK pilot rejected periods in namespace. Changed runtime bank IDs via reversible literal percent escaping, native source identities unchanged; realSQLite unit regression red-before/green-after.",
+    "Mixed trace contains non-control events without phase. Original READ outcome was already stored; corrected reporting and reused it without reexecution.",
+    "Copied SQLite requires explicit in-process public-turn resume. Restored the exact persisted binding with existing SDK phase=resume; no permission or consistency relaxation.",
+    "Located prior canonical131072 query grouping and validated2048/dev32 after mistakenly recomputing it from stale intake status. Duplicate result equals the canonical grouping except display prefix; cost retained, no new data credited.",
+    "All11 new mixed-label conditional changes were source-audited;3 are native-label conflicts, not condition effects. They remain separate from8 supported pairs; no native label overwritten.",
+    "Do not repeat current bindings under a new intervention marker. Reused all8 original last-decision outcomes including the incomplete Reader, and executed only8 new raw-delivery policies.",
+    "Native reference for self-attention layers enumerates head counts; numeric table facts are absent from returned text in other tasks. These limitations are retained rather than manufactured into preference directions.",
+    "Observed one clear raw-delivery answer gain by retaining an already acquired Introduction. Another task lacks the actual initialization paragraph in every acquired candidate, so delivery reranking alone cannot solve it.",
+    "Initial test interpreter lacked torch:4gradient tests skipped, then full frozen CUDA-env CPU tensor suite passed65without skips.",
+    "Ruff line lengths were corrected; failed validation receipt retained. Real collection/replay provenance is now consumed without fake replay wrappers.",
+    "A common masked diagnostic is emitted for the delivery control as well as masked arms, allowing like-input offline nomination; the actual running initial64 report contains it."
+  ],
+  "remaining": {
+    "D3": "New objective implemented; three-arm actual native E1 fitting now running, not an observed task benefit.",
+    "D4": "Real fixed-SDK Source/READ/HANDOFF pilot done; standard frozen collection + real model/QA/feedback still pending. Promptriever canonical query allocation/2048 data done;10k tier and adequate training condition support remain.",
+    "D5_E1_E2_E3": "First8 policy feedback compiled; E1 first arm running, remaining2 serially queued. Complete fitting, saved checks, fixed32 actual choice outcomes and Host transfer; then expand within64newTRAIN/128states and matched conditional/old-pool comparisons.",
+    "E4_E5": "autonomous Host, lightweight/raw/extractive/generated baselines and lifecycle confirmation pending",
+    "final": "three seeds, family-paired intervals and source confirmation, LME-V2 then Mem2Act, paper tables/figures and measured Product increment pending"
+  },
+  "cost": {
+    "new_model_calls": 0,
+    "new_model_weights_loaded": 0,
+    "ledger_recorded": false,
+    "measured_command_cpu_seconds_rounded": {
+      "tests_initial": 1.09,
+      "e0_initial_v1": 3.04,
+      "tests_second": 1.27,
+      "e0_three_models_v2": 7.95,
+      "d1_batch0_v1": 0.96,
+      "d1_four_batches_v2": 1.12,
+      "e0_three_models_v3": 8.04,
+      "tests_final": 1.71
+    },
+    "measured_command_cpu_seconds_sum": 25.18,
+    "nested_analysis_cpu_not_added_again": true,
+    "unmeasured": "Read-only inspections, early failed probes, lint/type/boundary work, and report-writing CPU not instrumented; unknown, not zero. Author reasoning/token cost not available.",
+    "previous_pending": "Existing v284 pending 68 fields plus self remain untouched. No offline ledger write while compact lives."
+  },
+  "no_sha_validation": true,
+  "subagents": 0,
+  "remote_written": false,
+  "Product_changed": false,
+  "previous_progress": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v4.json",
+  "D3": {
+    "status": "IMPLEMENTED_TENSOR_AND_SYNTHETIC_AUDIT_TESTED;NEW_NATIVE_FITS_ZERO",
+    "objective": "0.80 answer-known + 0.20 delivery-answer-unknown + 0.25 accepted-set replay; independently normalized eligible families/events; no total normalization",
+    "mode": "--pair-supervision answer-first --feedback-target answer --replay-objective set",
+    "delivery_control": "--pair-supervision quality-tie --feedback-target delivery --replay-objective set --pair-mass-mode component-sum",
+    "historical_defaults_preserved": true,
+    "new_model_calls": 0,
+    "support_report": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d3-real-pool-v1.json",
+    "support_pools": {
+      "32": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-32/feedback/train.jsonl",
+        "rows": 384,
+        "answer_first": {
+          "feedback_states": 192,
+          "states_with_targets": 192,
+          "unknown_pairs": 26,
+          "answer_unknown_pairs": 195,
+          "target_pairs": 536,
+          "directional_pairs": 382,
+          "tie_pairs": 154,
+          "replay_states": 192,
+          "components": {
+            "answer": {
+              "states": 166,
+              "pairs": 367,
+              "directional_pairs": 268,
+              "tie_pairs": 99,
+              "families": 32,
+              "events": 109
+            },
+            "delivery_auxiliary": {
+              "states": 89,
+              "pairs": 169,
+              "directional_pairs": 114,
+              "tie_pairs": 55,
+              "families": 31,
+              "events": 67
+            }
+          }
+        },
+        "delivery_only": {
+          "feedback_states": 192,
+          "states_with_targets": 192,
+          "target_pairs": 528,
+          "directional_pairs": 326,
+          "unknown_pairs": 34,
+          "tie_pairs": 202,
+          "replay_states": 192
+        },
+        "effective_component_masses": {
+          "answer": 0.7999999999999999,
+          "delivery_auxiliary": 0.20000000000000004,
+          "replay": 0.2500000000000001
+        },
+        "literal_rows_unchanged_in_memory": true
+      },
+      "64": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-64/feedback/train.jsonl",
+        "rows": 768,
+        "answer_first": {
+          "feedback_states": 384,
+          "states_with_targets": 384,
+          "unknown_pairs": 54,
+          "answer_unknown_pairs": 383,
+          "target_pairs": 1072,
+          "directional_pairs": 724,
+          "tie_pairs": 348,
+          "replay_states": 384,
+          "components": {
+            "answer": {
+              "states": 334,
+              "pairs": 743,
+              "directional_pairs": 513,
+              "tie_pairs": 230,
+              "families": 64,
+              "events": 227
+            },
+            "delivery_auxiliary": {
+              "states": 174,
+              "pairs": 329,
+              "directional_pairs": 211,
+              "tie_pairs": 118,
+              "families": 61,
+              "events": 135
+            }
+          }
+        },
+        "delivery_only": {
+          "feedback_states": 384,
+          "states_with_targets": 384,
+          "target_pairs": 1053,
+          "directional_pairs": 583,
+          "unknown_pairs": 73,
+          "tie_pairs": 470,
+          "replay_states": 384
+        },
+        "effective_component_masses": {
+          "answer": 0.8000000000000024,
+          "delivery_auxiliary": 0.19999999999999987,
+          "replay": 0.24999999999999944
+        },
+        "literal_rows_unchanged_in_memory": true
+      },
+      "128": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-128/feedback/train.jsonl",
+        "rows": 1536,
+        "answer_first": {
+          "feedback_states": 768,
+          "states_with_targets": 768,
+          "unknown_pairs": 94,
+          "answer_unknown_pairs": 758,
+          "target_pairs": 2172,
+          "directional_pairs": 1413,
+          "tie_pairs": 759,
+          "replay_states": 768,
+          "components": {
+            "answer": {
+              "states": 680,
+              "pairs": 1508,
+              "directional_pairs": 1019,
+              "tie_pairs": 489,
+              "families": 128,
+              "events": 461
+            },
+            "delivery_auxiliary": {
+              "states": 352,
+              "pairs": 664,
+              "directional_pairs": 394,
+              "tie_pairs": 270,
+              "families": 124,
+              "events": 279
+            }
+          }
+        },
+        "delivery_only": {
+          "feedback_states": 768,
+          "states_with_targets": 768,
+          "target_pairs": 2119,
+          "directional_pairs": 1124,
+          "unknown_pairs": 147,
+          "tie_pairs": 995,
+          "replay_states": 768
+        },
+        "effective_component_masses": {
+          "answer": 0.8000000000000013,
+          "delivery_auxiliary": 0.2000000000000003,
+          "replay": 0.24999999999999992
+        },
+        "literal_rows_unchanged_in_memory": true
+      }
+    },
+    "saved_diagnostic_scope": "Old saved weights only; lower new objective diagnostic is not evidence of actual selected-action or Host success.",
+    "tests": "42 passed including CPU tensors and old-mode regression; tests/unit/test_answer_first_feedback.py contains 11 tests",
+    "validation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d3-validation-v1.json",
+    "new_fit_selection": "At most two offline nominees + update0/simple baseline; actual full-menu fixed-dev answer success still required"
+  },
+  "D4_QASPER": {
+    "status": "SOURCE_FIXTURE_AND_ACTUAL_SDK_PILOT_CLOSED;LEARNED_COLLECTOR_AND_QA_PENDING",
+    "preparation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-first-tier-v4/preparation.json",
+    "allocation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-first-tier-v4/allocation.json",
+    "splits": {
+      "train": {
+        "papers": 384,
+        "questions": 672,
+        "sources": 28925,
+        "annotations": 692,
+        "evidence_status": {
+          "non_text_evidence": 111,
+          "matched_text": 1027,
+          "unmatched_text": 13
+        },
+        "unanswerable_annotations": 82
+      },
+      "dev": {
+        "papers": 32,
+        "questions": 60,
+        "sources": 2031,
+        "annotations": 106,
+        "evidence_status": {
+          "matched_text": 162,
+          "non_text_evidence": 15
+        },
+        "unanswerable_annotations": 19
+      }
+    },
+    "unused_papers": 753,
+    "public_inputs_separate_from_native_annotations": true,
+    "literal_check": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-literal-check-v2.json",
+    "tests": "8 QASPER tests passed, real namespace regression failed before then passed",
+    "validation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-bank-validation-v1.json",
+    "source_url": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+    "license": "CC-BY-4.0",
+    "original_allocation_preserved_after_failures": true,
+    "actual_READ_Handoff_model_calls": 0,
+    "runtime_identifier_audit": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-bank-input-audit-v1.json"
+  },
+  "Promptriever_current_evidence": {
+    "raw_intake": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/promptriever-expansion-first131072-v1/range-intake-v1/driver.json",
+    "raw_status": "COMPLETE_FIXED131072_PUBLIC_TRAIN_PREFIX;QUERY_ANCHORED_GROUPING_PENDING",
+    "raw_rows": 131072,
+    "old_intake_pid_absent": true,
+    "source65536_summary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/promptriever-expansion-first65536-v1/summary-v1.json",
+    "eligible_train_components_at65536": 469,
+    "old512_excluded": 446,
+    "old48_review_excluded": 42,
+    "current_10000_base_query_train_target": "NOT_YET_EXPORTED; existing2048 data reused; preserve old596 allocations and explicit shared-corpus scope. Previous pending-grouping claim was a stale intake snapshot.",
+    "current_status": "PRIOR_COMPLETED_QUERY_ALLOCATION_AND_2048_TRAIN_32_DEV_DATA_REUSED",
+    "canonical_summary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/query-family-auxiliary-protocol-v1/summary-v1.json",
+    "canonical_allocation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/query-family-auxiliary-protocol-v1/allocated131072-v1/groups.json",
+    "reconciliation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/promptriever-existing-allocation-reconciliation-v1.json",
+    "new_unanchored_train_query_families": 26254,
+    "new_unanchored_dev_query_families": 6563,
+    "train_native": {
+      "families": 2048,
+      "native_rows": 4089,
+      "query_units": 2048,
+      "matrix_cells": 139641,
+      "known_training_cells": 130997,
+      "unjudged_cells": 8644,
+      "comparison_kinds": {
+        "unknown": 8644,
+        "stable": 61068
+      },
+      "stable_positive_pairs": 9,
+      "stable_negative_pairs": 61059
+    },
+    "dev_native": {
+      "families": 32,
+      "native_rows": 64,
+      "query_units": 32,
+      "matrix_cells": 2208,
+      "known_training_cells": 2061,
+      "unjudged_cells": 147,
+      "comparison_kinds": {
+        "unknown": 147,
+        "stable": 957
+      },
+      "stable_positive_pairs": 0,
+      "stable_negative_pairs": 957
+    }
+  },
+  "cost_v2": {
+    "ledger_recorded": false,
+    "previous_cost_record": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v1.json",
+    "measured_commands": [
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d3-real-pool-v1.time.txt",
+        "cpu_user": 4.57,
+        "cpu_system": 0.67,
+        "wall": 5.24,
+        "cpu_seconds_rounded": 5.24
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d3-tests-v1.time.txt",
+        "cpu_user": 0.77,
+        "cpu_system": 0.08,
+        "wall": 0.85,
+        "cpu_seconds_rounded": 0.85
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d3-tests-v2.time.txt",
+        "cpu_user": 6.0,
+        "cpu_system": 0.61,
+        "wall": 6.37,
+        "cpu_seconds_rounded": 6.61
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d3-tests-v3.time.txt",
+        "cpu_user": 3.4,
+        "cpu_system": 0.58,
+        "wall": 3.74,
+        "cpu_seconds_rounded": 3.98
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-literal-check-v1.time.txt",
+        "cpu_user": 1.2,
+        "cpu_system": 0.2,
+        "wall": 1.41,
+        "cpu_seconds_rounded": 1.4
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-literal-check-v2.time.txt",
+        "cpu_user": 1.23,
+        "cpu_system": 0.22,
+        "wall": 1.46,
+        "cpu_seconds_rounded": 1.45
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-preparation-v1.time.txt",
+        "cpu_user": 0.92,
+        "cpu_system": 0.11,
+        "wall": 1.04,
+        "cpu_seconds_rounded": 1.03
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-preparation-v2.time.txt",
+        "cpu_user": 1.3,
+        "cpu_system": 0.2,
+        "wall": 1.5,
+        "cpu_seconds_rounded": 1.5
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-preparation-v3.time.txt",
+        "cpu_user": 1.32,
+        "cpu_system": 0.28,
+        "wall": 1.61,
+        "cpu_seconds_rounded": 1.6
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-tests-v1.time.txt",
+        "cpu_user": 0.77,
+        "cpu_system": 0.09,
+        "wall": 0.86,
+        "cpu_seconds_rounded": 0.86
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-tests-v2.time.txt",
+        "cpu_user": 0.71,
+        "cpu_system": 0.08,
+        "wall": 0.8,
+        "cpu_seconds_rounded": 0.7899999999999999
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-tests-v3.time.txt",
+        "cpu_user": 0.75,
+        "cpu_system": 0.08,
+        "wall": 0.83,
+        "cpu_seconds_rounded": 0.83
+      }
+    ],
+    "validation_receipts": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d3-validation-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-validation-v1.json"
+    ],
+    "additional_measured_cpu_seconds": 53.557238,
+    "nested_report_and_analysis_seconds_not_added_again": true,
+    "unmeasured": "Early lint/type attempts, reads/authoring, curl download process, metadata inspections and report writing CPU unmeasured; not zero. All model forward counts remain zero for new work; existing compact is separate.",
+    "settlement": "Pending verified idle boundary; v284 and v1 pending entries remain unchanged."
+  },
+  "D4_SDK_pilot": {
+    "status": "ACTUAL_SOURCE_READ_POSTSTATE_AND_HANDOFF_CLOSED;HOST_QUALITY_UNMEASURED",
+    "summary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-sdk-pilot-v4/summary.json",
+    "range_audit": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-sdk-audit-v1.json",
+    "train_families": 2,
+    "real_source_imports": 268,
+    "real_original_reads": 8,
+    "actual_post_read_states": 8,
+    "handoff_branches": 4,
+    "branch_acquisitions_reexecuted": 0,
+    "original_packet_tokens": [
+      1537,
+      1240
+    ],
+    "source_roles_ranges_and_unknown_event_time_verified": true,
+    "learned_collector_states": 0,
+    "Host_answers": 0,
+    "training_quality_labels": 0,
+    "model_calls": 0,
+    "operational_ledger_opened": false,
+    "scope": "Existing raw fixed policy/SQLite/source pipeline and actual checkpoint restores. No synthetic evidence, model prediction, QA score or D5 learned reached-state claim."
+  },
+  "conditional_dev_review": {
+    "status": "ALL147_FIXED_DEV_REVIEWS_BOUND_AND_NATIVE_INPUTS_PRESERVED;CHANGE_PAIRS_SOURCE_AUDITED",
+    "audit": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/conditional-dev32-review-v1/actual-audit-v1.json",
+    "selection": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/conditional-dev32-review-v1/selection.json",
+    "judgments": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/conditional-dev32-review-v1/judgments-v1.json",
+    "author_decisions": {
+      "satisfies": 52,
+      "does_not_satisfy": 77,
+      "unknown": 18
+    },
+    "new_known_cells": 129,
+    "still_unknown": 18,
+    "matrix_cells": 2208,
+    "native_known_labels_unchanged": 2061,
+    "pair_counts": {
+      "stable_positive": 46,
+      "stable_negative": 1029,
+      "unknown": 18,
+      "change": 11
+    },
+    "source_audited_change_pairs": 8,
+    "supported_change_families": 5,
+    "native_label_conflicts_not_condition_effects": 3,
+    "gradient_training_allowed": false,
+    "model_calls": 0,
+    "confirmation_scope": "No protected64 query/body/label packet or semantic review; publicraw programmatic grouping scan exposure remains disclosed.",
+    "constant_negative_stable_macro": 0.957428152941895,
+    "constant_negative_stable_positive_joint": {
+      "correct": 0,
+      "pairs": 46
+    },
+    "scope": "Author applicability judgments, not independent factuality. Native known labels remain untouched;11 mixed-origin changes must not all be presented as semantic effects."
+  },
+  "current_plan_priority": "Follow Nov2 E0-E5 and E1 at most3 new fits. Preserve historical Q/coverage/request-text preparations without making their entire older grid mandatory prerequisites. Keep active compact untouched; require matched saved validation before any compact candidate use.",
+  "cost_v3": {
+    "ledger_recorded": false,
+    "previous_cost_record": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v2.json",
+    "measured_commands": [
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-sdk-pilot-v1.time.txt",
+        "cpu_user": 5.62,
+        "cpu_system": 0.61,
+        "wall": 3.67,
+        "cpu_seconds_rounded": 6.23
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-sdk-pilot-v2.time.txt",
+        "cpu_user": 6.89,
+        "cpu_system": 0.61,
+        "wall": 7.3,
+        "cpu_seconds_rounded": 7.5
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-sdk-pilot-v3.time.txt",
+        "cpu_user": 5.34,
+        "cpu_system": 0.43,
+        "wall": 3.09,
+        "cpu_seconds_rounded": 5.77
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-sdk-pilot-v4.time.txt",
+        "cpu_user": 7.54,
+        "cpu_system": 0.76,
+        "wall": 13.84,
+        "cpu_seconds_rounded": 8.3
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/promptriever-query-allocation-v1.time.txt",
+        "cpu_user": 10.35,
+        "cpu_system": 2.33,
+        "wall": 12.68,
+        "cpu_seconds_rounded": 12.68
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-sdk-audit-v1.time.txt",
+        "cpu_user": 0.53,
+        "cpu_system": 0.14,
+        "wall": 0.67,
+        "cpu_seconds_rounded": 0.67
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/conditional-dev32-application-v1.time.txt",
+        "cpu_user": 0.26,
+        "cpu_system": 0.08,
+        "wall": 0.35,
+        "cpu_seconds_rounded": 0.34
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/conditional-dev32-audit-v1.time.txt",
+        "cpu_user": 0.21,
+        "cpu_system": 0.04,
+        "wall": 0.25,
+        "cpu_seconds_rounded": 0.25
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-bank-regression-before.time.txt",
+        "cpu_user": 3.9,
+        "cpu_system": 0.17,
+        "wall": 1.43,
+        "cpu_seconds_rounded": 4.07
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-bank-regression-after.time.txt",
+        "cpu_user": 3.47,
+        "cpu_system": 0.17,
+        "wall": 1.1,
+        "cpu_seconds_rounded": 3.64
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-preparation-v4.time.txt",
+        "cpu_user": 1.4,
+        "cpu_system": 0.22,
+        "wall": 1.62,
+        "cpu_seconds_rounded": 1.6199999999999999
+      },
+      {
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-bank-input-audit-v1.time.txt",
+        "cpu_user": 0.36,
+        "cpu_system": 0.26,
+        "wall": 0.62,
+        "cpu_seconds_rounded": 0.62
+      }
+    ],
+    "validation_receipt": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-bank-validation-v1.json",
+    "additional_measured_cpu_seconds": 65.40592600000001,
+    "nested_report_and_analysis_seconds_not_added_again": true,
+    "unmeasured": "Read-only exploration, glue/report authoring, review selection and source-author semantic judgment cost not instrumented; not zero.",
+    "new_experiment_model_calls": 0,
+    "old_pending_preserved": "v284 pending68+self;v1 measured25.18+unknown;v2 measured53.557238+unknown remain. No ledger settlement while compact is live."
+  },
+  "completed_compact": {
+    "status": "NATIVE_TERMINAL_AND_FULL_DECLARED_OUTPUT_COVERAGE_OBSERVED;SAVED_SELECTION_PENDING",
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/driver.json",
+    "optimizer_updates": 524,
+    "train_draws": 8384,
+    "train_input_tokens": 45881938,
+    "curve": [
+      {
+        "update": 0,
+        "native_dev_family_macro": 0.1007374003348213,
+        "dev_accepted": 49,
+        "actual_prediction_coverage": {
+          "train": 4886,
+          "dev": 860,
+          "feedback-dev": 16
+        }
+      },
+      {
+        "update": 32,
+        "native_dev_family_macro": 0.6744372113071367,
+        "dev_accepted": 395,
+        "actual_prediction_coverage": {
+          "train": 4886,
+          "dev": 860,
+          "feedback-dev": 16
+        }
+      },
+      {
+        "update": 64,
+        "native_dev_family_macro": 0.7196564400150509,
+        "dev_accepted": 425,
+        "actual_prediction_coverage": {
+          "train": 4886,
+          "dev": 860,
+          "feedback-dev": 16
+        }
+      },
+      {
+        "update": 128,
+        "native_dev_family_macro": 0.7817766619417242,
+        "dev_accepted": 463,
+        "actual_prediction_coverage": {
+          "train": 4886,
+          "dev": 860,
+          "feedback-dev": 16
+        }
+      },
+      {
+        "update": 262,
+        "native_dev_family_macro": 0.7848402666391602,
+        "dev_accepted": 468,
+        "actual_prediction_coverage": {
+          "train": 4886,
+          "dev": 860,
+          "feedback-dev": 16
+        }
+      },
+      {
+        "update": 393,
+        "native_dev_family_macro": 0.7691163182213258,
+        "dev_accepted": 460,
+        "actual_prediction_coverage": {
+          "train": 4886,
+          "dev": 860,
+          "feedback-dev": 16
+        }
+      },
+      {
+        "update": 524,
+        "native_dev_family_macro": 0.7710664415534534,
+        "dev_accepted": 460,
+        "actual_prediction_coverage": {
+          "train": 4886,
+          "dev": 860,
+          "feedback-dev": 16
+        }
+      }
+    ],
+    "model_calls": 0,
+    "scope": "Closed original native fit; recorded native metrics and file coverage, not saved-CPU validation, actual selected-action quality or Host advantage. New first8 collector uses already verified shared u262, not these unvalidated compact weights."
+  },
+  "first8_learned_collection": {
+    "status": "COLLECTION_PROCESS_CLOSED_REVIEW_PENDING",
+    "source": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-learned-first8-v1/dispatch.json",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-learned-first8-v1/driver.json",
+    "actual_positions": 8,
+    "source_families": 8,
+    "source_units": 835,
+    "actual_scored_states": 59,
+    "initial_states": 8,
+    "post_operation_states": 51,
+    "recorded_scores_matched": 59,
+    "unscored": 0,
+    "model_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+    "inference": "Verified CPU4/FP32/shared_actions/max16384/head2048; original attention wrapper",
+    "native_forwards": 59,
+    "native_input_tokens": 363257,
+    "conditional_readouts": {
+      "attempts": 8,
+      "completed": 7,
+      "failed": 1,
+      "known_generation_tokens": 34031,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      }
+    },
+    "whole_child_cpu_seconds": 4059.023073,
+    "native_cpu_already_recorded": {
+      "dynamic_memory_laya": 3994.521264452982,
+      "dynamic_memory_laya_load": 10.279081333999784
+    },
+    "scope": "Supplied-request actual learned trajectories on TRAIN, not autonomous Host or confirmation."
+  },
+  "first8_paired_feedback": {
+    "status": "ALL8_PAIRED_SOURCE_AUTHOR_REVIEWS_CLOSED;TRAINING_COMPILATION_PENDING",
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-post-branches-v1/comparison-v2.json",
+    "contracts": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-post-branches-v1/actual-pair-contracts-v1.json",
+    "reviews": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-post-branches-v1/source-author-reviews-v1.json",
+    "reused_original_current_outcomes": 8,
+    "retained_failed_original_reader": 1,
+    "new_baseline_branches": 8,
+    "baseline_completed_readouts": 8,
+    "baseline_known_generation_tokens": 25834,
+    "new_unknown_usage": {
+      "generation": 0,
+      "embedding": 0
+    },
+    "pure_delivery_pairs": 5,
+    "acquisition_stop_pairs": 3,
+    "selected_train_feedback_states": 8,
+    "quality_counts": {
+      "answer": {
+        "unknown": 3,
+        "tie": 4,
+        "right": 1
+      },
+      "delivery": {
+        "unknown": 2,
+        "tie": 3,
+        "right": 2,
+        "left": 1
+      },
+      "current_answer_grade": {
+        "qualified": 2,
+        "complete": 2,
+        "incomplete": 3,
+        "failed": 1
+      },
+      "baseline_answer_grade": {
+        "qualified": 2,
+        "complete": 3,
+        "incomplete": 3
+      }
+    },
+    "clear_same_acquired_material_answer_gain_for_raw": 1,
+    "proof": "All before/menu and baseline bindings verified. Full Reader inputs equal except actual packet. Current first outcomes not reexecuted, including failure.",
+    "model_calls_for_scoring_reuse": 0,
+    "training_compilation": "COMPILED8_WITH_EXPLICIT_COLLECTED_AND_REPLAY_OUTCOME_ORIGINS"
+  },
+  "D1_recorded_score_extension": {
+    "status": "IMPLEMENTED_AND_REAL59_SCORES_BOUND",
+    "option": "--decision-collection",
+    "baseline": "raw_delivery uses existing HANDOFF selector over acquired materials",
+    "scope": "Full actual menu logits and actual selection; no replayed numerical inference. Forced/unscored states not assigned invented scores."
+  },
+  "given_branch_readout_extension": {
+    "status": "IMPLEMENTED_FROZEN_AND_ACTUALLY_EXECUTED8",
+    "freeze": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/given-branch-runtime-freeze-v1.json",
+    "method_source": "local-given-view-readout-v4",
+    "runner_source": "local-given-branch-readout-20261102-v1",
+    "tests": {
+      "working_related": 53,
+      "frozen_related": 38,
+      "ruff": "passed",
+      "mypy_4_modules": "passed",
+      "package_and_tools_boundary": "passed"
+    },
+    "scope": "Actual replay receipt from same supplied request. Original task/history/answer untouched; current replay bank visibility and existing ledger/queue/remaining capacity retained."
+  },
+  "offline_settlements_v4": [
+    {
+      "status": "SETTLED_ONCE_AT_VERIFIED_IDLE_BOUNDARY",
+      "phase": "milai_development_training_20261102_precollector_idle_v1",
+      "measures": {
+        "cpu_seconds": 1211.6492906750004,
+        "measured_phases": 77,
+        "runs": 1
+      },
+      "entries": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/launch.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.009508251
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v281.json",
+          "field": "accounting.progress_processing_cpu_pending",
+          "cpu_seconds": 0.032582669
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/actual-native-input-admission-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.049515021000000006
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/saved-operation-execution-v1/dispatch-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.010561518999999998
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/saved-operation-execution-v1/execution-preflight-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.20374482899999996
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/saved-operation-execution-v1/execution-readiness-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.00026623699999999903
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/saved-operation-execution-v1/active-model-admission-test-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.23220363699999996
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/saved-operation-execution-v1/analysis-readiness-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.002259610000000002
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/initial-dev-observation-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.015408954000000002
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/initial-dev-and-feedback-audit-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.647217368
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v282.json",
+          "field": "accounting.progress_processing_cpu_pending",
+          "cpu_seconds": 0.04481373799999999
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/request-text-complete-actions-dev-v1/binding-preparation-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 8.232453285
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/request-text-complete-actions-dev-v1/feedback16-input-audit-execution-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 6.637816805
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/request-text-complete-actions-dev-v1/feedback16-input-audit-execution-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 9.75265242
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/request-text-complete-actions-dev-v1/closure-preflight-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.16763082
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/request-text-complete-actions-dev-v1/closure-plan-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.00018118199999999848
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/request-text-complete-actions-dev-v1/representation-admission-test-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 1.039075327
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/request-text-complete-actions-dev-v1/summary-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.006620025999999998
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v283.json",
+          "field": "accounting.progress_processing_cpu_pending",
+          "cpu_seconds": 0.04482077500000001
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/first32-exposure-and-readouts-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 5.751950775
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/closed32-64-audit-execution-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 7.485736414
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/focused-tests-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 13.9986751
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/focused-tests-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 11.916861443
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/focused-tests-v3.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 6.478029831
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/frozen-related-tests-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 12.687177991
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/frozen-related-tests-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 13.699166307
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/frozen-related-tests-v3.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 22.442909955
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/frozen-related-tests-v4.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 21.199654184
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/mypy-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 5.907687860999998
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/mypy-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 2.3280579569999995
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/package_boundary-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 3.826317943000003
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/package_boundary-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 3.8066712949999983
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/probe-source-scope-tests-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 11.410241678000002
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/projection_cost_mypy-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 35.33900827
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/projection_cost_ruff-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.14037801500000047
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/projection_cost_ruff-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.08348818
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/projection_cost_tests-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 6.8468936309999995
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/related_tests-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 10.838921567000002
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/related_tests-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 10.796060469999999
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/ruff-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.06220230199999799
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/ruff-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.09650726799999965
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/ruff-v3.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.055904803
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/scope_mypy-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 4.298668072
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/scope_mypy-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 34.863207076
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/scope_package_boundary-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 3.7991825940000012
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/scope_regressions-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 18.917670623
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/scope_ruff-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.8982732159999999
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/source-freeze-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.389028693
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/source-freeze-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.6741012439999999
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/source-freeze-v3.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.619504697
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/source-freeze-v4.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.414780747
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/summary-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.007676046000000002
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/timing_mypy-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 2.3225369860000002
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/timing_ruff-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.16228851400000066
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/timing_tests-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 6.7481833159999995
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/tools_boundary-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 13.61487025
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/given-view-readout-dev-v1/tools_boundary-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 8.234631653
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/active-model-admission-test-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.23945994799999998
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/config-preflight-execution-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 7.471494194
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/dispatch-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.009703633
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/dispatch-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.010977541
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/execution-readiness-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.0006490379999999976
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/final-wire-review-execution-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 4.910814193
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/mechanical-preflight-execution-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 258.50619149100004
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/mechanical-preflight-execution-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 242.10805558700002
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/protocol-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.012408989999999998
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/protocol-v2.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.039866502
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-lifecycle-probe-dev-v1/v2-projection-capacity-execution-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 136.004651823
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v284.json",
+          "field": "accounting.progress_processing_cpu_pending",
+          "cpu_seconds": 0.04704731799999999
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/driver.json",
+          "field": "child_residual_cpu_pending",
+          "cpu_seconds": 81.28793662200042
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/operation-orchestration-v1/driver.json",
+          "field": "orchestration_cpu_seconds_pending",
+          "cpu_seconds": 0.017476782999999996
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v1.json",
+          "field": "cost.measured_command_cpu_seconds_sum",
+          "cpu_seconds": 25.18
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v2.json",
+          "field": "cost_v2.additional_measured_cpu_seconds",
+          "cpu_seconds": 53.557238
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v3.json",
+          "field": "cost_v3.additional_measured_cpu_seconds",
+          "cpu_seconds": 65.40592600000001
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-learned-first8-v1/dispatch.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.387037634
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-learned-preflight-v1.time.txt",
+          "field": "measured_process_user_plus_system",
+          "cpu_seconds": 6.1
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/precollector-cpu-inventory-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.059915938
+        }
+      ],
+      "only_expected_compute_delta": true,
+      "generation_embedding_limits_and_old_unknown_usage_unchanged": true,
+      "model_calls": 0,
+      "no_sha_validation": true,
+      "unmeasured": "Author semantic annotation, early probes and administrative overhead remain unknown, not zero. Some command CPU receipts have0.01-second precision. Nested analysis, native trainer and prior settlements are not added again."
+    },
+    {
+      "status": "SETTLED_ONCE_AT_VERIFIED_IDLE_BOUNDARY",
+      "phase": "milai_qasper_first8_collection_and_branch_preparation_v1",
+      "measures": {
+        "cpu_seconds": 103.81164028801807,
+        "measured_phases": 11,
+        "runs": 1
+      },
+      "entries": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-learned-first8-v1/driver.json",
+          "field": "local_cpu_accounting.child_cpu_pending",
+          "cpu_seconds": 54.22272721301806
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-learned-first8-v1/driver.json",
+          "field": "coordinator_cpu_seconds_pending",
+          "cpu_seconds": 0.015662541000000085
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/given-branch-tests-v1.time.txt",
+          "field": "measured_process_user_plus_system",
+          "cpu_seconds": 7.640000000000001
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/captured-decision-tests-v1.time.txt",
+          "field": "measured_process_user_plus_system",
+          "cpu_seconds": 1.12
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/captured-decision-actual-v1.time.txt",
+          "field": "measured_process_user_plus_system",
+          "cpu_seconds": 1.5
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/decision-branch-tests-v2.time.txt",
+          "field": "measured_process_user_plus_system",
+          "cpu_seconds": 8.99
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-post-nominations-v1.time.txt",
+          "field": "measured_process_user_plus_system",
+          "cpu_seconds": 3.15
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/given-branch-freeze-v1.time.txt",
+          "field": "measured_process_user_plus_system",
+          "cpu_seconds": 0.42000000000000004
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/given-branch-frozen-tests-v1.time.txt",
+          "field": "measured_process_user_plus_system",
+          "cpu_seconds": 13.52
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/decision-branch-validation-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 13.198621999999999
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/first8-postcollection-cpu-inventory-v1.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.03462853399999999
+        }
+      ],
+      "only_expected_compute_delta": true,
+      "generation_embedding_limits_and_old_unknown_usage_unchanged": true,
+      "model_calls": 0,
+      "no_sha_validation": true,
+      "unmeasured": "Uninstrumented authoring, initial lint/type attempts and preparation commands remain unknown; command timing receipts are rounded to0.01s. No nested totals added."
+    }
+  ],
+  "cost_v4": {
+    "new_experiment_Reader_requests": 16,
+    "known_generation_tokens": 59865,
+    "new_unknown_usage": 0,
+    "new_embedding_calls": 0,
+    "native_policy_forwards": 59,
+    "native_policy_input_tokens": 363257,
+    "current_client_cpu_plus_baseline_client_cpu": 4080.673695,
+    "native_load_predict_CPU_is_subset_not_added_again": true,
+    "pending_disjoint_entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-post-branches-v1/baseline-driver-v1.json",
+        "field": "local_cpu_accounting.child_cpu_pending",
+        "cpu_seconds": 21.650622
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-post-branches-v1/baseline-driver-v1.json",
+        "field": "coordinator_cpu_seconds_pending",
+        "cpu_seconds": 0.012133361999999981
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-pair-contracts-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 5.97
+      }
+    ],
+    "pending_known_CPU_seconds": 27.632755361999997,
+    "unmeasured": "Author semantic review, uninstrumented command preparation and administrative overhead remain unknown, not zero. Remote GPU energy/money not measured.",
+    "older_pending_status": "v284 and v1-v3 measured entries settled once by precollector phase. First8 client residual and measured branch preparation settled once. Do not recharge copied historical manifests."
+  },
+  "feedback_compilation": {
+    "status": "COMPILED_AND_ACTUAL_PROVENANCE_VERIFIED",
+    "rows": 8,
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-feedback-compiled-v1/feedback.jsonl",
+    "audit": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/feedback-compilation-audit-v1.json",
+    "new_full_option_labels": 0,
+    "invented_replay_records": 0,
+    "answer_first_known_pairs": 5,
+    "delivery_auxiliary_pairs": 2,
+    "original_failed_reader_preserved": true
+  },
+  "E1": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-three-arm-v1/plan.json",
+    "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-three-arm-v1/protocol.json",
+    "admission": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-three-arm-v1/admission-v1.json",
+    "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-three-arm-v1/runtime",
+    "data": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-matched-data-v1",
+    "data_preparation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-matched-data-v1/preparation.json",
+    "rows_each_arm": 400,
+    "feedback_states": 200,
+    "replay_states": 200,
+    "feedback_families": 40,
+    "new_feedback_states": 8,
+    "old384_rows_literal_preserved": true,
+    "new_input_max_tokens": 8469,
+    "new_input_truncated_rows": 0,
+    "arms": [
+      "delivery-only",
+      "answer-first-full",
+      "answer-first-head"
+    ],
+    "updates_each": 128,
+    "draws_each": 2048,
+    "evaluation_points": [
+      0,
+      16,
+      32,
+      64,
+      128
+    ],
+    "encoder_lr": 5e-06,
+    "head_lr": 0.0001,
+    "effective_batch": 16,
+    "microbatch": 2,
+    "seed": 0,
+    "replay_objective": "set",
+    "replay_mass": 0.25,
+    "mass_mode": "component-sum",
+    "common_initialization": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+    "old_feedback_dev_scope": "64 fixed states for offline nomination, not new-domain task success; old operation860 for retention",
+    "fixed_new_task_dev32": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-three-arm-v1/fixed-task-dev32.json",
+    "fixed_task_dev_dispatch": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-three-arm-v1/fixed-task-dev32-dispatch.json",
+    "selection": "At most2 trained nominees plus update0 and raw-delivery control; actual fixed32 complete-answer family macro, not pair loss, determines selection. Missing/failing positions stay in denominator.",
+    "started_fits": 1,
+    "complete_fits": 0,
+    "saved_model_validation": "PENDING",
+    "actual_task_choice_selection": "PENDING",
+    "autonomous_Host": "PENDING",
+    "tests": "65 final frozen tensor/compiler/audit tests passed with no skips; initial base-env run had4torch skips, retained. Ruff passed, mypy6modules passed, dependency boundaries passed."
+  },
+  "pre_E1_settlement": {
+    "status": "SETTLED_ONCE_AT_VERIFIED_IDLE_BOUNDARY",
+    "phase": "milai_e1_20261102_prelaunch_v1",
+    "measures": {
+      "cpu_seconds": 117.694505362,
+      "measured_phases": 11,
+      "runs": 1
+    },
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-post-branches-v1/baseline-driver-v1.json",
+        "field": "local_cpu_accounting.child_cpu_pending",
+        "cpu_seconds": 21.650622
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-post-branches-v1/baseline-driver-v1.json",
+        "field": "coordinator_cpu_seconds_pending",
+        "cpu_seconds": 0.012133361999999981
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-pair-contracts-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 5.97
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-feedback-compile-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 5.74
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/feedback-outcomes-tests-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 5.46
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-data-preparation-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 17.73
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-plan-freeze-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 0.5700000000000001
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-frozen-tests-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 7.02
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-admission-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 0.6
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-final-static-v1.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 36.03
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/feedback-outcomes-validation-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 16.91175
+      }
+    ],
+    "only_expected_compute_delta": true,
+    "generation_embedding_limits_and_old_unknown_usage_unchanged": true,
+    "no_sha_validation": true
+  },
+  "cost_v5": {
+    "prior_v4_pending_status": "Settled once by milai_e1_20261102_prelaunch_v1,117.694505362 CPU seconds; no old model or token cost re-added.",
+    "new_live_fit_accounting": "Each trainer records its own phase. Queue will settle whole-child residual only after its child is terminal, with unchanged ledger limits.",
+    "pending_offline": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-frozen-tests-v2.time.txt",
+        "field": "measured_process_user_plus_system",
+        "cpu_seconds": 6.92
+      }
+    ],
+    "unmeasured": "Uninstrumented authoring/config/metadata/report checks remain unknown, not zero. No offline ledger write while the E1 child is live."
+  }
+}

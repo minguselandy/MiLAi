@@ -1,0 +1,1635 @@
+{
+  "status": "NEW_EVALUATION_ROLES_RESERVED;FORMAL_CONFIRMATION_ADMISSION_PENDING",
+  "allocation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/two-wiki-evaluation-sources-dev-v1/actual-v1/allocation.json",
+  "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/two-wiki-evaluation-sources-dev-v1/protocol-v1.json",
+  "source_review": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/two-wiki-evaluation-sources-dev-v1/dev-source-review-complete-before-native-v1.json",
+  "post_review_boundary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/two-wiki-evaluation-sources-dev-v1/reviewed-target-boundary-v1.json",
+  "selection": [
+    {
+      "family": "two-wiki-family-005075",
+      "question_id": "149dddc0086511ebbd5eac1f6bf848b6",
+      "source_rows": [
+        2639
+      ],
+      "whole_family_rows": [
+        2639,
+        107897
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-006220",
+      "question_id": "1a00dfe4085911ebbd5bac1f6bf848b6",
+      "source_rows": [
+        91119
+      ],
+      "whole_family_rows": [
+        91119,
+        144800
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-003624",
+      "question_id": "0e31963008b411ebbd87ac1f6bf848b6",
+      "source_rows": [
+        165349
+      ],
+      "whole_family_rows": [
+        82684,
+        165349
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-013312",
+      "question_id": "3b8e15e8088911ebbd6eac1f6bf848b6",
+      "source_rows": [
+        97421
+      ],
+      "whole_family_rows": [
+        76563,
+        97421
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-042629",
+      "question_id": "e5642bb2085611ebbd59ac1f6bf848b6",
+      "source_rows": [
+        207
+      ],
+      "whole_family_rows": [
+        207
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-026925",
+      "question_id": "82dea9bc08a711ebbd7fac1f6bf848b6",
+      "source_rows": [
+        144817
+      ],
+      "whole_family_rows": [
+        144817
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-035330",
+      "question_id": "b57118aa08da11ebbd9cac1f6bf848b6",
+      "source_rows": [
+        83332
+      ],
+      "whole_family_rows": [
+        54949,
+        83332
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-032853",
+      "question_id": "a59d51f2089c11ebbd78ac1f6bf848b6",
+      "source_rows": [
+        127405
+      ],
+      "whole_family_rows": [
+        127405
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-009500",
+      "question_id": "290a9d76088c11ebbd6fac1f6bf848b6",
+      "source_rows": [
+        96477
+      ],
+      "whole_family_rows": [
+        96477
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-013235",
+      "question_id": "3b19d278098911ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        49904
+      ],
+      "whole_family_rows": [
+        49904,
+        102272
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-025648",
+      "question_id": "f13edf340bdc11eba7f7acde48001122",
+      "source_rows": [
+        65589
+      ],
+      "whole_family_rows": [
+        61005,
+        65589
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-005058",
+      "question_id": "148a17f8084a11ebbd55ac1f6bf848b6",
+      "source_rows": [
+        129840
+      ],
+      "whole_family_rows": [
+        129840
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-019604",
+      "question_id": "5aff87300bdc11eba7f7acde48001122",
+      "source_rows": [
+        1733
+      ],
+      "whole_family_rows": [
+        1733
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-046025",
+      "question_id": "fdd04f09088a11ebbd6fac1f6bf848b6",
+      "source_rows": [
+        126022
+      ],
+      "whole_family_rows": [
+        63340,
+        126022
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-040676",
+      "question_id": "d84b9de108a911ebbd80ac1f6bf848b6",
+      "source_rows": [
+        52176
+      ],
+      "whole_family_rows": [
+        52176
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-014254",
+      "question_id": "aeb3ed0d08b811ebbd88ac1f6bf848b6",
+      "source_rows": [
+        162511
+      ],
+      "whole_family_rows": [
+        85738,
+        162511
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-000071",
+      "question_id": "6bd650500bd911eba7f7acde48001122",
+      "source_rows": [
+        10976
+      ],
+      "whole_family_rows": [
+        3281,
+        4839,
+        10976,
+        36022,
+        67189,
+        68806,
+        77053,
+        119021,
+        120497,
+        130174,
+        130244
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-028289",
+      "question_id": "8a94424008c311ebbd8dac1f6bf848b6",
+      "source_rows": [
+        155334
+      ],
+      "whole_family_rows": [
+        155334
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-045833",
+      "question_id": "faab253a09b311ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        114138
+      ],
+      "whole_family_rows": [
+        114138
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-025112",
+      "question_id": "78f073f608c311ebbd8dac1f6bf848b6",
+      "source_rows": [
+        116728
+      ],
+      "whole_family_rows": [
+        116728
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-002698",
+      "question_id": "0a26f3560bdd11eba7f7acde48001122",
+      "source_rows": [
+        41868
+      ],
+      "whole_family_rows": [
+        41868,
+        131057
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-015832",
+      "question_id": "47ee32a60bda11eba7f7acde48001122",
+      "source_rows": [
+        39482
+      ],
+      "whole_family_rows": [
+        39482
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-045509",
+      "question_id": "f8a5cfbf086511ebbd5eac1f6bf848b6",
+      "source_rows": [
+        74319
+      ],
+      "whole_family_rows": [
+        74319
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-039887",
+      "question_id": "d2ea01be0bda11eba7f7acde48001122",
+      "source_rows": [
+        10675
+      ],
+      "whole_family_rows": [
+        10675
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-020506",
+      "question_id": "5fa9b8fb095e11ebbdafac1f6bf848b6",
+      "source_rows": [
+        47396
+      ],
+      "whole_family_rows": [
+        47396
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-024992",
+      "question_id": "78590737085611ebbd59ac1f6bf848b6",
+      "source_rows": [
+        120710
+      ],
+      "whole_family_rows": [
+        120710
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-041110",
+      "question_id": "db1981d0086611ebbd5eac1f6bf848b6",
+      "source_rows": [
+        161808
+      ],
+      "whole_family_rows": [
+        161808
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-020807",
+      "question_id": "61328e7208d011ebbd95ac1f6bf848b6",
+      "source_rows": [
+        50678
+      ],
+      "whole_family_rows": [
+        50678
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-011651",
+      "question_id": "33ad3ec4087211ebbd64ac1f6bf848b6",
+      "source_rows": [
+        75624
+      ],
+      "whole_family_rows": [
+        75624
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-013313",
+      "question_id": "3b8e84520bda11eba7f7acde48001122",
+      "source_rows": [
+        72980
+      ],
+      "whole_family_rows": [
+        72980
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-014319",
+      "question_id": "407d51d6089311ebbd74ac1f6bf848b6",
+      "source_rows": [
+        150448
+      ],
+      "whole_family_rows": [
+        150448
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-022859",
+      "question_id": "6c8f958708ef11ebbda8ac1f6bf848b6",
+      "source_rows": [
+        113781
+      ],
+      "whole_family_rows": [
+        113781
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "dev",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-000821",
+      "question_id": "c536f29208b111ebbd85ac1f6bf848b6",
+      "source_rows": [
+        162569
+      ],
+      "whole_family_rows": [
+        11364,
+        19363,
+        27611,
+        44894,
+        76494,
+        80846,
+        96151,
+        104518,
+        105073,
+        111796,
+        117572,
+        139055,
+        141685,
+        162569
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-011858",
+      "question_id": "40eceb0e08a211ebbd7aac1f6bf848b6",
+      "source_rows": [
+        94732
+      ],
+      "whole_family_rows": [
+        24845,
+        85039,
+        94732,
+        114743
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-017450",
+      "question_id": "50530b6c08bd11ebbd8aac1f6bf848b6",
+      "source_rows": [
+        11365
+      ],
+      "whole_family_rows": [
+        11365
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-035172",
+      "question_id": "b46a294408ce11ebbd94ac1f6bf848b6",
+      "source_rows": [
+        156716
+      ],
+      "whole_family_rows": [
+        156716
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-044649",
+      "question_id": "f30737f808bc11ebbd89ac1f6bf848b6",
+      "source_rows": [
+        5989
+      ],
+      "whole_family_rows": [
+        5989
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-036257",
+      "question_id": "bb44b44408df11ebbda1ac1f6bf848b6",
+      "source_rows": [
+        10542
+      ],
+      "whole_family_rows": [
+        10542
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-031895",
+      "question_id": "9ff544b4087211ebbd66ac1f6bf848b6",
+      "source_rows": [
+        94266
+      ],
+      "whole_family_rows": [
+        94266
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-021995",
+      "question_id": "c88ce102086d11ebbd62ac1f6bf848b6",
+      "source_rows": [
+        109014
+      ],
+      "whole_family_rows": [
+        47573,
+        71874,
+        109014,
+        111183
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-022992",
+      "question_id": "6d3c9050087111ebbd63ac1f6bf848b6",
+      "source_rows": [
+        116635
+      ],
+      "whole_family_rows": [
+        97752,
+        116635
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-013874",
+      "question_id": "3e334108088211ebbd6dac1f6bf848b6",
+      "source_rows": [
+        37314
+      ],
+      "whole_family_rows": [
+        37314,
+        54266,
+        58939,
+        67555,
+        120484,
+        139547,
+        141050
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-011782",
+      "question_id": "34659e5c087611ebbd67ac1f6bf848b6",
+      "source_rows": [
+        14017
+      ],
+      "whole_family_rows": [
+        14017,
+        148620
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-011342",
+      "question_id": "7096cc12089811ebbd77ac1f6bf848b6",
+      "source_rows": [
+        48766
+      ],
+      "whole_family_rows": [
+        42703,
+        48766,
+        51987,
+        78564,
+        157978
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-004343",
+      "question_id": "eb8cf38608d111ebbd95ac1f6bf848b6",
+      "source_rows": [
+        39094
+      ],
+      "whole_family_rows": [
+        39094,
+        81096
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-040489",
+      "question_id": "d6fa986108e511ebbda4ac1f6bf848b6",
+      "source_rows": [
+        80281
+      ],
+      "whole_family_rows": [
+        15054,
+        80281
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-004503",
+      "question_id": "74aa3a5b088411ebbd6dac1f6bf848b6",
+      "source_rows": [
+        162035
+      ],
+      "whole_family_rows": [
+        43858,
+        64309,
+        104983,
+        126804,
+        149913,
+        153323,
+        162035
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-003825",
+      "question_id": "2bb113d4087d11ebbd6aac1f6bf848b6",
+      "source_rows": [
+        26868
+      ],
+      "whole_family_rows": [
+        16792,
+        26868,
+        108393,
+        150163,
+        165829
+      ],
+      "native_support_titles": 4,
+      "native_type": "bridge_comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-011915",
+      "question_id": "350dcf3e088811ebbd6eac1f6bf848b6",
+      "source_rows": [
+        16822
+      ],
+      "whole_family_rows": [
+        16822
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-039306",
+      "question_id": "da2d84b4099311ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        167032
+      ],
+      "whole_family_rows": [
+        46748,
+        167032
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-001861",
+      "question_id": "072ecb3c097111ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        160817
+      ],
+      "whole_family_rows": [
+        160817
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-022398",
+      "question_id": "69e8f6d3098e11ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        154725
+      ],
+      "whole_family_rows": [
+        154725
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-001960",
+      "question_id": "079648ca098611ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        163156
+      ],
+      "whole_family_rows": [
+        163156
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-035771",
+      "question_id": "b8423ace089a11ebbd77ac1f6bf848b6",
+      "source_rows": [
+        116006
+      ],
+      "whole_family_rows": [
+        116006
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-025020",
+      "question_id": "787ac0a1093011ebbdaeac1f6bf848b6",
+      "source_rows": [
+        127035
+      ],
+      "whole_family_rows": [
+        127035
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-016734",
+      "question_id": "4c46c1800bdd11eba7f7acde48001122",
+      "source_rows": [
+        109948
+      ],
+      "whole_family_rows": [
+        109948
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-010045",
+      "question_id": "2bb5ca620bdb11eba7f7acde48001122",
+      "source_rows": [
+        51878
+      ],
+      "whole_family_rows": [
+        51878
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-043225",
+      "question_id": "e935794b086911ebbd5fac1f6bf848b6",
+      "source_rows": [
+        114976
+      ],
+      "whole_family_rows": [
+        114976
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-038759",
+      "question_id": "cb91df3808cc11ebbd93ac1f6bf848b6",
+      "source_rows": [
+        105790
+      ],
+      "whole_family_rows": [
+        105790
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-027900",
+      "question_id": "8864e2f6089111ebbd73ac1f6bf848b6",
+      "source_rows": [
+        120227
+      ],
+      "whole_family_rows": [
+        120227,
+        127121
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-015467",
+      "question_id": "46180ebe09b311ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        134200
+      ],
+      "whole_family_rows": [
+        134200
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-026629",
+      "question_id": "8136a490085c11ebbd5cac1f6bf848b6",
+      "source_rows": [
+        36112
+      ],
+      "whole_family_rows": [
+        36112
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-018264",
+      "question_id": "a09f9c3f09c111ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        116120
+      ],
+      "whole_family_rows": [
+        116120,
+        132508
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-017622",
+      "question_id": "51271e86098711ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        31202
+      ],
+      "whole_family_rows": [
+        31202
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-035161",
+      "question_id": "b4607017097c11ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        83714
+      ],
+      "whole_family_rows": [
+        83714
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-025884",
+      "question_id": "7d4925f1088d11ebbd70ac1f6bf848b6",
+      "source_rows": [
+        154572
+      ],
+      "whole_family_rows": [
+        154572
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 4,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-040235",
+      "question_id": "d517f83808f111ebbdaaac1f6bf848b6",
+      "source_rows": [
+        38977
+      ],
+      "whole_family_rows": [
+        38977
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-007517",
+      "question_id": "e2866b6f097f11ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        88748
+      ],
+      "whole_family_rows": [
+        32789,
+        81230,
+        88748
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-001299",
+      "question_id": "05120ff8085f11ebbd5cac1f6bf848b6",
+      "source_rows": [
+        69387
+      ],
+      "whole_family_rows": [
+        69387
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-024850",
+      "question_id": "778d1b3a0bda11eba7f7acde48001122",
+      "source_rows": [
+        70979
+      ],
+      "whole_family_rows": [
+        70979
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-004389",
+      "question_id": "11a4ef06097211ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        21173
+      ],
+      "whole_family_rows": [
+        21173
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-015910",
+      "question_id": "486db182097611ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        142177
+      ],
+      "whole_family_rows": [
+        55985,
+        66939,
+        142177
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-007724",
+      "question_id": "db0fed8e0bdc11eba7f7acde48001122",
+      "source_rows": [
+        45478
+      ],
+      "whole_family_rows": [
+        37781,
+        44500,
+        45478,
+        138389,
+        157346
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-015988",
+      "question_id": "48be0b820bdc11eba7f7acde48001122",
+      "source_rows": [
+        44328
+      ],
+      "whole_family_rows": [
+        44328
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-011894",
+      "question_id": "e969afec0bdb11eba7f7acde48001122",
+      "source_rows": [
+        38318
+      ],
+      "whole_family_rows": [
+        38318,
+        155325
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-042198",
+      "question_id": "e2946c340bdb11eba7f7acde48001122",
+      "source_rows": [
+        74111
+      ],
+      "whole_family_rows": [
+        74111
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-045585",
+      "question_id": "f9115068087b11ebbd69ac1f6bf848b6",
+      "source_rows": [
+        135923
+      ],
+      "whole_family_rows": [
+        135923
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-023869",
+      "question_id": "721e9f5608f411ebbdaaac1f6bf848b6",
+      "source_rows": [
+        78199
+      ],
+      "whole_family_rows": [
+        78199
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-025170",
+      "question_id": "efa285600bda11eba7f7acde48001122",
+      "source_rows": [
+        99465
+      ],
+      "whole_family_rows": [
+        99465,
+        164273
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-038391",
+      "question_id": "c92703e40bd911eba7f7acde48001122",
+      "source_rows": [
+        162816
+      ],
+      "whole_family_rows": [
+        162816
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-023313",
+      "question_id": "6eebe3a1097b11ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        102368
+      ],
+      "whole_family_rows": [
+        102368
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-000748",
+      "question_id": "02f5c2100bdd11eba7f7acde48001122",
+      "source_rows": [
+        75153
+      ],
+      "whole_family_rows": [
+        75153,
+        113966
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-032936",
+      "question_id": "a6207b4c097a11ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        157273
+      ],
+      "whole_family_rows": [
+        157273
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-038703",
+      "question_id": "cb332186096f11ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        147984
+      ],
+      "whole_family_rows": [
+        147984
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-041577",
+      "question_id": "de60bc15097111ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        56919
+      ],
+      "whole_family_rows": [
+        56919
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-036839",
+      "question_id": "bf1601a208dc11ebbd9dac1f6bf848b6",
+      "source_rows": [
+        6385
+      ],
+      "whole_family_rows": [
+        6385
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 3,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-010526",
+      "question_id": "2df7bd09097911ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        56786
+      ],
+      "whole_family_rows": [
+        56786
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-017173",
+      "question_id": "4ed333f008d211ebbd95ac1f6bf848b6",
+      "source_rows": [
+        10643
+      ],
+      "whole_family_rows": [
+        10643
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-022298",
+      "question_id": "695067ca098411ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        160729
+      ],
+      "whole_family_rows": [
+        17602,
+        160729
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-033995",
+      "question_id": "ace7dcbd098f11ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        155864
+      ],
+      "whole_family_rows": [
+        155864
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-009814",
+      "question_id": "ba86c4180bda11eba7f7acde48001122",
+      "source_rows": [
+        79867
+      ],
+      "whole_family_rows": [
+        79867,
+        145455
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-031493",
+      "question_id": "9d54a9d008d011ebbd95ac1f6bf848b6",
+      "source_rows": [
+        42
+      ],
+      "whole_family_rows": [
+        42
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-042696",
+      "question_id": "e5d5d22908d111ebbd95ac1f6bf848b6",
+      "source_rows": [
+        110558
+      ],
+      "whole_family_rows": [
+        51542,
+        110558
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-020217",
+      "question_id": "7737f867098511ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        60901
+      ],
+      "whole_family_rows": [
+        36970,
+        52587,
+        60901,
+        95130
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-023586",
+      "question_id": "706ffae00bdd11eba7f7acde48001122",
+      "source_rows": [
+        147366
+      ],
+      "whole_family_rows": [
+        147366
+      ],
+      "native_support_titles": 2,
+      "native_type": "compositional",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    },
+    {
+      "family": "two-wiki-family-016714",
+      "question_id": "4c28c8b4098811ebbdb0ac1f6bf848b6",
+      "source_rows": [
+        52948
+      ],
+      "whole_family_rows": [
+        52948
+      ],
+      "native_support_titles": 2,
+      "native_type": "comparison",
+      "native_reference_relations": 2,
+      "split": "confirmation",
+      "original_split": "train",
+      "gradient_training_allowed": false
+    }
+  ],
+  "gradient_training_allowed": false,
+  "original_native_split": "train",
+  "not_original_feedback8_dev": true,
+  "not_current_prefix32_training_cohort": true,
+  "confirmation_question_body_or_answer_exported": false,
+  "scope": "These96 native source groups are new project evaluation roles; they are not96 independent histories or official benchmark holdout. Preserve all old assignments and these roles. Future source/auxiliary allocations must reconcile these entire family reservations before training or formal confirmation. No protected inference before method/settings freeze.",
+  "creation_cost_recorded_at": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/two-wiki-evaluation-sources-dev-v1/summary-v1.json"
+}

@@ -1,0 +1,154 @@
+{
+  "candidate_version": "milai-innovation-full-v1",
+  "entrypoints": {
+    "benchmark": {
+      "experiment_name": "milai-innovation-full-v1",
+      "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "tokenizer_path": "/cra/qwen36-35B",
+      "context_tokens": 65536,
+      "retrieval_limit": 10,
+      "model": {
+        "base_url": "http://127.0.0.1:7862/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1.0,
+        "max_tokens": 8192,
+        "timeout": 300,
+        "enable_thinking": true,
+        "max_calls": 12
+      },
+      "source_tokens": 4096,
+      "chronological_order": "timestamp",
+      "method_version": "milai_edit_v2",
+      "config_version": "milai-innovation-full-v1",
+      "working_sets": false,
+      "interface_version": "I2",
+      "edit_features": {
+        "matter_organization": true,
+        "semantic_operations": true,
+        "bound_references": true,
+        "single_record_changes": true,
+        "source_metadata": true,
+        "temporal_scope": true,
+        "proposition_updates": true,
+        "dependency_updates": true,
+        "dependency_groups": true,
+        "cross_record_dependencies": true
+      },
+      "source_body_tokens": 8192,
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": false
+      },
+      "embedding_capacity": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "context_tokens": 8192
+      },
+      "embedding_dimension": 1024,
+      "embedding_batch_size": 16,
+      "halumem": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/data/fixtures/milai-innovation-pilot-v1.jsonl",
+        "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/HaluMem",
+        "users": [
+          "innovation-harbor",
+          "innovation-orchid",
+          "innovation-studio",
+          "innovation-grant",
+          "innovation-catalog",
+          "innovation-shared"
+        ],
+        "reader_failure_policy": "record_known_readonly_failure",
+        "session_prefix": null,
+        "evaluation_mode": "qa_only"
+      },
+      "maintenance_recipe": "single_pass",
+      "evidence_kind": "DEVELOPMENT_SOURCE_RETRIEVAL_UNICODE_V1",
+      "memory_profile": "unified_v1",
+      "memory_ranking": "dense",
+      "calendar_context": "Asia/Shanghai",
+      "memory_view_mode": "direct",
+      "reader_projection": "semantic_units_v1",
+      "retrieval_granularity": "record_units",
+      "stage_enable_thinking": {
+        "edit": true,
+        "impact": true,
+        "reader": true
+      },
+      "longmemeval": {
+        "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/longmemeval_s_cleaned.json",
+        "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/LongMemEval",
+        "questions": [
+          "01493427",
+          "031748ae",
+          "06db6396",
+          "07741c44",
+          "031748ae_abs",
+          "00ca467f",
+          "0100672e",
+          "078150f1",
+          "099778bb",
+          "09ba9854_abs",
+          "0e5e2d1a",
+          "1568498a",
+          "16c90bf4",
+          "18dcd5a5",
+          "06878be2",
+          "06f04340",
+          "07b6f563",
+          "09d032c9",
+          "001be529",
+          "0862e8bf",
+          "118b2229",
+          "15745da0",
+          "0862e8bf_abs",
+          "08f4fc43",
+          "0bb5a684",
+          "0bc8ad92",
+          "0bc8ad93",
+          "982b5123_abs"
+        ],
+        "reader_failure_policy": "record_known_readonly_failure"
+      },
+      "arm": "M",
+      "source_access": "independent_v1",
+      "source_top_k": 20,
+      "semantic_top_k": 10,
+      "maintenance_mode": "event_delta_v1",
+      "source_tokenization": "unicode_v1",
+      "source_granularity": "session",
+      "evidence_variant": "S2",
+      "reader_target": "original_question_v1",
+      "evidence_policy": "question_pack_v1",
+      "dependency_reading": true,
+      "read_usage_updates": false
+    }
+  },
+  "alignment": {
+    "name": "milai-innovation-full-v1",
+    "track": "common-conditions",
+    "backends": [
+      "MiLAi-memory-only"
+    ],
+    "history_protocol": "halumem-online-prefix",
+    "source_policy": "source-only",
+    "qa_top_k": 20,
+    "update_top_k": 10,
+    "delivery": "direct",
+    "raw_access": "original-history-for-RawRAG; independently-retrieved-visible-original-Sources-plus-linked-supports-and-fitting-semantic-views-for-MiLAi",
+    "rawrag": {
+      "granularity": "session"
+    },
+    "native_answer": "separate-optional-not-main-QA",
+    "prediction_scoring": "explicit-selected-arm-score-after-saved-predictions-and-resource-closure",
+    "unknown_retry": false,
+    "write_test_answers_back": false,
+    "resource_owner": "Root; existing continuous ledger; serial model dispatch",
+    "external_internal_usage": "unobserved unless actual native usage is available; not zero",
+    "claim": "Six new author-constructed development chains, four chronological events and four QA each. Independent formation; common source access and Reader. Not an official benchmark or held-out result."
+  }
+}

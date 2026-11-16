@@ -1,0 +1,32 @@
+{
+  "status": "EXPLORATORY_POST_PREDICTION_CITATION_PATH_NOT_APPLIED_TO_FROZEN_PRIMARY_LABELS",
+  "created_epoch": 1792256996.6876078,
+  "method_mappings_opened": false,
+  "items": [
+    {
+      "id": "dev-row16-alta-parent-region",
+      "case": "row-16",
+      "source_index": 8,
+      "candidate_id": "p16",
+      "source_title": "Alta, Fayette County, West Virginia",
+      "affected_unique_responses": [
+        "response-000186"
+      ],
+      "proposed_path": [
+        8
+      ],
+      "reading": "The question already gives Upland in West Virginia. Alta’s hierarchical address says Fayette County, West Virginia, United States; under ordinary address nesting it supplies the same parent-state country link.",
+      "primary_handling": "The actual subset already contains registered proof p7. Answer correctness/grounding retained; primary citation marked uncertain while this unregistered route is kept separate.",
+      "supplemental_handling": "Report citation acceptance under this address reading for every corresponding method position, after all first-response annotations are frozen; do not choose a beneficiary or change original outputs.",
+      "frozen_annotations_or_training_changed": false,
+      "boundary": {
+        "title": "Alta, Fayette County, West Virginia",
+        "new_source_index": 8,
+        "train_same_title": [],
+        "train_same_literal": [],
+        "reserved_same_title": [],
+        "reserved_same_literal": []
+      }
+    }
+  ]
+}

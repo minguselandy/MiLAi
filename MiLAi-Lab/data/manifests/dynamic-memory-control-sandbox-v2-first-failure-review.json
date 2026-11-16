@@ -1,0 +1,214 @@
+{
+  "version": "dynamic-memory-control-sandbox-v2-first-failure-review",
+  "status": "FIRST5CLOSED_REVIEWED_NO_RETRY",
+  "runtime": "dbf08661",
+  "records": [
+    {
+      "policy": "fixed_context",
+      "step": "recorded-requirements",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/9e24454a-ceed-45a5-8d6f-caccc0d8a8b3-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/9e24454a-ceed-45a5-8d6f-caccc0d8a8b3-trace-0.jsonl",
+      "grade": "correct",
+      "world": {
+        "label_available": false,
+        "reservations": [],
+        "attempts": []
+      },
+      "finalization": {
+        "status": "agent_response_retained",
+        "attempts": 0,
+        "tools_available": false,
+        "execution_candidate_delivered": true,
+        "protocol": "agent_response_v1",
+        "model_generation": false,
+        "observation_receipts_appended": false,
+        "request_failures_appended": false,
+        "memory_receipts_appended": false
+      },
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      }
+    },
+    {
+      "policy": "fixed_context",
+      "step": "reserve-with-label-outage",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/893d8677-831f-44e7-baee-b5bdce74422b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/893d8677-831f-44e7-baee-b5bdce74422b-trace-0.jsonl",
+      "grade": "correct_requested_partial_effect",
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5",
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "quantity": 4,
+            "destination": "检验区5号台",
+            "packing": "缓冲盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "finalization": {
+        "status": "response_rendered",
+        "attempts": 0,
+        "tools_available": false,
+        "execution_candidate_delivered": false,
+        "protocol": "receipt_business_response_v1",
+        "model_generation": false
+      },
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      }
+    },
+    {
+      "policy": "fixed_context",
+      "step": "reopened-live-status",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/cb7d6a86-d2e3-49ff-b1bf-8c59b0ab589e-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/cb7d6a86-d2e3-49ff-b1bf-8c59b0ab589e-trace-0.jsonl",
+      "grade": "response_omits_observed_fields",
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5",
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "quantity": 4,
+            "destination": "检验区5号台",
+            "packing": "缓冲盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "finalization": {
+        "status": "response_rendered",
+        "attempts": 0,
+        "tools_available": false,
+        "execution_candidate_delivered": false,
+        "protocol": "receipt_business_response_v1",
+        "model_generation": false
+      },
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      }
+    },
+    {
+      "policy": "fixed_context",
+      "step": "finish-original-label",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/417fa229-24b9-4e79-abb2-6cc95b4ad9f8-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/417fa229-24b9-4e79-abb2-6cc95b4ad9f8-trace-0.jsonl",
+      "grade": "unfulfilled_action",
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5",
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "quantity": 4,
+            "destination": "检验区5号台",
+            "packing": "缓冲盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "finalization": {
+        "status": "response_rendered",
+        "attempts": 0,
+        "tools_available": false,
+        "execution_candidate_delivered": false,
+        "protocol": "receipt_business_response_v1",
+        "model_generation": false
+      },
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      }
+    },
+    {
+      "policy": "fixed_context",
+      "step": "confirmed-state",
+      "status": "FAILED",
+      "error": "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/9c9580d7-0f31-4215-b98f-e13291c9253b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/9c9580d7-0f31-4215-b98f-e13291c9253b-trace-0.jsonl",
+      "grade": "no_answer",
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5",
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "quantity": 4,
+            "destination": "检验区5号台",
+            "packing": "缓冲盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "finalization": null,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      }
+    }
+  ],
+  "unstarted_positions": 5,
+  "findings": [
+    "Current parameter planning used actual bounded evidence: exactly4units to current inspection destination in padded packaging, one reservation persisted during real label outage.",
+    "Readonly reopen actually queried the backend and generated a correct model answer, but generic request-progress rendering suppressed its substantive fields.",
+    "Label continuation selected the registered request and actual internally queried object ID, but downstream receipt delivery was recognized only via Agent ToolMessages, causing a reference/plan rejection.",
+    "Final query misclassified action intent despite forbidding all mutation, then returned a malformed continuation declaration. All first effects and known costs retained."
+  ],
+  "continuation": "Only unstarted rules5positions continue under frozen dbf08661. Known pre-action declaration schema failure closes a failed position when usage remains known; no source output or existing result is repaired.",
+  "followup": "Shared observation delivery and readonly response fixes are in development and require their own frozen new-version validation."
+}

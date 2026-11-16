@@ -1,0 +1,185 @@
+{
+  "status": "ACTIVE;ACTUAL_AUXILIARY_INPUT_CONDITIONS_VERIFIED_NOT_TRAINED;SAVEDCPU393_RUNNING",
+  "observed_at": "2026-10-23T12:46:09.138947+00:00",
+  "source_version": "f1e8b9ce",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v13.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: explicit Host-only code/validation/frozen diagnostic and new recordedstate capacity evidence",
+  "auxiliary_audit": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/auxiliary-input-conditions-v1",
+    "status": "COMPLETE_EXISTING_AUXILIARY_NEW_INPUT_CONDITIONS_VERIFIED",
+    "candidate_rows": 4940,
+    "input_profile_rows": 19760,
+    "splits": {
+      "train": {
+        "candidates": 3979,
+        "families": 730,
+        "base_queries": 807,
+        "native_docs": 3169,
+        "native_row_ids": 1612,
+        "candidate_kinds": {
+          "positive": 1612,
+          "ordinary_negative": 1612,
+          "instruction_negative": 755
+        },
+        "with_instruction_candidates": 2365,
+        "profiles": {
+          "shared_actions": {
+            "rows": 3979,
+            "labelled": 3979,
+            "sdk_items": 3979,
+            "sdk_skipped": {},
+            "max_tokens": 533,
+            "total_tokens": 927445,
+            "truncated": 0,
+            "mask_replacements": 0
+          },
+          "compact_actions": {
+            "rows": 3979,
+            "labelled": 3979,
+            "sdk_items": 3979,
+            "sdk_skipped": {},
+            "max_tokens": 525,
+            "total_tokens": 897520,
+            "truncated": 0,
+            "mask_replacements": 0
+          },
+          "shared_actions_request_text": {
+            "rows": 3979,
+            "labelled": 3979,
+            "sdk_items": 3979,
+            "sdk_skipped": {},
+            "max_tokens": 575,
+            "total_tokens": 1096193,
+            "truncated": 0,
+            "mask_replacements": 0
+          },
+          "compact_actions_request_text": {
+            "rows": 3979,
+            "labelled": 3979,
+            "sdk_items": 3979,
+            "sdk_skipped": {},
+            "max_tokens": 570,
+            "total_tokens": 1076342,
+            "truncated": 0,
+            "mask_replacements": 0
+          }
+        }
+      },
+      "dev": {
+        "candidates": 961,
+        "families": 182,
+        "base_queries": 195,
+        "native_docs": 768,
+        "native_row_ids": 388,
+        "candidate_kinds": {
+          "positive": 388,
+          "ordinary_negative": 388,
+          "instruction_negative": 185
+        },
+        "with_instruction_candidates": 571,
+        "profiles": {
+          "shared_actions": {
+            "rows": 961,
+            "labelled": 961,
+            "sdk_items": 961,
+            "sdk_skipped": {},
+            "max_tokens": 552,
+            "total_tokens": 225569,
+            "truncated": 0,
+            "mask_replacements": 0
+          },
+          "compact_actions": {
+            "rows": 961,
+            "labelled": 961,
+            "sdk_items": 961,
+            "sdk_skipped": {},
+            "max_tokens": 544,
+            "total_tokens": 218317,
+            "truncated": 0,
+            "mask_replacements": 0
+          },
+          "shared_actions_request_text": {
+            "rows": 961,
+            "labelled": 961,
+            "sdk_items": 961,
+            "sdk_skipped": {},
+            "max_tokens": 594,
+            "total_tokens": 266325,
+            "truncated": 0,
+            "mask_replacements": 0
+          },
+          "compact_actions_request_text": {
+            "rows": 961,
+            "labelled": 961,
+            "sdk_items": 961,
+            "sdk_skipped": {},
+            "max_tokens": 589,
+            "total_tokens": 261522,
+            "truncated": 0,
+            "mask_replacements": 0
+          }
+        }
+      }
+    },
+    "cross_partition_identity_overlap": {
+      "family": 0,
+      "base_query_id": 0,
+      "native_docid": 0,
+      "event_id": 0
+    },
+    "literal_cross_split_candidate_bodies": 0,
+    "old_baseline_lengths_equal": true,
+    "candidate_text_gold_metadata_masks_unchanged": true,
+    "request_text_recovery_equal": true,
+    "sdk_skips_or_truncation": 0,
+    "weights_loaded": 0,
+    "model_forwards": 0,
+    "HTTP_requests": 0,
+    "training_dispatched": false,
+    "scope": "Existing3979/961publictrain-derived candidates only,new serialization/representation path validation. No auxiliary training,operation transfer or protected external score. Published membership labels unchanged/not independently semantically certified.",
+    "independence_limit": "Exact prepared candidate-body overlap only;not substring/paraphrase/pretraining/global-web independence. Original splits/labels unchanged. No training or model/HTTP calls.",
+    "original_auxiliary_recipe": "Unchanged:128updates/2048draws/final128init;operation follow-on files/order/524updates matched;extra auxiliarycost separate. No preparation can stand in for transfer/Host results."
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u393-v1",
+      "driver_pid": 3654617,
+      "child_pid": 3654665,
+      "session": 24298,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 89,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_ORIGINAL_SAVEDCPU393_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v13.json",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/auxiliary-input-conditions-v1/audit.json",
+        "field": "compute.cpu_seconds",
+        "cpu_seconds": 53.301065175
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/auxiliary-input-conditions-v1/verification.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.172361916
+      }
+    ],
+    "measured_cpu_seconds": 53.473427091,
+    "ledger_recorded": false,
+    "scope": "New auxiliary input-condition audit only; original ordinary audit not rebilled. No model/HTTP. Other unmeasured overhead unknown.",
+    "no_sha_validation": true
+  },
+  "remaining": "Original393/524/selection/matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic and compact-model quality comparison not yet executed.",
+  "scheduling": "Original393 is sole neuraljob. No new neural dispatch or offline settlement whilelive;never restart on stale observation. Allpriorclosedjobs/results remain closed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

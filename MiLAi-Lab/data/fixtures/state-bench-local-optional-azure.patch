@@ -1,0 +1,20 @@
+--- a/state_bench/client.py
++++ b/state_bench/client.py
+@@ -31,7 +31,6 @@
+ from typing import Any
+ 
+ import yaml
+-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+ from openai import APIStatusError, AuthenticationError, BadRequestError, OpenAI
+ from tenacity import (
+     RetryCallState,
+@@ -317,6 +316,9 @@
+             base_url=base_url,
+             api_key=cli_token_provider,
+         )
++
++    # Local research adapter uses a non-Azure client; import only for Azure auth.
++    from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+ 
+     credential = DefaultAzureCredential()
+     token_provider = get_bearer_token_provider(credential, "https://ai.azure.com/.default")

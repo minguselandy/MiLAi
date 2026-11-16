@@ -1,0 +1,32 @@
+[
+  {
+    "name": "shortcut-learning",
+    "url": "https://arxiv.org/abs/2004.07780v5",
+    "version": "arXiv2004.07780v5;NatureMachineIntelligence2020",
+    "retrieved_date": "2026-10-17",
+    "local_page": "artifacts/jev-reader/global-training-design-v1/literature/shortcut-learning.html",
+    "bytes": 45344,
+    "scope_read": "official abstract/record page only; not a full-paper review",
+    "sha_checks": false
+  },
+  {
+    "name": "wilds",
+    "url": "https://proceedings.mlr.press/v139/koh21a.html",
+    "version": "ICML2021/PMLR139",
+    "retrieved_date": "2026-10-17",
+    "local_page": "artifacts/jev-reader/global-training-design-v1/literature/wilds.html",
+    "bytes": 18214,
+    "scope_read": "official abstract/record page only; not a full-paper review",
+    "sha_checks": false
+  },
+  {
+    "name": "underspecification",
+    "url": "https://jmlr.org/papers/v23/20-1335.html",
+    "version": "JMLR23(226),2022",
+    "retrieved_date": "2026-10-17",
+    "local_page": "artifacts/jev-reader/global-training-design-v1/literature/underspecification.html",
+    "bytes": 8867,
+    "scope_read": "official abstract/record page only; not a full-paper review",
+    "sha_checks": false
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "status": "SAVED_CPU_CANDIDATE32_COMPLETE_ALREADY_BILLED;ORIGINAL_DRIVER_CONTINUES64",
+  "observed_at": "2026-10-22T10:54:47.095067+00:00",
+  "closed_update": 32,
+  "old_pid": 1589315,
+  "old_pid_absent": true,
+  "canonical_run": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/update-32/run.json",
+  "canonical_compute": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/update-32/compute.json",
+  "completed_states": 876,
+  "complete_numeric_call_inventory": true,
+  "parent_partitioned_result_present": true,
+  "completed_candidate_statuses": [
+    {
+      "update": 0,
+      "status": "COMPLETED"
+    },
+    {
+      "update": 32,
+      "status": "COMPLETED"
+    }
+  ],
+  "inference_condition": {
+    "device": "cpu",
+    "loaded_weight_dtype": "torch.float32",
+    "reference_compile_override": false,
+    "mha_fastpath_enabled": false,
+    "operation_state": "shared_actions",
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "calibrated": false,
+    "http_requests": 0
+  },
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "already_billed_phase": "training_generalization_source256_actions_full_seed0_u524_v1_saved_cpu_u32",
+  "compute_already_recorded_once": {
+    "wall_seconds": 10722.434969019145,
+    "cpu_seconds": 42191.226043333,
+    "runs": 1,
+    "forwards": 876,
+    "sequence_rows": 876,
+    "input_tokens": 4314812,
+    "state_tokenizations": 876,
+    "state_tokens": 4077231
+  },
+  "same_input_token_count_as_candidate0": true,
+  "current": {
+    "driver_pid": 893357,
+    "evaluator_pid": 2253075,
+    "update": 64,
+    "run": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/update-64/run.json",
+    "completed_states": 12,
+    "planned_states": 876
+  },
+  "quality_metrics_read": false,
+  "deployment_selection": null,
+  "remaining": "Remaining candidates64/128/262/393/524 and matching selected train; original full study unchanged. Do not restart closed candidates or bill twice.",
+  "ledger_write_calls": 0,
+  "ledger_bytes_equal_before_after": true,
+  "new_model_jobs_started_by_audit": 0,
+  "automatic_transition_within_existing_job": true,
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "compute_scope": "Only this metadata/condition/accounting audit is newly measured. Evaluator compute above already billed;not pending. Authoring/imports and other unmeasured overhead unknown,not0.",
+  "audit_compute_pending": {
+    "cpu_seconds": 0.005753067000000001,
+    "wall_seconds": 0.005757439881563187
+  }
+}

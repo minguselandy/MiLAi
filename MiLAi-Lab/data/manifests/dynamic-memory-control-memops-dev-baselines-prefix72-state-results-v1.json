@@ -1,0 +1,126 @@
+{
+  "status": "ALL28_PREFIX72_CONSTRUCTED_VIEWS_REVIEWED",
+  "reviewer": "Codex author, exposed development; source-role mapping and bound originals reviewed.",
+  "model_calls": 0,
+  "constructed_views": 28,
+  "nodes_reviewed": 180,
+  "rules_reviewed": 11,
+  "scope": "Task sufficiency is distinct from full-state coverage and logical/provenance correctness. These are exposed-development author judgments. No cached text or model output is repaired.",
+  "reuse_assessment": {
+    "actual_use_view_calls": 1,
+    "qualified_or_uncertain": 1,
+    "family": "memops_B30",
+    "policy": "generative",
+    "step": "stage-0-repeat",
+    "basis": "Same revision 1 retains name values but lacks role mapping and invents employer location; later Reader explicitly cannot map friend versus roommate."
+  },
+  "failed_refreshes": [
+    {
+      "policy": "generative",
+      "family": "memops_C03",
+      "step": "stage-2-repeat",
+      "result": {
+        "ok": false,
+        "status": "view_rejected",
+        "effect": "none",
+        "error_type": "FunctionalRejection",
+        "reason": "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE"
+      }
+    },
+    {
+      "policy": "rules",
+      "family": "memops_A19",
+      "step": "stage-2",
+      "result": {
+        "ok": false,
+        "status": "read_outcome_unknown",
+        "error_type": "KeyError",
+        "phase": "read_action",
+        "read_state_effect": "unconfirmed",
+        "retryable": false
+      }
+    }
+  ],
+  "construction_task_sufficiency": {
+    "True": 12,
+    "False": 5,
+    "None": 11
+  },
+  "version": "dynamic-memory-control-memops-dev-baselines-prefix72-state-results-v1",
+  "effect_inventory": {
+    "fixed_context": {
+      "messages": 24,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 23,
+      "READ": 70
+    },
+    "rules": {
+      "messages": 24,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 23,
+      "READ": 69,
+      "REFRESH_VIEW": 23,
+      "refresh_delivered": 22,
+      "refresh_not_delivered": 1
+    },
+    "generative": {
+      "messages": 24,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 1,
+      "REFRESH_VIEW": 7,
+      "refresh_delivered": 6,
+      "USE_VIEW": 1,
+      "refresh_not_delivered": 1
+    }
+  },
+  "by_policy": {
+    "rules": 22,
+    "generative": 6
+  },
+  "source_export": "artifacts/dynamic-memory-control/review-memops-dev-baselines-prefix72-v1/state-inventory/views.json",
+  "detailed_author_review": "artifacts/dynamic-memory-control/review-memops-dev-baselines-prefix72-v1/state-inventory/author-review.json",
+  "reviewed_view_keys": [
+    "rules/memops_A32/query-structure:1",
+    "rules/memops_A32/query-structure:2",
+    "rules/memops_A32/query-structure:3",
+    "rules/memops_A32/query-structure:4",
+    "rules/memops_A32/query-structure:5",
+    "generative/memops_A32/query-structure:1",
+    "rules/memops_A19/query-structure:1",
+    "rules/memops_A19/query-structure:2",
+    "rules/memops_A19/query-structure:3",
+    "rules/memops_A19/query-structure:4",
+    "rules/memops_A19/query-structure:5",
+    "generative/memops_A19/query-structure:1",
+    "rules/memops_B30/query-structure:1",
+    "rules/memops_B30/query-structure:2",
+    "rules/memops_B30/query-structure:3",
+    "rules/memops_B30/query-structure:4",
+    "rules/memops_B30/query-structure:5",
+    "rules/memops_B30/query-structure:6",
+    "generative/memops_B30/query-structure:1",
+    "generative/memops_B30/query-structure:2",
+    "generative/memops_B30/query-structure:3",
+    "rules/memops_C03/query-structure:1",
+    "rules/memops_C03/query-structure:2",
+    "rules/memops_C03/query-structure:3",
+    "rules/memops_C03/query-structure:4",
+    "rules/memops_C03/query-structure:5",
+    "rules/memops_C03/query-structure:6",
+    "generative/memops_C03/query-structure:1"
+  ],
+  "limits": [
+    "Only first four external backgrounds and their actual constructed views; remaining baseline families are not certified.",
+    "The fixed-context arm constructs no view in this slice; its raw-evidence task outcomes are reviewed separately.",
+    "Unknown view sufficiency remains unknown, never forced into training gold. No baseline review data enters training."
+  ]
+}

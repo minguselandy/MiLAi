@@ -1,0 +1,92 @@
+{
+  "name": "jev-reader-source-qualified-v3",
+  "selection": "data/manifests/jev-reader-source-qualified-v3-selection.json",
+  "source_protocol": "Complete pools reviewed; literal identical paragraphs in paired rows matched to the full reading. No hidden decomposition supplies absent facts. These are four additional original train families, not new independent benchmark cases. Author review is not independent adjudication.",
+  "cases": [
+    {
+      "review_id": "source-qualified-v3-row-10214",
+      "source_row": 10214,
+      "family": "musique-family-000058",
+      "split": "train",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "rationale": "Paragraph 6 names Edward Burne-Jones as painter. Paragraph 16 names Georgiana as Edward's wife and Philip's mother. It does not explicitly establish Edward as Philip's father. A conventional household inference may be intended; mask this underdetermined relationship instead of forcing either a complete proof or a false-world answer. Direct questions about the painter or Georgiana's motherhood can be separately grounded."
+    },
+    {
+      "review_id": "source-qualified-v3-row-18645",
+      "source_row": 18645,
+      "family": "musique-family-000058",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "rationale": "The paired pool lacks both the painting and Burne-Jones family passages. Other Merlin works, Child as a surname and unrelated parents do not bind the requested creator/child."
+    },
+    {
+      "review_id": "source-qualified-v3-row-39085",
+      "source_row": 39085,
+      "family": "musique-family-000577",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [[1, 17], [7, 17], [13, 17]],
+      "useful_partial_evidence": [],
+      "answer_supported": "7,516.6 km (4,671 mi)",
+      "rationale": "Paragraphs 1, 7 and 13 each identify India with the longest constitutional text; the question specifies a country, so the Alabama state-constitution comparison does not displace it. Paragraph 17 gives India's coastline separately from its land frontier and dimensions. Any of the three country premises plus 17 suffices; Canada and the UK are different subjects."
+    },
+    {
+      "review_id": "source-qualified-v3-row-39296",
+      "source_row": 39296,
+      "family": "musique-family-000577",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [5],
+      "rationale": "Paragraph 5 explicitly identifies India as longest for a sovereign nation, distinguishing Alabama. No India coastline figure remains. Paragraph 2 contains internally unqualified longest/second-largest wording; use the unambiguous sovereign-nation premise, without converting Canada/UK/Australia coastlines into India's."
+    },
+    {
+      "review_id": "source-qualified-v3-row-6352",
+      "source_row": 6352,
+      "family": "musique-family-000844",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [19, 12],
+      "rationale": "Paragraph 19 binds Pacific Ocean Blue to Dennis Wilson's solo album; paragraph 12 explicitly identifies Murry as Dennis's father. No paragraph establishes Murry's citizenship. Calling the Beach Boys an American band (5) does not establish the father's citizenship. The plural-titled Pacific Ocean Blues song (11) is not an alternative explicit album binding."
+    },
+    {
+      "review_id": "source-qualified-v3-row-33599",
+      "source_row": 33599,
+      "family": "musique-family-000844",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "rationale": "The album binding and explicit father passage are absent. Paragraph 18 concerns the differently titled Pacific Ocean Blues song and its submission to 15 Big Ones; it does not identify the album's performer and father. Ocean geography and an unrelated American country performer do not fill the gap."
+    },
+    {
+      "review_id": "source-qualified-v3-row-38572",
+      "source_row": 38572,
+      "family": "musique-family-000890",
+      "split": "train",
+      "disposition": "supported",
+      "complete_proofs": [[4, 10, 12]],
+      "useful_partial_evidence": [],
+      "answer_supported": "Towson, Maryland",
+      "rationale": "Paragraph 4 places Sinclair Broadcast Group's headquarters in Hunt Valley; 10 puts that community in Baltimore County; 12 explicitly names Towson as that county's seat. Interpret capital of a county as county seat, preserving the question's wording and documenting this ordinary administrative paraphrase. Sinclair Oil, Baltimore city and foreign capitals are not the target."
+    },
+    {
+      "review_id": "source-qualified-v3-row-38628",
+      "source_row": 38628,
+      "family": "musique-family-000890",
+      "split": "train",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [15],
+      "rationale": "Paragraph 15 still identifies Hunt Valley as Sinclair Broadcast Group's headquarters. The county and county-seat passages are absent; suburban Baltimore alone cannot establish the county or Towson."
+    }
+  ],
+  "new_model_calls": 0,
+  "training_started": false,
+  "reviewer_is_independent": false
+}

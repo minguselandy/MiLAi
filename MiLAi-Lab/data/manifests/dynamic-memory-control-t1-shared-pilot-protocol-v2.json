@@ -1,0 +1,71 @@
+{
+  "status": "STARTED_SERIAL_V2_FITS",
+  "partitions": {
+    "original_shared:train": {
+      "states": 418,
+      "labelled": 373,
+      "families": 24,
+      "max_tokens": 3479,
+      "max_len": 12288,
+      "head_max_len": 2048
+    },
+    "original_shared:dev": {
+      "states": 139,
+      "labelled": 125,
+      "families": 8,
+      "max_tokens": 3461,
+      "max_len": 12288,
+      "head_max_len": 2048
+    },
+    "broader_shared:train": {
+      "states": 516,
+      "labelled": 468,
+      "families": 36,
+      "max_tokens": 9496,
+      "max_len": 12288,
+      "head_max_len": 2048
+    },
+    "broader_shared:dev": {
+      "states": 139,
+      "labelled": 125,
+      "families": 8,
+      "max_tokens": 3461,
+      "max_len": 12288,
+      "head_max_len": 2048
+    }
+  },
+  "new_source_families": 12,
+  "new_prefixes": 98,
+  "new_labelled_prefixes": 95,
+  "new_masks": 3,
+  "scope": "A36family T1 pilot, not completion of the planned broader cohort or protected confirmation. Original-only and broader arms use shared representation and the same declared12288capacity. Encoder pretrained maximum8192 remains unchanged; numerical/runtime admission beyond that range is pending and does not establish extrapolation quality.",
+  "training_plan": {
+    "initialization": "same original laya-multilingual-base",
+    "seed": 0,
+    "optimizer_updates": 96,
+    "micro_batch_size": 1,
+    "effective_batch_size": 16,
+    "objective": "soft-ce",
+    "projection": "shared",
+    "selection": "final96only; no best checkpoint selection",
+    "skip_initial_dev": true
+  },
+  "same_original_inputs": true,
+  "model_calls": 0,
+  "model_forwards": 0,
+  "version": "dynamic-memory-control-t1-shared-pilot-protocol-v2",
+  "jobs": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/prepared-followups-v7.json",
+  "source_modules": "0acc4b9a",
+  "runtime_probe": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/prepared-after-v5-v1/probe_t1_long_input_v1.py",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "source_reviews": [
+    "dynamic-memory-control-memops-intake-results-v1.json"
+  ],
+  "mask_reason": "Three F07view contexts retain source-attribution uncertainty; keep them masked, not negative or HANDOFF labels.",
+  "capacity_gate": "COMPLETED9496-token forward/backward in t1-long-input-probe-v1, no parameter updates. Performance beyond pretraining length remains unverified.",
+  "confirmation": "Only development seed0. All declared confirmation seeds and fresh protected families remain unrun.",
+  "declaration_before_execution": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/prepared-followups-v7.json",
+  "initial_dev_reference": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-fitting-v1/t1-original-shared-seed0-v1/dev/0",
+  "initial_dev_repeated": false,
+  "prior_failed_training": "dynamic-memory-control-t1-first-admission-results-v1.json"
+}

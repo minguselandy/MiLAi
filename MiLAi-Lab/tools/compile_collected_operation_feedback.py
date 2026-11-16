@@ -1,0 +1,279 @@
+"""Bind actual branch readouts and compile explicit native-witness feedback, retaining unknowns."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import itertools
+import json
+import time
+from collections import Counter
+from pathlib import Path
+from typing import Any
+
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
+from prepare_handoff_feedback import reviewed_relation
+from retrieval_feedback import feedback_counts, validate_feedback
+
+
+def witness_relation(left: bool | None, right: bool | None) -> str:
+    """A coarse recorded-reference endpoint, never a semantic sufficiency judgment."""
+    if left is True and right is True:
+        return "tie"
+    if left is True and right is False:
+        return "left"
+    if left is False and right is True:
+        return "right"
+    return "unknown"
+
+
+def compile_case(
+    row: dict[str, Any],
+    branches: list[dict[str, Any]],
+    reviews: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    result = copy.deepcopy(row)
+    result["gold"] = {}
+    pairs = []
+    for a, b in itertools.combinations(branches, 2):
+        left, right = a["action"]["id"], b["action"]["id"]
+        quality = witness_relation(a["reference_proof_complete"], b["reference_proof_complete"])
+        answer = "unknown"
+        if reviews is not None:
+            ar, br = reviews.get(left, {}), reviews.get(right, {})
+            quality = reviewed_relation(
+                ar.get("material_status", "unknown"),
+                br.get("material_status", "unknown"),
+                "delivery",
+            )
+            answer = reviewed_relation(
+                ar.get("answer_status", "unknown")
+                if a["readout_status"] == "COMPLETED"
+                else "unknown",
+                br.get("answer_status", "unknown")
+                if b["readout_status"] == "COMPLETED"
+                else "unknown",
+                "answer",
+            )
+        pairs.append(
+            {
+                "left": left,
+                "right": right,
+                "answer": answer,
+                "delivery": quality,
+                "actual_readouts": [a["readout"], b["readout"]],
+            }
+        )
+    result["feedback"] = {"comparisons": pairs}
+    result["metadata"]["feedback_semantics"] = (
+        "source_reviewed_material_and_answer"
+        if reviews is not None
+        else "native_reference_witness_coverage_NOT_semantic_sufficiency_or_Host_success"
+    )
+    validate_feedback(result)
+    return result
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("prepared", type=Path)
+    parser.add_argument("readouts", type=Path)
+    parser.add_argument("output", type=Path)
+    parser.add_argument("--controls", type=Path,
+                        help="Explicit original native controls for collections without a "
+                             "controls field; native schema is retained unchanged")
+    parser.add_argument("--reviews", type=Path)
+    parser.add_argument("--utility-scores", type=Path,
+                        help="Optional closed offline scores; semantic labels remain separate")
+    parser.add_argument("--evaluation-only", action="store_true",
+                        help="Require evaluation roles and export no training-fit rows")
+    parser.add_argument("--evaluation-split", choices=("dev", "test"), default="dev",
+                        help="Keep the native evaluation role; TEST is not development")
+    args = parser.parse_args()
+    if args.evaluation_split == "test" and not args.evaluation_only:
+        parser.error("TEST binding requires --evaluation-only")
+    source_split = args.evaluation_split if args.evaluation_only else "train"
+    started, cpu = time.perf_counter(), time.process_time()
+    preparation = read_json(args.prepared / "run.json")
+    rollout = {
+        "policy": preparation["continuation_policy"],
+        "steps": preparation["continuation_steps"],
+        "terminal_handoff": preparation.get("terminal_handoff", "current"),
+    }
+    readout_run = read_json(args.readouts / "run.json")
+    if (
+        preparation["status"] != "COMPLETED"
+        or readout_run["status"] not in {"COMPLETED", "COMPLETED_WITH_FAILURES"}
+        or Path(readout_run["prepared"]).resolve() != args.prepared.resolve()
+    ):
+        raise ValueError("Compile only a closed first-readout matrix bound to this preparation")
+    cases = read_json(args.prepared / "cases.json")
+    rows = read_jsonl(args.prepared / "states.jsonl")
+    paths = read_json(args.readouts / "readout-paths.json")
+    collection = Path(preparation["collection"])
+    collection_run = read_json(collection / "run.json")
+    controls_path = args.controls or Path(collection_run["controls"])
+    controls = {
+        (c["source_group"], c["request_id"]): c
+        for c in read_jsonl(controls_path)
+    }
+    original = {}
+    if not args.evaluation_only:
+        # The shared SFT training view needs the original labelled model input.
+        # DEV outcome binding does not construct this training-only comparison.
+        selected_ids = {case["event_id"] for case in cases}
+        with (collection / "states.jsonl").open() as stream:
+            for line in stream:
+                value = json.loads(line)
+                if value["metadata"]["event_id"] in selected_ids:
+                    original[value["metadata"]["event_id"]] = value
+                    if len(original) == len(selected_ids):
+                        break
+    review_source = read_json(args.reviews) if args.reviews else None
+    supplied = (
+        {}
+        if review_source is None
+        else {(r["event_id"], r["actual_action"]["id"]): r for r in review_source["records"]}
+    )
+    compiled, review_inputs, sft, matched = [], [], [], []
+    for case in cases:
+        row = rows[case["state_index"]]
+        if (row["metadata"]["event_id"] != case["event_id"]
+                or row["metadata"]["split"] != source_split):
+            raise ValueError("Feedback state identity or research role changed")
+        if controls[case["family"], case["request_id"]]["split"] != source_split:
+            raise ValueError("Native control and actual state have different research roles")
+        bound = []
+        reviews = None if review_source is None else {}
+        for branch in case["branches"]:
+            candidates = {paths[p][case["case_key"]] for p in branch["policies"]}
+            if len(candidates) != 1:
+                raise ValueError("Shared full binding was not assigned one actual readout")
+            path = Path(candidates.pop())
+            record = read_json(path)
+            if (
+                record["event_id"] != case["event_id"]
+                or record["family"] != case["family"]
+                or record["action"] != branch["action"]
+                or read_json(Path(record["request"])) != branch["readout_request"]
+            ):
+                raise ValueError("Readout differs from its executed action, packet or public task")
+            actual = {
+                **branch,
+                "readout": str(path.resolve()),
+                "readout_status": record["status"],
+                "answer": record["answer"],
+                **({"answer_fields": record["answer_fields"]} if "answer_fields" in record else {}),
+                "usage": record.get("usage"),
+                "reference_proof_complete": branch["reference_proof_complete"]
+                if branch["execution_result"]["ok"]
+                else None,
+            }
+            bound.append(actual)
+            review = supplied.get((case["event_id"], branch["action"]["id"]))
+            if review is not None:
+                if (
+                    review["actual_action"] != branch["action"]
+                    or Path(review["readout"]).resolve() != path.resolve()
+                ):
+                    raise ValueError("Semantic review differs from the bound first outcome")
+                reviews[branch["action"]["id"]] = review
+        feedback = compile_case(row, bound, reviews)
+        feedback["metadata"]["feedback_rollout"] = rollout
+        compiled.append(feedback)
+        review_inputs.append(
+            {
+                "event_id": case["event_id"],
+                "family": case["family"],
+                "question": case["before"]["task"]["request"],
+                "native_control": controls[case["family"], case["request_id"]],
+                "branches": bound,
+            }
+        )
+        if not args.evaluation_only:
+            base = original[case["event_id"]]
+            if base["state"] != row["state"] or base["questions"] != row["questions"]:
+                raise ValueError("Source-matched SFT example changed the actual model input")
+            if base["gold"] and any(
+                p["delivery"] in {"left", "right"} for p in feedback["feedback"]["comparisons"]
+            ):
+                matched.append(feedback)
+                paired_sft = copy.deepcopy(base)
+                paired_sft["metadata"].update(
+                    collection_state_id=base["metadata"]["state_id"],
+                    state_id=feedback["metadata"]["state_id"],
+                    row=feedback["metadata"]["row"],
+                )
+                # Match permutation seeds and the actual before/menu for shared SFT.
+                sft.append(paired_sft)
+    args.output.mkdir(parents=True, exist_ok=False)
+    if args.utility_scores is not None:
+        from outcome_distillation import attach_utilities
+
+        compiled = attach_utilities(compiled, read_jsonl(args.utility_scores))
+    full_fit = {target: [r for r in compiled if any(
+        p[target] in {"left", "right"} for p in r["feedback"]["comparisons"])]
+        for target in ("answer", "delivery")}
+    known_fit = {target: [r for r in compiled if any(
+        p[target] in {"left", "right", "tie"} for p in r["feedback"]["comparisons"])]
+        for target in ("answer", "delivery")}
+    exports = (
+        ("raw-feedback", compiled),
+        ("delivery-fit", full_fit["delivery"]),
+        ("answer-fit", full_fit["answer"]),
+        ("delivery-known-fit", known_fit["delivery"]),
+        ("answer-known-fit", known_fit["answer"]),
+        ("matched-feedback", matched),
+        ("matched-sft", sft),
+    ) if not args.evaluation_only else (
+        ("raw-feedback", compiled), ("feedback-" + source_split, compiled))
+    for name, records in exports:
+        with (args.output / f"{name}.jsonl").open("w") as stream:
+            for row in records:
+                stream.write(json.dumps(row, ensure_ascii=False) + "\n")
+    write_json(args.output / "review-inputs.json", review_inputs)
+    write_json(
+        args.output / "manifest.json",
+        {
+            "status": "BOUND_BRANCH_FEEDBACK_COMPILED_NOT_FITTED",
+            "evaluation_only": args.evaluation_only,
+            "source_split": source_split,
+            "training_exports_written": not args.evaluation_only,
+            "source_matched_sft_constructed": not args.evaluation_only,
+            "prepared": str(args.prepared.resolve()),
+            "readouts": str(args.readouts.resolve()),
+            "controls": str(controls_path.resolve()),
+            "reviews": str(args.reviews) if args.reviews else None,
+            "utility_scores": str(args.utility_scores.resolve()) if args.utility_scores else None,
+            "rollout": rollout,
+            "states": len(compiled),
+            "families": len({r["metadata"]["family"] for r in compiled}),
+            "matched_states": len(matched),
+            "full_directional_fit_states": {target: len(rows) for target, rows in full_fit.items()},
+            "full_known_fit_states": {target: len(rows) for target, rows in known_fit.items()},
+            "known_fit_scope": "Include already established positive-quality ties at target0.5; "
+                               "unknown and failed comparisons are not converted into ties. "
+                               "Directional views and strict shared-SFT support remain separate.",
+            "fit_scope": "Full pair views retain new supervision even where reference-witness SFT "
+            "has no label. Matched views are a separate common-support objective control.",
+            "readout_status": dict(
+                Counter(b["readout_status"] for r in review_inputs for b in r["branches"])
+            ),
+            "feedback": {
+                target: feedback_counts(compiled, target) for target in ("answer", "delivery")
+            },
+            "no_sha_validation": True,
+            "new_model_calls": 0,
+            "scope": "Native-witness proxy and semantic review use separate versions. "
+            "Both-incomplete and missing judgments stay unknown. Same-input SFT is retained "
+            "on shared directional support; no fitted model or generalization claim.",
+            "compute": {
+                "cpu_seconds": time.process_time() - cpu,
+                "wall_seconds": time.perf_counter() - started,
+            },
+        },
+    )
+
+
+if __name__ == "__main__":
+    main()

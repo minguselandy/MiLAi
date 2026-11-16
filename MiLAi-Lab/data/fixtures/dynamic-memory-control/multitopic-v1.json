@@ -1,0 +1,186 @@
+{
+  "version": "dynamic-memory-control-multitopic-v1",
+  "scope": "One authored functional-development history, three topics. Twelve tasks are correlated within one history, not twelve independent families. No answer or topic ID enters Host input.",
+  "histories": [
+    {
+      "id": "multitopic_switching",
+      "source_family": "multitopic_switching",
+      "split": "functional_development",
+      "task_count": 12,
+      "steps": [
+        {
+          "id": "a-cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T09:10:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "砂桥项目普通无电池样品可以空运，当前这批样品原登记为普通无电池样品。",
+              "occurred_at": "2032-08-20T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "溪港团队文稿发布前由编辑审核，使用中文。",
+              "occurred_at": "2032-08-20T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "苇原档案室每周三闭馆维护，维护负责人是贺青。",
+              "occurred_at": "2032-08-20T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "能空运。"
+        },
+        {
+          "id": "b-cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，溪港团队的文稿发布前由谁审核，使用什么语言？",
+          "occurred_at": "2032-08-20T09:20:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "编辑审核，中文。"
+        },
+        {
+          "id": "a-return",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T09:30:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "能空运。"
+        },
+        {
+          "id": "c-cold",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，苇原档案室每周哪天闭馆维护，谁负责？",
+          "occurred_at": "2032-08-20T09:40:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "周三，贺青。"
+        },
+        {
+          "id": "a-after-third-topic",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T09:50:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "能空运。"
+        },
+        {
+          "id": "b-return",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，溪港团队的文稿发布前由谁审核，使用什么语言？",
+          "occurred_at": "2032-08-20T10:00:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "编辑审核，中文。"
+        },
+        {
+          "id": "a-related",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T10:10:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a-u",
+              "content": "砂桥当前这批样品经核查实际含锂电池；含锂电池样品只能陆运且不能空运。普通无电池样品规则不变。",
+              "occurred_at": "2032-08-20T10:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能空运，只能陆运。"
+        },
+        {
+          "id": "a-unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T10:20:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c-n",
+              "content": "苇原档案室更换了门外海报，这不改变维护日期和负责人。",
+              "occurred_at": "2032-08-20T10:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能空运，只能陆运。"
+        },
+        {
+          "id": "a-repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T10:30:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "不能空运，只能陆运。"
+        },
+        {
+          "id": "b-related",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，溪港团队的文稿发布前由谁审核，使用什么语言？",
+          "occurred_at": "2032-08-20T10:40:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b-u",
+              "content": "溪港团队文稿从现在起改用英文发布，发布前仍由编辑审核。",
+              "occurred_at": "2032-08-20T10:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "编辑审核，英文。"
+        },
+        {
+          "id": "c-return",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，苇原档案室每周哪天闭馆维护，谁负责？",
+          "occurred_at": "2032-08-20T10:50:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "周三，贺青。"
+        },
+        {
+          "id": "a-final-return",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砂桥项目当前这批样品能空运吗，应怎样寄送？",
+          "occurred_at": "2032-08-20T11:00:00+08:00",
+          "query_time": "2032-08-20",
+          "incoming_sources": [],
+          "expected": "不能空运，只能陆运。"
+        }
+      ]
+    }
+  ]
+}

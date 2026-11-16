@@ -1,0 +1,15 @@
+{
+  "status": "PREPARED",
+  "cases": 46,
+  "prefixes": 184,
+  "planned_positions": 368,
+  "unchanged_empty_positions": 92,
+  "maximum_new_forwards": 276,
+  "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/ce-c20-v1/checkpoint",
+  "max_len": 8192,
+  "head_max_len": 512,
+  "new_model_calls": 0,
+  "protocol": "configs/milai-jev-reader-state-information-v1.json",
+  "artifacts": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/state-information-v1",
+  "selection": "All original fixed-four prefixes, before perturbation predictions. No new labels, QA, weights or training."
+}

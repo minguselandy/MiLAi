@@ -1,0 +1,355 @@
+{
+  "status": "AB_ORIGINAL_UNRUN_SUFFIX_CLOSED_REVIEWED",
+  "source_commit": "f8257f46",
+  "parent_source_commit": "b33d5690",
+  "driver": {
+    "status": "AB_CONTINUATION_ALL_UNRUN_MESSAGES_CLOSED",
+    "driver_pid": 2459124,
+    "source_commit": "f8257f46",
+    "started_at": "2026-10-15T13:07:53.346049+00:00",
+    "steps": [
+      {
+        "index": 7,
+        "pid": 2502240,
+        "started_at": "2026-10-15T13:19:13.407798+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T13:19:38.621403+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "index": 8,
+        "pid": 2503901,
+        "started_at": "2026-10-15T13:19:38.623235+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T13:20:40.432894+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "index": 9,
+        "pid": 2507873,
+        "started_at": "2026-10-15T13:20:40.435582+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T13:21:41.054008+00:00",
+        "message_status": "COMPLETED"
+      }
+    ],
+    "original_indices": [
+      7,
+      8,
+      9
+    ],
+    "copied_actual_bank": true,
+    "original_failure_retried": false,
+    "unknown_retry": false,
+    "cold_first_attempt": false,
+    "handoff_at": "2026-10-15T13:19:13.405411+00:00",
+    "closed_at": "2026-10-15T13:21:41.055853+00:00"
+  },
+  "reviewer": "same source author/developer; not independent/blind",
+  "queries": [
+    {
+      "index": 7,
+      "question": "只查询，不保存：现在A项目的联络恢复给谁，临时安排为什么取消？6月16日的一般联系人与外发确认要求怎样？",
+      "answer": "\n\n根据已记录的备忘（报告时间：2026年6月12日），查询结果如下：\n\n**联络恢复与临时安排取消：**\n- **恢复给**：**陈丹**（恢复一般排班，自2026年6月15日起生效）\n- **取消原因**：临时展台已提前撤下，因此曾蕊代办A项目对外材料联络的临时安排取消\n\n**6月16日的相关要求：**\n- **一般联系人**：**陈丹**（自6月15日起负责A项目一般联络）\n- **外发确认要求**：**不变**（向外部发任何项目材料前，仍须先得到您本人明确确认）\n\n---\n\n> **依据来源**：报告时间为 2026年6月12日 的消息（\"临时展台已提前撤下，曾蕊代办A项目对外材料联络的临时安排现在取消，恢复一般排班。6月15日起陈丹负责的通告仍有效。外发材料的本人明确确认要求不变。\"）",
+      "record_values_unchanged": true,
+      "core_correct": false,
+      "source_faithful": false,
+      "review": "June12 current contact incorrectly Chen (only effectiveJune15), should Lin; cancellation reason/futureJune16 Chen/confirmation correct."
+    },
+    {
+      "index": 9,
+      "question": "只查询，不保存：按纠错后的信息，B现在以及6月2日的一般联系人是谁？最初实际保存的B联系人又是谁？A在6月14日和6月16日分别由谁负责？曾蕊的临时安排现在还有效吗？外发条件和饮茶偏好是什么？",
+      "answer": "\n\n根据已查询的协作备忘记录，答复如下：\n\n* **B项目一般联系人**：按纠错后的信息，现在以及6月2日均为**许安**（纠错说明B项目从一开始的正确联系人即为许安）。\n* **最初实际保存的B联系人**：**沈瑜**（此为初次记录时的笔误，后已通过纠错更正）。\n* **A项目联系人**：\n  * **6月14日**（6月15日之前）：**林舒**\n  * **6月16日**（6月15日起生效）：**陈丹**\n* **曾蕊的临时安排**：已**取消/无效**。因临时展台提前撤下，曾蕊代办A项目对外材料联络的临时安排已撤回，恢复正常排班。\n* **外发条件**：向外部发任何项目材料前，都必须先得到**您本人明确确认**（仅记录联系人不代表具备发送权限）。\n* **饮茶偏好**：**乌龙茶，不加糖**。",
+      "record_values_unchanged": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "review": "Current andJune2 corrected B Xu, actual original saved B Shen, A before/afterJune15, revokedtemporary exception, confirmation/tea all correct."
+    }
+  ],
+  "update": {
+    "index": 8,
+    "answer": "\n\n根据您的纠正，**协作备忘已更新**。确认以下变更：\n\n**已纠正的内容：**\n- **B项目一般联系人**：从\"沈瑜\"更正为**许安**（这是最初的记录错误，不是今天更换的联系人）\n\n**保持不变的内容：**\n- **A项目排班**：6月15日之前由林舒负责，6月15日起由陈丹负责\n- **临时安排**：已撤回（曾蕊代办A项目对外材料联络的安排已取消）\n- **外发确认要求**：不变（向外部发任何项目材料前，仍须先得到您本人明确确认）\n- **饮茶偏好**：不变（乌龙茶，不加糖）\n\n**本次更新的报告时间：2026年6月14日**\n\n---\n\n> **说明**：B项目一般由许安联络的记录已修正。之前的沈瑜是记录错误，实际从一开始就是许安。\n\n本轮语义记忆: 已提交, 已确认 1 项提交。这里只确认保存回执, 不确认全部请求或语义覆盖。",
+    "records": [
+      {
+        "id": "3e51d255-3a62-5507-9959-bf21518024db",
+        "revision": 5,
+        "state": {
+          "matter_description": "协作备忘",
+          "relations": [],
+          "representation": "conditioned_v1",
+          "units": [
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                "occurred_at": "2026-06-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 95,
+                  "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "A项目一般由林舒联络",
+              "unit_id": "unit-36ab0478-0044-47b6-8ebb-616a3e9d64c5"
+            },
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T13:19:41.225114+00:00",
+                "occurred_at": "2026-06-14T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-3cd25418-5ae8-45d6-b58c-b0a4b7a59acd",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 82,
+                  "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-3cd25418-5ae8-45d6-b58c-b0a4b7a59acd\",1,0,82]",
+                  "source_ref": "source-3cd25418-5ae8-45d6-b58c-b0a4b7a59acd",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "B项目一般由许安联络",
+              "unit_id": "unit-3adfaf26-e414-481d-9ebb-f2f9f823978f"
+            },
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                "occurred_at": "2026-06-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 95,
+                  "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "向外部发任何项目材料前，都必须先得到我本人明确确认",
+              "unit_id": "unit-5994da30-d905-48d7-bc9e-f13ca0dcd4d1"
+            },
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                "occurred_at": "2026-06-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 95,
+                  "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "记录联系人本身不代表可以发送",
+              "unit_id": "unit-c916f5fe-435a-4272-9715-64907a640dc3"
+            },
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                "occurred_at": "2026-06-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 95,
+                  "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "我喝乌龙茶，不加糖",
+              "unit_id": "unit-16bf70f0-2a23-40bc-899e-8ba29dc1bc50"
+            },
+            {
+              "assertion": {
+                "applicability": {
+                  "effective_from": "2026-06-15"
+                },
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T12:49:48.823945+00:00",
+                "occurred_at": "2026-06-10T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-20a05eee-c036-4e34-947f-d2148d5425cd",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 78,
+                  "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-20a05eee-c036-4e34-947f-d2148d5425cd\",1,0,78]",
+                  "source_ref": "source-20a05eee-c036-4e34-947f-d2148d5425cd",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "自2026年6月15日起，A项目一般联络改由陈丹负责",
+              "unit_id": "unit-639af755-631c-4b1a-968e-ceca2597bef3"
+            }
+          ]
+        }
+      }
+    ],
+    "current_B_correct": true,
+    "non_targets_preserved": true,
+    "full_historical_correction_semantics_explicit_in_current_state": false,
+    "review": "r5 replaces B Shen with Xu and keeps A/generalconfirmation/tea. The maintained B clause does not explicitly retain since-beginning/history-correction qualification; answer supplies that meaning from original correction Source. No relations/support groups formed."
+  },
+  "actual_final_history_reads": [
+    {
+      "tool": "read_memory",
+      "items": [
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 5,
+          "version_view": "current_at_snapshot",
+          "content": "A项目一般由林舒联络"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 5,
+          "version_view": "current_at_snapshot",
+          "content": "B项目一般由许安联络"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 5,
+          "version_view": "current_at_snapshot",
+          "content": "向外部发任何项目材料前，都必须先得到我本人明确确认"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 5,
+          "version_view": "current_at_snapshot",
+          "content": "记录联系人本身不代表可以发送"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 5,
+          "version_view": "current_at_snapshot",
+          "content": "我喝乌龙茶，不加糖"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 5,
+          "version_view": "current_at_snapshot",
+          "content": "自2026年6月15日起，A项目一般联络改由陈丹负责"
+        }
+      ]
+    },
+    {
+      "tool": "read_memory_revision",
+      "items": [
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 1,
+          "version_view": "historical_exact_revision",
+          "content": "A项目一般由林舒联络"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 1,
+          "version_view": "historical_exact_revision",
+          "content": "B项目一般由沈瑜联络"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 1,
+          "version_view": "historical_exact_revision",
+          "content": "向外部发任何项目材料前，都必须先得到我本人明确确认"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 1,
+          "version_view": "historical_exact_revision",
+          "content": "记录联系人本身不代表可以发送"
+        },
+        {
+          "record_id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 1,
+          "version_view": "historical_exact_revision",
+          "content": "我喝乌龙茶，不加糖"
+        }
+      ]
+    }
+  ],
+  "actual_initial_saved_version_verified": true,
+  "costs": {
+    "generation": {
+      "responses": 14,
+      "known_tokens": 134676,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "responses": 12,
+      "known_tokens": 1083,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 14,
+    "generation": {
+      "known_tokens": 134676,
+      "charged_tokens": 134676,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 1083,
+      "charged_tokens": 1083,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens": true,
+    "generation_requests": true,
+    "embedding_tokens": true
+  },
+  "original_index6_retried": false,
+  "original_first_status": "6COMPLETED+1FAILED+3NOT_RUN unchanged",
+  "new_lane_status": "original7/8/9 all engineeringCOMPLETED; one of2purequeries coreincorrect",
+  "cold_single_version_complete_example_success": false,
+  "capacity_fix_real_failure_path_retried": false,
+  "limitations": [
+    "Mixed-version actual-bank continuation does not repair original first failure or demonstrate full single-version Host success.",
+    "Actual exact initial revision reading is positive engineering evidence; current temporal interpretation still failed onJune12.",
+    "Correct final mixedSource answer is not full semantic-state preservation proof.",
+    "No SHAchecks,newledger,newdeployment,unknownretry or score replacement."
+  ]
+}

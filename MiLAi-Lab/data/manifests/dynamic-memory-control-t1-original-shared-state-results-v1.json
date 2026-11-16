@@ -1,0 +1,324 @@
+{
+  "version": "dynamic-memory-control-t1-original-shared-state-results-v1",
+  "status": "ALL80_EFFECTS_AND_ALL8_CONSTRUCTED_VIEWS_AUTHOR_REVIEWED",
+  "effect_inventory": {
+    "messages": 80,
+    "semantic_commits": 0,
+    "visibility_revocations": 0,
+    "business_effects": 0,
+    "business_observations": 3,
+    "refresh_attempts": 10,
+    "refresh_not_delivered": 2
+  },
+  "operation_counts": {
+    "SEARCH": 45,
+    "READ": 47,
+    "REFRESH_VIEW": 10,
+    "USE_VIEW": 7
+  },
+  "constructed_views": 8,
+  "nodes_reviewed": 39,
+  "rules_reviewed": 11,
+  "rejected_refreshes": [
+    {
+      "family": "nonunique_identity",
+      "step": "cold",
+      "result": {
+        "ok": false,
+        "status": "view_rejected",
+        "effect": "none",
+        "error_type": "FunctionalRejection",
+        "reason": "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE"
+      }
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "changed",
+      "result": {
+        "ok": false,
+        "status": "view_rejected",
+        "effect": "none",
+        "error_type": "FunctionalRejection",
+        "reason": "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE"
+      }
+    }
+  ],
+  "reviewer": "Codex author, exposed development; all constructed views included after error inspection, not blinded or independent verification.",
+  "records": [
+    {
+      "key": "count_distinct/query-structure:1",
+      "family": "count_distinct",
+      "step": "changed",
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/6a837b16-39fe-4085-8925-985b7cafbec4-result.json",
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/6a837b16-39fe-4085-8925-985b7cafbec4-trace-0.jsonl",
+      "source_aliases": 8,
+      "reported_source_bodies_delivered": 8,
+      "nodes": {
+        "n1": "supported_initial_report",
+        "n2": "supported_closed_initial_inventory",
+        "n3": "supported_new_distinct_sample",
+        "n4": "supported_duplicate_entry",
+        "n5": "supported_inference_via_n1_and_n3; extra question/assistant citations are not independent factual evidence"
+      },
+      "rules": {
+        "g1": "Set-union/distinct-count inference supported within the complete reported inventory; n1/n3 supply grounded premises."
+      },
+      "target_information_present": true,
+      "findings": [
+        "All sample identities and duplicate distinction source-consistent at construction. Ingestion/report timestamps must not be read as exact registration event times.",
+        "n5/g1 include request and previous-assistant references; their adequate support comes through original-source premises, not those extra references."
+      ]
+    },
+    {
+      "key": "serial_responsibility/query-structure:1",
+      "family": "serial_responsibility",
+      "step": "repeat",
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/f30a3a96-d33d-4343-88e5-538cc72ad253-result.json",
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/f30a3a96-d33d-4343-88e5-538cc72ad253-trace-0.jsonl",
+      "source_aliases": 5,
+      "reported_source_bodies_delivered": 5,
+      "nodes": {
+        "n1": "supported_author; direct user source plus assistant echo",
+        "n2": "supported_transfer",
+        "n3": "supported_author_preservation",
+        "n4": "supported_current_custodian_at_this_prefix"
+      },
+      "rules": {
+        "g1": "Supported for the bounded source prefix: the reported handover supplies current custody; no later transfer exists at construction."
+      },
+      "target_information_present": true,
+      "findings": [
+        "Unambiguous romanization preserves participant roles here but omits canonical Chinese spelling from the view body; later Reader rendering introduced different characters.",
+        "Later reuse after a new handover is stale application, not evidence that this construction was initially false."
+      ]
+    },
+    {
+      "key": "nonunique_identity/query-structure:1",
+      "family": "nonunique_identity",
+      "step": "repeat",
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/9e47e307-7ebc-4c30-8f7a-493f20b35315-result.json",
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/9e47e307-7ebc-4c30-8f7a-493f20b35315-trace-0.jsonl",
+      "source_aliases": 11,
+      "reported_source_bodies_delivered": 11,
+      "nodes": {
+        "n1": "supported_project_liaison",
+        "n2": "supported_distinct_same_nickname_liaison",
+        "n3": "contradicted_as_current_by_delivered_e1_disambiguation",
+        "n4": "supported_unrelated_liaison",
+        "n5": "contradicted_current_ambiguity_conclusion"
+      },
+      "rules": {
+        "g1": "Conditional ambiguity inference is coherent only when n3 holds; n3 no longer holds. Assistant-only citations do not establish current absence of identifying fields."
+      },
+      "target_information_present": false,
+      "findings": [
+        "Fresh refresh supplied the correcting original user Source e1 but omitted its meaning from nodes. Sources/aliases remained available, so this is semantic construction failure.",
+        "Current/historical distinction lost and stale assistant explanations treated as support."
+      ]
+    },
+    {
+      "key": "fraction_scope/query-structure:1",
+      "family": "fraction_scope",
+      "step": "cold",
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/070a31d4-3adf-481b-a9c0-d9738db46237-result.json",
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/070a31d4-3adf-481b-a9c0-d9738db46237-trace-0.jsonl",
+      "source_aliases": 3,
+      "reported_source_bodies_delivered": 3,
+      "nodes": {
+        "n1": "supported_batch_partition",
+        "n2": "supported_whole_day_fraction",
+        "n3": "supported_missing_subgroup_fraction_at_construction",
+        "n4": "correctly_uncertain_not_asserted_false"
+      },
+      "rules": {
+        "g1": "any=[] correctly represents no available supporting route from aggregate fraction to subgroup equality. It must not be normalized to[[]]."
+      },
+      "target_information_present": true,
+      "findings": [
+        "Construction correctly preserves uncertainty and does not infer subgroup frequency from aggregate frequency.",
+        "Subsequent reuse after morning10/2data is invalid for that later task; creation validity and later applicability differ."
+      ]
+    },
+    {
+      "key": "negated_exception/query-structure:1",
+      "family": "negated_exception",
+      "step": "repeat",
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/87e9a093-d63f-4d68-a250-b0868a06c422-result.json",
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/87e9a093-d63f-4d68-a250-b0868a06c422-trace-0.jsonl",
+      "source_aliases": 11,
+      "reported_source_bodies_delivered": 11,
+      "nodes": {
+        "n1": "supported_general_permission",
+        "n2": "supported_general_prohibition_with_exception_context",
+        "n3": "supported_shielding_exception",
+        "n4": "supported_completed_shielding",
+        "n5": "supported_current_batch_scope",
+        "n6": "source-supported_current_permission_in_text"
+      },
+      "rules": {
+        "g1": "Does not encode the claimed active derivation: any=[] blocks every route, and the general positive permission n1 is absent from all. Citations are old assistant answers, including a pre-exception negative answer.",
+        "g2": "Inert no-support route to an independently reported general rule; redundant, not a derivation of it.",
+        "g3": "Inert no-support route to an independently reported prohibition; redundant, not a derivation of it."
+      },
+      "target_information_present": true,
+      "findings": [
+        "Node text supports the correct current answer, but formal edges do not faithfully carry the source implication.",
+        "Correct QA can come from the already stated conclusion/plain text and does not demonstrate useful graph reasoning."
+      ]
+    },
+    {
+      "key": "memops_E08/query-structure:1",
+      "family": "memops_E08",
+      "step": "stage-0-repeat",
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/eaf24c90-435b-4f5e-bd01-63de4e34162c-result.json",
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/eaf24c90-435b-4f5e-bd01-63de4e34162c-trace-0.jsonl",
+      "source_aliases": 9,
+      "reported_source_bodies_delivered": 9,
+      "nodes": {
+        "n1": "supported_active_spreadsheet_routine",
+        "n2": "cutoff supported; cognitive-fatigue motive comes from an assistant explanation, not the cited user report of rushing",
+        "n3": "supported_corrected378not387",
+        "n4": "bounded absence observation is supported, but kind=reported misattributes an inference/coverage judgment as a direct report"
+      },
+      "rules": {},
+      "target_information_present": true,
+      "findings": [
+        "Core routine/amount available, but an unsupported psychological motive is embedded as reported fact.",
+        "Reader can omit that extra explanation and answer correctly; source-consistent task values do not certify all view statements."
+      ]
+    },
+    {
+      "key": "memops_F01/query-structure:1",
+      "family": "memops_F01",
+      "step": "stage-2",
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f1e7bd44-8c18-4557-816a-94733b9ed5d9/16fcad92-a378-4348-8f20-769495bcde6b-result.json",
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f1e7bd44-8c18-4557-816a-94733b9ed5d9/16fcad92-a378-4348-8f20-769495bcde6b-trace-0.jsonl",
+      "source_aliases": 31,
+      "reported_source_bodies_delivered": 31,
+      "nodes": {
+        "n1": "supported_initial6200pay",
+        "n2": "6080andMay15paystub supported; temporalMay15onwards conflates observation with the stated May effective period",
+        "n3": "current6080/future rollback distinction mostly retained; afterMay calendar anchor not supplied and budget-intent wording is imprecise",
+        "n4": "listed seven old amounts supported individually but omits current175dining line and loses estimate qualification",
+        "n5": "supported_one_off_reimbursement_exclusion",
+        "n6": "inactive freelance exclusion supported; linking it specifically to the previous consulting job is not established"
+      },
+      "rules": {
+        "g1": "Self-dependent n1 AND n2 ->n2 is a tautology, not a source-provided explanation of the pay update.",
+        "g2": "No-support route cannot derive the independently reported6080fact.",
+        "g3": "No-support route cannot derive the independently reported inactive-income exclusion."
+      },
+      "target_information_present": false,
+      "findings": [
+        "Current175allocation in actual source e9 was supplied but never represented. Required current outflows/remainder cannot be recovered from this view.",
+        "Temporal attribution and unsupported activity identity join add independent semantic defects; no generic repair of cycles/empty routes is warranted from this case."
+      ]
+    },
+    {
+      "key": "memops_E15/query-structure:1",
+      "family": "memops_E15",
+      "step": "stage-0",
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/84e78c5e-99eb-4139-bbcf-1de055fbebf0/077de992-bd9b-44c9-b6c3-759f08919a8d-result.json",
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/84e78c5e-99eb-4139-bbcf-1de055fbebf0/077de992-bd9b-44c9-b6c3-759f08919a8d-trace-0.jsonl",
+      "source_aliases": 7,
+      "reported_source_bodies_delivered": 7,
+      "nodes": {
+        "n1": "ticket/reclassification text supported; temporal2024-03-03not established outside identifier",
+        "n2": "count16supported; observationyear2024unsupported",
+        "n3": "downgrade-skew/no exactsplit supported atprefix; yearunsupported",
+        "n4": "supported14plus2correction with unknown recognition date",
+        "n5": "unknown exactstart correctly retained; invented2024year contaminates time scope"
+      },
+      "rules": {
+        "g1": "Incident count and directional skew do not entail the observation period; the date window is a separate direct report, with year unknown."
+      },
+      "target_information_present": true,
+      "findings": [
+        "Reference/count and need to withhold rate calculation are present, but unknown year is filled from identifier digits.",
+        "The source-bound cache preserves this unsupported clock assumption and Reader repeats it."
+      ]
+    }
+  ],
+  "basis": "Original bound user reports and relevant cited assistant/request bodies. Node text, temporal/actor attribution, formal rule meaning, coverage and later applicability assessed separately. Report clocks are not promoted to event clocks.",
+  "interpretation": "Read-only obligations preserved: no semantic commit, visibility revocation or business effect;3readonly business observations. Current task values can be present despite unsupported extra claims or unusable edges. Do not collapse this audit into a claim that all stored interpretations are valid.",
+  "runtime_change": "None; original views, model outputs, failures and costs retained. No node/route normalization or case-specific runtime repair.",
+  "source_export": "artifacts/dynamic-memory-control/t1-original-shared-state-inventory-v1/views.json",
+  "model_calls_by_audit": 0,
+  "reuse_assessment": {
+    "actual_use_view_calls": 7,
+    "valid_for_requested_meaning": 4,
+    "invalid_for_requested_meaning": 3,
+    "cases": [
+      {
+        "family": "count_distinct",
+        "step": "unrelated",
+        "meaning_supported": true,
+        "basis": "New note repeats an existing sample ID; cached distinct set remains applicable."
+      },
+      {
+        "family": "serial_responsibility",
+        "step": "unrelated",
+        "meaning_supported": true,
+        "basis": "New source concerns a different archive; original archive custody remains unchanged."
+      },
+      {
+        "family": "fraction_scope",
+        "step": "unrelated",
+        "meaning_supported": true,
+        "basis": "Unrelated afternoon note does not establish the morning fraction; cached uncertainty remains appropriate."
+      },
+      {
+        "family": "fraction_scope",
+        "step": "repeat",
+        "meaning_supported": true,
+        "basis": "No new resolving measurement has arrived yet; cached uncertainty remains appropriate."
+      },
+      {
+        "family": "serial_responsibility",
+        "step": "changed",
+        "meaning_supported": false,
+        "basis": "A newly reported handover changes custody; reused view still names the earlier custodian."
+      },
+      {
+        "family": "fraction_scope",
+        "step": "changed",
+        "meaning_supported": false,
+        "basis": "New morning10/2measurement resolves the earlier unknown; reused view omits it."
+      },
+      {
+        "family": "memops_F01",
+        "step": "stage-2-repeat",
+        "meaning_supported": false,
+        "basis": "The cached budget was already missing175at construction; reuse preserves that error without a new semantic update."
+      }
+    ],
+    "scope": "Actual cached meaning at each query, not merely cache hit or binding validity. Correct reuse need not reread new irrelevant/duplicate Sources. No netcost advantage inferred."
+  },
+  "feedback_recovery_examples": {
+    "cases": [
+      {
+        "step": "cold",
+        "actions": [
+          "refresh_view",
+          "search",
+          "context_0",
+          "handoff"
+        ],
+        "final_task_correct": true,
+        "first_rejected_refresh_preserved": true
+      },
+      {
+        "step": "changed",
+        "actions": [
+          "refresh_view",
+          "search",
+          "context_4",
+          "handoff"
+        ],
+        "final_task_correct": true,
+        "first_rejected_refresh_preserved": true
+      }
+    ],
+    "interpretation": "Known construction rejection followed by different read operations and correct first task response. Demonstrates working feedback/recovery, not an aggregate advantage over one-shot fallback."
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "status": "CPU_FIXTURES_PREPARED_REAL_PROBE_NOT_DISPATCHED",
+  "declared_at": "2026-10-22T04:17:18.974995+00:00",
+  "source_version": "a33974c0",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-archives-a33974c0/MiLAi-Lab",
+  "preparation": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/server-vision-probe-preparation-v1",
+  "planned_cases": [
+    {
+      "case": 0,
+      "image": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/server-vision-probe-preparation-v1/image-0.png",
+      "size": [
+        64,
+        128
+      ],
+      "expected_color_offline_only": "red",
+      "query_only_prompt_tokens": 243,
+      "query_only_total_reserved_tokens": 8947
+    },
+    {
+      "case": 1,
+      "image": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/server-vision-probe-preparation-v1/image-1.png",
+      "size": [
+        2048,
+        1024
+      ],
+      "expected_color_offline_only": "blue",
+      "query_only_prompt_tokens": 2219,
+      "query_only_total_reserved_tokens": 10923
+    },
+    {
+      "case": 2,
+      "image": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/server-vision-probe-preparation-v1/image-2.png",
+      "size": [
+        1280,
+        720
+      ],
+      "expected_color_offline_only": "green",
+      "query_only_prompt_tokens": 1051,
+      "query_only_total_reserved_tokens": 9755
+    }
+  ],
+  "query": "Identify the uniform color filling the supplied image. Answer with exactly one of red, green, or blue, enclosed in \\boxed{...}.",
+  "task": "Synthetic local server image-input/usage conformance only, not benchmark QA or trained-policy evaluation.",
+  "inputs": "Three exact solid-color PNGs, neutral filenames, identical query/choice set. Expected color never passed as a case-specific prompt field. Small/large images distinguish declared processor min/max pixel behavior;1280x720is released-asset geometry.",
+  "execution": "After current fit and all other real model jobs close, prepare actual runtime and execute empty-history given retrieval without generation, then existing predict_reader with exact query image and actual empty-evidence receipt. One Reader call per case, original durable call gate/queue/ledger. No service/model-limit change.",
+  "acceptance": "Compare actual server usage.prompt_tokens with complete local ImageHostCapacity count including the actual empty receipt. Preserve first final parsed response and compare its color only after completion. Report image admission, token count and simple visual answer separately; require all3before claiming probe pass. Unknown usage/incomplete response is not a pass. No automatic retries or repaired answers.",
+  "scope": "A tiny conformance probe cannot certify broad vision quality, Source fidelity, all retrieved image contexts or external generalization. All benchmark predictions and final method/checkpoint selection remain separate.",
+  "model_jobs_started": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "ledger_recorded": false,
+  "compute_scope": "CPU fixture/tokenizer preparation unmetered,unknown/not0. Actual later calls must use original ledger.",
+  "script": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/run_server_vision_probe_v1.py",
+  "execution_argv": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+    "-u",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/run_server_vision_probe_v1.py"
+  ],
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "TOKENIZERS_PARALLELISM": "false",
+    "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-archives-a33974c0/MiLAi-Lab/src:/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-archives-a33974c0/MiLAi-Lab/tools"
+  },
+  "dispatch_guard": "Current corrected fit must be COMPLETE with actual parent/child absent, and no real experiment model script live. Output created once. No automatic successor, retry or service changes."
+}

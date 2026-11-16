@@ -1,0 +1,16 @@
+{
+  "status": "RETRIEVAL_FEEDBACK_FINGERPRINTS_DISABLED_AND_CHECKED",
+  "discovery": "Two frozen63603feb fixed-context enum-error receipts included SHA presentation fingerprints. They were diagnostic fields, not file checksum gates; earlier blanket no-fingerprint claims did not cover this inherited path.",
+  "historical_outputs": "Preserved unchanged; no old experiment replay or receipt rewriting.",
+  "change": "build_agent accepts an explicit feedback-fingerprint switch. The functional retrieval profile passes false. JSON Schema validation, public constraints, error paths, omission counts and4096-byte cap stay in force.",
+  "coverage": [
+    "Public enum rejection still reports expected values without executing tool.",
+    "Large nested JSON Schema and Pydantic errors remain bounded without leaking instance data.",
+    "Actual prepared functional Host with real SQLite and scripted provider: invalid enum rejected, then valid retrieval executed. SHA generation functions were patched to fail throughout preparation and execution."
+  ],
+  "tests": "3 targeted tests passed with SHA generation forbidden; legacy hash-verification tests were not run.",
+  "static": "Ruff, mypy for contracts/functional runner, package/tools boundaries passed.",
+  "scope": "Current retrieval-only functional path. Defaults in unrelated inherited profiles are preserved; future adapters must explicitly use the fingerprint-free feedback path.",
+  "future_runs": "Use the new committed source; do not launch future Host jobs from frozen63603feb. Host prompts, validation and permissions unchanged.",
+  "model_calls": 0
+}

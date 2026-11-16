@@ -1,0 +1,19 @@
+{
+  "status": "FROZEN_FIRST_HOST_STORY_RUNNING",
+  "source_commit": "b33d5690",
+  "source_root": "artifacts/method-architecture/host-ab-source-v1/MiLAi-Lab",
+  "run_root": "artifacts/method-architecture/host-ab-v1/execution",
+  "driver_path": "artifacts/method-architecture/host-ab-v1/driver.json",
+  "driver_pid": 2384059,
+  "exec_session": 41638,
+  "messages": 10,
+  "events": 5,
+  "queries": 5,
+  "prepare": "frozen prepare completed0HTTP; prior prepare remains separate; initial archive invocation used wrong Git cwd and produced no archive, corrected to repository root before prepare",
+  "protocol": "data/manifests/method-architecture-host-ab-v1-protocol.json",
+  "cold_empty_bank": true,
+  "new_common_projection": "reported_at/captured_at names and storage-clock explanation in evidence pack; no real-model quality claim before review",
+  "failure_policy": "stop first lane on first non-COMPLETED message; preserve partial effects and unrun suffix; never retry unknown",
+  "handoff": "Native pilot and children gone; first scores closed; sealed ledger counters matched and unknown unchanged before dispatch",
+  "not_goal_completion": true
+}

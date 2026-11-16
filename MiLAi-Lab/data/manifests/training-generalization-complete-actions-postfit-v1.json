@@ -1,0 +1,41 @@
+{
+  "status": "CONCRETE_COMMANDS_PREPARED_NOT_DISPATCHED",
+  "declared_at": "2026-10-22T03:52:27.163435+00:00",
+  "fit_run_id": "source256-actions-full-seed0-u524-v1",
+  "fit_source": "d6a8afd3",
+  "analysis_source": "1df7669d",
+  "analysis_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab",
+  "required_before_any_model_dispatch": "Verify actual parent3470595/child3470601 terminal/absent, trainer driver/run COMPLETE524, existing unique compute ledger record, no other real model job. Do not start from timeout or intermediate scores.",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "TOKENIZERS_PARALLELISM": "false",
+    "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab/src:/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab/tools"
+  },
+  "terminal_audit_argv": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+    "-u",
+    "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab/tools/analyze_operation_curve.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-study-amendment-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-analysis-v1",
+    "--run-id",
+    "source256-actions-full-seed0-u524-v1",
+    "--positions",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-readiness-v1"
+  ],
+  "saved_cpu_argv": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+    "-u",
+    "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab/tools/evaluate_saved_operation_curve.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-analysis-v1/analysis.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1"
+  ],
+  "position_preflight": "All4886train and860dev fit length identities/tokens match complete-action-readiness-v1 positions; train position inventory also retains all7884rawstates. No metric files read.",
+  "selection": "Existing declared fixed32family operation dev macro, earliest tie,0eligible; savedCPU actual serialized candidates0/32/64/128/262/393/524 all evaluated before selection; feedback16secondary, selected train matching savedCPU condition. FP32loaded tensors,MHAfastpathFalse,reference_compileFalse,max12288/head2048/shared_actions.",
+  "costs": "Child saved-model compute recorded by existing evaluator once in original ledger. Parent/audit offline CPU separate pending. No automatic model successor, retries or offline settlement while fit lives.",
+  "scope": "Makes already-authorized next steps concrete; changes no training, selection, datasets or conditions. Legacy savedCPU remains pending too. Full original goal unchanged.",
+  "model_jobs_started": 0,
+  "no_sha_validation": true,
+  "no_subagents": true
+}

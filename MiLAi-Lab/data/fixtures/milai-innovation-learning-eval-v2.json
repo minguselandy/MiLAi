@@ -1,0 +1,111 @@
+{
+  "scope": "Fixed before minibatch training. Six fresh author source-only cases (four factual formations,two acknowledgments), plus four new transitions on previously exposed actual35B-model banks. The latter are not new independent histories. Author development evaluation, not formal holdout or external confirmation. Review dimensions never enter model messages.",
+  "cases": [
+    {
+      "case_id": "learning-v2-common-prerequisite-unknown",
+      "reported_at": "2039-03-03T09:00:00+08:00",
+      "source": "借用澄湖中心分析仪须签署保密承诺，并且科研证或一次性预约码任一有效。周朔的科研证已过期，预约码有效；是否已签承诺尚未核实。清洁刷在橙柜。",
+      "review_dimensions": [
+        "承诺共同前提未知，资格也未知；有效预约码不能消除共同前提",
+        "科研证已过期与预约码有效分别保留",
+        "橙柜位置独立保留",
+        "不把未知/过期状态接成足够支持资格的正向前提"
+      ]
+    },
+    {
+      "case_id": "learning-v2-total-membership-proposal",
+      "reported_at": "2039-03-03T09:00:00+08:00",
+      "source": "Larch has a confirmed project budget of 3,200 credits in total. Its current eight members share that budget; 3,200 is not an amount for each person. Willow has requested 2,400 credits, but no approval has been given. The reference folder is blue.",
+      "review_dimensions": [
+        "3200为Larch总额，不能乘8",
+        "8人保留",
+        "Willow2400请求尚未批准",
+        "蓝色文件夹保留"
+      ]
+    },
+    {
+      "case_id": "learning-v2-correction-then-future",
+      "reported_at": "2039-03-03T09:00:00+08:00",
+      "source": "白沙展厅记录更正：东厅自开放以来的联络人一直是赵宁，先前录成陈琛是笔误。另有一项已经确认的交接：2039年3月6日起东厅改由吴澈接手，6日之前仍由赵宁负责。西厅一直由方遥负责。这次安排不改变两厅钥匙均在前台的规定。",
+      "review_dimensions": [
+        "此前一直赵宁，陈琛是错录",
+        "3月6日交接吴澈是真实未来变更，与纠错分开",
+        "西厅方遥和前台钥匙不变",
+        "不把报告日当生效日"
+      ]
+    },
+    {
+      "case_id": "learning-v2-measurement-and-unknown",
+      "reported_at": "2039-03-03T09:00:00+08:00",
+      "source": "生产灯闪烁本身不表示故障。排风正常且湿度低于60%时才允许喷涂；现在湿度55%，排风状态尚待现场确认。外区晾干架不受该规则限制。昨晚更换的是灯罩，不是排风机。",
+      "review_dimensions": [
+        "喷涂共同条件AND，湿度满足但排风未知，不能确认允许或不允许",
+        "55%与60%门槛区分",
+        "外区范围独立",
+        "换灯罩不等于修复排风机"
+      ]
+    },
+    {
+      "case_id": "learning-v2-empty-ack-zh",
+      "reported_at": "2039-03-03T09:00:00+08:00",
+      "source": "谢谢，先这样。",
+      "review_dimensions": [
+        "空语义库保持空；会话原始Source保留"
+      ]
+    },
+    {
+      "case_id": "learning-v2-empty-ack-en",
+      "reported_at": "2039-03-03T09:00:00+08:00",
+      "source": "Okay, understood.",
+      "review_dimensions": [
+        "空语义库保持空；会话原始Source保留"
+      ]
+    },
+    {
+      "case_id": "learning-v2-cancel-future",
+      "bank_case_id": "learning-eval-future-two-scopes",
+      "before_bank": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/format-v2/execution/operations/learning-eval-future-two-scopes/memory.sqlite",
+      "reported_at": "2038-02-11T09:00:00+08:00",
+      "source": "取消原定2038年2月12日甲区交接给宋岚的安排。江芮继续负责甲区；乙区仍由周野负责，两区借阅登记规定不变。",
+      "review_dimensions": [
+        "取消未来交接，不能保留已取消的未来当前值",
+        "保留江芮、乙区周野、两区登记",
+        "不抹去先前真实保存的计划历史"
+      ]
+    },
+    {
+      "case_id": "learning-v2-paper-expiry",
+      "bank_case_id": "learning-eval-or-unknown-alternative",
+      "before_bank": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/format-v2/execution/operations/learning-eval-or-unknown-alternative/memory.sqlite",
+      "reported_at": "2038-02-11T09:00:00+08:00",
+      "source": "孟淇纸券今天已作废，电子证状态仍未核实。入门培训完成记录和登记本在铜盒这两项均保持原样。",
+      "review_dimensions": [
+        "纸券无效，电子证未知，资格未知不是否定",
+        "不再保留旧的已满足资格结论或错误未知支持路线",
+        "培训和铜盒不受损"
+      ]
+    },
+    {
+      "case_id": "learning-v2-existing-ack",
+      "bank_case_id": "learning-eval-history-and-exception",
+      "before_bank": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/format-v2/execution/operations/learning-eval-history-and-exception/memory.sqlite",
+      "reported_at": "2038-02-11T09:00:00+08:00",
+      "source": "收到这份说明，谢谢。",
+      "review_dimensions": [
+        "保持实际已有语义状态；不为寒暄添加语义记录",
+        "原库既有的措辞/结构问题不被当作此次新事实"
+      ]
+    },
+    {
+      "case_id": "learning-v2-existing-restatement",
+      "bank_case_id": "learning-eval-total-proposal-nontarget",
+      "before_bank": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/format-v2/execution/operations/learning-eval-total-proposal-nontarget/memory.sqlite",
+      "reported_at": "2038-02-11T09:00:00+08:00",
+      "source": "480是A组总额，A组有6人，B组仍待审批，账册封皮是银色——这些我都记下了，没有新情况。",
+      "review_dimensions": [
+        "既有总额/人数/待批/封皮含义不变",
+        "不得无限追加重复事实或泛化永久人数规则"
+      ]
+    }
+  ]
+}

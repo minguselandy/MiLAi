@@ -1,0 +1,130 @@
+{
+  "version": "dynamic-memory-control-lifecycle-v1",
+  "scope": "New authored functional history, same general save/correct/history/forget template as E0, not an additional independent generalization family. Actual Writer/Reader states only; no ideal records preseeded.",
+  "histories": [
+    {
+      "id": "lifecycle_source_closure_v1",
+      "source_family": "explicit_memory_lifecycle",
+      "split": "functional_development",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "save-identifier",
+          "kind": "explicit_operation",
+          "session": "lifecycle",
+          "content": "请保存一条关于我工具柜的记录：工具柜登记标识是霁川六号。这里只处理记忆，不办理业务。",
+          "occurred_at": "2032-12-06T09:00:00+08:00",
+          "query_time": "2032-12-06",
+          "incoming_sources": [],
+          "expected": {
+            "semantic_commit_required": true,
+            "meaning": "工具柜登记标识为霁川六号"
+          }
+        },
+        {
+          "id": "save-independent-preference",
+          "kind": "explicit_operation",
+          "session": "lifecycle",
+          "content": "请单独保存晨会纪要的语言偏好：用德语输出。它与工具柜登记标识是两件独立的事情。不要办理业务。",
+          "occurred_at": "2032-12-06T10:00:00+08:00",
+          "query_time": "2032-12-06",
+          "incoming_sources": [],
+          "expected": {
+            "semantic_commit_required": true,
+            "meaning": "晨会纪要用德语输出",
+            "preserve": "工具柜登记标识"
+          }
+        },
+        {
+          "id": "recall-both",
+          "kind": "task",
+          "session": "lifecycle",
+          "content": "当前保存的工具柜登记标识和晨会纪要语言偏好分别是什么？只读取，不更改。",
+          "occurred_at": "2032-12-06T11:00:00+08:00",
+          "query_time": "2032-12-06",
+          "incoming_sources": [],
+          "expected": {
+            "answer": "霁川六号；德语",
+            "mutations": 0
+          }
+        },
+        {
+          "id": "correct-identifier",
+          "kind": "explicit_operation",
+          "session": "lifecycle",
+          "content": "请更正已保存的工具柜记录：登记标识改为暮帆二号，原标识不再使用。保持晨会纪要语言偏好不变。",
+          "occurred_at": "2032-12-06T12:00:00+08:00",
+          "query_time": "2032-12-06",
+          "incoming_sources": [],
+          "expected": {
+            "semantic_commit_required": true,
+            "current": "暮帆二号",
+            "preserve": "德语"
+          }
+        },
+        {
+          "id": "recall-current",
+          "kind": "task",
+          "session": "lifecycle-reopened",
+          "content": "重新打开后，工具柜当前登记标识是什么？晨会纪要应使用什么语言？只读。",
+          "occurred_at": "2032-12-06T13:00:00+08:00",
+          "query_time": "2032-12-06",
+          "incoming_sources": [],
+          "expected": {
+            "answer": "暮帆二号；德语",
+            "mutations": 0
+          }
+        },
+        {
+          "id": "read-saved-history",
+          "kind": "task",
+          "session": "lifecycle-reopened",
+          "content": "这次更正之前，系统实际保存的工具柜登记标识是什么？请查真实保存历史，不用当前值替代旧版本。",
+          "occurred_at": "2032-12-06T14:00:00+08:00",
+          "query_time": "2032-12-06",
+          "incoming_sources": [],
+          "expected": {
+            "saved_revision_read_required": true,
+            "answer": "霁川六号"
+          }
+        },
+        {
+          "id": "forget-identifier",
+          "kind": "explicit_operation",
+          "session": "lifecycle-reopened",
+          "content": "请忘记工具柜登记标识，包括旧值、新值及其相关原始来源。保留晨会纪要的语言偏好和独立原始来源。",
+          "occurred_at": "2032-12-06T15:00:00+08:00",
+          "query_time": "2032-12-06",
+          "incoming_sources": [],
+          "expected": {
+            "whole_requested_visibility_revocation": true,
+            "target_sources": [
+              "save-identifier",
+              "correct-identifier"
+            ],
+            "preserve_source": "save-independent-preference",
+            "physical_erasure_claim": false
+          }
+        },
+        {
+          "id": "reopen-after-forget",
+          "kind": "task",
+          "session": "lifecycle-reopened",
+          "content": "现在还能查到工具柜登记标识吗？晨会纪要的语言偏好是什么？只查询，不恢复已经忘记的内容。",
+          "occurred_at": "2032-12-06T16:00:00+08:00",
+          "query_time": "2032-12-06",
+          "incoming_sources": [],
+          "expected": {
+            "forgotten_values_not_disclosed": [
+              "霁川六号",
+              "暮帆二号"
+            ],
+            "preserved_answer": "德语",
+            "raw_source_and_history_visibility_checked": true,
+            "mutations": 0
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2336 @@
+{
+  "status": "COMPLETED_PLAN_EXECUTION_WITH_DOCUMENTED_LIMITS",
+  "goal_turn_classification": "PROGRESS",
+  "previous_turn_classification": "PROGRESS",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
+  "artifact_root": "/data/milai-experiments/20261112-reader-utility",
+  "prior_progress": "reader-utility-progress-20261112-v2.json",
+  "constraints": {
+    "sha_validation": false,
+    "content_fingerprints": false,
+    "subagents": false,
+    "product_changes": false,
+    "service_restarts": false,
+    "remote_push": false,
+    "confirmation_retuning": false
+  },
+  "completion_claim": true,
+  "code_versions": {
+    "native_refs_and_sampling_deadband": "8e68dd2a",
+    "complementary_deliveries": "5563f08a",
+    "training_gpu_release": "3d09c327",
+    "balanced_replay": "287cedec",
+    "multi_request_public_rollout": "998fbfee",
+    "actual_live_U_source": "287cedec",
+    "public_actual_post_state": "152a43cd",
+    "public_terminal_deliveries": "aa0e2f12",
+    "saved_evaluator_release": "3bad33dc",
+    "actual_DEV_trajectory_endpoints": "71a677ee",
+    "frozen_terminal_nominations": "796e3934",
+    "cross_trajectory_review": "bbf42295",
+    "residual_GPU_graph_cleanup": "857067c0",
+    "dependency_group_weights": "79d7264f",
+    "public_append_states": "73748278",
+    "alias_prefix_teacher": "ed39c43c",
+    "public_snapshot_interval": "793dd0be",
+    "checkpointed_cleanup_regression": "3df6188c",
+    "scale_comparison": "2d79ef13",
+    "trajectory_outcome_summary": "4ae97cd8",
+    "continuous_host_outcome_summary": "f7740256",
+    "native_Host_cost_stages": "fe29a56b",
+    "native_DEV_explicit_controls_eval_only": "86ea0d16",
+    "continuous_declared_answer_field": "107af748",
+    "matched_own_state_sampler": "0c9ba3e1",
+    "explicit_shared_overlap_exclusion": "06ed4f92",
+    "lossless_weight_deltas": "6b7faae3",
+    "continuous_exact_source_review_binding": "7a9d359e",
+    "actual_only_terminal_collection": "6d20579c",
+    "preexecution_selection_logging": "365bd8cd",
+    "retained_collection_failure_denominators": "3bda68a6",
+    "bounded_natural_source_screen": "08468807",
+    "continuous_source_grade": "b99914c6",
+    "continuous_view_work": "d673435e",
+    "explicit_TEST_evaluation_roles": "8e343290",
+    "reserved_TEST_exporter": "8e7ffb87",
+    "eligible_context_review_diagnostic": "df30c61c",
+    "fixed_source_second_readout_preparation": "6d1ef075",
+    "fixed_source_repeat_stability_summary": "e5508afd",
+    "correct_full_final_response_stability": "806c66fd"
+  },
+  "formal_U": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
+    "engineering_choice": "/data/milai-experiments/20261112-reader-utility/formal-main3k-engineering-choice-v1.json",
+    "data": "/data/milai-experiments/20261112-reader-utility/formal-main3k-data-v2/run.json",
+    "main_states": 3356,
+    "main_sources": 698,
+    "opportunity_states": 3765,
+    "inactive_opportunities": 409,
+    "active_primary_targets": {
+      "u0_delivery": 37,
+      "u1_utility": 3355
+    },
+    "old_replay_pool": 4096,
+    "old_replay_sources": 857,
+    "available_old_labelled_replay_rows": 33667,
+    "primary_passes": 3,
+    "primary_exposures_each": 10068,
+    "replay_exposures_each": 3356,
+    "planned_updates_each": 420,
+    "curve_updates": [
+      70,
+      140,
+      280,
+      420
+    ],
+    "initialization": "fixed S1/36k final",
+    "initial128_dev_logits_identical": true,
+    "initial_dev_reference_accepted": 46,
+    "initial_dev_reference_labelled": 78,
+    "scope": "Production supervision-package comparison with explicit unequal supervision coverage. Frozen U labels are first68 reviewed opportunities; future Q labels never mutate U data. Do not call this pure loss isolation or claim a task gain from training/Teacher metrics.",
+    "interim140": {
+      "u0": {
+        "fast_dev": {
+          "labelled": 78,
+          "accepted": 44,
+          "handoff_outside_reviewed_preference": 14,
+          "masked": 50
+        },
+        "full_dev": {
+          "labelled": 584,
+          "accepted": 263,
+          "handoff_outside_reviewed_preference": 137,
+          "masked": 408
+        },
+        "full_dev_source_macro": 0.4899980791214557
+      },
+      "u1": {
+        "fast_dev": {
+          "labelled": 78,
+          "accepted": 29,
+          "handoff_outside_reviewed_preference": 4,
+          "masked": 50
+        },
+        "full_dev": {
+          "labelled": 584,
+          "accepted": 209,
+          "handoff_outside_reviewed_preference": 71,
+          "masked": 408
+        },
+        "full_dev_source_macro": 0.38961156087779464
+      }
+    },
+    "live": {
+      "u0": {
+        "pid": 1169498,
+        "status": "COMPLETED",
+        "last_reported_updates": 420,
+        "planned_updates": 420,
+        "source_commit": "287cedec",
+        "ledger_recorded": true
+      },
+      "u1": {
+        "pid": 1169499,
+        "status": "COMPLETED",
+        "last_reported_updates": 420,
+        "planned_updates": 420,
+        "source_commit": "287cedec",
+        "ledger_recorded": true
+      }
+    },
+    "closed_comparison": "/data/milai-experiments/20261112-reader-utility/formal-U-closed-reference-comparison-v1.json",
+    "saved_precision_observation": "/data/milai-experiments/20261112-reader-utility/formal-U-export-precision-observation-v1.json",
+    "actual_sampled_main_targets": {
+      "u0": 111,
+      "u1": 10065
+    },
+    "actual_input_tokens_each": 75634904,
+    "fast_dev_final": {
+      "u0": 44,
+      "u1": 34,
+      "labelled": 78
+    },
+    "full_reference_dev_final": {
+      "u0": 266,
+      "u1": 218,
+      "labelled": 584,
+      "source_macro_difference": -0.10705266955266955,
+      "paired_bootstrap95": [
+        -0.16818181818181818,
+        -0.04917027417027417
+      ],
+      "scope": "In-memory referencepreferences, notHosttaskperformance"
+    },
+    "reference_figure": "/data/milai-experiments/20261112-reader-utility/formal-U-reference-curves-v1/summary.json"
+  },
+  "replay_correction": {
+    "old_prepared_unfitted_data": "/data/milai-experiments/20261112-reader-utility/formal-main3k-data-v1/run.json",
+    "reason": "The old319 pool lost main-event overlaps, leaving110rows. Before fitting, chose4096 real old36k rows, family/event round-robin without replacement and without main-event overlap. Both arms share the exact pool and24:8draw plan."
+  },
+  "development": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/formal-development96-v1/manifest.json",
+    "capacity": "/data/milai-experiments/20261112-reader-utility/formal-development96-v1/capacity.json",
+    "sources": 96,
+    "states": 992,
+    "labelled_states": 584,
+    "max_tokens": 9460,
+    "state_and_head_tokens_dropped": 0,
+    "train_overlap": 0,
+    "scope": "Existing32 plus already exposed DEVELOPMENT64; historical confirmation roles unchanged. Reference acceptance, not Host success or new blind validation."
+  },
+  "profile": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/student-window-profile-v1.json",
+    "tested_settings": 5,
+    "chosen_target": 24576,
+    "checkpointing": true,
+    "fused_adamw": false,
+    "warm_8k_tokens_per_second": 12712.022738462512,
+    "warm_24k_tokens_per_second": 16356.64490982158,
+    "scope": "Common actual3windows, first warmup then2measured; no retained model or quality claim. Fused16k tested, untested combination not adopted. Dropout remains enabled; only logical workload/targets/windows matched."
+  },
+  "semantic_Q": {
+    "planned_review_opportunities": 600,
+    "allocation": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
+    "reviewed_opportunities_closed": 600,
+    "known_delivery_states_closed": 331,
+    "known_answer_states_closed": 293,
+    "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
+    "new42_known_delivery": 20,
+    "new42_known_answer": 20,
+    "remaining": "E1 closed; final synthesis must preserve nonindependent review and unequal U supervision coverage. E2/own task readouts, natural remaining methods, confirmation and full study cost remain.",
+    "all600_opportunities_selected": true,
+    "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
+    "finite_continuation_pid": 1325952,
+    "active92": "/data/milai-experiments/20261112-reader-utility/main3k-new128to256-semantic92-readouts-v2/run.json",
+    "active92_last_observation": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "pid": 1306490,
+      "planned_unique_packets": 308,
+      "closed_readouts": 308,
+      "failed_readouts": 21
+    },
+    "quality_preview_110": "/data/milai-experiments/20261112-reader-utility/quality110-data-preview-v1/run.json",
+    "quality_preparation_script": "/data/milai-experiments/20261112-reader-utility/prepare_formal_quality_data_v1.py",
+    "active59": "/data/milai-experiments/20261112-reader-utility/main3k-new256to337-semantic59-readouts-v2/run.json",
+    "active133": "/data/milai-experiments/20261112-reader-utility/main3k-additional203-semantic133-readouts-v2/run.json",
+    "final_data_and_plans_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-data-and-plans-owner-v1.json",
+    "closed133_readouts": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_readouts": 451,
+      "failed_readouts": 25,
+      "chat_invocations": 448,
+      "reused_readouts": 3,
+      "automatic_retry": false
+    },
+    "current_stage": "E1_FITS_FIRSTS_SOURCE_REVIEWS_AND_AUTHOR_AUDIT_CLOSED",
+    "fit_and_DEV_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-fit-and-dev-owner-v1.json",
+    "fit_and_DEV_process": {
+      "pid": 2573854,
+      "session": 39922,
+      "status_at_launch": "WAITING_FOR_Q_DATA_AND_PLANS",
+      "fits_launched_at_observation": 0,
+      "current_status": "COMPLETED"
+    },
+    "closed_labels_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-all600-closed-label-inventory-v1.json",
+    "closed133_labels": {
+      "manifest": "/data/milai-experiments/20261112-reader-utility/main3k-additional203-semantic133-labels-v2/manifest.json",
+      "known_delivery": 72,
+      "known_answer": 61,
+      "directional_delivery": 57,
+      "directional_answer": 45,
+      "masked_teacher_candidates": 92,
+      "unresolved_review_states": 0
+    },
+    "active_later68": "/data/milai-experiments/20261112-reader-utility/main3k-original-replay128-semantic68-readouts-v2/run.json",
+    "closed_later68_readouts": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_readouts": 228,
+      "failed_readouts": 20,
+      "chat_invocations": 227,
+      "reused_readouts": 1,
+      "automatic_retry": false
+    },
+    "closed_later68_labels": {
+      "manifest": "/data/milai-experiments/20261112-reader-utility/main3k-original-replay128-semantic68-labels-v2/manifest.json",
+      "known_delivery": 38,
+      "known_answer": 32,
+      "directional_delivery": 28,
+      "directional_answer": 18,
+      "masked_teacher_candidates": 42,
+      "unresolved_review_states": 0
+    },
+    "active_final138": "/data/milai-experiments/20261112-reader-utility/main3k-original-new256-semantic138-readouts-v2/run.json",
+    "closed_final138_readouts": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_readouts": 466,
+      "failed_readouts": 33,
+      "chat_invocations": 461,
+      "reused_readouts": 5,
+      "automatic_retry": false
+    },
+    "all600_first_readouts_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-all600-first-readouts-inventory-v1.json",
+    "all600_first_readout_counts": {
+      "opportunities": 600,
+      "readouts": 2018,
+      "failed_readouts": 143,
+      "actual_chat_invocations": 2004
+    },
+    "closed_final138_labels": {
+      "manifest": "/data/milai-experiments/20261112-reader-utility/main3k-original-new256-semantic138-labels-v2/manifest.json",
+      "known_delivery": 78,
+      "known_answer": 71,
+      "directional_delivery": 60,
+      "directional_answer": 48,
+      "masked_teacher_candidates": 82,
+      "unresolved_review_states": 2
+    },
+    "formal_quality_data": {
+      "run": "/data/milai-experiments/20261112-reader-utility/formal-quality600-data-v1/run.json",
+      "primary_states": 331,
+      "source_families": 287,
+      "inactive_opportunities": 269,
+      "known_events_outside_frozen_U_active_pool": 14,
+      "replay_rows": 4096,
+      "passes": 3,
+      "main_rows_per_window": 16,
+      "replay_rows_per_window": 16,
+      "optimizer_updates_each": 63,
+      "curve_updates": [
+        11,
+        21,
+        42,
+        63
+      ],
+      "full_dev_updates": [
+        21,
+        63
+      ],
+      "primary_exposures_each": 993,
+      "replay_exposures_each": 993,
+      "weak_loss": false
+    },
+    "startup_observation": "/data/milai-experiments/20261112-reader-utility/formal-Q-startup-observation-v1.json",
+    "fits_launched": {
+      "u0": {
+        "pid": 3604433,
+        "physical_gpu": 2
+      },
+      "u1": {
+        "pid": 3604437,
+        "physical_gpu": 3
+      }
+    },
+    "closed_fit_comparison": "/data/milai-experiments/20261112-reader-utility/formal-Q-closed-reference-comparison-v1.json",
+    "closed_fits": {
+      "optimizer_updates_each": 63,
+      "active_primary_exposures_each": 993,
+      "replay_exposures_each": 993,
+      "train_input_tokens_each": 12739957,
+      "train_padded_tokens_each": 13039993,
+      "ledger_recorded_each": true,
+      "full_reference": {
+        "states": 992,
+        "all_state_selected_kinds": {
+          "u0": {
+            "SEARCH": 89,
+            "READ": 638,
+            "HANDOFF": 265
+          },
+          "u1": {
+            "SEARCH": 64,
+            "READ": 708,
+            "HANDOFF": 220
+          }
+        },
+        "changes": {
+          "both_reference_accepted": 170,
+          "changed_complete_action": 362,
+          "same_kind_different_binding": 222,
+          "same_kind_target_or_parameters_changed": 222,
+          "neither_reference_accepted": 323,
+          "u0_only_reference_accepted": 43,
+          "kind_changed": 140,
+          "u1_only_reference_accepted": 48
+        },
+        "reference_labelled_sources": 77,
+        "paired_source_macro_Q1_minus_Q0": -0.031475000468506965,
+        "bootstrap95": [
+          -0.09966454901519836,
+          0.03325345289631004
+        ],
+        "scope": "In-memory finalreferenceevaluationonfixed992states; notsaved-exportwholepolicyHostresults. Conditionalonfalliblenativewitnesslabels, nottasksuccess, purelossisolation orindependentconfirmation."
+      },
+      "interpretation": "Reference acceptance is not actual supported task success."
+    },
+    "reference_figure": "/data/milai-experiments/20261112-reader-utility/formal-Q-reference-curves-v1/summary.json"
+  },
+  "K_diagnostic": {
+    "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
+    "scores": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-scores-fp32-v1/run.json",
+    "analysis": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-diagnostic-v1.json",
+    "sources": 16,
+    "states": 32,
+    "packets": 96,
+    "native_references_available_packets": 42,
+    "jointly_scorable_sources": 7,
+    "teacher_best_full_binding_changes": 6,
+    "scope": "Existing actual MuSiQue cold/known-first receipts with native context boundaries; native missing-support contexts unscored, not negatives. Menus/support can differ, so not causal K-only or learned/Host benefit. Legacy h4, separate from main h2."
+  },
+  "horizon_diagnostic": {
+    "analysis": "/data/milai-experiments/20261112-reader-utility/immediate-vs-h2-new8-diagnostic-fp32-v2.json",
+    "sources": 8,
+    "states": 36,
+    "bindings": 120,
+    "teacher_best_changes": 16,
+    "same_handoff_max_abs_delta": 3.0517578125e-05,
+    "mean_acquisition_delta": 0.31333477195881987,
+    "scope": "Stable FP32 comparison of actual h0/h2 outcomes; extra execution cost differs, not a Host quality or independent-source win."
+  },
+  "I2": {
+    "actual_packets": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-v1/run.json",
+    "prospective_format": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-v2/run.json",
+    "readouts": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-readouts-v2/run.json",
+    "sources": 8,
+    "executed_bindings": 47,
+    "scope": "Full/rules/common-model plus first offered legal A/B/A+B/empty. All materials already acquired, no gold selection, no invented over-budget union. Complementarity is to be measured, not presumed. Short answer protocol separate from earlier long-answer firsts.",
+    "status": "CLOSED_47_FIRSTS_4_FAILED",
+    "native": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-native-v2/summary.json",
+    "author_review": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-native-v2/author-source-review-v1.json",
+    "observed_union_only_sufficiency": 0,
+    "model_full_exact_packet_matches": 8
+  },
+  "scale_extension": {
+    "pilot": "/data/milai-experiments/20261112-reader-utility/expansion-public-multi-request-pilot-v1/run.json",
+    "source": "/data/milai-experiments/20261111-scalable-evidence/musique-public-shard-0-v1",
+    "native_requests": 2,
+    "cold_known_conditions_completed": 4,
+    "model_calls": 19,
+    "source_family_count": 1,
+    "device": "CPU",
+    "scope": "Common saved model real multi-request trial. Not10k. Existing source context masks and original lexical first receipt K retained; newly generated cold output never substitutes for K. Next extend public branch preparation beyond first request/initial-only states.",
+    "post_step1": "/data/milai-experiments/20261112-reader-utility/expansion-public-post1-pilot-v1/run.json",
+    "post_step4": "/data/milai-experiments/20261112-reader-utility/expansion-public-post4-pilot-v1/run.json",
+    "pilot_scoring_input": "/data/milai-experiments/20261112-reader-utility/expansion-public-post-pilot-input-v1/run.json",
+    "post_states": 6,
+    "post_packets": 22,
+    "post_packets_with_reliable_native_references": 0,
+    "production_plan": "/data/milai-experiments/20261112-reader-utility/expansion-public-production-plan-v1.json",
+    "production_status": "ALL_FIVE_SOURCE_COLLECTIONS_CLOSED",
+    "first_production_input": "/data/milai-experiments/20261112-reader-utility/expansion-main-pilot-input-v1/run.json",
+    "first_production_data": "/data/milai-experiments/20261112-reader-utility/expansion-main-pilot-data-v1/run.json",
+    "first_production_active_states": 69,
+    "first16_input": "/data/milai-experiments/20261112-reader-utility/expansion-shard0-first16-input-v1/run.json",
+    "first16_scoring": "/data/milai-experiments/20261112-reader-utility/expansion-shard0-first16-scores-fp32-cache-v1/run.json",
+    "preparing_next_blocks": [
+      "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
+      "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
+    ],
+    "closed_additional_active_states": 11486,
+    "available17_compilation": "/data/milai-experiments/20261112-reader-utility/expansion-available17-data-v1/run.json",
+    "scale_comparison_preview": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/run.json",
+    "common_input_observation": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/common-input-observation.json",
+    "remaining_preparation_owner": "/data/milai-experiments/20261112-reader-utility/remaining-expansion-preparation-owner-v1.json",
+    "remaining_scoring_owner": "/data/milai-experiments/20261112-reader-utility/remaining-expansion-scoring-owner-v1.json",
+    "closed_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-pilot-and-shard0-closed-inventory-v1.json",
+    "closed_opportunity_states": 5794,
+    "closed_raw_families": 60,
+    "closed_active_raw_families": 58,
+    "remaining_active_new_state_target": 0,
+    "closed_collection_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-closed-collection-inventory-v3.json",
+    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard3-families112to127-closed-inventory-v1.json",
+    "closed_inventory_scope": "closed_inventory, closed_opportunity_states, closed_raw_families and closed_active_raw_families describe pilot plus shard0 only; latest_closed_score_inventory and closed_additional_active_states include later shard1 blocks.",
+    "closed_collection_counts": {
+      "raw_source_families": 283,
+      "known_dependency_groups": 279,
+      "native_requests": 3418,
+      "conditions": 6836,
+      "model_calls": 29609,
+      "actual_forward_input_tokens": 184439379,
+      "Host_calls": 0
+    },
+    "available_states_above_new_target": 4842,
+    "formal_sampling_status": "COMPLETED_FIXED_SEED0_10000_PRIMARY_NOT_FITTED",
+    "formal_data_owner": "/data/milai-experiments/20261112-reader-utility/formal-scale-data-owner-v1.json",
+    "formal_data_process": {
+      "pid": 2768620,
+      "session": 31574,
+      "status_at_launch": "WAITING_FOR_ALL_TWENTY_SCORE_BLOCKS",
+      "canonical_score_blocks": 20,
+      "data_target": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1",
+      "model_fitting_launched": false,
+      "final_status": "COMPLETED_FORMAL_SCALE_DATA_NOT_FITTED"
+    },
+    "closed_shard2_score_counts": {
+      "opportunity_states": 5943,
+      "packets": 22626,
+      "scored_packets": 11533,
+      "unscored_packets": 11093,
+      "active_states": 3004,
+      "raw_families": 38,
+      "active_raw_families": 37
+    },
+    "branch_preparation_status": "ALL_TWENTY_BRANCH_INPUTS_CLOSED",
+    "all_branch_input_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-all-branch-input-inventory-v1.json",
+    "all_branch_input_counts": {
+      "opportunity_states": 22613,
+      "packets": 85907,
+      "packets_with_native_references_from_export": 44037,
+      "raw_families": 283,
+      "known_dependency_groups": 279,
+      "duplicate_event_ids": 0
+    },
+    "all_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-all-scores-inventory-v1.json",
+    "canonical_scoring_status": "ALL_TWENTY_CLOSED_AND_NATIVE_LEDGER_RECORDED",
+    "formal_data": {
+      "base_primary_states": 3356,
+      "available_active_new_states": 11486,
+      "selected_new_states": 6644,
+      "expanded_primary_states": 10000,
+      "expanded_raw_families": 967,
+      "expanded_dependency_groups": 963,
+      "shared_replay_states": 4096,
+      "schedules": {
+        "expanded": {
+          "passes": 3,
+          "updates": 1250,
+          "primary_exposures": 30000,
+          "replay_exposures": 10000
+        },
+        "repeat": {
+          "passes": 9,
+          "updates": 1259,
+          "primary_exposures": 30204,
+          "replay_exposures": 10068
+        }
+      },
+      "repeat_over_expanded_primary_exposure_ratio": 1.0068,
+      "run": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/run.json",
+      "common_input_observation": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/common-input-observation.json",
+      "capacity": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/capacity-check-v1/run.json",
+      "planned_token_work": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/planned-token-work-v1.json",
+      "old_U_replay_comparison": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/old-U-replay-comparison-v1.json"
+    },
+    "boundary_failures": {
+      "packets": 53,
+      "raw_families": 2,
+      "event_states": 14,
+      "reason": "token_crosses_answer_boundary",
+      "policy": "One failed native alias makes packet score unknown; retain successful alias records but do not repair mean or rescore."
+    },
+    "E2_three_fresh_U_plans": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-arm-data-and-U-plans-v1.json",
+    "E2_same_pass_baseline_required": true,
+    "native_score_bookkeeping_closure": "/data/milai-experiments/20261112-reader-utility/expansion-native-score-bookkeeping-closure-v1.json",
+    "E2_execution": {
+      "assessment": "/data/milai-experiments/20261112-reader-utility/formal-E2-launch-assessment-v1.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-chains-owner-v2.json",
+      "pid": 866950,
+      "session": null,
+      "status": "EXPANDED_ADOPTED_RUNNING_REPEAT9PASS_RUNNING_BASE_UQ_CLOSED",
+      "fits_at_launch": {
+        "expanded10k3pass": {
+          "pid": 148218,
+          "physical_gpu": 2
+        },
+        "base3k3pass": {
+          "pid": 148221,
+          "physical_gpu": 3
+        }
+      },
+      "finite_queue": "GPU2 expandedU+sameQ+DEV; GPU3 base3passU+sameQ+DEV thenrepeat9passU+sameQ+DEV. EachQfixed63 plusfullpanel21/63nomination atmostoneadditionalactualDEV. Allfixedendpoints/curvesretained.",
+      "selection_scope": "Launchafter allnative96firsts and72authorsourcebindings/public8diagnostic; full96semanticteacherstillrunning. No superiority/equivalence/puresizeclaim; finalmodelselection waitsfullresults.",
+      "HTTP_firsts": "Not partofthisGPUqueue; stillrequired after actualDEVcollections and coordinatedHTTPavailability.",
+      "startup_observation": "/data/milai-experiments/20261112-reader-utility/formal-E2-startup-observation-v1.json",
+      "initial_fast128_logits_identical": true,
+      "fits_at_snapshot": {
+        "expanded10k3pass": {
+          "pid": 148218,
+          "physical_gpu": 2,
+          "adopted": true
+        },
+        "repeat3k9pass": {
+          "pid": 867555,
+          "physical_gpu": 3
+        }
+      },
+      "base_DEV": {
+        "prepared": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-e2_base3k3pass_final-readout-input-v1/run.json",
+        "closed_actual_endpoints": 95,
+        "planned_sources": 96,
+        "retained_collection_failure": "/data/milai-experiments/20261112-reader-utility/e2-base-retained-collection-failure-v1.json",
+        "failed_source": "qasper-paper-2002.08795",
+        "original_position": 63,
+        "continuation_owner": "/data/milai-experiments/20261112-reader-utility/e2-base-dev-remaining-owner-v1.json",
+        "scope": "63closedprefix untouched; failedsource notrerun; onlyunexecutedsourcepositions64..95 collected. No firstterminalaction orReader packet inventedforfailedsource."
+      },
+      "HTTP_queue": {
+        "owner": "/data/milai-experiments/20261112-reader-utility/E2-task-firsts-and-review-owner-v1.json",
+        "pid": 1109746,
+        "status": "WAITING_FOR_E2_COLLECTIONS_AND_NATURAL_FIRSTS",
+        "scope": "PostQfixed/declaredselectedmethods, firstreadout+native+sourceTeacher+primary/secondarysummary. Usesfull96expectedreferenceandretainedbasefailuremanifest;95baseactualReadercalls, notfake96. Native-summarycompileridentitychecked. No confirmation."
+      },
+      "expanded_U_closed": {
+        "run": "/data/milai-experiments/20261112-reader-utility/formal-e2-expanded10k3pass-seed0-v1/run.json",
+        "updates": 1250,
+        "primary_exposures": 30000,
+        "active_primary_exposures": 29997,
+        "replay_exposures": 10000,
+        "train_input_tokens": 241314753,
+        "train_padded_input_tokens": 247797294,
+        "native_ledger_recorded": true,
+        "training_wall_seconds": 16853.916433302686,
+        "preledger_wall_seconds": 18381.856768903323,
+        "native_cpu_seconds": 22357.741105405,
+        "full_reference_macro": {
+          "417": 0.4917193736998932,
+          "1250": 0.4550294222372144
+        },
+        "scope": "FixedUterminal retained; Qinitializer remainsfixedfinal despitehigherintermediateproxy. Actualtaskresults pending. Adoptedprocess exitcode/wholeCPU unknown, nativecompute/ledgerclosed, no refit."
+      },
+      "current_owner": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-chains-owner-v2.json",
+      "HTTP_owner": "/data/milai-experiments/20261112-reader-utility/E2-task-firsts-and-review-owner-v2.json",
+      "current_status": "ALL_THREE_FITS_DEV_FIRSTS_NATIVE_SOURCE_REVIEWS_CLOSED",
+      "primary_summary": "/data/milai-experiments/20261112-reader-utility/formal-E2-task-dev96-primary-summary-v1/summary.json",
+      "secondary_summary": "/data/milai-experiments/20261112-reader-utility/formal-E2-task-dev96-repeat_secondary-summary-v1/summary.json",
+      "native_full96": "/data/milai-experiments/20261112-reader-utility/formal-E2-native-firsts-full96-v1.json",
+      "figure": "/data/milai-experiments/20261112-reader-utility/formal-E2-task-results-figure-v1/manifest.json"
+    }
+  },
+  "application_source_inventory": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
+    "scope": "Primary-source feasibility only. AMA is native test, never silently TRAIN; REALTALK has10overlapping-participant conversations, not32independent families; Dolphin derived data need original identity/chronology verification. None claimed as executed applications."
+  },
+  "checks": {
+    "native_reference_and_sampling_tests": 15,
+    "complementary_tests": 2,
+    "balanced_compiler_tests": 3,
+    "real_GPU_component_training_and_exact_resume_tests": 20,
+    "public_multi_request_and_context_tests": 2,
+    "ruff": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "Same6preexisting unresolved LME dynamic imports; no new findings"
+  },
+  "costs": {
+    "last_paid_receipt": "/data/milai-experiments/20261112-reader-utility/final-postprocessing71-compute-receipt-v1.json",
+    "new_unbilled_scopes": "Namedclosed457scopes settledonce. Finalaccounting/reporttail andsomeimports/tests/rootreasoning/serverGPUremainunsplitorunmeasured, notzero; finiteincrementaldisclosure, notper-shellaccounting.",
+    "closed_queue_scope_inventory": "/data/milai-experiments/20261112-reader-utility/closed-cpu-queue-cost-inventory-v1.json",
+    "closed_queue_pending_scope": {
+      "owners": 7,
+      "process_scopes": 111,
+      "cpu_seconds": 46975.766221,
+      "nested_artifact_cpu_seconds_do_not_add": 46167.581859849975,
+      "ledger_written": true,
+      "scope": "Partial CPU-accounting inventory, including GPU collectors; not full study cost. Covered receipt paths identify overlaps. Both prior paid phase CPU entries read back and matched receipts.",
+      "current_settlement": "/data/milai-experiments/20261112-reader-utility/prior-closed216-compute-receipt-v1.json",
+      "original_inventory_is_historical_snapshot": true
+    },
+    "independent_scope_inventory": "/data/milai-experiments/20261112-reader-utility/closed-independent-cpu-cost-inventory-v1.json",
+    "independent_pending_scope": {
+      "recorded_scopes": 81,
+      "cpu_seconds": 2605.7988505149997,
+      "closed_annotation_children": 8,
+      "covered_annotation_manifest_cpu_do_not_add": 27.257920924,
+      "inherited_preparation_measure_excluded": 1,
+      "ledger_written": true,
+      "scope": "Snapshot of independently recorded nonnative CPU scopes; excludes prior paid/native/111 covered scopes. Contains8closed subprocesses from the still-live annotation parent; their manifest compute is nested. Inherited I2 short-format preparation cost excluded; separate diagnostic timer included. Not complete study cost.",
+      "current_settlement": "/data/milai-experiments/20261112-reader-utility/prior-closed216-compute-receipt-v1.json",
+      "original_inventory_is_historical_snapshot": true
+    },
+    "additional_closed_owner_inventory": {
+      "path": "/data/milai-experiments/20261112-reader-utility/additional-closed-owner-cpu-cost-inventory-v1.json",
+      "scopes": 24,
+      "cpu_seconds": 3727.968919,
+      "ledger_written": true,
+      "scope": "Additional closed successfulchildren excludingnative/priorcoverage. Failedmatchedv1CPU, latermatchedv2children/newindependentanalysis/storage notincluded; notwhole-study cost.",
+      "current_settlement": "/data/milai-experiments/20261112-reader-utility/prior-closed216-compute-receipt-v1.json"
+    },
+    "formal_native_fit_inventory": {
+      "partial_snapshot": "/data/milai-experiments/20261112-reader-utility/formal-fit-costs-partial10-v1/summary.json",
+      "closed_reconciled_at_snapshot": 10,
+      "planned_fits": 14,
+      "final_inventory_owner": "/data/milai-experiments/20261112-reader-utility/formal-fit-costs-final-owner-v1.json",
+      "final_output": "/data/milai-experiments/20261112-reader-utility/formal-fit-costs-all14-v1/summary.json",
+      "scope": "NativeCPU/wall phase entries read back, no duplicate settlement. Totals are closedfit scope only; wall sums are not elapsedstudytime; gpu_hours is allocation proxy not activekernel,energy,FLOPs orHostservicecost.",
+      "status": "ALL14_CLOSED_NATIVE_LEDGER_MATCHED",
+      "closed_reconciled": 14,
+      "figure": "/data/milai-experiments/20261112-reader-utility/formal-fit-work-figure-v1/manifest.json",
+      "totals": {
+        "main_exposures": 101301,
+        "active_main_exposures": 91326,
+        "replay_exposures": 38401,
+        "train_input_tokens": 819510075,
+        "train_padded_tokens": 842198086,
+        "training_wall_seconds": 58437.09464145452,
+        "evaluation_wall_seconds": 14117.381748813204,
+        "native_cpu_seconds": 91915.137455366,
+        "native_preledger_wall_seconds": 76711.04704360384,
+        "allocated_device_hours_native_wall_proxy": 21.308624178778846
+      }
+    },
+    "paid_phase_snapshot": {
+      "artifact": "/data/milai-experiments/20261112-reader-utility/paid-study-phase-inventory-v1/summary.json",
+      "phases": 96,
+      "scope": "Already-paid study-prefixed bookkeeping only; genericruntime/active/future/unpaid scopes excluded. Not wholeprojectuniqueCPU orwalltotal.14fitentries matched, noledgerwrite."
+    },
+    "common_s1_runtime_deltas": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-model-trace-audit-v1/runtime-ledger-deltas-v1.json",
+    "reconciled216": {
+      "artifact": "/data/milai-experiments/20261112-reader-utility/reconciled-prior-closed-cost-scopes-v4/summary.json",
+      "scopes": 216,
+      "cpu_seconds": 53309.533990515,
+      "sum_recorded_scope_wall_seconds": 44320.26397436019,
+      "ledger_written": true,
+      "settlement_owner": "/data/milai-experiments/20261112-reader-utility/closed216-compute-settlement-owner-v1.json",
+      "settlement_pid": 3838848,
+      "status": "PAID_ONCE_READ_BACK_VERIFIED",
+      "scope": "Three priorinventories only. Currentreceipts andcoveredpaths revalidated; knownphase01/02paid overlaps excluded. Laterwork andunmeasuredscopes separate. Wall sum includesoneexplicitwait, notelapsedstudytime.",
+      "receipt": "/data/milai-experiments/20261112-reader-utility/prior-closed216-compute-receipt-v1.json"
+    },
+    "orchestration_counter_observation": "/data/milai-experiments/20261112-reader-utility/goal-orchestration-counter-observation-v1.json",
+    "later123": {
+      "child_inventory": "/data/milai-experiments/20261112-reader-utility/later-closed-child-cost-inventory-v2.json",
+      "independent_inventory": "/data/milai-experiments/20261112-reader-utility/later-independent-cost-inventory-v1.json",
+      "reconciliation": "/data/milai-experiments/20261112-reader-utility/reconciled-later123-cost-scopes-v1.json",
+      "scopes": 123,
+      "child_scopes": 47,
+      "independent_scopes": 76,
+      "failed_child_scopes": 1,
+      "cpu_seconds": 32811.74431177999,
+      "sum_recorded_scope_wall_seconds": 69977.10018235352,
+      "settlement_owner": "/data/milai-experiments/20261112-reader-utility/later123-compute-settlement-owner-v1.json",
+      "settlement_pid": 3939766,
+      "status": "PAID_ONCE_READ_BACK_VERIFIED",
+      "ledger_written": true,
+      "scope": "Disjointfromprior216. Includesfailedprocess andoneexitedwaiter measuredprefix; archive epochs separate, inheritedv2analysis timer excluded, fullfitcost analysischild replacesnestedsummary timer. Wallincludeswait/overlap, notelapsedstudytime. Nativeoverhead/unmeasuredtails/root/serviceGPUunknown. ActiveconfirmationHTTP/stability andfuturework excluded.",
+      "receipt": "/data/milai-experiments/20261112-reader-utility/later123-compute-receipt-v1.json"
+    },
+    "final71": {
+      "receipt": "/data/milai-experiments/20261112-reader-utility/final-postprocessing71-compute-receipt-v1.json",
+      "scopes": 71,
+      "cpu_seconds": 225.34885291999993,
+      "status": "PAID_ONCE_READ_BACK_VERIFIED"
+    },
+    "final_disclosure": {
+      "artifact": "/data/milai-experiments/20261112-reader-utility/closed-cost-disclosure-v3/summary.json",
+      "study_prefixed_bookkeeping_phases": 118,
+      "settled_non_native_scopes": 457,
+      "non_native_cpu_seconds": 99277.63530450902,
+      "no_total_unique_project_CPU_or_money_claim": true
+    },
+    "closing_orchestration_snapshot": "/data/milai-experiments/20261112-reader-utility/closing-orchestration-counter-observation-v1.json"
+  },
+  "required_remaining": {},
+  "next_actions": [],
+  "phase": 44,
+  "signal_diagnostic": {
+    "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
+    "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
+    "joint_directional_material_pairs": 88,
+    "agree": 67,
+    "oppose": 21,
+    "opposed_empty_no_K_winners": 15,
+    "scope": "Selected TRAIN signal analysis; reviewer correlation and ambiguous native annotations retained; no task gain or causal bias attribution.",
+    "canonical261": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic261-diagnostic-v1.json",
+    "public_fixed8_source_review": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/public-weak8-source-panel-v1/protocol.json",
+      "summary": "/data/milai-experiments/20261112-reader-utility/public-weak8-source-panel-v1/unmasked-summary-v1.json",
+      "states": 8,
+      "packets": 31,
+      "known_score_states": 3,
+      "known_score_packets": 12,
+      "scope": "Manualsourcejudgments before scoreunmasking; fiveunknown-reference states remainmasked. Three scoredcases include onepartialfact preference mismatch andtwo ambiguouspremises. No populationaccuracy/automaticlabelrepair."
+    },
+    "canonical600": {
+      "summary": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic600-diagnostic-v1/summary.json",
+      "conditional_uncertainty": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic600-diagnostic-v1/source-conditional-bootstrap-v1.json",
+      "opportunities": 600,
+      "sources": 481,
+      "pair_bindings": 2462,
+      "joint_material_directional": 523,
+      "material_agree": 375,
+      "material_oppose": 148,
+      "opposed_empty_without_K": 82,
+      "prior261_reproduced_exactly": true,
+      "scope": "Exact initialstate/menu/fullaction/packet/continuation join. SelectedTRAIN conditional diagnostics, not populationaccuracy/causalparametric-memory attribution; no labels/scores/firsts modified."
+    }
+  },
+  "natural_application_preparation": {
+    "source_inspection": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-inspection-v1/source-inspection.json",
+    "prepared": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-continuous10-plan-v1/manifest.json",
+    "histories": 10,
+    "participant_components": 3,
+    "natural_messages": 8944,
+    "native_questions": 100,
+    "all_native_references_arrived": 57,
+    "status": "ALL400_FIRSTS_AND_AUTHOR80_CLOSED_AUTOMATED_LEARNED_REVIEWS_PENDING",
+    "scope": "Evaluation-only natural messages with explicitly staged native QA timing. Not32independentTRAINhistories or whole native benchmark. No silent alias/image/annotation repair.",
+    "dolphin_first_download_failure": "/data/milai-experiments/20261112-reader-utility/natural-dolphin-inspection-v1/download-first-failure.json",
+    "native_source_bootstrap": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-native-config-v1/manifest.json",
+    "native_bootstrap_only_no_Host": true,
+    "outcome_summary_tool": "tools/summarize_continuous_host_outcomes.py",
+    "outcome_summary_scope": "Offline only, not an application execution. Full declared denominator; separate method labels for same-policy checkpoints; source review bound to exact first answer; future/missing native evidence has no reference-overlap target; equal histories within participant groups, then equal groups. No automatic success inference from text overlap; no training export.",
+    "frozen_application_protocol": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v1/protocol.json",
+    "finite_application_owner": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v6.json",
+    "native_first_failure": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/retained-native-first-failure.json",
+    "native_status": "FAILED_FIRST_RETAINED_AUTO_TOOL_CHOICE_NOT_ENABLED_SERVER",
+    "native_generation_ledger_delta": {
+      "charged_tokens": 10539,
+      "known_tokens": 0,
+      "unknown_usage": 1
+    },
+    "current_protocol": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/protocol.json",
+    "source_review_capacity": {
+      "source_size": "/data/milai-experiments/20261112-reader-utility/natural-review-source-size-v1.json",
+      "prepared_chunks": "/data/milai-experiments/20261112-reader-utility/natural-source-scan-plan-v1/manifest.json",
+      "chunks": 117,
+      "original_sources": 8944,
+      "question_chunk_pairs": 673,
+      "max_source_only_chunk_tokens": 23668,
+      "status": "PREPARED_NO_SCREENING_OR_FINAL_JUDGE_CALLS",
+      "scope": "FullfinalprefixsourceJSON alone69k-202ktokens; boundedofflinearrivalchunks preservealloriginalvalues/order. Futurequestions onlyoffline; nofutureSourcerow eligibleforearlierquery. Selectionfallible, notabsenceproof; actualHostcontext stillrequired."
+    },
+    "source_screening": {
+      "run": "/data/milai-experiments/20261112-reader-utility/natural-source-screening-v1/run.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/natural-source-scan-owner-v1.json",
+      "status": "COMPLETED_WITH_UNRESOLVED",
+      "chunks": 117,
+      "unresolved_chunks": 5,
+      "question_chunk_pairs": 673,
+      "validated_query_results": 647,
+      "coverage_counts": {
+        "selected": 189,
+        "none": 457,
+        "unknown": 1
+      },
+      "known_tokens": 1620657,
+      "unknown_usage_delta": 0,
+      "native_compute": {
+        "cpu_seconds": 13.825284828,
+        "wall_seconds": 738.8795654401183
+      },
+      "scope": "Offlineexistingmodel,thinkingoff,oneattempt/index-onlyselection.5invalidchunkoutputs retainedmasked; noneisnotabsenceproof. Noanswers/grades/onlinechanges/sha."
+    },
+    "baseline_review_inputs": {
+      "paths": [
+        "/data/milai-experiments/20261112-reader-utility/natural-json-fixed_context-source-review-v1",
+        "/data/milai-experiments/20261112-reader-utility/natural-json-view_cache_incremental-source-review-v1"
+      ],
+      "screened_payloads": "/data/milai-experiments/20261112-reader-utility/natural-screened-baseline-review-inputs-v1/manifest.json",
+      "positions": 200,
+      "completed_bound_contexts": 178,
+      "execution_failures": 22,
+      "source_neighbor_expansion": 2,
+      "max_payload_only_tokens": 97656,
+      "payloads_above50000tokens": 9,
+      "status": "PREPARED_NOT_SEMANTICALLY_GRADED",
+      "scope": "Originalsource-prefix/allactualfinalcontext retained. SelectedSourcesplus2neighborsclippedatarrivalcut; fullydeliveredexactoriginalbodiesalsoincluded. Unresolvedcoverageexplicit, no sourceabsenceinference. Fullrequestcapacityincludingrubric/outputreserve stilltocheck."
+    },
+    "baseline_source_grading": {
+      "owner": "/data/milai-experiments/20261112-reader-utility/natural-baseline-source-grade-owner-v1.json",
+      "output": "/data/milai-experiments/20261112-reader-utility/natural-baseline-source-grades-v1",
+      "status": "COMPLETED_WITH_UNRESOLVED",
+      "attempts_per_completed_response": 1,
+      "rule": "Exact original/source and actual user/tool context quotes; screened subset cannot certify absence; capacity/format/masks remain unknown. Failed executions separate.",
+      "closure": "/data/milai-experiments/20261112-reader-utility/natural-baseline-source-review-closure-v1.json",
+      "planned_positions": 200,
+      "completed_response_reviews": 178,
+      "execution_failures": 22,
+      "unresolved_judgments": 7,
+      "masked_judgments": 101,
+      "known_tokens": 4067025,
+      "charged_tokens": 4067025,
+      "unknown_usage": 0,
+      "native_cpu_seconds": 25.084905407,
+      "native_wall_seconds": 3529.5700861942023,
+      "native_ledger_phase_verified": true
+    },
+    "author_review": {
+      "artifact": "/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/baseline40.json",
+      "reviewed": 40,
+      "planned": 80,
+      "counts": {
+        "fixed_context": {
+          "incomplete": 8,
+          "execution_failure": 2,
+          "unknown": 7,
+          "supported": 2,
+          "incorrect": 1
+        },
+        "view_cache_incremental": {
+          "incomplete": 9,
+          "unknown": 7,
+          "execution_failure": 3,
+          "incorrect": 1
+        }
+      },
+      "scope": "Predeclared requests2/7. Actual original-source/manual judgments; author not independent. Targeted search absence remains unknown, no reference or Teacher labels used."
+    },
+    "view_work": {
+      "artifact": "/data/milai-experiments/20261112-reader-utility/natural-baseline-view-work-v1/summary.json",
+      "status": "BASELINES_CLOSED_LEARNED_PENDING",
+      "refresh_builds": 129,
+      "reuse_attempts": 14,
+      "successful_View_deliveries": 0,
+      "material_budget_exhausted": 143,
+      "builder_nested_seconds": 4.3218650771304965,
+      "scope": "Built revisions/cost exist despite rejected delivery; never count rejected View as delivered, or sum nested times. No net-benefit claim."
+    },
+    "final_review_queue": "/data/milai-experiments/20261112-reader-utility/natural-final-review-and-summary-owner-v1.json",
+    "author_automated_comparison": {
+      "owner": "/data/milai-experiments/20261112-reader-utility/natural-baseline-author-comparison-owner-v1.json",
+      "output": "/data/milai-experiments/20261112-reader-utility/natural-baseline-author-teacher-agreement-v1.json",
+      "status": "COMPLETED40_EXACT_FIRST_BINDINGS",
+      "author_blinded": false,
+      "both_reviewers_independent": false,
+      "scope": "Same40firstanswers; source-witness author judgments versus unmodified automated outcomes. Earlier reference exposure not excluded. Structured-field mistakes/quote masks distinguished from semantic disagreement. Unknown never becomes incorrect."
+    },
+    "answer_format_actual_wire_check": "/data/milai-experiments/20261112-reader-utility/natural-answer-format-wire-observation-v1.json",
+    "active_firsts": {
+      "owner": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v6.json",
+      "coordinator_revision": 7,
+      "owner_pid": 2420785,
+      "child_pid": 2420790,
+      "run": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-autonomous-json-q1-v2",
+      "planned_positions": 100,
+      "status": "COMPLETED_ALL400_FIRSTS",
+      "capacity_handoff": "/data/milai-experiments/20261112-reader-utility/natural-idle-Q1-capacity-handoff-v1.json",
+      "scope": "Stableownerpathv6 nowrunsv7coordinator. Baseline200 andS1100reused unchanged. Same16GiBadmission margin measuredascurrentprocessallocatable space (rootf_bfree/nonrootf_bavail), filesystemreserve untouched. Allfrozen method/budget/source/Host settings unchanged."
+    },
+    "common_s1_closure": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-closure-v1.json",
+    "common_s1_work": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-view-work-v1/summary.json",
+    "opportunity_inventory": "/data/milai-experiments/20261112-reader-utility/natural-all-four-opportunity-inventory-v1/summary.json",
+    "common_s1_model_audit": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-model-trace-audit-v1/summary.json",
+    "learned_author_review": {
+      "S1_status": "CLOSED20",
+      "S1_artifact": "/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/common_s1-20.json",
+      "S1_counts": {
+        "supported": 2,
+        "execution_failure": 2,
+        "incomplete": 9,
+        "unknown": 6,
+        "incorrect": 1
+      },
+      "Q1_status": "CLOSED20",
+      "Q1_records": "/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/learned",
+      "closed_binding_inputs": "/data/milai-experiments/20261112-reader-utility/natural-author-closed-bindings-v1",
+      "binding_helper": "/data/milai-experiments/20261112-reader-utility/bind_closed_natural_author_positions_v1.py",
+      "append_helper": "/data/milai-experiments/20261112-reader-utility/append_natural_author_judgment_v1.py",
+      "scope": "Onlypreselected2/7closedfirsts. Separateauthorfiles avoidcolliding withwaitingfullsourcegraderstandardoutputs. Allactualcompletedcontexts boundbyexistingexactbinder; failedfirsts nograde. Authornotblind/independent; originalbaseline40unchanged.",
+      "Q1_artifact": "/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/q1-20.json",
+      "all80_status": "CLOSED"
+    },
+    "q1_closure": "/data/milai-experiments/20261112-reader-utility/natural-q1-closure-v1.json",
+    "all_author80": "/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/all80.json",
+    "termination_inventory": "/data/milai-experiments/20261112-reader-utility/natural-all-four-control-terminations-v1/summary.json",
+    "q1_model_audit": "/data/milai-experiments/20261112-reader-utility/natural-q1-model-trace-audit-v1/summary.json",
+    "source_review_diagnostic_v2": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-protocol-v2.json",
+      "prepared": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-inputs-v2/manifest.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-owner-v2.json",
+      "pid": 2829033,
+      "status": "COMPLETED_FIXED_MEASUREMENT_DIAGNOSTIC_NO_PRIMARY_REPLACEMENT",
+      "primary_replacement": false,
+      "scope": "Onecomplete400 diagnostic after originalgrades.357completedpayloads preserve allquote-eligible top-leveluser/toolcontents andallselectedsources;43failedfirsts retained.178oldbaseline defaultrequestwires byte-identical. Allauthor80alreadyknown, notheldout/independent. No per-casebestgrade or thirdrevision.",
+      "closure": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-diagnostic-closure-v2.json",
+      "unresolved": 11,
+      "masked": 214,
+      "validated_supported": 0,
+      "category_changes": 114,
+      "author_supported_still_unknown": 5,
+      "known_generation_tokens": 7181796,
+      "third_revision": false
+    },
+    "source_review_original_v1": {
+      "status": "COMPLETED_ALL400_WITH_UNRESOLVED",
+      "summary": "/data/milai-experiments/20261112-reader-utility/natural-all-four-source-outcome-summary-v1/summary.json",
+      "validated_supported_each": 0,
+      "primary_observed_difference": 0,
+      "descriptive_bootstrap95": [
+        0,
+        0
+      ],
+      "unknown_identification_interval": [
+        -0.6861111111111111,
+        0.6694444444444445
+      ],
+      "scope": "Degeneratevalidatedlabel result, notzero true success/equivalence. Author80shows at least5supported cases; original field/quote masks retained."
+    }
+  },
+  "phase04_validation": {
+    "targeted_public_SQLite_tests": 2,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "cost": "Native jobs self-bill. New nonnative preparations/analyses and previousphase03 pending; no settlement while live model/Host scopes exist. Root/network/tool costs partly unmeasured."
+  },
+  "formal_actual_task_DEV": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-input-v1/manifest.json",
+    "fixed_context": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-fixed-context-v1/run.json",
+    "fixed_context_readout_input": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-fixed-context-readout-input-v1/run.json",
+    "source_count": 96,
+    "native_questions": 96,
+    "baseline_actual_states": 581,
+    "baseline_actual_endpoints": 96,
+    "baseline_forced_stops": 2,
+    "learner_collection_plans": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-collect-plans-v1.json",
+    "conditional_old32_h2": "/data/milai-experiments/20261112-reader-utility/formal-dev32-common-h2-v1/run.json",
+    "conditional_scope": "64same-statecomparisons206packets; oldcollector3k/u101, separatefrom96actualwholetrajectorytaskprotocol.",
+    "pre_Q_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-pre-Q-trajectory-comparison-v1.json",
+    "first_four_reader_owner": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-first-four-owner-v1.json",
+    "review_plan": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-review-plan-v1.json",
+    "summary_tool": "tools/summarize_trajectory_outcomes.py",
+    "Q_readouts_and_six_method_review_owner": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-Q-and-review-owner-v1.json",
+    "Q_readouts_and_review_process": {
+      "pid": 2573961,
+      "session": 1897,
+      "status_at_launch": "WAITING_FOR_PRE_Q_FIRSTS_AND_Q_COLLECTIONS"
+    },
+    "trajectory_status": "ALL_SIX_CLOSED",
+    "readout_status": "ALL_SIX_FIRSTS_NATIVE_AUTHOR72_AND_FULL_TEACHER_CLOSED",
+    "closed_native_at_snapshot": {
+      "fixed_context": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 95,
+          "FAILED": 1
+        },
+        "source_macro_answer_f1_missing_zero": 0.32798214349175525
+      },
+      "common_s1": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 91,
+          "FAILED": 5
+        },
+        "source_macro_answer_f1_missing_zero": 0.24205157372822636
+      },
+      "u0": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 88,
+          "FAILED": 8
+        },
+        "source_macro_answer_f1_missing_zero": 0.18513176516163823
+      },
+      "u1": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 92,
+          "FAILED": 4
+        },
+        "source_macro_answer_f1_missing_zero": 0.19989864285618741
+      },
+      "u0q": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 92,
+          "FAILED": 4
+        },
+        "source_macro_answer_f1_missing_zero": 0.23630842646426423
+      },
+      "u1q": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 95,
+          "FAILED": 1
+        },
+        "source_macro_answer_f1_missing_zero": 0.23543106483971302
+      }
+    },
+    "all_six_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-trajectory-comparison-v1.json",
+    "author_source_review": {
+      "path": "/data/milai-experiments/20261112-reader-utility/formal-task-dev12-author-source-review-v1.json",
+      "planned_sources": 12,
+      "planned_bindings": 72,
+      "reviewed_at_snapshot": 72,
+      "closed_method_panels": [
+        "fixed_context",
+        "common_s1",
+        "u0",
+        "u1",
+        "u0q",
+        "u1q"
+      ],
+      "scope": "Preselected source positions; manual implementation-agent source review, method-hidden display but nonindependent and not fully blind. Remaining four methods await actual firsts.",
+      "status": "CLOSED_NONINDEPENDENT_AUTHOR_PANEL"
+    },
+    "identical_wire_first_variation_diagnostic": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-identical-wire-first-variation-v1.json",
+    "native_and_author_summary": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-native-and-author-summary-v1.json",
+    "full_teacher_summary": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-summary-v1/summary.json",
+    "author_teacher_comparison": "/data/milai-experiments/20261112-reader-utility/formal-dev96-author-teacher-agreement-v1.json",
+    "result_figure": "/data/milai-experiments/20261112-reader-utility/formal-E1-task-results-v1/summary.json",
+    "closed_source_review": {
+      "counts": {
+        "fixed_context": {
+          "complete_supported": 40,
+          "incomplete": 21,
+          "unknown": 31,
+          "incorrect": 3,
+          "execution_failed": 1
+        },
+        "common_s1": {
+          "complete_supported": 31,
+          "execution_failed": 5,
+          "incomplete": 37,
+          "unknown": 23
+        },
+        "u0": {
+          "complete_supported": 30,
+          "incomplete": 38,
+          "execution_failed": 8,
+          "unknown": 18,
+          "incorrect": 2
+        },
+        "u1": {
+          "complete_supported": 34,
+          "unknown": 20,
+          "incomplete": 37,
+          "execution_failed": 4,
+          "incorrect": 1
+        },
+        "u0q": {
+          "complete_supported": 31,
+          "incomplete": 39,
+          "unknown": 20,
+          "incorrect": 2,
+          "execution_failed": 4
+        },
+        "u1q": {
+          "complete_supported": 32,
+          "unknown": 24,
+          "incomplete": 39,
+          "execution_failed": 1
+        }
+      },
+      "primary": {
+        "left": "u1q",
+        "right": "u0q",
+        "sources": 96,
+        "observed_complete_difference": 0.010416666666666666,
+        "source_bootstrap95": [
+          -0.08333333333333333,
+          0.09375
+        ],
+        "unknown_identification_interval": [
+          -0.19791666666666666,
+          0.2604166666666667
+        ]
+      },
+      "reviewer_independent": false,
+      "review_groups": 288,
+      "unresolved_groups": 1,
+      "validated_records": 574,
+      "masked_candidates": 107,
+      "author_binary_disagreements": 9,
+      "author_difference_classes": {
+        "quote_validation_mask": 3,
+        "semantic_interpretation": 6
+      },
+      "no_labels_replaced": true
+    }
+  },
+  "I2_public": {
+    "prepared": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/run.json",
+    "native_witness": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/native-witness-diagnostic.json",
+    "author_premise_check": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/author-premise-check-v1.json",
+    "states": 16,
+    "sources": 8,
+    "packets": 62,
+    "states_with_AB_comparison": 12,
+    "union_only_native_witness": 2,
+    "semantic_caution": "Old u565 acquired pools; collector/full identical in all16. One cold film-premise/count union case; known-film K already makes A sufficient but A first failed. Album/artist label remains ambiguous. Native F1 and full-premise source success differ. No unique learned delivery benefit or new-U/Q result.",
+    "retained_first_startup_failure": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-readouts-v1/run.json",
+    "failure_Host_calls": 0,
+    "dependent_owner": "/data/milai-experiments/20261112-reader-utility/i2-public-after-q-owner-v2.json",
+    "status": "CLOSED_FIRSTS_NATIVE_AND_AUTHOR_SOURCE_REVIEW",
+    "actual_firsts_closed": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-readouts-v2/run.json",
+    "closed_readouts": 62,
+    "failed_firsts": 6,
+    "native_summary": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-native-v2/summary.json",
+    "author_source_review": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-native-v2/author-source-review-v1.json",
+    "bound_evaluation_only": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-bound-v2",
+    "source_reviewed_states": 16,
+    "source_reviewed_physical_bindings": 62,
+    "common_AB_states": 12,
+    "common_AB_native_positive_states": 5,
+    "common_AB_native_positive_families": 3,
+    "common_AB_answer_f1": {
+      "collector_actual": 0.41333333333333333,
+      "full_pool": 0.41333333333333333,
+      "AB": 0.4,
+      "A": 0.2,
+      "B": 0,
+      "rules": 0,
+      "empty": 0
+    },
+    "common_AB_complete_supported": {
+      "collector_actual": 2,
+      "full_pool": 2,
+      "AB": 2,
+      "A": 0,
+      "B": 0,
+      "rules": 0,
+      "empty": 0
+    },
+    "clear_cold_union_only_case": 1,
+    "collector_full_same_wire": 16
+  },
+  "post_U_GPU_owners": {
+    "2": "/data/milai-experiments/20261112-reader-utility/post-u-gpu2-owner-v2.json",
+    "3": "/data/milai-experiments/20261112-reader-utility/post-u-gpu3-owner-v1.json",
+    "2_old_superseded_before_first_job": "/data/milai-experiments/20261112-reader-utility/post-u-gpu2-owner-v1.json"
+  },
+  "new_confirmation_reservation": {
+    "reservation": "/data/milai-experiments/20261112-reader-utility/new-confirmation-source-reservation-v1/reservation.json",
+    "known_exposure_scan": "/data/milai-experiments/20261112-reader-utility/new-confirmation-source-reservation-v1/known-project-exposure-scan.json",
+    "native_test_papers": 416,
+    "reserved": 256,
+    "prior_train_dev_overlap": 0,
+    "known_metadata_ID_matches": 0,
+    "Source_exported": true,
+    "model_calls": 2431,
+    "scope": "FrozenbeforeSourceexport; all256TESTsources and4actualtrajectories closed. ControllerNN2431calls; noReader/sourcegrade outcomes yet. No pretrainingisolationclaim, no roleconversion or trainingexports.",
+    "sampling_freeze": "/data/milai-experiments/20261112-reader-utility/new-confirmation-source-sampling-freeze-v1.json",
+    "second_Host_sources": 32,
+    "author_sources": 32,
+    "full_method_protocol_frozen": true,
+    "exporter": {
+      "tool": "tools/prepare_reserved_qasper_confirmation.py",
+      "status": "READY_TESTED_ON_SYNTHETIC_DATA_ONLY",
+      "required_protocol_status": "FROZEN_BEFORE_CONFIRMATION_SOURCE_EXPORT",
+      "source_commit": "8e7ffb87",
+      "tests_passed": 14,
+      "actual_TEST_Source_exported": false,
+      "model_calls": 0
+    },
+    "frozen_protocol": "/data/milai-experiments/20261112-reader-utility/new-confirmation-protocol-v1.json",
+    "exported_input": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-input-v1/manifest.json",
+    "collection_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-collection-closure-v1.json",
+    "controller_trace_check": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-controller-trace-check-v1.json"
+  },
+  "phase05_validation": {
+    "public_and_complementary": 6,
+    "saved_evaluator": 5,
+    "collector_and_terminal_binding": 5,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "cost": "NewCPUpreps/collectors/analyses and earlierphase03/04pending; model jobs selfbill. FirstI2startupfailureCPUunmeasured, notzero. No ledgerwriteswhilelive."
+  },
+  "alias_prefix_scoring": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/teacher-scoring-numerical-protocol-v3-alias-prefix.json",
+    "same579packets": "/data/milai-experiments/20261112-reader-utility/alias-prefix-full-pilot-comparison-v1.json",
+    "diverse12sources": "/data/milai-experiments/20261112-reader-utility/alias-cache-diverse12-comparison-v1.json",
+    "max_observed_packet_mean_difference": 2.9063224792125197e-05,
+    "max_observed_token_difference": 0.000209808349609375,
+    "known_masks_and_comparison_directions_unchanged": true,
+    "scoring_wall_ratio": 3.87725999642433,
+    "whole_job_wall_ratio": 3.521887750354673,
+    "scope": "NewexplicitFP32backend for newexpansion only; oldUdata/fits untouched; limitedequivalence/throughput, nottaskbenefit."
+  },
+  "phase06_storage": "/data/milai-experiments/20261112-reader-utility/phase06-closed-recovery-sparse-v1.json",
+  "phase06_validation": {
+    "GPU_cleanup_with_exact_resume": 2,
+    "GPU_cleanup_with_gradient_checkpointing": 2,
+    "mixture_compiler_math": 30,
+    "teacher_scoring": 12,
+    "cross_trajectory_binding": 2,
+    "public_nomination_and_union": 5,
+    "public_append": 2,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "native_fits": "BothU420closedandselfbilled; ledgerwaitreported; no nativebillduplication",
+    "pending_costs": "Phase03through06nonnativepreparation/analysis/profile/storagepending; root/imports/tests/networkpartlyunmeasured."
+  },
+  "execution_local_date": "2026-11-14",
+  "phase07_storage": "/data/milai-experiments/20261112-reader-utility/phase07-closed-recovery-sparse-v1.json",
+  "phase07_validation": {
+    "scale_comparison_tests": 2,
+    "initial_combined_compiler_test_run": 7,
+    "real_data_preview_common_inputs_targets_and_replay_equal": true,
+    "native_Source_bootstrap_sources": 85,
+    "native_bootstrap_model_calls": 0,
+    "native_bootstrap_Host_calls": 0,
+    "reference_figure_visually_inspected": true,
+    "ruff": "passed",
+    "git_diff_check": "passed"
+  },
+  "phase08_storage": "/data/milai-experiments/20261112-reader-utility/phase08-closed-branch-stream-compression-v1.json",
+  "phase08_validation": {
+    "outcome_summary_and_binding_tests": 4,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "closed_incremental_streams": 22,
+    "decompressed_bytes_equal_original": true
+  },
+  "phase10_storage": "/data/milai-experiments/20261112-reader-utility/phase10-closed-branch-stream-compression-v1.json",
+  "historical_jobs_snapshot": [
+    {
+      "name": "formal-u-u0-seed0-v1",
+      "pid": 1169498,
+      "exec_session": 55981,
+      "gpu": 2,
+      "process_live_verified": true,
+      "status": "RUNNING",
+      "observed_counts": {
+        "optimizer_updates": 70,
+        "sampled_main_rows": 1680,
+        "sampled_main_active_rows": 15,
+        "sampled_window_replay_rows": 560
+      }
+    },
+    {
+      "name": "formal-u-u1-seed0-v1",
+      "pid": 1169499,
+      "exec_session": 95185,
+      "gpu": 3,
+      "process_live_verified": true,
+      "status": "RUNNING",
+      "observed_counts": {
+        "optimizer_updates": 70,
+        "sampled_main_rows": 1680,
+        "sampled_main_active_rows": 1680,
+        "sampled_window_replay_rows": 560
+      }
+    },
+    {
+      "name": "i2-complementary-dev8-short-readouts-v2",
+      "pid": 1203337,
+      "exec_session": 93985,
+      "gpu": null,
+      "process_live_verified": true,
+      "status": "COMPLETED_WITH_FAILURES",
+      "observed_counts": {
+        "closed_readouts": 47,
+        "failed_readouts": 4
+      }
+    }
+  ],
+  "historical_jobs_snapshot_scope": "Early U70 snapshot retained as historical evidence only; not current process state.",
+  "current_job_monitor": "/data/milai-experiments/20261112-reader-utility/observe_jobs_v1.py",
+  "phase11_validation": {
+    "continuous_outcome_tests": 3,
+    "existing_trajectory_summary_tests": 2,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "actual_natural_Host_calls": 0,
+    "scope": "Synthetic unit cases validate binding/denominator/missing-reference/grouping semantics; actual natural application still pending frozen checkpoint and HTTP capacity."
+  },
+  "phase12_execution": {
+    "Q_GPU_driver": "/data/milai-experiments/20261112-reader-utility/run_formal_Q_and_dev_v1.py",
+    "Q_HTTP_driver": "/data/milai-experiments/20261112-reader-utility/run_formal_task_dev96_Q_and_review_v1.py",
+    "scope": "Finite exact existing plans only. Q0 GPU2 after scorer yield, Q1 GPU3 after public producer closure; actual free memory checked. Both Q DEV collections GPU3 after fixed fits close and release, native bookkeeping separate. Q first readouts wait prior four methods; grouping and primary follow predeclared review plan. Parent does not retry, refit, export TRAIN labels or open new confirmation.",
+    "validation": "Both scripts parsed; targets absent at launch; exact /proc cmdlines and waiting owners verified; no Q model launched yet."
+  },
+  "phase12_storage": "/data/milai-experiments/20261112-reader-utility/phase12-closed-branch-stream-compression-v1.json",
+  "phase13_validation": {
+    "native_and_json_action_cost_stage_tests": 6,
+    "continuous_outcome_tests": 3,
+    "trajectory_outcome_tests": 2,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "scope": "Offline classification and ledger token reconciliation on unit fixtures; no model calls, no existing outcomes or ledger totals changed. Real natural application remains pending.",
+    "initial_test_environment_error": "Missing langchain_core with bare CUDA environment; rerun using existing HTTP site packages, no installation."
+  },
+  "remaining_storage_owner": "/data/milai-experiments/20261112-reader-utility/remaining-closed-stream-compression-owner-v1.json",
+  "remaining_storage_process": {
+    "pid": 2706424,
+    "session": 50739,
+    "initial_closed_streams": 9,
+    "initial_freed_allocated_bytes": 1247105024,
+    "scope": "Finite companion to remaining preparation queue. Only completed incremental streams; exact restored byte comparison, final cases/states retained. Stops when preparation owner completes or stops. Native first outcomes and models unchanged; no SHA.",
+    "final_status": "COMPLETED",
+    "final_closed_streams": 38,
+    "final_freed_allocated_bytes": 2630381568
+  },
+  "phase14_validation": {
+    "driver_syntax": "passed",
+    "canonical_block_arguments": 20,
+    "new_output_absent_before_launch": true,
+    "actual_process_cmdline_verified": true,
+    "scope": "Finite data-only driver launched in dependency wait, not a finished dataset or fitted comparison. Existing compiler and common-input verification execute only after all20 closed blocks."
+  },
+  "phase19_case_storage": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase19-closed-expansion-case-archives-v1/manifest.json",
+    "status": "COMPLETED",
+    "files": 80,
+    "freed_allocated_bytes": 13368143872,
+    "restore_entry": "/data/milai-experiments/20261112-reader-utility/phase19-closed-expansion-case-archives-v1/restore.py",
+    "actual_restore_CLI_validation": "/data/milai-experiments/20261112-reader-utility/phase19-closed-expansion-case-archives-v1/restore-cli-validation.json",
+    "restore_before_following_original_packet_ref_paths": true,
+    "scope": "Only80closed expansion step case JSONs archived after all scores/data close. Full bytes/mode/mtime retained; states,packets,scores,training data,Source banks,models andHost firsts kept directly available."
+  },
+  "checkpoint_nomination": {
+    "rule": "/data/milai-experiments/20261112-reader-utility/formal-UQ-reference-checkpoint-nomination-rule-v1.json",
+    "result": "/data/milai-experiments/20261112-reader-utility/formal-UQ-reference-checkpoint-nomination-result-v1.json",
+    "all_selected_fixed_terminal": true,
+    "additional_checkpoints": 0,
+    "disclosure": "Explicit full-panel interpretation/Q application recorded after fits, before Q full values inspection; earlier U values and Q fast values already exposed. Not a new pretraining preregistration."
+  },
+  "phase22_validation": {
+    "native_DEV_binder_tests": 20,
+    "ruff_pass": true,
+    "Q_reference_comparison_closed": true,
+    "checkpoint_nominations_closed": true,
+    "I2_all62_firsts_source_reviewed": true,
+    "no_sha_validation": true
+  },
+  "own_state_round": {
+    "status": "COLLECTION_BRANCHES_SCORES_AND_MATCHED_DATA_CLOSED_NO_FIT",
+    "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-protocol-v1.json",
+    "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-owner-v1.json",
+    "pid": 3944666,
+    "session": 8407,
+    "child_pid_at_launch": 3944671,
+    "physical_gpu": 2,
+    "collector": "fixed primary Q1 endpoint",
+    "raw_families": 16,
+    "native_requests": 195,
+    "conditions_per_request": 2,
+    "old_comparator": "same source/request prefix collected by common S1",
+    "branch_steps": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "horizon": 2,
+    "next_finite_stages": "four branch preparations, shared native controls, canonical FP32 alias-prefix Teacher score",
+    "no_fit_launched": false,
+    "scope": "TRAIN reuse, same original lexical K and native masks; not new confirmation or autonomous Host. Equal-size matching and fit decisions remain after DEV assessment.",
+    "collection_run": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-collection-v1/run.json",
+    "closed_collection_comparison": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-vs-s1-closed-collection-comparison-v2.json",
+    "closed_conditions": 390,
+    "model_calls": 1709,
+    "actual_input_tokens": 10668681,
+    "Host_calls": 0,
+    "comparison_caution": "Same request/K/source visibility but runtime telemetry differs in model inputs. Exact full packet equality0 includes run-specific snapshot IDs; ordered literal Source texts equal139/390. No source/task superiority claim.",
+    "runtime_field_probe": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-runtime-fields-probe-v1/protocol.json",
+      "summary": "/data/milai-experiments/20261112-reader-utility/ownstate-runtime-fields-probe-v1/summary.json",
+      "eligible_pairs": 32,
+      "new_inference_rows": 128,
+      "runtime_field_choice_changes_each_model": 0,
+      "checkpoint_choice_changes_on_old_and_new_inputs": 7,
+      "max_abs_logit_change": {
+        "s1": 0.8736692667007446,
+        "q1": 0.5548999309539795
+      },
+      "scope": "Fixed firstnativequestion/condition postsearch32TRAINpairs, rawactualruntimefields. No normalization/removal for inference, no training, no task conclusion. Not general invariance."
+    },
+    "score_run": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-scores-fp32-cache-v1/run.json",
+    "opportunity_states": 1303,
+    "packets": 4948,
+    "known_scores": 2566,
+    "unknown_scores": 2382,
+    "known_reference_sequences": 3595,
+    "scorer_actual_input_tokens": 2002319,
+    "active_weak_states": 674,
+    "matched_data": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-followup-protocol-v2.json",
+      "data": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-v2/run.json",
+      "capacity": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-v2/capacity-check-v1/run.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-owner-v2.json",
+      "status": "CLOSED_NOT_FITTED",
+      "main_each": 657,
+      "old_available": 672,
+      "own_available": 674,
+      "sources_each": 16,
+      "groups_each": 16,
+      "shared_replay": 4056,
+      "excluded_replay_overlap": 40,
+      "updates_each": 83,
+      "primary_exposures_each": 1971,
+      "replay_exposures_each": 657,
+      "planned_canonical_tokens": {
+        "old": 16183785,
+        "own": 16254459
+      },
+      "retained_first_failure": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-owner-v1.json",
+      "failed_first_child_cpu_seconds": 27.294794,
+      "scope": "Same nativeevent/condition quotas, minactive counts, source-balanced loss. Fulloriginalinputs/targets retained; no refill after shared replay exclusion. PriorQ1initializeralready saw originalreplay; notunseen-source/generalizationclaim."
+    },
+    "fit_queue": {
+      "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-two-chains-owner-v2.json",
+      "status": "BOTH_FITS_DEV_FIRSTS_NATIVE_SOURCE_AND_AUTHOR24_CLOSED",
+      "HTTP_owner": "/data/milai-experiments/20261112-reader-utility/ownstate-task-firsts-and-review-owner-v1.json",
+      "HTTP_order": "Wait own models/DEV and E2 HTTP closure; primary own-minus-matched-old, secondary unchanged original Q1 firsts. Same96 planned denominators, fixed/selected points only.",
+      "HTTP_coordinator_revision": 2,
+      "HTTP_pid": 1900301,
+      "idle_handoff": "/data/milai-experiments/20261112-reader-utility/ownstate-HTTP-idle-argument-fix-v1.json"
+    },
+    "task_primary_summary": "/data/milai-experiments/20261112-reader-utility/formal-ownstate-task-dev96-primary-summary-v1/summary.json",
+    "task_initial_secondary_summary": "/data/milai-experiments/20261112-reader-utility/formal-ownstate-task-dev96-initial_secondary-summary-v1/summary.json",
+    "author_agreement": "/data/milai-experiments/20261112-reader-utility/formal-ownstate-author-teacher-agreement-v1.json",
+    "same_Q1_rejudgment_sensitivity": "/data/milai-experiments/20261112-reader-utility/formal-Q1-rejudgment-context-sensitivity-v1.json",
+    "task_figure": "/data/milai-experiments/20261112-reader-utility/formal-ownstate-task-results-figure-v1/manifest.json"
+  },
+  "phase22_UQ_storage": {
+    "partial_first": "/data/milai-experiments/20261112-reader-utility/phase22-closed-UQ-storage-v1.json",
+    "remaining_closed": "/data/milai-experiments/20261112-reader-utility/phase22-closed-UQ-storage-v2.json",
+    "total_freed_bytes": 6820663296,
+    "scope": "Final checkpoint weight aliases directly byte-compared and hardlinked; closed recovery zero extents deallocated, logical contents retained. First fallocate changed mtime and triggered overstrict assertion after size/inode preserved. First original mtime was not saved; later operations explicitly preserve metadata. Failure retained; no repeated operation on first recovery."
+  },
+  "phase23_historical_recovery_archives": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/manifest.json",
+    "restore_entry": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/restore.py",
+    "pid": 3932751,
+    "session": 59678,
+    "planned_recoveries": 23,
+    "status": "COMPLETED",
+    "scope": "Closed v2 optimizer/FP32/RNG recovery directories archived losslessly after reconstructed-byte comparison. Inference models/firsts/source banks unchanged; restore original recovery before any future resume. Frozen helper/empty base retained; no SHA.",
+    "restore_validation": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/restore-validation-v1.json",
+    "restore_validation_status_at_snapshot": "PASSED_REAL_S1_36K_RECOVERY_METADATA_AND_PYTORCH_DESERIALIZATION",
+    "closed_recoveries": 23,
+    "freed_bytes": 11341807616
+  },
+  "phase24_validation": {
+    "continuous_answer_format_and_cost_tests_passed": 15,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "ownstate_crossed_real_GPU_probe_closed": true,
+    "no_sha_validation": true
+  },
+  "phase25_validation": {
+    "matched_data_and_math_tests_passed": 24,
+    "GPU_regressions_skipped_unchanged_trainer": 2,
+    "weight_delta_tests_passed": 3,
+    "actual_643835524_byte_storage_probe_roundtrip": true,
+    "actual_first_U_checkpoint_restore_compared_all_original_bytes": true,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "no_sha_validation": true
+  },
+  "phase25_weight_storage": {
+    "current_UQ": "/data/milai-experiments/20261112-reader-utility/phase25-closed-intermediate-weight-deltas-v1/manifest.json",
+    "current_UQ_status": "COMPLETED",
+    "archived_current_intermediate_weights": 12,
+    "current_weight_payload_allocated_bytes_saved": 6488535040,
+    "historical": "/data/milai-experiments/20261112-reader-utility/phase25-historical-intermediate-weight-deltas-v1/manifest.json",
+    "historical_pid": 107977,
+    "historical_session": 90717,
+    "planned_historical_weights": 59,
+    "status": "BOTH_CURRENT_AND_HISTORICAL_WEIGHT_ARCHIVES_COMPLETED",
+    "restore": "python3 <appropriate-archive-directory>/restore.py <run-directory-name> <update-directory-name>",
+    "scope": "Each rawintermediateweight removedonlyafter completebyteverification anddurable sidecar. Allfixedterminalweights remainraw andanchored byretainedhardlinks. Keepbases/deltas/sidecars/frozenhelper. Noquantization/SHA; restorebeforefutureintermediateaccess.",
+    "historical_closed_weights": 59,
+    "historical_weight_payload_allocated_bytes_saved": 32215441408
+  },
+  "phase26_validation": {
+    "continuous_source_and_outcome_tests_passed": 13,
+    "ruff_pass": true,
+    "actual_first4_closed_context_and_source_prefix_bindings_verified": true,
+    "native_failure_bound_without_semantic_grade": true,
+    "no_sha_validation": true
+  },
+  "phase26_new_fit_storage": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase27-closed-new-fit-storage-v2/manifest.json",
+    "pid": 876752,
+    "session": null,
+    "planned_closed_fits": 10,
+    "status": "WAITING_FOR_CLOSED_FITS_AND_THEIR_DEV",
+    "scope": "Finite6E2+4own fits. Requireoriginalnativechildexit0 inownerreceipt andsamearmfixed/selectedDEVclosure beforearchivinganyweight. Finalweights stayraw; recoveryonlyzeroextentdeallocation withmtimepreserved. PreventsremovingnominatedcheckpointbeforeactualDEV.",
+    "closed_fits": [
+      "formal-e2-base3k3pass-seed0-v1",
+      "formal-e2-base3k3pass-q-seed0-v1"
+    ],
+    "current_status": "COMPLETED_ALL10_FITS"
+  },
+  "coordinator_continuation": {
+    "audit": "/data/milai-experiments/20261112-reader-utility/coordinator-exit-and-continuation-audit-v1.json",
+    "cause": "Oldcoordinatorprocessesverifiedabsent; exitcauseunrecorded. Expandedtrainingchild148218remainedliveandwasadopted, neverrefitted.",
+    "new_coordinators_detached": true,
+    "scope": "Completedstages/firsts retained. Adoptednonchildfit exitcode/wholechildCPU unavailable; no inventedexit0, nativecompute/ledger remainsauthoritative."
+  },
+  "phase27_natural_snapshot_storage": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase26-natural-closed-snapshot-archives-v1/manifest.json",
+    "pid": 1818134,
+    "closed_snapshots_at_snapshot": 578,
+    "freed_payload_allocated_bytes_at_snapshot": 16800792576,
+    "status": "COMPLETED",
+    "restore": "python3 <archive-dir>/restore.py <run-output-name> <capture-UUID> <snapshot-dir-name>",
+    "scope": "Onlyclosedbefore/final-input/afterdatabase snapshotdirs byteverifiedthenarchived. Host/closed/pre-final-store JSON, actualresults/traces andliveprimarybanks stayraw. Continuefinite3JSONjobs/400positions. Restoreonlybeforecounterfactualsnapshotuse; source-reviewbinderneedsnoDBrestore.",
+    "continuation": "/data/milai-experiments/20261112-reader-utility/natural-snapshot-archive-continuation-v1.json",
+    "closed_snapshots": 1157,
+    "freed_payload_allocated_bytes": 31636615168
+  },
+  "phase27_validation": {
+    "collector_terminal_group_summary_tests_passed": 12,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "actual_tail32_collection_and95endpoint_binding_closed": true,
+    "no_sha_validation": true
+  },
+  "phase28_validation": {
+    "source_screen_and_source_binding_tests_passed": 11,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "actual117screen_chunks_closed": true,
+    "actual200baseline_source_bindings_closed": true,
+    "no_sha_validation": true
+  },
+  "phase29_validation": {
+    "source_grade_related_tests_passed": 24,
+    "view_work_tests_passed": 2,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "baseline_author40_recorded": true,
+    "baseline_View_work_closed": true,
+    "all_new_queues_detached": true,
+    "no_sha_validation": true
+  },
+  "phase29_queues": {
+    "baseline_grade": "/data/milai-experiments/20261112-reader-utility/natural-baseline-source-grade-owner-v1.json",
+    "natural": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v6.json",
+    "E2_HTTP": "/data/milai-experiments/20261112-reader-utility/E2-task-firsts-and-review-owner-v2.json",
+    "own_HTTP": "/data/milai-experiments/20261112-reader-utility/ownstate-task-firsts-and-review-owner-v1.json",
+    "natural_final_review": "/data/milai-experiments/20261112-reader-utility/natural-final-review-and-summary-owner-v1.json",
+    "HTTP_order": "baseline source grade -> natural S1/Q1 firsts -> E2 firsts/review -> own-state firsts/review -> natural learned finalsource grade. Native GPU collections parallel only when hardware available."
+  },
+  "results_report": {
+    "path": "docs/MILAI_READER_UTILITY_RESULTS_20261113.md",
+    "status": "FINAL_SCOPE_COMPLETE_WITH_SCIENTIFIC_AND_COST_LIMITS",
+    "confirmation_figure_entry": {
+      "script": "/data/milai-experiments/20261112-reader-utility/plot_confirmation_first_results_v2.py",
+      "status": "EXECUTED_BOTH_PNGS_VISUALLY_CHECKED",
+      "output": "/data/milai-experiments/20261112-reader-utility/confirmation-first-results-figure-v2",
+      "visual_check": "/data/milai-experiments/20261112-reader-utility/confirmation-first-results-figure-v2/visual-check-v1.json",
+      "v1_retained": true,
+      "v2_CSV_literal_equal_to_v1": true,
+      "scope": "All256firsts only; source/native/unknownrange separate. v2tickdensity/captionprecision change, no datachange."
+    }
+  },
+  "phase30_execution": {
+    "E2_repeat_U": {
+      "run": "/data/milai-experiments/20261112-reader-utility/formal-e2-repeat3k9pass-seed0-v1/run.json",
+      "status": "COMPLETED",
+      "optimizer_updates": 1259,
+      "main_exposures": 30204,
+      "active_main_exposures": 30195,
+      "replay_exposures": 10068,
+      "train_input_tokens": 228957845,
+      "native_cpu_seconds": 21500.899494678,
+      "native_preledger_wall_seconds": 17743.69466293603,
+      "ledger_recorded": true
+    },
+    "own_U": {
+      "run": "/data/milai-experiments/20261112-reader-utility/formal-ownstate-own-seed0-v1/run.json",
+      "status": "COMPLETED",
+      "optimizer_updates": 83,
+      "main_exposures": 1971,
+      "active_main_exposures": 1971,
+      "replay_exposures": 657,
+      "train_input_tokens": 16254459,
+      "native_cpu_seconds": 2911.062844831,
+      "native_preledger_wall_seconds": 2495.979326759465,
+      "ledger_recorded": true
+    },
+    "scope": "Native counters only. Whole-child CPU overlaps native compute; no double billing. Q and DEV/task evaluation still required."
+  },
+  "phase30_validation": {
+    "related_tests_passed": 43,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "actual_DEV_compatibility": "/data/milai-experiments/20261112-reader-utility/explicit-test-role-dev-compatibility-v1/grouped/manifest.json",
+    "compatibility_sources": 96,
+    "compatibility_first_answers_bound": 192,
+    "compatibility_new_model_calls": 0,
+    "TEST_Source_exported": false,
+    "TEST_model_calls": 0,
+    "scope": "Explicit test collector/readout/compiler/group/reviewer/summary roles; no training-fit exports or relabeling test asdev. Complete same-task panels retain their full native denominator without a fake collection-failure manifest."
+  },
+  "phase30_recovery_storage": {
+    "plan": "/data/milai-experiments/20261112-reader-utility/phase30-closed-current-recovery-plan-v1.json",
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase30-closed-current-recovery-archives-v1/manifest.json",
+    "pid": 2009483,
+    "planned": 10,
+    "status": "COMPLETED",
+    "restore": "python3 <archive-dir>/restore.py <run-name>",
+    "scope": "Only10 enumeratedclosednativefit optimizer/FP32/RNG recovery dirs after previous storage operations; inference checkpoints unchanged. Exact reconstructed byte comparison before original removal; no fingerprint. Restore before optimizer resume; retain emptybase/helper/archive/manifest. Current fits not touched.",
+    "completed_before_handoff": 2,
+    "idle_capacity_handoff": "/data/milai-experiments/20261112-reader-utility/phase30-recovery-archive-idle-capacity-handoff-v1.json",
+    "completed": 10,
+    "freed_bytes": 6110969856
+  },
+  "same_teacher_mode_probe": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/same-teacher-mode-probe-plan-v1/protocol.json",
+    "run": "/data/milai-experiments/20261112-reader-utility/same-teacher-mode-probe-v1/run.json",
+    "interpretation": "/data/milai-experiments/20261112-reader-utility/same-teacher-mode-probe-v1/interpretation-v1.json",
+    "status": "CLOSED_ALL9_GENERATIONS_CENSORED",
+    "selected_packets": 9,
+    "sources": 8,
+    "score_seconds": 3.833316828124225,
+    "generation_seconds": 91.75261839479208,
+    "truncated_at256": 9,
+    "native_cpu_seconds": 127.468622766,
+    "native_wall_seconds": 113.31681035645306,
+    "ledger_recorded": true,
+    "scope": "Same4BFP32/exactpublicprefix; annotations excluded fromgeneration, evidencecan naturallycontainanswertext. No equivalentcompletedanswers orwholepipelineefficiency claim. Nativecomputealreadycharged once."
+  },
+  "phase31_final_four_recovery_storage": {
+    "plan": "/data/milai-experiments/20261112-reader-utility/phase31-final-four-recovery-plan-v1.json",
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase31-closed-final-four-recovery-archives-v1/manifest.json",
+    "pid": 2173169,
+    "planned": 4,
+    "status": "COMPLETED",
+    "restore": "python3 <archive-dir>/restore.py <run-name>",
+    "scope": "Only last4closed E2-repeat/own-state optimizerrecoveries after theirnativefit/DEV and priorstorage closure. Samebyteverifiedarchive, inferenceweightsraw. Trigger: ordinaryspace15.9534GiB belowunchangednatural16GiB. No activefits remaining.",
+    "completed": 4,
+    "freed_bytes": 2418032640
+  },
+  "formal_E2_ownstate_author_review": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/formal-E2-ownstate-author12-protocol-v1.json",
+    "status": "ALL60_CLOSED",
+    "sources": 12,
+    "new_bindings": 60,
+    "existing_Q1_bindings_reused": 12,
+    "independent": false,
+    "blinded": false,
+    "artifact": "/data/milai-experiments/20261112-reader-utility/formal-E2-ownstate-author12-source-review-v1.json",
+    "E2_agreement": "/data/milai-experiments/20261112-reader-utility/formal-E2-author-teacher-agreement-v1.json"
+  },
+  "phase31_validation": {
+    "full600_packet_state_action_joins_verified": true,
+    "prior261_signal_statistics_reproduced_exactly": true,
+    "actual178_full_system_prompts_literal_present": true,
+    "same_teacher_probe_GPU_executed_and_ledger_verified": true,
+    "all14_native_fit_cost_entries_matched": true,
+    "fit_cost_PNG_visually_checked": true,
+    "no_sha_validation": true
+  },
+  "phase32_validation": {
+    "S1_all100_driver_results_matched": true,
+    "S1_model_calls": 616,
+    "S1_model_choice_complete_menu_matches": 616,
+    "S1_model_input_truncations": 0,
+    "S1_declared_format_failures_among90completed": 90,
+    "actual_S1_author20_closed": true,
+    "same_current_origins_and_arrival_prefixes_verified_for_completed_author_samples": true,
+    "coordinator_idle_before_Q1_handoff": true,
+    "all_downstream_owners_revalidated_live": true,
+    "no_sha_validation": true
+  },
+  "phase33_E2_results": {
+    "complete_supported_counts": {
+      "base3k3pass": 37,
+      "expanded10k3pass": 36,
+      "repeat3k9pass": 35
+    },
+    "unknown_counts": {
+      "base3k3pass": 21,
+      "expanded10k3pass": 32,
+      "repeat3k9pass": 28
+    },
+    "primary_difference": -0.010416666666666666,
+    "primary_source_bootstrap95": [
+      -0.11458333333333333,
+      0.09375
+    ],
+    "primary_unknown_bounds": [
+      -0.22916666666666666,
+      0.3229166666666667
+    ],
+    "secondary_difference": 0.010416666666666666,
+    "secondary_source_bootstrap95": [
+      -0.09375,
+      0.125
+    ],
+    "secondary_unknown_bounds": [
+      -0.28125,
+      0.34375
+    ],
+    "native_F1_full96": {
+      "base3k3pass": 0.2497053640074508,
+      "expanded10k3pass": 0.3315592560823119,
+      "repeat3k9pass": 0.2513091768129132
+    },
+    "native_primary_difference": 0.08185389207486113,
+    "native_primary_bootstrap95": [
+      0.012519838395244499,
+      0.1532176994249887
+    ],
+    "native_secondary_difference": 0.08025007926939877,
+    "native_secondary_bootstrap95": [
+      0.016170250482511635,
+      0.14830649731025355
+    ],
+    "review_groups": 192,
+    "unresolved_groups": 1,
+    "returned_candidate_records": 285,
+    "masked_candidates": 74,
+    "author_complete_counts": {
+      "base3k3pass": 4,
+      "expanded10k3pass": 5,
+      "repeat3k9pass": 5
+    },
+    "author_binary_disagreements": 6,
+    "scope": "Main source-success hasno establishedadvantage despitehigherauxiliaryF1. SharedHost/reviewermodel, singletrainingseed, firstHostcalls, data/domain/conditionandtokenworkdifferences retained. Base95actualendpoints+1collectionfailurealwaysfull96."
+  },
+  "phase33_validation": {
+    "reserved_exporter_and_qasper_tests_passed": 14,
+    "source_grade_binding_outcome_tests_passed": 19,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "all357_projection_grounding_content_invariants_pass": true,
+    "all178_baseline_default_request_wires_identical": true,
+    "Q1_full_menu_choice_matches": 708,
+    "Q1_input_truncations": 0,
+    "all80_natural_author_bindings_closed": true,
+    "E2_author36_closed_and_exact_firsts_compared": true,
+    "E2_PNG_visually_checked": true,
+    "no_sha_validation": true
+  },
+  "phase34_ownstate_results": {
+    "complete_supported": {
+      "q1_initial_rejudged": 37,
+      "matched_old": 36,
+      "own": 33
+    },
+    "unknown": {
+      "q1_initial": 22,
+      "matched_old": 29,
+      "own": 21
+    },
+    "reader_failures": {
+      "q1_initial": 1,
+      "matched_old": 1,
+      "own": 3
+    },
+    "own_minus_old": -0.03125,
+    "source_bootstrap95": [
+      -0.13541666666666666,
+      0.07291666666666667
+    ],
+    "unknown_bounds": [
+      -0.3333333333333333,
+      0.1875
+    ],
+    "native_F1": {
+      "matched_old": 0.2835603849387108,
+      "own": 0.24137340262244003
+    },
+    "native_difference": -0.0421869823162707,
+    "native_bootstrap95": [
+      -0.09621754640050462,
+      0.010384404262875742
+    ],
+    "author_complete_each": 5,
+    "author_bindings": 24,
+    "author_binary_disagreements": 4,
+    "scope": "Noownstateadvantage established. ReusedQ1firstanswers unchanged; differentreviewgroup/rater realization shiftedsourcecount32to37, notmodelprogress orindependentreplication."
+  },
+  "confirmation_execution": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/new-confirmation-protocol-v1.json",
+    "methods": [
+      "fixed_context",
+      "expanded10k_final",
+      "rules",
+      "common_s1"
+    ],
+    "primary": [
+      "expanded10k_final",
+      "fixed_context"
+    ],
+    "source_count": 256,
+    "candidate_selection": "Prespecifiedfocal10k+Qroute, notDEVwinner. Strongfixedcontext practicalE4primary, priorE1/E2/ownprimariesunchanged. No retuning/seedselection afterfreeze.",
+    "collection_owner": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-collections-owner-v1.json",
+    "collection_status": "COMPLETED_FROZEN_TEST_TRAJECTORIES_NO_HOST_FIRSTS",
+    "HTTP_owner": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-HTTP-owner-v1.json",
+    "HTTP_pid": 3538727,
+    "HTTP_status": "COMPLETED",
+    "repeat_sources": 32,
+    "repeat_positions": 128,
+    "author_sources": 32,
+    "author_bindings": 128,
+    "repeat_tool": "tools/prepare_fixed_source_repeat.py",
+    "repeat_tool_commit": "6d1ef075",
+    "scope": "Actualfullmenus andsingleterminalpacket per256source/method. Firsts andfixedsecondReadercalls separate; fullwireunchanged,no controllerrepeat,no --reuse-readouts. Source/cost/author/stabilityclosure stillrequired.",
+    "HTTP_stage_at_snapshot": "ALL_DECLARED_FIRST_AND_SECOND_STAGES_CLOSED",
+    "fixed_firsts_closed_at_snapshot": 256,
+    "fixed_firsts_failed_at_snapshot": 1,
+    "stability_tool": "tools/summarize_fixed_source_repeats.py",
+    "stability_tool_commit": "e5508afd",
+    "stability_owner": "/data/milai-experiments/20261112-reader-utility/new-confirmation-stability-owner-v1.json",
+    "stability_pid": 3763322,
+    "stability_status": "COMPLETED_CORRECTED_FULL_RESPONSE_SUMMARY",
+    "author_protocol": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author32-protocol-v1.json",
+    "author_closed_at_snapshot": 128,
+    "author_review": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author32-source-review-v1.json",
+    "fixed_author_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-fixed_context-author32-closure-v1.json",
+    "fixed_context_closed": {
+      "firsts": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-fixed_context-firsts-v1/run.json",
+      "bound": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-fixed_context-bound-v1/manifest.json",
+      "native": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-fixed_context-native-v1/summary.json",
+      "closed": 256,
+      "completed": 255,
+      "failed": 1,
+      "failure_reason": "length",
+      "failed_original_position": 116,
+      "known_generation_tokens": 865459,
+      "unknown_usage": 0,
+      "native_F1_missing_zero": 0.34210006976819124,
+      "native_cpu_seconds": 20.333639253,
+      "native_firsts_wall_seconds": 3075.1250420380384,
+      "source_review_status": "WAITING_FOR_ALL4_FIRSTS",
+      "author_answer_counts": {
+        "complete": 10,
+        "incomplete": 12,
+        "unknown": 8,
+        "incorrect": 1,
+        "execution_failure": 1
+      },
+      "author_material_counts": {
+        "sufficient": 11,
+        "insufficient": 15,
+        "unknown": 6
+      },
+      "scope": "Author32preselectedsourcefirsts only; nonindependent/unblinded, somecompleteness/scope judgments interpretive. No primarylabel orfirstreplacement. Full4methodcomparison stillpending."
+    },
+    "expanded10k_snapshot": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_firsts": 256,
+      "completed_firsts": 246,
+      "failed_firsts": 10,
+      "failure_reason_counts": {
+        "length": 10
+      },
+      "closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-expanded10k_final-closure-v1.json",
+      "native_F1_missing_zero": 0.31036991120373775,
+      "known_generation_tokens": 888881,
+      "unknown_usage": 0,
+      "native_firsts_compute": {
+        "cpu_seconds": 19.860242597,
+        "wall_seconds": 3652.1487958813086
+      },
+      "author_answer_counts": {
+        "complete": 8,
+        "incomplete": 13,
+        "unknown": 8,
+        "incorrect": 1,
+        "execution_failure": 2
+      },
+      "author_material_counts": {
+        "sufficient": 8,
+        "insufficient": 18,
+        "unknown": 6
+      }
+    },
+    "expanded_author_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-expanded10k_final-author32-closure-v1.json",
+    "rules_snapshot": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_firsts": 256,
+      "completed_firsts": 244,
+      "failed_firsts": 12,
+      "failure_reason_counts": {
+        "length": 12
+      },
+      "closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-rules-closure-v1.json",
+      "native_F1_missing_zero": 0.24333534239645516,
+      "known_generation_tokens": 883049,
+      "unknown_usage": 0,
+      "native_firsts_compute": {
+        "cpu_seconds": 19.169952648,
+        "wall_seconds": 4113.240784252994
+      },
+      "author_answer_counts": {
+        "complete": 7,
+        "incomplete": 14,
+        "unknown": 7,
+        "incorrect": 2,
+        "execution_failure": 2
+      },
+      "author_material_counts": {
+        "sufficient": 7,
+        "insufficient": 19,
+        "unknown": 6
+      }
+    },
+    "rules_author_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-rules-author32-closure-v1.json",
+    "common_s1_snapshot": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_firsts": 256,
+      "completed_firsts": 238,
+      "failed_firsts": 18,
+      "failure_reason_counts": {
+        "length": 18
+      },
+      "closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-common_s1-closure-v1.json",
+      "native_F1_missing_zero": 0.3005590870465532,
+      "known_generation_tokens": 864294,
+      "unknown_usage": 0,
+      "native_firsts_compute": {
+        "cpu_seconds": 19.627097542999998,
+        "wall_seconds": 3990.5224334504455
+      },
+      "author_answer_counts": {
+        "complete": 8,
+        "incomplete": 15,
+        "unknown": 4,
+        "incorrect": 1,
+        "execution_failure": 4
+      },
+      "author_material_counts": {
+        "sufficient": 10,
+        "insufficient": 17,
+        "unknown": 5
+      }
+    },
+    "author_all_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-all128-author-closure-v1.json",
+    "all_firsts_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-firsts-all1024-closure-v1.json",
+    "all_firsts": {
+      "positions": 1024,
+      "completed": 983,
+      "failed": 41,
+      "all_completed_declared_answer_fields_present": 983,
+      "known_and_charged_generation_tokens": 3501683,
+      "unknown_usage": 0,
+      "new_calls_each_method": 256,
+      "crossmethod_response_reuse": false
+    },
+    "source_review_snapshot": {
+      "status": "COMPLETED_WITH_UNRESOLVED",
+      "planned_groups": 512,
+      "closed_groups": 512,
+      "unresolved_groups": 4,
+      "returned_records": 1016,
+      "masked_candidates": 177,
+      "known_generation_tokens": 2699023,
+      "unknown_usage": 0,
+      "native_compute_readback_verified": true,
+      "artifact": "/data/milai-experiments/20261112-reader-utility/confirmation-first-source-evidence-v1/summary.json"
+    },
+    "author_agreement": {
+      "owner": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author-agreement-owner-v1.json",
+      "pid": 611414,
+      "status": "COMPLETED_AUTHOR128_ORIGINAL_SOURCE_AGREEMENT",
+      "script": "/data/milai-experiments/20261112-reader-utility/compare_confirmation_author_teacher_v1.py",
+      "all128_author_to_original_bindings_validated": true,
+      "scope": "Originalfirstgrades only, failures andmasks retained, nonindependent/notgold. No labelreplacement ornewcalls.",
+      "output": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author-teacher-agreement-v1.json",
+      "binary_disagreements": 18,
+      "exact_status_agreements": 87,
+      "masked_binary_disagreements": 1,
+      "semantic_scope_binary_disagreements": 17
+    },
+    "closed_first_source_results": {
+      "complete_supported": {
+        "fixed_context": 116,
+        "expanded10k_final": 92,
+        "rules": 72,
+        "common_s1": 96
+      },
+      "unknown": {
+        "fixed_context": 53,
+        "expanded10k_final": 60,
+        "rules": 50,
+        "common_s1": 51
+      },
+      "material_sufficient": {
+        "fixed_context": 124,
+        "expanded10k_final": 102,
+        "rules": 85,
+        "common_s1": 100
+      },
+      "primary": {
+        "difference": -0.09375,
+        "bootstrap95": [
+          -0.15625,
+          -0.03125
+        ],
+        "unknown_identification": [
+          -0.30078125,
+          0.140625
+        ],
+        "both_complete": 69,
+        "left_only": 23,
+        "right_only": 47,
+        "neither": 117,
+        "native_difference": -0.03173015856445353,
+        "native_bootstrap95": [
+          -0.07517771278130679,
+          0.011077836632017555
+        ]
+      },
+      "common_s1_secondary": {
+        "difference": -0.015625,
+        "bootstrap95": [
+          -0.07421875,
+          0.04296875
+        ],
+        "unknown_identification": [
+          -0.21484375,
+          0.21875
+        ],
+        "native_difference": 0.009810824157184853,
+        "native_bootstrap95": [
+          -0.034360565259378376,
+          0.05433431144559364
+        ]
+      },
+      "rules_secondary": {
+        "difference": 0.078125,
+        "bootstrap95": [
+          0.01171875,
+          0.14453125
+        ],
+        "unknown_identification": [
+          -0.1171875,
+          0.3125
+        ],
+        "native_difference": 0.06703456880728266,
+        "native_bootstrap95": [
+          0.02146766059937363,
+          0.11217450346746961
+        ]
+      },
+      "scope": "Validatedlabelprimarylowerthanstrongfixed; unknownbounds crosszero andreviewerbias/seedvariance remain. Positivesecondaryvsrules doesnotreplaceprimary. No winnerselection orProductpromotion."
+    },
+    "repeat_snapshot": {
+      "fixed_context": {
+        "status": "COMPLETED",
+        "closed": 32,
+        "failed": 0,
+        "new_calls": 32,
+        "reused_readouts": 0
+      },
+      "expanded10k_final": {
+        "status": "COMPLETED_WITH_FAILURES",
+        "closed": 32,
+        "failed": 2,
+        "new_calls": 32,
+        "reused_readouts": 0
+      },
+      "rules": {
+        "status": "COMPLETED",
+        "closed": 32,
+        "failed": 0,
+        "new_calls": 32,
+        "reused_readouts": 0
+      },
+      "common_s1": {
+        "status": "COMPLETED_WITH_FAILURES",
+        "closed": 32,
+        "failed": 2,
+        "new_calls": 32,
+        "reused_readouts": 0
+      }
+    },
+    "repeat_source_snapshot": {
+      "status": "COMPLETED",
+      "planned_groups": 64,
+      "closed_groups": 64,
+      "unresolved_groups": 0,
+      "masked_candidates": 26
+    },
+    "HTTP_owner_terminal_status": "COMPLETED_CONFIRMATION_FIRSTS_AND_SECOND_READOUTS_AUTHOR_COST_PENDING",
+    "stability_final_output": "/data/milai-experiments/20261112-reader-utility/new-confirmation-repeat32-stability-v2/summary.json",
+    "stability_superseded_output": "/data/milai-experiments/20261112-reader-utility/new-confirmation-repeat32-stability-v1/summary.json",
+    "stability_correction": "/data/milai-experiments/20261112-reader-utility/new-confirmation-repeat32-stability-correction-v1.json",
+    "all_stages_closed": true
+  },
+  "phase34_validation": {
+    "fixed_repeat_related_tests_passed": 28,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "real_DEV32_repeat_inputs_preserved": true,
+    "real_DEV_failed_firsts_preserved": 2,
+    "new_DEV_repeat_Host_calls": 0,
+    "actual_TEST_export_sources": 256,
+    "actual_TEST_roles_preserved": true,
+    "official_evaluator_literal_bytes_equal": true,
+    "confirmation_full_menu_logits_verified": 2431,
+    "confirmation_input_truncations": 0,
+    "confirmation_nonforced_executions_match_predictions": 2415,
+    "ownstate_author24_closed": true,
+    "ownstate_PNG_visually_checked": true,
+    "no_sha_validation": true
+  },
+  "evidence_layer_inventory": "/data/milai-experiments/20261112-reader-utility/closed-DEV-evidence-layer-inventory-v1/summary.json",
+  "phase35_validation": {
+    "repeat_stability_related_tests_passed": 9,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "natural_diagnostic400_closed": true,
+    "prior216_scopes_revalidated": true,
+    "TEST_native_question_ids_unique": 256,
+    "no_sha_validation": true
+  },
+  "learning_information": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/learning-information-efficiency-v1/summary.json",
+    "expanded_production_sources": 283,
+    "known_dependency_groups": 279,
+    "opportunity_states": 22613,
+    "executed_packets": 85907,
+    "scored_packets": 43984,
+    "active_states": 11486,
+    "actual_teacher_input_tokens": 36614350,
+    "active_states_per1000_input_tokens": 0.31370214137353253,
+    "selected_Q_opportunities": 600,
+    "Q_sources": 481,
+    "readout_records": 2018,
+    "failed_readouts": 143,
+    "chat_invocations": 2004,
+    "reused_records": 14,
+    "known_delivery_states": 331,
+    "known_delivery_sources": 287,
+    "directional_delivery_states": 249,
+    "scope": "Actualclosedproduction/semantic inputs, no new calls; state/source/pair/readout/token denominators separate. Candidatebeneficialaction discoveryrate not identifiablewithout exhaustiveactionoracle; no suchclaim."
+  },
+  "DEV_type_binding_controls": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/DEV-type-order-binding-controls-v1/summary.json",
+    "status": "CLOSED_POSTHOC_DEV_ONLY",
+    "states": 992,
+    "sources": 96,
+    "reference_labelled_states": 584,
+    "reference_labelled_sources": 77,
+    "fixed_type_orders": 6,
+    "model_source_macro": {
+      "u0": 0.49802313487378425,
+      "u1": 0.3909704653211147,
+      "q0": 0.41134466183167484,
+      "q1": 0.37986966136316785
+    },
+    "scope": "All6observedtype permutations, originalmenu-first binding, plusmodeltype-preserving first/uniform controls. No modelcalls/actualrollout/TESTchanges. Conditionalnativewitnessproxy, notHostsuccess orcausal/confirmatorysuperiority."
+  },
+  "phase36_validation": {
+    "all20_canonical_score_compute_receipts_match": true,
+    "all8_label_feedback_totals_match_original600_comparison": true,
+    "Reader_counts_2018_143_2004_14_match": true,
+    "all992_prediction_rows_and_complete_action_menus_match": true,
+    "U0_U1_reference_acceptance_266_218_reproduced": true,
+    "no_new_model_or_Host_calls": true,
+    "no_sha_validation": true
+  },
+  "phase37_validation": {
+    "fixed256firsts_closed": true,
+    "fixed_native256_denominator_verified": true,
+    "fixed_author32_exact_preselected_positions_and_unique_readouts_verified": true,
+    "author_literal_support_quotes_verified_at_each_append": true,
+    "fixed_author_failure116_retained": true,
+    "no_new_unplanned_model_calls": true,
+    "no_sha_validation": true
+  },
+  "phase38_validation": {
+    "expanded256firsts_closed_native256_denominator_verified": true,
+    "all10failed_firsts_length_retained": true,
+    "expanded_author32_exact_preselected_positions_and_unique_readouts_verified": true,
+    "author64_total_no_duplicate_firsts": true,
+    "author_literal_support_quotes_verified_at_each_append": true,
+    "TEST_role_no_training_exports_preserved": true,
+    "no_sha_validation": true
+  },
+  "phase39_validation": {
+    "rules256firsts_closed_native256_denominator_verified": true,
+    "all12failed_firsts_length_retained": true,
+    "rules_author32_exact_preselected_positions_verified": true,
+    "author96_total_unique_firsts": true,
+    "author_literal_support_quotes_verified_at_each_append": true,
+    "TEST_role_no_training_exports_preserved": true,
+    "no_sha_validation": true
+  },
+  "confirmation_controller_work": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/confirmation-controller-work-v1/summary.json",
+    "per_source_csv": "/data/milai-experiments/20261112-reader-utility/confirmation-controller-work-v1/source-work.csv",
+    "sources_each": 256,
+    "actual_states_all_methods": 5481,
+    "READ_counts": {
+      "fixed_context": 1034,
+      "expanded10k_final": 855,
+      "rules": 992,
+      "common_s1": 553
+    },
+    "terminal_packet_json_token_totals": {
+      "fixed_context": 307693,
+      "expanded10k_final": 239505,
+      "rules": 160035,
+      "common_s1": 160695
+    },
+    "rules_observe_only_READs": 992,
+    "rules_parameterized_HANDOFFs": 256,
+    "expanded_parameterized_HANDOFFs": 5,
+    "expanded_S1_exact_prepared_request_matches": 24,
+    "scope": "ClosedTESTtrajectories descriptiveonly, noanswers/annotations consumed. Nestedtimers notrebilled, fixedbankcreation makescollectorlatency comparisonunfair. Tokens areoriginalserializedpacket JSONcounter, notfullHostprompt orpureevidencetext. No quality/causalclaim orretuning."
+  },
+  "phase40_validation": {
+    "all1024_terminal_bindings_match_actual_trace_HANDOFF": true,
+    "all5481_state_trace_event_counts_match": true,
+    "same_frozen256_source_order_each_method": true,
+    "TEST_roles_preserved": true,
+    "no_reader_outcomes_or_native_annotations_used_in_behavior_summary": true,
+    "no_new_model_or_Host_calls": true,
+    "no_sha_validation": true
+  },
+  "phase41_validation": {
+    "all1024_unique_firsts_same_frozen256_source_order": true,
+    "all4_native256_denominators_verified": true,
+    "all983_completed_declared_fields_present": true,
+    "all41failures_length_retained": true,
+    "author128_all4_same32_positions_unique_readouts": true,
+    "author128_actual_event_action_family_question_binding_matches": true,
+    "no_native_gold_for_author_grades": true,
+    "all_TEST_compilers_no_training_exports": true,
+    "no_sha_validation": true
+  },
+  "phase42_validation": {
+    "three_closed_TEST_comparisons_same256_endpoints": true,
+    "pair_win_loss_counts_reproduce_primary_differences": true,
+    "1016_source_records_exact_bindings_verified": true,
+    "all177_masked_records_accounted": true,
+    "source_native_compute_readback_matches": true,
+    "author128_original_grade_binding_compared": true,
+    "both_confirmation_PNGs_visually_checked": true,
+    "v1_v2_plot_CSV_bytes_identical": true,
+    "no_sha_validation": true
+  },
+  "plan_evidence_audit": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/plan-evidence-audit-v1.json",
+    "status": "FINAL_DECLARED_SCOPE_VERIFIED",
+    "requirements_checked": 10,
+    "original_members_literal_equal": 5,
+    "original_tests_current_environment": 12,
+    "tiny_saved_tensor_equality": {
+      "utility-kl": 35,
+      "pair": 35
+    },
+    "formal_raw_runs_matched": 14,
+    "student_max_recorded_input": 10476,
+    "teacher_max_recorded_reference_input": 2434,
+    "universal_16k_teacher_capacity_tested": false,
+    "tracked_changes_outside_Lab_since_initial_integration": 0,
+    "scope": "Readsavedtestlog, originalfiles, implementation/tests, actualruns andtensors. No freshGPUfit/Teacher/Hostcalls. Actualworkloadcapacity only; incompletecost/repeats/synthesis preventcompletion.",
+    "final_artifact": "/data/milai-experiments/20261112-reader-utility/plan-evidence-audit-v2.json",
+    "verified_checks": 64
+  },
+  "historical_fields_note": "Earlierdata/owner/live snapshots retainedasprovenance; thisstatus,final_closure andfinalaudit arecurrent. Rawownerterminalnames mayretain AUTHOR_COST_PENDING althoughindependentauthor/costreceipts subsequentlyclosed.",
+  "fulfilled_plan_audit": "/data/milai-experiments/20261112-reader-utility/plan-evidence-audit-v2.json",
+  "optional_or_conditional_unexecuted": [
+    "Additionaltrainingseeds: no decisiveprimarygain supportingpromotion, no seedrobustnessclaim",
+    "Larger30k/RL/LoRA/alternateTeacher/long-statearchitecture notrequiredfirst-roundextensions",
+    "Natural32independenthistories unavailable; actual10histories/3groups disclosed",
+    "Arbitrary16kTeachercapacity notmeasured; actualworkloadlong-end2434tokens disclosed"
+  ],
+  "final_closure": {
+    "first_positions": 1024,
+    "first_completed": 983,
+    "first_failed": 41,
+    "first_source_groups": 512,
+    "author_bindings": 128,
+    "second_positions": 128,
+    "second_completed": 124,
+    "second_failed": 4,
+    "second_source_groups": 64,
+    "corrected_stability_rows": 128,
+    "formal_fits": 14,
+    "formal_DEV_panels": "E1/E2/ownclosed",
+    "natural_positions": 400,
+    "cost_settlements_read_back": 5,
+    "final_core_CPU_tests": 36,
+    "fresh_GPU_tests_deselected": 2,
+    "active_package_boundary": "PASS",
+    "active_tools_boundary": "6unchangedpreexistingfindings, no globallygreenclaim",
+    "no_new_Product_default_or_service_change": true,
+    "no_sha_validation": true
+  },
+  "final_scoped_validation": "/data/milai-experiments/20261112-reader-utility/final-scoped-validation-v1.json"
+}

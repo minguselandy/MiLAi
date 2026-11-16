@@ -1,0 +1,1408 @@
+{
+  "status": "ALL_POLICY_ATTEMPTS_AND_SOURCE_TEXT_REVIEWED",
+  "source_commit": "15319207",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/lifecycle-v1",
+  "data_role": "one authored six-event development stream; no deployment/generalization claim",
+  "reviewer": "same source author/developer; all47complete answers+1missing inspected, not independent/blind or official benchmark scores",
+  "policies": {
+    "event": {
+      "total_costs": {
+        "generation_known_tokens": 212042,
+        "generation_requests": 42,
+        "embedding_known_tokens": 1241,
+        "unknown_usage_responses": 0
+      },
+      "cost_stages": {
+        "stages": {
+          "reader": {
+            "responses": 15,
+            "known_tokens": 60013,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 6,
+            "known_tokens": 46112,
+            "unknown_usage_responses": 0
+          },
+          "impact": {
+            "responses": 5,
+            "known_tokens": 21787,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 25,
+            "known_tokens": 1241,
+            "unknown_usage_responses": 0
+          },
+          "evidence_selection": {
+            "responses": 16,
+            "known_tokens": 84130,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "reuse_curves": {
+        "1": {
+          "queries_per_checkpoint": 1,
+          "query_opportunities": 4,
+          "complete_answers": 4,
+          "maintenance": {
+            "generation_known_tokens": 67899,
+            "generation_requests": 11,
+            "embedding_known_tokens": 148,
+            "unknown_usage_responses": 0
+          },
+          "reading": {
+            "generation_known_tokens": 33224,
+            "generation_requests": 8,
+            "embedding_known_tokens": 829,
+            "unknown_usage_responses": 0
+          },
+          "lifecycle": {
+            "generation_known_tokens": 101123,
+            "generation_requests": 19,
+            "embedding_known_tokens": 977,
+            "unknown_usage_responses": 0
+          },
+          "quality": null
+        },
+        "4": {
+          "queries_per_checkpoint": 4,
+          "query_opportunities": 16,
+          "complete_answers": 15,
+          "maintenance": {
+            "generation_known_tokens": 67899,
+            "generation_requests": 11,
+            "embedding_known_tokens": 148,
+            "unknown_usage_responses": 0
+          },
+          "reading": {
+            "generation_known_tokens": 144143,
+            "generation_requests": 31,
+            "embedding_known_tokens": 1093,
+            "unknown_usage_responses": 0
+          },
+          "lifecycle": {
+            "generation_known_tokens": 212042,
+            "generation_requests": 42,
+            "embedding_known_tokens": 1241,
+            "unknown_usage_responses": 0
+          },
+          "quality": null
+        }
+      },
+      "captured_sources": 6,
+      "wall_seconds": 725.0913315499201,
+      "gate_decisions": [
+        {
+          "session": 0,
+          "decision": {
+            "maintain": true,
+            "reason": "per-event allocation"
+          }
+        },
+        {
+          "session": 1,
+          "decision": {
+            "maintain": true,
+            "reason": "per-event allocation"
+          }
+        },
+        {
+          "session": 2,
+          "decision": {
+            "maintain": true,
+            "reason": "per-event allocation"
+          }
+        },
+        {
+          "session": 3,
+          "decision": {
+            "maintain": true,
+            "reason": "per-event allocation"
+          }
+        },
+        {
+          "session": 4,
+          "decision": {
+            "maintain": true,
+            "reason": "per-event allocation"
+          }
+        },
+        {
+          "session": 5,
+          "decision": {
+            "maintain": true,
+            "reason": "per-event allocation"
+          }
+        }
+      ],
+      "checkpoints": [
+        {
+          "session": 0,
+          "record_values_unchanged": true,
+          "state_units": [
+            "复制件通常由徐珂登记，借出前还须盖章。",
+            "正本仅供室内阅览，不能借出。",
+            "所有封套用蓝色。"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则，复制件通常由**徐珂**登记。\n\n关于2033年6月2日起的登记安排，已到达的材料中未提及任何规则变更或人员调整，因此该日期的登记人信息**无法从已到达的材料中确定**。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 5630,
+                "generation_requests": 2,
+                "embedding_known_tokens": 129,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 21.03744153957814
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据提供的记忆材料（2026年10月15日由公开用户报告的一般规则），关于复制件登记的安排为：复制件**通常由徐珂登记**，且在借出前须盖章。\n\n关于2033年6月4日是否有临时例外，所交付的材料中**未提及**任何针对该日期的临时例外、特殊安排或本地覆盖规定。因此，无法从现有材料中确定2033年6月4日是否存在临时例外。若该日期的规则有调整，需以未提供的修正或特别说明为准；当前材料未对该内容作确定性陈述。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6041,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 25.925959137268364
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据记忆材料中的琴谱室规则：\n1. **正本不能借出**，仅供室内阅览。\n2. 借出**复制件**除了登记（通常由徐珂登记）外，借出前还须**盖章**。\n3. **封套**统一使用**蓝色**。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 5606,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 17.925435698591173
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据当前提供的记忆材料，回答如下：\n\n1. **最初接收到的登记规则中写的登记人**：规则明确指出“复制件通常由**徐珂**登记”。\n2. **后来的明确调整**：所交付的记忆材料中仅包含该琴谱室规则的最初记录，**未记载任何后续的明确调整**。依据现有材料，无法确定是否存在后续变更或修订。\n\n（注：检索范围以当前交付内容为准，未包含其他来源或版本迭代信息，故无法补充后续调整情况。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6241,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 24.946027467027307
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "record_values_unchanged": true,
+          "state_units": [
+            "自2033年6月2日起，复制件的通常登记负责人改为梁栖，借出前须盖章。",
+            "正本仅供室内阅览，不能借出。",
+            "所有封套用蓝色。",
+            "2日之前仍由徐珂登记，借出前须盖章。"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则：\n- **现在**（即2033年6月2日之前）：复制件仍由**徐珂**登记。\n- **2033年6月2日起**：复制件的通常登记负责人改为**梁栖**。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 8195,
+                "generation_requests": 2,
+                "embedding_known_tokens": 156,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 27.3667678181082
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据已交付的记忆材料，针对您于2033年6月1日11:00提问的2033年6月4日复制件登记安排，答复如下：\n\n1. **登记安排**：\n   - 依据来源`e0`/`e1`（用户公开消息报告及语义视图），其中明确陈述：**自2033年6月2日起**，复制件的通常登记负责人改为**梁栖**。\n   - 2033年6月4日处于该生效日期之后，因此适用此常规安排，即由梁栖负责复制件的通常登记。\n   - 材料同时指出，**盖章、正本阅览（仅供室内阅览）及封套（使用蓝色）的规则均保持不变**。\n\n2. **临时例外**：\n   - 所给材料中仅记录了上述常规负责人的变更及生效时间，**未提及**任何针对2033年6月4日或该时段存在的临时例外、特别授权或本地覆盖规定。\n   - 基于当前交付的材料，**无法确定存在临时例外**。\n\n注：以上信息严格基于已提供的记忆片段。材料说明检索并非完整清单，未报告的部分不代表实际情况。本答复仅作状态与规则说明，不构成额外建议或因果推断。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 8520,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 30.85381817445159
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据提供的琴谱室规则记录（适用于查询日期2033年6月1日）：\n\n1. **正本能借出吗**：不能。记录明确指出“正本仅供室内阅览，不能借出”。\n2. **借出复制件除了登记还要做什么**：借出前还须盖章。\n3. **封套用什么颜色**：蓝色。记录规定“所有封套用蓝色”。\n\n（注：上述关于盖章要求、正本使用限制及封套颜色的规则在查询时间2033年6月1日处于有效状态，且相关说明指出该部分规则在2033年6月2日后亦保持不变。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 9591,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 34.862487748265266
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据提供的记忆记录，相关规则的报告与变更情况如下：\n\n* **最初接收到的登记规则**（来源 `s1`，于2033年6月1日09:00报告）：明确指出复制件通常由**徐珂**登记，且借出前须盖章。\n* **后来已明确的调整**（来源 `s0`，于2033年6月1日11:00报告）：对登记负责人的责任划分补充了明确的时间节点。自**2033年6月2日起**，复制件的通常登记负责人改为**梁栖**；而在6月2日之前，登记工作仍由徐珂负责。同时确认，盖章、正本和封套的相关规则均保持不变。\n\n（注：以上均为用户端报告的内容，未明确提及规则生效的具体内部审批状态，仅按记录所述的时间界限与责任归属作答。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 9990,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 33.75083522312343
+            }
+          ]
+        },
+        {
+          "session": 4,
+          "record_values_unchanged": true,
+          "state_units": [
+            "自2033年6月2日起，复制件的通常登记负责人改为梁栖，借出前须盖章。",
+            "正本仅供室内阅览，不能借出。",
+            "所有封套用蓝色。",
+            "2日之前仍由徐珂登记，借出前须盖章。",
+            "仅2033年6月4日周六的交流活动期间，复制件临时改由宋若在庭院登记",
+            "2033年6月4日"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的记忆材料（用户s0报出的琴谱室规则）：\n\n- **现在**（即查询时间2033年6月1日，处于规则所称“2日之前”）：由**徐珂**登记。\n- **自2033年6月2日起**：由**梁栖**登记。\n\n该规则以2033年6月2日为明确的时间分界线切换登记负责人。当前查询时间尚未到达该生效日，因此“现在”适用徐珂登记的安排；自6月2日起正式改为梁栖登记。材料中未显示有其他活跃例外或覆盖该时间段的安排。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 9597,
+                "generation_requests": 2,
+                "embedding_known_tokens": 411,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 23.4307522457093
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据提供的源材料记录，关于2033年6月4日复制件登记的安排及临时例外如下：\n\n- **通常安排**：自2033年6月2日起，复制件的通常登记负责人已改为梁栖（非特殊日期均按此一般安排办理）。\n- **临时例外**：2033年6月4日（周六）存在明确的临时例外。在当日交流活动期间，复制件临时改由宋若在庭院登记。该例外安排明确覆盖（overrides）了当日梁栖的通常登记职责。\n\n除该周六交流活动外，其他日期均按梁栖的一般安排办理。材料中未显示其他例外条件或不确定性说明。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 11171,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 28.576018545776606
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据记忆资料中记载的用户发言与规则安排（截至您提供的查询时间2033年6月1日）：\n\n- **正本能借出吗**：不能。资料明确记录“正本仅供室内阅览，不能借出”。该规定在6月2日规则变更前保持不变。\n- **借出复制件除了登记还要做什么**：借出前还须**盖章**。资料记载“复制件通常由徐珂登记，借出前还须盖章”（注：2033年6月2日起登记负责人虽改为梁栖，但“借出前须盖章”的要求不变）。\n- **封套用什么颜色**：蓝色。资料记录“所有封套用蓝色”，该规则同样在后续调整中保持不变。\n\n以上回答仅基于您提供的记忆资料中记录的既定安排。资料本身为用户陈述的规则文本，不作外部事实认证。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 10320,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 27.713701236993074
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据资料中记录的用户声明内容，登记规则的演变与明确调整如下：\n\n- **最初接收到的规则**：写明复制件通常由**徐珂**登记（借出前须盖章）。该声明未标注具体的生效期限。\n- **后来已明确的调整**：\n  1. **负责人常规变更**：后续声明明确，自**2033年6月2日起**，复制件的通常登记负责人改为**梁栖**（借出前须盖章）；6月2日之前仍由徐珂负责。盖章、正本仅供室内阅览及所有封套用蓝色的要求保持不变。\n  2. **特定活动临时调整**：最新补充声明指出，仅**2033年6月4日**（周六）的交流活动期间，复制件临时改由**宋若**在庭院登记，其他日期均按梁栖的一般安排执行（构成对常规安排的局部覆盖）。\n\n注：以上信息均为资料中留存的用户报告/声明记录，按版本与声明时间顺序整理。各条款的适用以各自注明的时间条件为准。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 14713,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 38.75816935766488
+            }
+          ]
+        },
+        {
+          "session": 5,
+          "record_values_unchanged": true,
+          "state_units": [
+            "自2033年6月2日起，复制件的通常登记负责人改为梁栖，借出前须盖章。",
+            "正本仅供室内阅览，不能借出。",
+            "所有封套用蓝色。",
+            "2日之前仍由徐珂登记，借出前须盖章。"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则（s0/e0）：\n- **现在**（2033年6月2日之前）：复制件由**徐珂**登记。\n- **自2033年6月2日起**：复制件的通常登记负责人改为**梁栖**。\n\n以上为依据已到达规则声明的通常登记安排。2033年6月4日虽有临时例外调整，但不改变上述以6月2日为界的一般登记责任人划分。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 9802,
+                "generation_requests": 2,
+                "embedding_known_tokens": 133,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 33.698379593901336
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": null,
+              "reader_failure": {
+                "type": "ValueError",
+                "message": "Provider output incomplete: length",
+                "finish_reason": "length",
+                "phase": "confirmed_response",
+                "response_ref": "http/dependency-selection/http/questions/prefix-5/reuse-1/retrieval-materials.json/response.json",
+                "failure_ref": "http/dependency-selection/http/questions/prefix-5/reuse-1/retrieval-materials.json/failure.json"
+              },
+              "costs": {
+                "generation_known_tokens": 10632,
+                "generation_requests": 1,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 55.452707566320896
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据提供的琴谱室规则（2033年6月1日适用）：\n- **正本**：不能借出，仅供室内阅览。\n- **借出复制件**：除登记外，借出前还须**盖章**。\n- **封套颜色**：所有封套均使用**蓝色**。\n\n（注：上述规定在2033年6月1日有效；根据规则说明，6月2日起仅复制件登记负责人变更，盖章、正本借阅限制及封套颜色规则保持不变。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 8736,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 28.85272217541933
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据提供的记录，登记规则的内容及后续调整按时间顺序梳理如下：\n\n1. **最初接收到的规则**（2033年6月1日09:00报告）：\n   * **登记负责人**：复制件通常由**徐珂**登记（借出前须盖章）。\n   * **其他规定**：正本仅供室内阅览，不能借出；所有封套用蓝色。\n\n2. **已明确的后续调整**：\n   * **常规负责人变更**（2033年6月1日11:00报告）：自2033年6月2日起，复制件的通常登记负责人改为**梁栖**；6月2日之前仍由徐珂登记。盖章、正本和封套的规则保持不变。\n   * **临时例外设定**（2033年6月1日13:00报告）：曾设定仅2033年6月4日周六交流活动期间，复制件临时改由**宋若**在庭院登记，其他日期按梁栖的一般安排办理。\n   * **临时例外撤回**（2033年6月1日14:00报告）：因周六交流活动取消，已明确撤回6月4日由宋若登记的临时例外，后续统一按梁栖的通常安排办理，其他规则不变。\n\n以上均为记录中用户直接声明的内容，未包含超出原始记录的推断或额外规则。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 9358,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 30.890692689456046
+            }
+          ]
+        }
+      ]
+    },
+    "explicit_change": {
+      "total_costs": {
+        "generation_known_tokens": 164484,
+        "generation_requests": 37,
+        "embedding_known_tokens": 763,
+        "unknown_usage_responses": 0
+      },
+      "cost_stages": {
+        "stages": {
+          "reader": {
+            "responses": 16,
+            "known_tokens": 61783,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 3,
+            "known_tokens": 23106,
+            "unknown_usage_responses": 0
+          },
+          "impact": {
+            "responses": 1,
+            "known_tokens": 4020,
+            "unknown_usage_responses": 0
+          },
+          "policy_selection": {
+            "responses": 5,
+            "known_tokens": 11947,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 15,
+            "known_tokens": 763,
+            "unknown_usage_responses": 0
+          },
+          "evidence_selection": {
+            "responses": 12,
+            "known_tokens": 63628,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "reuse_curves": {
+        "1": {
+          "queries_per_checkpoint": 1,
+          "query_opportunities": 4,
+          "complete_answers": 4,
+          "maintenance": {
+            "generation_known_tokens": 39073,
+            "generation_requests": 9,
+            "embedding_known_tokens": 40,
+            "unknown_usage_responses": 0
+          },
+          "reading": {
+            "generation_known_tokens": 27657,
+            "generation_requests": 7,
+            "embedding_known_tokens": 525,
+            "unknown_usage_responses": 0
+          },
+          "lifecycle": {
+            "generation_known_tokens": 66730,
+            "generation_requests": 16,
+            "embedding_known_tokens": 565,
+            "unknown_usage_responses": 0
+          },
+          "quality": null
+        },
+        "4": {
+          "queries_per_checkpoint": 4,
+          "query_opportunities": 16,
+          "complete_answers": 16,
+          "maintenance": {
+            "generation_known_tokens": 39073,
+            "generation_requests": 9,
+            "embedding_known_tokens": 40,
+            "unknown_usage_responses": 0
+          },
+          "reading": {
+            "generation_known_tokens": 125411,
+            "generation_requests": 28,
+            "embedding_known_tokens": 723,
+            "unknown_usage_responses": 0
+          },
+          "lifecycle": {
+            "generation_known_tokens": 164484,
+            "generation_requests": 37,
+            "embedding_known_tokens": 763,
+            "unknown_usage_responses": 0
+          },
+          "quality": null
+        }
+      },
+      "captured_sources": 6,
+      "wall_seconds": 582.9449471347034,
+      "gate_decisions": [
+        {
+          "session": 0,
+          "decision": {
+            "maintain": true,
+            "reason": "initial arrival formation"
+          }
+        },
+        {
+          "session": 1,
+          "decision": {
+            "maintain": false,
+            "reason": "The user's message is a simple conversational acknowledgment confirming understanding, requiring no semantic maintenance."
+          }
+        },
+        {
+          "session": 2,
+          "decision": {
+            "maintain": true,
+            "reason": "The input explicitly establishes a new procedural rule regarding the change of registration responsibility, which adds a durable intention to the system."
+          }
+        },
+        {
+          "session": 3,
+          "decision": {
+            "maintain": false,
+            "reason": "The arrival is merely an acknowledgment that the user has reviewed the arrangement. It introduces no new durable assertions, rules, or intentions, and therefore requires no semantic maintenance."
+          }
+        },
+        {
+          "session": 4,
+          "decision": {
+            "maintain": true,
+            "reason": "明确引入了2033年6月4日的临时登记负责人变更，对现有一般规则构成具体例外安排，属于需维护的明确意图。"
+          }
+        },
+        {
+          "session": 5,
+          "decision": {
+            "maintain": false,
+            "reason": "The arrived event explicitly withdraws the temporary exception regarding Song Ruo's registration on June 4, 2033, cancelling the scheduled exchange and reverting to Liang Qi's usual arrangement."
+          }
+        }
+      ],
+      "checkpoints": [
+        {
+          "session": 0,
+          "record_values_unchanged": true,
+          "state_units": [],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的记忆材料（用户提供的琴谱室规则声明）：\n- **现在**：复制件通常由**徐珂**登记。\n- **2033年6月2日起**：已交付的材料中未包含该日期之后的规则更新或人员变动说明，因此**无法从已到达的材料中确定**该时间段的登记人。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 2669,
+                "generation_requests": 1,
+                "embedding_known_tokens": 0,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 13.614764781668782
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据已交付的记忆材料，复制件登记的一般安排为：复制件**通常**由徐珂登记，且借出前还须盖章。\n\n关于2033年6月4日的具体登记安排以及是否存在临时例外，当前材料中未提供相关信息，无法从已交付材料中确定。该材料仅记录了琴谱室的一般性规则（声明中明确使用“通常”表述），未包含针对该特定日期或临时例外的说明或调整。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 2237,
+                "generation_requests": 1,
+                "embedding_known_tokens": 0,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 10.885299935936928
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据记忆中的琴谱室规则：\n- **正本能否借出**：不能借出，正本仅供室内阅览。\n- **借出复制件除登记外还需做什么**：借出前还须盖章。\n- **封套颜色**：所有封套用蓝色。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 1804,
+                "generation_requests": 1,
+                "embedding_known_tokens": 0,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 8.09892042633146
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据当前交付的记忆材料（仅包含一条用户来源记录），该登记规则中明确记载复制件通常由**徐珂**登记。\n\n然而，所交付的材料中**并未提及**最初接收到的规则内容，也**没有记录**任何后来已明确的调整或变更。材料仅展示了该规则的一条当前陈述。无法从所交付的素材中确定最初版本及后续调整情况。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 2175,
+                "generation_requests": 1,
+                "embedding_known_tokens": 0,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 10.529482703655958
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "record_values_unchanged": true,
+          "state_units": [
+            "自2033年6月2日起，复制件的通常登记负责人为梁栖。",
+            "2日之前，复制件的通常登记负责人为徐珂。",
+            "盖章、正本和封套的规则都不变。"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则（来源 s0 报告）：\n- **现在**（即2033年6月2日之前）：复制件由**徐珂**登记。\n- **自2033年6月2日起**：复制件由**梁栖**登记。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 7036,
+                "generation_requests": 2,
+                "embedding_known_tokens": 151,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 22.14843566250056
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据提供的资料：\n\n- **2033年6月4日的登记安排**：资料中明确记载“自2033年6月2日起，复制件的通常登记负责人改为梁栖”。6月4日处于该生效日期之后，因此按照此变更安排，当日复制件的通常登记负责人为梁栖。（该信息为用户报告的内容，报告时间为2033年6月1日，规则自6月2日起正式适用。）\n- **临时例外**：所提供的记忆材料中未提及2033年6月4日，也未列出任何针对复制件登记的临时例外或特殊豁免条款。因此，**无法从现有材料中确定是否存在临时例外**。\n\n补充说明：资料中同时指出“盖章、正本和封套的规则都不变”。以上结论仅严格基于已交付的记忆片段；检索范围不代表完整信息库，若存在未载入的当日临时调整或特殊授权，需以实际最新官方通知为准。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 7896,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 30.87938190996647
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据记忆资料中的规则记录（报告于2033年6月1日及后续相关说明）：\n\n1. **正本能借出吗**：不能借出。记录明确陈述“正本仅供室内阅览，不能借出”。\n2. **借出复制件除了登记还要做什么**：借出前还须**盖章**。记录指出“借出前还须盖章”。\n3. **封套用什么颜色**：**蓝色**。记录明确“所有封套用蓝色”。\n\n（注：上述关于正本不可外借、复制件借出需盖章以及封套颜色的规则，在资料报告中状态为已明确陈述；后续虽有登记负责人的变更日期说明，但报告明确强调“盖章、正本和封套的规则都不变”，因此在该问题所述时间点及之后均适用相同标准。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 7790,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 30.645267259329557
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据已提供的记录，相关规则与调整如下：\n\n1. **最初接收的规则**：据用户（来源s1/e2）陈述，最初规则写明复制件通常由**徐珂**登记。\n2. **后来已明确的调整**：据同一用户（来源s0/e0）后续陈述，规则已作明确调整：\n   * **负责人变更**：自**2033年6月2日起**，复制件的通常登记负责人改为**梁栖**；\n   * **过渡条件**：明确6月2日之前仍由徐珂登记；\n   * **其他规则**：声明盖章、正本和封套的规则保持不变。\n\n以上均为用户直接报告的有效规则与变更，已保留声明的主体、报告状态、明确的时间生效条件与范围。依据现有材料，无法确定超出已记载内容之外的其他调整或例外情况。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 7769,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 26.845219790935516
+            }
+          ]
+        },
+        {
+          "session": 4,
+          "record_values_unchanged": true,
+          "state_units": [
+            "自2033年6月2日起，复制件的通常登记负责人为梁栖。",
+            "2日之前，复制件的通常登记负责人为徐珂。",
+            "盖章、正本和封套的规则都不变。",
+            "2033年6月4日交流活动期间，复制件临时改由宋若在庭院登记。",
+            "2033年6月4日"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则（来源e0/e1报告），复制件登记人员安排如下：\n* **现在**（2033年6月2日之前）：由**徐珂**登记。\n* **自2033年6月2日起**：登记负责人改为**梁栖**。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 9857,
+                "generation_requests": 2,
+                "embedding_known_tokens": 347,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 33.89342683274299
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据现有记录，关于2033年6月4日复制件登记的安排如下：\n\n- **临时例外安排**：仅在2033年6月4日（周六）的交流活动期间，复制件临时改由**宋若**在庭院进行登记。\n- **常规安排**：除该临时安排外，其他日期按**梁栖**的一般安排办理。根据记录，自2033年6月2日起，复制件的通常登记负责人已改为梁栖。\n\n该临时安排明确针对6月4日当天有效，并临时覆盖梁栖的常规登记负责规则。其他日期的登记事务仍按梁栖的一般安排执行。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 8562,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 25.246137334033847
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据记忆资料中的规则显示：\n- **正本能否借出**：不能借出，正本仅供室内阅览。\n- **借出复制件除登记外还需做什么**：借出前还须**盖章**。\n- **封套颜色**：所有封套使用**蓝色**。\n\n（注：上述关于正本使用、盖章要求及封套颜色的规则在2033年6月1日查询时依然有效且未发生变更。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 15086,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 61.09432005882263
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据提供的记忆材料，回答如下：\n\n- **最初接收到的登记规则所写登记人**：**徐珂**（规则原文明确“复制件通常由徐珂登记”）。\n- **后续已明确的调整**：\n  1. **负责人变更**：自2033年6月2日起，复制件的通常登记负责人改为**梁栖**（2日之前仍按原规由徐珂登记）。\n  2. **临时安排**：仅在2033年6月4日（周六）的交流活动期间，复制件临时改由**宋若**在庭院登记；其他日期均按梁栖的一般安排办理。\n  3. **未变动事项**：盖章、正本阅览规则及封套颜色的规定维持原状，不作更改。\n\n（注：以上调整内容均为材料中明确记载的修订项，其适用性严格受限于各自声明的生效日期与特定活动条件。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 11970,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 36.38521280325949
+            }
+          ]
+        },
+        {
+          "session": 5,
+          "record_values_unchanged": true,
+          "state_units": [
+            "自2033年6月2日起，复制件的通常登记负责人为梁栖。",
+            "2日之前，复制件的通常登记负责人为徐珂。",
+            "盖章、正本和封套的规则都不变。",
+            "2033年6月4日交流活动期间，复制件临时改由宋若在庭院登记。",
+            "2033年6月4日"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则记录：\n- **现在（即2033年6月2日之前）**：复制件由**徐珂**登记。\n- **自2033年6月2日起**：复制件的通常登记负责人改为**梁栖**。\n\n上述信息直接来源于已到达的公开用户消息及语义视图（规则明确以6月2日为生效分界点）。若需确认特定日期的临时登记安排，需参考对应日期的额外通知。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 8095,
+                "generation_requests": 2,
+                "embedding_known_tokens": 27,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 20.20699460338801
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据已送达的记忆记录，关于2033年6月4日复制件登记的安排如下：\n\n* **登记安排**：按梁栖的通常安排办理。此前记录已明确，自2033年6月2日起，复制件的通常登记负责人已调整为梁栖。\n* **临时例外状态**：原计划中“2033年6月4日周六交流活动期间，复制件临时改由宋若在庭院登记”的临时例外**已被撤回**。因周六交流活动取消，该临时改派安排不再适用，6月4日不再存在临时例外，统一执行梁栖的通常登记规则。\n\n上述结论基于最新公开用户通知（来源s0）的记载，该通知已明确撤销原临时例外并恢复通常安排。当前材料中未显示6月4日保留其他临时例外或特殊登记条件；若后续有新的规则调整或变更通知，需以最新记录为准。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 9637,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 31.14401728939265
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据记忆资料中用户报道的规则声明：\n\n* **正本**：不能借出（仅供室内阅览）。\n* **复制件借出**：除登记外，借出前还须**盖章**。\n* **封套颜色**：所有封套用**蓝色**。\n\n注：您的查询时间为2033年6月1日。资料记载自2033年6月2日起复制件的通常登记负责人会有所调整，但已明确声明“盖章、正本和封套的规则都不变”。因此，上述关于正本、盖章及封套颜色的规定在查询当日适用，且内容在该日期后亦保持不变。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 12336,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 39.22550609149039
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据提供的记忆材料，回答如下：\n\n**最初接收到的登记规则写明**\n复制件通常由**徐珂**负责登记。该规则同时规定：复制件借出前须盖章；正本仅供室内阅览，不可借出；所有封套用蓝色。\n\n**后来已明确的调整**\n1. **通常负责人变更**：自2033年6月2日起，复制件的通常登记负责人由徐珂改为**梁栖**（6月2日之前仍由徐珂登记）。\n2. **临时登记安排**：曾明确在2033年6月4日（周六）交流活动期间，复制件临时改由**宋若**在庭院登记。\n3. **临时安排撤回**：随后周六交流活动取消，已明确撤回6月4日宋若在庭院登记的临时例外，恢复按梁栖的通常安排办理（其他规则不变）。\n\n上述内容均为用户报告/记录的安排。除登记负责人及6月4日临时活动相关调整外，盖章、正本阅览限制及蓝色封套等其他登记规则保持不变。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 10492,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 34.33674621209502
+            }
+          ]
+        }
+      ]
+    },
+    "query_rebuild": {
+      "total_costs": {
+        "generation_known_tokens": 145060,
+        "generation_requests": 36,
+        "embedding_known_tokens": 735,
+        "unknown_usage_responses": 0
+      },
+      "cost_stages": {
+        "stages": {
+          "reader": {
+            "responses": 16,
+            "known_tokens": 54588,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 4,
+            "known_tokens": 29487,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 20,
+            "known_tokens": 735,
+            "unknown_usage_responses": 0
+          },
+          "evidence_selection": {
+            "responses": 16,
+            "known_tokens": 60985,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "reuse_curves": {
+        "1": {
+          "queries_per_checkpoint": 1,
+          "query_opportunities": 4,
+          "complete_answers": 4,
+          "maintenance": {
+            "generation_known_tokens": 29487,
+            "generation_requests": 4,
+            "embedding_known_tokens": 0,
+            "unknown_usage_responses": 0
+          },
+          "reading": {
+            "generation_known_tokens": 26360,
+            "generation_requests": 8,
+            "embedding_known_tokens": 471,
+            "unknown_usage_responses": 0
+          },
+          "lifecycle": {
+            "generation_known_tokens": 55847,
+            "generation_requests": 12,
+            "embedding_known_tokens": 471,
+            "unknown_usage_responses": 0
+          },
+          "quality": null
+        },
+        "4": {
+          "queries_per_checkpoint": 4,
+          "query_opportunities": 16,
+          "complete_answers": 16,
+          "maintenance": {
+            "generation_known_tokens": 29487,
+            "generation_requests": 4,
+            "embedding_known_tokens": 0,
+            "unknown_usage_responses": 0
+          },
+          "reading": {
+            "generation_known_tokens": 115573,
+            "generation_requests": 32,
+            "embedding_known_tokens": 735,
+            "unknown_usage_responses": 0
+          },
+          "lifecycle": {
+            "generation_known_tokens": 145060,
+            "generation_requests": 36,
+            "embedding_known_tokens": 735,
+            "unknown_usage_responses": 0
+          },
+          "quality": null
+        }
+      },
+      "captured_sources": 6,
+      "wall_seconds": 569.8884172653779,
+      "gate_decisions": [
+        {
+          "session": 0,
+          "decision": {
+            "maintain": false,
+            "reason": "deferred to query"
+          }
+        },
+        {
+          "session": 1,
+          "decision": {
+            "maintain": false,
+            "reason": "deferred to query"
+          }
+        },
+        {
+          "session": 2,
+          "decision": {
+            "maintain": false,
+            "reason": "deferred to query"
+          }
+        },
+        {
+          "session": 3,
+          "decision": {
+            "maintain": false,
+            "reason": "deferred to query"
+          }
+        },
+        {
+          "session": 4,
+          "decision": {
+            "maintain": false,
+            "reason": "deferred to query"
+          }
+        },
+        {
+          "session": 5,
+          "decision": {
+            "maintain": false,
+            "reason": "deferred to query"
+          }
+        }
+      ],
+      "checkpoints": [
+        {
+          "session": 0,
+          "record_values_unchanged": true,
+          "state_units": [
+            "复制件通常由徐珂登记，借出前还须盖章。",
+            "正本仅供室内阅览，不能借出。",
+            "所有封套用蓝色。"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则（来源s0/e0，为用户陈述的规则内容）：\n- **现在（2033年6月1日）**：规则中仅明确说明“复制件通常由徐珂登记”，未对当前日期设置特殊登记人。\n- **2033年6月2日起**：已到达的材料中未提及该日期起登记规则或登记人会发生变更，因此无法从当前提供的记忆材料中确定2033年6月2日起的登记人。\n\n综上，现有材料仅能确认复制件通常由徐珂登记，关于2033年6月2日后的登记人安排无法确定。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6330,
+                "generation_requests": 2,
+                "embedding_known_tokens": 129,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 25.467773471958935
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据已提供的记忆材料，仅包含一条公开用户消息中的琴谱室规则，指出“复制件通常由徐珂登记”。该材料未提及2033年6月4日的具体登记安排，也未说明该日期是否存在临时例外或特殊调整。因此，无法从当前材料中确定2033年6月4日的具体安排及是否有临时例外。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6170,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 24.40416782349348
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据提供的琴谱室规则资料：\n\n1. **正本能借出吗？**\n   不能借出。资料明确指出“正本仅供室内阅览，不能借出”。\n\n2. **借出复制件除了登记还要做什么？**\n   借出前须盖章。资料指出复制件在借出前除登记外，还必须完成盖章手续。\n\n3. **封套用什么颜色？**\n   使用蓝色。规则规定“所有封套用蓝色”。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 5952,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 20.197738833725452
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据已交付的记忆材料，回答如下：\n\n1. **最初登记规则记载的人**：规则中明确写了**徐珂**。原始记录原文为：“复制件通常由徐珂登记，借出前还须盖章；正本仅供室内阅览，不能借出。所有封套用蓝色。”该信息以用户消息（`role: user`）形式记录，观测/发生时间约为2026-10-15，在所提供的快照中为该规则的有效表述。\n\n2. **后续已明确的调整**：在当前交付的材料中，**未提及**任何针对该规则的后续调整、修正或版本变更。材料仅包含该规则的单一记录片段。基于已交付内容，**无法确定**是否存在后续调整或调整的具体内容；检索结果不构成完整信息清单，亦未提供覆盖该规则演变的全部来源。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 5672,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 21.30871958564967
+            }
+          ],
+          "rebuild_status": "completed"
+        },
+        {
+          "session": 2,
+          "record_values_unchanged": true,
+          "state_units": [
+            "2033年6月2日之前，复制件由徐珂登记。",
+            "自2033年6月2日起，复制件由梁栖登记。"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的规则声明（reported），复制件的登记安排如下：\n\n* **现在**（截至2033年6月1日查询时）：由**徐珂**登记（规则明确“2日之前仍由徐珂登记”）。\n* **自2033年6月2日起**：通常登记负责人改为**梁栖**。\n\n以上信息直接提取自所提供的琴谱室规则记录，未添加额外推断或外部规则。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6322,
+                "generation_requests": 2,
+                "embedding_known_tokens": 123,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 23.91711104195565
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据所交付的资料（由用户报告的信息），自2033年6月2日起，复制件的通常登记负责人已更改为梁栖。因此，针对2033年6月4日的登记安排为：复制件由梁栖负责登记。资料中未提及该日期存在临时例外或特别覆盖规定；关于是否有临时例外，现有材料无法确定。其余既定规则（盖章、正本仅供室内阅览、使用蓝色封套等）保持不变。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6028,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 23.50325025524944
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据记忆材料中记录的琴谱室规则（截至提问日期2033年6月1日仍适用），回答如下：\n\n1. **正本能借出吗**：不能借出。规则明确记载“正本仅供室内阅览，不能借出”。\n2. **借出复制件除了登记还要做什么**：须盖章。规则规定“借出前还须盖章”，且该项规定在相关日期调整后保持不变。\n3. **封套用什么颜色**：蓝色。规则指出“所有封套用蓝色”，且该规定同样保持不变。\n\n（注：以上结论均直接提取自提供的琴谱室规则记载，截至2033年6月1日这些具体条款未被修改或废止。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 8786,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 39.75147172436118
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据已交付的记忆材料，关于登记规则的初始设定与后续调整如下：\n\n* **最初接收到的登记规则**：在来源为 `s1`（角色 `user`）的记录中明确记载，“复制件通常由**徐珂**登记”，并附带了借出前须盖章、正本仅供室内阅览不能借出、所有封套用蓝色等配套条件。\n* **后来明确的调整**：在来源为 `s0`（角色 `user`）的记录中，明确了针对登记负责人的变更：“自**2033年6月2日起**，复制件的通常登记负责人改为**梁栖**；2日之前仍由徐珂登记。”同时确认盖章、正本和封套的原有规则均保持不变。\n\n材料中仅包含上述初始规则陈述与2033年6月1日提交的具体调整声明，未提供其他进一步的变更记录或外部验证信息。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6880,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 27.503351450897753
+            }
+          ],
+          "rebuild_status": "completed"
+        },
+        {
+          "session": 4,
+          "record_values_unchanged": true,
+          "state_units": [
+            "自2033年6月2日起，复制件的通常登记负责人改为梁栖；2日之前仍由徐珂登记。",
+            "仅2033年6月4日周六的交流活动期间，复制件临时改由宋若在庭院登记。"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则记载：\n- **现在**（指查询时间2033年6月1日，即规则所称“2日之前”时段）：由**徐珂**登记。\n- **2033年6月2日起**：由**梁栖**登记。\n\n依据记忆中的规则表述：“自2033年6月2日起，复制件的通常登记负责人改为梁栖；2日之前仍由徐珂登记。”",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 7294,
+                "generation_requests": 2,
+                "embedding_known_tokens": 164,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 25.06180147919804
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据提供的记忆资料，关于2033年6月4日复制件登记的安排如下：\n\n* **通常安排**：自2033年6月2日起，复制件的通常登记负责人改为梁栖，其他日期均按梁栖的一般安排办理。\n* **临时例外**：仅在2033年6月4日（周六）的交流活动期间，复制件**临时改由宋若在庭院登记**。\n\n**结论**：2033年6月4日当天**有临时例外**。该例外仅适用于当日周六的交流活动（由宋若在庭院登记），除该特定日期与活动期间外，其余时间均按梁栖的安排执行。资料中未记录该日期的其他例外情况。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 10817,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 43.991352752782404
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据记忆材料中的规则报告与断言，针对您查询的时间（2033年6月1日13:00:00）适用情况如下：\n\n1. **正本能否借出**：不能借出。规则明确正本仅供室内阅览。\n2. **借出复制件除登记外的要求**：借出前还须盖章。\n3. **封套颜色**：蓝色（所有封套用蓝色）。\n\n**时间条件说明**：\n- 查询日期为2033年6月1日，处于规则变更生效日（2033年6月2日）之前，因此复制件登记负责人为徐珂。\n- 根据材料记录，盖章要求、正本限制及封套颜色规定在2033年6月2日前后均保持不变，该日期前无其他例外或修改覆盖上述条款。\n- 以上结论仅基于所交付的记忆材料中的来源报告与语义断言。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 7775,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 27.740762698464096
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据记忆材料中的记录：\n\n- **最初接收到的登记规则**：在琴谱室规则中写明，复制件通常由**徐珂**登记。\n- **后来已明确的调整**：\n  1. 自2033年6月2日起，复制件的通常登记负责人改为**梁栖**（2日之前仍由徐珂登记）；盖章、正本和封套的规则保持不变。\n  2. 仅2033年6月4日（周六）交流活动期间，复制件临时改由**宋若**在庭院登记，其他日期按梁栖的一般安排办理。\n\n（以上内容均为记忆材料中明确记载的登记安排与调整声明。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 7915,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 25.470587383024395
+            }
+          ],
+          "rebuild_status": "completed"
+        },
+        {
+          "session": 5,
+          "record_values_unchanged": true,
+          "state_units": [
+            "自2033年6月2日起，复制件通常由梁栖登记。"
+          ],
+          "reads": [
+            {
+              "index": 0,
+              "id": "current-and-future",
+              "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？",
+              "hypothesis": "\n\n根据已到达的琴谱室规则：\n- **现在**（即2033年6月2日之前）：复制件由**徐珂**登记。\n- **自2033年6月2日起**：复制件由**梁栖**登记。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6414,
+                "generation_requests": 2,
+                "embedding_known_tokens": 55,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 24.203558170236647
+            },
+            {
+              "index": 1,
+              "id": "exception",
+              "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？",
+              "hypothesis": "\n\n根据截至查询时间（2033年6月1日14:00）的最新报告，关于2033年6月4日复制件登记的安排如下：\n\n1. **当前安排**：6月4日的周六交流活动已取消。复制件登记**按梁栖的通常安排办理**。根据此前十点（13:00报告）调整并自2033年6月2日起生效的规则，通常登记负责人已改为梁栖，因此6月4日由梁栖负责登记（盖章、正本室内阅览及蓝色封套等其他规则保持不变）。\n2. **临时例外**：此前曾规定“仅2033年6月4日周六交流活动期间，临时改由宋若在庭院登记”的例外安排，但已在最新报告（14:00）中**明确撤回（取消）**，不再适用。\n\n**结论**：目前（以最新报告为准）2033年6月4日复制件登记**没有**临时例外，已统一恢复按梁栖的通常安排执行。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 9690,
+                "generation_requests": 2,
+                "embedding_known_tokens": 22,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 45.321229761466384
+            },
+            {
+              "index": 2,
+              "id": "preservation",
+              "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？",
+              "hypothesis": "\n\n根据提供的资料（以2033年6月1日为准）：\n1. **正本能借出吗**：不能借出，正本仅供室内阅览。\n2. **借出复制件除了登记还要做什么**：借出前还须**盖章**。\n3. **封套用什么颜色**：所有封套用**蓝色**。\n\n（注：资料中的《琴谱室规则》明确说明，正本、盖章及封套颜色的规则均保持不变。2033年6月2日起仅变更了复制件的通常登记负责人，不影响上述三条规则。）",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 7105,
+                "generation_requests": 2,
+                "embedding_known_tokens": 25,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 30.826353675685823
+            },
+            {
+              "index": 3,
+              "id": "history",
+              "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？",
+              "hypothesis": "\n\n根据提供的记忆材料（均为用户消息记录），登记规则的初始内容与后续调整如下：\n\n**最初接收到的登记规则**（依据来源 `s3` 记录）：\n* **登记负责人**：复制件通常由**徐珂**登记。\n* **其他配套规则**：复制件借出前须盖章；正本仅供室内阅览，不得借出；所有复制件封套用蓝色。\n\n**后来已明确的调整**（依据来源 `s1`、`s2`、`s4` 记录）：\n1. **常规负责人变更**：自2033年6月2日起，复制件通常登记负责人由徐珂改为**梁栖**；6月2日之前仍由徐珂登记。盖章、正本阅览及蓝色封套的规则保持不变。\n2. **临时例外安排**：曾明确在2033年6月4日周六的交流活动期间，复制件临时改由**宋若**在庭院登记，该日之外的日期按梁栖的一般安排办理。\n3. **临时例外撤回**：因周六交流活动取消，已明确**撤回**宋若6月4日的临时登记例外，统一改按梁栖的通常安排办理。其他规则仍保持不变。\n\n上述内容均为记忆材料中明确记载的声明与安排。材料未提供其他登记负责人的变更或后续规则修订。",
+              "reader_failure": null,
+              "costs": {
+                "generation_known_tokens": 6423,
+                "generation_requests": 2,
+                "embedding_known_tokens": 19,
+                "unknown_usage_responses": 0
+              },
+              "wall_seconds": 24.38243990764022
+            }
+          ],
+          "rebuild_status": "completed"
+        }
+      ]
+    }
+  },
+  "state_review": {
+    "event": {
+      "0": "all declared base facts stored",
+      "2": "future handler split into pre/post periods with correct explicit bounds; other rules retained",
+      "4": "temporary clause/condition stored; general handler unit also contains stamping, so predicate-level override scope deserves further state-only verification",
+      "5": "temporary clause removed; base/pre-transition clauses, stamping, originals and covers retained"
+    },
+    "explicit_change": {
+      "0": "formation rejected EDIT_SUPPORT_ROUTE_INVALID; empty state",
+      "2": "handler periods stored but other-rule values replaced by ungrounded “unchanged” pointer because initial state was empty",
+      "4": "temporary Song exception added; concrete stamping/original/cover rules still absent",
+      "5": "gate false skips explicit cancellation; exception remains active in saved state"
+    },
+    "query_rebuild": {
+      "0": "base facts stored",
+      "2": "fresh rebuild contains only handlers; stamping, original restriction and blue covers omitted",
+      "4": "other-rule omissions persist; composite before/after clause incorrectly bounded effective_from June2",
+      "5": "only future Liang clause stored; current pre-June2 Xu and other-rule details absent, even though originals retained"
+    }
+  },
+  "answer_source_notes": [
+    {
+      "policy": "event",
+      "session": 0,
+      "query": "current-and-future",
+      "issue": "gives currentXu but declines future-date usual assignment because no explicit new rule; answers should be read as partial/overcautious rather than evidence of future knowledge"
+    },
+    {
+      "policy": "explicit_change",
+      "session": 0,
+      "query": "current-and-future",
+      "issue": "gives currentXu but declines future-date usual assignment because no explicit new rule; answers should be read as partial/overcautious rather than evidence of future knowledge"
+    },
+    {
+      "policy": "query_rebuild",
+      "session": 0,
+      "query": "current-and-future",
+      "issue": "gives currentXu but declines future-date usual assignment because no explicit new rule; answers should be read as partial/overcautious rather than evidence of future knowledge"
+    },
+    {
+      "policy": "event",
+      "session": 0,
+      "query": "exception",
+      "issue": "states usualXu and no declared exception but declines specific future-date certainty"
+    },
+    {
+      "policy": "explicit_change",
+      "session": 0,
+      "query": "exception",
+      "issue": "states usualXu and no declared exception but declines specific future-date certainty"
+    },
+    {
+      "policy": "query_rebuild",
+      "session": 0,
+      "query": "exception",
+      "issue": "states usualXu and no declared exception but declines specific future-date certainty"
+    },
+    {
+      "policy": "event",
+      "session": 0,
+      "query": "exception",
+      "issue": "uses2026 capture as report date"
+    },
+    {
+      "policy": "event",
+      "session": 4,
+      "query": "current-and-future",
+      "issue": "ends by denying other active/covering arrangements although a known June4 exception exists; ordinary handler facts correct"
+    },
+    {
+      "policy": "event",
+      "session": 5,
+      "query": "current-and-future",
+      "issue": "still mentions June4 temporary exception without saying it has been withdrawn"
+    },
+    {
+      "policy": "event",
+      "session": 5,
+      "query": "exception",
+      "issue": "known dependency-selector length missing answer; cost retained"
+    },
+    {
+      "policy": "explicit_change",
+      "session": 0,
+      "query": "history",
+      "issue": "refuses to identify first rule despite the sole delivered captured-prefix Source givingXu; initial semantic formation empty"
+    },
+    {
+      "policy": "query_rebuild",
+      "session": 0,
+      "query": "history",
+      "issue": "capture clock promoted to observation/event time2026"
+    },
+    {
+      "policy": "query_rebuild",
+      "session": 5,
+      "query": "exception",
+      "issue": "attributes regular change to inconsistent ten-o-clock/13:00 report; actual regular change report was11:00"
+    }
+  ],
+  "gate_review": {
+    "post_initial_decisions": 5,
+    "correct_under_declared_obligations": 4,
+    "false_positive_acknowledgments": 0,
+    "false_negative_changes": 1,
+    "failure": "last gate saysmaintain=false while its own reason describes the explicit cancellation; no reason-based override or retry applied"
+  },
+  "cost_curve_interpretation": "At reuse1/4, query rebuild has lower measured known tokens, but loses stored facts; explicit-change cost reduction includes failed initial formation and a wrongly skipped cancellation. No quality-preserving amortization or winner established.",
+  "quality_limits": [
+    "answer completion is not semantic correctness",
+    "initial future-date questions elicit over-refusal in all policies",
+    "raw originals rescue omitted state facts in many answers",
+    "event policy compound handler/stamp unit needs a predicate-scope check during its temporary exception"
+  ],
+  "ledger_delta": {
+    "generation_requests": 115,
+    "generation": {
+      "known_tokens": 521586,
+      "charged_tokens": 521586,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 2739,
+      "charged_tokens": 2739,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens_match": true,
+    "generation_requests_match": true,
+    "embedding_tokens_match": true
+  },
+  "original_outputs_changed": false,
+  "new_judge_calls": 0,
+  "rebuild_source_delivery_checks": [
+    {
+      "checkpoint": 0,
+      "path": "artifacts/method-architecture/lifecycle-v1/query_rebuild/http/maintenance/rebuild-prefix-0/edit/work-0/request.json",
+      "initial_stamp_rule_in_request": true,
+      "original_only_indoor_in_request": true,
+      "blue_covers_in_request": true,
+      "response_present": true
+    },
+    {
+      "checkpoint": 2,
+      "path": "artifacts/method-architecture/lifecycle-v1/query_rebuild/http/maintenance/rebuild-prefix-2/edit/work-0/request.json",
+      "initial_stamp_rule_in_request": true,
+      "original_only_indoor_in_request": true,
+      "blue_covers_in_request": true,
+      "response_present": true
+    },
+    {
+      "checkpoint": 4,
+      "path": "artifacts/method-architecture/lifecycle-v1/query_rebuild/http/maintenance/rebuild-prefix-4/edit/work-0/request.json",
+      "initial_stamp_rule_in_request": true,
+      "original_only_indoor_in_request": true,
+      "blue_covers_in_request": true,
+      "response_present": true
+    },
+    {
+      "checkpoint": 5,
+      "path": "artifacts/method-architecture/lifecycle-v1/query_rebuild/http/maintenance/rebuild-prefix-5/edit/work-0/request.json",
+      "initial_stamp_rule_in_request": true,
+      "original_only_indoor_in_request": true,
+      "blue_covers_in_request": true,
+      "response_present": true
+    }
+  ]
+}

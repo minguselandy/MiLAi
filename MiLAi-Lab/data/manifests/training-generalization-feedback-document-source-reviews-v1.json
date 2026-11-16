@@ -1,0 +1,75 @@
+{
+  "status": "FOUR_LEGACY_PUBLIC_POOL_REVIEWS_COMPLETE;REAL_FEEDBACK_PENDING",
+  "observed_at": "2026-10-22T09:10:01.188651+00:00",
+  "reviews": [
+    {
+      "family": "musique-family-000766",
+      "source_row": 18441,
+      "request_id": "corpus-18441",
+      "input_card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000766-18441.json",
+      "review": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/reviews/musique-family-000766-18441.json",
+      "source_units": 20,
+      "disposition": "QUALIFIED_RECORDING_CONTEXT;GENERAL_LABEL_AFFILIATION_NOT_ESTABLISHED",
+      "directly_read": 20,
+      "literal_reused": 0,
+      "full_pool_reviewed": true
+    },
+    {
+      "family": "musique-family-000766",
+      "source_row": 33114,
+      "request_id": "corpus-33114",
+      "input_card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000766-33114.json",
+      "review": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/reviews/musique-family-000766-33114.json",
+      "source_units": 20,
+      "disposition": "EXPLICIT_RECORDING_SPECIFIC_LABEL;MULTIPLE_HISTORICAL_LABELS_RETAINED",
+      "directly_read": 15,
+      "literal_reused": 5,
+      "full_pool_reviewed": true
+    },
+    {
+      "family": "musique-family-000104",
+      "source_row": 4099,
+      "request_id": "corpus-4099",
+      "input_card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000104-4099.json",
+      "review": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/reviews/musique-family-000104-4099.json",
+      "source_units": 20,
+      "disposition": "AUTHOR_IDENTIFIED;DEATH_LOCATION_NOT_ESTABLISHED_IN_THIS_POOL",
+      "directly_read": 20,
+      "literal_reused": 0,
+      "full_pool_reviewed": true
+    },
+    {
+      "family": "musique-family-000104",
+      "source_row": 14364,
+      "request_id": "corpus-14364",
+      "input_card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000104-14364.json",
+      "review": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/reviews/musique-family-000104-14364.json",
+      "source_units": 20,
+      "disposition": "AUTHOR_IDENTIFIED;DEATH_LOCATION_NOT_ESTABLISHED_IN_THIS_POOL",
+      "directly_read": 2,
+      "literal_reused": 18,
+      "full_pool_reviewed": true
+    }
+  ],
+  "source_groups": 2,
+  "public_requests": 4,
+  "paragraph_appearances": 80,
+  "directly_read_paragraph_bodies": 57,
+  "literal_reused_appearances": 23,
+  "source_review_scope": "Four complete public pools now have current full-pool author notes. Same-family paired pools are correlated,not four independent tasks. Prior reviews and frozen labels remain unchanged;no native answer or task outcome substitution.",
+  "findings": "Both Ode-to-Joy pools identify Schiller but lack a death-location link. Lou-Rawls pool18441 offers a contextual recording-company link;pool33114 explicitly supports Philadelphia International Records for the1976recording while retaining other dated label/reissue relations. Scope qualifications must remain visible.",
+  "training_boundary": "Source facts are not automatic action preferences. Actual new Host requests,before states,material deliveries,Views,branches and answers still need review. No requirement to perform two READs when one delivered paragraph closes a scoped proof.",
+  "native_reference_answers_used": false,
+  "corresponding_model_outputs_used": false,
+  "new_operation_labels": 0,
+  "model_calls": 0,
+  "source_inputs_changed": false,
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "ledger_write_calls": 0,
+  "compute_scope": "Only note binding,quote/literal checks and report construction measured. Semantic reading,authoring,exploratory literal mapping and unmeasured overhead unknown,not0.",
+  "compute": {
+    "cpu_seconds": 0.005725985000000003,
+    "wall_seconds": 0.00573041383177042
+  }
+}

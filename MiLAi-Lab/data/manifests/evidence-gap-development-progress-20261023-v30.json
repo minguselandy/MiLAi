@@ -1,0 +1,315 @@
+{
+  "source_version": "3c892d30",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Matching4886selected-train is sole neuraljob. No secondneural or offline settlement whilelive; verify actualPID/files, never stale-session restart. Afterterminal run verify_selected_train_v1.py using originalfrozenhelpers, reconcile terminalcosts, then unchanged remaining plan. Allolddevcandidates and Host-only diagnostic stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "status": "ACTIVE;SAVED_CPU_PHASE_AND_SIX_JOB_HOST_INSTRUCTION_DIAGNOSTIC_CLOSED;FULL_RESEARCH_REMAINS_OPEN",
+  "observed_at": "2026-10-24T16:19:20.994423+00:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v29.json",
+  "previous_turn_classification": "verified wait",
+  "prior_saved_phase": {
+    "complete_results": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/complete-results.json",
+    "closure_progress": "data/manifests/evidence-gap-development-progress-20261023-v29.json",
+    "closed": true
+  },
+  "host_pilot": {
+    "plan": "data/manifests/evidence-gap-state-host-instructions-pilot-v1.json",
+    "results": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/results.json",
+    "csv": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/results.csv",
+    "source_version": "45829497",
+    "memory_protocol": "none",
+    "jobs": [
+      {
+        "job_index": 0,
+        "task_id": "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state",
+        "condition": "base",
+        "native_state_score": 0,
+        "HTTP_requests": 18,
+        "known_generation_tokens": 82567,
+        "unknown_usage_increment": 0,
+        "host_attempts": 13,
+        "simulator_attempts": 5,
+        "domain_calls": 13,
+        "runner_cpu_seconds_already_billed": 1.93143129,
+        "whole_child_cpu_seconds_not_additive": 8.263383000000001,
+        "closed_overhead_cpu_seconds_already_billed": 6.4029557430000015,
+        "driver_wall_seconds_serial": 128.3098154142499,
+        "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-0-base",
+        "review": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-0-base.json",
+        "accounting": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-0-base-accounting.json",
+        "status": "COMPLETED_ONCE_AND_SOURCE_REVIEWED"
+      },
+      {
+        "job_index": 1,
+        "task_id": "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state",
+        "condition": "extra_instructions",
+        "native_state_score": 1,
+        "HTTP_requests": 22,
+        "known_generation_tokens": 119511,
+        "unknown_usage_increment": 0,
+        "host_attempts": 15,
+        "simulator_attempts": 7,
+        "domain_calls": 19,
+        "runner_cpu_seconds_already_billed": 2.509603437,
+        "whole_child_cpu_seconds_not_additive": 8.560338999999999,
+        "closed_overhead_cpu_seconds_already_billed": 6.128192324999999,
+        "driver_wall_seconds_serial": 155.94177839998156,
+        "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-0-extra_instructions",
+        "review": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-0-extra_instructions.json",
+        "accounting": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-0-extra_instructions-accounting.json",
+        "status": "COMPLETED_ONCE_AND_SOURCE_REVIEWED"
+      },
+      {
+        "job_index": 2,
+        "task_id": "7-book_simple_domestic",
+        "condition": "extra_instructions",
+        "native_state_score": 0,
+        "HTTP_requests": 14,
+        "known_generation_tokens": 54830,
+        "unknown_usage_increment": 0,
+        "host_attempts": 9,
+        "simulator_attempts": 5,
+        "domain_calls": 5,
+        "runner_cpu_seconds_already_billed": 1.4951920129999996,
+        "whole_child_cpu_seconds_not_additive": 7.218125000000001,
+        "closed_overhead_cpu_seconds_already_billed": 5.786714080000001,
+        "driver_wall_seconds_serial": 55.08850742969662,
+        "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-1-extra_instructions",
+        "review": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-1-extra_instructions.json",
+        "accounting": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-1-extra_instructions-accounting.json",
+        "status": "COMPLETED_ONCE_AND_SOURCE_REVIEWED"
+      },
+      {
+        "job_index": 3,
+        "task_id": "7-book_simple_domestic",
+        "condition": "base",
+        "native_state_score": 1,
+        "HTTP_requests": 9,
+        "known_generation_tokens": 32468,
+        "unknown_usage_increment": 0,
+        "host_attempts": 6,
+        "simulator_attempts": 3,
+        "domain_calls": 3,
+        "runner_cpu_seconds_already_billed": 1.2369900430000005,
+        "whole_child_cpu_seconds_not_additive": 6.77855,
+        "closed_overhead_cpu_seconds_already_billed": 5.618769798999999,
+        "driver_wall_seconds_serial": 37.74138327874243,
+        "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-1-base",
+        "review": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-1-base.json",
+        "accounting": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-1-base-accounting.json",
+        "status": "COMPLETED_ONCE_AND_SOURCE_REVIEWED"
+      },
+      {
+        "job_index": 4,
+        "task_id": "8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state",
+        "condition": "base",
+        "native_state_score": 0,
+        "HTTP_requests": 13,
+        "known_generation_tokens": 51979,
+        "unknown_usage_increment": 0,
+        "host_attempts": 10,
+        "simulator_attempts": 3,
+        "domain_calls": 10,
+        "runner_cpu_seconds_already_billed": 1.4500508869999997,
+        "whole_child_cpu_seconds_not_additive": 6.894941,
+        "closed_overhead_cpu_seconds_already_billed": 5.509598702000001,
+        "driver_wall_seconds_serial": 65.32663602102548,
+        "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-2-base",
+        "review": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-2-base.json",
+        "accounting": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-2-base-accounting.json",
+        "status": "COMPLETED_ONCE_AND_SOURCE_REVIEWED"
+      },
+      {
+        "job_index": 5,
+        "task_id": "8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state",
+        "condition": "extra_instructions",
+        "native_state_score": 0,
+        "HTTP_requests": 16,
+        "known_generation_tokens": 64692,
+        "unknown_usage_increment": 0,
+        "host_attempts": 11,
+        "simulator_attempts": 5,
+        "domain_calls": 7,
+        "runner_cpu_seconds_already_billed": 2.1511534690000005,
+        "whole_child_cpu_seconds_not_additive": 7.850396,
+        "closed_overhead_cpu_seconds_already_billed": 5.776038563999999,
+        "driver_wall_seconds_serial": 91.98574486654252,
+        "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-2-extra_instructions",
+        "review": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-2-extra_instructions.json",
+        "accounting": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-2-extra_instructions-accounting.json",
+        "status": "COMPLETED_ONCE_AND_SOURCE_REVIEWED"
+      }
+    ],
+    "pair_reviews": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-0-pair.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-1-pair.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/reviews/task-2-pair.json"
+    ],
+    "input_controls": "All three actual initial states matched within pair; each actual first Host request differed only by the frozen instruction text. Native input files stayed literal-equal; source files checked against the declared commit before each job.",
+    "totals": {
+      "real_HTTP_requests": 92,
+      "known_generation_tokens": 406047,
+      "unknown_usage": 0,
+      "Host_attempts": 64,
+      "simulator_attempts": 28,
+      "domain_tool_calls": 57,
+      "runtime_failures": 0,
+      "memory_calls": 0
+    },
+    "by_condition_descriptive_only": {
+      "base": {
+        "native_state_passes_descriptive_only": 1,
+        "trajectories": 3,
+        "HTTP_requests": 40,
+        "known_tokens": 167014
+      },
+      "extra_instructions": {
+        "native_state_passes_descriptive_only": 1,
+        "trajectories": 3,
+        "HTTP_requests": 52,
+        "known_tokens": 239033
+      }
+    },
+    "extra_minus_base": {
+      "HTTP_requests": 12,
+      "known_tokens": 72019
+    },
+    "findings": [
+      "TRAIN5: base state0 versus extra state1; extra still needed repeated date lookup and insurance correction and retained a wrong written cost formula.",
+      "TRAIN7: base state1 versus extra state0. Extra followed a simulator choice inconsistent with its nonstop rule, then recovered final public flight/preferences/price through an update; native required-record matching fails on retained initial cash_amount340 versus390.",
+      "TRAIN8: both state0. Base repeated creation after the confirmed receipt was already in the next actual Host input, producing two bookings. Extra double-counted cancellation fee and selected the pricier direct change, while misstating the target date."
+    ],
+    "interpretation": "Mixed observed task outcomes with higher token/request usage for extra instructions in all three pairs. No demonstrated consistent benefit; the optional instructions are not promoted to the default or injected into frozen feedback conditions.",
+    "limitations": [
+      "Three related native train tasks, one realization per condition; tasks5/8 share user/policy context, so not three independent source confirmations.",
+      "Later simulator replies diverged and sometimes violated frozen task rules; this is closed-loop behavior, not a fixed-readout estimate.",
+      "Native final-state score is distinct from dialogue/task/UX correctness; official task/UX judge was not run, and no substitute scalar author reward or training labels were created.",
+      "All runs had no memory tool; this is not evidence for or against Jev/MiLAi quality.",
+      "Model GPU time and monetary cost are not priced; earlier/unmeasured interpreter startup, authoring, inspection, reporting and settlement overhead remain unknown, not zero.",
+      "Equal descriptive native pass counts do not establish equivalence; task outcomes and failure mechanisms differ."
+    ],
+    "no_retry_or_task_replacement": true
+  },
+  "active_processes": [],
+  "accounting": {
+    "per_job_closed_overheads": [
+      {
+        "phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_job0_closed_overhead",
+        "measures": {
+          "cpu_seconds": 6.4029557430000015,
+          "measured_phases": 5,
+          "runs": 1
+        }
+      },
+      {
+        "phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_job1_closed_overhead",
+        "measures": {
+          "cpu_seconds": 6.128192324999999,
+          "measured_phases": 5,
+          "runs": 1
+        }
+      },
+      {
+        "phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_job2_closed_overhead",
+        "measures": {
+          "cpu_seconds": 5.786714080000001,
+          "measured_phases": 5,
+          "runs": 1
+        }
+      },
+      {
+        "phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_job3_closed_overhead",
+        "measures": {
+          "cpu_seconds": 5.618769798999999,
+          "measured_phases": 5,
+          "runs": 1
+        }
+      },
+      {
+        "phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_job4_closed_overhead",
+        "measures": {
+          "cpu_seconds": 5.509598702000001,
+          "measured_phases": 5,
+          "runs": 1
+        }
+      },
+      {
+        "phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_job5_closed_overhead",
+        "measures": {
+          "cpu_seconds": 5.776038563999999,
+          "measured_phases": 5,
+          "runs": 1
+        }
+      }
+    ],
+    "summary": {
+      "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/summary-accounting.json",
+      "phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_summary_v1",
+      "measures": {
+        "cpu_seconds": 0.027961562000000002,
+        "measured_phases": 1,
+        "runs": 1
+      }
+    },
+    "costs_already_recorded": {
+      "runner_cpu_seconds": 10.774421139000001,
+      "closed_overhead_cpu_seconds": 35.222269213000004,
+      "execution_and_review_cpu_seconds": 45.996690352,
+      "preparation_cpu_seconds": 12.367179513,
+      "preparation_allocation_source": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v25.json",
+      "preparation_already_settled_in": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-settlement.json",
+      "serial_driver_wall_seconds": 534.3938654102385,
+      "wall_scope": "Driver wall durations are serial across jobs; nested runner/model wall is not added."
+    },
+    "runner_HTTP_and_prior_preparation_not_rebilled": true,
+    "historical_pending_v21_v28": "Already closed in selected-train-settlement.json; old flags must not be billed again."
+  },
+  "next_work": {
+    "original_feedback_plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+    "authoritative_checkpoint_binding": "data/manifests/training-generalization-feedback-initialization-binding-v1.json",
+    "frozen_feedback_source": "2a179b58",
+    "initialization": "Verified original update262; do not reselect using these Host outcomes",
+    "action": "Resume the original frozen feedback collection from its first unattempted batch after inspecting the plan and actual outputs; keep the new Host supplement out of that frozen condition. Current F1/F2 acceptance and other full-plan work remain explicit.",
+    "no_automatic_queue": true
+  },
+  "remaining": "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.; Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.; Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.; New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.; Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.; Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.; LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.; Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables.",
+  "remaining_requirements": [
+    "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.",
+    "Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.",
+    "Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.",
+    "New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.",
+    "Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.",
+    "Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.",
+    "LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.",
+    "Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables."
+  ],
+  "goal_complete": false,
+  "current_turn_progress": "Completed full saved CPU matching evaluation, verified and settled it, exported the complete curve, executed all six frozen Host jobs once, reviewed all actual pairs and reconciled measured costs."
+}

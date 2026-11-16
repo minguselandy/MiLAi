@@ -1,0 +1,22 @@
+{
+  "status": "TRAIN_METADATA_GROUPED_NOT_SEMANTICALLY_REVIEWED",
+  "archive": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/two-wiki-intake/data_ids_april7.zip",
+  "archive_members_read": [
+    "train.json"
+  ],
+  "rows": 167454,
+  "families": 46642,
+  "family_max_support_titles": {
+    "2": 46527,
+    "4": 115
+  },
+  "largest_family_rows": 96347,
+  "group_rule": "Transitive closure of shared native support entity IDs OR exact support titles",
+  "limitations": "Native support labels, not semantic proofs. Cross-corpus literal boundaries and registered historical exposure still require checking.",
+  "source_text_or_answers_emitted": false,
+  "model_calls": 0,
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "wall_seconds": 19.413533689454198,
+  "cpu_seconds": 19.41006091
+}

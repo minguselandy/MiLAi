@@ -1,0 +1,71 @@
+{
+  "status": "READY_FOR_T0_FITTING",
+  "train_states": 2276,
+  "train_labelled": 1649,
+  "train_groups": 64,
+  "dev_states": 456,
+  "dev_labelled": 353,
+  "dev_groups": 16,
+  "train_masks": {
+    "source_reviewed_preference": 1649,
+    "forced_single_action_masked": 105,
+    "reviewed_ambiguous_masked": 487,
+    "unreviewed_masked": 35
+  },
+  "optimizer_updates": 207,
+  "effective_batch": 16,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "first_seed": 0,
+  "train_sources": [
+    "artifacts/host-intent-retrieval-v3/data/t0-reviewed-primary-v14/train.jsonl",
+    "artifacts/host-intent-retrieval-v3/data/t0-reviewed-generative-v1/train.jsonl"
+  ],
+  "dev_source": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-dev-v3/dev.jsonl",
+  "input_equality": true,
+  "source_group_overlap": false,
+  "teacher_actions_copied": false,
+  "partial_view_revision": "Withdraw unsupported2024 temporal view labels; retain source-valid warm reuse and actual address refresh.",
+  "max_labelled_sequence": {
+    "event_id": "generative-rich/memops_A04/record-first/chatcmpl-a990cec78a37a3a6:tool:0/6",
+    "question": "next",
+    "sequence_tokens": 8634,
+    "state_tokens_dropped": 0,
+    "head_tokens_dropped": 0
+  },
+  "max_all_sequence": 9723,
+  "model_calls": 0,
+  "wall_seconds": 5.3209695890545845,
+  "cpu_seconds": 5.320766185999999,
+  "ledger_recorded": false,
+  "state_id": "Sequential identity over full train then dev rows, assigned before masking; for synchronized option/target permutation only, outside model input.",
+  "training_recipe": {
+    "backend": "native",
+    "objective": "soft-ce",
+    "operation_state": "shared",
+    "encoder_lr": 2.5e-05,
+    "head_lr": 0.0001,
+    "micro_batch_size": 2,
+    "gradient_accumulation": 8,
+    "effective_batch": 16,
+    "optimizer_updates": 207,
+    "shuffle_options": true,
+    "gradient_checkpointing": true,
+    "precision": "float32",
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "diagnostics": [
+      0,
+      103,
+      207
+    ],
+    "selection": "Predetermined final weights, not best dev checkpoint"
+  }
+}

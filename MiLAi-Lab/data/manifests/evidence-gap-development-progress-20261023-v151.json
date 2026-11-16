@@ -1,0 +1,354 @@
+{
+  "status": "THREE_ORIGINAL_ANSWER_FITS_VERIFIED;FIRST_SAVED_CPU_JOB_RUNNING;F1_MECHANICS_PREPARED",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-27T02:54:29.096253+00:00",
+  "previous_progress": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v150.json",
+  "previous_turn_classification": "progress: implemented explicitcurrentF1inputpreparation/replay withstrictoriginaladmission;59tests pass; actualF01copy+Hostframeprepared and12devfamilycohort/source-witnessboundariesdeclared.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "unchanged_review_compile_inputs": "v148 and original-feedback-v2-all-reviews-closure-v1.json remainauthoritative:train768/dev48new plus16unchangedlegacy;sourceprefix32/64/128 andfrozen2a nine-fit recipes unchanged.",
+  "fit_plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-nine-fit-plan-v1.json",
+  "feedback_fits_started": 3,
+  "feedback_fits_completed": 3,
+  "completed_native_fits": [
+    {
+      "run_id": "source32-answer-seed0-u192-v1",
+      "analysis": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-native-audits-v1/source32-answer-seed0-u192-v1/analysis.json",
+      "terminal": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source32-answer-terminal-v1.json",
+      "native_selection_provisional": {
+        "answer": {
+          "update": 192,
+          "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source32-answer-seed0-u192-v1/checkpoints/update-192"
+        }
+      },
+      "curve": [
+        {
+          "update": 0,
+          "answer": 0.5179811507936508,
+          "delivery": 0.6067708333333333,
+          "old_operation": 0.807826854448818
+        },
+        {
+          "update": 12,
+          "answer": 0.7242063492063492,
+          "delivery": 0.7083333333333334,
+          "old_operation": 0.6856358148086849
+        },
+        {
+          "update": 24,
+          "answer": 0.681671626984127,
+          "delivery": 0.734375,
+          "old_operation": 0.7679348171354983
+        },
+        {
+          "update": 48,
+          "answer": 0.7666170634920635,
+          "delivery": 0.8020833333333333,
+          "old_operation": 0.7368759171072089
+        },
+        {
+          "update": 96,
+          "answer": 0.7710813492063491,
+          "delivery": 0.8593749999999999,
+          "old_operation": 0.7273449130509763
+        },
+        {
+          "update": 192,
+          "answer": 0.7872023809523809,
+          "delivery": 0.8515625,
+          "old_operation": 0.7466104910556995
+        }
+      ],
+      "train_input_tokens": 15308528,
+      "deployment_selection": null,
+      "Host_success": null
+    },
+    {
+      "run_id": "source64-answer-seed0-u192-v1",
+      "analysis": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-native-audits-v1/source64-answer-seed0-u192-v1/analysis.json",
+      "terminal": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source64-answer-terminal-v1.json",
+      "native_selection_provisional": {
+        "answer": {
+          "update": 96,
+          "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source64-answer-seed0-u192-v1/checkpoints/update-96"
+        }
+      },
+      "curve": [
+        {
+          "update": 0,
+          "answer": 0.5179811507936508,
+          "delivery": 0.6067708333333333,
+          "old_operation": 0.807826854448818
+        },
+        {
+          "update": 12,
+          "answer": 0.6218998015873016,
+          "delivery": 0.7057291666666666,
+          "old_operation": 0.7847632862185684
+        },
+        {
+          "update": 24,
+          "answer": 0.7534722222222222,
+          "delivery": 0.8385416666666666,
+          "old_operation": 0.7271550246529715
+        },
+        {
+          "update": 48,
+          "answer": 0.738095238095238,
+          "delivery": 0.8072916666666667,
+          "old_operation": 0.7578814226952875
+        },
+        {
+          "update": 96,
+          "answer": 0.7839781746031746,
+          "delivery": 0.8229166666666666,
+          "old_operation": 0.7246556740093668
+        },
+        {
+          "update": 192,
+          "answer": 0.7596726190476191,
+          "delivery": 0.8307291666666667,
+          "old_operation": 0.7207301609530539
+        }
+      ],
+      "train_input_tokens": 15851792,
+      "deployment_selection": null,
+      "Host_success": null
+    },
+    {
+      "run_id": "source128-answer-seed0-u192-v1",
+      "analysis": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-native-audits-v1/source128-answer-seed0-u192-v1/analysis.json",
+      "terminal": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source128-answer-terminal-v1.json",
+      "native_selection_provisional": {
+        "answer": {
+          "update": 96,
+          "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source128-answer-seed0-u192-v1/checkpoints/update-96"
+        }
+      },
+      "curve": [
+        {
+          "update": 0,
+          "answer": 0.5179811507936508,
+          "delivery": 0.6067708333333333,
+          "old_operation": 0.807826854448818
+        },
+        {
+          "update": 12,
+          "answer": 0.7218501984126984,
+          "delivery": 0.8072916666666666,
+          "old_operation": 0.7894221778442443
+        },
+        {
+          "update": 24,
+          "answer": 0.76140873015873,
+          "delivery": 0.7526041666666667,
+          "old_operation": 0.7212784053210346
+        },
+        {
+          "update": 48,
+          "answer": 0.7579365079365079,
+          "delivery": 0.8411458333333334,
+          "old_operation": 0.7530310509831376
+        },
+        {
+          "update": 96,
+          "answer": 0.8100198412698413,
+          "delivery": 0.8567708333333333,
+          "old_operation": 0.7573706432667002
+        },
+        {
+          "update": 192,
+          "answer": 0.8010912698412698,
+          "delivery": 0.8854166666666666,
+          "old_operation": 0.7833412101667436
+        }
+      ],
+      "train_input_tokens": 16718944,
+      "deployment_selection": null,
+      "Host_success": null
+    }
+  ],
+  "saved_reload_selections_completed": 0,
+  "feedback_Host_evaluations_completed": 0,
+  "active_model_job": {
+    "kind": "saved_weight_CPU_evaluation",
+    "job_id": "common-base-u262",
+    "exec_session": 27787,
+    "dispatch": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/common-base-u262/driver.json",
+    "native_output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/common-base-u262/evaluation",
+    "status": "RUNNING",
+    "completed_states_at_observation": 145,
+    "planned_states": 924,
+    "processes": [
+      {
+        "pid": 1919923,
+        "argv": "python3 -u artifacts/evidence-gap-20261023/run_original_feedback_saved_job_v1.py common-base-u262 "
+      },
+      {
+        "pid": 1919928,
+        "argv": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab/tools/evaluate_bounded_laya.py /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/inputs/dev-and-feedback.jsonl /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262 /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/common-base-u262/evaluation --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --compute-phase evidence_gap_20261027_feedback_v2_saved_cpu_common_base_u262_v1 --task memory_feedback --device cpu --operation-state shared_actions --max-len 16384 --head-max-len 2048 --disable-reference-compile --threads 4 "
+      }
+    ],
+    "conditions": {
+      "device": "cpu",
+      "visible_cuda_devices": "",
+      "threads": 4,
+      "max_len": 16384,
+      "head_max_len": 2048,
+      "operation_state": "shared_actions",
+      "reference_compile_override": false,
+      "mha_fastpath_enabled": false,
+      "loaded_weight_dtype": "torch.float32"
+    },
+    "ledger_owner": "native evaluator records terminal compute; nooffline settlement whilelive",
+    "no_auto_retry": true
+  },
+  "next_actions": [
+    "FinishcommonbaseCPU924 audit andsettlechildresidual onlyafterterminal",
+    "Run3answer fits savedCPU candidatecurves under existingplan, selectwithfrozenverifier andperformconditional earlyold-retention jobs",
+    "Originalremaining6fits:CE32/64/128 then delivery32/64/128, eachfromcommonu262;savedCPU/Hostrequired",
+    "F1currentinputcode tested/prepared; finish8existingconditionsemanticreviews/4newcorpusactualpostcaptures (12devfamilies), thenfreeze method andexecuteexistingtwoarmHANDOFF/Host comparisonafterserialadmission. Knownpartial/sufficientmustactualpreviousreceipts.",
+    "Keep F2/F3/compact/conditiondata/newprefix/Q-controls/regularization/seeds/autonomousHost/lifecycle/externalchain/fourfigures infullrequirementmap"
+  ],
+  "handoff_comparison_development": {
+    "summary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/summary-v1.json",
+    "tests_passed": 43,
+    "snapshot_counts": {
+      "inventory": 216,
+      "post_operation_states": 177,
+      "families": 8,
+      "with_actual_known_material": 7,
+      "with_acquired_view": 9,
+      "multiple_handoff_options": 119,
+      "changed_menus": 119,
+      "ready_host_frames": 177
+    },
+    "known_states_all_one_family": "memops_F01;7stepsfromsameactualrequest",
+    "changed_projection_fields": [
+      "retrieved_scopes"
+    ],
+    "old_options_omitted_states": 0,
+    "neural_calls": 0,
+    "real_Host_branches": 0,
+    "current_source_status": "uncommitted/unfrozen; original2a/sourcealiasoutcomes unchanged",
+    "source_condition_review": {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/f01-known-partial-source-review-v1.json",
+      "family": "memops_F01",
+      "independent_requests": 1,
+      "post_states": 7,
+      "known_condition": "partial",
+      "full_documented_three_source_witness_set_action_at_step7": "handoff_select_1_2_4",
+      "current_rule_choice_at_step7": "handoff",
+      "max_return_tokens": 2048,
+      "scope": "Sufficient witnesssetnotunique necessityproof. Othercandidates remain semanticallyunjudged andnewHostoutcomesunknown. No policylabelsadded.",
+      "next": "Useasonecurrent-versionF1candidate, not7independentconditions; sourceformation/replay/Hostpending."
+    },
+    "current_input_preparation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/summary-v1.json",
+    "distinct_related_tests_passed": 59,
+    "actual_f01_prepared_capture": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/actual-input-f01-v1",
+    "actual_f01_current_actions": 27,
+    "actual_f01_original_files_unchanged": 26,
+    "cohort12_plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/cohort12-preparation-v1/plan.json",
+    "cohort12_source_status": "8existingexposeddevfamilies plus4existingT1devfamilies,6literalnewsourcepositions. 4familiesneednewactualpostcaptures; knownconditionsnotfabricatedfromgold/sourcepool. NoactualnewF1Hostbranches."
+  },
+  "other_development": "v148 Q3modeoverlay andF3extractiveimplementation/tests retained;neitheractualQmodel norF3Hostcomparisonexecuted.",
+  "accounting": {
+    "settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source128-answer-postfit-settlement.json",
+    "settled_cpu_seconds": 150.07283168699965,
+    "settled_fields": 15,
+    "native_source128_fit_cpu_previously_recorded_not_rebilled": 8095.459651788,
+    "all_v148_F1_audit_tests_static_summary_native128_parent_fields_settled": true,
+    "pending": "16explicitprior/currentF1fields listed plusv151progress andfutureactiveCPUparentresidual. Noofflineledgerwrite whilelive; previouslysettled150.072831687CPU isnotrebilled.",
+    "unmeasured": "Authoring/reading/exploration/settlement costunknown;GPUactive-seconds/pricesunknown.Originalinterruptedgenerationunknown1 retained.",
+    "progress_processing_cpu_pending": 0.021975012,
+    "pending_disjoint_entries_excluding_this_progress": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v149.json",
+        "field": "accounting.progress_processing_cpu_pending",
+        "cpu_seconds": 0.055432492
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/f01-known-partial-source-review-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.05834454700000001
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v150.json",
+        "field": "accounting.progress_processing_cpu_pending",
+        "cpu_seconds": 0.018660958000000002
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/validation-v1.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 16.180776
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/validation-v1.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 1.0644509999999991
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/validation-v2.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 6.359103
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/validation-v2.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.07308099999999917
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/static-v1.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 53.252855000000004
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/static-v1.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 3.7330169999999976
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/static-v1.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 7.762451000000001
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/mypy-v2.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 1.860017
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/ruff-final.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.127695
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/actual-input-f01-v1/preparation.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 1.081761211
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/actual-input-f01-verification-v1.json",
+        "field": "cpu_seconds_pending_excluding_preparation",
+        "cpu_seconds": 4.371941643
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/cohort12-preparation-v1/plan.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.030314001999999996
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-input-dev-v1/summary-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0016325210000000014
+      }
+    ],
+    "original_ledger_unchanged_while_CPU_job_live": true
+  },
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "verification": "Original128all6nativeold860+feedback64 curves/schedule/weights/options/lengths/checkpoints/ledger audited.F1scriptedactualStoretests pass;mechanicalprojection doesnotprovecurrentfullreplayadmissionorsemanticquality."
+}

@@ -1,0 +1,28 @@
+{
+  "name": "milai-jev-shared-before-pilot-v1",
+  "source_run": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/factorial-v3-r1",
+  "cases": [
+    "exception-withdrawal",
+    "alternative-support",
+    "shared-condition"
+  ],
+  "laya": {
+    "D2-Laya-0": {
+      "base_url": "http://127.0.0.1:7870",
+      "model": "milai-impact-base-v1",
+      "max_len": 2048,
+      "head_max_len": 256,
+      "timeout_seconds": 180.0
+    },
+    "D2-Laya-CE": {
+      "base_url": "http://127.0.0.1:7870",
+      "model": "milai-impact-ce-v1",
+      "max_len": 2048,
+      "head_max_len": 256,
+      "timeout_seconds": 180.0
+    }
+  },
+  "data_role": "Previously exposed source histories, different actual model-formed seed from training. Not heldout.",
+  "controls": "Only independent Impact differs; identical candidate/Writer/Reader settings. No local projection yet.",
+  "unknown_retry": false
+}

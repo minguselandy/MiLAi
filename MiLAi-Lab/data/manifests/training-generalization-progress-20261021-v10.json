@@ -1,0 +1,94 @@
+{
+  "status": "ACTIVE_SOURCE_COLLECTION_CLOSED_NESTED_DATA_FROZEN_FIRST_PRIMARY_FIT_RUNNING",
+  "prior_progress_commit": "f786f0bb",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "source_complete_manifest": "data/manifests/training-generalization-source-expansion-complete-v1.json",
+  "source_collection_status": "CLOSED480with352programcompleted128failed,no retries",
+  "source_review": {
+    "families": 128,
+    "pools": 240,
+    "actual_requests": 728,
+    "raw_states": 3792,
+    "labelled_states": 2124,
+    "masked_states": 1668,
+    "labelled_families": 123,
+    "partial_proof_handoff_labels": 0
+  },
+  "nested_data_manifest": "data/manifests/training-generalization-nested-operation-data-v1.json",
+  "cohort_counts": {
+    "64": {
+      "registered_families": 64,
+      "families_with_actual_states": 64,
+      "labelled_families": 63,
+      "raw_rows": 2142,
+      "labelled_rows": 1468,
+      "masked_rows": 674
+    },
+    "128": {
+      "registered_families": 128,
+      "families_with_actual_states": 128,
+      "labelled_families": 126,
+      "raw_rows": 4092,
+      "labelled_rows": 2762,
+      "masked_rows": 1330
+    },
+    "256": {
+      "registered_families": 256,
+      "families_with_actual_states": 256,
+      "labelled_families": 249,
+      "raw_rows": 7884,
+      "labelled_rows": 4886,
+      "masked_rows": 2998
+    }
+  },
+  "first_fit_plan": "data/manifests/training-generalization-source256-fit-plan-v1.json",
+  "active_fit": {
+    "observed_at": "2026-10-21T15:41:43.540534+00:00",
+    "exec_session": 42364,
+    "parent_pid": 2089181,
+    "child_pid": 2089186,
+    "parent_live": true,
+    "child_live": true,
+    "source_version": "490c683e",
+    "driver": "artifacts/generalization-20261021/first-operation-fit-v1/driver.json",
+    "run": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-full-seed0-u524-v1/run.json",
+    "status": "RUNNING",
+    "optimizer_updates_observed": 0,
+    "planned_optimizer_updates": 524,
+    "input_train_states": 4886,
+    "input_old_dev_states": 860,
+    "input_feedback_dev_states": 16
+  },
+  "settlement": {
+    "status": "SETTLED_ONCE",
+    "phase": "training_generalization_20261021_source_collection_preparation_v3",
+    "cpu_seconds": 1039.874442707,
+    "unmeasured": "Semantic review,tests,debug/inspection,module import and uninstrumented preparation remain unknown,not zero. Initial batch0 label compile and batch1 raw export unmeasured.",
+    "prior_settlements_modified": false,
+    "old_pending35_modified": false,
+    "generation_tokens_already_recorded": true,
+    "five_feedback_evaluator_CPUs_already_recorded_excluded": true,
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "ledger_phase": {
+      "cpu_seconds": 1039.874442707,
+      "measured_phases": 63,
+      "runs": 1
+    },
+    "token_counters_and_limits_unchanged": true
+  },
+  "boundaries": {
+    "new_completed_research_fits": 0,
+    "new_real_post_operation_branches": 0,
+    "new_STATE_model_views": 0,
+    "no_second_model_job_or_offline_settlement_while_fit_live": true,
+    "closed_settlements_v1_v2_v3_do_not_append_or_repeat": true,
+    "old_pending35_untouched": true,
+    "no_sha_validation": true,
+    "no_subagents": true,
+    "no_new_services": true,
+    "pushed": false,
+    "merged": false
+  },
+  "remaining": "Complete first524update primary fit;source128/64curves,lowencoder/headonly,andauxiliarymatchedcontrols;real postoperation/STATE View acceptance;expandedfeedback/selfstates/common-support,factorial/E3/Host,protectedexternal,seeds0/1/2. No Host/generalization gain claimed.",
+  "goal_complete": false
+}

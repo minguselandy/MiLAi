@@ -1,0 +1,27 @@
+{
+  "version": "dynamic-memory-control-followups-v9-admission",
+  "status": "STARTED_SERIAL",
+  "dispatcher": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/reviewed-followups-dispatch-v9.json",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/prepared-followups-v9.json",
+  "observed_pid": 1338326,
+  "observed_child_pid": 1338331,
+  "observed_active": "sandbox-progress-observation-v3",
+  "positions": {
+    "new_sandbox_template_variant": 10,
+    "matched_old_external_dev": 160,
+    "external_dev_baselines": 144,
+    "broader_own_train": 72,
+    "total": 386
+  },
+  "runtime_versions": {
+    "sandbox": "7cb10883",
+    "learned_and_baseline_methods": "0acc4b9a",
+    "evaluation_dispatcher": "dc2d4b32"
+  },
+  "settled_offline_phases_once": 7,
+  "new_budget": false,
+  "automatic_retry": false,
+  "prior_v2_results": "dynamic-memory-control-sandbox-evidence-plan-v2-results.json",
+  "configuration_admission": "Frozen sandbox and4evaluation configs prepared with0modelcalls; final96/shared checkpoint metadata checked.",
+  "no_dev_in_training": true
+}

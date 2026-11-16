@@ -1,0 +1,547 @@
+{
+  "status": "NATIVE_PILOT_FIRST_RESULTS_REVIEWED",
+  "source_commit": "46bc516e",
+  "native_source_commit": "db80b6a",
+  "root": "artifacts/method-architecture/simplemem-v1",
+  "driver": {
+    "status": "NATIVE_PILOT_PREDICTIONS_AND_FIRST_SCORES_CLOSED",
+    "driver_pid": 2094352,
+    "source_commit": "46bc516e",
+    "native_source_commit": "db80b6a",
+    "started_at": "2026-10-15T11:31:13.260289+00:00",
+    "steps": [
+      {
+        "phase": "predict",
+        "pid": 2363644,
+        "started_at": "2026-10-15T12:43:04.788035+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:46:00.708574+00:00"
+      },
+      {
+        "phase": "score",
+        "pid": 2375123,
+        "started_at": "2026-10-15T12:46:00.711817+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:47:26.992649+00:00"
+      }
+    ],
+    "events": 6,
+    "questions": 8,
+    "unknown_wrapper_retry": false,
+    "handoff_at": "2026-10-15T12:43:04.785566+00:00",
+    "closed_at": "2026-10-15T12:47:26.993347+00:00"
+  },
+  "data_role": "two exposed authored development chains; adapter pilot only, not external benchmark or author-native answer replication",
+  "reviewer": "same source author/developer, not independent or blind",
+  "first_labels_unchanged": true,
+  "first_qa_labels": {
+    "Correct": 6,
+    "invalid": 2
+  },
+  "qa_review": [
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "question_index": 0,
+      "question": "防晒帘损坏后原件和照片分别是否继续展示？",
+      "hypothesis": "\n\n根据已交付的记忆材料，针对 **2032年6月2日** 防晒帘损坏的情况，展示状态如下：\n\n* **原件**：**不再继续展示**。记忆 `e2`（2032-06-02 的外部记忆记录）及 `e1` 明确指出，该日防晒帘撕裂损坏，尽管照度检测仍合格，但依据“原件需防晒帘完好且照度合格”的规则，原件被撤下。\n* **照片**：**继续展示**。记忆 `e2` 及 `e0` 说明，壁面照片的展示条件仅为“照度合格”，当日照度未受影响，因此照片继续展出。\n* （补充说明：电子目录的开放状态与展柜条件无关，当日照常运行。）\n\n上述结论直接来源于记忆 `e0`、`e1` 的规则定义与 `e2` 的具体事件记录。材料中未提及该日期存在其他例外条款或不确定性信息。若需查询展柜具体物理结构或照度传感器的详细数值，当前交付材料未包含。",
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "evidence_path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/predictions/halumem/method-screen-exhibit/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "question_index": 1,
+      "question": "电子目录是否关闭，照度是否因帘坏就不合格？",
+      "hypothesis": "\n\n根据交付的记忆资料（对应2032年6月2日及同期记录中的明确陈述）：\n\n1. **电子目录是否关闭？**  \n   未关闭。记录明确指出，电子目录一直开放（或照常运行），其开放状态与展柜条件（如防晒帘是否完好、照度是否合格）无关。\n\n2. **照度是否因帘坏就不合格？**  \n   不是。资料明确记载，在防晒帘撕裂/损坏的情况下，照度检测仍保持合格。帘坏并不会导致照度指标变为不合格。\n\n以上结论直接基于所交付记忆中的报告内容，未作额外推断。",
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "evidence_path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/predictions/halumem/method-screen-exhibit/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "question_index": 0,
+      "question": "帘修好但照度不合格后原件和照片可展吗？",
+      "hypothesis": "\n\n根据记忆材料（e0、e4、e5）针对**2032年6月3日09:00:00**的记录：\n- **原件**：不能展示（仍不能展）。\n- **照片**：必须撤下（不可展示）。\n- **电子目录**：保持不变。\n\n以上为记忆记录中对该具体时间点与条件（防晒帘修好但照度检测不合格）的直接状态描述。未提供该条件下可例外开放或后续变更的信息。",
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "evidence_path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/predictions/halumem/method-screen-exhibit/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "question_index": 1,
+      "question": "防晒帘现在是否完好，电子目录状态如何？",
+      "hypothesis": "\n\n根据提供的记忆记录（对应时间2032年6月3日09:00:00）：\n- **防晒帘**：记录显示其**已修好**，但当时的照度检测不合格。\n- **电子目录**：记录显示其状态**保持不变**。\n\n（注：以上状态均仅依据来源e4与e5在指定时间点的明确记载得出。）",
+      "core_correct": false,
+      "source_faithful": true,
+      "issues": [
+        "catalogue_status_omitted"
+      ],
+      "evidence_path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/predictions/halumem/method-screen-exhibit/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "question_index": 0,
+      "question": "市电停用后投影还能开吗，靠什么？",
+      "hypothesis": "\n\n根据交付的记忆记录，在**2032年6月2日09:00:00**市电停用后，投影**仍然可以开启**，依靠的是**车辆的大电池供电**。\n\n具体条件与依据如下（按记忆状态与日期整理）：\n- **供电方式与切换**：投影系统可通过接通的市电或有电的电池任选一种供电（依据2026-10-15原始用户消息e0/e1的设定）。市电停用后，系统可切换至电池供电。\n- **必要运行条件**：记忆明确指出，无论使用市电或电池，**都必须保证冷却风扇正常运转**。2032-06-02的外部生成记录e2报告指出，当日尽管市电插座停用，但车辆大电池仍有电且风扇功能正常，因此投影可继续开启。\n- **关联设备状态**：字幕屏采用独立小电池供电，不依赖该冷却系统，因此不受市电停用影响（依据e0/e1/e2记录）。\n\n**说明与未覆盖范围**：\n- 上述结论基于所交付的原始用户报告（e0/e1，2026-10-15）与对应2032-06-02的外部生成条目（e2）。各来源仅描述当前状态与既定规则，不 certifies 外部现实绝对性。\n- 当前记忆未提及电池容量上限、风扇异常时的应急方案或投影在双条件失效后的运行状态。若仅依据现有材料，无法确定电池耗尽或风扇停转后投影能否通过其他途径维持运行。",
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "capture_report_clock_confusion"
+      ],
+      "evidence_path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/predictions/halumem/method-screen-projection/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "question_index": 1,
+      "question": "市电停用会使字幕屏停用吗？",
+      "hypothesis": "\n\n根据提供的记忆材料，市电停用**不会**使字幕屏停用。\n\n依据2032年6月2日的记录（external_memory e2）及相关原始来源说明（original_source e0、e1），字幕屏**单独使用小电池供电，不依赖市电或车载主供电与冷却风扇系统**。材料明确指出，当市电插座停用、车载大电池仍有电且风扇正常运行时，投影系统会切换至电池供电，而**字幕屏不受影响**。因此，基于现有记录的条件与陈述，市电停用的状态变化不会导致字幕屏停止运行。",
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "evidence_path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/predictions/halumem/method-screen-projection/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "question_index": 0,
+      "question": "风扇停转而大电池有电时能开投影吗，为什么？",
+      "hypothesis": "\n\n根据提供的记忆材料，针对2032年6月3日09:00:00这一时间点：\n\n**结论：不能开启投影。**\n\n**原因与依据：**\n1. **供电与运行规则（报告/记录状态）**：系统记录与用户报告（e1/s1, e5）明确指出，移动放映车的投影可通过市电或大电池供电，但**这两种供电方式都必须有冷却风扇运转**才能开启投影。该条件为强制限制，不因电源类型改变而豁免。\n2. **设备实际状态（报告状态）**：在2032年6月3日09:00:00，冷却风扇已停止运转（e3, e6）。用户报告（e0/s0）与外部记忆（e3）均同步陈述：在风扇恢复运转前，**即使大电池仍有电，也不能开投影**。\n3. **设备独立性说明**：字幕屏由独立的小电池供电且运行状态未变（e0, e1, e2, e6），不受风扇停转影响，但该状态不适用于投影设备本身。\n\n综上，受设备运行的强制条件限制，在风扇未恢复运转前，即使大电池有电也无法开启投影。",
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "evidence_path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/predictions/halumem/method-screen-projection/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "question_index": 1,
+      "question": "字幕屏现在能否继续运行，它也依赖同一个风扇吗？",
+      "hypothesis": "\n\n根据所交付的记忆材料，针对您询问的2032年6月3日09:00:00的情况，回答如下：\n\n1. **字幕屏能否继续运行**：根据2032年6月3日09:00:00的记录（记忆e3，外部记忆条目），在冷却风扇停止运转时，字幕屏的小电池与运行状态均保持未发生变化。依据该报告陈述，字幕屏在此时点可以继续运行。\n2. **是否依赖同一个风扇**：根据设备规则说明（记忆e1，用户报告于2026-10-15；记忆e6，外部记忆条目于2032-06-01记录），字幕屏采用独立的小电池供电，明确“不依赖这套风扇”。该条件设定在现有材料的时间序列中未被标记为失效、修正或存在局部覆盖，因此适用于当前时间点的推断。\n\n综合上述记忆中的陈述与规则，在2032年6月3日09:00:00，字幕屏能够继续运行，且其运行不依赖投影设备的冷却风扇。以上结论严格基于所交付记忆的记录得出，材料本身不认证客观真实性。检索结果不保证涵盖全部现场信息，实际运行状况需以实时情况为准。",
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "capture_report_clock_confusion"
+      ],
+      "evidence_path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/predictions/halumem/method-screen-projection/2/qa/1/complete.json"
+    }
+  ],
+  "qa_review_counts": {
+    "core_correct": 7,
+    "source_faithful": 6,
+    "denominator": 8
+  },
+  "retrievals": [
+    {
+      "path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/native/halumem/method-screen-exhibit/1/qa/0/retrieval.json",
+      "status": "COMPLETED",
+      "native_fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_generation_calls": 5,
+      "native_plus_flush_and_common_reader_calls": 6
+    },
+    {
+      "path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/native/halumem/method-screen-exhibit/1/qa/1/retrieval.json",
+      "status": "COMPLETED",
+      "native_fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_generation_calls": 4,
+      "native_plus_flush_and_common_reader_calls": 5
+    },
+    {
+      "path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/native/halumem/method-screen-exhibit/2/qa/0/retrieval.json",
+      "status": "COMPLETED",
+      "native_fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 5,
+      "native_plus_flush_generation_calls": 5,
+      "native_plus_flush_and_common_reader_calls": 6
+    },
+    {
+      "path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/native/halumem/method-screen-exhibit/2/qa/1/retrieval.json",
+      "status": "COMPLETED",
+      "native_fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 5,
+      "native_plus_flush_generation_calls": 4,
+      "native_plus_flush_and_common_reader_calls": 5
+    },
+    {
+      "path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/native/halumem/method-screen-projection/1/qa/0/retrieval.json",
+      "status": "COMPLETED",
+      "native_fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_generation_calls": 5,
+      "native_plus_flush_and_common_reader_calls": 6
+    },
+    {
+      "path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/native/halumem/method-screen-projection/1/qa/1/retrieval.json",
+      "status": "COMPLETED",
+      "native_fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_generation_calls": 4,
+      "native_plus_flush_and_common_reader_calls": 5
+    },
+    {
+      "path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/native/halumem/method-screen-projection/2/qa/0/retrieval.json",
+      "status": "COMPLETED",
+      "native_fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_generation_calls": 5,
+      "native_plus_flush_and_common_reader_calls": 6
+    },
+    {
+      "path": "artifacts/method-architecture/simplemem-v1/pilot/SimpleMem-native-common-reader/native/halumem/method-screen-projection/2/qa/1/retrieval.json",
+      "status": "COMPLETED",
+      "native_fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_generation_calls": 4,
+      "native_plus_flush_and_common_reader_calls": 5
+    }
+  ],
+  "native_entries": [
+    {
+      "entry_id": "05f46136-0f00-4b09-8817-00ba4701e284",
+      "lossless_restatement": "On 2032-06-02, the sunshades were torn but illuminance detection remained qualified, so original items were removed from display, photos continued to be displayed, and the electronic catalog continued to operate normally.",
+      "keywords": [
+        "sunshades",
+        "torn",
+        "illuminance",
+        "original items",
+        "photos",
+        "electronic catalog",
+        "display status"
+      ],
+      "timestamp": "2032-06-02T09:00:00+08:00",
+      "location": "Orange Hall",
+      "persons": [],
+      "entities": [
+        "electronic catalog"
+      ],
+      "topic": "Display status update due to damaged sunshades"
+    },
+    {
+      "entry_id": "4f399a4b-8422-4716-a83e-41bf1bc15489",
+      "lossless_restatement": "On 2032-06-01, the rule for displaying original items in the Orange Hall display cabinet requires both intact sunshades and qualified illuminance, while displaying wall photos only requires qualified illuminance; at that time, both conditions were met, allowing both original items and photos to be displayed, and the electronic catalog remained open regardless of display cabinet conditions.",
+      "keywords": [
+        "Orange Hall",
+        "display cabinet",
+        "original items",
+        "wall photos",
+        "sunshades",
+        "illuminance",
+        "electronic catalog",
+        "display rules"
+      ],
+      "timestamp": "2032-06-01T09:00:00+08:00",
+      "location": "Orange Hall",
+      "persons": [],
+      "entities": [
+        "Orange Hall",
+        "electronic catalog"
+      ],
+      "topic": "Display conditions for original items and photos in Orange Hall"
+    },
+    {
+      "entry_id": "6c803cf6-227c-495c-a93c-ee4059b94a76",
+      "lossless_restatement": "On 2032-06-03T09:00:00, the sunshade curtain was repaired, but the illuminance detection failed to meet standards at that time.",
+      "keywords": [
+        "sunshade curtain",
+        "repair",
+        "illuminance detection",
+        "standard failure"
+      ],
+      "timestamp": "2032-06-03T09:00:00",
+      "location": null,
+      "persons": [],
+      "entities": [
+        "sunshade curtain"
+      ],
+      "topic": "Sunshade curtain repair and illuminance detection result"
+    },
+    {
+      "entry_id": "bb0b4358-520b-4712-9a53-0ccd84e5f98e",
+      "lossless_restatement": "On 2032-06-03T09:00:00, the original document could not be exhibited, and the photograph had to be removed.",
+      "keywords": [
+        "original document",
+        "exhibition",
+        "photograph",
+        "removal"
+      ],
+      "timestamp": "2032-06-03T09:00:00",
+      "location": null,
+      "persons": [],
+      "entities": [
+        "original document",
+        "photograph"
+      ],
+      "topic": "Exhibition status of original document and photograph"
+    },
+    {
+      "entry_id": "220a1a00-f4df-4242-8a6f-1663a41dfd51",
+      "lossless_restatement": "On 2032-06-03T09:00:00, the electronic catalog remained unchanged.",
+      "keywords": [
+        "electronic catalog",
+        "unchanged"
+      ],
+      "timestamp": "2032-06-03T09:00:00",
+      "location": null,
+      "persons": [],
+      "entities": [
+        "electronic catalog"
+      ],
+      "topic": "Status of electronic catalog"
+    },
+    {
+      "entry_id": "272ec92c-4c94-498c-9aa4-3cee9012c394",
+      "lossless_restatement": "On 2032-06-02T09:00:00, the municipal electricity socket was deactivated, but the vehicle's large battery remained charged and the fan continued to function normally, causing the projector to switch to battery power; the subtitle screen remained unaffected.",
+      "keywords": [
+        "municipal electricity socket",
+        "vehicle large battery",
+        "fan",
+        "projector",
+        "battery power",
+        "subtitle screen"
+      ],
+      "timestamp": "2032-06-02T09:00:00",
+      "location": null,
+      "persons": [],
+      "entities": [
+        "vehicle large battery",
+        "projector",
+        "subtitle screen"
+      ],
+      "topic": "Change in projector power source due to municipal electricity outage"
+    },
+    {
+      "entry_id": "5ec350e4-1420-4b05-87cf-4c1138a1e292",
+      "lossless_restatement": "On 2032-06-01T09:00:00, the mobile screening vehicle's projector can be powered by either connected municipal electricity or a charged battery, and both power methods require the cooling fan to operate; on this date, municipal electricity is connected, the battery is charged, and the fan is functioning normally, so the projector can be turned on; the subtitle screen uses a separate small battery and does not depend on this fan system.",
+      "keywords": [
+        "mobile screening vehicle",
+        "projector",
+        "municipal electricity",
+        "battery",
+        "cooling fan",
+        "subtitle screen",
+        "power supply"
+      ],
+      "timestamp": "2032-06-01T09:00:00",
+      "location": null,
+      "persons": [],
+      "entities": [
+        "mobile screening vehicle",
+        "projector",
+        "subtitle screen"
+      ],
+      "topic": "Mobile screening vehicle projector power supply status and rules"
+    },
+    {
+      "entry_id": "39386d9a-3b3d-4069-9b07-0ece6a0fab25",
+      "lossless_restatement": "On 2032-06-03T09:00:00, the projector cannot be turned on even if the large battery has power, until the cooling fan resumes operation.",
+      "keywords": [
+        "projector",
+        "cannot be turned on",
+        "large battery",
+        "power",
+        "cooling fan",
+        "resume operation"
+      ],
+      "timestamp": "2032-06-03T09:00:00",
+      "location": null,
+      "persons": [],
+      "entities": [
+        "projector",
+        "large battery",
+        "cooling fan"
+      ],
+      "topic": "Projector operation restriction"
+    },
+    {
+      "entry_id": "80b3bd02-06f4-4e56-a870-ea470d511b53",
+      "lossless_restatement": "On 2032-06-03T09:00:00, the cooling fan stopped operating, and the subtitle screen's small battery and operating status remained unchanged.",
+      "keywords": [
+        "cooling fan",
+        "stopped operating",
+        "subtitle screen",
+        "small battery",
+        "operating status",
+        "unchanged"
+      ],
+      "timestamp": "2032-06-03T09:00:00",
+      "location": null,
+      "persons": [],
+      "entities": [
+        "cooling fan",
+        "subtitle screen"
+      ],
+      "topic": "Equipment status update"
+    }
+  ],
+  "native_entry_review": [
+    {
+      "case": "method-screen-projection",
+      "entries": 4,
+      "core_meanings_covered": true,
+      "notes": "Both supply alternatives share fan; dated actual battery transition and later fan stop/restriction retained; subtitle independence preserved. Restatements incorrectly anchor exact event onset to09:00 report timestamp and omit timezone in native timestamp; outage topic overstates socket deactivation. No exact-span attribution is provided by native core."
+    },
+    {
+      "case": "method-screen-exhibit",
+      "entries": 5,
+      "core_meanings_covered": true,
+      "notes": "Original curtain+light AND versus photos light-only, independent catalogue, curtain tear/repair and light failure preserved chronologically. Event wording anchors exact repair/light failure to report09:00; latest catalogue entry only says unchanged but initial open entry remains."
+    }
+  ],
+  "native_state_timing": "No immediate semantic formation at source0: native40-window buffering preserved. First query flushes arrived source0+1; second checkpoint flushes source2. Generated state reviewed at actual query-time flush, not equated to Strong post-arrival state UJS.",
+  "builder_state": {
+    "method-screen-projection": {
+      "sequence": 3,
+      "processed_count": 3,
+      "dialogue_buffer": [],
+      "previous_entries": []
+    },
+    "method-screen-exhibit": {
+      "sequence": 3,
+      "processed_count": 3,
+      "dialogue_buffer": [],
+      "previous_entries": []
+    }
+  },
+  "native_input_audit": [
+    {
+      "case": "method-screen-exhibit",
+      "session": 0,
+      "exact_arrived_source_text": true,
+      "query_not_writer_input": true,
+      "opaque_source_id": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "exact_arrived_source_text": true,
+      "query_not_writer_input": true,
+      "opaque_source_id": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "exact_arrived_source_text": true,
+      "query_not_writer_input": true,
+      "opaque_source_id": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 0,
+      "exact_arrived_source_text": true,
+      "query_not_writer_input": true,
+      "opaque_source_id": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "exact_arrived_source_text": true,
+      "query_not_writer_input": true,
+      "opaque_source_id": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "exact_arrived_source_text": true,
+      "query_not_writer_input": true,
+      "opaque_source_id": true,
+      "pending_dialogues": 1
+    }
+  ],
+  "costs_by_stage": {
+    "reader": {
+      "responses": 8,
+      "known_tokens": 28906,
+      "unknown_usage": 0
+    },
+    "judge": {
+      "responses": 8,
+      "known_tokens": 21830,
+      "unknown_usage": 0
+    },
+    "native_core": {
+      "responses": 36,
+      "known_tokens": 23884,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "responses": 32,
+      "known_tokens": 1003,
+      "unknown_usage": 0
+    }
+  },
+  "finish_reasons": {
+    "reader": {
+      "stop": 8
+    },
+    "judge": {
+      "stop": 8
+    },
+    "native_core": {
+      "stop": 36
+    }
+  },
+  "prediction_generation_tokens": 52790,
+  "ledger_delta": {
+    "generation_requests": 52,
+    "generation": {
+      "known_tokens": 74620,
+      "charged_tokens": 74620,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 1003,
+      "charged_tokens": 1003,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens_match": true,
+    "generation_requests_match": true,
+    "embedding_tokens_match": true
+  },
+  "requests_without_responses": [],
+  "limitations": [
+    "Two development chains, one first generation each; no superiority/generalization claim.",
+    "Common original-source Reader may repair native omissions; original/core generated entries remain distinct.",
+    "Native temperature/planning/reflection/no-thinking unchanged;8192 cap and shared12-call envelope documented adaptation.",
+    "Native semantic_success remains null; parse/insert success is not quality proof.",
+    "First Judge6Correct+2invalid preserved; manual core7/8 and fidelity6/8 are separate annotations.",
+    "Full12-chain cohort can proceed with unchanged frozen native adapter/common Reader; pilot and full repeat outputs must remain separate.",
+    "No SHA verification, new ledger, service deployment or outcome retries."
+  ]
+}

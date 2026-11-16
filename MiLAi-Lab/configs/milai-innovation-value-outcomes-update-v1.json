@@ -1,0 +1,72 @@
+{
+  "name": "innovation-value-outcomes-update-v1",
+  "source_run": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-external-v1/standard/MiLAi-memory-only",
+  "question_id": "6a1eabeb",
+  "scope": "exposed training/diagnostic source pool, not a new benchmark arm or a heldout result",
+  "nomination": "Actual source review: May23 personal best27:12; May30 hopes to beat existing personal best25:50. The modal hope concerns beating the record, not whether25:50 is the existing record.",
+  "conditions": [
+    {
+      "name": "empty",
+      "indices": [],
+      "expand_context": []
+    },
+    {
+      "name": "old_only",
+      "indices": [
+        2
+      ],
+      "expand_context": [
+        2
+      ]
+    },
+    {
+      "name": "new_only",
+      "indices": [
+        0
+      ],
+      "expand_context": [
+        0
+      ]
+    },
+    {
+      "name": "both",
+      "indices": [
+        2,
+        0
+      ],
+      "expand_context": [
+        2,
+        0
+      ]
+    },
+    {
+      "name": "equivalent_new",
+      "indices": [
+        2,
+        9
+      ],
+      "expand_context": [
+        2,
+        9
+      ]
+    },
+    {
+      "name": "both_plus_unrelated",
+      "indices": [
+        2,
+        0,
+        108
+      ],
+      "expand_context": [
+        2,
+        0,
+        108
+      ]
+    }
+  ],
+  "generation_bound": 12,
+  "source_and_state_mutations": false,
+  "retrieval": "none, exact saved accessible pool",
+  "reader": "same free-form final Reader and same sampling in every subset",
+  "gold": "only original Judge, never Reader; no old scores replaced"
+}

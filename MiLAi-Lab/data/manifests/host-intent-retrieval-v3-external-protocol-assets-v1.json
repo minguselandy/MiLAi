@@ -1,0 +1,88 @@
+{
+  "status": "EXTERNAL_ASSETS_AND_PROTOCOL_PREPARATION_ONLY",
+  "instructir": {
+    "code_revision": "58162a0fb2484eaf02080a538f040221362eecba",
+    "data_revision": "1615ed0ee07d6d33b0082362f008bfe62041a54b",
+    "audit": {
+      "phase": "host_intent_instructir_protocol_audit_v2",
+      "status": "PASS",
+      "model_calls": 0,
+      "ledger_recorded": false,
+      "documents": 16072,
+      "query_instances": 9906,
+      "original_query_groups": 1267,
+      "qrels": 9906,
+      "unique_ids": true,
+      "all_qrel_query_and_document_ids_resolved": true,
+      "complete_title_text_projection": 16072,
+      "public_request_projection": 9906,
+      "synthetic_author_static_method_metrics_equal": 48,
+      "conformance_scope": "Unmodified official static-method body extracted via AST; BEIR base class and unused numpy import not loaded. Synthetic rankings only: ties, empty runs, rank2 and identical IDs. Complete missing-query denominator is an explicitly declared wrapper behavior.",
+      "first_failure": "v1 exact-float equality exposed nondeterministic set iteration in local aggregation; now preserves declared query order. First failure retained; no prediction changed.",
+      "actual_retrieval_queries": 0,
+      "actual_prediction_rows": 0,
+      "wall_seconds": 0.3122751032933593,
+      "cpu_seconds": 2.82517707
+    },
+    "metric_environment": "artifacts/host-intent-retrieval-v3/external/ir-metrics-env",
+    "metric_versions": {
+      "pytrec_eval": "0.5",
+      "numpy": "2.4.6"
+    },
+    "actual_evaluation": "NOT_STARTED; retrieval adapter and frozen method/config remain"
+  },
+  "longmemeval_v2_small": {
+    "code_revision": "2cc8c540bdb87fe6761629b585e727e1c4704520",
+    "current_hf_metadata_revision": "f152293e235517d504809563c833d7190b8c713b",
+    "local_asset_revision": "UNKNOWN; local download revision metadata absent, no byte-identity claim",
+    "preparation": {
+      "status": "COMPLETE_SMALL_SNAPSHOT",
+      "source": "/cra/memory/mx_memory/benchmarks/LongMemEval-V2/data/longmemeval-v2",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/lme-v2-small-snapshot-v1",
+      "tier": "small",
+      "model_calls": 0,
+      "checksum_verification": false,
+      "ledger_recorded": false,
+      "questions": 451,
+      "selected_trajectories": 200,
+      "retained_trajectories": 200,
+      "scanned_trajectories": 1870,
+      "retained_states": 5095,
+      "question_images": 29,
+      "assets": 5124,
+      "copied_assets": 5124,
+      "copied_image_bytes": 548713157,
+      "scope": "All released questions and their unchanged Small mappings; full selected trajectory records and all referenced images copied independently. Unselected trajectories belong to other tiers and are not in Small. No question/answer/history/image contents displayed or used for training.",
+      "wall_seconds": 93.39450666960329,
+      "cpu_seconds": 8.738416362,
+      "peak_rss_kib": 783100
+    },
+    "official_structural_validation": {
+      "status": "OFFICIAL_STRUCTURAL_VALIDATOR_PASSED",
+      "result": {
+        "questions": 451,
+        "trajectories": 200,
+        "haystack_questions": 451,
+        "tier": "small",
+        "check_screenshots": true
+      },
+      "source_revision": "2cc8c540bdb87fe6761629b585e727e1c4704520",
+      "scope": "Schema, IDs, domains, complete Small mapping and referenced image existence; not visual decoding or model accuracy. No hashes computed.",
+      "model_calls": 0,
+      "phase": "host_intent_lme_small_public_validation_v1",
+      "wall_seconds": 1.670244550332427,
+      "cpu_seconds": 1.669512768,
+      "ledger_recorded": false
+    },
+    "prior_exposure": "All200Small histories have prior project assignment/contact; disclosed regression only, not new history-disjoint holdout. See jev-longmemeval-v2-prior-contact-20261017.json and eligibility manifest.",
+    "actual_evaluation": "NOT_STARTED; native memory backend, fixed Reader with image support and cost integration remain. Text-only subset cannot replace451."
+  },
+  "verification": "JSON structure, IDs, native mapping and asset existence only; no SHA/checksum verification. No benchmark questions/answers used for training. No visual semantic evaluation yet.",
+  "tests": {
+    "instructir_synthetic": 4,
+    "lme_snapshot_synthetic": 2,
+    "ruff": "PASS",
+    "mypy": "PASS: instructir.py, export_host_intent_states.py, prepare_lme_small_snapshot.py"
+  },
+  "scope": "Full original external evaluation requirements remain. No new model service or actual external model run."
+}

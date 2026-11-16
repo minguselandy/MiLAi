@@ -1,0 +1,30 @@
+{
+  "selection": "First ID per four declared task types absent from this worktree configs; at least eight sessions. Metadata-only selection, source bodies/questions/gold not inspected here. Prior exposures outside tracked configurations are unknown.",
+  "role": "external development pilot, not a formal held-out split or complete benchmark result",
+  "questions": [
+    {
+      "question_id": "0a995998",
+      "question_type": "multi-session"
+    },
+    {
+      "question_id": "gpt4_59149c77",
+      "question_type": "temporal-reasoning"
+    },
+    {
+      "question_id": "6a1eabeb",
+      "question_type": "knowledge-update"
+    },
+    {
+      "question_id": "8a2466db",
+      "question_type": "single-session-preference"
+    }
+  ],
+  "data": "/cra/memory/mx_memory/reference-sources/milai-edit/data/longmemeval_s_cleaned.json",
+  "arms": [
+    "standard",
+    "value_v1"
+  ],
+  "model_changes": false,
+  "reader_changes": false,
+  "parameter_updates": 0
+}

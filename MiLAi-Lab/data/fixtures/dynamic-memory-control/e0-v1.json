@@ -1,0 +1,854 @@
+{
+  "version": "dynamic-memory-control-e0-v1",
+  "authorship": "assistant-authored synthetic development histories; no external benchmark or unseen-generalization claim",
+  "runtime_contract": "Only each step current content/time and arriving sources enter normal Host. Expected outcomes, family labels and future steps stay offline. All arms start empty.",
+  "review": "Source texts and expectations authored together; not independent gold. Tool logs are explicit authored historical source fixtures, not live application receipts.",
+  "histories": [
+    {
+      "id": "approval",
+      "topic": "A/B scope and future effect",
+      "source_family": "approval",
+      "split": "functional_development",
+      "source_events": 8,
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "q1",
+          "kind": "task",
+          "session": "approval",
+          "content": "截至2031年4月1日及5月2日，A与B差旅审批门槛分别是多少？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "approval-sources",
+              "event_key": "1-0",
+              "content": "A与B项目的差旅审批门槛目前均为1000元。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "approval-sources",
+              "event_key": "1-1",
+              "content": "自2031年5月1日起，只有A项目的差旅审批门槛改为2000元，B不变。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-01T11:00:00+08:00",
+          "query_time": "2031-04-01",
+          "expected": {
+            "apr1": {
+              "A": 1000,
+              "B": 1000
+            },
+            "may2": {
+              "A": 2000,
+              "B": 1000
+            }
+          }
+        },
+        {
+          "id": "q2",
+          "kind": "task",
+          "session": "approval",
+          "content": "2031年5月2日，A采购、A差旅与B差旅各适用什么门槛？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "approval-sources",
+              "event_key": "2-0",
+              "content": "A项目采购物资的审批门槛仍为800元，差旅政策不适用于采购。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "approval-sources",
+              "event_key": "2-1",
+              "content": "B项目新联系人是苏禾；联系人变化不调整审批规则。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-02T11:00:00+08:00",
+          "query_time": "2031-04-02",
+          "expected": {
+            "A_procurement": 800,
+            "A_travel": 2000,
+            "B_travel": 1000
+          }
+        },
+        {
+          "id": "q3",
+          "kind": "task",
+          "session": "approval-reopened",
+          "content": "按最新补充，2031年5月2日A境内、A境外与B差旅各是什么门槛？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "approval-sources",
+              "event_key": "3-0",
+              "content": "补充A差旅新规：2000元门槛只适用于境内差旅，境外差旅仍为1000元。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "approval-sources",
+              "event_key": "3-1",
+              "content": "A境内差旅新规生效日仍为2031年5月1日，未提前。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-03T11:00:00+08:00",
+          "query_time": "2031-04-03",
+          "expected": {
+            "A_domestic": 2000,
+            "A_foreign": 1000,
+            "B": 1000
+          }
+        },
+        {
+          "id": "q4",
+          "kind": "task",
+          "session": "approval-reopened",
+          "content": "按目前收到的更改，2031年5月2日A境外与B差旅各是什么门槛？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "approval-sources",
+              "event_key": "4-0",
+              "content": "撤回对A境外差旅的上述例外。自2031年5月1日起，A境内和境外差旅均适用2000元。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "approval-sources",
+              "event_key": "4-1",
+              "content": "B项目差旅审批门槛保持1000元，采购规则不受本次A调整影响。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-04T11:00:00+08:00",
+          "query_time": "2031-04-04",
+          "expected": {
+            "A_foreign": 2000,
+            "B": 1000
+          }
+        }
+      ]
+    },
+    {
+      "id": "project_lead",
+      "topic": "Current, corrected history, actual saved history",
+      "source_family": "project_lead",
+      "split": "functional_development",
+      "source_events": 8,
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "command-1",
+          "kind": "explicit_operation",
+          "session": "project_lead",
+          "content": "请保存：云帆项目负责人林岚的任职起始日是2031年2月1日。",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "project_lead-sources",
+              "event_key": "1-0",
+              "content": "云帆项目：林岚从2031年2月1日起担任负责人。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "project_lead-sources",
+              "event_key": "1-1",
+              "content": "云帆项目财务审核人为周宁，财务审核不代表项目负责人。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-01T10:00:00+08:00",
+          "query_time": "2031-04-01"
+        },
+        {
+          "id": "q1",
+          "kind": "task",
+          "session": "project_lead",
+          "content": "目前云帆负责人是谁，从哪天开始？",
+          "incoming_sources": [],
+          "occurred_at": "2031-04-01T11:00:00+08:00",
+          "query_time": "2031-04-01",
+          "expected": {
+            "lead": "林岚",
+            "start": "2031-02-01"
+          }
+        },
+        {
+          "id": "q2",
+          "kind": "task",
+          "session": "project_lead",
+          "content": "目前云帆与青屿的负责人分别是谁？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "project_lead-sources",
+              "event_key": "2-0",
+              "content": "从2031年4月2日起，陈秋接任云帆负责人，林岚此前负责。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "project_lead-sources",
+              "event_key": "2-1",
+              "content": "林岚调往青屿项目，自4月2日起负责青屿，不再负责云帆。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-02T11:00:00+08:00",
+          "query_time": "2031-04-02",
+          "expected": {
+            "云帆": "陈秋",
+            "青屿": "林岚"
+          }
+        },
+        {
+          "id": "command-3",
+          "kind": "explicit_operation",
+          "session": "project_lead",
+          "content": "请更正已保存的云帆早期负责人起始日期：林岚实际从2031年2月3日起任职，原2月1日是录入错误。陈秋自4月2日起接任的安排不变。",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "project_lead-sources",
+              "event_key": "3-0",
+              "content": "更正云帆早期任职记录：林岚实际从2031年2月3日起负责；原2月1日是录入错误。陈秋4月2日接任日期不变。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "project_lead-sources",
+              "event_key": "3-1",
+              "content": "云帆合同签署日为2031年1月20日，签署日不是负责人任职起始日。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-03T10:00:00+08:00",
+          "query_time": "2031-04-03"
+        },
+        {
+          "id": "q3",
+          "kind": "task",
+          "session": "project_lead-reopened",
+          "content": "纠错后，2031年3月1日云帆由谁负责，其实际任职起始日是哪天？",
+          "incoming_sources": [],
+          "occurred_at": "2031-04-03T11:00:00+08:00",
+          "query_time": "2031-04-03",
+          "expected": {
+            "lead": "林岚",
+            "start": "2031-02-03"
+          }
+        },
+        {
+          "id": "q4",
+          "kind": "task",
+          "session": "project_lead-reopened",
+          "content": "系统最初保存的云帆负责人起始日是哪天？纠错后实际起始日又是哪天？现在负责人是谁？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "project_lead-sources",
+              "event_key": "4-0",
+              "content": "云帆现任负责人仍是陈秋，没有新的负责人调整。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "project_lead-sources",
+              "event_key": "4-1",
+              "content": "云帆新增设计联系人顾然；设计联系人不是负责人。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-04T11:00:00+08:00",
+          "query_time": "2031-04-04",
+          "expected": {
+            "first_saved": "2031-02-01",
+            "corrected_start": "2031-02-03",
+            "current": "陈秋",
+            "requires_actual_history": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "preferences",
+      "topic": "Speaker, third-party report and tool observation",
+      "source_family": "preferences",
+      "split": "functional_development",
+      "source_events": 8,
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "q1",
+          "kind": "task",
+          "session": "preferences",
+          "content": "明舟和陶溪各喜欢哪类咖啡？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "preferences-sources",
+              "event_key": "1-0",
+              "content": "我叫明舟，我平时喜欢无糖黑咖啡。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "preferences-sources",
+              "event_key": "1-1",
+              "content": "我同事陶溪喜欢加奶的甜咖啡；这是陶溪的偏好，不是我的。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-01T11:00:00+08:00",
+          "query_time": "2031-04-01",
+          "expected": {
+            "明舟": "无糖黑咖啡",
+            "陶溪": "加奶甜咖啡"
+          }
+        },
+        {
+          "id": "q2",
+          "kind": "task",
+          "session": "preferences",
+          "content": "4月2日的代领订单是否说明明舟改成喜欢甜拿铁了？他的已报告偏好是什么？",
+          "incoming_sources": [
+            {
+              "role": "tool",
+              "session_id": "preferences-sources",
+              "event_key": "2-0",
+              "content": "订单日志：4月2日明舟代陶溪领取一杯甜拿铁，收件人是陶溪。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai",
+              "origin": "authored_order_log"
+            },
+            {
+              "role": "user",
+              "session_id": "preferences-sources",
+              "event_key": "2-1",
+              "content": "我今天代陶溪取咖啡，自己没有点咖啡，我的平时偏好不变。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-02T11:00:00+08:00",
+          "query_time": "2031-04-02",
+          "expected": {
+            "changed": false,
+            "明舟": "无糖黑咖啡",
+            "order_recipient": "陶溪"
+          }
+        },
+        {
+          "id": "q3",
+          "kind": "task",
+          "session": "preferences-reopened",
+          "content": "明舟上午与晚上分别喝什么？陶溪晚上的报告是什么？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "preferences-sources",
+              "event_key": "3-0",
+              "content": "更新我的饮用安排：明舟上午仍选无糖黑咖啡，晚上只喝无咖啡因茶。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "preferences-sources",
+              "event_key": "3-1",
+              "content": "陶溪晚上仍喝加奶咖啡，他没有报告改喝茶。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-03T11:00:00+08:00",
+          "query_time": "2031-04-03",
+          "expected": {
+            "明舟上午": "无糖黑咖啡",
+            "明舟晚上": "无咖啡因茶",
+            "陶溪晚上": "加奶咖啡"
+          }
+        },
+        {
+          "id": "q4",
+          "kind": "task",
+          "session": "preferences-reopened",
+          "content": "现在为明舟安排晚上饮品应选什么？陶溪代领那杯茶能否证明陶溪也改成同样偏好？",
+          "incoming_sources": [
+            {
+              "role": "tool",
+              "session_id": "preferences-sources",
+              "event_key": "4-0",
+              "content": "订单日志：陶溪替明舟领走一杯无咖啡因茶，收件人明舟，领取时段晚上。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai",
+              "origin": "authored_order_log"
+            },
+            {
+              "role": "user",
+              "session_id": "preferences-sources",
+              "event_key": "4-1",
+              "content": "我明舟订会议饮品时按每个人已报告的偏好安排；代领行为不改变任何人的偏好。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-04T11:00:00+08:00",
+          "query_time": "2031-04-04",
+          "expected": {
+            "明舟晚上": "无咖啡因茶",
+            "陶溪_changed": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "alternate_support",
+      "topic": "Alternative proofs and withdrawals",
+      "source_family": "alternate_support",
+      "split": "functional_development",
+      "source_events": 8,
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "q1",
+          "kind": "task",
+          "session": "alternate_support",
+          "content": "叶澄当前可以领取样品吗，依据是什么？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "alternate_support-sources",
+              "event_key": "1-0",
+              "content": "资料室规则：仅当安全培训有效或导师授权有效这两条路径至少一条成立，成员才可以领取样品。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "alternate_support-sources",
+              "event_key": "1-1",
+              "content": "成员叶澄的安全培训记录当前有效。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-01T11:00:00+08:00",
+          "query_time": "2031-04-01",
+          "expected": {
+            "eligible": true,
+            "support": [
+              "training"
+            ]
+          }
+        },
+        {
+          "id": "q2",
+          "kind": "task",
+          "session": "alternate_support",
+          "content": "叶澄当前有哪些独立的有效领取资格路径？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "alternate_support-sources",
+              "event_key": "2-0",
+              "content": "导师又为叶澄签发了独立样品领取授权，当前有效。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "alternate_support-sources",
+              "event_key": "2-1",
+              "content": "资料室更换了门牌颜色，领取资格规则没有改变。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-02T11:00:00+08:00",
+          "query_time": "2031-04-02",
+          "expected": {
+            "eligible": true,
+            "support": [
+              "training",
+              "mentor"
+            ]
+          }
+        },
+        {
+          "id": "q3",
+          "kind": "task",
+          "session": "alternate_support-reopened",
+          "content": "培训记录被撤回之后，叶澄还能领取样品吗，为什么？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "alternate_support-sources",
+              "event_key": "3-0",
+              "content": "撤回叶澄的安全培训有效记录：培训尚未完成；这次更正不涉及导师授权。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "alternate_support-sources",
+              "event_key": "3-1",
+              "content": "管理员确认叶澄的导师授权仍有效。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-03T11:00:00+08:00",
+          "query_time": "2031-04-03",
+          "expected": {
+            "eligible": true,
+            "support": [
+              "mentor"
+            ],
+            "withdrawal_not_negation": true
+          }
+        },
+        {
+          "id": "q4",
+          "kind": "task",
+          "session": "alternate_support-reopened",
+          "content": "当前叶澄是否满足领取资格？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "alternate_support-sources",
+              "event_key": "4-0",
+              "content": "导师撤回叶澄的样品领取授权，即时失效。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "alternate_support-sources",
+              "event_key": "4-1",
+              "content": "叶澄仍未完成安全培训，目前没有任何其他领取授权。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-04T11:00:00+08:00",
+          "query_time": "2031-04-04",
+          "expected": {
+            "eligible": false,
+            "both_paths_invalid": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "topic_reuse",
+      "topic": "A to B to A with unrelated events and new exception",
+      "source_family": "topic_reuse",
+      "split": "functional_development",
+      "source_events": 8,
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "q1",
+          "kind": "task",
+          "session": "topic_reuse",
+          "content": "星港项目A的普通无电池样品可按什么方式寄送？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "topic_reuse-sources",
+              "event_key": "1-0",
+              "content": "星港项目A的普通样品可以空运，通常按空运安排寄送。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "topic_reuse-sources",
+              "event_key": "1-1",
+              "content": "北岭项目B的文稿发表前须由编辑审核，并以中文发布。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-01T11:00:00+08:00",
+          "query_time": "2031-04-01",
+          "expected": {
+            "transport": "air"
+          }
+        },
+        {
+          "id": "q2",
+          "kind": "task",
+          "session": "topic_reuse",
+          "content": "北岭项目B文稿发布前需要什么，使用什么语言？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "topic_reuse-sources",
+              "event_key": "2-0",
+              "content": "北岭项目B新增财务联系人秦宇，这不改变文稿审核规则。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "topic_reuse-sources",
+              "event_key": "2-1",
+              "content": "星港项目A的样品目录改放二楼，运输规则未变。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-02T11:00:00+08:00",
+          "query_time": "2031-04-02",
+          "expected": {
+            "review": "editor",
+            "language": "Chinese"
+          }
+        },
+        {
+          "id": "q3",
+          "kind": "task",
+          "session": "topic_reuse-reopened",
+          "content": "星港项目A的普通无电池样品可按什么方式寄送？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "topic_reuse-sources",
+              "event_key": "3-0",
+              "content": "北岭项目B更新收件邮箱位置说明，仍执行原中文发布流程。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "topic_reuse-sources",
+              "event_key": "3-1",
+              "content": "星港项目A新增文档整理员许澄，普通样品运输规则未变。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-03T11:00:00+08:00",
+          "query_time": "2031-04-03",
+          "expected": {
+            "transport": "air",
+            "same_query_as": "q1"
+          }
+        },
+        {
+          "id": "q4",
+          "kind": "task",
+          "session": "topic_reuse-reopened",
+          "content": "星港项目A含锂电池的样品现在能空运吗，应按什么方式寄送？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "topic_reuse-sources",
+              "event_key": "4-0",
+              "content": "星港项目A补充运输例外：含锂电池的样品只能陆运，不能空运。普通无电池样品的规则不变。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "topic_reuse-sources",
+              "event_key": "4-1",
+              "content": "北岭项目B新增活动海报，文稿仍由编辑审核并以中文发布。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-04T11:00:00+08:00",
+          "query_time": "2031-04-04",
+          "expected": {
+            "air_allowed": false,
+            "transport": "ground"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reopen_forget",
+      "topic": "Explicit save, correction, cross-session read and forget",
+      "source_family": "reopen_forget",
+      "split": "functional_development",
+      "source_events": 8,
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "command-1",
+          "kind": "explicit_operation",
+          "session": "reopen_forget",
+          "content": "请保存：我的收藏柜标签是松影七号。",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "reopen_forget-sources",
+              "event_key": "1-0",
+              "content": "我希望以后给我的便签使用中文。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "reopen_forget-sources",
+              "event_key": "1-1",
+              "content": "我的收藏柜用途是存放模型配件。",
+              "occurred_at": "2031-04-01T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-01T10:00:00+08:00",
+          "query_time": "2031-04-01"
+        },
+        {
+          "id": "q1",
+          "kind": "task",
+          "session": "reopen_forget",
+          "content": "我收藏柜现在保存的标签是什么？",
+          "incoming_sources": [],
+          "occurred_at": "2031-04-01T11:00:00+08:00",
+          "query_time": "2031-04-01",
+          "expected": {
+            "tag": "松影七号"
+          }
+        },
+        {
+          "id": "command-2",
+          "kind": "explicit_operation",
+          "session": "reopen_forget",
+          "content": "请更正：我的收藏柜标签改为潮声九号，原标签已不再使用。",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "reopen_forget-sources",
+              "event_key": "2-0",
+              "content": "我把收藏柜移到了工作间，但用途不变。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "reopen_forget-sources",
+              "event_key": "2-1",
+              "content": "我的日程提醒希望安排在上午，和收藏柜标签无关。",
+              "occurred_at": "2031-04-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-02T10:00:00+08:00",
+          "query_time": "2031-04-02"
+        },
+        {
+          "id": "q2",
+          "kind": "task",
+          "session": "reopen_forget",
+          "content": "更正后收藏柜标签是什么？",
+          "incoming_sources": [],
+          "occurred_at": "2031-04-02T11:00:00+08:00",
+          "query_time": "2031-04-02",
+          "expected": {
+            "tag": "潮声九号"
+          }
+        },
+        {
+          "id": "q3",
+          "kind": "task",
+          "session": "reopen_forget-reopened",
+          "content": "我重新打开了对话，收藏柜的标签是什么？便签用什么语言？",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "reopen_forget-sources",
+              "event_key": "3-0",
+              "content": "工作间新添一张折叠桌。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "reopen_forget-sources",
+              "event_key": "3-1",
+              "content": "我的便签语言偏好仍然是中文。",
+              "occurred_at": "2031-04-03T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-03T11:00:00+08:00",
+          "query_time": "2031-04-03",
+          "expected": {
+            "tag": "潮声九号",
+            "language": "Chinese",
+            "cross_session": true
+          }
+        },
+        {
+          "id": "command-4",
+          "kind": "explicit_operation",
+          "session": "reopen_forget",
+          "content": "请忘记我的收藏柜标签，包括旧标签、新标签及其相关原始来源。保留我的便签语言偏好。",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "reopen_forget-sources",
+              "event_key": "4-0",
+              "content": "我保留模型配件收藏的爱好。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "reopen_forget-sources",
+              "event_key": "4-1",
+              "content": "便签语言的中文偏好仍需要保留。",
+              "occurred_at": "2031-04-04T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "occurred_at": "2031-04-04T10:00:00+08:00",
+          "query_time": "2031-04-04"
+        },
+        {
+          "id": "q4",
+          "kind": "task",
+          "session": "reopen_forget-reopened",
+          "content": "我收藏柜的标签是什么？我的便签应使用什么语言？",
+          "incoming_sources": [],
+          "occurred_at": "2031-04-04T11:00:00+08:00",
+          "query_time": "2031-04-04",
+          "expected": {
+            "tag": "unavailable_after_forget",
+            "language": "Chinese",
+            "question_does_not_repeat_forgotten_value": true
+          }
+        }
+      ]
+    }
+  ]
+}

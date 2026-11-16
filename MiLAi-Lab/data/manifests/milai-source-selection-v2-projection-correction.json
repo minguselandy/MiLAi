@@ -1,0 +1,20 @@
+{
+  "status": "PRE_MODEL_PROJECTION_CORRECTION_INPUTS_UNCHANGED",
+  "first_data": "artifacts/jev-reader/selection-v2/states-v1",
+  "active_data": "artifacts/jev-reader/selection-v2/states-v2",
+  "deltas": {
+    "train": {
+      "source_target_changes": 70,
+      "reference_target_changes": 0
+    },
+    "dev": {
+      "source_target_changes": 11,
+      "reference_target_changes": 0
+    }
+  },
+  "finding": "A completed equivalent premise made longer residual proofs unnecessary, but v1 still rewarded their extra reads. v2 retains inclusion-minimal residual sets. This removes logical redundancy without selecting shortest incomparable paths or adding budget utility.",
+  "native_reference_targets_changed": false,
+  "source_annotations_changed": false,
+  "model_calls": 0,
+  "sha_checks": false
+}

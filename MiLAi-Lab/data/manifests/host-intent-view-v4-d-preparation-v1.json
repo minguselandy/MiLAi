@@ -1,0 +1,32 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "source_fixture": "artifacts/host-intent-retrieval-v3/data/t1-sources-v1/full-histories.json",
+  "recipe": "data/fixtures/host-intent-view-v4-d-dev-streams.json",
+  "histories": "artifacts/host-intent-retrieval-v3/data/view-v4-d-dev-streams-v1/histories.json",
+  "split": "dev",
+  "source_groups": [
+    "memops_A19",
+    "memops_A32",
+    "memops_B30",
+    "memops_C03",
+    "memops_D25",
+    "memops_E08",
+    "memops_E15",
+    "memops_F01"
+  ],
+  "groups": 8,
+  "streams": 16,
+  "positions_per_arm": 64,
+  "selection": "All eight existing natural continuous memops dev groups; no model outcomes used. The authored changed-View mechanism history remains separate, not discarded from the project.",
+  "exposure": "Already exposed development sources; not blind/independent test. No dev source enters new feedback training.",
+  "source_objects_per_stream": 23,
+  "original_source_objects_preserved": true,
+  "middle_scope": "Three additional original arrivals; relevance is not asserted by schedule labels.",
+  "model_calls": 0,
+  "compute": {
+    "wall_seconds": 0.04380720108747482,
+    "cpu_seconds": 0.043808230000000004
+  },
+  "ledger_recorded": true,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v22.json"
+}

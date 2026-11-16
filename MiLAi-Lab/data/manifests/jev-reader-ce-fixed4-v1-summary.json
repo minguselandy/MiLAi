@@ -1,0 +1,652 @@
+{
+  "status": "SELECTOR_CLOSED_NO_READER_QA_YET",
+  "run": {
+    "status": "COMPLETED",
+    "pid": 1451842,
+    "source_version": "31837038",
+    "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/laya_ce",
+    "planned_cases": 46,
+    "completed_cases": 46,
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/ce-c20-v1/checkpoint",
+    "physical_gpu": 2,
+    "new_http_calls": 0,
+    "ledger_recorded": true
+  },
+  "compute": {
+    "runs": 1,
+    "wall_seconds": 18.60731962416321,
+    "cpu_seconds": 26.264596073000003,
+    "forwards": 70,
+    "sequence_rows": 70,
+    "input_tokens": 209377,
+    "state_tokenizations": 70,
+    "state_tokens": 187175,
+    "peak_rss_kib": 2747976,
+    "peak_cuda_allocated_bytes": 6073125376
+  },
+  "counts": {
+    "reused_prefixes": 114,
+    "new_prefixes": 70,
+    "same_as_bm25_four": 17,
+    "same_as_adaptive": 0
+  },
+  "comparisons": [
+    {
+      "case": "row-866",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-1284",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-2389",
+      "fixed4": [
+        "p0",
+        "p5",
+        "p1",
+        "p2"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-3045",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p3",
+        "p12"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-3445",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p5",
+        "p4"
+      ],
+      "adaptive": [
+        "p1",
+        "p0"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-4588",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p3",
+        "p15"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-5026",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-5217",
+      "fixed4": [
+        "p0",
+        "p12",
+        "p11",
+        "p10"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-6214",
+      "fixed4": [
+        "p0",
+        "p3",
+        "p2",
+        "p1"
+      ],
+      "adaptive": [
+        "p0",
+        "p3"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-6657",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-7996",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p15"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-8077",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p3",
+        "p2"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-10114",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p4"
+      ],
+      "adaptive": [],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-10637",
+      "fixed4": [
+        "p0",
+        "p2",
+        "p1",
+        "p3"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-10766",
+      "fixed4": [
+        "p0",
+        "p5",
+        "p4",
+        "p18"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-11853",
+      "fixed4": [
+        "p0",
+        "p10",
+        "p5",
+        "p15"
+      ],
+      "adaptive": [
+        "p0",
+        "p10"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-12523",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p1",
+        "p0"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-12833",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p1",
+        "p0"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-14496",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p1"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-15332",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p5",
+        "p3"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-17008",
+      "fixed4": [
+        "p0",
+        "p5",
+        "p4",
+        "p2"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-17159",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p12",
+        "p2"
+      ],
+      "adaptive": [
+        "p1",
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-19869",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-19890",
+      "fixed4": [
+        "p13",
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "adaptive": [
+        "p13",
+        "p0"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-21050",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-21946",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p5",
+        "p3"
+      ],
+      "adaptive": [],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-23089",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p12",
+        "p11"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-23193",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-24052",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p3",
+        "p2"
+      ],
+      "adaptive": [
+        "p1"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-24087",
+      "fixed4": [
+        "p0",
+        "p2",
+        "p4",
+        "p5"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-24439",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p1"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-24506",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-26884",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p5",
+        "p6"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-27448",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-28384",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p14",
+        "p2"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-28960",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p5"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-32682",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p3",
+        "p5"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-35775",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p13",
+        "p12"
+      ],
+      "adaptive": [],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-36340",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p12",
+        "p5"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-36373",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p15"
+      ],
+      "adaptive": [],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-36664",
+      "fixed4": [
+        "p0",
+        "p1",
+        "p2",
+        "p11"
+      ],
+      "adaptive": [
+        "p0",
+        "p1"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-37002",
+      "fixed4": [
+        "p0",
+        "p2",
+        "p3",
+        "p5"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-37282",
+      "fixed4": [
+        "p1",
+        "p0",
+        "p5",
+        "p2"
+      ],
+      "adaptive": [
+        "p1",
+        "p0"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-38432",
+      "fixed4": [
+        "p0",
+        "p2",
+        "p5",
+        "p3"
+      ],
+      "adaptive": [
+        "p0"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    },
+    {
+      "case": "row-38999",
+      "fixed4": [
+        "p1",
+        "p2",
+        "p0",
+        "p12"
+      ],
+      "adaptive": [
+        "p1",
+        "p2",
+        "p0"
+      ],
+      "adaptive_stop": "stop_sufficient"
+    },
+    {
+      "case": "row-39565",
+      "fixed4": [
+        "p0",
+        "p2",
+        "p1",
+        "p18"
+      ],
+      "adaptive": [
+        "p0",
+        "p2"
+      ],
+      "adaptive_stop": "stop_exhausted"
+    }
+  ],
+  "same_original_fixed2_prefix_all": true,
+  "standalone_model_tokens": 547859,
+  "ledger_exact_once": true,
+  "new_http_calls": 0,
+  "scope": "SamefrozenCE model,pool/ranking andfourdecisioncap; fixed4disablesSTOP. DoesnotproveQAeffect withoutpairedReader evaluation."
+}

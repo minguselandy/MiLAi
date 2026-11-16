@@ -98,6 +98,11 @@ class HostCapacity:
             raise ValueError(f"INVALID_CAPACITY_{name.upper()}")
         return value
 
+    def text_offsets(self, text: str) -> list[tuple[int, int]]:
+        """Native Unicode character offsets for explicit literal-range retrieval."""
+        return list(self.tokenizer(text, add_special_tokens=False,
+            return_offsets_mapping=True)["offset_mapping"])
+
     def text_tokens(self, text: str) -> int:
         if not isinstance(text, str):
             raise TypeError("TEXT_TOKENS_REQUIRES_STRING")
@@ -107,7 +112,12 @@ class HostCapacity:
         self,
         messages: Sequence[Mapping[str, Any]],
         tools: Sequence[dict[str, Any]] | None = None,
+        *,
+        enable_thinking: bool | None = None,
     ) -> int:
+        thinking = self.enable_thinking if enable_thinking is None else enable_thinking
+        if type(thinking) is not bool:
+            raise ValueError("INVALID_CAPACITY_ENABLE_THINKING")
         rendered_messages = []
         for message in messages:
             normalized = deepcopy(dict(message))
@@ -135,7 +145,7 @@ class HostCapacity:
             tools=list(tools) if tools else None,
             tokenize=True,
             add_generation_prompt=True,
-            enable_thinking=self.enable_thinking,
+            enable_thinking=thinking,
         )
         return len(rendered)
 
@@ -144,11 +154,16 @@ class HostCapacity:
         messages: Sequence[Mapping[str, Any]],
         output_tokens: int | None = None,
         tools: Sequence[dict[str, Any]] | None = None,
+        *,
+        enable_thinking: bool | None = None,
     ) -> dict[str, Any]:
         reserve = self.output_tokens if output_tokens is None else output_tokens
         if type(reserve) is not int or reserve <= 0:
             raise ValueError("INVALID_OUTPUT_RESERVATION")
-        prompt = self.count_messages(messages, tools)
+        prompt = self.count_messages(
+            messages, tools,
+            **({"enable_thinking": enable_thinking} if enable_thinking is not None else {}),
+        )
         total = (
             prompt
             + reserve
@@ -165,7 +180,9 @@ class HostCapacity:
             "context_tokens": self.context_tokens,
             "total_reserved_tokens": total,
             "remaining_tokens": self.context_tokens - total,
-            "identity": self.identity,
+            "identity": self.identity if enable_thinking is None else {
+                **self.identity, "enable_thinking": enable_thinking,
+            },
         }
         if total > self.context_tokens:
             raise CapacityExceeded(receipt)

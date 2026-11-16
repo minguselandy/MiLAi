@@ -19,7 +19,7 @@ import anyio
 import httpx2
 import uvicorn
 from anyio.from_thread import start_blocking_portal
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool

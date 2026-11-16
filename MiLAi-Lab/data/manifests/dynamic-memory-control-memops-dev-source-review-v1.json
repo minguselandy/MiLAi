@@ -1,0 +1,470 @@
+{
+  "version": "dynamic-memory-control-memops-dev-source-review-v1",
+  "status": "SOURCE_CONTRACTS_REVIEWED_NOT_RUN",
+  "declared_split": "dev",
+  "scope": "Eight jointly allocated development source backgrounds,24chronological cuts plus repeats. Separate from all training inputs and protected test families; not heldout or pretraining-unseen.",
+  "source_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main/generated_result/2-evidence_conversation",
+  "family_assignments": [
+    {
+      "A19": "dev",
+      "A32": "dev",
+      "B30": "dev",
+      "C03": "dev",
+      "D25": "dev",
+      "E08": "dev",
+      "E15": "dev",
+      "F01": "dev"
+    },
+    {
+      "A19": "dev",
+      "A32": "dev",
+      "B30": "dev",
+      "C03": "dev",
+      "D25": "dev",
+      "E08": "dev",
+      "E15": "dev",
+      "F01": "dev"
+    }
+  ],
+  "planned_files": [
+    "A19_update.json",
+    "A32_reflect.json",
+    "B30_trajectory_ops.json",
+    "C03_trajectory_ops.json",
+    "D25_reflect.json",
+    "E08_reflect.json",
+    "E15_remember.json",
+    "F01_trajectory_ops.json"
+  ],
+  "cases": [
+    {
+      "family": "A19",
+      "file": "A19_update.json",
+      "query": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Karen Liu is the current primary at HR and CoreFit. Her phone number has not yet been supplied;520-334-7190belongs to the former contact Diane and must not be transferred to Karen.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Priya Nair,503-772-4415, is the current primary at HR and the gym during Karen’s trip. Karen’s earlier accident response does not reverse the subsequent change; Marcus is an outdated removed contact, not current.",
+          "support_sets": [
+            [
+              "s1t7",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Karen Liu at503-461-2283 is primary again at HR and CoreFit after the reported update this morning. The Tom switch never happened; Priya as an official secondary is only being considered and has not been submitted. No calendar date for this morning is supplied.",
+          "support_sets": [
+            [
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Public synthetic source-contained reports, not verified HR/dentist changes, contactability or emergency advice."
+    },
+    {
+      "family": "A32",
+      "file": "A32_reflect.json",
+      "query": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "A bounded preference for an orderly, more controlled existing email setup: inbox cleanup on March16, password changed after the April2lockout, and2FAenabled. Gmail is primary. These are user reports of actions, not independent verification of account security.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "The same organization/security pattern while retaining Gmail, with inbox cleanup, password change and2FAalready reported. Connected-app review and suspicious-activity alerts are plans, not completed actions. Danielle’s ProtonMail switch and Kevin’s phishing are other people’s events.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Gmail remains primary. In addition to inbox cleanup, password change and2FA, the connected-app audit is now reported complete and about eight old services had access revoked. Danielle’s proposed Proton address is not adopted as primary. Alert setup is still not confirmed; do not claim a full migration or guaranteed security.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "The quoted request to forget an old Outlook account is a historical source statement; this read-only task does not execute or evaluate Store deletion."
+    },
+    {
+      "family": "B30",
+      "file": "B30_trajectory_ops.json",
+      "query": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Use Marc professionally for the college friend and Chen Wei in full for the former roommate, not Wei. Chen Wei stated the preference on May2. No later personal reversal or future corporate branding is yet established.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Use Marcus, including at work, after the confirmed reversal of the Marc preference; use Chen Wei in full, as reported on May2. Other people’s Dave/Tommy/Sophie preferences do not change either name.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t3",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "The latest confirmed personal preference remains Marcus; a corporate website listing as Marc is planned for next week, without a confirmed new personal-preference reversal. Chen Wei remains full-name-only, reported May2. M.J. is an unused historical nickname. Do not invent a calendar anchor for next week.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t7",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Preference and corporate presentation are distinct scopes. This is a read-only naming task, not sending an introduction email."
+    },
+    {
+      "family": "C03",
+      "file": "C03_trajectory_ops.json",
+      "query": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "May14at9:30AMwith Dr.Liang at Riverside General. No proposed replacement time has yet been reported. Mother’s May6St.Luke’s appointment and PT sessions are separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            3
+          ],
+          "answer": "May14at9:45AMwith Dr.Liang at Riverside General remains the latest confirmed slot.10:15AMis a proposal awaiting the user’s callback, not an accepted change. Kevin’s9:30printout/11AMPTslot concerns Kevin.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s3t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "May14at9:45AMwith Dr.Liang at Riverside General. The user rejected10:15and the office agreed to keep9:45; no pending time change remains in these reports. Do not revert to the old9:30or import another person’s appointment.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s3t3",
+              "s3t5"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Source-contained appointment reports only, not medical advice, live appointment verification or a clinical outcome."
+    },
+    {
+      "family": "D25",
+      "file": "D25_reflect.json",
+      "query": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers flavorful food without overwhelming chili burn: mild beef curry/pickled ginger at regular Koku Kitchen, adapted mapo tofu with less doubanjiang and enjoyable Sichuan numbing tingle, and sweet-savory bulgogi. Medium Thai curry and chili-flake side were too hot. No untried new venue is yet established; do not infer no interest in spices generally.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Layered umami, fermented sweetness and aromatic warmth without raw chili burn; mild butter chicken and about a teaspoon of gochujang per pan are reported successes. Koku Kitchen remains the go-to. Vindaloo was considered then declined, not tried. Priya’s hot-sauce preference is not the user’s.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same bounded preference; Koku Kitchen remains established. A Szechuan visit is booked for next Friday by Priya but the user has not tried its food and retracts calling it a new favorite. Katsu curry and mirin are still things to try, while the gochujang/vinegar/sesame stir-fry was actually made. James/Priya’s heat scale does not establish the user’s.",
+          "support_sets": [
+            [
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported food preferences and intentions, not nutrition advice, a recommendation list, or proof a future restaurant visit occurred."
+    },
+    {
+      "family": "E08",
+      "file": "E08_reflect.json",
+      "query": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Spreadsheet template adopted around mid-March; do not file after4PM, save unfinished review for the next morning. Own Portland hotel total is378for two nights, corrected from387. Quiet solo coffee reviewing and peer-review changes have not yet been established in this prefix.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Spreadsheet review in a quiet solo morning window with coffee, three separate passes for figures/counts/dates-descriptions, and the4PMcutoff. Own hotel remains378. No peer-review mandate has yet been supplied. The Greenfield38vs40hours is a different error.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Current spreadsheet/quiet solo morning/three-pass/4PMroutine remains. Peer review starts next quarter; the user has not committed to a combined process yet. Own hotel total remains378; a387draft possibly belonging to Sarah does not overwrite it. Do not diagnose anxiety or assume the future mandate is already implemented.",
+          "support_sets": [
+            [
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported work habits and corrected figures; the assistant’s psychological explanations are not user-reported facts."
+    },
+    {
+      "family": "E15",
+      "file": "E15_remember.json",
+      "query": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Reference INC-20240303-0712was reclassified P1toP3. Corrected total16, not14; most were downgrades, but exact split and exact duration are not yet supplied. Late March to April15does not supply an exact start/day count. Overall-ticket denominator is unknown, so no overall mislabeling percentage.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Same reference and corrected16; split11downgrades/5upgrades.11/16is the downgrade share among tracked mislabeled incidents, not a mislabeling percentage among all submitted tickets. Exact duration still absent. Derek’s monitor example is not an additional verified entry to add automatically.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same reference,16personally verified incidents,11downgrades/5upgrades. Using the user-stated21-day window March25–April15:16/21about0.762incidents/calendar day and16/3about5.33per seven-day week. Working-day count and total submitted tickets are not supplied; assistant’s hypothetical50tickets and annual projection are not observed data. Do not add unverified shared-log/coworker cases.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s3t1",
+              "s3t3"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Use the explicitly reported21-day duration for the requested arithmetic; do not infer a year or equate calendar days to workdays. This reviews source reports, not independently audited incident truth."
+    },
+    {
+      "family": "F01",
+      "file": "F01_trajectory_ops.json",
+      "query": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Use6200net monthly pay. Listed amounts including savings total1850+1500+120+55+350+40+45=3960, leaving about2240. Some listed expenses are estimates; this is a budget remainder, not verified actual spending.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Use6080net; same3960listed outflows including1500savings, leaving about2120. Exclude the one-off2000relocation reimbursement and brother’s3800pay.",
+          "support_sets": [
+            [
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Use current6080, as rechecked in the employee portal. Add the newly earmarked175dining-out amount to3960to get4135, leaving about1945. Future6200rollback is not effective; Derek’s7500gross/unknown net and inactive freelance income are excluded.",
+          "support_sets": [
+            [
+              "s2t7",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Arithmetic on public synthetic user-reported budget figures, not financial advice or actual account/payment verification; retain estimated-expense qualification."
+    }
+  ],
+  "remaining_source_review": [],
+  "projection_note": "Use explicit --split dev. Preserve all literal roles/content, unknown dates and source-session boundaries; current cut stops on the actual user turn before the next assistant response.",
+  "model_calls": 0,
+  "source": "https://github.com/MemTensor/MemOps",
+  "license": "MIT, local upstream snapshot",
+  "reviewer": "Codex author, source-only review before new method outcomes; no original operation label converted to action gold.",
+  "assignment_evidence": [
+    "artifacts/jev-reader/external-data/memops-families-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-memops-families-v1.json"
+  ]
+}

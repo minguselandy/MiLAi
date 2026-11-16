@@ -1,0 +1,139 @@
+{
+  "name": "milai-global-training-source-audit-v1",
+  "status": "STRATIFIED_SOURCE_REVIEW_COMPLETED_NOT_TRAINING_ADMISSION",
+  "selection": "data/manifests/milai-global-training-source-audit-v1-selection.json",
+  "annotations": "data/manifests/milai-global-training-source-audit-v1-annotations.json",
+  "families": 24,
+  "source_rows": 44,
+  "paragraph_positions": 880,
+  "distinct_title_texts": 563,
+  "source_dispositions": {
+    "supported": 8,
+    "pool_insufficient": 21,
+    "masked": 15
+  },
+  "native_answerability_comparison": {
+    "True/supported": 8,
+    "False/pool_insufficient": 17,
+    "True/masked": 9,
+    "False/masked": 6,
+    "True/pool_insufficient": 4
+  },
+  "stratum_counts": {
+    "2": {
+      "supported": 4,
+      "pool_insufficient": 7,
+      "masked": 4
+    },
+    "3": {
+      "pool_insufficient": 6,
+      "masked": 7,
+      "supported": 2
+    },
+    "4": {
+      "pool_insufficient": 8,
+      "supported": 2,
+      "masked": 4
+    }
+  },
+  "shortest_reported_answer_proof_sizes": {
+    "2": 4,
+    "1": 2,
+    "3": 1,
+    "4": 1
+  },
+  "native_positive_count": 21,
+  "native_negative_count": 23,
+  "mechanical_review": {
+    "status": "SOURCE_OBJECTS_AND_COMPLETE_INPUTS_VERIFIED",
+    "source_objects_literal_equal_to_saved_mirror": 44,
+    "source_rows": [
+      683,
+      1048,
+      2466,
+      2563,
+      3645,
+      4497,
+      4600,
+      5418,
+      7101,
+      9324,
+      9378,
+      9812,
+      10100,
+      10687,
+      12065,
+      12568,
+      12750,
+      16106,
+      18834,
+      19075,
+      19509,
+      20611,
+      21819,
+      22014,
+      23165,
+      23338,
+      24139,
+      25143,
+      25256,
+      26964,
+      32433,
+      32488,
+      33747,
+      34770,
+      34957,
+      36500,
+      36742,
+      37121,
+      37552,
+      37786,
+      38308,
+      38399,
+      38693,
+      38872
+    ],
+    "paragraph_positions": 880,
+    "distinct_title_texts": 563,
+    "complete_encoder_max_len": 8192,
+    "head_max_len": 512,
+    "max_sequence_tokens": 7825,
+    "sequence_token_sum": 134489,
+    "truncated_rows": [],
+    "sha_checks": false,
+    "new_model_calls": 0,
+    "official_archive_equivalence": false,
+    "semantic_review_is_independent": false,
+    "author_review_time": "Not fully timed, not zero",
+    "compute": {
+      "wall_seconds": 5.551707277074456,
+      "cpu_seconds": 5.555971719
+    }
+  },
+  "official_source_check": {
+    "status": "OFFICIAL_ARCHIVE_UNAVAILABLE_QUOTA",
+    "url": "https://drive.usercontent.google.com/download?id=1tGdADlNjWFaHLeZZGShh2IRcpO6Lv24h&export=download&confirm=t",
+    "author_reference": "https://github.com/StonyBrookNLP/musique",
+    "observed": "HTTP200 yielded2040byte GoogleDrive quota-exceeded HTML, not an archive",
+    "sha_checks": false,
+    "official_equivalence_proven": false,
+    "automatic_retry": false,
+    "raw_train_status": "AUTHOR_RAW_TRAIN_ALSO_QUOTA_EXCEEDED",
+    "raw_train_url": "https://drive.usercontent.google.com/download?id=1qRgF7UXv1iNQ8NU3k5rau1lPFEu6ip1Y&export=download&confirm=t",
+    "raw_train_response_bytes": 2040
+  },
+  "review_first_reference_later": true,
+  "original_source_and_labels_preserved": true,
+  "independent_human_review": false,
+  "new_model_calls": 0,
+  "runtime_changes": false,
+  "implications": [
+    "Treat this as stratified training-source quality evidence, not corpus-wide noise rate or model generalization validation.",
+    "Eight requested attributes have source support, including qualified/direct shorter proofs. Four native-positive rows lack a complete chain under the stated review reading; nine native-positive rows are masked for interpretation/scope. These counts are not thirteen proven false answers.",
+    "At least one represents-question interpretation remains disputed; do not silently force the first reviewer reading into a new gold standard.",
+    "Alternative partial information must not be flattened into a requirement to read all redundant passages.",
+    "Shorter proofs, question-leaked constraints, creator-role differences, temporal ownership and administrative entity scope must be addressed at dataset/protocol level, not with per-case runtime patches.",
+    "Do not train only these44rows or relaunch the superseded155state fit study; global family/task coverage and a fixed heldout protocol remain required.",
+    "Do not mix benchmark reference support metrics with source-qualified semantic sufficiency."
+  ]
+}

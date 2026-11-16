@@ -1,0 +1,190 @@
+{
+  "status": "MIXED_PATH_IMPLEMENTED_DATA_AUDITED_MODEL_PROBE_PENDING",
+  "data": "artifacts/host-intent-retrieval-v3/data/mixed-integration-v1",
+  "preparation": {
+    "status": "MIXTURE_PREPARED_NOT_FITTED",
+    "recipe": "artifacts/host-intent-retrieval-v3/data/mixed-integration-recipe-v1.json",
+    "splits": {
+      "train": {
+        "rows": 3703,
+        "labelled": 3076,
+        "families": 1029,
+        "component_rows": {
+          "operation_history": 1955,
+          "complementary_evidence": 321,
+          "instruction_applicability": 1427
+        },
+        "labelled_component_rows": {
+          "operation_history": 1499,
+          "complementary_evidence": 150,
+          "instruction_applicability": 1427
+        }
+      },
+      "dev": {
+        "rows": 805,
+        "labelled": 702,
+        "families": 257,
+        "component_rows": {
+          "operation_history": 386,
+          "complementary_evidence": 70,
+          "instruction_applicability": 349
+        },
+        "labelled_component_rows": {
+          "operation_history": 309,
+          "complementary_evidence": 44,
+          "instruction_applicability": 349
+        }
+      }
+    },
+    "loss_mixture": {
+      "operation_history": 0.6,
+      "complementary_evidence": 0.2,
+      "instruction_applicability": 0.2
+    },
+    "suggested_two_pass_updates": 385,
+    "sampling": "Uniform shuffled passes over labelled rows, not stratified component quotas. Loss normalizes within component/family/event, then applies declared masses. Actual sampled rows and tokens must be reported from fitting.",
+    "state_ids": "Assigned over all train then dev rows before masking, outside model input.",
+    "scope": "Integration inputs using frozen T0 and published FollowIR only. Not the expanded T1 corpus, no T1 fitting or efficacy claim.",
+    "public_inputs_and_gold_changed": false,
+    "model_calls": 0,
+    "wall_seconds": 5.573042795062065,
+    "cpu_seconds": 5.572877228,
+    "ledger_recorded": false
+  },
+  "input_audit": {
+    "status": "COMPLETE_INPUT_AND_MIXTURE_AUDIT_NOT_MODEL_RUN",
+    "splits": {
+      "train": {
+        "rows": 3703,
+        "labelled_sdk_items": 3076,
+        "max_sequence_tokens": 9723,
+        "public_state_questions_gold_equal": 3703,
+        "truncated": 0
+      },
+      "dev": {
+        "rows": 805,
+        "labelled_sdk_items": 702,
+        "max_sequence_tokens": 8378,
+        "public_state_questions_gold_equal": 805,
+        "truncated": 0
+      }
+    },
+    "source_group_overlap": false,
+    "loss_mass_per_full_pass": {
+      "operation_history": 0.5999999999999952,
+      "complementary_evidence": 0.2,
+      "instruction_applicability": 0.19999999999999762
+    },
+    "sampling": "Uniform shuffled rows; these masses are loss weights, not sampled proportions.",
+    "probe": "artifacts/host-intent-retrieval-v3/data/mixed-pipeline-probe-v1",
+    "model_loads": 0,
+    "model_calls": 0,
+    "phase": "host_intent_mixed_integration_audit_v1",
+    "wall_seconds": 80.84736918658018,
+    "cpu_seconds": 83.583766415,
+    "ledger_recorded": false
+  },
+  "labelled_families": {
+    "train": 1029,
+    "dev": 257
+  },
+  "validation": {
+    "pure_tests": "13 passed;10 unrelated model/GPU tests deselected while the actual Host job was live.",
+    "ruff": "passed",
+    "mypy": "4 affected tools passed using existing CUDA environment; SDK import-untyped excluded.",
+    "tools_boundary": "passed"
+  },
+  "semantics": "Uniform shuffled row passes are unchanged. Declared0.6/0.2/0.2 weights control loss mass per full pass, then family/event normalization; they are not sampling proportions. Actual component/task rows and component tokens are recorded by the trainer.",
+  "scope": "Existing T0 plus published FollowIR integration inputs only, not expanded T1 data or T1 efficacy. New128/32-group operation collection/labels still pending.",
+  "probe": {
+    "status": "PREPARED_NOT_RUN",
+    "scope": "One-update pipeline/gradient/serialization check only, not T1 fitting or efficacy.",
+    "selection": "Two longest labelled train examples per component, and first two labelled dev examples by stable state_id. Existing inputs/labels unchanged.",
+    "chosen": {
+      "train": [
+        {
+          "event_id": "generative-rich/memops_A04/record-first/chatcmpl-a990cec78a37a3a6:tool:0/6",
+          "state_id": 1887,
+          "component": "operation_history",
+          "task": "memory_operation"
+        },
+        {
+          "event_id": "generative-rich/memops_A05/stage-2/chatcmpl-9eb6e63109e9f787:tool:0/2",
+          "state_id": 1908,
+          "component": "operation_history",
+          "task": "memory_operation"
+        },
+        {
+          "event_id": "rules-query_only/musique-family-000552/corpus-202/chatcmpl-b38ec493b5fdcd57:tool:0/7",
+          "state_id": 1962,
+          "component": "complementary_evidence",
+          "task": "memory_operation"
+        },
+        {
+          "event_id": "rules-rich/musique-family-000552/corpus-202/chatcmpl-9398bbd933b68ea6:tool:0/7",
+          "state_id": 1980,
+          "component": "complementary_evidence",
+          "task": "memory_operation"
+        },
+        {
+          "event_id": "followir-topic-1033/row-752",
+          "state_id": 3509,
+          "component": "instruction_applicability",
+          "task": "instruction_applicability"
+        },
+        {
+          "event_id": "followir-topic-0507/row-846",
+          "state_id": 2946,
+          "component": "instruction_applicability",
+          "task": "instruction_applicability"
+        }
+      ],
+      "dev": [
+        {
+          "event_id": "rules-query_only/memops_A19/stage-0/chatcmpl-9e0e6e29a3154f21:tool:0/0",
+          "state_id": 3703,
+          "component": "operation_history",
+          "task": "memory_operation"
+        },
+        {
+          "event_id": "rules-query_only/memops_A19/stage-0/chatcmpl-9e0e6e29a3154f21:tool:0/1",
+          "state_id": 3704,
+          "component": "operation_history",
+          "task": "memory_operation"
+        },
+        {
+          "event_id": "rules-query_only/musique-family-000752/corpus-5087/chatcmpl-ae1b68867625489c:tool:0/0",
+          "state_id": 4089,
+          "component": "complementary_evidence",
+          "task": "memory_operation"
+        },
+        {
+          "event_id": "rules-query_only/musique-family-000752/corpus-5087/chatcmpl-ae1b68867625489c:tool:0/1",
+          "state_id": 4090,
+          "component": "complementary_evidence",
+          "task": "memory_operation"
+        },
+        {
+          "event_id": "followir-topic-0006/row-463",
+          "state_id": 4159,
+          "component": "instruction_applicability",
+          "task": "instruction_applicability"
+        },
+        {
+          "event_id": "followir-topic-0006/row-1494",
+          "state_id": 4160,
+          "component": "instruction_applicability",
+          "task": "instruction_applicability"
+        }
+      ]
+    },
+    "optimizer_updates": 1,
+    "evaluate_initial_dev": false,
+    "parent": "artifacts/host-intent-retrieval-v3/data/mixed-integration-v1",
+    "state_id": "Retains parent pre-mask identities.",
+    "model_calls": 0
+  },
+  "probe_data": "artifacts/host-intent-retrieval-v3/data/mixed-pipeline-probe-v1",
+  "probe_model_start": "No model probe has run yet. Use explicit one-update diagnostic, no initial baseline or main efficacy claim, then validate persisted weights.",
+  "model_calls_for_preparation": 0
+}

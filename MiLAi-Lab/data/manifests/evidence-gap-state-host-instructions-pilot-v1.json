@@ -1,0 +1,277 @@
+{
+  "status": "FROZEN_THREE_TASK_SIX_CONDITION_HOST_ONLY_DIAGNOSTIC_READY_NOT_DISPATCHED",
+  "cohort_selection": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/cohort-selection.json",
+  "source_version": "45829497",
+  "frozen_lab": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab",
+  "literal_source_files_checked": [
+    "tools/run_state_bench_local_pilot.py",
+    "src/milai_lab/runners/state_bench_adapter.py",
+    "src/milai_lab/providers/chat_bridge.py",
+    "src/milai_lab/providers/contextual_vllm.py"
+  ],
+  "cases": [
+    {
+      "index": 0,
+      "task_id": "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state",
+      "user_id": "user_003",
+      "native_task": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-local-research-v1/source/state_bench/domains/travel/tasks/5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state.json",
+      "native_environment": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-local-research-v1/source/state_bench/domains/travel/task_envs/5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state.json",
+      "initial_state": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-0/initial-native-state.json",
+      "native_state_requirements": 7,
+      "native_task_requirements": 2,
+      "state_score_available": true,
+      "scope": "Source-first exposed train review; hidden native requirements remain outside Host messages."
+    },
+    {
+      "index": 1,
+      "task_id": "7-book_simple_domestic",
+      "user_id": "user_005",
+      "native_task": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-local-research-v1/source/state_bench/domains/travel/tasks/7-book_simple_domestic.json",
+      "native_environment": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-local-research-v1/source/state_bench/domains/travel/task_envs/7-book_simple_domestic.json",
+      "initial_state": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-1/initial-native-state.json",
+      "native_state_requirements": 1,
+      "native_task_requirements": 3,
+      "state_score_available": true,
+      "scope": "Source-first exposed train review; hidden native requirements remain outside Host messages."
+    },
+    {
+      "index": 2,
+      "task_id": "8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state",
+      "user_id": "user_003",
+      "native_task": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-local-research-v1/source/state_bench/domains/travel/tasks/8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state.json",
+      "native_environment": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-local-research-v1/source/state_bench/domains/travel/task_envs/8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state.json",
+      "initial_state": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-2/initial-native-state.json",
+      "native_state_requirements": 4,
+      "native_task_requirements": 2,
+      "state_score_available": true,
+      "scope": "Source-first exposed train review; hidden native requirements remain outside Host messages."
+    }
+  ],
+  "jobs": [
+    {
+      "task_id": "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state",
+      "condition": "base",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-0-base",
+      "compute_phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_task0_base",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "-u",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab/tools/run_state_bench_local_pilot.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/configs/task-0-base.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-0/preparation",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-0-base",
+        "--source-version",
+        "45829497",
+        "--split",
+        "train",
+        "--memory-protocol",
+        "none",
+        "--compute-phase",
+        "evidence_gap_20261023_state_host_instructions_pilot_v1_task0_base"
+      ]
+    },
+    {
+      "task_id": "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state",
+      "condition": "extra_instructions",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-0-extra_instructions",
+      "compute_phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_task0_extra_instructions",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "-u",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab/tools/run_state_bench_local_pilot.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/configs/task-0-extra_instructions.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-0/preparation",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-0-extra_instructions",
+        "--source-version",
+        "45829497",
+        "--split",
+        "train",
+        "--memory-protocol",
+        "none",
+        "--compute-phase",
+        "evidence_gap_20261023_state_host_instructions_pilot_v1_task0_extra_instructions"
+      ]
+    },
+    {
+      "task_id": "7-book_simple_domestic",
+      "condition": "extra_instructions",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-1-extra_instructions",
+      "compute_phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_task1_extra_instructions",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "-u",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab/tools/run_state_bench_local_pilot.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/configs/task-1-extra_instructions.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-1/preparation",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-1-extra_instructions",
+        "--source-version",
+        "45829497",
+        "--split",
+        "train",
+        "--memory-protocol",
+        "none",
+        "--compute-phase",
+        "evidence_gap_20261023_state_host_instructions_pilot_v1_task1_extra_instructions"
+      ]
+    },
+    {
+      "task_id": "7-book_simple_domestic",
+      "condition": "base",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-1-base",
+      "compute_phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_task1_base",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "-u",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab/tools/run_state_bench_local_pilot.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/configs/task-1-base.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-1/preparation",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-1-base",
+        "--source-version",
+        "45829497",
+        "--split",
+        "train",
+        "--memory-protocol",
+        "none",
+        "--compute-phase",
+        "evidence_gap_20261023_state_host_instructions_pilot_v1_task1_base"
+      ]
+    },
+    {
+      "task_id": "8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state",
+      "condition": "base",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-2-base",
+      "compute_phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_task2_base",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "-u",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab/tools/run_state_bench_local_pilot.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/configs/task-2-base.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-2/preparation",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-2-base",
+        "--source-version",
+        "45829497",
+        "--split",
+        "train",
+        "--memory-protocol",
+        "none",
+        "--compute-phase",
+        "evidence_gap_20261023_state_host_instructions_pilot_v1_task2_base"
+      ]
+    },
+    {
+      "task_id": "8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state",
+      "condition": "extra_instructions",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-2-extra_instructions",
+      "compute_phase": "evidence_gap_20261023_state_host_instructions_pilot_v1_task2_extra_instructions",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "-u",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab/tools/run_state_bench_local_pilot.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/configs/task-2-extra_instructions.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/tasks/task-2/preparation",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/runs/task-2-extra_instructions",
+        "--source-version",
+        "45829497",
+        "--split",
+        "train",
+        "--memory-protocol",
+        "none",
+        "--compute-phase",
+        "evidence_gap_20261023_state_host_instructions_pilot_v1_task2_extra_instructions"
+      ]
+    }
+  ],
+  "condition_comparisons": [
+    {
+      "task_id": "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state",
+      "same_initial_state": true,
+      "only_config_differences": [
+        "config_version",
+        "state_host_instructions"
+      ],
+      "only_initial_wire_difference": "Literal supplemental Host instructions at the end of the system message",
+      "native_tools_and_public_opening_equal": true,
+      "hidden_evaluator_context_not_delivered": true,
+      "initial_capacity_check": "PASS using declared local tokenizer/HostCapacity; later histories untested"
+    },
+    {
+      "task_id": "7-book_simple_domestic",
+      "same_initial_state": true,
+      "only_config_differences": [
+        "config_version",
+        "state_host_instructions"
+      ],
+      "only_initial_wire_difference": "Literal supplemental Host instructions at the end of the system message",
+      "native_tools_and_public_opening_equal": true,
+      "hidden_evaluator_context_not_delivered": true,
+      "initial_capacity_check": "PASS using declared local tokenizer/HostCapacity; later histories untested"
+    },
+    {
+      "task_id": "8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state",
+      "same_initial_state": true,
+      "only_config_differences": [
+        "config_version",
+        "state_host_instructions"
+      ],
+      "only_initial_wire_difference": "Literal supplemental Host instructions at the end of the system message",
+      "native_tools_and_public_opening_equal": true,
+      "hidden_evaluator_context_not_delivered": true,
+      "initial_capacity_check": "PASS using declared local tokenizer/HostCapacity; later histories untested"
+    }
+  ],
+  "host_instruction_source": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-v1/condition.json",
+  "reference_config": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-task3-v1/config.json",
+  "memory_protocol": "none",
+  "common_host_and_simulator": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 1,
+    "max_tokens": 8192,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 24,
+    "enable_thinking": true
+  },
+  "simulator_enable_thinking_override": false,
+  "environment": {
+    "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab/src:/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-45829497/MiLAi-Lab/tools",
+    "CUDA_VISIBLE_DEVICES": "",
+    "TOKENIZERS_PARALLELISM": "false",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "real_model_calls": 0,
+  "real_http_requests": 0,
+  "weights_loaded": 0,
+  "mock_transport_calls": 6,
+  "synthetic_usage_excluded_from_research_costs": true,
+  "original_ledger_literal_unchanged": true,
+  "native_tasks_environments_literal_unchanged": true,
+  "source_review": "Task5 compares opposite cheapest mechanisms across two legs; task7 has an over-budget ideal and an in-budget preference tradeoff; task8 compares direct change with cancel/rebook. Tasks5/8 share user003 and related rule structure, so do not count them as independent confirmation. Instructions were frozen before these bodies were read and are unchanged.",
+  "scope": "Three native tasks in one travel domain, one realization percondition; correlated development diagnostic, not population-effect inference or memory-quality comparison.",
+  "assessment": "Retain actual transcript, native before/after/diff and deterministic state score (null remains unscored), policy/preview/confirmation/execution correspondence and complete known/unknown usage. No official task/UX judge. Native state success alone does not establish conversation/task requirements or UX success; review these separately against the original task without creating a scalar quality-cost reward.",
+  "failure_policy": "Run each planned condition at most once; preserve first failure, no repair/retry. Stop and inspect failed job/usage before any remaining unattempted job. Do not replace failed tasks. A completed trajectory with native state0 is an observed outcome and does not change the predeclared order. Inspect runtime errors or unknown usage before the next unattempted job; the overall goal remains active.",
+  "dispatch_requirement": "No dispatch while current4886matchingtrain lives. Verify its terminal results and reconcile closed costs before any new neural job; no automatic queue launch.",
+  "automatic_dispatch": false,
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "cpu_seconds_pending": 12.365259361,
+  "wall_seconds": 9.66410915646702,
+  "accounting": "Own preparation/preflight CPU plus git archive/show child CPU; no model inference. Earlier selection/authoring overhead unmeasured.",
+  "native_input_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/native-input-freeze.json",
+  "dispatch_input_rule": "Before each real job, compare its native task/environment and split metadata with the stored literal copies. Keep actual original source paths; do not silently substitute changed inputs.",
+  "review_categories": [
+    "native state requirements",
+    "actual task/conversation requirements",
+    "policy conditions and parameter premises",
+    "preview versus execution",
+    "confirmation where required",
+    "preference preservation",
+    "unsupported claims",
+    "simulator termination versus actual completion",
+    "known and unknown usage"
+  ],
+  "simulator_source_review": "Native simulator instructions were read for allthree selectedtasks. Tasks5/8 require comparing both mechanisms before approval and forbid volunteering fee rules; task7 requires disclosure of the over-budget ideal, explicit tradeoffs and profile preferences. TASK_DONE alone is not success; future review must check actual state and conversation requirements separately. Simulator prompts/settings remain unchanged."
+}

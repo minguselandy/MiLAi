@@ -1,0 +1,85 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "cross-record-host",
+      "owner": "method-cross-host",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "session_id": "cross-event-0",
+          "message_id": "source",
+          "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。",
+          "occurred_at": "2034-07-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2034-07-01T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "cross-event-1",
+          "message_id": "source",
+          "content": "请另建领取资格条目，引用已有台账中的具体凭据，不要复制一份台账：领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。",
+          "occurred_at": "2034-07-02T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2034-07-02T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "cross-query-1",
+          "message_id": "query",
+          "content": "只查询，不保存：许澄目前能领稀有资料吗，需要哪些条件？ 凭据柜标签是什么颜色？",
+          "occurred_at": "2034-07-02T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2034-07-02T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "cross-event-2",
+          "message_id": "source",
+          "content": "台账更新：许澄的会员卡失效了，借阅凭条仍有效，培训完成的事实不变。凭条加培训仍支持她领取稀有资料。台账和资格记录要分别保持这些事实；柜子标签不变。",
+          "occurred_at": "2034-07-03T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2034-07-03T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "cross-query-2",
+          "message_id": "query",
+          "content": "只查询，不保存：会员卡失效后许澄还能领取吗，靠什么？ 会员卡失效影响培训完成状态或柜签颜色吗？",
+          "occurred_at": "2034-07-03T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2034-07-03T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "cross-event-3",
+          "message_id": "source",
+          "content": "借阅凭条现在也取消了，两种凭据都已无效，因此许澄现在不能领取稀有资料。她已完成培训的事实和蓝色柜签均不变。",
+          "occurred_at": "2034-07-04T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2034-07-04T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "cross-query-3",
+          "message_id": "query",
+          "content": "只查询，不保存：两种凭据都无效后，许澄现在能领取吗？ 她的培训和柜签颜色目前怎样？",
+          "occurred_at": "2034-07-04T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2034-07-04T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "cross-history",
+          "message_id": "query",
+          "content": "只查询，不保存：领取资格条目最初保存时写了什么？请区分当时实际保存的文字、后来哪些凭据失效，以及目前的领取资格。不要把最新结论当作初存内容。",
+          "occurred_at": "2034-07-04T10:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2034-07-04T10:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        }
+      ]
+    }
+  ]
+}

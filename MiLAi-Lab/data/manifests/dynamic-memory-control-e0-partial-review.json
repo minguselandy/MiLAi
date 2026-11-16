@@ -1,0 +1,94 @@
+{
+  "scope": "Partial author review of actual first responses, delivered evidence and effect receipts. Not blinded or independent gold; no automatic semantic grading.",
+  "source_export": "artifacts/dynamic-memory-control/e0-review-prefix108-v1",
+  "reviews": [
+    {
+      "policy": "fixed",
+      "history": "alternate_support",
+      "step": "q4",
+      "core_answer": "incorrect",
+      "task_success": false,
+      "grounding": "stale_subset",
+      "evidence": "Delivered April1 training-valid and April2 mentor-valid, no April3/4 withdrawals. Prior assistant answers also delivered.",
+      "attribution": "Necessary latest evidence not selected; subset-consistent answer is not current-task success."
+    },
+    {
+      "policy": "rules",
+      "history": "alternate_support",
+      "step": "q3",
+      "core_answer": "incorrect",
+      "task_success": false,
+      "grounding": "contradicts_available_view_and_full_sources",
+      "evidence": "Raw subset lacks mentor confirmation. View n2 reports mentor valid and n3 eligible, but also incorrectly retains training-valid n1. Reader denies eligibility and says no mentor record.",
+      "view_state": "mixed; stale training claim retained",
+      "attribution": "Selection, view maintenance and Reader use all contribute; no isolated policy-causality claim."
+    },
+    {
+      "policy": "rules",
+      "history": "alternate_support",
+      "step": "q4",
+      "core_answer": "correct_polarity_wrong_reason",
+      "task_success": false,
+      "grounding": "incorrect_temporal_and_support_explanation",
+      "evidence": "Reader relies on April3 supposed lack of mentor support, contrary to that date. Latest view mixes a mentor-valid node with no-other-authorization and ineligible nodes.",
+      "view_state": "contradictory",
+      "attribution": "Do not score a coincidentally correct denial as a fully grounded task success."
+    },
+    {
+      "policy": "generative",
+      "history": "alternate_support",
+      "step": "q3",
+      "core_answer": "incorrect",
+      "task_success": false,
+      "grounding": "insufficient_subset_and_wrong_rule",
+      "evidence": "Only sign-color/no-rule-change plus training-withdrawal source delivered. No actual OR rule or remaining mentor support delivered. Reader invents training as the sole necessary route.",
+      "attribution": "Premature handoff plus unsupported Reader inference."
+    },
+    {
+      "policy": "generative",
+      "history": "alternate_support",
+      "step": "q4",
+      "core_answer": "correct_polarity_wrong_reason",
+      "task_success": false,
+      "grounding": "prior_model_answer_only",
+      "evidence": "Only previous q3 user question and incorrect assistant denial delivered; neither latest withdrawal nor original OR rule.",
+      "attribution": "Self-reuse of a wrong answer is not an independent proof."
+    },
+    {
+      "policy": "laya",
+      "history": "alternate_support",
+      "step": "q3",
+      "core_answer": "correct",
+      "task_success": true,
+      "grounding": "complete_actual_originals",
+      "evidence": "Expanded context supplies original OR rule, original training report, mentor grant, latest training withdrawal and latest mentor-valid confirmation.",
+      "qualification": "Operational-rule reading of the authored permission rule; one development family."
+    },
+    {
+      "policy": "fixed",
+      "history": "reopen_forget",
+      "step": "command-4",
+      "task_success": false,
+      "state_outcome": "record_only_revocation",
+      "evidence": "Seven rejected attempts then one successful scope=record, selected_records1, revoked_sources0. User requested original sources too.",
+      "attribution": "Partial effect, not successful forgetting."
+    },
+    {
+      "policy": "rules",
+      "history": "reopen_forget",
+      "step": "command-4",
+      "task_success": false,
+      "state_outcome": "no_confirmed_revocation",
+      "evidence": "Two attempts not committed. Later repetition of the old label is an unfulfilled-forget outcome, not proof of a post-revocation bypass."
+    },
+    {
+      "policy": "laya",
+      "history": "reopen_forget",
+      "step": "command-4",
+      "task_success": false,
+      "state_outcome": "permission_interpretation_failure",
+      "evidence": "Host says it lacks forgetting permission despite the explicit request, and does not perform the requested revocation."
+    }
+  ],
+  "method_limit": "Context expansion is a shared capability. A fixed full-session baseline is needed before attributing its benefits to learned dynamic control."
+}

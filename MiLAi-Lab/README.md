@@ -1,5 +1,9 @@
 # MiLAi Lab
 
+当前开发执行[动态记忆控制 v2 计划](docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md)，完整目标仍在进行。两项各80位置的学习策略评价和144位置的外部基线已关闭，72位置的自身轨迹正在运行。当前结果尚未建立复杂控制器相对强简单方法的全面优势。最新实现、结果、成本和未完成项见[开发检查点](docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md)及[当前状态](docs/LAB_CURRENT_STATUS.md)。
+
+此前[2026-10-14 全局规划](docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)及下方旧阶段说明保留作历史记录；各阶段的暂停、完成和发布状态不替代本轮检查点。
+
 r52同版本开发实验与140项终态回填已完成，功能验收仍PARTIAL，没有稳定推荐配置，Product NO_GO。原L1为24/24 PASS；新增合同L1 23限定通过／1失败，L2 9／3，L3形成41／16、读取17／13，新L4 9／3。来源、时间范围、行动选择及提供方限制按原结果保留。详见[终态报告](docs/V13_5_R52_TERMINAL_REPORT.md)、[FUNC汇总](docs/V13_5_PROGRESS.md)及[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
 
 当前隔离开发从 PR82 main `fc1c6c9` 执行完整 MiLAi-Edit 计划：公开 benchmark、共同底座清理、B0/B1/B2/M 四臂比较、保留来源确认及一个最终候选的功能回归。E0 接线已完成，实际 E1 正在运行；按用户指令仅使用现有 Qwen3.6 家族。工程检查不代表方法有效或 Product 验收，见[本轮进度](docs/MILAI_EDIT_PROGRESS.md)及[复现说明](docs/MILAI_EDIT_REPRODUCTION.md)。
@@ -10,6 +14,7 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 
 ## 当前入口
 
+- [动态记忆控制当前开发检查点](docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md)：共享操作循环、训练与机制比较、完整外部基线、实际状态和成本；实验继续，保护确认与全部种子尚未完成。
 - [2026-10-05 实验进度快照](docs/MILAI_EDIT_CHECKPOINT_20261005.md)：B0/B1 已完成，B2 运行中，M 未开始；实验继续，最终候选与产品验收尚未完成。
 - [MiLAi-Edit 原计划](docs/MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md)、[分析协议](docs/MILAI_EDIT_ANALYSIS_SPEC.md)和[实现说明](docs/MILAI_EDIT_IMPLEMENTATION.md)：本轮完整执行，历史结论原样保留。
 - [v13.5 功能入口](docs/V13_5_FUNCTIONAL_USAGE.md)：自然保存、修订、历史、遗忘及两工作流；[执行协议](docs/V13_5_EXECUTION_PROTOCOL.md)、[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
@@ -80,3 +85,5 @@ uv run --no-sync milai-lab-check-tools-boundary
 历史 README 的完整阶段记录保留在
 [整理前固定提交](https://github.com/minguselandy/MiLAi/blob/091dcbd48dc1800e5b8cc7f0ee3066dc00a76311/MiLAi-Lab/README.md)，
 相关实验报告和锁文件原样保留。复现旧结果应检出其方法/执行提交，不能要求当前源码匹配所有旧冻结。
+
+当前方法架构研究的开发、首次实验结果和未完成项见[2026-10-15检查点总结](docs/MILAI_DEVELOPMENT_CHECKPOINT_20261015.md)。

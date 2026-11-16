@@ -1,0 +1,43 @@
+{
+  "status": "RECORDED_BEFORE_MODEL_FORWARD_AFTER_REFERENCE_COMPARISON",
+  "source_snapshot": "artifacts/jev-reader/selection-v2/source-review/all228-before-reference.json",
+  "scope": "Machine projection of already documented historical-label alternatives. Original source dispositions,primary answers,raw data and native answers remain unchanged. Both original and augmented proof metrics must remain available; this is not an independent second blind review.",
+  "cases": [
+    {
+      "source_row": 78,
+      "additional_complete_proofs": [
+        [
+          7,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          18,
+          8
+        ]
+      ],
+      "alternative_answer": "Capitol Records for Lou Rawls's 1962 debut era",
+      "prior_annotation_basis": "A clearly dated earlier Capitol-label answer can be source-grounded using performer identity plus U26; keep it qualified by era rather than declaring the label a false world fact. The directly named-song association is PIR.",
+      "reason": "The frozen prose already accepts the earlier-era answer. Source index8 is the Stormy Monday debut on Capitol;7,3,18 each bind the requested performer/song. The longer route is valid for response review,but its extra read is not necessarily a positive next-action target when a subset already answers the question."
+    },
+    {
+      "source_row": 0,
+      "additional_complete_proofs": [
+        [
+          0,
+          13
+        ]
+      ],
+      "alternative_answer": "Warner Bros. in the US or Vertigo elsewhere for Lou Reed's 2011 collaboration",
+      "prior_annotation_basis": "The named work paragraph directly supplies performer context and release label. LouReed later collaborative album has different regional labels,so this cannot be an exclusive lifelong artist-label assertion.",
+      "reason": "The pre-reference note retained the different-era/region label association. Source0 binds Lou Reed to the requested compilation;13 supplies the dated collaboration labels. Retain the original Arista primary answer and qualification; this adds a conditional longer route rather than replacing it with the native answer."
+    }
+  ],
+  "model_calls": 0,
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "selection_rule": "Longer valid-answer paths are retained for interpretation,while action labels use inclusion-minimal missing sets. A path strictly containing another missing set contributes no extra required open;incomparable routes of different lengths are both retained. No cost threshold or budget utility is added."
+}

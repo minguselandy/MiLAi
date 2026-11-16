@@ -1,0 +1,117 @@
+"""Check exported-checkpoint evaluation wiring with a model stub and isolated test ledger."""
+import json
+import sys
+import weakref
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
+import evaluate_bounded_laya
+from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+
+
+@pytest.mark.parametrize("projection", ["shared", "shared_request_text"])
+@pytest.mark.parametrize("disable_compile", [False, True])
+def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
+    tmp_path, monkeypatch, projection, disable_compile,
+):
+    pytest.importorskip("torch")
+    rows = [{"state": {"task": {"retrieval_request": {"query": "Question\u0085\u2028\u2029end"}},
+                      "pending_candidates": []},
+             "questions": {"next": {"type": "choice", "instructions": "Choose",
+                                     "criteria": {"finish": "HANDOFF"}}},
+             "gold": {"next": {"probabilities": {"finish": 1.0}}},
+             "metadata": {"family": "f", "label_status": "reviewed",
+                          "action_kinds": {"finish": "HANDOFF"}}}]
+    data, budget, output = tmp_path / "dev.jsonl", tmp_path / "budget.json", tmp_path / "run"
+    data.write_text(json.dumps(rows[0], ensure_ascii=False) + "\n")
+    budget.write_text(json.dumps(RunBudget(RunLimits(), budget).state))
+    observed = []
+    references = []
+
+    class StubDecision:
+        def __init__(self, checkpoint, max_len, head_max_len, device):
+            references.append(weakref.ref(self))
+            self.model = SimpleNamespace(
+                parameters=lambda: iter([SimpleNamespace(dtype="float32")]),
+                encoder=SimpleNamespace(config=SimpleNamespace(reference_compile=None)))
+            self.counters = {"forwards": 0, "sequence_rows": 0, "input_tokens": 0}
+            assert device == "cpu"
+
+        def predict(self, payload):
+            expected_compile = False if disable_compile else None
+            assert self.model.encoder.config.reference_compile is expected_compile
+            observed.append(payload)
+            self.counters.update(forwards=1, sequence_rows=1, input_tokens=10)
+            return {"choice": "finish", "input_tokens": 10}
+
+    monkeypatch.setattr(evaluate_bounded_laya, "NativeDecision", StubDecision)
+    record_compute = RunBudget.record_compute
+
+    def record_after_release(self, phase, measures):
+        assert references and all(reference() is None for reference in references)
+        closed = json.loads((output / "run.json").read_text())
+        assert closed["status"] == "COMPLETED" and closed["ledger_recorded"] is False
+        return record_compute(self, phase, measures)
+
+    monkeypatch.setattr(RunBudget, "record_compute", record_after_release)
+    monkeypatch.setattr(sys, "argv", ["evaluate_bounded_laya", str(data),
+        str(tmp_path / "checkpoint"), str(output), "--budget", str(budget),
+        "--task", "memory_operation", "--operation-state", projection,
+        "--compute-phase", "test_exported_operations",
+        *(["--disable-reference-compile"] if disable_compile else [])])
+    evaluate_bounded_laya.main()
+    result = json.loads((output / "results.json").read_text())
+    assert result["counts"] == {"labelled": 1, "accepted": 1}
+    assert result["selected_operations"] == {"HANDOFF": {"selected": 1, "accepted": 1}}
+    assert set(observed[0]) == {"state", "questions"}
+    if projection == "shared_request_text":
+        from audit_request_text import recover_request_fields
+
+        assert recover_request_fields(
+            observed[0]["state"]["task"]["request_text"]) == rows[0]["state"]["task"]
+    else:
+        assert observed[0]["state"]["task"] == rows[0]["state"]["task"]
+    run = json.loads((output / "run.json").read_text())
+    assert run["status"] == "COMPLETED" and run["completed_states"] == 1
+    assert run["task"] == "memory_operation" and run["operation_state"] == projection
+    assert run["reference_compile_override"] is (False if disable_compile else None)
+    assert run["ledger_recorded"] and run["ledger_wait_wall_seconds"] >= 0
+    assert json.loads(budget.read_text())["compute"]["test_exported_operations"]["forwards"] == 1
+
+
+def test_feedback_evaluator_uses_one_forward_for_both_targets(tmp_path, monkeypatch):
+    pytest.importorskip("torch")
+    row = {"state": {"task": {"retrieval_request": {"query": "actual request"}}},
+           "questions": {"next": {"type": "choice", "criteria": {"a": "READ", "b": "HANDOFF"}}},
+           "gold": {}, "metadata": {"family": "held-dev", "split": "dev"},
+           "feedback": {"comparisons": [{"left": "a", "right": "b",
+                                          "answer": "left", "delivery": "right"}]}}
+    data, budget, output = tmp_path / "feedback.jsonl", tmp_path / "budget.json", tmp_path / "run"
+    data.write_text(json.dumps(row) + "\n")
+    budget.write_text(json.dumps(RunBudget(RunLimits(), budget).state))
+    observed = []
+
+    class StubDecision:
+        def __init__(self, *args):
+            self.model = SimpleNamespace(
+                parameters=lambda: iter([SimpleNamespace(dtype="float32")]))
+            self.counters = {"forwards": 0, "sequence_rows": 0, "input_tokens": 0}
+
+        def predict(self, payload):
+            observed.append(payload)
+            self.counters.update(forwards=1, sequence_rows=1, input_tokens=10)
+            return {"choice": "a", "logits": {"a": 2., "b": 0.}, "input_tokens": 10}
+
+    monkeypatch.setattr(evaluate_bounded_laya, "NativeDecision", StubDecision)
+    monkeypatch.setattr(sys, "argv", ["evaluate", str(data), str(tmp_path / "checkpoint"),
+        str(output), "--budget", str(budget), "--task", "memory_feedback"])
+    evaluate_bounded_laya.main()
+    result = json.loads((output / "results.json").read_text())
+    assert result["answer"]["family_macro_state_pair_accuracy"] == 1
+    assert result["delivery"]["family_macro_state_pair_accuracy"] == 0
+    assert len(observed) == 1 and set(observed[0]) == {"state", "questions"}
+    compute = json.loads(budget.read_text())["compute"]["laya_memory_feedback_evaluation"]
+    assert compute["forwards"] == 1 and compute["input_tokens"] == 10

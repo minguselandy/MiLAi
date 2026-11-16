@@ -1,0 +1,58 @@
+{
+  "status": "B_REPAIR_C_MECHANICAL_BUDGET_AND_CONDITIONAL_TASK_FIGURE",
+  "PNG": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-B-repair-C-evidence-v2.png",
+  "PDF": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-B-repair-C-evidence-v2.pdf",
+  "PNG_size": [
+    3000,
+    1240
+  ],
+  "PNG_visual_inspection_pending": false,
+  "PNG_actual_visual_inspection_passed": true,
+  "source_audits": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-repair66-quality-stop-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-C8-Source-saved-choices-v1.json"
+  ],
+  "used_budgets": {
+    "new_READ": [
+      57,
+      57
+    ],
+    "acquired_pools": [
+      18,
+      24
+    ],
+    "new_set_readouts": [
+      47,
+      48
+    ]
+  },
+  "task_counts": {
+    "B52": {
+      "retained": 18,
+      "new_READ": 15,
+      "n": 52
+    },
+    "C8": {
+      "rules": 4,
+      "saved_E3": 1,
+      "n": 8
+    },
+    "C7": {
+      "rules": 3,
+      "E3": 2,
+      "n": 7
+    }
+  },
+  "source_author_not_independent_or_blind": true,
+  "descriptive_exposed_TRAIN_only": true,
+  "original_Source_labels_or_firsts_changed": false,
+  "new_model_GPU_HTTP_or_original_ledger_calls": 0,
+  "full763_line_completion_proven": false,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "visual_inspection": "Actually viewed final3000x1240 PNG; v1legend/footer overlap corrected by explicit single-row figure legend and footer spacing in v2.",
+  "PDF_same_figure_single_page_structure_verified": true,
+  "PDF_separately_rendered": false,
+  "published_PNG": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-plan-B-repair-C-evidence-20261109-v1.png",
+  "published_PDF": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-plan-B-repair-C-evidence-20261109-v1.pdf"
+}

@@ -1,0 +1,191 @@
+{
+  "status": "FINAL_RESEARCH_EXECUTION_CLOSED_READY_FOR_GOAL_COMPLETION",
+  "observed_at_utc": "2026-11-12T00:57:12.989666+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v43.json",
+  "no_sha_validation": true,
+  "active_owned_jobs": [],
+  "final_report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/MILAI_SCALABLE_EVIDENCE_RESEARCH_REPORT_20261112.md",
+  "final_audit": "/data/milai-experiments/20261111-scalable-evidence/plan-execution-audit-v2.json",
+  "remaining_required": [],
+  "external_comparison": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/lme-small32-closed-comparison-v1/summary.json",
+    "methods": {
+      "fixed_prefix_historical": {
+        "planned": 32,
+        "scored": 29,
+        "unscored": 3,
+        "correct_score_sum": 5.0,
+        "scored_subset_mean": 0.1724137931034483,
+        "all_planned_bounds": [
+          0.15625,
+          0.25
+        ],
+        "prediction_statuses": {
+          "COMPLETED": 29,
+          "FAILED_READING": 3
+        },
+        "score_statuses": {
+          "COMPLETED": 29,
+          "UNSCORED_FAILED_READING": 3
+        },
+        "valid_UNKNOWN_scored": 21
+      },
+      "S1_36k_u1130": {
+        "planned": 32,
+        "scored": 29,
+        "unscored": 3,
+        "correct_score_sum": 7.0,
+        "scored_subset_mean": 0.2413793103448276,
+        "all_planned_bounds": [
+          0.21875,
+          0.3125
+        ],
+        "prediction_statuses": {
+          "FAILED_RETRIEVING": 1,
+          "COMPLETED": 29,
+          "FAILED_READING": 2
+        },
+        "score_statuses": {
+          "UNSCORED_FAILED_RETRIEVING": 1,
+          "COMPLETED": 29,
+          "UNSCORED_FAILED_READING": 2
+        },
+        "valid_UNKNOWN_scored": 16
+      },
+      "S2_feedback_u51": {
+        "planned": 32,
+        "scored": 30,
+        "unscored": 2,
+        "correct_score_sum": 5.0,
+        "scored_subset_mean": 0.16666666666666666,
+        "all_planned_bounds": [
+          0.15625,
+          0.21875
+        ],
+        "prediction_statuses": {
+          "COMPLETED": 30,
+          "FAILED_READING": 2
+        },
+        "score_statuses": {
+          "COMPLETED": 30,
+          "UNSCORED_FAILED_READING": 2
+        },
+        "valid_UNKNOWN_scored": 21
+      }
+    },
+    "contrasts": {
+      "S1_36k_u1130 minus fixed_prefix_historical": {
+        "common_scored": 27,
+        "left_sum_on_common": 6.0,
+        "right_sum_on_common": 5.0,
+        "wins": 1,
+        "losses": 0,
+        "ties": 26,
+        "common_scored_mean_difference": 0.037037037037037035,
+        "full32_unknown_outcome_difference_bounds": [
+          -0.03125,
+          0.15625
+        ],
+        "by_shared_domain_bank": {
+          "enterprise": {
+            "common_scored": 14,
+            "score_difference_sum": 0.0
+          },
+          "web": {
+            "common_scored": 13,
+            "score_difference_sum": 1.0
+          }
+        },
+        "scope": "Paired questions within two shared100trajectory banks; no independent-Source CI, no favorable missingness imputation, historical Host draws unmatched."
+      },
+      "S2_feedback_u51 minus fixed_prefix_historical": {
+        "common_scored": 28,
+        "left_sum_on_common": 5.0,
+        "right_sum_on_common": 5.0,
+        "wins": 2,
+        "losses": 2,
+        "ties": 24,
+        "common_scored_mean_difference": 0.0,
+        "full32_unknown_outcome_difference_bounds": [
+          -0.09375,
+          0.0625
+        ],
+        "by_shared_domain_bank": {
+          "enterprise": {
+            "common_scored": 15,
+            "score_difference_sum": 0.0
+          },
+          "web": {
+            "common_scored": 13,
+            "score_difference_sum": 0.0
+          }
+        },
+        "scope": "Paired questions within two shared100trajectory banks; no independent-Source CI, no favorable missingness imputation, historical Host draws unmatched."
+      },
+      "S2_feedback_u51 minus S1_36k_u1130": {
+        "common_scored": 27,
+        "left_sum_on_common": 5.0,
+        "right_sum_on_common": 5.0,
+        "wins": 2,
+        "losses": 2,
+        "ties": 23,
+        "common_scored_mean_difference": 0.0,
+        "full32_unknown_outcome_difference_bounds": [
+          -0.15625,
+          0.0
+        ],
+        "by_shared_domain_bank": {
+          "enterprise": {
+            "common_scored": 15,
+            "score_difference_sum": 0.0
+          },
+          "web": {
+            "common_scored": 12,
+            "score_difference_sum": 0.0
+          }
+        },
+        "scope": "Paired questions within two shared100trajectory banks; no independent-Source CI, no favorable missingness imputation, historical Host draws unmatched."
+      }
+    },
+    "Reader_parameters_match": true,
+    "scope": "Frozen nominees S1/36ku1130 and S2u51, historical fixed-prefix firsts retained. Same32questions/nativehaystacks, exposedtransfer notfull451/newblind or32independent Sources. First initialization/Reader/Judge failures retained. Native score is task answer evaluation, not Source-fidelity certification or actual business execution. Complete-cohort native metric unavailable when unscored positions remain."
+  },
+  "archives": {
+    "S1": {
+      "status": "COMPLETED",
+      "archived_cases": 32,
+      "original_case_bytes": 9534863887,
+      "archive_bytes": 301831679
+    },
+    "S2": {
+      "status": "COMPLETED",
+      "archived_cases": 32,
+      "original_case_bytes": 9888676025,
+      "archive_bytes": 314997139
+    }
+  },
+  "last_cost_settlement": {
+    "phase": "milai_scalable_phase44_closed_pipeline_residuals_20261112_v1",
+    "CPU_seconds": 5067.006707411743,
+    "stages": 32,
+    "recorded": true
+  },
+  "cost_synthesis": "/data/milai-experiments/20261111-scalable-evidence/closed-study-cost-synthesis-v1.json",
+  "local_capability_chain": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-source12-mechanism-v2.json",
+  "conclusions": [
+    "Measuredexecutionimprovements andactual3k/10k/36kdata/longfits/threepairedseeds delivered.",
+    "S2/S3/I1/I2/SourceView/update-scope/adequate-cost explorations executed withfailures/unknownsretained.",
+    "Frozen96Sourceconfirmation384firsts+32repeats andtwofixedLME32nativechainsclosed; no stableaggregatequalityorcomplete-costadvantage.",
+    "NewheldstudySource12providesactualsame-input READ8vsHANDOFF ->current-workFreebasewitness ->supportedHostanswers inbothplanned draws. BoundedoneSource/givenquerychain, notpopulation/seed/pretrainingisolation/autonomousbusinessclaim.",
+    "M6updatefailures remain; mostpositions neverinvokedcontroller, soallfailuresnotinterpretedasJevREFRESHrefusal."
+  ],
+  "validation": "Finalauditinspectedactualartifacts/terminalowners/scoredenominators/Source12inputidentity/Source-IDroles/originalledger/locallinks. Runtimecode91b3f707tested21relevantcases;Ruff/diff/packageDAGpass,6oldtoolsboundaryfindingsunchanged. No newcodeafterthesechecks.",
+  "unresolved_limits": [
+    "Stablemeanbenefitunproved; localmechanismdoesnotoverridefullnull/negativecontrasts",
+    "Generated/exposedcontinuousSources andonly2externalhistorybanks; notnatural200-500trajectorycoverage/full451",
+    "Rootreviewsnonindependent/notguaranteedblind, oneHost/trainingseed limitations",
+    "Untimedauthor/parent/tests/serverGPU/currencyunknown, notzero; costtablesnotadditive",
+    "OldhistoricalMem2Actprimaryscore/archivework remainsprior-scope debt, notclaimednewcompletion"
+  ],
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchange/service restart/push/postconfirmationtraining-selection. Originalfirsts/failures/rolespreserved. Researchexecutioncompletion, notproductionreadiness."
+}

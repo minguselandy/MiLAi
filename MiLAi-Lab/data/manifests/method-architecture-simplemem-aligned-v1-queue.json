@@ -1,0 +1,27 @@
+{
+  "status": "WAITING_FOR_STRONG",
+  "source_commit": "46bc516e",
+  "source_snapshot": "artifacts/method-architecture/simplemem-source-v1/MiLAi-Lab",
+  "native_source_commit": "db80b6a",
+  "native_source_worktree": "artifacts/method-architecture/simplemem-native-v1",
+  "isolated_python": "artifacts/method-architecture/simplemem-env/bin/python",
+  "queue": "artifacts/method-architecture/simplemem-v1/queue.json",
+  "driver_pid": 2094352,
+  "exec_session": 84597,
+  "waiting_for": {
+    "driver_pid": 1672507,
+    "exec_session": 12669,
+    "closed_status_required": "FIVE_ARMS_PREDICTIONS_AND_FIRST_SCORES_CLOSED"
+  },
+  "handoff_checks": [
+    "actual prior driver and step processes gone",
+    "sealed end accounting exists",
+    "no increase in unknown usage",
+    "current original ledger matches sealed closure counters"
+  ],
+  "native_model_requests_at_queue": 0,
+  "pilot_only": true,
+  "full_dispatch_requires_review": true,
+  "unknown_wrapper_retry": false,
+  "no_sha_verification": true
+}

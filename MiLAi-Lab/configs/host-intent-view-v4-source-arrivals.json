@@ -1,0 +1,84 @@
+{
+  "candidate_version": "host-intent-view-v4-source-arrivals-v1",
+  "entrypoints": {
+    "functional": {
+      "profile": "functional_v1",
+      "capacity": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tokenizer_path": "/cra/qwen36-35B",
+        "context_tokens": 65536,
+        "output_tokens": 8192,
+        "batch_source_tokens": 6000,
+        "safety_tokens": 512,
+        "source_message_overhead_tokens": 32,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "enable_thinking": true
+      },
+      "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "max_calls_per_message": 24,
+      "format_reproposals": 1,
+      "queue_limits": {
+        "requests": 600,
+        "reserved_tokens": 8000000
+      },
+      "http_ownership_profile": "serialized_ledger_owner_v1",
+      "host": {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1,
+        "max_tokens": 8192,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 24,
+        "enable_thinking": true
+      },
+      "http_ownership_domain": {
+        "deployment_id": "existing-local-qwen36-native-functional-v13-5",
+        "clients": [
+          {
+            "base_url": "http://127.0.0.1:7860/v1/",
+            "model": "Qwen3.6-35B-A3B-FP8",
+            "temperature": 1,
+            "max_tokens": 8192,
+            "timeout": 180,
+            "tool_mode": "json_action",
+            "max_calls": 24,
+            "enable_thinking": true,
+            "response_format": null
+          }
+        ]
+      },
+      "config_version": "host-intent-view-v4-source-arrivals-v1",
+      "system_prompt": "MiLAi retrieves evidence from existing memory; you remain responsible for the user's task.\nWhen past information, changes, preferences or stored history are needed, call milai_retrieve.\nWrite the complete evidence question in query. Add purpose, required evidence points, target scope,\nas_of time and references you actually received only when useful. Keep unverified premises as\nquestions. Do not prescribe the internal search/read/cache/refresh sequence.\nUse the returned evidence to complete the original task. A termination reason does not certify\nsufficiency. Distinguish original statements, stored interpretations, applicable dates and unknowns.\nRequest further evidence only when necessary. Never invent missing sources or tool effects.\n",
+      "ordinary_material_tokens": 2048,
+      "additional_reads": 8,
+      "memory_method": "milai_edit_m_v1",
+      "memory_view_mode": "staged",
+      "source_access": "independent_v1",
+      "source_top_k": 16,
+      "semantic_top_k": 16,
+      "source_tokenization": "unicode_v1",
+      "evidence_policy": "question_pack_v1",
+      "memory_ranking": "activation",
+      "memory_profile": "unified_v1",
+      "request_mode": "disabled",
+      "read_exhaustion": "answer_from_delivered_v1",
+      "retrieval_tool": "rich",
+      "stage_enable_thinking": {
+        "query_structure": false,
+        "memory_control": false
+      },
+      "memory_control": {
+        "policy": "generative",
+        "max_control_steps": 8,
+        "reads": 4,
+        "routing": "feedback",
+        "view_capacity": 1,
+        "state_projection": "shared"
+      },
+      "business_tools": [],
+      "host_source_arrivals": true
+    }
+  }
+}

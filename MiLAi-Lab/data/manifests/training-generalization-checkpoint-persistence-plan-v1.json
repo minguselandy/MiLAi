@@ -1,0 +1,57 @@
+{
+  "status": "DECLARED_BEFORE_READING_CURRENT_POST_UPDATE_METRICS;NOT_DISPATCHED",
+  "declared_at": "2026-10-21T20:36:37.155859+00:00",
+  "trigger": {
+    "active_run_updates": 411,
+    "training_precision": "float32",
+    "actual_saved_tensor_dtypes": {
+      "F16": 170
+    },
+    "header_source": "artifacts/generalization-20261021/fitting/source256-full-seed0-u524-v1/checkpoints/update-32/model.safetensors",
+    "native_save_behavior": "laya.train.save_checkpoint writes v.detach().half();load_checkpoint returns model.float(),which does not recover discarded precision",
+    "modernbert_serialization": "Installed ModernBertConfig.to_dict removes reference_compile;explicit runtime setting needed for reproducible evaluation"
+  },
+  "preserved": "Original in-memory histories,scores,source data,524update plans and all saved checkpoints stay unchanged. No current job hot update or restart.",
+  "selection_amendment": "The same declared fixed operation-dev source-family macro rule,earliest tie and0eligible will be applied to saved checkpoint predictions under the declared CPU deployment inference condition for downstream checkpoint binding. Also preserve/report the original in-memory choice separately. This is an explicit pre-outcome clarification,not backdated original preregistration.",
+  "candidate_updates": [
+    0,
+    32,
+    64,
+    128,
+    262,
+    393,
+    524
+  ],
+  "candidate_data": {
+    "primary": "unchanged860-state/616-labelled32-family operation dev",
+    "secondary": "unchanged16-state8-family feedback dev,both targets;not used to select operation checkpoint",
+    "wire": "Combine the two immutable input blocks for one load per candidate;score/report them separately. Never make a mixed primary memory score."
+  },
+  "inference": {
+    "device": "cpu",
+    "loaded_dtype": "float32 from actual saved tensors",
+    "max_len": "same as each declared fit",
+    "head_max_len": 2048,
+    "operation_state": "same as each declared fit",
+    "mha_fastpath": false,
+    "reference_compile": false,
+    "calibrated": false,
+    "source_data_and_order": "identical across candidate checkpoints"
+  },
+  "execution": "Only after fit and parent terminal;one real model process/job at a time,original ledger,no automatic retry. This stage is genuine saved-model evaluation,not an offline timing settlement.",
+  "selected_train": "Evaluate the persisted selected checkpoint on its labelled training states to measure its matching train/dev gap. Do not combine saved CPU dev with unsaved GPU train as if one model condition.",
+  "confirmation": "Freeze each decisive seed0 saved-model selected update before seeds1/2;evaluate that fixed update for confirmation,do not reselect per seed or from final Host/protected outcomes.",
+  "statistics": {
+    "bootstrap_replicates": 10000,
+    "seed": 0,
+    "unit": "registered source family;average paired states within family and paired seeds within family before resampling",
+    "unknowns": "Keep planned coverage and explicit unknowns;do not infer negative labels or inflate sample size with states/seeds",
+    "scope": "Descriptive conditional development intervals;author annotations,shared family structure and repeated generation remain limitations",
+    "baselines": "Retain all six prespecified recorded-state baselines;not a replacement for actual Host/lifecycle comparisons"
+  },
+  "no_post_update_metric_files_read_for_this_amendment": true,
+  "model_jobs_started": 0,
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "compute_scope": "Preparation/header inspection unmetered;not zero. Saved-model evaluation and later offline summaries have separate actual measurements."
+}

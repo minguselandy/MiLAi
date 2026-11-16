@@ -1,0 +1,78 @@
+{
+  "status": "PAUSED_BY_USER",
+  "source_code": "8c893af3",
+  "pause": {
+    "status": "PAUSED_PROCESSES",
+    "user_requested": true,
+    "paused_at": "2026-10-14T14:37:21.037877+00:00",
+    "arm": "pack",
+    "phase": "predict",
+    "worker_pid": 1626865,
+    "driver_pid": 1376965,
+    "pending_request_artifacts": [],
+    "resources_settled": false,
+    "next_dispatch": "None while paused. Resume original processes only after explicit user instruction; never start a duplicate queue."
+  },
+  "arms": {
+    "s0": {
+      "completed_session_checkpoints": 132,
+      "planned_sessions": 132,
+      "planned_qa": 12,
+      "saved_qa_checkpoints": 12,
+      "answers": 9,
+      "known_missing": 3,
+      "first_labels": {
+        "missing": 3,
+        "Correct": 7,
+        "Hallucination": 2
+      },
+      "cost": {
+        "reading": {
+          "calls": 100,
+          "prompt_tokens": 3454267,
+          "total_tokens": 3652278,
+          "completion_tokens": 198011
+        },
+        "judge": {
+          "calls": 9,
+          "prompt_tokens": 9301,
+          "total_tokens": 24602,
+          "completion_tokens": 15301
+        }
+      },
+      "score_status": "CLOSED_FIRST_SCORE"
+    },
+    "pack": {
+      "completed_session_checkpoints": 54,
+      "planned_sessions": 132,
+      "planned_qa": 12,
+      "saved_qa_checkpoints": 4,
+      "answers": 4,
+      "known_missing": 0,
+      "first_labels": null,
+      "cost": {
+        "reading": {
+          "calls": 8,
+          "prompt_tokens": 349396,
+          "total_tokens": 363114,
+          "completion_tokens": 13718
+        }
+      },
+      "score_status": "NOT_RUN"
+    }
+  },
+  "ledger_delta": {
+    "generation": {
+      "known_tokens": 4039994,
+      "new_unknown": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "new_unknown": 0
+    }
+  },
+  "incomplete_comparison": true,
+  "no_model_restart_or_retry": true,
+  "resume_policy": "Only after explicit user resume. Inspect original stoppedworker/driver and pendingreceipts; prefer continuing originalprocesses, never startduplicate queue or repeatclosedS0 phases. Paused time mustbeexcludedfrom activetiming claims.",
+  "artifact_root": "artifacts/global-development/final-confirmation-v1"
+}

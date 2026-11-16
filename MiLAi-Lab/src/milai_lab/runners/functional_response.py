@@ -33,6 +33,7 @@ _STATUS = {
     "none": "没有产生新效果", "observed": "仅查询观察",
     "no_effect": "没有产生新效果", "completed": "列出的操作已完成",
     "not_executed": "未执行新的业务操作",
+    "not_requested": "本轮未要求办理", "visibility_revoked": "可见性已撤销",
 }
 _FIELDS = {
     "item_key": "物品", "quantity": "数量", "reservation_id": "预订编号",
@@ -84,6 +85,7 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
     """Quote already delivered, visibility-filtered record parts without new reads."""
     calls: dict[str, str] = {}
     items: list[dict[str, Any]] = []
+    omitted_record_body = False
     for message in messages:
         if isinstance(message, AIMessage):
             for call in message.tool_calls:
@@ -101,13 +103,26 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
             if (isinstance(packet, dict) and packet.get("schema") == "functional_material_v1"
                     and packet.get("ok") is not False):
                 items.extend(packet.get("items", []))
+                omitted_record_body |= any(
+                    unit.get("type") == "record"
+                    and unit.get("reason") == "unit_exceeds_material_limit"
+                    and unit.get("snapshot_body_delivered") is False
+                    for unit in packet.get("skipped_units", [])
+                )
     if material.get("schema") == "functional_material_v1":
         items.extend(material.get("items", []))
+        omitted_record_body |= any(
+            unit.get("type") == "record"
+            and unit.get("snapshot_body_delivered") is False
+            for unit in material.get("skipped_units", [])
+        )
     lines = []
     seen = set()
     remaining = 1000
     for unit in items:
-        if unit.get("type") != "record" or not unit.get("content"):
+        if (unit.get("type") != "record" or not unit.get("content")
+                or unit.get("status") == "visibility_revoked"
+                or unit.get("source_visibility") == "visibility_revoked"):
             continue
         identity = (unit["record_id"], unit["revision"],
                     unit.get("edit_unit", {}).get("unit_id"), tuple(unit.get("content_range", [])))
@@ -126,19 +141,34 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
         remaining -= len(excerpt)
         if remaining == 0:
             break
+    if omitted_record_body:
+        lines.append("部分保存内容因读取材料额度未送达; 未读到不表示未保存。")
     return lines
+
+
+def memory_receipt_summary(effects: dict[str, Any]) -> str:
+    """Report actual save progress without copying stored bodies or tool IDs."""
+    semantic = effects["semantic_memory"]
+    status = str(semantic["status"])
+    committed = sum(row.get("status") == "committed" for row in semantic["operations"])
+    return ("本轮语义记忆: " + _STATUS.get(status, status)
+            + (", 已确认 " + str(committed) + " 项提交" if committed else "")
+            + "。这里只确认保存回执, 不确认全部请求或语义覆盖。")
 
 
 def business_response(
     messages: list[Any], effects: dict[str, Any], material: dict[str, Any],
     *, execution_stop: dict[str, Any] | None = None,
+    current_mode: dict[str, Any] | None = None,
+    include_business: bool = True,
+    include_memory_feedback: bool = True,
 ) -> AIMessage:
     """Use matched delivered receipts and current-message journal identities only."""
     business = effects["business"]
     authorized = {row["receipt_ref"]: row for row in [
         *business["operations"], *business["observations"]]}
     calls: dict[str, str] = {}
-    receipts: list[tuple[str, dict[str, Any]]] = []
+    receipts: list[tuple[str, dict[str, Any], str | None]] = []
     source_refs: set[str] = set()
     targets: set[tuple[str, str]] = set()
     for message in messages:
@@ -150,6 +180,9 @@ def business_response(
         elif isinstance(message, ToolMessage):
             name = calls.pop(message.tool_call_id, None)
             authority = authorized.get(message.tool_call_id, {})
+            if (name is None
+                    and message.additional_kwargs.get("milai_origin") == "program_observation"):
+                name = message.name
             if name not in _TOOLS or name != message.name or authority.get("tool") != name:
                 continue
             try:
@@ -159,22 +192,33 @@ def business_response(
             receipt = body.get("receipt") if isinstance(body, dict) else None
             if not isinstance(receipt, dict):
                 continue
-            receipts.append((name, receipt))
+            captured = (body.get("raw_capture") or {}).get("observed_at")
+            receipts.append((name, receipt, captured if isinstance(captured, str) else None))
             source_refs.add(body.get("source_ref", ""))
             targets.update((k, receipt[k]) for k in ("item_key", "title")
                            if isinstance(receipt.get(k), str))
-    paragraphs = ["本轮业务结果: " + _STATUS.get(business["status"], business["status"]) +
-                  "。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。"]
-    for name, receipt in receipts:
+    paragraphs = (["本轮业务结果: " + _STATUS.get(business["status"], business["status"]) +
+                   "。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。"]
+                  if include_business else [])
+    if effects.get("request_part_failures"):
+        paragraphs.append("本轮业务请求解析未完成, 没有由该分支取得新的执行许可。"
+                          "独立记忆工作的回执另列, 不代表原请求全部完成。")
+    # Recovery observations can arrive through progress after the Agent's messages.
+    # Source capture clocks order those real receipts, not their business-event dates.
+    if all(captured is not None for _, _, captured in receipts):
+        receipts.sort(key=lambda item: item[2] or "")
+    for name, receipt, _ in receipts:
         paragraphs.append(_TOOLS[name] + ": \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(receipt)))
-    if not receipts:
-        paragraphs.append("本轮没有可交付的业务结果回执; 不能确认所请求的业务已完成。")
+    if include_business and not receipts:
+        paragraphs.append("本轮未取得新的业务回执。")
     historical = set()
     for unit in material.get("items", []):
         ref = unit.get("source_ref")
         if (unit.get("type") != "fragment" or unit.get("role") != "tool"
-                or unit.get("origin") not in _TOOLS or ref in source_refs or ref in historical):
+                or unit.get("origin") not in _TOOLS or ref in source_refs or ref in historical
+                or unit.get("status") == "visibility_revoked"
+                or unit.get("source_visibility") == "visibility_revoked"):
             continue
         try:
             old = json.loads(unit.get("content", ""))
@@ -185,12 +229,24 @@ def business_response(
         historical.add(ref)
         paragraphs.append("历史原始回执 (不代表当前状态): \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(old)))
+    if not include_memory_feedback:
+        return AIMessage(content="\n\n".join(paragraphs))
     saved_content = _saved_content_lines(messages, material)
     paragraphs.extend(saved_content)
     if saved_content and not effects.get("application_requests"):
         paragraphs.append("原请求是否已全部完成尚未核对。")
     semantic = effects["semantic_memory"]
-    paragraphs.append("本轮语义记忆: " + _STATUS.get(semantic["status"], semantic["status"]) + "。")
+    paragraphs.append("本轮语义记忆: " + _STATUS.get(semantic["status"], semantic["status"])
+                      + "。这里只报告列出的回执, 不确认全部请求或语义覆盖。")
+    if current_mode is not None:
+        allowed = current_mode["allow_memory_maintenance"]
+        paragraphs.append("本轮保存许可: " + ("当前允许记忆维护" if allowed
+                                               else "当前未获允许") + "。")
+        if allowed and semantic["status"] in {"not_committed", "partial", "unknown"}:
+            if semantic["operations"]:
+                paragraphs.append("本轮已尝试记忆维护; 列出的未提交或未知结果不能确认保存成功。")
+            else:
+                paragraphs.append("本轮没有可确认的记忆维护尝试回执, 尚不能确认保存完成。")
     for operation in semantic["operations"]:
         paragraphs.append("记忆操作: " + _text({k: operation[k] for k in (
             "tool", "id", "revision", "status") if k in operation}))
@@ -209,14 +265,20 @@ def business_response(
             "pending": "尚未确认", "committed": "提交已确认", "failed": "未确认成功",
             "not_requested": "未要求", "delivered": "Host已收到进度",
             "semantic_unknown": "提交结果未知", "model_unknown": "模型响应未知",
+            "visibility_revoked": "可见性已撤销",
         }
         business_status = request["business"]["status"]
         execution_status = request["business"]["execution"]["status"]
-        memory_status = request["memory"].get("current_permission", request["memory"]["status"])
+        memory_status = request["memory"]["status"]
+        permission = request["memory"].get("current_permission")
+        if current_mode is not None:
+            permission = ("当前允许记忆维护" if current_mode["allow_memory_maintenance"]
+                          else "not_authorized_current_request")
         feedback_status = request["feedback"]["status"]
         paragraphs.append("原请求进度: 业务" + labels.get(business_status, business_status)
             + "; 本次执行" + labels.get(execution_status, execution_status)
             + "; 实际结果保存" + labels.get(memory_status, memory_status)
+            + ("; 保存许可" + labels.get(permission, permission) if permission else "")
             + "; 反馈" + labels.get(feedback_status, feedback_status)
             + "。回执进度与语义正确性分别记录。")
     for number, operation in enumerate(effects.get("visibility", {}).get("operations", []), 1):
@@ -230,8 +292,15 @@ def business_response(
             paragraphs.append(attempt_label + _STATUS.get(operation["status"],
                               _text(operation["status"])) +
                               "; 此次尝试未确认撤销效果, 其他尝试的结果分别列出。")
-    if effects["raw_event"]["status"] == "stored":
-        paragraphs.append("本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。")
+    raw = effects["raw_event"]
+    if raw["status"] == "stored":
+        paragraphs.append(
+            "本轮原始消息曾记录, 当前可见性已撤销。原始消息记录与语义记忆提交分别计数。"
+            if raw.get("source_visibility") == "visibility_revoked" else
+            "本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。"
+        )
+    elif raw["status"] == "visibility_revoked":
+        paragraphs.append("本轮原始消息的可见性已撤销; 本轮无法据此确认语义保存内容。")
     if execution_stop:
         paragraphs.append("执行已停止: 追加读取额度已用完; 未继续办理剩余工作。已确认的效果保留。")
     return AIMessage(content="\n\n".join(paragraphs))

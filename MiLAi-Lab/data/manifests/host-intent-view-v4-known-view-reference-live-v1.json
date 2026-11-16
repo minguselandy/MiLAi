@@ -1,0 +1,59 @@
+{
+  "status": "NORMAL_HOST_KNOWN_VIEW_REF_REOPEN_PASSED",
+  "source_version": "41477465",
+  "source_group": "memops_B05",
+  "split": "train",
+  "scope": "Controlled known-View-only functional check on a copied actual Store. Actual previously returned View supplied as context; no original-source ToolMessages supplied. Not autonomous benchmark efficacy or independent generalization.",
+  "original_view_result": "artifacts/host-intent-retrieval-v3/view-v4-a-generative-v1/generative-rich/banks/77a68517-3fae-4a06-a66d-a91b5af29ecd/dc8e6daa-9774-4329-9344-1114c3a676bd-result.json",
+  "actual_known_ref": {
+    "collection": "materials",
+    "item_index": 0,
+    "snapshot_id": "retrieval:[\"host\",\"after-unrelated-arrivals\",\"chatcmpl-b6e47c55f4a2a434:tool:0\"]"
+  },
+  "Host_generated_ref_equals_actual_returned_ref": true,
+  "known_reference_reads": 1,
+  "returned_original_materials": 5,
+  "required_original_user_statements_delivered": 2,
+  "required_quotations_match_returned_user_sources": true,
+  "read_operations": 5,
+  "control_steps": 6,
+  "post_witness_extra_reads": 3,
+  "post_witness_note": "After two requested original sources, three subsequent reads return earlier requests/assistant refusals. Observed overhead, not measured counterfactual net savings.",
+  "actual_request": {
+    "query": "Retrieve the exact original statements from the user that confirm they and their wife have jointly agreed on 'Elara' as their first-choice name for their daughter. Specifically, I need the direct quotes from the sources associated with evidence points e6 and e9.",
+    "read_goal": {
+      "purpose": "Extract the verbatim original user statement supporting the joint agreement on the name 'Elara'.",
+      "evidence": [
+        "original_source"
+      ],
+      "required_points": [
+        "Exact quote from user",
+        "Confirmation of joint agreement with wife on 'Elara'"
+      ]
+    },
+    "task_context": {
+      "as_of": "early March",
+      "target_scope": "Daughter's name discussion",
+      "known_evidence_refs": [
+        {
+          "snapshot_id": "retrieval:[\"host\",\"after-unrelated-arrivals\",\"chatcmpl-b6e47c55f4a2a434:tool:0\"]",
+          "collection": "materials",
+          "item_index": 0
+        }
+      ]
+    }
+  },
+  "known_generation_tokens": 76356,
+  "generation_requests": 8,
+  "new_unknown_usage": 0,
+  "wall_seconds": 47.80957933049649,
+  "local_cpu_seconds_nested": 1.721016433,
+  "runtime": "artifacts/host-intent-retrieval-v3/view-v4-known-view-reference-check-v1",
+  "compute": {
+    "wall_seconds": 0.010871577076613903,
+    "cpu_seconds": 0.010871869
+  },
+  "ledger_recorded": true,
+  "limits": "Does not repair known View semantic defects, prove all refs/version cases, or establish cost savings.",
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v19.json"
+}

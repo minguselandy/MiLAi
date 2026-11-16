@@ -1,0 +1,79 @@
+{
+  "status": "ALL_GENERATIVE_POSITIONS_REVIEWED",
+  "positions": 48,
+  "source_groups": 8,
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-generative-task-reviews-v1.json",
+  "collection": "artifacts/host-intent-retrieval-v3/generative48-collection-cost-summary-v1.json",
+  "grades": {
+    "CORRECT": 19,
+    "FAILED": 11,
+    "QUALIFIED": 1,
+    "UNFULFILLED": 2,
+    "WRONG": 15
+  },
+  "by_interface": {
+    "query_only": {
+      "CORRECT": 7,
+      "FAILED": 5,
+      "QUALIFIED": 1,
+      "UNFULFILLED": 2,
+      "WRONG": 9
+    },
+    "rich": {
+      "CORRECT": 12,
+      "FAILED": 6,
+      "WRONG": 6
+    }
+  },
+  "by_request_kind": {
+    "stage-0": {
+      "CORRECT": 3,
+      "FAILED": 3,
+      "WRONG": 2
+    },
+    "stage-2": {
+      "CORRECT": 4,
+      "WRONG": 4
+    },
+    "stored_version": {
+      "CORRECT": 7,
+      "UNFULFILLED": 2,
+      "WRONG": 7
+    },
+    "corpus": {
+      "CORRECT": 5,
+      "FAILED": 8,
+      "QUALIFIED": 1,
+      "WRONG": 2
+    }
+  },
+  "rubric": {
+    "CORRECT": "Requested source facts and material status distinctions correct; permitted unknowns preserved.",
+    "WRONG": "Material false claim, wrong object/version, or missed critical update.",
+    "QUALIFIED": "Main requested state is largely right but a secondary detail/inventory item is missing, ambiguous or unsupported; kept separate from full success.",
+    "UNFULFILLED": "Accepted final response does not provide the requested answer despite task scope.",
+    "FAILED": "No accepted final answer; first failure receipt retained."
+  },
+  "scope": "Exploratory source-author review of all registered generative training collection; no independent or causal comparison.",
+  "limitations": [
+    "First36 stopped at failed placeholder; only12 untouched later positions were continued. All original11 failures retained.",
+    "Correct answer content does not certify full generated view; e.g. unsupported temporal2024 in earlyA01 query-only view remains rejected.",
+    "Literal saved-record tasks require actual stored version, not graph or transcript reconstruction.",
+    "Partial observed evidence does not make the entire Store empty.",
+    "MuSiQue source-qualified scores separate from unchanged native gold.",
+    "No new semantic labels added to live fitting inputs.",
+    "Author reading/annotation time unmeasured, not zero."
+  ],
+  "validation": {
+    "exact_unique_position_coverage": 48,
+    "failure_receipt_agreement": 11
+  },
+  "model_calls": 0,
+  "http_requests": 0,
+  "aggregation_compute": {
+    "wall_seconds": 0.0031402474269270897,
+    "cpu_seconds": 0.003140098999999997,
+    "ledger_recorded": false,
+    "phase": "host_intent_t0_generative_task_review_aggregation_v1"
+  }
+}

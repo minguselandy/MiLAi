@@ -1,0 +1,51 @@
+{
+  "name": "jev-reader-objective-pair-v1",
+  "training_tool": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/tools/train_bounded_laya.py",
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "data_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/source-qualified-label-pair-v1/data/reviewed_labels",
+  "output_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-v1/runs",
+  "arms": [
+    "soft-ce",
+    "set"
+  ],
+  "seeds": [
+    0,
+    1
+  ],
+  "epochs": 4,
+  "max_len": 8192,
+  "head_max_len": 512,
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "precision": "float32",
+  "batch_size": 4,
+  "gradient_accumulation": 4,
+  "learning_rates": {
+    "encoder": 2.5e-05,
+    "head": 0.0001
+  },
+  "weight_decay": 0.01,
+  "objective": "Matched event/family-normalized soft-CE vs acceptable-set log likelihood",
+  "training_rows": 86,
+  "training_families": 9,
+  "training_source_rows": 17,
+  "reviewed_pool_rows": 123,
+  "common_masked_rows": 37,
+  "changed_admitted_targets": 0,
+  "dev_rows": 30,
+  "dev_labelled": 22,
+  "dev_labelled_families": 3,
+  "initialization": "Both arms restart from the same original multilingual checkpoint, not the existing 602-state CE model. Seed/order/optimizer/weights/masks/input data are matched within each pair.",
+  "primary_evaluation": "Fixed final epoch4 per-seed train/dev acceptance, complement hit, false sufficient/exhausted stops and family macro. Already exposed dev; no weight selection.",
+  "secondary_evaluation": "Retain original-label acceptance on the exact same admitted dev states; source-qualified and original metrics remain distinct.",
+  "interpretation_limits": [
+    "Same 86 source-reviewed training states and 30 dev positions (22 labelled); no new independent semantic families in this experiment.",
+    "Set objective may concentrate on one proof and does not fix label quality or budget utility.",
+    "Train-prefix fit and exposed dev decisions are not policy QA, Writer state correctness or net benefit.",
+    "No calibration/test loading, HTTP, service change, new ledger, SHA/content fingerprints, automatic retries or default adoption."
+  ],
+  "evaluate_train": true
+}

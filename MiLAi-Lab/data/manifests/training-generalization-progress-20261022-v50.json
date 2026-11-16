@@ -1,0 +1,184 @@
+{
+  "status": "ACTIVE_SAVED_CPU_LIVE;DOCUMENT_REVIEW_PROVENANCE_RECONCILED",
+  "observed_at": "2026-10-22T08:50:24.472122+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v49.json",
+  "previous_turn_classification": "PROGRESS:all57history public notes and full coverage audit closed",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 1589315,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 32,
+    "completed_states": 220,
+    "planned_states": 876,
+    "completed_candidates": 1,
+    "deployment_selection": null,
+    "condition": "All seven saved CPU candidates, then matching selected train; CPU FP32 loaded, reference_compile=False, MHA fastpath=False, shared_actions12288/head2048. Unchanged.",
+    "automatic_candidate_transition_within_original_job": true,
+    "current_inference_fields_verified": true
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 228,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "public_source_review": {
+    "manifest": "data/manifests/training-generalization-feedback-source-review-v15.json",
+    "new_notes_families": [],
+    "new_source_units": 0,
+    "new_public_requests": 0,
+    "cumulative_new_note_families": 57,
+    "cumulative_source_units": 1311,
+    "cumulative_public_requests": 122,
+    "new_independent_record_requests": 0,
+    "cumulative_independent_record_requests": 8,
+    "all_sources_read_including_assistant": true,
+    "source_copies_literal_equal": true,
+    "scope": "Existing exposed train histories only. New-note coverage is not all historical review coverage. No outputs, labels, source selection or conditions changed. Actual captured requests, Views, branches and answers still require later review.",
+    "findings": [],
+    "new_prefix_sizes": {},
+    "new_repeated_source_entries_checked_not_added_to_units": 0,
+    "this_turn": "Completed57history notes retained;no new history reviews this turn."
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "feedback_document_review_provenance_v2",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-review-provenance-v2.json",
+      "cpu_seconds": 0.10917985399999999,
+      "wall_seconds": 0.10918525885790586,
+      "ledger_recorded": false
+    },
+    {
+      "id": "feedback_document_source_review_input_preparation_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/preparation.json",
+      "cpu_seconds": 0.004253804999999999,
+      "wall_seconds": 0.004257585853338242,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.11343365899999999,
+  "costs": "New provenance auditCPU0.109179854 + public-card exportCPU0.004253805 =0.113433659 pending. Failed initial schema attempt/inspection/authoring unknown,not0. V49pending0.043105309 and older phases separate. Candidate0CPU43688.529695180 already billed once. Original ledger only;closedv1/v2/v3 untouched,no settlement while model live.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active.",
+  "coverage_audit": {
+    "manifest": "data/manifests/training-generalization-feedback-all-history-source-review-coverage-v1.json",
+    "all57_histories_literal_equal": true,
+    "new_prefix_notes_remaining_anchors": [],
+    "earlier_nonanchor_audit_retained": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-nonanchor-source-review-coverage-v1.json",
+    "scope": "One-author public-source review coverage only. Existing exposed train groups, not new independent sources or action labels. Original W5 reviews and labels remain intact; all eight now have new public-prefix notes as well. Other71 source groups inherit earlier review evidence, not audited semantically here. Actual future requests,Views,reached states,branches and answers need review."
+  },
+  "closed_saved_cpu_candidate_already_billed": {
+    "update": 0,
+    "planned_and_completed_states": 876,
+    "old_pid": 893516,
+    "old_pid_absent": true,
+    "canonical_run": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/update-0/run.json",
+    "canonical_compute": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/update-0/compute.json",
+    "original_ledger_phase": "training_generalization_source256_actions_full_seed0_u524_v1_saved_cpu_u0",
+    "compute": {
+      "wall_seconds": 11132.235744120553,
+      "cpu_seconds": 43688.529695180005,
+      "runs": 1,
+      "forwards": 876,
+      "sequence_rows": 876,
+      "input_tokens": 4314812,
+      "state_tokenizations": 876,
+      "state_tokens": 4077231
+    },
+    "unique_runs_1_and_exact_ledger_measures_verified": true,
+    "partial_quality_metrics_read_this_turn": false,
+    "accounting": "Already billed once by evaluator, not pending and never re-settle."
+  },
+  "document_source_provenance": {
+    "manifest": "data/manifests/training-generalization-feedback-document-review-provenance-v2.json",
+    "document_groups": 71,
+    "public_requests": 129,
+    "paragraph_appearances": 2570,
+    "literal_input_mismatches": 0,
+    "prior_review_request_counts": {
+      "generalization_source_first": 85,
+      "legacy_t0_witness_scoped_source_review": 4,
+      "legacy_t1_source_notes": 40
+    },
+    "prior_review_group_counts": {
+      "generalization_source_first": 46,
+      "legacy_t0_witness_scoped_source_review": 2,
+      "legacy_t1_source_notes": 23
+    },
+    "new_semantic_reviews": 0,
+    "new_labels": 0,
+    "full_pool_coverage_not_reasserted": [
+      {
+        "family": "musique-family-000766",
+        "source_row": 18441,
+        "request_id": "corpus-18441"
+      },
+      {
+        "family": "musique-family-000766",
+        "source_row": 33114,
+        "request_id": "corpus-33114"
+      },
+      {
+        "family": "musique-family-000104",
+        "source_row": 4099,
+        "request_id": "corpus-4099"
+      },
+      {
+        "family": "musique-family-000104",
+        "source_row": 14364,
+        "request_id": "corpus-14364"
+      }
+    ],
+    "public_only_cards": [
+      {
+        "family": "musique-family-000766",
+        "source_row": 18441,
+        "request_id": "corpus-18441",
+        "card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000766-18441.json",
+        "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-017.json",
+        "source_units": 20,
+        "review_status": "NOT_YET_REVIEWED_HERE"
+      },
+      {
+        "family": "musique-family-000766",
+        "source_row": 33114,
+        "request_id": "corpus-33114",
+        "card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000766-33114.json",
+        "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-017.json",
+        "source_units": 20,
+        "review_status": "NOT_YET_REVIEWED_HERE"
+      },
+      {
+        "family": "musique-family-000104",
+        "source_row": 4099,
+        "request_id": "corpus-4099",
+        "card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000104-4099.json",
+        "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-024.json",
+        "source_units": 20,
+        "review_status": "NOT_YET_REVIEWED_HERE"
+      },
+      {
+        "family": "musique-family-000104",
+        "source_row": 14364,
+        "request_id": "corpus-14364",
+        "card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000104-14364.json",
+        "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-024.json",
+        "source_units": 20,
+        "review_status": "NOT_YET_REVIEWED_HERE"
+      }
+    ],
+    "scope": "Literal bindings and prior review evidence checked,not a fresh semantic review of all129pools. OldT0witness lists do not prove full-pool coverage or incorrect labels. Four public pools prepared for source-only review;all inputs/labels/collection positions retained."
+  }
+}

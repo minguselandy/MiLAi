@@ -1,0 +1,20 @@
+{
+  "status": "COMPLETE_MATERIAL_DELIVERY_PATH_VERIFIED_CONDITIONALLY",
+  "audit": "artifacts/host-intent-retrieval-v3/view-v4-state-material-granularity-v1/audit.json",
+  "normal_pack_first_tokens": 2092,
+  "whole_context_tokens": [
+    5921,
+    10865
+  ],
+  "limit": 2048,
+  "presentation": "artifacts/host-intent-retrieval-v3/view-v4-state-travel-pilot-preparation-v2/preparation.json",
+  "original_sources": 46,
+  "source_payloads_roles_order_ids_unchanged": true,
+  "change": "Remove repeated historical provenance boilerplate from every event; retain concise domain/history scope. Existing generic Host instruction retains the full historical/current distinction.",
+  "mechanical_check": "artifacts/host-intent-retrieval-v3/view-v4-state-compact-source-check-v2/result.json",
+  "registered_tool_complete_wire_tokens": 1747,
+  "policy": "Existing fixed ordinary-pack policy, four material target; hard8control/2048wire unchanged.",
+  "autonomous_result": "v2 made0memorycalls; score0; no material-effect inference.",
+  "conditional_result": "v3 reused the actual v1 Host query, delivered1pack/1747tokens and7Hostwire requests contained the exact receipt, followed by actual sandbox actions; score0.",
+  "scope": "A conditional interface path, not autonomous reliability or evidence-caused task improvement. All three completed trajectories and costs retained."
+}

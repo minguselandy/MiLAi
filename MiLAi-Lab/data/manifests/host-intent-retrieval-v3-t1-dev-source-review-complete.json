@@ -1,0 +1,12 @@
+{
+  "status": "ALL_NEW_DEV_SOURCE_POOLS_REVIEWED_NOT_COLLECTED",
+  "notes": "artifacts/host-intent-retrieval-v3/data/t1-dev-source-review-notes-v1.json",
+  "new_dev_groups": 16,
+  "new_dev_pools": 26,
+  "source_document_occurrences": 470,
+  "fixture_keys_and_source_indices_match": true,
+  "training_allowed": false,
+  "actual_dev_requests_reviewed": 0,
+  "actual_dev_collection": "NOT_STARTED; wait until existingtrain228isclosed andinspected",
+  "scope": "Source-authorreview ofregistereddevonly, noreserved/test and noautomaticnativeanswergold. Entire newT1sourcepool review now114train+26dev; actualrequestreview andfinaltrainingstillincomplete."
+}

@@ -1,0 +1,18 @@
+{
+  "stage": "T0 own-policy development rollouts",
+  "source_families": 8,
+  "tasks_per_family": 4,
+  "methods": [
+    "BASE",
+    "CE_seed0_final96"
+  ],
+  "planned_task_positions": 64,
+  "shared_runtime_source": "edf087d3",
+  "fixture": "data/fixtures/dynamic-memory-control/t0-dev-rollouts-v1.json",
+  "initial_state": "Empty independent bank for each method/family. Same arriving source contents; each method creates its own views and actual feedback.",
+  "reader": "Original normal Host Reader via existing Qwen JSON action transport",
+  "checkpoint_rule": "Load exactly the saved final96 checkpoint, never the old open-only selector. Wait for training terminal success before any rollout.",
+  "failure_policy": "First responses retained; known-usage length failure counted and next distinct input continues. Other errors inspected, no automatic same-position retry.",
+  "interpretation": "Development sample, not holdout. Prefix preference matching, actual task success, state correctness and costs reported separately.",
+  "checkpoint_reload": "Training saves FP16 then runtime loads its normal checkpoint representation; pre-save diagnostic is not interchangeable with own-policy evaluation."
+}

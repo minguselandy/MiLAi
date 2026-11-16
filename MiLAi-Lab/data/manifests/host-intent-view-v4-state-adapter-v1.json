@@ -1,0 +1,69 @@
+{
+  "status": "ADAPTER_MECHANICALLY_VALIDATED_NO_MODEL_PILOT",
+  "implementation_version": "state-local-research-v1",
+  "upstream_version": "5644b1838d96bc4483da29642d058ecaa6f80f7f",
+  "upstream_source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-5644b18/source/STATE-Bench-5644b1838d96bc4483da29642d058ecaa6f80f7f",
+  "research_copy": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/state-bench-local-research-v1/source",
+  "compatibility_patch": "data/fixtures/state-bench-local-optional-azure.patch",
+  "upstream_license": "MIT; LICENSE retained beside research copy",
+  "domain": "travel",
+  "source_selection": "artifacts/host-intent-retrieval-v3/view-v4-state-travel-pilot-preparation-v1/selection.json",
+  "source_preparation": "artifacts/host-intent-retrieval-v3/view-v4-state-travel-pilot-preparation-v1/preparation.json",
+  "memory_source_count": 46,
+  "memory_trajectories": 2,
+  "target_trajectory_excluded": true,
+  "test_task_contents_read": false,
+  "public_metadata_only": [
+    "domain",
+    "user_id",
+    "now",
+    "opaque session"
+  ],
+  "excluded_from_host_and_memory": [
+    "task_summary",
+    "state_requirements",
+    "task_requirements",
+    "free-form runtime config",
+    "descriptive benchmark task identifiers"
+  ],
+  "memory_contract": {
+    "tool": "retrieve_learnings",
+    "returns": "One complete canonical evidence receipt as one string; at most3strings",
+    "budget": "Entire wrapped JSON value counted with the existing tokenizer before material admission",
+    "registered_tool": "milai_retrieve",
+    "public_allowance": "Same actual user turn across intra-turn tool rounds; no reset",
+    "known_refs": "Only actual previously delivered references"
+  },
+  "mechanical_validation": {
+    "actual_upstream_harness": true,
+    "actual_sqlite_store": true,
+    "actual_registered_retrieval": true,
+    "actual_travel_hotel_write": true,
+    "host": "Scripted HTTP transport through the actual JSON-action bridge; no model",
+    "hidden_context_sentinel_absent": true,
+    "flat_STATE_schema_adapted_to_chat_schema": true,
+    "adapter_tests": 4,
+    "related_retrieval_regressions": 24,
+    "package_tools_boundaries": 6,
+    "ruff": "passed",
+    "mypy": "3 files passed",
+    "final_hidden_task_id_check": "passed"
+  },
+  "model_pilot": {
+    "status": "NOT_STARTED",
+    "runner": "tools/run_state_bench_local_pilot.py",
+    "transport": "existing local Qwen JSON-action",
+    "controller": "fixed_context functional bridge",
+    "simulator": "Original travel prompt through existing local Qwen; research variant",
+    "judge": "No LLM judge in initial functional pilot; deterministic final-state score only",
+    "official_score": false,
+    "official_cli": false,
+    "sha_validation_executed": false
+  },
+  "limitations": [
+    "Python3.11.13 imports and public harness execution passed; upstream declares>=3.12, full benchmark compatibility unproven.",
+    "Raw public historical evidence is not a reproduced procedural-learning extractor.",
+    "No actual model STATE trajectory yet; scheduled only after current model queue closes.",
+    "Official GPT-5.4 simulator/judge configuration remains unavailable; do not label local pilot official."
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "status": "PREPARED_FROM_COMPLETED_OUTCOMES",
+  "tool": "tools/prepare_evidence_value_transitions.py",
+  "queries": [
+    {
+      "question_id": "gpt4_59149c77",
+      "states": 6,
+      "transitions": 12,
+      "labeled_transitions": 12,
+      "unlabeled_transitions": 0,
+      "equivalent_evidence": [
+        {
+          "conditions": [
+            "both",
+            "equivalent_parent"
+          ],
+          "observed_return_disagreement": false
+        }
+      ],
+      "observations": [
+        {
+          "before": "empty",
+          "after": "moma_only",
+          "opens": 1,
+          "immediate_gain": 0,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 5797
+        },
+        {
+          "before": "empty",
+          "after": "ancient_only",
+          "opens": 1,
+          "immediate_gain": 0,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 4540
+        },
+        {
+          "before": "empty",
+          "after": "both",
+          "opens": 2,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 10348
+        },
+        {
+          "before": "empty",
+          "after": "equivalent_parent",
+          "opens": 2,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 10348
+        },
+        {
+          "before": "moma_only",
+          "after": "both",
+          "opens": 1,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 4551
+        },
+        {
+          "before": "moma_only",
+          "after": "equivalent_parent",
+          "opens": 1,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 4551
+        },
+        {
+          "before": "moma_only",
+          "after": "both_plus_unrelated",
+          "opens": 2,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 8934
+        },
+        {
+          "before": "ancient_only",
+          "after": "both",
+          "opens": 1,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 5808
+        },
+        {
+          "before": "ancient_only",
+          "after": "equivalent_parent",
+          "opens": 1,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 5808
+        },
+        {
+          "before": "ancient_only",
+          "after": "both_plus_unrelated",
+          "opens": 2,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 10191
+        },
+        {
+          "before": "both",
+          "after": "both_plus_unrelated",
+          "opens": 1,
+          "immediate_gain": 0,
+          "unpenalized_two_open_return_gain": 0,
+          "reader_input_token_delta": 4383
+        },
+        {
+          "before": "equivalent_parent",
+          "after": "both_plus_unrelated",
+          "opens": 1,
+          "immediate_gain": 0,
+          "unpenalized_two_open_return_gain": 0,
+          "reader_input_token_delta": 4383
+        }
+      ]
+    },
+    {
+      "question_id": "6a1eabeb",
+      "states": 6,
+      "transitions": 12,
+      "labeled_transitions": 8,
+      "unlabeled_transitions": 4,
+      "equivalent_evidence": [
+        {
+          "conditions": [
+            "both",
+            "equivalent_new"
+          ],
+          "observed_return_disagreement": false
+        }
+      ],
+      "observations": [
+        {
+          "before": "empty",
+          "after": "old_only",
+          "opens": 1,
+          "immediate_gain": 0,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 4676
+        },
+        {
+          "before": "empty",
+          "after": "new_only",
+          "opens": 1,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 5399
+        },
+        {
+          "before": "empty",
+          "after": "both",
+          "opens": 2,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 10086
+        },
+        {
+          "before": "empty",
+          "after": "equivalent_new",
+          "opens": 2,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 10086
+        },
+        {
+          "before": "old_only",
+          "after": "both",
+          "opens": 1,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 5410
+        },
+        {
+          "before": "old_only",
+          "after": "equivalent_new",
+          "opens": 1,
+          "immediate_gain": 1,
+          "unpenalized_two_open_return_gain": 1,
+          "reader_input_token_delta": 5410
+        },
+        {
+          "before": "old_only",
+          "after": "both_plus_unrelated",
+          "opens": 2,
+          "immediate_gain": null,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 9956
+        },
+        {
+          "before": "new_only",
+          "after": "both",
+          "opens": 1,
+          "immediate_gain": 0,
+          "unpenalized_two_open_return_gain": 0,
+          "reader_input_token_delta": 4687
+        },
+        {
+          "before": "new_only",
+          "after": "equivalent_new",
+          "opens": 1,
+          "immediate_gain": 0,
+          "unpenalized_two_open_return_gain": 0,
+          "reader_input_token_delta": 4687
+        },
+        {
+          "before": "new_only",
+          "after": "both_plus_unrelated",
+          "opens": 2,
+          "immediate_gain": null,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 9233
+        },
+        {
+          "before": "both",
+          "after": "both_plus_unrelated",
+          "opens": 1,
+          "immediate_gain": null,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 4546
+        },
+        {
+          "before": "equivalent_new",
+          "after": "both_plus_unrelated",
+          "opens": 1,
+          "immediate_gain": null,
+          "unpenalized_two_open_return_gain": null,
+          "reader_input_token_delta": 4546
+        }
+      ]
+    }
+  ],
+  "new_model_calls": 0,
+  "parameter_updates": 0,
+  "source_mutations": 0,
+  "label_scope": "Observed single-draw returns, not expected utility or evidence sufficiency. Two-open target is an optimistic observed return without cost penalty; it must be considered alongside actual input costs and number of opens. Equivalent and multiple subset examples remain dependent. Missing/disputed labels stay null.",
+  "model_input": "Actual saved question/date/delivered materials plus ordinary candidate navigation excerpts; labels and review notes remain outside model_input."
+}

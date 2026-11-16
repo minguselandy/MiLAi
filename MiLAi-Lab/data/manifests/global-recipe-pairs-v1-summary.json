@@ -1,0 +1,125 @@
+{
+  "source_code": "a171b814",
+  "source_before": "closed be7c5e6f actual final state",
+  "recipes": {
+    "single_pass": {
+      "cases": [
+        {
+          "case": "future-contact",
+          "status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null
+            }
+          ],
+          "changed_records": 1,
+          "unprocessed": []
+        },
+        {
+          "case": "decision",
+          "status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null
+            },
+            {
+              "status": "no_change",
+              "reason": null
+            }
+          ],
+          "changed_records": 1,
+          "unprocessed": []
+        },
+        {
+          "case": "preserve",
+          "status": "completed",
+          "receipts": [
+            {
+              "status": "no_change",
+              "reason": null
+            },
+            {
+              "status": "no_change",
+              "reason": null
+            }
+          ],
+          "changed_records": 0,
+          "unprocessed": []
+        }
+      ],
+      "cost": {
+        "generation_calls": 3,
+        "input_tokens": 18165,
+        "output_tokens": 6506,
+        "embedding_calls": 6,
+        "embedding_tokens": 1077
+      }
+    },
+    "extract_then_edit": {
+      "cases": [
+        {
+          "case": "future-contact",
+          "status": "incomplete",
+          "receipts": [
+            {
+              "status": "rejected",
+              "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+            }
+          ],
+          "changed_records": 0,
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "pairs/future-contact:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+              }
+            }
+          ]
+        },
+        {
+          "case": "decision",
+          "status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null
+            }
+          ],
+          "changed_records": 1,
+          "unprocessed": []
+        },
+        {
+          "case": "preserve",
+          "status": "completed",
+          "receipts": [
+            {
+              "status": "committed",
+              "reason": null
+            }
+          ],
+          "changed_records": 1,
+          "unprocessed": []
+        }
+      ],
+      "cost": {
+        "generation_calls": 9,
+        "input_tokens": 23950,
+        "output_tokens": 28534,
+        "embedding_calls": 6,
+        "embedding_tokens": 1073
+      }
+    }
+  },
+  "actual_befores_equal": [
+    true,
+    true,
+    true
+  ],
+  "findings": "Single-pass committed both actual changes and preserved no-change state. Extract-then-edit selected old Oct20 for new Nov1 and was rejected; its no-change event rewrote B/confirmation and lost previous correction explanation. All outputs retained; prefer single-pass for this declared simple-change slice."
+}

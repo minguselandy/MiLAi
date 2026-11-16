@@ -1,0 +1,639 @@
+{
+  "status": "CLOSED_FIRST_SCORES",
+  "selection": [
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_length": 8,
+      "source_session": 7,
+      "question_indices": [
+        4,
+        5
+      ],
+      "types": [
+        "Multi-hop Inference",
+        "Multi-hop Inference"
+      ]
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_length": 18,
+      "source_session": 17,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Basic Fact Recall",
+        "Memory Conflict"
+      ]
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_length": 32,
+      "source_session": 31,
+      "question_indices": [
+        1,
+        2
+      ],
+      "types": [
+        "Generalization & Application",
+        "Memory Conflict"
+      ]
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_length": 8,
+      "source_session": 7,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Basic Fact Recall",
+        "Basic Fact Recall"
+      ]
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_length": 20,
+      "source_session": 19,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Basic Fact Recall",
+        "Basic Fact Recall"
+      ]
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_length": 32,
+      "source_session": 31,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Generalization & Application",
+        "Generalization & Application"
+      ]
+    }
+  ],
+  "arms": {
+    "s0": {
+      "closed": true,
+      "cases": [
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 8,
+          "session_index": 7,
+          "selected_question_index": 0,
+          "original_question_index": 4,
+          "execution": "answered",
+          "first_label": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 8,
+          "session_index": 7,
+          "selected_question_index": 1,
+          "original_question_index": 5,
+          "execution": "answered",
+          "first_label": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 18,
+          "session_index": 17,
+          "selected_question_index": 0,
+          "original_question_index": 0,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 18,
+          "session_index": 17,
+          "selected_question_index": 1,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 32,
+          "session_index": 31,
+          "selected_question_index": 0,
+          "original_question_index": 1,
+          "execution": "known_missing",
+          "first_label": "missing",
+          "reader_failure": {
+            "type": "ValueError",
+            "message": "Provider output incomplete: length",
+            "finish_reason": "length",
+            "phase": "confirmed_response",
+            "response_ref": "http/halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/31/qa/0/view/page-3/response.json",
+            "failure_ref": "http/halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/31/qa/0/view/page-3/failure.json"
+          }
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 32,
+          "session_index": 31,
+          "selected_question_index": 1,
+          "original_question_index": 2,
+          "execution": "answered",
+          "first_label": "invalid",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 8,
+          "session_index": 7,
+          "selected_question_index": 0,
+          "original_question_index": 0,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 8,
+          "session_index": 7,
+          "selected_question_index": 1,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 20,
+          "session_index": 19,
+          "selected_question_index": 0,
+          "original_question_index": 0,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 20,
+          "session_index": 19,
+          "selected_question_index": 1,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 32,
+          "session_index": 31,
+          "selected_question_index": 0,
+          "original_question_index": 0,
+          "execution": "answered",
+          "first_label": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 32,
+          "session_index": 31,
+          "selected_question_index": 1,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        }
+      ],
+      "labels": {
+        "Hallucination": 3,
+        "Correct": 7,
+        "missing": 1,
+        "invalid": 1
+      },
+      "cost": {
+        "reading": {
+          "calls": 76,
+          "prompt_tokens": 2878687,
+          "total_tokens": 3034404,
+          "completion_tokens": 155717
+        },
+        "judge": {
+          "calls": 11,
+          "prompt_tokens": 12003,
+          "total_tokens": 34156,
+          "completion_tokens": 22153
+        }
+      },
+      "copied_generation_receipts_verified_not_repeated": 0,
+      "maintenance_status": {
+        "null": 64
+      },
+      "completed_session_checkpoints": 64
+    },
+    "candidate": {
+      "closed": true,
+      "cases": [
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 8,
+          "session_index": 7,
+          "selected_question_index": 0,
+          "original_question_index": 4,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 8,
+          "session_index": 7,
+          "selected_question_index": 1,
+          "original_question_index": 5,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 18,
+          "session_index": 17,
+          "selected_question_index": 0,
+          "original_question_index": 0,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 18,
+          "session_index": 17,
+          "selected_question_index": 1,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 32,
+          "session_index": 31,
+          "selected_question_index": 0,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "prefix_sessions": 32,
+          "session_index": 31,
+          "selected_question_index": 1,
+          "original_question_index": 2,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 8,
+          "session_index": 7,
+          "selected_question_index": 0,
+          "original_question_index": 0,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 8,
+          "session_index": 7,
+          "selected_question_index": 1,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 20,
+          "session_index": 19,
+          "selected_question_index": 0,
+          "original_question_index": 0,
+          "execution": "answered",
+          "first_label": "Correct",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 20,
+          "session_index": 19,
+          "selected_question_index": 1,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 32,
+          "session_index": 31,
+          "selected_question_index": 0,
+          "original_question_index": 0,
+          "execution": "answered",
+          "first_label": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+          "prefix_sessions": 32,
+          "session_index": 31,
+          "selected_question_index": 1,
+          "original_question_index": 1,
+          "execution": "answered",
+          "first_label": "Hallucination",
+          "reader_failure": null
+        }
+      ],
+      "labels": {
+        "Correct": 7,
+        "Hallucination": 5
+      },
+      "cost": {
+        "maintenance": {
+          "calls": 65,
+          "prompt_tokens": 2432772,
+          "total_tokens": 2743944,
+          "completion_tokens": 311172
+        },
+        "reading": {
+          "calls": 24,
+          "prompt_tokens": 848656,
+          "total_tokens": 874535,
+          "completion_tokens": 25879
+        },
+        "judge": {
+          "calls": 12,
+          "prompt_tokens": 11801,
+          "total_tokens": 35462,
+          "completion_tokens": 23661
+        },
+        "embedding": {
+          "calls": 130,
+          "prompt_tokens": 248882,
+          "total_tokens": 248882,
+          "completion_tokens": 0
+        }
+      },
+      "copied_generation_receipts_verified_not_repeated": 16,
+      "maintenance_status": {
+        "completed": 62,
+        "incomplete": 2
+      },
+      "completed_session_checkpoints": 64
+    }
+  },
+  "timing_scope": "whole process phases; candidate includes stopped phase, continuation, and physical index interventions; not stable per-request latency",
+  "no_rescore": true,
+  "paired": {
+    "candidate_only_correct": 3,
+    "control_only_correct": 3
+  },
+  "candidate_total_prediction_tokens": 3618479,
+  "reading_token_reduction": 0.7117934856400137,
+  "total_prediction_token_increase": 0.19248425720503937,
+  "phase_timeline": [
+    {
+      "arm": "s0",
+      "phase": "predict",
+      "source": "4c988f10",
+      "status": "EXITED",
+      "returncode": 0,
+      "started_at": "2026-10-14T07:20:56.303015+00:00",
+      "ended_at": "2026-10-14T08:06:33.266476+00:00"
+    },
+    {
+      "arm": "s0",
+      "phase": "score",
+      "source": "4c988f10",
+      "status": "EXITED",
+      "returncode": 0,
+      "started_at": "2026-10-14T08:06:33.274124+00:00",
+      "ended_at": "2026-10-14T08:09:01.689156+00:00"
+    },
+    {
+      "arm": "candidate",
+      "phase": "predict",
+      "source": "4c988f10",
+      "status": "EXITED",
+      "returncode": -15,
+      "started_at": "2026-10-14T08:09:01.690509+00:00",
+      "ended_at": "2026-10-14T09:11:09.667205+00:00"
+    },
+    {
+      "arm": "candidate",
+      "phase": "predict",
+      "source": "51182ead",
+      "status": "EXITED",
+      "returncode": 0,
+      "started_at": "2026-10-14T09:14:52.818075+00:00",
+      "ended_at": "2026-10-14T11:27:58.408601+00:00"
+    },
+    {
+      "arm": "candidate",
+      "phase": "score",
+      "source": "51182ead",
+      "status": "EXITED",
+      "returncode": 0,
+      "started_at": "2026-10-14T11:27:58.414578+00:00",
+      "ended_at": "2026-10-14T11:30:36.469429+00:00"
+    }
+  ],
+  "phase_wall_seconds": [
+    {
+      "arm": "s0",
+      "phase": "predict",
+      "runtime": "4c988f10",
+      "seconds": 2736.963461,
+      "returncode": 0
+    },
+    {
+      "arm": "s0",
+      "phase": "score",
+      "runtime": "4c988f10",
+      "seconds": 148.415032,
+      "returncode": 0
+    },
+    {
+      "arm": "candidate",
+      "phase": "predict",
+      "runtime": "4c988f10",
+      "seconds": 3727.976696,
+      "returncode": -15
+    },
+    {
+      "arm": "candidate",
+      "phase": "predict",
+      "runtime": "51182ead",
+      "seconds": 7985.590526,
+      "returncode": 0
+    },
+    {
+      "arm": "candidate",
+      "phase": "score",
+      "runtime": "51182ead",
+      "seconds": 158.054851,
+      "returncode": 0
+    }
+  ],
+  "root_source_review": {
+    "status": "first scores closed, root review; no label changes",
+    "cases": [
+      {
+        "case": "U1-prefix8-selected0",
+        "both": "Core healthier work-life balance, improved mental health, and unspecified title supported. User explicitly mentions a creative aspect; do not misclassify creativity as wholly Assistant-invented.",
+        "attribution_limit": "Healthcare-sector and humanitarian-care framing in the current-role session is chiefly Assistant text; neither answer marks that attribution clearly.",
+        "changes_to_labels": false
+      },
+      {
+        "case": "U1-prefix18-selected1",
+        "both": "Both received the same explicit User reports of fear of unpredictable snake movement, continued distance from snakes, and interest in iguanas. Their negative answers and this explanation are Source-supported.",
+        "control_first_label": "Correct",
+        "candidate_first_label": "Correct",
+        "changes_to_labels": false,
+        "label_evidence": "actual evaluation session17 second question and Judge000004"
+      },
+      {
+        "case": "U4-prefix8-selected1",
+        "control_first_label": "Correct",
+        "candidate_first_label": "Hallucination",
+        "source_fact": "Both final inputs contain an Assistant report of20,000 and a User acknowledgment of18,000 in the same October conversation.",
+        "review": "Candidate explicitly distinguishes speakers and preserves the discrepancy. Official label difference does not prove worse source fidelity."
+      },
+      {
+        "case": "U4-prefix20-selected1",
+        "control_first_label": "Correct",
+        "candidate_first_label": "Hallucination",
+        "source_fact": "Candidate final input includes the earlier User preference for strategy games and later User interest in cooperative shooters.",
+        "review": "Maintaining strategy preference alongside the new cooperative interest has actual source support; current material does not show its withdrawal. Treat label difference separately from semantic preservation."
+      },
+      {
+        "case": "U4-prefix32-selected1",
+        "control_first_label": "Correct",
+        "candidate_first_label": "Hallucination",
+        "review": "Control distinguishes suggestions from User reports. Candidate says considering and adopting before a mixed list, risking promotion of Assistant suggestions to completed/current User behavior; this is a real modality/attribution concern."
+      }
+    ],
+    "remaining": "Wait for candidate first scoring; review consequential disagreements symmetrically and distinguish missing/invalid from Source fidelity."
+  },
+  "final_evidence": [
+    {
+      "case": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/17/qa/0",
+      "kinds": {
+        "original_source": 1
+      },
+      "steps": 2,
+      "expanded": 1
+    },
+    {
+      "case": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/17/qa/1",
+      "kinds": {
+        "original_source": 2
+      },
+      "steps": 2,
+      "expanded": 2
+    },
+    {
+      "case": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/31/qa/0",
+      "kinds": {
+        "original_source": 6,
+        "semantic_view": 2
+      },
+      "steps": 2,
+      "expanded": 8
+    },
+    {
+      "case": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/31/qa/1",
+      "kinds": {
+        "original_source": 2,
+        "semantic_view": 1
+      },
+      "steps": 2,
+      "expanded": 3
+    },
+    {
+      "case": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/7/qa/0",
+      "kinds": {
+        "original_source": 5
+      },
+      "steps": 2,
+      "expanded": 5
+    },
+    {
+      "case": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/7/qa/1",
+      "kinds": {
+        "original_source": 3
+      },
+      "steps": 2,
+      "expanded": 3
+    },
+    {
+      "case": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/31/qa/0",
+      "kinds": {
+        "original_source": 4
+      },
+      "steps": 2,
+      "expanded": 4
+    },
+    {
+      "case": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/31/qa/1",
+      "kinds": {
+        "original_source": 5
+      },
+      "steps": 2,
+      "expanded": 5
+    },
+    {
+      "case": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/0",
+      "kinds": {
+        "original_source": 1
+      },
+      "steps": 2,
+      "expanded": 1
+    },
+    {
+      "case": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/1",
+      "kinds": {
+        "original_source": 2
+      },
+      "steps": 2,
+      "expanded": 2
+    },
+    {
+      "case": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/19/qa/0",
+      "kinds": {
+        "original_source": 1
+      },
+      "steps": 2,
+      "expanded": 1
+    },
+    {
+      "case": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/19/qa/1",
+      "kinds": {
+        "original_source": 5
+      },
+      "steps": 2,
+      "expanded": 5
+    }
+  ],
+  "decision": "Do not select automatic S2+pack+C as established overall winner: first Correct counts tie, lifecycle tokens rise, and Source/Judge attribution differences remain. Retain shared update capability, evaluate one source-only pack efficiency candidate using the same full development cohort before final freeze.",
+  "next_candidate": "configs/milai-global-long32-source-pack-v1.json",
+  "heldout_used": false
+}

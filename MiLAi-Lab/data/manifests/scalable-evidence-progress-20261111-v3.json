@@ -1,0 +1,328 @@
+{
+  "status": "I2_FIRST_READOUTS_CLOSED_OP10K_READY_MAIN_303_UPDATE_RUNS_STILL_ACTIVE",
+  "goal_complete": false,
+  "no_sha_validation": true,
+  "code_commit": "2039a7d0",
+  "main_training_source_commit": "cececfb7",
+  "previous_goal_turn": "progress",
+  "current_goal_turn": "progress",
+  "main_training": [
+    {
+      "name": "s1-op3k",
+      "pid": 4189632,
+      "exists_in_proc": true,
+      "status": "RUNNING",
+      "last_persisted_update": 151,
+      "curve": [
+        {
+          "update": 0,
+          "fast_counts": {
+            "labelled": 78,
+            "accepted": 25,
+            "masked": 50
+          },
+          "full_counts": null,
+          "full_family_macro": null,
+          "labelled_full_families": null
+        },
+        {
+          "update": 51,
+          "fast_counts": {
+            "labelled": 78,
+            "accepted": 43,
+            "handoff_outside_reviewed_preference": 13,
+            "masked": 50
+          },
+          "full_counts": null,
+          "full_family_macro": null,
+          "labelled_full_families": null
+        },
+        {
+          "update": 101,
+          "fast_counts": {
+            "labelled": 78,
+            "accepted": 43,
+            "handoff_outside_reviewed_preference": 15,
+            "masked": 50
+          },
+          "full_counts": {
+            "labelled": 278,
+            "accepted": 133,
+            "handoff_outside_reviewed_preference": 52,
+            "masked": 202
+          },
+          "full_family_macro": 0.48244240878169453,
+          "labelled_full_families": 28
+        }
+      ]
+    },
+    {
+      "name": "s1-repeat32",
+      "pid": 4189633,
+      "exists_in_proc": true,
+      "status": "RUNNING",
+      "last_persisted_update": 151,
+      "curve": [
+        {
+          "update": 0,
+          "fast_counts": {
+            "labelled": 78,
+            "accepted": 25,
+            "masked": 50
+          },
+          "full_counts": null,
+          "full_family_macro": null,
+          "labelled_full_families": null
+        },
+        {
+          "update": 51,
+          "fast_counts": {
+            "labelled": 78,
+            "accepted": 45,
+            "handoff_outside_reviewed_preference": 18,
+            "masked": 50
+          },
+          "full_counts": null,
+          "full_family_macro": null,
+          "labelled_full_families": null
+        },
+        {
+          "update": 101,
+          "fast_counts": {
+            "labelled": 78,
+            "accepted": 41,
+            "handoff_outside_reviewed_preference": 15,
+            "masked": 50
+          },
+          "full_counts": {
+            "labelled": 278,
+            "accepted": 113,
+            "handoff_outside_reviewed_preference": 69,
+            "masked": 202
+          },
+          "full_family_macro": 0.4300885126777984,
+          "labelled_full_families": 28
+        }
+      ]
+    }
+  ],
+  "main_command_manifest": "/data/milai-experiments/20261111-scalable-evidence/s1-main-comparison-v1.json",
+  "op10k": {
+    "status": "FIXED_OPERATION_SHARD_RELEASED",
+    "no_sha_validation": true,
+    "train_collections": [
+      "/data/milai-experiments/20261111-scalable-evidence/operation-pilot-v3",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-new-a-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-new-b-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-replay-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-a-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-b-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-expanded-new-family-c-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-additional-pilot-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-expanded-additional-v1"
+    ],
+    "dev_collection": "/data/milai-experiments/20261111-scalable-evidence/operation-dev-v1",
+    "train_source_families": 721,
+    "train_labelled_families": 646,
+    "train_raw_states": 16833,
+    "train_fit_states": 10070,
+    "train_unknown_states_retained_in_collections": 6764,
+    "newly_supervised_states": 1,
+    "remaining_unknown_states": 6763,
+    "new_supervision_source": "/data/milai-experiments/20261111-scalable-evidence/observed-pool-label-updates-v2.jsonl",
+    "dev_families": 32,
+    "dev_fast_states": 128,
+    "dev_full_states": 480,
+    "train_labels": {
+      "reference_acquisition": 8202,
+      "reference_preserving_handoff": 1868
+    },
+    "train_stages": {
+      "initial": 1556,
+      "post_search": 1268,
+      "post_read": 7246
+    },
+    "supervision_scope": "Reference-witness operation preferences, not exhaustive semantic proofs or measured Host success",
+    "selection": "Completed family order, then known supervision; fast dev uses evenly spaced states in every family without outcome or predicted-score selection"
+  },
+  "nesting": {
+    "old_fit_rows": 3202,
+    "all_original_fit_lines_literal_equal_prefix": true,
+    "fast_dev_bytes_equal": false,
+    "full_dev_bytes_equal": false,
+    "no_sha_validation": true,
+    "dev_identical_except_offline_state_id": true,
+    "dev-full_identical_except_offline_state_id": true
+  },
+  "new_source_population": {
+    "status": "EXPANDED_TRAIN_SOURCES_FROZEN_OPERATION_COLLECTION_PENDING",
+    "native_train_papers": 888,
+    "existing_train_families": 384,
+    "new_train_families": 337,
+    "combined_train_families": 721,
+    "new_confirmation_families": 96,
+    "reserved_content_exported": false,
+    "sources": {
+      "new-family": {
+        "families": 337,
+        "native_requests": 1005
+      },
+      "additional-question": {
+        "families": 203,
+        "native_requests": 429
+      }
+    },
+    "no_sha_validation": true,
+    "new_operation_states": 0,
+    "inherited_roles_changed": false,
+    "raw_archive": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-native-v03/qasper-train-dev-v0.3.tgz",
+    "scope": "Natural extra questions share their paper family, not new independent sources. Existing op3k inputs unchanged. Larger curves expand both family and query coverage; native annotation mapping remains offline and does not certify Host success.",
+    "compute": {
+      "wall_seconds": 1.8184760035946965,
+      "cpu_seconds": 1.793422998
+    }
+  },
+  "existing_Source_banks_reused": 203,
+  "supervision_correction": {
+    "affected_queries": 4,
+    "actual_states_replayed": 32,
+    "changed_labels": 1,
+    "previously_labelled_changes": 0,
+    "newly_labelled": 1,
+    "events": [
+      "qasper-paper-2001.02943/question-0/step-7"
+    ],
+    "live_data_or_first_outcomes_modified": false,
+    "no_sha_validation": true,
+    "cpu_seconds": 5.438721814,
+    "wall_seconds": 5.438925955444574
+  },
+  "i2": {
+    "actual_development_families": 8,
+    "completed_first_readouts": 23,
+    "failed_first_readouts": 1,
+    "planned_policy_positions": 24,
+    "known_generation_tokens": 91757,
+    "new_unknown_usage": 0,
+    "native_metrics": {
+      "base": {
+        "literal_Answer_F1": 0.06309728686962573,
+        "missing": 0,
+        "reference_complete": 0,
+        "reference_unknown": 1
+      },
+      "i2": {
+        "literal_Answer_F1": 0.0708919924742904,
+        "missing": 0,
+        "reference_complete": 2,
+        "reference_unknown": 1
+      },
+      "rules": {
+        "literal_Answer_F1": 0.08122719587187659,
+        "missing": 1,
+        "reference_complete": 1,
+        "reference_unknown": 1
+      }
+    },
+    "source_review_summary": {
+      "base": {
+        "positions": 8,
+        "task_resolution": {
+          "complete": 3,
+          "uncertain": 2,
+          "incomplete": 3
+        },
+        "strict_supported_success": 3,
+        "answer_support": {
+          "supported": 8
+        },
+        "material_sufficiency": {
+          "sufficient": 3,
+          "uncertain": 2,
+          "insufficient": 2,
+          "partial": 1
+        },
+        "packet_tokens": 2506,
+        "known_generation_tokens": 33909,
+        "actual_first_response_wall_seconds": 189.342878498137
+      },
+      "i2": {
+        "positions": 8,
+        "task_resolution": {
+          "complete": 4,
+          "uncertain": 2,
+          "incomplete": 2
+        },
+        "strict_supported_success": 2,
+        "answer_support": {
+          "supported": 6,
+          "qualified": 2
+        },
+        "material_sufficiency": {
+          "sufficient": 4,
+          "uncertain": 2,
+          "insufficient": 1,
+          "partial": 1
+        },
+        "packet_tokens": 12009,
+        "known_generation_tokens": 27034,
+        "actual_first_response_wall_seconds": 88.03273347020149
+      },
+      "rules": {
+        "positions": 8,
+        "task_resolution": {
+          "complete": 3,
+          "uncertain": 2,
+          "incomplete": 2,
+          "execution_failed": 1
+        },
+        "strict_supported_success": 3,
+        "answer_support": {
+          "supported": 7,
+          "unscored": 1
+        },
+        "material_sufficiency": {
+          "sufficient": 3,
+          "uncertain": 2,
+          "insufficient": 2,
+          "partial": 1
+        },
+        "packet_tokens": 4385,
+        "known_generation_tokens": 30814,
+        "actual_first_response_wall_seconds": 158.50505582336336
+      }
+    },
+    "reviewer": "Root source-grounded review; not blinded or independent",
+    "exact_fixed_current_packet_matches": {
+      "base": 0,
+      "i2": 8,
+      "rules": 0
+    },
+    "interpretation": "I2 retains useful material previously discarded, but chooses current/all in all8 and is packet-identical to fixed-current. This is not evidence of learned conditional complementarity or advantage over that simple strategy.",
+    "new_GitHub_or_product_adoption": false,
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/i2-dev8-comparison-v2",
+    "readouts": "/data/milai-experiments/20261111-scalable-evidence/i2-dev8-readouts-v1",
+    "source_review": "/data/milai-experiments/20261111-scalable-evidence/i2-dev8-scoring-v1/author-review-v1.json"
+  },
+  "op10k_training_plan": "/data/milai-experiments/20261111-scalable-evidence/s1-op10k-seed0-v1-plan.json",
+  "op10k_training_started": false,
+  "tests": {
+    "related_tests": 26,
+    "real_closed_prefix_replay_cases": 8,
+    "targeted_supervision_replay_states": 32,
+    "real_Source_bank_reuse_pilot": "passed",
+    "shared_3k_literal_prefix": "passed",
+    "ruff": "passed",
+    "package_boundary": "passed",
+    "tools_boundary": "same6 untouched LME owner dynamic imports; no new findings"
+  },
+  "cost_receipt": "/data/milai-experiments/20261111-scalable-evidence/expanded-stage-compute-v1.json",
+  "remaining": [
+    "Finish original303 update runs and inspect51/101/202/303 curves, preserving both arms",
+    "Run ready op10k from the common original initializer when an allocated GPU is free; do not restart live jobs",
+    "Collect TRAIN feedback under constrained delivery and actual Host-known evidence; fixed-current and rules remain strong controls",
+    "Actual selected S1 models in Host tasks, not only reference-action acceptance",
+    "MuSiQue/legal independent-source expansion for30k; selected conditional/own-state/continuous-memory studies",
+    "Decisive seed repeats, frozen new-source confirmation and complete cost/generalization conclusions"
+  ]
+}

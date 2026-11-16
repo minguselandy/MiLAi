@@ -1,0 +1,175 @@
+{
+  "status": "PHASE6_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-10T21:27:23.645959+00:00",
+  "code_commit": "7a97a50e",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v5.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op10k-seed0-v1",
+      "session": 33781,
+      "loaded_source_commit": "cececfb7",
+      "pid": 468718,
+      "status": "RUNNING",
+      "optimizer_updates": 365,
+      "planned_optimizer_updates": 945
+    },
+    {
+      "name": "s1-op36k-seed0-v1",
+      "session": 52995,
+      "loaded_source_commit": "4bab6388",
+      "pid": 769163,
+      "status": "RUNNING",
+      "optimizer_updates": 25,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-learner-train160-v1",
+      "session": 31902,
+      "loaded_source_commit": "17269285",
+      "pid": 818846,
+      "status": "RUNNING",
+      "completed_families": 32,
+      "planned_families": 160,
+      "raw_states": 142,
+      "branch_packets": 85,
+      "model_calls": 142
+    },
+    {
+      "name": "i2-learner-terminal-first16-readouts-v1",
+      "session": 68555,
+      "loaded_source_commit": "7a97a50e",
+      "pid": 953553,
+      "status": "RUNNING",
+      "planned_families": 16,
+      "closed_readouts": 9,
+      "failed_readouts": 1,
+      "reused_readouts": 0,
+      "planned_unique_packets": 41
+    }
+  ],
+  "encoding_reuse": {
+    "implementation_commit": "603d5ab5",
+    "optional_flag": "--reuse-training-tokens",
+    "existing_live_models_changed": false,
+    "scope": "CPU preparation and three option permutations only; no model forward, GPU throughput or end-to-end training speedup claim. SDK already reused state IDs during permutation; new work shares audit/item state tokenization and repeated instruction/option text.",
+    "rows": 64,
+    "sequence_token_range": [
+      3624,
+      10445
+    ],
+    "option_range": [
+      13,
+      89
+    ],
+    "truncations": 0,
+    "exact_audit_items_initial_and_three_permutations": true,
+    "wall_speedup": 3.2740322851910797,
+    "cpu_speedup": 3.2739196503967944,
+    "medians": {
+      "legacy": {
+        "wall_seconds": 3.518950889352709,
+        "cpu_seconds": 3.5187211744999995,
+        "prepare_wall_seconds": 2.6884503476321697,
+        "prepare_cpu_seconds": 2.6882557439999992,
+        "tokenizer_calls": 28320.0,
+        "tokenized_characters": 4072428.0
+      },
+      "reuse": {
+        "wall_seconds": 1.074806410819292,
+        "cpu_seconds": 1.074773223000001,
+        "prepare_wall_seconds": 0.9342598225921392,
+        "prepare_cpu_seconds": 0.9342321435000009,
+        "tokenizer_calls": 211.0,
+        "tokenized_characters": 1204499.0
+      }
+    },
+    "benchmark": "/data/milai-experiments/20261111-scalable-evidence/training-token-reuse-benchmark-v2.json",
+    "first_failure": "/data/milai-experiments/20261111-scalable-evidence/training-token-reuse-benchmark-v1-failure.json"
+  },
+  "first_pass_10k": {
+    "full_dev_labelled": 278,
+    "accepted": 115,
+    "family_macro_acceptance": 0.4472950164914451,
+    "same_dev_3k_firstpass_accepted": 133,
+    "same_dev_3k_firstpass_macro": 0.48244240878169453,
+    "scope": "Interim first-pass comparison, later preset points retained. Source expansion does not show monotonic gain here; no early stopping/model replacement."
+  },
+  "closed_short_rollout": {
+    "families": 8,
+    "states": 16,
+    "unique_bindings": 40,
+    "new_host_readouts": 40,
+    "completed": 34,
+    "failed": 6,
+    "generation_known_tokens": 177748,
+    "new_unknown_usage": 0,
+    "first2_semantic_reviewed": true,
+    "next6_semantic_review": "pending; only explicit reference-witness proxy compiled",
+    "native_witness_directional_states": 2,
+    "native_witness_directional_pairs": 4,
+    "limitation": "Legacy bounded continuation forced current-packet HANDOFF; observation-only acquisitions can be dropped. Keep this condition separate and do not promote it as general learner-vs-rules advantage."
+  },
+  "terminal_mechanism": {
+    "same_sources_states_menus_nominations_acquisition_bindings": true,
+    "changed_readout_wires": 9,
+    "exact_wire_reused_first_results": 1,
+    "new_host_calls": 9,
+    "new_generation_known_tokens": 40157,
+    "first_length_failures": 2,
+    "completed_positions_including_reused": 8,
+    "complete_supported": 0,
+    "incomplete": 6,
+    "incorrect_target_attribution": 2,
+    "review": "/data/milai-experiments/20261111-scalable-evidence/s2-prefix2-rules-terminal-author-review-v1.json",
+    "comparison": "/data/milai-experiments/20261111-scalable-evidence/s2-prefix2-terminal-mechanism-v1.json",
+    "scope": "Shared rules now select among actual HANDOFF bindings at the boundary. This restores observed material but can discard correct acquired evidence; CAIS paragraph lost to abstract, SNIPS substituted for target CAIS. No quality improvement is established. Old first results retained."
+  },
+  "direct_I2": {
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-first16-v1",
+    "families": 16,
+    "actual_terminal_states": 16,
+    "actual_packets": 41,
+    "budget_forced_states": 0,
+    "new_native_executions": 0,
+    "readout_status": "RUNNING",
+    "full_online_menu_retained": true,
+    "next_terminal_family_offset": 16,
+    "target_family_prefix": 64,
+    "scope": "Every fixed-order terminal state; use already-executed learner/rules/coverage HANDOFF packets. First action and final delivery are the same; no common suffix can overwrite that decision."
+  },
+  "tests": {
+    "cpu_tokenization_and_training": {
+      "passed": 22,
+      "broader_GPU_tests_skipped_in_CPU_invocation": 9
+    },
+    "targeted_real_CUDA_token_reuse_and_recovery": {
+      "passed": 2,
+      "legacy_vs_reuse_final_parameters_equal": true
+    },
+    "feedback_selection_reuse_compilation": 13,
+    "terminal_full_menu_binding": 1,
+    "ruff": "pass",
+    "package_boundary": "pass",
+    "tools_boundary": "six unchanged old LME dynamic-import findings"
+  },
+  "cost_receipt": "/data/milai-experiments/20261111-scalable-evidence/phase6-preparation-compute-v1.json",
+  "measured_preparation_cpu": {
+    "cpu_seconds": 27.603084699000004,
+    "runs": 6
+  },
+  "preparation_cost_recorded": false,
+  "pending_cost_session": 57897,
+  "remaining": [
+    "Continue original10k/36k trajectories, no restarts on timeouts or stale logging",
+    "Complete learner TRAIN160 and direct-I2 first16 readouts, then source-order terminal family segments16..64 without duplicate first results",
+    "Keep legacy-current, rules-terminal and direct-HANDOFF feedback distinct; close semantic review on actual outcomes and fit adequate matched SFT/pair comparison",
+    "Use token reuse only in new declared jobs; current processes retain old loaded source/recipe",
+    "Known-evidence/constrained I2, own-state comparison and continuing-source/View application remain incomplete",
+    "Reuse prior1200-position exposed D baseline evidence where applicable, but do not count it as new S1/36k View learning or natural-history confirmation",
+    "Decisive seed repeats and final frozen new-source confirmation96/full task-cost generalization still required"
+  ],
+  "Product_API_permissions_Canonical_changed": false,
+  "services_restarted": false,
+  "remote_push": false
+}

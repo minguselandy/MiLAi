@@ -1,0 +1,266 @@
+{
+  "status": "TRAIN576_REVIEWED;STORED_RECORD_MENU_GAP_AND_REJECTED_REFRESH_VERIFIED;FULL_PLAN_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-26T22:02:56.335826+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v139.json",
+  "previous_turn_classification": "Progress: previousgoalturn finalized32states/96pairs and9literalViewboundaries atv139. Thisturn adds32states/96pairs,10source/binding checks andactualrejected-refresh/unselected-stored-record-menu evidence.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": {
+    "development_parent": "7aece29d",
+    "candidate": "Uncommitted tested working-tree alias allocation change; freeze before real-model use.",
+    "frozen_feedback_method": "2a179b58 unchanged"
+  },
+  "active_processes": [],
+  "branch_execution": "Original train2285/dev142 attempts remain closed. No new actual model calls or outcome repair. Original unknown interrupted usage retained.",
+  "train_quality_reviews": {
+    "status": "TRAIN576_REVIEWED;FIXED_CONTEXT_INITIAL64_OF128;FULLPOOL_OPEN",
+    "reviewed_states": 576,
+    "pairs": 1728,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 128,
+      "laya_post": 128,
+      "fixed_context_initial": 64
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 160,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 32,
+          "laya_post": 32,
+          "fixed_context_initial": 32
+        },
+        "remaining_states": 32
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 320,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 64,
+          "laya_post": 64,
+          "fixed_context_initial": 64
+        },
+        "remaining_states": 64
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 576,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 128,
+          "laya_post": 128,
+          "fixed_context_initial": 64
+        },
+        "remaining_states": 192
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 454,
+        "unknown": 592,
+        "tie": 372,
+        "left": 310
+      },
+      "delivery": {
+        "right": 521,
+        "unknown": 127,
+        "tie": 730,
+        "left": 350
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 566,
+        "unknown": 592,
+        "tie": 136,
+        "left": 434
+      },
+      "delivery": {
+        "right": 774,
+        "unknown": 127,
+        "tie": 238,
+        "left": 589
+      }
+    },
+    "new_chunks": [
+      "544-559",
+      "560-575"
+    ],
+    "new_states": 32,
+    "new_pairs": 96,
+    "new_cost_only_directions": 32,
+    "next_source_first_state": 576,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.071128397,
+    "scope": "Original family-order cohorts, not row-prefix cohorts. All128 originalfamilies alreadyexposed; morestates not newindependentfamilies. Author review, no blind/independent neural quality claim."
+  },
+  "dev_quality_review_states": 0,
+  "compiled_feedback_rows": 0,
+  "feedback_fits_started": 0,
+  "source_review_method": {
+    "new_states": 32,
+    "same_request_source_reuse": 32,
+    "new_request_or_frontier_reviews": 0,
+    "current_record575": {
+      "revision": 2,
+      "unit_characters": 292,
+      "completed_hosts": 3,
+      "exact_answers": 0
+    },
+    "annotation_correction": "566 actualrequest19772 matchedallbeforefields toprior310; correctedcurrentannotationheader22680 clericaltypo to19772 withoutchangingprioroutputs/labels.",
+    "host_context": "571oldstage0HostFirefox/no policyanswer preservedbutnotcurrenttruth. Public/toolqueries separatelyretained.",
+    "reviewer": "Current source author, not independent or blind."
+  },
+  "semantic_boundary_artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/semantic-boundaries-states-544-575-v1.json",
+  "development_change": {
+    "status": "IMPLEMENTED_AND_MECHANICALLY_VERIFIED;MODEL_EFFECT_UNTESTED",
+    "paths": [
+      "src/milai_lab/methods/query_structure.py",
+      "tests/unit/test_query_structure.py"
+    ],
+    "behavior": "Allocate new aliases while traversing actual capture/presentation order instead of opaque-source-ID order. Existing cached bindings remain unchanged; no text/role/time rewrite or fallback.",
+    "public_schema_API_permissions_canonical_changed": false,
+    "frozen_inputs_outputs_changed": false,
+    "regression_before_change": {
+      "test": "test_new_aliases_follow_capture_order_and_existing_aliases_stay_stable",
+      "exec_session": 95475,
+      "exit_code": 1,
+      "actual_ids": [
+        "e2",
+        "e1",
+        "e0"
+      ],
+      "expected_new_behavior_ids": [
+        "e0",
+        "e1",
+        "e2"
+      ],
+      "CPU": "unmeasured"
+    },
+    "validation": {
+      "query_structure_tests_passed": 25,
+      "related_regressions_passed": 89,
+      "skipped": 1,
+      "skip_reason": "Optional mempursuit dependency absent in test environment.",
+      "ruff": "passed",
+      "mypy": "passed one changed source module",
+      "package_boundary": "passed",
+      "tools_boundary": "passed; existing6grandfathered private dependencies unchanged",
+      "artifacts": [
+        "artifacts/evidence-gap-20261023/alias-order-query-tests-v1.json",
+        "artifacts/evidence-gap-20261023/alias-order-validation-v1.json"
+      ]
+    },
+    "actual_input_probe": {
+      "artifact": "artifacts/evidence-gap-20261023/alias-order-actual-input-v1/result.json",
+      "source_state": 352,
+      "sources": 20,
+      "candidate_order": "e0..e19 matches document0..19 capture presentation",
+      "information_equal_after_explicit_alias_resolution": true,
+      "original_response_not_reinterpreted": true,
+      "real_model_calls": 0,
+      "scripted_callbacks": 2,
+      "original_store_untouched": true
+    },
+    "limitations": "No demonstrated reduction in neural citation errors yet; fresh-cache alias behavior differs, legacy cached aliases retained. F3 extractive View baseline still not implemented.",
+    "checkpoint_note": "Unchanged sincev136;114passed/1optionalskip andchecks notrerun. Aliasallocationcandidateuncommitted/unfrozen, allthisbatchoutputsoriginal2a. F3extractivebaseline notimplemented."
+  },
+  "semantic_findings": [
+    "546 LouRawls facts partlybindIrvineWelshstories;552 GraycountybindsDarialPakistan;554ASUnumberbindsJeromePlante;556Louiswife bindsFiveNightsAtFreddys2;560SchillerbindsTheDivisionTV.",
+    "547unreported2026dates;555unstatedreschedulingmorninganchoredMay3.",
+    "557intenttooverpreparewithnotes promotedtoactualpractice.",
+    "567DannyselfswitchtoProtonmail becomesuser-switches-him; chronologyalsoinferred.",
+    "569ownedDispossessedcopy convertedtonextbookintent.",
+    "571ViewrejectedQUERY_STRUCTURE_RULE_NODE_UNAVAILABLE, no cache, twoSEARCHandzeroREAD, emptyhandoff; wholetoolCOMPLETED retained.",
+    "575current292charrecord existsasoriginalcandidate1/revision2/actualunitid withread_1/history_1; fixedtail selectedsearch16 thenoldcontext0. No alternativeREAD/Hostexecuted ornewlabelinvented.",
+    "575all3completedHostsfailactualunit; Viewscopeclaimsstoredrecordisbroadpersonalhistory andomitsunit-source3t7.",
+    "566actualChrisBrown2017source-period release result preservesunknowncurrentnewalbum; no aliascandidateused."
+  ],
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-reviews544-575-settlement.json",
+    "settled_cpu_seconds": 4.062132323999999,
+    "settled_fields": 9,
+    "only_expected_compute_delta": true,
+    "generation_embedding_limits_match_last_closed_dev_readout": true,
+    "new_generation_requests": 0,
+    "new_known_generation_tokens": 0,
+    "new_unknown_generation_usage": 0,
+    "unmeasured": "Semanticreading/authoring, exploratorysource/trace/menu inspections andsettlementoverhead remainunknown. No newactualmodelcall/retry.",
+    "progress_processing_cpu_pending": 0.000854872999999999
+  },
+  "next_actions": [
+    "Continue source-first train576:remaining64fixed_contextinitial and128fixed_contextpost plus48dev reviews. Source32=160/192,source64=320/384 remainmissingpoststratum.",
+    "Compile largestcompletepool once, deriveoriginalsource32/64, executeallnine192updatefits andselectedsaved-reload/Hostevaluation.",
+    "RetainF1/F2/F3/compact/data/seed/lifecycle/external/figure work. Separatemenucoverage/actionselection fromViewsemanticfidelity; actual575legalstored-recordREAD counterfactual requiresseparatefrozenexperiment, notretroactivegold orretry."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "verification": [
+    "576disjointtrainstates/1728pairs; fixed_contextinitial64; remaining192train+48dev. Originalsource32=160/192,source64=320/384 incomplete.",
+    "32newstates/96pairs,32cost-only targetdirections; allunknown/directional quality unchanged.",
+    "10literalnode/sourcebindings plus actualnative571rejection/no-cache/zeroREAD and575candidate-unit/choices verified.",
+    "9explicitprocessingfields settledonce; allotherledgerfields unchanged andmodelcounters matchterminaldevreadout."
+  ],
+  "prior_quality_refinement": {
+    "artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/quality-refinement-453-before-resource-v1.json",
+    "state": 453,
+    "targets": 2,
+    "from": "delivery left",
+    "to": "delivery tie",
+    "timing": "Beforefinalresourceprocessing; no frozenmodeloutputs/compiledtargets changed",
+    "initial_author_snapshot_retained": true
+  },
+  "view_boundary_audit": {
+    "literal_entries": 10,
+    "distinct_states": 10,
+    "positive_case": 566,
+    "neural_alias_candidate_used": false,
+    "frozen_response_reinterpreted_under_new_aliases": false
+  },
+  "rejected_refresh571": {
+    "state_row": 571,
+    "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1655/call-01888",
+    "trace": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1655/call-01888/runtime/banks/87abf1ee-5f18-47f3-bb15-fda8e6c4cf7d/498a5720-9a2c-4713-9976-772b18e18bdd-trace-0.jsonl",
+    "cache_rows": 0,
+    "read_operations": 0,
+    "actual_target_packet": [],
+    "native_tool_status": "COMPLETED",
+    "meaning": "Rejectedrefresh is notfailedwholetoolreplay. No budgetdeliveryrejection andno persistedView; twoSEARCH thenhandoff. Originalmodelattempt notrerun."
+  },
+  "record575_menu": {
+    "candidate_index": 1,
+    "revision": 2,
+    "unit_characters": 292,
+    "available_after_search_steps": [
+      1,
+      2
+    ],
+    "available_actions": [
+      "read_1",
+      "history_1"
+    ],
+    "actual_choices": [
+      "search_0_8",
+      "search_0_16",
+      "context_0",
+      "handoff"
+    ],
+    "counterfactual_read1_executed": false,
+    "unexecuted_option_labels_added": false,
+    "interpretation": "Menuavailability separatescoverage fromactualchoice. NeedrealcounterfactualHost runbeforeclaimingchoicewouldsolve; betterViewtextalone cannotproveunopenedstoredrecordretrieval."
+  }
+}

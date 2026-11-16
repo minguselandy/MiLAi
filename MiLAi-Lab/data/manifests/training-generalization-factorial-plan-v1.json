@@ -1,0 +1,195 @@
+{
+  "status": "INPUT_PREPARED_NOT_DISPATCHED;WAIT_FOR_ACTIVE_MODEL_TERMINAL_AND_SOURCE_REVIEW",
+  "declared_at": "2026-10-21T17:50:35.366338+00:00",
+  "source_version": "8e9f5d70",
+  "source_fixture": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t1-sources-v1/full-histories.json",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-factorial-8e9f5d70/MiLAi-Lab",
+  "prelude_output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-prelude-v1",
+  "preparation": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1",
+  "prelude_argv": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+    "-u",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-factorial-8e9f5d70/MiLAi-Lab/tools/run_host_intent_retrieval.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1/config.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1/histories.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-prelude-v1",
+    "--source-version",
+    "8e9f5d70",
+    "--policies",
+    "view_cache",
+    "--interfaces",
+    "rich",
+    "--transport",
+    "json_action",
+    "--given-requests",
+    "--capture-control-steps"
+  ],
+  "environment": {
+    "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-factorial-8e9f5d70/MiLAi-Lab/src:/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-factorial-8e9f5d70/MiLAi-Lab/tools",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab",
+  "next_preparation_argv": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-factorial-8e9f5d70/MiLAi-Lab/tools/prepare_retrieval_factorial.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-prelude-v1/frozen-retrieval-calls",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1/specification.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-captured-preparation-v1"
+  ],
+  "subsequent_E2": "Existing run_frozen_retrieval_calls.py on prepared captures/policies; no Host readout because given requests have no original Host frame.",
+  "cell_runner": "tools/run_retrieval_factorial.py; reads closed E2 branches and independently copies each treatment for every factor cell and policy.",
+  "sources": [
+    {
+      "family": "memops_B06",
+      "split": "train",
+      "original_recipe": "host-intent-view-v4-b-streams.json",
+      "original_stream": "memops_B06-view-v4-b-content",
+      "query_from": "requests[0].content, literal unchanged",
+      "initial_source_count": 14,
+      "later_source_count": 23,
+      "incoming_after_seed": 9,
+      "all_original_sources_equal": true
+    },
+    {
+      "family": "memops_C26",
+      "split": "train",
+      "original_recipe": "host-intent-view-v4-b-streams.json",
+      "original_stream": "memops_C26-view-v4-b-content",
+      "query_from": "requests[0].content, literal unchanged",
+      "initial_source_count": 8,
+      "later_source_count": 23,
+      "incoming_after_seed": 15,
+      "all_original_sources_equal": true
+    },
+    {
+      "family": "memops_A19",
+      "split": "dev",
+      "original_recipe": "host-intent-view-v4-d-dev-streams.json",
+      "original_stream": "memops_A19-view-v4-d-content",
+      "query_from": "requests[0].content, literal unchanged",
+      "initial_source_count": 7,
+      "later_source_count": 23,
+      "incoming_after_seed": 16,
+      "all_original_sources_equal": true
+    },
+    {
+      "family": "memops_A32",
+      "split": "dev",
+      "original_recipe": "host-intent-view-v4-d-dev-streams.json",
+      "original_stream": "memops_A32-view-v4-d-content",
+      "query_from": "requests[0].content, literal unchanged",
+      "initial_source_count": 7,
+      "later_source_count": 23,
+      "incoming_after_seed": 16,
+      "all_original_sources_equal": true
+    }
+  ],
+  "original_arrivals": 92,
+  "prelude_calls": 8,
+  "full_factorial_cells_per_policy": 64,
+  "factor_levels": {
+    "view": 2,
+    "intent": 2,
+    "known": 2,
+    "control_step_budget": 2
+  },
+  "source_cohort_membership": {
+    "64": {
+      "memops_B06": {
+        "raw_states": 0,
+        "labelled_states": 0
+      },
+      "memops_C26": {
+        "raw_states": 0,
+        "labelled_states": 0
+      },
+      "memops_A19": {
+        "raw_states": 0,
+        "labelled_states": 0
+      },
+      "memops_A32": {
+        "raw_states": 0,
+        "labelled_states": 0
+      }
+    },
+    "128": {
+      "memops_B06": {
+        "raw_states": 30,
+        "labelled_states": 23
+      },
+      "memops_C26": {
+        "raw_states": 30,
+        "labelled_states": 24
+      },
+      "memops_A19": {
+        "raw_states": 0,
+        "labelled_states": 0
+      },
+      "memops_A32": {
+        "raw_states": 0,
+        "labelled_states": 0
+      }
+    },
+    "256": {
+      "memops_B06": {
+        "raw_states": 30,
+        "labelled_states": 23
+      },
+      "memops_C26": {
+        "raw_states": 30,
+        "labelled_states": 24
+      },
+      "memops_A19": {
+        "raw_states": 0,
+        "labelled_states": 0
+      },
+      "memops_A32": {
+        "raw_states": 0,
+        "labelled_states": 0
+      }
+    }
+  },
+  "raw_training_states_with_nonempty_known_refs": 0,
+  "raw_training_states": 7884,
+  "policy_comparison": {
+    "simple": [
+      {
+        "name": "fixed_context",
+        "memory_control": {
+          "policy": "fixed_context",
+          "reads": 4
+        }
+      },
+      {
+        "name": "rules",
+        "memory_control": {
+          "policy": "rules",
+          "reads": 4
+        }
+      },
+      {
+        "name": "view_cache",
+        "memory_control": {
+          "policy": "view_cache",
+          "reads": 4
+        }
+      }
+    ],
+    "learned": "Corrected complete-action policy at its preregistered dev-selected checkpoint. Select weights from operation dev,not these factor results. Exact weight path awaits terminal fits; each model keeps its trained input projection.",
+    "E3": "Matched complete-action text model after its declared fit; same conditions.",
+    "source_exposure": "B06/C26 are in128/256 training cohorts,not64. A19/A32 remain gradient-dev. Both dev groups are already exposed development sources,not blind tests."
+  },
+  "evaluation_scope": "Conditional mechanism over previously registered sources; report train and dev separately,missing conditions and failures in planned denominator. This does not substitute for autonomous Host,own-bank lifecycle costs, no-View comparison,protected external confirmation or multiseed checks.",
+  "costs": "Common View formation,original prelude,actual E2 refresh,each cell and model load separate on original ledger. Shared setup is not a free cache benefit.",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "model_runs": 0,
+  "automatic_retry": false,
+  "no_sha_validation": true,
+  "new_services": false,
+  "ledger_recorded": false,
+  "compute": {
+    "cpu_seconds": 10.78527915,
+    "wall_seconds": 10.773482169955969,
+    "scope": "This data/plan preparation plus git archive child; no repeated phase copies."
+  }
+}

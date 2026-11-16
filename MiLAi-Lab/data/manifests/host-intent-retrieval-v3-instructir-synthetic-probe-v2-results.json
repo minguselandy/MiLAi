@@ -1,0 +1,62 @@
+{
+  "status": "COMPLETE_SYNTHETIC_CPU_PROBE",
+  "source_version": "17c3086d",
+  "query_count": 1,
+  "native_benchmark_queries": 0,
+  "qrels_loaded": false,
+  "query_wall_seconds": 50.8567301845178,
+  "query_cpu_seconds": 50.397812548000005,
+  "model_calls": 0,
+  "http_requests": 0,
+  "native_forwards": 0,
+  "returned_documents": 4,
+  "operation_steps": [
+    {
+      "action": "search_0_8",
+      "wall_seconds": 16.468141463585198,
+      "status": "searched"
+    },
+    {
+      "action": "search_0_16",
+      "wall_seconds": 16.24269039835781,
+      "status": "searched"
+    },
+    {
+      "action": "read_0",
+      "wall_seconds": 0.02998458966612816,
+      "status": "opened"
+    },
+    {
+      "action": "read_1",
+      "wall_seconds": 0.029303669929504395,
+      "status": "opened"
+    },
+    {
+      "action": "read_2",
+      "wall_seconds": 0.02844717912375927,
+      "status": "opened"
+    },
+    {
+      "action": "read_3",
+      "wall_seconds": 0.031250374391674995,
+      "status": "opened"
+    }
+  ],
+  "source_inventory_wall_seconds": 9.5200734725222,
+  "archive": {
+    "archive": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v2/cases/00000.tar.gz",
+    "files": 19,
+    "uncompressed_bytes": 107056042,
+    "archive_bytes": 19549415,
+    "format": "tar.gz; complete closed Store, raw results, traces and request files",
+    "verification": "File names and sizes, no SHA/content fingerprints"
+  },
+  "one_arm_at_same_archive_size_bytes": 193656504990,
+  "four_arms_at_same_archive_size_bytes": 774626019960,
+  "storage_scope": "Arithmetic projection from one synthetic case, not measured full-release disk usage; current full-copy archives do not fit the intended four-arm matrix in available storage. Retain common source data once and preserve reconstructable query-specific state before full matrix.",
+  "scope": "No semantic quality claim or official benchmark score. Baseline interrupted version remains; corrected fullquery completes but ~51s latency still needs work.",
+  "phase": "host_intent_instructir_probe_v2_trace_audit_v1",
+  "wall_seconds": 0.5386844770982862,
+  "cpu_seconds": 0.5386700510000001,
+  "ledger_recorded": false
+}

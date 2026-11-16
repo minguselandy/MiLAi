@@ -1,0 +1,51 @@
+{
+  "status": "PREDECLARED_EVALUATOR_ONLY",
+  "not_loaded_by_policy_writer_or_reader": true,
+  "expected_explicit_change_decisions": [
+    true,
+    false,
+    true,
+    false,
+    true,
+    true
+  ],
+  "no_op_sessions": [
+    1,
+    3
+  ],
+  "change_sessions": [
+    2,
+    4,
+    5
+  ],
+  "formation_session": 0,
+  "preserve": "正本仅室内、不能借出；复制件借出须登记且盖章；蓝色封套。",
+  "checkpoints": {
+    "0": [
+      "通常徐珂；当时无已到达的6月2日变更。",
+      "6月4日适用当时通常徐珂登记，无已到达临时例外。",
+      "preserve",
+      "初始徐珂，无后来明确变更。"
+    ],
+    "2": [
+      "6月1日当前徐珂，6月2日起梁栖。",
+      "6月4日适用梁栖通常安排，无已到达临时例外。",
+      "preserve",
+      "初始徐珂，已明确6月2日起梁栖。"
+    ],
+    "4": [
+      "6月1日当前徐珂，6月2日起通常梁栖。",
+      "仅6月4日交流活动由宋若在庭院登记；其他日期梁栖。",
+      "preserve",
+      "初始徐珂；6月2日起梁栖；6月4日宋若临时例外。"
+    ],
+    "5": [
+      "6月1日当前徐珂，6月2日起通常梁栖。",
+      "6月4日例外已撤回，恢复梁栖通常安排，原因是交流活动取消。",
+      "preserve",
+      "初始徐珂；随后梁栖未来变更、宋若临时例外，再因活动取消撤回例外。"
+    ]
+  },
+  "cost_curve": "Actual first k queries from each same maintained checkpoint. Same question subset across policies at each k; no separate regeneration for reuse1 versus reuse4.",
+  "quality": "joint state success and source-faithful answers separately; do not count acknowledgments as successful updates"
+}

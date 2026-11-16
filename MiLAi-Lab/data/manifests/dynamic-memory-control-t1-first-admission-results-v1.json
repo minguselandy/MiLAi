@@ -1,0 +1,94 @@
+{
+  "version": "dynamic-memory-control-t1-first-admission-results-v1",
+  "status": "LONG_INPUT_PASSED_FIRST_TRAINING_FAILED_BEFORE_UPDATE",
+  "probe": {
+    "status": "COMPLETED",
+    "pid": 1070337,
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "model_config_max_position_embeddings": 8192,
+    "optimizer_updates": 0,
+    "model_service_requests": 0,
+    "forward_attempts": 1,
+    "forwards": 1,
+    "backwards": 1,
+    "automatic_retry": false,
+    "event_id": "generative:memops_B02:stage-2:1",
+    "input_tokens": 9496,
+    "loss": 1.023205041885376,
+    "gradient_tensors": 165,
+    "parameters_updated": false,
+    "scope": "Numerical/resource admission only. Position-range extrapolation quality and task success remain unverified."
+  },
+  "failed_training": {
+    "run": "artifacts/dynamic-memory-control/t1-fitting-v1/t1-original-shared-seed0-v1/run.json",
+    "optimizer_updates": 0,
+    "train_forward_attempts": 1,
+    "train_offered_tokens": 1179,
+    "complete_initial_dev_forwards": 139,
+    "error": "DataParallel scalar kwargs created a second empty replica call for a one-row microbatch.",
+    "initial_dev": {
+      "counts": {
+        "labelled": 125,
+        "accepted": 93,
+        "masked": 14
+      },
+      "strata": {
+        "acquire_evidence_preference": {
+          "labelled": 89,
+          "accepted": 82
+        },
+        "ready_handoff_preference": {
+          "labelled": 36,
+          "accepted": 11
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 45,
+          "accepted": 32
+        },
+        "READ": {
+          "selected": 37,
+          "accepted": 29
+        },
+        "HANDOFF": {
+          "selected": 11,
+          "accepted": 11
+        },
+        "USE_VIEW": {
+          "selected": 29,
+          "accepted": 21
+        },
+        "REFRESH_VIEW": {
+          "selected": 3,
+          "accepted": 0
+        }
+      },
+      "families": 8,
+      "family_macro_acceptance": 0.7462447478991596,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    },
+    "initial_dev_predictions": "artifacts/dynamic-memory-control/t1-fitting-v1/t1-original-shared-seed0-v1/dev/0"
+  },
+  "ledger_verified_once": [
+    {
+      "phase": "dynamic_memory_t1_long_input_probe_v1",
+      "runs": 1,
+      "compute": "artifacts/dynamic-memory-control/t1-long-input-probe-v1/compute.json"
+    },
+    {
+      "phase": "dynamic_memory_t1_original_shared_seed0_v1",
+      "runs": 1,
+      "compute": "artifacts/dynamic-memory-control/t1-fitting-v1/t1-original-shared-seed0-v1/compute.json"
+    }
+  ],
+  "fix": "Dispatch actual microbatches smaller than device count through the same base module; keep both-device path for larger batches. No data/window/loss/optimizer changes.",
+  "regression": "Actual physicalGPU2,3 TinyDecision forward/gradient test reproduced failure for1row and passed2/3rows; after fix all1/2/3row logits/gradients match direct execution.18training/learning tests passed.",
+  "next_recipe": "New original_shared and broader_shared v2 fits use the same data, BASE, seed0,96updates,micro1/effective16,max12288,shared representation. Both skip repeating the unchanged139base dev predictions, retaining them as the separately reported common reference.",
+  "limitations": [
+    "Probe at9496tokens proves numerical/resource admission only, not long-context accuracy.",
+    "Old failed training and all measured computation remain; its zero-step base dev result is not a trained-checkpoint score.",
+    "Broader_shared v1 was never started. No old QA position or completed initial evaluation is replayed."
+  ]
+}

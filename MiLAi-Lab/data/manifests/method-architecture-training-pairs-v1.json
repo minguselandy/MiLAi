@@ -1,0 +1,26 @@
+{
+  "status": "TWO_REVIEWABLE_MATCHED_PAIRS_NO_TRAINING",
+  "examples": 2,
+  "input_sources": "actual before/current/prior evidence from first continuous-v2 alias rejection and cancellation scope damage; no QA/gold questions",
+  "files": [
+    "data/fixtures/milai-method-architecture-matched-training-v1.jsonl"
+  ],
+  "resource_observation": {
+    "gpu": "four A100 40GB devices",
+    "used_mib": [
+      39981,
+      39997,
+      39901,
+      39863
+    ],
+    "total_mib_each": 40960,
+    "action": "do not interrupt serving; no training launched"
+  },
+  "limitations": [
+    "two cases and no independent label review",
+    "no positive OR-of-AND formation example yet",
+    "no unseen-scope or event-order evaluation",
+    "not a W4 completion or a relationship-training advantage"
+  ],
+  "next": "Expand with observed formation/support failures and positive routes; match baseline examples, trainable parameters and token budget before comparing"
+}

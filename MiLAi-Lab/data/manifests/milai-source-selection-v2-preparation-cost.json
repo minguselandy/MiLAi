@@ -1,0 +1,22 @@
+{
+  "status": "TWO_CLOSED_CPU_STAGES_RECORDED_ONCE_IN_ORIGINAL_LEDGER",
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "phases": {
+    "source_selection_v2_two_wiki_metadata": {
+      "wall_seconds": 19.413533689454198,
+      "cpu_seconds": 19.41006091,
+      "runs": 1
+    },
+    "source_selection_v2_first_boundary": {
+      "wall_seconds": 18.22362642735243,
+      "cpu_seconds": 18.223329961,
+      "runs": 1
+    }
+  },
+  "generation_requests_delta": 0,
+  "generation_tokens_delta": 0,
+  "embedding_tokens_delta": 0,
+  "unmetered_scope": "Initial schema inspection, metadata reservation/draw, tests, download, developer analysis not timed as complete stage CPU; not claimed zero-cost.",
+  "sha_checks": false,
+  "new_ledger": false
+}

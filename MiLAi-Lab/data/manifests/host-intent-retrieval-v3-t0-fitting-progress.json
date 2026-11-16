@@ -1,0 +1,167 @@
+{
+  "status": "COMPLETED",
+  "pid": 509200,
+  "exec_session": 65861,
+  "source_version": "c0770e49",
+  "collection_source_version": "8f7f2a18",
+  "data": "artifacts/host-intent-retrieval-v3/data/t0-fitting-v1",
+  "output": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1",
+  "seed": 0,
+  "planned_seeds": [
+    0,
+    1,
+    2
+  ],
+  "optimizer_updates": 207,
+  "planned_optimizer_updates": 207,
+  "train_sequence_rows": 3312,
+  "train_input_tokens": 16457101,
+  "micro_batch_size": 2,
+  "gradient_accumulation": 8,
+  "effective_batch": 16,
+  "gradient_checkpointing": true,
+  "freeze_encoder": false,
+  "precision": "float32",
+  "initial_dev": {
+    "counts": {
+      "labelled": 353,
+      "accepted": 152,
+      "masked": 103,
+      "handoff_outside_reviewed_preference": 15
+    },
+    "strata": {
+      "source_reviewed_preference": {
+        "labelled": 353,
+        "accepted": 152
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 80,
+        "accepted": 27
+      },
+      "READ": {
+        "selected": 180,
+        "accepted": 89
+      },
+      "HANDOFF": {
+        "selected": 51,
+        "accepted": 36
+      },
+      "REFRESH_VIEW": {
+        "selected": 12,
+        "accepted": 0
+      },
+      "USE_VIEW": {
+        "selected": 30,
+        "accepted": 0
+      }
+    },
+    "families": 16,
+    "family_macro_acceptance": 0.43533100586909623,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+  },
+  "final_checkpoint_selection": "Predetermined step207",
+  "budget_policy": "Original continuous ledger; no offline settlement or another model task while this process lives. Trainer records compute on terminal exit.",
+  "frozen_inputs": "Do not edit frozen-c0770e49 or data/t0-fitting-v1 while running.",
+  "midpoint_dev": {
+    "counts": {
+      "labelled": 353,
+      "accepted": 241,
+      "masked": 103,
+      "handoff_outside_reviewed_preference": 3
+    },
+    "strata": {
+      "source_reviewed_preference": {
+        "labelled": 353,
+        "accepted": 241
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 62,
+        "accepted": 62
+      },
+      "READ": {
+        "selected": 244,
+        "accepted": 135
+      },
+      "HANDOFF": {
+        "selected": 47,
+        "accepted": 44
+      }
+    },
+    "families": 16,
+    "family_macro_acceptance": 0.7079560886944695,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+  },
+  "snapshot_note": "Read from live run.json; revalidate process and current file before any dispatch.",
+  "final_diagnostic_snapshot": {
+    "dev_predictions": 456,
+    "train_predictions": 1649,
+    "final_checkpoint_written": true
+  },
+  "final_dev": {
+    "counts": {
+      "labelled": 353,
+      "accepted": 255,
+      "masked": 103,
+      "handoff_outside_reviewed_preference": 9
+    },
+    "strata": {
+      "source_reviewed_preference": {
+        "labelled": 353,
+        "accepted": 255
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 62,
+        "accepted": 62
+      },
+      "READ": {
+        "selected": 231,
+        "accepted": 142
+      },
+      "HANDOFF": {
+        "selected": 60,
+        "accepted": 51
+      }
+    },
+    "families": 16,
+    "family_macro_acceptance": 0.746664859985231,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+  },
+  "final_train": {
+    "counts": {
+      "labelled": 1649,
+      "accepted": 1413,
+      "handoff_outside_reviewed_preference": 24
+    },
+    "strata": {
+      "source_reviewed_preference": {
+        "labelled": 1649,
+        "accepted": 1413
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 287,
+        "accepted": 274
+      },
+      "READ": {
+        "selected": 1110,
+        "accepted": 911
+      },
+      "HANDOFF": {
+        "selected": 252,
+        "accepted": 228
+      }
+    },
+    "families": 64,
+    "family_macro_acceptance": 0.8746317018660565,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+  },
+  "final_checkpoint": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/checkpoint",
+  "next_model_job": "exported final207 dev456 validation; PID797851/exec35013"
+}

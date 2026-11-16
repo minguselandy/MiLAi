@@ -1,0 +1,451 @@
+{
+  "status": "INITIAL_E1_DEVELOPMENT_PILOT_COMPLETE_C0_SELECTED",
+  "registration": "data/manifests/host-intent-retrieval-v3-e1-development-protocol-v1.json",
+  "selected_C0": "fixed_context",
+  "selection_basis": "46 source-qualified complete answers versus38 for rules; prespecified primary criterion, no tie-break needed.",
+  "provisional_C1": "T0 seed0 final207; final T1/T2 recipe and all required seeds remain pending.",
+  "arms": {
+    "rules": {
+      "grades": {
+        "FAILED": 6,
+        "CORRECT": 38,
+        "WRONG": 11,
+        "QUALIFIED": 9
+      },
+      "interfaces": {
+        "query_only": 20,
+        "rich": 18
+      },
+      "generation_requests": 182,
+      "generation_tokens": 515477,
+      "new_unknown": 0,
+      "wall_seconds": 1382.1171315601096,
+      "message_cpu_seconds": 96.19104549799998,
+      "message_wall_seconds": 1356.3416916187853,
+      "retrievals": 71,
+      "tool_rejections": 0,
+      "empty_returns": 8,
+      "semantic_mutation_receipts": 0,
+      "local_model": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 0.0,
+          "forwards": 0,
+          "input_tokens": 0,
+          "sequence_rows": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0,
+          "wall_seconds": 0.0
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 0.0,
+          "loads": 0,
+          "wall_seconds": 0.0
+        }
+      },
+      "delivered_query_views": 43,
+      "delivered_semantic_record_snapshots": 5
+    },
+    "fixed_context": {
+      "grades": {
+        "CORRECT": 46,
+        "WRONG": 11,
+        "QUALIFIED": 5,
+        "FAILED": 2
+      },
+      "interfaces": {
+        "query_only": 24,
+        "rich": 22
+      },
+      "generation_requests": 139,
+      "generation_tokens": 368599,
+      "new_unknown": 0,
+      "wall_seconds": 1110.9090951969847,
+      "message_cpu_seconds": 88.01849072,
+      "message_wall_seconds": 1087.5592725137249,
+      "retrievals": 77,
+      "tool_rejections": 2,
+      "empty_returns": 11,
+      "semantic_mutation_receipts": 0,
+      "local_model": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 0.0,
+          "forwards": 0,
+          "input_tokens": 0,
+          "sequence_rows": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0,
+          "wall_seconds": 0.0
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 0.0,
+          "loads": 0,
+          "wall_seconds": 0.0
+        }
+      },
+      "delivered_query_views": 0,
+      "delivered_semantic_record_snapshots": 4
+    },
+    "laya": {
+      "grades": {
+        "CORRECT": 38,
+        "QUALIFIED": 4,
+        "WRONG": 15,
+        "FAILED": 7
+      },
+      "interfaces": {
+        "query_only": 17,
+        "rich": 21
+      },
+      "generation_requests": 147,
+      "generation_tokens": 407486,
+      "new_unknown": 0,
+      "wall_seconds": 1372.7670161761343,
+      "message_cpu_seconds": 262.93345369900027,
+      "message_wall_seconds": 1348.8105863733217,
+      "retrievals": 85,
+      "tool_rejections": 0,
+      "empty_returns": 2,
+      "semantic_mutation_receipts": 0,
+      "local_model": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 161.72210472795996,
+          "forwards": 320,
+          "input_tokens": 1185927,
+          "sequence_rows": 320,
+          "state_tokenizations": 320,
+          "state_tokens": 1029029,
+          "wall_seconds": 101.63586517237127
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 7.142015000999891,
+          "loads": 1,
+          "wall_seconds": 5.7203454952687025
+        }
+      },
+      "delivered_query_views": 0,
+      "delivered_semantic_record_snapshots": 3
+    }
+  },
+  "selected_2x2_positions": 128,
+  "all_compared_positions": 192,
+  "independent_unit": "16 declared source groups; not192 independent tasks/users.",
+  "source_group_rows": [
+    {
+      "history": "changed_view_missing_detail",
+      "source_group": "authored-changed-view-missing-detail-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "fixed_context": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 2
+      }
+    },
+    {
+      "history": "effective_threshold",
+      "source_group": "authored-effective-threshold-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "fixed_context": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 2
+      }
+    },
+    {
+      "history": "language_preference",
+      "source_group": "authored-language-preference-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 2
+      }
+    },
+    {
+      "history": "memops_A19",
+      "source_group": "memops_A19",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 2,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_A32",
+      "source_group": "memops_A32",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_B30",
+      "source_group": "memops_B30",
+      "rules": {
+        "query_only": 2,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_C03",
+      "source_group": "memops_C03",
+      "rules": {
+        "query_only": 2,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_D25",
+      "source_group": "memops_D25",
+      "rules": {
+        "query_only": 0,
+        "rich": 0
+      },
+      "fixed_context": {
+        "query_only": 1,
+        "rich": 0
+      },
+      "laya": {
+        "query_only": 0,
+        "rich": 0
+      }
+    },
+    {
+      "history": "memops_E08",
+      "source_group": "memops_E08",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 0,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_E15",
+      "source_group": "memops_E15",
+      "rules": {
+        "query_only": 0,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 0,
+        "rich": 2
+      }
+    },
+    {
+      "history": "memops_F01",
+      "source_group": "memops_F01",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 2,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "musique-family-000752",
+      "source_group": "musique-family-000752",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 0,
+        "rich": 1
+      }
+    },
+    {
+      "history": "musique-family-000879",
+      "source_group": "musique-family-000879",
+      "rules": {
+        "query_only": 0,
+        "rich": 0
+      },
+      "fixed_context": {
+        "query_only": 1,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "partial_evidence",
+      "source_group": "authored-partial-evidence-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "fixed_context": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 2
+      }
+    },
+    {
+      "history": "same_name_scope",
+      "source_group": "authored-same-name-scope-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "fixed_context": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 2
+      }
+    },
+    {
+      "history": "stored_vs_original",
+      "source_group": "authored-stored-vs-original-v3",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "fixed_context": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 1
+      }
+    }
+  ],
+  "cluster_bootstrap": {
+    "resamples": 10000,
+    "seed": 0,
+    "unit": "source group, retaining requests/interfaces together",
+    "intervals": {
+      "selected_C0_minus_rules": {
+        "estimate": 0.125,
+        "percentile_95": [
+          0.03125,
+          0.234375
+        ]
+      },
+      "C1_minus_selected_C0": {
+        "estimate": -0.125,
+        "percentile_95": [
+          -0.21875,
+          -0.046875
+        ]
+      },
+      "query_only_C1_minus_C0": {
+        "estimate": -0.21875,
+        "percentile_95": [
+          -0.375,
+          -0.0625
+        ]
+      },
+      "rich_C1_minus_C0": {
+        "estimate": -0.03125,
+        "percentile_95": [
+          -0.125,
+          0.0625
+        ]
+      },
+      "interface_by_policy_interaction": {
+        "estimate": 0.1875,
+        "percentile_95": [
+          0.0,
+          0.375
+        ]
+      }
+    }
+  },
+  "paired_C0_C1": {
+    "both": 36,
+    "C0_only": 10,
+    "C1_only": 2,
+    "neither": 16
+  },
+  "limitations": [
+    "Source-author development judgments, not independent or held-out confirmation.",
+    "C0 selected on this development panel; future reserved/external comparisons must keep its configuration fixed.",
+    "Host model/decoding settings match, but actual stochastic requests differ; not a pure controller causal comparison.",
+    "Positive interface interaction does not imply C1 beats C0: C1 has fewer complete answers on both interfaces.",
+    "Native/reference metrics, source-qualified task content and view validity stay separate.",
+    "Nested HTTP/model/message times are not added together."
+  ],
+  "model_calls": 0,
+  "phase": "host_intent_e1_initial_pilot_comparison_v1",
+  "wall_seconds": 0.16330928448587656,
+  "cpu_seconds": 0.163268465,
+  "ledger_recorded": false
+}

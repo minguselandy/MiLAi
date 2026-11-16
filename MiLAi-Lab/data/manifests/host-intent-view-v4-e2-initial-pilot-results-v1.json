@@ -1,0 +1,32 @@
+{
+  "status": "SIX_ACTUAL_ENDPOINTS_REVIEWED",
+  "states": 2,
+  "source_groups": 2,
+  "before_equal_endpoints": 6,
+  "readouts_completed": 6,
+  "grades": {
+    "C": 2,
+    "Q": 1,
+    "W": 1,
+    "U": 2
+  },
+  "source_search_path_successes": 2,
+  "scope": "Two failure-selected exposed train states. Conditional fixed Host readout, not complete autonomous tasks or representative training collection.",
+  "finding": "Both original empty handoffs had an actually executed successful source path within the original limits. Finite branches do not exhaust all possible strategies.",
+  "view_findings": "One core-correct but qualified View/readout; one wrong Host readout that overinterprets liking a backup. View temporal flaws and Host consumption errors remain separate.",
+  "preferences_created": 0,
+  "preference_scope": "No automatic labels for untested actions and no claim that delivery feedback beats answer-only feedback.",
+  "known_generation_tokens": 25418,
+  "generation_requests": 8,
+  "new_unknown_usage": 0,
+  "wall_seconds": 82.87023783661425,
+  "local_cpu_seconds_nested": 15.532868959,
+  "compute": {
+    "wall_seconds": 0.0696744630113244,
+    "cpu_seconds": 0.069667189
+  },
+  "ledger_recorded": true,
+  "endpoint_count": 6,
+  "endpoint_results": "artifacts/host-intent-retrieval-v3/view-v4-e2-initial-pilot-review-v1/endpoints.json",
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v19.json"
+}

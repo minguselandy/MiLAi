@@ -1,0 +1,68 @@
+{
+  "status": "USER_GOAL_PAUSED_PUBLICATION_AUTHORIZED",
+  "observed_at": "2026-10-22T12:40:00.623209+00:00",
+  "branch": "feat/training-generalization-20261021",
+  "research_commit_before_publication_handoff": "3cc017e4ccee9a01355f2700b87e60e67a35594e",
+  "previous_progress": "data/manifests/training-generalization-progress-20261022-v53.json",
+  "goal_complete": false,
+  "pause_scope": "Autonomous goal work and new research scheduling paused. Read-only monitoring cell terminated. Existing OS jobs were not signalled and may continue; the existing saved-CPU driver may advance its planned candidates.",
+  "saved_cpu": {
+    "session": 8452,
+    "driver_pid": 893357,
+    "evaluator_pid": 2253075,
+    "status": "RUNNING",
+    "update": 64,
+    "completed_states": 532,
+    "planned_states": 876,
+    "completed_candidates": [
+      {
+        "update": 0,
+        "status": "COMPLETED"
+      },
+      {
+        "update": 32,
+        "status": "COMPLETED"
+      }
+    ],
+    "deployment_selection": null
+  },
+  "CPU_path_audit": {
+    "session": 37854,
+    "pid": 662822,
+    "status": "RUNNING",
+    "completed_paths": 405,
+    "planned_paths": 902,
+    "closed_state_drop_inputs": 0,
+    "closed_head_drop_inputs": 0,
+    "closed_Reader_overflow_paths": 0,
+    "failed_paths": 0
+  },
+  "actual_processes": [
+    {
+      "pid": 893357,
+      "proc_present": true
+    },
+    {
+      "pid": 2253075,
+      "proc_present": true
+    },
+    {
+      "pid": 662822,
+      "proc_present": true
+    }
+  ],
+  "publication": {
+    "repository": "https://github.com/minguselandy/MiLAi",
+    "scope": "Existing branch history plus pause handoff; source, tests, plans and concise evidence only.",
+    "raw_artifacts_weights_and_Stores": "remain ignored and local",
+    "mode": "branch push; no PR because existing PR CI includes SHA verification",
+    "validation_record": "artifacts/generalization-20261021/publication-20261022/validation.json"
+  },
+  "costs": "No new settlement. Original ledger only. Closed candidates0/32 already billed. Live job totals remain unknown until terminal; prior pending registries unchanged. Unmeasured publication and monitoring work unknown,not0.",
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2.",
+  "no_new_model_jobs": true,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_production_schema_API_permission_canonical_changes": true,
+  "resume_requirement": "Explicit user resume, then inspect current processes, driver and terminal artifacts before scheduling; never rerun or rebill closed work."
+}

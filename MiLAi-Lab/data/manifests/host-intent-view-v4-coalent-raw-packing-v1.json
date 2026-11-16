@@ -1,0 +1,48 @@
+{
+  "status": "REGISTERED_RAW_PACKING_FIXED_AND_CHECKED_NO_MODELS",
+  "source_version": "e4844f28",
+  "rows": [
+    {
+      "source_group": "memops_B06",
+      "whole_session_returned_messages": 8,
+      "new_complete_message_returned_messages": 10,
+      "new_wire_tokens": 1898,
+      "old_session_packet_lengths": [
+        {
+          "session": "source-session-1",
+          "messages": 8,
+          "whole_packet_tokens": 1501
+        },
+        {
+          "session": "source-session-2",
+          "messages": 6,
+          "whole_packet_tokens": 1211
+        }
+      ]
+    },
+    {
+      "source_group": "memops_C26",
+      "whole_session_returned_messages": 8,
+      "new_complete_message_returned_messages": 8,
+      "new_wire_tokens": 1408,
+      "old_session_packet_lengths": [
+        {
+          "session": "source-session-1",
+          "messages": 8,
+          "whole_packet_tokens": 1405
+        }
+      ]
+    }
+  ],
+  "checks": "artifacts/host-intent-retrieval-v3/view-v4-coalent-raw-packing-check-v1/checks.json",
+  "check_status": "PASS",
+  "pytest_passed": 8,
+  "ruff": "PASS",
+  "mypy": "PASS",
+  "audit_before": "artifacts/host-intent-retrieval-v3/view-v4-coalent-raw-packing-audit-v1/audit.json",
+  "audit_after": "artifacts/host-intent-retrieval-v3/view-v4-coalent-raw-packing-audit-v2/audit.json",
+  "scope": "Two already chosen B train initial prefixes; actual registered tool/Store and real Qwen tokenizer. Constant vectors and scripted synthesis only exercise binding and packing, not semantic ranking or model quality. Counterfactual packing keeps whole actual messages in original retrieved order, never truncates text, and uses the same full packet budget.",
+  "behavior": "Cache artifact granularity remains session. Actual original messages are selected whole in retrieved order under full return budget. Oversized messages can be omitted while smaller complete messages are retained; refs reopen only delivered ranges. No content truncation or additional semantic ranking.",
+  "pilot_plan": "artifacts/host-intent-retrieval-v3/view-v4-coalent-pilot-plan-v2.json",
+  "accounting": "Audit/check/freeze measured CPU recorded in pending33, not settled; no model HTTP. Manual work unknown."
+}

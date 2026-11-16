@@ -1,0 +1,152 @@
+{
+  "schema": "host_intent_remaining_state_review_v1",
+  "source_commit": "c2fc3928",
+  "task_review": "data/manifests/host-intent-retrieval-v3-remaining-author-review.json",
+  "positions": 20,
+  "source_inventory_audit": "Every result.sources retains all declared initial sources and the applicable new arrival; textual equality checked, no hashes.",
+  "semantic_mutations_during_queries": 0,
+  "stored_fixture_revisions": "Four banks each receive two actual setup operations; these8scriptedsetupwrites are not query mutations.",
+  "view_count": 10,
+  "view_nodes": 38,
+  "view_rules": 0,
+  "actual_use_view_count": 0,
+  "view_reviews": [
+    {
+      "history": "effective_threshold",
+      "policy": "rules",
+      "request": "before",
+      "revision": 1,
+      "nodes": 4,
+      "rules": 0,
+      "grade": "source_supported_task_relevant",
+      "notes": [
+        "Values and explicit applicable dates are supported by the actual original Sources. No general graph-validity claim from these simple statements; all rule sets are empty."
+      ]
+    },
+    {
+      "history": "effective_threshold",
+      "policy": "rules",
+      "request": "after",
+      "revision": 1,
+      "nodes": 4,
+      "rules": 0,
+      "grade": "source_supported_task_relevant",
+      "notes": [
+        "Values and explicit applicable dates are supported by the actual original Sources. No general graph-validity claim from these simple statements; all rule sets are empty."
+      ]
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "rules",
+      "request": "spoken",
+      "revision": 1,
+      "nodes": 3,
+      "rules": 0,
+      "grade": "qualified_source_statement_view",
+      "notes": [
+        "Original/corrected dates match Sources. Temporal strings use report dates, whereas the text names future handover dates; do not infer event clocks from those strings."
+      ]
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "rules",
+      "request": "stored",
+      "revision": 1,
+      "nodes": 2,
+      "rules": 0,
+      "grade": "insufficient_for_stored_version_goal",
+      "notes": [
+        "View is built from original statements April3/April6, not saved revision1 April8. Its broad scope description must not substitute for actual database history. The separately returned historical revision enables the correct final answer."
+      ]
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "rules",
+      "request": "from_scratch",
+      "revision": 1,
+      "nodes": 4,
+      "rules": 0,
+      "grade": "qualified_source_supported_view",
+      "notes": [
+        "Main location/access facts in this view match their actual Sources. Setup-prefetch question/topic is also retained as a reported node; it is not an independent factual witness."
+      ]
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "rules",
+      "request": "with_prior",
+      "revision": 1,
+      "nodes": 5,
+      "rules": 0,
+      "grade": "qualified_source_supported_view",
+      "notes": [
+        "Main location/access facts in this view match their actual Sources. Setup-prefetch question/topic is also retained as a reported node; it is not an independent factual witness.",
+        "View covers the new entry gap but lacks the room already supplied to Host; unresolved room detail is about this view input, not the full available memory."
+      ]
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "laya",
+      "request": "from_scratch",
+      "revision": 1,
+      "nodes": 5,
+      "rules": 0,
+      "grade": "qualified_source_supported_view",
+      "notes": [
+        "Main location/access facts in this view match their actual Sources. Setup-prefetch question/topic is also retained as a reported node; it is not an independent factual witness.",
+        "Host receives the generated interpretation without original bodies: projected bindings explicitly say support_not_opened; actual supports remain in the Store."
+      ]
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "rules",
+      "request": "north",
+      "revision": 1,
+      "nodes": 3,
+      "rules": 0,
+      "grade": "qualified_request_scope_loss",
+      "notes": [
+        "Host retrieval request omitted North-team restriction. View preserves both scoped preferences and shared portal rule; its ambiguity is conditional on that request. Original user task still specifies North and final Host chooses email correctly."
+      ]
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "rules",
+      "request": "initial",
+      "revision": 1,
+      "nodes": 2,
+      "rules": 0,
+      "grade": "source_supported_task_relevant",
+      "notes": [
+        "Values and explicit applicable dates are supported by the actual original Sources. No general graph-validity claim from these simple statements; all rule sets are empty."
+      ]
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "rules",
+      "request": "after_change",
+      "revision": 2,
+      "nodes": 6,
+      "rules": 0,
+      "grade": "qualified_refreshed_view",
+      "notes": [
+        "New800threshold and replacement date are present. Historical500, prior user request and derived assistant restatement remain alongside it without an explicit invalidation edge. Raw sources are also delivered; final correctness does not certify the graph for arbitrary reuse."
+      ]
+    }
+  ],
+  "known_evidence_pair": {
+    "rules": "from-scratch4READ versus with-prior3READ plus1known-reference reopen; both correct. Saving an ordinaryREAD is not proven netcost reduction.",
+    "laya": "from-scratchREFRESH_VIEW versus with-priorSEARCH+2READ; both correct and latter passes actual known refs. No isolated causal cost claim because actual Host requests differ."
+  },
+  "retrieval_failure_notes": [
+    "Rules before-date task first asked for only2steps and received a truthful budget_exhausted empty result; Host continued within original allowance.",
+    "Laya made6empty handoffs: some beforesearch, others with1/2/3pending candidates. Four task outcomes remainunfulfilled despite available necessary sources.",
+    "Laya stored-version task opens original context and returnsApril3 instead of actualrev1April8. This is evidence-kind confusion, not missing storage history."
+  ],
+  "host_request_notes": [
+    "Both remaining schema failure types are semantic hints placed under read_goal/task_context, not invalid identities or changed permissions.",
+    "Both two-query purposes and generated goal fields remain actual Host outputs; no corrected requests were substituted."
+  ],
+  "reviewer": "assistant author, not independent human adjudication",
+  "original_outcomes_preserved": true
+}

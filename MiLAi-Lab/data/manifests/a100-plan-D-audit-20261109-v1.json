@@ -1,0 +1,1214 @@
+{
+  "passed": true,
+  "status": "ORIGINAL_D18_CONCRETE_EXECUTION_FACTORS_VIEWS_CONTROLS_FIRST_QUALITY_STATISTICS_AND_COST_SCOPE_AUDITED",
+  "timestamp_utc": "2026-11-09T11:39:31.781026+00:00",
+  "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_2XA100_40GB_20261104.md",
+  "original763_UTF8_literal_equal": true,
+  "obligations": [
+    {
+      "id": "D-01",
+      "original_plan_lines": [
+        382,
+        384,
+        388
+      ],
+      "original_literal_lines": [
+        "`CacheMemoryPolicy.choose` 在最近成功 USE_VIEW/REFRESH_VIEW 且请求不要求原文时，会直接 HANDOFF；scope 不匹配或有 pending content 时优先 REFRESH。执行器其实已经能继续 READ 并组合材料。[cache 策略][R8]",
+        "这是可检验的控制流问题，不是所有 final-arrivals 失败的已证实唯一原因。",
+        "保留原 view_cache。先用现有 Laya 在实际合法菜单中比较：USE_VIEW、读取相关新增 Source、REFRESH_VIEW、HANDOFF。"
+      ],
+      "requirement": "原cache类/范围函数保持；立即HANDOFF限制与已有后续READ执行能力分开验证",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-02",
+      "original_plan_lines": [
+        388,
+        390,
+        402
+      ],
+      "original_literal_lines": [
+        "保留原 view_cache。先用现有 Laya 在实际合法菜单中比较：USE_VIEW、读取相关新增 Source、REFRESH_VIEW、HANDOFF。",
+        "如需要强简单对照，再加入一个明确的可选策略路径：使用已有 View 后，依据当前请求、已知证据、实际新来源与预算，决定一次增量读取或停止。它复用现有执行器，不建立第二缓存、账本或审核 Agent。",
+        "沿既有 E5 的 8 家族、2 流程、5 请求作为开发定位。完成功能切片后，建议增加 32 个新的更新来源族，每族按同一预定请求时间表运行。先选 3 个方法、2048 返回额度；只有出现预算相关机制再补 1024，不默认恢复全部历史矩阵。"
+      ],
+      "requirement": "可选一次增量读取路径、同原执行器/材料/预算，无第二运行缓存/账本/审核Agent",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-03",
+      "original_plan_lines": [
+        390,
+        402
+      ],
+      "original_literal_lines": [
+        "如需要强简单对照，再加入一个明确的可选策略路径：使用已有 View 后，依据当前请求、已知证据、实际新来源与预算，决定一次增量读取或停止。它复用现有执行器，不建立第二缓存、账本或审核 Agent。",
+        "沿既有 E5 的 8 家族、2 流程、5 请求作为开发定位。完成功能切片后，建议增加 32 个新的更新来源族，每族按同一预定请求时间表运行。先选 3 个方法、2048 返回额度；只有出现预算相关机制再补 1024，不默认恢复全部历史矩阵。"
+      ],
+      "requirement": "旧8初始功能切片按最早真实capture执行7/8，缺B30保留、不换后轮或别流程",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-04",
+      "original_plan_lines": [
+        382,
+        390,
+        392
+      ],
+      "original_literal_lines": [
+        "`CacheMemoryPolicy.choose` 在最近成功 USE_VIEW/REFRESH_VIEW 且请求不要求原文时，会直接 HANDOFF；scope 不匹配或有 pending content 时优先 REFRESH。执行器其实已经能继续 READ 并组合材料。[cache 策略][R8]",
+        "如需要强简单对照，再加入一个明确的可选策略路径：使用已有 View 后，依据当前请求、已知证据、实际新来源与预算，决定一次增量读取或停止。它复用现有执行器，不建立第二缓存、账本或审核 Agent。",
+        "若 Host 已知旧 View，工具可以只返回新增原文；没有必要为了形成“View＋原文”外观而重复材料。新来源可能是重复、询问或旧结论回述，不能一律刷新；历史时间请求可能仍需旧事实。"
+      ],
+      "requirement": "9个post-generated-View真实READ+HANDOFF、5背景、原前缀/Source/缓存View投影保持；无新Host答案",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-05",
+      "original_plan_lines": [
+        200,
+        202,
+        229,
+        402
+      ],
+      "original_literal_lines": [
+        "### 5.2 数据用途与分割",
+        "- **TRAIN：**原生标签、真实操作分支与材料集合反馈用于拟合。正常在 TRAIN 中提名和执行，不会自动变成 DEV。",
+        "QASPER 是第一机制来源。扩大论文家族只能支持论文取证泛化，不能单独证明长期 Agent Memory 泛化。后续维持既有 MemOps/history replay，并在合法 TRAIN 来源上加入角色、时间和更新轨迹。若扩量同时改变来源类型比例，报告为数据组合扩展；纯规模曲线应保持配比。",
+        "沿既有 E5 的 8 家族、2 流程、5 请求作为开发定位。完成功能切片后，建议增加 32 个新的更新来源族，每族按同一预定请求时间表运行。先选 3 个方法、2048 返回额度；只有出现预算相关机制再补 1024，不默认恢复全部历史矩阵。"
+      ],
+      "requirement": "新增D32为既有TRAIN，29旧合同+3作者合同，native角色正文/用户cut与无未来支持逐字复现",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-06",
+      "original_plan_lines": [
+        398,
+        404
+      ],
+      "original_literal_lines": [
+        "| 无关历史增长 | query、相关证据、答案 | 无关会话数量 | 证据是否仍能被找到和使用 |",
+        "可从 memory-at-scale 借用“固定证据、只增加干扰”的协议，但其 Pass@B 是事后筛选，MiLAi 的实际预算能力仍需运行中执行额度约束。[论文与代码][P6]"
+      ],
+      "requirement": "无关因素最小0→1构造会话变更，query/相关支持/答案范围固定；未声称多规模历史增长曲线",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-07",
+      "original_plan_lines": [
+        392,
+        399
+      ],
+      "original_literal_lines": [
+        "若 Host 已知旧 View，工具可以只返回新增原文；没有必要为了形成“View＋原文”外观而重复材料。新来源可能是重复、询问或旧结论回述，不能一律刷新；历史时间请求可能仍需旧事实。",
+        "| 相关事实更新 | 历史规模与外生任务 | 新增事实、条件或撤销 | 是否读取并交付正确版本 |"
+      ],
+      "requirement": "相关到达与无关/不变阶段分开；更正/范围/计划/撤销保留，不将所有到达当当前值翻转",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-08",
+      "original_plan_lines": [
+        388,
+        402,
+        456,
+        461
+      ],
+      "original_literal_lines": [
+        "保留原 view_cache。先用现有 Laya 在实际合法菜单中比较：USE_VIEW、读取相关新增 Source、REFRESH_VIEW、HANDOFF。",
+        "沿既有 E5 的 8 家族、2 流程、5 请求作为开发定位。完成功能切片后，建议增加 32 个新的更新来源族，每族按同一预定请求时间表运行。先选 3 个方法、2048 返回额度；只有出现预算相关机制再补 1024，不默认恢复全部历史矩阵。",
+        "| 自主 Host | 同初始请求/信息/预算，自主调用工具完成原任务 | 主任务效果 |",
+        "强简单方法接收与学习策略相同的 Host 信息。复用现有 query-only/rich、同信息文本对照，避免把新增信息量的收益当作 Jev 学习收益。保持已选择的 thinking 设置，不把已经失败的 thinking=False 方案作为新降本假设。"
+      ],
+      "requirement": "原8与新32各2流程×5请求/3方法/2048同Host，240首次Provider请求实际逐dict匹配",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-09",
+      "original_plan_lines": [
+        388,
+        392,
+        479
+      ],
+      "original_literal_lines": [
+        "保留原 view_cache。先用现有 Laya 在实际合法菜单中比较：USE_VIEW、读取相关新增 Source、REFRESH_VIEW、HANDOFF。",
+        "若 Host 已知旧 View，工具可以只返回新增原文；没有必要为了形成“View＋原文”外观而重复材料。新来源可能是重复、询问或旧结论回述，不能一律刷新；历史时间请求可能仍需旧事实。",
+        "并列报告材料完整、实际操作与参数、原文与角色时间保持、失败类型及全成本。允许多条成功路径，不以唯一偏好动作定义全部成功。"
+      ],
+      "requirement": "E3 REFRESH实际可选779而未选；自身无USE菜单/收到View，不把开发信号归因学会View复用",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-10",
+      "original_plan_lines": [
+        390,
+        392
+      ],
+      "original_literal_lines": [
+        "如需要强简单对照，再加入一个明确的可选策略路径：使用已有 View 后，依据当前请求、已知证据、实际新来源与预算，决定一次增量读取或停止。它复用现有执行器，不建立第二缓存、账本或审核 Agent。",
+        "若 Host 已知旧 View，工具可以只返回新增原文；没有必要为了形成“View＋原文”外观而重复材料。新来源可能是重复、询问或旧结论回述，不能一律刷新；历史时间请求可能仍需旧事实。"
+      ],
+      "requirement": "增量3次USE均initial无new/pending后HANDOFF、无补读；实际known-View控制另报",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-11",
+      "original_plan_lines": [
+        388,
+        455,
+        459,
+        479
+      ],
+      "original_literal_lines": [
+        "保留原 view_cache。先用现有 Laya 在实际合法菜单中比较：USE_VIEW、读取相关新增 Source、REFRESH_VIEW、HANDOFF。",
+        "| 同 before 机制 | 首动作替代、短程续行、handoff-only | 定位读取和交付的作用 |",
+        "`--host-readout` 使用原完整 Host post-tool frame；`--given-readout` 是显式任务＋packet 的条件评测，且有第 13.5 节的输入限制；二者不能混为自主 Host 结果。LME/Mem2Act 已曝光部分仅作开发或复验；冻结模型不能消除之前的数据暴露。",
+        "并列报告材料完整、实际操作与参数、原文与角色时间保持、失败类型及全成本。允许多条成功路径，不以唯一偏好动作定义全部成功。"
+      ],
+      "requirement": "1086既有NN完整before/全菜单/有限head/无截断，2个完整K容量失败不裁剪保留",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-12",
+      "original_plan_lines": [
+        392,
+        479,
+        697
+      ],
+      "original_literal_lines": [
+        "若 Host 已知旧 View，工具可以只返回新增原文；没有必要为了形成“View＋原文”外观而重复材料。新来源可能是重复、询问或旧结论回述，不能一律刷新；历史时间请求可能仍需旧事实。",
+        "并列报告材料完整、实际操作与参数、原文与角色时间保持、失败类型及全成本。允许多条成功路径，不以唯一偏好动作定义全部成功。",
+        "MiLAi 仍是 Host 调用的记忆工具。沿现有来源、版本、权限、计量、模型池和执行器开发；不增加审核 Agent、第二数据库/账本、通用重试框架或 SHA/内容指纹门禁。选择来源与版本用于可复核，不作为另加审批流程。测试只解决本次设备、损失、绑定与返回的具体风险，随后尽快取得真实任务反馈。"
+      ],
+      "requirement": "1200轮不可变Store/Source/Saver/应用，641控制Source比较及16工具探针，合计21362完整值比较",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-13",
+      "original_plan_lines": [
+        392,
+        479,
+        681
+      ],
+      "original_literal_lines": [
+        "若 Host 已知旧 View，工具可以只返回新增原文；没有必要为了形成“View＋原文”外观而重复材料。新来源可能是重复、询问或旧结论回述，不能一律刷新；历史时间请求可能仍需旧事实。",
+        "并列报告材料完整、实际操作与参数、原文与角色时间保持、失败类型及全成本。允许多条成功路径，不以唯一偏好动作定义全部成功。",
+        "| handoff diagnosis | 已读与已交付材料、候选空间、Host 使用及完整成本 |"
+      ],
+      "requirement": "原1200首判断/1996原文锚点/805View锚点和所有收到的View角色时钟修订绑定，忠实不等事实或当前充分",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-14",
+      "original_plan_lines": [
+        402,
+        477,
+        481
+      ],
+      "original_literal_lines": [
+        "沿既有 E5 的 8 家族、2 流程、5 请求作为开发定位。完成功能切片后，建议增加 32 个新的更新来源族，每族按同一预定请求时间表运行。先选 3 个方法、2048 返回额度；只有出现预算相关机制再补 1024，不默认恢复全部历史矩阵。",
+        "主指标为 Host 完整成功的来源族宏平均；配对报告 gains/losses、差值与家族 bootstrap 区间。持续更新同一来源的多轮请求按簇处理；训练 seeds 分别报告并可在族内聚合。",
+        "可将点估计 +5pp 设为有实际意义的目标，但它不是自动采用标准。声称存在优势需要区间支持正差异；声称至少 +5pp 则需相应下界支持。开发面板区间跨零既不证明胜出，也不证明零作用。"
+      ],
+      "requirement": "旧8与新32按族/10相关请求统计，原配对区间及首失败保留，初始匹配不外推后续reached-state因果",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-15",
+      "original_plan_lines": [
+        392,
+        455,
+        459
+      ],
+      "original_literal_lines": [
+        "若 Host 已知旧 View，工具可以只返回新增原文；没有必要为了形成“View＋原文”外观而重复材料。新来源可能是重复、询问或旧结论回述，不能一律刷新；历史时间请求可能仍需旧事实。",
+        "| 同 before 机制 | 首动作替代、短程续行、handoff-only | 定位读取和交付的作用 |",
+        "`--host-readout` 使用原完整 Host post-tool frame；`--given-readout` 是显式任务＋packet 的条件评测，且有第 13.5 节的输入限制；二者不能混为自主 Host 结果。LME/Mem2Act 已曝光部分仅作开发或复验；冻结模型不能消除之前的数据暴露。"
+      ],
+      "requirement": "known-View9真实K准入/全frame与原首模板失败，2族完整三方法匹配、A05仅增量/E3匹配",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-16",
+      "original_plan_lines": [
+        400,
+        459,
+        489
+      ],
+      "original_literal_lines": [
+        "| Host 旧输出回流 | 原来源角色与目标 | 旧回答/建议是否可检索 | 是否混淆“说过”与“已证实” |",
+        "`--host-readout` 使用原完整 Host post-tool frame；`--given-readout` 是显式任务＋packet 的条件评测，且有第 13.5 节的输入限制；二者不能混为自主 Host 结果。LME/Mem2Act 已曝光部分仅作开发或复验；冻结模型不能消除之前的数据暴露。",
+        "已有公开探针结果不因旧清单写 pending 就重复执行；原评测任务的失败首结果保留。Host/Reader/Judge 沿用现有来源和评分机制，不新增多层审核 Agent。"
+      ],
+      "requirement": "旧输出48inventory/42可识别首格，改变额外检索而保留已知Host消息；七族/未匹配HostRNG边界保留",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-17",
+      "original_plan_lines": [
+        227,
+        495,
+        499
+      ],
+      "original_literal_lines": [
+        "这些分支上限不含取得 reached states 的前缀采集成本，也不等于模型/API 调用数。三个分支可形成多个 pair，但它们共享状态与执行结果，不是多个独立实验。",
+        "至少保留：数据准备、采集前缀、分支执行、训练、候选筛选、正式 Host、外部确认；每项报告本地模型输入/输出与 GPU-hours、CPU/wall、Host tokens、API 调用、返回 tokens、已知/未知用量。",
+        "形式相同的比较遵循同一计量范围。共享 baseline 分支的采集成本只按实际执行计一次，并明确用于哪些面板；不把共享数据当免费或重复独立证据。"
+      ],
+      "requirement": "原1200/两控制/前缀共享成本只计一次，冻结旧预算复现关闭凭据，丢失父CPU未知/child下界保留",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    },
+    {
+      "id": "D-18",
+      "original_plan_lines": [
+        384,
+        402,
+        520,
+        521,
+        699
+      ],
+      "original_literal_lines": [
+        "这是可检验的控制流问题，不是所有 final-arrivals 失败的已证实唯一原因。",
+        "沿既有 E5 的 8 家族、2 流程、5 请求作为开发定位。完成功能切片后，建议增加 32 个新的更新来源族，每族按同一预定请求时间表运行。先选 3 个方法、2048 返回额度；只有出现预算相关机制再补 1024，不默认恢复全部历史矩阵。",
+        "- 原文与简单增量策略更好：保留简单方法，把学习职责缩小到有证据支持的部分。",
+        "- 学习质量略好但全成本高：在质量成立后研究轻量打分或选择性调用；不压缩尚未证明有效的策略当成果。",
+        "最终允许简单方法获胜。若其质量和成本更好，产品采用简单方案，研究如实界定学习策略的价值范围。"
+      ],
+      "requirement": "不将cache早停当全部失败原因，不因拒绝计数自动扩1024/历史矩阵或采用；后续冻结确认另报",
+      "assessment": "PROVED_IN_DECLARED_D_SCOPE_WITH_EXPLICIT_INTERPRETATION_BOUNDARIES"
+    }
+  ],
+  "private_audits": {
+    "execution": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-existing-execution-v4/summary.json",
+    "factors": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-factors-v1/summary.json",
+    "quality": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-quality-and-baseline80-v2/summary.json",
+    "known_View": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-known-View-controls-v1/summary.json",
+    "old_output": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-old-output-controls-v1/summary.json",
+    "control_closeouts": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-control-closeouts-v3/summary.json",
+    "native_probes": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-native-probes-v2/summary.json",
+    "first_Provider_wires": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-initial-Provider-wires-v2.json"
+  },
+  "total_autonomous_first_positions_including_original_baseline_reuse": 1200,
+  "actual_new_native_autonomous_positions": 1120,
+  "old8_original_baseline80_not_reexecuted": true,
+  "whole_Source_value_comparisons": 21362,
+  "actual_original_NN_full_inputs_finite": 1086,
+  "actual_received_View_occurrences_including_K": 419,
+  "full_existing_main_author_records_literal_equal": true,
+  "actual_main_raw_anchors": 1996,
+  "actual_main_View_anchors": 805,
+  "main_quality": {
+    "old8-view_cache-original-reused": {
+      "positions": 80,
+      "families": 8,
+      "complete": 19,
+      "answer_grades": {
+        "Q": 30,
+        "C": 19,
+        "W": 13,
+        "F": 18
+      },
+      "material_statuses": {
+        "complete": 35,
+        "partial": 39,
+        "insufficient": 6
+      },
+      "received_View_occurrences_including_historical_K": 48,
+      "unique_actual_View_refs": 11
+    },
+    "old8-view_cache_incremental": {
+      "positions": 80,
+      "families": 8,
+      "complete": 11,
+      "answer_grades": {
+        "C": 11,
+        "Q": 32,
+        "W": 16,
+        "F": 21
+      },
+      "material_statuses": {
+        "complete": 17,
+        "partial": 59,
+        "insufficient": 4
+      },
+      "received_View_occurrences_including_historical_K": 21,
+      "unique_actual_View_refs": 5
+    },
+    "old8-e3-aggregate-u32": {
+      "positions": 80,
+      "families": 8,
+      "complete": 19,
+      "answer_grades": {
+        "C": 19,
+        "F": 20,
+        "W": 20,
+        "Q": 21
+      },
+      "material_statuses": {
+        "complete": 38,
+        "partial": 42
+      },
+      "received_View_occurrences_including_historical_K": 0,
+      "unique_actual_View_refs": 0
+    },
+    "new32-view_cache": {
+      "positions": 320,
+      "families": 32,
+      "complete": 67,
+      "answer_grades": {
+        "C": 67,
+        "F": 67,
+        "W": 121,
+        "Q": 65
+      },
+      "material_statuses": {
+        "partial": 222,
+        "complete": 84,
+        "insufficient": 14
+      },
+      "received_View_occurrences_including_historical_K": 163,
+      "unique_actual_View_refs": 42
+    },
+    "new32-view_cache_incremental": {
+      "positions": 320,
+      "families": 32,
+      "complete": 65,
+      "answer_grades": {
+        "C": 65,
+        "W": 135,
+        "F": 64,
+        "Q": 56
+      },
+      "material_statuses": {
+        "complete": 76,
+        "partial": 223,
+        "insufficient": 21
+      },
+      "received_View_occurrences_including_historical_K": 117,
+      "unique_actual_View_refs": 25
+    },
+    "new32-e3-aggregate-u32": {
+      "positions": 320,
+      "families": 32,
+      "complete": 95,
+      "answer_grades": {
+        "W": 99,
+        "C": 95,
+        "F": 58,
+        "Q": 68
+      },
+      "material_statuses": {
+        "insufficient": 4,
+        "complete": 133,
+        "partial": 183
+      },
+      "received_View_occurrences_including_historical_K": 0,
+      "unique_actual_View_refs": 0
+    }
+  },
+  "initial_Provider_wire_correction": {
+    "passed": true,
+    "status": "D240_ACTUAL_FIRST_PROVIDER_REQUESTS_BOUND_TO_PRE_HOST_TRACE_BOUNDARIES_ALL_INITIAL_WIRES_MATCH_LATER_TOOL_ARGUMENTS_DIFFER",
+    "timestamp_utc": "2026-11-09T11:31:37.385196+00:00",
+    "actual_first_Provider_requests_bound": 240,
+    "decoded_output_callback_and_native_message_binding_counts": {
+      "decoded_first_output_callback_bound": 234,
+      "first_response_id_also_in_native_AI_messages": 234,
+      "first_response_has_no_decoded_output_callback": 6
+    },
+    "first_undecoded_response_callbacks_not_fabricated": true,
+    "initial_flow_positions_per_method": {
+      "old8": 16,
+      "new32": 64
+    },
+    "comparisons": {
+      "old8": [
+        {
+          "reference": "view_cache",
+          "candidate": "view_cache_incremental",
+          "actual_first_Provider_request_dicts_literal_equal": 16,
+          "initial_flow_positions": 16,
+          "actual_first_tool_argument_batches_equal": 0
+        },
+        {
+          "reference": "view_cache",
+          "candidate": "e3-aggregate-u32",
+          "actual_first_Provider_request_dicts_literal_equal": 16,
+          "initial_flow_positions": 16,
+          "actual_first_tool_argument_batches_equal": 0
+        },
+        {
+          "reference": "view_cache_incremental",
+          "candidate": "e3-aggregate-u32",
+          "actual_first_Provider_request_dicts_literal_equal": 16,
+          "initial_flow_positions": 16,
+          "actual_first_tool_argument_batches_equal": 0
+        }
+      ],
+      "new32": [
+        {
+          "reference": "view_cache",
+          "candidate": "view_cache_incremental",
+          "actual_first_Provider_request_dicts_literal_equal": 64,
+          "initial_flow_positions": 64,
+          "actual_first_tool_argument_batches_equal": 0
+        },
+        {
+          "reference": "view_cache",
+          "candidate": "e3-aggregate-u32",
+          "actual_first_Provider_request_dicts_literal_equal": 64,
+          "initial_flow_positions": 64,
+          "actual_first_tool_argument_batches_equal": 0
+        },
+        {
+          "reference": "view_cache_incremental",
+          "candidate": "e3-aggregate-u32",
+          "actual_first_Provider_request_dicts_literal_equal": 64,
+          "initial_flow_positions": 64,
+          "actual_first_tool_argument_batches_equal": 0
+        }
+      ]
+    },
+    "all_three_method_pairs_old8_first_Provider_wires_equal16_of16": true,
+    "all_three_method_pairs_new32_first_Provider_wires_equal64_of64": true,
+    "first_tool_argument_batches_equal_zero_in_all_pairs": true,
+    "current_summary_correction": "Earlier broad wording that D initial Provider wires were not all equal is unsupported. Actual first Provider request dicts are all equal within each predeclared initial flow position. Actual runtime Source IDs/capture clocks and subsequent tool arguments/endogenous histories differ; distinguish those from initial Provider input. Fair autonomous initial information is matched, while later reached-state/controller causality and matched Host RNG are not established.",
+    "original_comparison_numeric_fields_literal_preserved": true,
+    "source_author_not_independent_or_blind": true,
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_Source_inputs_labels_models_or_firsts_changed": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "full763_line_completion_proven": false,
+    "goal_complete": false
+  },
+  "known_View": {
+    "passed": true,
+    "status": "D_CONTROL_ORIGINAL_SOURCE_VIEW_NATIVE_SDK_FULL_HOST_INPUT_AND_FIRST_RESULTS_RECONCILED_READ_ONLY",
+    "timestamp_utc": "2026-11-09T11:05:46.314038+00:00",
+    "component": "known-View",
+    "actual_frozen_runtime": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-d-update32",
+    "planned_first_cells": 9,
+    "families": 3,
+    "actual_Tool_packets": 9,
+    "whole_before_after_Source_value_comparisons": 165,
+    "actual_native_Source_SDK_projections_through_SQLite_mode_ro": 9,
+    "no_setup_DDL_original_DB_or_original_lock_writes": true,
+    "all_actual_existing_Store_values_preserved_by_projection": true,
+    "all_actual_application_tables_literal_equal": true,
+    "semantic_records_or_business_writes": 0,
+    "actual_HTTP": 8,
+    "known_Host_tokens_already_paid": 75003,
+    "retained_initial_capacity_failures": 0,
+    "retained_template_failure_without_HTTP": 1,
+    "all_actual_Component_and_Host_original_ranges_View_nodes_roles_revisions_clocks_literal_bound": true,
+    "actual_Host_original_range_occurrences": 16,
+    "Host_View_occurrences": 21,
+    "unique_Host_View_payloads": 10,
+    "component_View_occurrences": 2,
+    "unsent_Component_View_not_credited": 1,
+    "all_actual_whole_Host_frames_receipts_completed_responses_and_known_usage_failures_bound": true,
+    "old_Host_output_remains_exact_assistant_context_under_both_conditions": false,
+    "original_author_anchor_and_issue_quotes_verified": true,
+    "original_answer_grades": {
+      "F": 1,
+      "W": 4,
+      "Q": 4
+    },
+    "original_material_statuses": {
+      "unknown": 1,
+      "partial": 8
+    },
+    "all_original_judgments_unchanged": true,
+    "source_author_not_independent_or_blind": true,
+    "original_operations_full_input_report_literal_replayed": {
+      "original_validator": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/audit_d_known_view_operations_inputs.py",
+      "condition": "known-View",
+      "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-known-View-controls-v1/known-View-audit_d_known_view_operations_inputs.json",
+      "original_report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/known-View/reviews-v1/operations-and-finite-input-audit-v1.json",
+      "changed_report_destination": true,
+      "physical_JSONL_line_reader_substitutions": 1,
+      "inverse_changes_entire_original_source_literal_equal": true,
+      "excluded_dynamic_or_historical_narrative_fields": [],
+      "all_existing_original_scientific_report_fields_literal_equal": true,
+      "legacy_additive_zero_error_receipt_schema_verified_and_projected_for_comparison": false,
+      "actual_validator_executed_in_current_process": true,
+      "closed_previous_readonly_audit_report_reused": null,
+      "original_reports_or_Source_inputs_states_first_results_modified": false
+    },
+    "actual_model_forwards": 24,
+    "all_actual_head_values_finite": true,
+    "actual_local_input_tokens": 287238,
+    "minimum_actual_local_input_tokens": 9361,
+    "maximum_actual_local_input_tokens": 13552,
+    "original_K_menu_and_capacity_failures_retained_without_cropping": true,
+    "scope": "Actual frozen conditional TRAIN controls and original Source-author review reconciliation. Faithful literal View/Source roles and clocks do not certify underlying claims or current task coverage. Known-ViewA05baseline first template failure has no dispatched Host input; only A33/B03 have complete matched three-method frames. Old-output toggles additional acquisition while all already received Host knowledge remains; Host generation seeds unmatched. First capacity/HTTP/template failures remain, with no independent confirmation/adoption or general old-output harm/benefit conclusion.",
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_Source_inputs_labels_models_or_firsts_changed": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "full763_line_completion_proven": false,
+    "goal_complete": false
+  },
+  "old_output": {
+    "passed": true,
+    "status": "D_CONTROL_ORIGINAL_SOURCE_VIEW_NATIVE_SDK_FULL_HOST_INPUT_AND_FIRST_RESULTS_RECONCILED_READ_ONLY",
+    "timestamp_utc": "2026-11-09T11:05:54.875811+00:00",
+    "component": "old-output",
+    "actual_frozen_runtime": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-d-old-output-v1",
+    "planned_first_cells": 42,
+    "families": 7,
+    "actual_Tool_packets": 40,
+    "whole_before_after_Source_value_comparisons": 476,
+    "actual_native_Source_SDK_projections_through_SQLite_mode_ro": 40,
+    "no_setup_DDL_original_DB_or_original_lock_writes": true,
+    "all_actual_existing_Store_values_preserved_by_projection": true,
+    "all_actual_application_tables_literal_equal": true,
+    "semantic_records_or_business_writes": 0,
+    "actual_HTTP": 40,
+    "known_Host_tokens_already_paid": 343013,
+    "retained_initial_capacity_failures": 2,
+    "retained_template_failure_without_HTTP": 0,
+    "all_actual_Component_and_Host_original_ranges_View_nodes_roles_revisions_clocks_literal_bound": true,
+    "actual_Host_original_range_occurrences": 136,
+    "Host_View_occurrences": 49,
+    "unique_Host_View_payloads": 16,
+    "component_View_occurrences": 9,
+    "unsent_Component_View_not_credited": 0,
+    "all_actual_whole_Host_frames_receipts_completed_responses_and_known_usage_failures_bound": true,
+    "old_Host_output_remains_exact_assistant_context_under_both_conditions": true,
+    "original_author_anchor_and_issue_quotes_verified": true,
+    "original_answer_grades": {
+      "C": 22,
+      "F": 9,
+      "Q": 7,
+      "W": 4
+    },
+    "original_material_statuses": {
+      "complete": 27,
+      "partial": 13,
+      "unknown": 2
+    },
+    "all_original_judgments_unchanged": true,
+    "source_author_not_independent_or_blind": true,
+    "original_operations_full_input_report_literal_replayed": {
+      "original_validator": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/audit_d_old_output_operations_inputs.py",
+      "condition": "old-output",
+      "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-old-output-controls-v1/old-output-audit_d_old_output_operations_inputs.json",
+      "original_report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/old-output/reviews-v1/operations-and-finite-input-audit-v1.json",
+      "changed_report_destination": true,
+      "physical_JSONL_line_reader_substitutions": 1,
+      "inverse_changes_entire_original_source_literal_equal": true,
+      "excluded_dynamic_or_historical_narrative_fields": [],
+      "all_existing_original_scientific_report_fields_literal_equal": true,
+      "legacy_additive_zero_error_receipt_schema_verified_and_projected_for_comparison": false,
+      "actual_validator_executed_in_current_process": true,
+      "closed_previous_readonly_audit_report_reused": null,
+      "original_reports_or_Source_inputs_states_first_results_modified": false
+    },
+    "actual_model_forwards": 93,
+    "all_actual_head_values_finite": true,
+    "actual_local_input_tokens": 643723,
+    "minimum_actual_local_input_tokens": 4141,
+    "maximum_actual_local_input_tokens": 9795,
+    "original_K_menu_and_capacity_failures_retained_without_cropping": true,
+    "scope": "Actual frozen conditional TRAIN controls and original Source-author review reconciliation. Faithful literal View/Source roles and clocks do not certify underlying claims or current task coverage. Known-ViewA05baseline first template failure has no dispatched Host input; only A33/B03 have complete matched three-method frames. Old-output toggles additional acquisition while all already received Host knowledge remains; Host generation seeds unmatched. First capacity/HTTP/template failures remain, with no independent confirmation/adoption or general old-output harm/benefit conclusion.",
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_Source_inputs_labels_models_or_firsts_changed": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "full763_line_completion_proven": false,
+    "goal_complete": false
+  },
+  "control_closeouts": {
+    "passed": true,
+    "status": "D_CONTROL_ORIGINAL_PAIRED_STATISTICS_AND_KNOWN_PAID_COST_CLOSEOUTS_LITERAL_REPRODUCED_WITH_FROZEN_PRE_MEM_SNAPSHOT",
+    "timestamp_utc": "2026-11-09T11:19:30.445561+00:00",
+    "actual_historical_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-budget-before.json",
+    "original_live_ledger_read_or_written": false,
+    "known_View_original_closeout_entire_literal_equal": true,
+    "old_output_original_closeout_and_family_comparison_entire_literal_equal": true,
+    "only_known_View_ledger_input_replaced_by_existing_frozen_snapshot_and_three_report_destinations_changed": true,
+    "inverse_source_replacements_restore_both_entire_original_validators": true,
+    "known_View": {
+      "first_cells": 9,
+      "actual_HTTP": 8,
+      "known_Host_tokens_already_paid": 75003,
+      "local_model_forwards": 24,
+      "local_input_tokens": 287238,
+      "admission_reservations": 33,
+      "one_first_template_preflight_slot_consumed_without_HTTP": true,
+      "known_child_CPU_already_paid": 144.33048000000002,
+      "native_local_load_CPU_included_not_readded": 86.85622348397919,
+      "residual_CPU_included_not_readded": 57.474256516020816,
+      "GPU_job_interval_including_waits": 0.060981818240705046
+    },
+    "old_output": {
+      "first_cells": 42,
+      "actual_HTTP": 40,
+      "known_Host_tokens_already_paid": 343013,
+      "local_model_forwards": 93,
+      "local_input_tokens": 643723,
+      "admission_reservations": 133,
+      "initial_capacity_failures_with_zero_forward_tool_and_Host_dispatch": 2,
+      "observed_child_CPU_lower_bound_already_paid": 199.51,
+      "native_local_load_CPU_included_not_readded": 116.4836978450121,
+      "residual_lower_bound_included_not_readded": 83.02630215498789,
+      "baseline_collection_CPU_already_paid_separately": 47.450369934,
+      "unknown_parent_CPU": "unknown_not_zero",
+      "unknown_child_cleanup_CPU": "unknown_not_zero",
+      "original_exit_code": null,
+      "GPU_launch_to_observed_terminal_interval_upper_bound": 0.30707771837711334
+    },
+    "old_output_first_inventory48_eligible42_ineligible6_not_imputed": {
+      "families": [
+        "memops_A01",
+        "memops_A02",
+        "memops_A05",
+        "memops_A14",
+        "memops_A16",
+        "memops_A29",
+        "memops_A33",
+        "memops_B03"
+      ],
+      "ineligible_family": "memops_A02",
+      "ineligible_cells": 6,
+      "reason": "Original first initial Host failed; no completed old final output to intervene on. No later family/turn replacement. Inventory48 retained, actual eligible42 reported separately; no imputed outcomes for unidentifiable intervention."
+    },
+    "old_output_by_method_condition": [
+      {
+        "method": "view_cache",
+        "condition": "prior_Host_output_searchable",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 4,
+          "F": 3
+        },
+        "material_statuses": {
+          "complete": 5,
+          "partial": 2
+        },
+        "complete_successes": 4
+      },
+      {
+        "method": "view_cache",
+        "condition": "prior_Host_output_excluded",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 4,
+          "Q": 2,
+          "F": 1
+        },
+        "material_statuses": {
+          "complete": 6,
+          "partial": 1
+        },
+        "complete_successes": 4
+      },
+      {
+        "method": "view_cache_incremental",
+        "condition": "prior_Host_output_searchable",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 4,
+          "W": 1,
+          "Q": 2
+        },
+        "material_statuses": {
+          "complete": 5,
+          "partial": 2
+        },
+        "complete_successes": 4
+      },
+      {
+        "method": "view_cache_incremental",
+        "condition": "prior_Host_output_excluded",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 6,
+          "W": 1
+        },
+        "material_statuses": {
+          "complete": 5,
+          "partial": 2
+        },
+        "complete_successes": 6
+      },
+      {
+        "method": "e3-aggregate-u32",
+        "condition": "prior_Host_output_searchable",
+        "first_cells": 7,
+        "answer_grades": {
+          "F": 3,
+          "C": 2,
+          "W": 1,
+          "Q": 1
+        },
+        "material_statuses": {
+          "partial": 3,
+          "unknown": 1,
+          "complete": 3
+        },
+        "complete_successes": 2
+      },
+      {
+        "method": "e3-aggregate-u32",
+        "condition": "prior_Host_output_excluded",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 2,
+          "F": 2,
+          "W": 1,
+          "Q": 2
+        },
+        "material_statuses": {
+          "partial": 3,
+          "unknown": 1,
+          "complete": 3
+        },
+        "complete_successes": 2
+      }
+    ],
+    "old_output_family_comparisons": [
+      {
+        "name": "view_cache:searchable-minus-excluded",
+        "families": 7,
+        "gains": 1,
+        "losses": 1,
+        "difference_percentage_points": 0.0,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -42.857142857142854,
+          42.857142857142854
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": 0.0,
+          "memops_A14": 0.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": 1.0,
+          "memops_B03": -1.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "view_cache_incremental:searchable-minus-excluded",
+        "families": 7,
+        "gains": 0,
+        "losses": 2,
+        "difference_percentage_points": -28.571428571428573,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -57.14285714285714,
+          0.0
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": 0.0,
+          "memops_A14": 0.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": -1.0,
+          "memops_B03": -1.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "e3-aggregate-u32:searchable-minus-excluded",
+        "families": 7,
+        "gains": 1,
+        "losses": 1,
+        "difference_percentage_points": 0.0,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -42.857142857142854,
+          42.857142857142854
+        ],
+        "family_differences": {
+          "memops_A01": -1.0,
+          "memops_A05": 0.0,
+          "memops_A14": 1.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": 0.0,
+          "memops_B03": 0.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "prior_Host_output_searchable:view_cache_incremental-minus-view_cache",
+        "families": 7,
+        "gains": 1,
+        "losses": 1,
+        "difference_percentage_points": 0.0,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -42.857142857142854,
+          42.857142857142854
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": 0.0,
+          "memops_A14": 1.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": -1.0,
+          "memops_B03": 0.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "prior_Host_output_searchable:e3-aggregate-u32-minus-view_cache",
+        "families": 7,
+        "gains": 1,
+        "losses": 3,
+        "difference_percentage_points": -28.571428571428573,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -71.42857142857143,
+          28.57142857142857
+        ],
+        "family_differences": {
+          "memops_A01": -1.0,
+          "memops_A05": -1.0,
+          "memops_A14": 1.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": -1.0,
+          "memops_B03": 0.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "prior_Host_output_excluded:view_cache_incremental-minus-view_cache",
+        "families": 7,
+        "gains": 2,
+        "losses": 0,
+        "difference_percentage_points": 28.571428571428573,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          0.0,
+          57.14285714285714
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": 0.0,
+          "memops_A14": 1.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": 1.0,
+          "memops_B03": 0.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "prior_Host_output_excluded:e3-aggregate-u32-minus-view_cache",
+        "families": 7,
+        "gains": 0,
+        "losses": 2,
+        "difference_percentage_points": -28.571428571428573,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -71.42857142857143,
+          0.0
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": -1.0,
+          "memops_A14": 0.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": 0.0,
+          "memops_B03": -1.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      }
+    ],
+    "Host_generation_seed_matched": false,
+    "scope": "All original first failures/unknown cost fields and author judgments retained. Snapshot is the existing postidle137/preMem2Act budget copy, never the live original ledger or a second operational ledger. Reported costs already paid, no rebilling. Seven correlated TRAIN families and unmatched Host RNG do not identify general old-output harm/benefit. GPU job/observed intervals include waits, not active GPU compute; unknown parent/cleanup retain literal unknown_not_zero. Original exit code remains None. Original historical next fields are evidence of then-current scheduling, not a current queue.",
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_Source_inputs_labels_models_or_firsts_changed": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "full763_line_completion_proven": false,
+    "goal_complete": false
+  },
+  "native_probes": {
+    "passed": true,
+    "status": "D_OLD8_NATIVE_INITIAL_SLICE_AND_POST_GENERATED_VIEW_READ_FIRST_PROBES_RECONCILED_NO_REEXECUTION",
+    "timestamp_utc": "2026-11-09T11:19:31.895991+00:00",
+    "original_baseline_cache_class_and_context_scoring_functions_literal_equal": true,
+    "optional_slice_planned_families": 8,
+    "optional_slice_actual_native_first_tools": 7,
+    "optional_slice_unavailable": [
+      "memops_B30"
+    ],
+    "optional_slice_earliest_actual_initial_content_capture_per_family_verified": true,
+    "optional_slice_no_other_flow_later_turn_or_generated_builder_replacement": true,
+    "optional_slice_View_plus_raw_packets": 3,
+    "optional_slice_raw_Source_pieces": 9,
+    "optional_slice_actual_per_family": [
+      {
+        "family": "memops_A19",
+        "initial_complete_before_full_menu_and_no_forced_intervention": true,
+        "selected_kind_counts": {
+          "REFRESH_VIEW": 1,
+          "READ": 1,
+          "HANDOFF": 1
+        },
+        "new_HTTP_or_model": 0,
+        "before_after_whole_Source_comparisons": 8,
+        "literal_raw_Source_pieces": 1,
+        "actual_View_plus_raw": true
+      },
+      {
+        "family": "memops_A32",
+        "initial_complete_before_full_menu_and_no_forced_intervention": true,
+        "selected_kind_counts": {
+          "SEARCH": 1,
+          "READ": 4,
+          "HANDOFF": 1
+        },
+        "new_HTTP_or_model": 0,
+        "before_after_whole_Source_comparisons": 8,
+        "literal_raw_Source_pieces": 2,
+        "actual_View_plus_raw": false
+      },
+      {
+        "family": "memops_C03",
+        "initial_complete_before_full_menu_and_no_forced_intervention": true,
+        "selected_kind_counts": {
+          "SEARCH": 1,
+          "READ": 4,
+          "HANDOFF": 1
+        },
+        "new_HTTP_or_model": 0,
+        "before_after_whole_Source_comparisons": 8,
+        "literal_raw_Source_pieces": 2,
+        "actual_View_plus_raw": false
+      },
+      {
+        "family": "memops_D25",
+        "initial_complete_before_full_menu_and_no_forced_intervention": true,
+        "selected_kind_counts": {
+          "REFRESH_VIEW": 1,
+          "READ": 1,
+          "HANDOFF": 1
+        },
+        "new_HTTP_or_model": 0,
+        "before_after_whole_Source_comparisons": 8,
+        "literal_raw_Source_pieces": 1,
+        "actual_View_plus_raw": false
+      },
+      {
+        "family": "memops_E08",
+        "initial_complete_before_full_menu_and_no_forced_intervention": true,
+        "selected_kind_counts": {
+          "REFRESH_VIEW": 1,
+          "READ": 1,
+          "HANDOFF": 1
+        },
+        "new_HTTP_or_model": 0,
+        "before_after_whole_Source_comparisons": 8,
+        "literal_raw_Source_pieces": 1,
+        "actual_View_plus_raw": true
+      },
+      {
+        "family": "memops_E15",
+        "initial_complete_before_full_menu_and_no_forced_intervention": true,
+        "selected_kind_counts": {
+          "REFRESH_VIEW": 1,
+          "READ": 1,
+          "HANDOFF": 1
+        },
+        "new_HTTP_or_model": 0,
+        "before_after_whole_Source_comparisons": 8,
+        "literal_raw_Source_pieces": 1,
+        "actual_View_plus_raw": false
+      },
+      {
+        "family": "memops_F01",
+        "initial_complete_before_full_menu_and_no_forced_intervention": true,
+        "selected_kind_counts": {
+          "REFRESH_VIEW": 1,
+          "READ": 1,
+          "HANDOFF": 1
+        },
+        "new_HTTP_or_model": 0,
+        "before_after_whole_Source_comparisons": 8,
+        "literal_raw_Source_pieces": 1,
+        "actual_View_plus_raw": true
+      }
+    ],
+    "post_generated_View_saved_states": 9,
+    "post_generated_View_distinct_source_backgrounds": 5,
+    "post_generated_View_plus_raw_packets": 9,
+    "post_generated_View_actual_new_READ_then_HANDOFF_each": 9,
+    "all_original_prefix_bytes_boundaries_complete_before_and_menus_verified": true,
+    "all_Source_bodies_roles_clocks_and_application_tables_unchanged": true,
+    "whole_before_after_Source_value_comparisons": 156,
+    "generated_View_structure_native_locator_and_factored_metadata_literal_preserved": true,
+    "restored_shared_generation_counter_kept_literal_not_reset_or_claimed_as_new_calls": true,
+    "original_post_View_probe_closeout_literal_reproduced": {
+      "original_validator": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/close_d_old8_read_probe.py",
+      "condition": "old8-post-View-probe",
+      "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-native-probes-v2/old8-post-View-probe-close_d_old8_read_probe.json",
+      "original_report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/old8-native-read-probe-closeout.json",
+      "changed_report_destination": true,
+      "physical_JSONL_line_reader_substitutions": 0,
+      "inverse_changes_entire_original_source_literal_equal": true,
+      "excluded_dynamic_or_historical_narrative_fields": [],
+      "all_existing_original_scientific_report_fields_literal_equal": true,
+      "legacy_additive_zero_error_receipt_schema_verified_and_projected_for_comparison": false,
+      "actual_validator_executed_in_current_process": true,
+      "closed_previous_readonly_audit_report_reused": null,
+      "original_reports_or_Source_inputs_states_first_results_modified": false
+    },
+    "actual_new_Host_readouts_or_answers_in_original_probes": 0,
+    "scope": "Actual original tool executions only:7initial extractive-policy packets from8predeclared families (B30has no initial capture), and9post-generated-View READ+HANDOFF probes across5backgrounds. Neither set has new Host answers. A fitting View+raw packet establishes executor capability, not clean/pending View reuse, generated factuality, task benefit or independent confirmation. Original selected READs and cached structures preserved, not retrospectively created. Historical budget copies only; no live original ledger or real tool/model rerun.",
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_Source_inputs_labels_models_or_firsts_changed": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "full763_line_completion_proven": false,
+    "goal_complete": false
+  },
+  "factors": {
+    "passed": true,
+    "status": "D32_NATIVE_SOURCE_ONLY_TIMELINES_THREE_FACTORS_ACTUAL_CONFIGS_AND_INCREMENTAL_USE_MECHANISM_RECONCILED",
+    "timestamp_utc": "2026-11-09T10:46:53.537654+00:00",
+    "families": 32,
+    "split": "train",
+    "source_author_prior_contracts": 29,
+    "new_source_author_full_dialogue_contracts": 3,
+    "native_source_dialogue_objects_literal_reprojected": 768,
+    "native_Source_prefix_values_in_two_flows": 1472,
+    "all_final_exogenous_values_in_two_flows": 1536,
+    "no_future_support_user_cuts_role_body_null_unknown_clock_verified": true,
+    "actual_support_witness_occurrences_bound": 1390,
+    "streams": 64,
+    "requests_per_stream": 5,
+    "positions_per_method": 320,
+    "public_quote_requests": 128,
+    "Host_history_fields_contain_no_expected_answer_operation_or_scoring_labels": true,
+    "actual_config_and_autonomous_execution_jobs": [
+      {
+        "name": "old8-view_cache_incremental",
+        "policy": "view_cache_incremental",
+        "positions": 80,
+        "actual_frozen_config_literal_equal": true,
+        "autonomous_continuous_Host_all_first_positions_verified": true
+      },
+      {
+        "name": "old8-e3-aggregate-u32",
+        "policy": "laya",
+        "positions": 80,
+        "actual_frozen_config_literal_equal": true,
+        "autonomous_continuous_Host_all_first_positions_verified": true
+      },
+      {
+        "name": "new32-view_cache",
+        "policy": "view_cache",
+        "positions": 320,
+        "actual_frozen_config_literal_equal": true,
+        "autonomous_continuous_Host_all_first_positions_verified": true
+      },
+      {
+        "name": "new32-view_cache_incremental",
+        "policy": "view_cache_incremental",
+        "positions": 320,
+        "actual_frozen_config_literal_equal": true,
+        "autonomous_continuous_Host_all_first_positions_verified": true
+      },
+      {
+        "name": "new32-e3-aggregate-u32",
+        "policy": "laya",
+        "positions": 320,
+        "actual_frozen_config_literal_equal": true,
+        "autonomous_continuous_Host_all_first_positions_verified": true
+      }
+    ],
+    "separate_factor_positions_per_method": {
+      "initial": 64,
+      "no_new_exogenous_Source": 64,
+      "one_constructed_task_irrelevant_Source": 64,
+      "native_intermediate_arrivals": 64,
+      "native_final_arrivals": 64
+    },
+    "task_irrelevant_Source_is_one_constructed_cable_note_not_history_scale_curve": true,
+    "same_sources_means_exogenous_only_endogenous_Host_history_can_change": true,
+    "native_middle_arrivals_not_all_task_irrelevant": true,
+    "natural_target_irrelevant_middle_family": [
+      "memops_A02"
+    ],
+    "incremental_USE_VIEW_mechanism_original_report_literal_reproduced": true,
+    "incremental_USE_VIEW_mechanism_proof": {
+      "original_validator": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/close_d_incremental_mechanism.py",
+      "condition": "new32-incremental-mechanism",
+      "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-factors-v1/new32-incremental-mechanism-close_d_incremental_mechanism.json",
+      "original_report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache_incremental/actual-use-View-mechanism-closeout-v1.json",
+      "changed_report_destination": true,
+      "physical_JSONL_line_reader_substitutions": 0,
+      "inverse_changes_entire_original_source_literal_equal": true,
+      "excluded_dynamic_or_historical_narrative_fields": [],
+      "reproduced_report_literal_equal_except_listed_dynamic_fields": true,
+      "original_reports_or_Source_inputs_states_first_results_modified": false
+    },
+    "all3_USE_VIEW_initial_no_new_pending_events_no_supplemental_READ": true,
+    "known_View_K_and_old_output_controls_require_separate_actual_evidence": true,
+    "old8_original_baseline_reuse_not_claimed_as_new_firsts": true,
+    "source_author_not_independent_or_blind": true,
+    "scope": "Dsource-only TRAIN projection and author support/prefix/config/actual-first-execution reconciliation. Three factors have distinct actual schedule positions; the single irrelevant arrival does not establish an irrelevant-history scaling curve, and relevant arrivals include additions/corrections/status/scope rather than universal value flips. Autonomous endogenous histories and requests can diverge. This proves neither View+incremental task benefit, independent semantic truth, controls closure nor full original plan completion.",
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_Source_inputs_labels_or_firsts_changed": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "full763_line_completion_proven": false,
+    "goal_complete": false
+  },
+  "all_first_failures_unknowns_and_original_judgments_preserved": true,
+  "metadata_and_measurement_reflections": [
+    "Legacybaseline Viewfidelity wording kept in its original vocabulary; compare actual nodes/roles/clocks rather than require newer label spelling.",
+    "Native frozen modules requirePython3.11(StrEnum); first systemPython3.10 observer import failure retained, correct existing3.11 used without SDK compatibility fallback.",
+    "Lost parent/cleanup CPU is literalunknown_not_zero, notNone or0; exit code separatelyNone.",
+    "Native tool probe generation_calls includes captured prefix; unchanged captured-before count plus unchanged actual usage/empty current model trace verifies0newcalls without reset.",
+    "Six first incomplete responses have no decoded output callback. All240 firstrequests bound by actual preHost trace prefix/result path;234decoded IDs also match callback/nativeAI messages. No callbacks fabricated.",
+    "Actual initial Providerwires match16/16old8 and64/64new32 for all3pairs; later toolarguments match0. Correct earlier overly broad summary wording; original numeric comparisons/firsts unchanged.",
+    "Figurev1 annotation overlap fixed and finalv2 PNGactually viewed; both render timers retained."
+  ],
+  "failed_current_audit_timers": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/audit-original-plan-D-quality-and-baseline80-v1.time.txt",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/audit-original-plan-D-control-closeouts-v1.time.txt",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/audit-original-plan-D-control-closeouts-v2.time.txt",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/audit-original-plan-D-native-probes-v1.time.txt",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/audit-original-plan-D-initial-Provider-wires-v1.time.txt"
+  ],
+  "original_D_execution_v1_to_v3_failed_timers_already_retained": true,
+  "additional_1024_or_historical_full_matrix_not_automatically_triggered_by_nonzero_budget_rejections": true,
+  "conditional_1024_admission_scope": "Actual2048 rejections17/26/2 preserved. Counts alone do not establish a budget-dependent relative quality mechanism or require filling the historical matrix; no1024task/quality benefit claimed. Main limits remain missing needed source/query and Host use, and later full256confirmation separately bounds adoption.",
+  "analyst_is_implementation_Source_author_not_independent_or_blind": true,
+  "figure_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-D-figure-20261109-v1.json",
+  "analyzers": [
+    "tools/audit_a100_plan_d_existing_execution.py",
+    "tools/audit_a100_plan_d_factors.py",
+    "tools/audit_a100_plan_d_quality.py",
+    "tools/audit_a100_plan_d_controls.py",
+    "tools/audit_a100_plan_d_control_closeouts.py",
+    "tools/audit_a100_plan_d_native_probes.py",
+    "tools/audit_a100_plan_d_initial_wires.py"
+  ],
+  "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+  "original_Source_inputs_labels_models_or_firsts_changed": false,
+  "full763_line_completion_proven": false,
+  "CPU_pending_actual_idle138": true,
+  "no_sha_validation": true,
+  "goal_complete": false
+}

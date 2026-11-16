@@ -1,0 +1,88 @@
+{
+  "status": "PHASE24_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T12:21:02.983494+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v23.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2535,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed2-v1",
+      "owner_pid": 3905047,
+      "child_pid": 3905048,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 252,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m2-public-train16-query-once-129-teacher-v1",
+      "owner_pid": 69140,
+      "child_pid": 69141,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_states": 16,
+      "masked_teacher_candidates": 27
+    }
+  ],
+  "missing17_closed": {
+    "status": "COMPLETED_WITH_FAILURES",
+    "pid": 38561,
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-missing17-v1",
+    "planned_families": 10,
+    "planned_states": 17,
+    "planned_unique_packets": 17,
+    "planned_policy_positions": 17,
+    "closed_readouts": 17,
+    "failed_readouts": 2,
+    "chat_invocations": 17,
+    "reused_readouts": 0,
+    "reuse_source": null,
+    "response_callbacks": 17,
+    "error_callbacks": 0,
+    "automatic_retry": false,
+    "no_sha_validation": true,
+    "answer_persisted_as_source": false,
+    "scope": "Actual public initial cold/fixed-receipt-K observation/menu and saved model input. Same EvidenceOperations, declared four-step continuation and policy HANDOFF. Replay work counters restored separately from actual measured cost, as existing collected_handoff; no Source data or original labels changed. Core operation packet, not a rerun of full public-message/admission history. Explicit referenced prior K plus current real acquired packet, not autonomous Host.",
+    "generation_before": {
+      "charged_tokens": 449406835,
+      "known_tokens": 448781670,
+      "unknown_usage": 16
+    },
+    "generation_requests_before": 90937,
+    "active": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-missing17-readouts-v1/case-016/packet-0/readout.json",
+    "compute": {
+      "cpu_seconds": 1.994138445,
+      "wall_seconds": 383.33208788279444,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 82753,
+      "known_tokens": 82753,
+      "unknown_usage": 0
+    }
+  },
+  "query_once129_bound": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once129-bound-v1",
+  "matched_old112": "/data/milai-experiments/20261111-scalable-evidence/m2-public-query-once-matched112-v1.json",
+  "primary_training_support": "/data/milai-experiments/20261111-scalable-evidence/m2-public-query-once-primary-support-v1.json",
+  "primary_support_checked_on_old_closed_data": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-old-protocol-primary-check-v1/manifest.json",
+  "paired319_data_preparer": "/data/milai-experiments/20261111-scalable-evidence/prepare_m2_first160_feedback_sft_data_v1.py",
+  "paired319_status": "PREPARED_NOT_EXECUTED_AWAITING_LAST63_SEMANTIC_REVIEWS",
+  "plan_alignment": "v2sections7.1/7.2/8.1/14: first300-600actualcomparisonstates, fitvalidtargets andreporteffectivecount. Do notadd300known-label prerequisite. Primaryatmost3bindings; extra129outcomes retaineddiagnostic.",
+  "remaining": [
+    "Closepublic129teacher andcompileprimaryknown/directionalviews; runalreadyclosedpaper63teacher, compile319paperpaireddata usingallavailableknownsupervision.",
+    "Continue859newpaperfirsts,8continuousfamilies anddiverseSource/Viewlearning whilefirstS2/SFTfits whenGPUavailable.",
+    "Finishseed2pair/main3390, postS2aggregation,newconfirmation96/fullcost/generalization."
+  ],
+  "scope": "Raw129/32states preserved, primarysupport structuralbefore newteacherjudgments; no candidate selected bysuccess. Input/stateIDs unchanged. NoProduct/API/permission/Canonical changes,service restart/push/subagents. No goalcompletionclaim."
+}

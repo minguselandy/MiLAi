@@ -1,0 +1,43 @@
+{
+  "status": "EXISTING_ENDPOINT_METADATA_READINESS_OBSERVED",
+  "observed_epoch": 1792249285.8393567,
+  "observations": [
+    {
+      "kind": "reader",
+      "url": "http://127.0.0.1:7860/v1/models",
+      "status": 200,
+      "expected_model": "Qwen3.6-35B-A3B-FP8",
+      "models": [
+        {
+          "id": "Qwen3.6-35B-A3B-FP8",
+          "max_model_len": 65536,
+          "owned_by": "vllm"
+        }
+      ],
+      "expected_model_listed": true
+    },
+    {
+      "kind": "embedding",
+      "url": "http://127.0.0.1:7861/v1/models",
+      "status": 200,
+      "expected_model": "bge-m3",
+      "models": [
+        {
+          "id": "bge-m3",
+          "max_model_len": 8192,
+          "owned_by": "vllm"
+        }
+      ],
+      "expected_model_listed": true
+    }
+  ],
+  "generation_requests": 0,
+  "embedding_inference_requests": 0,
+  "service_started_or_reconfigured": false,
+  "scope": "GET /v1/models only; point-in-time metadata, not inference or future availability proof. Actual QA and receipt/model identity still required.",
+  "wall_seconds": 0.07580552995204926,
+  "cpu_seconds": 0.004625099000000001,
+  "sha_checks": false,
+  "compute_ledger_phase": "source_selection_v2_endpoint_metadata",
+  "charged_once": true
+}

@@ -1,0 +1,87 @@
+"""Paired Reader task wording on frozen, previously exposed MEME deliveries.
+
+No Writer, retrieval, state repair, new source or evaluator answer enters this
+experiment. Conditions share the protocol's decoding settings and output limit.
+"""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import os
+import time
+from pathlib import Path
+
+from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.runners.impact_comparison import TimedBenchmarkRun
+
+
+def messages_for(request: dict, addition: str | None, replacement: str | None = None) -> list[dict]:
+    messages = copy.deepcopy(request["messages"])
+    if replacement is not None:
+        messages[0]["content"] = replacement
+    elif addition:
+        messages[0]["content"] += "\n" + addition
+    return messages
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("config", type=Path)
+    parser.add_argument("output", type=Path)
+    args = parser.parse_args()
+    config = read_json(args.config)
+    args.output.mkdir(parents=True, exist_ok=False)
+    write_json(args.output / "protocol.json", config)
+    settings = read_json(Path(config["settings_source"]))
+    settings.update(experiment_name=config["name"], config_version=config["name"])
+    planned = len(config["variants"]) * len(config["cases"])
+    settings["model"].update(temperature=config["temperature"], max_calls=planned,
+        max_tokens=config.get("output_limit", settings["model"]["max_tokens"]))
+    run_state = {"status": "RUNNING", "pid": os.getpid(), "planned_calls": planned,
+                 "completed_calls": 0, "new_writer_calls": 0, "new_retrieval_calls": 0,
+                 "temperature": config["temperature"], "sampling": config.get("sampling", {}),
+                 "source_version": config["source_version"]}
+    write_json(args.output / "run.json", run_state)
+    started = time.perf_counter()
+    run = TimedBenchmarkRun(settings, args.output, phase="predict")
+    answers = []
+    try:
+        for index, case in enumerate(config["cases"]):
+            request = read_json(Path(case["source_request"]))
+            variants = tuple(config["variants"])
+            if index % 2:
+                variants = tuple(reversed(variants))
+            for variant in variants:
+                addition = config["instruction"] if variant == "rule_application" else None
+                replacement = config["compact_system_prompt"] if variant == "compact" else None
+                messages = messages_for(request, addition, replacement)
+                key = f"questions/{variant}/{case['episode']}/{case['id']}"
+                answer = {"episode": case["episode"], "id": case["id"], "phase": case["phase"],
+                          "variant": variant, "source_request": case["source_request"]}
+                try:
+                    answer["hypothesis"] = run.call(key, messages, structured=False,
+                        enable_thinking=run.stage_thinking("reader"), **config.get("sampling", {}))
+                except ValueError as error:
+                    failure = run._known_reader_failure(error, key)
+                    if failure is None:
+                        raise
+                    answer.update(hypothesis=None, reader_failure=failure)
+                answers.append(answer)
+                write_json(args.output / "answers.json", answers)
+                run_state["completed_calls"] += 1
+                write_json(args.output / "run.json", run_state)
+                print(f"{run_state['completed_calls']}/{run_state['planned_calls']} "
+                      f"{case['episode']}/{case['id']} {variant}", flush=True)
+        run_state["status"] = "COMPLETED"
+    except BaseException as error:
+        run_state.update(status="FAILED", error_type=type(error).__name__, error=str(error))
+        raise
+    finally:
+        run.close()
+        run_state["wall_seconds"] = time.perf_counter() - started
+        write_json(args.output / "run.json", run_state)
+
+
+if __name__ == "__main__":
+    main()

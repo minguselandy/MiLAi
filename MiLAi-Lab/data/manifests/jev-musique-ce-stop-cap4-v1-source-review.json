@@ -1,0 +1,59 @@
+{
+  "status": "TARGETED_SOURCE_REVIEW_COMPLETE",
+  "cohort": "artifacts/jev-reader/musique-ce-stop-cap4-v1",
+  "reviewer": "assistant author, not independent human adjudication",
+  "scope": "All 138 decoded first answers were inspected. This source review reads the union of actually selected original paragraphs for the six positive cases with any Answer F1 difference. It is not a source-corrected score for all 46 cases.",
+  "reference_policy": "Original answers, labels, support flags, first responses and official metrics remain unchanged. No replacement answers, retries or posthoc score normalization.",
+  "cases": [
+    {
+      "case_id": "row-11853",
+      "source_indices_by_arm": {"bm25_k4": [11, 18, 1, 9], "laya_ce_k4": [11, 12, 2, 3], "laya_ce_adaptive": [11, 12]},
+      "finding": "CE fixed-four delivers the Norbert Pfretzschner biography and Lana municipality paragraph. Their joined evidence supports comune. Adaptive stops sufficient after two opens, before the needed municipality paragraph. BM25 also lacks that paragraph.",
+      "interpretation": "Concrete missing-complement and premature sufficient-STOP failure; fixed-four repairs delivery in this case.",
+      "ce_minus_bm25_f1": 1.0,
+      "ce_minus_adaptive_f1": 1.0
+    },
+    {
+      "case_id": "row-23089",
+      "source_indices_by_arm": {"bm25_k4": [17, 9, 16, 3], "laya_ce_k4": [17, 9, 4, 11], "laya_ce_adaptive": [17, 9]},
+      "finding": "CE answers Kenya, matching the native reference, but its delivered biography only says Nairobi. None of its four paragraphs establishes Nairobi in Kenya or the target Jericho location. BM25 chooses the unrelated Jericho, North Carolina paragraph and answers United States. Adaptive abstains.",
+      "interpretation": "Native answer improvement without delivered country evidence; not proof of successful complementary evidence selection. The question's birthplace presupposition does not supply the missing country relation.",
+      "ce_minus_bm25_f1": 1.0,
+      "ce_minus_adaptive_f1": 1.0
+    },
+    {
+      "case_id": "row-24439",
+      "source_indices_by_arm": {"bm25_k4": [11, 7, 15, 8], "laya_ce_k4": [7, 11, 15, 8], "laya_ce_adaptive": [7]},
+      "finding": "Both fixed-four methods deliver the film-director paragraph and James Dearden biography, supporting the father-child link. Adaptive stops exhausted after the film paragraph although the needed child biography remains in the candidate pool.",
+      "interpretation": "Concrete premature exhausted-STOP failure; both fixed-four methods repair delivery. Their identical Reader input shares one first response.",
+      "ce_minus_bm25_f1": 0.0,
+      "ce_minus_adaptive_f1": 1.0
+    },
+    {
+      "case_id": "row-37282",
+      "source_indices_by_arm": {"bm25_k4": [18, 13, 0, 9], "laya_ce_k4": [13, 18, 10, 0], "laya_ce_adaptive": [13, 18]},
+      "finding": "All methods deliver the Garfield Peak (Colorado) paragraph giving Sawatch Range, but none delivers Craig Hospital's state. Adaptive abstains; both fixed-four methods answer the reference after adding unrelated hospital paragraphs.",
+      "interpretation": "Native answer improvement without resolving the disambiguating hospital-state relation. No new necessary proof was supplied by the extra opens.",
+      "ce_minus_bm25_f1": 0.0,
+      "ce_minus_adaptive_f1": 1.0
+    },
+    {
+      "case_id": "row-4588",
+      "source_indices_by_arm": {"bm25_k4": [19, 8, 3, 15], "laya_ce_k4": [19, 8, 15, 18], "laya_ce_adaptive": [19]},
+      "finding": "All methods deliver Canada's 22.3 percent statistic. Fixed-four answers 22.3%; adaptive answers 22.3 percent. The official normalizer gives F1 1 versus 2/3. Fixed-four adds the Elvis Costello television paragraph but still lacks the album-to-artist binding; the television paragraph itself describes UK/Canadian origin.",
+      "interpretation": "The F1 difference is answer formatting, not a different numerical answer. Full source-based entity binding remains incomplete.",
+      "ce_minus_bm25_f1": 0.0,
+      "ce_minus_adaptive_f1": 0.3333333333333333
+    },
+    {
+      "case_id": "row-36340",
+      "source_indices_by_arm": {"bm25_k4": [14, 6, 3, 16], "laya_ce_k4": [14, 6, 1, 18], "laya_ce_adaptive": [14, 6]},
+      "finding": "All methods deliver Prince Albert Victor's biography, which identifies his parents as the Prince and Princess of Wales. CE fixed-four and adaptive answer Prince of Wales, a source-supported alternative reference alias. BM25 returns both parents' titles despite a father-only question.",
+      "interpretation": "Improved answer scope with already available evidence; no complementary proof delivery gain. Canonical support inclusion alone undercounts the valid alternative biography path.",
+      "ce_minus_bm25_f1": 0.25,
+      "ce_minus_adaptive_f1": 0.0
+    }
+  ],
+  "aggregate_interpretation": "CE fixed-four gains 2.25 total F1 points over BM25 across 24 positive cases: one newly completed proof, one country answer unsupported by delivery, and one scope correction. Its 4.3333 total F1 gain over adaptive contains two genuine missing-complement repairs, two incompletely supported answers, and a percent-format difference. These categories describe this first draw, not a causal population decomposition.",
+  "next_decision": "Do not adopt current adaptive STOP or claim a net Jev benefit. Separately test state conditioning and source-qualified complement/STOP supervision; do not enlarge Impact training to explain these Reader failures."
+}

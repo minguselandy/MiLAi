@@ -1,0 +1,29 @@
+{
+  "name": "milai-innovation-common-before-v1",
+  "plain_config": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/configs/milai-innovation-common-before-plain-v1.json",
+  "candidate_config": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/configs/milai-innovation-common-before-full-v1.json",
+  "delta_config": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/configs/milai-innovation-common-before-delta-v1.json",
+  "sources": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/data/fixtures/milai-innovation-common-before-v1.jsonl",
+  "owner": "innovation-common-before-lucheng",
+  "seed_session": 0,
+  "update_session": 1,
+  "queries": [
+    {
+      "id": "qualification",
+      "kind": "target_unknown",
+      "question": "当前能确认陆澄有领料资格，或确认没有资格吗？"
+    },
+    {
+      "id": "preserve",
+      "kind": "non_target",
+      "question": "陆澄培训完成了吗？标签纸在哪里？"
+    },
+    {
+      "id": "credential_scope",
+      "kind": "scope",
+      "question": "蓝证是否仍有效？纸条是否已经被确认作废？"
+    }
+  ],
+  "scope": "One new author mechanism diagnostic: same actual plain-model before, same actual Source arrival, three methods. Tag-only conditioned projection; no oracle graph or semantic repair. Not an independent-formation or external result.",
+  "read_factor": "fixed common source/Reader; dependency-reading selection disabled in all three conditions"
+}

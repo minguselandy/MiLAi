@@ -1,0 +1,41 @@
+{
+  "status": "DECLARED_BEFORE_BASELINE_SCORES",
+  "data": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/nested-operation-data-v1/sources-256",
+  "result_roots": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab",
+    "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab"
+  ],
+  "baselines": {
+    "first_offered": "First actual option,including parameters",
+    "handoff": "Plain HANDOFF when offered;forced sole action preserved",
+    "fixed": "Existing FixedMemoryPolicy reads4",
+    "fixed_context": "Existing FixedContextMemoryPolicy reads4",
+    "rules": "Existing RulesMemoryPolicy reads4,reuseViewsTrue,expandFalse",
+    "view_cache": "Existing CacheMemoryPolicy reads4,minScopeOverlap0.35"
+  },
+  "prediction_scope": "One-step choices on recorded reached states with exact original actions. No world execution,model calls,oracle choice or retrospective winner selection. This cannot substitute for Host rollouts.",
+  "score_scope": "Existing positive-preference labels;an unaccepted choice is not proof of an illegal or useless operation. Masked states remain unknown.",
+  "position_scope": "Actual canonical-order native evaluation wire;reviewed original-source whole-body/range coverage,not minimal fact spans,source truth or Host delivery. Partial witnesses remain partial.",
+  "length_buckets": [
+    "<=8192",
+    ">8192"
+  ],
+  "candidate_buckets": [
+    "0",
+    "1-8",
+    "9-16",
+    "17+"
+  ],
+  "witness_position_buckets": [
+    "first_quarter",
+    "second_quarter",
+    "third_quarter",
+    "fourth_quarter",
+    "unavailable_or_incomplete",
+    "no_original_witness_contract"
+  ],
+  "missing_and_ambiguous_identity": "Report explicitly;do not invent source matches or minimal support spans.",
+  "no_sha_validation": true,
+  "model_calls": 0,
+  "ledger_recorded": false
+}

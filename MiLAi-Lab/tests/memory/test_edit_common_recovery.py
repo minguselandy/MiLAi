@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sqlite3
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -16,8 +17,27 @@ from langgraph.store.sqlite import SqliteStore
 from milai_lab.application.journal import BusinessActionJournal
 from milai_lab.application.native_journal import NativePublicActionJournal
 from milai_lab.application.world import ApplicationWorld
+from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.runners.functional import _bank_reference, _message_reference, _thread_reference
+
+
+def test_full_transaction_keeps_original_error_and_reopens(tmp_path: Path) -> None:
+    path = str(tmp_path / "memory.sqlite")
+    with TransactionalSqliteStore.from_conn_string(path) as store:
+        store.setup()
+        store.put(("memory",), "before", {"content": "original"})
+        pages = store.conn.execute("PRAGMA page_count").fetchone()[0]
+        store.conn.execute(f"PRAGMA max_page_count={pages + 2}")
+        with pytest.raises(sqlite3.DatabaseError, match="database or disk is full") as raised:
+            store.put(("memory",), "failed", {"content": "x" * 100_000})
+        assert raised.value.sqlite_errorcode == sqlite3.SQLITE_FULL
+        assert store.get(("memory",), "failed") is None
+        store.put(("memory",), "after", {"content": "continued"})
+    with TransactionalSqliteStore.from_conn_string(path) as store:
+        assert store.get(("memory",), "before").value == {"content": "original"}
+        assert store.get(("memory",), "after").value == {"content": "continued"}
+        assert store.get(("memory",), "failed") is None
 
 
 def request(name: str, arguments: dict[str, Any], generation: str) -> Any:

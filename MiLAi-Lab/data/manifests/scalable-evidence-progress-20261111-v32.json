@@ -1,0 +1,266 @@
+{
+  "status": "PHASE32_PROGRESS_ALL_CONFIRMATION_POLICIES_CLOSED_SOURCEVIEW_FIRST8_REVIEWED_APPLICATIONS_CONTINUE",
+  "observed_at_utc": "2026-11-11T19:13:26.876401+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v31.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "m6-adapted-source-reference-families8to12-v1",
+      "owner_pid": 1586713,
+      "child_pid": 1586714,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "actual_argv_checked": true,
+      "process_alive": true,
+      "closed_positions": 14,
+      "active": {
+        "history": "memops_B21-d-update32-v1-content",
+        "policy": "laya",
+        "interface": "rich",
+        "profile": "laya",
+        "request": "final-arrivals"
+      }
+    }
+  ],
+  "confirmation_policies_closed": {
+    "status": "ALL4_FROZEN_POLICIES_CLOSED_READER_NOT_STARTED",
+    "methods": {
+      "fixed_context": {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-fixed-context-policy-v1",
+        "families": 96,
+        "model_calls": 0,
+        "truncated_model_inputs": 0,
+        "Host_calls": 0,
+        "whole_child_cpu_seconds": 38.554228,
+        "owner_wall_seconds": 37.21609247010201,
+        "tool_compute_subset": {
+          "cpu_seconds": 33.136977859,
+          "wall_seconds": 33.284121399745345
+        }
+      },
+      "scale_36k_final": {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-scale36k-policy-v1",
+        "families": 96,
+        "model_calls": 414,
+        "truncated_model_inputs": 0,
+        "Host_calls": 0,
+        "whole_child_cpu_seconds": 450.126327,
+        "owner_wall_seconds": 257.9940351517871,
+        "tool_compute_subset": {
+          "cpu_seconds": 431.23532651200003,
+          "wall_seconds": 252.06780518498272
+        }
+      },
+      "S3_own_final": {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-s3-own-policy-v1",
+        "families": 96,
+        "model_calls": 406,
+        "truncated_model_inputs": 0,
+        "Host_calls": 0,
+        "whole_child_cpu_seconds": 407.37928999999997,
+        "owner_wall_seconds": 244.35956640262157,
+        "tool_compute_subset": {
+          "cpu_seconds": 389.63098038100003,
+          "wall_seconds": 238.20362232532352
+        }
+      },
+      "S3_old_S1_final": {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-s3-old-policy-v1",
+        "families": 96,
+        "model_calls": 367,
+        "truncated_model_inputs": 0,
+        "Host_calls": 0,
+        "whole_child_cpu_seconds": 331.054888,
+        "owner_wall_seconds": 202.76708519924432,
+        "tool_compute_subset": {
+          "cpu_seconds": 315.888992389,
+          "wall_seconds": 197.2043294236064
+        }
+      }
+    },
+    "scope": "No confirmationanswers/scoresyet; all96permethod, actualnative8stepcontrol, initialSourcebanksreused. Wholechildren notselfbilled, pendingonce, nestednotadditive. No filtering/reselection/retry.",
+    "no_sha_validation": true
+  },
+  "confirmation_first_readouts": "Notstarted; allmodels/data/Host/protocol frozen beforecontent, no retuning/reselection",
+  "confirmation_repetition_preparation": {
+    "plans": {
+      "fixed_context": "qasper-confirm96-fixed-context-repeat2-readouts-v1",
+      "scale_36k_final": "qasper-confirm96-scale36k-repeat2-readouts-v1",
+      "S3_own_final": "qasper-confirm96-s3-own-repeat2-readouts-v1",
+      "S3_old_S1_final": "qasper-confirm96-s3-old-repeat2-readouts-v1"
+    },
+    "owner_entry": "/data/milai-experiments/20261111-scalable-evidence/run_confirmation96_repeat2_readouts_v1.py",
+    "original_positions": [
+      0,
+      12,
+      24,
+      36,
+      48,
+      60,
+      72,
+      84
+    ],
+    "total_calls": 32,
+    "automatic_queue": false,
+    "no_sha_validation": true,
+    "scope": "Prespecifiedbeforecontentexport; doafterfirstmatrixregardlessfirstsuccess/failure, no firstreplacement."
+  },
+  "confirmation_scoring_preparation": {
+    "script": "/data/milai-experiments/20261111-scalable-evidence/score_confirmation96_firsts_v1.py",
+    "status": "READY_NOT_EXECUTED_ON_CONFIRMATION",
+    "validation": "Nativeper-sourceF1aggregationagreeswithofficialfunctions onoldI2DEV. Requiresall4firstReaderownersandmatrixclosed. No confirmationanswersopened.",
+    "scope": "NativefullF1missing=0convention +completed-only +unscoredoutcomebounds; primary/secondarySourcebootstrap, no favorableanswerextraction. EvidenceF1notusedforanswer-onlyschema, nativeF1notsemanticSource-supportedaccuracy."
+  },
+  "SourceView_first8": {
+    "status": "FIRST8_SOURCEVIEW_ADAPTATION_APPLICATIONS_CLOSED_REMAINDER_RUNNING",
+    "conditions": {
+      "source-reference": {
+        "positions": 40,
+        "families": 8,
+        "answer_grades": {
+          "C": 12,
+          "W": 15,
+          "Q": 8,
+          "F": 5
+        },
+        "relevant_update_positions": 15,
+        "relevant_update_grades": {
+          "W": 11,
+          "Q": 2,
+          "F": 2
+        },
+        "selected_operations": {
+          "SEARCH": 11,
+          "READ": 81,
+          "HANDOFF": 18
+        },
+        "generation_delta": {
+          "charged_tokens": 381235,
+          "known_tokens": 381235,
+          "unknown_usage": 0
+        },
+        "HTTP": 66,
+        "NN": 110,
+        "retrievals": 29
+      },
+      "continued-replay": {
+        "positions": 40,
+        "families": 8,
+        "answer_grades": {
+          "C": 17,
+          "W": 10,
+          "F": 9,
+          "Q": 4
+        },
+        "relevant_update_positions": 15,
+        "relevant_update_grades": {
+          "W": 8,
+          "F": 6,
+          "Q": 1
+        },
+        "selected_operations": {
+          "SEARCH": 10,
+          "READ": 50,
+          "HANDOFF": 9
+        },
+        "generation_delta": {
+          "charged_tokens": 305783,
+          "known_tokens": 305783,
+          "unknown_usage": 0
+        },
+        "HTTP": 50,
+        "NN": 69,
+        "retrievals": 10
+      }
+    },
+    "scope": "Descriptiveprefixofpredeclared16Sourcepanel, no earlystop orselection. SameGPU3/newHostconditions, stochasticdrawsunmatched; Rootnonblind/nonindependent. No applicationbenefit established; referenceproficiency gains do notsubstitute forclosedtaskresults.",
+    "no_sha_validation": true
+  },
+  "SourceView_second4": {
+    "status": "SECOND4_ADAPTED_APPLICATION_PAIRS_SOURCE_REVIEWED",
+    "families": 4,
+    "positions_each": 20,
+    "conditions": {
+      "source-reference": {
+        "answer_grades": {
+          "W": 9,
+          "F": 5,
+          "C": 3,
+          "Q": 3
+        },
+        "delivery_status": {
+          "partial": 17,
+          "complete": 3
+        },
+        "HTTP": 39,
+        "NN": 63,
+        "retrievals": 23,
+        "selected_operations": {
+          "READ": 41,
+          "HANDOFF": 17,
+          "SEARCH": 5
+        },
+        "generation_delta": {
+          "charged_tokens": 243823,
+          "known_tokens": 243823,
+          "unknown_usage": 0
+        },
+        "relevant_update_grades": {
+          "F": 2,
+          "W": 5,
+          "Q": 1
+        },
+        "review": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-source-reference-families4to8-v1-review/author-decisions-v1.json"
+      },
+      "continued-replay": {
+        "answer_grades": {
+          "W": 6,
+          "F": 5,
+          "C": 5,
+          "Q": 4
+        },
+        "delivery_status": {
+          "partial": 17,
+          "complete": 3
+        },
+        "HTTP": 26,
+        "NN": 41,
+        "retrievals": 6,
+        "selected_operations": {
+          "SEARCH": 6,
+          "READ": 30,
+          "HANDOFF": 5
+        },
+        "generation_delta": {
+          "charged_tokens": 167952,
+          "known_tokens": 167952,
+          "unknown_usage": 0
+        },
+        "relevant_update_grades": {
+          "F": 3,
+          "W": 4,
+          "Q": 1
+        },
+        "review": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-continued-replay-families4to8-v1-review/author-decisions-v1.json"
+      }
+    },
+    "scope": "Prescheduledsecond4of16. Rootexecutionagent nonblind/nonindependent, sameGPU3/Host,RNGunmatched. Allfirstfailureskept, no traininglabels or outcome-selectedtermination."
+  },
+  "source_review_scope": "Rootexecutionagent, nonblind/nonindependent. A16botharms misscurrenttitlecorrections; A29reference missesinitial72; A33referencefirst3correct/replayomitsKevin; B03partialorwrongplacement/interimduty. Firstfailureskept, nottraininglabels.",
+  "final_S1_figure": {
+    "directory": "/data/milai-experiments/20261111-scalable-evidence/s1-all-closed-learning-curves-v1",
+    "png": "curves.png",
+    "pdf": "curves.pdf",
+    "source_data": "source-data.json",
+    "visually_checked": true,
+    "scope": "Allprescheduledclosedpoints/3seeds/3k10k36k/MuSiQue; source-meanfinalintervalconditionedon3seeds. ExposedreferenceDEV, no Hostgainclaim."
+  },
+  "next": [
+    "Aftercurrentreference8to12closes, runmatchedreplay8to12, thenreplay12to16/reference12to16; closeallsourcejudgments",
+    "Executeconfirmation384firstreadouts then32predeclaredrepeats whenHTTPfree; scorefixedmatrix andRoot8predeclaredSourcepositions",
+    "ExecuteLME32fixednominees andnativeJudgechain; finishcost/generalization/report withoutaddingpost-confirmationtuning"
+  ],
+  "cost_scope": "NewconfirmationSourceinitializer/policywholechildren andlatestplots/analysis pendingstagebilling; nativeapplications/readers/evaluatorsselfbill. Applicationwhole-minus-native residualrequiresactualcloseout. No duplicatesofphase29/30payments; unmeasured author/tests/importcostsunknown.",
+  "validation": "No trackedruntimechangephase32. Scorer/repetitionownersyntaxchecked, repeatedpacket/wireliteralidentity checked, oldDEVnativeF1aggregationmatched. Finalfigure rendered/viewed. Existing30tests/Ruff/packagePASS/tools6legacyfindings unchanged.",
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchange/service restart/push. FullgoalACTIVE/incomplete."
+}

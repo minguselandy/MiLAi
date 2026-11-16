@@ -1,0 +1,318 @@
+{
+  "status": "COMPLETED_CLASSIFICATION_FAILURE",
+  "source_version": "352ace3b",
+  "arms": {
+    "standard": {
+      "first_correct": 3,
+      "labels": {
+        "Omission": 3,
+        "Correct": 3
+      },
+      "states": [
+        {
+          "key": "halumem/innovation-range-deliveries/11/qa/0",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 8,
+            "required_source_ranges": 12,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-deliveries/11/qa/1",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 8,
+            "required_source_ranges": 12,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-deliveries/11/qa/2",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1,
+            3
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 9,
+            "required_source_ranges": 12,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-reservations/13/qa/0",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 10,
+            "required_source_ranges": 14,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-reservations/13/qa/1",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            1,
+            2
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 12,
+            "required_source_ranges": 14,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-reservations/13/qa/2",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 12,
+            "required_source_ranges": 14,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        }
+      ],
+      "costs": {
+        "reader_packet": {
+          "responses": 12,
+          "input_tokens": 25509,
+          "output_tokens": 1878,
+          "total_tokens": 27387
+        },
+        "judge": {
+          "responses": 6,
+          "input_tokens": 9683,
+          "output_tokens": 997,
+          "total_tokens": 10680
+        }
+      }
+    },
+    "aggregate": {
+      "first_correct": 3,
+      "labels": {
+        "Omission": 3,
+        "Correct": 3
+      },
+      "states": [
+        {
+          "key": "halumem/innovation-range-deliveries/11/qa/0",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 8,
+            "required_source_ranges": 12,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-deliveries/11/qa/1",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 8,
+            "required_source_ranges": 12,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-deliveries/11/qa/2",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1,
+            3
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 9,
+            "required_source_ranges": 12,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-reservations/13/qa/0",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 10,
+            "required_source_ranges": 14,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-reservations/13/qa/1",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            1,
+            2
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 12,
+            "required_source_ranges": 14,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "key": "halumem/innovation-range-reservations/13/qa/2",
+          "task": "lookup",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            1
+          ],
+          "aggregation_invoked": false,
+          "raw_source_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 12,
+            "required_source_ranges": 14,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        }
+      ],
+      "costs": {
+        "reader_packet": {
+          "responses": 12,
+          "input_tokens": 25509,
+          "output_tokens": 2087,
+          "total_tokens": 27596
+        },
+        "judge": {
+          "responses": 6,
+          "input_tokens": 9905,
+          "output_tokens": 1071,
+          "total_tokens": 10976
+        }
+      }
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 36,
+    "generation": {
+      "known_tokens": 76639,
+      "charged_tokens": 76639,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "receipt_minus_ledger_tokens": 0,
+  "response_minus_generation_requests": 0,
+  "author_review": {
+    "coverage": "All12 complete answers and actual input/response/task state inspected. No map/chunk requests exist in either arm. Source fixture facts and original first Judge labels preserved.",
+    "findings": [
+      "Both arms classify allsix range questions as lookup; aggregation is never invoked. This tests failed end-to-end routing, not successful execution or quality of chunk aggregation.",
+      "Both miss A13 confirmation/A17 and report only A11; both correctly report Birch B21/A14 and cancellations A12/A16.",
+      "Both miss D01/D07 in completed-delivery totals/enumeration. Standard gives8 rather than25 books and2 rather than4 deliveries. D08 undelivered9books is correctly retained.",
+      "Nominal aggregate delivery-total answer starts17 then changes to8 and ends in prompt/schema discussion. Original finish_reason is stop with642completion tokens, not length; JSON parsing alone did not make it a coherent answer."
+    ],
+    "independent_blind_review": false
+  },
+  "next": {
+    "source_version": "61631a5b",
+    "change": "Common Reader starts task=null until the model actually classifies. Prior unobserved lookup label removed; response still freely chooses lookup or range. No forced range tag or source/reference answer provided.",
+    "tests": "36 evidence/reader/value cases, source mypy and Ruff passed.",
+    "queue": "range-v3 waits for the already running ten-question value-outcomes-corpus-v2; no overlapping model dispatch."
+  },
+  "source_capture_verification": {
+    "standard": 26,
+    "aggregate": 26,
+    "comparison": "All actual captured role/date/content tuples equal the original fixture, including irrelevant padding. Read-only SQLite comparison, no content fingerprints."
+  }
+}

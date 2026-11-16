@@ -1,0 +1,721 @@
+{
+  "status": "ALL_SIX_FIXED_UPDATE_LEARNING_DIAGNOSTICS_CLOSED",
+  "jobs": [
+    {
+      "condition": "reference",
+      "seed": 0,
+      "optimizer_updates": 188,
+      "train_states": 1495,
+      "train_final": {
+        "states": 1495,
+        "labelled": 1495,
+        "accepted": 1494,
+        "bm25_next_accepted": 868
+      },
+      "source_dev": {
+        "counts": {
+          "states": 428,
+          "labelled": 255,
+          "accepted": 171,
+          "bm25_next_accepted": 150,
+          "masked": 173
+        },
+        "family_question_macro": 0.6819692653025986,
+        "strata": {
+          "dataset/musique_train_mirror": {
+            "labelled": 117,
+            "accepted": 61
+          },
+          "source/supported": {
+            "labelled": 185,
+            "accepted": 141
+          },
+          "qualified/True": {
+            "labelled": 32,
+            "accepted": 22
+          },
+          "minimum_proof/1": {
+            "labelled": 21,
+            "accepted": 11
+          },
+          "qualified/False": {
+            "labelled": 223,
+            "accepted": 149
+          },
+          "minimum_proof/2": {
+            "labelled": 89,
+            "accepted": 67
+          },
+          "source/pool_insufficient": {
+            "labelled": 70,
+            "accepted": 30
+          },
+          "dataset/two_wiki_author_train": {
+            "labelled": 138,
+            "accepted": 110
+          },
+          "minimum_proof/3": {
+            "labelled": 50,
+            "accepted": 38
+          },
+          "minimum_proof/4": {
+            "labelled": 25,
+            "accepted": 25
+          }
+        }
+      },
+      "reference_dev_counts": {
+        "states": 428,
+        "labelled": 354,
+        "accepted": 251,
+        "bm25_next_accepted": 207,
+        "masked": 74
+      },
+      "actual_compute_already_charged": {
+        "wall_seconds": 1048.4879624368623,
+        "cpu_seconds": 1520.7094710869999,
+        "runs": 1,
+        "train_sequence_rows": 3008,
+        "train_input_tokens": 5937015,
+        "train_batch_forwards": 752,
+        "train_device_forwards": 1504,
+        "train_batch_attempts": 752,
+        "train_offered_rows": 3008,
+        "train_offered_tokens": 5937015,
+        "dev_forwards": 1284,
+        "dev_sequence_rows": 1284,
+        "dev_input_tokens": 2835618,
+        "dev_state_tokenizations": 1284,
+        "dev_state_tokens": 2531772,
+        "train_eval_forwards": 1495,
+        "train_eval_sequence_rows": 1495,
+        "train_eval_input_tokens": 2952432,
+        "train_eval_state_tokenizations": 1495,
+        "train_eval_state_tokens": 2617286,
+        "peak_rss_kib": 5489876,
+        "peak_cuda_allocated_bytes": [
+          21009314816,
+          16994122240
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_matches": true,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607817
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769468
+        }
+      }
+    },
+    {
+      "condition": "reference",
+      "seed": 1,
+      "optimizer_updates": 188,
+      "train_states": 1495,
+      "train_final": {
+        "states": 1495,
+        "labelled": 1495,
+        "accepted": 1495,
+        "bm25_next_accepted": 868
+      },
+      "source_dev": {
+        "counts": {
+          "states": 428,
+          "labelled": 255,
+          "accepted": 192,
+          "bm25_next_accepted": 150,
+          "masked": 173
+        },
+        "family_question_macro": 0.773551345773568,
+        "strata": {
+          "dataset/musique_train_mirror": {
+            "labelled": 117,
+            "accepted": 79
+          },
+          "source/supported": {
+            "labelled": 185,
+            "accepted": 154
+          },
+          "qualified/True": {
+            "labelled": 32,
+            "accepted": 25
+          },
+          "minimum_proof/1": {
+            "labelled": 21,
+            "accepted": 15
+          },
+          "qualified/False": {
+            "labelled": 223,
+            "accepted": 167
+          },
+          "minimum_proof/2": {
+            "labelled": 89,
+            "accepted": 74
+          },
+          "source/pool_insufficient": {
+            "labelled": 70,
+            "accepted": 38
+          },
+          "dataset/two_wiki_author_train": {
+            "labelled": 138,
+            "accepted": 113
+          },
+          "minimum_proof/3": {
+            "labelled": 50,
+            "accepted": 40
+          },
+          "minimum_proof/4": {
+            "labelled": 25,
+            "accepted": 25
+          }
+        }
+      },
+      "reference_dev_counts": {
+        "states": 428,
+        "labelled": 354,
+        "accepted": 276,
+        "bm25_next_accepted": 207,
+        "masked": 74
+      },
+      "actual_compute_already_charged": {
+        "wall_seconds": 1050.6293156584725,
+        "cpu_seconds": 1503.972391916,
+        "runs": 1,
+        "train_sequence_rows": 3008,
+        "train_input_tokens": 5943124,
+        "train_batch_forwards": 752,
+        "train_device_forwards": 1504,
+        "train_batch_attempts": 752,
+        "train_offered_rows": 3008,
+        "train_offered_tokens": 5943124,
+        "dev_forwards": 1284,
+        "dev_sequence_rows": 1284,
+        "dev_input_tokens": 2835618,
+        "dev_state_tokenizations": 1284,
+        "dev_state_tokens": 2531772,
+        "train_eval_forwards": 1495,
+        "train_eval_sequence_rows": 1495,
+        "train_eval_input_tokens": 2952432,
+        "train_eval_state_tokenizations": 1495,
+        "train_eval_state_tokens": 2617286,
+        "peak_rss_kib": 5700004,
+        "peak_cuda_allocated_bytes": [
+          21063925760,
+          16998566400
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_matches": true,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607826
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769467
+        }
+      }
+    },
+    {
+      "condition": "reference",
+      "seed": 2,
+      "optimizer_updates": 188,
+      "train_states": 1495,
+      "train_final": {
+        "states": 1495,
+        "labelled": 1495,
+        "accepted": 1492,
+        "bm25_next_accepted": 868
+      },
+      "source_dev": {
+        "counts": {
+          "states": 428,
+          "labelled": 255,
+          "accepted": 185,
+          "bm25_next_accepted": 150,
+          "masked": 173
+        },
+        "family_question_macro": 0.7649570594015038,
+        "strata": {
+          "dataset/musique_train_mirror": {
+            "labelled": 117,
+            "accepted": 66
+          },
+          "source/supported": {
+            "labelled": 185,
+            "accepted": 142
+          },
+          "qualified/True": {
+            "labelled": 32,
+            "accepted": 24
+          },
+          "minimum_proof/1": {
+            "labelled": 21,
+            "accepted": 13
+          },
+          "qualified/False": {
+            "labelled": 223,
+            "accepted": 161
+          },
+          "minimum_proof/2": {
+            "labelled": 89,
+            "accepted": 66
+          },
+          "source/pool_insufficient": {
+            "labelled": 70,
+            "accepted": 43
+          },
+          "dataset/two_wiki_author_train": {
+            "labelled": 138,
+            "accepted": 119
+          },
+          "minimum_proof/3": {
+            "labelled": 50,
+            "accepted": 38
+          },
+          "minimum_proof/4": {
+            "labelled": 25,
+            "accepted": 25
+          }
+        }
+      },
+      "reference_dev_counts": {
+        "states": 428,
+        "labelled": 354,
+        "accepted": 244,
+        "bm25_next_accepted": 207,
+        "masked": 74
+      },
+      "actual_compute_already_charged": {
+        "wall_seconds": 1035.6399225508794,
+        "cpu_seconds": 1447.541701141,
+        "runs": 1,
+        "train_sequence_rows": 3008,
+        "train_input_tokens": 5931463,
+        "train_batch_forwards": 752,
+        "train_device_forwards": 1504,
+        "train_batch_attempts": 752,
+        "train_offered_rows": 3008,
+        "train_offered_tokens": 5931463,
+        "dev_forwards": 1284,
+        "dev_sequence_rows": 1284,
+        "dev_input_tokens": 2835618,
+        "dev_state_tokenizations": 1284,
+        "dev_state_tokens": 2531772,
+        "train_eval_forwards": 1495,
+        "train_eval_sequence_rows": 1495,
+        "train_eval_input_tokens": 2952432,
+        "train_eval_state_tokenizations": 1495,
+        "train_eval_state_tokens": 2617286,
+        "peak_rss_kib": 5566324,
+        "peak_cuda_allocated_bytes": [
+          21088686592,
+          16995170304
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_matches": true,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607842
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769472
+        }
+      }
+    },
+    {
+      "condition": "source",
+      "seed": 0,
+      "optimizer_updates": 188,
+      "train_states": 1228,
+      "train_final": {
+        "states": 1228,
+        "labelled": 1228,
+        "accepted": 1228,
+        "bm25_next_accepted": 729
+      },
+      "source_dev": {
+        "counts": {
+          "states": 428,
+          "labelled": 255,
+          "accepted": 195,
+          "bm25_next_accepted": 150,
+          "masked": 173
+        },
+        "family_question_macro": 0.7750293944738389,
+        "strata": {
+          "dataset/musique_train_mirror": {
+            "labelled": 117,
+            "accepted": 71
+          },
+          "source/supported": {
+            "labelled": 185,
+            "accepted": 147
+          },
+          "qualified/True": {
+            "labelled": 32,
+            "accepted": 22
+          },
+          "minimum_proof/1": {
+            "labelled": 21,
+            "accepted": 11
+          },
+          "qualified/False": {
+            "labelled": 223,
+            "accepted": 173
+          },
+          "minimum_proof/2": {
+            "labelled": 89,
+            "accepted": 66
+          },
+          "source/pool_insufficient": {
+            "labelled": 70,
+            "accepted": 48
+          },
+          "dataset/two_wiki_author_train": {
+            "labelled": 138,
+            "accepted": 124
+          },
+          "minimum_proof/3": {
+            "labelled": 50,
+            "accepted": 45
+          },
+          "minimum_proof/4": {
+            "labelled": 25,
+            "accepted": 25
+          }
+        }
+      },
+      "reference_dev_counts": {
+        "states": 428,
+        "labelled": 354,
+        "accepted": 256,
+        "bm25_next_accepted": 207,
+        "masked": 74
+      },
+      "actual_compute_already_charged": {
+        "wall_seconds": 1023.8855660445988,
+        "cpu_seconds": 1490.9016358509998,
+        "runs": 1,
+        "train_sequence_rows": 3008,
+        "train_input_tokens": 5751633,
+        "train_batch_forwards": 752,
+        "train_device_forwards": 1504,
+        "train_batch_attempts": 752,
+        "train_offered_rows": 3008,
+        "train_offered_tokens": 5751633,
+        "dev_forwards": 1284,
+        "dev_sequence_rows": 1284,
+        "dev_input_tokens": 2835618,
+        "dev_state_tokenizations": 1284,
+        "dev_state_tokens": 2531772,
+        "train_eval_forwards": 1228,
+        "train_eval_sequence_rows": 1228,
+        "train_eval_input_tokens": 2338110,
+        "train_eval_state_tokenizations": 1228,
+        "train_eval_state_tokens": 2069924,
+        "peak_rss_kib": 5522912,
+        "peak_cuda_allocated_bytes": [
+          21090278400,
+          16994064896
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_matches": true,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607838
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769471
+        }
+      }
+    },
+    {
+      "condition": "source",
+      "seed": 1,
+      "optimizer_updates": 188,
+      "train_states": 1228,
+      "train_final": {
+        "states": 1228,
+        "labelled": 1228,
+        "accepted": 1228,
+        "bm25_next_accepted": 729
+      },
+      "source_dev": {
+        "counts": {
+          "states": 428,
+          "labelled": 255,
+          "accepted": 192,
+          "bm25_next_accepted": 150,
+          "masked": 173
+        },
+        "family_question_macro": 0.7755520713854047,
+        "strata": {
+          "dataset/musique_train_mirror": {
+            "labelled": 117,
+            "accepted": 69
+          },
+          "source/supported": {
+            "labelled": 185,
+            "accepted": 143
+          },
+          "qualified/True": {
+            "labelled": 32,
+            "accepted": 22
+          },
+          "minimum_proof/1": {
+            "labelled": 21,
+            "accepted": 11
+          },
+          "qualified/False": {
+            "labelled": 223,
+            "accepted": 170
+          },
+          "minimum_proof/2": {
+            "labelled": 89,
+            "accepted": 65
+          },
+          "source/pool_insufficient": {
+            "labelled": 70,
+            "accepted": 49
+          },
+          "dataset/two_wiki_author_train": {
+            "labelled": 138,
+            "accepted": 123
+          },
+          "minimum_proof/3": {
+            "labelled": 50,
+            "accepted": 42
+          },
+          "minimum_proof/4": {
+            "labelled": 25,
+            "accepted": 25
+          }
+        }
+      },
+      "reference_dev_counts": {
+        "states": 428,
+        "labelled": 354,
+        "accepted": 257,
+        "bm25_next_accepted": 207,
+        "masked": 74
+      },
+      "actual_compute_already_charged": {
+        "wall_seconds": 1026.36183238402,
+        "cpu_seconds": 1507.3382376280001,
+        "runs": 1,
+        "train_sequence_rows": 3008,
+        "train_input_tokens": 5720335,
+        "train_batch_forwards": 752,
+        "train_device_forwards": 1504,
+        "train_batch_attempts": 752,
+        "train_offered_rows": 3008,
+        "train_offered_tokens": 5720335,
+        "dev_forwards": 1284,
+        "dev_sequence_rows": 1284,
+        "dev_input_tokens": 2835618,
+        "dev_state_tokenizations": 1284,
+        "dev_state_tokens": 2531772,
+        "train_eval_forwards": 1228,
+        "train_eval_sequence_rows": 1228,
+        "train_eval_input_tokens": 2338110,
+        "train_eval_state_tokenizations": 1228,
+        "train_eval_state_tokens": 2069924,
+        "peak_rss_kib": 5467468,
+        "peak_cuda_allocated_bytes": [
+          21079540224,
+          16998002688
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_matches": true,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607831
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769470
+        }
+      }
+    },
+    {
+      "condition": "source",
+      "seed": 2,
+      "optimizer_updates": 188,
+      "train_states": 1228,
+      "train_final": {
+        "states": 1228,
+        "labelled": 1228,
+        "accepted": 1227,
+        "bm25_next_accepted": 729
+      },
+      "source_dev": {
+        "counts": {
+          "states": 428,
+          "labelled": 255,
+          "accepted": 201,
+          "bm25_next_accepted": 150,
+          "masked": 173
+        },
+        "family_question_macro": 0.7993943299498855,
+        "strata": {
+          "dataset/musique_train_mirror": {
+            "labelled": 117,
+            "accepted": 77
+          },
+          "source/supported": {
+            "labelled": 185,
+            "accepted": 153
+          },
+          "qualified/True": {
+            "labelled": 32,
+            "accepted": 18
+          },
+          "minimum_proof/1": {
+            "labelled": 21,
+            "accepted": 9
+          },
+          "qualified/False": {
+            "labelled": 223,
+            "accepted": 183
+          },
+          "minimum_proof/2": {
+            "labelled": 89,
+            "accepted": 72
+          },
+          "source/pool_insufficient": {
+            "labelled": 70,
+            "accepted": 48
+          },
+          "dataset/two_wiki_author_train": {
+            "labelled": 138,
+            "accepted": 124
+          },
+          "minimum_proof/3": {
+            "labelled": 50,
+            "accepted": 47
+          },
+          "minimum_proof/4": {
+            "labelled": 25,
+            "accepted": 25
+          }
+        }
+      },
+      "reference_dev_counts": {
+        "states": 428,
+        "labelled": 354,
+        "accepted": 260,
+        "bm25_next_accepted": 207,
+        "masked": 74
+      },
+      "actual_compute_already_charged": {
+        "wall_seconds": 998.9426946388558,
+        "cpu_seconds": 1399.172642339,
+        "runs": 1,
+        "train_sequence_rows": 3008,
+        "train_input_tokens": 5737661,
+        "train_batch_forwards": 752,
+        "train_device_forwards": 1504,
+        "train_batch_attempts": 752,
+        "train_offered_rows": 3008,
+        "train_offered_tokens": 5737661,
+        "dev_forwards": 1284,
+        "dev_sequence_rows": 1284,
+        "dev_input_tokens": 2835618,
+        "dev_state_tokenizations": 1284,
+        "dev_state_tokens": 2531772,
+        "train_eval_forwards": 1228,
+        "train_eval_sequence_rows": 1228,
+        "train_eval_input_tokens": 2338110,
+        "train_eval_state_tokenizations": 1228,
+        "train_eval_state_tokens": 2069924,
+        "peak_rss_kib": 5503568,
+        "peak_cuda_allocated_bytes": [
+          21018473472,
+          16998298112
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_matches": true,
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607847
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769470
+        }
+      }
+    }
+  ],
+  "source_minus_reference": [
+    {
+      "seed": 0,
+      "all_labelled_difference": 24,
+      "supported_pool_difference": 6,
+      "insufficient_pool_partial_difference": 18
+    },
+    {
+      "seed": 1,
+      "all_labelled_difference": 0,
+      "supported_pool_difference": -11,
+      "insufficient_pool_partial_difference": 11
+    },
+    {
+      "seed": 2,
+      "all_labelled_difference": 16,
+      "supported_pool_difference": 11,
+      "insufficient_pool_partial_difference": 5
+    }
+  ],
+  "optimizer_updates_total": 1128,
+  "compute_totals_already_charged": {
+    "wall_seconds": 6183.947293713689,
+    "cpu_seconds": 8869.636079962002,
+    "runs": 6,
+    "train_sequence_rows": 18048,
+    "train_input_tokens": 35021231,
+    "train_batch_forwards": 4512,
+    "train_device_forwards": 9024,
+    "train_batch_attempts": 4512,
+    "train_offered_rows": 18048,
+    "train_offered_tokens": 35021231,
+    "dev_forwards": 7704,
+    "dev_sequence_rows": 7704,
+    "dev_input_tokens": 17013708,
+    "dev_state_tokenizations": 7704,
+    "dev_state_tokens": 15190632,
+    "train_eval_forwards": 8169,
+    "train_eval_sequence_rows": 8169,
+    "train_eval_input_tokens": 15871626,
+    "train_eval_state_tokenizations": 8169,
+    "train_eval_state_tokens": 14061630
+  },
+  "driver_process_wall_seconds": 6221.197076303884,
+  "analysis_compute": {
+    "wall_seconds": 2.98912335280329,
+    "cpu_seconds": 2.9879653699999995,
+    "analyses": 1
+  },
+  "model_calls_added_by_analysis": 0,
+  "all_ledger_audits_match": true,
+  "inference_scope": "Pre-save FP32 diagnostics, not reloaded checkpoint predictions. Equal188updates and3008examples, differing masks/eligible families/tokens; no equal-FLOPs claim. Intermediate94 diagnostics retained; checkpoint_latest is overwritten by188.",
+  "interpretation": "Two seeds improve total source-labelled prefix acceptance, one ties; net40state-position increase across three seeds includes34on insufficient pools and6on supported pools. These repeated state positions are not independent cases. Supported-pool differences+6/-11/+11 remain mixed. No actual-policyQA, generalization acceptance or default adoption claim.",
+  "raw_report": "artifacts/jev-reader/selection-v2/learning-analysis-v1/report.json",
+  "sha_checks": false,
+  "content_fingerprints": false
+}

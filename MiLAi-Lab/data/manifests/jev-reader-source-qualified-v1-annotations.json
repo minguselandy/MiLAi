@@ -1,0 +1,674 @@
+{
+  "status": "SOURCE_REVIEWED_PILOT",
+  "reviewer": "Root author, not independent or blinded",
+  "source_protocol": "Reason over literal visible paragraphs and ordinary reference resolution. No external factual lookup, future answer, or hidden decomposition binding may supply a missing premise. Multiple supported answer paths are allowed. Hard labels are masked when the reviewer cannot resolve the input; masked is not a declaration the official answer is false.",
+  "partial_policy": "Before pool-relative exhausted, allow opening explicitly grounded partial premises. Unanswerable does not automatically mean immediateSTOP.",
+  "train_selection": {
+    "role": "train-only source review pilot, not a new heldout cohort",
+    "selection_rule": "First positive source family per available support-group count in frozen C20order, then first remaining positive families until4. Metadata-only selection before reviewing source text. All paired source rows included.",
+    "available_positive_group_counts": {
+      "2": 53,
+      "3": 9
+    },
+    "families": [
+      "musique-family-000678",
+      "musique-family-000848",
+      "musique-family-000527",
+      "musique-family-000550"
+    ],
+    "rows": [
+      31011,
+      37250,
+      6187,
+      17316,
+      33457,
+      11604,
+      5473,
+      24500
+    ],
+    "new_model_calls": 0,
+    "initial_selection_note": "Attempted2/3/4strata had no4-support row and ended before writing any selection. No source text was inspected in that failed metadata selection."
+  },
+  "dev_selection": "Four alreadyexposed families targeted from earlier failure/alternative reviews; seven rows, not a representative noise-rate estimate.",
+  "cases": [
+    {
+      "review_id": "source-qualified-v1-row-31011",
+      "source_row": 31011,
+      "family": "musique-family-000678",
+      "split": "train",
+      "question_id": "2hop__502793_420644",
+      "question": "What conflict did the star of As Good as Married star in a movie about?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          8,
+          11
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "rationale": "The named comedy identifies John Boles; Only Yesterday identifies him as a star and explicitly gives World War I. No other complete conflict path was found in the20paragraphs.",
+      "original_answerable": true,
+      "original_support_indices": [
+        8,
+        11
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-37250",
+      "source_row": 37250,
+      "family": "musique-family-000678",
+      "split": "train",
+      "question_id": "2hop__502793_420644",
+      "question": "What conflict did the star of As Good as Married star in a movie about?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        16
+      ],
+      "rationale": "The named comedy still identifies its cast, so this premise is useful. The20paragraphs contain no corresponding actor-to-war-film/conflict link.",
+      "original_answerable": false,
+      "original_support_indices": [
+        16
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-6187",
+      "source_row": 6187,
+      "family": "musique-family-000527",
+      "split": "train",
+      "question_id": "2hop__374456_162253",
+      "question": "When did the brand open in the city where Ivan Mane Jarnović died?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "rationale": "A Siemens branch opened in StPetersburg in1855 and the death city is explicit. However the question never names a brand and asks about a brand opening while the evidence dates a company branch.1855 is plausible under that interpretation; the reviewer does not assign a certain label or rewrite the question.",
+      "original_answerable": true,
+      "original_support_indices": [
+        7,
+        18
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-17316",
+      "source_row": 17316,
+      "family": "musique-family-000527",
+      "split": "train",
+      "question_id": "2hop__374456_162253",
+      "question": "When did the brand open in the city where Ivan Mane Jarnović died?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "rationale": "Same underidentified brand/branch question; only death city remains. Do not assign a definite useful business path from hidden decomposition or repair the missing brand identity.",
+      "original_answerable": false,
+      "original_support_indices": [
+        9
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-33457",
+      "source_row": 33457,
+      "family": "musique-family-000550",
+      "split": "train",
+      "question_id": "2hop__64563_86874",
+      "question": "When did the singer of Love Lifts Us Up Where We Belong record With a Little Help From My Friends?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16,
+          18
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "rationale": "The first paragraph identifies Joe Cocker among the singers, and the matching Cocker album infobox explicitly says Recorded Early1968. Qualification: this is the named Cocker album/work, not the Beatles original or a claim about an individually dated track.",
+      "original_answerable": true,
+      "original_support_indices": [
+        16,
+        18
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-11604",
+      "source_row": 11604,
+      "family": "musique-family-000550",
+      "split": "train",
+      "question_id": "2hop__64563_86874",
+      "question": "When did the singer of Love Lifts Us Up Where We Belong record With a Little Help From My Friends?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        16
+      ],
+      "rationale": "The singers are identifiable, but the remaining With a Little Help paragraphs concern the Beatles/RingoStarr, not the Cocker recording date. They cannot substitute for the removed Cocker album premise.",
+      "original_answerable": false,
+      "original_support_indices": [
+        16
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-5473",
+      "source_row": 5473,
+      "family": "musique-family-000848",
+      "split": "train",
+      "question_id": "3hop1__491573_171721_264389",
+      "question": "What country presents the award received by the performer of Lea?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          11,
+          8,
+          3
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "rationale": "Lea album identifies Salonga; her biography explicitly names Theatre World Award; that award is explicitly American. The multiple other awards do not license unprovided country links. This is one supported answer path, not a claim there is only one award in the world.",
+      "original_answerable": true,
+      "original_support_indices": [
+        3,
+        8,
+        11
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-24500",
+      "source_row": 24500,
+      "family": "musique-family-000848",
+      "split": "train",
+      "question_id": "3hop1__491573_171721_264389",
+      "question": "What country presents the award received by the performer of Lea?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "rationale": "The album-to-performer binding is absent, as is the Theatre World country paragraph. Both Lea Michele and Lea Salonga appear, but no paragraph identifies the performer of the work Lea. The surviving gold-marked Salonga paragraph is not a certain next-premise target from visible inputs; mask instead of teaching a hidden-identity choice.",
+      "original_answerable": false,
+      "original_support_indices": [
+        19
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-866",
+      "source_row": 866,
+      "family": "musique-family-000138",
+      "split": "dev",
+      "question_id": "2hop__125960_675104",
+      "question": "Where did the Baldevins bryllup director die?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        9
+      ],
+      "rationale": "The film paragraph identifies its director. The biography states birthplace only; none of the20paragraphs supplies that director death location. Read the grounded director-identification premise, then allow only pool-relative insufficiency, never sufficient from birth text.",
+      "original_answerable": true,
+      "original_support_indices": [
+        3,
+        9
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-14496",
+      "source_row": 14496,
+      "family": "musique-family-000138",
+      "split": "dev",
+      "question_id": "2hop__125960_675104",
+      "question": "Where did the Baldevins bryllup director die?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        7
+      ],
+      "rationale": "The film still identifies George Schneevoigt; no death-location premise occurs in the full pool. This partial identity fact remains useful before pool exhaustion.",
+      "original_answerable": false,
+      "original_support_indices": [
+        7
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-3445",
+      "source_row": 3445,
+      "family": "musique-family-000023",
+      "split": "dev",
+      "question_id": "2hop__181212_701819",
+      "question": "What does Riviere-Verte in Brian Lawton's birthplace share a border with?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "rationale": "Lawton birthplace is explicitly NewBrunswick,NewJersey; the RiviereVerte paragraph does not establish it is that place. Being15km southeast of Edmundston also does not entail a shared border. Do not force the reference join or a unique answer.",
+      "original_answerable": true,
+      "original_support_indices": [
+        2,
+        12
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-27448",
+      "source_row": 27448,
+      "family": "musique-family-000023",
+      "split": "dev",
+      "question_id": "2hop__181212_701819",
+      "question": "What does Riviere-Verte in Brian Lawton's birthplace share a border with?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "rationale": "Lawton birthplace binding is missing and the remaining RiviereVerte paragraph only gives relative distance, not the asked border relation. Mask the ambiguous/unentailed chain.",
+      "original_answerable": false,
+      "original_support_indices": [
+        1
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-28960",
+      "source_row": 28960,
+      "family": "musique-family-000583",
+      "split": "dev",
+      "question_id": "2hop__34208_22796",
+      "question": "How many troops did the Turks send to the city in Armenia where Russia has a military base?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16,
+          10
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "rationale": "Paragraph16 identifies Gyumri as the Armenian city with the Russian base. Paragraph10 explicitly gives about30000Turks moving toward Gyumri/Alexandropol. Preserve about; the bridge is still required, and the1853 concentration alone does not establish the city named by the present-base clue.",
+      "original_answerable": true,
+      "original_support_indices": [
+        10,
+        16
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-12523",
+      "source_row": 12523,
+      "family": "musique-family-000583",
+      "split": "dev",
+      "question_id": "2hop__34208_22796",
+      "question": "How many troops did the Turks send to the city in Armenia where Russia has a military base?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        1
+      ],
+      "rationale": "The base-city premise identifies Gyumri. The full pool does not supply its Turkish troop count; the78000Turks/Trabzon paragraph concerns a different location and event.",
+      "original_answerable": false,
+      "original_support_indices": [
+        1
+      ]
+    },
+    {
+      "review_id": "source-qualified-v1-row-36340",
+      "source_row": 36340,
+      "family": "musique-family-000135",
+      "split": "dev",
+      "question_id": "2hop__125316_149236",
+      "question": "What was the position held by the father of Prince Albert Victor, Duke of Clarence and Avondale?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          14
+        ],
+        [
+          14,
+          0
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "rationale": "The son biography itself identifies his parents as Prince/Princess ofWales and laterKingEdwardVII/QueenAlexandra. PrinceofWales is a source-supported answer without paragraph0. The longer path also supports EmperorofIndia. The query supplies no office timeframe; reference aliasqueen is not accepted just because it occurs in the alias list.",
+      "original_answerable": true,
+      "original_support_indices": [
+        0,
+        14
+      ]
+    }
+  ],
+  "model_calls": 0,
+  "weights_changed": false,
+  "official_scores_changed": false,
+  "sha_checks": 0,
+  "human_review_time_measured": false,
+  "source_extraction_time_measured": false
+}

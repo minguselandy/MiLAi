@@ -1,0 +1,251 @@
+{
+  "status": "TRAIN512_REVIEWED;RULES_LAYA_INITIAL_POST_COMPLETE;FULL_PLAN_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-26T21:22:05.617324+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v137.json",
+  "previous_turn_classification": "Progress: previousgoalturn added64states/192pairs andsettled15fields atv137. Thisturn adds64states/192pairs, actualhistoricalversion/scope evidence, andoneauthorreviewrefinement.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": {
+    "development_parent": "7aece29d",
+    "candidate": "Uncommitted tested working-tree alias allocation change; freeze before real-model use.",
+    "frozen_feedback_method": "2a179b58 unchanged"
+  },
+  "active_processes": [],
+  "branch_execution": "Original train2285/dev142 attempts remain closed. No new actual model calls or outcome repair. Original unknown interrupted usage retained.",
+  "train_quality_reviews": {
+    "status": "RULES_AND_LAYA_INITIAL_POST_ALL128_REVIEWED;FIXED_STRATA_PENDING",
+    "reviewed_states": 512,
+    "pairs": 1536,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 128,
+      "laya_post": 128
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 128,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 32,
+          "laya_post": 32
+        },
+        "remaining_states": 64
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 256,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 64,
+          "laya_post": 64
+        },
+        "remaining_states": 128
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 512,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 128,
+          "laya_post": 128
+        },
+        "remaining_states": 256
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 395,
+        "unknown": 523,
+        "tie": 341,
+        "left": 277
+      },
+      "delivery": {
+        "right": 438,
+        "unknown": 104,
+        "tie": 677,
+        "left": 317
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 507,
+        "unknown": 523,
+        "tie": 124,
+        "left": 382
+      },
+      "delivery": {
+        "right": 691,
+        "unknown": 104,
+        "tie": 217,
+        "left": 524
+      }
+    },
+    "new_chunks": [
+      "448-463",
+      "464-479",
+      "480-495",
+      "496-511"
+    ],
+    "new_states": 64,
+    "new_pairs": 192,
+    "new_cost_only_directions": 130,
+    "next_source_first_state": 512,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.08434799,
+    "scope": "Original family-order cohorts, not row-prefix cohorts. All128 originalfamilies alreadyexposed; morestates not newindependentfamilies. Author review, no blind/independent neural quality claim."
+  },
+  "dev_quality_review_states": 0,
+  "compiled_feedback_rows": 0,
+  "feedback_fits_started": 0,
+  "source_review_method": {
+    "new_states": 64,
+    "same_request_source_reuse": 60,
+    "new_request_or_frontier_reviews": 4,
+    "first_versions": {
+      "467": {
+        "requested_revision": 1,
+        "history_revisions": [
+          1,
+          2
+        ],
+        "unit_characters": 355,
+        "completed_hosts": 3,
+        "exact_answers": 0,
+        "first_source_body_delivered": [
+          false,
+          false,
+          false
+        ]
+      },
+      "489": {
+        "requested_revision": 1,
+        "history_revisions": [
+          1,
+          2
+        ],
+        "unit_characters": 363,
+        "completed_hosts": 3,
+        "exact_answers": 0,
+        "first_source_body_delivered": [
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    "failed_probe": "Initialsource448..466 savedbeforehistorysingletonunpackfailed at467. Actualhistoryretainscurrentrevision too; explicit1selected thereafter. Original19files retained, theirfirstattemptCPU unknown; remaining13measured.",
+    "reviewer": "Current source author, not independent or blind."
+  },
+  "semantic_boundary_artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/semantic-boundaries-states-448-511-v1.json",
+  "development_change": {
+    "status": "IMPLEMENTED_AND_MECHANICALLY_VERIFIED;MODEL_EFFECT_UNTESTED",
+    "paths": [
+      "src/milai_lab/methods/query_structure.py",
+      "tests/unit/test_query_structure.py"
+    ],
+    "behavior": "Allocate new aliases while traversing actual capture/presentation order instead of opaque-source-ID order. Existing cached bindings remain unchanged; no text/role/time rewrite or fallback.",
+    "public_schema_API_permissions_canonical_changed": false,
+    "frozen_inputs_outputs_changed": false,
+    "regression_before_change": {
+      "test": "test_new_aliases_follow_capture_order_and_existing_aliases_stay_stable",
+      "exec_session": 95475,
+      "exit_code": 1,
+      "actual_ids": [
+        "e2",
+        "e1",
+        "e0"
+      ],
+      "expected_new_behavior_ids": [
+        "e0",
+        "e1",
+        "e2"
+      ],
+      "CPU": "unmeasured"
+    },
+    "validation": {
+      "query_structure_tests_passed": 25,
+      "related_regressions_passed": 89,
+      "skipped": 1,
+      "skip_reason": "Optional mempursuit dependency absent in test environment.",
+      "ruff": "passed",
+      "mypy": "passed one changed source module",
+      "package_boundary": "passed",
+      "tools_boundary": "passed; existing6grandfathered private dependencies unchanged",
+      "artifacts": [
+        "artifacts/evidence-gap-20261023/alias-order-query-tests-v1.json",
+        "artifacts/evidence-gap-20261023/alias-order-validation-v1.json"
+      ]
+    },
+    "actual_input_probe": {
+      "artifact": "artifacts/evidence-gap-20261023/alias-order-actual-input-v1/result.json",
+      "source_state": 352,
+      "sources": 20,
+      "candidate_order": "e0..e19 matches document0..19 capture presentation",
+      "information_equal_after_explicit_alias_resolution": true,
+      "original_response_not_reinterpreted": true,
+      "real_model_calls": 0,
+      "scripted_callbacks": 2,
+      "original_store_untouched": true
+    },
+    "limitations": "No demonstrated reduction in neural citation errors yet; fresh-cache alias behavior differs, legacy cached aliases retained. F3 extractive View baseline still not implemented.",
+    "checkpoint_note": "Unchanged sincev136. Prior114passed/1optional skip andchecks notrerun. Uncommitted/unfrozen aliascandidate unchanged; no newneuralcalls or extractive View implemented."
+  },
+  "semantic_findings": [
+    "467 returnedlatest7turntranscript asfirstsavedversion; actualhistoricalunit355chars notdelivered.",
+    "489 firstunit363chars preserveshistorical3B. Hostmisreads currentpublicmessage commitcount0 asglobalno-records despitehistory1/2.",
+    "453 rawretaineds1t3/5/7 alreadyprovidecurrentGboardsettings: twoinitialauthor deliveryleftlabels refinedtotie BEFORE costprocessing, initialsnapshotretained.",
+    "461 allthree reuseoldpartialpacket andanswerstale2560x1600 instead oflatest1920x1200.",
+    "465 historicalmedicalclaims promotedtoindependentverifiedguidance; rawsource roles keep assistant/report distinct.",
+    "499 Gailwifeanswer withfalseGallman maidenname, actualsource6Sloatman; sourcewife bodyundelivered.",
+    "503 correctNOagainstpool with weakfilm-language-to-nationalityrationale, explicitIndianbody0undelivered.",
+    "509 twoanswers preserveRepriserelease relation whileonesigned-contractclaim overstates actualsource."
+  ],
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-reviews448-511-settlement.json",
+    "settled_cpu_seconds": 7.943231754000001,
+    "settled_fields": 16,
+    "only_expected_compute_delta": true,
+    "generation_embedding_limits_match_last_closed_dev_readout": true,
+    "new_generation_requests": 0,
+    "new_known_generation_tokens": 0,
+    "new_unknown_generation_usage": 0,
+    "unmeasured": "Initialsourceattempt including448..466 serialization andfailed467historyshape assumption; semanticreading/authoring, exploratory inspections, diagnosis andsettlementoverhead remainunknown. No modelretry.",
+    "progress_processing_cpu_pending": 0.0011815149999999976
+  },
+  "next_actions": [
+    "Continue source-first train512:remaining128fixed_context initial and128fixed_context post plus48dev reviews. Allrules/laya strata complete butsource32/64 stillmissingfixedstrata.",
+    "Compile largest completepool once, deriveoriginalsource32/64, executeallnine192update fits andsaved-model/Hostevaluation.",
+    "Use actual489scopeerror in separatelyfrozenF2 same-information presentation test. Preserve allF1/F3/compact/data/seed/lifecycle/external/figure requirements andoriginal2a pipeline; freeze developmentcandidate beforeactualnew-modeluse."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "verification": [
+    "512disjointstates/1536pairs; exactlyfour ofsixstrata complete. source32=128/192,source64=256/384; neithercomplete.",
+    "64newstates/192pairs,130cost-only targetdirections; independentunknown masks andall originalfailures retained.",
+    "Actual467/489 historicalrecords inspected byrevision1; sixcompletedHosts noneexactrequestedunit.",
+    "489 frameeffectsscope=currentpublicmessage confirmedcount0, beforebankhistory1/2exists; globalabsenceclaimcontradicted.",
+    "Oneauthorrefinement beforecostprocessing retainsinitialsnapshot anddoesnotcountasextratraininglabels.",
+    "16explicitprocessingfields settledonce; allotherledgerfields unchanged andmodelcounters matchterminaldevreadout."
+  ],
+  "quality_refinement": {
+    "artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/quality-refinement-453-before-resource-v1.json",
+    "state": 453,
+    "targets": 2,
+    "from": "delivery left",
+    "to": "delivery tie",
+    "timing": "Beforefinalresourceprocessing; no frozenmodeloutputs/compiledtargets changed",
+    "initial_author_snapshot_retained": true
+  }
+}

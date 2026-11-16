@@ -1,0 +1,595 @@
+{
+  "status": "CLOSED_WARM_TRAINING_AND_POLICY_RECONCILED",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/reader-label-ce-v1",
+  "training_initialization": "Continue the same existing final C20 CE checkpoint; not training new models from released base. Both arms start from the same checkpoint each seed.",
+  "train_input_pairs_equal": 55,
+  "changed_targets": 12,
+  "dev_input_pairs_equal": 22,
+  "epoch0_records_exact_equal_within_both_seed_pairs": true,
+  "finals": {
+    "original-seed0": {
+      "states": 22,
+      "flat_correct": 9,
+      "family_event_normalized": {
+        "accuracy": 0.39166666666666666,
+        "soft_ce": 1.9189218167339062,
+        "brier": 0.693165714829323
+      },
+      "chosen_types": {
+        "stop_sufficient": 7,
+        "open": 6,
+        "stop_exhausted": 9
+      },
+      "by_label_status": {
+        "reviewed_missing_complement": {
+          "states": 8,
+          "correct": 1
+        },
+        "reviewed_pool_insufficient": {
+          "states": 9,
+          "correct": 7
+        },
+        "reviewed_proof_complete": {
+          "states": 5,
+          "correct": 1
+        }
+      },
+      "calibrated": false
+    },
+    "qualified-seed0": {
+      "states": 22,
+      "flat_correct": 11,
+      "family_event_normalized": {
+        "accuracy": 0.5,
+        "soft_ce": 1.6028618745382415,
+        "brier": 0.6050880796771102
+      },
+      "chosen_types": {
+        "stop_sufficient": 7,
+        "stop_exhausted": 11,
+        "open": 4
+      },
+      "by_label_status": {
+        "reviewed_missing_complement": {
+          "states": 8,
+          "correct": 1
+        },
+        "reviewed_pool_insufficient": {
+          "states": 9,
+          "correct": 8
+        },
+        "reviewed_proof_complete": {
+          "states": 5,
+          "correct": 2
+        }
+      },
+      "calibrated": false
+    },
+    "original-seed1": {
+      "states": 22,
+      "flat_correct": 10,
+      "family_event_normalized": {
+        "accuracy": 0.4833333333333333,
+        "soft_ce": 1.9433980361363965,
+        "brier": 0.7148305489531297
+      },
+      "chosen_types": {
+        "stop_sufficient": 11,
+        "open": 3,
+        "stop_exhausted": 8
+      },
+      "by_label_status": {
+        "reviewed_missing_complement": {
+          "states": 8,
+          "correct": 0
+        },
+        "reviewed_pool_insufficient": {
+          "states": 9,
+          "correct": 6
+        },
+        "reviewed_proof_complete": {
+          "states": 5,
+          "correct": 4
+        }
+      },
+      "calibrated": false
+    },
+    "qualified-seed1": {
+      "states": 22,
+      "flat_correct": 10,
+      "family_event_normalized": {
+        "accuracy": 0.4833333333333333,
+        "soft_ce": 1.703266168616632,
+        "brier": 0.6616024994098375
+      },
+      "chosen_types": {
+        "stop_exhausted": 10,
+        "stop_sufficient": 7,
+        "open": 5
+      },
+      "by_label_status": {
+        "reviewed_missing_complement": {
+          "states": 8,
+          "correct": 1
+        },
+        "reviewed_pool_insufficient": {
+          "states": 9,
+          "correct": 6
+        },
+        "reviewed_proof_complete": {
+          "states": 5,
+          "correct": 3
+        }
+      },
+      "calibrated": false
+    }
+  },
+  "recorded_training_compute": {
+    "wall_seconds": 607.5898014577106,
+    "cpu_seconds": 675.7190240140001,
+    "runs": 4,
+    "model_forwards": 1320,
+    "encoder_sequence_rows": 1320,
+    "token_positions": 3638836,
+    "tokenizer_calls": 54772,
+    "tokenizer_wall_seconds": 6.869875635951757
+  },
+  "training_ledger_differences": {
+    "wall_seconds": 0.0,
+    "cpu_seconds": -2.9558577807620168e-12,
+    "runs": 0,
+    "model_forwards": 0,
+    "encoder_sequence_rows": 0,
+    "token_positions": 0,
+    "tokenizer_calls": 0,
+    "tokenizer_wall_seconds": 0.0
+  },
+  "policy_input_response_bindings_verified": 30,
+  "unique_first_reader_responses": 17,
+  "literal_response_reuses": 13,
+  "recorded_reader_usage": {
+    "prompt_tokens": 8955,
+    "completion_tokens": 476,
+    "total_tokens": 9431
+  },
+  "reader_ledger_difference": 0,
+  "reader_new_unknown": 0,
+  "policy_records": [
+    {
+      "arm": "bm25-k4",
+      "case_id": "row-866",
+      "reader_case_id": "terminal-000",
+      "selected_ids": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "stop_reason": "fixed_budget",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "bm25-k4",
+      "case_id": "row-14496",
+      "reader_case_id": "terminal-001",
+      "selected_ids": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "stop_reason": "fixed_budget",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "bm25-k4",
+      "case_id": "row-28960",
+      "reader_case_id": "terminal-002",
+      "selected_ids": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "stop_reason": "fixed_budget",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "bm25-k4",
+      "case_id": "row-12523",
+      "reader_case_id": "terminal-003",
+      "selected_ids": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "stop_reason": "fixed_budget",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "bm25-k4",
+      "case_id": "row-36340",
+      "reader_case_id": "terminal-004",
+      "selected_ids": [
+        "p0",
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "stop_reason": "fixed_budget",
+      "answer": {
+        "answerable": true,
+        "answer": "Prince and Princess of Wales (later King Edward VII and Queen Alexandra)",
+        "support_ids": [
+          "p0"
+        ]
+      }
+    },
+    {
+      "arm": "initial-ce",
+      "case_id": "row-866",
+      "reader_case_id": "terminal-005",
+      "selected_ids": [
+        "p0"
+      ],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "initial-ce",
+      "case_id": "row-14496",
+      "reader_case_id": "terminal-006",
+      "selected_ids": [
+        "p1"
+      ],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "initial-ce",
+      "case_id": "row-28960",
+      "reader_case_id": "terminal-007",
+      "selected_ids": [
+        "p0"
+      ],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "initial-ce",
+      "case_id": "row-12523",
+      "reader_case_id": "terminal-008",
+      "selected_ids": [
+        "p1",
+        "p0"
+      ],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "initial-ce",
+      "case_id": "row-36340",
+      "reader_case_id": "terminal-009",
+      "selected_ids": [
+        "p0",
+        "p1"
+      ],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": true,
+        "answer": "King Edward VII",
+        "support_ids": [
+          "p0"
+        ]
+      }
+    },
+    {
+      "arm": "original-seed0",
+      "case_id": "row-866",
+      "reader_case_id": "terminal-010",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "original-seed0",
+      "case_id": "row-14496",
+      "reader_case_id": "terminal-010",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "original-seed0",
+      "case_id": "row-28960",
+      "reader_case_id": "terminal-011",
+      "selected_ids": [],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "original-seed0",
+      "case_id": "row-12523",
+      "reader_case_id": "terminal-012",
+      "selected_ids": [
+        "p1"
+      ],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "original-seed0",
+      "case_id": "row-36340",
+      "reader_case_id": "terminal-013",
+      "selected_ids": [
+        "p0",
+        "p12"
+      ],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": true,
+        "answer": "Prince and Princess of Wales (later King Edward VII and Queen Alexandra)",
+        "support_ids": [
+          "p0"
+        ]
+      }
+    },
+    {
+      "arm": "qualified-seed0",
+      "case_id": "row-866",
+      "reader_case_id": "terminal-010",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed0",
+      "case_id": "row-14496",
+      "reader_case_id": "terminal-010",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed0",
+      "case_id": "row-28960",
+      "reader_case_id": "terminal-011",
+      "selected_ids": [],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed0",
+      "case_id": "row-12523",
+      "reader_case_id": "terminal-011",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed0",
+      "case_id": "row-36340",
+      "reader_case_id": "terminal-014",
+      "selected_ids": [
+        "p0",
+        "p5",
+        "p4",
+        "p6"
+      ],
+      "stop_reason": "read_budget",
+      "answer": {
+        "answerable": true,
+        "answer": "King Edward VII",
+        "support_ids": [
+          "p0"
+        ]
+      }
+    },
+    {
+      "arm": "original-seed1",
+      "case_id": "row-866",
+      "reader_case_id": "terminal-010",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "original-seed1",
+      "case_id": "row-14496",
+      "reader_case_id": "terminal-010",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "original-seed1",
+      "case_id": "row-28960",
+      "reader_case_id": "terminal-011",
+      "selected_ids": [],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "original-seed1",
+      "case_id": "row-12523",
+      "reader_case_id": "terminal-012",
+      "selected_ids": [
+        "p1"
+      ],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "original-seed1",
+      "case_id": "row-36340",
+      "reader_case_id": "terminal-015",
+      "selected_ids": [
+        "p12"
+      ],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed1",
+      "case_id": "row-866",
+      "reader_case_id": "terminal-010",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed1",
+      "case_id": "row-14496",
+      "reader_case_id": "terminal-010",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed1",
+      "case_id": "row-28960",
+      "reader_case_id": "terminal-011",
+      "selected_ids": [],
+      "stop_reason": "stop_exhausted",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed1",
+      "case_id": "row-12523",
+      "reader_case_id": "terminal-016",
+      "selected_ids": [
+        "p1",
+        "p6"
+      ],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": false,
+        "answer": "",
+        "support_ids": []
+      }
+    },
+    {
+      "arm": "qualified-seed1",
+      "case_id": "row-36340",
+      "reader_case_id": "terminal-009",
+      "selected_ids": [
+        "p0",
+        "p1"
+      ],
+      "stop_reason": "stop_sufficient",
+      "answer": {
+        "answerable": true,
+        "answer": "King Edward VII",
+        "support_ids": [
+          "p0"
+        ]
+      }
+    }
+  ],
+  "scope": "Read-only reconciliation; original sibling costs not charged again. Different warm initialization,55states and recipe from own released-base86state study; do not pool the eight runs as exchangeable replications. Exposed dev, not new benchmark.",
+  "new_model_calls": 0,
+  "sha_checks": 0,
+  "compute": {
+    "runs": 1,
+    "wall_seconds": 0.04572675283998251,
+    "cpu_seconds": 0.04572736,
+    "model_calls": 0
+  }
+}

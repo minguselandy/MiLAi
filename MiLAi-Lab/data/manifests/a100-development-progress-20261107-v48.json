@@ -1,0 +1,311 @@
+{
+  "status": "ACTIVE_BASELINE_ALL256_QUALITY_CLOSED_PRIMARY_QA80_SEED2_RUNNING_LME_CAPTURE_ARCHIVE_ADAPTER_IMPLEMENTED",
+  "timestamp_utc": "2026-11-06T16:50:36.438626+00:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261107-v47.json",
+  "previous_checkpoint_commit": "fc61b77b",
+  "unchanged_scope": "Original full763-line plan/M5; N256paper families/1024first trajectories and frozen methods/checkpoints/Host/budgets/full Source/input/runtime/native scoring unchanged. Prior M0-M4, B-C/D-K, fits/replication and full mechanical/cost closures remain in v47 and ancestors.",
+  "baseline_all256_whole_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-source-author-quality-closeout-v1.json",
+    "whole_manual_records": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-first256-source-author-review-reconciliation-v1.json",
+    "new_since_v47": 56,
+    "positions": 256,
+    "quality_counts": {
+      "C": 149,
+      "I": 52,
+      "Q": 0,
+      "W": 15,
+      "F": 40,
+      "U": 0
+    },
+    "material_counts": {
+      "S": 150,
+      "P": 75,
+      "I": 31,
+      "U": 0
+    },
+    "main_whole_task_C": 149,
+    "main_whole_task_C_rate": 0.58203125,
+    "common_source_scope_stress": {
+      "inventory": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-inventory-all256-v2.json",
+      "flagged": 122,
+      "unflagged": 134,
+      "C_credit": 71,
+      "C_rate_full256_denominator": 0.27734375,
+      "main_C_credit_withheld": 78,
+      "all256_denominator_preserved": true,
+      "same_fixed_indices_required_for_all4_methods": true,
+      "main_quality_material_native_references_unchanged": true,
+      "no_favorable_subset_or_mask_selection": true
+    },
+    "native_partition_strata": {
+      "dev": {
+        "positions": 185,
+        "quality_counts": {
+          "C": 105,
+          "W": 12,
+          "I": 35,
+          "F": 33
+        },
+        "material_counts": {
+          "S": 111,
+          "I": 28,
+          "P": 46
+        },
+        "main_C": 105,
+        "main_C_rate": 0.5675675675675675,
+        "common_stress_flagged": 94,
+        "common_stress_C": 46,
+        "common_stress_C_rate_full_stratum_denominator": 0.24864864864864866
+      },
+      "train": {
+        "positions": 71,
+        "quality_counts": {
+          "C": 44,
+          "I": 17,
+          "F": 7,
+          "W": 3
+        },
+        "material_counts": {
+          "S": 39,
+          "P": 29,
+          "I": 3
+        },
+        "main_C": 44,
+        "main_C_rate": 0.6197183098591549,
+        "common_stress_flagged": 28,
+        "common_stress_C": 25,
+        "common_stress_C_rate_full_stratum_denominator": 0.352112676056338
+      }
+    },
+    "prior200_record_dicts_literal_equal_through216_224_240_256": true,
+    "all_whole_first_result_and_failed_provider_bindings_retained": true,
+    "same40first_failures_as_native_completion_and_F1": true,
+    "source_author_not_blind_or_independent": true,
+    "quality_not_native_COMPLETED_or_material_S_or_native_F1": true,
+    "guides_and_addendum_timing": "General task scoring/methods/N/budgets frozen before held export; not all Source-specific guides before all model executions/answers. Previously disclosed early pilot-answer exposure and guide82 addendum after baseline82 review remain. Common122 mask followed baseline80/primary16 semantic review. No fully preregistered/blind-author claim.",
+    "old_pre_semantic_binding_PENDING_field": "Historical original preserved; the separate full quality closeout now resolves baseline semantic status.",
+    "other3_methods_or_paired_effect_closed": false
+  },
+  "primary_whole_quality_unchanged": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first80-source-author-review-reconciliation-v1.json",
+    "positions": 80,
+    "quality_counts": {
+      "C": 41,
+      "W": 7,
+      "I": 11,
+      "F": 20,
+      "U": 1
+    },
+    "material_counts": {
+      "S": 52,
+      "P": 23,
+      "I": 5
+    },
+    "native_strata": {
+      "dev": 80
+    },
+    "all80_record_dicts_unchanged_this_turn": true,
+    "full256_quality_closed": false
+  },
+  "processes": {
+    "sole_actual_experiment": {
+      "name": "e3-aggregate-seed2-u32",
+      "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-owner-v1.json",
+      "actual_owner_receipt": {
+        "status": "RUNNING",
+        "pid": 3666509,
+        "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-execution-plan-v1.json",
+        "name": "e3-aggregate-seed2-u32",
+        "positions": 256,
+        "automatic_retry": false,
+        "client_CPU_recorded": false,
+        "child_pid": 3666510,
+        "started_epoch": 1793979809.361017
+      },
+      "actual_process_commands": {
+        "pid": {
+          "pid": 3666509,
+          "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/own_final_confirmation_learned.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-execution-plan-v1.json"
+        },
+        "child_pid": {
+          "pid": 3666510,
+          "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_saved_gpu.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32-inference-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_frozen_host_messages.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-cases-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed2-u32 --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --source-version local-a100-final-confirmation-20261106-v1 --presentation current --host-enable-thinking --policy-config /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32-policy.json --continue-known-host-failures --host-site-packages /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages"
+        }
+      },
+      "closed_at_snapshot": 130,
+      "planned_positions": 256,
+      "native_statuses_at_snapshot": {
+        "COMPLETED": 106,
+        "FAILED": 24
+      },
+      "model_cache_entries": 1,
+      "actual_cached_model_loads": [
+        {
+          "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-2/checkpoints/update-32",
+          "device": "cuda:0",
+          "visible_cuda_devices": "2",
+          "threads": 4,
+          "max_len": 16384,
+          "head_max_len": 2048,
+          "loaded_weight_dtype": "torch.float32",
+          "mha_fastpath_enabled": false,
+          "reference_compile_override": false,
+          "status": "VERIFIED"
+        }
+      ],
+      "native_completion_is_not_task_quality": true,
+      "detached_bounded_owner": true,
+      "automatic_queue_or_retry": false
+    }
+  },
+  "common_scoring": {
+    "inventory": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-inventory-all256-v2.json",
+    "fixed_true_false": [
+      122,
+      134
+    ],
+    "same_cases_for_all4_methods_full256_each": true,
+    "main_material_native_alternatives_unchanged": true,
+    "baseline_C_credit_withheld": 78,
+    "baseline_stress_C_credit": 71,
+    "baseline_stress_denominator": 256,
+    "not_a_favorable_subset_denominator134": true,
+    "source_specific_guide_mask_not_fully_preregistered_or_blind": true,
+    "v1_bad_booleans_not_used_to_score": true,
+    "guide82_timing_and_earlier_material_adjudication_preserved": true
+  },
+  "external_LME_adapter_progress": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/preparation-v2.json",
+    "adapter": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/run_lme_with_actual_policy_capture.py",
+    "baseline": "Wrap the original LmeMemoryBackend.message binding only to request actual retrieval snapshots and every control-step snapshot. Native query, given-request exclusion, search/read policy, budgets, result, images and Reader unchanged. Restore the binding on exit.",
+    "primary": "Use each original first baseline given-query capture before any retrieval/Reader response. Restore its complete archived pre-call runtime, pass original public_message to native functional.message with native replay_retrieval/resume and only fixed-to-laya/seed0u32 policy override. Preserve one native shared model pool; assert the complete first observation and all legal bindings match. Call the unchanged native fixed Reader on its own actual delivered text/images.",
+    "shared_closed_template_and_original_first_given_call": true,
+    "native_policy_executor_guard_image_binding_fixedReader_Judge_unchanged": true,
+    "archive_component_contract": {
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/archive-contract-rehearsal-v2/verification.json",
+      "actual_exit_code": 0,
+      "files": 7,
+      "literal_reconstructed_bytes_compared": 121794392,
+      "original_SQLite_copy_and_existing_common_base_format": true,
+      "raw_before_removed_only_after_every_reconstructed_byte_equal": true,
+      "complete_base_and_archive_retained": true,
+      "no_Source_state_head_menu_shortening": true,
+      "not_an_actual_new_policy_or_QA_trajectory": true
+    },
+    "installed_native_ABI_contract": {
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/installed-adapter-contract-v1.json",
+      "actual_torch": "2.7.0+cu126",
+      "actual_transformers": "4.52.3",
+      "Pillow": "12.3.0",
+      "ABI_keywords_accepted": true,
+      "native_protocol_AST_loaded": true,
+      "capture_hooks_restored": true,
+      "CUDA_context_or_model_weights_loaded": false,
+      "not_a_new_image_probe": true,
+      "scope": "Installed ABI and wiring validation only. No policy trajectory, image probe, benchmark prediction, Judge or full-cohort/source-state audit."
+    },
+    "storage_evidence": {
+      "available_bytes_at_this_receipt": 138578726912,
+      "retained_prior_complete_base_bytes": {
+        "pool-0": 120502002,
+        "pool-1": 96284634
+      },
+      "illustrative_raw_8snapshots_each_902cases_using_smaller_retained_base_bytes": 694789918944,
+      "scope": "Illustrative storage envelope, not a claim every future path takes eight snapshots or an actual new-cohort storage measurement.",
+      "implementation": "Process-local copy_call_root wrapper takes the original native SQLite online-backup snapshot, then calls existing case_archive.archive_case against the full retained backend template immediately. Every reconstructed byte is compared before removing the raw before directory. Adjacent before-archive.json records the base/archive; primary restore_case recreates the exact before directly at its new runtime. No source/body/head/menu shortening or fingerprints.",
+      "rehearsal": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/archive-contract-rehearsal-v2/verification.json",
+      "files_compared": 7,
+      "bytes_compared": 121794392,
+      "complete_base_and_archive_retained": true,
+      "native_copy_hook_restored": true,
+      "first_rehearsal": "v1 remains; v2 verifies the current simpler common-local-template hook after adding primary closed-template reuse. Neither executes policy/Reader/Judge or retries a task outcome.",
+      "whole_case_storage": "Native archive_lme_cases remains the post-prediction/post-scoring mechanism. Keep full templates and all prediction/scoring outputs; decide the explicit serial Reader/Judge/archive order before final freeze so both complete raw runtime cohorts need not coexist."
+    },
+    "actual_component_checks": [
+      {
+        "timer": "check-lme-own-policy-adapter-syntax-help-v1.time.txt",
+        "exit_code": 0
+      },
+      {
+        "timer": "check-lme-capture-archive-contract-v1.time.txt",
+        "exit_code": 0,
+        "prior_prototype": true
+      },
+      {
+        "timer": "check-lme-capture-archive-contract-v2.time.txt",
+        "exit_code": 0,
+        "current_archive_hook": true
+      },
+      {
+        "timer": "check-lme-adapter-installed-contract-v1.time.txt",
+        "exit_code": 0
+      }
+    ],
+    "new_external_tasks_or_model_HTTP_calls": 0,
+    "runtime_or_Product_file_changes": false,
+    "final_external_protocol_frozen": false,
+    "pending": [
+      "Freeze final experiment IDs, immutable adapter/config/native-code/input/image binding, full planned451 per method and exact serial prediction/scoring/archive order.",
+      "Prepare the concrete bounded owner and exact argv/environment; whole child minus native CPU plus parent once, original ledger/queue only, known/unknown HTTP retained.",
+      "Prepare full actual Source/role/origin/timestamp/image/SDK/Store/Saver and finite NN state/head/menu/binding audit readers that restore these complete archived before snapshots. Do not reuse the QASPER undated-source assumptions.",
+      "Wait seed2 actual exit/paid/processes gone, perform full256 audit and native F1/all4 reconciliation, then actual idle25 one-time settlement before another experimental model/HTTP job."
+    ],
+    "Mem2Act": "Still pending its recorded-tool-catalog/shared-first-input adapter and native/adapted protocol freeze; do not route through the incompatible QASPER Host capture."
+  },
+  "native_full_answer_F1_unchanged": {
+    "first3_closeout": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-first3-methods-closeout-v1.json",
+    "fixed-prefix": 0.0981909306413507,
+    "e3-aggregate-u32": 0.08804209206295316,
+    "e3-aggregate-seed1-u32": 0.08179025700801325,
+    "seed2": "Pending actual terminal/full audit",
+    "not_main_whole_task_C_or_adoption": true
+  },
+  "cost_accounting": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "last_paid_idle": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v24.json",
+    "all_after24_new_closed_timers": "Pending during current seed2; includes all v47 failures and current archive/import/full-QA work.",
+    "offline_ledger_written_this_turn": false,
+    "idle25_prepared_or_executed": false,
+    "no_model_native_CPU_whole_client_parent_or_prior_timer_rebilling": true,
+    "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
+    "legacy_unknown_generation_embedding": [
+      15,
+      1
+    ],
+    "closed_pending_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/progress-v48-offline-cost-pending-snapshot.json",
+    "closed_pending_timers_at_snapshot": 75,
+    "closed_pending_CPU_seconds_at_snapshot": 23.680000000000003,
+    "closed_pending_actual_exit_counts_at_snapshot": {
+      "0": 73,
+      "1": 2
+    }
+  },
+  "remaining": {
+    "baseline_semantic": "All256 closed; no rerun",
+    "primary_semantic_positions": [
+      80,
+      255
+    ],
+    "seed1_semantic_reviewed": 0,
+    "seed2_semantic_reviewed": 0,
+    "unreviewed_of1024": 688,
+    "seed2_actual_terminal": "Exit0/CPU paid/both processes absent; native full256 Source/SDK/Store/Saver/provider/NN audit then full nativeF1/all4native reconciliation, actual idle25 one-time settlement before next actual model/HTTP worker.",
+    "all4quality_statistics": "Common122 stress/all256denominators; C/I/Q/W/F/U separate from material/nativeF1; paired gains/losses and20000drawseed0family bootstrap,nativeDEV/TRAIN strata,each fixed seed and within-family3seed mean,N256not1024independent. Training RNG conditional on commonE1init.",
+    "external": "Complete prospective input/config/adapter/owner/audit/scoring/budget freeze then actual LME451Reader/Judge and Mem2Act400own-policy tasks; all exposure/metadata holes kept, no old fixed-path restart or new image probe.",
+    "other_full_goal": "Old64reserved query eligibility boundary/nativeTEST still unopened, full Source-View/ops/cost analysis, standalone final figures, paper/results and full requirement-by-requirement completion audit.",
+    "adoption_or_final_effect_claim": "Not established; no best-seed/checkpoint/N/budget/scorer selection."
+  },
+  "guardrails": {
+    "no_sha_checksums_or_content_fingerprints": true,
+    "no_subagents": true,
+    "no_services_or_second_ledger": true,
+    "no_reset_refund_first_outcome_retry_or_reselection": true,
+    "no_remote_or_Product_changes": true,
+    "GPUs0_1_unchanged": true,
+    "no_Source_K_menu_task_horizon_crop_compact_quantize_to_pass": true
+  }
+}

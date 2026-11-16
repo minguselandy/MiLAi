@@ -1,0 +1,271 @@
+{
+  "status": "ACTIVE_FULL_NOV2_PLAN;FIXED_ACQUISITION_AND_E2_ENTRY_CLOSED;ONE_E2_UNIT_FIT_RUNNING",
+  "timestamp_utc": "2026-11-02T18:40:54.648438+00:00",
+  "goal_complete": false,
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_TRAINING_PLAN_20261102.md",
+  "previous_progress": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v11.json",
+  "history_policy": "Prior evidence remains in prior manifest/artifact paths; no old results, labels, ledger limits or failures replaced.",
+  "source": {
+    "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab",
+    "base_version": "b66a5024",
+    "new_runtime_version": "local-e2-paired-unit-schedule-20261103-v1",
+    "changed_runtime_files": [
+      "tools/conditional_training.py",
+      "tools/train_bounded_laya.py"
+    ],
+    "new_tests": "tests/unit/test_conditional_training.py",
+    "committed": false,
+    "Product_changed": false
+  },
+  "fixed_acquisition_dev32": {
+    "status": "MATCHED_FIXED_ACQUISITION_DEV32_CLOSED",
+    "task_results": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/acquisition-prefix-dev32-v1/task-results-v1.json",
+    "fixed_complete": 17,
+    "raw_complete": 14,
+    "families": 32,
+    "success_gains": [
+      3,
+      13,
+      21,
+      22,
+      31
+    ],
+    "success_losses": [
+      19,
+      27
+    ],
+    "difference_pp": 9.375,
+    "descriptive_family_paired_bootstrap": {
+      "seed": 0,
+      "draws": 50000,
+      "percentile95_interval_pp": [
+        -6.25,
+        25.0
+      ],
+      "scope": "Post-selection development uncertainty; not confirmation or a seed-replication interval."
+    },
+    "native_answer_f1": 0.07110840228619666,
+    "readout_costs_for_all32_positions": {
+      "fixed_prefix": {
+        "readouts": 32,
+        "http_attempts": 32,
+        "prompt_tokens": 49343,
+        "completion_tokens": 52139,
+        "known_total_tokens": 101482,
+        "missing_usage_events": 0,
+        "readout_client_cpu_seconds": 27.362932932,
+        "readout_wall_seconds": 374.2331563131884
+      },
+      "raw_context": {
+        "readouts": 32,
+        "http_attempts": 32,
+        "prompt_tokens": 54987,
+        "completion_tokens": 63412,
+        "known_total_tokens": 118399,
+        "missing_usage_events": 0,
+        "readout_client_cpu_seconds": 27.70626679500002,
+        "readout_wall_seconds": 446.9224088191986
+      }
+    },
+    "cost_scope": "Logical method totals reuse9 identical first outcomes, including the original failure. Not new ledger charges and not full pipeline cost; model training, retrieval and unmeasured author work are outside these Reader-only sums. No efficiency-route claim.",
+    "actual_new_suffixes": 23,
+    "original_suffixes_reused": 9,
+    "new_known_generation_tokens_already_recorded": 66558,
+    "new_unknown_usage": 0,
+    "mechanism": {
+      "required_evidence_and_success_repaired": [
+        13,
+        31
+      ],
+      "reader_quality_or_restraint_gains_with_prior_evidence": [
+        3,
+        21,
+        22
+      ],
+      "success_losses": {
+        "19": "CDA target missing from fixed packet",
+        "27": "Reader incorrectly describes all compared models as LSTM"
+      }
+    },
+    "next_role": "Keep the existing fixed prefix policy as a stronger development control for subsequent learned candidates. Query cleanup remains a separate factor. No Product migration.",
+    "new_model_calls": 0,
+    "new_training_labels": 0,
+    "ledger_recorded": false,
+    "cpu_seconds_nested": 0.43279317100000003,
+    "no_sha_validation": true
+  },
+  "E1_retained": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-choice-branches-v1/research-selection-v1.json",
+    "strict_complete_of32": {
+      "raw_context": 14,
+      "update0": 11,
+      "delivery16": 14,
+      "answer_first_head128": 11
+    },
+    "selected_saved_research_reference": "delivery16",
+    "learned_advantage_proved": false,
+    "head_same_complete_binding_as_update0": "30/31",
+    "native_or_author_dev_is_confirmation": false
+  },
+  "E2_entry": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-entry-diagnostic-v1/analysis-v1.json",
+    "run": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-entry-diagnostic-v1/driver.json",
+    "rows": 2208,
+    "unknown_rows": 18,
+    "families": 32,
+    "positive_correct": 77,
+    "positive_total": 116,
+    "negative_correct": 1727,
+    "negative_total": 2074,
+    "balanced_cell_accuracy": 0.7482417783393742,
+    "supported_change": {
+      "joint_correct": 6,
+      "pairs": 8,
+      "families": 5,
+      "family_macro_joint": 0.8666666666666666
+    },
+    "stable_positive": {
+      "joint_correct": 22,
+      "pairs": 46,
+      "family_macro_joint": 0.46551724137931033
+    },
+    "stable_negative": {
+      "joint_correct": 762,
+      "pairs": 1029,
+      "family_macro_joint": 0.7410121884164222
+    },
+    "native_conflict_changes_separate": 3,
+    "constant_negative_family_macro_unit_accuracy": 0.9470324253499122,
+    "constant_negative_balanced_accuracy": 0.5,
+    "actual_input_tokens": 531393,
+    "all_inputs_literal_equal": true,
+    "finite_full_logits": true,
+    "truncated": 0,
+    "conclusion": "Already reacts correctly on6/8 supported changes, but stable positives weak. This is not evidence that an ordinary paired conditional fit ignores conditions; first run ordinary supervised full exposure."
+  },
+  "E2_ordinary_training": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/plan.json",
+    "admission": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/admission-v1.json",
+    "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/runtime",
+    "data": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/data",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/driver.json",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-fitting-v1/ordinary-unit",
+    "coordinator_pid": 3789446,
+    "child_pid": 3789458,
+    "exec_session": 69731,
+    "observed_native_status": "RUNNING",
+    "observed_updates": 0,
+    "known_train_rows": 44868,
+    "conditional_rows": 39982,
+    "old_replay_rows": 4886,
+    "conditional_families": 10000,
+    "conditional_conditions": 19968,
+    "complete_known_pairs": 10054,
+    "supported_change_pairs": 6,
+    "stable_positive_pairs": 80,
+    "stable_negative_pairs": 9968,
+    "planned_updates": 2805,
+    "evaluation_points": [
+      0,
+      702,
+      1403,
+      2104,
+      2805
+    ],
+    "full_passes": 1,
+    "repeat_exposure": 0,
+    "final_window_rows": 4,
+    "microbatch_rows": 2,
+    "all_known_pairs_within_one_microbatch": true,
+    "train_input_tokens_capacity": 37502475,
+    "conditional_tokens_capacity": 9507402,
+    "old_replay_tokens_capacity": 27995073,
+    "loss_coefficients": {
+      "ordinary_conditional_unit": 1,
+      "accepted_set_operation_replay": 0.25,
+      "cross_condition": 0
+    },
+    "initialization": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only/checkpoints/update-16",
+    "encoder_lr": 5e-06,
+    "head_lr": 0.0001,
+    "seed": 0,
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "loaded_precision": "FP32",
+    "representation": "shared_actions",
+    "max_len": 16384,
+    "head_max_len": 2048,
+    "full_parameter_training": true,
+    "option_shuffle": true,
+    "gradient_checkpointing": true,
+    "selection": "Entry is mandatory update0. After the full ordinary fit closes, nominate at most one checkpoint by mean of positive/negative accuracy within query family, averaged over 32 fixed dev families; earliest tie. Report supported-change and both stable strata, native-label conflicts separately, original operation acceptance and fixed feedback64. An operation acceptance decrease exceeding2 percentage points versus matched GPU update0 disqualifies a nomination. If none qualifies, retain update0. Offline nomination does not replace saved CPU evaluation and complete-binding QASPER task selection against update0 and the stronger fixed acquisition baseline.",
+    "second_fit": "No second fit queued. Only after ordinary paired exposure closes, inspect supported dev changes that remain same-class, signed logit differences and stable positives. A cross-condition arm, if justified, must use this initialization/data/groups/row order, source weights/options/update cuts and same measured forwards. Maximum2 E2 fits; no sweep.",
+    "new_fit_is_task_improvement": false,
+    "last_observation_utc": "2026-11-02T18:43:05.980724+00:00",
+    "initial_dev_predictions_observed": 2215
+  },
+  "live_model": {
+    "owners": [
+      3789458
+    ],
+    "serial_only": true,
+    "offline_ledger_writes_allowed": false,
+    "restart_authorized": false,
+    "automatic_retry": false,
+    "second_fit_queued": false
+  },
+  "tests": {
+    "frozen_focused_suite": "38 passed no skips",
+    "new_native_grouped_cli": "1 passed",
+    "Ruff": "passed",
+    "mypy": "2 modules passed using existing CUDA Python imports",
+    "dependency_boundaries": "6 passed",
+    "failures_retained": "Base tests had14 environment skips; first CUDA tests lacked HTTP dependencies; first new native grouped test failed from temporary ledger preparation. First admission compared Python tuples to JSON lists; canonical JSON comparison preserves every value and passes. Corrected environment/test setup passed; no experimental model first attempt retried."
+  },
+  "failure_reflection": {
+    "data_audit": "First schedule comparison failed because Python tuples and JSON lists differ; normalized JSON representation preserves all values. Original failed script/log/time retained.",
+    "test_environment": "Used existing HTTP package path with CUDA environment; no new packages/services. New GPU CLI test temporary ledger now initialized explicitly.",
+    "scientific": "Fixed policy acquisition matters before learned training. Overall conditional accuracy hides class imbalance. Preserve stable positives and ordinary unit coverage before adding pair-relative objectives."
+  },
+  "cost": {
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "prelaunch_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/prelaunch-settlement-v1.json",
+    "new_offline_cpu_recorded_once": 307.56,
+    "earlier_this_round_settlements": {
+      "prefix_prepare_cpu": 0.52,
+      "prefix_suffix_residual_and_e2_entry_prelaunch_cpu": 67.532020661
+    },
+    "e2_entry_native_cpu_already_recorded": 1763.675672773,
+    "e2_entry_client_residual_cpu_already_recorded": 15.255174511999954,
+    "new_suffix_known_generation_tokens_already_recorded": 66558,
+    "new_unknown_usage": 0,
+    "live_native_fit_phase": "milai_e2_ordinary_unit_fullpass_20261103_v1",
+    "new_pending_measured_cpu": 0,
+    "unmetered_cost": "author source review, inspection, style/type checks and reporting unknown not zero",
+    "historical_unknown_usage_preserved": true,
+    "limits_unchanged": true,
+    "nested_cost_not_added": true
+  },
+  "next_actions": [
+    "Observe the original E2 driver/native/PID through terminal state; do not start a second model or write offline ledger while live.",
+    "After closure, analyze all fixed dev checkpoints with source-family balanced unit metrics, supported change and stable strata; separate native conflicts and quantify operation/feedback retention.",
+    "Apply predeclared nomination then saved CPU and actual complete-binding QASPER task evaluation; compare with update0 and fixed prefix acquisition control.",
+    "Decide whether evidence warrants the one remaining matched E2 cross-condition fit; no automatic second arm.",
+    "Continue E3 current-policy TRAIN state aggregation and matched continued-old training, then autonomous Host and final confirmation."
+  ],
+  "remaining": [
+    "E2 matched decision and real task selection",
+    "E3 own-state64newTRAIN/128states cap and continued-old control",
+    "E4 strong fixed/rule/lightweight/main autonomous Host",
+    "E5 evidence-based View/lifecycle",
+    "final3seeds and source-family paired confirmation",
+    "LME-V2 actual451Reader/Judge then Mem2Act",
+    "paper tables/figures and only validated Product migration"
+  ],
+  "no_sha_validation": true,
+  "subagents": false,
+  "remote_written": false,
+  "Product_changed": false
+}

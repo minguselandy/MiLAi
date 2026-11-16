@@ -35,30 +35,45 @@ def _visible_request(app: FunctionalApplication, service: Any, row: dict[str, An
 
 
 def visible_cards(
-    app: FunctionalApplication,
+    app: FunctionalApplication | None,
     service: Any,
     current_source_ref: str,
+    *,
+    pending_maintenance: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
-    """Issue at most twelve actual visible requests as intent/progress cards."""
+    """Issue bounded application and existing explicit-save references, without rights."""
     cards = []
-    for row in app.progress.snapshot().values():
-        if not _visible_request(app, service, row):
+    if app is not None:
+        for row in app.progress.snapshot().values():
+            if not _visible_request(app, service, row):
+                continue
+            binding = row["binding"]
+            if binding["source_ref"] == current_source_ref:
+                continue
+            request_id = row["identity"]["call_id"]
+            cards.append(
+                {
+                    "request_id": request_id,
+                    "requirements": deepcopy(row["requirements"]),
+                    "binding": deepcopy(binding),
+                    "progress": _resume_result(
+                        request_id, row["request_progress"],
+                        lambda ref: service.source(ref) is not None,
+                    ),
+                    "user_fragments": service.source_fragments(binding["source_ref"]),
+                }
+            )
+    for pending in pending_maintenance or []:
+        refs = pending["source_refs"]
+        sources = [service.source(ref) for ref in refs]
+        if not refs or current_source_ref in refs or any(source is None for source in sources):
             continue
-        binding = row["binding"]
-        if binding["source_ref"] == current_source_ref:
-            continue
-        request_id = row["identity"]["call_id"]
-        cards.append(
-            {
-                "request_id": request_id,
-                "requirements": deepcopy(row["requirements"]),
-                "binding": deepcopy(binding),
-                "progress": _resume_result(
-                    request_id, row["request_progress"], lambda ref: service.source(ref) is not None
-                ),
-                "user_fragments": service.source_fragments(binding["source_ref"]),
-            }
-        )
+        cards.append({
+            **deepcopy(pending), "kind": "memory_maintenance",
+            "user_fragments": [part for ref, source in zip(refs, sources, strict=True)
+                               if source["role"] == "user"
+                               for part in service.source_fragments(ref)],
+        })
     return cards[-12:]
 
 
@@ -123,12 +138,24 @@ class HostRequestProgress:
             for _, row in self.rows()
         ]
 
+    def observation_messages(self) -> list[ToolMessage]:
+        """Actual visible query receipts already delivered in the request-progress frame."""
+        messages = []
+        for row in self.snapshot():
+            observed = row["business"].get("observation", {})
+            if "delivery_response" in observed:
+                message = ToolMessage.model_validate(observed["delivery_response"])
+                message.additional_kwargs = {
+                    **message.additional_kwargs, "milai_origin": "program_observation"}
+                messages.append(message)
+        return messages
+
     def _target(self, request: Any) -> dict[str, Any] | None:
         name, arguments = request.tool_call["name"], request.tool_call["args"]
         if name != "complete_label":
             field = "title" if self.app.workflow == "document_publication_v1" else "item_key"
             return {field: arguments[field]}
-        for message in reversed(request.state["messages"]):
+        for message in reversed([*request.state["messages"], *self.adapter.delivered_observations]):
             if not isinstance(message, ToolMessage) or message.name not in self.app.tool_names:
                 continue
             try:

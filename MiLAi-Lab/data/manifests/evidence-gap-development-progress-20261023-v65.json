@@ -1,0 +1,1236 @@
+{
+  "source_version": "3c892d30",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "remaining": "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.; Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.; Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.; New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.; Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.; Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.; LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.; Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables.",
+  "remaining_requirements": [
+    "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.",
+    "Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.",
+    "Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.",
+    "New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.",
+    "Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.",
+    "Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.",
+    "LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.",
+    "Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables."
+  ],
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Original batch034 completed all12 positions and both driver/child exited. Source-first and actual-output review plus one-time measured overhead settlement remain pending before original batch035. First64 collection/accounting closed without sampling or training. Continue full128-source train pool and4 original dev batches before once-only quota/seed preparation. First32, saved CPU/train and Host pilot remain closed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "status": "ACTIVE;ORIGINAL_FEEDBACK_V2_FIRST64_COLLECTION_VERIFIED;FRONTIER128_BATCH034_EXITED_REVIEW_PENDING",
+  "observed_at": "2026-10-25T03:10:58.922611+00:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v64.json",
+  "previous_turn_classification": "progress",
+  "current_turn_progress": "Closed batch033 facts/stored-version review and original64 collection audit. All64 declared histories and381 positions verified;400 initial+1667 post observations.108 later ordinary positions have arrivals but87 execute no retrieval. Costs reconciled once; stored fixtures remain distinct from learned Writer quality. Started original batch034 at128 frontier. Batch034 subsequently completed12 positions and driver/child exited; source/output review pending.",
+  "closed_batch": {
+    "split": "train",
+    "index": 33,
+    "cohort_frontier": 64,
+    "groups": [
+      "memops_A07"
+    ],
+    "planned_positions": 12,
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/train/batch-033",
+    "review": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033-review.json",
+    "status": "CLOSED_BATCH033_MECHANICS_SOURCE_AND_STORED_VERSION_FINDINGS_REVIEWED;READ_VS_DELIVER_VS_EXACT_OUTPUT_SEPARATE",
+    "position_status_counts": {
+      "FAILED": 1,
+      "COMPLETED": 11
+    },
+    "HTTP_requests": 27,
+    "known_generation_tokens": 99488,
+    "unknown_usage_increment": 0,
+    "host_HTTP_requests": 24,
+    "view_HTTP_requests": 3,
+    "local_model_forwards": 19,
+    "local_model_input_tokens": 114126,
+    "max_local_model_input_tokens": 9493,
+    "all_local_model_outputs_finite_and_untruncated": true,
+    "initial_state_occurrences": 13,
+    "post_operation_state_occurrences": 64,
+    "actual_decision_state_occurrences": 77,
+    "no_retrieval_positions": [
+      {
+        "history": "memops_A07",
+        "profile": "laya-rich",
+        "request": "stage-2",
+        "status": "COMPLETED"
+      }
+    ],
+    "training_labels_created": 0,
+    "counterfactual_branches_executed": 0,
+    "retrieval_calls_without_decision_state": [],
+    "semantic_findings": [
+      {
+        "history": "memops_A07",
+        "profile": "rules-rich",
+        "request": "stage-0",
+        "finding": "Actualall7initialSources andView supportquietdining/anniversary, nobirthdayexceptionyet; follow-upemptyaftersearch. FinalHTTP200length8192 with23168charactersincompletecontent/reasoning2698, notsalvaged. CorrectViewpartsnotfinalanswer."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "rules-rich",
+        "request": "stage-2",
+        "finding": "FreshHostframe afterearlyfailure (16arrivals,nopriortoolmessages). Actualretrievalreturnsbirthdayproposal/exception/currentquietcorner plusquerytextandotherlatebodies. Finalusualpref/tentative-notconfirmed/one-offexception distinctiongrounded. Saysspecificpastexperiencesnotinreturnedmemory; fullbankhasanniversary/weekdaypreference, notdelivered. GeneratedlateViewcontainsadditionalexperiencecontentbutmaterialbudgetrejectsdelivery. NotmatchedHosthistory withothercollectors."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "rules-rich",
+        "request": "record-current",
+        "finding": "Actualhistorical1andcurrent2storedviews delivered withverifiedunitpayloads, plusordinarySources. Hostanswersmixedprofile/preferences/events summaryratherthanexactcurrentunit, despiteuserexplicitexactrequest; itsqueryweakenswordingtoverbatimornear-verbatim. Retrievaltargetpresent, outputtransformationfailure. No learnedWriter claim."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "rules-rich",
+        "request": "record-first",
+        "finding": "Actualhistoricalrevision1delivered, current2alsopresent. Finalquotesfirstsavedunitliterally (afterformatting), doesnotreplacewithcurrentsummary. ActualStoreprovenance verified."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "laya-rich",
+        "request": "stage-0",
+        "finding": "Twoactualretrievals returnfirst4sourcescontainingpartnerintro/anniversary twice. Finalquietsmall/conversationpreference andspecificdinnergrounded; nobirthdayexceptionyet trueatearlyfrontier. No birthdate/confirmedplaninvented."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "laya-rich",
+        "request": "stage-2",
+        "finding": "No newretrieval despite16arrivals/priortools. Stablepreference/oldanniversarycorrect, butfalseclaimnobirthdayideas/exception despiteexplicitlaterproposal/willingness. Preferenceunchangednotproofprocessingexception."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "laya-rich",
+        "request": "record-current",
+        "finding": "Independentbankcurrent2storedunit delivered; finalexactlyequalstargetunitpayload. HISTORYdirectory alsoqueried, notitselfbodyread. Rawinternalrenderingprefix outsidepayloadclaim."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "laya-rich",
+        "request": "record-first",
+        "finding": "HISTORYenumeratesversions; actualREAD13succeedsandlastcontrolobservationcontainsrevision1alongsidecurrent2. HANDOFF_SELECT1thenreturns onlycurrent2; finalquotescurrentpayloadasfirst. Failureatdeliveryselection, unlikebatch027wherefirstbodywasnotread. No model-full-textvisibilityclaim beyondactualopenedoperation/versionmetadata; no counterfactualwinner."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "stage-0",
+        "finding": "Onecontextpacketall7initialSources. Finalquietpreference/anniversary andabsenceofbirthdaydetails appropriateatearlyfrontier; asksforfutureinfo withoutinventingplan."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "stage-2",
+        "finding": "Oneactualretrieval deliverssource-session3birthdayproposal/exception plusoldHostcontext. PriorHosttoolhistorypreservesanniversary. Finalsupportsusualpref,concreteexperience,tentativeFridaygroupideaandwillingexceptionwithoutclaimingpreferenceflip orconfirmedbooking. Actualsourcesgrounded, no method-widewin."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "record-current",
+        "finding": "Current2semantic_view delivered alongsideordinarySources. Finalquotescorrectcurrentunitpayloadliterally; doesnotreconstructprofile. ActualindependentStoreseed/database verified."
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "record-first",
+        "finding": "No historical1bodydelivered; packetordinarySourcepluscurrent2semantic_view. Finalexactlyequalscurrent2payload ratherthanrequestedfirst1. Storedunitcopyisnotcorrectversionselection; no ordinary-sourcecoincidence acceptedasversionread."
+      }
+    ],
+    "source_review_provenance": {
+      "artifact": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033-source-pre-review.json",
+      "scope": "OriginalsingleMemOpshistory/4requests percollector.7+16 Sources read; two independent23-source recordrequests literal-equal accumulateddialogue; declared2storedrevisions inspected. No protectedsources/nativeannotations/externallookup."
+    },
+    "sensitive_detail_reporting": "Partner/familyfullnames,restaurantstreet andirrelevantclinicaldetails remain inignoredrawsources. Trackedprose usesroles, preference/exception/confirmation distinctions andversionprovenance. No reservation, familycontact ormedicalaction/advice.",
+    "host_arrival_review": {
+      "ordinary_stages": [
+        "stage-0",
+        "stage-2"
+      ],
+      "stage2_new_visible_sources_each": 16,
+      "stage2_prior_tool_history": {
+        "rules": false,
+        "laya": true,
+        "fixed_context": true
+      },
+      "stage2_retrieval_calls": {
+        "rules": 1,
+        "laya": 0,
+        "fixed_context": 1
+      },
+      "independent_stored_requests": [
+        "record-current",
+        "record-first"
+      ],
+      "stored_initial_source_rows_each": 23,
+      "scope": "Rulesfreshafterfailure, otherscontinuepriorHosthistory. Facts/independentstoredversions anddifferentframeconditions notinterchangeable."
+    },
+    "stored_record_review": {
+      "artifact": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033-stored-record-review.json",
+      "script": "artifacts/evidence-gap-20261023/review_stored_record_payloads_v1.py",
+      "actual_independent_banks": 6,
+      "actual_scripted_save_update_receipts": 12,
+      "setup_model_calls": 0,
+      "actual_store_versions_per_bank": [
+        1,
+        2
+      ],
+      "all_actual_store_unit_payloads_literal_equal": true,
+      "checks": [
+        {
+          "profile": "rules-rich",
+          "request": "record-current",
+          "target_revision": 2,
+          "delivered_target_stored_revision": true,
+          "ordinary_source_contains_same_target_text": false,
+          "answer_exact_target_unit_text": false,
+          "answer_contains_target_after_blockquote_prefix_removal": false,
+          "answer_contains_seed_revisions_after_blockquote_prefix_removal": [],
+          "answer_exact_seed_revision": null
+        },
+        {
+          "profile": "rules-rich",
+          "request": "record-first",
+          "target_revision": 1,
+          "delivered_target_stored_revision": true,
+          "ordinary_source_contains_same_target_text": false,
+          "answer_exact_target_unit_text": false,
+          "answer_contains_target_after_blockquote_prefix_removal": true,
+          "answer_contains_seed_revisions_after_blockquote_prefix_removal": [
+            1
+          ],
+          "answer_exact_seed_revision": null
+        },
+        {
+          "profile": "laya-rich",
+          "request": "record-current",
+          "target_revision": 2,
+          "delivered_target_stored_revision": true,
+          "ordinary_source_contains_same_target_text": false,
+          "answer_exact_target_unit_text": true,
+          "answer_contains_target_after_blockquote_prefix_removal": true,
+          "answer_contains_seed_revisions_after_blockquote_prefix_removal": [
+            2
+          ],
+          "answer_exact_seed_revision": 2
+        },
+        {
+          "profile": "laya-rich",
+          "request": "record-first",
+          "target_revision": 1,
+          "delivered_target_stored_revision": false,
+          "ordinary_source_contains_same_target_text": false,
+          "answer_exact_target_unit_text": false,
+          "answer_contains_target_after_blockquote_prefix_removal": false,
+          "answer_contains_seed_revisions_after_blockquote_prefix_removal": [
+            2
+          ],
+          "answer_exact_seed_revision": null
+        },
+        {
+          "profile": "fixed_context-rich",
+          "request": "record-current",
+          "target_revision": 2,
+          "delivered_target_stored_revision": true,
+          "ordinary_source_contains_same_target_text": false,
+          "answer_exact_target_unit_text": false,
+          "answer_contains_target_after_blockquote_prefix_removal": true,
+          "answer_contains_seed_revisions_after_blockquote_prefix_removal": [
+            2
+          ],
+          "answer_exact_seed_revision": null
+        },
+        {
+          "profile": "fixed_context-rich",
+          "request": "record-first",
+          "target_revision": 1,
+          "delivered_target_stored_revision": false,
+          "ordinary_source_contains_same_target_text": true,
+          "answer_exact_target_unit_text": false,
+          "answer_contains_target_after_blockquote_prefix_removal": false,
+          "answer_contains_seed_revisions_after_blockquote_prefix_removal": [
+            2
+          ],
+          "answer_exact_seed_revision": 2
+        }
+      ],
+      "scope": "Read-only SQLite mode=ro. Actual fixture save/update receipts and persisted unit payloads checked literally. Internal rendered content has unitID/role prefixes; exactness claims apply unit payloads, not full raw rendering/JSON. Blockquote-prefix removal only checks quoted payloads. Directory metadata and identical ordinary Source text are not historical body reads. Fixture operations are not learned Writer results."
+    },
+    "historical_read_then_wrong_delivery": {
+      "historical_read_receipt": {
+        "ok": true,
+        "status": "opened",
+        "index": 13
+      },
+      "observed_versions_before_handoff": [
+        {
+          "item_index": 1,
+          "kind": "semantic_view",
+          "selected": true,
+          "revision": 2,
+          "version_view": "current_at_snapshot"
+        },
+        {
+          "item_index": 13,
+          "kind": "semantic_view",
+          "selected": true,
+          "revision": 1,
+          "version_view": "historical_exact_revision"
+        }
+      ],
+      "offered_handoff_actions": [
+        "handoff",
+        "handoff_select_1",
+        "handoff_select_13"
+      ],
+      "actual_handoff": "handoff_select_1"
+    },
+    "reflection_and_disposition": {
+      "frozen_collection_unchanged": true,
+      "training_labels_created": 0,
+      "counterfactual_branches_executed": 0,
+      "no_manual_winner_nominations": true,
+      "next": "Auditclosed000-033 againstoriginal64cohort, includingactualstate/updatecoverageandcosts; settlecurrentmeasuredoverheadonce, thenoriginalbatch034 at128frontier. No branchpreparationbeforefull128trainandoriginaldev. Preserve1truncation,9budgetrejections andversion/outputfailures."
+    },
+    "retrieval_calls": 13,
+    "actual_host_receipts_verified": true,
+    "explicit_failed_operations": [
+      {
+        "history": "memops_A07",
+        "profile": "rules-rich",
+        "request": "stage-2",
+        "operation": {
+          "step": 6,
+          "selected": "refresh_view",
+          "kind": "REFRESH_VIEW",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      },
+      {
+        "history": "memops_A07",
+        "profile": "rules-rich",
+        "request": "record-current",
+        "operation": {
+          "step": 6,
+          "selected": "read_2",
+          "kind": "READ",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      },
+      {
+        "history": "memops_A07",
+        "profile": "rules-rich",
+        "request": "record-first",
+        "operation": {
+          "step": 7,
+          "selected": "refresh_view",
+          "kind": "REFRESH_VIEW",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "stage-2",
+        "operation": {
+          "step": 3,
+          "selected": "context_3",
+          "kind": "READ",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "stage-2",
+        "operation": {
+          "step": 4,
+          "selected": "context_4",
+          "kind": "READ",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "record-current",
+        "operation": {
+          "step": 3,
+          "selected": "context_2",
+          "kind": "READ",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "record-current",
+        "operation": {
+          "step": 4,
+          "selected": "context_5",
+          "kind": "READ",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "record-first",
+        "operation": {
+          "step": 3,
+          "selected": "context_2",
+          "kind": "READ",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      },
+      {
+        "history": "memops_A07",
+        "profile": "fixed_context-rich",
+        "request": "record-first",
+        "operation": {
+          "step": 4,
+          "selected": "context_5",
+          "kind": "READ",
+          "status": "material_budget_exhausted",
+          "reason": null,
+          "error_type": null
+        }
+      }
+    ],
+    "operation_failure_summary_coverage": "Explicit operation summaries present from batch011; missing older summaries are not zero failure evidence."
+  },
+  "feedback_collection": {
+    "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+    "source_version": "2a179b58",
+    "split": "train",
+    "batch_index": 34,
+    "groups": [
+      "musique-family-000706",
+      "memops_A20"
+    ],
+    "planned_positions": 12,
+    "completed_positions_observed": 12,
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/train/batch-034",
+    "frozen_recipe_unchanged": true,
+    "full128_pool_branch_preparation": "NOT_STARTED; do once after declared collection with original quotas/seed, no hand-picked binding winners.",
+    "cohort_frontier": 128,
+    "status": "DRIVER_COMPLETED;SOURCE_AND_OUTPUT_REVIEW_PENDING"
+  },
+  "active_processes": [],
+  "accounting": {
+    "closed_batch_model_CPU_already_billed": 1366.1214846100302,
+    "closed_batch_whole_child_CPU_not_additive": 1413.031395,
+    "closed_batch_overhead": {
+      "status": "SETTLED_ONCE_WITH_NO_NEURAL_JOB_ACTIVE",
+      "phase": "evidence_gap_20261025_original_feedback_v2_train033_closed_overhead",
+      "measures": {
+        "cpu_seconds": 47.6901110349698,
+        "measured_phases": 9,
+        "runs": 1
+      },
+      "entries": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033.json",
+          "field": "startup_and_child_cpu_seconds_pending",
+          "cpu_seconds": 46.90991038996981
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033.json",
+          "field": "preflight_children_cpu_seconds_pending",
+          "cpu_seconds": 0.037579999999999995
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033.json",
+          "field": "coordinator_cpu_seconds_pending",
+          "cpu_seconds": 0.03406723799999999
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033-review.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.32741146
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033-review.json",
+          "field": "semantic_annotation_cpu_seconds_pending",
+          "cpu_seconds": 0.009113746999999998
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033-source-pre-review.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.0010869319999999988
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033-stored-record-review.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.09490244
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/frontier64-collection-review.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.27482012699999997
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/frontier64-collection-review.json",
+          "field": "coverage_detail_cpu_seconds_pending",
+          "cpu_seconds": 0.0012187009999999991
+        }
+      ],
+      "model_CPU_already_billed_not_rebilled": 1366.1214846100302,
+      "known_HTTP_tokens_not_rebilled": 99488,
+      "no_sha_validation": true,
+      "scope": "Whole child minus actual ledger CPU delta plus preflight/coordinator, successful mechanical/semantic/stored-record audit and new source64 aggregation/coverage detail CPU. No previous model/review/first32 cost rebilled. Unmeasured interpreter, exploratory reads, authoring and reporting/settlement CPU remain unknown."
+    },
+    "frontier32_accounting_report": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/frontier32-collection-review.json",
+    "frontier32_scope": "Still original000-015 only; no later batch or cost folded into that subtotal.",
+    "live_batch": "Batch034 runner closed; actual model/HTTP costs recorded by original runner. Remaining measured overhead awaits source/output review and one-time settlement.",
+    "unknowns": "Unmeasured interpreter, source/exploratory reads, authoring and reporting/settlement CPU, GPU time and prices remain unknown.",
+    "frontier64_accounting_report": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/frontier64-collection-review.json",
+    "frontier64_known_measured_CPU_subtotal": 47821.552382084,
+    "frontier64_scope": "Original000-033 collection plus measured follow-ups and prelaunch collision; first32 is a nested subset, not added again. Earlier preparation/selection/pilot separate; unknown costs retained."
+  },
+  "goal_complete": false,
+  "closed_collection_to_date": {
+    "batches": 34,
+    "source_groups": 64,
+    "source_group_ids": [
+      "memops_A02",
+      "memops_A04",
+      "memops_A07",
+      "memops_A13",
+      "memops_A14",
+      "memops_A22",
+      "memops_A29",
+      "memops_A33",
+      "memops_B01",
+      "memops_B02",
+      "memops_B03",
+      "memops_B05",
+      "memops_B06",
+      "memops_B12",
+      "memops_B21",
+      "memops_B25",
+      "memops_C02",
+      "memops_C05",
+      "memops_C10",
+      "memops_C23",
+      "memops_C26",
+      "memops_C27",
+      "memops_C29",
+      "memops_D11",
+      "memops_D17",
+      "memops_D19",
+      "memops_D20",
+      "memops_D23",
+      "memops_E01",
+      "memops_E07",
+      "memops_E10",
+      "memops_E11",
+      "memops_F07",
+      "memops_F08",
+      "memops_F13",
+      "memops_F14",
+      "musique-family-000047",
+      "musique-family-000090",
+      "musique-family-000104",
+      "musique-family-000116",
+      "musique-family-000148",
+      "musique-family-000272",
+      "musique-family-000275",
+      "musique-family-000312",
+      "musique-family-000384",
+      "musique-family-000395",
+      "musique-family-000402",
+      "musique-family-000420",
+      "musique-family-000423",
+      "musique-family-000431",
+      "musique-family-000462",
+      "musique-family-000470",
+      "musique-family-000522",
+      "musique-family-000550",
+      "musique-family-000555",
+      "musique-family-000648",
+      "musique-family-000652",
+      "musique-family-000689",
+      "musique-family-000738",
+      "musique-family-000743",
+      "musique-family-000764",
+      "musique-family-000766",
+      "musique-family-000782",
+      "musique-family-000796"
+    ],
+    "attempted_positions": 381,
+    "process_completed": 313,
+    "retained_failed": 68,
+    "HTTP_requests": 873,
+    "known_tokens": 3366835,
+    "unknown_usage_increment": 0,
+    "actual_decision_state_occurrences": 2067,
+    "zero_decision_calls": 19,
+    "independent_source_warning": "Declared group IDs, repeated collector positions, state observations and model forwards are distinct units. Process completion is not semantic correctness. Branch eligibility not yet assessed.",
+    "counterfactual_branches_executed": 0,
+    "training_labels_created": 0
+  },
+  "declared_collection_schedule_check": {
+    "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+    "read_scope": "Metadata only; no new source bodies or dispatch during check. CPU unmeasured.",
+    "train_batches": 68,
+    "dev_batches": 4,
+    "frontier32_batch_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "frontier32_groups": 32,
+    "frontier64_batches": 18,
+    "frontier128_batches": 34,
+    "next_batch014_positions": 12,
+    "next_batch015_positions": 6,
+    "first_frontier64_batch": 16,
+    "preparation_rule": "Full128-source collection before once-only quota/seed preparation, not at32 frontier."
+  },
+  "frontier32_collection_review": {
+    "artifact": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/frontier32-collection-review.json",
+    "script": "artifacts/evidence-gap-20261023/review_frontier32_collection_v1.py",
+    "status": "FIRST32_COLLECTION_INPUTS_AND_ACTUAL_STATE_COVERAGE_VERIFIED;NO_SELECTION_OR_LABELS",
+    "registered_groups": 32,
+    "all_declared_histories_literal_equal": true,
+    "no_duplicate_or_missing_history_or_position": true,
+    "collector_summary": {
+      "rules": {
+        "attempted_positions": 61,
+        "process_completed": 52,
+        "failed_positions": 9,
+        "positions_with_retrieval": 44,
+        "captured_calls": 45,
+        "initial_state_occurrences": 45,
+        "post_state_occurrences": 291,
+        "zero_decision_calls": 0,
+        "registered_groups": 32,
+        "groups_with_attempts": 32,
+        "groups_with_initial_state": 32,
+        "groups_with_post_state": 32,
+        "missing_initial_groups": [],
+        "missing_post_groups": []
+      },
+      "laya": {
+        "attempted_positions": 61,
+        "process_completed": 44,
+        "failed_positions": 17,
+        "positions_with_retrieval": 46,
+        "captured_calls": 91,
+        "initial_state_occurrences": 82,
+        "post_state_occurrences": 263,
+        "zero_decision_calls": 9,
+        "registered_groups": 32,
+        "groups_with_attempts": 32,
+        "groups_with_initial_state": 32,
+        "groups_with_post_state": 32,
+        "missing_initial_groups": [],
+        "missing_post_groups": []
+      },
+      "fixed_context": {
+        "attempted_positions": 61,
+        "process_completed": 52,
+        "failed_positions": 9,
+        "positions_with_retrieval": 42,
+        "captured_calls": 54,
+        "initial_state_occurrences": 52,
+        "post_state_occurrences": 209,
+        "zero_decision_calls": 2,
+        "registered_groups": 32,
+        "groups_with_attempts": 32,
+        "groups_with_initial_state": 32,
+        "groups_with_post_state": 32,
+        "missing_initial_groups": [],
+        "missing_post_groups": []
+      }
+    },
+    "aggregate": {
+      "attempted_positions": 183,
+      "process_completed": 148,
+      "failed_positions": 35,
+      "positions_with_retrieval": 132,
+      "captured_calls": 190,
+      "initial_state_occurrences": 179,
+      "post_state_occurrences": 763,
+      "zero_decision_calls": 11
+    },
+    "HTTP_requests": 409,
+    "known_generation_tokens": 1629571,
+    "unknown_generation_usage_increment": 0,
+    "unknown_embedding_usage_increment": 0,
+    "local_model_forwards": 339,
+    "local_model_input_tokens": 2026053,
+    "maximum_observed_local_model_input_tokens": 12445,
+    "actual_known_reference_cases": [
+      {
+        "batch": 14,
+        "history": "musique-family-000402",
+        "profile": "fixed_context-rich",
+        "stage": "corpus-11758",
+        "known_reference_reads": 1,
+        "termination_reason": "budget_exhausted"
+      }
+    ],
+    "scope_limits": [
+      "Counts are declared groups and state occurrences, not proof of statistical independence or task correctness.",
+      "Initial/post presence does not establish branch eligibility, condition quality, adequate known-evidence coverage or directional supervision.",
+      "Explicit known-reference reads do not count all knowledge implicit in queries or Host history.",
+      "Earlier reports without operation-status summaries are not treated as having zero operation failures."
+    ],
+    "branch_preparation_executed": false,
+    "quota_selection_executed": false,
+    "quota_eligible_state_count": null,
+    "selected_state_count": null,
+    "counterfactual_branches_executed": 0,
+    "new_training_labels_created": 0,
+    "new_feedback_training_draws": 0,
+    "full_goal_complete": false,
+    "first_review_failure": {
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/frontier32-collection-review.log",
+      "cause": "Counter(mapping) treated history dictionaries as counts; expected multiplicities must count mapping keys.",
+      "correction": "Counter(by_id.keys()) checks exactly one occurrence of every declared history. Experiment inputs/results unchanged; only this read-only report rerun.",
+      "failed_attempt_CPU": "unmeasured, not zero"
+    },
+    "accounting_verification": {
+      "status": "MEASURED_COLLECTION_AND_CLOSED_FOLLOWUPS_RECONCILED_IN_ORIGINAL_LEDGER",
+      "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "closed_batch_settlement_files": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-000-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-001-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-002-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-003-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-004-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-005-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-007-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-008-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-009-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-011-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-012-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-013-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-014-settlement.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-015-settlement.json"
+      ],
+      "settlement_phases_literal_equal_to_original_ledger": true,
+      "already_billed_child_compute_CPU_seconds": 22893.796010538874,
+      "settled_closed_followup_CPU_seconds": 662.9723986791251,
+      "prelaunch_failure_CPU_already_settled": 0.060029373999999996,
+      "known_measured_CPU_subtotal": 23556.828438591998,
+      "whole_child_CPU_nested_not_added": 23551.969275999996,
+      "serial_driver_wall_seconds_not_added_to_nested_timings": 11314.882784920745,
+      "report_CPU_settled_in_phase": "evidence_gap_20261025_original_feedback_v2_train015_closed_overhead",
+      "scope": "Collection dispatches000-015, measured follow-ups and the retained prelaunch log collision only. Earlier source/binding preparation, saved-model selection and Host pilot are separate records and are not included here. Unmeasured authoring/failed probes/interpreter and reporting work, service GPU time and monetary prices remain unknown."
+    },
+    "closed_budget_token_totals": {
+      "generation_known": 1629571,
+      "generation_charged": 1629571,
+      "embedding_known": 0,
+      "embedding_charged": 0,
+      "embedding_unknown": 0
+    },
+    "closed_budget_token_scope": "Literal differences of the16 closed budget-before/after snapshots. Known/charged token counters are not service GPU-time or monetary-cost measurements. This follow-up reporting CPU was unmeasured and did not write the original ledger.",
+    "state_count_definition": "Counts follow actual captured decision_input observations, not necessarily model forwards, executed bindings or eligible supervised rows."
+  },
+  "progress_reporting_failures": [
+    {
+      "cause": "First read-only v49 composition assumed optional zero-decision field in earliest reports; KeyError before write.",
+      "correction": "Use verified first32 aggregate plus explicit later lists."
+    },
+    {
+      "cause": "Second composition added a zero-decision list to integer; TypeError before write.",
+      "correction": "Use len of actual later lists, preserve call records separately."
+    },
+    {
+      "scope": "Readonly frontier assertion and local staging",
+      "failure": "registered_groups is an integer, not a list; git add used repository-root paths from Lab cwd. No ledger/model/source mutation occurred. Corrected schema access and relative paths.",
+      "CPU": "unmeasured;unknown"
+    }
+  ],
+  "progress_reporting_failure_scope": "Historical v49 failures retained. No experiment, ledger or source mutation from those failures; failed/report authoring CPU unmeasured, not zero.",
+  "frontier64_collection_review": {
+    "artifact": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/frontier64-collection-review.json",
+    "script": "artifacts/evidence-gap-20261023/review_frontier64_collection_v1.py",
+    "status": "FIRST64_COLLECTION_INPUTS_STATE_AND_COSTS_VERIFIED;NO_SELECTION_OR_LABELS",
+    "registered_groups": 64,
+    "batch_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33
+    ],
+    "all_declared_histories_literal_equal": true,
+    "no_duplicate_or_missing_history_or_position": true,
+    "all_driver_and_child_processes_exited": true,
+    "collector_summary": {
+      "rules": {
+        "attempted_positions": 127,
+        "process_completed": 106,
+        "failed_positions": 21,
+        "positions_with_retrieval": 94,
+        "captured_calls": 108,
+        "initial_state_occurrences": 108,
+        "post_state_occurrences": 630,
+        "zero_decision_calls": 0,
+        "registered_groups": 64,
+        "groups_with_initial_state": 64,
+        "groups_with_post_state": 64,
+        "missing_initial_groups": [],
+        "missing_post_groups": []
+      },
+      "laya": {
+        "attempted_positions": 127,
+        "process_completed": 96,
+        "failed_positions": 31,
+        "positions_with_retrieval": 98,
+        "captured_calls": 185,
+        "initial_state_occurrences": 170,
+        "post_state_occurrences": 542,
+        "zero_decision_calls": 15,
+        "registered_groups": 64,
+        "groups_with_initial_state": 64,
+        "groups_with_post_state": 64,
+        "missing_initial_groups": [],
+        "missing_post_groups": []
+      },
+      "fixed_context": {
+        "attempted_positions": 127,
+        "process_completed": 111,
+        "failed_positions": 16,
+        "positions_with_retrieval": 94,
+        "captured_calls": 126,
+        "initial_state_occurrences": 122,
+        "post_state_occurrences": 495,
+        "zero_decision_calls": 4,
+        "registered_groups": 64,
+        "groups_with_initial_state": 64,
+        "groups_with_post_state": 64,
+        "missing_initial_groups": [],
+        "missing_post_groups": []
+      }
+    },
+    "aggregate": {
+      "attempted_positions": 381,
+      "process_completed": 313,
+      "failed_positions": 68,
+      "positions_with_retrieval": 286,
+      "captured_calls": 419,
+      "initial_state_occurrences": 400,
+      "post_state_occurrences": 1667,
+      "zero_decision_calls": 19
+    },
+    "HTTP_requests": 873,
+    "known_generation_tokens": 3366835,
+    "budget_token_deltas": {
+      "generation_known_tokens": 3366835,
+      "generation_charged_tokens": 3366835,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0
+    },
+    "failure_types": {
+      "VLLM_CHAT_TRUNCATED": 64,
+      "JSON_ACTION_MALFORMED": 4
+    },
+    "local_model_forwards": 703,
+    "local_model_input_tokens": 4186264,
+    "maximum_observed_local_model_input_tokens": 12704,
+    "later_ordinary_request_coverage": {
+      "rules": {
+        "later_positions": 36,
+        "with_new_source_notice": 36,
+        "with_retrieval": 6,
+        "without_retrieval": 30,
+        "notice_without_retrieval": 30,
+        "prior_tool_messages": 35,
+        "no_prior_tool_messages": 1,
+        "process_completed": 27,
+        "failed": 9
+      },
+      "laya": {
+        "later_positions": 36,
+        "with_new_source_notice": 36,
+        "with_retrieval": 11,
+        "without_retrieval": 25,
+        "notice_without_retrieval": 25,
+        "prior_tool_messages": 31,
+        "no_prior_tool_messages": 5,
+        "process_completed": 26,
+        "failed": 10
+      },
+      "fixed_context": {
+        "later_positions": 36,
+        "with_new_source_notice": 36,
+        "with_retrieval": 4,
+        "without_retrieval": 32,
+        "notice_without_retrieval": 32,
+        "prior_tool_messages": 36,
+        "no_prior_tool_messages": 0,
+        "process_completed": 31,
+        "failed": 5
+      }
+    },
+    "later_request_coverage_totals": {
+      "positions": 108,
+      "with_new_source_notice": 108,
+      "with_retrieval": 21,
+      "without_retrieval": 87,
+      "scope": "Actualexecutedretrieval only, notintent; protocolfailedpositions retained. Continuation andprior-toolhistory separatelycounted. No taskcorrectnessorcausalclaim."
+    },
+    "later_request_context_breakdown": [
+      {
+        "profile": "fixed_context-rich",
+        "continuation_message_present": true,
+        "prior_tool_messages": true,
+        "positions": 36,
+        "with_retrieval": 4,
+        "without_retrieval": 32,
+        "no_retrieval_process_completed": 28,
+        "no_retrieval_failed": 4
+      },
+      {
+        "profile": "laya-rich",
+        "continuation_message_present": false,
+        "prior_tool_messages": false,
+        "positions": 5,
+        "with_retrieval": 5,
+        "without_retrieval": 0,
+        "no_retrieval_process_completed": 0,
+        "no_retrieval_failed": 0
+      },
+      {
+        "profile": "laya-rich",
+        "continuation_message_present": true,
+        "prior_tool_messages": true,
+        "positions": 31,
+        "with_retrieval": 6,
+        "without_retrieval": 25,
+        "no_retrieval_process_completed": 17,
+        "no_retrieval_failed": 8
+      },
+      {
+        "profile": "rules-rich",
+        "continuation_message_present": false,
+        "prior_tool_messages": false,
+        "positions": 1,
+        "with_retrieval": 1,
+        "without_retrieval": 0,
+        "no_retrieval_process_completed": 0,
+        "no_retrieval_failed": 0
+      },
+      {
+        "profile": "rules-rich",
+        "continuation_message_present": true,
+        "prior_tool_messages": true,
+        "positions": 35,
+        "with_retrieval": 5,
+        "without_retrieval": 30,
+        "no_retrieval_process_completed": 22,
+        "no_retrieval_failed": 8
+      }
+    ],
+    "actual_known_reference_cases": [
+      {
+        "batch": 14,
+        "history": "musique-family-000402",
+        "profile": "fixed_context-rich",
+        "stage": "corpus-11758",
+        "known_reference_reads": 1,
+        "termination_reason": "budget_exhausted"
+      }
+    ],
+    "explicit_operation_summary_coverage": {
+      "batches_with_summaries": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "batches_without_summaries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "covered_failure_counts": {
+        "view_rejected": 1,
+        "material_budget_exhausted": 61
+      }
+    },
+    "scope_limits": [
+      "Process completion is not task correctness; state occurrences are not independent sources or model forwards.",
+      "Initial/post presence is not branch eligibility, condition quality or directional supervision.",
+      "Source-arrival notices are counts, not evidence bodies. Prior Host history and failures differ across collectors; these are not causal comparisons.",
+      "Stored revisions are declared scripted fixture operations, not learned Writer outputs.",
+      "Missing old operation summaries are not zero-failure evidence; explicit reference counts exclude implicit prior knowledge.",
+      "First32 report remains unchanged and is not rerun or rebilled. Source64 totals include those same runs once.",
+      "All34 closed overhead settlement phases were reconciled after batch033 settlement. GPU time, monetary prices and unmeasured work remain unknown."
+    ],
+    "branch_preparation_executed": false,
+    "quota_selection_executed": false,
+    "quota_eligible_state_count": null,
+    "selected_state_count": null,
+    "counterfactual_branches_executed": 0,
+    "new_training_labels_created": 0,
+    "new_feedback_training_draws": 0,
+    "full_goal_complete": false,
+    "accounting_verification": {
+      "status": "MEASURED_COLLECTION_AND_CLOSED_FOLLOWUPS_RECONCILED_IN_ORIGINAL_LEDGER",
+      "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "settlement_phases": [
+        "evidence_gap_20261025_original_feedback_v2_train000_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train001_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train002_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train003_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train004_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train005_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train006_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train007_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train008_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train009_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train010_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train011_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train012_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train013_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train014_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train015_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train016_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train017_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train018_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train019_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train020_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train021_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train022_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train023_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train024_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train025_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train026_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train027_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train028_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train029_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train030_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train031_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train032_closed_overhead",
+        "evidence_gap_20261025_original_feedback_v2_train033_closed_overhead"
+      ],
+      "settlement_phases_literal_equal_to_original_ledger": true,
+      "prelaunch_failure_phase": "evidence_gap_20261025_original_feedback_v2_train002_prelaunch_log_collision",
+      "prelaunch_failure_CPU_already_settled": 0.060029373999999996,
+      "already_billed_child_compute_CPU_seconds": 46427.38735944983,
+      "settled_closed_followup_CPU_seconds": 1394.1049932601763,
+      "known_measured_CPU_subtotal": 47821.552382084,
+      "whole_child_CPU_nested_not_added": 47810.21992,
+      "serial_driver_wall_seconds_not_added_to_nested_timings": 22970.13679282181,
+      "report_CPU_settled_in_phase": "evidence_gap_20261025_original_feedback_v2_train033_closed_overhead",
+      "first32_subset_included_once_not_added_again": true,
+      "scope": "Collection000-033, measured follow-ups and retained prelaunch collision only. Earlier source/binding preparation, saved-model selection and Host pilot are separate. Unmeasured failed/exploratory/interpreter/author/reporting CPU, provider GPU time and monetary prices remain unknown. This reconciliation did not add another ledger phase."
+    },
+    "declared_stored_record_task_count": 12,
+    "actual_stored_record_audits": [
+      {
+        "batch": 27,
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-027-stored-record-review.json",
+        "checks": [
+          {
+            "profile": "rules-rich",
+            "request": "record-current",
+            "target_revision": 2,
+            "delivered_target_stored_revision": true,
+            "answer_contains_target_after_blockquote_prefix_removal": true
+          },
+          {
+            "profile": "rules-rich",
+            "request": "record-first",
+            "target_revision": 1,
+            "delivered_target_stored_revision": true,
+            "answer_contains_target_after_blockquote_prefix_removal": true
+          },
+          {
+            "profile": "laya-rich",
+            "request": "record-current",
+            "target_revision": 2,
+            "delivered_target_stored_revision": true,
+            "answer_contains_target_after_blockquote_prefix_removal": true
+          },
+          {
+            "profile": "laya-rich",
+            "request": "record-first",
+            "target_revision": 1,
+            "delivered_target_stored_revision": false,
+            "answer_contains_target_after_blockquote_prefix_removal": false
+          },
+          {
+            "profile": "fixed_context-rich",
+            "request": "record-current",
+            "target_revision": 2,
+            "delivered_target_stored_revision": false,
+            "answer_contains_target_after_blockquote_prefix_removal": false
+          },
+          {
+            "profile": "fixed_context-rich",
+            "request": "record-first",
+            "target_revision": 1,
+            "delivered_target_stored_revision": false,
+            "answer_contains_target_after_blockquote_prefix_removal": false
+          }
+        ]
+      },
+      {
+        "batch": 33,
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033-stored-record-review.json",
+        "checks": [
+          {
+            "profile": "rules-rich",
+            "request": "record-current",
+            "target_revision": 2,
+            "delivered_target_stored_revision": true,
+            "answer_contains_target_after_blockquote_prefix_removal": false
+          },
+          {
+            "profile": "rules-rich",
+            "request": "record-first",
+            "target_revision": 1,
+            "delivered_target_stored_revision": true,
+            "answer_contains_target_after_blockquote_prefix_removal": true
+          },
+          {
+            "profile": "laya-rich",
+            "request": "record-current",
+            "target_revision": 2,
+            "delivered_target_stored_revision": true,
+            "answer_contains_target_after_blockquote_prefix_removal": true
+          },
+          {
+            "profile": "laya-rich",
+            "request": "record-first",
+            "target_revision": 1,
+            "delivered_target_stored_revision": false,
+            "answer_contains_target_after_blockquote_prefix_removal": false
+          },
+          {
+            "profile": "fixed_context-rich",
+            "request": "record-current",
+            "target_revision": 2,
+            "delivered_target_stored_revision": true,
+            "answer_contains_target_after_blockquote_prefix_removal": true
+          },
+          {
+            "profile": "fixed_context-rich",
+            "request": "record-first",
+            "target_revision": 1,
+            "delivered_target_stored_revision": false,
+            "answer_contains_target_after_blockquote_prefix_removal": false
+          }
+        ]
+      }
+    ]
+  }
+}

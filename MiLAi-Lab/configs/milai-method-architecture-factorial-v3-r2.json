@@ -1,0 +1,87 @@
+{
+  "name": "milai-method-architecture-factorial-v3-r2",
+  "base_config": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/configs/milai-method-architecture-dev-v2.json",
+  "sources": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/data/fixtures/milai-method-architecture-screening-v1.jsonl",
+  "replicates": 1,
+  "data_role": "controlled development diagnostics on three declared mechanism cases; not heldout",
+  "cases": [
+    {
+      "id": "exception-withdrawal",
+      "owner": "method-screen-archive",
+      "seed_sessions": [
+        0,
+        1
+      ],
+      "update_session": 2,
+      "queries": [
+        {
+          "id": "current",
+          "kind": "current_scope",
+          "question": "公开课结束后，练习复印件和纸本原稿在室内阅览分别要戴手套吗？"
+        },
+        {
+          "id": "withdrawn",
+          "kind": "history_explanation",
+          "question": "公开课期间曾有什么免戴手套安排，为什么现在不再适用？"
+        },
+        {
+          "id": "preserved",
+          "kind": "non_target",
+          "question": "数字副本室内阅览和外借纸本的规定分别是什么，有变化吗？"
+        }
+      ]
+    },
+    {
+      "id": "alternative-support",
+      "owner": "method-screen-projection",
+      "seed_sessions": [
+        0
+      ],
+      "update_session": 1,
+      "queries": [
+        {
+          "id": "remaining-route",
+          "kind": "alternative_support",
+          "question": "市电插座停用后，投影还能开吗，依靠哪些条件？"
+        },
+        {
+          "id": "shared-condition",
+          "kind": "required_premise",
+          "question": "按当前规程，如果大电池有电但冷却风扇不转，能开投影吗？"
+        },
+        {
+          "id": "preserved",
+          "kind": "non_target",
+          "question": "字幕屏受市电停用影响吗，它依赖投影的冷却风扇吗？"
+        }
+      ]
+    },
+    {
+      "id": "shared-condition",
+      "owner": "method-screen-walk",
+      "seed_sessions": [
+        0
+      ],
+      "update_session": 1,
+      "queries": [
+        {
+          "id": "current",
+          "kind": "derived_effect",
+          "question": "栈桥封闭但向导仍在场时，湖边和屋顶路线分别能否开展？"
+        },
+        {
+          "id": "prerequisite",
+          "kind": "shared_condition",
+          "question": "按当前规则，假如向导离开而栈桥重新开放，湖边和屋顶路线能开展吗？"
+        },
+        {
+          "id": "preserved",
+          "kind": "non_target",
+          "question": "室内标本展示现在开放吗，是否依赖向导到场？"
+        }
+      ]
+    }
+  ],
+  "repeat_index": 2,
+  "repeat_protocol": "two symmetric corrected-history-selection repeats; same actual original conditioned seed and arrival; no new seed formation; report/capture projection common to all cells"
+}

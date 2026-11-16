@@ -1,0 +1,73 @@
+{
+  "status": "C_CLOSED_AUTHOR_FEEDBACK_PREPARED_NOT_FITTED",
+  "source_version": "2e510e32",
+  "collector_version": "8458725a",
+  "source_groups": 8,
+  "split": "train",
+  "states": 37,
+  "branches": 112,
+  "original_planned_branches": 111,
+  "adaptive_additional_binding": 1,
+  "comparisons": 114,
+  "tool_completed": 112,
+  "before_equal": 112,
+  "host_readouts": {
+    "COMPLETED": 89,
+    "FAILED": 23
+  },
+  "generation_tokens": 784737,
+  "unknown_usage_delta": 0,
+  "max_wire_tokens": 1721,
+  "return_limit_tokens": 2048,
+  "feedback": {
+    "answer": {
+      "feedback_states": 37,
+      "states_with_direction": 15,
+      "unknown_pairs": 60,
+      "tie_pairs": 27,
+      "directional_pairs": 27
+    },
+    "delivery": {
+      "feedback_states": 37,
+      "states_with_direction": 26,
+      "directional_pairs": 56,
+      "tie_pairs": 36,
+      "unknown_pairs": 22
+    }
+  },
+  "raw_state_inputs_unchanged": true,
+  "full_option_gold_added": false,
+  "reviewer": "Training-side author/source review; not independent or blind.",
+  "artifacts": {
+    "primary": "view-v4-c-branches-v1",
+    "remaining": "view-v4-c-branches-remaining-v1",
+    "additional": "view-v4-c-additional-v2",
+    "setup_failure": "view-v4-c-additional-run-plan-v1.json",
+    "reviews": "view-v4-c-author-review-v1/final-reviews-v1.json",
+    "costs": "view-v4-c-author-review-v1/costs-and-closure-v1.json",
+    "feedback": "data/view-v4-c-feedback-v1",
+    "matched_data": "data/view-v4-feedback-fitting-v1"
+  },
+  "artifact_root": "artifacts/host-intent-retrieval-v3",
+  "training": {
+    "status": "NOT_STARTED",
+    "common_initialization": "fitting/t1-native-shared-seed0-v1/checkpoint",
+    "seed": 0,
+    "feedback_states": 37,
+    "shared_old_replay": 37,
+    "rows_per_arm": 74,
+    "optimizer_updates": 10,
+    "draws_each_arm": 160,
+    "dev_rows": 860,
+    "answer_delivery_same_pool": true,
+    "replay_loss_relative_mass": 0.25,
+    "continued_ce_scope": "Old operation states; difference includes state coverage and supervision. Lengths only approximately matched."
+  },
+  "limitations": [
+    "23 failed readouts retained; answer comparisons involving failures remain unknown.",
+    "Material-only delivery preferences can be known with failed Host; coverage differs explicitly.",
+    "One fourth binding was adaptively nominated; not a retry; state weight normalized.",
+    "Known token totals include failures; untimed review/import/setup overhead remains unknown.",
+    "No W5 model fitted yet. D/E, E1-E5 broader comparisons and external baseline/STATE work remain incomplete."
+  ]
+}

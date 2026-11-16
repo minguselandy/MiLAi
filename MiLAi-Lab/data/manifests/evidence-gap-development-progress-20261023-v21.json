@@ -1,0 +1,99 @@
+{
+  "status": "ACTIVE;ORIGINAL_FEEDBACK_V2_INITIALIZATION_BOUND;MATCHING_TRAIN_RUNNING",
+  "observed_at": "2026-10-23T18:38:16.258534+00:00",
+  "source_version": "45829497",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v20.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress:allprimarydev candidates verified,262selected,feesclosed,fullmatchingtrainstarted",
+  "feedback_initialization_binding": {
+    "manifest": "data/manifests/training-generalization-feedback-initialization-binding-v1.json",
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-initialization-binding-v1/binding.json",
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+    "frozen_source_version": "2a179b58",
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+    "selected_update": 262,
+    "bound_config": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v2/bound-config.json",
+    "only_config_addition": "entrypoints.functional.memory_control.checkpoint",
+    "train_batches": 68,
+    "dev_batches": 4,
+    "source_cohorts": [
+      32,
+      64,
+      128
+    ],
+    "collectors": [
+      "rules",
+      "laya",
+      "fixed_context"
+    ],
+    "fitting_updates_each": 192,
+    "fitting_draws_each": 3072,
+    "preflight": "PASS_ACTUAL_FROZEN_PREPARE_LOCAL_TOKENIZER_AND_POLICY_CONSTRUCTION",
+    "scope": "Same original v2 source/quota/branch/readout/replay/fit protocol; only the previously absent actual selected checkpoint is supplied. No new Host instructions, compact representation or executor behavior folded into the frozen experiment. No collection, feedback labels or fitting performed."
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train",
+      "driver_json": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-driver.json",
+      "driver_pid": 798921,
+      "child_pid": 798926,
+      "session": 52857,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 43,
+      "planned": 4886,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_MATCHING_SELECTED_TRAIN_LIVES",
+    "previous_closed_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u524-v1/settlement.json",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-initialization-binding-v1/binding.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0035351700000000007
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-initialization-binding-v1/command-compute.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 9.159894999999999
+      }
+    ],
+    "measured_cpu_seconds": 9.163430169999998,
+    "ledger_recorded": false,
+    "scope": "Checkpoint binding and whole frozen preflight child; nested prepare CPU not added again. No weights/forward/HTTP. Other exploratory/authoring/reporting overhead remains unknown.",
+    "no_sha_validation": true
+  },
+  "remaining": "Matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured. New Host instruction condition still needs a declared real comparison; no F1/F2/Host quality fix claimed. Originalfeedback initialization now bound; collection, state/source-grounded review and allfits remain unexecuted.",
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Matching4886selected-train is sole neuraljob. No secondneural or offline settlement whilelive; verify actualPID/files, never stale-session restart. Afterterminal run verify_selected_train_v1.py using originalfrozenhelpers, reconcile terminalcosts, then unchanged remaining plan. Allolddevcandidates and Host-only diagnostic stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

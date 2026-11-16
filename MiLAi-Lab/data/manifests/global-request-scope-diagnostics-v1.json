@@ -1,0 +1,148 @@
+{
+  "status": "CLOSED",
+  "purpose": "Shared request-mode diagnostic; first outputs preserved. Later conditions overlap earlier development inputs, not independent quality samples.",
+  "runs": [
+    {
+      "run": "scope-canary-v1",
+      "planned": 8,
+      "attempted": 8,
+      "completed": 8,
+      "mismatches": [
+        {
+          "case": "save",
+          "mismatches": {
+            "requires_memory_result": {
+              "expected": true,
+              "actual": false
+            }
+          },
+          "error": null
+        },
+        {
+          "case": "business_cancel",
+          "mismatches": {
+            "business_action_request": {
+              "expected": "perform",
+              "actual": "none"
+            }
+          },
+          "error": null
+        }
+      ],
+      "generation_calls": 8,
+      "generation_tokens": 5675,
+      "new_unknown": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "semantic_writes": 0,
+      "business_mutations": 0,
+      "forget_mutations": 0
+    },
+    {
+      "run": "scope-canary-v2",
+      "planned": 8,
+      "attempted": 8,
+      "completed": 8,
+      "mismatches": [
+        {
+          "case": "save",
+          "mismatches": {
+            "requires_memory_result": {
+              "expected": true,
+              "actual": false
+            }
+          },
+          "error": null
+        },
+        {
+          "case": "business_cancel",
+          "mismatches": {
+            "business_action_request": {
+              "expected": "perform",
+              "actual": "continue_if_unfinished"
+            }
+          },
+          "error": null
+        }
+      ],
+      "generation_calls": 8,
+      "generation_tokens": 8883,
+      "new_unknown": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "semantic_writes": 0,
+      "business_mutations": 0,
+      "forget_mutations": 0
+    },
+    {
+      "run": "scope-canary-v3",
+      "planned": 8,
+      "attempted": 8,
+      "completed": 8,
+      "mismatches": [
+        {
+          "case": "rule_cancel",
+          "mismatches": {
+            "allow_forgetting": {
+              "expected": false,
+              "actual": true
+            }
+          },
+          "error": null
+        }
+      ],
+      "generation_calls": 8,
+      "generation_tokens": 9127,
+      "new_unknown": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "semantic_writes": 0,
+      "business_mutations": 0,
+      "forget_mutations": 0
+    },
+    {
+      "run": "scope-canary-v4",
+      "planned": 8,
+      "attempted": 2,
+      "completed": 1,
+      "mismatches": [
+        {
+          "case": "assertion",
+          "mismatches": null,
+          "error": "Provider output incomplete: length"
+        }
+      ],
+      "generation_calls": 2,
+      "generation_tokens": 36506,
+      "new_unknown": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "semantic_writes": 0,
+      "business_mutations": 0,
+      "forget_mutations": 0
+    }
+  ],
+  "decision": "Do not increase thinking output budget: v4 second request looped to32768. Keep explicit forgetting guidance and model-visible JSON schema; use existing disabled thinking/greedy declaration for final finite normal story, retain classifier risk.",
+  "old_story_failures": {
+    "v3": {
+      "attempted": 1,
+      "generation_tokens": 6748,
+      "failure": "invalid prior memory source"
+    },
+    "v4": {
+      "attempted": 2,
+      "generation_tokens": 13676,
+      "failure": "classification length8192"
+    },
+    "v5": {
+      "attempted": 1,
+      "generation_tokens": 64210,
+      "failure": "false forgetting intent;4 semantic clauses actually committed;0 forget actions"
+    }
+  },
+  "raw_artifact_root": "artifacts/global-development"
+}

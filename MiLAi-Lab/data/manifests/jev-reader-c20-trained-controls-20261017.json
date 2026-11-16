@@ -1,0 +1,732 @@
+{
+  "status": "COMPLETED_TRAINING",
+  "models": {
+    "ce-c20-v1": {
+      "source_version": "cc8f8af6",
+      "run": {
+        "status": "COMPLETED",
+        "pid": 94497,
+        "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/decisions-c20-v1",
+        "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+        "seed": 0,
+        "physical_gpus": [
+          2,
+          3
+        ],
+        "device": "cuda",
+        "torch_version": "2.7.0+cu126",
+        "cuda_version": "12.6",
+        "precision": "float32",
+        "reference_compile": false,
+        "epochs": 4,
+        "batch_size": 4,
+        "gradient_accumulation": 4,
+        "max_len": 8192,
+        "head_max_len": 512,
+        "train_states": 602,
+        "dev_states": 223,
+        "encoder_lr": 2.5e-05,
+        "head_lr": 0.0001,
+        "freeze_encoder": false,
+        "objective": "event-and-family-normalized soft-CE",
+        "calibration_test_loaded": false,
+        "http_requests": 0,
+        "optimizer_updates": 152,
+        "train_sequence_rows": 2408,
+        "train_input_tokens": 6740108,
+        "train_batch_forwards": 604,
+        "train_device_forwards": 1208,
+        "train_batch_attempts": 604,
+        "train_offered_rows": 2408,
+        "train_offered_tokens": 6740108
+      },
+      "history": [
+        {
+          "epoch": 0,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 12,
+              "first_remaining_candidate_accepted": 34,
+              "unnecessary_continue": 84,
+              "unsupported_exhaustion_stop": 4,
+              "unsupported_sufficient_stop": 7
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 10
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 0
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 2
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.04873737373737374,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 1,
+          "weighted_ce_mean": 2.321942022076477,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 79,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 121,
+              "unsupported_sufficient_stop": 7,
+              "unnecessary_continue": 3
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 20
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 2
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 57
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.3625,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 2,
+          "weighted_ce_mean": 1.5459222477733892,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 73,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 40,
+              "unsupported_sufficient_stop": 58,
+              "unnecessary_continue": 16
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 25
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 22
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 26
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.3460963804713805,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 3,
+          "weighted_ce_mean": 0.6615732542681585,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 81,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 46,
+              "unsupported_sufficient_stop": 40,
+              "unnecessary_continue": 14
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 26
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 17
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 38
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.37844065656565656,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 4,
+          "weighted_ce_mean": 0.3437265893042187,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 81,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 50,
+              "unsupported_sufficient_stop": 36,
+              "unnecessary_continue": 15
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 25
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 18
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 38
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.3810185185185185,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        }
+      ],
+      "compute": {
+        "wall_seconds": 848.707333624363,
+        "cpu_seconds": 1201.635965316,
+        "runs": 1,
+        "train_sequence_rows": 2408,
+        "train_input_tokens": 6740108,
+        "train_batch_forwards": 604,
+        "train_device_forwards": 1208,
+        "train_batch_attempts": 604,
+        "train_offered_rows": 2408,
+        "train_offered_tokens": 6740108,
+        "dev_forwards": 1115,
+        "dev_sequence_rows": 1115,
+        "dev_input_tokens": 3353230,
+        "dev_state_tokenizations": 1115,
+        "dev_state_tokens": 2987535,
+        "peak_rss_kib": 5351420,
+        "peak_cuda_allocated_bytes": [
+          17117993472,
+          13089237504
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/ce-c20-v1/checkpoint"
+    },
+    "linear-c20-v1": {
+      "source_version": "936fcc1e",
+      "run": {
+        "status": "COMPLETED",
+        "pid": 180117,
+        "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/decisions-c20-v1",
+        "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+        "seed": 0,
+        "physical_gpus": [
+          2,
+          3
+        ],
+        "device": "cuda",
+        "torch_version": "2.7.0+cu126",
+        "cuda_version": "12.6",
+        "precision": "float32",
+        "reference_compile": false,
+        "backend": "linear",
+        "epochs": 4,
+        "batch_size": 4,
+        "gradient_accumulation": 4,
+        "max_len": 8192,
+        "head_max_len": 512,
+        "train_states": 602,
+        "dev_states": 223,
+        "encoder_lr": 2.5e-05,
+        "head_lr": 0.0001,
+        "freeze_encoder": false,
+        "objective": "event-and-family-normalized soft-CE",
+        "calibration_test_loaded": false,
+        "http_requests": 0,
+        "optimizer_updates": 152,
+        "train_sequence_rows": 2408,
+        "train_input_tokens": 6740108,
+        "train_batch_forwards": 604,
+        "train_device_forwards": 1208,
+        "train_batch_attempts": 604,
+        "train_offered_rows": 2408,
+        "train_offered_tokens": 6740108
+      },
+      "history": [
+        {
+          "epoch": 0,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 13,
+              "unsupported_sufficient_stop": 47,
+              "first_remaining_candidate_accepted": 34,
+              "unnecessary_continue": 67,
+              "unsupported_exhaustion_stop": 6
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 7
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 4
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 2
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.055166245791245794,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 1,
+          "weighted_ce_mean": 2.1985938992611196,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 77,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 128,
+              "unnecessary_continue": 7
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 21
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 0
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 56
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.356428872053872,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 2,
+          "weighted_ce_mean": 0.9244262076592524,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 63,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 63,
+              "unnecessary_continue": 27,
+              "unsupported_sufficient_stop": 32
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 25
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 9
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 29
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.2922243265993265,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 3,
+          "weighted_ce_mean": 0.34424076756567656,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 62,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 54,
+              "unsupported_sufficient_stop": 50,
+              "unnecessary_continue": 23
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 23
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 14
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 25
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.2880260942760942,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 4,
+          "weighted_ce_mean": 0.19033827937433984,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 69,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 49,
+              "unsupported_sufficient_stop": 61,
+              "unnecessary_continue": 17
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 26
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 18
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 25
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.3170664983164983,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        }
+      ],
+      "compute": {
+        "wall_seconds": 790.3784339744598,
+        "cpu_seconds": 1166.400826751,
+        "runs": 1,
+        "train_sequence_rows": 2408,
+        "train_input_tokens": 6740108,
+        "train_batch_forwards": 604,
+        "train_device_forwards": 1208,
+        "train_batch_attempts": 604,
+        "train_offered_rows": 2408,
+        "train_offered_tokens": 6740108,
+        "dev_forwards": 1115,
+        "dev_sequence_rows": 1115,
+        "dev_input_tokens": 3353230,
+        "dev_state_tokenizations": 1115,
+        "dev_state_tokens": 2987535,
+        "peak_rss_kib": 5152776,
+        "peak_cuda_allocated_bytes": [
+          16108926464,
+          12350010368
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/linear-c20-v1/checkpoint"
+    },
+    "logits-c20-v1": {
+      "source_version": "e2aa1f37",
+      "run": {
+        "status": "COMPLETED",
+        "pid": 270240,
+        "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/decisions-c20-v1",
+        "base": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/models/qwen25-05b",
+        "epochs": 4,
+        "seed": 0,
+        "states_per_update": 16,
+        "batch_size": 2,
+        "gradient_accumulation": 8,
+        "learning_rate": 0.0001,
+        "lora_rank": 8,
+        "lora_alpha": 16,
+        "precision": "float32",
+        "max_len": 8192,
+        "gradient_checkpointing": true,
+        "checkpoint_reentrant": false,
+        "forward_counter_scope": "model entries; layer recomputations included in timings",
+        "loss": "full-vocabulary next-token soft-CE",
+        "train_states": 602,
+        "dev_states": 223,
+        "optimizer_updates": 152,
+        "train_offered_rows": 2408,
+        "train_completed_rows": 2408,
+        "train_offered_tokens": 7605736,
+        "train_device_forwards": 2408,
+        "calibration_test_loaded": false,
+        "http_requests": 0,
+        "generated_tokens": 0,
+        "preparation_chat_tokenizations": 825,
+        "preparation_letter_tokenizations": 16716,
+        "trainable_parameters": 1081344,
+        "total_parameters": 495114112
+      },
+      "history": [
+        {
+          "epoch": 0,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 35,
+              "first_remaining_candidate_accepted": 34,
+              "unnecessary_continue": 88
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 35
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 0
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 0
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.16723484848484851,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 1,
+          "weighted_ce_mean": 2.5484498978849266,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 61,
+              "unsupported_exhaustion_stop": 161,
+              "first_remaining_candidate_accepted": 34,
+              "unnecessary_continue": 1
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 0
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 1
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 60
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.2740530303030303,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 2,
+          "weighted_ce_mean": 2.2485471757939486,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 79,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 83,
+              "unsupported_sufficient_stop": 44,
+              "unnecessary_continue": 5
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 16
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 22
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 41
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.3677293771043772,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 3,
+          "weighted_ce_mean": 2.177472205455121,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 79,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 114,
+              "unsupported_sufficient_stop": 12,
+              "unnecessary_continue": 5
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 16
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 11
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 52
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.3697916666666667,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        },
+        {
+          "epoch": 4,
+          "weighted_ce_mean": 2.137833862407659,
+          "dev": {
+            "counts": {
+              "labelled": 223,
+              "accepted": 81,
+              "first_remaining_candidate_accepted": 34,
+              "unsupported_exhaustion_stop": 104,
+              "unsupported_sufficient_stop": 16,
+              "unnecessary_continue": 7
+            },
+            "strata": {
+              "missing_complement": {
+                "labelled": 135,
+                "accepted": 18
+              },
+              "reference_proof_complete": {
+                "labelled": 27,
+                "accepted": 12
+              },
+              "official_unanswerable_pool": {
+                "labelled": 61,
+                "accepted": 51
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 27,
+              "stop_exhausted": 61
+            },
+            "family_macro_acceptance": 0.3782091750841751,
+            "families": 24,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+          }
+        }
+      ],
+      "compute": {
+        "wall_seconds": 1837.2050680695102,
+        "cpu_seconds": 2510.503083722,
+        "runs": 1,
+        "train_offered_rows": 2408,
+        "train_completed_rows": 2408,
+        "train_offered_tokens": 7605736,
+        "train_device_forwards": 2408,
+        "preparation_chat_tokenizations": 825,
+        "preparation_letter_tokenizations": 16716,
+        "dev_forwards": 1115,
+        "dev_sequence_rows": 1115,
+        "dev_input_tokens": 3776125,
+        "dev_chat_tokenizations": 1115,
+        "dev_letter_tokenizations": 22595,
+        "peak_rss_kib": 3778660,
+        "peak_cuda_allocated_bytes": [
+          6301385216,
+          2732054528
+        ]
+      },
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/logits-c20-v1/checkpoint",
+      "option_mass": {
+        "0": {
+          "mean": 0.9996668196579801
+        },
+        "4": {
+          "mean": 0.9962063271368565
+        }
+      }
+    }
+  },
+  "same_families": 64,
+  "train_states": 602,
+  "dev_states": 223,
+  "seeds": [
+    0
+  ],
+  "scope": "Native/linear share exact sequences; decoder has same visible state/actions but a chat renderer and full-vocabulary loss. No end-to-end or calibrated probability claim."
+}

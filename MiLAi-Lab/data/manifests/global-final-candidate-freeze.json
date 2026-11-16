@@ -1,0 +1,36 @@
+{
+  "status": "FROZEN",
+  "frozen_at": "2026-10-14T13:16:24.914334+00:00",
+  "source_code": "8c893af3",
+  "source_directory": "/cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/source-retain-packs-v1",
+  "configs": {
+    "s0": "configs/milai-global-final-confirmation-s0-v1.json",
+    "pack": "configs/milai-global-final-confirmation-pack-v1.json"
+  },
+  "selection_manifest": "data/manifests/global-final-confirmation-selection.json",
+  "arms": {
+    "s0": "Source-only Unicode retrieval + original-question legacy Reader",
+    "pack": "SameSource-only retrieval/arrival + budgeted question evidence packs; no automaticsemantic maintenance"
+  },
+  "common_model": {
+    "base_url": "http://127.0.0.1:7862/v1",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 1.0,
+    "max_tokens": 8192,
+    "timeout": 300,
+    "enable_thinking": true,
+    "max_calls": 12
+  },
+  "common_context_tokens": 65536,
+  "benchmark_setting_differences": [
+    "experiment_name",
+    "config_version",
+    "evidence_policy"
+  ],
+  "basis": "DevelopmentS0=7/12Correct; S2+pack+C=7/12 at+19.2%totalpredictiontokens; source-onlypack=6/12 with2invalid,12answers,956365predictiontokens vs3034404. Selectpack as efficiencycandidate, not establishedqualitywinner; preserveall originalfailures/labels.",
+  "host_evidence": "Sharedcore actualbodydelivery verified on bothoriginalHostcases; normalstory andsomefinalanswerinterpretation/forgetting remainpartial.",
+  "heldout_semantic_content_accessed_before_freeze": false,
+  "confirmation_rule": "Complete histories of existing first2reservedusers; predetermined chronological thirds/full QA metadata rule. No method/config/selection tuning or rescoring from confirmation outcomes.",
+  "scope": "Exploratory confirmation over2independentuserhistories; no automaticProductpromotion.",
+  "preparation_compatibility_note": "Before any confirmationmodelcall, normalCLIprepare required session_prefix key. Set null inbothconfigs, preserving frozen complete-history/no-cap semantics; missingkey failure retained. No method/model/budget/questionselection changes."
+}

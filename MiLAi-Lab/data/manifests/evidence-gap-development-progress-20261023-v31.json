@@ -1,0 +1,110 @@
+{
+  "source_version": "3c892d30",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "remaining": "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.; Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.; Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.; New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.; Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.; Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.; LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.; Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables.",
+  "remaining_requirements": [
+    "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.",
+    "Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.",
+    "Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.",
+    "New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.",
+    "Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.",
+    "Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.",
+    "LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.",
+    "Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables."
+  ],
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Matching4886selected-train is sole neuraljob. No secondneural or offline settlement whilelive; verify actualPID/files, never stale-session restart. Afterterminal run verify_selected_train_v1.py using originalfrozenhelpers, reconcile terminalcosts, then unchanged remaining plan. Allolddevcandidates and Host-only diagnostic stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "status": "ACTIVE;ORIGINAL_FROZEN_FEEDBACK_V2_TRAIN_BATCH000_RUNNING",
+  "observed_at": "2026-10-24T16:43:15.754910+00:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v30.json",
+  "previous_turn_classification": "progress",
+  "current_turn_progress": "Verified no active prior neural process, original checkpoint-only binding, literal frozen source and batch/cohort identity, then dispatched the first unattempted original feedback-v2 collection batch.",
+  "feedback_collection": {
+    "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+    "source_version": "2a179b58",
+    "split": "train",
+    "batch_index": 0,
+    "groups": [
+      "memops_A29",
+      "memops_B05"
+    ],
+    "planned_positions": 12,
+    "completed_positions_observed": 8,
+    "active_position_observed": {
+      "history": "memops_B05",
+      "policy": "laya",
+      "interface": "rich",
+      "profile": "laya-rich",
+      "request": "stage-0"
+    },
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/train/batch-000",
+    "source_files_literal_equal": [
+      "tools/prepare_feedback_source_cohorts.py",
+      "tools/prepare_view_feedback_branches.py",
+      "tools/prepare_retrieval_feedback.py",
+      "tools/prepare_feedback_training.py",
+      "tools/run_host_intent_retrieval.py",
+      "tools/run_frozen_retrieval_calls.py",
+      "tools/train_bounded_laya.py",
+      "tools/retrieval_feedback.py",
+      "src/milai_lab/runners/functional.py",
+      "src/milai_lab/runners/frozen_retrieval.py"
+    ],
+    "bound_config_only_checkpoint_addition": true,
+    "batch_literal_equal_to_declared_cohort": true,
+    "conditions": "Original rules/laya/fixed_context rich profiles in their own banks; source2a179b58, selected262, CPU4, shared_actions16384/head2048, return2048, reads8, controlsteps8, unchanged600/8M queues. No compact profile or new Host instruction supplement.",
+    "capture": "Actual autonomous Host requests, control-step snapshots and own completed conversation history. No invented frames, labels, branches or missing cells.",
+    "failure_policy": "Frozen runner may advance after fully-known response-format/IncompleteChatResponse failures, preserving them. Other failures stop the batch; inspect actual prefix and usage before further unattempted work. No retry or queue reset.",
+    "semantic_quality": "NOT_ASSESSED_YET; process completion is not correctness. Fresh source-grounded review of actual requests/Views/branches remains required."
+  },
+  "active_processes": [
+    {
+      "driver_json": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-000.json",
+      "driver_pid": 1541852,
+      "child_pid": 1541867,
+      "session": 67648,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "neural_model": true,
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/train/batch-000"
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_COLLECTION_LIVES",
+    "preflight_children_cpu_seconds_pending": 0.039252,
+    "source": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-000.json",
+    "scope": "Original collector accrues HTTP/local-model CPU in the single original ledger. Whole child minus actual billed CPU, coordinator and preflight children reconcile only after exit; no concurrent offline settlement."
+  },
+  "prior_phases": {
+    "saved_cpu_selection_and_matching_train": "CLOSED; progress-v29",
+    "host_instruction_diagnostic": "CLOSED; progress-v30; mixed results, supplement not promoted"
+  },
+  "goal_complete": false
+}

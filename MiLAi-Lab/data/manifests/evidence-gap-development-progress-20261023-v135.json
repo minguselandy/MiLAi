@@ -1,0 +1,167 @@
+{
+  "status": "LAYA_INITIAL80_REVIEWED;FULL_FEEDBACK_LEARNING_LOOP_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-26T18:56:41.610641+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v134.json",
+  "previous_turn_classification": "progress:32 states/96pairs and original empty-refresh/citation diagnoses persisted; no experiments restarted.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": "development7aece29d; frozen feedback method2a179b58 and original outcomes unchanged",
+  "active_processes": [],
+  "branch_execution": "Original train2285/dev142 attempts remain closed with all failures; no new model call or retry. Full closures still v130train/v132dev.",
+  "train_quality_reviews": {
+    "status": "RULES256_AND_LAYA_INITIAL80_REVIEWED;FULLPOOL_OPEN",
+    "reviewed_states": 336,
+    "pairs": 1008,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 80
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 96,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 32
+        },
+        "remaining_states": 96
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 192,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 64
+        },
+        "remaining_states": 192
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 336,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 80
+        },
+        "remaining_states": 432
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 272,
+        "unknown": 377,
+        "tie": 208,
+        "left": 151
+      },
+      "delivery": {
+        "right": 343,
+        "unknown": 90,
+        "tie": 390,
+        "left": 185
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 321,
+        "unknown": 377,
+        "tie": 79,
+        "left": 231
+      },
+      "delivery": {
+        "right": 455,
+        "unknown": 90,
+        "tie": 129,
+        "left": 334
+      }
+    },
+    "new_chunk": "296-335",
+    "new_states": 40,
+    "new_pairs": 120,
+    "new_cost_only_directions": 47,
+    "next_source_first_state": 336,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "full_option_ce_labels_added": false,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.0746776,
+    "scope": "Coverage/disjointness/target-mask verification, not independent semantic validation or model improvement. Preserve original source-family ordering; partial collector coverage is not a complete smaller cohort."
+  },
+  "dev_quality_review_states": 0,
+  "compiled_feedback_rows": 0,
+  "feedback_fits_started": 0,
+  "source_review_method": {
+    "new_states": 40,
+    "same_request_source_reuse": 31,
+    "different_request_or_frontier_reviews": 9,
+    "retained_record_rechecked": {
+      "state": 309,
+      "actual_revision": 2,
+      "current_unit_characters": 643
+    },
+    "comparison": "Actual source fields literally matched excluding native event identity/capture clock across collectors; current requests inspected. No cross-request answer transfer.",
+    "reviewer": "Source author, not independent/blind."
+  },
+  "semantic_boundaries": {
+    "artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/semantic-boundaries-states-300-302-309-310-313-319-321-330-v1.json",
+    "findings": [
+      "300 View changes separate vocal performers into a collaboration with the trumpeter.",
+      "302 View simultaneously calls the same relative mother and sister; final bounded answer doesnot certify graph.",
+      "309 actual current single stored unit is not the second-session transcript or three-session profile.",
+      "310 ChrisBrown claims bind RosemaryClooney andLookingThroughYourEyes sources; single date is transferred to album.",
+      "313 shelf ownership is not confirmed next-book order.",
+      "319 assistant callback date is cited to user; native dangling text retained.",
+      "321 gym form doesnot imply physical wallet card.",
+      "330 free-text scope also contains wrong source alias, not only node evidence fields."
+    ]
+  },
+  "positive_and_negative_delivery_evidence": [
+    "320 and324 View provides missing second/third-hop support under the same branch protocol.",
+    "333 View combines old unchanged model identity with latest user-confirmed resolution; raw selected latest session lacks model.",
+    "335 View preserves last confirmed lodging versus tentative alternative; old raw plus fixed old frame stays stale.",
+    "316 correct county answer still lacks delivered county body.",
+    "329 fixed complete sibling source makes extra target delivery redundant; do not infer autonomous decision-time sufficiency."
+  ],
+  "development_code_inspection": {
+    "status": "READ_ONLY_INSPECTION;NO_IMPLEMENTATION_OR_MODEL_VALIDATION",
+    "entrypoints": [
+      "src/milai_lab/methods/query_structure.py:build_query_structure",
+      "src/milai_lab/methods/query_structure.py:open_structure",
+      "src/milai_lab/methods/evidence_control.py:EvidenceOperations",
+      "src/milai_lab/methods/evidence_reading.py:project_packs"
+    ],
+    "finding": "Existing build/reuse/refresh, source metadata, revocation/version checks and common projection are reusable. Current generated policies are rebuild/version_cache/incremental; no extractive View builder found in inspected active code. F3 quote baseline remains to implement/test; current development prompts are not the frozen2a method or newly validated model results."
+  },
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-reviews296-335-settlement.json",
+    "settled_cpu_seconds": 4.351651374000001,
+    "settled_fields": 7,
+    "only_expected_compute_delta": true,
+    "new_generation_requests": 0,
+    "new_known_generation_tokens": 0,
+    "new_unknown_generation_usage": 0,
+    "unmeasured": "Semantic reading/authoring/import, source-code inspection and settlement/report editing outside explicit fields remain unknown.",
+    "progress_processing_cpu_pending": 0.0008356460000000024
+  },
+  "next_actions": [
+    "Continue original laya initial atstate336.432train states and48dev states remain to review.",
+    "Compile largest full pool once, derive source32/64 prefixes, run all nine192-update fits and saved-model Host evaluation.",
+    "Implement/test new-version F1/F2/F3/compact and declared data/quality/coverage/seed/lifecycle/external tasks separately from frozen original feedback; full requirements preserved."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "new_runtime_changes": false,
+  "verification": [
+    "336disjoint states/1008pairs and original source-family prefix coverage checked.",
+    "Unknown/directional quality unchanged by resource rule;47cost-only tie directions are not47successfulanswers.",
+    "Exact current stored unit and wrong source aliases checked against actual before/data sources.",
+    "Seven processing fields settledonce; all other ledger fields unchanged."
+  ]
+}

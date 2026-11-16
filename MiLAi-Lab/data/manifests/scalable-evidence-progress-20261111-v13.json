@@ -1,0 +1,370 @@
+{
+  "status": "PHASE13_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T05:18:44.741209+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v12.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 1280,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "m4-fixed-states-seed0-v1",
+      "owner_pid": 2626000,
+      "child_pid": 2626002,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 55,
+      "planned_optimizer_updates": 165
+    },
+    {
+      "name": "m2-fixed-context-train160-families64to96-readouts-v1",
+      "owner_pid": 2690908,
+      "child_pid": 2690914,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "closed_readouts": 31,
+      "planned_unique_packets": 159,
+      "failed_readouts": 0
+    }
+  ],
+  "M4_own_closed": "/data/milai-experiments/20261111-scalable-evidence/m4-own-closed-curve-v1.json",
+  "M4_fixed_running": true,
+  "M2_DEV32_closed": {
+    "status": "ALL32_DEV_SOURCE_COMPARISONS_CLOSED",
+    "source_families": 32,
+    "actual_states": 64,
+    "logical_bound_outcomes": 107,
+    "methods": [
+      "fixed_context",
+      "feedback",
+      "continued_sft"
+    ],
+    "views": {
+      "teacher_only": {
+        "by_method": {
+          "fixed_context": {
+            "positions": 64,
+            "complete_supported": 33,
+            "failed": 2,
+            "answer_unknown": 19,
+            "answer_incomplete": 12,
+            "answer_incorrect": 0,
+            "material_sufficient": 34,
+            "material_unknown": 16
+          },
+          "feedback": {
+            "positions": 64,
+            "complete_supported": 32,
+            "failed": 2,
+            "answer_unknown": 18,
+            "answer_incomplete": 14,
+            "answer_incorrect": 0,
+            "material_sufficient": 33,
+            "material_unknown": 15
+          },
+          "continued_sft": {
+            "positions": 64,
+            "complete_supported": 31,
+            "failed": 2,
+            "answer_unknown": 20,
+            "answer_incomplete": 13,
+            "answer_incorrect": 0,
+            "material_sufficient": 33,
+            "material_unknown": 17
+          }
+        },
+        "paired_feedback_minus": {
+          "fixed_context": {
+            "difference_in_source_mean_supported_resolution": -0.015625,
+            "percentile95_interval": [
+              -0.078125,
+              0.046875
+            ],
+            "source_differences": {
+              "qasper-paper-1901.05287": 0.5,
+              "qasper-paper-1709.10367": -0.5,
+              "qasper-paper-1912.01772": 0.0,
+              "qasper-paper-1812.06864": 0.0,
+              "qasper-paper-1903.11437": 0.0,
+              "qasper-paper-1906.01040": 0.0,
+              "qasper-paper-1808.10245": 0.0,
+              "qasper-paper-1909.09067": -0.5,
+              "qasper-paper-1811.05711": 0.0,
+              "qasper-paper-1710.07960": 0.0,
+              "qasper-paper-1603.01514": 0.0,
+              "qasper-paper-1802.08636": 0.0,
+              "qasper-paper-1904.03288": 0.0,
+              "qasper-paper-1909.03582": 0.5,
+              "qasper-paper-1907.01468": 0.0,
+              "qasper-paper-1810.04428": 0.0,
+              "qasper-paper-1811.00383": 0.0,
+              "qasper-paper-1801.10293": 0.0,
+              "qasper-paper-1810.08699": 0.0,
+              "qasper-paper-1905.12801": 0.0,
+              "qasper-paper-1903.11283": 0.0,
+              "qasper-paper-1802.06024": 0.0,
+              "qasper-paper-1611.04798": 0.0,
+              "qasper-paper-1707.03569": 0.0,
+              "qasper-paper-1909.00326": 0.0,
+              "qasper-paper-1909.01362": 0.0,
+              "qasper-paper-1810.12091": -0.5,
+              "qasper-paper-1806.04330": 0.0,
+              "qasper-paper-1904.07904": 0.0,
+              "qasper-paper-1805.03710": 0.0,
+              "qasper-paper-1901.01010": 0.0,
+              "qasper-paper-1603.08594": 0.0
+            },
+            "scope": "Source-family bootstrap only; excludes Host randomness, teacher/author uncertainty and model-seed variance. Not an independent efficacy estimate."
+          },
+          "continued_sft": {
+            "difference_in_source_mean_supported_resolution": 0.015625,
+            "percentile95_interval": [
+              -0.046875,
+              0.078125
+            ],
+            "source_differences": {
+              "qasper-paper-1901.05287": 0.0,
+              "qasper-paper-1709.10367": -0.5,
+              "qasper-paper-1912.01772": 0.0,
+              "qasper-paper-1812.06864": 0.0,
+              "qasper-paper-1903.11437": 0.5,
+              "qasper-paper-1906.01040": 0.0,
+              "qasper-paper-1808.10245": 0.0,
+              "qasper-paper-1909.09067": 0.0,
+              "qasper-paper-1811.05711": 0.5,
+              "qasper-paper-1710.07960": 0.0,
+              "qasper-paper-1603.01514": 0.0,
+              "qasper-paper-1802.08636": 0.0,
+              "qasper-paper-1904.03288": 0.0,
+              "qasper-paper-1909.03582": 0.0,
+              "qasper-paper-1907.01468": 0.0,
+              "qasper-paper-1810.04428": 0.0,
+              "qasper-paper-1811.00383": 0.0,
+              "qasper-paper-1801.10293": 0.0,
+              "qasper-paper-1810.08699": 0.0,
+              "qasper-paper-1905.12801": 0.0,
+              "qasper-paper-1903.11283": 0.0,
+              "qasper-paper-1802.06024": 0.0,
+              "qasper-paper-1611.04798": 0.0,
+              "qasper-paper-1707.03569": 0.0,
+              "qasper-paper-1909.00326": 0.5,
+              "qasper-paper-1909.01362": 0.0,
+              "qasper-paper-1810.12091": -0.5,
+              "qasper-paper-1806.04330": 0.0,
+              "qasper-paper-1904.07904": 0.0,
+              "qasper-paper-1805.03710": 0.0,
+              "qasper-paper-1901.01010": 0.0,
+              "qasper-paper-1603.08594": 0.0
+            },
+            "scope": "Source-family bootstrap only; excludes Host randomness, teacher/author uncertainty and model-seed variance. Not an independent efficacy estimate."
+          }
+        }
+      },
+      "source_author_corrected": {
+        "by_method": {
+          "fixed_context": {
+            "positions": 64,
+            "complete_supported": 32,
+            "failed": 2,
+            "answer_unknown": 18,
+            "answer_incomplete": 14,
+            "answer_incorrect": 0,
+            "material_sufficient": 35,
+            "material_unknown": 14
+          },
+          "feedback": {
+            "positions": 64,
+            "complete_supported": 34,
+            "failed": 2,
+            "answer_unknown": 16,
+            "answer_incomplete": 14,
+            "answer_incorrect": 0,
+            "material_sufficient": 36,
+            "material_unknown": 13
+          },
+          "continued_sft": {
+            "positions": 64,
+            "complete_supported": 32,
+            "failed": 2,
+            "answer_unknown": 19,
+            "answer_incomplete": 13,
+            "answer_incorrect": 0,
+            "material_sufficient": 35,
+            "material_unknown": 15
+          }
+        },
+        "paired_feedback_minus": {
+          "fixed_context": {
+            "difference_in_source_mean_supported_resolution": 0.03125,
+            "percentile95_interval": [
+              0.0,
+              0.078125
+            ],
+            "source_differences": {
+              "qasper-paper-1901.05287": 0.5,
+              "qasper-paper-1709.10367": 0.0,
+              "qasper-paper-1912.01772": 0.0,
+              "qasper-paper-1812.06864": 0.0,
+              "qasper-paper-1903.11437": 0.0,
+              "qasper-paper-1906.01040": 0.0,
+              "qasper-paper-1808.10245": 0.0,
+              "qasper-paper-1909.09067": 0.0,
+              "qasper-paper-1811.05711": 0.0,
+              "qasper-paper-1710.07960": 0.0,
+              "qasper-paper-1603.01514": 0.0,
+              "qasper-paper-1802.08636": 0.0,
+              "qasper-paper-1904.03288": 0.0,
+              "qasper-paper-1909.03582": 0.5,
+              "qasper-paper-1907.01468": 0.0,
+              "qasper-paper-1810.04428": 0.0,
+              "qasper-paper-1811.00383": 0.0,
+              "qasper-paper-1801.10293": 0.0,
+              "qasper-paper-1810.08699": 0.0,
+              "qasper-paper-1905.12801": 0.0,
+              "qasper-paper-1903.11283": 0.0,
+              "qasper-paper-1802.06024": 0.0,
+              "qasper-paper-1611.04798": 0.0,
+              "qasper-paper-1707.03569": 0.0,
+              "qasper-paper-1909.00326": 0.0,
+              "qasper-paper-1909.01362": 0.0,
+              "qasper-paper-1810.12091": 0.0,
+              "qasper-paper-1806.04330": 0.0,
+              "qasper-paper-1904.07904": 0.0,
+              "qasper-paper-1805.03710": 0.0,
+              "qasper-paper-1901.01010": 0.0,
+              "qasper-paper-1603.08594": 0.0
+            },
+            "scope": "Source-family bootstrap only; excludes Host randomness, teacher/author uncertainty and model-seed variance. Not an independent efficacy estimate."
+          },
+          "continued_sft": {
+            "difference_in_source_mean_supported_resolution": 0.03125,
+            "percentile95_interval": [
+              0.0,
+              0.078125
+            ],
+            "source_differences": {
+              "qasper-paper-1901.05287": 0.0,
+              "qasper-paper-1709.10367": 0.0,
+              "qasper-paper-1912.01772": 0.0,
+              "qasper-paper-1812.06864": 0.0,
+              "qasper-paper-1903.11437": 0.5,
+              "qasper-paper-1906.01040": 0.0,
+              "qasper-paper-1808.10245": 0.0,
+              "qasper-paper-1909.09067": 0.0,
+              "qasper-paper-1811.05711": 0.0,
+              "qasper-paper-1710.07960": 0.0,
+              "qasper-paper-1603.01514": 0.0,
+              "qasper-paper-1802.08636": 0.0,
+              "qasper-paper-1904.03288": 0.0,
+              "qasper-paper-1909.03582": 0.0,
+              "qasper-paper-1907.01468": 0.0,
+              "qasper-paper-1810.04428": 0.0,
+              "qasper-paper-1811.00383": 0.0,
+              "qasper-paper-1801.10293": 0.0,
+              "qasper-paper-1810.08699": 0.0,
+              "qasper-paper-1905.12801": 0.0,
+              "qasper-paper-1903.11283": 0.0,
+              "qasper-paper-1802.06024": 0.0,
+              "qasper-paper-1611.04798": 0.0,
+              "qasper-paper-1707.03569": 0.0,
+              "qasper-paper-1909.00326": 0.5,
+              "qasper-paper-1909.01362": 0.0,
+              "qasper-paper-1810.12091": 0.0,
+              "qasper-paper-1806.04330": 0.0,
+              "qasper-paper-1904.07904": 0.0,
+              "qasper-paper-1805.03710": 0.0,
+              "qasper-paper-1901.01010": 0.0,
+              "qasper-paper-1603.08594": 0.0
+            },
+            "scope": "Source-family bootstrap only; excludes Host randomness, teacher/author uncertainty and model-seed variance. Not an independent efficacy estimate."
+          }
+        }
+      }
+    },
+    "scope": "Same finalu15 models and common frozenS1 reached states/fixed_context4 continuation. Teacher is sameQwen as Host; source-author view combines full first8 author review with remaining24 teacher+4state spots, not uniform independent human grading. Unknown/failure denominators preserved. Not autonomous Host, not final confirmation.",
+    "no_sha_validation": true
+  },
+  "M2_remaining24_Host": {
+    "status": "COMPLETED",
+    "closed_readouts": 79,
+    "failed_readouts": 0,
+    "compute": {
+      "cpu_seconds": 5.5679259199999995,
+      "wall_seconds": 935.8973466800526,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 260195,
+      "known_tokens": 260195,
+      "unknown_usage": 0
+    }
+  },
+  "M2_remaining24_teacher": {
+    "status": "COMPLETED",
+    "closed_states": 48,
+    "unresolved_states": 0,
+    "masked_teacher_candidates": 16,
+    "compute": {
+      "cpu_seconds": 4.875858254000001,
+      "wall_seconds": 635.8875724012032,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 249672,
+      "known_tokens": 249672,
+      "unknown_usage": 0
+    }
+  },
+  "M6_actual_view_opportunities": {
+    "source": "/data/milai-experiments/20261111-scalable-evidence/m6-recorded-view-opportunities-v1",
+    "actual_states": 6,
+    "source_families": 5,
+    "available_population_families": 32,
+    "source_role": "Existing generatedMemOps TRAIN, not natural-history or new confirmation",
+    "selection": "Actual step0 USE_VIEW opportunities in later content-flow public requests, no outcome filter. Missing cells retained.",
+    "states_by_stage": {
+      "additional-arrival": 3,
+      "intermediate-arrivals": 3
+    },
+    "all6_complete_input_fit": true,
+    "sequence_tokens": [
+      7521,
+      9152,
+      3378,
+      8392,
+      2884,
+      6869
+    ],
+    "model_checkpoint": "s1-op36k-seed0-v1/checkpoints/update-1130",
+    "model_device": "CPUFP32 four threads",
+    "model_first_choices": "SEARCH query_from=request limit16 in all6",
+    "old_cache_actual_first_choices": {
+      "REFRESH_VIEW": 5,
+      "SEARCH": 1
+    },
+    "scores_status": "COMPLETED",
+    "source_diagnostic": "/data/milai-experiments/20261111-scalable-evidence/m6-recorded-view-opportunities-v1/s1-u1130-diagnostic-v1.json",
+    "scope": "No new action or Host execution. First-step preference does not show that later View use is impossible or that SEARCH is wrong. Actual continuous current-model Source/View validation still pending."
+  },
+  "TRAIN_expansion": {
+    "new_batch": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families64to96-v1",
+    "families": 32,
+    "states": 64,
+    "first_readouts_planned": 159,
+    "native_reexecution": 0,
+    "remaining_unstarted_packets_after_this_batch": 1171
+  },
+  "costs": "New reader/teacher/scorer/fits self-bill; measured prep CPU pending next grouped settlement. Prior phases not rebilled; authorship/tests unmeasured, not zero.",
+  "remaining": [
+    "Close TRAIN159firsts and semantic feedback, then expand remaining1171 prepared endpoints in bounded batches",
+    "Finish M4fixed165 and compare full curves/actual outcomes with own arm; finish original36k3390",
+    "No stable M2 benefit established: teacher-only and source-corrected DEV32 judgments differ, intervals include0 and omit Host/annotation/seed uncertainty",
+    "Current-model continuousSource/View execution, sufficient broaderS2, decisive seeds,newconfirmation96 and full costs/generalization still required"
+  ]
+}

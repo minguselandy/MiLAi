@@ -1,0 +1,59 @@
+{
+  "scope": "Matched48 source/request/interface positions from T0 training collection; own policy trajectories, source-author task-content review. Descriptive only; not E2 same-before control branches.",
+  "arms": {
+    "rules": {
+      "positions": 48,
+      "source_groups": 8,
+      "grades": {
+        "CORRECT": 21,
+        "FAILED": 10,
+        "QUALIFIED": 4,
+        "WRONG": 13
+      },
+      "generation_requests": 142,
+      "known_tokens": 476795,
+      "charged_tokens": 476795,
+      "new_unknown_usage": 0,
+      "message_wall_seconds": 1320.0067642861977,
+      "message_cpu_seconds": 76.88468266299999
+    },
+    "generative": {
+      "positions": 48,
+      "source_groups": 8,
+      "grades": {
+        "CORRECT": 19,
+        "FAILED": 11,
+        "QUALIFIED": 1,
+        "UNFULFILLED": 2,
+        "WRONG": 15
+      },
+      "generation_requests": 320,
+      "known_tokens": 1611720,
+      "charged_tokens": 1611720,
+      "new_unknown_usage": 0,
+      "message_wall_seconds": 1540.6762231774628,
+      "message_cpu_seconds": 80.38668813000002
+    }
+  },
+  "paired_full_task_correct": {
+    "both": 10,
+    "rules_only": 11,
+    "generative_only": 9,
+    "neither": 18
+  },
+  "cost_scope": "Per-position original ledger deltas including first failures; message CPU/wall excludes separate setup/offline annotation and is not a total-cost claim. Full run cost receipts remain authoritative.",
+  "limitations": [
+    "Only8 train source groups; positions within group correlated.",
+    "Host sampling and actual requests differ; no isolated causal control-policy estimate.",
+    "Native benchmark scores, full view validity and task-content grades remain separate.",
+    "No claims about learned T0 policy yet."
+  ],
+  "model_calls": 0,
+  "http_requests": 0,
+  "aggregation_compute": {
+    "wall_seconds": 0.25925526209175587,
+    "cpu_seconds": 0.259257468,
+    "ledger_recorded": false,
+    "phase": "host_intent_t0_matched48_summary_v1"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "status": "PHASE36_PROGRESS_BASELINE_CONFIRMATION_FIRSTS_CLOSED_HEAD_ONLY_FIT_CLOSED_SCALE_READER_ACTIVE",
+  "observed_at_utc": "2026-11-11T20:19:12.796539+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v35.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "qasper-confirm96-scale36k-readouts-v1",
+      "owner_pid": 1842885,
+      "child_pid": 1842886,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "process_alive": true,
+      "actual_argv_checked": true,
+      "closed_readouts": 15,
+      "failed_readouts": 0
+    }
+  ],
+  "confirmation_baseline_firsts_closed": {
+    "run": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-fixed-context-readouts-v1",
+    "positions": 96,
+    "failed": 0,
+    "quality_scored_or_answers_inspected": false,
+    "scope": "Transportcompletion only; all4firstconditionsmustclose beforefixednativeF1/Sourcepanel. No modelorprotocolchanges."
+  },
+  "head_only_closed_curve": "/data/milai-experiments/20261111-scalable-evidence/head-only-closed-curve-v1.json",
+  "head_only_single_change": {
+    "status": "SINGLE_OPTIMIZATION_CHANGE_PLAN_CHECKED",
+    "changed_nonsemantic_argv_positions": [
+      6,
+      10
+    ],
+    "added_flag": "--freeze-encoder",
+    "same_data_init_seed_update_draw_schedule_loss_replay": true,
+    "physicalGPU": "fullfeedback3 vshead-only2, sameA100class; differentbackwardcompute",
+    "confirmation_changed": false,
+    "no_sha_validation": true,
+    "existing_flag_semantics": "optimizer_groups disablesencoderparametergradients/excludesoptimizerstate; training_mode also setsfrozenencoder.eval (dropoutoff). HeadMLP remainsintrainmode. Thus singleCLIupdatescopeprocedure, notpureparameter-only/dropout-matchedcontrast.",
+    "local_model_evidence": "Actualparameter-probes showencoder.embeddings.tok_embeddings.weight changed_elements0; head.layers.0.self_attn.in_proj_weight changed1769469. Actualheadhastransformerparameters, notonlyscalarcalibration. EarliergenericMLPdescription wasnotactualcheckpointbranch andisreplacedhere.",
+    "code_or_live_fit_changed": false,
+    "actual_parameter_probes": {
+      "encoder": {
+        "parameter": "encoder.embeddings.tok_embeddings.weight",
+        "changed_elements": 0
+      },
+      "head": {
+        "parameter": "head.layers.0.self_attn.in_proj_weight",
+        "changed_elements": 1769469
+      }
+    }
+  },
+  "head_only_findings": {
+    "full_DEV": [
+      133,
+      133,
+      133
+    ],
+    "updates": [
+      17,
+      34,
+      51
+    ],
+    "denominator": 278,
+    "train_direction_pairs_correct": 45,
+    "train_direction_pairs": 62,
+    "full_model_training_pairs_correct": 59,
+    "encoder_probe_changed": 0,
+    "head_probe_changed": 1769469,
+    "scope": "Existingfreezeencoderprocedure alsoencoder.eval/dropoutoff; headhastransformerparams. Notpuredropout-matchedparametercontrast. Stableaggregateacceptanceisnotproofunchangedchoices orHostgain. No confirmationdata used."
+  },
+  "head_only_DEV_preparation": {
+    "score": "m2-first160-head-only-dev64-scores-v1",
+    "status": "SCORE_AND_NATIVE_CHOICES_CLOSED_READER_NOT_STARTED",
+    "packet_union": "/data/milai-experiments/20261111-scalable-evidence/head-only-existing-dev-packet-union-v1",
+    "union_packets": 198,
+    "physical_first_cache": 149,
+    "comparison_packets": 109,
+    "new_native_packets": 0,
+    "reusable_readouts": 107,
+    "new_Host_calls_needed": 2,
+    "reader_plan": "/data/milai-experiments/20261111-scalable-evidence/head-only-dev32-comparison-readouts-v1-plan.json",
+    "reader_entry": "/data/milai-experiments/20261111-scalable-evidence/run_head_only_dev32_readouts_v1.py",
+    "scope": "Same64oldDEVbefore/menu/fixedcontext4, head_only/full_feedback/SFT +fixedbaseline, no newconfirmation/tuning."
+  },
+  "Source_adaptation_figure": {
+    "directory": "/data/milai-experiments/20261111-scalable-evidence/source-adaptation-closed-figures-v1",
+    "png": "comparison.png",
+    "pdf": "comparison.pdf",
+    "source_data": "source-data.json",
+    "visually_checked": true,
+    "scope": "Reference62states vsactual80positions perarm, workcountsnotfullcost; no stableapplicationgainclaim."
+  },
+  "settlement": {
+    "recorded": true,
+    "unbilled_collectors": [
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-new-confirmation96-base-banks-v1-owner.json",
+        "cpu_seconds": 4.435663,
+        "scope": "Unbilledwholechild, nativecollectionnotselfbilled; includesimports/toolstage, no nestedaddition"
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-new-confirmation96-base-banks-v2-owner.json",
+        "cpu_seconds": 32.29438,
+        "scope": "Unbilledwholechild, nativecollectionnotselfbilled; includesimports/toolstage, no nestedaddition"
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-fixed-context-policy-v1-owner.json",
+        "cpu_seconds": 38.554228,
+        "scope": "Unbilledwholechild, nativecollectionnotselfbilled; includesimports/toolstage, no nestedaddition"
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-scale36k-policy-v1-owner.json",
+        "cpu_seconds": 450.126327,
+        "scope": "Unbilledwholechild, nativecollectionnotselfbilled; includesimports/toolstage, no nestedaddition"
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-s3-own-policy-v1-owner.json",
+        "cpu_seconds": 407.37928999999997,
+        "scope": "Unbilledwholechild, nativecollectionnotselfbilled; includesimports/toolstage, no nestedaddition"
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirm96-s3-old-policy-v1-owner.json",
+        "cpu_seconds": 331.054888,
+        "scope": "Unbilledwholechild, nativecollectionnotselfbilled; includesimports/toolstage, no nestedaddition"
+      }
+    ],
+    "unbilled_preparations": [
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-new-confirmation96-source-v1/manifest.json",
+        "cpu_seconds": 0.9763320129999999
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/policy-rollout-dev-smoke-fixed-v1/run.json",
+        "cpu_seconds": 1.1934796399999996
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/policy-rollout-dev-smoke-learned-v1/run.json",
+        "cpu_seconds": 12.854105041
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/s1-all-closed-learning-curves-v1/manifest.json",
+        "cpu_seconds": 2.3517651519999996
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/source-adaptation-closed-figures-v1/manifest.json",
+        "cpu_seconds": 1.675322311
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-retrieval-resources-v1.json",
+        "cpu_seconds": 0.5032260869999999
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/head-only-existing-dev-packet-union-v1/run.json",
+        "cpu_seconds": 1.438506557
+      }
+    ],
+    "collector_and_preparation_cpu": 1284.837512801,
+    "adapted_application_residual_cpu": 427.4864677799725,
+    "scope": "Only6closedunbilledconfirmationinitializer/policywholechildren plus7explicitmeasuredpreps, andall8appwhole-minus-native residual. Failedinitializerincluded; no selfbilledtraining/eval/Reader/teacher doublecount. Otherauthor/tests/untimedprepsunknown. Partialappinventorynotadded.",
+    "no_sha_validation": true,
+    "phases": {
+      "milai_scalable_phase36_closed_collectors_preparation_20261112_v1": {
+        "cpu_seconds": 1284.837512801,
+        "runs": 13
+      },
+      "milai_scalable_adapted_apps_whole_minus_native_20261112_v1": {
+        "cpu_seconds": 427.4864677799725,
+        "runs": 8
+      }
+    }
+  },
+  "next": [
+    "Finishscale96Reader, thenremaining2S3conditions; allfirstsclosebefore scoring/repeats; preservefrozenprotocol",
+    "AtHTTPgap, head-onlyDEV2newfirsts andjudgments using107oldfirsts; no outcome-reroll",
+    "LME32fixednominees/nativeJudgechain, 32confirmationrepeats/Source8spots, completecost/generalization/ability-chain assessment"
+  ],
+  "validation": "No runtimecodechanges. Actualfreezeencoder/dropoutmode andrealparameterprobes inspected, replacingearliergenericheadarchitecturedescription; sameargvexceptfreeze flag/output/phase confirmed. Source/readoutfullbinding/wireinventory shows107reusablefirsts. Figure rendered/viewed. Earlier30tests/Ruff/packagePASS/tools6oldfindings unchanged.",
+  "cost_scope": "Paidclosed6confirmationinitializer/policywholechildren(inclfailedv1)+7measuredpreps total1284.837512801CPU; all8appwhole-minus-native427.486467780CPU once. Nativefits/eval/readers/teachersnotduplicated. Otherprep/ownerresidual/author/test/import unknownorpending.",
+  "completion_scope": "v2section16abilityimprovementchain remainsunprovedoverall; notcomplete fromclosednegativeexperiments. Targetedupdate-scope experiment ongoingactualevaluation; confirmation unchanged.",
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push. Firstfailuresunknownsrolespreserved; goalACTIVE/incomplete."
+}

@@ -1,0 +1,61 @@
+{
+  "status": "CLOSED_PARTIAL_ACCEPTANCE",
+  "source_code": "c61e680f",
+  "cost": {
+    "generation": {
+      "calls": 9,
+      "prompt_tokens": 37914,
+      "total_tokens": 43240,
+      "completion_tokens": 5326
+    }
+  },
+  "cases": [
+    {
+      "case": "pack-range",
+      "status": "COMPLETED",
+      "tool_names": [
+        "search_memory",
+        "read_evidence",
+        "read_evidence"
+      ],
+      "body_texts": [
+        "外部通知必须先确认；不影响内部通知。",
+        "B项目通知王芳。",
+        "A项目通知李明。"
+      ],
+      "range_coverage": [
+        {
+          "complete": true,
+          "meaning": "source delivery coverage, not correctness or external-world completeness",
+          "missing_source_ranges": 0,
+          "required_source_ranges": 3,
+          "scope": "captured_visible_arrival_prefix",
+          "scope_available": true
+        },
+        {
+          "complete": true,
+          "meaning": "source delivery coverage, not correctness or external-world completeness",
+          "missing_source_ranges": 0,
+          "required_source_ranges": 3,
+          "scope": "captured_visible_arrival_prefix",
+          "scope_available": true
+        }
+      ],
+      "root_review": "Actual3Source bodies delivered;2projects and confirmation answered; broad independence wording goes beyond literalcondition."
+    },
+    {
+      "case": "pack-context",
+      "status": "COMPLETED",
+      "tool_names": [
+        "search_memory",
+        "search_memory"
+      ],
+      "body_texts": [],
+      "range_coverage": [],
+      "root_review": "No evidence bodies opened; answer uses legacy search candidate excerpts. Still fails actualbody delivery acceptance."
+    }
+  ],
+  "semantic_writes": 0,
+  "business_mutations": 0,
+  "artifact_root": "artifacts/global-development/host-packs-run-v2"
+}

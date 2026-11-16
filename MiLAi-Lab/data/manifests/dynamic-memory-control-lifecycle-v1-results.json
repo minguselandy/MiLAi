@@ -1,0 +1,448 @@
+{
+  "version": "dynamic-memory-control-lifecycle-v1-results",
+  "status": "CLOSED16_FIRST_OUTCOMES_REVIEWED",
+  "run": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1",
+  "runtime_source": "3f3c10d3",
+  "policies": {
+    "fixed_context": {
+      "positions": [
+        {
+          "step": "save-identifier",
+          "status": "COMPLETED",
+          "answer": "已为您保存工具柜登记信息：登记标识为“霁川六号”。\n\n本轮语义记忆: 已提交, 已确认 1 项提交。这里只确认保存回执, 不确认全部请求或语义覆盖。",
+          "semantic_operations": [
+            {
+              "tool": "maintain_event",
+              "status": "committed",
+              "receipt_ref": "maintenance:[\"session-0\",\"save-identifier\",\"dynamic-memory-operation-lifecycle-v1-fixed_context\",\"source-11633afd-51cd-45b5-adac-e3a3f9a732fb\"]:proposal:0",
+              "id": "466e04d3-be9c-58ce-ba6a-a8ef71798b6a",
+              "revision": 1,
+              "effect": "memory_only"
+            }
+          ],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "read_0",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/fixed_context/banks/994fe6f6-4669-4eab-82f9-66c4457d0702/9ec92ac8-fcf9-4d7f-ac11-a51fca494d0a-result.json"
+        },
+        {
+          "step": "save-independent-preference",
+          "status": "COMPLETED",
+          "answer": "已为您保存晨会纪要的语言偏好：用德语输出。该记录已独立保存，未与工具柜登记关联，也未办理业务。\n\n本轮语义记忆: 已提交, 已确认 1 项提交。这里只确认保存回执, 不确认全部请求或语义覆盖。",
+          "semantic_operations": [
+            {
+              "tool": "maintain_event",
+              "status": "committed",
+              "receipt_ref": "maintenance:[\"session-0\",\"save-independent-preference\",\"dynamic-memory-operation-lifecycle-v1-fixed_context\",\"source-86de1405-32ef-4442-8b5f-2a6d6d846084\"]:proposal:0",
+              "id": "5cd4e253-3664-5025-85d0-896b3d8946b4",
+              "revision": 1,
+              "effect": "memory_only"
+            }
+          ],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/fixed_context/banks/994fe6f6-4669-4eab-82f9-66c4457d0702/faf1f288-1690-4707-ac98-8a0229ab1dc4-result.json"
+        },
+        {
+          "step": "recall-both",
+          "status": "COMPLETED",
+          "answer": "当前保存的工具柜登记标识是“霁川六号”，晨会纪要语言偏好是“用德语输出”。",
+          "semantic_operations": [],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "context_2",
+            "read_1",
+            "read_3",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/fixed_context/banks/994fe6f6-4669-4eab-82f9-66c4457d0702/f3bc985a-de35-409d-8540-353a409d17b5-result.json"
+        },
+        {
+          "step": "correct-identifier",
+          "status": "COMPLETED",
+          "answer": "已为您更新记忆：工具柜登记标识已更正为“暮帆二号”，原标识“霁川六号”已停用。晨会纪要语言偏好保持“用德语输出”不变。\n\n本轮语义记忆: 已提交, 已确认 1 项提交。这里只确认保存回执, 不确认全部请求或语义覆盖。",
+          "semantic_operations": [
+            {
+              "tool": "maintain_event",
+              "status": "committed",
+              "receipt_ref": "maintenance:[\"session-0\",\"correct-identifier\",\"dynamic-memory-operation-lifecycle-v1-fixed_context\",\"source-ad0d0288-ab37-40d8-a189-7d522e2a1bd0\"]:proposal:0",
+              "id": "466e04d3-be9c-58ce-ba6a-a8ef71798b6a",
+              "revision": 2,
+              "effect": "memory_only"
+            },
+            {
+              "tool": "maintain_event",
+              "status": "no_change",
+              "receipt_ref": "maintenance:[\"session-0\",\"correct-identifier\",\"dynamic-memory-operation-lifecycle-v1-fixed_context\",\"source-ad0d0288-ab37-40d8-a189-7d522e2a1bd0\"]:proposal:1",
+              "id": "5cd4e253-3664-5025-85d0-896b3d8946b4",
+              "revision": 1,
+              "effect": "none"
+            }
+          ],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "context_0",
+            "read_1",
+            "read_3",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/fixed_context/banks/994fe6f6-4669-4eab-82f9-66c4457d0702/51ff7202-3cb4-40d1-81f6-3a330788d309-result.json"
+        },
+        {
+          "step": "recall-current",
+          "status": "COMPLETED",
+          "answer": "工具柜当前登记标识是暮帆二号。晨会纪要应使用德语。",
+          "semantic_operations": [],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "context_0",
+            "read_1",
+            "read_3",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/fixed_context/banks/994fe6f6-4669-4eab-82f9-66c4457d0702/744802a2-87e9-46f7-be9f-80dc6e9af76e-result.json"
+        },
+        {
+          "step": "read-saved-history",
+          "status": "COMPLETED",
+          "answer": "在更正之前，系统实际保存的工具柜登记标识是“霁川六号”。",
+          "semantic_operations": [],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "context_0",
+            "read_1",
+            "read_3",
+            "read_4",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/fixed_context/banks/994fe6f6-4669-4eab-82f9-66c4457d0702/b03db811-2886-4cd4-9114-481ec098464f-result.json"
+        },
+        {
+          "step": "forget-identifier",
+          "status": "COMPLETED",
+          "answer": "已读取的保存内容 (版本 1): \"晨会纪要的语言偏好为德语输出。\"\n\n原请求是否已全部完成尚未核对。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n遗忘尝试 1: 未提交; 此次尝试未确认撤销效果, 其他尝试的结果分别列出。\n\n遗忘尝试 2: 未提交; 此次尝试未确认撤销效果, 其他尝试的结果分别列出。\n\n遗忘尝试 3: 已按实际回执撤销所选记忆及来源的可见性。范围: \"record_and_sources\"; 数量: {\"derived_assistant_sources\": 6, \"explicit_support_sources\": 3, \"revoked_sources\": 9, \"selected_records\": 1}。未执行物理擦除, 备份和实验审计轨迹仍保留。未选择的独立副本不在本次确认范围内。\n\n本轮原始消息曾记录, 当前可见性已撤销。原始消息记录与语义记忆提交分别计数。",
+          "semantic_operations": [],
+          "visibility_operations": [
+            {
+              "tool": "forget_memory",
+              "receipt_ref": "chatcmpl-8c596103495c6747:tool:0",
+              "status": "not_committed",
+              "effect": "none",
+              "phase": "pre_mutation_contract",
+              "error_type": "FunctionalRejection"
+            },
+            {
+              "tool": "forget_memory",
+              "receipt_ref": "chatcmpl-87aa8385de30bd35:tool:0",
+              "status": "not_committed",
+              "effect": "none",
+              "phase": "pre_mutation_contract",
+              "error_type": "FunctionalRejection"
+            },
+            {
+              "tool": "forget_memory",
+              "receipt_ref": "chatcmpl-ad4b07d1ae485043:tool:0",
+              "status": "visibility_revoked",
+              "effect": "visibility_only",
+              "scope": "record_and_sources",
+              "scope_counts": {
+                "derived_assistant_sources": 6,
+                "explicit_support_sources": 3,
+                "revoked_sources": 9,
+                "selected_records": 1
+              },
+              "physical_erasure": false,
+              "raw_audit_retained": true
+            }
+          ],
+          "control_actions": [],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/fixed_context/banks/994fe6f6-4669-4eab-82f9-66c4457d0702/5c1b6a40-955b-4df4-b2b0-bf1887cf3911-result.json"
+        },
+        {
+          "step": "reopen-after-forget",
+          "status": "COMPLETED",
+          "answer": "目前无法查询到工具柜登记标识信息，晨会纪要的语言偏好设置也未找到。",
+          "semantic_operations": [],
+          "visibility_operations": [],
+          "control_actions": [
+            "search"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/fixed_context/banks/994fe6f6-4669-4eab-82f9-66c4457d0702/fbe66832-4042-4051-ae7a-5d83ba609776-result.json"
+        }
+      ],
+      "generation_known_tokens": 157726,
+      "embedding_known_tokens": 1281,
+      "new_unknown_generation": 0,
+      "new_unknown_embedding": 0,
+      "message_wall_seconds": 439.03289557248354,
+      "two_independent_records_and_correction_committed": true,
+      "saved_history_actually_read": false,
+      "requested_forget_visibility_revoked": true,
+      "independent_record_and_source_preserved": true,
+      "target_history_and_sources_hidden": true,
+      "revoked_sources_on_receipt": 9,
+      "final_revoked_sources": 10,
+      "extra_revocation": "Final assistant delivery derives from forgotten request and is also hidden; receipt counts describe the earlier commit.",
+      "public_cached_view_visibility": {},
+      "post_forget_query_completed_correctly": false,
+      "all_eight_messages_fulfilled": false,
+      "full_semantic_graph_validity": "Not certified; some stored units also quote transient instructions. Core requested facts and update checked separately.",
+      "copied_store_audit": "artifacts/dynamic-memory-control/lifecycle-fixed-store-after-v1/report.json"
+    },
+    "rules": {
+      "positions": [
+        {
+          "step": "save-identifier",
+          "status": "COMPLETED",
+          "answer": "本轮语义记忆: 已提交, 已确认 1 项提交。这里只确认保存回执, 不确认全部请求或语义覆盖。",
+          "semantic_operations": [
+            {
+              "tool": "maintain_event",
+              "status": "committed",
+              "receipt_ref": "maintenance:[\"session-0\",\"save-identifier\",\"dynamic-memory-operation-lifecycle-v1-rules\",\"source-428520ad-df9e-4e8f-86c4-25b2655f24b6\"]:proposal:0",
+              "id": "91bef240-88d1-53bb-b256-18867d23c988",
+              "revision": 1,
+              "effect": "memory_only"
+            }
+          ],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "read_0",
+            "new_view",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/rules/banks/02301091-b664-45b1-a8cb-49a54750e337/3e68a054-ded1-4fb6-83f2-b2027f1063dc-result.json"
+        },
+        {
+          "step": "save-independent-preference",
+          "status": "COMPLETED",
+          "answer": "已确认保存晨会纪要语言偏好：用德语输出。该记录已作为独立事项与工具柜登记标识（霁川六号）分离处理。此处仅处理记忆，不办理业务。\n\n本轮语义记忆: 已提交, 已确认 1 项提交。这里只确认保存回执, 不确认全部请求或语义覆盖。",
+          "semantic_operations": [
+            {
+              "tool": "maintain_event",
+              "status": "committed",
+              "receipt_ref": "maintenance:[\"session-0\",\"save-independent-preference\",\"dynamic-memory-operation-lifecycle-v1-rules\",\"source-150113aa-0cc3-4ecb-9b06-ff2639566ea5\"]:proposal:0",
+              "id": "c9137b94-8e1f-5d50-bf94-43b6b7b98df1",
+              "revision": 1,
+              "effect": "memory_only"
+            },
+            {
+              "tool": "maintain_event",
+              "status": "no_change",
+              "receipt_ref": "maintenance:[\"session-0\",\"save-independent-preference\",\"dynamic-memory-operation-lifecycle-v1-rules\",\"source-150113aa-0cc3-4ecb-9b06-ff2639566ea5\"]:proposal:1",
+              "id": "91bef240-88d1-53bb-b256-18867d23c988",
+              "revision": 1,
+              "effect": "none"
+            }
+          ],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "new_view",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/rules/banks/02301091-b664-45b1-a8cb-49a54750e337/8462410c-9ec3-4b31-80bf-30a5cc547eda-result.json"
+        },
+        {
+          "step": "recall-both",
+          "status": "COMPLETED",
+          "answer": "根据已保存的记录，当前保存的工具柜登记标识是“霁川六号”，晨会纪要的语言偏好是“用德语输出”。",
+          "semantic_operations": [],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "history_1",
+            "history_3",
+            "context_0",
+            "read_1",
+            "read_3",
+            "new_view",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/rules/banks/02301091-b664-45b1-a8cb-49a54750e337/d0dd31fd-8f9d-4a7d-9a72-27df83618cd1-result.json"
+        },
+        {
+          "step": "correct-identifier",
+          "status": "COMPLETED",
+          "answer": "已成功将工具柜登记标识更正为“暮帆二号”，原标识不再使用。晨会纪要的语言偏好保持为“用德语输出”不变。\n\n本轮语义记忆: 已提交, 已确认 1 项提交。这里只确认保存回执, 不确认全部请求或语义覆盖。",
+          "semantic_operations": [
+            {
+              "tool": "maintain_event",
+              "status": "committed",
+              "receipt_ref": "maintenance:[\"session-0\",\"correct-identifier\",\"dynamic-memory-operation-lifecycle-v1-rules\",\"source-1ffc427d-ba9d-40a0-a0fa-3913bcee8c4c\"]:proposal:0",
+              "id": "91bef240-88d1-53bb-b256-18867d23c988",
+              "revision": 2,
+              "effect": "memory_only"
+            }
+          ],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "context_0",
+            "read_1",
+            "read_3",
+            "new_view",
+            "handoff"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/rules/banks/02301091-b664-45b1-a8cb-49a54750e337/ea984eb9-0477-4812-919e-a97e1b4a669c-result.json"
+        },
+        {
+          "step": "recall-current",
+          "status": "COMPLETED",
+          "answer": "重新打开后，工具柜当前登记标识是暮帆二号。晨会纪要应使用德语输出。",
+          "semantic_operations": [],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "history_1",
+            "history_3",
+            "read_6",
+            "context_0",
+            "read_1",
+            "read_3",
+            "new_view"
+          ],
+          "historical_versions_opened": [
+            [
+              "工具柜",
+              1
+            ]
+          ],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/rules/banks/02301091-b664-45b1-a8cb-49a54750e337/c794f150-5996-4b96-ada9-74bc5b30a93f-result.json"
+        },
+        {
+          "step": "read-saved-history",
+          "status": "COMPLETED",
+          "answer": "更正前，系统实际保存的工具柜登记标识是“霁川六号”。",
+          "semantic_operations": [],
+          "visibility_operations": [],
+          "control_actions": [
+            "search",
+            "history_1",
+            "history_3",
+            "read_7",
+            "context_0",
+            "read_1",
+            "read_3",
+            "new_view"
+          ],
+          "historical_versions_opened": [
+            [
+              "工具柜",
+              1
+            ]
+          ],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/rules/banks/02301091-b664-45b1-a8cb-49a54750e337/6c40b661-6e8e-4cf4-b8b5-997877a13686-result.json"
+        },
+        {
+          "step": "forget-identifier",
+          "status": "COMPLETED",
+          "answer": "已读取的保存内容 (版本 1): \"晨会纪要的语言偏好为用德语输出。\"\n\n原请求是否已全部完成尚未核对。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n遗忘尝试 1: 未提交; 此次尝试未确认撤销效果, 其他尝试的结果分别列出。\n\n遗忘尝试 2: 已按实际回执撤销所选记忆及来源的可见性。范围: \"record_and_sources\"; 数量: {\"derived_assistant_sources\": 6, \"explicit_support_sources\": 3, \"revoked_sources\": 9, \"selected_records\": 1}。未执行物理擦除, 备份和实验审计轨迹仍保留。未选择的独立副本不在本次确认范围内。\n\n本轮原始消息曾记录, 当前可见性已撤销。原始消息记录与语义记忆提交分别计数。",
+          "semantic_operations": [],
+          "visibility_operations": [
+            {
+              "tool": "forget_memory",
+              "receipt_ref": "chatcmpl-a9a387067df955d5:tool:0",
+              "status": "not_committed",
+              "effect": "none",
+              "phase": "pre_mutation_contract",
+              "error_type": "FunctionalRejection"
+            },
+            {
+              "tool": "forget_memory",
+              "receipt_ref": "chatcmpl-983d21a3293daa10:tool:0",
+              "status": "visibility_revoked",
+              "effect": "visibility_only",
+              "scope": "record_and_sources",
+              "scope_counts": {
+                "derived_assistant_sources": 6,
+                "explicit_support_sources": 3,
+                "revoked_sources": 9,
+                "selected_records": 1
+              },
+              "physical_erasure": false,
+              "raw_audit_retained": true
+            }
+          ],
+          "control_actions": [],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/rules/banks/02301091-b664-45b1-a8cb-49a54750e337/92a632ae-23b0-4d7e-a272-5949b8c98987-result.json"
+        },
+        {
+          "step": "reopen-after-forget",
+          "status": "COMPLETED",
+          "answer": "目前无法查询到工具柜登记标识的状态，也无法确定晨会纪要的语言偏好。因当前无可用工具，且记忆中未找到相关记录。",
+          "semantic_operations": [],
+          "visibility_operations": [],
+          "control_actions": [
+            "search"
+          ],
+          "historical_versions_opened": [],
+          "source_result": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1/rules/banks/02301091-b664-45b1-a8cb-49a54750e337/e798ef6f-2b09-4b9d-8cc6-bfa881e6363c-result.json"
+        }
+      ],
+      "generation_known_tokens": 156266,
+      "embedding_known_tokens": 1255,
+      "new_unknown_generation": 0,
+      "new_unknown_embedding": 0,
+      "message_wall_seconds": 454.84682723414153,
+      "two_independent_records_and_correction_committed": true,
+      "saved_history_actually_read": true,
+      "requested_forget_visibility_revoked": true,
+      "independent_record_and_source_preserved": true,
+      "target_history_and_sources_hidden": true,
+      "revoked_sources_on_receipt": 9,
+      "final_revoked_sources": 10,
+      "extra_revocation": "Final assistant delivery derives from forgotten request and is also hidden; receipt counts describe the earlier commit.",
+      "public_cached_view_visibility": {
+        "current": "support_unavailable",
+        "slot1": "support_unavailable"
+      },
+      "post_forget_query_completed_correctly": false,
+      "all_eight_messages_fulfilled": false,
+      "full_semantic_graph_validity": "Not certified; some stored units also quote transient instructions. Core requested facts and update checked separately.",
+      "copied_store_audit": "artifacts/dynamic-memory-control/lifecycle-rules-store-after-v1/report.json"
+    }
+  },
+  "shared_failure": "Post-forget SEARCH reaches dependent_record_candidates, which reads value from a legitimate visibility-revoked status receipt and raises KeyError. Independent memory remains accessible via actual SDK.",
+  "generic_fix": "Only successful current-body reads participate in dependency traversal and dependency-cache revision basis. Original status/visibility APIs and scopes unchanged.",
+  "validation": {
+    "before": "4reopened actual SQLite cases failed at query handoff across record/source scopes and dependency-read modes. Actual fixed-store copy reproduced KeyError/value.",
+    "after": "4cases pass. Both final Storecopies reopen independent semantic pool while selected sources/history stay hidden; cached rule views expose no forgotten values.158other affected regressions passed;2new selector stubs originally violated optional schema, corrected and4focused cases revalidated.",
+    "ruff": "passed",
+    "mypy": "2modules passed",
+    "package_boundary": "passed",
+    "real_model_after_fix": "NOT_RUN"
+  },
+  "next": "Two distinct later-session queries on copied final banks after V10; no old positions replayed or repaired.",
+  "scope": "One authored lifecycle template,2simple policies; semantic task and state judgments separated. Source visibility revocation is not physical erasure; raw experiment audits retained."
+}

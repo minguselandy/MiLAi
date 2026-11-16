@@ -1,0 +1,38 @@
+{
+  "status": "FIVE_REVIEWABLE_MATCHED_EXAMPLES_NO_TRAINING",
+  "existing_v1_examples": 2,
+  "additional_v2_examples": 3,
+  "total_examples": 5,
+  "new_reference_graph_examples": {
+    "OR_of_AND": 2,
+    "independent_scope_AND": 1
+  },
+  "input_files": [
+    "data/fixtures/milai-method-architecture-matched-training-v1.jsonl",
+    "data/fixtures/milai-method-architecture-matched-training-v2.jsonl"
+  ],
+  "source_histories": [
+    "continuous-v2 loans",
+    "continuous-v2 seed-library",
+    "cross-v1 access",
+    "screening-v1 projection",
+    "screening-v1 exhibit"
+  ],
+  "reviewer": "same source author/developer; no independent labels",
+  "validation": "both targets pass each actual saved generation schema; factual clause arrays and attribution exactly equal; no bank edits or HTTP",
+  "parameter_updates": 0,
+  "cpu_fp32_training": false,
+  "runtime_loads_training_targets": false,
+  "limits": [
+    "positive graphs are authored corrective labels, not model-formed successes",
+    "no trained model or learning advantage",
+    "unseen scope/order evaluation still required",
+    "training token/parameter/step budgets not yet allocated or matched",
+    "all source histories are exposed development data; exclude them from later heldout learning comparisons",
+    "reviewable references have distinct task formats; normalize task-specific training messages before any SFT"
+  ],
+  "task_groups": {
+    "impact_and_local_update_v1": 2,
+    "support_group_formation_v2": 3
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "status": "PHASE14_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T06:20:20.276114+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v13.json",
+  "code_commit": "71b4e488",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 1480,
+      "closed_cases": 0
+    },
+    {
+      "name": "m6-s1u1130-view5-arrival-notice-v1",
+      "owner_pid": 2899654,
+      "child_pid": 2899655,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "active": "memops_D21",
+      "closed_cases": 4
+    },
+    {
+      "name": "m4-dev64-score-pair-v1",
+      "owner_pid": 2910786,
+      "child_pid": 2929295,
+      "status": "COMPLETED",
+      "active": "m4-fixed-dev64-scores-v1",
+      "actual_child_live": false,
+      "scope": "Two fixed finalu165 scorers; first closed, second64predictions produced, closeout may wait on existing HTTP ledger lease. Do not restart."
+    }
+  ],
+  "M4_curves_closed": "/data/milai-experiments/20261111-scalable-evidence/m4-paired-closed-curves-v1.json",
+  "M4_packet_reuse_union": "/data/milai-experiments/20261111-scalable-evidence/m2-dev32-executed-packet-union-v1",
+  "M4_Host_reuse_cache": "/data/milai-experiments/20261111-scalable-evidence/m2-dev32-closed-readout-cache-v1",
+  "M4_reuse_inventory": {
+    "actual_native_packets": 175,
+    "canonical_first_Host_outcomes": 123,
+    "new_native_executions": 0
+  },
+  "TRAIN_next32_closed": {
+    "status": "COMPLETED_WITH_FAILURES",
+    "closed_readouts": 159,
+    "failed_readouts": 2,
+    "compute": {
+      "cpu_seconds": 11.364073660999999,
+      "wall_seconds": 1896.988027925603,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 509730,
+      "known_tokens": 509730,
+      "unknown_usage": 0
+    }
+  },
+  "TRAIN_next32_bound": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families64to96-witness-v1",
+  "TRAIN_remaining_unstarted": 1171,
+  "M6_selected_restoration": {
+    "files": 155,
+    "restored_bytes": 28112487,
+    "archive": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/closed-D-capture-storage-v1/new32-view_cache-frozen-host-messages.tar.gz",
+    "base": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/closed-D-capture-storage-v1/immutable-empty-base",
+    "destination": "/data/milai-experiments/20261111-scalable-evidence/m6-view5-captures-v1",
+    "no_sha_validation": true,
+    "source_families": 5,
+    "scope": "Only one actual pre-Host capture per family: host.json and before subtree. No unrelated captures, after states or prefix execution restored. Existing original archive/base untouched.",
+    "compute": {
+      "cpu_seconds": 129.884794909,
+      "wall_seconds": 129.8991375695914
+    }
+  },
+  "M6_actual_firsts": {
+    "status": "FIVE_FIRST_HOST_BRANCHES_CLOSED",
+    "records": [
+      {
+        "family": "memops_A05",
+        "status": "COMPLETED",
+        "error": null,
+        "new_HTTP_responses": 1,
+        "new_controller_decisions": 0,
+        "selected_actions": [],
+        "new_generation_delta": {
+          "charged_tokens": 17242,
+          "known_tokens": 17242,
+          "unknown_usage": 0
+        },
+        "generation_calls_including_local_decisions": 1,
+        "before_verified": true,
+        "context_verified": true,
+        "catalog_verified": true,
+        "result": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/memops_A05/result.json"
+      },
+      {
+        "family": "memops_C01",
+        "status": "COMPLETED",
+        "error": null,
+        "new_HTTP_responses": 1,
+        "new_controller_decisions": 0,
+        "selected_actions": [],
+        "new_generation_delta": {
+          "charged_tokens": 4832,
+          "known_tokens": 4832,
+          "unknown_usage": 0
+        },
+        "generation_calls_including_local_decisions": 1,
+        "before_verified": true,
+        "context_verified": true,
+        "catalog_verified": true,
+        "result": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/memops_C01/result.json"
+      },
+      {
+        "family": "memops_C23",
+        "status": "COMPLETED",
+        "error": null,
+        "new_HTTP_responses": 1,
+        "new_controller_decisions": 0,
+        "selected_actions": [],
+        "new_generation_delta": {
+          "charged_tokens": 7273,
+          "known_tokens": 7273,
+          "unknown_usage": 0
+        },
+        "generation_calls_including_local_decisions": 1,
+        "before_verified": true,
+        "context_verified": true,
+        "catalog_verified": true,
+        "result": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/memops_C23/result.json"
+      },
+      {
+        "family": "memops_D19",
+        "status": "COMPLETED",
+        "error": null,
+        "new_HTTP_responses": 1,
+        "new_controller_decisions": 0,
+        "selected_actions": [],
+        "new_generation_delta": {
+          "charged_tokens": 7345,
+          "known_tokens": 7345,
+          "unknown_usage": 0
+        },
+        "generation_calls_including_local_decisions": 1,
+        "before_verified": true,
+        "context_verified": true,
+        "catalog_verified": true,
+        "result": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/memops_D19/result.json"
+      },
+      {
+        "family": "memops_D21",
+        "status": "FAILED",
+        "error": "VLLM_CHAT_TRUNCATED",
+        "new_HTTP_responses": 2,
+        "new_controller_decisions": 8,
+        "selected_actions": [
+          {
+            "id": "search_0_16",
+            "kind": "SEARCH",
+            "target": "Host query",
+            "parameters": {
+              "query_from": "request",
+              "limit": 16
+            }
+          },
+          {
+            "id": "read_3",
+            "kind": "READ",
+            "target": "candidate 3",
+            "parameters": {
+              "index": 3
+            }
+          },
+          {
+            "id": "read_2",
+            "kind": "READ",
+            "target": "candidate 2",
+            "parameters": {
+              "index": 2
+            }
+          },
+          {
+            "id": "read_1",
+            "kind": "READ",
+            "target": "candidate 1",
+            "parameters": {
+              "index": 1
+            }
+          },
+          {
+            "id": "read_0",
+            "kind": "READ",
+            "target": "candidate 0",
+            "parameters": {
+              "index": 0
+            }
+          },
+          {
+            "id": "source_fragment_6",
+            "kind": "READ",
+            "target": "observed source 6 fragment as original Reader evidence",
+            "parameters": {
+              "observed_source": {
+                "source_ref": "source-c0bd1b9c-4abd-4878-8472-d2c2535b4900",
+                "source_revision": 1,
+                "start": 0,
+                "end": 380
+              }
+            }
+          },
+          {
+            "id": "read_4",
+            "kind": "READ",
+            "target": "candidate 4",
+            "parameters": {
+              "index": 4
+            }
+          },
+          {
+            "id": "handoff",
+            "kind": "HANDOFF",
+            "target": "Reader with opened evidence",
+            "parameters": {}
+          }
+        ],
+        "new_generation_delta": {
+          "charged_tokens": 23439,
+          "known_tokens": 23439,
+          "unknown_usage": 0
+        },
+        "generation_calls_including_local_decisions": 10,
+        "before_verified": true,
+        "context_verified": true,
+        "catalog_verified": true,
+        "result": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/memops_D21/result.json"
+      }
+    ],
+    "corrects": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/execution-summary-v1.json",
+    "correction": "Original host_result_path points to attempt-N.json, not necessarily result.json. Correct trace identity from actual attempt basename; original erroneous diagnostic retained.",
+    "scope": "Current-message traces only; historical Tool messages are not new calls. No semantic-success claim from transport status.",
+    "no_sha_validation": true
+  },
+  "M6_source_review": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/author-review-v1.json",
+  "M6_first_findings": {
+    "transport_completed": 4,
+    "transport_failed": 1,
+    "new_retrieval_not_called_in": 4,
+    "actual_controller_decisions_last_case": 8,
+    "new_View_operations": 0,
+    "source_author_grades": {
+      "qualified": 1,
+      "incorrect_stale_or_missing_scope": 3,
+      "execution_failed": 1
+    },
+    "scope": "Actual updated source witnesses present in all5 native ready states. Four no-new-retrieval answers cannot be credited to or blamed on an uncalled learned controller. Fifth madeSEARCH/6READ/HANDOFF then providerlengthfailed. Source-author review nonblind/nonindependent on generatedMemOps TRAIN."
+  },
+  "M6_notice_condition": {
+    "plan": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-arrival-notice-v1-plan.json",
+    "wire_check": "/data/milai-experiments/20261111-scalable-evidence/m6-arrival-notice-wire-check-v1.json",
+    "scope": "Same real preHost Source/history/state/policy, only first provider message gains actual incoming-source count and role counts. No bodies/gold/relevance judgement/forced sequence. Explicit additional-information condition, not pure scorer benefit. Original firsts retained."
+  },
+  "validation": {
+    "archive_and_fullHost_replay_tests": 22,
+    "ruff": "pass",
+    "original_frozen_runtime_used": true,
+    "original_archive_and_sources_unchanged": true,
+    "current_wrapper_cache_origins_supported": true,
+    "source_api_permissions_canonical_changed": false,
+    "remote_push": false,
+    "services_restarted": false
+  },
+  "cost_scope": "Original ledger, native runs self-meter. Restoration/preparation and overlap-aware owner residuals remain to settle; no duplicate addition of whole-child/native timers. Author/tests/unmeasured overhead unknown, not zero.",
+  "remaining": [
+    "Close arrival-notice condition and source-review actual outputs/calls, preserve its intentionally changed Host input and original no-notice firsts",
+    "Finish M4score closeout then execute full-menu own/fixed/strongsimple comparisons reusing actual175packets/123firstoutcomes",
+    "Annotate closed159TRAIN endpoints, resume remaining1171 prepared first outcomes and train adequate fullfeedback",
+    "Finish original36k3390, continuingSource/View trajectories beyond single restored messages, decisive seeds,newconfirmation96 andfullcost/generalization"
+  ]
+}

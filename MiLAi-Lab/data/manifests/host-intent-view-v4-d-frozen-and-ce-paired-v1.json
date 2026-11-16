@@ -1,0 +1,224 @@
+{
+  "status": "DESCRIPTIVE_EXPOSED_DEV_PAIRED_GROUP_COMPARISON",
+  "arms": {
+    "t1-main-seed0": {
+      "host_grades": {
+        "C": 19,
+        "W": 19,
+        "Q": 13,
+        "F": 13
+      },
+      "delivery": {
+        "complete": 37,
+        "partial": 27
+      },
+      "generation_tokens": 537603,
+      "generation_requests": 88,
+      "native_input_audit": {
+        "forwards": 94,
+        "input_tokens": 401840,
+        "max_input_tokens": 11000,
+        "truncated": 0,
+        "nonfinite": 0
+      },
+      "native_compute_directly_billed": 56.53014885597122,
+      "cpu_unbilled": 77.53777131102876,
+      "final_arrivals": {
+        "positions": 16,
+        "host": {
+          "W": 12,
+          "F": 3,
+          "Q": 1
+        },
+        "retrieval_calls": 1,
+        "positions_with_new_retrieval": 1
+      }
+    },
+    "t1-control-seed0": {
+      "host_grades": {
+        "C": 16,
+        "W": 20,
+        "Q": 19,
+        "F": 9
+      },
+      "delivery": {
+        "complete": 36,
+        "partial": 28
+      },
+      "generation_tokens": 525203,
+      "generation_requests": 89,
+      "native_input_audit": {
+        "forwards": 111,
+        "input_tokens": 484251,
+        "max_input_tokens": 11626,
+        "truncated": 0,
+        "nonfinite": 0
+      },
+      "native_compute_directly_billed": 64.93404674400836,
+      "cpu_unbilled": 72.31576356499164,
+      "final_arrivals": {
+        "positions": 16,
+        "host": {
+          "W": 13,
+          "Q": 3
+        },
+        "retrieval_calls": 1,
+        "positions_with_new_retrieval": 1
+      }
+    },
+    "continued-ce-seed0": {
+      "host_grades": {
+        "C": 18,
+        "W": 19,
+        "Q": 17,
+        "F": 10
+      },
+      "delivery": {
+        "complete": 36,
+        "partial": 28
+      },
+      "generation_tokens": 539523,
+      "generation_requests": 85,
+      "native_input_audit": {
+        "forwards": 83,
+        "input_tokens": 369416,
+        "max_input_tokens": 12194,
+        "truncated": 0,
+        "nonfinite": 0
+      },
+      "native_compute_directly_billed": 57.69113207900091,
+      "cpu_unbilled": 71.7641587089991,
+      "final_arrivals": {
+        "positions": 16,
+        "host": {
+          "W": 11,
+          "Q": 3,
+          "F": 2
+        },
+        "retrieval_calls": 1,
+        "positions_with_new_retrieval": 1
+      }
+    }
+  },
+  "paired": {
+    "t1-control-seed0_minus_t1-main-seed0": {
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 2713
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 921
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -14433
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": -10679
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -18064
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 4240
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 17291
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 5611
+        }
+      ],
+      "groups_Host_more": 3,
+      "groups_Host_equal": 1,
+      "groups_Host_fewer": 4
+    },
+    "continued-ce-seed0_minus_t1-main-seed0": {
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -1836
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -2633
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -155
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": -9836
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -6209
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -5916
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 13861
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 14644
+        }
+      ],
+      "groups_Host_more": 2,
+      "groups_Host_equal": 3,
+      "groups_Host_fewer": 3
+    }
+  },
+  "unit": "Eight source groups; four-turn flows and their content/originals variants are not independent samples.",
+  "scope": "Frozen T1 main/control and additional continued-CE at original2048 workpoint. Different autonomous Host trajectories; no controller-only causal attribution, blind/offical score or winner claim. Additional feedback arms and simple/cache/MemPursuit full comparison remain pending.",
+  "reviewer": "Current author/source review; explicit grade uncertainty remains in arm reviews.",
+  "model_calls": 0,
+  "compute": {
+    "wall_seconds": 0.00037380773574113846,
+    "cpu_seconds": 0.00037326099999999973
+  },
+  "ledger_recorded": false
+}

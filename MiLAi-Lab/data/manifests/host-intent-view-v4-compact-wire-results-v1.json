@@ -1,0 +1,39 @@
+{
+  "status": "CLOSED_FUNCTIONAL_DELIVERY_AND_CONDITIONAL_HOST_REVIEWED",
+  "pid": 1870988,
+  "source_version": "2e510e32",
+  "scope": "Functional reuse of the actual post-refresh cached View, new public request. One conditional Host receipt substitution; not same-before E2 or policy performance.",
+  "automatic_retry": false,
+  "view_regenerations": 0,
+  "tool_status": "COMPLETED",
+  "packet_tokens": 871,
+  "wire_bindings": 6,
+  "stored_bindings": 30,
+  "controller_bindings": 30,
+  "actual_ref_reopened": true,
+  "interpretation_unchanged": true,
+  "answer": "Based on the most recent stored reports, the currently supported historical reference for your early-March InPost pickup is:\n\n- **Corrected Code:** 7742 (Note: This was a correction from an initial report of 7724).\n- **Location:** Greenfield Ave\n- **Uncertainty/Corrections:** \n  - The code was initially reported as 7724 but was corrected to 7742 by the user.\n  - A potential confusion involving code 7740 was resolved as 7742 in the email body.\n\nThis remains a historical record and is not valid for current use.",
+  "wall_seconds": 5.851201520301402,
+  "cpu_seconds_nested": 2.152786751,
+  "conditional_host_grade": "C",
+  "grade_basis": "7742 correction, Greenfield location and7740 subject-line uncertainty resolved by email body match actual stored user reports. Historical-only usage retained.",
+  "reviewer": "Current author/source review, not independent or blind.",
+  "view_quality": "Core required facts supported; not full View certification. Retained ruleg1 cites e1 (initial7724 source) for n1 (corrected7742), which does not establish that rule. Compaction did not change this defect.",
+  "generation_requests": 1,
+  "generation": {
+    "charged_tokens": 4767,
+    "known_tokens": 4767,
+    "unknown_usage": 0
+  },
+  "original_failure_retained": "view-v4-source-check-followups-v1/case-05/runtime",
+  "raw": "artifacts/host-intent-retrieval-v3/view-v4-compact-view-delivery-v1",
+  "checks": "39 affected tests,2focused mixed/reference checks,6package/tools boundaries; Ruff/mypy2files passed.",
+  "same_before_checks": "artifacts/host-intent-retrieval-v3/view-v4-compact-wire-before-check-v1/summary.json",
+  "implementation": "project_packs compact_view_bindings defaultsFalse; retrieval_packet requestsTrue. Interpretations and internal/cache/snapshot/control bindings unchanged.",
+  "review_compute": {
+    "wall_seconds": 0.0025415588170289993,
+    "cpu_seconds": 0.0025420489999999976
+  },
+  "ledger_recorded": true,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v24.json"
+}

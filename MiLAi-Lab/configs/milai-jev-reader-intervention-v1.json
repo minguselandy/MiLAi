@@ -1,0 +1,38 @@
+{
+  "name": "milai-jev-reader-intervention-v1",
+  "artifact_base": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab",
+  "settings": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-supervision-v3/corpus/actual-config.json",
+  "questions": [
+    "0db4c65d",
+    "0ea62687",
+    "08e075c7",
+    "1e043500"
+  ],
+  "methods": [
+    "top1",
+    "top2",
+    "value_single",
+    "reviewed"
+  ],
+  "prepared_inputs": {
+    "0db4c65d": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/0db4c65d.json",
+    "0ea62687": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/0ea62687.json",
+    "08e075c7": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/08e075c7.json",
+    "1e043500": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/1e043500.json"
+  },
+  "saved_selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/learned-value-comparison-v1/execution",
+  "reviewed_conditions": {
+    "0db4c65d": "both",
+    "0ea62687": "both",
+    "08e075c7": "support_1",
+    "1e043500": "support"
+  },
+  "generation_call_bound": 32,
+  "strata": [
+    "two-event date difference",
+    "two-event quantity comparison",
+    "latest stated duration",
+    "single-source lookup"
+  ],
+  "scope": "Four already exposed source families; same actual saved full pool, expanded parent contexts, Reader and budget. Saved top1/top2/ridge choices reused without rerunning controllers. Source-reviewed subsets are offline diagnostic interventions only. All first predictions precede first official scoring; identical subsets remain declared stochastic replicates. Costs include original selection work for standalone methods; no claims of unseen generalization or independent Judge."
+}

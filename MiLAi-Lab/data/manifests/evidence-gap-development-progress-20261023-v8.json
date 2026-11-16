@@ -1,0 +1,233 @@
+{
+  "status": "ACTIVE;COMPACT_JSON_OPT_IN_IMPLEMENTED;NATIVE_INPUT_AUDIT_AND_ORIGINAL_SAVEDCPU262_RUNNING",
+  "observed_at": "2026-10-23T10:15:24.944977+00:00",
+  "source_version": "67c9a9eb",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v7.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: STATE actual branch executor and LME901 archive reconciliation",
+  "compact_condition": {
+    "profiles": [
+      "compact_actions",
+      "compact_actions_request_text"
+    ],
+    "default_or_original_frozen_inference_changed": false,
+    "mechanism": "Same shared JSON values/order/action head; omit JSON syntax whitespace only; native state accepts JSON text directly. Source text whitespace and types preserved.",
+    "entrypoints": "--operation-state in train/evaluate; state_projection in live policy; mixed/auxiliary/export/diagnostics supported",
+    "retraining_and_quality": "Not measured; input fit alone cannot justify deployment input replacement",
+    "rejected_prototypes": "Text substring references added11tokens to STATE failure; nested compact string adds escaping cost. Neither adopted."
+  },
+  "validation": {
+    "native_related_tests": 45,
+    "final_positions_supervision_tests_overlapping": 10,
+    "ruff": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "scoped_mypy": "9 modules PASS using actual CUDA interpreter plus HTTP dependencies; prior follow-imports/import-untyped/unused-ignore exclusions retained",
+    "first_failures_retained": "3 assertions involving separated action bindings/Python tuple-vs-JSON-array checks; first typing run missing torch/laya imports",
+    "full_suite": "not_run",
+    "remote_CI": "not_run",
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1"
+  },
+  "completed_STATE_input_pairs": {
+    "STATE_actual4/shared_actions": {
+      "pairs": 4,
+      "before_state_drops": 1,
+      "after_state_drops": 0,
+      "before_head_drops": 0,
+      "after_head_drops": 0,
+      "mask_replacements": 0,
+      "before_total_tokens": 46223,
+      "after_total_tokens": 42125,
+      "max_before_complete_tokens": 16699,
+      "max_after_complete_tokens": 15318,
+      "token_regressions": 0
+    },
+    "STATE_actual4/shared_actions_request_text": {
+      "pairs": 4,
+      "before_state_drops": 1,
+      "after_state_drops": 0,
+      "before_head_drops": 0,
+      "after_head_drops": 0,
+      "mask_replacements": 0,
+      "before_total_tokens": 47503,
+      "after_total_tokens": 43529,
+      "max_before_complete_tokens": 17019,
+      "max_after_complete_tokens": 15669,
+      "token_regressions": 0
+    }
+  },
+  "live_audit": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-audit-v1",
+    "scope": "New compact_actions and compact_actions_request_text serialization audit only. Same complete JSON values/ordering,head,actions and labels; no task rerun,weights,forward or QA. Original STATE/LME sources and old savedCPU inference unchanged. SDK tokenization may diagnose original truncation; this does not execute those truncated sequences.",
+    "pairs_observed": 3100,
+    "regressions_observed": 0,
+    "status": "RUNNING",
+    "all_inputs_passed": "not_yet_proven",
+    "quality": "not_measured"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1",
+      "driver_pid": 2925107,
+      "child_pid": 2925108,
+      "session": 47993,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 312,
+      "planned": 876,
+      "neural_model": true
+    },
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-audit-v1",
+      "driver_pid": 3158998,
+      "child_pid": 3159005,
+      "session": 83608,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 3100,
+      "planned": "STATE4 + LME7208 decisions + source256 train/dev; two serialization pairs each",
+      "neural_model": false
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_SAVED_CPU262_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v7.json",
+    "additional_closed_phases": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1/package-boundary.json",
+        "cpu_seconds": 3.645119999999997,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1/ruff.json",
+        "cpu_seconds": 0.042494,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1/tests-first.json",
+        "cpu_seconds": 5.367773,
+        "exit_code": 1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1/tests-native.json",
+        "cpu_seconds": 8.60904,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1/tests-positions-final.json",
+        "cpu_seconds": 7.620985,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1/tools-boundary.json",
+        "cpu_seconds": 7.644823000000002,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1/typing-native-env.json",
+        "cpu_seconds": 41.804976999999994,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-validation-v1/typing.json",
+        "cpu_seconds": 21.920982,
+        "exit_code": 1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/text-spans-prototype-v1.json",
+        "cpu_seconds": 8.659791209
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-json-prototype-v1.json",
+        "cpu_seconds": 7.102421066
+      }
+    ],
+    "additional_measured_cpu_seconds": 112.418406275,
+    "ledger_recorded": false,
+    "live_audit": "Excluded until terminal whole-child measurement; do not add nested audit CPU twice",
+    "unknown": "Authoring and unmeasured checks remain unknown; earlier unknowns unchanged"
+  },
+  "preserved_LME_result": {
+    "status": "COMPLETE_901_ARCHIVED_PATHS_VERIFIED_ONE_ORIGINAL_PATH_UNKNOWN",
+    "source_version": "a33974c0",
+    "completed_paths": 901,
+    "planned_paths": 902,
+    "original_preserved_complete": 501,
+    "continued_complete": 400,
+    "unknown": [
+      {
+        "original_index": 501,
+        "row": 250,
+        "delivery_selection": true,
+        "reason": "Original interrupted path has neither completed case nor archive; never retried."
+      }
+    ],
+    "archives_verified": 901,
+    "by_delivery_selection": {
+      "False": {
+        "paths": 451,
+        "empty_packets": 0,
+        "reader_overflow_paths": 0,
+        "state_drop_paths": 0,
+        "head_drop_paths": 0,
+        "mask_replacement_paths": 0,
+        "material_budget_rejections": 1838,
+        "max_sequence_tokens": 10817,
+        "max_reader_reserved_tokens": 14816,
+        "source_images": 545,
+        "native_inputs": 7216
+      },
+      "True": {
+        "paths": 450,
+        "empty_packets": 0,
+        "reader_overflow_paths": 0,
+        "state_drop_paths": 2,
+        "head_drop_paths": 0,
+        "mask_replacement_paths": 0,
+        "material_budget_rejections": 1834,
+        "max_sequence_tokens": 16384,
+        "max_reader_reserved_tokens": 14816,
+        "source_images": 545,
+        "native_inputs": 7200
+      }
+    },
+    "by_representation": {
+      "shared_actions": {
+        "inputs": 7208,
+        "state_drop_inputs": 2,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 16384
+      },
+      "shared_actions_request_text": {
+        "inputs": 7208,
+        "state_drop_inputs": 2,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 16384
+      }
+    },
+    "fully_paired_questions": 450,
+    "single_path_questions": [
+      250
+    ],
+    "paired_delivered_evidence_different": 1,
+    "scope": "Frozen fixed-policy path and capacity coverage only; no Reader answers, native QA judgements, learned-policy coverage or current-method result.",
+    "archive_verification_scope": "All901 archived audit-case JSON reconstructed and checked against summary, decisions, paired input representation counts and actual packet/Reader measurements. Full database/trace bytes were verified directly at original archive construction; this reconciliation does not repeat that entire byte comparison or alter bases.",
+    "reconciliation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/lme-fixed-path-tail400-v1/reconciliation.json",
+    "overflow_details": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/lme-fixed-path-tail400-v1/overflow-details.json",
+    "native_capacity_pass": false,
+    "Reader_QA_answers": 0,
+    "native_QA_judging": "not_run"
+  },
+  "remaining": "Original262/393/524andselectedtrain/selection;otherfits/feedback32/64/128/T2/statecomparison/seeds;F1relevance/F2faithfulness/F3nativecapacity/simulatorcompletion;LMEReader/lifecycle/Host/officialfullprotocol/external/protected/finalfigures. M1-M5 not achieved. STATE fixed Host continuation and real task feedback after actual branch executor. New compact condition full capacity audit and separate learned/Host comparison; old frozen queues unchanged.",
+  "scheduling": "One original neural savedCPU evaluator plus independent CPU-only input audit. No second neural work or offline settlement while262lives; never restart on stale status/session loss.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_interfaces_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

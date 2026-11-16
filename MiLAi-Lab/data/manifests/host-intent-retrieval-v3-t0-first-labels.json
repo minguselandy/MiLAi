@@ -1,0 +1,33 @@
+{
+  "status": "PARTIAL_SOURCE_REVIEW_NOT_FIT_READY",
+  "input_export": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v1",
+  "compiled_labels": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v2",
+  "states": 190,
+  "review_records": 16,
+  "labelled": 12,
+  "forced_masked": 4,
+  "unreviewed_masked": 174,
+  "labelled_families": [
+    "memops_A01",
+    "memops_A02"
+  ],
+  "preferred_operation_counts": {
+    "HANDOFF": 9,
+    "SEARCH": 1,
+    "READ": 2
+  },
+  "model_inputs_unchanged": true,
+  "teacher_actions_copied": false,
+  "native_reference_answers_used_as_semantic_gold": false,
+  "review_basis": [
+    "A01 actual first stored revision1 and its declared current/first-version distinction; explicit version indicator and fullunit already opened.",
+    "A01/A02 stage0 actual requests and all5originalturns reviewed; completeuserreports s1t1/s1t3/s1t5 give current corrected facts and establish the bounded-prefix unknown detail."
+  ],
+  "limitations": [
+    "Only2sourcegroups and a closedprefix; not the64grouptrainingdataset.",
+    "Preferences are shortterm source judgments, not optimal utilities or exhaustive action legality.",
+    "No training job or new model claim from12labels.",
+    "Originalrawstates/traces/results retained; ambiguous/unreviewed/forced remainmasked."
+  ],
+  "reviewer": "assistant author, not independent judgment"
+}

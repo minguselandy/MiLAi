@@ -1,0 +1,98 @@
+{
+  "name": "milai-source-selection-v2-fixed4",
+  "status": "FROZEN_BEFORE_ANY_MODEL_FORWARD",
+  "frozen_epoch": 1792244942.9124665,
+  "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/states-v2",
+  "source_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/source-review/all228-before-reference.json",
+  "projection_addenda": "data/manifests/milai-source-selection-v2-proof-projection-addenda.json",
+  "projection_correction": "data/manifests/milai-source-selection-v2-projection-correction.json",
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "backend": "native",
+  "conditions": [
+    "reference",
+    "source"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "planned_jobs": 6,
+  "job_order": "Seeds0,1,2;reference/source for even seeds,source/reference for odd seeds;serial root process,no retry.",
+  "optimizer_updates": 188,
+  "update_rule": "Two full passes of the larger eligible count rounded up to full16-example update windows. Frozen from data only before forwards.",
+  "batch_size": 4,
+  "gradient_accumulation": 4,
+  "train_rows_per_job": 3008,
+  "evaluation_steps": [
+    0,
+    94,
+    188
+  ],
+  "checkpoint_rule": "Use fixed final188-update checkpoint for everyseed/recipe;half checkpoint diagnostic only.",
+  "common_dev": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/states-v2/source/dev.jsonl",
+  "reference_dev": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/states-v2/reference/dev.jsonl",
+  "objective": "soft-ce",
+  "shuffle_options": true,
+  "option_schedule": "Shared state_id,seed,data-pass integer seed;no content hash. Same shared-state option order despite different label masks.",
+  "encoder_lr": 2.5e-05,
+  "head_lr": 0.0001,
+  "weight_decay": 0.01,
+  "precision": "float32",
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "max_len": 8192,
+  "head_max_len": 512,
+  "actual_max_input_tokens": 5198,
+  "source_labelled_states": 1228,
+  "reference_labelled_states": 1495,
+  "source_fitted_families": 116,
+  "reference_fitted_families": 127,
+  "source_family_scope": "128admitted train families retained in reports; actual gradient family counts differ because empty-label states are not fitted. Not a9familymicrofit.",
+  "comparison_scope": "Complete supervision recipe including labels/masks,at matched updates and common initialization. Different eligible examples and tokens are measured;not equalFLOPs,pure-label-only causal isolation,data-scale effect or head-architecture effect.",
+  "saved_weight_rule": "Checkpoint writer storesFP16;all final probes/selection reload that exact saved artifact asFP32. TrainingFP32dev predictions are separate learning diagnostics,not reused as reloaded predictions.",
+  "evaluation": {
+    "development_cases": 43,
+    "reserved_families": 14,
+    "reserved_cases": 28,
+    "reservation": "data/manifests/milai-source-selection-v2-reservation.json",
+    "boundary_scope": "data/manifests/milai-source-selection-v2-boundary-scope-decision.json",
+    "read_budget": 4,
+    "methods": "All6new final checkpoints,BASEzero-shot,all3prior128nativefinal checkpoints,BM25fixed4,densefixed4,andfullpool.13arms/cohort;no bestseed selection. Prior models use their original task with STOP ignored for fixed4;new/BASE use open-only task.",
+    "reader": "Use existing source-only Reader endpoint,prompt,decoding and first-failure policy. Reuse only exactly identical rendered input;all actual and gross costs disclosed.",
+    "reserved_review": "After method freeze only;source-first judgments before native-answer/model-output comparison. No gradients/tuning from these families.",
+    "native_scores": "Original answers retained with dataset/reference scoring explicitly identified;source semantic criteria separate,including qualified answers.",
+    "response_review": "All first responses source/citation/contract reviewed before method mapping;assistant/partial blinding only,no independentgold claim."
+  },
+  "robustness": {
+    "presentation_variants": [
+      "original",
+      "aliases",
+      "candidate_order",
+      "option_order",
+      "title_frame",
+      "evidence_order"
+    ],
+    "models": "all6new final checkpoints",
+    "states": 428,
+    "scope": "Acceptance in both views primary,canonical exact-choice invariance secondary;mask/qualified denominators explicit.",
+    "evidence_contrasts": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evidence-contrasts-v1/contrasts.jsonl",
+    "evidence_pairs": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evidence-contrasts-v1/pairs.json",
+    "contrast_counts": {
+      "contexts": 44,
+      "labelled": 42,
+      "families": 18,
+      "disjoint_target_pairs": 31
+    },
+    "contrast_scope": "Identical questions,candidates and actions;neutral-ID literal observed-premise copies change. Controlled complement-selection diagnosis,not natural counterfactual coverage. Natural positive/insufficient variants also compared in actualQA."
+  },
+  "adoption": "Research only. Keep strongdensebaseline and prior native positive signal;no automaticSTOP/default adoption orWriterclaim. Negative/qualified scientific outcome is valid after every frozen stage and analysis is executed,not a reason to reroll.",
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "new_services": false,
+  "new_ledger": false,
+  "other_worktrees_resumed": false
+}

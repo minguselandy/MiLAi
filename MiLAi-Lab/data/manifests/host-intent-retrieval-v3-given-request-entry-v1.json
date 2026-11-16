@@ -1,0 +1,33 @@
+{
+  "status": "GIVEN_REQUEST_ENTRY_IMPLEMENTED_SOURCE_STORE_PREPARATION_READY",
+  "entry": "milai_lab.runners.functional.message(given_retrieval_request=...)",
+  "request_boundary": "Exact supplied query/read_goal/task_context/limits through the same registered milai_retrieve tool; no Host request rewrite or final-answer generation. Query-only explicitly rejects rich fields. Public message identity includes the literal request.",
+  "runtime_reuse": [
+    "Existing Store, visibility and source snapshots",
+    "Existing memory policy, native model pool, actual read/control/return budgets",
+    "Original continuous HTTP/compute ledger and first-failure records",
+    "Existing tool request validation; source visibility rechecked before return and on replay"
+  ],
+  "response": "Original ToolMessage and retrieval_result, request_transport=programmatic_given_request, final_answer=None, final_delivery=not_requested. This is a native-backend/given-request mode, not autonomous Host or nativeE0.",
+  "first_failure": "Controller exceptions retained without answer-only repair or automatic retry. Initial new test fixture incorrectly used event-delta maintenance with v1; corrected test to I2, no production rule relaxed.",
+  "source_preparation_tool": "tools/prepare_instructir_bank.py",
+  "source_preparation": "Full corpus only; source-map uses native document IDs offline. No query/qrel input or model run. Progress counts actual captured sources; partial failure/time retained.",
+  "validation": {
+    "new_given_request_and_source_intake_tests": 6,
+    "related_tests": 33,
+    "ruff": "PASS4files",
+    "mypy": "PASS3sourcefiles",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS"
+  },
+  "pending_work": [
+    "Full actual Store ingestion and direct equality/lineage audit",
+    "Independent case/arm state isolation and storage plan for the full9906-query release",
+    "Ranking projection from actual delivered originals/interpretation citations and full native scoring",
+    "Final method/config freeze, actual full E4 and all remaining plan requirements"
+  ],
+  "product_changes": "No Product Schema/API/permission/Canonical changes; optional Lab runner argument only.",
+  "active_training": "PID2070802/exec15108 remains sole actual model job, frozen ba2bf8d8. No second model job or offline settlement while live.",
+  "no_sha_checks": true,
+  "remote_publication": false
+}

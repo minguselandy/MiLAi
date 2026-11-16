@@ -1,0 +1,22 @@
+{
+  "status": "COMPLETED_OFFLINE_REPLAY",
+  "source_run": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/raw-scale-v2/1000/MiLAi-memory-only",
+  "key": "halumem/innovation-scale-aster-1000/999/qa/0",
+  "old_source_version": "cd1dcf86",
+  "new_source_version": "27d888ab",
+  "original_model_responses_reused": 1,
+  "new_model_http_calls": 0,
+  "requests_identical": true,
+  "reader_state_identical": true,
+  "linear": {
+    "wall_seconds": 60.691672494634986,
+    "cpu_seconds": 60.70476517499999,
+    "token_measurements": 1004
+  },
+  "binary": {
+    "wall_seconds": 2.475925241596997,
+    "cpu_seconds": 2.478685318,
+    "token_measurements": 14
+  },
+  "scope": "One actual1000-source snapshot, actual tokenizer and live visibility checks on independent SQLite copies. No new generation or quality measurement. Shared-machine CPU wall times; not complete pipeline speed."
+}

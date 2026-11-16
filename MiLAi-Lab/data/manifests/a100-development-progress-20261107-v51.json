@@ -1,0 +1,105 @@
+{
+  "status": "ACTIVE_PRIMARY_QA208_EXISTING_SOLE_LME_UNTOUCHED_TAIL_RUNNING",
+  "timestamp_utc": "2026-11-06T19:04:06.479046+00:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261107-v50.json",
+  "previous_checkpoint_commit": "a205f6ca",
+  "unchanged_full_scope": "Original763-line goal/M5 ACTIVE. All M0-M4/B-C/D-K/fits/internal1024 first outcomes/full Source-wires-NN audits/native all4 F1 and costs in v50 ancestors remain unchanged. No repeated model outcomes, method/seed/N/budget/scorer reselection or adoption.",
+  "primary_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first208-source-author-review-reconciliation-v1.json",
+    "positions": 208,
+    "new_since_v50": 24,
+    "quality_counts": {
+      "C": 115,
+      "W": 10,
+      "I": 31,
+      "F": 48,
+      "U": 4
+    },
+    "material_counts": {
+      "S": 122,
+      "P": 75,
+      "I": 11
+    },
+    "native_strata": {
+      "dev": 185,
+      "train": 23
+    },
+    "prior184_whole_records_literal_equal": true,
+    "all208_whole_first_results_literal_equal_full256_audit": true,
+    "original_failures_and_last_provider_bindings_retained": true,
+    "other_method_labels_inherited": false,
+    "source_author_not_blind_or_independent": true,
+    "guides_preceded_all_corresponding_semantic_answer_review": false,
+    "guide101_after_exposure_timing_and_common82_addendum_retained": true,
+    "common_scope_mask": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-inventory-all256-v2.json",
+    "common_stress_count": 122,
+    "fixed_denominator_each_method": 256,
+    "partial_panel_extrapolation_or_all4_main_C_statistics": false
+  },
+  "actual_external_process": {
+    "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-running-snapshot-v2.json",
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-owner.json",
+    "pid": 183645,
+    "child_pid": 183647,
+    "status": "RUNNING",
+    "client_CPU_recorded": false,
+    "driver_status": "RUNNING",
+    "active_row": 11,
+    "native_cases": {
+      "COMPLETED": 10,
+      "FAILED_READING": 1,
+      "PREPARING_INPUT": 1,
+      "NOT_RUN": 439
+    },
+    "actual_process_commands_verified": true,
+    "inherited_first8_whole_dicts_literal_equal": true,
+    "original_first_failed_row7_retried": false,
+    "local_model_loads": 0,
+    "automatic_queue_or_second_model_HTTP_worker": false,
+    "whole451_audit_score_archive_closed": false,
+    "fixed_Reader_given_retrieval_not_autonomous_Host_or_unseen_Small": true
+  },
+  "unchanged_v50_closures": {
+    "initial_LME_first8_and_length_failure": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-first-reader-failure-reflection.json",
+    "Mem2Act_catalog_mock_only": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/mem2act-catalog-capture-contract-v1/verification.json",
+    "actual_Mem2Act_released_tasks": 0,
+    "native_all4_F1": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-all4-methods-closeout-v1.json",
+    "baseline_quality": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-source-author-quality-closeout-v1.json"
+  },
+  "costs": {
+    "last_actual_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v27.json",
+    "idle27_commands": 71,
+    "idle27_CPU_seconds": 18.560000000000002,
+    "new_offline_timers_after27": "Pending next actual no-worker gap; never settle while live tail worker exists.",
+    "live_segment_whole_CPU_HTTP_and_unknown_usage": "Not final until actual exit; no zero-cost inference.",
+    "first_LME_child_and_parent_already_paid_once": true,
+    "native_model_whole_client_parent_or_idle1_to27_rebilled": false,
+    "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
+    "offline_settlement_during_live_worker": false
+  },
+  "remaining": {
+    "semantic_of1024": 560,
+    "primary_indices": [
+      208,
+      255
+    ],
+    "seed1_semantic_reviewed": 0,
+    "seed2_semantic_reviewed": 0,
+    "statistics": "All4 full256 taskC/material/common122; gains-losses,paired20kfamilyCI,perseed/nativeDEV185-TRAIN71/within-family3seedmean.",
+    "external": "LME451x2 all first predictions/Source-SDK-role-clock-image-NN-Reader audit/native Judge and rule scoring/audit/archive. Mem2Act400x2 protocol/full429sessions16843turns/catalog shared-first-input/own-policy execution/audits/adapted metrics; no authorTA or leaderboard claim.",
+    "other": "Old64reserved-query eligibility/nativeTEST unopened; old64Source exposed. Full Source-View/operations/costs/standalonefigures/finalpaper/results/full763-line requirement audit."
+  },
+  "guardrails": {
+    "no_sha_checksums_fingerprints": true,
+    "no_subagents": true,
+    "no_services_second_ledger_reset_refund": true,
+    "no_model_first_outcome_retries_or_reselection": true,
+    "no_remote_Product_changes": true,
+    "GPUs0_1_unchanged": true,
+    "no_Source_K_menu_task_horizon_crop_compact_quantize_to_pass": true
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "status": "ACTIVE_FIRST64_SOURCE_REQUEST_REVIEW_AND_OPERATION_LABELS_CLOSED_COLLECTION_LIVE",
+  "implementation_commit": "aaa0885a",
+  "prior_progress_commit": "ae5b9055",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "source_review": {
+    "families": 64,
+    "rows": 119,
+    "planned_families": 128,
+    "planned_rows": 240,
+    "dispositions": {
+      "source_pool_insufficient": 76,
+      "supported_with_qualification": 20,
+      "qualified_alternative": 6,
+      "supported": 17
+    },
+    "progress": "artifacts/generalization-20261021/source-expansion-v1/source-review-progress-v32.json",
+    "new_batch_snapshot": "artifacts/generalization-20261021/source-expansion-v1/batch-1-source-review-before-reference-v1.json",
+    "native_answers_and_model_outputs_not_used_to_decide_source_judgments": true
+  },
+  "new_batch_native_comparison": {
+    "status": "SECOND32_SOURCE_REVIEW_FROZEN_THEN_NATIVE_COMPARISON",
+    "review_snapshot": "artifacts/generalization-20261021/source-expansion-v1/batch-1-source-review-before-reference-v1.json",
+    "rows": 58,
+    "families": 32,
+    "cross_table": {
+      "native_True__source_pool_insufficient": 9,
+      "native_False__source_pool_insufficient": 28,
+      "native_True__supported_with_qualification": 11,
+      "native_True__supported": 8,
+      "native_True__qualified_alternative": 2
+    },
+    "annotation_rewritten_to_match_native": false,
+    "not_corpus_error_rate": true
+  },
+  "new_batch_actual_request_review": {
+    "requests": 178,
+    "none": 69,
+    "partial": 54,
+    "complete": 55,
+    "artifact": "artifacts/generalization-20261021/source-expansion-batch-1-request-reviews-v1/requests.json"
+  },
+  "new_batch_operation_labels": {
+    "states": 906,
+    "reviewed_requests": 178,
+    "reviewed_states": 906,
+    "labelled": 499,
+    "reasons": {
+      "no_reviewed_source_proof_masked": 298,
+      "reviewed_missing_original_progress": 392,
+      "reviewed_partial_evidence_only_masked": 75,
+      "reviewed_originals_sufficient": 107,
+      "no_reviewed_progress_masked": 34
+    },
+    "families_labelled": 31,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/generalization-20261021/source-expansion-batch-1-states-v1/train.jsonl",
+    "reviews_source": "artifacts/generalization-20261021/source-expansion-batch-1-request-reviews-v1/requests.json",
+    "compute": {
+      "wall_seconds": 4.0187337612733245,
+      "cpu_seconds": 4.042427748000001
+    },
+    "ledger_recorded": false
+  },
+  "new_batch_input_and_mask_audit": {
+    "status": "PASS_ACTUAL_INPUT_BINDINGS_AND_PARTIAL_MASKS",
+    "states": 906,
+    "labelled": 499,
+    "families": 32,
+    "labelled_families": 31,
+    "families_without_labels": [
+      "musique-family-000123"
+    ],
+    "positive_action_occurrences": {
+      "SEARCH": 112,
+      "READ": 355,
+      "HANDOFF": 107
+    },
+    "partial_proof_handoff_labels": 0,
+    "inputs_questions_bindings_equal": true,
+    "native_reference_truth_not_used_for_labels": true,
+    "request_count": 178,
+    "requests_with_known_evidence_refs": 0,
+    "qualification": "Inherited static original-source CE preferences; not full legality, causal utility or Host success. All raw masks/failures retained.",
+    "compute": {
+      "cpu_seconds": 0.707877656,
+      "wall_seconds": 0.7079028869047761
+    },
+    "ledger_recorded": false
+  },
+  "new_batch_original_source_audit": {
+    "status": "PASS_LITERAL_ORIGINAL_SOURCE_MATCH",
+    "result_paths": 110,
+    "source_paragraph_comparisons": 2200,
+    "hashes_used": false,
+    "compute": {
+      "cpu_seconds": 0.451842753,
+      "wall_seconds": 0.45189896412193775
+    },
+    "ledger_recorded": false
+  },
+  "new_batch_input_lengths": {
+    "status": "AUDITED_NOT_FITTED",
+    "states": 906,
+    "labelled_states": 499,
+    "operation_state": "shared",
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "max_encoded_tokens": 6490,
+    "state_truncations": 0,
+    "head_truncations": 0,
+    "labelled_over_8192": 0,
+    "model_forwards": 0,
+    "gpu_used": false,
+    "compute": {
+      "wall_seconds": 15.701808991841972,
+      "cpu_seconds": 15.704150743
+    },
+    "ledger_recorded": false
+  },
+  "cumulative_new_source_supervision": {
+    "raw_states": 1855,
+    "labelled_states": 1030,
+    "masked_states": 825,
+    "labelled_families": 62,
+    "registered_families": 64,
+    "reviewed_actual_requests": 355,
+    "source_rows": 119,
+    "final_mixture_and_stable_ids_built": false
+  },
+  "collection": {
+    "observed_at": "2026-10-21T14:26:53.510765+00:00",
+    "exec_session": 93727,
+    "parent_pid": 1131060,
+    "parent_status": "RUNNING",
+    "parent_live": true,
+    "batches": [
+      {
+        "batch": "batch-0",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1131065,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "COMPLETED": 87,
+          "FAILED": 35
+        }
+      },
+      {
+        "batch": "batch-1",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1381395,
+        "live": false,
+        "closed_positions": 116,
+        "planned_positions": 116,
+        "program_statuses": {
+          "FAILED": 30,
+          "COMPLETED": 86
+        }
+      },
+      {
+        "batch": "batch-2",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1591077,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "FAILED": 31,
+          "COMPLETED": 91
+        }
+      },
+      {
+        "batch": "batch-3",
+        "status": "RUNNING",
+        "pid": 1798815,
+        "live": true,
+        "closed_positions": 9,
+        "planned_positions": 120,
+        "program_statuses": {
+          "COMPLETED": 8,
+          "FAILED": 1
+        }
+      }
+    ],
+    "closed_positions": 369,
+    "planned_positions": 480,
+    "live_method_version": "890dbdd0",
+    "unreviewed_model_outputs_displayed": false
+  },
+  "boundaries": {
+    "new_research_fits": 0,
+    "new_real_post_operation_checkpoint_branches": 0,
+    "program_statuses_are_not_semantic_success": true,
+    "all_failed_and_masked_states_retained": true,
+    "explicit_known_refs_nonempty_requests": 0,
+    "offline_settlements_v1_v2_closed": true,
+    "new_offline_compute_pending_while_collection_live": true,
+    "raw_state_export_and_semantic_review_compute": "unmeasured,not zero",
+    "no_sha_verification": true,
+    "no_subagents": true,
+    "no_new_services": true,
+    "pushed": false,
+    "merged": false
+  },
+  "remaining": "64newsourcefamilies/121sourcepools then actualrequest/witness labels; finish480positions; actual post-operation acceptance; full nested-source524update curves/parametercontrols; auxiliary matched operation stage; expanded feedback/self-trajectories/STATE/factorial/E3/Host/external/seeds0,1,2.",
+  "goal_complete": false
+}

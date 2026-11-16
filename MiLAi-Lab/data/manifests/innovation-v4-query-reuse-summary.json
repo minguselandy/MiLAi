@@ -1,0 +1,301 @@
+{
+  "status": "ALL_FIVE_CONDITIONS_CLOSED",
+  "independent_histories": 1,
+  "real_source_arrivals_per_condition": 3,
+  "query_checkpoints": 4,
+  "questions_per_checkpoint": 4,
+  "conditions": {
+    "source": {
+      "first_qa": {
+        "correct": 13,
+        "opportunities": 16,
+        "missing": 0,
+        "labels": {
+          "Correct": 13,
+          "invalid": 3
+        }
+      },
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 16,
+            "known_tokens": 35726,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 16,
+            "known_tokens": 40786,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 35726,
+      "query_actions": {},
+      "query_source_bodies_delivered": [],
+      "state_metric": "after-arrival semantic UJS not applicable for source/cache policies; scoped interpretation quality not yet fully audited"
+    },
+    "rebuild": {
+      "first_qa": {
+        "correct": 15,
+        "opportunities": 16,
+        "missing": 0,
+        "labels": {
+          "Correct": 15,
+          "invalid": 1
+        }
+      },
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 16,
+            "known_tokens": 44572,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 16,
+            "known_tokens": 43067,
+            "unknown_usage_responses": 0
+          },
+          "query_structure": {
+            "responses": 16,
+            "known_tokens": 106730,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 151302,
+      "query_actions": {
+        "build": 14,
+        "incomplete_raw_only": 2
+      },
+      "query_source_bodies_delivered": [
+        3,
+        null,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        null,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_metric": "after-arrival semantic UJS not applicable for source/cache policies; scoped interpretation quality not yet fully audited"
+    },
+    "version_cache": {
+      "first_qa": {
+        "correct": 14,
+        "opportunities": 16,
+        "missing": 0,
+        "labels": {
+          "Correct": 14,
+          "invalid": 1,
+          "Omission": 1
+        }
+      },
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 16,
+            "known_tokens": 48224,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 16,
+            "known_tokens": 43992,
+            "unknown_usage_responses": 0
+          },
+          "query_structure": {
+            "responses": 3,
+            "known_tokens": 23727,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 71951,
+      "query_actions": {
+        "reuse": 13,
+        "build": 3
+      },
+      "query_source_bodies_delivered": [
+        3,
+        1,
+        2
+      ],
+      "state_metric": "after-arrival semantic UJS not applicable for source/cache policies; scoped interpretation quality not yet fully audited"
+    },
+    "incremental": {
+      "first_qa": {
+        "correct": 14,
+        "opportunities": 16,
+        "missing": 0,
+        "labels": {
+          "Correct": 14,
+          "invalid": 2
+        }
+      },
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 16,
+            "known_tokens": 44089,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 16,
+            "known_tokens": 39896,
+            "unknown_usage_responses": 0
+          },
+          "query_structure": {
+            "responses": 3,
+            "known_tokens": 17155,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 61244,
+      "query_actions": {
+        "reuse": 13,
+        "refresh": 2,
+        "build": 1
+      },
+      "query_source_bodies_delivered": [
+        1,
+        1,
+        1
+      ],
+      "state_metric": "after-arrival semantic UJS not applicable for source/cache policies; scoped interpretation quality not yet fully audited"
+    },
+    "full": {
+      "first_qa": {
+        "correct": 12,
+        "opportunities": 16,
+        "missing": 0,
+        "labels": {
+          "invalid": 3,
+          "Correct": 12,
+          "Hallucination": 1
+        }
+      },
+      "costs": {
+        "stages": {
+          "impact": {
+            "responses": 2,
+            "known_tokens": 7652,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 3,
+            "known_tokens": 26681,
+            "unknown_usage_responses": 0
+          },
+          "reader": {
+            "responses": 16,
+            "known_tokens": 47062,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 16,
+            "known_tokens": 40700,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 21,
+            "known_tokens": 868,
+            "unknown_usage_responses": 0
+          },
+          "evidence_selection": {
+            "responses": 16,
+            "known_tokens": 73929,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 155324,
+      "query_actions": {},
+      "query_source_bodies_delivered": [],
+      "state_metric": "after-arrival semantic UJS not applicable for source/cache policies; scoped interpretation quality not yet fully audited"
+    }
+  },
+  "ledger_segments": [
+    {
+      "generation_requests": 35,
+      "generation": {
+        "known_tokens": 120165,
+        "charged_tokens": 120165,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "known_tokens": 0,
+        "charged_tokens": 0,
+        "unknown_usage": 0
+      }
+    },
+    {
+      "generation_requests": 16,
+      "generation": {
+        "known_tokens": 40786,
+        "charged_tokens": 40786,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "known_tokens": 0,
+        "charged_tokens": 0,
+        "unknown_usage": 0
+      }
+    },
+    {
+      "generation_requests": 152,
+      "generation": {
+        "known_tokens": 523037,
+        "charged_tokens": 523037,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "known_tokens": 868,
+        "charged_tokens": 868,
+        "unknown_usage": 0
+      }
+    }
+  ],
+  "combined_ledger": {
+    "generation": {
+      "known_tokens": 683988,
+      "charged_tokens": 683988,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 868,
+      "charged_tokens": 868,
+      "unknown_usage": 0
+    }
+  },
+  "receipt_tokens": {
+    "generation": 683988,
+    "embedding": 868
+  },
+  "ledger_minus_receipts": {
+    "generation": 0,
+    "embedding": 0
+  },
+  "copy_accounting": "19 original rebuild responses included exactly once; new continuation ledger excludes them. Original failed run preserved.",
+  "version_boundary": "Source baseline and first rebuild prefix use73116958; rebuild continuation and fresh cached/full conditions usec7c5c469. Not a full cold same-version experiment.",
+  "interpretation": "Incremental reuse reduces interpretation cost versus repeated rebuilding, but source-only total prediction cost remains lower. First scores include invalids; all approaches retain raw evidence. No causal claim that QA correctness comes from the cached structure.",
+  "semantic_review": "Partial; initial day-only scope and cross-question reuse need full source/interpretation/answer audit. No statistical population interval for one history."
+}

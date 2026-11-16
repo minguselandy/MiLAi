@@ -1,0 +1,63 @@
+{
+  "source": "screening-v1 candidate exhibit event2 actual model states",
+  "original_group": {
+    "alternatives": [
+      [
+        "unit-200e2157-2033-4865-8549-7d504332c5bf",
+        "unit-6b251d57-ab22-432d-985d-08b13f40721c"
+      ]
+    ],
+    "changed_premises": [
+      "unit-6b251d57-ab22-432d-985d-08b13f40721c"
+    ],
+    "evidence_refs": [
+      {
+        "end": 72,
+        "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-screen-exhibit\"],\"method-screen-exhibit\",\"source-5fdb5edf-8d06-4614-9d44-bc2b764d715f\",1,0,72]",
+        "source_ref": "source-5fdb5edf-8d06-4614-9d44-bc2b764d715f",
+        "source_revision": 1,
+        "start": 0
+      }
+    ],
+    "group_id": "support-34db6bc9-9384-4f59-8e7a-bb852aee4a69",
+    "target_unit": "unit-9faaacab-c80c-4fe7-b245-3a7d7f5e5cfe"
+  },
+  "new_group_projection": {
+    "alternatives": [
+      [
+        "unit-200e2157-2033-4865-8549-7d504332c5bf",
+        "unit-6b251d57-ab22-432d-985d-08b13f40721c"
+      ]
+    ],
+    "changed_premises": [
+      "unit-6b251d57-ab22-432d-985d-08b13f40721c"
+    ],
+    "evidence_refs": [
+      {
+        "end": 72,
+        "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-screen-exhibit\"],\"method-screen-exhibit\",\"source-5fdb5edf-8d06-4614-9d44-bc2b764d715f\",1,0,72]",
+        "source_ref": "source-5fdb5edf-8d06-4614-9d44-bc2b764d715f",
+        "source_revision": 1,
+        "start": 0
+      }
+    ],
+    "group_id": "support-34db6bc9-9384-4f59-8e7a-bb852aee4a69",
+    "target_unit": "unit-9faaacab-c80c-4fe7-b245-3a7d7f5e5cfe",
+    "changed_target": true
+  },
+  "actual_unit_texts_unchanged": true,
+  "original_state_unchanged": true,
+  "new_model_calls": 0,
+  "bank_writes": 0,
+  "scope": "pure projection over saved actual states, not a new model score",
+  "source_parent": "0a9c2e4d",
+  "implementation": "changed_target marker persists until an explicit source-bound support-group reset; old proof cannot certify changed conclusion",
+  "checks": {
+    "related_tests": "112 passed,20.37s",
+    "ruff": "pass",
+    "mypy": "4files pass",
+    "package_dag": "pass",
+    "tools_boundary": "pass"
+  },
+  "real_model_run": false
+}

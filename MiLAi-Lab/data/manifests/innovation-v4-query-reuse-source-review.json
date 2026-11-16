@@ -1,0 +1,531 @@
+{
+  "scope": "All80 full delivered answers read against the three original source events; all16 rebuild attempts (14 materialized views,2 confirmed length failures), six constructed cached views and allthree full-method post-arrival rendered states inspected. Detailed full-method per-clause provenance audit remains incomplete.",
+  "independent_history_count": 1,
+  "qa_core_author_review": {
+    "source": [
+      {
+        "session": 0,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 3,
+        "core": null
+      },
+      {
+        "session": 3,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 3,
+        "core": true
+      }
+    ],
+    "rebuild": [
+      {
+        "session": 0,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 3,
+        "core": true
+      }
+    ],
+    "version_cache": [
+      {
+        "session": 0,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 3,
+        "core": null
+      },
+      {
+        "session": 3,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 3,
+        "core": true
+      }
+    ],
+    "incremental": [
+      {
+        "session": 0,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 3,
+        "core": true
+      }
+    ],
+    "full": [
+      {
+        "session": 0,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 0,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 1,
+        "question": 3,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 2,
+        "question": 3,
+        "core": null
+      },
+      {
+        "session": 3,
+        "question": 0,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 1,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 2,
+        "core": true
+      },
+      {
+        "session": 3,
+        "question": 3,
+        "core": true
+      }
+    ]
+  },
+  "same_raw_access": "All80 saved memory-view records declare complete captured arrival-prefix raw-source delivery. This is delivery evidence, not proof of semantic use.",
+  "source_author_ambiguity": "Question2/3 asks whether the battery is still there now. Reference expects latest-known white box; source/cache/full distinguish last reported position from unverified current physical location. Keep labels and this ambiguity rather than upgrading other methods from answer-count differences.",
+  "unsupported_explanations": [
+    "Several arms say night eligibility depends only on night training, omitting still-required baseline training/credential conditions. Core yes/no is often correct for the stated person.",
+    "Some outputs infer female gender from the name; the sources do not supply gender.",
+    "Rebuild2/3 cites a derived continuous-since-May6 location claim that the original dated observation does not establish.",
+    "Credential independence is sometimes generalized beyond the single reported cancellation."
+  ],
+  "cached_view_findings": {
+    "version_cache": [
+      "Initial8nodes cover source meanings but one support route uses combined both-valid credential fact; complete alternative coverage is absent.",
+      "May9 day-specific rebuild drops night-training and battery information, yet the same cache is reused for those queries.",
+      "May10 graph has redundant OR among inferred subchecks while all underlying prerequisites are already in its AND set; not evidence of efficient factorization."
+    ],
+    "incremental": [
+      "Initial6nodes cover day qualification only; night/battery omitted.",
+      "May9 removes invalid annual-card premise and retains voucher+training route, a real local update positive; night completion still omitted.",
+      "May10 battery movement appears in scope prose only, nodes stay day-only and unresolved explicitly says night undefined. Same-source reuse is not semantic scope coverage."
+    ],
+    "full": [
+      "All stated source facts are present in the three saved rendered states; credential/training facts remain compound.",
+      "No explicit support groups formed, so graph-enabled costs are not evidence that OR grouping was exercised."
+    ]
+  },
+  "official_scores_modified": false,
+  "independent_blind_review": false,
+  "conclusion": "Cache reuse lowered repeated-construction cost but did not reduce raw delivery or establish correct cross-question scope. Do not attribute QA success to the cache or claim state completeness from raw-assisted answers.",
+  "rebuild_attempt_review": [
+    {
+      "session": 0,
+      "question": 0,
+      "finding": "Day-only interpretation; true sufficient compound-credential route but does not factor both alternatives. Night/battery outside its stated scope."
+    },
+    {
+      "session": 0,
+      "question": 1,
+      "finding": "Correct isolated future effective date; no other source facts represented."
+    },
+    {
+      "session": 0,
+      "question": 2,
+      "finding": "Text covers all source facts; both rules use any=[] despite the declared no-route semantics, so their text conclusions are not supported by the encoded formulas."
+    },
+    {
+      "session": 0,
+      "question": 3,
+      "finding": "Battery question covered with dated observation and independence. Day admission rule omitted even though other credentials/training retained."
+    },
+    {
+      "session": 1,
+      "question": 0,
+      "finding": "No-night-training becomes a positive premise of an uncertain eligibility target. any=[] leaves no route. Temporal fields move May6 observations to May8 without a new report."
+    },
+    {
+      "session": 1,
+      "question": 1,
+      "finding": "Correct generic training-plus-credential rule in text; OR remains inside one compound premise, not factorized alternatives."
+    },
+    {
+      "session": 1,
+      "question": 2,
+      "finding": "Correct training status contrast; current May8 temporal tags are carried-forward interpretations of May6 observations."
+    },
+    {
+      "session": 1,
+      "question": 3,
+      "finding": "Correct missing-night-training denial for the person in context; target text omits subject and says qualification not effective, conflating eligibility with rule effective time."
+    },
+    {
+      "session": 2,
+      "question": 0,
+      "finding": "Day credential update correct in text; g1 any=[] encodes no available route. Night completion not represented."
+    },
+    {
+      "session": 2,
+      "question": 1,
+      "finding": "Confirmed length response; no interpretation delivered, common raw Reader continued in the separate continuation run."
+    },
+    {
+      "session": 2,
+      "question": 2,
+      "finding": "Overgeneralizes this cancellation with the voucher still valid into a universal independence claim. May6 report is promoted to policy start; current facts otherwise present."
+    },
+    {
+      "session": 2,
+      "question": 3,
+      "finding": "Current source facts present; battery temporal field invents continuous storage since May6. Credential compound temporal span ambiguously extends the May9 cancellation backward."
+    },
+    {
+      "session": 3,
+      "question": 0,
+      "finding": "Second confirmed length response; no interpretation delivered, raw Reader continued."
+    },
+    {
+      "session": 3,
+      "question": 1,
+      "finding": "Battery gray is correct. Battery position independence is changed into battery-access independence; training completion inferred only from unchanged-training reports while the positive original training source e1 is omitted from n2 support."
+    },
+    {
+      "session": 3,
+      "question": 2,
+      "finding": "Voucher-only current route correct, explicit all/any structure used. Policy start at May6 unsupported, and e0 continuation cited in temporal prose but omitted from n1 evidence aliases."
+    },
+    {
+      "session": 3,
+      "question": 3,
+      "finding": "Current facts present but night eligibility g2 depends only on night training, omitting baseline prerequisites. n7/g2 bind only initial e1, which reports night training incomplete, omitting May9 completion source e2. Battery movement alone is also made sufficient for independence in g3."
+    }
+  ],
+  "rebuild_counts": {
+    "attempts": 16,
+    "materialized_views": 14,
+    "confirmed_length_raw_only": 2,
+    "new_author_review_model_calls": 0
+  }
+}

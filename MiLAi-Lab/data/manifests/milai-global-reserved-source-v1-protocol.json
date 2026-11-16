@@ -1,0 +1,163 @@
+{
+  "name": "milai-global-reserved-source-v1",
+  "status": "METADATA_SELECTED_BEFORE_SOURCE_INTAKE_OR_MODEL_FORWARD",
+  "selected_epoch": 1792211866.3321772,
+  "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-training-design-v1/heldout-candidate-intake/musique_full_v1.0_dev.jsonl",
+  "source_identity": "Public MuSiQue-Full v1.0 DEV mirror, not official test; author archive equivalence unproven.",
+  "joint_partition": "data/manifests/milai-global-joint-partition-v1-feasibility.json",
+  "selection_seed": 20261017,
+  "selection_rule": "Within the fixed49 reservedgroups, shuffle sortedIDs by maxstep2/3/4, select6/4/4; choose one uniform maximum-step question per selectedgroup, retain both native variants. No reroll, no newsourcebody/answer/modelresult used.",
+  "selected": [
+    {
+      "family": "candidate-family-000173",
+      "max_steps": 2,
+      "question_id": "2hop__242753_658778",
+      "source_rows": [
+        647,
+        1967
+      ]
+    },
+    {
+      "family": "candidate-family-000466",
+      "max_steps": 2,
+      "question_id": "2hop__85931_108632",
+      "source_rows": [
+        119,
+        410
+      ]
+    },
+    {
+      "family": "candidate-family-000025",
+      "max_steps": 2,
+      "question_id": "2hop__124412_402641",
+      "source_rows": [
+        1561,
+        2273
+      ]
+    },
+    {
+      "family": "candidate-family-000421",
+      "max_steps": 2,
+      "question_id": "2hop__706637_93362",
+      "source_rows": [
+        1673,
+        2203
+      ]
+    },
+    {
+      "family": "candidate-family-000434",
+      "max_steps": 2,
+      "question_id": "2hop__75714_21969",
+      "source_rows": [
+        3314,
+        3604
+      ]
+    },
+    {
+      "family": "candidate-family-000443",
+      "max_steps": 2,
+      "question_id": "2hop__85713_72187",
+      "source_rows": [
+        3703,
+        3911
+      ]
+    },
+    {
+      "family": "candidate-family-000080",
+      "max_steps": 3,
+      "question_id": "3hop1__28841_547811_80702",
+      "source_rows": [
+        1941,
+        3039
+      ]
+    },
+    {
+      "family": "candidate-family-000482",
+      "max_steps": 3,
+      "question_id": "3hop1__136852_30587_83479",
+      "source_rows": [
+        4475,
+        4524
+      ]
+    },
+    {
+      "family": "candidate-family-000506",
+      "max_steps": 3,
+      "question_id": "3hop1__6362_14336_21111",
+      "source_rows": [
+        4403,
+        4621
+      ]
+    },
+    {
+      "family": "candidate-family-000485",
+      "max_steps": 3,
+      "question_id": "3hop1__133264_40769_64047",
+      "source_rows": [
+        1643,
+        2382
+      ]
+    },
+    {
+      "family": "candidate-family-000347",
+      "max_steps": 4,
+      "question_id": "4hop1__58323_375563_161848_20546",
+      "source_rows": [
+        4519,
+        4622
+      ]
+    },
+    {
+      "family": "candidate-family-000520",
+      "max_steps": 4,
+      "question_id": "4hop1__341156_49925_13759_736921",
+      "source_rows": [
+        786,
+        2141
+      ]
+    },
+    {
+      "family": "candidate-family-000526",
+      "max_steps": 4,
+      "question_id": "4hop3__601548_836463_161616_77103",
+      "source_rows": [
+        1654,
+        3395
+      ]
+    },
+    {
+      "family": "candidate-family-000484",
+      "max_steps": 4,
+      "question_id": "4hop1__860115_798482_131926_13165",
+      "source_rows": [
+        1067,
+        3467
+      ]
+    }
+  ],
+  "families": 14,
+  "source_rows": 28,
+  "strata": {
+    "2": 6,
+    "3": 4,
+    "4": 4
+  },
+  "training_membership": "Excluded whole reserved49groups from newgradient and development roles through joint literal-source pruning. Actual128/32cohorts are subsets of retainedtrain.",
+  "model_matrix": "All12 fixedepoch2 models from32/128families,native/linear,seeds0/1/2; no winner selected from development results.",
+  "pipeline": "Same frozen20pool/candidate permutation, semanticSTOP versusfixed4, unchangedReader prompt/settings, BM25/dense4/full20 controls as global-reader-policy-qa-v1.",
+  "state_seed_rule": "Use derive_global_states unchanged; metadata row identifies nativeDEVrow, RNG seed20261017+100000+row; namespace and source_dataset recorded offline. No label-driven presentation.",
+  "read_limit": 4,
+  "reader_positions_upper_bound": 756,
+  "new_controller_and_reader_calls_before_freeze": 0,
+  "dispatch_rule": "Complete source-ID/current-data literal boundary checks; freeze method code/settings; only then expose these28 source pools for evaluation review. Finish training before model inference. Never add these questions or their families to gradients/tuning.",
+  "evaluation_scope": "Source-disjoint relative to declared literal targets/pools and registered project exposure, with substantial maximum-decomposition-step shift. Actual minimal proof lengths must be reviewed; not natural-frequency population estimate, officialtest or complete-history/semantic/pretraining-isolation certification.",
+  "source_quality": "Read complete visible pools before reference comparison and model predictions; keep uncertainty, alternative proofs and raw labels distinct. Do not drop failed/ambiguous cases from reported coverage.",
+  "still_unproven": [
+    "Author-mirror full equivalence",
+    "Exhaustive semantic near-duplicates",
+    "All unregistered historical project exposure",
+    "Foundation-model pretraining exposure"
+  ],
+  "sha_or_content_fingerprint_checks": false,
+  "other_worktrees_resumed": false
+}

@@ -1,0 +1,181 @@
+{
+  "source_code": "be7c5e6f",
+  "source_bound_dates": true,
+  "editor_thinking": true,
+  "same_output_ceiling": 8192,
+  "cases": [
+    {
+      "event": 1,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 1,
+      "revisions": [
+        1
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 2,
+      "maintenance": "completed",
+      "receipts": {
+        "no_change": 1
+      },
+      "records": 1,
+      "revisions": [
+        1
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 3,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 1,
+      "revisions": [
+        2
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 4,
+      "maintenance": "completed",
+      "receipts": {
+        "no_change": 1
+      },
+      "records": 1,
+      "revisions": [
+        2
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 5,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 1,
+      "revisions": [
+        3
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 6,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 1,
+      "revisions": [
+        4
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 7,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 1,
+      "revisions": [
+        5
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 8,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 2,
+      "revisions": [
+        1,
+        5
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 9,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 2,
+      "revisions": [
+        6,
+        1
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 10,
+      "maintenance": "completed",
+      "receipts": {
+        "no_change": 2
+      },
+      "records": 2,
+      "revisions": [
+        6,
+        1
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 11,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 2,
+      "revisions": [
+        7,
+        1
+      ],
+      "precise_event_times": []
+    },
+    {
+      "event": 12,
+      "maintenance": "completed",
+      "receipts": {
+        "committed": 1
+      },
+      "records": 2,
+      "revisions": [
+        8,
+        1
+      ],
+      "precise_event_times": []
+    }
+  ],
+  "cost": {
+    "generation_calls": 12,
+    "input_tokens": 54332,
+    "output_tokens": 36416,
+    "embedding_calls": 19,
+    "embedding_tokens": 1180
+  },
+  "history_versions": 9,
+  "history_all_readable": true,
+  "forgetting": {
+    "current_hidden": true,
+    "history_hidden": true,
+    "original_sources_hidden": true,
+    "notification_unchanged": true,
+    "notification_history_readable": true
+  },
+  "forget_effect": "visibility_only",
+  "physical_erasure": false,
+  "limits": [
+    "Synthetic development, no independent semantic judge.",
+    "Before-effective answering still needs historical/source-backed reading; no false claim from future-only current unit.",
+    "Event7 semantic text omits the literal recent word, which remains in selected original support.",
+    "Some stored wording still includes user instruction phrasing; no claim of perfect normalization."
+  ]
+}

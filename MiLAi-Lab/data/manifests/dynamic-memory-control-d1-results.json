@@ -1,0 +1,177 @@
+{
+  "stage": "D1 development smoke; not comparative or held-out evidence",
+  "runs": [
+    {
+      "run": "d1-laya-v2",
+      "source_version": {
+        "implementation_version": "milai-unified-memory-v1",
+        "git_commit": "61124918"
+      },
+      "status": "FAILED",
+      "error": "'event'",
+      "result_path": "artifacts/dynamic-memory-control/d1-laya-v2/banks/dc2015a3-4f5d-411b-84ba-4d1122b45804/1aed8956-a82a-4f07-8389-7480fe258b31-result.json",
+      "trace_path": "artifacts/dynamic-memory-control/d1-laya-v2/banks/dc2015a3-4f5d-411b-84ba-4d1122b45804/1aed8956-a82a-4f07-8389-7480fe258b31-trace-0.jsonl",
+      "decisions": [],
+      "costs": {
+        "generation": {
+          "known_tokens": 10528,
+          "charged_tokens": 10528,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 162,
+          "charged_tokens": 162,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "final_answer": null,
+      "review": {
+        "task_success": false,
+        "semantic_write_may_have_committed": true
+      }
+    },
+    {
+      "run": "d1-laya-v3",
+      "source_version": {
+        "implementation_version": "milai-unified-memory-v1",
+        "git_commit": "2a4f83d2"
+      },
+      "status": "FAILED",
+      "error": "HTTP_OWNER_RESERVATION_OUTSIDE_REQUEST",
+      "result_path": "artifacts/dynamic-memory-control/d1-laya-v3/banks/03420cd2-7696-4856-99e2-33d2a3d4326f/24779b62-3738-4573-a78a-813e84548aae-result.json",
+      "trace_path": "artifacts/dynamic-memory-control/d1-laya-v3/banks/03420cd2-7696-4856-99e2-33d2a3d4326f/24779b62-3738-4573-a78a-813e84548aae-trace-0.jsonl",
+      "decisions": [],
+      "costs": {
+        "generation": {
+          "known_tokens": 13032,
+          "charged_tokens": 13032,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 218,
+          "charged_tokens": 218,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "final_answer": null,
+      "review": {
+        "task_success": false,
+        "semantic_write_may_have_committed": true
+      }
+    },
+    {
+      "run": "d1-laya-v4",
+      "source_version": {
+        "implementation_version": "milai-unified-memory-v1",
+        "git_commit": "7f33aa60"
+      },
+      "status": "PROVIDER_ERROR",
+      "error": "Client error '400 Bad Request' for url 'http://127.0.0.1:7860/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+      "result_path": "artifacts/dynamic-memory-control/d1-laya-v4/banks/1dc514f0-7cec-420e-91ab-df6c84344d18/831bcddd-ed78-4ee1-88f6-e1fa1c2f6eeb-result.json",
+      "trace_path": "artifacts/dynamic-memory-control/d1-laya-v4/banks/1dc514f0-7cec-420e-91ab-df6c84344d18/831bcddd-ed78-4ee1-88f6-e1fa1c2f6eeb-trace-0.jsonl",
+      "decisions": [
+        "search",
+        "read_0",
+        "read_1",
+        "context_1",
+        "refresh_view",
+        "handoff"
+      ],
+      "costs": {
+        "generation": {
+          "known_tokens": 4401,
+          "charged_tokens": 17797,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya_load": {
+            "wall_seconds": 7.252075165510178,
+            "cpu_seconds": 8.953620845999998,
+            "loads": 1
+          },
+          "dynamic_memory_laya": {
+            "wall_seconds": 8.331322929821908,
+            "cpu_seconds": 30.110883793000006,
+            "forwards": 6,
+            "sequence_rows": 6,
+            "input_tokens": 6225,
+            "state_tokenizations": 6,
+            "state_tokens": 5264
+          }
+        }
+      },
+      "final_answer": null,
+      "review": {
+        "task_success": false,
+        "semantic_write_may_have_committed": false
+      }
+    },
+    {
+      "run": "d1-laya-v5",
+      "source_version": {
+        "implementation_version": "milai-unified-memory-v1",
+        "git_commit": "37b9cf23"
+      },
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "artifacts/dynamic-memory-control/d1-laya-v5/banks/7268f223-5556-4804-8d3b-5e0cb64f0c2e/54bfe6db-bde9-4865-a303-766c5146abcf-result.json",
+      "trace_path": "artifacts/dynamic-memory-control/d1-laya-v5/banks/7268f223-5556-4804-8d3b-5e0cb64f0c2e/54bfe6db-bde9-4865-a303-766c5146abcf-trace-0.jsonl",
+      "decisions": [
+        "search",
+        "read_1",
+        "read_0",
+        "context_1",
+        "handoff"
+      ],
+      "costs": {
+        "generation": {
+          "known_tokens": 5686,
+          "charged_tokens": 5686,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 17.86083083100001,
+            "forwards": 5,
+            "input_tokens": 4318,
+            "sequence_rows": 5,
+            "state_tokenizations": 5,
+            "state_tokens": 3460,
+            "wall_seconds": 4.760479273274541
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 6.972736363000001,
+            "loads": 1,
+            "wall_seconds": 5.9791905442252755
+          }
+        }
+      },
+      "final_answer": "\n\n根据已记录的规则，各时期的差旅审批门槛如下：\n\n**截至2026年10月18日：**\n*   **A项目**：1000元\n*   **B项目**：1000元\n\n**截至2026年11月2日（自11月1日起生效）：**\n*   **A项目**：2000元\n*   **B项目**：1000元（保持原状不变）",
+      "review": {
+        "core_temporal_scope_answer": "correct",
+        "grounding": "both required original sources actually delivered",
+        "explicit_citation_labels": "not requested, not supplied",
+        "reviewer": "assistant author; not independent blinded review"
+      }
+    }
+  ],
+  "limitations": [
+    "v3 attempted local loading had unrecorded timing; no invented zero cost",
+    "Source inventory and operation wall times remain in trace; no FLOPs or production-latency claim",
+    "No new operation training, six-history comparison, or reserved confirmation yet",
+    "v5 context expansion repeated already-delivered ranges; subsequent code change removes that availability by literal version/range coverage"
+  ],
+  "checksum_verification": false
+}

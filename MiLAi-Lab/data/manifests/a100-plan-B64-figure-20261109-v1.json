@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "status": "B64_ACTUAL_DELIVERY_POSTFIT_ANSWER_AND_AUTONOMOUS_DEV64_FIGURE",
+  "timestamp_utc": "2026-11-09T09:47:19.970341+00:00",
+  "source_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-B64-audit-20261109-v1.json",
+  "PNG": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-plan-B64-evidence-20261109-v1.png",
+  "PDF": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-plan-B64-evidence-20261109-v1.pdf",
+  "actual_PNG_size": [
+    3000,
+    1240
+  ],
+  "delivery_counts": {
+    "b0": {
+      "tie": 117,
+      "right": 4,
+      "left": 5,
+      "unknown": 2
+    },
+    "b1": {
+      "tie": 103,
+      "right": 21,
+      "left": 2,
+      "unknown": 2
+    }
+  },
+  "postfit_answer_counts": {
+    "b0": {
+      "T": 85,
+      "R": 12,
+      "U": 12,
+      "L": 19
+    },
+    "b1": {
+      "T": 72,
+      "R": 32,
+      "U": 14,
+      "L": 10
+    }
+  },
+  "DEV64_complete": [
+    25,
+    25,
+    33,
+    32,
+    40
+  ],
+  "B1_minus_B0": {
+    "gains": 12,
+    "losses": 13,
+    "ties": 39,
+    "delta": -0.015625,
+    "family_bootstrap_95_percent": [
+      -0.171875,
+      0.140625
+    ],
+    "draws": 20000,
+    "analysis_seed": 0
+  },
+  "PNG_visual_inspection_pending": false,
+  "scope": "Source-author labels and exposed selection. Postfit answer directions not in actual closed fit supervision.",
+  "new_model_or_original_ledger_calls": 0,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "PNG_actual_visual_inspection_passed": true,
+  "PNG_visual_scope": "Actual3000x1240 image viewed; footer/notes separated by layout fix, directional labels and unknown/ties preserved.",
+  "PDF_same_figure_single_page_structure_verified": true,
+  "PDF_separately_rendered_or_visually_inspected": false
+}

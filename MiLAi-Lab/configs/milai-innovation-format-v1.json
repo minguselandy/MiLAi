@@ -1,0 +1,12 @@
+{
+  "name": "milai-innovation-format-v1",
+  "model_config": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/configs/milai-innovation-common-before-delta-short-v1.json",
+  "references": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/data/fixtures/milai-innovation-matched-training-v3.jsonl",
+  "example_ids": [
+    "innovation-harbor-formation-reference-001",
+    "innovation-catalog-formation-reference-v3"
+  ],
+  "cases": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/data/fixtures/milai-innovation-learning-eval-v1.json",
+  "source_banks": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/sft-pilot-v2/evaluation/source-banks",
+  "scope": "Four exposed author formation cases, cloned identical actual source-only banks. Two identical reviewed demonstrations, common semantic instructions, native ordinary action versus indexed delta encoding;2048output,temperature0,thinkingFalse. Not full lifecycle, independent confirmation or a trained model comparison."
+}

@@ -146,7 +146,15 @@ class DurableGenerationAdmission:
             type(state) is not dict
             or set(state) != {"schema", "configuration", "messages"}
             or state["schema"] != SCHEMA
-            or state["configuration"] != self.configuration
+            or type(state["configuration"]) is not dict
+            # A new public message may use a new policy version with the same
+            # owner, bank, model and cap. Old message identities still bind their
+            # exact version in _match; no reservation is reset or transferred.
+            # The file-level version remains legacy provenance of its first use.
+            or {key: value for key, value in state["configuration"].items()
+                if key != "config_version"} != {
+                    key: value for key, value in self.configuration.items()
+                    if key != "config_version"}
             or type(state["messages"]) is not dict
         ):
             _reject("STATE_INCOMPATIBLE")

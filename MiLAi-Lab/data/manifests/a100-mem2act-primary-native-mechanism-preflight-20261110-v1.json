@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "status": "PRIMARY_FIRST_COMPLETED0_AND_FAILED4_ACTUAL_SOURCE_FULL_NN_AND_FIRST_HOST_CONFIG_PREFLIGHT_ONLY",
+  "original_protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+  "frozen_observer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py",
+  "selected_closed_rows": [
+    0,
+    4
+  ],
+  "selection_rule": "Earliest native COMPLETED and earliest native FAILED; no task-quality metric selection.",
+  "original_native_status": [
+    "COMPLETED",
+    "FAILED"
+  ],
+  "initial_Source_comparisons": 33686,
+  "pre_first_Source_comparisons": 33688,
+  "native_SDK_packets_reconstructed": 2,
+  "actual_returned_NN_predictions": 16,
+  "actual_returned_NN_input_tokens": 101840,
+  "original_case_records_and_results_literal_unchanged": true,
+  "actual_verified_model_load": {
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-fitting-v1/aggregate/checkpoints/update-32",
+    "device": "cuda:0",
+    "visible_cuda_devices": "2",
+    "threads": 4,
+    "max_len": 16384,
+    "head_max_len": 2048,
+    "loaded_weight_dtype": "torch.float32",
+    "mha_fastpath_enabled": false,
+    "reference_compile_override": false,
+    "status": "VERIFIED"
+  },
+  "paired_first_Provider_requests_equal_both": true,
+  "full_original_memory_control_merge_verified_both": true,
+  "actual_all400_Source_NN_or_score_gate_satisfied": false,
+  "primary_native_owner_still_running_full400_unchanged": true,
+  "partial_intent_or_missing_failure_fields_not_promoted": true,
+  "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+  "ordinary_GNU_CPU_pending_actual_idle139": true,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "timestamp_utc": "2026-11-09T16:08:42.555936+00:00",
+  "private_full_preflight": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/mem2act-primary-first-completed-failed-Source-NN-preflight-v1.json",
+  "cases": [
+    {
+      "row": 0,
+      "native_status": "COMPLETED",
+      "initial_Source_compared": 16843,
+      "pre_first_Source_compared": 16844,
+      "native_SDK_packets_reconstructed": 1,
+      "actual_returned_NN_predictions": 8,
+      "actual_returned_NN_input_tokens": 52275,
+      "selected_operations": {
+        "SEARCH": 1,
+        "READ": 7
+      },
+      "unfinished_decisions_retained": 0,
+      "entire_before_all_legal_bindings_heads_finite_argmax_untruncated": true,
+      "paired_first_Provider_request_equal": true,
+      "shared_first_Host_checks": {
+        "frozen_pre_host_state_equal": true,
+        "frozen_host_baseline_context_equal": true,
+        "frozen_host_tool_catalog_equal": true
+      },
+      "native_failure_receipt_evidence": {
+        "native_field_present": true,
+        "native_literal_value": [],
+        "missing_native_failure_field_inferred_empty": false,
+        "Source_Store_Saver_world_and_application_checks_still_required": true
+      }
+    },
+    {
+      "row": 4,
+      "native_status": "FAILED",
+      "initial_Source_compared": 16843,
+      "pre_first_Source_compared": 16844,
+      "native_SDK_packets_reconstructed": 1,
+      "actual_returned_NN_predictions": 8,
+      "actual_returned_NN_input_tokens": 49565,
+      "selected_operations": {
+        "SEARCH": 1,
+        "READ": 7
+      },
+      "unfinished_decisions_retained": 0,
+      "entire_before_all_legal_bindings_heads_finite_argmax_untruncated": true,
+      "paired_first_Provider_request_equal": true,
+      "shared_first_Host_checks": {
+        "frozen_pre_host_state_equal": true,
+        "frozen_host_baseline_context_equal": true,
+        "frozen_host_tool_catalog_equal": true
+      },
+      "native_failure_receipt_evidence": {
+        "native_field_present": false,
+        "native_literal_value": null,
+        "missing_native_failure_field_inferred_empty": false,
+        "Source_Store_Saver_world_and_application_checks_still_required": true
+      }
+    }
+  ],
+  "all400_not_proven_by_these_two_cases": true,
+  "task_quality_metrics_computed": false
+}

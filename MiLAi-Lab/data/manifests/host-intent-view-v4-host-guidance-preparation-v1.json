@@ -1,0 +1,24 @@
+{
+  "status": "PREPARED_NOT_STARTED",
+  "source_version": "d8447495",
+  "policies": [
+    "generative"
+  ],
+  "positions_per_policy": 8,
+  "source_groups": [
+    "memops_C26",
+    "memops_F08"
+  ],
+  "common_change": "Only generic Host guidance about current source coverage and actual quotations, plus config version. Current B runs unchanged.",
+  "scope": "Normal autonomous Host prompt diagnostic on two previously exposed train groups; same source/order/controller/budgets. No forced internal action and no learned-policy gain claim.",
+  "automatic_retry": false,
+  "compute": {
+    "wall_seconds": 0.0006040381267666817,
+    "cpu_seconds": 0.0006034260000000007
+  },
+  "ledger_recorded": true,
+  "execution_order": "After active B queue closes, before D configuration selection. No concurrent model job.",
+  "config": "configs/host-intent-view-v4-host-evidence-guidance.json",
+  "run_plan": "artifacts/host-intent-retrieval-v3/view-v4-host-guidance-pilot-plan-v1.json",
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v22.json"
+}

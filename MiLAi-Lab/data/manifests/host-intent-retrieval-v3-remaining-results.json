@@ -1,0 +1,2301 @@
+{
+  "schema": "host_intent_closed_results_v1",
+  "runs": [
+    {
+      "root": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4",
+      "status": "FAILED",
+      "source_version": "c2fc3928",
+      "closed": 14,
+      "transport": "json_action",
+      "wall_seconds": 311.7778041549027,
+      "generation": {
+        "charged_tokens": 95308,
+        "known_tokens": 95308,
+        "unknown_usage": 0
+      },
+      "generation_requests": 38
+    },
+    {
+      "root": "artifacts/host-intent-retrieval-v3/runs/remaining-v4-scope-laya",
+      "status": "FAILED",
+      "source_version": "c2fc3928",
+      "closed": 2,
+      "transport": "json_action",
+      "wall_seconds": 70.39374590013176,
+      "generation": {
+        "charged_tokens": 14111,
+        "known_tokens": 14111,
+        "unknown_usage": 0
+      },
+      "generation_requests": 4
+    },
+    {
+      "root": "artifacts/host-intent-retrieval-v3/runs/remaining-v4-changed-view",
+      "status": "COMPLETED",
+      "source_version": "c2fc3928",
+      "closed": 4,
+      "transport": "json_action",
+      "wall_seconds": 70.07156772445887,
+      "generation": {
+        "charged_tokens": 25493,
+        "known_tokens": 25493,
+        "unknown_usage": 0
+      },
+      "generation_requests": 12
+    }
+  ],
+  "positions": [
+    {
+      "history": "effective_threshold",
+      "policy": "rules",
+      "request": "before",
+      "status": "COMPLETED",
+      "answer": "On October 31, 2026, the approval threshold for Orion project travel expenses is 600 credits (approval is required above this amount). The other project mentioned is Vega, which has a different approval threshold of 900 credits.",
+      "error": null,
+      "review": {
+        "history": "effective_threshold",
+        "policy": "rules",
+        "request": "before",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/rules/banks/d5369bcb-5a02-4d4d-9904-fc14fbf2fa4d/e873c6cf-24f4-4c83-b5ba-c381f03dcbbd-result.json",
+      "tool_attempts": 2,
+      "tool_rejections": 0,
+      "executed_retrievals": 2,
+      "empty_returns": 1,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve policy evidence regarding the approval threshold for Orion project travel expenses applicable on October 31, 2026. Also, identify and describe the 'other' project mentioned in the policy to distinguish it from Orion.",
+            "read_goal": {
+              "purpose": "Determine the approval threshold for Orion travel expenses on Oct 31, 2026, and characterize the other project for distinction.",
+              "evidence": [
+                "current_interpretation",
+                "original_source"
+              ],
+              "required_points": [
+                "Orion approval threshold amount or condition",
+                "Date applicability",
+                "Details of the other project mentioned"
+              ]
+            },
+            "task_context": {
+              "as_of": "2026-10-31",
+              "target_scope": "Travel Expense Policy",
+              "known_evidence_refs": []
+            },
+            "limits": {
+              "max_return_tokens": 2000,
+              "max_control_steps": 2
+            }
+          },
+          "path": [
+            "search_0_8",
+            "search_0_16"
+          ],
+          "reason": "budget_exhausted",
+          "evidence_kinds": [],
+          "known_evidence_count": 0,
+          "remaining_candidates": 2,
+          "usage": {
+            "control_steps": 2,
+            "known_reference_reads": 0,
+            "operations": 2,
+            "wall_seconds": 0.09671812877058983,
+            "read_operations": 0
+          }
+        },
+        {
+          "request": {
+            "query": "Find any travel expense policy documents that mention approval thresholds, specifically for projects named Orion or any other named projects.",
+            "read_goal": {
+              "purpose": "Find specific approval thresholds for Orion and any other projects mentioned in travel policies.",
+              "evidence": [
+                "original_source",
+                "current_interpretation"
+              ],
+              "required_points": [
+                "Approval threshold for Orion",
+                "Approval threshold for any other project"
+              ]
+            },
+            "task_context": {
+              "as_of": "2026-10-31",
+              "target_scope": "Travel Policy",
+              "known_evidence_refs": []
+            },
+            "limits": {
+              "max_return_tokens": 4000,
+              "max_control_steps": 5
+            }
+          },
+          "path": [
+            "search_0_8",
+            "search_0_16",
+            "read_0",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 5,
+            "known_reference_reads": 0,
+            "operations": 4,
+            "wall_seconds": 2.8971499856561422,
+            "read_operations": 1
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e1",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "Travel expense approval thresholds for projects Orion and Vega, as reported in user session 'travel-policy'.",
+            "nodes": {
+              "n1": {
+                "text": "Travel expenses for project Orion require approval above 600 credits.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "Until October 31, 2026 (inclusive)"
+              },
+              "n2": {
+                "text": "Travel expenses for project Vega require approval above 900 credits.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "Unknown end date (unchanged as of reported date)"
+              },
+              "n3": {
+                "text": "The approval threshold for project Orion travel expenses becomes 1200 credits.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "Starting November 1, 2026"
+              },
+              "n4": {
+                "text": "The approval threshold for project Vega travel expenses remains unchanged from previous values.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "Starting November 1, 2026"
+              }
+            },
+            "rules": {},
+            "unresolved": []
+          },
+          "source_bindings": {
+            "e0": "s0",
+            "e1": "s1"
+          },
+          "query_time": "2026-10-31",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"before\",\"chatcmpl-92f00b22357bbbb6:tool:0\"]",
+            "collection": "materials",
+            "item_index": 1
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 2,
+          "tokens": 4320,
+          "http_wall_seconds": 10.56192156020552
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1731,
+          "http_wall_seconds": 2.659557532519102
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 3058,
+          "http_wall_seconds": 4.190411880612373
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "effective_threshold",
+      "policy": "rules",
+      "request": "after",
+      "status": "COMPLETED",
+      "answer": "For Orion travel expenses on November 2, 2026, the approval threshold is 1200 credits. The other project is Vega, which has a constant approval threshold of 900 credits.",
+      "error": null,
+      "review": {
+        "history": "effective_threshold",
+        "policy": "rules",
+        "request": "after",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/rules/banks/c1076cf5-5c11-495e-99ae-b701f826869b/08699c2e-262f-43ae-a72a-f8bafd6fec3a-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "What are the travel expense approval thresholds for the Orion project on November 2, 2026, and for the other project mentioned in the policy?",
+            "read_goal": {
+              "purpose": "Identify the specific approval threshold amount or rule for Orion travel expenses on Nov 2, 2026, and distinguish the other project.",
+              "evidence": [
+                "original_source"
+              ],
+              "required_points": [
+                "Approval threshold for Orion",
+                "Approval threshold for other projects",
+                "Effective dates"
+              ]
+            }
+          },
+          "path": [
+            "search_0_8",
+            "search_0_16",
+            "read_0",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 5,
+            "known_reference_reads": 0,
+            "operations": 4,
+            "wall_seconds": 3.016189114190638,
+            "read_operations": 1
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e1",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "Travel expense approval thresholds for Orion and Vega projects, including effective date changes.",
+            "nodes": {
+              "n1": {
+                "text": "Orion travel expenses required approval above 600 credits as of October 2026.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "On or before 2026-10-31"
+              },
+              "n2": {
+                "text": "Vega travel expenses required approval above 900 credits.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "On or before 2026-10-31"
+              },
+              "n3": {
+                "text": "Orion travel expense threshold increased to 1200 credits effective November 1, 2026.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "From 2026-11-01"
+              },
+              "n4": {
+                "text": "Vega travel expense threshold remained unchanged at 900 credits from November 1, 2026.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "From 2026-11-01"
+              }
+            },
+            "rules": {},
+            "unresolved": []
+          },
+          "source_bindings": {
+            "e0": "s0",
+            "e1": "s1"
+          },
+          "query_time": "",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"after\",\"chatcmpl-a402ef288c855927:tool:0\"]",
+            "collection": "materials",
+            "item_index": 1
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1936,
+          "http_wall_seconds": 4.519924667663872
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1735,
+          "http_wall_seconds": 2.807922233827412
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2911,
+          "http_wall_seconds": 5.20322994235903
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "effective_threshold",
+      "policy": "laya",
+      "request": "before",
+      "status": "COMPLETED",
+      "answer": "For Orion travel expenses on October 31, 2026, the approval threshold is **600 credits**. The other project mentioned is **Vega**, which has a distinct, higher approval threshold of **900 credits**. While a new policy announces an increase to 1200 credits for Orion, this change is effective from November 1, 2026, and is not retroactive, so the 600-credit threshold remains applicable for the requested date.",
+      "error": null,
+      "review": {
+        "history": "effective_threshold",
+        "policy": "laya",
+        "request": "before",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/laya/banks/875347e5-e7a4-4292-a02b-5eb4533f68f5/1b074218-124a-4bb2-9d46-c74f05620ac1-result.json",
+      "tool_attempts": 2,
+      "tool_rejections": 0,
+      "executed_retrievals": 2,
+      "empty_returns": 1,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve the travel expense approval threshold for the Orion project on October 31, 2026. Identify if there is another project mentioned in the policy and determine the distinction in rules or thresholds between Orion and that other project.",
+            "read_goal": {
+              "purpose": "Determine the specific approval threshold for Orion travel expenses on the given date and distinguish it from any other project mentioned.",
+              "evidence": [
+                "original_source"
+              ],
+              "required_points": [
+                "Orion approval threshold",
+                "Other project name and threshold",
+                "Effective date of policy"
+              ]
+            },
+            "task_context": {
+              "as_of": "2026-10-31",
+              "target_scope": "Travel Expense Policy"
+            }
+          },
+          "path": [
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [],
+          "known_evidence_count": 0,
+          "remaining_candidates": 0,
+          "usage": {
+            "control_steps": 1,
+            "known_reference_reads": 0,
+            "operations": 0,
+            "wall_seconds": 8.276525488123298,
+            "read_operations": 0
+          }
+        },
+        {
+          "request": {
+            "query": "Find any existing travel expense policies in memory. Specifically look for projects mentioned (e.g., Orion, or any other) and their respective approval thresholds for travel expenses around October 2026.",
+            "read_goal": {
+              "purpose": "Find all travel expense policies and project distinctions.",
+              "evidence": [
+                "original_source"
+              ],
+              "required_points": [
+                "List of projects",
+                "Approval thresholds for each",
+                "Dates"
+              ]
+            }
+          },
+          "path": [
+            "search_3_16",
+            "read_0",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [
+            "original_source"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 3,
+            "known_reference_reads": 0,
+            "operations": 2,
+            "wall_seconds": 7.768850302323699,
+            "read_operations": 1
+          }
+        }
+      ],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 2,
+          "tokens": 3634,
+          "http_wall_seconds": 6.1878530932590365
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 3533,
+          "http_wall_seconds": 10.024256147444248
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "effective_threshold",
+      "policy": "laya",
+      "request": "after",
+      "status": "COMPLETED",
+      "answer": "The retrieved evidence does not contain information regarding the approval threshold for Orion travel expenses on November 2, 2026, nor does it provide details to distinguish other projects.",
+      "error": null,
+      "review": {
+        "history": "effective_threshold",
+        "policy": "laya",
+        "request": "after",
+        "grade": "unfulfilled",
+        "note": "One readable policy pool was found, but the policy handed off empty. Final answer denies having the requested threshold; actual policy explicitly supports1200 effectiveNov1.",
+        "source_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/laya/banks/707b6783-6a18-4e26-9140-b293b0e2b91c/1f92d29d-ce36-4431-83e5-8c07c354f774-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 1,
+      "retrievals": [
+        {
+          "request": {
+            "query": "What is the approval threshold for Orion travel expenses on November 2, 2026? Also, what are the travel expense approval thresholds for other projects to distinguish them from Orion?",
+            "read_goal": {
+              "purpose": "Determine the specific approval threshold for Orion travel expenses on November 2, 2026 and distinguish it from other projects.",
+              "evidence": [
+                "current_interpretation",
+                "original_source"
+              ],
+              "required_points": [
+                "Orion travel expense approval threshold",
+                "Date November 2 2026",
+                "Comparison with other projects travel expense thresholds"
+              ]
+            }
+          },
+          "path": [
+            "search_1_16",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [],
+          "known_evidence_count": 0,
+          "remaining_candidates": 2,
+          "usage": {
+            "control_steps": 2,
+            "known_reference_reads": 0,
+            "operations": 1,
+            "wall_seconds": 4.458942264318466,
+            "read_operations": 0
+          }
+        }
+      ],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1637,
+          "http_wall_seconds": 2.5974206645041704
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 3911,
+          "http_wall_seconds": 15.820263557136059
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "rules",
+      "request": "spoken",
+      "status": "COMPLETED",
+      "answer": "April 3, 2027",
+      "error": null,
+      "review": {
+        "history": "stored_vs_original",
+        "policy": "rules",
+        "request": "spoken",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/rules/banks/c59c9784-e604-4681-8097-d92960cb8512/0e00f2a6-e1b8-4d5f-9267-4014c87cd710-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "What date did I originally say for the Atlas handover before my correction?",
+            "read_goal": {
+              "purpose": "Find the original date mentioned for the Atlas handover and the subsequent correction.",
+              "evidence": [
+                "saved_history",
+                "original_source"
+              ],
+              "required_points": [
+                "Original date mentioned by user for Atlas handover",
+                "Subsequent correction or change to that date"
+              ]
+            },
+            "task_context": {
+              "as_of": null,
+              "target_scope": "Conversations regarding 'Atlas handover'",
+              "known_evidence_refs": []
+            }
+          },
+          "path": [
+            "search_0_8",
+            "history_1",
+            "read_3",
+            "search_0_16",
+            "read_0",
+            "read_1",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "semantic_view",
+            "original_source",
+            "semantic_view",
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 8,
+            "known_reference_reads": 0,
+            "operations": 7,
+            "wall_seconds": 2.4800817109644413,
+            "read_operations": 4
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e3",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "User statements regarding the Atlas handover date, specifically capturing the initial declaration and the subsequent correction within the 'handover' session.",
+            "nodes": {
+              "n1": {
+                "text": "Original stated date for Atlas handover: April 3, 2027.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "2026-10-01"
+              },
+              "n2": {
+                "text": "Corrected date for Atlas handover: April 6, 2027.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "2026-10-02"
+              },
+              "n3": {
+                "text": "Correction event: User amended the previously stated Atlas handover date.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "2026-10-02"
+              }
+            },
+            "rules": {},
+            "unresolved": []
+          },
+          "source_bindings": {
+            "e0": "s1",
+            "e1": "s0"
+          },
+          "query_time": "",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"spoken\",\"chatcmpl-a716743664639f2c:tool:0\"]",
+            "collection": "materials",
+            "item_index": 3
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1559,
+          "http_wall_seconds": 2.1748222410678864
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1595,
+          "http_wall_seconds": 2.1686371797695756
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2815,
+          "http_wall_seconds": 1.6008900171145797
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "rules",
+      "request": "stored",
+      "status": "COMPLETED",
+      "answer": "The system saved the date **April 8, 2027** in the first revision of the Atlas handover record. While the original user message stated \"April 3, 2027,\" the stored record (Revision 1) reflects April 8, 2027, before the correction to April 6, 2027 was applied in the subsequent revision.",
+      "error": null,
+      "review": {
+        "history": "stored_vs_original",
+        "policy": "rules",
+        "request": "stored",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/rules/banks/92ed1291-9253-4e1a-bf65-49f4a8dd4bf9/b9ed0ca8-1c79-4b57-b880-7e7df3e4f09c-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Find the date stored in the first revision of the Atlas handover record, specifically before any correction was made. Retrieve the full history or versioning of the Atlas handover record if available to identify the initial saved date.",
+            "read_goal": {
+              "purpose": "Identify the initial date in the first version of the Atlas handover record before the correction.",
+              "evidence": [
+                "original_source",
+                "saved_history",
+                "current_interpretation"
+              ],
+              "required_points": [
+                "The exact date saved in the first revision of the Atlas handover record."
+              ]
+            }
+          },
+          "path": [
+            "search_0_8",
+            "history_1",
+            "read_3",
+            "search_0_16",
+            "read_0",
+            "read_1",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "semantic_view",
+            "original_source",
+            "semantic_view",
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 8,
+            "known_reference_reads": 0,
+            "operations": 7,
+            "wall_seconds": 2.0226081451401114,
+            "read_operations": 4
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e3",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "Retrieval of the initial date from the first revision of the Atlas handover record, prior to any corrections.",
+            "nodes": {
+              "n1": {
+                "text": "The Atlas handover begins on April 3, 2027.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "2027-04-03"
+              },
+              "n2": {
+                "text": "The Atlas handover date was corrected to April 6, 2027.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "2027-04-06"
+              }
+            },
+            "rules": {},
+            "unresolved": []
+          },
+          "source_bindings": {
+            "e0": "s1",
+            "e1": "s0"
+          },
+          "query_time": "",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"stored\",\"chatcmpl-993aae7eaac702f7:tool:0\"]",
+            "collection": "materials",
+            "item_index": 3
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1570,
+          "http_wall_seconds": 2.309318014420569
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1548,
+          "http_wall_seconds": 1.6949122231453657
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 4301,
+          "http_wall_seconds": 11.436682945117354
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "laya",
+      "request": "spoken",
+      "status": "COMPLETED",
+      "answer": "Based on the retrieved memory, the only recorded date is the corrected date of **April 6, 2027**. The original statement or date prior to this correction was not found in the current evidence scope.",
+      "error": null,
+      "review": {
+        "history": "stored_vs_original",
+        "policy": "laya",
+        "request": "spoken",
+        "grade": "unfulfilled",
+        "note": "The current correction April6 was opened; original April3 was not delivered. The final answer reports only the correction and fails the original-statement goal.",
+        "source_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/laya/banks/6e536b26-185f-46a5-b9f3-55557f9fd601/4081356f-a762-44b1-93ff-253995a72288-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "What was the original date mentioned for the Atlas handover, and what was the subsequent correction?",
+            "read_goal": {
+              "purpose": "Identify the initial date proposed for the Atlas handover and the later date it was corrected to, distinguishing the original statement from the interpretation or correction.",
+              "evidence": [
+                "original_source",
+                "saved_history"
+              ],
+              "required_points": [
+                "original_date",
+                "corrected_date",
+                "context_of_correction"
+              ]
+            }
+          },
+          "path": [
+            "search_2_8",
+            "read_1",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [
+            "semantic_view"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 2,
+          "usage": {
+            "control_steps": 3,
+            "known_reference_reads": 0,
+            "operations": 2,
+            "wall_seconds": 8.02401086781174,
+            "read_operations": 1
+          }
+        }
+      ],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1533,
+          "http_wall_seconds": 2.0179684348404408
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2741,
+          "http_wall_seconds": 6.079704761505127
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "laya",
+      "request": "stored",
+      "status": "COMPLETED",
+      "answer": "April 3, 2027",
+      "error": null,
+      "review": {
+        "history": "stored_vs_original",
+        "policy": "laya",
+        "request": "stored",
+        "grade": "wrong_evidence_kind",
+        "note": "The final April3 is the original user statement, not actual stored revision1 April8. Controller expanded original context and never opened the stored-version directory.",
+        "source_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/laya/banks/fd533e2b-3e13-4fe9-ba94-782babec4cae/9e17e8e4-4d1f-4324-a1ca-55ffd8247d16-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve the history of the 'Atlas handover record', specifically the date saved in the first revision before any correction.",
+            "read_goal": {
+              "purpose": "Identify the initial date recorded in the first revision of the Atlas handover record.",
+              "evidence": [
+                "saved_history",
+                "original_source"
+              ],
+              "required_points": [
+                "First revision date of Atlas handover record",
+                "Any subsequent corrections or updates"
+              ]
+            },
+            "task_context": {
+              "target_scope": "Atlas handover record"
+            }
+          },
+          "path": [
+            "search_2_16",
+            "context_1",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [
+            "original_source"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 3,
+            "known_reference_reads": 0,
+            "operations": 2,
+            "wall_seconds": 6.296342729590833,
+            "read_operations": 1
+          }
+        }
+      ],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1600,
+          "http_wall_seconds": 2.3939782064408064
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2255,
+          "http_wall_seconds": 3.485240763053298
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "rules",
+      "request": "from_scratch",
+      "status": "COMPLETED",
+      "answer": "To get to the Cedar workshop, go to room N-214 on the second floor. Enter through the east door using access code 7316. Please note that the west door is exit-only.",
+      "error": null,
+      "review": {
+        "history": "partial_evidence",
+        "policy": "rules",
+        "request": "from_scratch",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/rules/banks/baaad1dc-de23-4798-8326-588f68fbfa96/249086f6-6d33-472b-a27e-5885d880d214-result.json",
+      "tool_attempts": 2,
+      "tool_rejections": 1,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve the room location and entry instructions for the Cedar workshop.",
+            "read_goal": {
+              "purpose": "Get location and entry instructions",
+              "required_points": [
+                "room_location",
+                "entry_instructions"
+              ]
+            }
+          },
+          "path": [
+            "search_0_8",
+            "search_0_16",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "original_source",
+            "original_source",
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 0,
+          "usage": {
+            "control_steps": 8,
+            "known_reference_reads": 0,
+            "operations": 7,
+            "wall_seconds": 3.0643877405673265,
+            "read_operations": 4
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e4",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "Cedar workshop room location and entry instructions from sessions room-location, entry-instructions, setup-prefetch, and equipment.",
+            "nodes": {
+              "n1": {
+                "text": "The Cedar workshop is located in room N-214 on the second floor.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              },
+              "n2": {
+                "text": "Entry to the Cedar workshop is through the east door using access code 7316.",
+                "evidence": [
+                  "e2"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              },
+              "n3": {
+                "text": "The west door of the Cedar workshop room is exit-only.",
+                "evidence": [
+                  "e2"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              },
+              "n4": {
+                "text": "Cedar workshop room location.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              }
+            },
+            "rules": {},
+            "unresolved": []
+          },
+          "source_bindings": {
+            "e0": "s3",
+            "e1": "s0",
+            "e2": "s1",
+            "e3": "s2"
+          },
+          "query_time": "",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"from_scratch\",\"chatcmpl-a332291261d946e2:tool:0\"]",
+            "collection": "materials",
+            "item_index": 4
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 2,
+          "tokens": 3741,
+          "http_wall_seconds": 6.085396227426827
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1865,
+          "http_wall_seconds": 2.502339015714824
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 3559,
+          "http_wall_seconds": 5.537611708976328
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "rules",
+      "request": "with_prior",
+      "status": "COMPLETED",
+      "answer": "To get to the Cedar workshop, go to room N-214 on the second floor. Enter through the east door using the access code 7316 (note that the west door is exit-only).",
+      "error": null,
+      "review": {
+        "history": "partial_evidence",
+        "policy": "rules",
+        "request": "with_prior",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/rules/banks/13b1c462-d29e-4d1e-a25b-6b86a5909801/073edbd3-1d69-4a90-b2f1-c77853a749ef-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Cedar workshop entry instructions",
+            "read_goal": {
+              "purpose": "Find entry instructions and access method for the Cedar workshop",
+              "required_points": [
+                "entry_instructions",
+                "access_instructions"
+              ]
+            },
+            "task_context": {
+              "as_of": null,
+              "target_scope": "Cedar workshop details",
+              "known_evidence_refs": [
+                {
+                  "snapshot_id": "retrieval:[\"setup-prefetch\",\"request\",\"setup-read\"]",
+                  "collection": "materials",
+                  "item_index": 0
+                }
+              ]
+            }
+          },
+          "path": [
+            "search_0_8",
+            "search_0_16",
+            "read_0",
+            "read_2",
+            "read_3",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "original_source",
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "known_evidence_count": 1,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 7,
+            "known_reference_reads": 1,
+            "operations": 6,
+            "wall_seconds": 3.0898306434974074,
+            "read_operations": 3
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e3",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "Cedar workshop entry instructions and related facility details",
+            "nodes": {
+              "n1": {
+                "text": "The Cedar workshop has an east door designated for entry.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported"
+              },
+              "n2": {
+                "text": "The access code for the Cedar workshop east door entry is 7316.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported"
+              },
+              "n3": {
+                "text": "The Cedar workshop has a west door designated as exit-only.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported"
+              },
+              "n4": {
+                "text": "Cedar workshop room location information is requested.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported"
+              },
+              "n5": {
+                "text": "A spare projector belongs to room S-108 and is available after 15:00.",
+                "evidence": [
+                  "e2"
+                ],
+                "kind": "reported",
+                "temporal": "available after 15:00"
+              }
+            },
+            "rules": {},
+            "unresolved": [
+              "Specific room number or geographic location of the Cedar workshop is not provided in the text, only that n4 exists."
+            ]
+          },
+          "source_bindings": {
+            "e0": "s1",
+            "e1": "s0",
+            "e2": "s2"
+          },
+          "query_time": "",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"with_prior\",\"chatcmpl-8b47c32d47f8c287:tool:0\"]",
+            "collection": "materials",
+            "item_index": 3
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 2239,
+          "http_wall_seconds": 4.6248318161815405
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1791,
+          "http_wall_seconds": 2.7471198830753565
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2781,
+          "http_wall_seconds": 1.4166485257446766
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "laya",
+      "request": "from_scratch",
+      "status": "COMPLETED",
+      "answer": "The Cedar workshop is located in room N-214 on the second floor. To enter, use the access code 7316 on the east door. Please note that the west door is for exit only.",
+      "error": null,
+      "review": {
+        "history": "partial_evidence",
+        "policy": "laya",
+        "request": "from_scratch",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/laya/banks/ab4ad2ab-c17f-45e2-8a5b-2cf0392b1a90/6276ff32-08a9-4fa4-bb02-175595eb8607-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve the room location and entry instructions for the Cedar workshop.",
+            "read_goal": {
+              "purpose": "Find the physical location and access details for the Cedar workshop.",
+              "required_points": [
+                "location",
+                "entry_instructions"
+              ]
+            }
+          },
+          "path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 0,
+          "usage": {
+            "control_steps": 2,
+            "known_reference_reads": 0,
+            "operations": 1,
+            "wall_seconds": 9.498519011773169,
+            "read_operations": 0
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e0",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "Local interpretation of Cedar workshop location and entry instructions from provided user reports.",
+            "nodes": {
+              "n1": {
+                "text": "The Cedar workshop is located in room N-214 on the second floor.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              },
+              "n2": {
+                "text": "Entry to the Cedar workshop is via the east door using access code 7316.",
+                "evidence": [
+                  "e2"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              },
+              "n3": {
+                "text": "The west door for the Cedar workshop is exit-only.",
+                "evidence": [
+                  "e2"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              },
+              "n4": {
+                "text": "Spare projector belongs to room S-108 and is available after 15:00.",
+                "evidence": [
+                  "e3"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              },
+              "n5": {
+                "text": "Cedar workshop room location (topic reference).",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "unknown"
+              }
+            },
+            "rules": {},
+            "unresolved": []
+          },
+          "source_bindings": {
+            "e0": "support_not_opened",
+            "e1": "support_not_opened",
+            "e2": "support_not_opened",
+            "e3": "support_not_opened"
+          },
+          "query_time": "",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"from_scratch\",\"chatcmpl-bde14326e0e9e291:tool:0\"]",
+            "collection": "materials",
+            "item_index": 0
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 4238,
+          "http_wall_seconds": 19.43852618802339
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1938,
+          "http_wall_seconds": 2.9003830375149846
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 1979,
+          "http_wall_seconds": 1.7693914538249373
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "laya",
+      "request": "with_prior",
+      "status": "COMPLETED",
+      "answer": "The Cedar workshop is located in room N-214 on the second floor. To enter, go through the east door using access code 7316. Please note that the west door is exit-only.",
+      "error": null,
+      "review": {
+        "history": "partial_evidence",
+        "policy": "laya",
+        "request": "with_prior",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/laya/banks/c86da4ac-06b3-4143-909b-8adcb5929336/eafb391e-2066-4234-8a11-9cbc7da91b2b-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "What are the entry instructions for the Cedar workshop?",
+            "task_context": {
+              "target_scope": "Cedar workshop entry instructions",
+              "known_evidence_refs": [
+                {
+                  "snapshot_id": "retrieval:[\"setup-prefetch\",\"request\",\"setup-read\"]",
+                  "collection": "materials",
+                  "item_index": 0
+                }
+              ]
+            }
+          },
+          "path": [
+            "search_1_8",
+            "read_2",
+            "read_0",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [
+            "original_source",
+            "original_source"
+          ],
+          "known_evidence_count": 1,
+          "remaining_candidates": 2,
+          "usage": {
+            "control_steps": 4,
+            "known_reference_reads": 1,
+            "operations": 3,
+            "wall_seconds": 10.368455860763788,
+            "read_operations": 2
+          }
+        }
+      ],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 2716,
+          "http_wall_seconds": 7.756703255698085
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2413,
+          "http_wall_seconds": 2.6012924974784255
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "rules",
+      "request": "north",
+      "status": "COMPLETED",
+      "answer": "Send expense updates to Alex Chen on the North design team by **email**. A 900-credit expense claim must be submitted through the **finance portal**, as all claims above 700 credits require this method regardless of contact preferences.",
+      "error": null,
+      "review": {
+        "history": "same_name_scope",
+        "policy": "rules",
+        "request": "north",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/rules/banks/0d89dd0b-1684-4c65-be20-3e8598133bf8/64b983fb-af54-4860-8ac4-835a81a3aaa3-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve Alex Chen's contact preference for expense updates and the policy for submitting 900-credit expense claims.",
+            "read_goal": {
+              "purpose": "Find how to send expense updates to Alex Chen and the submission rule for 900-credit claims.",
+              "evidence": [
+                "current_interpretation",
+                "saved_history",
+                "original_source",
+                "live_business"
+              ],
+              "required_points": [
+                "Alex Chen contact method for expenses",
+                "900 credit expense claim submission rule"
+              ]
+            }
+          },
+          "path": [
+            "search_0_8",
+            "search_0_16",
+            "read_0",
+            "read_1",
+            "read_2",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "original_source",
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 0,
+          "usage": {
+            "control_steps": 7,
+            "known_reference_reads": 0,
+            "operations": 6,
+            "wall_seconds": 3.8633330427110195,
+            "read_operations": 3
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e3",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "The user's query asks for two specific pieces of information: 1) Alex Chen's contact preference for expense updates, and 2) the policy for submitting expense claims of 900 credits. The sources indicate that Alex Chen belongs to different teams in different contexts (North design team vs. South audit team) and has different preferences for each. Additionally, a universal rule applies to expense claim submissions based on credit amount, regardless of contact preferences.",
+            "nodes": {
+              "n1": {
+                "text": "Alex Chen on the North design team wants expense updates by email.",
+                "evidence": [
+                  "e2"
+                ],
+                "kind": "reported",
+                "temporal": "2026-10-01T09:00:00+08:00"
+              },
+              "n2": {
+                "text": "Alex Chen on the South audit team wants expense updates by SMS.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "2026-10-01T09:00:00+08:00"
+              },
+              "n3": {
+                "text": "All teams must submit expense claims above 700 credits through the finance portal. Message preferences do not replace this shared submission rule.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "2026-10-01T09:00:00+08:00"
+              }
+            },
+            "rules": {},
+            "unresolved": [
+              "The user's query does not specify which team Alex Chen is currently associated with, leading to two distinct contact preferences (Email for North design team, SMS for South audit team). Without knowing the specific team context for the 'expense updates' request, both preferences are relevant but mutually exclusive per team context.",
+              "The policy for 900-credit claims is explicitly covered by the node stating claims above 700 credits must be submitted via the finance portal."
+            ]
+          },
+          "source_bindings": {
+            "e0": "s2",
+            "e1": "s0",
+            "e2": "s1"
+          },
+          "query_time": "",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"north\",\"chatcmpl-b46246c393b55ab8:tool:0\"]",
+            "collection": "materials",
+            "item_index": 3
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1801,
+          "http_wall_seconds": 3.584530091844499
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1980,
+          "http_wall_seconds": 3.5750642707571387
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2880,
+          "http_wall_seconds": 2.68616958335042
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "rules",
+      "request": "south",
+      "status": "FAILED",
+      "answer": null,
+      "error": "VLLM_CHAT_TRUNCATED",
+      "review": {
+        "history": "same_name_scope",
+        "policy": "rules",
+        "request": "south",
+        "grade": "length_failure",
+        "note": "Initial Host generation ended length before any retrieval.9464known tokens, no newunknown, no semantic/business effect; no task retry.",
+        "source_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-histories-json-v4/rules/banks/aea9988f-1d40-476d-8449-1e752847d903/3b9e6fee-1e5a-4c16-b187-45bccea3c8df-result.json",
+      "tool_attempts": 0,
+      "tool_rejections": 0,
+      "executed_retrievals": 0,
+      "empty_returns": 0,
+      "retrievals": [],
+      "views": [],
+      "stage_costs": {
+        "host_incomplete": {
+          "requests": 1,
+          "tokens": 9464,
+          "http_wall_seconds": 53.03519770503044
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "laya",
+      "request": "north",
+      "status": "COMPLETED",
+      "answer": "The specific communication preference for Alex Chen on the North design team and the submission rule for a 900-credit expense claim are not found in the available records. Please consult the relevant internal team resources or finance policy documents for these details.",
+      "error": null,
+      "review": {
+        "history": "same_name_scope",
+        "policy": "laya",
+        "request": "north",
+        "grade": "unfulfilled",
+        "note": "Two empty handoffs; second state had three readable candidates. Final answer fails to supply email and finance-portal rule although both are in the actual source pool.",
+        "source_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-v4-scope-laya/laya/banks/93813cac-0487-4830-9522-daf605e901d4/b4a8aa8b-bc3c-400e-a342-2b08e6923d1f-result.json",
+      "tool_attempts": 2,
+      "tool_rejections": 0,
+      "executed_retrievals": 2,
+      "empty_returns": 2,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve the communication preference for sending expense updates to Alex Chen on the North design team and the submission rule for a 900-credit expense claim.",
+            "read_goal": {
+              "purpose": "To identify the specific contact method for Alex Chen regarding expenses and the policy for 900-credit claims.",
+              "evidence": [
+                "original_source",
+                "saved_history"
+              ],
+              "required_points": [
+                "Alex Chen expense preference",
+                "North design team context",
+                "900-credit claim submission rule"
+              ]
+            }
+          },
+          "path": [
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [],
+          "known_evidence_count": 0,
+          "remaining_candidates": 0,
+          "usage": {
+            "control_steps": 1,
+            "known_reference_reads": 0,
+            "operations": 0,
+            "wall_seconds": 6.490999939851463,
+            "read_operations": 0
+          }
+        },
+        {
+          "request": {
+            "query": "Retrieve general expense submission rules for the company and communication preferences for team members in the North design team.",
+            "read_goal": {
+              "purpose": "To find general expense rules and team member preferences.",
+              "evidence": [
+                "original_source",
+                "saved_history"
+              ],
+              "required_points": [
+                "General expense submission policy",
+                "North design team communication preferences"
+              ]
+            }
+          },
+          "path": [
+            "search_0_16",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [],
+          "known_evidence_count": 0,
+          "remaining_candidates": 3,
+          "usage": {
+            "control_steps": 2,
+            "known_reference_reads": 0,
+            "operations": 1,
+            "wall_seconds": 4.066744005307555,
+            "read_operations": 0
+          }
+        }
+      ],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 2,
+          "tokens": 5005,
+          "http_wall_seconds": 15.028031690977514
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 7433,
+          "http_wall_seconds": 37.490119164809585
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "laya",
+      "request": "south",
+      "status": "FAILED",
+      "answer": null,
+      "error": "FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED",
+      "review": {
+        "history": "same_name_scope",
+        "policy": "laya",
+        "request": "south",
+        "grade": "schema_failure",
+        "note": "One Host response emitted two tool calls with target_scope inside the strict read_goal object. Both were rejected and the existing format allowance ended execution; no retrieval occurred.",
+        "source_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-v4-scope-laya/laya/banks/6cf44239-060e-4675-af28-9ea00cff6887/c053c449-0c3b-4213-b2a1-50e88d248bca-result.json",
+      "tool_attempts": 2,
+      "tool_rejections": 2,
+      "executed_retrievals": 0,
+      "empty_returns": 0,
+      "retrievals": [],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1673,
+          "http_wall_seconds": 2.7703488171100616
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "rules",
+      "request": "initial",
+      "status": "COMPLETED",
+      "answer": "Supported information: For the Harbor project, expenses above 500 credits require approval. Unspecified: The source does not name the specific approver or role responsible for authorizing these expenses.",
+      "error": null,
+      "review": {
+        "history": "changed_view_missing_detail",
+        "policy": "rules",
+        "request": "initial",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-v4-changed-view/rules/banks/7ee5e1e3-8105-4739-ac8a-d405a1bb77d4/a125f21a-334c-491d-ae9f-94d34f1722e2-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Harbor project expenses approval threshold and approver on October 31, 2026.",
+            "read_goal": {
+              "purpose": "Identify the specific expense approval threshold and the designated approver for the Harbor project on October 31, 2026, distinguishing supported facts from gaps.",
+              "evidence": [
+                "saved_history",
+                "original_source"
+              ],
+              "required_points": [
+                "expense_threshold",
+                "approver_role_or_name",
+                "effective_date_or_policy_version"
+              ]
+            },
+            "task_context": {
+              "as_of": "2026-10-31",
+              "target_scope": "Harbor Project Governance and Financials",
+              "known_evidence_refs": []
+            }
+          },
+          "path": [
+            "search_0_8",
+            "search_0_16",
+            "read_0",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 0,
+          "usage": {
+            "control_steps": 5,
+            "known_reference_reads": 0,
+            "operations": 4,
+            "wall_seconds": 2.1347477855160832,
+            "read_operations": 1
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e1",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "Harbor project expense approval policy as reported on 2026-10-01, valid as of query time 2026-10-31.",
+            "nodes": {
+              "n1": {
+                "text": "Harbor project expenses above 500 credits require approval.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "As of 2026-10-01"
+              },
+              "n2": {
+                "text": "The specific approver for Harbor project expenses above 500 credits is not named in the source.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "As of 2026-10-01"
+              }
+            },
+            "rules": {},
+            "unresolved": [
+              "Identified approver role or name for Harbor project expenses > 500 credits."
+            ]
+          },
+          "source_bindings": {
+            "e0": "s0"
+          },
+          "query_time": "2026-10-31",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 1,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"initial\",\"chatcmpl-9ef656004643f0a9:tool:0\"]",
+            "collection": "materials",
+            "item_index": 1
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1652,
+          "http_wall_seconds": 2.8274480402469635
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 1435,
+          "http_wall_seconds": 1.9299168726429343
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2317,
+          "http_wall_seconds": 2.375308974646032
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "rules",
+      "request": "after_change",
+      "status": "COMPLETED",
+      "answer": "For the Harbor project on November 2, 2026:\n\n*   **Approval Threshold:** Expenses above **800 credits** require approval. (Source `s3` indicates this threshold became effective on November 1, 2026, replacing the previous 500-credit threshold).\n*   **Approver:** The specific approver or role is **unspecified**. The provided sources do not name who authorizes these expenses.",
+      "error": null,
+      "review": {
+        "history": "changed_view_missing_detail",
+        "policy": "rules",
+        "request": "after_change",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-v4-changed-view/rules/banks/7ee5e1e3-8105-4739-ac8a-d405a1bb77d4/493596c2-6104-4a28-b52c-28d9d069f664-result.json",
+      "tool_attempts": 1,
+      "tool_rejections": 0,
+      "executed_retrievals": 1,
+      "empty_returns": 0,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve the approval threshold and who approves expenses for the Harbor project specifically on November 2, 2026.",
+            "read_goal": {
+              "purpose": "Identify the expense approval threshold and the designated approver for the Harbor project on the specific date of November 2, 2026.",
+              "evidence": [
+                "current_interpretation",
+                "saved_history",
+                "original_source"
+              ],
+              "required_points": [
+                "Harbor project approval threshold on Nov 2, 2026",
+                "Approver for Harbor project expenses on Nov 2, 2026",
+                "Any changes to these rules around this date"
+              ]
+            },
+            "task_context": {
+              "as_of": "November 2, 2026",
+              "target_scope": "Harbor project financial governance"
+            }
+          },
+          "path": [
+            "search_0_8",
+            "search_0_16",
+            "read_0",
+            "read_1",
+            "refresh_view",
+            "handoff"
+          ],
+          "reason": "no_available_operation",
+          "evidence_kinds": [
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 6,
+            "known_reference_reads": 0,
+            "operations": 5,
+            "wall_seconds": 5.0014075161889195,
+            "read_operations": 2
+          }
+        }
+      ],
+      "views": [
+        {
+          "label": "e2",
+          "kind": "query_structure",
+          "interpretation": {
+            "scope": "Harbor project expense approval policy as updated on 2026-11-01, valid as of query time 2026-11-02.",
+            "nodes": {
+              "n1": {
+                "text": "For the Harbor project, expenses above 500 credits need approval. This note does not name the approver.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "As of 2026-10-01"
+              },
+              "n2": {
+                "text": "The specific approver for Harbor project expenses above 500 credits is not named in the source.",
+                "evidence": [
+                  "e0"
+                ],
+                "kind": "reported",
+                "temporal": "As of 2026-10-01"
+              },
+              "n3": {
+                "text": "For the Harbor project on October 31, 2026, retrieve the approval threshold and who approves expenses. Distinguish supported information from details the sources leave unspecified.",
+                "evidence": [
+                  "e1"
+                ],
+                "kind": "reported",
+                "temporal": "As of null"
+              },
+              "n4": {
+                "text": "Supported information: For the Harbor project, expenses above 500 credits require approval. Unspecified: The source does not name the specific approver or role responsible for authorizing these expenses.",
+                "evidence": [
+                  "e2"
+                ],
+                "kind": "reported",
+                "temporal": "As of null"
+              },
+              "n5": {
+                "text": "Starting November 1, 2026, the Harbor project approval threshold is 800 credits. The previous threshold no longer applies after that date. No approver name is provided here.",
+                "evidence": [
+                  "e3"
+                ],
+                "kind": "reported",
+                "temporal": "As of 2026-11-01"
+              },
+              "n6": {
+                "text": "No approver name is provided in the source for the updated threshold.",
+                "evidence": [
+                  "e3"
+                ],
+                "kind": "reported",
+                "temporal": "As of 2026-11-01"
+              }
+            },
+            "rules": {},
+            "unresolved": [
+              "Identified approver role or name for Harbor project expenses > 800 credits (effective from 2026-11-01)."
+            ]
+          },
+          "source_bindings": {
+            "e0": "s2",
+            "e1": "s0",
+            "e2": "s1",
+            "e3": "s3"
+          },
+          "query_time": "November 2, 2026",
+          "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); unknown is not false; apply temporal rules at current query time",
+          "revision": 2,
+          "ref": {
+            "snapshot_id": "retrieval:[\"host\",\"after_change\",\"chatcmpl-ba9c64b96e0bbb09:tool:0\"]",
+            "collection": "materials",
+            "item_index": 2
+          }
+        }
+      ],
+      "stage_costs": {
+        "host_request": {
+          "requests": 1,
+          "tokens": 1673,
+          "http_wall_seconds": 2.8033562591299415
+        },
+        "view_generation": {
+          "requests": 1,
+          "tokens": 2526,
+          "http_wall_seconds": 4.727909235283732
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 3181,
+          "http_wall_seconds": 3.427179079502821
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "laya",
+      "request": "initial",
+      "status": "COMPLETED",
+      "answer": "Based on the available records for the Harbor project:\n\n**Supported Information:**\n*   **Approval Threshold:** Expenses exceeding **500 credits** require approval.\n\n**Unspecified Details:**\n*   **Approver Identity:** The source does not specify who approves these expenses.",
+      "error": null,
+      "review": {
+        "history": "changed_view_missing_detail",
+        "policy": "laya",
+        "request": "initial",
+        "grade": "correct",
+        "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+        "source_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-v4-changed-view/laya/banks/f46948c6-b688-4470-a9d4-6d40e6c7a11e/c98720f9-b53e-4d7c-93f7-39a66a5ac2e4-result.json",
+      "tool_attempts": 2,
+      "tool_rejections": 0,
+      "executed_retrievals": 2,
+      "empty_returns": 1,
+      "retrievals": [
+        {
+          "request": {
+            "query": "For the Harbor project on October 31, 2026, retrieve the approval threshold and the identity of the approver for expenses.",
+            "read_goal": {
+              "purpose": "Determine the financial approval hierarchy and limits for the Harbor project as of the specific date.",
+              "evidence": [
+                "current_interpretation",
+                "saved_history",
+                "original_source"
+              ],
+              "required_points": [
+                "Harbor project expense approval threshold",
+                "Specific approver role or name for Harbor project expenses",
+                "Effective date of these approval rules relative to October 31, 2026"
+              ]
+            },
+            "task_context": {
+              "as_of": "2026-10-31",
+              "target_scope": "Harbor project governance and financial policy"
+            }
+          },
+          "path": [
+            "search_0_8",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [],
+          "known_evidence_count": 0,
+          "remaining_candidates": 1,
+          "usage": {
+            "control_steps": 2,
+            "known_reference_reads": 0,
+            "operations": 1,
+            "wall_seconds": 9.697637620382011,
+            "read_operations": 0
+          }
+        },
+        {
+          "request": {
+            "query": "Retrieve any available information about the 'Harbor project', general expense approval policies, approval thresholds, and approvers.",
+            "read_goal": {
+              "purpose": "Find any stored data related to the Harbor project or general financial approval rules.",
+              "evidence": [
+                "current_interpretation",
+                "saved_history",
+                "original_source",
+                "live_business"
+              ],
+              "required_points": [
+                "Mentions of Harbor project",
+                "General expense approval policies",
+                "List of approvers and thresholds"
+              ]
+            },
+            "task_context": {
+              "target_scope": "All available project and policy data"
+            }
+          },
+          "path": [
+            "search_0_16",
+            "read_0",
+            "search_3_16",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [
+            "original_source"
+          ],
+          "known_evidence_count": 0,
+          "remaining_candidates": 0,
+          "usage": {
+            "control_steps": 4,
+            "known_reference_reads": 0,
+            "operations": 3,
+            "wall_seconds": 6.61211246624589,
+            "read_operations": 1
+          }
+        }
+      ],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 2,
+          "tokens": 3620,
+          "http_wall_seconds": 5.75220715533942
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2607,
+          "http_wall_seconds": 4.666300821118057
+        }
+      },
+      "semantic_mutation_receipts": 0
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "laya",
+      "request": "after_change",
+      "status": "COMPLETED",
+      "answer": "Based on the retrieved evidence, there is no information available regarding the Harbor project on November 2, 2026. Consequently:\n\n- **Approval Threshold:** Unspecified.\n- **Expense Approver:** Unspecified.\n\nNo sources in the current memory context confirm these details.",
+      "error": null,
+      "review": {
+        "history": "changed_view_missing_detail",
+        "policy": "laya",
+        "request": "after_change",
+        "grade": "unfulfilled",
+        "note": "Policy handed off empty with three pending candidates after the actual new source arrived. Final answer omits the available800threshold. The approver is correctly unspecified but does not fulfill the threshold goal.",
+        "source_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence.",
+        "reviewer": "assistant author; no independent judge"
+      },
+      "result_path": "artifacts/host-intent-retrieval-v3/runs/remaining-v4-changed-view/laya/banks/f46948c6-b688-4470-a9d4-6d40e6c7a11e/91148012-4848-43e5-bf0b-0c9d93a72203-result.json",
+      "tool_attempts": 2,
+      "tool_rejections": 1,
+      "executed_retrievals": 1,
+      "empty_returns": 1,
+      "retrievals": [
+        {
+          "request": {
+            "query": "Retrieve the approval threshold and who approves expenses for the Harbor project on November 2, 2026.",
+            "read_goal": {
+              "purpose": "Determine the expense approval threshold and the specific approver for the Harbor project as of November 2, 2026.",
+              "evidence": [
+                "current_interpretation",
+                "saved_history",
+                "original_source"
+              ],
+              "required_points": [
+                "Harbor project name",
+                "Approval threshold amount",
+                "Expenses approver name or role"
+              ]
+            },
+            "task_context": {
+              "as_of": "2026-11-02",
+              "target_scope": "Harbor project expense approval"
+            }
+          },
+          "path": [
+            "search_0_16",
+            "handoff"
+          ],
+          "reason": "policy_handoff",
+          "evidence_kinds": [],
+          "known_evidence_count": 0,
+          "remaining_candidates": 3,
+          "usage": {
+            "control_steps": 2,
+            "known_reference_reads": 0,
+            "operations": 1,
+            "wall_seconds": 5.862588065676391,
+            "read_operations": 0
+          }
+        }
+      ],
+      "views": [],
+      "stage_costs": {
+        "host_request": {
+          "requests": 2,
+          "tokens": 4176,
+          "http_wall_seconds": 8.037562174722552
+        },
+        "host_completion": {
+          "requests": 1,
+          "tokens": 2306,
+          "http_wall_seconds": 2.493924356997013
+        }
+      },
+      "semantic_mutation_receipts": 0
+    }
+  ],
+  "grades": {
+    "laya": {
+      "correct": 4,
+      "unfulfilled": 4,
+      "wrong_evidence_kind": 1,
+      "schema_failure": 1
+    },
+    "rules": {
+      "correct": 9,
+      "length_failure": 1
+    }
+  },
+  "stages": {
+    "host_request": {
+      "requests": 25,
+      "tokens": 50323,
+      "http_wall_seconds": 111.4721485991031
+    },
+    "view_generation": {
+      "requests": 10,
+      "tokens": 18144,
+      "http_wall_seconds": 27.713761484250426
+    },
+    "host_completion": {
+      "requests": 18,
+      "tokens": 56981,
+      "http_wall_seconds": 122.30462618079036
+    },
+    "host_incomplete": {
+      "requests": 1,
+      "tokens": 9464,
+      "http_wall_seconds": 53.03519770503044
+    }
+  },
+  "local_model": {
+    "dynamic_memory_laya": {
+      "cpu_seconds": 244.93768383701536,
+      "forwards": 29,
+      "input_tokens": 41797,
+      "sequence_rows": 29,
+      "state_tokenizations": 29,
+      "state_tokens": 29283,
+      "wall_seconds": 66.48098748829216
+    },
+    "dynamic_memory_laya_load": {
+      "cpu_seconds": 21.98551210000005,
+      "loads": 3,
+      "wall_seconds": 15.961559638381004
+    }
+  },
+  "known_generation_tokens": 134912,
+  "model_outcomes_rewritten": false,
+  "semantic_review_kind": "author_source_review_not_independent_judgment",
+  "cost_note": "Stage HTTP wall is nested inside retrieval/message wall; do not sum twice."
+}

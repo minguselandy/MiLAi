@@ -1,0 +1,43 @@
+{
+  "coverage": "All72 complete answers read against the three relevant Source arrivals; four diagnostic requests/views checked in full. Original labels unchanged.",
+  "core_answers": {
+    "100": 24,
+    "1000": 23,
+    "5000": 23
+  },
+  "issues": [
+    {
+      "size": 100,
+      "session": 99,
+      "question_index": 15,
+      "core": true,
+      "note": "Adds voucher-based reference-index access, which the source does not establish; folio route is correct."
+    },
+    {
+      "size": 1000,
+      "session": 1000,
+      "question_index": 2,
+      "core": false,
+      "note": "Abstains about preserved orientation. Opens only the new policy; original orientation-complete Source is candidate1, but its excerpt ends before the completion fact. Reader stops without opening it."
+    },
+    {
+      "size": 5000,
+      "session": 4999,
+      "question_index": 15,
+      "core": false,
+      "note": "Says only that Mira can consult folios, omitting the requested usable credential route despite receiving the complete Source."
+    },
+    {
+      "size": 5000,
+      "session": 5000,
+      "question_index": 0,
+      "core": true,
+      "note": "Correct denial but claims no indication of completed orientation. As above, original Source is candidate1 but not opened; the original completion fact is absent from the actual request."
+    }
+  ],
+  "other_limits": "Some answers infer female pronouns without explicit Source support. Core counts are author judgments, not independent blind scores.",
+  "source_run": "artifacts/innovation-v4/raw-scale-v3",
+  "source_version": "dc9d14cc",
+  "independent_blind_review": false,
+  "official_labels_modified": false
+}

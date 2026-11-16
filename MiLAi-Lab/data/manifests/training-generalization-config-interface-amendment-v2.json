@@ -1,0 +1,56 @@
+{
+  "status": "CONFIG_INTERFACE_REPAIRED_V2_ACTUAL_FROZEN_PREFLIGHTS_PASSED_NOT_DISPATCHED",
+  "configuration_source": "36543a5b",
+  "actual_v1_rejections": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v1/audit.json",
+  "cases": [
+    {
+      "case": "state",
+      "old_config": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/config.json",
+      "new_config": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v2/config.json",
+      "only_semantic_change": "edit_interface_version absent -> I2",
+      "config_version_bumped": true,
+      "host_capacity_budget_unchanged": true
+    },
+    {
+      "case": "factorial",
+      "old_config": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1/config.json",
+      "new_config": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v2/config.json",
+      "only_semantic_change": "edit_interface_version absent -> I2",
+      "config_version_bumped": true,
+      "host_capacity_budget_unchanged": true
+    },
+    {
+      "case": "feedback",
+      "old_config": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/config-template.json",
+      "new_config": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v2/config-template.json",
+      "only_semantic_change": "edit_interface_version absent -> I2",
+      "config_version_bumped": true,
+      "host_capacity_budget_unchanged": true
+    }
+  ],
+  "new_plans": {
+    "state": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-execution-plan-v2.json",
+    "factorial": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-execution-plan-v2.json",
+    "feedback": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json"
+  },
+  "collector_sources_unchanged": {
+    "state": "074ee79e",
+    "factorial": "8e9f5d70",
+    "feedback": "2a179b58"
+  },
+  "source_inputs_and_reviews_unchanged": true,
+  "model_jobs_dispatched": 0,
+  "validation_rule": "Existing FUNCTIONAL_EDIT_FEATURES_REQUIRE_I2_EDIT_METHOD retained",
+  "old_readiness_qualification": "Prior material/unit checks did not prove the actual configs passed prepare;the old execution plans are superseded,not runnable defaults.",
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "compute": {
+    "cpu_seconds": 0.012735766999999995,
+    "wall_seconds": 0.012740119360387325
+  },
+  "actual_preflights": {
+    "state": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/state/preflight.json",
+    "factorial": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/factorial/preflight.json",
+    "feedback": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/feedback/preflight.json"
+  }
+}

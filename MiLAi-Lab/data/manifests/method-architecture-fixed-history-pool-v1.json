@@ -1,0 +1,401 @@
+{
+  "status": "REAL_CLOSED_BANK_POOL_PROBE_ZERO_MODEL",
+  "cases": [
+    {
+      "arm": "plain",
+      "owner": "method-dev-loans",
+      "event": 1,
+      "input_revisions": {
+        "f2603ccb-c48f-573a-baa0-f5c282ab2ca5": 2,
+        "79bb10d3-55ce-5f5e-ace2-60819d86ab72": 1
+      },
+      "versions": [
+        [
+          "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+          2
+        ],
+        [
+          "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+          1
+        ],
+        [
+          "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+          1
+        ]
+      ],
+      "same_version_pool": true,
+      "no_future_versions": true,
+      "source_bodies_delivered": 2,
+      "selector_history": {
+        "r0": {
+          "pack": "e0",
+          "revisions": [
+            2,
+            1
+          ],
+          "current_revision": 2
+        },
+        "r1": {
+          "pack": "e1",
+          "revisions": [
+            1
+          ],
+          "current_revision": 1
+        }
+      },
+      "selection_for_probe": "all current units; syntax/input coverage only, not a model decision or semantic oracle"
+    },
+    {
+      "arm": "plain",
+      "owner": "method-dev-loans",
+      "event": 5,
+      "input_revisions": {
+        "aeb76aef-1189-5036-8313-1b72af0f81e9": 1,
+        "f2603ccb-c48f-573a-baa0-f5c282ab2ca5": 3,
+        "79bb10d3-55ce-5f5e-ace2-60819d86ab72": 1
+      },
+      "versions": [
+        [
+          "aeb76aef-1189-5036-8313-1b72af0f81e9",
+          1
+        ],
+        [
+          "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+          3
+        ],
+        [
+          "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+          1
+        ],
+        [
+          "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+          2
+        ],
+        [
+          "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+          1
+        ]
+      ],
+      "same_version_pool": true,
+      "no_future_versions": true,
+      "source_bodies_delivered": 4,
+      "selector_history": {
+        "r0": {
+          "pack": "e0",
+          "revisions": [
+            1
+          ],
+          "current_revision": 1
+        },
+        "r1": {
+          "pack": "e1",
+          "revisions": [
+            3,
+            1,
+            2
+          ],
+          "current_revision": 3
+        },
+        "r2": {
+          "pack": "e2",
+          "revisions": [
+            1
+          ],
+          "current_revision": 1
+        }
+      },
+      "selection_for_probe": "all current units; syntax/input coverage only, not a model decision or semantic oracle"
+    },
+    {
+      "arm": "plain",
+      "owner": "method-dev-seed-library",
+      "event": 1,
+      "input_revisions": {
+        "056814b8-aa39-529f-a10d-7ed554f69a2b": 2,
+        "550600e9-c6ee-5da2-8d1a-6e707886bacb": 1
+      },
+      "versions": [
+        [
+          "056814b8-aa39-529f-a10d-7ed554f69a2b",
+          2
+        ],
+        [
+          "056814b8-aa39-529f-a10d-7ed554f69a2b",
+          1
+        ],
+        [
+          "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+          1
+        ]
+      ],
+      "same_version_pool": true,
+      "no_future_versions": true,
+      "source_bodies_delivered": 2,
+      "selector_history": {
+        "r0": {
+          "pack": "e0",
+          "revisions": [
+            2,
+            1
+          ],
+          "current_revision": 2
+        },
+        "r1": {
+          "pack": "e1",
+          "revisions": [
+            1
+          ],
+          "current_revision": 1
+        }
+      },
+      "selection_for_probe": "all current units; syntax/input coverage only, not a model decision or semantic oracle"
+    },
+    {
+      "arm": "plain",
+      "owner": "method-dev-seed-library",
+      "event": 5,
+      "input_revisions": {
+        "1c4f7f66-fa0f-5f4b-bb68-400615aaeebb": 1,
+        "056814b8-aa39-529f-a10d-7ed554f69a2b": 3,
+        "550600e9-c6ee-5da2-8d1a-6e707886bacb": 3
+      },
+      "versions": [
+        [
+          "1c4f7f66-fa0f-5f4b-bb68-400615aaeebb",
+          1
+        ],
+        [
+          "056814b8-aa39-529f-a10d-7ed554f69a2b",
+          3
+        ],
+        [
+          "056814b8-aa39-529f-a10d-7ed554f69a2b",
+          1
+        ],
+        [
+          "056814b8-aa39-529f-a10d-7ed554f69a2b",
+          2
+        ],
+        [
+          "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+          3
+        ],
+        [
+          "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+          1
+        ],
+        [
+          "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+          2
+        ]
+      ],
+      "same_version_pool": true,
+      "no_future_versions": true,
+      "source_bodies_delivered": 6,
+      "selector_history": {
+        "r0": {
+          "pack": "e0",
+          "revisions": [
+            1
+          ],
+          "current_revision": 1
+        },
+        "r1": {
+          "pack": "e1",
+          "revisions": [
+            3,
+            1,
+            2
+          ],
+          "current_revision": 3
+        },
+        "r2": {
+          "pack": "e2",
+          "revisions": [
+            3,
+            1,
+            2
+          ],
+          "current_revision": 3
+        }
+      },
+      "selection_for_probe": "all current units; syntax/input coverage only, not a model decision or semantic oracle"
+    },
+    {
+      "arm": "candidate",
+      "owner": "method-dev-loans",
+      "event": 1,
+      "input_revisions": {
+        "3c29727c-d792-5083-a4b6-f5db5690b1aa": 1
+      },
+      "versions": [
+        [
+          "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+          1
+        ]
+      ],
+      "same_version_pool": true,
+      "no_future_versions": true,
+      "source_bodies_delivered": 1,
+      "selector_history": {
+        "r0": {
+          "pack": "e0",
+          "revisions": [
+            1
+          ],
+          "current_revision": 1
+        }
+      },
+      "selection_for_probe": "all current units; syntax/input coverage only, not a model decision or semantic oracle"
+    },
+    {
+      "arm": "candidate",
+      "owner": "method-dev-loans",
+      "event": 5,
+      "input_revisions": {
+        "3c29727c-d792-5083-a4b6-f5db5690b1aa": 5
+      },
+      "versions": [
+        [
+          "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+          5
+        ],
+        [
+          "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+          1
+        ],
+        [
+          "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+          2
+        ],
+        [
+          "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+          3
+        ],
+        [
+          "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+          4
+        ]
+      ],
+      "same_version_pool": true,
+      "no_future_versions": true,
+      "source_bodies_delivered": 5,
+      "selector_history": {
+        "r0": {
+          "pack": "e0",
+          "revisions": [
+            5,
+            1,
+            2,
+            3,
+            4
+          ],
+          "current_revision": 5
+        }
+      },
+      "selection_for_probe": "all current units; syntax/input coverage only, not a model decision or semantic oracle"
+    },
+    {
+      "arm": "candidate",
+      "owner": "method-dev-seed-library",
+      "event": 1,
+      "input_revisions": {
+        "a9d793d8-cd1c-5e57-ab13-06b988a36104": 2
+      },
+      "versions": [
+        [
+          "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+          2
+        ],
+        [
+          "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+          1
+        ]
+      ],
+      "same_version_pool": true,
+      "no_future_versions": true,
+      "source_bodies_delivered": 2,
+      "selector_history": {
+        "r0": {
+          "pack": "e0",
+          "revisions": [
+            2,
+            1
+          ],
+          "current_revision": 2
+        }
+      },
+      "selection_for_probe": "all current units; syntax/input coverage only, not a model decision or semantic oracle"
+    },
+    {
+      "arm": "candidate",
+      "owner": "method-dev-seed-library",
+      "event": 5,
+      "input_revisions": {
+        "a9d793d8-cd1c-5e57-ab13-06b988a36104": 6
+      },
+      "versions": [
+        [
+          "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+          6
+        ],
+        [
+          "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+          1
+        ],
+        [
+          "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+          2
+        ],
+        [
+          "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+          3
+        ],
+        [
+          "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+          4
+        ],
+        [
+          "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+          5
+        ]
+      ],
+      "same_version_pool": true,
+      "no_future_versions": true,
+      "source_bodies_delivered": 6,
+      "selector_history": {
+        "r0": {
+          "pack": "e0",
+          "revisions": [
+            6,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "current_revision": 6
+        }
+      },
+      "selection_for_probe": "all current units; syntax/input coverage only, not a model decision or semantic oracle"
+    }
+  ],
+  "model_requests": 0,
+  "original_bank_writes": 0,
+  "copy_record_values_unchanged": true,
+  "scope": "controlled future R-factor pool preparation, not a scored reading comparison",
+  "all_same_version_pool": true,
+  "all_no_future_versions": true,
+  "source_parent": "9756c757",
+  "implementation": "methods/evidence_reading.py::fixed_history_candidates",
+  "checks": {
+    "dependency_memory_and_evidence_reading": "24 passed, 6.79s",
+    "dependency_groups_and_v2_runner": "34 passed, 11.29s",
+    "ruff": "pass",
+    "mypy": "1 source file pass",
+    "package_DAG": "pass",
+    "tools_boundary": "pass"
+  },
+  "running_experiment_unchanged": "screening-v1 continues frozen463b5182; new helper is not in that snapshot",
+  "next": "wire controlled same-state R comparison using this pool; no scored 2x2 result yet"
+}

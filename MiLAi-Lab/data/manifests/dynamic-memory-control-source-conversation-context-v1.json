@@ -1,0 +1,50 @@
+{
+  "version": "dynamic-memory-control-source-conversation-context-v1",
+  "status": "IMPLEMENTED_MECHANICALLY_VERIFIED_SEMANTIC_EFFECT_PENDING",
+  "evidence": {
+    "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/c10b823c-22b2-4abf-a65f-66693dbfc38c/6bda04ab-1328-4fe8-83e1-143c909d2333-trace-0.jsonl",
+    "observed_input": "Captured original bodies were sorted by opaque Source ID, separating conversational question/answer order; Source session existed in Store but was absent from generation payload.",
+    "observed_output": "Several generated interpretations treated a direct reply to a prior side-dish question as unrelated or ambiguous. This is a plausible contextual failure mechanism, not a causal effect estimate."
+  },
+  "change": {
+    "source": "src/milai_lab/methods/query_structure.py",
+    "behavior": "Present delivered bodies in actual capture order after stable alias assignment; retain source session in body payload and source directory. Existing instruction distinguishes capture/report clocks from event/effective dates.",
+    "preserved": [
+      "Exact source body and role",
+      "Reported dates and calendar context",
+      "Selected source set and new-arrival handling",
+      "Alias identity and existing graph bindings",
+      "Previous graph, response schema and rule semantics",
+      "Cache validity, scope, visibility and permissions"
+    ],
+    "new_gates": 0,
+    "case_specific_branches": 0
+  },
+  "validation": {
+    "regression": "Real SQLite sources across two interleaved sessions, opaque IDs opposite to capture order, reported dates deliberately different from arrival order, reordered source inventory, and stable aliases across incremental refresh. Failed before; passes after.",
+    "related_tests_passed": 50,
+    "ruff": "passed",
+    "mypy": "one module passed",
+    "package_boundary": "passed",
+    "captured_input_probe": "artifacts/dynamic-memory-control/source-conversation-context-v1/captured-input-probe/report.json",
+    "actual_body_order_capture_keys": [
+      "s1t1",
+      "s1t2",
+      "s1t3",
+      "s1t4",
+      "s1t5",
+      "s1t6",
+      "s1t7"
+    ],
+    "new_model_calls": 0,
+    "semantic_quality_retested": false
+  },
+  "runtime_scope": "Working development source only. Live V10 and prepared postforget/expanded81 frozen inputs remain unchanged; first results and costs preserved. New input format must be identified in a later source freeze before real-model use.",
+  "limits": [
+    "Capture sequence provides arrival context, not a universal historical event order or permission to infer missing relations.",
+    "Session grouping is captured conversation metadata, not entity identity or a new proof edge.",
+    "Recorded old output was reapplied on a diagnostic copy only to exercise mechanics; no model-position replay or repaired task result."
+  ],
+  "artifacts": "artifacts/dynamic-memory-control/source-conversation-context-v1",
+  "ledger": "All new offline measurements pending while V10 is live; Codex semantic review is outside script timers."
+}

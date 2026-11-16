@@ -1,0 +1,24 @@
+{
+  "status": "PREPARED_NOT_STARTED",
+  "source_version": "2e510e32",
+  "captured_execution_version": "d8447495",
+  "states": 37,
+  "branches": 111,
+  "source_groups": {
+    "memops_A29": 3,
+    "memops_B05": 2,
+    "memops_B06": 6,
+    "memops_C26": 6,
+    "memops_D11": 6,
+    "memops_F08": 6,
+    "memops_C23": 3,
+    "memops_D23": 5
+  },
+  "split": "train",
+  "continuation": "Same fixed_context policy, at most2 decisions then legalHANDOFF; no new labels until actual endpoints reviewed.",
+  "automatic_retry": false,
+  "scope": "New common wire presentation for all branches; preserve old original outcomes. Each replay checks original firstbefore/actions exactly. Not a pure comparison to old wire implementation.",
+  "selection": "artifacts/host-intent-retrieval-v3/view-v4-c-branches-preparation-v1/selection.json",
+  "raw_states": "artifacts/host-intent-retrieval-v3/view-v4-c-branches-preparation-v1/raw-selected-states.jsonl",
+  "frames": "artifacts/host-intent-retrieval-v3/view-v4-c-branches-preparation-v1/readout-readiness.json"
+}

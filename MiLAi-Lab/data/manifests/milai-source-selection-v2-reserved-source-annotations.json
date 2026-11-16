@@ -1,0 +1,1296 @@
+{
+  "status": "ALL28_SOURCE_REVIEWS_CLOSED_BEFORE_NATIVE_REFERENCE_OR_MODEL_OUTPUTS",
+  "source_version": "6ec3984b",
+  "started_epoch": 1792246083.2711303,
+  "contract": "docs/MILAI_SOURCE_SELECTION_EXECUTION_20261017.md#来源限定语义合同-v2",
+  "reviewer": "development assistant; not independent gold",
+  "native_reference_opened": false,
+  "model_outputs_opened": false,
+  "cases": [
+    {
+      "source_row": 53,
+      "review_id": "musique_dev-row-53",
+      "family": "candidate-family-000440",
+      "split": "reserved",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          15,
+          16
+        ]
+      ],
+      "useful_partial_evidence": [
+        15,
+        16
+      ],
+      "expected_answer": "Delaware River",
+      "relations": [
+        {
+          "sources": [
+            16
+          ],
+          "claim": "Bartram’s Covered Bridge carried Goshen Road over Crum Creek."
+        },
+        {
+          "sources": [
+            15
+          ],
+          "claim": "Crum Creek drains into the Delaware River at Eddystone."
+        }
+      ],
+      "rationale": "The bridge-to-creek and creek-to-mouth links are explicit and geographically compatible.",
+      "qualification": "",
+      "mechanism_tags": [
+        "two_relation_chain",
+        "watercourse_mouth"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [
+          [
+            15,
+            16
+          ]
+        ],
+        "partial_uids": [
+          15,
+          16
+        ]
+      }
+    },
+    {
+      "source_row": 328,
+      "review_id": "musique_dev-row-328",
+      "family": "candidate-family-000364",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        0,
+        13
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            0
+          ],
+          "claim": "The 1930 Bad Man stars Walter Huston, Dorothy Revier, Sidney Blackmer and James Rennie."
+        },
+        {
+          "sources": [
+            13
+          ],
+          "claim": "Different Bad Man adaptations star Holbrook Blinn, Walter Huston, Wallace Beery and Ronald Reagan."
+        }
+      ],
+      "rationale": "No nomination or award relation for any identified cast member is supplied; unrelated nominees do not fill this gap.",
+      "qualification": "The film year and cast member are unspecified.",
+      "mechanism_tags": [
+        "multiple_adaptations",
+        "missing_nomination"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          0,
+          13
+        ]
+      }
+    },
+    {
+      "source_row": 415,
+      "review_id": "musique_dev-row-415",
+      "family": "candidate-family-000041",
+      "split": "reserved",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          4
+        ],
+        [
+          14
+        ]
+      ],
+      "useful_partial_evidence": [
+        4,
+        14
+      ],
+      "expected_answer": "Iran; alternatively Region 1 (administrative grouping from 22 June 2014).",
+      "relations": [
+        {
+          "sources": [
+            4
+          ],
+          "claim": "Maraveh Tappeh County is in Golestan Province in Iran."
+        },
+        {
+          "sources": [
+            14
+          ],
+          "claim": "Golestan lists Maraveh Tappeh among its counties and was assigned to Region 1 on 22 June 2014."
+        }
+      ],
+      "rationale": "The county paragraph directly gives the country containing the province. A separate single paragraph gives the province and its administrative region; the question does not demand one geographic granularity.",
+      "qualification": "Region 1 is a dated coordination/development grouping, not a claim about an unstated compass location.",
+      "mechanism_tags": [
+        "one_paragraph_proof",
+        "geographic_granularity",
+        "alternative_answers"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [
+          [
+            4
+          ],
+          [
+            14
+          ]
+        ],
+        "partial_uids": [
+          4,
+          14
+        ]
+      }
+    },
+    {
+      "source_row": 671,
+      "review_id": "musique_dev-row-671",
+      "family": "candidate-family-000523",
+      "split": "reserved",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        1,
+        7,
+        8,
+        15
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            15
+          ],
+          "claim": "Let the Good Times Roll has co-directors Robert Abel and Sidney Levin."
+        },
+        {
+          "sources": [
+            7
+          ],
+          "claim": "Robert Abel was born in an unspecified Cleveland."
+        },
+        {
+          "sources": [
+            1
+          ],
+          "claim": "Cleveland, North Carolina is in Rowan County."
+        },
+        {
+          "sources": [
+            8
+          ],
+          "claim": "Gold Hill lies in southeastern Rowan County near the Cabarrus County line."
+        }
+      ],
+      "rationale": "The apparent four-part path depends on choosing Abel among two directors, identifying his unqualified Cleveland with the North Carolina town, and interpreting proximity to a county line as shared county adjacency. These are not all explicit source links; retain the tempting chain as qualified rather than treating it as certain.",
+      "qualification": "Cabarrus County is a conditional candidate only under the specified director, homonymous-city and border interpretations; no external birthplace geography is substituted.",
+      "mechanism_tags": [
+        "co_director_scope",
+        "homonymous_city",
+        "near_vs_adjacent",
+        "qualified_four_paragraph_path"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          15,
+          7,
+          1,
+          8
+        ]
+      },
+      "qualified_expected_answer": "Cabarrus County under the Abel/Cleveland-North-Carolina/adjacency interpretation.",
+      "qualified_alternative_proofs": [
+        [
+          1,
+          7,
+          8,
+          15
+        ]
+      ]
+    },
+    {
+      "source_row": 2266,
+      "review_id": "musique_dev-row-2266",
+      "family": "candidate-family-000479",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        12,
+        15,
+        16,
+        18
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            16
+          ],
+          "claim": "The Philippine embassy in Bandar Seri Begawan is the diplomatic mission to Brunei."
+        },
+        {
+          "sources": [
+            15,
+            18
+          ],
+          "claim": "The Biggest Loser Brunei is a Bruneian version of an NBC series."
+        },
+        {
+          "sources": [
+            12
+          ],
+          "claim": "Walter Sabo’s NBC team brought radio personalities Dan Daniel, Steve O’Brien, Dick Summers, Don Bleu and Tom Parker from AM to FM."
+        }
+      ],
+      "rationale": "NBC association/broadcasting of a format does not explicitly establish the creator of the Bruneian version, and the radio paragraph does not identify one requested prominent figure in Brunei. Several NBC radio people are named; a unique role/country chain is missing. The embassy locates Country A as Brunei without needing the food-origin inference.",
+      "qualification": "Palitaw being eaten in the Philippines does not alone assert its origin. Radio and television creator/broadcaster roles remain separate; named people are not declared false answers.",
+      "mechanism_tags": [
+        "broadcaster_vs_creator",
+        "radio_role_scope",
+        "multiple_people",
+        "country_binding"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          16,
+          15,
+          18,
+          12
+        ]
+      }
+    },
+    {
+      "source_row": 2268,
+      "review_id": "musique_dev-row-2268",
+      "family": "candidate-family-000232",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        7
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            7
+          ],
+          "claim": "Stefan Nemanja overthrew Tihomir and became ruler of All Serbia."
+        }
+      ],
+      "rationale": "The successor is identifiable, but no paragraph states a child of Stefan Nemanja. The Saint Sava biography fragment describes religious roles, not parentage.",
+      "qualification": "No surname, saint status or Serbian association substitutes for a parent-child link.",
+      "mechanism_tags": [
+        "missing_child_relation",
+        "successor_identity"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          7
+        ]
+      }
+    },
+    {
+      "source_row": 2486,
+      "review_id": "musique_dev-row-2486",
+      "family": "candidate-family-000523",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        1,
+        8
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            1
+          ],
+          "claim": "The film’s co-directors are Robert Abel and Sidney Levin."
+        },
+        {
+          "sources": [
+            8
+          ],
+          "claim": "Robert Abel was born in Cleveland, with no state specified."
+        }
+      ],
+      "rationale": "No paragraph locates the relevant Cleveland in a county or names an adjacent county. Even assuming the Abel reading cannot complete the missing geographic relations.",
+      "qualification": "Director quantifier and Cleveland identity remain underspecified.",
+      "mechanism_tags": [
+        "co_director_scope",
+        "homonymous_city",
+        "missing_county",
+        "missing_adjacency"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          15,
+          7
+        ]
+      }
+    },
+    {
+      "source_row": 2896,
+      "review_id": "musique_dev-row-2896",
+      "family": "candidate-family-000364",
+      "split": "reserved",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        2,
+        10,
+        14
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            2
+          ],
+          "claim": "Walter Huston stars in the 1930 Bad Man."
+        },
+        {
+          "sources": [
+            10
+          ],
+          "claim": "Walter Huston is identified with the 1930 adaptation; other adaptations have different stars."
+        },
+        {
+          "sources": [
+            14
+          ],
+          "claim": "Walter Huston won a Golden Globe Award and Academy Award for Best Supporting Actor for The Treasure of the Sierra Madre."
+        }
+      ],
+      "rationale": "Awards won are explicit, nominations are not. A winner-to-nominee convention yields a plausible award answer, but the question leaves the film/cast identity unspecified and the convention is not stated in the pool. Preserve this as an interpretation-dependent case, not definite falsehood.",
+      "qualification": "Academy Award for Best Supporting Actor is acceptable only under the winner-implies-nominee convention and Walter Huston/1930-film reading; Golden Globe Award also appears but its category is less explicitly scoped.",
+      "mechanism_tags": [
+        "nomination_vs_win",
+        "multiple_adaptations",
+        "qualified_award_inference"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          0,
+          13,
+          30
+        ]
+      },
+      "qualified_expected_answer": "Academy Award for Best Supporting Actor; Golden Globe Award under the stated qualification.",
+      "qualified_alternative_proofs": [
+        [
+          2,
+          14
+        ],
+        [
+          10,
+          14
+        ]
+      ]
+    },
+    {
+      "source_row": 3041,
+      "review_id": "musique_dev-row-3041",
+      "family": "candidate-family-000300",
+      "split": "reserved",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          0,
+          8
+        ]
+      ],
+      "useful_partial_evidence": [
+        0,
+        8
+      ],
+      "expected_answer": "4,255 (2008 census, Saint Helena).",
+      "relations": [
+        {
+          "sources": [
+            0
+          ],
+          "claim": "Francis Watson was born on a ship in the bay at Saint Helena."
+        },
+        {
+          "sources": [
+            8
+          ],
+          "claim": "Saint Helena had a population of 4,255 in the 2008 census."
+        }
+      ],
+      "rationale": "The stated birthplace association and dated island population are explicit. This answers at island/locality scale rather than claiming the ship or bay itself had that population.",
+      "qualification": "Birth occurred aboard a ship at Saint Helena; use the associated island as the population unit. The value is from 2008, not the birth year or current population.",
+      "mechanism_tags": [
+        "birthplace_scope",
+        "dated_population",
+        "two_paragraph_proof"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [
+          [
+            0,
+            8
+          ]
+        ],
+        "partial_uids": [
+          0,
+          8
+        ]
+      },
+      "qualified": true
+    },
+    {
+      "source_row": 3181,
+      "review_id": "musique_dev-row-3181",
+      "family": "candidate-family-000411",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        10
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            10
+          ],
+          "claim": "Young Man Luther is a 1958 book by Erik Erikson."
+        },
+        {
+          "sources": [
+            13
+          ],
+          "claim": "Erik Erikson collaborated with Joan Erikson on psychosocial development theory."
+        }
+      ],
+      "rationale": "The author is explicit but no marriage relation is supplied. Collaboration and shared surname do not prove Joan is his spouse; Martin Luther is the book subject, not its author.",
+      "qualification": "A plausible real-world spouse remains distinct from a supplied spouse relation.",
+      "mechanism_tags": [
+        "missing_spouse",
+        "collaboration_vs_marriage",
+        "author_vs_subject"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          10
+        ]
+      }
+    },
+    {
+      "source_row": 3289,
+      "review_id": "musique_dev-row-3289",
+      "family": "candidate-family-000411",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "expected_answer": null,
+      "relations": [],
+      "rationale": "The author identification and Erikson collaboration paragraphs are absent. The wife of Martin Luther does not establish the spouse of a book’s author.",
+      "qualification": "",
+      "mechanism_tags": [
+        "missing_author",
+        "missing_spouse",
+        "author_vs_subject"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": []
+      }
+    },
+    {
+      "source_row": 3378,
+      "review_id": "musique_dev-row-3378",
+      "family": "candidate-family-000300",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "expected_answer": null,
+      "relations": [],
+      "rationale": "No Francis Watson birthplace or Saint Helena population is present. Other Watsons, namesakes and unrelated city populations cannot close the chain.",
+      "qualification": "",
+      "mechanism_tags": [
+        "missing_birthplace",
+        "missing_population"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": []
+      }
+    },
+    {
+      "source_row": 3727,
+      "review_id": "musique_dev-row-3727",
+      "family": "candidate-family-000440",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "expected_answer": null,
+      "relations": [],
+      "rationale": "No paragraph identifies Bartram’s bridge or Crum Creek; the mouths of unrelated rivers cannot supply either required link.",
+      "qualification": "",
+      "mechanism_tags": [
+        "missing_bridge_identity",
+        "missing_watercourse_link"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": []
+      }
+    },
+    {
+      "source_row": 3822,
+      "review_id": "musique_dev-row-3822",
+      "family": "candidate-family-000232",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [],
+      "expected_answer": null,
+      "relations": [],
+      "rationale": "Neither Tihomir’s successor nor that successor’s child is identified; the Saint Sava fragment still gives no parentage.",
+      "qualification": "",
+      "mechanism_tags": [
+        "missing_successor",
+        "missing_child_relation"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": []
+      }
+    },
+    {
+      "source_row": 3991,
+      "review_id": "musique_dev-row-3991",
+      "family": "candidate-family-000041",
+      "split": "reserved",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          0
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "useful_partial_evidence": [
+        0,
+        11
+      ],
+      "expected_answer": "Iran; more precisely northeastern Iran, south of the Caspian Sea.",
+      "relations": [
+        {
+          "sources": [
+            0
+          ],
+          "claim": "Maraveh Tappeh County lies in Golestan Province in Iran."
+        },
+        {
+          "sources": [
+            11
+          ],
+          "claim": "Golestan Province is in northeastern Iran south of the Caspian Sea."
+        }
+      ],
+      "rationale": "A country-level answer is directly supported; the two-paragraph path additionally supplies a finer location. Extra detail must not invalidate the shorter valid answer.",
+      "qualification": "",
+      "mechanism_tags": [
+        "one_paragraph_proof",
+        "alternative_proof",
+        "geographic_granularity"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [
+          [
+            4
+          ],
+          [
+            4,
+            23
+          ]
+        ],
+        "partial_uids": [
+          4,
+          23
+        ]
+      }
+    },
+    {
+      "source_row": 4296,
+      "review_id": "musique_dev-row-4296",
+      "family": "candidate-family-000479",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        1,
+        2,
+        6
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            2,
+            6
+          ],
+          "claim": "The Biggest Loser Brunei is a Bruneian version of an NBC series."
+        },
+        {
+          "sources": [
+            1
+          ],
+          "claim": "Walter Sabo’s NBC team brought radio personalities Dan Daniel, Steve O’Brien, Dick Summers, Don Bleu and Tom Parker from AM to FM."
+        }
+      ],
+      "rationale": "NBC association/broadcasting of a format does not explicitly establish the creator of the Bruneian version, and the radio paragraph does not identify one requested prominent figure in Brunei. Several NBC radio people are named; a unique role/country chain is missing. The embassy/food paragraphs are absent, leaving the Country A identification unproven from the question premise.",
+      "qualification": "Palitaw being eaten in the Philippines does not alone assert its origin. Radio and television creator/broadcaster roles remain separate; named people are not declared false answers.",
+      "mechanism_tags": [
+        "broadcaster_vs_creator",
+        "radio_role_scope",
+        "multiple_people",
+        "country_binding"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          15,
+          18,
+          12
+        ]
+      }
+    },
+    {
+      "source_row": 4405,
+      "review_id": "musique_dev-row-4405",
+      "family": "candidate-family-000490",
+      "split": "reserved",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          3,
+          15,
+          19
+        ]
+      ],
+      "useful_partial_evidence": [
+        3,
+        15,
+        19
+      ],
+      "expected_answer": "The English Channel.",
+      "relations": [
+        {
+          "sources": [
+            15
+          ],
+          "claim": "Erwin Speckter died in Hamburg."
+        },
+        {
+          "sources": [
+            3
+          ],
+          "claim": "The North Sea lies west of Hamburg."
+        },
+        {
+          "sources": [
+            19
+          ],
+          "claim": "During the last cold phase the English Channel, Irish Channel and most of the North Sea were dry land because sea level was about 120 m lower."
+        }
+      ],
+      "rationale": "Reading Speckler as the supplied near-spelling Speckter, Hamburg identifies the North Sea among the three listed waters; removing it and the Irish Channel leaves the English Channel.",
+      "qualification": "Explicit minor-name correction Speckler→Speckter. Lowered refers to sea level/exposure as dry land, not lowering the geological channel bed. Hamburg has other waters, but the last-cold-phase list identifies the relevant sea.",
+      "mechanism_tags": [
+        "three_paragraph_chain",
+        "set_difference",
+        "minor_name_spelling",
+        "sea_level_scope"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [
+          [
+            3,
+            15,
+            19
+          ]
+        ],
+        "partial_uids": [
+          3,
+          15,
+          19
+        ]
+      },
+      "qualified": true
+    },
+    {
+      "source_row": 4423,
+      "review_id": "musique_dev-row-4423",
+      "family": "candidate-family-000226",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        6,
+        11
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            6
+          ],
+          "claim": "Hayek began Abuse of Reason during World War II."
+        },
+        {
+          "sources": [
+            11
+          ],
+          "claim": "The main WWII victors plus France received permanent seats on the UN Security Council."
+        }
+      ],
+      "rationale": "Even if Abuse of power is repaired to the supplied Abuse of Reason, no paragraph states who has Security Council veto power. Unrelated domestic vetoes do not fill this gap.",
+      "qualification": "Question/project-title mismatch remains unresolved; the partial path assumes the likely intended project.",
+      "mechanism_tags": [
+        "project_title_mismatch",
+        "missing_veto_relation"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          6,
+          11
+        ]
+      }
+    },
+    {
+      "source_row": 4466,
+      "review_id": "musique_dev-row-4466",
+      "family": "candidate-family-000527",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        7,
+        15
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            15
+          ],
+          "claim": "El Valle volcano lies in central Panama on the Central American Volcanic Arc."
+        },
+        {
+          "sources": [
+            7
+          ],
+          "claim": "Ferdinand de Lesseps led an initial French attempt to build a sea-level Panama canal."
+        }
+      ],
+      "rationale": "The Panama canal attempt and a leader are visible, but the text does not bind the canal to the Pacific and the ocean receiving the Sampit River, nor explicitly give the requested continent link. Sampit is absent.",
+      "qualification": "Ferdinand de Lesseps is a relevant named canal leader, not automatically a complete answer to every embedded geographic condition. Do not import a different historical advocate from world knowledge.",
+      "mechanism_tags": [
+        "missing_ocean_connection",
+        "continent_scope",
+        "canal_identity_conditions"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          7,
+          15
+        ]
+      }
+    },
+    {
+      "source_row": 4561,
+      "review_id": "musique_dev-row-4561",
+      "family": "candidate-family-000503",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        19
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            19
+          ],
+          "claim": "Stalin published Falsifiers of History in response to Nazi–Soviet Relations (1948)."
+        },
+        {
+          "sources": [
+            18
+          ],
+          "claim": "The Soviet offices and their Western analogues are distinguished, without identifying the early-1920s officeholder requested."
+        }
+      ],
+      "rationale": "The explicit 1948 dates the State Department edition, not necessarily Stalin’s response. The requested early-1920s officeholder and successor chain is also absent.",
+      "qualification": "A response to a 1948 publication is not proven to be published in that same year; do not label the plausible date false.",
+      "mechanism_tags": [
+        "publication_date_scope",
+        "missing_officeholder",
+        "missing_successor"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          19
+        ]
+      }
+    },
+    {
+      "source_row": 4571,
+      "review_id": "musique_dev-row-4571",
+      "family": "candidate-family-000490",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        2,
+        17
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            17
+          ],
+          "claim": "Erwin Speckter died in Hamburg."
+        },
+        {
+          "sources": [
+            2
+          ],
+          "claim": "Hamburg is geographically related to the North Sea and several other waters."
+        }
+      ],
+      "rationale": "Even accepting the name-spelling correction, the pool lacks the last-cold-phase three-water account. The different Rhine paragraph about Lake Constance does not give the required lowering event.",
+      "qualification": "Minor-name correction alone does not supply the missing geologic-event relation.",
+      "mechanism_tags": [
+        "missing_glacial_event",
+        "minor_name_spelling"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          3,
+          15
+        ]
+      }
+    },
+    {
+      "source_row": 4595,
+      "review_id": "musique_dev-row-4595",
+      "family": "candidate-family-000527",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        3,
+        13,
+        18
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            3
+          ],
+          "claim": "El Valle volcano lies in central Panama on the Central American Volcanic Arc."
+        },
+        {
+          "sources": [
+            13
+          ],
+          "claim": "Ferdinand de Lesseps led an initial French attempt to build a sea-level Panama canal."
+        },
+        {
+          "sources": [
+            18
+          ],
+          "claim": "The Sampit River joins Winyah Bay."
+        }
+      ],
+      "rationale": "The Panama canal attempt and a leader are visible, but the text does not bind the canal to the Pacific and the ocean receiving the Sampit River, nor explicitly give the requested continent link. Winyah Bay receives Sampit, but a peninsula between the bay and Atlantic does not explicitly state that the bay drains into that ocean.",
+      "qualification": "Ferdinand de Lesseps is a relevant named canal leader, not automatically a complete answer to every embedded geographic condition. Do not import a different historical advocate from world knowledge.",
+      "mechanism_tags": [
+        "missing_ocean_connection",
+        "continent_scope",
+        "canal_identity_conditions"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          7,
+          15,
+          24
+        ]
+      }
+    },
+    {
+      "source_row": 4620,
+      "review_id": "musique_dev-row-4620",
+      "family": "candidate-family-000250",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        2,
+        7
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            7
+          ],
+          "claim": "You Wenhui was born in Shanghai."
+        },
+        {
+          "sources": [
+            2
+          ],
+          "claim": "The Longest Night in Shanghai was produced by Japan’s Movie Eye Entertainment, a China-Japan collaboration."
+        }
+      ],
+      "rationale": "The city and Japan-linked producer identify the relevant film/country reading, but none of the available war accounts gives the US declaration date against Japan. The 1942 final declarations concern other named countries.",
+      "qualification": "Country of producer is not exclusive film nationality; the movie is a bilateral collaboration.",
+      "mechanism_tags": [
+        "missing_war_date",
+        "producer_country_scope",
+        "country_event_binding"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          2,
+          7
+        ]
+      }
+    },
+    {
+      "source_row": 4650,
+      "review_id": "musique_dev-row-4650",
+      "family": "candidate-family-000510",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        2,
+        4
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            2
+          ],
+          "claim": "The Things They Carried concerns the Vietnam War."
+        },
+        {
+          "sources": [
+            4
+          ],
+          "claim": "Australia introduced compulsory National Service in 1964."
+        }
+      ],
+      "rationale": "Pepsi Live’s host country is absent, and the conscription paragraph does not connect its 1964 policy to the Vietnam War. No single country/event chain is supplied.",
+      "qualification": "1964 is visible as an Australian policy date, not yet bound to all question conditions.",
+      "mechanism_tags": [
+        "missing_host_country",
+        "missing_event_time_binding"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "source_row": 4660,
+      "review_id": "musique_dev-row-4660",
+      "family": "candidate-family-000510",
+      "split": "reserved",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        1,
+        6,
+        19
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            1
+          ],
+          "claim": "The book is set in the Vietnam War."
+        },
+        {
+          "sources": [
+            6
+          ],
+          "claim": "Australian compulsory National Service began in 1964."
+        },
+        {
+          "sources": [
+            19
+          ],
+          "claim": "Pepsi Live included live performances from Sydney, Australia and London, United Kingdom."
+        }
+      ],
+      "rationale": "The show explicitly spans two countries; choosing its Australian side and treating the 1964 policy as the Vietnam-era measure yields 1964. Neither that exclusive country reading nor the war/date link is explicit, so retain interpretation-dependent status.",
+      "qualification": "Qualified 1964 answer requires the Australian broadcast/host reading and external or implicit Vietnam-era timing; do not call it a source-explicit complete chain.",
+      "mechanism_tags": [
+        "multiple_host_countries",
+        "event_time_binding",
+        "qualified_temporal_inference"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          2,
+          4,
+          23
+        ]
+      },
+      "qualified_expected_answer": "1964 under the Australian/Vietnam-era interpretation.",
+      "qualified_alternative_proofs": [
+        [
+          1,
+          6,
+          19
+        ]
+      ]
+    },
+    {
+      "source_row": 4733,
+      "review_id": "musique_dev-row-4733",
+      "family": "candidate-family-000226",
+      "split": "reserved",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        5,
+        8,
+        9,
+        12,
+        18
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            12
+          ],
+          "claim": "Hayek began Abuse of Reason during WWII, not a project named Abuse of power."
+        },
+        {
+          "sources": [
+            9
+          ],
+          "claim": "WWII victors form five permanent UN Security Council members and can veto substantive resolutions."
+        },
+        {
+          "sources": [
+            8
+          ],
+          "claim": "China, France, Russia, the UK and the US have permanent seats with veto power."
+        },
+        {
+          "sources": [
+            18
+          ],
+          "claim": "Security Council veto power belongs to permanent members and covers substantive resolutions."
+        }
+      ],
+      "rationale": "The veto answer is explicit for the identifiable Security Council, but the first premise names a different Hayek project. Preserve the title repair as qualified interpretation rather than silently editing the question.",
+      "qualification": "If Abuse of power means Abuse of Reason, answer is the five permanent members: China, France, Russia, UK and US; historical USSR/ROC representation is explained in U24.",
+      "mechanism_tags": [
+        "project_title_mismatch",
+        "qualified_title_repair",
+        "alternative_proofs"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          6,
+          11,
+          23,
+          24,
+          27
+        ]
+      },
+      "qualified_expected_answer": "The five permanent UN Security Council members: China, France, Russia, United Kingdom and United States, conditional on the title repair.",
+      "qualified_alternative_proofs": [
+        [
+          9,
+          12
+        ],
+        [
+          5,
+          8,
+          12
+        ],
+        [
+          5,
+          12,
+          18
+        ]
+      ]
+    },
+    {
+      "source_row": 4755,
+      "review_id": "musique_dev-row-4755",
+      "family": "candidate-family-000503",
+      "split": "reserved",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        0,
+        11
+      ],
+      "expected_answer": null,
+      "relations": [
+        {
+          "sources": [
+            11
+          ],
+          "claim": "Joseph Stalin took power after Vladimir Lenin died."
+        },
+        {
+          "sources": [
+            0
+          ],
+          "claim": "Stalin’s Falsifiers of History responded to a State Department edition dated 1948."
+        }
+      ],
+      "rationale": "The Lenin-to-Stalin succession is present, but no text dates Stalin’s version or establishes all the early-1920s presidential/general-secretary attributes. 1948 is attached to the preceding publication.",
+      "qualification": "Question office terminology may be inaccurate; no outside political chronology or publication date is substituted.",
+      "mechanism_tags": [
+        "publication_date_scope",
+        "office_title_scope",
+        "missing_response_date"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [],
+        "partial_uids": [
+          19,
+          22
+        ]
+      }
+    },
+    {
+      "source_row": 4778,
+      "review_id": "musique_dev-row-4778",
+      "family": "candidate-family-000250",
+      "split": "reserved",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          6,
+          16,
+          19
+        ]
+      ],
+      "useful_partial_evidence": [
+        6,
+        16,
+        19
+      ],
+      "expected_answer": "December 8, 1941.",
+      "relations": [
+        {
+          "sources": [
+            6
+          ],
+          "claim": "You Wenhui was born in Shanghai."
+        },
+        {
+          "sources": [
+            16
+          ],
+          "claim": "The film title is The Longest Night in Shanghai; its producer is Japan’s Movie Eye Entertainment."
+        },
+        {
+          "sources": [
+            19
+          ],
+          "claim": "The US Congress declared war on the Empire of Japan on December 8, 1941."
+        }
+      ],
+      "rationale": "The birthplace completes the film title, the explicit Japan-linked production company supplies the relevant producer-country reading, and the US declaration paragraph supplies the date.",
+      "qualification": "The film is a China-Japan collaboration; answer uses the explicitly Japanese producer, not an exclusive nationality or a separately asserted filming location. Treat the city phrase as title disambiguation.",
+      "mechanism_tags": [
+        "three_paragraph_chain",
+        "title_disambiguation",
+        "producer_country_scope"
+      ],
+      "family_view_annotation": {
+        "proof_uids": [
+          [
+            2,
+            7,
+            22
+          ]
+        ],
+        "partial_uids": [
+          2,
+          7,
+          22
+        ]
+      },
+      "qualified": true
+    }
+  ],
+  "finished_epoch": 1792246335.0102735,
+  "coverage": {
+    "rows": 28,
+    "families": 14,
+    "paragraph_positions": 559,
+    "literal_texts": 356,
+    "all_visible_pools_reviewed": true
+  },
+  "counts": {
+    "supported": 6,
+    "pool_insufficient": 18,
+    "masked": 4
+  },
+  "qualified_supported": 3,
+  "minimum_proof_reads": {
+    "2": 2,
+    "1": 2,
+    "3": 2
+  }
+}

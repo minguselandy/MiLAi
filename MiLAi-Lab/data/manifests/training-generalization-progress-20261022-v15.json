@@ -1,0 +1,199 @@
+{
+  "status": "ACTIVE_NOT_COMPLETE;PRIMARY_LEGACY_FIT_LIVE",
+  "recorded_at": "2026-10-22T03:15:33.355552+08:00",
+  "active_model_job": {
+    "session": 42364,
+    "parent_pid": 2089181,
+    "child_pid": 2089186,
+    "process_states": {
+      "2089181": "State:\tS (sleeping)",
+      "2089186": "State:\tR (running)"
+    },
+    "status": "RUNNING",
+    "updates": 262,
+    "planned_updates": 524,
+    "frozen_source": "490c683e",
+    "action": "Continue unchanged;no second model job/offline settlement/restart/hot update"
+  },
+  "state_source_review": {
+    "status": "COMPLETE_SOURCE_FIRST_REVIEW_BEFORE_REAL_STATE_VIEWS",
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-first-review-v1.json",
+    "streams": 6,
+    "source_rows": 59,
+    "tool_observations": 38,
+    "user_occurrences": 21,
+    "literal_field_checks": 92,
+    "new_View_outputs_read": 0,
+    "new_operation_labels": 0,
+    "native_business_actions_executed": 0,
+    "cases": [
+      {
+        "id": "state-train-travel-000",
+        "domain": "travel",
+        "frontiers": {
+          "early_source_count": 5,
+          "later_source_count": 8,
+          "later_new_tool_observations": 1,
+          "terminal_marker_observed": true
+        },
+        "sources": 8,
+        "roles": {
+          "user": 3,
+          "tool": 5
+        }
+      },
+      {
+        "id": "state-train-travel-001",
+        "domain": "travel",
+        "frontiers": {
+          "early_source_count": 5,
+          "later_source_count": 14,
+          "later_new_tool_observations": 6,
+          "terminal_marker_observed": true
+        },
+        "sources": 14,
+        "roles": {
+          "user": 4,
+          "tool": 10
+        }
+      },
+      {
+        "id": "state-train-customer_support-000",
+        "domain": "customer_support",
+        "frontiers": {
+          "early_source_count": 5,
+          "later_source_count": 13,
+          "later_new_tool_observations": 3,
+          "terminal_marker_observed": true
+        },
+        "sources": 13,
+        "roles": {
+          "user": 6,
+          "tool": 7
+        }
+      },
+      {
+        "id": "state-train-customer_support-001",
+        "domain": "customer_support",
+        "frontiers": {
+          "early_source_count": 5,
+          "later_source_count": 6,
+          "later_new_tool_observations": 0,
+          "terminal_marker_observed": true
+        },
+        "sources": 6,
+        "roles": {
+          "user": 2,
+          "tool": 4
+        }
+      },
+      {
+        "id": "state-train-shopping_assistant-000",
+        "domain": "shopping_assistant",
+        "frontiers": {
+          "early_source_count": 6,
+          "later_source_count": 10,
+          "later_new_tool_observations": 1,
+          "terminal_marker_observed": true
+        },
+        "sources": 10,
+        "roles": {
+          "user": 4,
+          "tool": 6
+        }
+      },
+      {
+        "id": "state-train-shopping_assistant-001",
+        "domain": "shopping_assistant",
+        "frontiers": {
+          "early_source_count": 6,
+          "later_source_count": 8,
+          "later_new_tool_observations": 1,
+          "terminal_marker_observed": true
+        },
+        "sources": 8,
+        "roles": {
+          "user": 2,
+          "tool": 6
+        }
+      }
+    ],
+    "findings": [
+      "Travel previews must remain distinct from later recorded cancellations;unread other objects retain only last recorded status.",
+      "Customer_support000 includes an already committed contested defect return,followed by rejected changed-mind preview;user-desired correction is not an applied update.",
+      "Customer_support001 has no later tool observation;later confirmation request is not another refund.",
+      "Shopping cart additions are not purchases;availability of gift wrapping is not actual selected gift wrapping.",
+      "Assistant prose is excluded,so conversational closure cannot be inferred from a final question alone.",
+      "Historical object dates/amounts remain literal;no live object authority or external-world verification is created."
+    ]
+  },
+  "state_readiness": {
+    "status": "SOURCE_REVIEW_AND_REQUEST_MATRIX_READY_NOT_DISPATCHED",
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-review-readiness-v1.json",
+    "planned_calls": 36,
+    "collector_source": "074ee79e",
+    "delivery_feedback_compiler_source": "2a179b58",
+    "host_readout": false,
+    "feedback_flags": [
+      "--split",
+      "train",
+      "--delivery-only"
+    ],
+    "runtime_source_scope": "No incoming STATE materials on repeated/known stages does not mean no new Store Sources:the runner captures each public probe query. Previous probe queries can appear as subsequent arrivals. Count/grade these separately from imported STATE user/tool observations;do not assume a zero-pending perfect cache hit. No assistant final-answer Source is produced by given-request mode.",
+    "known_condition_scope": "A planned prior-ref condition is realized only when actual earlier returned refs/materials exist. Empty or failed earlier delivery remains visible,not replaced by invented refs. Ref presence does not certify old View correctness."
+  },
+  "whole_train_literal_exposure_audit": {
+    "status": "DESCRIPTIVE_TRAIN_ID_AND_VISIBLE_POLICY_EXPOSURE_AUDIT",
+    "streams": 300,
+    "tool_observations": 2842,
+    "shared_top_level_id_field_values": 88,
+    "shared_nonempty_literal_values": 86,
+    "shared_empty_string_fields": 2,
+    "maximum_streams_per_shared_value": 67,
+    "maximum_streams_per_shared_nonempty_value": 59,
+    "get_policies_calls": {
+      "travel": 91,
+      "customer_support": 176,
+      "shopping_assistant": 43
+    },
+    "streams_with_get_policies": 177,
+    "literal_scoring_phrase_occurrences": {
+      "customer_support": 55
+    },
+    "scope": "Explicit top-level *_id field values,not verified object identities or a split/grouping algorithm. Empty variant IDs mean no selected variant. Reused nonempty IDs can refer to different reset episodes;do not merge them into one live object or treat these counts as independence proof. Policy text is preserved public training tool output,not a hidden test oracle or current system instruction.",
+    "new_semantic_review_scope": "Only the six selected pilot streams were semantically reviewed in this stage;this whole-corpus pass is a literal/count audit.",
+    "raw_materials_rewritten": false,
+    "native_task_test_or_environment_bodies_read": false,
+    "model_calls": 0,
+    "no_sha_validation": true,
+    "ledger_recorded": false
+  },
+  "identity_qualification": "Old88/max67 are repeated top-level ID-field literal values,not verified shared objects.86values are nonempty;two are empty placeholders(max67is empty variant_id);maxnonempty59. Reused nonempty IDs can belong to independent reset episodes;do not merge or infer independence from equality. Six pilot streams contain8repeated values,one empty.",
+  "policy_qualification": "Original system messages and assistant prose were not ingested. Public TRAIN get_policies responses were retained:310calls in177streams,55literal scoring-phrase occurrences. This is visible training tool material,not hidden test oracle access or new system instructions. Raw sources unchanged.",
+  "validation": "92typed field checks and source-prefix/identity checks pass;all36request cards map to their allowed material frontier. No production code change or redundant test rerun.",
+  "new_measured_cpu_pending": {
+    "phases": [
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-first-review-v1.json",
+        "cpu_seconds": 0.04538346200000001
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-public-train-materials-v1/identity-policy-exposure-audit-v2.json",
+        "cpu_seconds": 0.074666499
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-review-readiness-v1.json",
+        "cpu_seconds": 0.0019952940000000016
+      }
+    ],
+    "total_cpu_seconds": 0.12204525500000002,
+    "scope": "Programmatic audits/note assembly only. Semantic reading/authoring and final I/O/unmeasured work unknown,not zero;embedded copies not extra phases."
+  },
+  "closed_settlements": "v1/v2/v3closed neverappend/re-settle;oldpending35 and priorv11-v14pending untouched. No settlement while fit lives.",
+  "remaining": "Legacy524 and corrected nested/parameter/aux/E3 fits;actual STATE36/realView/E2/delivery review;factorial prelude/pairs/cells;new feedback128-source3-collector trajectories/labels/nestedfits/T2/common-support;strong simple autonomous Host/no-View/lifecycle cost comparison;protected external andseeds0/1/2 family-level inference.",
+  "new_real_model_jobs": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_service_or_Product_change": true,
+  "no_generalization_or_Host_gain_claimed": true
+}

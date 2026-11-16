@@ -1,0 +1,237 @@
+{
+  "status": "ACTIVE_GOAL;FULL_PAGING_CLOSED;ALL_PUBLIC_SEARCH_CACHE_EQUIVALENT",
+  "observed_at": "2026-10-22T03:12:50.536196+00:00",
+  "previous": "training-generalization-progress-20261022-v24.json",
+  "previous_turn_classification": "PROGRESS:all public initial inputs verified and known View pre-HTTP capacity outcome implemented. This turn closed all-page proof, implemented exact native corpus reuse and checked every public query, plus lossless archive feasibility.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "latest_recorded_updates": 393,
+    "planned": 524,
+    "source_version": "d6a8afd3",
+    "no_hot_update_restart_or_recipe_change": true,
+    "post_update_scores_not_read_for_selection": true
+  },
+  "full_page_audit": {
+    "session": 68138,
+    "pid": 4070915,
+    "actual_pid_alive": false,
+    "exit_code": 0,
+    "status": "COMPLETE_ALL_LITERAL_PAGES_AUDITED_NOT_A_POLICY_ROLLOUT",
+    "pools": [
+      {
+        "pool": "pool-0",
+        "sources": 3458,
+        "pages": 11987,
+        "original_characters_covered": 93966498,
+        "literal_contiguous_full_coverage": true,
+        "source_store_unchanged": true,
+        "full_bank_search_result_unchanged": true,
+        "max_native_sequence_tokens": 5606,
+        "state_drop_pages": 0,
+        "head_drop_pages": 0,
+        "SDK_mask_replacements": 0
+      },
+      {
+        "pool": "pool-1",
+        "sources": 1837,
+        "pages": 10835,
+        "original_characters_covered": 77507410,
+        "literal_contiguous_full_coverage": true,
+        "source_store_unchanged": true,
+        "full_bank_search_result_unchanged": true,
+        "max_native_sequence_tokens": 5544,
+        "state_drop_pages": 0,
+        "head_drop_pages": 0,
+        "SDK_mask_replacements": 0
+      }
+    ],
+    "total_pages": 22822,
+    "total_sources": 5295,
+    "total_characters": 171473908,
+    "original_ledger_unchanged": true,
+    "scope": "All literal pages, native lengths, Source/search invariance complete. Not a policy rollout or8step ability. Canonical whole-process cost closes now; prior partial/embedded observations never separately bill."
+  },
+  "source_search_cache": {
+    "source_version": "8e2178bd",
+    "freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-source-search-cache-8e2178bd/MiLAi-Lab",
+    "plan": "training-generalization-source-search-cache-plan-v1.json",
+    "behavior": "One latest caller-owned corpus; scope/tokenization and ordered strings compared literally. Reuse pinned native statistics only; every call still revalidates visible Sources, current exclusions, assembly, metadata and actual reads. Cache contains no questions/results/answers/old Source bindings. Identical replacement text can reuse statistics while fresh provenance comes from current units.",
+    "integration": "MemoryService/functional.message optional cache; defaults remain uncached. LME has one per backend across fresh isolated question Store clones; counters private in query reports. Native0.2.2 pin retained on hits/misses, scopes/tokenization/order/text changes respected. No fingerprint or persistent new index/schema.",
+    "validation": {
+      "passed": 21,
+      "new_cache_tests": 10,
+      "skipped": 0,
+      "ruff_files": 6,
+      "mypy_files": 4,
+      "package_tools_boundaries": "PASS;6grandfatheredprivateedges unchanged",
+      "coverage": "Native scores/ties/empty/Unicode, changed text/scope/version, Source add/forget/current-query exclusion/ordered allowlist, fresh same-text replacement bindings, actual isolated query backend with no prior-question cache."
+    }
+  },
+  "actual_cache_audit": {
+    "session": 85875,
+    "pid": 362155,
+    "actual_pid_alive": false,
+    "exit_code": 0,
+    "status": "COMPLETE_ALL_PUBLIC_NATIVE_SEARCH_CACHE_EQUIVALENCE_NOT_MODEL_EVALUATION",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-search-cache-audit-v1/audit.json",
+    "queries": 451,
+    "searches": 902,
+    "cache_builds": 2,
+    "cache_hits": 900,
+    "pools": [
+      {
+        "pool": "pool-0",
+        "sources": 3458,
+        "queries": 211,
+        "searches": 422,
+        "cache_builds": 1,
+        "cache_hits": 421,
+        "all_ranks_scores_materials_ranges_versions_equal": true,
+        "first_query_direct_frozen_flat_equality": true,
+        "original_Source_values_unchanged": true,
+        "old_reference_search_timings": {
+          "enumerate_seconds": 0.3897025529295206,
+          "assemble_seconds": 0.12002707459032536,
+          "index_seconds": 30.275283619761467,
+          "rank_seconds": 0.17312983237206936,
+          "open_seconds": 0.5380506161600351,
+          "total_seconds": 31.659456682391465
+        },
+        "new_cold_search_timings": {
+          "enumerate_seconds": 0.35807662550359964,
+          "assemble_seconds": 0.1674976320937276,
+          "cache_lookup_seconds": 6.576627492904663e-05,
+          "index_seconds": 29.606574310921133,
+          "rank_seconds": 0.0027594277635216713,
+          "open_seconds": 0.2937589306384325,
+          "total_seconds": 30.42886776663363
+        },
+        "hot_search_median_seconds": 0.8861810676753521,
+        "hot_search_max_seconds": 1.4353244379162788,
+        "hot_lookup_median_seconds": 0.037029461935162544,
+        "hot_index_build_seconds_total": 0.0
+      },
+      {
+        "pool": "pool-1",
+        "sources": 1837,
+        "queries": 240,
+        "searches": 480,
+        "cache_builds": 1,
+        "cache_hits": 479,
+        "all_ranks_scores_materials_ranges_versions_equal": true,
+        "first_query_direct_frozen_flat_equality": true,
+        "original_Source_values_unchanged": true,
+        "old_reference_search_timings": {
+          "enumerate_seconds": 0.41795679461210966,
+          "assemble_seconds": 0.06368928216397762,
+          "index_seconds": 27.910401324741542,
+          "rank_seconds": 0.007432299666106701,
+          "open_seconds": 0.16039145179092884,
+          "total_seconds": 28.697868639603257
+        },
+        "new_cold_search_timings": {
+          "enumerate_seconds": 0.5177589524537325,
+          "assemble_seconds": 0.1146620661020279,
+          "cache_lookup_seconds": 7.93207436800003e-05,
+          "index_seconds": 24.82752256002277,
+          "rank_seconds": 0.0028383536264300346,
+          "open_seconds": 0.060506454668939114,
+          "total_seconds": 25.523483030498028
+        },
+        "hot_search_median_seconds": 0.48108967673033476,
+        "hot_search_max_seconds": 6.3068603575229645,
+        "hot_lookup_median_seconds": 0.02517021168023348,
+        "hot_index_build_seconds_total": 0.0
+      }
+    ],
+    "original_ledger_unchanged": true,
+    "reference_scope": "Frozen c85old flat function through real service once per bank, retaining its independently constructed native BM25 object/ordered units. All451queries x limits8/16 compare exact ranks/scores/current material text/ranges/revisions to that reference. First public query also directly matches old flat service result. Not902old cold rebuilds; no QA answer/eval access, policy, model, Reader or relevance scoring.",
+    "timing_scope": "Warm source-search medians0.886181068/0.481089677seconds under this audit; actual lookup/visibility/assembly/read work included. Reference-validation reopens outside those per-call measurements. Not full cloned-runtime/Reader/Host latency or model generalization evidence."
+  },
+  "archive_feasibility": {
+    "status": "COMPLETE_LITERAL_ARCHIVE_ROUNDTRIP_NOT_RETENTION_CHANGE",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/report.json",
+    "post_process_byte_check": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/post-close-readback.json",
+    "format": "Standard XZ,preset0,CHECK_NONE; no content checksum or hash/fingerprint validation",
+    "pools": [
+      {
+        "pool": "pool-0",
+        "consistent_snapshot_bytes": 117305344,
+        "archive_bytes": 3231004,
+        "restored_bytes_literally_equal": 117305344,
+        "Store_table_rows": 13836,
+        "sqlite_quick_check": "ok",
+        "compression_nested": {
+          "cpu_seconds": 3.0722814300000003,
+          "wall_seconds": 3.072386432439089
+        },
+        "restoration_nested": {
+          "cpu_seconds": 3.4773843970000002,
+          "wall_seconds": 3.489062137901783
+        },
+        "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-0/snapshot.sqlite",
+        "archive": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-0/snapshot.sqlite.xz",
+        "restore": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-0/restored.sqlite"
+      },
+      {
+        "pool": "pool-1",
+        "consistent_snapshot_bytes": 94498816,
+        "archive_bytes": 3455816,
+        "restored_bytes_literally_equal": 94498816,
+        "Store_table_rows": 7352,
+        "sqlite_quick_check": "ok",
+        "compression_nested": {
+          "cpu_seconds": 2.8405565779999993,
+          "wall_seconds": 2.840778767131269
+        },
+        "restoration_nested": {
+          "cpu_seconds": 0.5130776370000003,
+          "wall_seconds": 0.5130912661552429
+        },
+        "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-1/snapshot.sqlite",
+        "archive": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-1/snapshot.sqlite.xz",
+        "restore": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-1/restored.sqlite"
+      }
+    ],
+    "snapshot_bytes": 211804160,
+    "archive_bytes": 6686820,
+    "main_db_copy_estimate_per_451_arm_bytes": 47431143424,
+    "main_db_archive_estimate_per_451_arm_bytes": 1511137684,
+    "scope": "Independent readonly SQLite backups of both complete preflight Stores. Direct byte equality after restore and again after process exit; SQLite quick_check and row counts pass. Original Stores, snapshots, compressed files and restores all retained. Projection is only a static main-DB estimate, excludes actual query growth/otherDBs/traces. No evaluator archival, deletion or retention change implemented."
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "lme_all_literal_source_pages_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-source-pages-audit-v1/audit.json",
+      "cpu_seconds": 6340.347716984,
+      "wall_seconds": 6740.827235221863,
+      "ledger_recorded": false
+    },
+    {
+      "id": "lme_all_public_source_search_cache_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-search-cache-audit-v1/audit.json",
+      "cpu_seconds": 1028.186257835,
+      "wall_seconds": 1028.5002422165126,
+      "ledger_recorded": false
+    },
+    {
+      "id": "sqlite_lossless_archive_probe_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/report.json",
+      "cpu_seconds": 11.819056254000001,
+      "wall_seconds": 12.734131370671093,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 7380.353031073,
+  "costs": "7380.353031073new closed measured CPU seconds pending:6340.347716984all pages+1028.186257835all-query cache audit+11.819056254archive probe. Nested pool/search/compression/restore clocks and copied reports never add again. Post-exit byte recheck and authoring/tests/import/freezing unmeasured, unknown not0. ExistingV24pending65.415592814,V23pending549.912019680,V22pending1505.460591140 and older pending unchanged. No offline settlement while fit live; closedv1/v2/v3 never reopen.",
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "remaining": "Full corrected training/control matrix and savedCPU incl legacy; STATE108E2/factorial/expandedfeedback/T2/common-support; actualHost/lifecycle/costs; full external/protected/seeds0,1,2. Source-range256 still candidate: actual-query post-operation/learned paths, completeReadercontexts, actual server vision/usage, checkpoints/method/seedfreeze and real evaluation remain. Archive feasibility not yet integrated into a declared post-run retention/restore path; no cohort/source reduction."
+}

@@ -1,0 +1,35 @@
+{
+  "stage": "T0 operation observation collection before labels/training",
+  "source_families": "data/fixtures/dynamic-memory-control/operation-families-v1.json",
+  "train_families": 24,
+  "development_families": 8,
+  "functional_e0_families_excluded_from_fitting": true,
+  "phases": [
+    "cold",
+    "repeat",
+    "unrelated",
+    "changed"
+  ],
+  "phase_orders": "All six orders of the three post-cold phases, kept within family. Changes are on independent subjects.",
+  "shared_runtime": "MemoryService, EvidenceOperations, query_structure and reader packet projection",
+  "demonstrator": "Scripted acquisition/build or use-view prefixes, not authoritative action labels",
+  "view_generation": "Actual existing Qwen provider with schema, enable_thinking=false; first responses only",
+  "planned_view_calls_if_all_phases_complete": 64,
+  "max_control_steps": 8,
+  "reader_executed": false,
+  "gold_created_automatically": false,
+  "review_before_fitting": [
+    "Check actual generated views against original complete sources and stated time/scope.",
+    "Keep unsupported/ambiguous views and failed operations; use partial labels or masks.",
+    "Use multiple acceptable actions when supported; never assume the scripted action is uniquely correct.",
+    "Keep recorded source statements distinct from actual stored versions and live business effects."
+  ],
+  "training_recipe": "Original BASE native encoder/head and existing soft-CE trainer; update count decided only after actual labelled-state and length review. No training started.",
+  "scope_limits": [
+    "Authored synthetic source contracts, not independent human gold or external benchmark.",
+    "These 32 source histories do not themselves cover every stored-history or sandbox operation.",
+    "Views are actual generated interpretations; structural acceptance is not semantic correctness."
+  ],
+  "original_budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "checksum_verification": false
+}

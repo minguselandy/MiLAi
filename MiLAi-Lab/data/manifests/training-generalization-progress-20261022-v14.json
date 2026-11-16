@@ -1,0 +1,278 @@
+{
+  "status": "ACTIVE_NOT_COMPLETE;PRIMARY_LEGACY_FIT_LIVE",
+  "recorded_at": "2026-10-22T02:39:45.542160+08:00",
+  "implementation": [
+    "2a179b58",
+    "20907af8"
+  ],
+  "active_model_job": {
+    "session": 42364,
+    "parent_pid": 2089181,
+    "child_pid": 2089186,
+    "process_states": {
+      "2089181": "State:\tS (sleeping)",
+      "2089186": "State:\tR (running)"
+    },
+    "status": "RUNNING",
+    "updates": 187,
+    "planned_updates": 524,
+    "frozen_source": "490c683e",
+    "action": "Continue unchanged;no second model job,no offline settlement,no retry on observation timeout"
+  },
+  "feedback_protocol": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v1.json",
+    "readiness": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-protocol-readiness-v1.json",
+    "state": "SOURCE_COHORTS_AND_BATCHES_READY;SELECTED_CHECKPOINT_BINDING_PENDING;NOT_DISPATCHED",
+    "cohorts": {
+      "32": {
+        "component_groups": {
+          "operation_history": 20,
+          "complementary_evidence": 12
+        },
+        "histories": 32,
+        "request_positions_per_collector": 61
+      },
+      "64": {
+        "component_groups": {
+          "operation_history": 36,
+          "complementary_evidence": 28
+        },
+        "histories": 64,
+        "request_positions_per_collector": 127
+      },
+      "128": {
+        "component_groups": {
+          "operation_history": 57,
+          "complementary_evidence": 71
+        },
+        "histories": 128,
+        "request_positions_per_collector": 251
+      }
+    },
+    "source_anchors": [
+      "memops_A29",
+      "memops_B05",
+      "memops_B06",
+      "memops_C23",
+      "memops_C26",
+      "memops_D11",
+      "memops_D23",
+      "memops_F08"
+    ],
+    "masked_groups_retained": [
+      "musique-family-000384",
+      "musique-family-000881",
+      "musique-family-000670",
+      "musique-family-000123"
+    ],
+    "train_batches": 68,
+    "dev_batches": 4,
+    "train_collector_positions": 753,
+    "dev_collector_positions": 48,
+    "collectors": [
+      "rules",
+      "laya",
+      "fixed_context"
+    ],
+    "state_quotas": {
+      "rules": {
+        "initial": 1,
+        "after_operation": 1
+      },
+      "laya": {
+        "initial": 1,
+        "after_operation": 1
+      },
+      "fixed_context": {
+        "initial": 1,
+        "after_operation": 1
+      }
+    },
+    "native_input_projection": "shared_actions",
+    "feedback_context_limit": 16384,
+    "return_tokens": 2048,
+    "continuation": "Existing fixed_context reads4,two decisions after actual first action;at most3branches per state",
+    "budget": {
+      "seed": 0,
+      "arms": [
+        "continued-ce",
+        "answer",
+        "delivery"
+      ],
+      "source_cohorts": [
+        32,
+        64,
+        128
+      ],
+      "optimizer_updates_each_arm": 192,
+      "draws_each_arm": 3072,
+      "schedule_cycle": 192,
+      "eval_updates": [
+        0,
+        12,
+        24,
+        48,
+        96,
+        192
+      ],
+      "encoder_lr": 2.5e-05,
+      "head_lr": 0.0001,
+      "freeze_encoder": false,
+      "effective_batch": 16,
+      "micro_batch_size": 1,
+      "gradient_checkpointing": true,
+      "shuffle_options": true,
+      "max_len": 16384,
+      "head_max_len": 2048,
+      "operation_state": "shared_actions",
+      "reason": "192=ceil(2*(768feedback+768replay)/16) from preregistered maximum128-source pool. Fix this same budget/cosine cycle for ALL cohorts,including shortfalls; do not confound feedback source count with extra updates. Existing data preparer legacy two-pass suggestion is recorded but explicitly overridden.",
+      "selection": "For each target,highest independent feedback-dev family_macro_state_pair_accuracy, earliest update on ties,0eligible. CE curve has separately declared answer and delivery selection views for its corresponding contrast;report both, not a single retrospectively convenient control. Always report common192 endpoint and old-operation retention. No final Host/protected selection."
+    },
+    "legacy_capture_audit": {
+      "status": "AUDITED_CLOSED_SOURCE_CAPTURES",
+      "batches": [
+        {
+          "index": 0,
+          "status": "COMPLETED_WITH_FAILURES",
+          "capture_retrieval_calls": true,
+          "capture_control_steps": false,
+          "continue_host_history": false,
+          "initial_captures": 187,
+          "actual_initial_decisions": 177,
+          "post_operation_checkpoint_captures": 0,
+          "call_statuses": {
+            "ORIGINAL_COMPLETED": 187
+          },
+          "policy_classes": {
+            "FixedContextMemoryPolicy": 187
+          }
+        },
+        {
+          "index": 1,
+          "status": "COMPLETED_WITH_FAILURES",
+          "capture_retrieval_calls": true,
+          "capture_control_steps": false,
+          "continue_host_history": false,
+          "initial_captures": 194,
+          "actual_initial_decisions": 178,
+          "post_operation_checkpoint_captures": 0,
+          "call_statuses": {
+            "ORIGINAL_COMPLETED": 194
+          },
+          "policy_classes": {
+            "FixedContextMemoryPolicy": 194
+          }
+        },
+        {
+          "index": 2,
+          "status": "COMPLETED_WITH_FAILURES",
+          "capture_retrieval_calls": true,
+          "capture_control_steps": false,
+          "continue_host_history": false,
+          "initial_captures": 189,
+          "actual_initial_decisions": 181,
+          "post_operation_checkpoint_captures": 0,
+          "call_statuses": {
+            "ORIGINAL_COMPLETED": 189
+          },
+          "policy_classes": {
+            "FixedContextMemoryPolicy": 189
+          }
+        },
+        {
+          "index": 3,
+          "status": "COMPLETED_WITH_FAILURES",
+          "capture_retrieval_calls": true,
+          "capture_control_steps": false,
+          "continue_host_history": false,
+          "initial_captures": 200,
+          "actual_initial_decisions": 192,
+          "post_operation_checkpoint_captures": 0,
+          "call_statuses": {
+            "ORIGINAL_COMPLETED": 200
+          },
+          "policy_classes": {
+            "FixedContextMemoryPolicy": 200
+          }
+        }
+      ],
+      "initial_captures": 770,
+      "actual_initial_decisions": 728,
+      "post_operation_checkpoint_captures": 0,
+      "scope": "Full initial snapshots available;observational action traces are not complete post-operation executor/Store snapshots. New post-step capture is required;old queue stays closed.",
+      "model_calls": 0,
+      "no_sha_validation": true,
+      "ledger_recorded": false,
+      "compute": {
+        "cpu_seconds": 0.211303438,
+        "wall_seconds": 0.21139902621507645
+      }
+    },
+    "legacy_quota_audit": {
+      "scope": "Only four closed new-source collection batches,not all historic captures",
+      "eligible_selected_states": 46,
+      "proposed_branches": 138,
+      "quota_shortfall": 722,
+      "phase": "All46selected states are fixed_context initial;post-operation0",
+      "dispatch": "Diagnostic only,not dispatched or treated as new feedback pool"
+    },
+    "delivery_only": "Explicit --delivery-only reads no Host readout;answer must stay unknown,not a tie. Given STATE/factorial labels remain0 until real branches and semantic review.",
+    "nested_subset_tool": "prepare_feedback_subset.py preserves parent per-state feedback/replay/replacement and physical JSONL lines;no resampling or label compilation. Largest pool matched once,smaller cohorts source-filter it.",
+    "legacy_subset_audit": {
+      "scope": "Historical37-state pool layout audit only,not new32/64/128 data",
+      "feedback_states": 14,
+      "rows_each_arm": 28,
+      "labels_recompiled": false,
+      "dev_bytes_unchanged": true
+    },
+    "native_branch_parameter_sampling": "Actual post-operation states use seeded distinct same-kind target/parameter alternatives,plus a control. Initial states retain operation representatives;main pool uses no manual nominations.",
+    "own_trajectory": "All actual laya states,including masks,still require separate source review and matched T2 CE augmentation;feedback versus old CE alone does not isolate state coverage.",
+    "feedback_dev": "Same eight exposed dev families,up to48newquota states+unchanged old16;freeze common development pool before feedback fits and report strata. Old860/616operationdev separate.",
+    "real_new_collection_or_fits": 0
+  },
+  "validation": {
+    "unique_related_tests_passed": 48,
+    "skipped": 0,
+    "ruff_files_passed": 9,
+    "mypy_implementation_files_passed": 4,
+    "scope": "Includes CPU tensor pair gradients,scripted-HTTP actual Store/E2/factorial capture and quota selection;no new real model experiment",
+    "tools_boundary": "PASS;6 existing grandfathered private edges unchanged",
+    "literal_data_audit": "All cohort histories match originals;nested prefixes and whole-family serial batches verified;readiness report saved"
+  },
+  "new_measured_cpu_pending": {
+    "phases": [
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-cohorts-v1/selection.json",
+        "cpu_seconds": 4.474040162
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-existing-capture-audit-v1.json",
+        "cpu_seconds": 0.211303438
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-existing-quota-audit-v1/selection.json",
+        "cpu_seconds": 0.48399824700000005
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v1.json",
+        "cpu_seconds": 4.221708271000001
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-subset-layout-audit-v1/preparation.json",
+        "cpu_seconds": 0.20661302399999998
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-protocol-readiness-v1.json",
+        "cpu_seconds": 0.5294312959999999
+      }
+    ],
+    "total_cpu_seconds": 10.127094437999999,
+    "scope": "Canonical files only;embedded copies in plan/manifests are not new phases. Imports/tests/manual review and unmeasured wrappers/inspections remain unknown."
+  },
+  "closed_settlements": "v1/v2/v3 CLOSED;never append/re-settle;exclude their phase measurement files. Oldpending35 and priorv11/v12/v13pending unchanged.",
+  "remaining": "Complete legacy524 and corrected nested/parameter/aux/E3 fits;STATE36 and factorial8-call preludes,actualView/E2/factorial and semantics;new feedback128-source3-collector trajectories,full labels and nested target/CE fits,T2 own-state augmentation/common-support;strong simple autonomous Host/no-View/lifecycle costs;protected external andseeds0/1/2 family-level confirmation.",
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_or_service_change": true,
+  "no_generalization_or_Host_gain_claimed": true
+}

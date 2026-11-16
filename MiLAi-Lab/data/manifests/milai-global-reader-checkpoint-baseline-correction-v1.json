@@ -1,0 +1,25 @@
+{
+  "status": "CORRECTED_BEFORE_ANY_POSTTRAIN_MODEL_DISPATCH",
+  "observed_epoch": 1792213418.909318,
+  "reason": "Native save_checkpoint and ordinary save_model both cast state_dict tensors to half. In-training finaldev2 uses pre-save FP32 model; checkpoint loader casts savedF16 values back toFP32, not losslessly restoring original values. Reusing finaldev2 as invariance baseline would confound checkpoint rounding with presentation changes.",
+  "observed_header_dtypes": {
+    "native32seed0/checkpoint/model.safetensors": "F16 (sampledact_head tensors)",
+    "linear32seed0/checkpoint/encoder/model.safetensors": "F16 (sampledembedding/finalnorm tensors)",
+    "linear32seed0/checkpoint/scorer.safetensors": "F16 (bothbias/weight)"
+  },
+  "source_functions": [
+    "laya.train.save_checkpoint",
+    "laya.train.load_checkpoint",
+    "tools/ordinary_reader_reranker.py:save_model",
+    "tools/linear_reader_classifier.py:LinearDecision.load"
+  ],
+  "scope": "Measurement correction only; no changes to trained weights, training order/labels/epochs, modelselection, candidateviews, Readerprompt/settings or heldoutsource selection. No posttrain outcomes existed.",
+  "old_new_forward_upper_bound": 8064,
+  "corrected_new_forward_upper_bound": 10080,
+  "added_original_view_forwards": 2016,
+  "new_reader_requests_added": 0,
+  "new_model_calls_during_inspection": 0,
+  "no_original_training_rebilling": true,
+  "previous_protocol": "artifacts/jev-reader/global-reader-policy-qa-v1/protocol-before-reload-baseline-correction.json",
+  "inspection_compute": "Read-only code/headerinspection not fully metered; not zero."
+}

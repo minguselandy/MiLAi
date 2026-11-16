@@ -1,0 +1,565 @@
+{
+  "status": "TRAIN768_REVIEW_COMPLETE;ALL_ORIGINAL2285_ATTEMPTS_COVERED;DEV48_PENDING;FULL_PLAN_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-27T00:19:59.547496+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v142.json",
+  "previous_turn_classification": "Progress: closed remaining96train states/264pairs, all original2285attempts and sixstrata; separately verified stored-record directory→currentbody positive path. Dev48 and fullplan remain.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": {
+    "development_parent": "7aece29d",
+    "candidate": "Uncommitted tested working-tree alias allocation change; freeze before real-model use.",
+    "frozen_feedback_method": "2a179b58 unchanged"
+  },
+  "active_processes": [],
+  "branch_execution": "Original train2285/dev142 attempts remain closed. No new actual model calls or outcome repair. Original unknown interrupted usage retained.",
+  "train_quality_reviews": {
+    "status": "TRAIN768_ALL_SIX_STRATA_AND_SOURCE32_64_128_REVIEWS_COMPLETE;DEV48_STILL_OPEN",
+    "reviewed_states": 768,
+    "pairs": 2266,
+    "reviewed_branch_attempts": 2285,
+    "all_original_branch_attempts_covered_once": true,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 128,
+      "laya_post": 128,
+      "fixed_context_initial": 128,
+      "fixed_context_post": 128
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 192,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 32,
+          "laya_post": 32,
+          "fixed_context_initial": 32,
+          "fixed_context_post": 32
+        },
+        "remaining_states": 0,
+        "reviewed_pairs": 562,
+        "reviewed_branch_attempts": 569
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 384,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 64,
+          "laya_post": 64,
+          "fixed_context_initial": 64,
+          "fixed_context_post": 64
+        },
+        "remaining_states": 0,
+        "reviewed_pairs": 1126,
+        "reviewed_branch_attempts": 1139
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 768,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 128,
+          "laya_post": 128,
+          "fixed_context_initial": 128,
+          "fixed_context_post": 128
+        },
+        "remaining_states": 0,
+        "reviewed_pairs": 2266,
+        "reviewed_branch_attempts": 2285
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 583,
+        "unknown": 758,
+        "tie": 489,
+        "left": 436
+      },
+      "delivery": {
+        "right": 628,
+        "unknown": 147,
+        "tie": 995,
+        "left": 496
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 734,
+        "unknown": 758,
+        "tie": 162,
+        "left": 612
+      },
+      "delivery": {
+        "right": 993,
+        "unknown": 147,
+        "tie": 293,
+        "left": 833
+      }
+    },
+    "new_chunks": [
+      "672-687",
+      "688-703",
+      "704-719",
+      "720-735",
+      "736-751",
+      "752-767"
+    ],
+    "new_states": 96,
+    "new_pairs": 264,
+    "new_cost_only_directions": 180,
+    "new_actual_branch_counts": {
+      "3": 84,
+      "2": 12
+    },
+    "new_two_branch_state_rows": [
+      681,
+      683,
+      685,
+      695,
+      697,
+      701,
+      713,
+      717,
+      721,
+      733,
+      737,
+      741
+    ],
+    "next_source_first_split": "dev",
+    "next_source_first_state": 0,
+    "dev_reviewed_states": 0,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.09728684200000001,
+    "scope": "Exact original family-order cohorts; author reviews, not independent/blind. 2285 attempts preserved, unknowns retained. Largestfullpool compilation waits for48dev reviews; no fits yet."
+  },
+  "dev_quality_review_states": 0,
+  "compiled_feedback_rows": 0,
+  "feedback_fits_started": 0,
+  "source_review_method": {
+    "new_states": 96,
+    "same_request_source_reuse": 93,
+    "new_request_or_frontier_reviews": 3,
+    "new_requests": {
+      "688": "Schiller/BrideOfMessina Weimar premiere not deathplace; currentpool no deathbody.",
+      "709": "Full23turn stage2 phoneGboardmedium, shortweekendplan, Koreanrejected; laptopUSInternationalSpanish separate. OldHosttall/noLaptop stale.",
+      "749": "KZOI licensedDakotaCityNebraska andactualDakotaCountybody8, fullchain available but countybody unacquired in branches."
+    },
+    "public_query_checks": "Actual before sources and old/current publicqueries literally compared. Full new requests/source pools read before branch outputs.",
+    "reviewer": "Current source author; not independent or blind."
+  },
+  "semantic_boundary_artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/semantic-boundaries-states-672-767-v1.json",
+  "development_change": {
+    "status": "IMPLEMENTED_AND_MECHANICALLY_VERIFIED;MODEL_EFFECT_UNTESTED",
+    "paths": [
+      "src/milai_lab/methods/query_structure.py",
+      "tests/unit/test_query_structure.py"
+    ],
+    "behavior": "Allocate new aliases while traversing actual capture/presentation order instead of opaque-source-ID order. Existing cached bindings remain unchanged; no text/role/time rewrite or fallback.",
+    "public_schema_API_permissions_canonical_changed": false,
+    "frozen_inputs_outputs_changed": false,
+    "regression_before_change": {
+      "test": "test_new_aliases_follow_capture_order_and_existing_aliases_stay_stable",
+      "exec_session": 95475,
+      "exit_code": 1,
+      "actual_ids": [
+        "e2",
+        "e1",
+        "e0"
+      ],
+      "expected_new_behavior_ids": [
+        "e0",
+        "e1",
+        "e2"
+      ],
+      "CPU": "unmeasured"
+    },
+    "validation": {
+      "query_structure_tests_passed": 25,
+      "related_regressions_passed": 89,
+      "skipped": 1,
+      "skip_reason": "Optional mempursuit dependency absent in test environment.",
+      "ruff": "passed",
+      "mypy": "passed one changed source module",
+      "package_boundary": "passed",
+      "tools_boundary": "passed; existing6grandfathered private dependencies unchanged",
+      "artifacts": [
+        "artifacts/evidence-gap-20261023/alias-order-query-tests-v1.json",
+        "artifacts/evidence-gap-20261023/alias-order-validation-v1.json"
+      ]
+    },
+    "actual_input_probe": {
+      "artifact": "artifacts/evidence-gap-20261023/alias-order-actual-input-v1/result.json",
+      "source_state": 352,
+      "sources": 20,
+      "candidate_order": "e0..e19 matches document0..19 capture presentation",
+      "information_equal_after_explicit_alias_resolution": true,
+      "original_response_not_reinterpreted": true,
+      "real_model_calls": 0,
+      "scripted_callbacks": 2,
+      "original_store_untouched": true
+    },
+    "limitations": "No demonstrated reduction in neural citation errors yet; fresh-cache alias behavior differs, legacy cached aliases retained. F3 extractive View baseline still not implemented.",
+    "checkpoint_note": "Unchanged sincev136. Prior114tests/1optional skip retained; no neuralcandidate evidence, no newtest reruns. Freeze candidate separately before newmodeluse."
+  },
+  "semantic_findings": [
+    "All768train states/2266pairs/2285attempts complete; source32=192/562/569,source64=384/1126/1139; dev48 still pending.",
+    "723actual history_1 reads directory only; read_1 then opens revision2 actual629charunit; read_13 rejected bybudget. Host exactly equals unit, nofixedotherreceipt. Prefix3READs not replayed;3newREADattempts,2prefix+1newbudgetrejections.",
+    "709allbranches stale tall/noLaptop; stage2 actual medium/USInternational/shortplanned/Koreanrejected unavailable in their deliveredoldpacket.729updatesDiscovery/relaxation partialbranch beatsstaleRAM, latestHomework rejection still unacquired.",
+    "713View user recall correction becomescompanyquote correction;721 adds Shingrix-series mandatorysequencing;733 assistantprobablecheckups becomesscheduled;741 coworkersaffirmation citedtoassistantquestion.",
+    "740 distances fromFortMitchell become countyborder/county-distance nodes; targetNewport absent.",
+    "749/757 correct county/year hits without actualsecondhop delivered; answer quality and actual proof keptseparate.",
+    "731 and759 actual evidence coverage incomparable; unknown masks retained, no syntheticunion options.",
+    "735 fullfixedlaterreceipt equalizesHostinformation; nottargetdecision-time knowledge.",
+    "Observer v1 refused native semantic_view; actualschema read, v2 preservesmaterial and verifies quotedsource, v3printer supports it. No modelretry."
+  ],
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-reviews672-767-settlement.json",
+    "settled_cpu_seconds": 11.843510084000002,
+    "settled_fields": 21,
+    "only_expected_compute_delta": true,
+    "generation_embedding_limits_match_last_closed_dev_readout": true,
+    "new_generation_requests": 0,
+    "new_known_generation_tokens": 0,
+    "new_unknown_generation_usage": 0,
+    "unmeasured": "Reading/authoring/exploration/failed semantic_view observer and settlement overhead unknown, notzero. 723reason-onlyclarification CPU includedonce in boundaryfield; snapshotcopies notextra labels/CPU.",
+    "progress_processing_cpu_pending": 0.0022343530000000014
+  },
+  "next_actions": [
+    "Source-first review dev0..47 across8originalfamilies/6strata; preserve originalinterrupted arm35 andallotherfailures, no reruns.",
+    "Compile largesttrain/devpool once, derive source32/64 byoriginalfamilyorder, execute9×192updatefits fromcommonupdate262 with savedreload/actualHost/oldskills/cost.",
+    "F1/F2/F3/compact/data/quality/seeds/autonomousHost/lifecycle/external/fourfigures remain; no completionclaim fromreviewmilestone."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "verification": [
+    "All original2285casepaths equal union of reviewed pair endpoints, eachbelongsone state; all768selected captures literalmatched; originalHostfailures answerunknown.",
+    "All non-tie originalquality labels unchangedbyresourcerule. New96states have84threebranch+12twobranch states,264pairs,180cost-onlydirections.",
+    "SixliteralView/source boundaryentries and exact currentrecord723 actualsource/unit/receipt/answer verified; labels/resourcesunchanged by723reasonclarification.",
+    "21explicitdisjoint fields settledonce withnoneuraljob; allotherledgerfields unchanged andgeneration/embedding/limits matchterminaldevreadout.",
+    "Runtime/testsource unchanged thisbatch; previous114passed/1optionalskip not rerun. No schema/API/permission/Canonical changes."
+  ],
+  "prior_quality_refinement": {
+    "artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/quality-refinement-453-before-resource-v1.json",
+    "state": 453,
+    "targets": 2,
+    "from": "delivery left",
+    "to": "delivery tie",
+    "timing": "Beforefinalresourceprocessing; no frozenmodeloutputs/compiledtargets changed",
+    "initial_author_snapshot_retained": true
+  },
+  "view_boundary_audit": {
+    "literal_entries": 6,
+    "distinct_states": 5,
+    "opened_binding_paths_resolved": true,
+    "native_semantic_view_preserved": true,
+    "positive_stored_record723": {
+      "state_row": 723,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-2094/call-02752",
+      "actual_unit_characters": 629,
+      "actual_revision": 2,
+      "literal_unit_evidence_answer_equal": true,
+      "actual_request_equals_native_packet": true,
+      "fixed_other_receipts": 0,
+      "restored_step": 5,
+      "original_prefix_reads": 3,
+      "prefix_reexecuted": false,
+      "new_READ_attempts": 3,
+      "prefix_material_rejections": 2,
+      "new_material_rejections": 1,
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-2094/call-02752/runtime/banks/c0363b6d-9a6f-479e-890b-cb5e98de0b69/4333ec39-3120-49dd-b2e8-16de16c48622-trace-0.jsonl",
+      "new_operations": [
+        {
+          "step": 5,
+          "selected": "history_1",
+          "result": {
+            "ok": true,
+            "status": "history_directory",
+            "id": "f48dfe4a-447f-5e72-a849-468a6f466e63",
+            "current_revision_at_snapshot": 2,
+            "revision_count": 2,
+            "revisions": [
+              1,
+              2
+            ],
+            "start": 0,
+            "omitted_count": 0,
+            "index_kind": "stored_history",
+            "source_ref": null,
+            "source_revision": null,
+            "snapshot_id": "history-7673c755-663b-412a-86fe-db2e499d2f5c",
+            "next_cursor": null,
+            "content_verification": "unchecked",
+            "business_authority": false,
+            "body_delivered": false
+          }
+        },
+        {
+          "step": 6,
+          "selected": "read_1",
+          "result": {
+            "ok": true,
+            "status": "opened",
+            "index": 1,
+            "visibility": null
+          }
+        },
+        {
+          "step": 7,
+          "selected": "read_13",
+          "result": {
+            "ok": false,
+            "status": "material_budget_exhausted",
+            "index": 13,
+            "visibility": null
+          }
+        }
+      ],
+      "meaning": "Actual closed branch directory→currentbody→budgetreject yields exact current text. No synthetic counterfactual success; directory alone delivers no body."
+    },
+    "neural_alias_candidate_used": false,
+    "frozen_response_reinterpreted_under_new_aliases": false
+  },
+  "prior_rejected_refresh571": {
+    "state_row": 571,
+    "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1655/call-01888",
+    "trace": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1655/call-01888/runtime/banks/87abf1ee-5f18-47f3-bb15-fda8e6c4cf7d/498a5720-9a2c-4713-9976-772b18e18bdd-trace-0.jsonl",
+    "cache_rows": 0,
+    "read_operations": 0,
+    "actual_target_packet": [],
+    "native_tool_status": "COMPLETED",
+    "meaning": "Rejectedrefresh is notfailedwholetoolreplay. No budgetdeliveryrejection andno persistedView; twoSEARCH thenhandoff. Originalmodelattempt notrerun."
+  },
+  "prior_record575_menu": {
+    "candidate_index": 1,
+    "revision": 2,
+    "unit_characters": 292,
+    "available_after_search_steps": [
+      1,
+      2
+    ],
+    "available_actions": [
+      "read_1",
+      "history_1"
+    ],
+    "actual_choices": [
+      "search_0_8",
+      "search_0_16",
+      "context_0",
+      "handoff"
+    ],
+    "counterfactual_read1_executed": false,
+    "unexecuted_option_labels_added": false,
+    "interpretation": "Menuavailability separatescoverage fromactualchoice. NeedrealcounterfactualHost runbeforeclaimingchoicewouldsolve; betterViewtextalone cannotproveunopenedstoredrecordretrieval."
+  },
+  "record595_history_menu": {
+    "requested_revision": 1,
+    "current_candidate_revision": 2,
+    "actual_first_unit_characters": 355,
+    "available_history_action": "history_1",
+    "available_after_steps": [
+      1,
+      2
+    ],
+    "actual_choices": [
+      "search_0_8",
+      "search_0_16",
+      "context_0",
+      "handoff"
+    ],
+    "counterfactual_history_read_executed": false,
+    "unexecuted_labels_added": false
+  },
+  "source32_review_status": {
+    "selected_families": 32,
+    "states": 192,
+    "pairs": 562,
+    "branch_attempts": 569,
+    "all_six_strata_complete": true,
+    "compiled_or_fitted": false,
+    "scope": "Allsource32/64/128trainreviews complete; dev48 stillopen. Largestpoolonce compilation andninefits notstarted."
+  },
+  "new_option_counts": {
+    "states": 96,
+    "three_branch_states": 84,
+    "two_branch_states": 12,
+    "two_branch_state_rows": [
+      681,
+      683,
+      685,
+      695,
+      697,
+      701,
+      713,
+      717,
+      721,
+      733,
+      737,
+      741
+    ],
+    "pairs": 264,
+    "unexecuted_option_labels_added": false
+  },
+  "same_before_handoff640": {
+    "restored_step": 4,
+    "original_prefix_reads": 2,
+    "prefix_reexecuted": false,
+    "max_return_tokens": 2048,
+    "new_reads": 0,
+    "new_retrieval_generation_requests": 0,
+    "new_protocol_operations": [
+      1,
+      1,
+      0
+    ],
+    "result": "Actualold/correction/unionpackets andHost74/72/72background recorded; diagnosticcase notfullF1devexperiment."
+  },
+  "author_source_reason_correction638": {
+    "artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/source-reason-correction-638-v1.json",
+    "labels_and_resource_fields_changed": false,
+    "initial_quality_and_final_snapshots_retained": true,
+    "correction": "n3e8 mapsJijEnIk song; n4e13 mapsNBA list. Initialexplanation misidentifiedwhichnode/bodywasmisbound."
+  },
+  "source_family_review_status": {
+    "32": {
+      "selected_states": 192,
+      "reviewed_states": 192,
+      "reviewed_strata": {
+        "rules_initial": 32,
+        "rules_post": 32,
+        "laya_initial": 32,
+        "laya_post": 32,
+        "fixed_context_initial": 32,
+        "fixed_context_post": 32
+      },
+      "remaining_states": 0,
+      "reviewed_pairs": 562,
+      "reviewed_branch_attempts": 569,
+      "compiled_or_fitted": false
+    },
+    "64": {
+      "selected_states": 384,
+      "reviewed_states": 384,
+      "reviewed_strata": {
+        "rules_initial": 64,
+        "rules_post": 64,
+        "laya_initial": 64,
+        "laya_post": 64,
+        "fixed_context_initial": 64,
+        "fixed_context_post": 64
+      },
+      "remaining_states": 0,
+      "reviewed_pairs": 1126,
+      "reviewed_branch_attempts": 1139,
+      "compiled_or_fitted": false
+    },
+    "128": {
+      "selected_states": 768,
+      "reviewed_states": 768,
+      "reviewed_strata": {
+        "rules_initial": 128,
+        "rules_post": 128,
+        "laya_initial": 128,
+        "laya_post": 128,
+        "fixed_context_initial": 128,
+        "fixed_context_post": 128
+      },
+      "remaining_states": 0,
+      "reviewed_pairs": 2266,
+      "reviewed_branch_attempts": 2285,
+      "compiled_or_fitted": false
+    }
+  },
+  "prior_rejected_refreshes580_598": [
+    {
+      "state": 580,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1682/call-02227",
+      "target_call_id": "chatcmpl-a84495579f352b26:tool:0",
+      "cache_rows": 0,
+      "read_operations": 0,
+      "termination_reason": "intervention_handoff",
+      "selected_operations": [
+        "refresh_view",
+        "search_0_8",
+        "search_0_16"
+      ],
+      "excluded_earlier_call_ids": [],
+      "whole_tool_status": "COMPLETED"
+    },
+    {
+      "state": 598,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1736/call-02864",
+      "target_call_id": "chatcmpl-92a3d474360a5261:tool:0",
+      "cache_rows": 0,
+      "read_operations": 0,
+      "termination_reason": "budget_exhausted",
+      "selected_operations": [
+        "refresh_view",
+        "search_0_8"
+      ],
+      "excluded_earlier_call_ids": [
+        "chatcmpl-b633e789482abe98:tool:0"
+      ],
+      "whole_tool_status": "COMPLETED"
+    }
+  ],
+  "prior_refresh_mechanics623_626_635_655": [
+    {
+      "state_row": 623,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1811/call-03870",
+      "restored_control_step": 0,
+      "cache_nodes": 0,
+      "cache_rules": 0,
+      "new_reads": 0,
+      "prefix_material_rejections": 0,
+      "new_material_rejections": 0,
+      "final_packet_kinds": []
+    },
+    {
+      "state_row": 626,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1820/call-03994",
+      "restored_control_step": 0,
+      "cache_nodes": 0,
+      "cache_rules": 0,
+      "new_reads": 0,
+      "prefix_material_rejections": 0,
+      "new_material_rejections": 0,
+      "final_packet_kinds": []
+    },
+    {
+      "state_row": 635,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1847/call-04311",
+      "restored_control_step": 0,
+      "cache_nodes": 8,
+      "cache_rules": 0,
+      "new_reads": 0,
+      "prefix_material_rejections": 0,
+      "new_material_rejections": 1,
+      "final_packet_kinds": []
+    },
+    {
+      "state_row": 655,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1904/call-00478",
+      "restored_control_step": 4,
+      "cache_nodes": 11,
+      "cache_rules": 0,
+      "new_reads": 0,
+      "prefix_material_rejections": 1,
+      "new_material_rejections": 1,
+      "final_packet_kinds": [
+        "original_source"
+      ]
+    }
+  ]
+}

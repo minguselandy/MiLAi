@@ -1,0 +1,22 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "plan": "artifacts/host-intent-retrieval-v3/view-v4-d-plan-v2.json",
+  "source_version": "11798c8d",
+  "arms": 10,
+  "positions_per_arm": 64,
+  "total_positions": 640,
+  "split": "dev",
+  "source_groups": 8,
+  "old_plan_preserved": "artifacts/host-intent-retrieval-v3/view-v4-d-plan-v1.json",
+  "change": "Add simple View cache and MemPursuit before any D result; all arms use one common core source. Prespecified final10 model weights, original Host prompt and own cold banks.",
+  "parameters": {
+    "return_tokens": 2048,
+    "control_steps": 8,
+    "cache_scope_overlap": 0.35,
+    "selector_reads": 4,
+    "selector_adaptive": true
+  },
+  "required_next": "Wait for all persisted checkpoint evaluations to close; execute separately from STATE pilot and other model jobs.",
+  "test_scope": "Exposed internal development; not independent confirmation.",
+  "semantic_results_available": false
+}

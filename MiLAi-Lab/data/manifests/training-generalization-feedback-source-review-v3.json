@@ -1,0 +1,130 @@
+{
+  "status": "PARTIAL_PUBLIC_SOURCE_REVIEW_BEFORE_NEW_FEEDBACK_OUTPUTS",
+  "observed_at": "2026-10-22T06:13:07.859678+00:00",
+  "reviewed_families": 10,
+  "declared_training_pool_families": 128,
+  "source_units_read": 230,
+  "public_requests": 20,
+  "reviews": [
+    {
+      "family": "memops_B25",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_B25.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-004.json",
+      "source_units": 23,
+      "public_requests": 2
+    },
+    {
+      "family": "memops_B21",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_B21.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-005.json",
+      "source_units": 23,
+      "public_requests": 2
+    },
+    {
+      "family": "memops_E11",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_E11.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-006.json",
+      "source_units": 23,
+      "public_requests": 2,
+      "prefix_sizes": [
+        7,
+        23
+      ]
+    },
+    {
+      "family": "memops_C29",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_C29.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-007.json",
+      "source_units": 23,
+      "public_requests": 2,
+      "prefix_sizes": [
+        15,
+        23
+      ]
+    },
+    {
+      "family": "memops_A14",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_A14.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-008.json",
+      "source_units": 23,
+      "public_requests": 2,
+      "prefix_sizes": [
+        7,
+        23
+      ]
+    },
+    {
+      "family": "memops_E07",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_E07.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-009.json",
+      "source_units": 23,
+      "public_requests": 2,
+      "prefix_sizes": [
+        7,
+        23
+      ]
+    },
+    {
+      "family": "memops_F14",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_F14.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-010.json",
+      "source_units": 23,
+      "public_requests": 2,
+      "prefix_sizes": [
+        7,
+        23
+      ]
+    },
+    {
+      "family": "memops_A33",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_A33.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-011.json",
+      "source_units": 23,
+      "public_requests": 2,
+      "prefix_sizes": [
+        7,
+        23
+      ]
+    },
+    {
+      "family": "memops_C05",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_C05.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-012.json",
+      "source_units": 23,
+      "public_requests": 2,
+      "prefix_sizes": [
+        7,
+        23
+      ]
+    },
+    {
+      "family": "memops_B01",
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/memops_B01.json",
+      "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-013.json",
+      "source_units": 23,
+      "public_requests": 2,
+      "prefix_sizes": [
+        7,
+        23
+      ]
+    }
+  ],
+  "selection_scope": "Next four already frozen non-anchor history families in batches010–013. Review scheduling only;source/collector/quota/order/split unchanged.",
+  "exposure": "Existing exposed training histories,not fresh or held-out evidence. Earlier source reviews remain retained;this is a new public-prefix review record.",
+  "limitations": "One author. Only public material before collection is reviewed. Actual autonomous requests,received evidence,generated Views,reached states,branches and conditional Host answers still require source-grounded review after execution. Continuous Host/tool history may add material not present in these source prefixes.",
+  "no_model_or_action_quality_claim": true,
+  "new_training_labels": 0,
+  "new_model_calls": 0,
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "compute_scope": "New four-note saving/literal/reference checks only,not previous phase CPU. Semantic reading,authoring,inspection and final I/O unknown,not0.",
+  "compute": {
+    "cpu_seconds": 0.0045440469999999955,
+    "wall_seconds": 0.004547606222331524
+  },
+  "previous": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v2.json",
+  "newly_reviewed_families": 4,
+  "new_source_units_read": 92,
+  "new_public_requests": 8,
+  "prefix_scope": "Each of these four public prefixes begins with7sources. All four later prefixes contain23sources. Earlier notes preserved."
+}

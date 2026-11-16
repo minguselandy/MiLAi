@@ -1,0 +1,103 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "ab-future-exception-correction",
+      "owner": "method-host-ab",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "occurred_at": "2026-06-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-01T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-event-0",
+          "message_id": "source",
+          "content": "请记住这份协作备忘：A项目一般由林舒联络，B项目一般由沈瑜联络。向外部发任何项目材料前，都必须先得到我本人明确确认；记录联系人本身不代表可以发送。另记一个无关的个人偏好：我喝乌龙茶，不加糖。"
+        },
+        {
+          "occurred_at": "2026-06-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-01T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-query-0",
+          "message_id": "query",
+          "content": "只查询，不保存：A、B的一般联系人分别是谁？外发材料需要什么条件？我的饮茶偏好是什么？"
+        },
+        {
+          "occurred_at": "2026-06-10T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-10T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-event-1",
+          "message_id": "source",
+          "content": "已确认的排班通告：2026年6月15日起，A项目的一般联络改由陈丹负责；15日之前仍由林舒负责。B项目的安排、外发确认要求和我的饮茶偏好均不变。请更新备忘。"
+        },
+        {
+          "occurred_at": "2026-06-10T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-10T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-query-1",
+          "message_id": "query",
+          "content": "只查询，不保存：按已确认的通告，6月14日与6月16日A的一般联系人分别是谁？B项目和饮茶偏好有没有改变？"
+        },
+        {
+          "occurred_at": "2026-06-11T10:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-11T10:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-event-2",
+          "message_id": "source",
+          "content": "请记下临时安排：只在2026年6月12日的临时展台开放期间，A项目的对外材料联络由曾蕊代办。其他日期和A的内部联络仍按一般排班；B不变。即使曾蕊代办，对外发送仍须先得到我本人明确确认。"
+        },
+        {
+          "occurred_at": "2026-06-11T10:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-11T10:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-query-2",
+          "message_id": "query",
+          "content": "只查询，不保存：6月12日临时展台开放时，A的对外材料联络与内部联络分别找谁？曾蕊代办是否免去本人确认？"
+        },
+        {
+          "occurred_at": "2026-06-12T14:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-12T14:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-event-3",
+          "message_id": "source",
+          "content": "临时展台已提前撤下，曾蕊代办A项目对外材料联络的临时安排现在取消，恢复一般排班。6月15日起陈丹负责的通告仍有效。外发材料的本人明确确认要求不变。请撤回这个临时例外。"
+        },
+        {
+          "occurred_at": "2026-06-12T14:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-12T14:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-query-3",
+          "message_id": "query",
+          "content": "只查询，不保存：现在A项目的联络恢复给谁，临时安排为什么取消？6月16日的一般联系人与外发确认要求怎样？"
+        },
+        {
+          "occurred_at": "2026-06-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-14T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-event-4",
+          "message_id": "source",
+          "content": "请纠正我最初对B项目的记录：B项目从一开始的一般联系人就是许安，之前写成沈瑜是记录错误，不是今天换了联系人。A项目的日期排班、已经撤回的临时安排以及饮茶偏好均不变。"
+        },
+        {
+          "occurred_at": "2026-06-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2026-06-14T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai",
+          "session_id": "ab-query-4",
+          "message_id": "query",
+          "content": "只查询，不保存：按纠错后的信息，B现在以及6月2日的一般联系人是谁？最初实际保存的B联系人又是谁？A在6月14日和6月16日分别由谁负责？曾蕊的临时安排现在还有效吗？外发条件和饮茶偏好是什么？"
+        }
+      ]
+    }
+  ]
+}

@@ -8,19 +8,20 @@ not concurrently mutate this isolated namespace. No cross-system exactly-once.
 
 from __future__ import annotations
 
+import copy
 import fcntl
 import json
 import threading
 import time
-import unicodedata
 import uuid
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
 from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Literal, cast
 
+from langgraph.store.base import GetOp, Item
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.contracts.memory import (
@@ -46,7 +47,16 @@ from milai_lab.memory.observation import (
 from milai_lab.memory.observation import (
     observation_view as field_observation_view,
 )
-from milai_lab.memory.retrieval import SemanticRetriever, semantic_text
+from milai_lab.memory.retrieval import (
+    SemanticRetriever,
+    SourceSearchCache,
+    flat_bm25_rank,
+    raw_exchange_units,
+    semantic_text,
+)
+from milai_lab.memory.retrieval import _lexical_tokens as _lexical_tokens
+
+_STORE_SCAN_PAGE_SIZE = 512
 
 
 def _json(value: Any) -> str:
@@ -77,54 +87,6 @@ def _receipt_json(content: str) -> Any:
     return json.loads(content, object_pairs_hook=unique_object, parse_constant=invalid_constant)
 
 
-def _lexical_tokens(text: str, *, include_cjk_unigrams: bool = False) -> list[str]:
-    """Unicode words plus overlapping Han/kana/Hangul bigrams, without a dictionary.
-
-    Multi-character CJK query runs use bigrams rather than common individual
-    characters. Candidate unigrams also allow an explicitly single-character
-    query. Canonical normalization and case folding apply only to matching;
-    original queries and stored bodies are untouched.
-    """
-    tokens: list[str] = []
-    run: list[str] = []
-    cjk = False
-
-    def flush() -> None:
-        if not run:
-            return
-        if cjk:
-            if include_cjk_unigrams or len(run) == 1:
-                tokens.extend(run)
-            tokens.extend(run[index] + run[index + 1] for index in range(len(run) - 1))
-        else:
-            tokens.append("".join(run))
-        run.clear()
-
-    for character in unicodedata.normalize("NFC", text.casefold()):
-        category = unicodedata.category(character)[0]
-        if category in {"L", "N"}:
-            is_cjk = unicodedata.name(character, "").startswith(
-                (
-                    "CJK UNIFIED",
-                    "CJK COMPATIBILITY",
-                    "HIRAGANA",
-                    "KATAKANA",
-                    "HALFWIDTH KATAKANA",
-                    "HANGUL",
-                )
-            )
-            if run and is_cjk != cjk:
-                flush()
-            cjk = is_cjk
-            run.append(character)
-        elif category == "M" and run:
-            run.append(character)
-        else:
-            flush()
-    flush()
-    return tokens
-
-
 class MemoryService:
     """One owner, one Store; refs and user events are captured only by trusted code."""
 
@@ -151,6 +113,7 @@ class MemoryService:
         functional_contract: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
         semantic_retriever: SemanticRetriever | None = None,
+        source_search_cache: SourceSearchCache | None = None,
         memory_profile: str = "ordinary",
         memory_ranking: str = "dense",
         clock: Callable[[], datetime] | None = None,
@@ -175,6 +138,7 @@ class MemoryService:
             raise ValueError("V13_MEMORY_OWNER_NAMESPACE_MISMATCH")
         self.store, self.namespace, self.owner = store, namespace, owner
         self.semantic_retriever = semantic_retriever
+        self.source_search_cache = source_search_cache
         self._thread_lock = threading.RLock()
         self._lock_depth = 0
         self.memory_profile = memory_profile
@@ -689,6 +653,29 @@ class MemoryService:
             result.append(row)
         return result
 
+    def _backlink_record_ids(
+        self, source_refs: list[str], *, limit_per_source: int,
+    ) -> dict[str, list[str]]:
+        """One authoritative history scan for many source-to-record lookups.
+
+        Keep the public single-source lookup's sorted-ID cap before checking a
+        record's current readability. No persistent content index is introduced.
+        """
+        with self._locked():
+            visible = {ref for ref in source_refs if self.source(ref) is not None}
+            if not visible:
+                return {}
+            matches: dict[str, list[str]] = {ref: [] for ref in visible}
+            for row in self._rows(self.namespace):
+                metadata = row["value"].get("_v13_1", {})
+                if metadata.get("owner") != self.owner:
+                    continue
+                referenced = {ref for version in metadata["history"]
+                              for ref in self._version_source_refs(version)}
+                for ref in referenced & visible:
+                    matches[ref].append(row["id"])
+            return {ref: sorted(ids)[:limit_per_source] for ref, ids in matches.items()}
+
     def history_index(
         self,
         memory_id: str,
@@ -696,6 +683,7 @@ class MemoryService:
         cursor: str | None = None,
         limit: int = 6,
         source_ref: str | None = None,
+        transient_snapshots: dict[str, dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Enumerate actual owner-bound stored revisions; this grants no write authority."""
         if type(limit) is not int or not 1 <= limit <= 6:
@@ -747,24 +735,31 @@ class MemoryService:
                 "revisions": revisions,
                 "current_revision": metadata["revision"],
             }
-            self.store.put(snapshot_ns, snapshot_id, snapshot, index=False)
+            if transient_snapshots is None:
+                self.store.put(snapshot_ns, snapshot_id, snapshot, index=False)
+            else:
+                transient_snapshots[snapshot_id] = copy.deepcopy(snapshot)
         else:
             snapshot_id, separator, offset = cursor.rpartition(":")
-            stored = self.store.get(snapshot_ns, snapshot_id)
+            if transient_snapshots is None:
+                stored = self.store.get(snapshot_ns, snapshot_id)
+                saved = stored.value if stored is not None else None
+            else:
+                saved = transient_snapshots.get(snapshot_id)
             if (
                 separator != ":"
                 or not offset.isdecimal()
-                or stored is None
-                or stored.value.get("owner") != self.owner
-                or stored.value.get("record_id") != memory_id
-                or stored.value.get("source_ref") != source_ref
+                or saved is None
+                or saved.get("owner") != self.owner
+                or saved.get("record_id") != memory_id
+                or saved.get("source_ref") != source_ref
             ):
                 reject(
                     "V13_HISTORY_CURSOR_CHANGED_OR_INVALID",
                     "memory_service",
                     self.tool_read_feedback,
                 )
-            snapshot = stored.value
+            snapshot = saved
             revisions = snapshot["revisions"]
             # Later appends do not alter the issued history page. Revocation still applies.
             available = {v["revision"] for v in versions}
@@ -1012,6 +1007,8 @@ class MemoryService:
             adapters_ns = (*self.namespace, "observation_adapters")
             adapter = self.store.get(adapters_ns, profile_version)
             definition = json.loads(_json(asdict(profile)))
+            if not profile.unstructured_paths:
+                definition.pop("unstructured_paths")
             if adapter is not None and adapter.value["definition"] != definition:
                 return {
                     "ok": False,
@@ -1318,17 +1315,10 @@ class MemoryService:
                 return str(prior.value["source_ref"])
             # Keep IDs issued before this index existed. Do not reconstruct an
             # ID from content or reinterpret old digest-shaped IDs.
-            existing = next(
-                (
-                    row["id"]
-                    for row in self._rows(self.sources_namespace)
-                    if row["value"].get("owner") == self.owner
-                    and row["value"].get("session") == session
-                    and row["value"].get("role") == role
-                    and row["value"].get("capture_key") == event_key
-                ),
-                None,
-            )
+            matches = self.store.search(self.sources_namespace, filter={
+                "owner": self.owner, "session": session, "role": role, "capture_key": event_key,
+            }, limit=1)
+            existing = matches[0].key if matches else None
             source_ref = existing or "source-" + str(uuid.uuid4())
             self.store.put(ns, key, {"source_ref": source_ref}, index=False)
             return str(source_ref)
@@ -1336,8 +1326,13 @@ class MemoryService:
     def capture_user(
         self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None,
         calendar_context: str | None = None,
+        capture_context: str | None = None,
     ) -> dict[str, Any]:
-        """Capture an actual incoming user event, not a model-selected source body."""
+        """Capture an incoming event with optional trusted execution context.
+
+        Context identifies the capture path, not whether a user's words are facts.
+        Ordinary user messages retain their default identity and original content.
+        """
         return self._capture(
             session,
             event_key,
@@ -1347,6 +1342,7 @@ class MemoryService:
             None,
             occurred_at=occurred_at,
             calendar_context=calendar_context,
+            capture_context=capture_context,
         )
 
     def capture_assistant(
@@ -1411,6 +1407,7 @@ class MemoryService:
         *,
         occurred_at: str | None = None,
         calendar_context: str | None = None,
+        capture_context: str | None = None,
     ) -> dict[str, Any]:
         if occurred_at is not None and (
             not isinstance(occurred_at, str) or not occurred_at.strip()
@@ -1470,12 +1467,17 @@ class MemoryService:
             event["occurred_at"] = occurred_at
         if calendar_context is not None:
             event["calendar_context"] = calendar_context
+        if capture_context is not None:
+            event["capture_context"] = capture_context
         if self.memory_profile == "unified_v1":
             event["episode_id"] = reference_key([session, event_key, role])
         with self._locked():
             prior = self.store.get(self.sources_namespace, event_id)
             formed = False
             if prior is not None:
+                if (capture_context is not None
+                        and prior.value.get("capture_context") != capture_context):
+                    raise ValueError("V13_SOURCE_CAPTURE_CONTEXT_CHANGED")
                 if occurred_at is not None and prior.value.get("occurred_at") != occurred_at:
                     raise ValueError("V13_SOURCE_OCCURRENCE_TIME_CHANGED")
                 if (calendar_context is not None
@@ -1706,11 +1708,13 @@ class MemoryService:
             if candidate_handle is not None:
                 bound = self.candidate(candidate_handle)
                 if bound is None:
-                    return {"ok": False, "status": "rejected", "reason": "read_handle_invalid"}
+                    return {"ok": False, "status": "rejected", "reason": "read_handle_invalid",
+                            "effect": "none", "phase": "pre_mutation_contract"}
                 item = self.store.get(self.namespace, bound["record_id"])
                 metadata = item.value["_v13_1"] if item is not None else None
                 if metadata is None or metadata["revision"] != bound["revision"]:
-                    return {"ok": False, "status": "rejected", "reason": "revision_conflict"}
+                    return {"ok": False, "status": "rejected", "reason": "revision_conflict",
+                            "effect": "none", "phase": "pre_mutation_contract"}
                 refs = list(
                     dict.fromkeys(
                         ref
@@ -1807,35 +1811,107 @@ class MemoryService:
             return receipt
 
     def _rows(self, namespace: tuple[str, ...]) -> list[dict[str, Any]]:
+        # An SDK prefix search also materializes every descendant namespace.
+        # Discover exact namespace membership before fetching its values; this
+        # avoids scanning capture/episode journals for an empty record namespace.
+        namespace_offset = 0
+        while True:
+            names = self.store.list_namespaces(prefix=namespace, limit=100, offset=namespace_offset)
+            if namespace in names:
+                break
+            if len(names) < 100:
+                return []
+            namespace_offset += len(names)
         rows: list[dict[str, Any]] = []
         offset = 0
         while True:
-            page = self.store.search(namespace, limit=100, offset=offset)
+            page = self.store.search(namespace, limit=_STORE_SCAN_PAGE_SIZE, offset=offset)
             # Store namespace searches are prefix searches, not owner exact scans.
             rows.extend(
                 {"id": item.key, "value": item.value}
                 for item in page
                 if item.namespace == namespace
             )
-            if len(page) < 100:
+            if len(page) < _STORE_SCAN_PAGE_SIZE:
                 return rows
             offset += len(page)
 
+    def _visible_sources(self, session: str | None = None) -> list[dict[str, Any]]:
+        """Only Source visibility and owner scope; no semantic formation history."""
+        with self._locked():
+            events = self._visible_source_rows(self._rows(self.sources_namespace))
+            if session is not None:
+                events = [event for event in events if event["session"] == session]
+        return sorted(events, key=lambda event: (event["observed_at"], event["event_id"]))
+
+    def _visible_source_rows(self, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Validate captured rows under the caller's service lock, in bounded batches.
+
+        Search already fetched the immutable bodies. Reuse those exact values and
+        batch only their capture confirmations, keeping the single-source checks.
+        """
+        from milai_lab.memory.functional_state import namespace, validate_source, visibility
+
+        hidden = (set(visibility(self)["sources"])
+                  if self.functional_contract == "functional_v1" else set())
+        selected = [row for row in rows if row["id"] not in self._uncertain_captures
+                    and row["id"] not in hidden and row["value"].get("owner") == self.owner]
+        if self.functional_contract != "functional_v1":
+            return [row["value"] for row in selected]
+        events = []
+        refresh = (self.store.ttl_config or {}).get("refresh_on_read", True)
+        for offset in range(0, len(selected), _STORE_SCAN_PAGE_SIZE):
+            group = selected[offset:offset + _STORE_SCAN_PAGE_SIZE]
+            confirmations = cast(list[Item | None], self.store.batch([
+                GetOp(namespace(self), "capture:" + row["id"], refresh) for row in group]))
+            for row, confirmation in zip(group, confirmations, strict=True):
+                ref, event = row["id"], row["value"]
+                validate_source(ref, event, self.owner)
+                if confirmation is None:
+                    continue
+                if confirmation.value.get("source_ref") != ref or confirmation.value.get(
+                    "source_revision", 1
+                ) != event.get("source_revision", 1):
+                    raise FunctionalIntegrityError("V13_5_SOURCE_CAPTURE_CONFIRMATION_CHANGED")
+                events.append(event)
+        return events
+
     def sources(self, session: str | None = None) -> list[dict[str, Any]]:
         with self._locked():
-            records = self._rows(self.namespace)
-            result = []
-            for row in self._rows(self.sources_namespace):
-                event = self.source(row["id"])
-                if event is None or (session is not None and event["session"] != session):
-                    continue
-                formed = any(
-                    row["id"] in self._version_source_refs(version)
-                    for record in records
-                    for version in record["value"].get("_v13_1", {}).get("history", [])
-                )
-                result.append({**event, "formation_status": "formed" if formed else "pending"})
-            return sorted(result, key=lambda event: (event["observed_at"], event["event_id"]))
+            formed = {ref for record in self._rows(self.namespace)
+                      for version in record["value"].get("_v13_1", {}).get("history", [])
+                      for ref in self._version_source_refs(version)}
+            return [{**event, "formation_status":
+                     "formed" if event["event_id"] in formed else "pending"}
+                    for event in self._visible_sources(session)]
+
+    def source_arrivals(self, since: str | None = None) -> dict[str, Any]:
+        """Read visible arrivals at/after a capture-time boundary, without formation scans.
+
+        The boundary is inclusive: callers retain the exact IDs already seen at
+        that timestamp, so equal capture clocks cannot silently lose an arrival.
+        Store filtering limits materialization; SQLite's internal scan is unmeasured.
+        """
+        with self._locked():
+            predicate: dict[str, Any] = {"owner": self.owner}
+            if since is not None:
+                predicate["observed_at"] = {"$gte": since}
+            events: list[dict[str, Any]] = []
+            offset, materialized = 0, 0
+            while True:
+                page = self.store.search(self.sources_namespace, filter=predicate,
+                                         limit=_STORE_SCAN_PAGE_SIZE, offset=offset)
+                materialized += len(page)
+                events.extend(self._visible_source_rows([
+                    {"id": item.key, "value": item.value} for item in page
+                    if item.namespace == self.sources_namespace]))
+                if len(page) < _STORE_SCAN_PAGE_SIZE:
+                    break
+                offset += len(page)
+            return {"events": sorted(events, key=lambda e: (e["observed_at"], e["event_id"])),
+                    "rows_materialized": materialized, "since_inclusive": since,
+                    "query": "Store owner/time filter; no semantic-formation enumeration",
+                    "database_rows_scanned": None}
 
     def episodes(
         self,
@@ -1850,6 +1926,203 @@ class MemoryService:
         return EpisodeIndex(self).select(
             episode_ids=episode_ids, pending_only=pending_only, limit=limit
         )
+
+    def read_source_materials(
+        self, materials: Sequence[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
+        """Reopen selected original ranges under current Source visibility.
+
+        Cached text is never evidence here. Overlap within each item is merged
+        by Source identity/version; separate sources with identical wording stay
+        separate. Item order/identity stays fixed, including empty unavailable
+        markers. No operation credential is issued by this read-only material.
+        """
+        from milai_lab.memory.functional_state import body_text
+        from milai_lab.memory.reader_projection import merge_source_ranges
+
+        result = []
+        with self._locked():
+            for material in materials:
+                if material.get("kind") != "original_source":
+                    result.append(copy.deepcopy(material))
+                    continue
+                spans = merge_source_ranges([
+                    *material["source_ranges"], *material.get("unavailable_source_ranges", []),
+                ])
+                turns, actual_ranges, unavailable = [], [], []
+                partial = False
+                for span in spans:
+                    event = self.source(span["source_ref"])
+                    if event is None or event.get("source_revision", 1) != span["source_revision"]:
+                        unavailable.append(dict(span))
+                        continue
+                    body = body_text(event)
+                    start, end = span["start"], span["end"]
+                    if not 0 <= start <= end <= len(body):
+                        raise FunctionalRejection("SOURCE_MATERIAL_RANGE_UNAVAILABLE")
+                    partial = partial or start != 0 or end != len(body)
+                    turn = {
+                        "source_ref": event["event_id"], "source_revision": span["source_revision"],
+                        "session_id": event["session"], "role": event["role"],
+                        "origin": event["origin"], "content": body[start:end],
+                        "timestamp": event.get("occurred_at", event["observed_at"]),
+                        "observed_at": event["observed_at"],
+                        "occurred_at": event.get("occurred_at"),
+                        "range": [start, end], "source_total_codepoints": len(body),
+                    }
+                    if "calendar_context" in event:
+                        turn["calendar_context"] = event["calendar_context"]
+                    if "capture_context" in event:
+                        turn["capture_context"] = event["capture_context"]
+                    turns.append(turn)
+                    actual_ranges.append(dict(span))
+                result.append({
+                    "kind": "original_source", "provenance": "original_exchange",
+                    "id": material["id"], "session_id": material["session_id"],
+                    "date": turns[0]["timestamp"] if turns else material.get("date"),
+                    "turn_range": material["turn_range"],
+                    "text": json.dumps(turns, ensure_ascii=False),
+                    "source_ranges": actual_ranges, "unavailable_source_ranges": unavailable,
+                    "score": material.get("score"), "truncated": partial or bool(unavailable),
+                    "coverage": "selected_visible_source_ranges", "body_delivered": bool(turns),
+                    "visibility": "partial" if turns and unavailable else
+                                  "visible" if turns else "unavailable",
+                })
+        return result
+
+    def search_sources(
+        self, query: str, limit: int = 20, *,
+        granularity: Literal["session", "turn"] = "session",
+        tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+        include_scope: bool = False,
+        source_refs: Sequence[str] | None = None,
+        excluded_source_refs: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Rank visible original text without traversing semantic formation history.
+
+        Source storage, rather than semantic formation or Episode descriptions,
+        owns the pool. An optional ordered Source allowlist is an arrival-prefix
+        boundary, never an effective-date test. Without one, the pool is exactly
+        the currently captured visible Sources in this owner bank. Explicit
+        exclusions are applied before corpus assembly and ranking, not afterward.
+        """
+        from milai_lab.memory.functional_state import body_text
+
+        if type(limit) is not int or limit < 1 or granularity not in {"session", "turn"}:
+            raise ValueError("SOURCE_RETRIEVAL_LIMIT_OR_GRANULARITY_INVALID")
+        started = time.perf_counter()
+        timings: dict[str, float] = {}
+        with self._locked():
+            visible = {source["event_id"]: source for source in self._visible_sources()}
+            timings["enumerate_seconds"] = time.perf_counter() - started
+            assemble_started = time.perf_counter()
+            excluded = set(excluded_source_refs)
+            scope_refs = visible if source_refs is None else dict.fromkeys(source_refs)
+            ordered = [ref for ref in scope_refs if ref not in excluded]
+            sessions: dict[str, list[dict[str, Any]]] = {}
+            for ref in ordered:
+                if ref in visible:
+                    source = visible[ref]
+                    group = source.get("session") or source["event_id"]
+                    sessions.setdefault(group, []).append(source)
+            units = []
+            for session_id, sources in sessions.items():
+                # Benchmark captures already have exact public turn ordinals.
+                # Host exchanges retain their existing capture order; fact dates
+                # never reorder arrival or fill an absent session association.
+                if all(source["capture_key"].startswith("turn:")
+                       and source["capture_key"][5:].isdecimal() for source in sources):
+                    sources.sort(key=lambda source: int(source["capture_key"][5:]))
+                turns = [{"role": source["role"], "content": body_text(source),
+                          "timestamp": source.get("occurred_at", source["observed_at"]),
+                          "source_ref": source["event_id"],
+                          "source_revision": source.get("source_revision", 1)}
+                         for source in sources]
+                first_user = next((index for index, turn in enumerate(turns)
+                                   if turn["role"] == "user"), len(turns))
+                selected = []
+                if granularity == "turn" and first_user:
+                    # Original Tool/assistant material without a user anchor is
+                    # still a real Source range, not an invented user exchange.
+                    prefix = raw_exchange_units(session_id, turns[0]["timestamp"],
+                                                turns[:first_user])[0]
+                    prefix["id"] = session_id + "_source_prefix"
+                    selected.append(prefix)
+                if granularity == "session" or first_user < len(turns):
+                    selected.extend(raw_exchange_units(session_id, turns[0]["timestamp"], turns,
+                                                       granularity=granularity))
+                for unit in selected:
+                    # All actual Source wording is searchable, including original
+                    # Tool observations. RawRAG's own user-only keys stay unchanged.
+                    unit["index_text"] = " ".join(turn["content"] for turn in unit["turns"])
+                units.extend(selected)
+            timings["assemble_seconds"] = time.perf_counter() - assemble_started
+            cache_reused: bool | None = None
+            if self.source_search_cache is None:
+                ranked = flat_bm25_rank(units, query, limit, tokenization=tokenization,
+                                        timings=timings)
+            else:
+                ranked, cache_reused = self.source_search_cache.rank(units, query, limit,
+                    scope=(self.sources_namespace, self.owner, granularity),
+                    tokenization=tokenization, timings=timings)
+            open_started = time.perf_counter()
+            def descriptor(unit: dict[str, Any]) -> dict[str, Any]:
+                return {"kind": "original_source", **{key: unit[key] for key in (
+                    "id", "session_id", "date", "turn_range")}, "score": unit.get("score"),
+                    "source_ranges": [{"source_ref": turn["source_ref"],
+                                       "source_revision": turn["source_revision"],
+                                       "start": 0, "end": len(turn["content"])}
+                                      for turn in unit["turns"]]}
+
+            descriptors = [descriptor(unit) for unit in ranked]
+            scope = ({"complete": True, "basis": "captured_visible_arrival_prefix",
+                      "materials": [descriptor(unit) for unit in units]} if include_scope else None)
+            materials = self.read_source_materials(descriptors)
+            selected_refs = dict.fromkeys(span["source_ref"]
+                                          for material in materials
+                                          for span in material["source_ranges"])
+            raw_events = [event for ref in selected_refs
+                          if (event := self.source(ref)) is not None]
+            timings["open_seconds"] = time.perf_counter() - open_started
+        timings["total_seconds"] = time.perf_counter() - started
+        return {
+            "ok": True, "raw_events": raw_events, "source_materials": materials,
+            **({"source_scope": scope} if scope is not None else {}),
+            "source_retrieval": {
+                "retrieval": "source_flat_bm25", "granularity": granularity,
+                "tokenization": tokenization, "timings": timings,
+                "index_text": "all_original_source_roles", "requested_count": limit,
+                **({"corpus_index_cache": "reused" if cache_reused else "built"}
+                   if cache_reused is not None else {}),
+                "indexed_count": len(units), "returned_count": len(materials),
+                "visible_source_count": sum(ref in visible for ref in ordered),
+                "returned_source_count": len(raw_events),
+                "prefix": "explicit_source_ids" if source_refs is not None else "captured_visible",
+                **({"excluded_source_count": len(excluded & set(visible))} if excluded else {}),
+            },
+        }
+
+    def search_evidence(
+        self, query: str, *, source_limit: int = 20, semantic_limit: int = 10,
+        granularity: Literal["session", "turn"] = "session",
+        tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+        include_scope: bool = False,
+        source_refs: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Two independent quotas; original evidence is not gated by semantic hits."""
+        with self._locked():
+            originals = self.search_sources(query, source_limit, granularity=granularity,
+                                            source_refs=source_refs, tokenization=tokenization,
+                                            include_scope=include_scope)
+            semantic = self.search(query, limit=semantic_limit, include_raw=False,
+                                   source_refs=source_refs)
+            records = semantic["records"]
+        return {**semantic, **originals, "records": records,
+                "retrieval": "independent_source_and_semantic",
+                "status": "found" if records or originals["source_materials"] else "no_results",
+                "semantic_retrieval": {"retrieval": semantic["retrieval"],
+                                       "requested_count": semantic_limit,
+                                       "returned_count": len(records)}}
 
     def index_source_episodes(self) -> dict[str, Any]:
         """Add episode indices for visible older sources without recapturing them."""
@@ -2546,7 +2819,8 @@ class MemoryService:
         self.store.put(self.namespace, target, prior, index=False)
         return receipt
 
-    def read(self, memory_id: str, revision: int | None = None) -> dict[str, Any]:
+    def read(self, memory_id: str, revision: int | None = None, *,
+             issue_candidate: bool = True) -> dict[str, Any]:
         if self._functional_hidden(record_id=memory_id):
             return {"ok": False, "status": "visibility_revoked", "id": memory_id}
         item = self.store.get(self.namespace, memory_id)
@@ -2598,7 +2872,7 @@ class MemoryService:
             "value": version,
             "observation_only": True,
         }
-        if self.mutation_contract == "event_bound_v1" and version is not None:
+        if issue_candidate and self.mutation_contract == "event_bound_v1" and version is not None:
             with self._locked():
                 result["candidate_handle"] = self._issue_candidate(memory_id, version)
         return result
@@ -2608,12 +2882,13 @@ class MemoryService:
         return [self.read(row["id"]) for row in self._rows(self.namespace)]
 
     def search(
-        self, query: str, limit: int = 10, *, dense: bool = False, include_raw: bool = True
+        self, query: str, limit: int = 10, *, dense: bool = False, include_raw: bool = True,
+        source_refs: Sequence[str] | None = None,
     ) -> dict[str, Any]:
         if not 1 <= limit <= 100:
             raise ValueError("V13_SEARCH_LIMIT_INVALID")
         degradation = None
-        if dense and self.semantic_retriever is None:
+        if dense and self.semantic_retriever is None and source_refs is None:
             try:
                 page = self.store.search(self.namespace, query=query, limit=limit)
                 rows = [self.read(item.key) for item in page if item.namespace == self.namespace]
@@ -2632,10 +2907,19 @@ class MemoryService:
         enumerate_bank = not query.strip()
         records = self.records()
         raw = self.sources() if include_raw else []
+        allowed_sources = set(source_refs) if source_refs is not None else None
+        if allowed_sources is not None:
+            # Apply arrival restrictions before ranking/embedding, so a later
+            # supported record cannot crowd out or influence this prefix.
+            records = [row for row in records if row.get("value")
+                       and row["value"].get("source_ref") and
+                       set(self._version_source_refs(row["value"])) <= allowed_sources]
+            raw = [source for source in raw if source["event_id"] in allowed_sources]
         if self.functional_contract == "functional_v1":
             raw = [event for event in raw if event["role"] != "assistant"]
         episode_matches: dict[str, int] = {}
-        if include_raw and tokens and self.memory_profile == "unified_v1":
+        if include_raw and tokens and self.memory_profile == "unified_v1" \
+                and allowed_sources is None:
             from milai_lab.memory.episodes import EpisodeIndex
 
             episode_matches = EpisodeIndex(self).source_matches(query)
@@ -2658,27 +2942,31 @@ class MemoryService:
                 text += " " + str(value.get("content", ""))
             return text
 
-        if self.source_backlinks == "enabled" and tokens:
+        # Dense record ranking does not consume keyword backlink text. Only raw
+        # output and withdrawn-record notices still use the lexical path there.
+        needs_backlinks = bool(records) and (self.semantic_retriever is None or include_raw
+                           or any(row.get("status") == "retracted" for row in records))
+        if self.source_backlinks == "enabled" and tokens and needs_backlinks:
             all_sources = raw if include_raw else self.sources()
+            if allowed_sources is not None:
+                all_sources = [source for source in all_sources
+                               if source["event_id"] in allowed_sources]
             matching_sources = [
                 event
                 for event in all_sources
-                if any(
-                    token
-                    in set(
-                        _lexical_tokens(
-                            searchable(event),
-                            include_cjk_unigrams=True,
-                        )
-                    )
-                    for token in tokens
-                )
+                if set(tokens).intersection(_lexical_tokens(
+                    searchable(event), include_cjk_unigrams=True))
             ]
+            backlinks = self._backlink_record_ids([event["event_id"] for event in matching_sources],
+                                                 limit_per_source=100)
+            readable: dict[str, bool] = {}
             for event in matching_sources:
-                for record in self.backlink_candidates([event["event_id"]], limit=100):
-                    linked_text[record["id"]] = (
-                        linked_text.get(record["id"], "") + " " + searchable(event)
-                    )
+                for record_id in backlinks.get(event["event_id"], []):
+                    if record_id not in readable:
+                        readable[record_id] = self.read(record_id)["ok"]
+                    if readable[record_id]:
+                        linked_text[record_id] = (
+                            linked_text.get(record_id, "") + " " + searchable(event))
         if self.receipt_contract == "explicit_receipt_v1" and tokens:
             started_wall, started_cpu = time.monotonic_ns(), time.process_time_ns()
             # Reuse sources already loaded for raw search. Internal target discovery

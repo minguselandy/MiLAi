@@ -1,0 +1,331 @@
+{
+  "name": "milai-global-reserved-policy-qa-v1",
+  "status": "FROZEN_PREPARED_AWAITING_SOURCE_REVIEW_AND_PRIOR_STAGES",
+  "training_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1",
+  "training_protocol": "data/manifests/milai-global-reader-reference-v1-protocol.json",
+  "cases": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/cases.jsonl",
+  "labels": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/labels.jsonl",
+  "common_retrieval_costs": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/common-retrieval-costs.json",
+  "official_scorer": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-official",
+  "reader": {
+    "experiment_name": "milai-global-reserved-policy-qa-v1",
+    "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "context_tokens": 65536,
+    "model": {
+      "base_url": "http://127.0.0.1:7860/v1",
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 1.0,
+      "max_tokens": 8192,
+      "timeout": 300,
+      "enable_thinking": true,
+      "max_calls": 12
+    },
+    "interface_version": "v2"
+  },
+  "dense_embedding": {
+    "embedding": {
+      "base_url": "http://127.0.0.1:7861/v1/",
+      "model": "bge-m3",
+      "temperature": 0,
+      "max_tokens": 4096,
+      "timeout": 180,
+      "tool_mode": "json_action",
+      "max_calls": 12,
+      "enable_thinking": false
+    },
+    "embedding_capacity": {
+      "tokenizer_path": "/data/models/embed/tokenizer.json",
+      "context_tokens": 8192
+    },
+    "embedding_dimension": 1024,
+    "embedding_batch_size": 16
+  },
+  "arms": {
+    "bm25_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/bm25",
+      "policy": "k4"
+    },
+    "dense_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/dense",
+      "policy": "k4"
+    },
+    "full20": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/bm25",
+      "policy": "k20"
+    },
+    "families32-0-native_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-0-native",
+      "policy": "adaptive"
+    },
+    "families32-0-native_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-0-native-k4",
+      "policy": "k4"
+    },
+    "families32-0-linear_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-0-linear",
+      "policy": "adaptive"
+    },
+    "families32-0-linear_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-0-linear-k4",
+      "policy": "k4"
+    },
+    "families32-1-native_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-1-native",
+      "policy": "adaptive"
+    },
+    "families32-1-native_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-1-native-k4",
+      "policy": "k4"
+    },
+    "families32-1-linear_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-1-linear",
+      "policy": "adaptive"
+    },
+    "families32-1-linear_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-1-linear-k4",
+      "policy": "k4"
+    },
+    "families32-2-native_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-2-native",
+      "policy": "adaptive"
+    },
+    "families32-2-native_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-2-native-k4",
+      "policy": "k4"
+    },
+    "families32-2-linear_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-2-linear",
+      "policy": "adaptive"
+    },
+    "families32-2-linear_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-2-linear-k4",
+      "policy": "k4"
+    },
+    "families128-0-native_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-0-native",
+      "policy": "adaptive"
+    },
+    "families128-0-native_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-0-native-k4",
+      "policy": "k4"
+    },
+    "families128-0-linear_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-0-linear",
+      "policy": "adaptive"
+    },
+    "families128-0-linear_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-0-linear-k4",
+      "policy": "k4"
+    },
+    "families128-1-native_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-1-native",
+      "policy": "adaptive"
+    },
+    "families128-1-native_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-1-native-k4",
+      "policy": "k4"
+    },
+    "families128-1-linear_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-1-linear",
+      "policy": "adaptive"
+    },
+    "families128-1-linear_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-1-linear-k4",
+      "policy": "k4"
+    },
+    "families128-2-native_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-2-native",
+      "policy": "adaptive"
+    },
+    "families128-2-native_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-2-native-k4",
+      "policy": "k4"
+    },
+    "families128-2-linear_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-2-linear",
+      "policy": "adaptive"
+    },
+    "families128-2-linear_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-2-linear-k4",
+      "policy": "k4"
+    }
+  },
+  "models": [
+    {
+      "name": "families32-0-native",
+      "cohort": "families32",
+      "seed": 0,
+      "backend": "native",
+      "selector_backend": "laya",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/0/native/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families32-0-native",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-0-native",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-0-native-k4"
+    },
+    {
+      "name": "families32-0-linear",
+      "cohort": "families32",
+      "seed": 0,
+      "backend": "linear",
+      "selector_backend": "linear",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/0/linear/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families32-0-linear",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-0-linear",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-0-linear-k4"
+    },
+    {
+      "name": "families32-1-native",
+      "cohort": "families32",
+      "seed": 1,
+      "backend": "native",
+      "selector_backend": "laya",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/1/native/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families32-1-native",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-1-native",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-1-native-k4"
+    },
+    {
+      "name": "families32-1-linear",
+      "cohort": "families32",
+      "seed": 1,
+      "backend": "linear",
+      "selector_backend": "linear",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/1/linear/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families32-1-linear",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-1-linear",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-1-linear-k4"
+    },
+    {
+      "name": "families32-2-native",
+      "cohort": "families32",
+      "seed": 2,
+      "backend": "native",
+      "selector_backend": "laya",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/2/native/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families32-2-native",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-2-native",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-2-native-k4"
+    },
+    {
+      "name": "families32-2-linear",
+      "cohort": "families32",
+      "seed": 2,
+      "backend": "linear",
+      "selector_backend": "linear",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/2/linear/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families32-2-linear",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-2-linear",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families32-2-linear-k4"
+    },
+    {
+      "name": "families128-0-native",
+      "cohort": "families128",
+      "seed": 0,
+      "backend": "native",
+      "selector_backend": "laya",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/0/native/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families128-0-native",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-0-native",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-0-native-k4"
+    },
+    {
+      "name": "families128-0-linear",
+      "cohort": "families128",
+      "seed": 0,
+      "backend": "linear",
+      "selector_backend": "linear",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/0/linear/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families128-0-linear",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-0-linear",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-0-linear-k4"
+    },
+    {
+      "name": "families128-1-native",
+      "cohort": "families128",
+      "seed": 1,
+      "backend": "native",
+      "selector_backend": "laya",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/native/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families128-1-native",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-1-native",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-1-native-k4"
+    },
+    {
+      "name": "families128-1-linear",
+      "cohort": "families128",
+      "seed": 1,
+      "backend": "linear",
+      "selector_backend": "linear",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/linear/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families128-1-linear",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-1-linear",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-1-linear-k4"
+    },
+    {
+      "name": "families128-2-native",
+      "cohort": "families128",
+      "seed": 2,
+      "backend": "native",
+      "selector_backend": "laya",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/2/native/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families128-2-native",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-2-native",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-2-native-k4"
+    },
+    {
+      "name": "families128-2-linear",
+      "cohort": "families128",
+      "seed": 2,
+      "backend": "linear",
+      "selector_backend": "linear",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/2/linear/checkpoint",
+      "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/probes/families128-2-linear",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-2-linear",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-policy-qa-v1/selections/families128-2-linear-k4"
+    }
+  ],
+  "planned_cases": 28,
+  "families": 14,
+  "candidate_count": 20,
+  "selector_max_len": 8192,
+  "selector_head_max_len": 512,
+  "adaptive_read_limit": 4,
+  "invariance": {
+    "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-source-v1/data/reference-states.jsonl",
+    "variants": [
+      "original"
+    ],
+    "seed": 20261017,
+    "states": 158,
+    "new_forward_upper_bound": 1896,
+    "scope": "First native-reference prefixes on reserved sources, not a repeated invariance battery. Every model included; source semantics evaluated separately."
+  },
+  "planned_prediction_positions": 756,
+  "reader_call_upper_bound": 756,
+  "maximum_new_reader_output_tokens": 6193152,
+  "reuse_identical_reader_inputs": true,
+  "arm_order_seed": 20261017,
+  "reader_delivery_order": "Common frozen shuffled candidate order, identical across methods. Controller action order retained in trace.",
+  "source_review": "data/manifests/milai-global-reserved-source-v1-annotations.json",
+  "model_selection": "All twelve fixedfinalepoch2 models; no outcome-based seed/head/size choice. Both learning-curve cohorts get actualpolicyQA.",
+  "dispatch": "After all12training and broaddev QA stages are closed, all28reservedsource pools reviewed before reference/model outputs, and actual predecessorPIDs absent. Root serial, no retry, no model/epoch/head selection from dev outcomes.",
+  "stages": [
+    "twelve reserved-source prefix evaluations",
+    "twelve actual selectors and matchedfixed4 extensions",
+    "same-pool BGE dense4",
+    "Readerpreview",
+    "firstReader matrix",
+    "native metrics",
+    "source-semantic/fullcost review"
+  ],
+  "scope": "Fixed14reservedgroups with maximum-decomposition strata6/4/4,28nativeDEVsource variants. Qualified literal source/registered exposure boundary, not officialtest, natural distribution, semantic/full-history/pretraining certification.",
+  "controls": "Same frozen preprocessing and all12models/two policies/three simplecontrols as broaddev. Alias RNG seed adds100000 for nativeDEVrow namespace. No question-specific changes.",
+  "cost_scope": "Charge actual new embedding,selector,probe,Reader work once; per-method standalone traces expose shared work. All source text reaches selector, not free retrieval. Record failures and load/tokenization/selection overhead.",
+  "no_automatic_retry": true,
+  "sha_or_content_fingerprint_checks": false,
+  "runtime_defaults_changed": false,
+  "source_protocol": "data/manifests/milai-global-reserved-source-v1-protocol.json",
+  "admission": "data/manifests/milai-global-reserved-source-v1-admission.json",
+  "preceding_evaluation_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1"
+}

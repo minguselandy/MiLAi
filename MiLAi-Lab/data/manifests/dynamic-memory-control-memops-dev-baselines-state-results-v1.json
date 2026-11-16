@@ -1,0 +1,91 @@
+{
+  "version": "dynamic-memory-control-memops-dev-baselines-state-results-v1",
+  "status": "ALL144_EFFECTS_60CONSTRUCTED_VIEWS_4REUSES_AUTHOR_REVIEWED",
+  "effects": {
+    "fixed_context": {
+      "messages": 48,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 45,
+      "READ": 134
+    },
+    "rules": {
+      "messages": 48,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 47,
+      "READ": 141,
+      "REFRESH_VIEW": 47,
+      "refresh_delivered": 44,
+      "refresh_not_delivered": 3
+    },
+    "generative": {
+      "messages": 48,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 1,
+      "SEARCH": 1,
+      "REFRESH_VIEW": 16,
+      "refresh_delivered": 15,
+      "USE_VIEW": 4,
+      "refresh_not_delivered": 1
+    }
+  },
+  "constructed_views": 60,
+  "delivered_views": 59,
+  "persisted_not_delivered_views": 1,
+  "nodes_reviewed": 494,
+  "rules_reviewed": 50,
+  "construction_task_sufficiency": {
+    "True": 19,
+    "False": 20,
+    "None": 21
+  },
+  "reuse_assessment": [
+    {
+      "policy": "generative",
+      "family": "memops_B30",
+      "step": "stage-0-repeat",
+      "meaning_supported": null,
+      "basis": "Same revision 1 retains name values but lacks role mapping and invents employer location; later Reader explicitly cannot map friend versus roommate."
+    },
+    {
+      "family": "memops_E08",
+      "policy": "generative",
+      "step": "stage-1-repeat",
+      "revision": 1,
+      "meaning_supported": false,
+      "basis": "Reused old view lacks the new solitary morning and triple-check routine; final task answer is incomplete."
+    },
+    {
+      "family": "memops_E15",
+      "policy": "generative",
+      "step": "stage-0-repeat",
+      "revision": 1,
+      "meaning_supported": false,
+      "basis": "No new source establishes 14 days; cached unsupported estimate yields the same wrong rates."
+    },
+    {
+      "family": "memops_F01",
+      "policy": "generative",
+      "step": "stage-2",
+      "revision": 2,
+      "meaning_supported": false,
+      "basis": "Old otherwise-correct view omits newly accepted175dining allocation; final answer uses stale2120."
+    }
+  ],
+  "detailed_reviews": [
+    "artifacts/dynamic-memory-control/review-memops-dev-baselines-prefix72-v1/state-inventory/author-review.json",
+    "artifacts/dynamic-memory-control/review-memops-dev-baselines-d25-v1/state-inventory/author-review.json",
+    "artifacts/dynamic-memory-control/review-memops-dev-baselines-e08-v1/state-inventory/author-review.json",
+    "artifacts/dynamic-memory-control/review-memops-dev-baselines-e15-v1/state-inventory/author-review.json",
+    "artifacts/dynamic-memory-control/review-memops-dev-baselines-f01-v1/state-inventory/author-review.json"
+  ],
+  "scope": "All actual constructed views, including the persisted-but-undelivered D25 rules revision6. Task sufficiency differs from complete graph validity; no stored text or first answer repaired. All effects are read-only obligations, not an explicit-lifecycle success claim.",
+  "model_calls": 0
+}

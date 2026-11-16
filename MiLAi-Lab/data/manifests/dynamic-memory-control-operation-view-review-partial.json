@@ -1,0 +1,71 @@
+{
+  "scope": "Partial author review of actual generated first views; not automatic action labels or Reader results.",
+  "source": "artifacts/dynamic-memory-control/operation-collection-v2",
+  "reviews": [
+    {
+      "family": "sealed_parcel",
+      "phase": "cold",
+      "text_facts": "adequate",
+      "formal_rules": "incorrect",
+      "usable_for_action_gold": "partial_or_mask",
+      "reason": "g1 uses n2=sealing NOT complete as a positive prerequisite for permission n3. Do not label the graph semantically valid or blindly accept view-only handoff."
+    },
+    {
+      "family": "sealed_parcel",
+      "phase": "changed",
+      "text_facts": "adequate",
+      "formal_rules": "source_supported",
+      "usable_for_action_gold": "review_with_qualification",
+      "reason": "n2 is now sealing complete, together with inspection n1 satisfies the complete source rule. Target n3 remains kind=uncertain although the implication supports permission; retain this qualification."
+    },
+    {
+      "family": "room_capacity",
+      "phase": "cold",
+      "text_facts": "adequate",
+      "formal_rules": "incorrect_empty_or",
+      "usable_for_action_gold": "partial_or_mask",
+      "reason": "13-person inference and original numeric facts are supported, but any=[] means no route under the declared schema, not pure AND."
+    },
+    {
+      "family": "room_capacity",
+      "phase": "changed",
+      "text_facts": "adequate",
+      "formal_rules": "incorrect_empty_or",
+      "usable_for_action_gold": "partial_or_mask",
+      "reason": "10-person inference and cancellation are correct; g2 again has any=[] rather than the pure-AND [[]]."
+    },
+    {
+      "family": "contingent_editor",
+      "phase": "cold",
+      "text_facts": "adequate",
+      "formal_rules": "none",
+      "usable_for_action_gold": "potentially_usable",
+      "reason": "Default reviewer, absence-only substitute and both availability/authority facts retained in plain text."
+    },
+    {
+      "family": "contingent_editor",
+      "phase": "changed",
+      "text_facts": "contradictory",
+      "formal_rules": "incorrect_empty_or",
+      "usable_for_action_gold": "partial_or_mask",
+      "reason": "n3 still says Song currently present, now citing update e3 that says temporarily absent. n6/n7 correctly say absent/Wei substitutes; these coexist. Do not repair this saved view before labelling."
+    },
+    {
+      "family": "partial_delivery",
+      "phase": "cold",
+      "text_facts": "adequate",
+      "formal_rules": "none",
+      "usable_for_action_gold": "potentially_usable",
+      "reason": "40 ordered,24+10 delivered,34 total and6 remaining are supported."
+    },
+    {
+      "family": "partial_delivery",
+      "phase": "changed",
+      "text_facts": "adequate_for_task",
+      "formal_rules": "none",
+      "usable_for_action_gold": "review_with_qualification",
+      "reason": "Third batch6,total40,remaining0 and complete delivery are supported. No-other-batches statement is only a bounded record interpretation, not independent world completeness."
+    }
+  ],
+  "gold_actions_created": false
+}

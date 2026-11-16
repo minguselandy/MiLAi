@@ -1,0 +1,504 @@
+{
+  "status": "READONLY_CLOSED_OFFLINE_COST_EVIDENCE_CENSUS_THROUGH_ACTUAL_IDLE33_LIVE_WORKER_NOT_BILLED",
+  "timestamp_utc": "2026-11-07T09:01:58.089925+00:00",
+  "actual_idle_receipts": [
+    {
+      "version": 1,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v1.json",
+      "new_command_count": 38,
+      "whole_timer_CPU_seconds": 839.1899999999999,
+      "already_native_C_CPU_deducted": 380.64422756196655,
+      "actual_current_offline_CPU_paid": 458.54577243803345
+    },
+    {
+      "version": 2,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v2.json",
+      "new_command_count": 13,
+      "whole_timer_CPU_seconds": 159.39999999999998,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 159.39999999999998
+    },
+    {
+      "version": 3,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v3.json",
+      "new_command_count": 5,
+      "whole_timer_CPU_seconds": 5.63,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 5.63
+    },
+    {
+      "version": 4,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v4.json",
+      "new_command_count": 4,
+      "whole_timer_CPU_seconds": 14.989999999999998,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 14.989999999999998
+    },
+    {
+      "version": 5,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v5.json",
+      "new_command_count": 7,
+      "whole_timer_CPU_seconds": 5.1,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 5.1
+    },
+    {
+      "version": 6,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v6.json",
+      "new_command_count": 27,
+      "whole_timer_CPU_seconds": 15.05,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 15.05
+    },
+    {
+      "version": 7,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v7.json",
+      "new_command_count": 14,
+      "whole_timer_CPU_seconds": 59.9,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 59.9
+    },
+    {
+      "version": 8,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v8.json",
+      "new_command_count": 10,
+      "whole_timer_CPU_seconds": 24.68,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 24.68
+    },
+    {
+      "version": 9,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v9.json",
+      "new_command_count": 2,
+      "whole_timer_CPU_seconds": 1.04,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 1.04
+    },
+    {
+      "version": 10,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v10.json",
+      "new_command_count": 22,
+      "whole_timer_CPU_seconds": 78.39,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 78.39
+    },
+    {
+      "version": 11,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v11.json",
+      "new_command_count": 6,
+      "whole_timer_CPU_seconds": 89.77000000000001,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 89.77000000000001
+    },
+    {
+      "version": 12,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v12.json",
+      "new_command_count": 4,
+      "whole_timer_CPU_seconds": 4.18,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 4.18
+    },
+    {
+      "version": 13,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v13.json",
+      "new_command_count": 5,
+      "whole_timer_CPU_seconds": 5.609999999999999,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 5.609999999999999
+    },
+    {
+      "version": 14,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v14.json",
+      "new_command_count": 5,
+      "whole_timer_CPU_seconds": 6.76,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 6.76
+    },
+    {
+      "version": 15,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v15.json",
+      "new_command_count": 30,
+      "whole_timer_CPU_seconds": 87.78,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 87.78
+    },
+    {
+      "version": 16,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v16.json",
+      "new_command_count": 76,
+      "whole_timer_CPU_seconds": 211.75999999999993,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 211.75999999999993
+    },
+    {
+      "version": 17,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v17.json",
+      "new_command_count": 99,
+      "whole_timer_CPU_seconds": 172.82999999999993,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 172.82999999999993
+    },
+    {
+      "version": 18,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v18.json",
+      "new_command_count": 16,
+      "whole_timer_CPU_seconds": 46.74,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 46.74
+    },
+    {
+      "version": 19,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v19.json",
+      "new_command_count": 10,
+      "whole_timer_CPU_seconds": 47.67,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 47.67
+    },
+    {
+      "version": 20,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v20.json",
+      "new_command_count": 7,
+      "whole_timer_CPU_seconds": 46.83,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 46.83
+    },
+    {
+      "version": 21,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v21.json",
+      "new_command_count": 4,
+      "whole_timer_CPU_seconds": 7.81,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 7.81
+    },
+    {
+      "version": 22,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v22.json",
+      "new_command_count": 15,
+      "whole_timer_CPU_seconds": 24.539999999999992,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 24.539999999999992
+    },
+    {
+      "version": 23,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v23.json",
+      "new_command_count": 29,
+      "whole_timer_CPU_seconds": 44.680000000000014,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 44.680000000000014
+    },
+    {
+      "version": 24,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v24.json",
+      "new_command_count": 98,
+      "whole_timer_CPU_seconds": 66.59999999999998,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 66.59999999999998
+    },
+    {
+      "version": 25,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v25.json",
+      "new_command_count": 106,
+      "whole_timer_CPU_seconds": 118.97999999999998,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 118.97999999999998
+    },
+    {
+      "version": 26,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v26.json",
+      "new_command_count": 4,
+      "whole_timer_CPU_seconds": 0.5,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 0.5
+    },
+    {
+      "version": 27,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v27.json",
+      "new_command_count": 71,
+      "whole_timer_CPU_seconds": 18.560000000000002,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 18.560000000000002
+    },
+    {
+      "version": 28,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v28.json",
+      "new_command_count": 122,
+      "whole_timer_CPU_seconds": 323.24999999999994,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 323.24999999999994
+    },
+    {
+      "version": 29,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v29.json",
+      "new_command_count": 37,
+      "whole_timer_CPU_seconds": 5.540000000000002,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 5.540000000000002
+    },
+    {
+      "version": 30,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v30.json",
+      "new_command_count": 62,
+      "whole_timer_CPU_seconds": 86.49000000000005,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 86.49000000000005
+    },
+    {
+      "version": 31,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v31.json",
+      "new_command_count": 13,
+      "whole_timer_CPU_seconds": 22.32,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 22.32
+    },
+    {
+      "version": 32,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v32.json",
+      "new_command_count": 307,
+      "whole_timer_CPU_seconds": 72.4899999999999,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 72.4899999999999
+    },
+    {
+      "version": 33,
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v33.json",
+      "new_command_count": 41,
+      "whole_timer_CPU_seconds": 46.80999999999999,
+      "already_native_C_CPU_deducted": 0,
+      "actual_current_offline_CPU_paid": 46.80999999999999
+    }
+  ],
+  "distinct_paid_phases": {
+    "milai_a100_carried_v79_offline_20261104_v1": {
+      "CPU_seconds": 45.39000000000001,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v1.json",
+      "category": "carried_pre_goal_debt"
+    },
+    "milai_a100_preparation_review_validation_20261104_v1": {
+      "CPU_seconds": 458.54577243803345,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v1.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_b64_prelaunch_offline_20261105_v2": {
+      "CPU_seconds": 159.39999999999998,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v2.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_b_postfit_offline_20261105_v3": {
+      "CPU_seconds": 5.63,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v3.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_dev64_prelaunch_offline_20261105_v4": {
+      "CPU_seconds": 14.989999999999998,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v4.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_task_dev64_remaining56_prelaunch_offline_20261105_v5": {
+      "CPU_seconds": 5.1,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v5.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_dev64_e1_b0_pre_b1_offline_20261105_v6": {
+      "CPU_seconds": 15.05,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v6.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_dev64_b1_postview_pre_e3_offline_20261105_v7": {
+      "CPU_seconds": 59.9,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v7.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_dev64_all5_scoring_pre_c_e3_offline_20261105_v8": {
+      "CPU_seconds": 24.68,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v8.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_c_e3_binding_and_replication_preparation_offline_20261105_v9": {
+      "CPU_seconds": 1.04,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v9.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_replication_fits_closed_pre_host_offline_20261105_v10": {
+      "CPU_seconds": 78.39,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v10.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_e3rep_seed1_closed_pre_seed2_offline_20261105_v11": {
+      "CPU_seconds": 89.77000000000001,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v11.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_e3rep_seed2_closed_pre_D_offline_20261105_v12": {
+      "CPU_seconds": 4.18,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v12.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_D_old8_incremental_closed_pre_E3_offline_20261106_v13": {
+      "CPU_seconds": 5.609999999999999,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v13.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_D_old8_both_closed_pre_new32_offline_20261106_v14": {
+      "CPU_seconds": 6.76,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v14.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_D_new32_cache_closed_pre_incremental_offline_20261106_v15": {
+      "CPU_seconds": 87.78,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v15.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_D_new32_incremental_closed_pre_E3_offline_20261106_v16": {
+      "CPU_seconds": 211.75999999999993,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v16.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_D_new32_E3_closed_pre_controls_offline_20261106_v17": {
+      "CPU_seconds": 172.82999999999993,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v17.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_D_known_View_first9_closed_pre_old_output_offline_20261106_v18": {
+      "CPU_seconds": 46.74,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v18.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_D_old_output_first42_closed_pre_B_READ52_offline_20261106_v19": {
+      "CPU_seconds": 47.67,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v19.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_B_READ52_C_pool7_mechanical_closed_QA_pending_offline_20261106_v20": {
+      "CPU_seconds": 46.83,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v20.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_B_C_whole_quality_and_final_prefreeze_offline_20261106_v21": {
+      "CPU_seconds": 7.81,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v21.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_confirmation_anchor_and_source_reviews_offline_20261106_v22": {
+      "CPU_seconds": 24.539999999999992,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v22.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_confirmation_primary_full_audit_and_source_reviews_offline_20261106_v23": {
+      "CPU_seconds": 44.680000000000014,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v23.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_confirmation_seed1_full_audit_and_offline_reviews_20261106_v24": {
+      "CPU_seconds": 66.59999999999998,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v24.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_confirmation_seed2_full_audit_and_external_preparation_20261107_v25": {
+      "CPU_seconds": 118.97999999999998,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v25.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_lme_frozen_prelaunch_progress_verification_20261107_v26": {
+      "CPU_seconds": 0.5,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v26.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_lme_first_failure_quality184_catalog_contract_offline_20261107_v27": {
+      "CPU_seconds": 18.560000000000002,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v27.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_lme_continuation001_storage_source_quality64_offline_20261107_v28": {
+      "CPU_seconds": 323.24999999999994,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v28.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_mem2act_full_common_source_preparation_cpu_20261107_v1": {
+      "CPU_seconds": 1244.593596831,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v28.json",
+      "category": "closed_full_Source_setup_whole_child_plus_parent"
+    },
+    "milai_a100_lme_continuation002_quality104_storage_offline_20261107_v29": {
+      "CPU_seconds": 5.540000000000002,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v29.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation002_cpu_20261107_v3": {
+      "CPU_seconds": 16.054043141,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v29.json",
+      "category": "closed_storage_follower_whole_child_plus_parent"
+    },
+    "milai_a100_lme_continuation003_quality160_mem2act_full_bank_io_storage_offline_20261107_v30": {
+      "CPU_seconds": 86.49000000000005,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v30.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation003_cpu_20261107_v3": {
+      "CPU_seconds": 112.94493893100001,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v30.json",
+      "category": "closed_storage_follower_whole_child_plus_parent"
+    },
+    "milai_a100_lme_continuation004_mem2act_final_freeze_offline_20261107_v31": {
+      "CPU_seconds": 22.32,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v31.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation004_cpu_20261107_v3": {
+      "CPU_seconds": 81.819887883,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v31.json",
+      "category": "closed_storage_follower_whole_child_plus_parent"
+    },
+    "milai_a100_lme_continuation005_all4_confirmation_quality_offline_20261107_v32": {
+      "CPU_seconds": 72.4899999999999,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v32.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation005_cpu_20261107_v3": {
+      "CPU_seconds": 348.14992905400004,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v32.json",
+      "category": "closed_storage_follower_whole_child_plus_parent"
+    },
+    "milai_a100_lme_continuation006_reserved64_prelaunch_offline_20261107_v33": {
+      "CPU_seconds": 46.80999999999999,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v33.json",
+      "category": "current_goal_closed_offline_residual"
+    },
+    "milai_a100_lme_lossless_closed_storage_continuation006_cpu_20261107_v3": {
+      "CPU_seconds": 325.668297828,
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v33.json",
+      "category": "closed_storage_follower_whole_child_plus_parent"
+    }
+  },
+  "paid_CPU_by_scope": {
+    "carried_pre_goal_debt": 45.39000000000001,
+    "closed_full_Source_setup_whole_child_plus_parent": 1244.593596831,
+    "closed_storage_follower_whole_child_plus_parent": 884.6370968370002,
+    "current_goal_closed_offline_residual": 2381.225772438033
+  },
+  "distinct_closed_current_goal_timer_paths": 1309,
+  "all_paid_timer_paths_unique_and_original_CPU_matches_actual_payments": true,
+  "C_native_CPU_removed_once_from_original_timer": 380.64422756196655,
+  "carried_v79_debt_not_new_A100_experiment_cost": true,
+  "closed_pending_post33_CPU_seconds": 0,
+  "retained_pending_failed_commands": [],
+  "scope": "Offline evidence/payments only. Native/model/client/wholeowner costs remain in separate authoritative receipts and must be reconciled before all-project totals. All phase rows here refer to actual existing original-ledger settlement evidence; this file is not operational accounting and creates no charge or replacement ledger. Do not add whole-command C plus nativeC again. Source/storage whole costs not added as both child and child+parent. Carried prior debt separate. New live LME006/Q64 costs not inferred zero.",
+  "scanner_and_author_CPU": "unmetered_unknown_not_zero; scanner deliberately not GNU-wrapped",
+  "new_model_HTTP_calls": 0,
+  "original_ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "full_original_evidence_census": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/closed-offline-cost-evidence-census-through-idle33-v1.json",
+  "this_report_CPU_is_post33_pending_next_idle": true,
+  "author_review_provenance": {
+    "implementation_Source_guided_reviewer": "This execution assistant, reading the complete retained answers and actually received Source/context; not original paper authors, independent human annotations, blind review, or multiple-reviewer agreement.",
+    "published_C_material_labels_unchanged": true,
+    "native_AnswerF1_and_external_original_judges_separate": true,
+    "label_uncertainty_not_removed_by_family_bootstrap": true
+  },
+  "orchestration_usage_observation": {
+    "source": "Actual get_goal result observed during this turn, before reserved64 initial model launch",
+    "thread_tokens_used_at_observation": 15457059,
+    "thread_elapsed_seconds_at_observation": 191272,
+    "scope": "Goal orchestration/authoring usage, not HostQwen tokens, experimental API-call counts or measured GPU busy time. Monetary cost unmeasured; do not merge tokenizer/counting units or charge the original Host ledger."
+  }
+}

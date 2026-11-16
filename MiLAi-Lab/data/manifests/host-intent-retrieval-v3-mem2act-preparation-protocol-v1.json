@@ -1,0 +1,17 @@
+{
+  "status": "REGISTERED_BEFORE_RELEASE_DATA_DOWNLOAD",
+  "repository": "Cantaloupe-M/Mem2ActBench",
+  "upstream_revision": "c935c65be9aa19c930b60657c0c4b2b7ea13a34a",
+  "scope": "FullreleasedMem2ACTBench_small400GivenTool evaluation only; no training ormethodselectionfromtestanswers. NoSelectToolclaim.",
+  "input_contract": "Literalquery and target_tool_schema. Fullsessions assigned bysource_conversation_ids, preservingallturnsandorder; lineageIDs/expectedcalls/grounding/complexitystayoffline.",
+  "preparation": "Downloadreleasedsmall400QA/429sessions, inspectstructuraltypes,lineagecoverage andcounts only; donotdisplayquestions,historybodies,targetargumentvalues. Usesyntheticfixturesforadaptertests.",
+  "model_runs": "Noneauthorizedbythispreparationentry; actualmodelworkremainsserializedbehindliveT1collection andfinalmethodfreeze. Fullbenchmarktargetunchanged.",
+  "scoring": "Nativepaperparametersmetrics stillbeingchecked. Additionalstrict_call_match mustcomparecompletecall, notpartialparameterhits.",
+  "isolation": "Publicexternalbenchmark, previouscontactmustbedisclosed; countsarenot400independentusers. Connectedfullhistory/sourcecomponentsmustbereported.",
+  "integrity": "HTTPSsourcepath+upstreamrevision+parsedrecordcountsandstructure; noSHA/checksum/fingerprint computation. Legacyv0213hashscriptnotinvoked.",
+  "source_docs": [
+    "https://github.com/Cantaloupe-M/Mem2ActBench",
+    "https://github.com/Cantaloupe-M/Mem2ActBench/blob/c935c65be9aa19c930b60657c0c4b2b7ea13a34a/Mem2ACTBench_small/README.md"
+  ],
+  "license": "PinnedrootREADMEdeclaresMIT; upstreamToolACE/BFCL/OASST1notautomaticallyrelicensed. Localresearchartifactsignored; nodataredistribution."
+}

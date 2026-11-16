@@ -1,0 +1,75 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "contact-zh",
+      "owner": "jev-host-zh",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "session_id": "contact-zh-0",
+          "message_id": "source",
+          "content": "请记住协作安排：云岚展区的联系人是陈芷，石桥展区的联系人是许禾。向外发送材料前，都要先得到我本人明确确认。这里只记事，不执行发送。",
+          "occurred_at": "2033-04-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2033-04-01T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "contact-zh-1",
+          "message_id": "source",
+          "content": "请更新协作记录：从今天起，云岚展区联系人换成沈秋；石桥展区仍由许禾负责，外发材料前的本人确认要求保持不变。",
+          "occurred_at": "2033-04-02T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2033-04-02T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "contact-zh-2",
+          "message_id": "query",
+          "content": "只查询，不保存：云岚、石桥两展区现在的联系人分别是谁？向外发送材料需要满足什么条件？",
+          "occurred_at": "2033-04-02T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2033-04-02T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        }
+      ]
+    },
+    {
+      "case_id": "storage-en",
+      "owner": "jev-host-en",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "session_id": "storage-en-0",
+          "message_id": "source",
+          "content": "Please remember the equipment inventory: the field recorder is in cupboard 2, and the spare batteries are in the grey drawer. Borrowing either item requires my explicit approval. Record this only; do not arrange a loan.",
+          "occurred_at": "2033-04-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2033-04-01T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "storage-en-1",
+          "message_id": "source",
+          "content": "Update the inventory: the field recorder has now moved to cupboard 6. The spare batteries are still in the grey drawer, and the approval requirement for borrowing remains unchanged.",
+          "occurred_at": "2033-04-02T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2033-04-02T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "storage-en-2",
+          "message_id": "query",
+          "content": "Query only, do not save: where are the field recorder and spare batteries now, and what must happen before either may be borrowed?",
+          "occurred_at": "2033-04-02T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2033-04-02T09:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        }
+      ]
+    }
+  ]
+}

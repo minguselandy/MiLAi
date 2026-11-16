@@ -1,0 +1,49 @@
+{
+  "status": "FROZEN_AND_SYNTHETICALLY_VERIFIED;NO_REAL_MODELS_DISPATCHED",
+  "declared_at": "2026-10-22T01:45:10.882717+00:00",
+  "source_version": "c85eb6d3",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-view-capacity-c85eb6d3/MiLAi-Lab",
+  "literal_files_equal": [
+    "src/milai_lab/runners/functional.py",
+    "src/milai_lab/methods/evidence_control.py",
+    "src/milai_lab/methods/query_structure.py",
+    "src/milai_lab/methods/source_ranges.py",
+    "src/milai_lab/methods/evidence_reading.py",
+    "src/milai_lab/methods/laya_memory_policy.py",
+    "src/milai_lab/providers/contextual_capacity.py",
+    "src/milai_lab/providers/image_capacity.py",
+    "src/milai_lab/datasets/lme_protocol.py",
+    "src/milai_lab/runners/lme_evaluation.py",
+    "src/milai_lab/runners/lme_reader.py"
+  ],
+  "input_renderers_unchanged_from_bcebf420": [
+    "src/milai_lab/methods/evidence_control.py",
+    "src/milai_lab/methods/query_structure.py",
+    "src/milai_lab/methods/source_ranges.py",
+    "src/milai_lab/methods/evidence_reading.py",
+    "src/milai_lab/methods/laya_memory_policy.py",
+    "src/milai_lab/providers/contextual_capacity.py",
+    "src/milai_lab/providers/image_capacity.py",
+    "src/milai_lab/datasets/lme_protocol.py",
+    "src/milai_lab/runners/lme_evaluation.py",
+    "src/milai_lab/runners/lme_reader.py"
+  ],
+  "change": "Only query_structure stage CapacityExceeded from the existing pre-HTTP capacity check becomes FunctionalRejection with compact measured limits. Existing EvidenceOperations view_rejected/effect:none outcome handles it. No cache commit; same policy chooses subsequent actual actions within remaining control/read budget.",
+  "accounting": "Original read and generation-admission attempts remain consumed. The provider retains full vllm_capacity_rejected trace; no HTTP request/billing when precheck rejects. No refunds, retries, clipping, smaller output limit or substituted View.",
+  "failure_boundary": "Dispatched transport timeout remains unknown/charged and does not continue as a definite View rejection. Controller-generation capacity overflow still raises. Other exception types unchanged.",
+  "validation": {
+    "unique_passed": 25,
+    "new_tests": 4,
+    "skipped": 0,
+    "existing_regressions": 21,
+    "ruff_files": 2,
+    "mypy_files": 1,
+    "package_tools_boundaries": "PASS;6grandfatheredprivateedges unchanged",
+    "evidence": "Actual normal runner with real temporary Store/ledger and native mock transport: prior View/no prior View, zero HTTP on capacity failure, preserved cache, consumed admission, subsequent original read; dispatched timeout and non-View controller overflow preserved."
+  },
+  "scope": "Known bounded-operation resource outcome, not View success, actual learned-policy behavior or complete external readiness. Model source d6a8afd3 and all active training inputs unchanged.",
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "new_training_labels": 0,
+  "new_model_jobs": 0
+}

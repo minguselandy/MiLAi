@@ -1,0 +1,69 @@
+{
+  "training_tool": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/tools/train_bounded_laya.py",
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "data_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/source-qualified-label-pair-v1/data/reviewed_labels",
+  "seeds": [
+    0,
+    1
+  ],
+  "epochs": 4,
+  "max_len": 8192,
+  "head_max_len": 512,
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "precision": "float32",
+  "batch_size": 4,
+  "gradient_accumulation": 4,
+  "learning_rates": {
+    "encoder": 2.5e-05,
+    "head": 0.0001
+  },
+  "weight_decay": 0.01,
+  "training_rows": 86,
+  "training_families": 9,
+  "training_source_rows": 17,
+  "dev_rows": 30,
+  "dev_labelled": 22,
+  "dev_labelled_families": 3,
+  "name": "jev-reader-option-shuffle-v1",
+  "status": "PREPARED_NOT_STARTED",
+  "objective": "soft-ce",
+  "evaluate_train": true,
+  "shuffle_options": true,
+  "option_seed_rule": "seed + 10000, independent from row-order RNG",
+  "output_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/option-shuffle-v1/runs",
+  "new_jobs": [
+    {
+      "seed": 0,
+      "condition": "shuffled-options"
+    },
+    {
+      "seed": 1,
+      "condition": "shuffled-options"
+    }
+  ],
+  "fixed_option_controls": [
+    {
+      "seed": 0,
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-user-restart-v1/runs/0/soft-ce",
+      "reuse": "Existing completed first run; do not repeat or rebill."
+    },
+    {
+      "seed": 1,
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-user-restart-v1/runs/1/soft-ce",
+      "reuse": "Existing completed first run; do not repeat or rebill."
+    }
+  ],
+  "factor": "Only option slot permutation and matching target permutation each epoch. Same86states, source text, family weights, row order, BASE initialization, optimization updates and loss. No semantic-facet/source-v3 addition in this contrast.",
+  "primary_evaluation": "Fixed finalepoch4 train/dev semantic strata; original and transformed action agreement on same30dev positions,22labelled/3families. Do not choose a favorable epoch/seed/order.",
+  "scheduling": "After current objective-policy-qa-v2 is terminal and reviewed; Root serialGPU2,3. Other worktrees remain paused. No HTTP or services for training.",
+  "limits": [
+    "Observed option-order intervention collapsed every tested model to exhausted; permutation augmentation is a hypothesis, not an established remedy.",
+    "Same already-exposed development families, no independent generalization claim.",
+    "Existing controls reuse preserves original timings; no randomized exclusive-hardware timing inference.",
+    "All losses/first failures/option orders/costs preserved. No automatic retry, SHA, fingerprints, new ledger or default adoption."
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "host_intent_stream_recipe_v1",
+  "scope": "Additional normal collection for two more source groups from the existing T2 train selection. Original initial/later source boundaries retained. Two requests add a quotation requirement at each actual prefix. Together with A/B, available source groups total eight; actual closed states/branches still need selection and review. Not independent confirmation.",
+  "streams": [
+    {
+      "id": "memops_C23-view-v4-c-supplement",
+      "history_id": "memops_C23",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What passport expiry dates have I actually supplied for my family, which remain uncertain, and what is the current plan for my own renewal? Distinguish a chosen planning window from a booked appointment and an available cancellation slot."
+        },
+        {
+          "id": "same-sources-originals",
+          "after_sources": 7,
+          "content": "What passport expiry dates have I actually supplied for my family, which remain uncertain, and what is the current plan for my own renewal? Distinguish a chosen planning window from a booked appointment and an available cancellation slot. Quote the original statements in my reports that support your conclusions, keeping those quotations distinct from your interpretation."
+        },
+        {
+          "id": "later-sources",
+          "after_sources": 23,
+          "content": "What passport expiry dates have I actually supplied for my family, which remain uncertain, and what is the current plan for my own renewal? Distinguish a chosen planning window from a booked appointment and an available cancellation slot."
+        },
+        {
+          "id": "later-originals",
+          "after_sources": 23,
+          "content": "What passport expiry dates have I actually supplied for my family, which remain uncertain, and what is the current plan for my own renewal? Distinguish a chosen planning window from a booked appointment and an available cancellation slot. Quote the original statements in my reports that support your conclusions, keeping those quotations distinct from your interpretation."
+        }
+      ]
+    },
+    {
+      "id": "memops_D23-view-v4-c-supplement",
+      "history_id": "memops_D23",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What flight-seat preference and actual travel experiences have I reported, and what seat choices or profile corrections remain unconfirmed plans? Keep other people's aisle preferences and a tentative aircraft-layout assumption separate from my own current preference or bookings."
+        },
+        {
+          "id": "same-sources-originals",
+          "after_sources": 7,
+          "content": "What flight-seat preference and actual travel experiences have I reported, and what seat choices or profile corrections remain unconfirmed plans? Keep other people's aisle preferences and a tentative aircraft-layout assumption separate from my own current preference or bookings. Quote the original statements in my reports that support your conclusions, keeping those quotations distinct from your interpretation."
+        },
+        {
+          "id": "later-sources",
+          "after_sources": 23,
+          "content": "What flight-seat preference and actual travel experiences have I reported, and what seat choices or profile corrections remain unconfirmed plans? Keep other people's aisle preferences and a tentative aircraft-layout assumption separate from my own current preference or bookings."
+        },
+        {
+          "id": "later-originals",
+          "after_sources": 23,
+          "content": "What flight-seat preference and actual travel experiences have I reported, and what seat choices or profile corrections remain unconfirmed plans? Keep other people's aisle preferences and a tentative aircraft-layout assumption separate from my own current preference or bookings. Quote the original statements in my reports that support your conclusions, keeping those quotations distinct from your interpretation."
+        }
+      ]
+    }
+  ]
+}

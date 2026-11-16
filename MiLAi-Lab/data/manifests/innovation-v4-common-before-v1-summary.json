@@ -1,0 +1,195 @@
+{
+  "status": "PAIRED_DIAGNOSTIC_CLOSED",
+  "source_version": "f1d0595d",
+  "scope": "One new author controlled update, actual common model-formed plain before plus one shared actual arrival; conditioned views only change representation tag/rendering. Not independent formation or generalization.",
+  "shared_seed_costs": {
+    "stages": {
+      "maintenance": {
+        "responses": 1,
+        "known_tokens": 5282,
+        "unknown_usage_responses": 0
+      }
+    },
+    "requests_without_response": [],
+    "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+  },
+  "seed_review": "Three real records preserve rule, credential/training compound and independent label-paper location. No ideal graph inserted.",
+  "arms": {
+    "plain": {
+      "engineered_ok": true,
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 3,
+            "known_tokens": 11734,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 1,
+            "known_tokens": 9779,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 6,
+            "known_tokens": 202,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "generation_tokens": 21513,
+      "before_record_ids": [
+        "453c92bc-1d86-5fcd-b895-99aada833dcf",
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef",
+        "83745d4b-1207-5320-8551-74c3e9557734"
+      ],
+      "after_record_count": 3,
+      "maintenance_failures": [],
+      "qa_core_author_review": [
+        {
+          "id": "qualification",
+          "correct": true
+        },
+        {
+          "id": "preserve",
+          "correct": true
+        },
+        {
+          "id": "credential_scope",
+          "correct": true
+        }
+      ]
+    },
+    "candidate": {
+      "engineered_ok": false,
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 3,
+            "known_tokens": 12090,
+            "unknown_usage_responses": 0
+          },
+          "impact": {
+            "responses": 1,
+            "known_tokens": 3668,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 1,
+            "known_tokens": 14780,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 5,
+            "known_tokens": 164,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "generation_tokens": 30538,
+      "before_record_ids": [
+        "453c92bc-1d86-5fcd-b895-99aada833dcf",
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef",
+        "83745d4b-1207-5320-8551-74c3e9557734"
+      ],
+      "after_record_count": 3,
+      "maintenance_failures": [
+        {
+          "path": "maintenance/update/batch-0-result.json",
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ]
+        }
+      ],
+      "qa_core_author_review": [
+        {
+          "id": "qualification",
+          "correct": false
+        },
+        {
+          "id": "preserve",
+          "correct": true
+        },
+        {
+          "id": "credential_scope",
+          "correct": true
+        }
+      ]
+    },
+    "delta": {
+      "engineered_ok": true,
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 3,
+            "known_tokens": 12516,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 1,
+            "known_tokens": 7531,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 6,
+            "known_tokens": 201,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "generation_tokens": 20047,
+      "before_record_ids": [
+        "453c92bc-1d86-5fcd-b895-99aada833dcf",
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef",
+        "83745d4b-1207-5320-8551-74c3e9557734"
+      ],
+      "after_record_count": 3,
+      "maintenance_failures": [],
+      "qa_core_author_review": [
+        {
+          "id": "qualification",
+          "correct": true
+        },
+        {
+          "id": "preserve",
+          "correct": true
+        },
+        {
+          "id": "credential_scope",
+          "correct": true
+        }
+      ]
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 14,
+    "generation": {
+      "known_tokens": 77380,
+      "charged_tokens": 77380,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 567,
+      "charged_tokens": 567,
+      "unknown_usage": 0
+    }
+  },
+  "state_review": {
+    "plain": "Credentials updated, training and label location retained. Whole compound gets event_at Nov2; independent claim granularity/temporal interpretation remains a limitation.",
+    "candidate": "Editor response reached the fixed output ceiling after Impact; no semantic update, old valid credentials remain. Reader wrongly treats unknown paper validity as false and confirms no eligibility; other2 answers core-correct.",
+    "delta": "One edit updates blue invalid/paper unknown and retains training/non-target label location. Same compound unit retained with effective_from Nov2; no new support groups. All3 core answers correct."
+  },
+  "decision": "Indexed delta has a positive local update/cost result in this one controlled before:7531 maintenance tokens vsplain9779, total20047 vs21513. This does not establish independent formation, graph benefit, stable superiority or noninferiority. Preserve the full-control length failure and its cost.",
+  "official_judge_calls": 0,
+  "independent_blind_review": false,
+  "full_goal_complete": false
+}

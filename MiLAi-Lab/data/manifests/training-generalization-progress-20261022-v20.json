@@ -1,0 +1,113 @@
+{
+  "status": "ACTIVE_GOAL_NOT_COMPLETE",
+  "observed_at": "2026-10-22T00:12:27.236092+00:00",
+  "previous": "training-generalization-progress-20261022-v19.json",
+  "previous_turn_classification": "PROGRESS:36STATEsemanticreviews,100recordedchoices/6capacitychecksandE2readinesscompleted. Actualcurrentfitrevalidatedagain.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "updates": 96,
+    "planned": 524,
+    "source_version": "d6a8afd3",
+    "run": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/run.json",
+    "unchanged": "No hotupdate/restart/input/label/parameterchanges;onlyrealmodeljob. No newpost-update scoresreadforselection."
+  },
+  "LME_workflow": {
+    "implementation": "ec2bc88a (core99c49bb7,native-boundary00cd0105,originalReadergateec2bc88a)",
+    "manifest": "training-generalization-lme-reader-workflow-v2.json",
+    "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-reader-ec2bc88a/MiLAi-Lab",
+    "entrypoints": [
+      "tools/run_lme_predictions.py",
+      "tools/score_lme_predictions.py"
+    ],
+    "prediction": "Completeinputcohort,fullnativeorderedhaystacks,publicquery/image,independentStoreclonepercase/sharedcontrollerpool. Literalnativecode/referenceinputcopies;noQAfiltering/answer-drivenmethodinput.",
+    "score": "Onlyafterpredictionphaseterminal. Reusesnativefunctionbodies/constants/rubrics/parsers;SDKconstructor/retriesnotloaded. Actualpredictionchecked;no regeneration. Failed/unattempted/Judge-errorpositionsunscored,fullplannedbounds andconditionalmetrics explicit.",
+    "original_limits": "Readerresumesactualpublic-taskgenerationgate soquery+Readerstaywithin24. OfflineJudgeatmost1separatecall;bothshareexistingqueryqueueandoriginalledger,no resets orlimitexpansion.",
+    "model_protocol": "ExistinglocalQwenHostDTO forReader/Judge;notofficialpaperReader/Judgereproduction. Laya CPU inference stays4.52.3/MHAfastpathfalse. Actualservervision/usage stillpending.",
+    "cpu_scope": "RequestfrontendCPU/exclusiveorchestration/nestedwholeprocessseparate. No automaticsettlement or adding nestedcopies.",
+    "real_benchmark_predictions": 0,
+    "new_labels": 0
+  },
+  "pixel_bounds": {
+    "issue": "BothpinnedslowQwenprocessorsdiscardvalidsize dict;from_pretrainedkwargsareappliedtoo late tocorrecteffective size.",
+    "fix": "Resolvednativeconstructor receivesfullconfig anddeclaredmin/maxbounds;noglobalenvironment/libraryupdate.",
+    "effective_pixels": {
+      "min": 65536,
+      "max": 16777216
+    },
+    "geometry": {
+      "64x128": 72,
+      "800x480": 375,
+      "1000x480": 465,
+      "1280x720": 880,
+      "2048x1024": 2048
+    },
+    "old_scope": "Old5124assets3resolutioncountsunchanged. Priorcomponent-equalitytestsdidnotverifydeclaredbounds. Newtestscoverrange plusactualReaderimagewire.",
+    "primary_runtime": "CUDAenv4.52.3+HTTPdeps+localPillowoverlay;preservesLayaevaluationversion. HTTP4.57.6checkedsecondarily,not silentlyusedforlearnedcontroller."
+  },
+  "validation": {
+    "native_protocol": 15,
+    "Reader_accounting_privacy_failure_budget": 7,
+    "full_synthetic_cohort_real_Stores": 3,
+    "new_image_bounds_and_Reader": 3,
+    "existing_image_regression": 6,
+    "unique_passed": 34,
+    "skipped": 0,
+    "extra_runs": "Threeimagebound/Reader testsalsoexecutedinbothpinnedenvironments;notdoublecounted",
+    "ruff": "PASS10changedPythonfiles",
+    "mypy": "PASS6implementationfiles;follow-imports=silent/ignoremissingexternaltypes",
+    "package_and_tools_boundaries": "PASS;6inheritedprivateedgesunchanged",
+    "entrypoint_help": "Bothpassed",
+    "initial_boundary_failure": "Wholemoduledynamicimportwasunresolved. Replacedwithexplicitimport-free AST exports;boundaryrulesnotweakened;testsrejectimportsinsideexports/unrelatedinitialization.",
+    "tests_model_calls": "MockHTTPonly,realnetworkblocked;no researchmodelweightsloaded"
+  },
+  "active_CPU_input_audit": {
+    "session": 21998,
+    "pid": 3985384,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "active": {
+      "pool": "pool-0",
+      "stage": "ingest"
+    },
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/audit_lme_whole_bank_inputs_v1.py",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-whole-bank-input-preflight-v1",
+    "process_record": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-whole-bank-input-preflight-v1-process.json",
+    "latest_logged_capture_count_pool0": 2816,
+    "planned_source_counts": [
+      3458,
+      1837
+    ],
+    "model_calls": 0,
+    "model_weights_loaded": 0,
+    "network_requests": 0,
+    "ledger": "Originalledgeronly;scriptcomparesliteralbefore/after. No settlement.",
+    "scope": "ActualfullStoreingestion plussharedEvidenceOperationsinitialsyntheticrequest/nativeSDKtokenization. Unpagedvs4096source-observationcandidate,not afinalinputamendment/actualpolicytrajectory. Laterpagecoverage,realquery/search/Viewstates stillpending. Neverrestartwhilelive ordeclaretimeoutterminal.",
+    "measurement": "Live;finalCPU notcountedpendingyet;embeddedsetupcostsarepartofsameaudit,notadditive."
+  },
+  "new_measured_cpu_pending": {
+    "phases": [
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-pixel-bounds-audit-v2/cuda452.json",
+        "cpu_seconds": 5.532889467
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-pixel-bounds-audit-v2/http457.json",
+        "cpu_seconds": 6.836637233
+      }
+    ],
+    "total_cpu_seconds": 12.369526700000002,
+    "scope": "Two actualsyntheticgeometryprograms only. Tests/imports/debug/initialfailedpatchandstaticchecks/freeze/authoringunmeasured,notzero. Wholebankauditlivecostnotfinal."
+  },
+  "closed_settlements": "v1/v2/v3 neverappend/re-settle;oldpending35/v11-v19pendinguntouched. Legacytrainer/STATEHTTPalreadybilled. Nooffline settlement whilecorrectedfitlives.",
+  "next": "Finishwholebankinputaudit;declarematchedsourcepagingconditionifneededandverifyfullreachability/nativecapacity. Actualservervisionprobe andfull451evaluationwaitsinglemodelslot+finalmethodfreeze. STATE108E2planreadybutnotdispatched;otherremainingfullgoalrequirementsunchanged.",
+  "remaining": "Allcorrectednested/parameter/aux/E3fits+savedCPUcandidateevalsincllegacy;STATE108E2+actualdeliverylabels;factorialv2;feedbackv2threecollector128sources/labels/192fits/T2/common-support;strongsimple/full/NoView/textautonomousHostlifecycleandcosts;fullprotected/external/seed0,1,2confirmation.",
+  "new_real_model_jobs_started": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "no_generalization_or_Host_gain_claimed": true
+}

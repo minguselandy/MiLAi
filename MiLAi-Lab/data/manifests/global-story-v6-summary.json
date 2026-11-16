@@ -1,0 +1,361 @@
+{
+  "status": "CLOSED_WITH_ACCEPTANCE_FAILURES",
+  "runtime": "87851a3a",
+  "config": "configs/milai-global-story-v6.json",
+  "planned": 17,
+  "attempted": 17,
+  "first_completed": 15,
+  "first_failed": 2,
+  "readonly_recoveries": 2,
+  "after_recovery_completed": 17,
+  "completion_is_not_semantic_acceptance": true,
+  "cost": {
+    "generation": {
+      "calls": 54,
+      "prompt_tokens": 464777,
+      "total_tokens": 489040,
+      "completion_tokens": 24263
+    },
+    "embedding": {
+      "calls": 73,
+      "prompt_tokens": 3891,
+      "total_tokens": 3891,
+      "completion_tokens": 0
+    }
+  },
+  "ledger_delta": {
+    "generation": {
+      "known_tokens": 489040,
+      "new_unknown": 0
+    },
+    "embedding": {
+      "known_tokens": 3891,
+      "new_unknown": 0
+    }
+  },
+  "results": [
+    {
+      "event": 1,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 2,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": []
+        }
+      ]
+    },
+    {
+      "event": 3,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 4,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": []
+        }
+      ]
+    },
+    {
+      "event": 5,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 6,
+      "attempts": [
+        {
+          "status": "FAILED",
+          "error": "VLLM_CHAT_INVALID_CONTENT",
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        },
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": true,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 7,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 8,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 9,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 10,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 11,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 12,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": [
+            "completed"
+          ]
+        }
+      ]
+    },
+    {
+      "event": 13,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": []
+        }
+      ]
+    },
+    {
+      "event": 14,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": []
+        }
+      ]
+    },
+    {
+      "event": 15,
+      "attempts": [
+        {
+          "status": "FAILED",
+          "error": "VLLM_CHAT_INVALID_CONTENT",
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": []
+        },
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": true,
+          "classification_forgetting": false,
+          "maintenance_statuses": []
+        }
+      ]
+    },
+    {
+      "event": 16,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": true,
+          "maintenance_statuses": []
+        }
+      ]
+    },
+    {
+      "event": 17,
+      "attempts": [
+        {
+          "status": "COMPLETED",
+          "error": null,
+          "recovery": false,
+          "classification_forgetting": false,
+          "maintenance_statuses": []
+        }
+      ]
+    }
+  ],
+  "review": {
+    "status": "CLOSED_ROOT_SOURCE_REVIEW",
+    "independent_reviewer": false,
+    "entries": [
+      {
+        "event": 1,
+        "finding": "Actualr1 has independent A and B clauses plus complete external-confirmation/internal-exemption expression. Program receipt reports actualcommit only."
+      },
+      {
+        "event": 2,
+        "finding": "Actualr1 unchanged, no duplicate semanticrecord. Response inspects savedrecord."
+      },
+      {
+        "event": 3,
+        "finding": "Actualr2 stores A/Zhao with literal effective_from2030-10-20; B and commoncondition unchanged. Earlier A/Li is in actual history/source, absent from current renderedstate."
+      },
+      {
+        "event": 4,
+        "finding": "No semanticchange for pleasantry."
+      },
+      {
+        "event": 5,
+        "finding": "Actualr3 adds scoped Du exception for2030-10-21, keeps generalZhao,B and commoncondition."
+      },
+      {
+        "event": 6,
+        "finding": "Actualr4 retracts only Du exception, preserves generalrule and non-targets. First finalanswer null; one readonly recovery produced incorrect statement that cancellation had not executed, despite actualcommitted receipt. CLI completed recovery does not count source-faithful finalanswer."
+      },
+      {
+        "event": 7,
+        "finding": "Separate B/SMS considering clause; no precise eventdate invented. Literal recent/no-defined-start and explicit undecided wording omitted; do not claim full temporal-text retention."
+      },
+      {
+        "event": 8,
+        "finding": "Separate finance Li record explicitly distinguishes same-name projectLi; otherrecords unchanged."
+      },
+      {
+        "event": 9,
+        "finding": "Actualr5 corrects B to Chen with original-arrangement wording and no invented effective date; A/commonrule and otherrecords preserved. Earlier Wang history still must be reopened below."
+      },
+      {
+        "event": 10,
+        "finding": "Actual no_change receipt, no duplicate commonrule at this step."
+      },
+      {
+        "event": 11,
+        "finding": "Actual no_change; stored B/SMS still considering, no enabled/sent claim. Does not add literal undecided detail missing at event7."
+      },
+      {
+        "event": 12,
+        "finding": "Correct complete C/weekend/internal scoped rule in newrecord, but also appends duplicate general external-confirmation clause to notifierr6 with new event12 attribution. This is unwanted non-target duplication/provenance change, not joint update success."
+      },
+      {
+        "event": 13,
+        "finding": "Correct before-effective A/Li vs futureZhao; actualreadr1 andr2 bodies."
+      },
+      {
+        "event": 14,
+        "finding": "Correct A/Zhao,B/Chen and commonexternal/C-onlyweekend rules. No semanticmaintenance/business action."
+      },
+      {
+        "event": 15,
+        "finding": "Actually read r1 through history and r3 through exactrevision. First answer null; readonly recovery correctly lists initialLi/Wang and correctedChen, but incorrectly calls withdrawnDu exception effective onOct21. Currentr6 had noexception; this is temporal/history interpretation failure."
+      },
+      {
+        "event": 16,
+        "finding": "Threeforget attempts allrejected beforemutation: requesttargetnotdelivered, wholeSource selection required, then Source scope required. No visibility revoked; program receipt honestly reports uncommitted attempts. Task not fulfilled."
+      },
+      {
+        "event": 17,
+        "finding": "Correctly reports finance memory/source stillaccessible and priorforget uncommitted; A/Li beforeOct20, A/Zhao after, otherLi history preserved. Direct actualbank backup confirms all4recordvalues unchanged, all9storedversions found,0revokedSources."
+      }
+    ]
+  },
+  "bank_review": {
+    "all_four_record_values_unchanged_across_forget": true,
+    "all_nine_versions_readable": true,
+    "revoked_sources": 0,
+    "finance_source_visible": true,
+    "project_source_visible": true
+  },
+  "decision": "No further same-story tuning. Normalchain remains partial: non-target duplicate/provenance change, incorrect cancellation answer/history interpretation, forgetting task unfulfilled. Preserve guards and raw failures.",
+  "artifact_root": "artifacts/global-development/global-story-v6"
+}

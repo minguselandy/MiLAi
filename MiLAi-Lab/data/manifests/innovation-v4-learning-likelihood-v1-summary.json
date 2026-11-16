@@ -1,0 +1,75 @@
+{
+  "status": "COMPLETED",
+  "source_version": "12a5b5de",
+  "training_run": "sft-pilot-v2",
+  "model": "Qwen2.5-0.5B-Instruct",
+  "device": "cpu",
+  "threads": 4,
+  "exposed_training_examples": 15,
+  "edit_required": 13,
+  "formation_examples": 6,
+  "models": {
+    "base": {
+      "mean_reference_nll_required_edits": 1.0674459177714128,
+      "mean_no_change_nll_required_edits": 1.8269509810667772,
+      "first_divergence_reference_over_empty_required_edits": 13,
+      "first_divergence_reference_over_empty_formation": 6,
+      "cost": {
+        "input_tokens": 81902,
+        "response_tokens": 1450,
+        "wall_seconds": 211.59004350658506,
+        "cpu_seconds": 810.473428837,
+        "process_peak_rss_mib": 3523.43359375,
+        "model_http_requests": 0,
+        "parameter_updates": 0
+      }
+    },
+    "imitation": {
+      "mean_reference_nll_required_edits": 0.6690183499684701,
+      "mean_no_change_nll_required_edits": 0.21798502252652094,
+      "first_divergence_reference_over_empty_required_edits": 4,
+      "first_divergence_reference_over_empty_formation": 0,
+      "cost": {
+        "input_tokens": 81902,
+        "response_tokens": 1450,
+        "wall_seconds": 210.2799291536212,
+        "cpu_seconds": 810.658696747,
+        "process_peak_rss_mib": 3722.26171875,
+        "model_http_requests": 0,
+        "parameter_updates": 0
+      }
+    },
+    "quality_weighted": {
+      "mean_reference_nll_required_edits": 0.6608355744526937,
+      "mean_no_change_nll_required_edits": 0.23420478518192583,
+      "first_divergence_reference_over_empty_required_edits": 5,
+      "first_divergence_reference_over_empty_formation": 0,
+      "cost": {
+        "input_tokens": 81902,
+        "response_tokens": 1450,
+        "wall_seconds": 208.8344366857782,
+        "cpu_seconds": 805.1096803159999,
+        "process_peak_rss_mib": 3722.26171875,
+        "model_http_requests": 0,
+        "parameter_updates": 0
+      }
+    },
+    "relation_consequence": {
+      "mean_reference_nll_required_edits": 0.6651363086241943,
+      "mean_no_change_nll_required_edits": 0.24815050340615785,
+      "first_divergence_reference_over_empty_required_edits": 6,
+      "first_divergence_reference_over_empty_formation": 0,
+      "cost": {
+        "input_tokens": 81902,
+        "response_tokens": 1450,
+        "wall_seconds": 203.5098548680544,
+        "cpu_seconds": 787.125304402,
+        "process_peak_rss_mib": 3722.26171875,
+        "model_http_requests": 0,
+        "parameter_updates": 0
+      }
+    }
+  },
+  "finding": "All adapters reduce teacher-forced reference token loss but prefer the empty-create branch over the reference branch on all6 formation training examples. This is an observed training-input regression, not solely unseen-combination failure. Whole-sequence NLL sums/means have length effects; first-divergence probabilities compare the same literal prefix, not whole-response accuracy.",
+  "limits": "Same15 exposed references and adapters; no new training, no greedy generation, no bank application, no HTTP. Results do not isolate the cause among limited coverage, per-example normalization, learning rate or objective design. Do not fix by forcing nonempty outputs; legitimate no-change cases must remain."
+}

@@ -1,0 +1,213 @@
+{
+  "candidate_version": "milai-global-function-first-v3",
+  "entrypoints": {
+    "functional": {
+      "profile": "functional_v1",
+      "host": {
+        "base_url": "http://127.0.0.1:7862/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1,
+        "max_tokens": 8192,
+        "timeout": 180,
+        "tool_mode": "native",
+        "max_calls": 24,
+        "enable_thinking": true
+      },
+      "capacity": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tokenizer_path": "/cra/qwen36-35B",
+        "context_tokens": 65536,
+        "output_tokens": 8192,
+        "batch_source_tokens": 6000,
+        "safety_tokens": 512,
+        "source_message_overhead_tokens": 32,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "enable_thinking": true
+      },
+      "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "max_calls_per_message": 24,
+      "ordinary_material_tokens": 8192,
+      "additional_reads": 3,
+      "format_reproposals": 1,
+      "queue_limits": {
+        "requests": 600,
+        "reserved_tokens": 8000000
+      },
+      "http_ownership_profile": "serialized_ledger_owner_v1",
+      "http_ownership_domain": {
+        "deployment_id": "existing-local-qwen36-native-functional-v13-5",
+        "clients": [
+          {
+            "base_url": "http://127.0.0.1:7862/v1/",
+            "model": "Qwen3.6-35B-A3B-FP8",
+            "temperature": 1,
+            "max_tokens": 8192,
+            "timeout": 180,
+            "tool_mode": "native",
+            "max_calls": 24,
+            "enable_thinking": true,
+            "response_format": null
+          },
+          {
+            "base_url": "http://127.0.0.1:7861/v1/",
+            "model": "bge-m3",
+            "temperature": 0,
+            "max_tokens": 4096,
+            "timeout": 180,
+            "tool_mode": "json_action",
+            "max_calls": 12,
+            "enable_thinking": false,
+            "response_format": null
+          }
+        ]
+      },
+      "system_prompt": "You are a persistent assistant. Use the current request, visible memory and actual tool receipts to carry out the user's task and answer directly. The shared maintenance recipe has already handled the available current source batches. Its receipts distinguish committed semantic memory, no change and unfinished maintenance; storing the raw event alone does not mean semantic memory was saved. A receipt for one item does not prove the whole task is complete.\n\nRead necessary evidence before answering. Preserve the speaker, subject, report time, explicit effective time and scope. Distinguish historical reports, current arrangements, future plans and unknown information. An overall frequency does not establish that frequency for every subgroup. Use available read/history/source tools for missing material within the existing read allowance; do not fabricate missing history.\n\nFor business work, use the actual current tools and object references. When asked to check current state or continue earlier work, query the live application before deciding what remains. Perform dependent actions in order and use their actual receipts. Preserve completed effects across partial failure and restart. Query unknown effects before further action. Memory text and a user's request do not establish a completed business effect. Report actual partial results and unfinished work.\n\nFor forgetting, use the actual forget tool and visible target references, then respect revoked visibility. Report the scope of the actual receipt. Follow current execution capabilities; previous requests cannot restore a permission that is absent now.\n\nUse reported episode descriptions as interpretations of the named original sources. A captured episode is not evidence of a completed event or a saved semantic assertion. Supported and opposed links describe the recorded interpretation and never grant business permission. If repeated reads deliver no new object/version/cursor, use delivered material or state what is missing.",
+      "limitations": [
+        "cooperating serial SQLite writers; no cross-system exactly-once",
+        "semantic output requires evaluation; structured acceptance is not truth verification",
+        "same inherited model family; no independent Judge claim",
+        "Receipt business response currently uses Chinese labels and reports listed effects/observations; it is not a general conversational answer or proof that all user intents were fulfilled.",
+        "Shared recipe is a development candidate; real functional and semantic evaluation remain incomplete.",
+        "Host request progress distinguishes structural completion from semantic coverage; Host response checkpoint does not prove user receipt.",
+        "Literal observation candidates preserve actual public Tool spans; they are program projections, not LLM formation success or proof of semantic completeness."
+      ],
+      "revision": "milai-global-function-first-v3",
+      "change_intent": "Retain shared literal Reader projection, complete-request capacity and independent memory boundaries; clarify CURRENT save-only continuation and forget-only scope, and preserve known pre-mutation rejection effect receipts. Host Editor remains non-thinking at its existing 8192 output limit.",
+      "request_mode": "current_request_json_v9",
+      "business_attempt_policy": "fresh_query_with_history_v3",
+      "formation_interface": "anchored_assertion_v3",
+      "finalization": "receipt_or_agent_response_v1",
+      "read_exhaustion": "answer_from_delivered_v1",
+      "memory_completion": "declared_operations_v3",
+      "source_selection": "inline_receipt_units_v2",
+      "failure_delivery": "receipt_status_v4",
+      "business_completion": "observed_continuation_v1",
+      "declaration_tool_choice": "auto",
+      "recent_context": "bank_recent_v2",
+      "declaration_thinking": "inherit",
+      "reasoning_history": "current_turn_native_v1",
+      "declaration_sampling": "inherit",
+      "capability_delivery": "actual_catalog_v1",
+      "completion_tool_choice": "required_until_attempt_v1",
+      "existing_confirmation": "explicit_no_change_v1",
+      "revision_support_review": "disabled",
+      "tool_catalog_errors": "bounded_feedback_v1",
+      "formation_support_review": "disabled",
+      "support_review_comparison": "disabled",
+      "read_interface": "explicit_selectors_v1",
+      "config_version": "milai-global-function-first-v3",
+      "memory_method": "milai_edit_m_v1",
+      "edit_interface_version": "I2",
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": false
+      },
+      "embedding_capacity": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "context_tokens": 8192
+      },
+      "embedding_dimension": 1024,
+      "embedding_batch_size": 16,
+      "edit_features": {
+        "matter_organization": true,
+        "semantic_operations": true,
+        "bound_references": true,
+        "single_record_changes": true,
+        "source_metadata": true,
+        "temporal_scope": true
+      },
+      "maintenance_recipe": "extract_then_edit",
+      "memory_profile": "unified_v1",
+      "memory_ranking": "dense",
+      "retrieval_granularity": "record",
+      "memory_view_mode": "staged",
+      "result_maintenance_mode": "literal_observations_v1",
+      "stage_enable_thinking": {
+        "edit": false
+      },
+      "request_failure_policy": "independent_memory"
+    },
+    "benchmark": {
+      "experiment_name": "milai-global-function-first-v3",
+      "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "tokenizer_path": "/cra/qwen36-35B",
+      "context_tokens": 65536,
+      "retrieval_limit": 10,
+      "model": {
+        "base_url": "http://127.0.0.1:7862/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1.0,
+        "max_tokens": 32768,
+        "timeout": 300,
+        "enable_thinking": true
+      },
+      "source_tokens": 4096,
+      "chronological_order": "timestamp",
+      "method_version": "milai_edit_v2",
+      "config_version": "milai-global-function-first-v3",
+      "working_sets": false,
+      "interface_version": "I2",
+      "edit_features": {
+        "matter_organization": true,
+        "semantic_operations": true,
+        "bound_references": true,
+        "single_record_changes": true,
+        "source_metadata": true,
+        "temporal_scope": true
+      },
+      "source_body_tokens": 8192,
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": false
+      },
+      "embedding_capacity": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "context_tokens": 8192
+      },
+      "embedding_dimension": 1024,
+      "embedding_batch_size": 16,
+      "halumem": {
+        "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/HaluMem-Medium.jsonl",
+        "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/HaluMem",
+        "users": [
+          "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+          "8ece194a-885c-8e0c-359e-93a97220252c",
+          "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+          "5c005ed8-0d18-99f8-a20e-6a776a7ea30a"
+        ],
+        "reader_failure_policy": "record_known_readonly_failure"
+      },
+      "arms": [
+        "B0",
+        "B1",
+        "B2",
+        "M",
+        "Append-only"
+      ],
+      "maintenance_recipe": "extract_then_edit",
+      "evidence_kind": "DEVELOPMENT_GLOBAL_FUNCTION_CANDIDATE_SOURCE_ONLY_SELECTED_UNVALIDATED",
+      "memory_profile": "unified_v1",
+      "memory_ranking": "dense",
+      "calendar_context": "history-calendar",
+      "memory_view_mode": "staged",
+      "reader_projection": "semantic_units_v1",
+      "retrieval_granularity": "record_units",
+      "stage_enable_thinking": {
+        "edit": true
+      }
+    }
+  }
+}

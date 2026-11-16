@@ -1,0 +1,275 @@
+{
+  "version": "dynamic-memory-control-sandbox-evidence-plan-v2-results",
+  "status": "ALL10FIRST_POSITIONS_REVIEWED",
+  "method_source": "dbf08661",
+  "continuation_dispatcher": "dc2d4b32",
+  "families": 1,
+  "records": [
+    {
+      "policy": "fixed_context",
+      "step": "recorded-requirements",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据记录，关于“榆风仪器箱（校准批）”的核对信息如下：\n1. **办理数量**：4件。\n2. **送达地点**：校准间3号台。\n3. **包装要求**：缓冲盒。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/9e24454a-ceed-45a5-8d6f-caccc0d8a8b3-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/9e24454a-ceed-45a5-8d6f-caccc0d8a8b3-trace-0.jsonl",
+      "outcome": "correct_requirement_query",
+      "world": {
+        "label_available": false,
+        "reservations": [],
+        "attempts": []
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "fixed_context",
+      "step": "reserve-with-label-outage",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "本轮业务结果: 部分完成。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n实时查询预订: \n\n- 结果: 未查到对象\n- 物品: \"榆风仪器箱（校准批）\"\n\n预订并制作标签: \n\n- 结果: 预订成功, 标签制作失败\n- 物品: \"榆风仪器箱（校准批）\"\n- 数量: 4\n- 预订编号: \"RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5\"\n- 目的地配置: \"检验区5号台\"\n- 包装配置: \"缓冲盒\"\n- 标签: 未创建\n- 原因: 标签服务不可用\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n原请求进度: 业务部分完成; 本次执行evidence_query_limit_exhausted; 实际结果保存未要求; 保存许可当前未获允许; 反馈Host已收到进度。回执进度与语义正确性分别记录。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/893d8677-831f-44e7-baee-b5bdce74422b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/893d8677-831f-44e7-baee-b5bdce74422b-trace-0.jsonl",
+      "outcome": "correct_requested_partial_effect",
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5",
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "quantity": 4,
+            "destination": "检验区5号台",
+            "packing": "缓冲盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "fixed_context",
+      "step": "reopened-live-status",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n原请求进度: 业务部分完成; 本次执行只查询; 实际结果保存未要求; 保存许可当前未获允许; 反馈Host已收到进度。回执进度与语义正确性分别记录。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/cb7d6a86-d2e3-49ff-b1bf-8c59b0ab589e-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/cb7d6a86-d2e3-49ff-b1bf-8c59b0ab589e-trace-0.jsonl",
+      "outcome": "observed_state_omitted_from_response",
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5",
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "quantity": 4,
+            "destination": "检验区5号台",
+            "packing": "缓冲盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "fixed_context",
+      "step": "finish-original-label",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n原请求进度: 业务部分完成; 本次执行仍有待办; 实际结果保存未要求; 保存许可当前未获允许; 反馈Host已收到进度。回执进度与语义正确性分别记录。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/417fa229-24b9-4e79-abb2-6cc95b4ad9f8-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/417fa229-24b9-4e79-abb2-6cc95b4ad9f8-trace-0.jsonl",
+      "outcome": "unfulfilled_label_action",
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5",
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "quantity": 4,
+            "destination": "检验区5号台",
+            "packing": "缓冲盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "fixed_context",
+      "step": "confirmed-state",
+      "status": "FAILED",
+      "error": "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/9c9580d7-0f31-4215-b98f-e13291c9253b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/fixed_context/banks/a636aa5b-a0a2-4480-8cf5-4144f11c5797/9c9580d7-0f31-4215-b98f-e13291c9253b-trace-0.jsonl",
+      "outcome": "no_answer",
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-1d9b560e-fd87-4436-a41e-c3df6b556bb5",
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "quantity": 4,
+            "destination": "检验区5号台",
+            "packing": "缓冲盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "榆风仪器箱（校准批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "rules",
+      "step": "recorded-requirements",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据记录，榆风仪器箱（校准批）需要办理4件，送到校准间3号台，使用缓冲盒包装。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/cb9ff76c-ed23-47b5-b3f8-4f019dec362c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/cb9ff76c-ed23-47b5-b3f8-4f019dec362c-trace-0.jsonl",
+      "outcome": "correct_requirement_query",
+      "world": {
+        "label_available": false,
+        "reservations": [],
+        "attempts": []
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "rules",
+      "step": "reserve-with-label-outage",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/1b37bd0d-39f8-4d3f-80fe-7613e2cf8184-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/1b37bd0d-39f8-4d3f-80fe-7613e2cf8184-trace-0.jsonl",
+      "outcome": "no_answer",
+      "world": {
+        "label_available": false,
+        "reservations": [],
+        "attempts": []
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "rules",
+      "step": "reopened-live-status",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据记录，榆风仪器箱（校准批）的计划信息如下：\n1. **数量**：4件\n2. **目的地**：检验区5号台（根据2032-10-04 09:18:00的指令，原定校准间3号台已停用）\n3. **包装**：缓冲盒\n\n关于**实际执行状态**，根据最新的业务日志（源s3），之前的执行流程因协议失败已停止，且**未执行任何新的业务操作**，语义记忆也未提交。因此，目前的实际状态为：**未预留**，**未制作标签**。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n实时查询预订: \n\n- 结果: 未查到对象\n- 物品: \"榆风仪器箱（校准批）\"",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/7a4c064d-a1ea-4d86-ac17-0a6e88080371-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/7a4c064d-a1ea-4d86-ac17-0a6e88080371-trace-0.jsonl",
+      "outcome": "correct_live_status_after_prior_action_failure",
+      "world": {
+        "label_available": false,
+        "reservations": [],
+        "attempts": []
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "rules",
+      "step": "finish-original-label",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/f868c251-91f8-408e-8d12-ba7060c1c4dd-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/f868c251-91f8-408e-8d12-ba7060c1c4dd-trace-0.jsonl",
+      "outcome": "no_answer",
+      "world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "workflow_fulfilled": false
+    },
+    {
+      "policy": "rules",
+      "step": "confirmed-state",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据最新查询，榆风仪器箱（校准批）的实际状态如下：\n\n1. **系统查询结果**：未找到该物品的预留记录（状态：not_found）。\n2. **业务状态**：\n   - **预留**：未完成。\n   - **标签**：未完成。\n3. **现有参数（基于申请记录）**：\n   - **数量**：4件\n   - **目的地**：检验区5号台（注：原计划为校准间3号台，后续指令变更为5号台，但未执行生效）。\n   - **包装**：缓冲盒\n\n目前该批次物品在系统中无实际预留，标签也未制作，相关参数仅停留在申请记录中。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n实时查询预订: \n\n- 结果: 未查到对象\n- 物品: \"榆风仪器箱（校准批）\"",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/cd775225-dd1a-4cf7-a33f-71a4e4259de3-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-evidence-plan-v2/rules/banks/18e14b18-0552-4b8c-94c9-d871b8417cf0/cd775225-dd1a-4cf7-a33f-71a4e4259de3-trace-0.jsonl",
+      "outcome": "correct_live_status_after_prior_action_failure",
+      "world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "workflow_fulfilled": false
+    }
+  ],
+  "costs": {
+    "fixed_context": {
+      "attempted": 5,
+      "host_completed": 4,
+      "task_positions": 3,
+      "explicit_positions": 2,
+      "generation_known_tokens": 164626,
+      "generation_charged_tokens": 164626,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0
+    },
+    "rules": {
+      "attempted": 5,
+      "host_completed": 3,
+      "task_positions": 3,
+      "explicit_positions": 2,
+      "generation_known_tokens": 79730,
+      "generation_charged_tokens": 79730,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0
+    }
+  },
+  "conclusions": [
+    "Fixed-context actually reserved the correct4units/current destination/packaging once under label outage and truthfully reported its partial effect.",
+    "Neither arm completed the whole reservation-plus-label workflow. Fixed ends with1unlabelled reservation; rules ends with0reservations after2original length failures.",
+    "Rules readonly queries correctly reported the actual absence after prior action failures. This is response fidelity, not fulfillment of the earlier business request.",
+    "Fixed readonly Agent draft contained correct actual fields but was suppressed by generic progress rendering; its label call used the correct internally queried ID but failed the ToolMessage-only evidence bridge.",
+    "The final fixed query had a known pre-action declaration schema failure; no original position was retried.",
+    "New shared observation-delivery/readonly-presentation/prohibition handling must be validated separately on the declared v3input variant."
+  ]
+}

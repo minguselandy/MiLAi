@@ -1,0 +1,58 @@
+{
+  "status": "AUTHORED_CROSS_RECORD_DEVELOPMENT_PROTOCOL",
+  "events": 4,
+  "qa_per_arm": 6,
+  "arms": [
+    "conditioned local control with cross-record representation",
+    "same representation with impact regions"
+  ],
+  "formation": "all state and links from model; source asks separation of credential ledger and eligibility matter but supplies no graph IDs/edges",
+  "success_requires": [
+    "at least two actual related records",
+    "model actually declares a cross-record support link",
+    "card removal retains voucher+training alternative",
+    "both invalid changes eligibility but preserves training/blue label",
+    "source and old versions remain readable under current visibility",
+    "sequential and partial commits are reported exactly"
+  ],
+  "control": "same sources/model/budgets/reader; formation independent, not common-before attribution",
+  "costs": "full formation/update/expansion/selection/reading and embeddings; no O(k) claim",
+  "qa": "first HaluMem rubric on authored data, invalid and missing retained",
+  "no_gold_to_writer": true,
+  "replicates": 1,
+  "unknown_retry": false,
+  "engineering_checks": {
+    "related_tests": 147,
+    "related_tests_seconds": 30.86,
+    "final_cross_tests": 4,
+    "final_cross_tests_seconds": 1.42,
+    "mypy_files": 10,
+    "ruff": "pass",
+    "package_dag_and_tools_boundary": "pass",
+    "verification_matrix_owned_sources": 277,
+    "native_grammar": {
+      "xgrammar": "0.2.3",
+      "cases": {
+        "noop": {
+          "accepted": true,
+          "completed": true
+        },
+        "cross_create": {
+          "accepted": true,
+          "completed": true
+        },
+        "cross_group_reset": {
+          "accepted": true,
+          "completed": true
+        }
+      },
+      "model_requests": 0
+    }
+  },
+  "limitations": [
+    "visible record scan, not O(k) indexed propagation",
+    "record-by-record commits, no multi-record transaction",
+    "Functional Host custom commit path still needs migration",
+    "cached current read signals need for a fresh dependency pool after foreign changes"
+  ]
+}

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Iterator
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from contextvars import ContextVar
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -149,6 +149,15 @@ class RunBudget:
             self.state[kind]["unknown_usage"] -= 1
             self._persist()
 
+    def record_compute(self, phase: str, measures: dict[str, int | float]) -> None:
+        """Accumulate local model work in the existing ledger, separately from tokens."""
+        context = self.http_owner.local_compute(self) if self.http_owner else nullcontext()
+        with context, self.lock:
+            totals = self.state.setdefault("compute", {}).setdefault(phase, {})
+            for name, value in measures.items():
+                totals[name] = totals.get(name, 0) + value
+            self._persist()
+
     def _persist(self) -> None:
         if self.http_owner is None:
             write_json(self.path, self.state)
@@ -249,6 +258,25 @@ class Trace:
             minimal.update(
                 {key: event[key] for key in ("cold_input_tokens", "hits") if key in event}
             )
+        elif kind == "functional_maintenance_result":
+            def effect_batch(batch: dict[str, Any]) -> dict[str, Any]:
+                # Original operation identity/effect survives forgetting. Source,
+                # proposal, directory and error bodies cannot be replayed here.
+                result = {key: batch[key] for key in (
+                    "request_id", "source_refs", "status", "phase", "outcome",
+                    "semantic_write_performed", "memory_save_requested", "source_visibility",
+                ) if key in batch}
+                result["receipts"] = [{key: receipt[key] for key in (
+                    "ok", "status", "id", "revision", "effect", "replayed", "original_status",
+                    "duplicate_request", "existing_record", "duplicate_of_operation",
+                ) if key in receipt} for receipt in batch.get("receipts", [])]
+                result["unprocessed_count"] = batch.get(
+                    "unprocessed_count", len(batch.get("unprocessed", [])))
+                if "batches" in batch:
+                    result["batches"] = [effect_batch(child) for child in batch["batches"]]
+                return result
+
+            minimal["batches"] = [effect_batch(batch) for batch in event.get("batches", [])]
         elif kind in {"local_execution", "host_dispatch", "material_delivery",
                       "ingestion_settlement"}:
             minimal.update({key: value for key, value in event.items()

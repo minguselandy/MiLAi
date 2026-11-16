@@ -12,7 +12,7 @@ import json
 from collections.abc import Callable
 from typing import Any
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
 from milai_lab.analysis.trace_join import join_attempts
 

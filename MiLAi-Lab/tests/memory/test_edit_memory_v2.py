@@ -238,7 +238,7 @@ def next_unit(text, evidence="e1", role="content", kind="reported"):
         "text": text,
         "role": role,
         "evidence": [evidence],
-        "assertion": {"source": evidence, "kind": kind},
+        "assertion": {"source_evidence": evidence, "kind": kind},
     }
 
 
@@ -618,7 +618,8 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
     with opened(tmp_path, "B2") as (service, _):
         method = EditMemory(service, "B2", interface_version="I2", features=NEXT_FEATURES)
         view, old_source = next_request(
-            service, method, "form", "Use quiet reminders only during gallery hours."
+            service, method, "form", "Use quiet reminders only for my own reminders "
+            "during gallery hours."
         )
         create = {
             "action": "create", "matter": "Reminder sound",
@@ -629,14 +630,20 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
                     "text": "During gallery hours.", "evidence": ["e1"],
                     "assertion": {"source": "e1", "kind": "reported"},
                     "binding": {"evidence": ["e1"]},
+                }, {
+                    "text": "Only for my own reminders.", "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                    "binding": {"evidence": ["e1"]},
                 }],
             }],
         }
         saved = method.apply("s", "form", method.decode_proposal(create, view["mapping"]))
         original = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
+        other, _ = next_save(service, method, key="other-record")
         view, new_source = next_request(
-            service, method, "change", "The reminder rule now applies during evening hours.",
-            [service.read(saved["id"])], allow_create=False,
+            service, method, "change", "The reminder rule now applies during evening hours. "
+            "Use haptic backup for reminders.",
+            [service.read(saved["id"]), service.read(other["id"])], allow_create=False,
         )
         clause = view["packet"]["records"][0]["clauses"][0]
         condition = clause["conditions"][0]
@@ -658,21 +665,35 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         rewritten_condition["from_unit"] = condition["id"]
         generated = copy.deepcopy(rewrite)
         generated.pop("target")
+        generated_assertion = generated["clauses"][0]["conditions"][0]["assertion"]
+        generated_assertion["source_evidence"] = generated_assertion.pop("source")
         Draft202012Validator(view["schema"]).validate({"creates": [], "records": {"r1": generated}})
 
-        missing_identity = copy.deepcopy(rewrite)
-        missing_identity["clauses"][0].pop("from_unit")
-        with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
-            method.decode_proposal(missing_identity, view["mapping"])
+        kept_without_identity = copy.deepcopy(rewrite)
+        kept_without_identity["clauses"][0].pop("from_unit")
+        decoded_keep = method.decode_proposal(kept_without_identity, view["mapping"])
+        assert (
+            decoded_keep["_edit_metadata"]["unit_assertions"][0]
+            == original["units"][0]["assertion"]
+        )
+        assert decoded_keep["units"][0]["evidence"] == [
+            ref["evidence_id"] for ref in original["units"][0]["evidence_refs"]
+        ]
+        wrong_record = copy.deepcopy(kept_without_identity)
+        wrong_record["clauses"][0]["assertion"] = {
+            "keep": view["packet"]["records"][1]["clauses"][0]["support"][0]
+        }
+        with pytest.raises(FunctionalRejection, match="PUBLIC_PROPOSAL_INVALID"):
+            method.decode_proposal(wrong_record, view["mapping"])
         wrong_assertion = copy.deepcopy(rewrite)
         wrong_assertion["clauses"][0]["assertion"] = {"keep": condition["support"][0]}
         with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
             method.decode_proposal(wrong_assertion, view["mapping"])
-        explicit_empty = copy.deepcopy(rewrite)
+        explicit_empty = copy.deepcopy(kept_without_identity)
         explicit_empty["clauses"][0]["keep_support"] = []
         with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
             method.decode_proposal(explicit_empty, view["mapping"])
-        changed_retained = copy.deepcopy(rewrite)
+        changed_retained = copy.deepcopy(kept_without_identity)
         changed_retained["clauses"][0]["text"] = "Use loud reminders."
         with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM"):
             method.decode_proposal(changed_retained, view["mapping"])
@@ -702,18 +723,51 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
             method.decode_proposal(duplicated, view["mapping"])
 
-        result = method.apply("s", "change", method.decode_proposal(rewrite, view["mapping"]))
+        retained = copy.deepcopy(kept_without_identity)
+        unchanged_condition = clause["conditions"][1]
+        retained["clauses"][0]["conditions"].append({
+            "from_unit": unchanged_condition["id"], "evidence": [],
+            "assertion": {"keep": unchanged_condition["support"][0]},
+            "binding": {"evidence": [],
+                        "keep_support": unchanged_condition["binding"]["support"]},
+        })
+        retained["clauses"].append({
+            "text": "Use haptic backup for reminders.", "evidence": ["e1"],
+            "assertion": {"source_evidence": "e1", "kind": "reported"}, "conditions": [],
+        })
+        wrong_keep = copy.deepcopy(retained)
+        wrong_keep["clauses"][0]["from_unit"] = clause["id"]
+        wrong_keep["clauses"][0].pop("text")
+        wrong_keep["clauses"][0]["assertion"] = {"keep": condition["support"][0]}
+        with pytest.raises(FunctionalRejection, match="ASSERTION_UNIT_BINDING_INVALID"):
+            method.decode_proposal(wrong_keep, view["mapping"])
+        public_retained = copy.deepcopy(retained)
+        public_retained.pop("target")
+        condition_assertion = public_retained["clauses"][0]["conditions"][0]["assertion"]
+        condition_assertion["source_evidence"] = condition_assertion.pop("source")
+        Draft202012Validator(view["schema"]).validate(
+            {"creates": [], "records": {"r1": public_retained}}
+        )
+        result = method.apply("s", "change", method.decode_proposal(retained, view["mapping"]))
         assert result["ok"] and result["revision"] == 2
         current = service.read(saved["id"])["value"]["edit_state"]
         assert [u["text"] for u in current["units"]] == [
-            "Use quiet reminders.", "During evening hours."
+            "Use quiet reminders.", "During evening hours.", "Only for my own reminders.",
+            "Use haptic backup for reminders.",
         ]
-        assert len(current["relations"]) == 1
-        assert current["relations"][0]["relation_type"] == "modifies"
+        assert len(current["relations"]) == 2
+        assert all(r["relation_type"] == "modifies" for r in current["relations"])
         assert current["units"][0]["assertion"] == original["units"][0]["assertion"]
         assert current["units"][0]["evidence_refs"] == original["units"][0]["evidence_refs"]
+        assert current["units"][2]["text"] == original["units"][2]["text"]
+        assert current["units"][2]["role"] == original["units"][2]["role"] == "condition"
+        assert current["units"][2]["assertion"] == original["units"][2]["assertion"]
+        assert current["units"][2]["assertion"]["role"] == "user"
+        assert current["units"][2]["evidence_refs"] == original["units"][2]["evidence_refs"]
         assert {r["source_ref"] for r in current["units"][1]["evidence_refs"]} == {new_source}
-        assert {r["source_ref"] for r in current["relations"][0]["evidence_refs"]} == {old_source}
+        assert {r["source_ref"] for r in current["units"][3]["evidence_refs"]} == {new_source}
+        assert all({r["source_ref"] for r in edge["evidence_refs"]} == {old_source}
+                   for edge in current["relations"])
         assert service.read(saved["id"], 1)["value"]["edit_state"] == original
         record_id = saved["id"]
     with opened(tmp_path, "B2") as (service, _):
@@ -794,6 +848,21 @@ def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(
         assert '"edit"' not in schema_text and '"no_change"' not in schema_text
         assert '"not"' not in schema_text
         assert view["schema"]["properties"]["records"]["properties"] == {}
+        user_ref = view["mapping"]["evidence"]["e1"]["source_ref"]
+        tool_ref = service.capture_tool(
+            "s", "query", "get_reservation", '{"ok":false,"status":"not_found"}', None,
+        )["source_ref"]
+        actual_source = copy.deepcopy(service.source(tool_ref))
+        mixed = method.prepare([user_ref, tool_ref], "", selected_records=[])
+        editor = method.writer_view(mixed, request_id="mixed-origins")
+        source_table = editor["packet"]["source_table"]
+        assert [row["role"] for row in source_table] == ["user", "tool"]
+        assert "origin" not in source_table[0]
+        assert source_table[1]["origin"] == actual_source["origin"] == "get_reservation"
+        extract = method.change_request(mixed, "2026-10-09")
+        extract_table = json.loads(extract["messages"][1]["content"])["delivery"]["source_table"]
+        assert extract_table == [{**row, "delivery_kinds": ["current"]} for row in source_table]
+        assert service.source(tool_ref) == actual_source
         with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
             method.envelope_proposals(
                 {"creates": [], "records": {"r1": {"action": "no_change"}}}, view["mapping"]
@@ -826,7 +895,8 @@ def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(
         assert legacy.envelope_proposals(mixed, old["mapping"]) == mixed["proposals"]
 
 
-def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_path):
+@pytest.mark.parametrize("repetitions", [1, 2])
+def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_path, repetitions):
     with opened(tmp_path) as (service, _):
         method = EditMemory(service, "M", interface_version="I2", features=NEXT_FEATURES)
         saved, _ = next_save(service, method, conditioned=True)
@@ -844,7 +914,7 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
             "edits": [
                 {
                     **next_unit("During afternoon gallery hours.", role="condition"),
-                    "operation": "change_condition",
+                    "operation": "replace",
                     "target_unit": "u2",
                 },
                 {
@@ -865,16 +935,16 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         compact = compact_prompt_schema(view["schema"])
         validator = Draft202012Validator(compact)
         Draft202012Validator.check_schema(compact)
-        assert validator.is_valid({"records": {"r1": edit}})
+        assert validator.is_valid({"creates": [], "records": {"r1": edit}})
         assert compact_prompt_schema(compact) == compact
         wrong_role = copy.deepcopy(edit)
         wrong_role["edits"][1]["shared_conditions"] = ["u1"]
-        assert not validator.is_valid({"records": {"r1": wrong_role}})
+        assert not validator.is_valid({"creates": [], "records": {"r1": wrong_role}})
         with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
             method.decode_envelope({"records": {"r1": wrong_role}}, view["mapping"])
         wrong_target = copy.deepcopy(edit)
         wrong_target["edits"][0]["target_unit"] = "u999"
-        assert not validator.is_valid({"records": {"r1": wrong_target}})
+        assert not validator.is_valid({"creates": [], "records": {"r1": wrong_target}})
         with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
             method.decode_envelope({"records": {"r1": wrong_target}}, view["mapping"])
         wrong_support = copy.deepcopy(edit)
@@ -882,10 +952,66 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
             method.decode_envelope({"records": {"r1": wrong_support}}, view["mapping"])
         decoded = method.decode_envelope({"records": {"r1": edit}}, view["mapping"])[0]
+        legacy_attribution = copy.deepcopy(edit)
+        for item in legacy_attribution["edits"]:
+            item["assertion"]["source"] = item["assertion"].pop("source_evidence")
+        assert not validator.is_valid({"creates": [], "records": {"r1": legacy_attribution}})
+        assert (
+            method.decode_envelope({"records": {"r1": legacy_attribution}}, view["mapping"])[0]
+            == decoded
+        )
+        conflicting_attribution = copy.deepcopy(edit)
+        conflicting_attribution["edits"][0]["assertion"]["source"] = "e1"
+        with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
+            method.decode_envelope({"records": {"r1": conflicting_attribution}}, view["mapping"])
+        legacy_edit = copy.deepcopy(edit)
+        legacy_edit["edits"][0]["operation"] = "change_condition"
+        assert not validator.is_valid({"creates": [], "records": {"r1": legacy_edit}})
+        assert (
+            method.decode_envelope({"records": {"r1": legacy_edit}}, view["mapping"])[0] == decoded
+        )
+        # A local target and its explicitly kept attribution identify the same
+        # unchanged unit; retaining that h does not need a second declaration.
+        edit["edits"].append({
+            "operation": "replace", "target_unit": clause["id"], "text": clause["text"],
+            "evidence": [], "assertion": {"keep": clause["support"][0]},
+        })
+        assert validator.is_valid({"creates": [], "records": {"r1": edit}})
+        decoded = method.decode_envelope({"records": {"r1": edit}}, view["mapping"])[0]
+        explicit = copy.deepcopy(edit)
+        explicit["edits"][-1]["keep_support"] = clause["support"]
+        assert method.decode_envelope({"records": {"r1": explicit}}, view["mapping"])[0] == decoded
+        relation_support = next(
+            alias for alias, support in view["mapping"]["support"].items() if "unit" not in support
+        )
+        relation_attribution = copy.deepcopy(explicit)
+        relation_attribution["edits"][-1].update(
+            keep_support=[relation_support], assertion={"keep": relation_support},
+        )
+        assert not validator.is_valid({"creates": [], "records": {"r1": relation_attribution}})
+        with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
+            method.decode_envelope({"records": {"r1": relation_attribution}}, view["mapping"])
+        explicit_empty = copy.deepcopy(edit)
+        explicit_empty["edits"][-1].update(evidence=["e1"], keep_support=[])
+        with pytest.raises(FunctionalRejection, match="ASSERTION_SUPPORT_NOT_KEPT"):
+            method.decode_envelope({"records": {"r1": explicit_empty}}, view["mapping"])
+        cross_unit = copy.deepcopy(edit)
+        cross_unit["edits"][-1].update(
+            evidence=["e1"], assertion={"keep": clause["conditions"][0]["support"][0]},
+        )
+        with pytest.raises(FunctionalRejection, match="ASSERTION_SUPPORT_NOT_KEPT"):
+            method.decode_envelope({"records": {"r1": cross_unit}}, view["mapping"])
+        changed = copy.deepcopy(edit)
+        changed["edits"][-1].update(text="User reports loud reminders.", evidence=["e1"])
+        with pytest.raises(FunctionalRejection, match="CHANGED_ASSERTION_REQUIRES_NEW_EVIDENCE"):
+            method.decode_envelope({"records": {"r1": changed}}, view["mapping"])
+        assert service.read(saved["id"])["value"]["edit_state"] == baseline
         revised = method.apply("s", "scope", decoded)
         state = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
         assert revised["revision"] == 2 and state["units"][0] == baseline["units"][0]
         assert state["units"][1]["unit_id"] == baseline["units"][1]["unit_id"]
+        assert state["units"][1]["role"] == baseline["units"][1]["role"]
+        assert state["relations"][0] == baseline["relations"][0]
         assert len(state["units"]) == 4 and len(state["relations"]) == 4
         view, _ = next_request(
             service,
@@ -896,12 +1022,15 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         )
         remove = {
             "action": "edit",
-            "edits": [{"operation": "remove_exception", "target_unit": "u3", "evidence": ["e1"]}],
+            "edits": [{"operation": "remove_exception", "target_unit": "u3",
+                       "evidence": ["e1"]}] * repetitions,
         }
         decoded = method.decode_envelope(
             {"creates": [], "records": {"r1": remove}}, view["mapping"]
         )[0]
-        assert len(decoded["edits"]) == len(decoded["_edit_metadata"]["unit_assertions"]) == 2
+        assert len(decoded["edits"]) == len(decoded["_edit_metadata"]["unit_assertions"])
+        assert sum(edit["target_unit"] == state["units"][2]["unit_id"]
+                   for edit in decoded["edits"]) == repetitions
         receipt = method.apply("s", "remove", decoded)
         now = service.read(saved["id"])["value"]["edit_state"]
         assert receipt["revision"] == 3 and now["units"] == state["units"][:2]
@@ -929,13 +1058,20 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
             "edits": [
                 {
                     **next_unit("Changed stale value."),
-                    "operation": "change_value",
+                    "operation": "replace",
                     "target_unit": "u1",
                 }
             ],
         }
         stale["edits"][0].pop("role")
-        rejected = method.apply("s", "stale", method.decode_proposal(stale, view["mapping"]))
+        decoded_stale = method.decode_proposal(stale, view["mapping"])
+        legacy_stale = copy.deepcopy(stale)
+        legacy_stale["edits"][0]["operation"] = "change_value"
+        legacy_stale["edits"][0]["assertion"]["source"] = legacy_stale["edits"][0][
+            "assertion"
+        ].pop("source_evidence")
+        assert method.decode_proposal(legacy_stale, view["mapping"]) == decoded_stale
+        rejected = method.apply("s", "stale", decoded_stale)
         assert not rejected["ok"] and service.read(saved["id"])["value"]["revision"] == 3
 
 
@@ -1002,14 +1138,25 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
             ),
         )
         original = copy.deepcopy(service.read(saved["id"])["value"])
+        rows = [service.read(saved["id"])]
+        cancellation_text = "Tuesday reminders use the general quiet tone again."
+        if arm == "B0":
+            other, _ = next_save(service, method, key="other-reminder")
+            rows.append(service.read(other["id"]))
+            cancellation_text += (
+                " Tuesday reminders vibrate before chiming, and Tuesday reminders do not flash."
+            )
         partial, cancellation = next_request(
-            service, method, "cancel-local", "Tuesday reminders use the general quiet tone again.",
-            [service.read(saved["id"])],
+            service, method, "cancel-local", cancellation_text, rows,
         )
         retained = {
             "text": "User reports quiet reminders.", "evidence": [],
             "keep_support": ["h1"], "assertion": {"keep": "h1"},
         }
+        if arm == "B0":
+            retained.pop("text")
+            retained.pop("evidence")
+            retained.pop("keep_support")
         public = clause_proposal(
             {"action": "rewrite", "target": "r1", "units": [retained]},
             conditioned=method.conditioned,
@@ -1020,16 +1167,76 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
         assert not rejected["ok"] and rejected["reason"] == "current_boundary_source_required"
         assert service.read(saved["id"])["value"] == original
         public["revision_evidence"] = ["e1"]
+        if arm == "B0":
+            public["clauses"].extend([
+                {"text": "Tuesday reminders vibrate before chiming.", "evidence": ["e1"],
+                 "assertion": {"source_evidence": "e1", "kind": "reported"}},
+                {"text": "Tuesday reminders do not flash.", "evidence": ["e1"],
+                 "assertion": {"source_evidence": "e1", "kind": "reported"}},
+            ])
+            assert "from_unit" not in json.dumps(partial["schema"])
+            assert "from_unit" not in method.instructions()
+            assert "Copy retained text and role exactly" not in method.instructions()
+            generated = copy.deepcopy(public)
+            generated.pop("target")
+            Draft202012Validator(partial["schema"]).validate(
+                {"creates": [], "records": {"r1": generated}}
+            )
+            assert generated["clauses"][0] == {"assertion": {"keep": "h1"}}
+            Draft202012Validator(partial["schema"]).validate({"creates": [], "records": {}})
+            assert method.decode_envelope({}, partial["mapping"]) == []
+            empty_evidence = copy.deepcopy(generated)
+            empty_evidence["clauses"][1]["evidence"] = []
+            assert not Draft202012Validator(partial["schema"]).is_valid(
+                {"creates": [], "records": {"r1": empty_evidence}}
+            )
+            with pytest.raises(FunctionalRejection, match="EDIT_EVIDENCE_REQUIRED"):
+                method.decode_proposal({**empty_evidence, "target": "r1"}, partial["mapping"])
+            assert empty_evidence["clauses"][1]["evidence"] == []
+            repeated = copy.deepcopy(generated)
+            repeated["clauses"][0]["text"] = "User reports quiet reminders."
+            assert not Draft202012Validator(partial["schema"]).is_valid(
+                {"creates": [], "records": {"r1": repeated}}
+            )
+            wrong_target = copy.deepcopy(public)
+            wrong_target["target"] = "r2"
+            with pytest.raises(FunctionalRejection, match="PUBLIC_PROPOSAL_INVALID"):
+                method.decode_proposal(wrong_target, partial["mapping"])
+            wrong_role = copy.deepcopy(public)
+            wrong_role["clauses"][0]["role"] = "condition"
+            with pytest.raises(FunctionalRejection, match="PUBLIC_PROPOSAL_INVALID"):
+                method.decode_proposal(wrong_role, partial["mapping"])
         changed = copy.deepcopy(public)
         changed["clauses"][0]["text"] = "User reports loud reminders."
         with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM"):
             method.decode_proposal(changed, partial["mapping"])
         decoded = method.decode_proposal(public, partial["mapping"])
+        if arm == "B0":
+            explicit_arrays = copy.deepcopy(public)
+            explicit_arrays["clauses"][0]["evidence"] = []
+            assert method.decode_proposal(explicit_arrays, partial["mapping"]) == decoded
+            empty_support = copy.deepcopy(explicit_arrays)
+            empty_support["clauses"][0]["keep_support"] = []
+            with pytest.raises(FunctionalRejection, match="EDIT_EVIDENCE_REQUIRED"):
+                method.decode_proposal(empty_support, partial["mapping"])
+            legacy = copy.deepcopy(public)
+            legacy["clauses"][0]["text"] = "User reports quiet reminders."
+            legacy["clauses"][0]["from_unit"] = "u1"
+            legacy["clauses"][0]["evidence"] = []
+            assert method.decode_proposal(legacy, partial["mapping"]) == decoded
+            legacy["clauses"][1]["from_unit"] = "u1"
+            with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
+                method.decode_proposal(legacy, partial["mapping"])
         receipt = method.apply("s", "remove-local", decoded)
         assert receipt["ok"] and receipt["revision"] == 2
         assert method.apply("s", "remove-local", decoded)["replayed"]
         current = service.read(saved["id"])["value"]
-        assert len(current["edit_state"]["units"]) == 1
+        assert len(current["edit_state"]["units"]) == (3 if arm == "B0" else 1)
+        if arm == "B0":
+            assert [u["text"] for u in current["edit_state"]["units"][1:]] == [
+                "Tuesday reminders vibrate before chiming.", "Tuesday reminders do not flash.",
+            ]
+            assert all(u["assertion"]["role"] == "user" for u in current["edit_state"]["units"])
         assert {
             k: v for k, v in current["edit_state"]["units"][0].items() if k != "unit_id"
         } == {
@@ -1086,6 +1293,10 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
         assert service.read(saved["id"], 1)["value"]["edit_state"]["units"]
         assert service.read(saved["id"], 2)["value"]["edit_state"]["units"]
         assert service.read(saved["id"], 3)["value"]["edit_state"]["units"] == []
+    if arm == "B0":
+        with opened(tmp_path, arm) as (service, _):
+            assert service.read(saved["id"], 2)["value"] == current
+            assert service.read(saved["id"], 3)["value"]["edit_state"]["units"] == []
 
 
 def test_next_contract_occurrence_time_restart_immutable_and_unknown(tmp_path):
@@ -1738,3 +1949,234 @@ def test_balanced_formation_then_local_exception_and_supported_cancel_keep_gener
         assert canceled["ok"] and canceled["id"] == saved["id"] and canceled["revision"] == 3
         assert service.read(saved["id"])["value"]["edit_state"] == original
         assert service.read(saved["id"], 2)["value"]["edit_state"] == state
+
+@pytest.mark.parametrize("maintenance_mode", ["legacy", "event_delta_v1"])
+def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(
+    tmp_path, maintenance_mode,
+):
+    """Authored proposals exercise the real Source/SQLite path, not model semantics."""
+    initial_text = (
+        "During this quarter, checklist reminders are disabled by default. "
+        "South and North currently have no checklist reminders. "
+        "I am considering optional coordinator training. "
+        "The previous quarter used printed checklists."
+    )
+    correction_text = (
+        "For North only during this quarter, the rule is now weekly checklist reminders. "
+        "South stays unchanged."
+    )
+    features = EditFeatures(True, True, True, True, True, True)
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=features,
+                            maintenance_mode=maintenance_mode)
+        initial, initial_ref = next_request(service, method, "initial", initial_text)
+        create = {
+            "action": "create",
+            "matter": "Exhibition checklist reminders",
+            "units": [
+                next_unit("Checklist reminders are disabled by default."),
+                next_unit("During this quarter.", role="condition"),
+                next_unit("During this quarter, South and North have no checklist reminders."),
+                next_unit("The user is considering optional coordinator training."),
+                next_unit("The user reports that the previous quarter used printed checklists."),
+            ],
+            "relations": [
+                {"source": 1, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
+            ],
+        }
+        saved = method.apply(
+            "s", "save-initial", method.decode_envelope(
+                {"creates": [clause_proposal(create, conditioned=True)], "records": {}},
+                initial["mapping"],
+            )[0],
+        )
+        assert saved["ok"] and saved["revision"] == 1
+        before_row = service.read(saved["id"])
+        before = copy.deepcopy(before_row["value"])
+        baseline = before["edit_state"]
+        new_ref = service.capture_user(
+            "s", "north", correction_text, occurred_at="2025-03-11T10:00:00Z"
+        )["source_ref"]
+        service.bind_source_boundary("s", "north", [new_ref])
+        delivery = method.prepare(
+            [new_ref], correction_text, selected_records=[before_row],
+            redelivered_ranges=method.target_support_ranges([before_row]),
+        )
+        request = method.writer_request(delivery, request_id="north", allow_create=False)
+        messages = method.edit_messages(
+            request["packet"], "2026-10-10", allow_create=False, schema=request["schema"]
+        )
+        actual_input = json.loads(messages[1]["content"])["delivery"]
+        if maintenance_mode == "legacy":
+            assert actual_input == request["packet"]
+        else:
+            assert actual_input["records"] == request["packet"]["records"]
+            assert actual_input["source_table"] == request["packet"]["source_table"]
+            # Empty locating hints are omitted; original evidence still precedes records.
+            assert "change_candidates" not in actual_input
+            assert list(actual_input).index("evidence") < list(actual_input).index("records")
+        bodies = [*actual_input["evidence"], *actual_input.get("redelivered_support", [])]
+        assert [(e["text"], e["delivery_kind"]) for e in bodies] == [
+            (correction_text, "current"), (initial_text, "redelivered_support")
+        ]
+        record = actual_input["records"][0]
+        assert [c["id"] for c in record["clauses"]] == ["u1", "u3", "u4", "u5"]
+        assert record["clauses"][0]["conditions"][0]["id"] == "u2"
+        assert record["clauses"][1]["text"] == baseline["units"][2]["text"]
+        assert record["clauses"][1]["conditions"] == []
+        assert set(request["mapping"]["units"]) == {"u1", "u2", "u3", "u4", "u5"}
+        assert all(h["use"] == "EXISTING_SUPPORT_ONLY"
+                   for h in actual_input["historical_support"])
+
+        # Rewording the combined old scope cannot use an exact-keep assertion.
+        split_text = "During this quarter, South has no checklist reminders."
+        with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE"):
+            method.decode_envelope(
+                {"records": {"r1": {"action": "edit", "edits": [{
+                    "operation": "replace", "target_unit": "u3", "text": split_text,
+                    "evidence": [], "assertion": {"keep": "h3"},
+                }]}}}, request["mapping"],
+            )
+        old_only = method.decode_envelope(
+            {"records": {"r1": {"action": "edit", "edits": [{
+                "operation": "retract", "target_unit": "u3", "evidence": ["e2"],
+            }]}}}, request["mapping"],
+        )[0]
+        rejected = method.apply("s", "old-affirmation-only", old_only)
+        assert not rejected["ok"] and rejected["reason"] == "current_boundary_source_required"
+        assert service.read(saved["id"])["value"] == before
+
+        proposal = {"records": {"r1": {"action": "edit", "edits": [
+            {
+                "operation": "add_exception", "target_unit": "u1",
+                "text": "Checklist reminders run weekly.", "condition": "Only in North.",
+                "shared_conditions": ["u2"], "evidence": ["e1"],
+                "assertion": {"source_evidence": "e1", "kind": "reported"},
+            },
+            {
+                "operation": "replace", "target_unit": "u3", "text": split_text,
+                "evidence": ["e1", "e2"],
+                "assertion": {"source_evidence": "e1", "kind": "inferred"},
+            },
+        ]}}}
+        decoded = method.decode_envelope(proposal, request["mapping"])
+        assert len(decoded) == 1
+        revised = method.apply("s", "revise-north-and-overview", decoded[0])
+        assert revised["ok"] and revised["id"] == saved["id"] and revised["revision"] == 2
+        current = copy.deepcopy(service.read(saved["id"])["value"])
+        state = current["edit_state"]
+        for index in (0, 1, 3, 4):
+            assert state["units"][index] == baseline["units"][index]
+        assert state["relations"][0] == baseline["relations"][0]
+        assert state["units"][2]["unit_id"] == baseline["units"][2]["unit_id"]
+        assert state["units"][2]["text"] == split_text
+        assert {r["source_ref"] for r in state["units"][2]["evidence_refs"]} == {
+            initial_ref, new_ref
+        }
+        assertion = state["units"][2]["assertion"]
+        assert assertion["source_ref"] == new_ref and assertion["role"] == "user"
+        assert assertion["kind"] == "inferred"
+        assert assertion["occurred_at"] == "2025-03-11T10:00:00Z"
+        assert assertion["observed_at"] == service.source(new_ref)["observed_at"]
+        assert all("applicability" not in u["assertion"] for u in state["units"])
+        general, shared = baseline["units"][:2]
+        exception, north_scope = state["units"][5:]
+        edges = {(r["source_unit"], r["relation_type"], r["target_unit"])
+                 for r in state["relations"]}
+        assert edges == {
+            (shared["unit_id"], "modifies", general["unit_id"]),
+            (shared["unit_id"], "modifies", exception["unit_id"]),
+            (north_scope["unit_id"], "modifies", exception["unit_id"]),
+            (exception["unit_id"], "overrides", general["unit_id"]),
+        }
+        assert {part["content"] for part in read_revision_evidence(service, current)} == {
+            initial_text, correction_text
+        }
+        assert service.read(saved["id"], 1)["value"] == before
+
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=features,
+                            maintenance_mode=maintenance_mode)
+        assert service.read(saved["id"])["value"] == current
+        assert service.read(saved["id"], 1)["value"] == before
+        current_view = method.revision_view(service.read(saved["id"])["value"])
+        history_view = method.revision_view(service.read(saved["id"], 1)["value"])
+        assert len(current_view["units"]) == 7 and len(history_view["units"]) == 5
+        assert any(u["kind"] == "scoped_exception" for u in current_view["units"])
+        assert not any(u.get("kind") == "scoped_exception" for u in history_view["units"])
+        assert [part["content"] for part in read_revision_evidence(service, before)] == [
+            initial_text
+        ]
+
+
+@pytest.mark.parametrize("mode", ["legacy", "event_delta_v1"])
+def test_proposition_recipe_preserves_literal_time_through_extractor_writer_boundary(
+    tmp_path, mode,
+):
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", maintenance_mode=mode,
+                            features=EditFeatures(source_metadata=True, temporal_scope=True,
+                                                  proposition_updates=True))
+        view, delivery = packet(service, method, "consider", "Recently I began considering a move.")
+        request = method.change_request(delivery, "2030-10-14")
+        extracted = method.decode_changes({"changes": [{
+            "subject": "user", "statement": "Recently the user began considering a move.",
+            "evidence": ["e1"], "time": "Recently", "scope": None,
+        }]}, request)
+        candidates = method.writer_changes(extracted, view["mapping"])
+        assert candidates[0]["time"] == "Recently"
+        assert candidates[0]["evidence"] == ["e1"]
+        messages = method.edit_messages(view["packet"], "2030-10-14", allow_create=True,
+                                        change_candidates=candidates)
+        assert "Recently" in messages[1]["content"]
+        assert "event_at" not in candidates[0] and service.records() == []
+        assert "proposition_updates" not in EditFeatures().settings()
+
+
+def test_proposition_time_and_changed_assertion_are_bound_before_generation(tmp_path):
+    features = EditFeatures(True, True, True, True, True, True, proposition_updates=True)
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=features,
+                            maintenance_mode="event_delta_v1")
+        view, _ = next_request(service, method, "seed", "A sends to Li. B sends to Wang.")
+        created = {"action": "create", "matter": "Contacts", "units": [
+            next_unit("A sends to Li."), next_unit("B sends to Wang.")], "relations": []}
+        saved = method.apply("s", "seed", method.decode_proposal(
+            clause_proposal(created, conditioned=True), view["mapping"]))
+        assert saved["ok"]
+        current, _ = next_request(service, method, "change",
+            "From 2030-10-20 A sends to Zhao; B remains unchanged.", [service.read(saved["id"])])
+        assert current["packet"]["time_choices"][0]["value"] == "2030-10-20"
+        valid = {"action": "edit", "target": "r1", "edits": [{
+            "operation": "replace", "target_unit": "u1", "text": "A sends to Zhao from 2030-10-20.",
+            "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported",
+                                              "applicability": {"effective_from": "t1"}},
+        }]}
+        schema = method.proposal_schema(mapping=current["mapping"], for_generation=True)
+        Draft202012Validator(schema).validate(valid)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["assertion"] = {"keep": "h1"}
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["keep_support"] = ["h2"]
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["assertion"]["applicability"]["effective_from"] = "2030-10-20"
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        receipt = method.apply("s", "change", method.decode_proposal(valid, current["mapping"]))
+        assert receipt["ok"]
+        state = service.read(saved["id"])["value"]["edit_state"]
+        assert state["units"][0]["assertion"]["applicability"] == {"effective_from": "2030-10-20"}
+        assert state["units"][1]["text"] == "B sends to Wang."
+        assert service.read(saved["id"], 1)["ok"]
+        recent, _ = next_request(service, method, "recent", "Recently considering SMS; undecided.",
+                                 [service.read(saved["id"])])
+        assert recent["packet"]["time_choices"] == []
+        append = {"action": "edit", "target": "r1", "edits": [{
+            "operation": "append", "role": "content",
+            "text": "Recently considering SMS; undecided.",
+            "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported",
+                                              "applicability": {"event_at": "2030-10-14"}},
+        }]}
+        assert not Draft202012Validator(method.proposal_schema(
+            mapping=recent["mapping"], for_generation=True)).is_valid(append)

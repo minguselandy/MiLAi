@@ -1,0 +1,361 @@
+{
+  "status": "ACTIVE_GOAL;PUBLIC_INITIAL_INPUTS_VERIFIED;KNOWN_VIEW_CAPACITY_OUTCOME_IMPLEMENTED",
+  "observed_at": "2026-10-22T01:51:22.191914+00:00",
+  "previous": "training-generalization-progress-20261022-v23.json",
+  "previous_turn_classification": "PROGRESS:generic literal-range condition implemented;512cumulative overflow retained;256fixed-path inputs passed. This turn verified all public initial inputs and measured/handled actual offered View capacity rejection.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "latest_recorded_updates": 262,
+    "planned": 524,
+    "source_version": "d6a8afd3",
+    "no_hot_update_restart_or_recipe_change": true,
+    "post_update_scores_not_read_for_selection": true
+  },
+  "full_page_audit": {
+    "session": 68138,
+    "pid": 4070915,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "active": {
+      "pool": "pool-1",
+      "pages": 6800,
+      "sources_complete": 1121
+    },
+    "closed_pools": [
+      {
+        "pool": "pool-0",
+        "sources": 3458,
+        "pages": 11987,
+        "original_characters_covered": 93966498,
+        "literal_contiguous_full_coverage": true,
+        "source_store_unchanged": true,
+        "full_bank_search_result_unchanged": true,
+        "max_native_sequence_tokens": 5606,
+        "state_drop_pages": 0,
+        "head_drop_pages": 0,
+        "SDK_mask_replacements": 0
+      }
+    ],
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-source-pages-audit-v1",
+    "scope": "Pool0 all11987pages literally cover93966498characters/3458Sources, no state/head drops or mask replacements; Store/search invariance. Pool1 still live; no full-job closure or final CPU cost yet. Does not imply8steps traverse all pages."
+  },
+  "public_query_audit": {
+    "session": 36685,
+    "pid": 77655,
+    "actual_pid_alive": false,
+    "exit_code": 0,
+    "status": "COMPLETE_ALL_PUBLIC_INITIAL_INPUTS_AND_QUERY_ONLY_READER_AUDIT",
+    "source_version": "bcebf420",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-public-query-input-audit-v1/audit.json",
+    "cases_per_pool": {
+      "pool-0": 211,
+      "pool-1": 240
+    },
+    "public_projection_literal_equal": true,
+    "planned_queries": 451,
+    "query_images": 29,
+    "controller_inputs": 3608,
+    "max_controller_sequence_tokens": 6866,
+    "control_conditions": [
+      {
+        "pool": "pool-0",
+        "internal_views": true,
+        "delivery_selection": false,
+        "representation": "shared_actions",
+        "queries": 211,
+        "max_native_sequence_tokens": 6832,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-0",
+        "internal_views": true,
+        "delivery_selection": false,
+        "representation": "shared_actions_request_text",
+        "queries": 211,
+        "max_native_sequence_tokens": 6866,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-0",
+        "internal_views": true,
+        "delivery_selection": true,
+        "representation": "shared_actions",
+        "queries": 211,
+        "max_native_sequence_tokens": 6508,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-0",
+        "internal_views": true,
+        "delivery_selection": true,
+        "representation": "shared_actions_request_text",
+        "queries": 211,
+        "max_native_sequence_tokens": 6542,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-0",
+        "internal_views": false,
+        "delivery_selection": false,
+        "representation": "shared_actions",
+        "queries": 211,
+        "max_native_sequence_tokens": 6688,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-0",
+        "internal_views": false,
+        "delivery_selection": false,
+        "representation": "shared_actions_request_text",
+        "queries": 211,
+        "max_native_sequence_tokens": 6722,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-0",
+        "internal_views": false,
+        "delivery_selection": true,
+        "representation": "shared_actions",
+        "queries": 211,
+        "max_native_sequence_tokens": 6364,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-0",
+        "internal_views": false,
+        "delivery_selection": true,
+        "representation": "shared_actions_request_text",
+        "queries": 211,
+        "max_native_sequence_tokens": 6398,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-1",
+        "internal_views": true,
+        "delivery_selection": false,
+        "representation": "shared_actions",
+        "queries": 240,
+        "max_native_sequence_tokens": 6395,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-1",
+        "internal_views": true,
+        "delivery_selection": false,
+        "representation": "shared_actions_request_text",
+        "queries": 240,
+        "max_native_sequence_tokens": 6429,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-1",
+        "internal_views": true,
+        "delivery_selection": true,
+        "representation": "shared_actions",
+        "queries": 240,
+        "max_native_sequence_tokens": 6161,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-1",
+        "internal_views": true,
+        "delivery_selection": true,
+        "representation": "shared_actions_request_text",
+        "queries": 240,
+        "max_native_sequence_tokens": 6195,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-1",
+        "internal_views": false,
+        "delivery_selection": false,
+        "representation": "shared_actions",
+        "queries": 240,
+        "max_native_sequence_tokens": 6289,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-1",
+        "internal_views": false,
+        "delivery_selection": false,
+        "representation": "shared_actions_request_text",
+        "queries": 240,
+        "max_native_sequence_tokens": 6323,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-1",
+        "internal_views": false,
+        "delivery_selection": true,
+        "representation": "shared_actions",
+        "queries": 240,
+        "max_native_sequence_tokens": 6055,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      },
+      {
+        "pool": "pool-1",
+        "internal_views": false,
+        "delivery_selection": true,
+        "representation": "shared_actions_request_text",
+        "queries": 240,
+        "max_native_sequence_tokens": 6089,
+        "state_drop_rows": [],
+        "head_drop_rows": [],
+        "mask_replacement_rows": []
+      }
+    ],
+    "Reader_question_only": {
+      "queries": 451,
+      "question_images": 29,
+      "max_prompt_tokens": 1188,
+      "max_total_reserved_tokens": 9892,
+      "overflow_rows": [],
+      "scope": "Native domain prompt and actual unchanged public query/image, EMPTY memory context. Not a full retrieved-context capacity result or server visual/usage probe."
+    },
+    "original_ledger_unchanged": true,
+    "scope": "All451public queries, two representations x internalViews true/false x deliverySelection true/false. Actual full-bank first observation reused per condition, exact task and offered bindings regenerated. No query capture/SEARCH/READ/own-policy execution; query image deliberately only in fixed Reader. No reference values/QA text displayed or used as labels. Reader has EMPTY memory context; not full final Reader capacity/server probe."
+  },
+  "offered_view_audit": {
+    "session": 51567,
+    "pid": 96665,
+    "actual_pid_alive": false,
+    "exit_code": 0,
+    "status": "COMPLETE_OFFERED_VIEW_WIRE_CAPACITY_NOT_GENERATION",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-offered-view-input-audit-v1/audit.json",
+    "source_version": "bcebf420",
+    "offered_inputs": 32,
+    "max_prompt_tokens": 63759,
+    "overflow_rows": [
+      {
+        "pool": "pool-0",
+        "delivery_selection": true,
+        "step": 6,
+        "prompt_tokens": 57590,
+        "total_reserved_tokens": 66294
+      },
+      {
+        "pool": "pool-0",
+        "delivery_selection": true,
+        "step": 7,
+        "prompt_tokens": 63759,
+        "total_reserved_tokens": 72463
+      }
+    ],
+    "view_cache_unchanged": true,
+    "original_ledger_unchanged": true,
+    "scope": "All32offered REFRESH alternatives from the frozen256fixed-policy paths. Same synthetic query, actual fullSource identities and current observation coverage; builder stopped before generation/cache commit. Not selected refresh rollout, View quality or learned-policy failure rate. FullSource semantics preserved."
+  },
+  "implementation": {
+    "source_version": "c85eb6d3",
+    "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-view-capacity-c85eb6d3/MiLAi-Lab",
+    "manifest": "training-generalization-view-capacity-outcome-v1.json",
+    "behavior": "QueryStructure CapacityExceeded before HTTP becomes existing view_rejected/effect:none with compact actual limits. Original View unchanged; actual policy may choose another action within remaining budgets. Read/generation admission attempts remain spent. Full provider capacity trace retained; no HTTP billing/refund/retry/clipping/output-cap change.",
+    "limits": "Dispatched timeout remains unknown and charged, controller-capacity overflow still fails, other errors unchanged. This does not make oversized View inputs fit or establish task success. SourceRange256 and all frozen training inputs remain unchanged."
+  },
+  "validation": {
+    "unique_latest_passed": 25,
+    "new_tests": 4,
+    "existing_regressions": 21,
+    "skipped": 0,
+    "ruff_files": 2,
+    "mypy_implementation_files": 1,
+    "package_tools_boundaries": "PASS;6grandfatheredprivateedges unchanged",
+    "native_mock_HTTP": "Real temporary Store/ledger: prior/no prior View preservation, zero dispatched HTTP on capacity error, consumed admission, subsequent Source read, unknown dispatched timeout and non-View overflow boundaries. No research model calls.",
+    "initial_test_report": "v1retained; author READ-count and Path-type fixture assertions corrected; v2new4passed, old21passed."
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "lme_public_query_initial_and_question_reader_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-public-query-input-audit-v1/audit.json",
+      "cpu_seconds": 62.47938478099999,
+      "wall_seconds": 62.48105838242918,
+      "ledger_recorded": false
+    },
+    {
+      "id": "lme_offered_view_wire_capacity_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-offered-view-input-audit-v1/audit.json",
+      "cpu_seconds": 2.9362080330000007,
+      "wall_seconds": 2.938917458988726,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 65.415592814,
+  "costs": "65.415592814new measured CPU seconds pending. Full-page job still live. Nested per-condition/per-source observations and copied summaries not additional costs. Tests/authoring/import/freezing overhead unknown, not zero. V23pending549.912019680,V22pending1505.460591140 and all older pending unchanged; no offline settlement while fit lives. Closedv1/v2/v3 never reopen.",
+  "resource_observations": {
+    "observed_at": "2026-10-22T01:51:22.191670+00:00",
+    "source": "ExistingV22search timing observations and present file sizes; no new search/model run.",
+    "canonical_search_report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-search-read-input-audit-v1/audit.json",
+    "search_timings_nested_NOT_new_costs": [
+      {
+        "pool": "pool-0",
+        "enumerate_seconds": 0.32659248542040586,
+        "assemble_seconds": 0.10547097492963076,
+        "index_seconds": 29.855985710397363,
+        "rank_seconds": 0.0015166355296969414,
+        "open_seconds": 0.28858370054513216,
+        "total_seconds": 30.75448950473219
+      },
+      {
+        "pool": "pool-1",
+        "enumerate_seconds": 0.24404332041740417,
+        "assemble_seconds": 0.096095304004848,
+        "index_seconds": 24.305069491267204,
+        "rank_seconds": 0.001048085279762745,
+        "open_seconds": 0.13262460473924875,
+        "total_seconds": 24.915476000867784
+      }
+    ],
+    "preflight_main_Store_bytes": {
+      "pool-0": 117305344,
+      "pool-1": 94498816
+    },
+    "native_queries_per_pool": {
+      "pool-0": 211,
+      "pool-1": 240
+    },
+    "plain_main_Store_copy_estimate_per_451_arm_bytes": 47431143424,
+    "current_filesystem": "ext4",
+    "available_bytes_at_observation": 356157992960,
+    "scope": "Static main-DB copy extrapolation, not a reservation or actual future footprint; preflight Stores include one excluded synthetic query. Excludes case growth, other DBs, traces, checkpoints and images. No compression, cache or retention change implemented. Full history/cohort denominators stay required."
+  },
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "remaining": "Full corrected training/control matrix and savedCPU incl legacy; STATE108E2/factorial/expandedfeedback/T2/common-support; actual Host/lifecycle/costs; complete external/protected/seeds0,1,2. External readiness still needs full-page closure, actual-query post-operation/learned paths, real server vision/usage, selected checkpoints/method/seed freeze, complete Reader contexts and evaluation. Source indexing/storage costs need preservation-aware preparation before large full-cohort runs; no scope reduction."
+}

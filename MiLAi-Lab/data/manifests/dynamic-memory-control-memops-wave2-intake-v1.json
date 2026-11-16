@@ -1,0 +1,20 @@
+{
+  "status": "COMPLETED",
+  "states": 180,
+  "raw": {
+    "max_full_tokens": 14002,
+    "oversized": 72
+  },
+  "shared": {
+    "max_full_tokens": 8569,
+    "oversized": 3
+  },
+  "typed_roundtrip": 180,
+  "model_calls": 0,
+  "model_forwards": 0,
+  "scope": "Additional6preallocated source backgrounds; source-only geometric probe, no new neural outcome. 3shared states exceed8192, so native admission remains unresolved. Sources and tasks are retained unchanged.",
+  "version": "dynamic-memory-control-memops-wave2-intake-v1",
+  "source_review": "data/manifests/dynamic-memory-control-memops-source-wave2-v1.json",
+  "fixture": "artifacts/dynamic-memory-control/memops-control-wave2-v1/histories.json",
+  "next": "Generative collection can proceed under the existing Host context budget; actual visited states and generated views must be audited before any native fitting/dispatch. Do not declare this serialization a universal capacity solution."
+}

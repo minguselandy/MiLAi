@@ -1,0 +1,2361 @@
+{
+  "version": "dynamic-memory-control-e0-author-review-v1",
+  "reviewer": "Codex author with method identities visible; no independent/blinded Judge",
+  "coverage": {
+    "first_answer_tasks": 96,
+    "explicit_operation_positions": 20,
+    "independent_authored_histories": 6
+  },
+  "scope": "All core first answers and explicit operation states reviewed. Task source coverage and known defects recorded separately. Core correctness is not a fully grounded task score, query-view graph validity, successful upkeep, or method superiority.",
+  "source_run": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-review-all116-v1",
+  "totals": {
+    "fixed": {
+      "qa_positions": 24,
+      "answer_core_correct": 21,
+      "task_response_complete": 21,
+      "correct": 21,
+      "explicit_positions": 5,
+      "explicit_full_state_valid": 2,
+      "false_saved_history": 1,
+      "wrong_current_state": 1,
+      "partial_missing_preserved_preference": 1
+    },
+    "rules": {
+      "qa_positions": 24,
+      "answer_core_correct": 18,
+      "task_response_complete": 18,
+      "correct": 18,
+      "explicit_positions": 5,
+      "explicit_full_state_valid": 2,
+      "receipt_instead_of_answer": 1,
+      "wrong_alternative_support": 1,
+      "right_polarity_wrong_reason": 1,
+      "no_answer": 1,
+      "wrong_current_state": 1,
+      "forget_not_completed_and_stale_value": 1
+    },
+    "laya": {
+      "qa_positions": 24,
+      "answer_core_correct": 22,
+      "task_response_complete": 21,
+      "omission": 1,
+      "correct": 21,
+      "no_answer": 1,
+      "explicit_positions": 5,
+      "explicit_full_state_valid": 2,
+      "correct_disclosure_after_failed_forget": 1
+    },
+    "generative": {
+      "qa_positions": 24,
+      "answer_core_correct": 15,
+      "task_response_complete": 15,
+      "correct": 15,
+      "no_answer": 2,
+      "explicit_positions": 5,
+      "explicit_full_state_valid": 4,
+      "omission": 4,
+      "wrong_alternative_support": 1,
+      "right_polarity_wrong_reason": 1,
+      "partial_missing_preserved_preference": 1
+    }
+  },
+  "qualifications": [
+    "Alternative-support positive answers use the intended operational OR rule. Literal only-if wording states necessity, so exclude this family from an unqualified strict logical sufficiency claim. Frozen inputs retained.",
+    "Approval caller query_time is arrival date while questions ask a later date; interpretation must follow explicit question dates. Frozen inputs retained.",
+    "Project q4 requires actual saved history. A save request plus assistant receipt is weaker than a stored revision READ; those differences are recorded, not silently accepted as direct history evidence.",
+    "After failed forgetting, truthful disclosure can be locally correct while end-to-end forgetting fails. No source revocation implies no post-revocation bypass claim.",
+    "No confidence interval or independent sample count from 96 correlated tasks; six author-visible families only.",
+    "Stored query-view semantic/graph validity is not exhausted by this answer/explicit-state review. View defects are catalogued separately; no complete view-validity rate claimed.",
+    "No source grading is fed into live control. Original failures, records and billed costs are unchanged."
+  ],
+  "rows": [
+    {
+      "history": "approval",
+      "policy": "fixed",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/93b14d47-ea6e-4850-a68f-e61346ffc828/0cec3a5f-5fc0-453b-b299-f1052274c77b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/93b14d47-ea6e-4850-a68f-e61346ffc828/0cec3a5f-5fc0-453b-b299-f1052274c77b-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "fixed",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/93b14d47-ea6e-4850-a68f-e61346ffc828/b8f96675-a895-422f-875e-df91efff2c38-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/93b14d47-ea6e-4850-a68f-e61346ffc828/b8f96675-a895-422f-875e-df91efff2c38-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "fixed",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/93b14d47-ea6e-4850-a68f-e61346ffc828/a95125b2-f8dc-4295-9635-ab37ab8423a6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/93b14d47-ea6e-4850-a68f-e61346ffc828/a95125b2-f8dc-4295-9635-ab37ab8423a6-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "fixed",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/93b14d47-ea6e-4850-a68f-e61346ffc828/d22668d1-f8e5-42d6-8e23-11efc7beb088-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/93b14d47-ea6e-4850-a68f-e61346ffc828/d22668d1-f8e5-42d6-8e23-11efc7beb088-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        5,
+        6
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "rules",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/efb36955-08a4-4fc3-9afc-4430afa3d164/3cb888c8-54fb-4ff7-a703-885709fd4dcb-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/efb36955-08a4-4fc3-9afc-4430afa3d164/3cb888c8-54fb-4ff7-a703-885709fd4dcb-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "rules",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/efb36955-08a4-4fc3-9afc-4430afa3d164/e16c5ea0-3889-4507-b8f7-db195030d557-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/efb36955-08a4-4fc3-9afc-4430afa3d164/e16c5ea0-3889-4507-b8f7-db195030d557-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "rules",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/efb36955-08a4-4fc3-9afc-4430afa3d164/7481e4bf-8513-4cf9-b463-bc37c81786f9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/efb36955-08a4-4fc3-9afc-4430afa3d164/7481e4bf-8513-4cf9-b463-bc37c81786f9-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "rules",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/efb36955-08a4-4fc3-9afc-4430afa3d164/f88c7ec5-731c-41cb-aafe-a2b4824da203-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/efb36955-08a4-4fc3-9afc-4430afa3d164/f88c7ec5-731c-41cb-aafe-a2b4824da203-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        5,
+        6
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "laya",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/c214e4cb-ec32-471c-b2df-c4ed21fd5818/b71bf7df-7d4f-43b6-a6d1-dbb10ddd1e01-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/c214e4cb-ec32-471c-b2df-c4ed21fd5818/b71bf7df-7d4f-43b6-a6d1-dbb10ddd1e01-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "omission",
+      "note": "SEARCH then HANDOFF with empty delivered evidence despite answer-bearing available sources."
+    },
+    {
+      "history": "approval",
+      "policy": "laya",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/c214e4cb-ec32-471c-b2df-c4ed21fd5818/cbdc8fb4-fec2-4f3c-b0fc-0ed28e9bd4a6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/c214e4cb-ec32-471c-b2df-c4ed21fd5818/cbdc8fb4-fec2-4f3c-b0fc-0ed28e9bd4a6-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "laya",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/c214e4cb-ec32-471c-b2df-c4ed21fd5818/a53de4f7-f232-4d92-9451-6c588bb84a51-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/c214e4cb-ec32-471c-b2df-c4ed21fd5818/a53de4f7-f232-4d92-9451-6c588bb84a51-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "laya",
+      "step": "q4",
+      "kind": "task",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/c214e4cb-ec32-471c-b2df-c4ed21fd5818/bc08b6cd-e7ea-4fbe-b3d2-8ca6e2483a91-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/c214e4cb-ec32-471c-b2df-c4ed21fd5818/bc08b6cd-e7ea-4fbe-b3d2-8ca6e2483a91-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {},
+      "answer_core": "no_answer",
+      "note": "First answer does not complete available-source task; see preserved answer and trace."
+    },
+    {
+      "history": "approval",
+      "policy": "generative",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/0afdc246-b91e-4e47-9ccc-3a35d20ab305/0bc451e0-427a-40ea-9dcb-8d81c781dc7c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/0afdc246-b91e-4e47-9ccc-3a35d20ab305/0bc451e0-427a-40ea-9dcb-8d81c781dc7c-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "generative",
+      "step": "q2",
+      "kind": "task",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/0afdc246-b91e-4e47-9ccc-3a35d20ab305/bedea6c1-17f3-4636-96e2-594571f053a9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/0afdc246-b91e-4e47-9ccc-3a35d20ab305/bedea6c1-17f3-4636-96e2-594571f053a9-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "no_answer",
+      "note": "First answer does not complete available-source task; see preserved answer and trace."
+    },
+    {
+      "history": "approval",
+      "policy": "generative",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/0afdc246-b91e-4e47-9ccc-3a35d20ab305/22b05067-42ef-49fd-a274-7f38f1016aba-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/0afdc246-b91e-4e47-9ccc-3a35d20ab305/22b05067-42ef-49fd-a274-7f38f1016aba-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "approval",
+      "policy": "generative",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/0afdc246-b91e-4e47-9ccc-3a35d20ab305/456f8bf5-c3a2-41ae-a192-a6fb46da163b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/0afdc246-b91e-4e47-9ccc-3a35d20ab305/456f8bf5-c3a2-41ae-a192-a6fb46da163b-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        5,
+        6
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core values correct; delivered current originals cover A only. B value is carried by a prior assistant answer in the opened packet, not by a freshly opened B user source."
+    },
+    {
+      "history": "project_lead",
+      "policy": "fixed",
+      "step": "command-1",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/3be57293-474d-432a-877a-c3174ba050fd-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/3be57293-474d-432a-877a-c3174ba050fd-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "explicit_state": "not_committed",
+      "note": "Initial proposal rejected EDIT_SUPPORT_ROUTE_INVALID; empty semantic state.",
+      "observed_records": [],
+      "mutation_receipts": []
+    },
+    {
+      "history": "project_lead",
+      "policy": "fixed",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/62594c96-0abb-4b30-bfae-cfd466ebdc79-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/62594c96-0abb-4b30-bfae-cfd466ebdc79-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "fixed",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/1c1e10f1-4954-4bb4-a176-9399094ca6e1-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/1c1e10f1-4954-4bb4-a176-9399094ca6e1-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "fixed",
+      "step": "command-3",
+      "kind": "explicit_operation",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/56c904a0-c345-4710-b494-cd480e2985c1-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/56c904a0-c345-4710-b494-cd480e2985c1-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "not_committed",
+      "note": "Length failure; no semantic record or correction.",
+      "observed_records": [],
+      "mutation_receipts": null
+    },
+    {
+      "history": "project_lead",
+      "policy": "fixed",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/84cedb6b-ee3c-48cb-be05-b7934bbfaef3-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/84cedb6b-ee3c-48cb-be05-b7934bbfaef3-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "fixed",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/c79f0124-f5d0-4aa7-af2c-8d22299806a6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/bdf92de8-547e-4fee-b47f-86a54127e718/c79f0124-f5d0-4aa7-af2c-8d22299806a6-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "false_saved_history",
+      "note": "Claim of initial semantic save contradicts command-1 rejection and empty records; raw capture is not semantic save."
+    },
+    {
+      "history": "project_lead",
+      "policy": "rules",
+      "step": "command-1",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/833937fe-59f6-40ca-9c3a-1ac95aa4b46f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/833937fe-59f6-40ca-9c3a-1ac95aa4b46f-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision1 content and effective date match explicit save.",
+      "observed_records": [
+        {
+          "id": "0bab821e-c9f5-543f-97db-b03efd7de3f1",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 云帆项目林岚任职\nunit-9d0df796-c01c-4908-bcfa-862729d0e205 — Content: 云帆项目负责人林岚的任职起始日是2031年2月1日。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00; effective_from=2031-02-01]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "project_lead",
+      "policy": "rules",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/29725bd2-a1f5-42eb-b5a5-88b47e515f46-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/29725bd2-a1f5-42eb-b5a5-88b47e515f46-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "rules",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/deb96167-0476-4e85-a41b-70b6e787c1ea-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/deb96167-0476-4e85-a41b-70b6e787c1ea-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "rules",
+      "step": "command-3",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/3c1a0891-a817-4d5c-8ae3-560ab077d07e-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/3c1a0891-a817-4d5c-8ae3-560ab077d07e-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "cited_labels": {},
+      "explicit_state": "not_committed",
+      "note": "Length failure during maintenance; revision1 still present. Later q3 commit is separate.",
+      "observed_records": [
+        {
+          "id": "0bab821e-c9f5-543f-97db-b03efd7de3f1",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 云帆项目林岚任职\nunit-9d0df796-c01c-4908-bcfa-862729d0e205 — Content: 云帆项目负责人林岚的任职起始日是2031年2月1日。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00; effective_from=2031-02-01]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "project_lead",
+      "policy": "rules",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/8f9f6c9f-359c-48de-9867-00e08568119a-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/8f9f6c9f-359c-48de-9867-00e08568119a-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "receipt_instead_of_answer",
+      "note": "A deferred correction commits revision2 during this request; final response is only receipts and omits the question answer. Do not credit command-3 retroactively."
+    },
+    {
+      "history": "project_lead",
+      "policy": "rules",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/5de8e0f9-f941-4eb0-aa29-4fd156b35630-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/04dfc73b-6742-4c34-bc2f-d84c90de529e/5de8e0f9-f941-4eb0-aa29-4fd156b35630-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core historical/current facts match actual observed states. Reader opens current revision2 plus original save request and assistant receipt; no exact revision1 history READ."
+    },
+    {
+      "history": "project_lead",
+      "policy": "laya",
+      "step": "command-1",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/a730ca61-360c-4a0f-b252-3e90b92e3e57-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/a730ca61-360c-4a0f-b252-3e90b92e3e57-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision1 content and effective date match explicit save.",
+      "observed_records": [
+        {
+          "id": "0f438305-6d10-5456-89ca-8bcec7af51a6",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 云帆项目负责人任职\nunit-203057d2-39b4-487c-9ca5-8a20b04babd3 — Content: 云帆项目负责人林岚的任职起始日是2031年2月1日。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00; effective_from=2031-02-01]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "project_lead",
+      "policy": "laya",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/5fa8c654-a285-4321-a7d9-0ac0bac5d52f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/5fa8c654-a285-4321-a7d9-0ac0bac5d52f-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "laya",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/ac7c5d2b-7764-4a19-8dad-5980939d55a5-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/ac7c5d2b-7764-4a19-8dad-5980939d55a5-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "laya",
+      "step": "command-3",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/d444cc70-0da7-43dd-898f-df60436e3603-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/d444cc70-0da7-43dd-898f-df60436e3603-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "not_committed",
+      "note": "Rejected self-support route; revision1 unchanged.",
+      "observed_records": [
+        {
+          "id": "0f438305-6d10-5456-89ca-8bcec7af51a6",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 云帆项目负责人任职\nunit-203057d2-39b4-487c-9ca5-8a20b04babd3 — Content: 云帆项目负责人林岚的任职起始日是2031年2月1日。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00; effective_from=2031-02-01]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "project_lead",
+      "policy": "laya",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/cc0373b3-6ab0-44d0-82e2-c1be2a80af9d-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/cc0373b3-6ab0-44d0-82e2-c1be2a80af9d-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "laya",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/d61d87d6-b149-4d56-a2c4-f9498fd0f159-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/8832d58a-f109-428e-bf3b-491c6197f655/d61d87d6-b149-4d56-a2c4-f9498fd0f159-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Actual current stored revision1 is delivered and establishes first saved date; correction was never committed. Corrected real-world date comes from user originals, not saved revision2."
+    },
+    {
+      "history": "project_lead",
+      "policy": "generative",
+      "step": "command-1",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/39c9dbd7-f65c-45f2-9d63-3bb45862d25b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/39c9dbd7-f65c-45f2-9d63-3bb45862d25b-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0
+      ],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision1 content and effective date match explicit save.",
+      "observed_records": [
+        {
+          "id": "e4c396dd-d5e7-5702-a08c-defbdcc269e6",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 云帆项目负责人（Yunfan Project Leader）\nunit-f79cd582-39f0-43dc-a18d-bc30767fa347 — Content: 云帆项目负责人林岚的任职起始日是2031年2月1日。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00; effective_from=2031-02-01]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "project_lead",
+      "policy": "generative",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/7a248f04-cde0-4ea3-90ea-b867e079e8a0-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/7a248f04-cde0-4ea3-90ea-b867e079e8a0-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "generative",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/16c049aa-a8b6-480e-aafd-b53e15051031-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/16c049aa-a8b6-480e-aafd-b53e15051031-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "generative",
+      "step": "command-3",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/aa52bf48-c62d-4b9f-bbca-317540232586-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/aa52bf48-c62d-4b9f-bbca-317540232586-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision2 corrects content/effective date to February3. April2 successor remains in independent original Sources.",
+      "observed_records": [
+        {
+          "id": "e4c396dd-d5e7-5702-a08c-defbdcc269e6",
+          "status": "found",
+          "revision": 2,
+          "content": "Matter: 云帆项目负责人（Yunfan Project Leader）\nunit-f79cd582-39f0-43dc-a18d-bc30767fa347 — Content: 云帆项目负责人林岚的任职起始日为2031年2月3日。 [Assertion: reported; speaker=user; occurred_at=2031-04-03T10:00:00+08:00; effective_from=2031-02-03]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "project_lead",
+      "policy": "generative",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/61420f3c-6cbd-489d-bd2c-bd6f287111a9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/61420f3c-6cbd-489d-bd2c-bd6f287111a9-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "project_lead",
+      "policy": "generative",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/8ec73313-956c-4334-ac80-cc0a9f796195-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/82b129a1-6457-4bcb-8edb-3536fd468d18/8ec73313-956c-4334-ac80-cc0a9f796195-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        2,
+        3,
+        4
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core facts match actual observed saved states, but packet supplies the save request/assistant receipt rather than an exact stored revision1 history READ."
+    },
+    {
+      "history": "preferences",
+      "policy": "fixed",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/e02502aa-b585-470c-9d6f-f5cfe5e85e41/3ddbf8aa-2c24-4db8-8e15-d53e03ef8133-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/e02502aa-b585-470c-9d6f-f5cfe5e85e41/3ddbf8aa-2c24-4db8-8e15-d53e03ef8133-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "fixed",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/e02502aa-b585-470c-9d6f-f5cfe5e85e41/112d60ca-4a3c-44a8-8cd6-3bc5c8b1ae6b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/e02502aa-b585-470c-9d6f-f5cfe5e85e41/112d60ca-4a3c-44a8-8cd6-3bc5c8b1ae6b-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {
+        "s0": {
+          "role": "user",
+          "content": "我叫明舟，我平时喜欢无糖黑咖啡。"
+        },
+        "s2": {
+          "role": "tool",
+          "content": "订单日志：4月2日明舟代陶溪领取一杯甜拿铁，收件人是陶溪。"
+        },
+        "s5": {
+          "role": "user",
+          "content": "我今天代陶溪取咖啡，自己没有点咖啡，我的平时偏好不变。"
+        }
+      },
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "fixed",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/e02502aa-b585-470c-9d6f-f5cfe5e85e41/c4cadbcd-91e8-4bf7-ae76-8ee070778437-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/e02502aa-b585-470c-9d6f-f5cfe5e85e41/c4cadbcd-91e8-4bf7-ae76-8ee070778437-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {
+        "s1": {
+          "role": "user",
+          "content": "更新我的饮用安排：明舟上午仍选无糖黑咖啡，晚上只喝无咖啡因茶。"
+        },
+        "s2": {
+          "role": "user",
+          "content": "陶溪晚上仍喝加奶咖啡，他没有报告改喝茶。"
+        }
+      },
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "fixed",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/e02502aa-b585-470c-9d6f-f5cfe5e85e41/c36ab73f-dc90-47e6-ad6f-0b2855874726-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/e02502aa-b585-470c-9d6f-f5cfe5e85e41/c36ab73f-dc90-47e6-ad6f-0b2855874726-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {
+        "s0": {
+          "role": "user",
+          "content": "陶溪晚上仍喝加奶咖啡，他没有报告改喝茶。"
+        },
+        "s1": {
+          "role": "tool",
+          "content": "订单日志：陶溪替明舟领走一杯无咖啡因茶，收件人明舟，领取时段晚上。"
+        },
+        "s9": {
+          "role": "user",
+          "content": "更新我的饮用安排：明舟上午仍选无糖黑咖啡，晚上只喝无咖啡因茶。"
+        }
+      },
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "rules",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/bfda737d-e7c5-43c4-8701-b17dee081988/e2171fd9-4983-4420-ad3d-63d8e8841623-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/bfda737d-e7c5-43c4-8701-b17dee081988/e2171fd9-4983-4420-ad3d-63d8e8841623-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "rules",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/bfda737d-e7c5-43c4-8701-b17dee081988/5fd9dfed-afb2-4dc0-ab69-6e7e5586d228-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/bfda737d-e7c5-43c4-8701-b17dee081988/5fd9dfed-afb2-4dc0-ab69-6e7e5586d228-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "rules",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/bfda737d-e7c5-43c4-8701-b17dee081988/8b2373fe-21b0-4e22-b051-fce4a81487d1-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/bfda737d-e7c5-43c4-8701-b17dee081988/8b2373fe-21b0-4e22-b051-fce4a81487d1-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "rules",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/bfda737d-e7c5-43c4-8701-b17dee081988/7888933e-bca2-45fa-b19d-c3159cf24690-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/bfda737d-e7c5-43c4-8701-b17dee081988/7888933e-bca2-45fa-b19d-c3159cf24690-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "laya",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/726570de-3001-4685-b71a-d58b9dbb92cb/49176794-a26d-4e2f-8379-ecca6f9a496f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/726570de-3001-4685-b71a-d58b9dbb92cb/49176794-a26d-4e2f-8379-ecca6f9a496f-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "laya",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/726570de-3001-4685-b71a-d58b9dbb92cb/46d4e537-d9c3-40f9-9fc6-410295f4f25e-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/726570de-3001-4685-b71a-d58b9dbb92cb/46d4e537-d9c3-40f9-9fc6-410295f4f25e-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {
+        "s1": {
+          "role": "assistant",
+          "content": "根据记录，明舟喜欢无糖黑咖啡，陶溪喜欢加奶的甜咖啡。"
+        },
+        "s2": {
+          "role": "user",
+          "content": "我叫明舟，我平时喜欢无糖黑咖啡。"
+        },
+        "s4": {
+          "role": "tool",
+          "content": "订单日志：4月2日明舟代陶溪领取一杯甜拿铁，收件人是陶溪。"
+        },
+        "s5": {
+          "role": "user",
+          "content": "我今天代陶溪取咖啡，自己没有点咖啡，我的平时偏好不变。"
+        }
+      },
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "laya",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/726570de-3001-4685-b71a-d58b9dbb92cb/982be1a4-5891-4356-b0a7-7ebc0ceea9f4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/726570de-3001-4685-b71a-d58b9dbb92cb/982be1a4-5891-4356-b0a7-7ebc0ceea9f4-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "laya",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/726570de-3001-4685-b71a-d58b9dbb92cb/51d687e6-e31d-44f3-a0fa-74956517f4ab-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/726570de-3001-4685-b71a-d58b9dbb92cb/51d687e6-e31d-44f3-a0fa-74956517f4ab-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {
+        "s10": {
+          "role": "user",
+          "content": "陶溪晚上仍喝加奶咖啡，他没有报告改喝茶。"
+        },
+        "s11": {
+          "role": "tool",
+          "content": "订单日志：陶溪替明舟领走一杯无咖啡因茶，收件人明舟，领取时段晚上。"
+        },
+        "s13": {
+          "role": "user",
+          "content": "我明舟订会议饮品时按每个人已报告的偏好安排；代领行为不改变任何人的偏好。"
+        },
+        "s9": {
+          "role": "user",
+          "content": "更新我的饮用安排：明舟上午仍选无糖黑咖啡，晚上只喝无咖啡因茶。"
+        }
+      },
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "generative",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ae84e404-e1fa-4499-adb6-e3eaff443e63/66102db5-a52a-4ead-8058-8122ea84adb4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ae84e404-e1fa-4499-adb6-e3eaff443e63/66102db5-a52a-4ead-8058-8122ea84adb4-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "generative",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ae84e404-e1fa-4499-adb6-e3eaff443e63/def41702-8ff3-4f73-8578-bf879cf60210-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ae84e404-e1fa-4499-adb6-e3eaff443e63/def41702-8ff3-4f73-8578-bf879cf60210-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "generative",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ae84e404-e1fa-4499-adb6-e3eaff443e63/a228eedb-3000-4902-ab85-abf0494f6a96-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ae84e404-e1fa-4499-adb6-e3eaff443e63/a228eedb-3000-4902-ab85-abf0494f6a96-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "preferences",
+      "policy": "generative",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ae84e404-e1fa-4499-adb6-e3eaff443e63/836d6a28-ded9-407c-98fb-04bfbd2baf3f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ae84e404-e1fa-4499-adb6-e3eaff443e63/836d6a28-ded9-407c-98fb-04bfbd2baf3f-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "omission",
+      "note": "First answer does not complete available-source task; see preserved answer and trace."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "fixed",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/1e6624e4-4a30-40de-bd27-9f39b776ba73/ae00c446-8ec4-4c5f-bc17-46d4a61095a2-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/1e6624e4-4a30-40de-bd27-9f39b776ba73/ae00c446-8ec4-4c5f-bc17-46d4a61095a2-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "fixed",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/1e6624e4-4a30-40de-bd27-9f39b776ba73/a914ca7b-6c89-49a6-8c69-29b8c6596e41-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/1e6624e4-4a30-40de-bd27-9f39b776ba73/a914ca7b-6c89-49a6-8c69-29b8c6596e41-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "fixed",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/1e6624e4-4a30-40de-bd27-9f39b776ba73/e4f579e3-58cd-4b4b-9715-46cbf1c02e10-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/1e6624e4-4a30-40de-bd27-9f39b776ba73/e4f579e3-58cd-4b4b-9715-46cbf1c02e10-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Correct operational OR answer; opened user originals omit mentor grant/confirmation. A previous assistant answer carries that valid alternative."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "fixed",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/1e6624e4-4a30-40de-bd27-9f39b776ba73/fb95cfc2-4651-486d-bc9f-be56941c61e4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/1e6624e4-4a30-40de-bd27-9f39b776ba73/fb95cfc2-4651-486d-bc9f-be56941c61e4-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "wrong_current_state",
+      "note": "Opened stale training/grant statements and missed the latest withdrawals; grants permission incorrectly."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "rules",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/69a6acde-e208-463f-9406-de2c277f06b1/2609dfa3-e190-4c1a-9ee3-5ed4a5a19e74-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/69a6acde-e208-463f-9406-de2c277f06b1/2609dfa3-e190-4c1a-9ee3-5ed4a5a19e74-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "rules",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/69a6acde-e208-463f-9406-de2c277f06b1/34e77da9-f5ec-4735-be6e-45daedbc0578-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/69a6acde-e208-463f-9406-de2c277f06b1/34e77da9-f5ec-4735-be6e-45daedbc0578-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "rules",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/69a6acde-e208-463f-9406-de2c277f06b1/f0c4ff7f-aa27-414b-aa5f-846bcd0d5377-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/69a6acde-e208-463f-9406-de2c277f06b1/f0c4ff7f-aa27-414b-aa5f-846bcd0d5377-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "cited_labels": {
+        "s3": {
+          "role": "user",
+          "content": "撤回叶澄的安全培训有效记录：培训尚未完成；这次更正不涉及导师授权。"
+        },
+        "s4": {
+          "role": "user",
+          "content": "资料室规则：仅当安全培训有效或导师授权有效这两条路径至少一条成立，成员才可以领取样品。"
+        }
+      },
+      "answer_core": "wrong_alternative_support",
+      "note": "View contains mentor-valid/eligible claims but Reader denies alternative support. View also preserves stale training-valid text; errors in both interpretation and use."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "rules",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/69a6acde-e208-463f-9406-de2c277f06b1/741f595c-e365-4804-9ded-6cca2ccf4068-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/69a6acde-e208-463f-9406-de2c277f06b1/741f595c-e365-4804-9ded-6cca2ccf4068-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "right_polarity_wrong_reason",
+      "note": "Negative answer matches current polarity but explanation incorrectly says no mentor support at April3. The actual April4 mentor withdrawal is required."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "laya",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/cc21af69-0638-4830-865c-999421b2fe82/4188997a-9ac6-4dbd-8fc5-e85316034aa1-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/cc21af69-0638-4830-865c-999421b2fe82/4188997a-9ac6-4dbd-8fc5-e85316034aa1-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "laya",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/cc21af69-0638-4830-865c-999421b2fe82/7655a918-55aa-49a4-bf8e-4381b69e364f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/cc21af69-0638-4830-865c-999421b2fe82/7655a918-55aa-49a4-bf8e-4381b69e364f-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {
+        "s2": {
+          "role": "user",
+          "content": "资料室规则：仅当安全培训有效或导师授权有效这两条路径至少一条成立，成员才可以领取样品。"
+        },
+        "s3": {
+          "role": "user",
+          "content": "成员叶澄的安全培训记录当前有效。"
+        },
+        "s4": {
+          "role": "user",
+          "content": "导师又为叶澄签发了独立样品领取授权，当前有效。"
+        }
+      },
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "laya",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/cc21af69-0638-4830-865c-999421b2fe82/5d442626-25d2-4e6d-8aa8-5623aa861ddf-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/cc21af69-0638-4830-865c-999421b2fe82/5d442626-25d2-4e6d-8aa8-5623aa861ddf-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {
+        "s1": {
+          "role": "user",
+          "content": "撤回叶澄的安全培训有效记录：培训尚未完成；这次更正不涉及导师授权。"
+        },
+        "s6": {
+          "role": "user",
+          "content": "资料室规则：仅当安全培训有效或导师授权有效这两条路径至少一条成立，成员才可以领取样品。"
+        },
+        "s8": {
+          "role": "user",
+          "content": "导师又为叶澄签发了独立样品领取授权，当前有效。"
+        },
+        "s9": {
+          "role": "user",
+          "content": "管理员确认叶澄的导师授权仍有效。"
+        }
+      },
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "laya",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/cc21af69-0638-4830-865c-999421b2fe82/6174a08f-f281-419d-8356-2c23ab7339b6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/cc21af69-0638-4830-865c-999421b2fe82/6174a08f-f281-419d-8356-2c23ab7339b6-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {
+        "s10": {
+          "role": "user",
+          "content": "导师撤回叶澄的样品领取授权，即时失效。"
+        },
+        "s11": {
+          "role": "user",
+          "content": "叶澄仍未完成安全培训，目前没有任何其他领取授权。"
+        }
+      },
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "generative",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/8e35d537-d529-4329-89e6-c37549f4c365/4f8a0221-950d-479f-9c4f-4bf727e4d534-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/8e35d537-d529-4329-89e6-c37549f4c365/4f8a0221-950d-479f-9c4f-4bf727e4d534-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "generative",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/8e35d537-d529-4329-89e6-c37549f4c365/48113dbb-4bf8-4416-ad6d-2df942235929-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/8e35d537-d529-4329-89e6-c37549f4c365/48113dbb-4bf8-4416-ad6d-2df942235929-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "omission",
+      "note": "First answer does not complete available-source task; see preserved answer and trace."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "generative",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/8e35d537-d529-4329-89e6-c37549f4c365/4aced1f4-12f8-4cf3-ba15-218fb87d5e13-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/8e35d537-d529-4329-89e6-c37549f4c365/4aced1f4-12f8-4cf3-ba15-218fb87d5e13-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        3,
+        4
+      ],
+      "cited_labels": {},
+      "answer_core": "wrong_alternative_support",
+      "note": "Reads training withdrawal and unrelated door colour; invents training as the sole requirement."
+    },
+    {
+      "history": "alternate_support",
+      "policy": "generative",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/8e35d537-d529-4329-89e6-c37549f4c365/d70b6131-a9a7-4794-b274-528f3db63b48-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/8e35d537-d529-4329-89e6-c37549f4c365/d70b6131-a9a7-4794-b274-528f3db63b48-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "right_polarity_wrong_reason",
+      "note": "Only prior wrong assistant answer is delivered. Negative polarity is coincidental and repeats the false single-path rule."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "fixed",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/274734c2-56ed-4a44-a1c6-b7251d7afb53/62f16760-92e6-413f-b42d-45e9fc2c38a6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/274734c2-56ed-4a44-a1c6-b7251d7afb53/62f16760-92e6-413f-b42d-45e9fc2c38a6-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "fixed",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/274734c2-56ed-4a44-a1c6-b7251d7afb53/81da8f4d-9d58-42b9-9e7d-35dee1501c61-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/274734c2-56ed-4a44-a1c6-b7251d7afb53/81da8f4d-9d58-42b9-9e7d-35dee1501c61-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "fixed",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/274734c2-56ed-4a44-a1c6-b7251d7afb53/f72f00be-7f5d-49e5-9ad7-749381360d0f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/274734c2-56ed-4a44-a1c6-b7251d7afb53/f72f00be-7f5d-49e5-9ad7-749381360d0f-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "fixed",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/274734c2-56ed-4a44-a1c6-b7251d7afb53/f95c259f-a89b-4b41-a509-5c18eb624bbf-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/274734c2-56ed-4a44-a1c6-b7251d7afb53/f95c259f-a89b-4b41-a509-5c18eb624bbf-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        5,
+        6
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "rules",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/34620528-560e-4a3c-9385-fde102d17df1/735b935c-407e-45b5-bab4-39d5b44c4d95-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/34620528-560e-4a3c-9385-fde102d17df1/735b935c-407e-45b5-bab4-39d5b44c4d95-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "rules",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/34620528-560e-4a3c-9385-fde102d17df1/507f1f5f-53cd-47f8-b3ca-91cdf340097c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/34620528-560e-4a3c-9385-fde102d17df1/507f1f5f-53cd-47f8-b3ca-91cdf340097c-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "rules",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/34620528-560e-4a3c-9385-fde102d17df1/e00ed7c0-997f-459c-8f1f-84eacfdf26b4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/34620528-560e-4a3c-9385-fde102d17df1/e00ed7c0-997f-459c-8f1f-84eacfdf26b4-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "rules",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/34620528-560e-4a3c-9385-fde102d17df1/488e952b-4b88-4c6d-8946-5480e912e730-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/34620528-560e-4a3c-9385-fde102d17df1/488e952b-4b88-4c6d-8946-5480e912e730-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        5,
+        6
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "laya",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/993ca238-57f7-4c9d-8d51-d702259fab99/2ce60adb-2359-49b4-981a-3760943cbfee-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/993ca238-57f7-4c9d-8d51-d702259fab99/2ce60adb-2359-49b4-981a-3760943cbfee-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "laya",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/993ca238-57f7-4c9d-8d51-d702259fab99/57079eab-96d0-42f6-9e1e-b34991b4f5e7-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/993ca238-57f7-4c9d-8d51-d702259fab99/57079eab-96d0-42f6-9e1e-b34991b4f5e7-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "laya",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/993ca238-57f7-4c9d-8d51-d702259fab99/2a9f970f-dead-4a5c-ad00-f0fea88a7c1b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/993ca238-57f7-4c9d-8d51-d702259fab99/2a9f970f-dead-4a5c-ad00-f0fea88a7c1b-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "laya",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/993ca238-57f7-4c9d-8d51-d702259fab99/b5fd7f5e-a21b-48d1-9c07-f09d72000a5b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/993ca238-57f7-4c9d-8d51-d702259fab99/b5fd7f5e-a21b-48d1-9c07-f09d72000a5b-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "generative",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ddbf0599-1d8a-4981-8aff-a19a518f42bb/63fb727b-da01-4eea-a31b-21f4ddcc3f96-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ddbf0599-1d8a-4981-8aff-a19a518f42bb/63fb727b-da01-4eea-a31b-21f4ddcc3f96-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "generative",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ddbf0599-1d8a-4981-8aff-a19a518f42bb/65c37ac5-5819-4963-b654-37bf79955061-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ddbf0599-1d8a-4981-8aff-a19a518f42bb/65c37ac5-5819-4963-b654-37bf79955061-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "generative",
+      "step": "q3",
+      "kind": "task",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ddbf0599-1d8a-4981-8aff-a19a518f42bb/e98944cf-f769-476d-b3bf-a146040d7f9b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ddbf0599-1d8a-4981-8aff-a19a518f42bb/e98944cf-f769-476d-b3bf-a146040d7f9b-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "no_answer",
+      "note": "First answer does not complete available-source task; see preserved answer and trace."
+    },
+    {
+      "history": "topic_reuse",
+      "policy": "generative",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ddbf0599-1d8a-4981-8aff-a19a518f42bb/6fea1438-120a-4d54-b739-e1744a121c6b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/ddbf0599-1d8a-4981-8aff-a19a518f42bb/6fea1438-120a-4d54-b739-e1744a121c6b-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        5,
+        6
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "fixed",
+      "step": "command-1",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/1b125cb9-17cf-43ec-afd8-4a3cfb5b8291-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/1b125cb9-17cf-43ec-afd8-4a3cfb5b8291-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision1 stores the requested cabinet label with user source binding.",
+      "observed_records": [
+        {
+          "id": "642edbd7-9370-5c01-9766-cca7ab0ce3eb",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 收藏柜标签\nunit-671667bb-828d-4638-a190-a41e09895c60 — Content: 我的收藏柜标签是松影七号。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00; scope=收藏柜]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "fixed",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/e1f0d644-56a4-4953-a1f8-da8e911d362d-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/e1f0d644-56a4-4953-a1f8-da8e911d362d-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "fixed",
+      "step": "command-2",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/1b513f5e-a66d-40b1-9cc3-d36b7c3b34f9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/1b513f5e-a66d-40b1-9cc3-d36b7c3b34f9-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision2 stores new label and preserves user-source provenance.",
+      "observed_records": [
+        {
+          "id": "642edbd7-9370-5c01-9766-cca7ab0ce3eb",
+          "status": "found",
+          "revision": 2,
+          "content": "Matter: 收藏柜标签\nunit-671667bb-828d-4638-a190-a41e09895c60 — Content: 我的收藏柜标签是潮声九号。 [Assertion: reported; speaker=user; occurred_at=2031-04-02T10:00:00+08:00]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "fixed",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/f3f9bc5a-30ba-46bc-b20c-a2a8162ac420-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/f3f9bc5a-30ba-46bc-b20c-a2a8162ac420-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "fixed",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/77012d06-c5b4-4c8f-ba2a-734335161199-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/77012d06-c5b4-4c8f-ba2a-734335161199-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "fixed",
+      "step": "command-4",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/3a369864-8094-4663-b5dc-456b2ae996f9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/3a369864-8094-4663-b5dc-456b2ae996f9-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "partial_scope",
+      "note": "Seven rejections, then record-only revocation: selected_records1, revoked_sources0; requested old/new raw Sources remain. Non-target preference capture remains, later retrieval fails.",
+      "observed_records": [
+        {
+          "id": "642edbd7-9370-5c01-9766-cca7ab0ce3eb",
+          "status": "visibility_revoked",
+          "revision": null,
+          "content": null
+        }
+      ],
+      "mutation_receipts": [
+        {
+          "position": 2,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-8b1f658e78a208ad:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_REQUEST_TARGET_NOT_DELIVERED\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 4,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-8459063e992eabf9:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_FORGET_WHOLE_SOURCE_SELECTION_REQUIRED: this contract cannot revoke only part of a Source. Read and explicitly select its complete body only when the user authorizes all of it; otherwise use record scope and report that original Sources remain accessible.\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 6,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-bcc330c95df8b45a:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_REQUEST_TARGET_NOT_DELIVERED\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 11,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-9716b9230b820262:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_REQUEST_TARGET_NOT_DELIVERED\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 13,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-9c8583662952e46a:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_FORGET_WHOLE_SOURCE_SELECTION_REQUIRED: this contract cannot revoke only part of a Source. Read and explicitly select its complete body only when the user authorizes all of it; otherwise use record scope and report that original Sources remain accessible.\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 15,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-b618182a902a9b36:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_FORGET_BODY_READ_REQUIRED: navigation targets grant no forget authority; first use read_memory/read_source and select the resulting delivered target\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 19,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-855e9de4fa366fb7:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_FORGET_WHOLE_SOURCE_SELECTION_REQUIRED: this contract cannot revoke only part of a Source. Read and explicitly select its complete body only when the user authorizes all of it; otherwise use record scope and report that original Sources remain accessible.\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 21,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-b76aae040b49adbf:tool:0",
+          "receipt": "{\"effect\":\"visibility_only\",\"exposure_semantics\":\"assistant_output_only_not_user_prefetch\",\"forget_epoch\":1,\"independent_input_copies\":\"require_explicit_fragment_selection\",\"ok\":true,\"physical_erasure\":false,\"raw_audit_retained\":true,\"revoked_ids\":[\"642edbd7-9370-5c01-9766-cca7ab0ce3eb\"],\"revoked_source_refs\":[],\"scope\":\"record\",\"scope_counts\":{\"derived_assistant_sources\":0,\"explicit_support_sources\":2,\"revoked_sources\":0,\"selected_records\":1},\"source_visibility_scope\":\"selected_support_trigger_and_assistant_outputs\",\"status\":\"visibility_revoked\"}"
+        }
+      ]
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "fixed",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/2778860e-fcb4-4051-ad3a-77290dffbefe-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/fixed/banks/a7a75d58-3da5-4caa-af26-a7b30b202e5d/2778860e-fcb4-4051-ad3a-77290dffbefe-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "partial_missing_preserved_preference",
+      "note": "Abstains on label and also loses retained Chinese preference. Prior forget revoked one record and zero Sources; abstention is not proof of complete forgetting."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "rules",
+      "step": "command-1",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/14528880-77f1-4f8c-916e-2ac171f2ad35-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/14528880-77f1-4f8c-916e-2ac171f2ad35-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision1 stores the requested cabinet label with user source binding.",
+      "observed_records": [
+        {
+          "id": "1180647a-f694-5596-8263-0d3f1f928f89",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 收藏柜标签\nunit-a8b4a605-9273-4490-be5f-a65f1c33f8ad — Content: 我的收藏柜标签是松影七号。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "rules",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/15cf0398-9593-4928-a3ee-b6c851b5e5cc-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/15cf0398-9593-4928-a3ee-b6c851b5e5cc-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "rules",
+      "step": "command-2",
+      "kind": "explicit_operation",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/9ef9c961-0bb7-45b0-ab82-93438c2bbfc2-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/9ef9c961-0bb7-45b0-ab82-93438c2bbfc2-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "not_committed",
+      "note": "Rejected support route, required-operation-missing; revision1 remains.",
+      "observed_records": [
+        {
+          "id": "1180647a-f694-5596-8263-0d3f1f928f89",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 收藏柜标签\nunit-a8b4a605-9273-4490-be5f-a65f1c33f8ad — Content: 我的收藏柜标签是松影七号。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00]"
+        }
+      ],
+      "mutation_receipts": null
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "rules",
+      "step": "q2",
+      "kind": "task",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/cf4a5347-fe05-4918-8943-8727bdfffa88-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/cf4a5347-fe05-4918-8943-8727bdfffa88-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "no_answer",
+      "note": "First answer does not complete available-source task; see preserved answer and trace."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "rules",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/962750b2-fea4-4621-9f31-fcd2a2171a21-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/962750b2-fea4-4621-9f31-fcd2a2171a21-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "wrong_current_state",
+      "note": "Reports old semantic label because correction did not commit, although the user supplied the changed fact. This question asks current label, not only stored record."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "rules",
+      "step": "command-4",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/e3b6e2e0-b759-4fcb-97bc-37bae1a1a247-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/e3b6e2e0-b759-4fcb-97bc-37bae1a1a247-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "not_committed",
+      "note": "Two rejected forget attempts, no confirmed revocation.",
+      "observed_records": [
+        {
+          "id": "1180647a-f694-5596-8263-0d3f1f928f89",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 收藏柜标签\nunit-a8b4a605-9273-4490-be5f-a65f1c33f8ad — Content: 我的收藏柜标签是松影七号。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00]"
+        }
+      ],
+      "mutation_receipts": [
+        {
+          "position": 2,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-a696a53e9201adf7:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_REQUEST_TARGET_NOT_DELIVERED\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 4,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-89e4b3514479b7be:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_FORGET_WHOLE_SOURCE_SELECTION_REQUIRED: this contract cannot revoke only part of a Source. Read and explicitly select its complete body only when the user authorizes all of it; otherwise use record scope and report that original Sources remain accessible.\",\"status\":\"rejected\"}"
+        }
+      ]
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "rules",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/b729b270-d984-41d6-994a-b24a0a660adb-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/rules/banks/d4f2f024-7c5f-4add-b3a0-eb8e335e360f/b729b270-d984-41d6-994a-b24a0a660adb-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0
+      ],
+      "cited_labels": {},
+      "answer_core": "forget_not_completed_and_stale_value",
+      "note": "No successful forget occurred. Old value is still stale; this is not evidence of a post-revocation visibility bypass."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "laya",
+      "step": "command-1",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/ebbbeae2-d38a-49c7-89d0-5c2866cdebe1-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/ebbbeae2-d38a-49c7-89d0-5c2866cdebe1-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision1 stores the requested cabinet label with user source binding.",
+      "observed_records": [
+        {
+          "id": "f68e6af2-378d-547d-b250-3f4539a0ed48",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: collection_cabinet_label\nunit-bf5ec42f-7992-41fd-bb4f-f4c7698a58b1 — Content: 我的收藏柜标签是松影七号。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "laya",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/305bff7b-c5cc-4add-a341-ac107d6c3dc7-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/305bff7b-c5cc-4add-a341-ac107d6c3dc7-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "laya",
+      "step": "command-2",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/1cd8d268-ed29-427a-a1e2-7d094f77dab2-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/1cd8d268-ed29-427a-a1e2-7d094f77dab2-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "explicit_state": "partial_graph_defect",
+      "note": "Revision2 text is correct, but support_groups has alternatives=[]; actual rendering says No stored support route. Not a valid full structured state.",
+      "observed_records": [
+        {
+          "id": "f68e6af2-378d-547d-b250-3f4539a0ed48",
+          "status": "found",
+          "revision": 2,
+          "content": "Matter: collection_cabinet_label\nunit-bf5ec42f-7992-41fd-bb4f-f4c7698a58b1 — Content: 我的收藏柜标签是潮声九号。 [Assertion: reported; speaker=user; occurred_at=2031-04-02T10:00:00+08:00]\nNo stored support route for 我的收藏柜标签是潮声九号。"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "laya",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/e98c6ca3-bc60-40fe-9db8-61d567ccdcde-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/e98c6ca3-bc60-40fe-9db8-61d567ccdcde-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "laya",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/08456bea-f59e-42f3-8b7a-3d6106d63442-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/08456bea-f59e-42f3-8b7a-3d6106d63442-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "laya",
+      "step": "command-4",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/cec6ab39-d619-4871-bf9b-9858820b46a2-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/cec6ab39-d619-4871-bf9b-9858820b46a2-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {},
+      "explicit_state": "not_committed",
+      "note": "Request interpretation incorrectly disables forgetting despite explicit request; zero attempts.",
+      "observed_records": [
+        {
+          "id": "f68e6af2-378d-547d-b250-3f4539a0ed48",
+          "status": "found",
+          "revision": 2,
+          "content": "Matter: collection_cabinet_label\nunit-bf5ec42f-7992-41fd-bb4f-f4c7698a58b1 — Content: 我的收藏柜标签是潮声九号。 [Assertion: reported; speaker=user; occurred_at=2031-04-02T10:00:00+08:00]\nNo stored support route for 我的收藏柜标签是潮声九号。"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "laya",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/67e444fe-8e81-4376-9371-dd1da0336810-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/laya/banks/86b28dbb-2ff4-4869-98cd-99eb2b061d48/67e444fe-8e81-4376-9371-dd1da0336810-trace-0.jsonl",
+      "delivered_fixture_sources": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cited_labels": {},
+      "answer_core": "correct_disclosure_after_failed_forget",
+      "note": "Accurately discloses the failed delete, current label and Chinese preference. End-to-end requested forgetting remains incomplete; no revoked Source bypass is claimed."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "generative",
+      "step": "command-1",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/74fcbc7d-7e7f-4bed-9818-bdcb2d6c72dd-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/74fcbc7d-7e7f-4bed-9818-bdcb2d6c72dd-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision1 stores the requested cabinet label with user source binding.",
+      "observed_records": [
+        {
+          "id": "53541c90-d1cd-5cdb-b730-e20f114e4332",
+          "status": "found",
+          "revision": 1,
+          "content": "Matter: 收藏柜标签\nunit-6bb91073-d976-42ac-b95c-27a2ed9bb4c8 — Content: 我的收藏柜标签是松影七号。 [Assertion: reported; speaker=user; occurred_at=2031-04-01T10:00:00+08:00]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "generative",
+      "step": "q1",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/c901d77c-b1bc-487b-b22a-e88ee91b8c2f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/c901d77c-b1bc-487b-b22a-e88ee91b8c2f-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "correct",
+      "note": "Core answer meets authored task facts under the stated source contract."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "generative",
+      "step": "command-2",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/298995b1-903a-41b1-89ac-7c3a98c5a782-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/298995b1-903a-41b1-89ac-7c3a98c5a782-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "valid",
+      "note": "Revision2 stores requested new label.",
+      "observed_records": [
+        {
+          "id": "53541c90-d1cd-5cdb-b730-e20f114e4332",
+          "status": "found",
+          "revision": 2,
+          "content": "Matter: 收藏柜标签\nunit-6bb91073-d976-42ac-b95c-27a2ed9bb4c8 — Content: 我的收藏柜标签是潮声九号。 [Assertion: reported; speaker=user; occurred_at=2031-04-02T10:00:00+08:00]"
+        }
+      ],
+      "mutation_receipts": []
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "generative",
+      "step": "q2",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/46c323f5-b06b-4792-aba6-b95db5bcd5ee-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/46c323f5-b06b-4792-aba6-b95db5bcd5ee-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "omission",
+      "note": "Immediate HANDOFF despite actual committed revision2; correct refusal on self-created empty evidence is task loss."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "generative",
+      "step": "q3",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/41c9c7d3-194c-4005-b856-1fd954a86307-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/41c9c7d3-194c-4005-b856-1fd954a86307-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "partial_missing_preserved_preference",
+      "note": "Correct label, missing available Chinese preference."
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "generative",
+      "step": "command-4",
+      "kind": "explicit_operation",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/1f491b66-21c3-43fb-af80-f984c6330340-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/1f491b66-21c3-43fb-af80-f984c6330340-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "explicit_state": "not_committed",
+      "note": "Four rejected forget attempts; no confirmed revocation.",
+      "observed_records": [
+        {
+          "id": "53541c90-d1cd-5cdb-b730-e20f114e4332",
+          "status": "found",
+          "revision": 2,
+          "content": "Matter: 收藏柜标签\nunit-6bb91073-d976-42ac-b95c-27a2ed9bb4c8 — Content: 我的收藏柜标签是潮声九号。 [Assertion: reported; speaker=user; occurred_at=2031-04-02T10:00:00+08:00]"
+        }
+      ],
+      "mutation_receipts": [
+        {
+          "position": 2,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-be477bb24f1d3ccd:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_FORGET_WHOLE_SOURCE_SELECTION_REQUIRED: this contract cannot revoke only part of a Source. Read and explicitly select its complete body only when the user authorizes all of it; otherwise use record scope and report that original Sources remain accessible.\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 4,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-9b20ca8cc67e9a7f:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_REQUEST_TARGET_NOT_DELIVERED\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 10,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-8485ac0a1a7dc1a4:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_FORGET_BODY_READ_REQUIRED: navigation targets grant no forget authority; first use read_memory/read_source and select the resulting delivered target\",\"status\":\"rejected\"}"
+        },
+        {
+          "position": 16,
+          "tool": "forget_memory",
+          "tool_call_id": "chatcmpl-892ce1e77577af3d:tool:0",
+          "receipt": "{\"effect\":\"none\",\"error_type\":\"FunctionalRejection\",\"formation_status\":\"pending\",\"ok\":false,\"phase\":\"pre_mutation_contract\",\"reason\":\"V13_5_FORGET_WHOLE_SOURCE_SELECTION_REQUIRED: this contract cannot revoke only part of a Source. Read and explicitly select its complete body only when the user authorizes all of it; otherwise use record scope and report that original Sources remain accessible.\",\"status\":\"rejected\"}"
+        }
+      ]
+    },
+    {
+      "history": "reopen_forget",
+      "policy": "generative",
+      "step": "q4",
+      "kind": "task",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/cecb2cf6-d5a7-49f3-9ae1-6e20305abdc4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/e0-v1/generative/banks/5e8ba5f2-c733-491f-aa22-783f94d00131/cecb2cf6-d5a7-49f3-9ae1-6e20305abdc4-trace-0.jsonl",
+      "delivered_fixture_sources": [],
+      "cited_labels": {},
+      "answer_core": "omission",
+      "note": "SEARCH then HANDOFF; fails to recover retained preference. Prior forget had no accepted revocation."
+    }
+  ]
+}

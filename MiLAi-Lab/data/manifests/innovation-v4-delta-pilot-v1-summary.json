@@ -1,0 +1,55 @@
+{
+  "run": "delta-pilot-v1",
+  "source_version": "c8ffd8e5",
+  "status": "CLOSED_EXIT_0",
+  "scope": "one author development chain, four arrivals and four QA; frozen original alias-format diagnostic",
+  "stages": {
+    "embedding": {
+      "responses": 5,
+      "input_tokens": 312,
+      "output_tokens": 0,
+      "total_tokens": 312
+    },
+    "answering": {
+      "responses": 4,
+      "input_tokens": 3816,
+      "output_tokens": 8234,
+      "total_tokens": 12050
+    },
+    "maintenance": {
+      "responses": 4,
+      "input_tokens": 6000,
+      "output_tokens": 17316,
+      "total_tokens": 23316
+    }
+  },
+  "ledger_delta": {
+    "generation": {
+      "known_tokens": 35366,
+      "charged_tokens": 35366,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 312,
+      "charged_tokens": 312,
+      "unknown_usage": 0
+    }
+  },
+  "generation_requests": 8,
+  "source_review": {
+    "initial_coverage": false,
+    "initial_result": "No semantic state: generated node bases did not name defined bases; rule also referred to unissued u1. No commit.",
+    "arrival_results": [
+      "formation rejected",
+      "empty proposal; state still empty",
+      "new state saved; original rule, training and battery still absent; confirmed cancelled annual pass mislabeled uncertain",
+      "voucher corrected and night requirements appended; no support group formed; original rule and battery still missing"
+    ],
+    "reader_core_correct": 4,
+    "reader_opportunities": 4,
+    "independent_blind_review": false,
+    "official_judge_calls": 0,
+    "state_success_not_inferred_from_qa": true
+  },
+  "decision": "Remove the generated basis namespace and use delivered e references directly; restrict new-rule references to new nodes. Keep the original failed state and costs; paired cold runs use a new frozen source."
+}

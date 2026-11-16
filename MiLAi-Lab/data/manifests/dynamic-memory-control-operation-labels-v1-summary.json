@@ -1,0 +1,22 @@
+{
+  "rows": 557,
+  "labelled_by_split": {
+    "train": 373,
+    "dev": 125
+  },
+  "statuses": {
+    "acquire_evidence_preference": 351,
+    "ready_handoff_preference": 147,
+    "forced_single_action_masked": 59
+  },
+  "positive_action_kinds": {
+    "SEARCH": 141,
+    "REFRESH_VIEW": 211,
+    "READ": 575,
+    "HANDOFF": 147,
+    "USE_VIEW": 181
+  },
+  "candidate_reconstruction_checks": 1081,
+  "teacher_choices_copied": false,
+  "scope": "T0 source-task preferences; partial observed states, not optimal lifelong policy or QA proof"
+}

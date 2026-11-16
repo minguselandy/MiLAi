@@ -1,0 +1,198 @@
+{
+  "status": "ACTIVE_GOAL;SAVED_CPU_LIVE;VIEW_POSITIVE_PROVENANCE_VERIFIED",
+  "observed_at": "2026-10-22T05:30:49.044312+00:00",
+  "previous": "training-generalization-progress-20261022-v32.json",
+  "previous_turn_classification": "VERIFIED_WAIT:both jobs alive and progressing. This turn inspected immutable View-positive provenance and actual completed training draws without new labels or model calls.",
+  "only_real_model": {
+    "session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "candidate": 0,
+    "states_completed": 148,
+    "planned_per_candidate": 876,
+    "deployment_selection": null
+  },
+  "CPU_audit": {
+    "session": 37854,
+    "pid": 662822,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "paths_completed": 75,
+    "planned": 902
+  },
+  "diagnostic": {
+    "status": "COMPLETE_FROZEN_COHORT_VIEW_SUPERVISION_PROVENANCE",
+    "cohorts": [
+      {
+        "registered_source_groups": 64,
+        "raw_rows": 2142,
+        "labelled_rows": 1468,
+        "view_positive_states_by_kind": {
+          "REFRESH_VIEW": 1
+        },
+        "view_positive_families": [
+          "memops_A05"
+        ],
+        "positive_rows": [
+          {
+            "raw_row": 985,
+            "event_id": "generative-rich/memops_A05/stage-2/chatcmpl-9eb6e63109e9f787:tool:0/1",
+            "family": "memops_A05",
+            "component": "operation_history",
+            "collection_policy": "generative",
+            "training_event": "generative-rich/memops_A05/stage-2",
+            "source_version": "8f7f2a18",
+            "kind": "REFRESH_VIEW"
+          }
+        ]
+      },
+      {
+        "registered_source_groups": 128,
+        "raw_rows": 4092,
+        "labelled_rows": 2762,
+        "view_positive_states_by_kind": {
+          "REFRESH_VIEW": 2,
+          "USE_VIEW": 1
+        },
+        "view_positive_families": [
+          "memops_A01",
+          "memops_A05"
+        ],
+        "positive_rows": [
+          {
+            "raw_row": 1848,
+            "event_id": "generative-rich/memops_A01/stage-0/chatcmpl-8eec5a9b3b9c75c5:tool:0/2",
+            "family": "memops_A01",
+            "component": "operation_history",
+            "collection_policy": "generative",
+            "training_event": "generative-rich/memops_A01/stage-0",
+            "source_version": "8f7f2a18",
+            "kind": "REFRESH_VIEW"
+          },
+          {
+            "raw_row": 1850,
+            "event_id": "generative-rich/memops_A01/stage-0/chatcmpl-8eec5a9b3b9c75c5:tool:1/0",
+            "family": "memops_A01",
+            "component": "operation_history",
+            "collection_policy": "generative",
+            "training_event": "generative-rich/memops_A01/stage-0",
+            "source_version": "8f7f2a18",
+            "kind": "USE_VIEW"
+          },
+          {
+            "raw_row": 1907,
+            "event_id": "generative-rich/memops_A05/stage-2/chatcmpl-9eb6e63109e9f787:tool:0/1",
+            "family": "memops_A05",
+            "component": "operation_history",
+            "collection_policy": "generative",
+            "training_event": "generative-rich/memops_A05/stage-2",
+            "source_version": "8f7f2a18",
+            "kind": "REFRESH_VIEW"
+          }
+        ]
+      },
+      {
+        "registered_source_groups": 256,
+        "raw_rows": 7884,
+        "labelled_rows": 4886,
+        "view_positive_states_by_kind": {
+          "REFRESH_VIEW": 2,
+          "USE_VIEW": 1
+        },
+        "view_positive_families": [
+          "memops_A01",
+          "memops_A05"
+        ],
+        "positive_rows": [
+          {
+            "raw_row": 1848,
+            "event_id": "generative-rich/memops_A01/stage-0/chatcmpl-8eec5a9b3b9c75c5:tool:0/2",
+            "family": "memops_A01",
+            "component": "operation_history",
+            "collection_policy": "generative",
+            "training_event": "generative-rich/memops_A01/stage-0",
+            "source_version": "8f7f2a18",
+            "kind": "REFRESH_VIEW"
+          },
+          {
+            "raw_row": 1850,
+            "event_id": "generative-rich/memops_A01/stage-0/chatcmpl-8eec5a9b3b9c75c5:tool:1/0",
+            "family": "memops_A01",
+            "component": "operation_history",
+            "collection_policy": "generative",
+            "training_event": "generative-rich/memops_A01/stage-0",
+            "source_version": "8f7f2a18",
+            "kind": "USE_VIEW"
+          },
+          {
+            "raw_row": 1907,
+            "event_id": "generative-rich/memops_A05/stage-2/chatcmpl-9eb6e63109e9f787:tool:0/1",
+            "family": "memops_A05",
+            "component": "operation_history",
+            "collection_policy": "generative",
+            "training_event": "generative-rich/memops_A05/stage-2",
+            "source_version": "8f7f2a18",
+            "kind": "REFRESH_VIEW"
+          }
+        ]
+      }
+    ],
+    "actual_source256_draws_total": 8384,
+    "actual_view_positive_state_draws": [
+      {
+        "event_id": "generative-rich/memops_A01/stage-0/chatcmpl-8eec5a9b3b9c75c5:tool:0/2",
+        "family": "memops_A01",
+        "positive_kinds": [
+          "READ",
+          "REFRESH_VIEW"
+        ],
+        "draws": 2
+      },
+      {
+        "event_id": "generative-rich/memops_A01/stage-0/chatcmpl-8eec5a9b3b9c75c5:tool:1/0",
+        "family": "memops_A01",
+        "positive_kinds": [
+          "USE_VIEW"
+        ],
+        "draws": 2
+      },
+      {
+        "event_id": "generative-rich/memops_A05/stage-2/chatcmpl-9eb6e63109e9f787:tool:0/1",
+        "family": "memops_A05",
+        "positive_kinds": [
+          "REFRESH_VIEW"
+        ],
+        "draws": 2
+      }
+    ],
+    "scope": "Existing immutable labels/metadata and completed524sampling only. Counts are states/families/draws, not gradient mass, causal attribution, all beneficial View actions or independent tasks. No reweighting, labels or cohort changes.",
+    "model_calls": 0,
+    "no_sha_validation": true,
+    "ledger_recorded": false,
+    "compute": {
+      "cpu_seconds": 8.933107323,
+      "wall_seconds": 8.934078240767121
+    }
+  },
+  "interpretation": "64cohort has1REFRESHpositive inmemops_A05.128and256each have2REFRESH/1USE acrossmemops_A01/A05, all operation_history generative collection8f7f2a18. Expansion128->256 did not add View-positive states. Each of those3states drew2times in actual8384source256draws. One REFRESHpositive also accepts READ. These are state/draw counts,not gradient mass or proof of which actions are beneficial. Preserve old labels and existing STATE E2/feedback plans; no outcome-driven relabelling or case rules.",
+  "new_closed_measured_phases": [
+    {
+      "id": "complete_actions_view_supervision_provenance_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-view-supervision-provenance-v1.json",
+      "cpu_seconds": 8.933107323,
+      "wall_seconds": 8.934078240767121,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 8.933107323,
+  "costs": "New metadata/closed-draw diagnostic CPU pending only; no offline settlement while model job lives. Trainer already billed; all prior pending and closedv1/v2/v3 unchanged. Unmeasured authoring/monitoring unknown,not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,remaining corrected controls/aux/E3/seeds,STATE108E2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,server vision and full external/protected confirmation. No method or selection-rule change."
+}

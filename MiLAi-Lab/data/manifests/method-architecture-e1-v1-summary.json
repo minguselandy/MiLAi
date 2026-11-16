@@ -1,0 +1,183 @@
+{
+  "source_commit": "9bb7d7e1",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/paired-v1",
+  "status": "E1_PAIRED_ATTEMPTS_CLOSED",
+  "seed_costs": {
+    "stages": {
+      "maintenance": {
+        "responses": 1,
+        "known_tokens": 4131,
+        "unknown_usage_responses": 0
+      }
+    },
+    "requests_without_response": [],
+    "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+  },
+  "arms": {
+    "plain": {
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 3,
+            "known_tokens": 9342,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 1,
+            "known_tokens": 6852,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 6,
+            "known_tokens": 360,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "wall_seconds": 61.3937265239656,
+      "runtime_engineered_ok": true,
+      "before_revision": 1,
+      "after_revision": 2,
+      "unit_texts": [
+        "燕桥站自2031年4月18日起收件工作由何雨负责，18日之前仍由沈宁负责。",
+        "松港站由罗琳收件。",
+        "寄出借展品需要馆员核准。",
+        "馆内搬运不用核准。"
+      ],
+      "existing_non_target_units_preserved": true,
+      "qa_answers": [
+        {
+          "id": "current-and-future",
+          "kind": "current_and_time",
+          "question": "2031年4月17日和4月18日，燕桥站分别由谁收件？",
+          "hypothesis": "\n\n根据排班单报告记录：\n- **2031年4月17日**（18日之前）：燕桥站收件工作由**沈宁**负责。\n- **2031年4月18日**：自该日起生效，燕桥站收件工作改由**何雨**负责。\n\n（注：上述人员安排基于排班单明确界定的时间条件，即调整自2031年4月18日起生效。）"
+        },
+        {
+          "id": "initial-saved",
+          "kind": "saved_history",
+          "question": "第一次保存的借展登记里，燕桥站和松港站分别记的是哪位收件人？请只说明初存记录。",
+          "hypothesis": "\n\n根据初存的借展登记记录，燕桥站的收件人为沈宁，松港站的收件人为罗琳。"
+        },
+        {
+          "id": "non-target",
+          "kind": "non_target_preservation",
+          "question": "寄出借展品、馆内搬运分别需要什么核准？我的茶饮偏好有改变吗？",
+          "hypothesis": "\n\n根据已交付的记忆材料（来源s1及s0，报告/观测时间均为2026-10-15）：\n\n1. **寄出借展品**：需要**馆员核准**（来源s1为用户直接报告；来源s0同日报告亦佐证“寄出核准要求照旧”）。\n2. **馆内搬运**：**不用核准**（来源s1为用户报告）。\n3. **茶饮偏好**：来源s1中报告了“我个人喜欢无糖乌龙茶”。在当前已交付的记忆材料中，未包含任何关于该偏好发生改变的报告、修订或新记录。基于现有材料，无法得出您的茶饮偏好有改变的结论（注：检索结果并非完整清单，仅反映已交付的观测记录；若无新报告，则现状维持原样）。"
+        }
+      ],
+      "source_review": {
+        "target_written": true,
+        "state_temporal_limitation": "before/after clauses combined in one unit with effective_from on the whole unit",
+        "answers_core_facts": "three questions covered",
+        "answer_source_faithful": false,
+        "answer_issue": "non-target answer incorrectly equates report and capture dates as 2026-10-15 although explicit report clocks are 2031-04-10"
+      }
+    },
+    "candidate": {
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 3,
+            "known_tokens": 9483,
+            "unknown_usage_responses": 0
+          },
+          "impact": {
+            "responses": 1,
+            "known_tokens": 3421,
+            "unknown_usage_responses": 0
+          },
+          "maintenance": {
+            "responses": 1,
+            "known_tokens": 8817,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 5,
+            "known_tokens": 255,
+            "unknown_usage_responses": 0
+          },
+          "evidence_selection": {
+            "responses": 3,
+            "known_tokens": 9604,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "wall_seconds": 111.6804313948378,
+      "runtime_engineered_ok": true,
+      "before_revision": 1,
+      "after_revision": 1,
+      "unit_texts": [
+        "燕桥站由沈宁收件。",
+        "松港站由罗琳收件。",
+        "寄出借展品需要馆员核准。",
+        "馆内搬运不用核准。"
+      ],
+      "existing_non_target_units_preserved": true,
+      "qa_answers": [
+        {
+          "id": "current-and-future",
+          "kind": "current_and_time",
+          "question": "2031年4月17日和4月18日，燕桥站分别由谁收件？",
+          "hypothesis": "\n\n根据记忆材料e0中的排班单记载（用户报告/陈述状态），2031年4月17日（属于“18日之前”的时段）燕桥站的收件工作由**沈宁**负责；2031年4月18日（属于“18日起”的时段）则交由**何雨**负责。该记录明确标注了适用条件与时间节点，材料中未提示该排班存在其他时间限制、修正或例外情况。"
+        },
+        {
+          "id": "initial-saved",
+          "kind": "saved_history",
+          "question": "第一次保存的借展登记里，燕桥站和松港站分别记的是哪位收件人？请只说明初存记录。",
+          "hypothesis": "\n\n根据初存的借展登记记录：\n- 燕桥站收件人：沈宁\n- 松港站收件人：罗琳"
+        },
+        {
+          "id": "non-target",
+          "kind": "non_target_preservation",
+          "question": "寄出借展品、馆内搬运分别需要什么核准？我的茶饮偏好有改变吗？",
+          "hypothesis": "\n\n根据提供的记忆材料：\n\n1. **寄出借展品与馆内搬运的核准要求**（依据用户陈述）：\n   - **寄出借展品**：需要馆员核准。\n   - **馆内搬运**：不用核准。\n\n2. **茶饮偏好是否改变**：\n   - 材料中仅记录用户表示“我个人喜欢无糖乌龙茶”，未提供该偏好此前的状态或任何变更记录。基于现有材料，**无法确定**您的茶饮偏好是否有改变。"
+        }
+      ],
+      "source_review": {
+        "target_written": false,
+        "impact_root_correct": true,
+        "existing_state_unchanged": true,
+        "answers_current_and_initial": "core facts correct using delivered original sources",
+        "answer_non_target": "approval facts and tea value present, but unnecessarily refuses to conclude recorded preference unchanged",
+        "state_success": false,
+        "earliest_candidate_break": "generation contract masks legal edit branch; no_change accepted"
+      }
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 13,
+    "generation": {
+      "known_tokens": 51650,
+      "charged_tokens": 51650,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 615,
+      "charged_tokens": 615,
+      "unknown_usage": 0
+    }
+  },
+  "official_labels": null,
+  "judge_calls": 0,
+  "source_review": "same developer, all source bodies and six complete answers; not independent or blinded",
+  "initial_formation": {
+    "stored_claims": 4,
+    "expected_durable_claims": 5,
+    "missing": "unsweetened oolong preference",
+    "source_delivered": true,
+    "no_hand_repair": true
+  },
+  "generation_contract": {
+    "old_schema_probe": "artifacts/method-architecture/paired-v1/grammar-probe.stdout.json",
+    "new_schema_probe": "artifacts/method-architecture/paired-v1/grammar-fixed-probe.stdout.json",
+    "json_schema_legal_edits_rejected_by_xgrammar_0_2_3": true,
+    "new_schema_accepts_same_examples": true,
+    "probe_model_http": 0
+  },
+  "full_goal_complete": false
+}

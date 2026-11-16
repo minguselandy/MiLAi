@@ -1,0 +1,128 @@
+{
+  "status": "PREPARED_NOT_EXECUTED_METHODS_NOT_YET_SELECTED",
+  "source_fixtures": [
+    "data/fixtures/dynamic-memory-control/multitopic-v1.json",
+    "artifacts/host-intent-retrieval-v3/data/t1-sources-v1/full-histories.json"
+  ],
+  "histories": "artifacts/host-intent-retrieval-v3/data/view-v4-e5-coverage-streams-v1/histories.json",
+  "source_groups": [
+    "multitopic_switching",
+    "authored-effective-threshold-v3"
+  ],
+  "original_splits": {
+    "multitopic_switching": "functional_development",
+    "authored-effective-threshold-v3": "dev"
+  },
+  "runtime_split": "dev; original functional-development exposure explicitly retained, no new independent split.",
+  "positions": 18,
+  "streams": 2,
+  "original_source_objects_equal": true,
+  "source_schedule": "Multitopic original order and arrivals retained, one equivalent request inserted. Threshold source0 initially available; unchanged source1 delivered at q03, preserving source order/body/role/native clocks but deliberately changing availability from the earlier all-at-once diagnostic.",
+  "task_mapping": [
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q01",
+      "original_step": "a-cold"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q02",
+      "original_step": null,
+      "workload": "equivalent paraphrase of first public task; no new sources"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q03",
+      "original_step": "b-cold"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q04",
+      "original_step": "a-return"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q05",
+      "original_step": "c-cold"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q06",
+      "original_step": "a-after-third-topic"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q07",
+      "original_step": "b-return"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q08",
+      "original_step": "a-related"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q09",
+      "original_step": "a-unrelated"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q10",
+      "original_step": "a-repeat"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q11",
+      "original_step": "b-related"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q12",
+      "original_step": "c-return"
+    },
+    {
+      "history": "existing-multitopic-v4-e5",
+      "request": "q13",
+      "original_step": "a-final-return"
+    }
+  ],
+  "workloads": {
+    "repeated_same_need": [
+      "existing-effective-threshold-v4-e5:q01/q02",
+      "existing-multitopic-v4-e5:q09/q10"
+    ],
+    "equivalent_paraphrase": [
+      "existing-multitopic-v4-e5:q01/q02"
+    ],
+    "topic_switch": [
+      "existing-multitopic-v4-e5:q01/q03/q05:shipping,publishing,archive maintenance"
+    ],
+    "related_change": [
+      "existing-multitopic-v4-e5:q08",
+      "existing-multitopic-v4-e5:q11"
+    ],
+    "unrelated_change": [
+      "existing-multitopic-v4-e5:q09:poster update leaves shipping rule unchanged"
+    ],
+    "late_source": [
+      "existing-effective-threshold-v4-e5:q03:original October12 report becomes visible after earlier requests; native capture time must be observed at execution, not forged."
+    ],
+    "effective_time_crossing": [
+      "existing-effective-threshold-v4-e5:q03/q04:same two sources, October31 versusNovember2 applicability",
+      "existing-effective-threshold-v4-e5:q05:retrospective non-retroactive scope"
+    ]
+  },
+  "offline_review_basis": {
+    "multitopic": "Original expected fields remain only in the original fixture and offline review. Air shipment initially allowed (not required); battery correction requires ground only; publishing Chinese thenEnglish with editor unchanged; archiveWednesday/贺青 unchanged.",
+    "threshold": "q01/q02 Orion600,Vega900, no upcoming change known. q03 Orion600 and declared November1 future1200,Vega900 unchanged. q04 Orion1200,Vega900. q05 retrospectiveOrion600, non-retroactive later1200."
+  },
+  "clocks": "Original authored scenario uses2032 declared occurrence/query dates; it is not real-world contemporaneous history. Threshold report occurredOctober12 and becomes visible in actual2026October execution; late-receipt assertion still requires actual capture receipt. No source occurrence dates invented or rewritten.",
+  "method_plan": "Select few methods and512/2048/4096 workpoints only after D/Coalent review; no model dispatched. Every arm gets its own cold bank.",
+  "exposure": "Both families already authored/exposed development fixtures; no claim of unseen sources or independent confirmation, and no dev labels enter training. STATE retained tasks remain a separate confirmation requirement.",
+  "model_calls": 0,
+  "compute": {
+    "wall_seconds": 0.03890762571245432,
+    "cpu_seconds": 0.038908507999999994
+  },
+  "ledger_recorded": false
+}

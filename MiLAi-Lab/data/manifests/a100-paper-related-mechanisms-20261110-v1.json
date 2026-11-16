@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "status": "ORIGINAL_PLAN_SIX_PRIMARY_RESEARCH_MECHANISMS_CREDITED_WITH_ACTUAL_EVIDENCE_LIMITS",
+  "timestamp_utc": "2026-11-09T16:21:51.775950+00:00",
+  "rows": [
+    {
+      "id": "P1",
+      "name": "Promptriever",
+      "primary": "https://arxiv.org/html/2409.11136v1",
+      "original_plan_source": "https://proceedings.iclr.cc/paper_files/paper/2025/hash/2cefdb2c4c3274b78cd450bac35228df-Abstract-Conference.html",
+      "version": "arXiv2409.11136v1 (2024-09-17), ICLR2025 abstract metadata separately verified; final PDF timed out, no byte-equivalence claim",
+      "source_mechanism": "用实例级instruction训练检索器，使同一query在不同相关性要求下检索。",
+      "MiLAi_inference": "Host用途/证据/对象时间/K/预算进入完整绑定条件；A只测试原生负例覆盖处理，单目标set与CE等价，不是Promptriever重训或新loss。",
+      "own_evidence": "a100-plan-A-audit-20261109-v1.json"
+    },
+    {
+      "id": "P2",
+      "name": "STITCH",
+      "primary": "https://aclanthology.org/2026.findings-acl.584/",
+      "version": "Findings ACL2026 published page and PDF; methods2.1–2.3",
+      "source_mechanism": "以主题scope、事件类型、关键实体类型构造contextual intent，过滤并排序上下文相容记忆。",
+      "MiLAi_inference": "借鉴条件化检索的问题定义；本轮保持既有Host公开接口，Source身份/权限准入与相关性标签分别记录，原STITCH指标不转作MiLAi结果。",
+      "own_evidence": "a100-paper-methods-exposure-20261109-v1.json"
+    },
+    {
+      "id": "P3",
+      "name": "EMem / EMem-G",
+      "primary": "https://aclanthology.org/2026.findings-emnlp.924/",
+      "version": "Findings EMNLP2026 published page and PDF; methods3 and source-turn attribution discussion",
+      "source_mechanism": "用带实体、时间和source-turn归属的事件/事实EDU作检索单元，结合稠密检索/LLM过滤；图版本另用关联传播。",
+      "MiLAi_inference": "区分完整Source、派生View和实际交付；字节/角色/时钟相同不证明生成View语义完整或事实正确，也不等价于EDU方案。",
+      "own_evidence": "a100-plan-D-audit-20261109-v1.json"
+    },
+    {
+      "id": "P4",
+      "name": "FlexA-Mem",
+      "primary": "https://arxiv.org/html/2610.33274v1",
+      "original_project": "https://github.com/WujiangXu/Flex-Amem",
+      "version": "arXiv2610.33274v1 (2026-10-23), sections3.1–3.5; README observed at acquisition time",
+      "source_mechanism": "保留不可变raw与关联记录，在预算内渲染时间线并恢复raw、excerpt或原文pieces。",
+      "MiLAi_inference": "存储完整性、预算内交付、NN完整投影是三种不同约束；本轮实际packet由原SDK预算决定，关闭产物无损归档不属于prompt压缩或策略收益。",
+      "own_evidence": "a100-confirmation256-quality-results-20261107-v1.json"
+    },
+    {
+      "id": "P5",
+      "name": "Memory-R2",
+      "primary": "https://arxiv.org/html/2605.21768v1",
+      "version": "arXiv2605.21768v1 (2026-05-20), section3.3 local/global branches",
+      "source_mechanism": "局部rerollout从相同中间memory state比较操作，并与全轨迹GRPO目标结合。",
+      "MiLAi_inference": "B64同before/完整参数分支借鉴可比状态；本轮是材料反馈监督，不是LoGo-GRPO或联合extractor-manager RL。自主后续历史与Host随机性不由同初态自动配对。",
+      "own_evidence": "a100-plan-B64-audit-20261109-v1.json"
+    },
+    {
+      "id": "P6",
+      "name": "Memory at Scale",
+      "primary": "https://arxiv.org/html/2605.07313v2",
+      "original_project": "https://github.com/AndyLu666/memory-at-scale",
+      "version": "arXiv2605.07313v2 (2026-10-29), sections3.1–3.2/A.9; README observed at acquisition time",
+      "source_mechanism": "固定query/证据/答案，增加无关完整session，并对已完成轨迹事后计算memory-call预算、尾部负担和可靠性边界。",
+      "MiLAi_inference": "D的0→1构造无关会话仅是最小因素测试，没有重现多规模曲线；本轮硬generation准入包含依赖NN，不能换名论文的事后memory-call B或Pass@B。",
+      "own_evidence": "a100-plan-D-audit-20261109-v1.json"
+    }
+  ],
+  "primary_source_acquisition": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/research-primary-references-20261110-v1/source-acquisition-v1.json",
+  "sources_readonly_and_saved_locally": true,
+  "original_ICLR_page_and_PDF_fetch_timeouts_retained_as_access_limit": true,
+  "no_arxiv_preprint_and_conference_PDF_byte_equivalence_inferred": true,
+  "MiLAi_relation_column_is_author_inference_not_a_claim_by_other_papers": true,
+  "external_paper_benchmark_numbers_imported_into_MiLAi_results": false,
+  "original_plan_labels_models_firsts_or_frozen_protocol_changed": false,
+  "runtime_research_recipe_or_algorithm_changed": false,
+  "new_experimental_model_HTTP_GPU_business_or_original_ledger_calls": 0,
+  "ordinary_CPU_pending_actual_idle139": true,
+  "no_sha_validation": true,
+  "full763_line_completion_proven": false,
+  "goal_complete": false
+}

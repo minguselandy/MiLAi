@@ -1,0 +1,272 @@
+{
+  "status": "PHASE9_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T01:07:50.839433+00:00",
+  "code_commit": "ae97ea17",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v8.json",
+  "no_sha_validation": true,
+  "closed10k": {
+    "status": "ORIGINAL10K_CURVE_CLOSED",
+    "updates": 945,
+    "draws": 30210,
+    "effective_tokens": 196237134,
+    "full_dev": {
+      "315": {
+        "accepted": 115,
+        "labelled": 278,
+        "macro": 0.4472950164914451,
+        "strata": {
+          "reference_acquisition": {
+            "labelled": 203,
+            "accepted": 68
+          },
+          "reference_preserving_handoff": {
+            "labelled": 75,
+            "accepted": 47
+          }
+        }
+      },
+      "630": {
+        "accepted": 113,
+        "labelled": 278,
+        "macro": 0.43216604823747684,
+        "strata": {
+          "reference_acquisition": {
+            "labelled": 203,
+            "accepted": 81
+          },
+          "reference_preserving_handoff": {
+            "labelled": 75,
+            "accepted": 32
+          }
+        }
+      },
+      "945": {
+        "accepted": 113,
+        "labelled": 278,
+        "macro": 0.42862296433725,
+        "strata": {
+          "reference_acquisition": {
+            "labelled": 203,
+            "accepted": 74
+          },
+          "reference_preserving_handoff": {
+            "labelled": 75,
+            "accepted": 39
+          }
+        }
+      }
+    },
+    "compute": {
+      "cpu_seconds": 31316.376633332,
+      "wall_seconds": 20072.181828411296,
+      "gpu_hours": 5.575606063447582,
+      "stage_wall_seconds": {
+        "prepare": 433.42015030700713,
+        "evaluation": 840.2171859061345,
+        "training": 18600.912719103508,
+        "save": 195.08486051857471
+      }
+    },
+    "loaded_source_commit": "cececfb7",
+    "cost": "Already recorded by original trainer; not rebilled",
+    "no_sha_validation": true,
+    "scope": "All predefined points retained, no best-point replacement. Reference-preference development remains separate from semantic Host quality."
+  },
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "code": "4bab6388",
+      "pid": 769163,
+      "status": "RUNNING",
+      "optimizer_updates": 615,
+      "planned_optimizer_updates": 3390,
+      "train_states": 36150,
+      "task": "memory_operation"
+    },
+    {
+      "name": "i2-budget-operations-seed0-v3",
+      "code": "ae97ea17",
+      "pid": 1773519,
+      "status": "RUNNING",
+      "optimizer_updates": 0,
+      "planned_optimizer_updates": 99,
+      "train_states": 1052,
+      "task": "mixed_retrieval"
+    }
+  ],
+  "native36k_halfpass": {
+    "checkpoint": 565,
+    "labelled_states": 423,
+    "raw_states": 688,
+    "labelled_families": 29,
+    "raw_families": 30,
+    "initial_accepted": 181,
+    "halfpass_accepted": 341,
+    "initial_macro": 0.42260971786833856,
+    "halfpass_macro": 0.8081896551724138,
+    "scope": "Exposed native DEV operation-reference preferences, including actual cold/known conditions. Not Host task success or final36k performance; main run continues to3390."
+  },
+  "direct_I2_semantic64": {
+    "status": "ALL64_DIRECT_HANDOFF_FEEDBACK_SOURCE_REVIEWED_NOT_FITTED",
+    "sources": [
+      "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-first16-semantic-v2",
+      "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-families16to32-semantic-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-families32to64-semantic-v1"
+    ],
+    "counts": {
+      "raw-feedback": {
+        "states": 64,
+        "families": 64
+      },
+      "delivery-fit": {
+        "states": 8,
+        "families": 8
+      },
+      "answer-fit": {
+        "states": 5,
+        "families": 5
+      },
+      "matched-feedback": {
+        "states": 4,
+        "families": 4
+      },
+      "matched-sft": {
+        "states": 4,
+        "families": 4
+      }
+    },
+    "source_families": 64,
+    "logical_unique_results": 168,
+    "answer_status": {
+      "incomplete": 88,
+      "complete": 24,
+      "incorrect": 5,
+      "execution_failed": 16,
+      "unknown": 33,
+      "qualified": 2
+    },
+    "material_status": {
+      "insufficient": 95,
+      "sufficient": 33,
+      "unknown": 40
+    },
+    "by_policy": {
+      "collector_actual": {
+        "positions": 64,
+        "strict_supported_complete": 13
+      },
+      "rules": {
+        "positions": 64,
+        "strict_supported_complete": 9
+      },
+      "coverage": {
+        "positions": 57,
+        "strict_supported_complete": 5
+      }
+    },
+    "orphan_unknown_failure_positions": 1,
+    "no_sha_validation": true,
+    "new_model_calls": 0,
+    "scope": "Full semantic fit and strict static-SFT common support are separate. All first outcomes retained, including one unknown reserved slot. TRAIN author review is nonblind/nonindependent and not held-out learning evidence. No inference of superiority over fixed-current or overall cost advantage."
+  },
+  "budget_nomination": {
+    "scoring": "/data/milai-experiments/20261111-scalable-evidence/i2-budget512-terminal64-s1u101-scores-v1",
+    "prepared_packets": "/data/milai-experiments/20261111-scalable-evidence/i2-budget512-scored-packets64-v1",
+    "full_argmax_handoff": 35,
+    "conditional_equals_current": 64,
+    "states": 64,
+    "new_packet_executions": 0,
+    "reused_actual_packets": 106,
+    "Host_calls": 0,
+    "scope": "All64 full inputs scored with frozenS1; conditional bestHANDOFF equals current in every case and misses4 offered reference-positive alternatives. No new behavior/selection benefit; do not fabricate a readout advantage by duplicating identical current packets."
+  },
+  "exploratory_budget_fit": {
+    "data": "/data/milai-experiments/20261111-scalable-evidence/i2-budget-operation-data-v1",
+    "new_reference_fit_rows": 526,
+    "new_raw_states": 1024,
+    "new_raw_families": 64,
+    "new_labelled_families": 43,
+    "old_replay_rows": 526,
+    "total_rows": 1052,
+    "dev_budget_rows": 512,
+    "dev_source_families": 32,
+    "epochs": 3,
+    "updates": 99,
+    "draws": 3156,
+    "initialization": "/data/milai-experiments/20261111-scalable-evidence/s1-op3k-seed0-v1/checkpoints/update-101",
+    "component_masses": {
+      "budget_operations": 0.8,
+      "replay": 0.2
+    },
+    "scope": "Native-reference operation practice plus extra source/condition experience, not formal real-Host-feedback M2. Numeric budget absent from private policy state; actual legal menus/execution vary. Same source conditions grouped; exposed DEV retained.",
+    "startup_failures_retained": [
+      {
+        "version": "v1",
+        "stage": "argument parsing",
+        "reason": "mixture requires mixed_retrieval",
+        "optimizer_updates": 0,
+        "native_run_started": false
+      },
+      {
+        "version": "v2 launcher",
+        "stage": "before script existed",
+        "native_run_started": false,
+        "reason": "dependent preparation cell had not returned; corrected after actual completion"
+      },
+      {
+        "version": "v2 native",
+        "stage": "initial dev reporting",
+        "reason": "component missing in fixed operation dev metadata",
+        "optimizer_updates": 0,
+        "original_predictions_preserved": 128
+      }
+    ],
+    "compatibility": "All2172 train/dev inputs project identically via mixed and operation-only routes. Reporting fallback groups missing components by task without changing native metrics, masks, inputs or training weights. v3 uses original declared data/updates; fixes no optimizer replay."
+  },
+  "M2_preparation": {
+    "source_families": 160,
+    "actual_comparison_states": 320,
+    "actual_packets": 780,
+    "segments": {
+      "first16": {
+        "states": 32,
+        "packets": 77,
+        "Host_status": "closed"
+      },
+      "families16to48": {
+        "states": 64,
+        "packets": 155,
+        "Host_status": "closed"
+      },
+      "families48to160": {
+        "states": 224,
+        "packets": 548,
+        "Host_status": "not started"
+      }
+    },
+    "semantic_review": "not yet completed for M2; native proxy does not stand in for semantic labels"
+  },
+  "learner_compute_recorded": true,
+  "phase9_preparation_compute": "/data/milai-experiments/20261111-scalable-evidence/phase9-preparation-compute-v1.json",
+  "tests": {
+    "full_menu_conditional_nomination_and_first_result_reuse": 6,
+    "mixture_fixed_dev_and_matched_state": 8,
+    "actual2172_input_projection_equivalence": true,
+    "actual128first_baseline_predictions_recovered_unchanged": true,
+    "ruff": "pass",
+    "package_boundary": "prior pass, no new active package dependencies",
+    "tools_boundary": "six unchanged oldLME dynamic imports"
+  },
+  "remaining": [
+    "Complete original36k and exploratory99-update fit; preserve all failures and baseline outputs",
+    "Verify v3 initial baseline against original128 outputs; compare held-source budget panels and actual selected packets/Host outcomes",
+    "Review M2 outputs and generate the remaining548 first endpoints in bounded resource batches; fit adequate real-feedback controls from declared commonS1",
+    "Keep full-feedback versus common-support objective/control distinctions;8delivery states alone are not adequate formalS2 evidence",
+    "ActualK/complementarity, continuingSource/View, own-state training comparison, decisive seeds and frozen newconfirmation96/full cost/generalization still unproved"
+  ],
+  "external_changes": {
+    "Product_API_permissions_Canonical": false,
+    "remote_push": false,
+    "services_restarted": false
+  }
+}

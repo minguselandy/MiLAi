@@ -1,0 +1,118 @@
+{
+  "status": "EXISTING_PREDICTIONS_ANALYZED",
+  "analysis": "artifacts/host-intent-retrieval-v3/analysis/t0-seed0-midpoint-v1.json",
+  "source_version": "c0770e49",
+  "seed": 0,
+  "initial_updates": 0,
+  "midpoint_updates": 103,
+  "family_direction_counts": {
+    "improved": 15,
+    "unchanged": 1
+  },
+  "remaining_midpoint_errors": {
+    "HANDOFF": 3,
+    "READ": 109,
+    "SEARCH": 0
+  },
+  "family_changes": [
+    {
+      "family": "authored-changed-view-missing-detail-v3",
+      "labelled": 18,
+      "initial_accepted": 8,
+      "midpoint_accepted": 15
+    },
+    {
+      "family": "authored-effective-threshold-v3",
+      "labelled": 16,
+      "initial_accepted": 9,
+      "midpoint_accepted": 16
+    },
+    {
+      "family": "authored-language-preference-v3",
+      "labelled": 12,
+      "initial_accepted": 6,
+      "midpoint_accepted": 12
+    },
+    {
+      "family": "authored-partial-evidence-v3",
+      "labelled": 28,
+      "initial_accepted": 13,
+      "midpoint_accepted": 19
+    },
+    {
+      "family": "authored-same-name-scope-v3",
+      "labelled": 26,
+      "initial_accepted": 12,
+      "midpoint_accepted": 13
+    },
+    {
+      "family": "authored-stored-vs-original-v3",
+      "labelled": 22,
+      "initial_accepted": 9,
+      "midpoint_accepted": 9
+    },
+    {
+      "family": "memops_A19",
+      "labelled": 22,
+      "initial_accepted": 10,
+      "midpoint_accepted": 15
+    },
+    {
+      "family": "memops_A32",
+      "labelled": 23,
+      "initial_accepted": 12,
+      "midpoint_accepted": 19
+    },
+    {
+      "family": "memops_B30",
+      "labelled": 22,
+      "initial_accepted": 11,
+      "midpoint_accepted": 16
+    },
+    {
+      "family": "memops_C03",
+      "labelled": 24,
+      "initial_accepted": 11,
+      "midpoint_accepted": 15
+    },
+    {
+      "family": "memops_D25",
+      "labelled": 20,
+      "initial_accepted": 15,
+      "midpoint_accepted": 17
+    },
+    {
+      "family": "memops_E08",
+      "labelled": 24,
+      "initial_accepted": 11,
+      "midpoint_accepted": 21
+    },
+    {
+      "family": "memops_E15",
+      "labelled": 27,
+      "initial_accepted": 10,
+      "midpoint_accepted": 17
+    },
+    {
+      "family": "memops_F01",
+      "labelled": 25,
+      "initial_accepted": 11,
+      "midpoint_accepted": 17
+    },
+    {
+      "family": "musique-family-000752",
+      "labelled": 29,
+      "initial_accepted": 3,
+      "midpoint_accepted": 10
+    },
+    {
+      "family": "musique-family-000879",
+      "labelled": 15,
+      "initial_accepted": 1,
+      "midpoint_accepted": 10
+    }
+  ],
+  "scope": "Reviewed short-term action preferences only; unselected/zero-mass actions not proven illegal and no end-to-end task accuracy inferred.",
+  "checkpoint_selection_unchanged": "Final207 only",
+  "model_calls": 0
+}

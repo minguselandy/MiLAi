@@ -1,0 +1,228 @@
+{
+  "status": "COMPLETED",
+  "seed": 0,
+  "updates": 96,
+  "train_examples": 1536,
+  "checkpoint": "artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+  "fixed_final_checkpoint": true,
+  "learning_curve": [
+    {
+      "optimizer_updates": 0,
+      "dev": {
+        "counts": {
+          "labelled": 125,
+          "accepted": 93,
+          "masked": 14
+        },
+        "strata": {
+          "acquire_evidence_preference": {
+            "labelled": 89,
+            "accepted": 81
+          },
+          "ready_handoff_preference": {
+            "labelled": 36,
+            "accepted": 12
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 46,
+            "accepted": 32
+          },
+          "READ": {
+            "selected": 45,
+            "accepted": 35
+          },
+          "HANDOFF": {
+            "selected": 12,
+            "accepted": 12
+          },
+          "USE_VIEW": {
+            "selected": 22,
+            "accepted": 14
+          }
+        },
+        "families": 8,
+        "family_macro_acceptance": 0.7443963001867413,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      }
+    },
+    {
+      "optimizer_updates": 48,
+      "weighted_loss_mean": 1.2995784584588062,
+      "dev": {
+        "counts": {
+          "labelled": 125,
+          "accepted": 101,
+          "masked": 14,
+          "handoff_outside_reviewed_preference": 23
+        },
+        "strata": {
+          "acquire_evidence_preference": {
+            "labelled": 89,
+            "accepted": 65
+          },
+          "ready_handoff_preference": {
+            "labelled": 36,
+            "accepted": 36
+          }
+        },
+        "selected_operations": {
+          "REFRESH_VIEW": {
+            "selected": 28,
+            "accepted": 28
+          },
+          "READ": {
+            "selected": 24,
+            "accepted": 23
+          },
+          "HANDOFF": {
+            "selected": 59,
+            "accepted": 36
+          },
+          "USE_VIEW": {
+            "selected": 13,
+            "accepted": 13
+          },
+          "SEARCH": {
+            "selected": 1,
+            "accepted": 1
+          }
+        },
+        "families": 8,
+        "family_macro_acceptance": 0.8127874066293185,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "weighted_ce_mean": 1.2995784584588062
+    },
+    {
+      "optimizer_updates": 96,
+      "weighted_loss_mean": 0.962543747756475,
+      "dev": {
+        "counts": {
+          "labelled": 125,
+          "accepted": 107,
+          "masked": 14,
+          "handoff_outside_reviewed_preference": 15
+        },
+        "strata": {
+          "acquire_evidence_preference": {
+            "labelled": 89,
+            "accepted": 71
+          },
+          "ready_handoff_preference": {
+            "labelled": 36,
+            "accepted": 36
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 13,
+            "accepted": 13
+          },
+          "REFRESH_VIEW": {
+            "selected": 22,
+            "accepted": 22
+          },
+          "READ": {
+            "selected": 25,
+            "accepted": 22
+          },
+          "HANDOFF": {
+            "selected": 51,
+            "accepted": 36
+          },
+          "USE_VIEW": {
+            "selected": 14,
+            "accepted": 14
+          }
+        },
+        "families": 8,
+        "family_macro_acceptance": 0.8604925303454715,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "weighted_ce_mean": 0.962543747756475,
+      "train": {
+        "counts": {
+          "labelled": 373,
+          "accepted": 342,
+          "handoff_outside_reviewed_preference": 21
+        },
+        "strata": {
+          "acquire_evidence_preference": {
+            "labelled": 262,
+            "accepted": 236
+          },
+          "ready_handoff_preference": {
+            "labelled": 111,
+            "accepted": 106
+          }
+        },
+        "selected_operations": {
+          "REFRESH_VIEW": {
+            "selected": 78,
+            "accepted": 78
+          },
+          "READ": {
+            "selected": 66,
+            "accepted": 58
+          },
+          "HANDOFF": {
+            "selected": 127,
+            "accepted": 106
+          },
+          "SEARCH": {
+            "selected": 39,
+            "accepted": 39
+          },
+          "USE_VIEW": {
+            "selected": 63,
+            "accepted": 61
+          }
+        },
+        "families": 24,
+        "family_macro_acceptance": 0.9182311281769487,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      }
+    }
+  ],
+  "compute": {
+    "wall_seconds": 389.5092468895018,
+    "cpu_seconds": 535.106737566,
+    "runs": 1,
+    "train_sequence_rows": 1536,
+    "train_input_tokens": 2629749,
+    "train_batch_forwards": 384,
+    "train_device_forwards": 768,
+    "train_batch_attempts": 384,
+    "train_offered_rows": 1536,
+    "train_offered_tokens": 2629749,
+    "dev_forwards": 417,
+    "dev_sequence_rows": 417,
+    "dev_input_tokens": 769416,
+    "dev_state_tokenizations": 417,
+    "dev_state_tokens": 683940,
+    "train_eval_forwards": 373,
+    "train_eval_sequence_rows": 373,
+    "train_eval_input_tokens": 638278,
+    "train_eval_state_tokenizations": 373,
+    "train_eval_state_tokens": 558916,
+    "peak_rss_kib": 5438056,
+    "peak_cuda_allocated_bytes": [
+      15126457856,
+      11120954368
+    ],
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+  },
+  "parameter_probes": {
+    "encoder": {
+      "parameter": "encoder.embeddings.tok_embeddings.weight",
+      "changed_elements": 196607910
+    },
+    "head": {
+      "parameter": "head.layers.0.self_attn.in_proj_weight",
+      "changed_elements": 1769470
+    }
+  },
+  "scope": "Offline reviewed operation preferences only; own-policy QA is separate and ongoing."
+}

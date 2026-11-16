@@ -1,0 +1,1143 @@
+{
+  "status": "ACTIVE_GOAL;EXPLICIT_RANGE_CONDITION_IMPLEMENTED;512CUMULATIVE_FAIL_RETAINED;256FIXED_PATH_INPUTS_PASS",
+  "observed_at": "2026-10-22T01:05:28.445521+00:00",
+  "previous": "training-generalization-progress-20261022-v22.json",
+  "previous_turn_classification": "PROGRESS:actual whole-trajectory READ overflow changed next action; this turn implemented one shared literal range condition and verified actual initial SEARCH/READ/context inputs.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "latest_recorded_updates": 139,
+    "planned": 524,
+    "source_version": "d6a8afd3",
+    "no_hot_update_restart_or_recipe_change": true,
+    "post_update_scores_not_read_for_selection": true
+  },
+  "implementation": {
+    "source_version": "bcebf420",
+    "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-source-ranges-bcebf420-v2/MiLAi-Lab",
+    "plan": "training-generalization-source-range-condition-v2.json",
+    "default_unchanged": true,
+    "scientific_scope": "Explicit changed retrieval/read granularity shared across arms if admitted; NOT equal-information projection or a new model. Existing full-bank session ranking, then fragment ranking within actually returned sessions. Full Sources retained; source ranges are partial and disclosed. Source identity/revision and existing visibility/read-admission/return/image-locator semantics retained.",
+    "not_claimed": "Full external readiness, actual-query coverage, learned-policy success, source fidelity/answer accuracy, or semantic reliability above8K."
+  },
+  "first_reads_actual_audit": {
+    "session": 3875,
+    "pid": 4178857,
+    "actual_pid_alive": false,
+    "exit_code": 0,
+    "status": "COMPLETE_SOURCE_RANGE_INPUT_DIAGNOSTIC_NOT_POLICY_EVALUATION",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-input-audit-v1/audit.json",
+    "conditions": [
+      {
+        "pool": "pool-0",
+        "delivery_selection": false,
+        "sources_in_actual_returned_pool": 539,
+        "range_fragments_checked": 7812,
+        "characters_literally_covered": 10791657,
+        "all_returned_pool_ranges_contiguous_and_complete": true,
+        "read_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "context_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "full_packet_tokens": [
+          713,
+          1294
+        ],
+        "inputs": [
+          {
+            "event_id": "pool-0/False/initial",
+            "question": "next",
+            "sequence_tokens": 5231,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "initial",
+            "offered_actions": 9,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/after_search",
+            "question": "next",
+            "sequence_tokens": 6559,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_search",
+            "offered_actions": 24,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/after_read",
+            "question": "next",
+            "sequence_tokens": 8135,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_read",
+            "offered_actions": 25,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/after_context_read",
+            "question": "next",
+            "sequence_tokens": 9778,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_context_read",
+            "offered_actions": 24,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-0",
+        "delivery_selection": true,
+        "sources_in_actual_returned_pool": 539,
+        "range_fragments_checked": 7812,
+        "characters_literally_covered": 10791657,
+        "all_returned_pool_ranges_contiguous_and_complete": true,
+        "read_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "context_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "full_packet_tokens": [
+          713,
+          1294
+        ],
+        "inputs": [
+          {
+            "event_id": "pool-0/True/initial",
+            "question": "next",
+            "sequence_tokens": 5708,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "initial",
+            "offered_actions": 13,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/after_search",
+            "question": "next",
+            "sequence_tokens": 7748,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_search",
+            "offered_actions": 44,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/after_read",
+            "question": "next",
+            "sequence_tokens": 8350,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_read",
+            "offered_actions": 44,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/after_context_read",
+            "question": "next",
+            "sequence_tokens": 8833,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_context_read",
+            "offered_actions": 42,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "delivery_selection": false,
+        "sources_in_actual_returned_pool": 214,
+        "range_fragments_checked": 3955,
+        "characters_literally_covered": 5006515,
+        "all_returned_pool_ranges_contiguous_and_complete": true,
+        "read_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "context_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "full_packet_tokens": [
+          767,
+          1446
+        ],
+        "inputs": [
+          {
+            "event_id": "pool-1/False/initial",
+            "question": "next",
+            "sequence_tokens": 5139,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "initial",
+            "offered_actions": 8,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/after_search",
+            "question": "next",
+            "sequence_tokens": 6522,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_search",
+            "offered_actions": 23,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/after_read",
+            "question": "next",
+            "sequence_tokens": 8311,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_read",
+            "offered_actions": 24,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/after_context_read",
+            "question": "next",
+            "sequence_tokens": 10251,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_context_read",
+            "offered_actions": 23,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "delivery_selection": true,
+        "sources_in_actual_returned_pool": 214,
+        "range_fragments_checked": 3955,
+        "characters_literally_covered": 5006515,
+        "all_returned_pool_ranges_contiguous_and_complete": true,
+        "read_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "context_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "full_packet_tokens": [
+          767,
+          1446
+        ],
+        "inputs": [
+          {
+            "event_id": "pool-1/True/initial",
+            "question": "next",
+            "sequence_tokens": 5533,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "initial",
+            "offered_actions": 11,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/after_search",
+            "question": "next",
+            "sequence_tokens": 7628,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_search",
+            "offered_actions": 42,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/after_read",
+            "question": "next",
+            "sequence_tokens": 8335,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_read",
+            "offered_actions": 42,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/after_context_read",
+            "question": "next",
+            "sequence_tokens": 8917,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_context_read",
+            "offered_actions": 40,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      }
+    ],
+    "original_ledger_unchanged": true,
+    "scope": "Both complete100-trajectory banks, one synthetic query, actual SEARCH limit8 and first offered ordinary/context READ. Four conditions,16native input states, no weights/forward/HTTP/QA answers. Full literal fragment coverage concerns only16actually returned session pools (8each), not every Source in the full banks. Duplicate coverage in paired modes is not additional sources.",
+    "comparison_limit": "New first fragment can differ from the old first session candidate within the same actual retrieved pool.713/767tokens do not encode all information in the old946169/217265token candidates. No quality or compression-equivalence claim."
+  },
+  "cumulative_fixed_path_audit": {
+    "session": 32900,
+    "pid": 3227,
+    "actual_pid_alive": false,
+    "status": "COMPLETE_FIXED_POLICY_CPU_PATH_NOT_LEARNED_MODEL_EVALUATION",
+    "active": {
+      "pool": "pool-1",
+      "delivery_selection": true,
+      "step": 7,
+      "native_state_drops": 511
+    },
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/audit_lme_source_range_fixed_path_v1.py",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-fixed-path-audit-v1/audit.json",
+    "scope": "Existing FixedContextMemoryPolicy reads4/max8steps on complete banks; actual Search/Read, native input measurement only. Static search cache reused across paired modes, local read counters mirror allowance; not full functional HTTP/admission execution or throughput comparison. Does not claim learned-policy failure frequency. No models/View generation.",
+    "automatic_retry": false,
+    "exit_code": 0,
+    "original_ledger_unchanged": true,
+    "conditions": [
+      {
+        "pool": "pool-0",
+        "delivery_selection": false,
+        "reason": "budget_exhausted",
+        "final_visible_evidence": 1,
+        "final_observed_materials": 0,
+        "state_drop_decisions": 0,
+        "head_drop_decisions": 0,
+        "max_native_sequence_tokens": 8699,
+        "inputs": [
+          {
+            "event_id": "pool-0/False/step-0",
+            "question": "next",
+            "sequence_tokens": 5232,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 0,
+            "offered_actions": 9,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-1",
+            "question": "next",
+            "sequence_tokens": 6560,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 1,
+            "offered_actions": 24,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-2",
+            "question": "next",
+            "sequence_tokens": 7753,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 2,
+            "offered_actions": 39,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-3",
+            "question": "next",
+            "sequence_tokens": 8699,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 3,
+            "offered_actions": 37,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-4",
+            "question": "next",
+            "sequence_tokens": 8665,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 4,
+            "offered_actions": 36,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-5",
+            "question": "next",
+            "sequence_tokens": 8632,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 5,
+            "offered_actions": 35,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-6",
+            "question": "next",
+            "sequence_tokens": 8599,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 6,
+            "offered_actions": 34,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-7",
+            "question": "next",
+            "sequence_tokens": 8566,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 7,
+            "offered_actions": 33,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-0",
+        "delivery_selection": true,
+        "reason": "budget_exhausted",
+        "final_visible_evidence": 1,
+        "final_observed_materials": 6,
+        "state_drop_decisions": 0,
+        "head_drop_decisions": 0,
+        "max_native_sequence_tokens": 15414,
+        "inputs": [
+          {
+            "event_id": "pool-0/True/step-0",
+            "question": "next",
+            "sequence_tokens": 5708,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 0,
+            "offered_actions": 13,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-1",
+            "question": "next",
+            "sequence_tokens": 7748,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 1,
+            "offered_actions": 44,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-2",
+            "question": "next",
+            "sequence_tokens": 9703,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 2,
+            "offered_actions": 75,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-3",
+            "question": "next",
+            "sequence_tokens": 10693,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 3,
+            "offered_actions": 71,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-4",
+            "question": "next",
+            "sequence_tokens": 11866,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 4,
+            "offered_actions": 68,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-5",
+            "question": "next",
+            "sequence_tokens": 13067,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 5,
+            "offered_actions": 65,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-6",
+            "question": "next",
+            "sequence_tokens": 14240,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 6,
+            "offered_actions": 62,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-7",
+            "question": "next",
+            "sequence_tokens": 15414,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 7,
+            "offered_actions": 59,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "delivery_selection": false,
+        "reason": "budget_exhausted",
+        "final_visible_evidence": 1,
+        "final_observed_materials": 0,
+        "state_drop_decisions": 0,
+        "head_drop_decisions": 0,
+        "max_native_sequence_tokens": 9370,
+        "inputs": [
+          {
+            "event_id": "pool-1/False/step-0",
+            "question": "next",
+            "sequence_tokens": 5139,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 0,
+            "offered_actions": 8,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-1",
+            "question": "next",
+            "sequence_tokens": 6522,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 1,
+            "offered_actions": 23,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-2",
+            "question": "next",
+            "sequence_tokens": 8218,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 2,
+            "offered_actions": 46,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-3",
+            "question": "next",
+            "sequence_tokens": 9370,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 3,
+            "offered_actions": 44,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-4",
+            "question": "next",
+            "sequence_tokens": 9336,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 4,
+            "offered_actions": 43,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-5",
+            "question": "next",
+            "sequence_tokens": 9303,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 5,
+            "offered_actions": 42,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-6",
+            "question": "next",
+            "sequence_tokens": 9270,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 6,
+            "offered_actions": 41,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-7",
+            "question": "next",
+            "sequence_tokens": 9237,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 7,
+            "offered_actions": 40,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "delivery_selection": true,
+        "reason": "budget_exhausted",
+        "final_visible_evidence": 1,
+        "final_observed_materials": 6,
+        "state_drop_decisions": 1,
+        "head_drop_decisions": 0,
+        "max_native_sequence_tokens": 16384,
+        "inputs": [
+          {
+            "event_id": "pool-1/True/step-0",
+            "question": "next",
+            "sequence_tokens": 5533,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 0,
+            "offered_actions": 11,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-1",
+            "question": "next",
+            "sequence_tokens": 7628,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 1,
+            "offered_actions": 42,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-2",
+            "question": "next",
+            "sequence_tokens": 10470,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 2,
+            "offered_actions": 89,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-3",
+            "question": "next",
+            "sequence_tokens": 11664,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 3,
+            "offered_actions": 85,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-4",
+            "question": "next",
+            "sequence_tokens": 13007,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 4,
+            "offered_actions": 82,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-5",
+            "question": "next",
+            "sequence_tokens": 14330,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 5,
+            "offered_actions": 79,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-6",
+            "question": "next",
+            "sequence_tokens": 15585,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 6,
+            "offered_actions": 76,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-7",
+            "question": "next",
+            "sequence_tokens": 16384,
+            "state_tokens_dropped": 511,
+            "head_tokens_dropped": 0,
+            "step": 7,
+            "offered_actions": 73,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      }
+    ],
+    "finding": "32actual fixed-policy decision states. Pool1 delivery-selection true step7 drops511state tokens,0head. Before that decision:5acquired materials,4undelivered bodies,1visible evidence,15pending candidates. Searches8/16 then context0 opened;context1..4 failed return budget but retained controller observations. Fixed CPU policy continued because it does not use Laya; no truncated model forward.",
+    "conclusion": "512condition NOT ADMITTED to full external model evaluation; first-read success did not bound accumulated observations."
+  },
+  "exhaustive_page_audit": {
+    "session": 68138,
+    "pid": 4070915,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "active": {
+      "pool": "pool-0",
+      "pages": 11400,
+      "sources_complete": 3290
+    },
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-source-pages-audit-v1/audit.json"
+  },
+  "validation": {
+    "unique_latest_passed": 78,
+    "failed": 0,
+    "skipped": 0,
+    "new_range_tests": 7,
+    "new_image_boundary_tests": 2,
+    "native_normal_runner_given_retrieval": "PASS on synthetic all-tool long history without Host generation",
+    "default_source_paging_evidence_and_intent_regressions": 61,
+    "existing_media_regressions": 8,
+    "ruff_changed_files": 7,
+    "mypy_implementation_files": 5,
+    "package_tools_boundaries": "PASS;6grandfatheredprivateedges unchanged",
+    "initial_test_fixture_failures": "v1/v2 preserved, corrected assertions for actual READ/SEARCH/selected HANDOFF accounting and missing synthetic tool origin. Production accounting unchanged.",
+    "freeze_failure": "Initial git archive used root-relative paths from Lab cwd and failed before code copy. Preserved failed directory; v2 archived from repository root and5source files are literally equal. No digest validation."
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "lme_source_range_input_diagnostic_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-input-audit-v1/audit.json",
+      "cpu_seconds": 133.56797044,
+      "wall_seconds": 133.58258382976055,
+      "ledger_recorded": false
+    },
+    {
+      "id": "lme_source_range_fixed_path_512_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-fixed-path-audit-v1/audit.json",
+      "cpu_seconds": 208.79061871800002,
+      "wall_seconds": 208.79841367620975,
+      "ledger_recorded": false
+    },
+    {
+      "id": "lme_source_range_fixed_path_256_v2",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-fixed-path-audit-v2/audit.json",
+      "cpu_seconds": 207.553430522,
+      "wall_seconds": 207.55665307864547,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 549.9120196800001,
+  "costs": "549.912019680new closed CPU seconds pending:133.567970440first reads+208.790618718fixed512+207.553430522fixed256. No nested search/setup/paired-copy sums. Full-source-page audit still live. Authoring/tests/freezing/debug unmeasured, unknown not zero. V22pending1505.460591140 and all older pending unchanged; no offline settlement while fit live; closed v1/v2/v3 never re-settle.",
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "remaining": "Complete corrected fits/control matrix and savedCPU incl legacy; STATE108E2/factorial/expandedfeedback/T2/common-support; Host/lifecycle/costs; complete external/protected/multiseed. LME512condition not admitted;256candidate fixed-path audit passed; requires complete inputs, actual queries/View/own-policy states, full-page closure, server image probe and checkpoint/method/seed freeze remain.",
+  "capacity_revision": {
+    "plan": "training-generalization-source-range-condition-v2.json",
+    "source_range_tokens": 256,
+    "other_conditions_unchanged": true,
+    "basis": "One declared capacity revision before QA inputs/answers/model outputs; retain512failure. No automatic halving/retry/accuracy-based selection.",
+    "session": 28996,
+    "pid": 23035,
+    "actual_pid_alive": false,
+    "status": "COMPLETE_FIXED_POLICY_CPU_PATH_NOT_LEARNED_MODEL_EVALUATION",
+    "active": {
+      "pool": "pool-1",
+      "delivery_selection": true,
+      "step": 7,
+      "native_state_drops": 0
+    },
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/audit_lme_source_range_fixed_path_v2.py",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-fixed-path-audit-v2/audit.json",
+    "new_model_calls": 0,
+    "exit_code": 0,
+    "original_ledger_unchanged": true,
+    "conditions": [
+      {
+        "pool": "pool-0",
+        "delivery_selection": false,
+        "reason": "budget_exhausted",
+        "final_visible_evidence": 2,
+        "final_observed_materials": 0,
+        "state_drop_decisions": 0,
+        "head_drop_decisions": 0,
+        "max_native_sequence_tokens": 9188,
+        "inputs": [
+          {
+            "event_id": "pool-0/False/step-0",
+            "question": "next",
+            "sequence_tokens": 5232,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 0,
+            "offered_actions": 9,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-1",
+            "question": "next",
+            "sequence_tokens": 6499,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 1,
+            "offered_actions": 24,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-2",
+            "question": "next",
+            "sequence_tokens": 7637,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 2,
+            "offered_actions": 39,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-3",
+            "question": "next",
+            "sequence_tokens": 8330,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 3,
+            "offered_actions": 37,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-4",
+            "question": "next",
+            "sequence_tokens": 9188,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 4,
+            "offered_actions": 35,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-5",
+            "question": "next",
+            "sequence_tokens": 9154,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 5,
+            "offered_actions": 34,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-6",
+            "question": "next",
+            "sequence_tokens": 9121,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 6,
+            "offered_actions": 33,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/step-7",
+            "question": "next",
+            "sequence_tokens": 9088,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 7,
+            "offered_actions": 32,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-0",
+        "delivery_selection": true,
+        "reason": "budget_exhausted",
+        "final_visible_evidence": 2,
+        "final_observed_materials": 6,
+        "state_drop_decisions": 0,
+        "head_drop_decisions": 0,
+        "max_native_sequence_tokens": 13454,
+        "inputs": [
+          {
+            "event_id": "pool-0/True/step-0",
+            "question": "next",
+            "sequence_tokens": 5708,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 0,
+            "offered_actions": 13,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-1",
+            "question": "next",
+            "sequence_tokens": 7687,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 1,
+            "offered_actions": 44,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-2",
+            "question": "next",
+            "sequence_tokens": 9587,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 2,
+            "offered_actions": 75,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-3",
+            "question": "next",
+            "sequence_tokens": 10326,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 3,
+            "offered_actions": 71,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-4",
+            "question": "next",
+            "sequence_tokens": 11287,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 4,
+            "offered_actions": 69,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-5",
+            "question": "next",
+            "sequence_tokens": 11977,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 5,
+            "offered_actions": 68,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-6",
+            "question": "next",
+            "sequence_tokens": 12702,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 6,
+            "offered_actions": 68,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/step-7",
+            "question": "next",
+            "sequence_tokens": 13454,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 7,
+            "offered_actions": 69,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "delivery_selection": false,
+        "reason": "budget_exhausted",
+        "final_visible_evidence": 2,
+        "final_observed_materials": 0,
+        "state_drop_decisions": 0,
+        "head_drop_decisions": 0,
+        "max_native_sequence_tokens": 9566,
+        "inputs": [
+          {
+            "event_id": "pool-1/False/step-0",
+            "question": "next",
+            "sequence_tokens": 5139,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 0,
+            "offered_actions": 8,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-1",
+            "question": "next",
+            "sequence_tokens": 6522,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 1,
+            "offered_actions": 23,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-2",
+            "question": "next",
+            "sequence_tokens": 8453,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 2,
+            "offered_actions": 44,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-3",
+            "question": "next",
+            "sequence_tokens": 8950,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 3,
+            "offered_actions": 42,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-4",
+            "question": "next",
+            "sequence_tokens": 9566,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 4,
+            "offered_actions": 40,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-5",
+            "question": "next",
+            "sequence_tokens": 9532,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 5,
+            "offered_actions": 39,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-6",
+            "question": "next",
+            "sequence_tokens": 9499,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 6,
+            "offered_actions": 38,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/step-7",
+            "question": "next",
+            "sequence_tokens": 9466,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 7,
+            "offered_actions": 37,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "delivery_selection": true,
+        "reason": "budget_exhausted",
+        "final_visible_evidence": 2,
+        "final_observed_materials": 6,
+        "state_drop_decisions": 0,
+        "head_drop_decisions": 0,
+        "max_native_sequence_tokens": 14207,
+        "inputs": [
+          {
+            "event_id": "pool-1/True/step-0",
+            "question": "next",
+            "sequence_tokens": 5533,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 0,
+            "offered_actions": 11,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-1",
+            "question": "next",
+            "sequence_tokens": 7628,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 1,
+            "offered_actions": 42,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-2",
+            "question": "next",
+            "sequence_tokens": 10609,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 2,
+            "offered_actions": 85,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-3",
+            "question": "next",
+            "sequence_tokens": 11147,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 3,
+            "offered_actions": 81,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-4",
+            "question": "next",
+            "sequence_tokens": 11857,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 4,
+            "offered_actions": 79,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-5",
+            "question": "next",
+            "sequence_tokens": 12623,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 5,
+            "offered_actions": 78,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-6",
+            "question": "next",
+            "sequence_tokens": 13377,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 6,
+            "offered_actions": 78,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/step-7",
+            "question": "next",
+            "sequence_tokens": 14207,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "step": 7,
+            "offered_actions": 79,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      }
+    ],
+    "conclusion": "All32native decision inputs fit, max14207tokens. This is one declared synthetic fixed-policy path, not actual QA/learned-policy/View coverage or semantic reliability above8K.256 remains a shared input candidate, not full external readiness."
+  }
+}

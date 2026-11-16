@@ -1,0 +1,42 @@
+{
+  "status": "COMPLETED",
+  "source_version": "02f2ec20",
+  "families": {
+    "train": 24,
+    "dev": 8
+  },
+  "states": {
+    "train": 418,
+    "dev": 139
+  },
+  "labelled_states": 0,
+  "model_calls": 64,
+  "operation_statuses": {
+    "view_opened": 113,
+    "searched": 70,
+    "opened": 242,
+    "view_rejected": 9
+  },
+  "rejection_reasons": {
+    "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE": 9
+  },
+  "cost": {
+    "generation": {
+      "known_tokens": 135342,
+      "charged_tokens": 135342,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "compute": {
+    "wall_including_generation_seconds": 255.36457029543817,
+    "local_cpu_seconds": 5.613832793,
+    "runs": 1,
+    "states": 557
+  },
+  "scope": "Observation collection only; no Reader runs, semantic acceptance or operation fitting claim."
+}

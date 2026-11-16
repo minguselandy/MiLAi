@@ -1,0 +1,240 @@
+{
+  "status": "COMPLETED_SELECTION_ONLY",
+  "source_version": "43f5a302",
+  "cases": 46,
+  "families": 24,
+  "arms": {
+    "bm25_k2": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 92,
+        "empty_deliveries": 0,
+        "positive_cases": 24,
+        "reference_proof_complete": 2
+      },
+      "stop_reasons": {
+        "fixed_k": 46
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 0,
+        "standalone_model_sequence_rows": 0,
+        "standalone_model_wall_seconds": 0,
+        "reconstructed_standalone_wall_seconds": 0
+      }
+    },
+    "bm25_k4": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 184,
+        "empty_deliveries": 0,
+        "positive_cases": 24,
+        "reference_proof_complete": 3
+      },
+      "stop_reasons": {
+        "fixed_k": 46
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 0,
+        "standalone_model_sequence_rows": 0,
+        "standalone_model_wall_seconds": 0,
+        "reconstructed_standalone_wall_seconds": 0
+      }
+    },
+    "bm25_k8": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 368,
+        "empty_deliveries": 0,
+        "positive_cases": 24,
+        "reference_proof_complete": 10
+      },
+      "stop_reasons": {
+        "fixed_k": 46
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 0,
+        "standalone_model_sequence_rows": 0,
+        "standalone_model_wall_seconds": 0,
+        "reconstructed_standalone_wall_seconds": 0
+      }
+    },
+    "laya_zero_k2": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 92,
+        "empty_deliveries": 0,
+        "positive_cases": 24,
+        "reference_proof_complete": 1
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 119930,
+        "standalone_model_sequence_rows": 92,
+        "standalone_model_wall_seconds": 4.96107539627701,
+        "reconstructed_standalone_wall_seconds": 5.048705279827118
+      }
+    },
+    "laya_zero_adaptive": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 127,
+        "empty_deliveries": 5,
+        "positive_cases": 24,
+        "reference_proof_complete": 2
+      },
+      "stop_reasons": {
+        "read_budget": 24,
+        "stop_sufficient": 13,
+        "stop_exhausted": 9
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 189869,
+        "standalone_model_sequence_rows": 149,
+        "standalone_model_wall_seconds": 7.553576190024614,
+        "reconstructed_standalone_wall_seconds": 7.6958901742473245
+      }
+    },
+    "laya_ce_k2": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 92,
+        "empty_deliveries": 0,
+        "positive_cases": 24,
+        "reference_proof_complete": 2
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 119933,
+        "standalone_model_sequence_rows": 92,
+        "standalone_model_wall_seconds": 5.3166150636971,
+        "reconstructed_standalone_wall_seconds": 5.410338276065886
+      }
+    },
+    "laya_ce_adaptive": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 52,
+        "empty_deliveries": 7,
+        "positive_cases": 24,
+        "reference_proof_complete": 1
+      },
+      "stop_reasons": {
+        "stop_exhausted": 41,
+        "stop_sufficient": 5
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 127690,
+        "standalone_model_sequence_rows": 98,
+        "standalone_model_wall_seconds": 5.594582456164062,
+        "reconstructed_standalone_wall_seconds": 5.689318200573325
+      }
+    },
+    "ordinary_ce_k2": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 92,
+        "empty_deliveries": 0,
+        "positive_cases": 24,
+        "reference_proof_complete": 2
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 1043866,
+        "standalone_model_sequence_rows": 874,
+        "standalone_model_wall_seconds": 23.138567643240094,
+        "reconstructed_standalone_wall_seconds": 23.228658591397107
+      }
+    },
+    "ordinary_ce_adaptive": {
+      "counts": {
+        "cases": 46,
+        "contexts_opened": 45,
+        "empty_deliveries": 5,
+        "positive_cases": 24,
+        "reference_proof_complete": 0
+      },
+      "stop_reasons": {
+        "stop_exhausted": 43,
+        "stop_sufficient": 3
+      },
+      "standalone_cost": {
+        "standalone_model_input_tokens": 1008487,
+        "standalone_model_sequence_rows": 861,
+        "standalone_model_wall_seconds": 22.212925455532968,
+        "reconstructed_standalone_wall_seconds": 22.299735416658223
+      }
+    }
+  },
+  "checkpoint_reload": {
+    "laya_ce": {
+      "compared_initial_states": 46,
+      "same_choices": 46,
+      "max_probability_difference": 0.015028685331344604,
+      "scope": "46 initial states only, not complete 203-prefix reload"
+    },
+    "ordinary_ce": {
+      "compared_initial_states": 46,
+      "same_choices": 46,
+      "max_probability_difference": 0.002294600009918213,
+      "scope": "46 initial states only, not complete 203-prefix reload"
+    }
+  },
+  "actual_compute": {
+    "bm25": {
+      "wall_seconds": 0.04541188012808561,
+      "cpu_seconds": 0.03437075899999975,
+      "runs": 1,
+      "peak_rss_kib": 37200,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    },
+    "laya_zero": {
+      "wall_seconds": 18.37930133845657,
+      "cpu_seconds": 23.730378892999997,
+      "runs": 1,
+      "forwards": 154,
+      "sequence_rows": 154,
+      "input_tokens": 196274,
+      "state_tokenizations": 154,
+      "state_tokens": 170160,
+      "peak_rss_kib": 2744276,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    },
+    "laya_ce": {
+      "wall_seconds": 13.679299077019095,
+      "cpu_seconds": 18.363224559,
+      "runs": 1,
+      "forwards": 105,
+      "sequence_rows": 105,
+      "input_tokens": 136252,
+      "state_tokenizations": 105,
+      "state_tokens": 117727,
+      "peak_rss_kib": 2744736,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    },
+    "ordinary_ce": {
+      "wall_seconds": 31.176516199484468,
+      "cpu_seconds": 35.437299501,
+      "runs": 1,
+      "forwards": 96,
+      "sequence_rows": 906,
+      "input_tokens": 1081062,
+      "state_tokenizations": 96,
+      "action_tokenizations": 906,
+      "peak_rss_kib": 2562024,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    }
+  },
+  "reader_requests": 0,
+  "limitations": [
+    "C8 contains complete reference proof in only10of24 answerable cases",
+    "Previously exposed dev families, not unseen external evidence",
+    "Known reference proofs and literal equivalents only",
+    "Standalone selector wall reconstructs reused prefixes; total study cost counts each executed prefix once"
+  ]
+}

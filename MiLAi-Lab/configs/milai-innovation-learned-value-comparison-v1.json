@@ -1,0 +1,38 @@
+{
+  "name": "milai-innovation-learned-value-comparison-v1",
+  "settings": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-supervision-v3/corpus/actual-config.json",
+  "questions": [
+    "gpt4_59149c77",
+    "6a1eabeb",
+    "0db4c65d",
+    "2a1811e2",
+    "08e075c7",
+    "0ea62687",
+    "19b5f2b3",
+    "1e043500",
+    "0a34ad58",
+    "0edc2aef"
+  ],
+  "prepared_inputs": {
+    "gpt4_59149c77": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v1/date.json",
+    "6a1eabeb": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v1/update.json",
+    "0db4c65d": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/0db4c65d.json",
+    "2a1811e2": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/2a1811e2.json",
+    "08e075c7": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/08e075c7.json",
+    "0ea62687": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/0ea62687.json",
+    "19b5f2b3": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/19b5f2b3.json",
+    "1e043500": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/1e043500.json",
+    "0a34ad58": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/0a34ad58.json",
+    "0edc2aef": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-training-v2/0edc2aef.json"
+  },
+  "crossquery_models": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/conditional-value-learning-v2/crossquery",
+  "methods": [
+    "top1",
+    "top2",
+    "value_single",
+    "value_bundle"
+  ],
+  "pair_width": 8,
+  "generation_call_bound": 80,
+  "scope": "Ten exposed development questions with no original-session overlap, each evaluated using a model fit on the other nine. Full saved Source pools, exact-parent alias deduplication, same expanded contexts and same final Reader. All predictions before first Judge scoring. References/labels never enter selection/Reader inputs. This is cross-fitted exposed-pool selection diagnosis, not independent formation, formal holdout, proven semantic sufficiency, or a completed gap-reading policy. Learned selection can scan all Source bodies locally; its I/O/CPU cost is included. Task-classification/range conditions are separate."
+}

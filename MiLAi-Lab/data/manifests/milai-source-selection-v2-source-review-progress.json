@@ -1,0 +1,55 @@
+{
+  "status": "ALL228_SOURCE_FIRST_REVIEWS_CLOSED_BEFORE_NATIVE_REFERENCE_COMPARISON",
+  "reviewed_source_rows": 228,
+  "reviewed_families": 158,
+  "paragraph_positions_reviewed": 3760,
+  "distinct_literal_paragraphs_reviewed": 2290,
+  "splits": {
+    "train": {
+      "rows": 185,
+      "families": 128,
+      "dispositions": {
+        "pool_insufficient": 87,
+        "masked": 10,
+        "supported": 88
+      },
+      "supported_qualified": 19,
+      "minimum_recorded_proof_lengths": {
+        "2": 47,
+        "1": 6,
+        "3": 12,
+        "4": 23
+      },
+      "qualified_proof_cases": 20
+    },
+    "dev": {
+      "rows": 43,
+      "families": 30,
+      "dispositions": {
+        "supported": 23,
+        "pool_insufficient": 16,
+        "masked": 4
+      },
+      "supported_qualified": 6,
+      "minimum_recorded_proof_lengths": {
+        "1": 5,
+        "2": 12,
+        "3": 4,
+        "4": 2
+      },
+      "qualified_proof_cases": 4
+    }
+  },
+  "native_reference_opened": false,
+  "model_calls": 0,
+  "reviewer_is_independent": false,
+  "scope": "All admitted train/dev visible pools reviewed;prior literal copies referenced with exact row/paragraph provenance. Metadata/native support counts known from sampling;native answers/support identities not displayed. Conditional interpretations and masks retained. New reserved14 families still unexposed to reviewer.",
+  "remaining_source_rows": 0,
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "followup_reference_comparison": {
+    "status": "CLOSED_AFTER_SOURCE_SNAPSHOT",
+    "report": "data/manifests/milai-source-selection-v2-reference-boundary.json",
+    "annotations_regraded": false
+  }
+}

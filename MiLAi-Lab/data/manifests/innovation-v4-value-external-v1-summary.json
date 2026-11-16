@@ -1,0 +1,316 @@
+{
+  "status": "CLOSED",
+  "source_version": "f6cef996",
+  "cases": 4,
+  "scope": "LongMemEval external development subset; not the full official benchmark or formal heldout confirmation",
+  "arms": {
+    "standard": {
+      "first_score": {
+        "benchmark": "longmemeval",
+        "cases": 4,
+        "complete_answers": 4,
+        "missing_answers": 0,
+        "judge_calls": 4,
+        "correct": 2,
+        "opportunities": 4
+      },
+      "per_case": [
+        {
+          "question_id": "0a995998",
+          "correct": false
+        },
+        {
+          "question_id": "8a2466db",
+          "correct": true
+        },
+        {
+          "question_id": "gpt4_59149c77",
+          "correct": true
+        },
+        {
+          "question_id": "6a1eabeb",
+          "correct": false
+        }
+      ],
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 10,
+            "known_tokens": 197030,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 4,
+            "known_tokens": 3160,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 197030,
+      "views": [
+        {
+          "question_id": "0a995998",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            3
+          ],
+          "context_indices": [
+            0,
+            3
+          ],
+          "range_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 462,
+            "required_source_ranges": 484,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "question_id": "6a1eabeb",
+          "steps": 2,
+          "opened_indices": [
+            2
+          ],
+          "context_indices": [
+            2
+          ],
+          "range_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 401,
+            "required_source_ranges": 413,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "question_id": "8a2466db",
+          "steps": 2,
+          "opened_indices": [
+            0,
+            6,
+            15,
+            44,
+            90,
+            93,
+            95,
+            109
+          ],
+          "context_indices": [
+            0,
+            6,
+            15,
+            44,
+            90,
+            93,
+            95,
+            109
+          ],
+          "range_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 490,
+            "required_source_ranges": 508,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "question_id": "gpt4_59149c77",
+          "steps": 4,
+          "opened_indices": [
+            1,
+            2,
+            22,
+            108,
+            8,
+            13,
+            18
+          ],
+          "context_indices": [
+            1,
+            2,
+            8,
+            13,
+            18
+          ],
+          "range_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 450,
+            "required_source_ranges": 484,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        }
+      ]
+    },
+    "value_v1": {
+      "first_score": {
+        "benchmark": "longmemeval",
+        "cases": 4,
+        "complete_answers": 4,
+        "missing_answers": 0,
+        "judge_calls": 4,
+        "correct": 1,
+        "opportunities": 4
+      },
+      "per_case": [
+        {
+          "question_id": "0a995998",
+          "correct": false
+        },
+        {
+          "question_id": "8a2466db",
+          "correct": true
+        },
+        {
+          "question_id": "gpt4_59149c77",
+          "correct": false
+        },
+        {
+          "question_id": "6a1eabeb",
+          "correct": false
+        }
+      ],
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 4,
+            "known_tokens": 25964,
+            "unknown_usage_responses": 0
+          },
+          "evidence_value_selection": {
+            "responses": 9,
+            "known_tokens": 259591,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 4,
+            "known_tokens": 3566,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 285555,
+      "views": [
+        {
+          "question_id": "0a995998",
+          "steps": 4,
+          "opened_indices": [
+            5,
+            0
+          ],
+          "context_indices": [
+            5,
+            0
+          ],
+          "value_stop": "model_stopped",
+          "candidate_inventory_count": 242,
+          "candidate_cost_evaluations": 723,
+          "source_pack_opens": 1708,
+          "range_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 462,
+            "required_source_ranges": 484,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "question_id": "6a1eabeb",
+          "steps": 4,
+          "opened_indices": [
+            2,
+            25
+          ],
+          "context_indices": [
+            2,
+            25
+          ],
+          "value_stop": "no_positive_affordable_increment",
+          "candidate_inventory_count": 208,
+          "candidate_cost_evaluations": 621,
+          "source_pack_opens": 1462,
+          "range_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 401,
+            "required_source_ranges": 413,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "question_id": "8a2466db",
+          "steps": 3,
+          "opened_indices": [
+            0
+          ],
+          "context_indices": [
+            0
+          ],
+          "value_stop": "model_stopped",
+          "candidate_inventory_count": 258,
+          "candidate_cost_evaluations": 515,
+          "source_pack_opens": 1037,
+          "range_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 490,
+            "required_source_ranges": 508,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        },
+        {
+          "question_id": "gpt4_59149c77",
+          "steps": 2,
+          "opened_indices": [],
+          "context_indices": [],
+          "value_stop": "model_stopped",
+          "candidate_inventory_count": 244,
+          "candidate_cost_evaluations": 244,
+          "source_pack_opens": 488,
+          "range_coverage": {
+            "scope": "captured_visible_arrival_prefix",
+            "complete": false,
+            "missing_source_ranges": 484,
+            "required_source_ranges": 484,
+            "scope_available": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness"
+          }
+        }
+      ]
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 31,
+    "generation": {
+      "known_tokens": 489311,
+      "charged_tokens": 489311,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "source_review": {
+    "answers_read": 8,
+    "selected_source_catalog_review": "MoMA-relevant candidates existed in both catalogs. C stopped without opening any evidence. Standard read the dates and answered7 days.",
+    "other_failures": "Both methods gave old5K27:12 instead of reference25:50 and counted2 clothing items instead of3. Full source-history correctness audit remains pending.",
+    "equivalent_context": "Several selected pack indices expand to identical parent ranges; smaller index count alone is not less evidence."
+  },
+  "protocol_boundary": "Same source access, model and base Reader messages, but standard can answer within its reading call while value reserves a final answer call; not an isolated scoring-head causal comparison.",
+  "decision": "No value-policy advantage:1/4 vs2/4 and higher prediction cost. New code starts in the ordinary retrieved set, permits explicit-gap pool expansion and removes repeated delivered intervals. New-code model comparison remains pending."
+}

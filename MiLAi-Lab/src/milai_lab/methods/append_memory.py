@@ -7,14 +7,18 @@ from typing import Any
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
-from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.methods.edit_memory import EditMemory, MaintenanceMode
 
 
 class AppendMemory(EditMemory):
     """Plain factual records; corrections are new reports, never silent rewrites."""
 
-    def __init__(self, service: MemoryService, *, features: EditFeatures) -> None:
-        super().__init__(service, "B0", interface_version="I2", features=features)
+    def __init__(
+        self, service: MemoryService, *, features: EditFeatures,
+        maintenance_mode: MaintenanceMode = "legacy",
+    ) -> None:
+        super().__init__(service, "B0", interface_version="I2", features=features,
+                         maintenance_mode=maintenance_mode)
         self.method_version = "milai_fact_append_v1"
 
     @property
@@ -22,9 +26,12 @@ class AppendMemory(EditMemory):
         return "Append-only"
 
     def envelope_schema(
-        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
+        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
+        for_generation: bool = True,
     ) -> dict[str, Any]:
-        schema = super().envelope_schema(allow_create=allow_create, mapping=mapping)
+        schema = super().envelope_schema(
+            allow_create=allow_create, mapping=mapping, for_generation=for_generation
+        )
         fields = schema["properties"]
         if "creates" in fields:
             fields["records"] = {
@@ -47,6 +54,14 @@ class AppendMemory(EditMemory):
             packet, date, allow_create=allow_create, schema=schema,
             change_candidates=change_candidates, prior_context=prior_context,
         )
+        envelope_instruction = (
+            "Return both creates and records in the supplied JSON envelope; "
+            "use [] and {} respectively when empty. Only creates may contain create proposals; "
+            "records stays {}. "
+            if self.features.single_record_changes else
+            "Return the supplied JSON envelope with only creates (or create proposals); "
+            "records stays {}. "
+        )
         messages[0]["content"] = (
             "Maintain factual append-only memory using the supplied plain-record schema. "
             "Append useful independently stated facts from the current original sources. "
@@ -62,15 +77,17 @@ class AppendMemory(EditMemory):
             "Do not append duplicate restatements or copy the raw dialogue as a substitute "
             "for useful factual memory. change_candidates are temporary hints, not evidence; "
             "empty candidates still allow original-source facts. prior_context is earlier "
-            "speech for resolving references, not a new event to append again. Return the "
-            "supplied JSON envelope with only creates (or create proposals); records stays {}. "
+            "speech for resolving references, not a new event to append again. "
+            + envelope_instruction +
             "An empty envelope means no new factual record, not proof of successful maintenance."
         )
         return messages
 
     def apply(
-        self, session: str, proposal_id: str, proposal: dict[str, Any]
+        self, session: str, proposal_id: str, proposal: dict[str, Any], *,
+        dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         if proposal.get("action") != "create":
             raise FunctionalRejection("APPEND_ONLY_CREATE_REQUIRED")
-        return super().apply(session, proposal_id, proposal)
+        return super().apply(session, proposal_id, proposal,
+                             dependency_receipts=dependency_receipts)

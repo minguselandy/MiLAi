@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from milai_lab.tools_boundary import verify_tools_boundary
 
 LAB = Path(__file__).parents[2]
@@ -135,3 +137,51 @@ def test_inventory_line_identity_must_be_refreshed_after_source_drift(
     assert [finding.code for finding in findings] == [
         "TOOLS_PRODUCT_INVENTORY_DRIFT"
     ]
+
+
+@pytest.mark.parametrize(
+    "filename", ["own_a100_lme_execution_v2.py", "own_a100_lme_observation_v3.py"]
+)
+def test_frozen_lme_loader_review_does_not_authorize_other_paths_or_private_imports(
+    tmp_path: Path, filename: str
+) -> None:
+    tools = tmp_path / "tools"
+    tools.mkdir()
+    path = tools / filename
+    original = (LAB / "tools" / filename).read_text()
+    inventory = _inventory(tmp_path / "inventory.json")
+    path.write_text(original)
+    assert verify_tools_boundary(tools, inventory)[0] == ()
+
+    path.write_text(original.replace('"frozen_owner_entry"', '"unreviewed_entry"'))
+    findings, _ = verify_tools_boundary(tools, inventory)
+    assert findings and all(f.code == "UNRESOLVED_TOOL_IMPORT" for f in findings)
+
+    path.write_text(original + "\nimport milai.private_runtime\n")
+    findings, _ = verify_tools_boundary(tools, inventory)
+    assert [f.code for f in findings] == ["NEW_PRIVATE_PRODUCT_IMPORT"]
+
+
+def test_frozen_lme_observer_does_not_authorize_an_extra_dynamic_loader_call(
+    tmp_path: Path,
+) -> None:
+    tools = tmp_path / "tools"
+    tools.mkdir()
+    filename = "own_a100_lme_observation_v3.py"
+    original = (LAB / "tools" / filename).read_text()
+    (tools / filename).write_text(original + '\nload_entry("unreviewed", other_path)\n')
+    findings, _ = verify_tools_boundary(tools, _inventory(tmp_path / "inventory.json"))
+    assert findings and all(f.code == "UNRESOLVED_TOOL_IMPORT" for f in findings)
+
+
+def test_frozen_lme_observer_rejects_repointed_predecessor(tmp_path: Path) -> None:
+    tools = tmp_path / "tools"
+    tools.mkdir()
+    filename = "own_a100_lme_observation_v3.py"
+    original = (LAB / "tools" / filename).read_text()
+    (tools / filename).write_text(original.replace(
+        'predecessor = read(correction["predecessor_protocol"])',
+        'predecessor = read(other_protocol)',
+    ))
+    findings, _ = verify_tools_boundary(tools, _inventory(tmp_path / "inventory.json"))
+    assert findings and all(f.code == "UNRESOLVED_TOOL_IMPORT" for f in findings)

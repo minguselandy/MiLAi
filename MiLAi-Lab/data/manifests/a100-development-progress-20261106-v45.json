@@ -1,0 +1,434 @@
+{
+  "status": "ACTIVE_SEED1_RUNNING_COMMON_ALL256_SCOPE_FIXED_BASELINE_QA112_PRIMARY_QA32_TWO_FULL_NATIVE_F1S_CLOSED",
+  "timestamp_utc": "2026-11-06T14:30:27.504554+00:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261106-v44.json",
+  "previous_checkpoint_commit": "091783a2",
+  "unchanged_closed_proofs": "v44 primary all256 owner/audit/cost, all256 shared baseline, all256 original Source guides and earlier M0-M4/B-C/D-K/formal/M3 closeouts remain unchanged.",
+  "protocol_unchanged": {
+    "families": 256,
+    "first_trajectories_all4": 1024,
+    "methods_checkpoints_Host_context_budgets_N_runtime_precision_changed": false,
+    "new_fits_or_policy_labels": 0,
+    "first_outcome_retry": false,
+    "no_sha_validation": true
+  },
+  "processes": {
+    "sole_actual_experiment": {
+      "name": "e3-aggregate-seed1-u32",
+      "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32/learned-owner-v1.json",
+      "actual_processes": {
+        "pid": {
+          "pid": 3168683,
+          "exists": true,
+          "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/own_final_confirmation_learned.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32/learned-execution-plan-v1.json"
+        },
+        "child_pid": {
+          "pid": 3168737,
+          "exists": true,
+          "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_saved_gpu.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32-inference-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_frozen_host_messages.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-cases-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed1-u32 --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --source-version local-a100-final-confirmation-20261106-v1 --presentation current --host-enable-thinking --policy-config /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32-policy.json --continue-known-host-failures --host-site-packages /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages"
+        }
+      },
+      "status_at_snapshot": "RUNNING",
+      "closed_at_snapshot": 121,
+      "planned_positions": 256,
+      "native_statuses_at_snapshot": {
+        "COMPLETED": 97,
+        "FAILED": 24
+      },
+      "native_completion_is_not_task_quality": true,
+      "client_CPU_recorded": false,
+      "actual_cached_model_loads": [
+        {
+          "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-1/checkpoints/update-32",
+          "device": "cuda:0",
+          "visible_cuda_devices": "2",
+          "threads": 4,
+          "max_len": 16384,
+          "head_max_len": 2048,
+          "loaded_weight_dtype": "torch.float32",
+          "mha_fastpath_enabled": false,
+          "reference_compile_override": false,
+          "status": "VERIFIED"
+        }
+      ],
+      "model_cache_entries": 1,
+      "detached_bounded_owner": true,
+      "automatic_queue_or_retry": false
+    },
+    "secondary_seed2_actual": 0
+  },
+  "common_source_question_scope": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-inventory-all256-v2.json",
+    "manual_specification": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-specification-all256-v1.json",
+    "positions": 256,
+    "same_all4_methods": true,
+    "full_denominator_each_method": 256,
+    "common_stress_flagged_count": 122,
+    "common_stress_flagged_indices": [
+      0,
+      6,
+      7,
+      10,
+      11,
+      12,
+      13,
+      16,
+      21,
+      22,
+      24,
+      26,
+      28,
+      29,
+      32,
+      34,
+      38,
+      40,
+      42,
+      43,
+      44,
+      46,
+      48,
+      49,
+      52,
+      53,
+      56,
+      58,
+      59,
+      60,
+      62,
+      63,
+      67,
+      68,
+      70,
+      71,
+      75,
+      77,
+      78,
+      79,
+      80,
+      81,
+      83,
+      85,
+      86,
+      87,
+      90,
+      92,
+      93,
+      94,
+      96,
+      98,
+      99,
+      105,
+      107,
+      108,
+      112,
+      113,
+      116,
+      119,
+      120,
+      121,
+      122,
+      123,
+      125,
+      127,
+      133,
+      135,
+      136,
+      142,
+      143,
+      144,
+      146,
+      147,
+      148,
+      150,
+      151,
+      155,
+      159,
+      161,
+      162,
+      163,
+      164,
+      165,
+      169,
+      170,
+      171,
+      173,
+      175,
+      177,
+      180,
+      181,
+      182,
+      183,
+      186,
+      190,
+      191,
+      192,
+      193,
+      196,
+      199,
+      204,
+      205,
+      206,
+      213,
+      214,
+      217,
+      219,
+      224,
+      228,
+      232,
+      233,
+      236,
+      237,
+      238,
+      242,
+      243,
+      244,
+      245,
+      247,
+      253,
+      255
+    ],
+    "category_counts": {
+      "exclusive_language_boundary_unestablished": 15,
+      "requested_reference_detail_unavailable_in_export": 41,
+      "question_referent_scope_units_or_answer_granularity": 82
+    },
+    "rule": {
+      "main_scoring": "Original frozen whole-task C/I/Q/W/F/U judgments remain unchanged; accurate scoped limitations for facts absent from full available Source can complete. Extant facts missed by retrieval remain incomplete.",
+      "common_stress": "For every flagged family, set confirmed-complete credit to0 for all4 methods; leave all256 family positions in every denominator. Nonflagged families retain main complete credit. Keep original outcomes/material grades and expose category membership. This is a lower-bound stress view, not a new main scorer or a claim flagged main answers are wrong.",
+      "first_failures_and_unresolved": "F and unresolvedU never receive C credit in either view.",
+      "no_per_method_case_selection": true,
+      "no_best_sensitivity_selection": true,
+      "no_native_F1_string_repair": true
+    },
+    "source_author_not_blind_or_independent": true,
+    "timing": "After frozen protocol, all256 Source guides, baseline80 and primary16 semantic reviews; before remaining semantic reviews and complete-panel results. Not claimed to be before all answers.",
+    "unambiguous_Source_answers_not_blanket_excluded_for_native_disagreement": [
+      2,
+      76,
+      130,
+      132,
+      152,
+      234,
+      249
+    ],
+    "method_successes_not_used_to_assign_membership": true,
+    "earlier_partial_scope_flags_checked_as_metadata_only": true,
+    "main_grades_materials_native_references_unchanged": true,
+    "all_per_record_boolean_flags_equal_declared_membership": true,
+    "intended_source_membership_set_unchanged_by_correction": true,
+    "v1_wrong_booleans_used_to_compute_scores": false,
+    "corrected_nonflagged_boolean_records": 134,
+    "retained_incorrect_v1_inventory": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-inventory-all256-v1.json",
+    "correction_reflection": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-scope-inventory-v1-boolean-failure-reflection-v1.json"
+  },
+  "earlier_pending_material_scopes": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-material-scope-adjudication-pending-cases-v1.json",
+    "status": "PREVIOUS_THREE_PENDING_MATERIAL_SCOPES_FINAL_P_QUALITY_F_UNCHANGED",
+    "criterion": "For a language-scope question, S requires the actual packet to establish the relevant own dataset/evaluation or an explicit language boundary sufficiently to support a scoped answer. Partial own-study context without that setup is P; unrelated material is I. Full Source language uncertainty and answer F are independent of this delivery grade.",
+    "decisions": [
+      {
+        "method": "fixed-prefix",
+        "index": 26,
+        "family": "qasper-paper-1701.08229",
+        "final_material": "P",
+        "quality_kept": "F",
+        "material_scope_sensitivity_pending": false,
+        "previous_grade_changed": false
+      },
+      {
+        "method": "fixed-prefix",
+        "index": 59,
+        "family": "qasper-paper-1601.02403",
+        "final_material": "P",
+        "quality_kept": "F",
+        "material_scope_sensitivity_pending": false,
+        "previous_grade_changed": false
+      },
+      {
+        "method": "e3-aggregate-u32",
+        "index": 6,
+        "family": "qasper-paper-1604.00400",
+        "final_material": "P",
+        "quality_kept": "F",
+        "material_scope_sensitivity_pending": false,
+        "previous_grade_changed": false
+      }
+    ],
+    "historical_pending_metadata_and_whole_original_records_retained": true,
+    "same_criterion_for_future_method_records": true
+  },
+  "source_guide_82_addendum": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/source-author-guide-82-naive-baselines-addendum-v1.json",
+    "whole_original_Source_witness": "1912.04961/section-9-paragraph-1",
+    "additional_supported_scope": "Besides QA-PGNet learning baselines,explicit naive baselines are NearestNumber fordosage andRandomTop3 fromnone/daily/twiceaday forfrequency. Either clearly scoped baseline-family account is supported by the literal singular question.",
+    "after_baseline82_semantic_answer_review": true,
+    "before_corresponding_learned82_semantic_reviews": true,
+    "same_all4_methods": true,
+    "common_mask_changed": false,
+    "original_guide_literal_retained": true,
+    "no_unique_native_gold_string_enforced": true,
+    "new_review_output_timing_metadata_discloses_addendum_after_answer": true
+  },
+  "baseline_whole_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-first112-source-author-review-reconciliation-v1.json",
+    "positions": 112,
+    "new_since_v44": 32,
+    "quality_counts": {
+      "C": 67,
+      "W": 6,
+      "I": 21,
+      "F": 18
+    },
+    "material_counts": {
+      "S": 70,
+      "I": 19,
+      "P": 23
+    },
+    "native_strata": {
+      "dev": 112
+    },
+    "prior96_record_dicts_literal_equal": true,
+    "original80_record_dicts_literal_equal_through_intermediate96": true,
+    "all_reviewed_whole_results_equal_final256_except_declared_global_index": true,
+    "source_author_not_blind_or_independent": true,
+    "partial_prefix_not_population_effect": true,
+    "full256_quality_closed": false
+  },
+  "primary_whole_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first32-source-author-review-reconciliation-v1.json",
+    "positions": 32,
+    "new_since_v44": 16,
+    "quality_counts": {
+      "C": 17,
+      "W": 4,
+      "I": 3,
+      "F": 8
+    },
+    "material_counts": {
+      "S": 24,
+      "P": 7,
+      "I": 1
+    },
+    "native_strata": {
+      "dev": 32
+    },
+    "prior16_record_dicts_literal_equal": true,
+    "all_reviewed_whole_results_equal_full256_native_audit_records": true,
+    "other_method_labels_inherited": false,
+    "source_author_not_blind_or_independent": true,
+    "partial_prefix_not_population_effect": true,
+    "full256_quality_closed": false
+  },
+  "native_full_answer_agreement": {
+    "status": "TWO_FULL256_METHODS_OFFICIAL_LITERAL_ANSWER_F1_BOUND_OTHER_SEEDS_AND_WHOLE_TASK_QUALITY_PENDING",
+    "timestamp_utc": "2026-11-06T14:19:18.031967+00:00",
+    "methods": {
+      "fixed-prefix": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-fixed-prefix-v1.json",
+        "Answer F1": 0.0981909306413507,
+        "positions": 256,
+        "actual_completed_answers": 216,
+        "first_failed_empty_positions": 40,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.0972221874536791
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.10071512063739638
+          }
+        },
+        "all_prediction_jsonl_whole_strings_literal_equal_receipt_records": true,
+        "official_empty_failure_and_missing_failure_total_equal": true
+      },
+      "e3-aggregate-u32": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-e3-aggregate-u32-v1.json",
+        "Answer F1": 0.08804209206295316,
+        "positions": 256,
+        "actual_completed_answers": 204,
+        "first_failed_empty_positions": 52,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.08723387799739968
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.09014800195207132
+          }
+        },
+        "all_prediction_jsonl_whole_strings_literal_equal_receipt_records": true,
+        "official_empty_failure_and_missing_failure_total_equal": true
+      }
+    },
+    "primary_minus_baseline_F1_points": -1.0148838578397545,
+    "each_method_denominator": 256,
+    "new_model_calls": 0,
+    "ledger_opened_or_written": false,
+    "no_sha_validation": true,
+    "new_scoring_or_prediction_selection": false,
+    "no_fragment_extraction_or_unanswerable_or_failed_answer_repair": true,
+    "main_source_author_complete_success_not_closed": true,
+    "paired_intervals_and_all4_method_statistics": "PENDING",
+    "adopted": false,
+    "goal_complete": false,
+    "closeout_file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-first2-methods-closeout-v1.json",
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/score_final_confirmation_native.py",
+    "uses_existing_frozen_host_result_loader_and_inspected_cached_official_evaluator": true,
+    "not_an_extracted_answer_or_semantic_quality_metric": true,
+    "first2_native_scorer_exec_sessions_drained_never_repoll": [
+      15529,
+      46317
+    ]
+  },
+  "cost_state": {
+    "latest_paid_idle_receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v23.json",
+    "all_new_closed_offline_timers_after23": "PENDING while actual seed1 worker lives",
+    "no_offline_CPU_ledger_settlement_during_live_worker": true,
+    "native_model_or_owner_or_parent_costs_rebilled": false,
+    "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
+    "legacy_unknown_generation_embedding_last_closed_primary": [
+      15,
+      1
+    ]
+  },
+  "next_serial_gate_prepared": {
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/settle_confirmation_seed1_idle_v24.py",
+    "AST_valid": true,
+    "executed": false,
+    "sequence": "At actual seed1 exit0/CPU paid/both procs gone: run full256 audit, compute original full native F1, wait actual command exits, settle only new closed timers once at actual idle, then launch frozen seed2 owner. No automatic queue."
+  },
+  "reflection": [
+    "Source guide82 omitted two explicitly named naive baselines; add the literal Source alternative for all4 methods rather than enforce a unique native answer. Addendum timing is disclosed, with old guide retained.",
+    "Current source-scope inventory is retrospective relative to baseline80/primary16; do not claim blinded or fully preregistered source-specific adjudication. Frozen method/N/budgets/general scoring did not change.",
+    "Actual full-answer official native F1 is lower for primary than baseline; retain this result and continue the frozen secondary seeds/full-quality task without reselection.",
+    "Case103 wrong temporal self-coverage formula and primary30 wrong unsquared norm were checked against explicit original prose, not inferred from masked equations.",
+    "Full256consistency verification found a defaultdict insertion bug: declared122indices were correct,but each record boolean wasTrue. Retain v1andfailed GNUtimer; v2derives flags from explicit category lists and verifies the unchanged122set. No sensitivity scores had been computed; existing main/material/nativeF1/model results are unchanged."
+  ],
+  "remaining_work": [
+    "Baseline quality112..255; primary quality32..255; both secondary full256 semantic reviews; all raw firstfailures and common122 sensitivity/full256 denominators",
+    "Seed1 actual remaining positions, full Source/SDK/first-wire/NN audits/cost closure and native F1; frozen seed2 actual256 withsame gates",
+    "All4 full-task confirmed-complete outcomes, paired gains/losses and20000seed0family bootstrap, native strata/perseed/within-familymean, full operation/cost analysis; no adoption from prefixes or native overlap",
+    "Old64 reserved query semantic eligibility and nativeTEST semantics remain unopened",
+    "LME451ReaderJudge/Mem2Act400 actual own-policy/full-input/native-budget/scoring/exposure followthrough; final figures/results/paper under the original full plan"
+  ],
+  "no_subagents_new_services_second_ledger_reset_refund_remote_or_Product_writes": true,
+  "no_crop_compact_quantize_to_pass_or_model_first_outcome_retry": true,
+  "adopted": false,
+  "no_sha_validation": true,
+  "process_snapshot_timestamp_utc": "2026-11-06T14:25:38.539241+00:00",
+  "retained_failed_verification": {
+    "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/verify-progress-v45.time.txt",
+    "exit_code": 1,
+    "failure": "Per-record common-stress flags totaled256instead of the correctly declared122.",
+    "corrected_artifact": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-inventory-all256-v2.json",
+    "reflection": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-scope-inventory-v1-boolean-failure-reflection-v1.json",
+    "scores_or_runtime_retried": false
+  }
+}

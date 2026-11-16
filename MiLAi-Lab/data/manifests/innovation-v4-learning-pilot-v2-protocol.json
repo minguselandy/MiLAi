@@ -1,0 +1,31 @@
+{
+  "status": "PREDECLARED",
+  "model_path": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/models/qwen25-05b",
+  "training_references": "data/fixtures/milai-innovation-matched-training-v3.jsonl",
+  "examples": 15,
+  "source_chains": 6,
+  "actual_empty_before_formations": 6,
+  "create_over_existing_before": 1,
+  "updates": 6,
+  "no_change": 2,
+  "auxiliary_tasks": 1,
+  "counterfactual_assignments": 27,
+  "format": "indexed_separate; native editor output, independent auxiliary task",
+  "objectives": [
+    "imitation",
+    "quality_weighted",
+    "relation_consequence"
+  ],
+  "epochs": 1,
+  "steps_per_arm": 15,
+  "rank": 4,
+  "alpha": 8,
+  "learning_rate": 0.0005,
+  "seed": 20261016,
+  "threads": 4,
+  "device": "cpu",
+  "matching": "same main and auxiliary forward/backward shapes and head positions, source order and optimizer steps; auxiliary task weight0 in first two arms",
+  "limits": "15 examples are not 15 independent histories or the full proposed training corpus. Field weighting remains a proxy; no correctness guarantee.",
+  "evaluation": "same exposed development cases first; unseen independent transition histories still required",
+  "cost": "CPU/token reports separate; authoring/review not independently metered and not zero."
+}

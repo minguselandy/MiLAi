@@ -1,0 +1,96 @@
+{
+  "status": "ALL9_CONSTRUCTED_VIEWS_AUTHOR_REVIEWED",
+  "constructed": 9,
+  "delivered": 8,
+  "persisted_not_delivered": 1,
+  "nodes_reviewed": 153,
+  "rules_reviewed": 0,
+  "reviewer": "Codex author, exposed source-role and conversation-context review; no independent Judge.",
+  "scope": "Required trial-status/actor distinctions remain incorrect despite correct preference/venue facts. No view edits or new model calls.",
+  "model_calls": 0,
+  "version": "dynamic-memory-control-memops-dev-baselines-d25-state-results-v1",
+  "effects": {
+    "fixed_context": {
+      "messages": 6,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 5,
+      "READ": 14
+    },
+    "rules": {
+      "messages": 6,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 6,
+      "READ": 18,
+      "REFRESH_VIEW": 6,
+      "refresh_delivered": 5,
+      "refresh_not_delivered": 1
+    },
+    "generative": {
+      "messages": 6,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "REFRESH_VIEW": 3,
+      "refresh_delivered": 3
+    }
+  },
+  "not_delivered": [
+    {
+      "policy": "rules",
+      "family": "memops_D25",
+      "step": "stage-2-repeat",
+      "result": {
+        "ok": false,
+        "status": "material_budget_exhausted",
+        "view_id": "query-structure:6",
+        "revision": 6,
+        "report": {
+          "policy": "incremental",
+          "visible_sources_enumerated": 33,
+          "source_inventory": "explicit source events; upstream discovery counted separately",
+          "retrieved_sources": 25,
+          "new_arrivals": 2,
+          "model_calls": 1,
+          "source_bodies_delivered": 25,
+          "cache_capacity": 1,
+          "slot": "current",
+          "replaced_view": null,
+          "query_time": "",
+          "scope_claim": "retrieved scope plus new arrivals, not full-history semantic coverage",
+          "action": "refresh",
+          "node_count": 22,
+          "rule_count": 0,
+          "elapsed_ms": 15987.626656889915
+        }
+      },
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e8ed959c-9355-4447-8b79-3be929a9a380/69dbce76-b654-4120-b68f-14b9a16a2520-trace-0.jsonl"
+    }
+  ],
+  "detailed_author_review": "artifacts/dynamic-memory-control/review-memops-dev-baselines-d25-v1/state-inventory/author-review.json",
+  "source_export": "artifacts/dynamic-memory-control/review-memops-dev-baselines-d25-v1/state-inventory/views.json",
+  "undelivered_source_export": "artifacts/dynamic-memory-control/review-memops-dev-baselines-d25-v1/state-inventory/constructed-undelivered-views.json",
+  "task_review": "artifacts/dynamic-memory-control/review-memops-dev-baselines-d25-v1/author-review.json",
+  "task_counts": {
+    "fixed_context": {
+      "qualified": 5,
+      "length_failure": 1
+    },
+    "rules": {
+      "correct": 4,
+      "wrong": 2
+    },
+    "generative": {
+      "wrong": 3,
+      "unfulfilled": 2,
+      "length_failure": 1
+    }
+  },
+  "all_constructed_task_sufficient": false
+}

@@ -9,7 +9,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal, cast
 
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 from langchain_core.embeddings import Embeddings
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
@@ -154,6 +154,8 @@ def build_agent(
     tool_save_communication: str | None = None,
     model_tool_choice: Callable[[list[BaseMessage]], Literal["auto", "required"]] | None = None,
     model_tools_provider: Callable[[RunnableConfig], Sequence[BaseTool]] | None = None,
+    schema_feedback_fingerprints: bool = True,
+    model_enable_thinking: bool | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     selected_save = read_profile("tool_save_communication", model.tool_save_communication)
@@ -316,7 +318,8 @@ def build_agent(
                 except ValidationError as error:
                     return ToolMessage(
                         content=(
-                            feedback_text(jsonschema_feedback(error, schema))
+                            feedback_text(jsonschema_feedback(
+                                error, schema, fingerprints=schema_feedback_fingerprints))
                             if selected_communication != "legacy"
                             else f"Tool input validation error: {error.message}"
                         ),
@@ -349,11 +352,14 @@ def build_agent(
         # Bind the exact executable catalog; the selector cannot grant tools.
         selected = actual_tools(get_config()) if model_tools_provider is not None else tools
         choice = model_tool_choice(state["messages"]) if model_tool_choice else "auto"
-        return model.bind_tools(selected, tool_choice=choice)
+        return model.bind_tools(selected, tool_choice=choice,
+            **({"enable_thinking": model_enable_thinking}
+               if model_enable_thinking is not None else {}))
 
     prompt = system_prompt + ("\n" + environment_rules if environment_rules else "")
     return create_react_agent(
         (select_model if model_tool_choice is not None or model_tools_provider is not None
+         or model_enable_thinking is not None
          else model),
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=(prompt if persistent_memory_arm is None

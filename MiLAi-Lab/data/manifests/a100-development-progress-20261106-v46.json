@@ -1,0 +1,338 @@
+{
+  "status": "ACTIVE_SEED1_ALL256_AUDIT_NATIVE_F1_COST_CLOSED_SEED2_RUNNING_BASELINE_QA168_PRIMARY_QA64",
+  "timestamp_utc": "2026-11-06T15:48:34.694048+00:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261106-v45.json",
+  "previous_checkpoint_commit": "91a67937",
+  "unchanged_scope": "Original full goal/M5 remains. Frozen256families/1024first trajectories, methods/checkpoints/Host/native budgets/full input/runtime/scoring/N unchanged. Baseline/primary all256 proofs and earlier M0-M4/B-C/D-K/formal/M3 closeouts remain in v45 and ancestors.",
+  "seed1_confirmation_closed": {
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32/learned-owner-v1.json",
+    "actual_owner_receipt": {
+      "status": "COMPLETED_FIRST_LEARNED_CONFIRMATION_JOB_QUALITY_AND_FULL_AUDITS_PENDING",
+      "pid": 3168683,
+      "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32/learned-execution-plan-v1.json",
+      "name": "e3-aggregate-seed1-u32",
+      "positions": 256,
+      "automatic_retry": false,
+      "client_CPU_recorded": true,
+      "child_pid": 3168737,
+      "started_epoch": 1793971699.3656895,
+      "exit_code": 0,
+      "whole_child_CPU_seconds": 2546.614015,
+      "wall_seconds": 7645.406356122345,
+      "already_recorded_native_CPU": {
+        "dynamic_memory_laya_load": 6.662404252000215,
+        "dynamic_memory_laya": 1897.1903147900011
+      },
+      "client_CPU_residual": 642.7612959579988,
+      "shared_generation_admissions": 565,
+      "native_known_generation_tokens": 2136058,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "one_GPU2_job_interval_hours": 2.123723988920295,
+      "GPU_interval_scope": "Whole child reservation including Host waits; not active CUDA kernel time.",
+      "client_compute_phase": "a100-final-confirmation-20261106-v1-e3-aggregate-seed1-u32-whole-client-residual-and-parent",
+      "parent_CPU_seconds_through_billing": 0.092552207,
+      "unmetered_launch_cleanup_author_CPU": "unknown_not_zero",
+      "first_outcomes_closed": 256,
+      "actual_HTTP_responses": 565,
+      "known_HTTP_tokens": 2136058
+    },
+    "both_actual_processes_absent": true,
+    "full_native_audit_folder": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32/audit-all256-v1",
+    "full_native_audit_actual_exit_code": 0,
+    "drained_audit_session_never_repoll": 23103,
+    "audit_closeout": {
+      "status": "ALL256_NATIVE_STATE_SOURCE_SAVER_APPLICATION_FIRST_WIRE_AND_FINITE_INPUTS_AUDITED_QUALITY_PENDING",
+      "method": "e3-aggregate-seed1-u32",
+      "positions": 256,
+      "full_planned_positions": 256,
+      "native_statuses": {
+        "COMPLETED": 205,
+        "FAILED": 51
+      },
+      "completed_final_inputs": 205,
+      "failed_last_inputs": 51,
+      "whole_existing_Source_comparisons": 19188,
+      "literal_Source_ranges": 1388,
+      "raw_Source_role_origin_capture_and_reported_clock_checks": 1388,
+      "first_provider_requests_literal_equal": 256,
+      "unmatched_ranges": 0,
+      "actual_HTTP_responses_already_native_paid": 565,
+      "known_HTTP_tokens_already_native_paid": 2136058,
+      "selected_native_action_kinds": {
+        "SEARCH": 381,
+        "READ": 1561,
+        "HANDOFF": 17
+      },
+      "actual_NN_forwards": 1959,
+      "all_actual_NN_inputs_complete_and_untruncated": true,
+      "Source_Saver_Store_world_and_application_invariants": true,
+      "semantic_or_business_writes": 0,
+      "prefix_entire_records_require_full_reconciliation": false,
+      "whole_quality": "PENDING_NOT_NATIVE_COMPLETION",
+      "new_model_calls": 0,
+      "ledger_opened_or_written": false,
+      "no_sha_validation": true
+    },
+    "finite_input_summary": {
+      "projection": "shared_actions",
+      "all_actual_truncated_false": true,
+      "all_decoded_complete_state_bindings_and_menu_heads_literal_equal": true,
+      "recorded_model_forwards": 1959,
+      "minimum_actual_input_tokens": 3636,
+      "maximum_actual_input_tokens": 9706,
+      "sum_actual_input_tokens_already_native_recorded": 12353161,
+      "new_model_forwards": 0,
+      "new_model_loads": 0
+    },
+    "forced_single_action_decisions": 0,
+    "new_model_tokenizer_or_HTTP_replay_in_audit": 0,
+    "scope": "Complete actual observed state/full legal bindings/head and Source/Saver/Store/application invariants; not all-bank delivery, correct answers or effective16kcontext proof."
+  },
+  "processes": {
+    "sole_actual_experiment": {
+      "name": "e3-aggregate-seed2-u32",
+      "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-owner-v1.json",
+      "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-execution-plan-v1.json",
+      "launch": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-launch-v1.json",
+      "status_at_snapshot": "RUNNING",
+      "actual_processes": {
+        "pid": {
+          "pid": 3666509,
+          "exists": true,
+          "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/own_final_confirmation_learned.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-execution-plan-v1.json"
+        },
+        "child_pid": {
+          "pid": 3666510,
+          "exists": true,
+          "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_saved_gpu.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32-inference-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_frozen_host_messages.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-cases-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed2-u32 --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --source-version local-a100-final-confirmation-20261106-v1 --presentation current --host-enable-thinking --policy-config /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32-policy.json --continue-known-host-failures --host-site-packages /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages"
+        }
+      },
+      "closed_at_snapshot": 9,
+      "planned_positions": 256,
+      "native_statuses_at_snapshot": {
+        "COMPLETED": 8,
+        "FAILED": 1
+      },
+      "native_completion_is_not_task_quality": true,
+      "client_CPU_recorded": false,
+      "actual_cached_model_loads": [
+        {
+          "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-2/checkpoints/update-32",
+          "device": "cuda:0",
+          "visible_cuda_devices": "2",
+          "threads": 4,
+          "max_len": 16384,
+          "head_max_len": 2048,
+          "loaded_weight_dtype": "torch.float32",
+          "mha_fastpath_enabled": false,
+          "reference_compile_override": false,
+          "status": "VERIFIED"
+        }
+      ],
+      "native_decision_module_file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/src/milai_lab/providers/laya_local.py",
+      "model_cache_entries": 1,
+      "detached_bounded_owner": true,
+      "automatic_queue_or_retry": false,
+      "actual_launch_gates": "Both prior learned owners exit0/CPU paid/procs gone, both full256audits passed, seed1nativeF1closed, actualidle24paid before frozen seed2launch."
+    }
+  },
+  "baseline_whole_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-first168-source-author-review-reconciliation-v1.json",
+    "positions": 168,
+    "new_since_v45": 56,
+    "quality_counts": {
+      "C": 97,
+      "W": 10,
+      "I": 31,
+      "F": 30
+    },
+    "material_counts": {
+      "S": 104,
+      "I": 26,
+      "P": 38
+    },
+    "native_strata": {
+      "dev": 168
+    },
+    "prior160_record_dicts_literal_equal": true,
+    "original112_records_literal_equal_through128_144_160": true,
+    "all_reviewed_whole_results_equal_final256_except_declared_global_index": true,
+    "source_author_not_blind_or_independent": true,
+    "partial_prefix_not_population_effect": true,
+    "full256_quality_closed": false
+  },
+  "primary_whole_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first64-source-author-review-reconciliation-v1.json",
+    "positions": 64,
+    "new_since_v45": 32,
+    "quality_counts": {
+      "C": 34,
+      "W": 7,
+      "I": 7,
+      "F": 15,
+      "U": 1
+    },
+    "material_counts": {
+      "S": 45,
+      "P": 15,
+      "I": 4
+    },
+    "native_strata": {
+      "dev": 64
+    },
+    "prior48_record_dicts_literal_equal": true,
+    "original32_records_literal_equal_through_corrected48": true,
+    "all_reviewed_whole_results_equal_full256_native_audit_records": true,
+    "other_method_labels_inherited": false,
+    "source_author_not_blind_or_independent": true,
+    "partial_prefix_not_population_effect": true,
+    "full256_quality_closed": false,
+    "unresolved_case62": "Unqualified English-only boundary cannot be confirmed fromSource. Ugets noCcredit; it is not a claim the real datasets contain non-English text.",
+    "not_all_nonC_are_factual_errors": true
+  },
+  "common_source_scope": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-inventory-all256-v2.json",
+    "positions": 256,
+    "flagged_count": 122,
+    "same_all4_methods": true,
+    "full_denominator_each_method": 256,
+    "all_record_booleans_equal_fixed_declared_membership": true,
+    "manual_membership_or_rule_changed_this_turn": false,
+    "v1_incorrect_booleans_retained_not_used_for_scores": true,
+    "prior_pending_material_decisions": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-material-scope-adjudication-pending-cases-v1.json",
+    "source_guide82_addendum": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/source-author-guide-82-naive-baselines-addendum-v1.json",
+    "source_author_not_blind_or_independent": true
+  },
+  "native_full_answer_agreement": {
+    "status": "THREE_FULL256_METHODS_OFFICIAL_LITERAL_ANSWER_F1_BOUND_SEED2_AND_WHOLE_TASK_QUALITY_PENDING",
+    "timestamp_utc": "2026-11-06T15:42:12.576836+00:00",
+    "methods": {
+      "fixed-prefix": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-fixed-prefix-v1.json",
+        "Answer F1": 0.0981909306413507,
+        "positions": 256,
+        "actual_completed_answers": 216,
+        "first_failed_empty_positions": 40,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.0972221874536791
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.10071512063739638
+          }
+        },
+        "all_original_completed_strings_and_failed_empty_jsonl_records_literal_equal": true
+      },
+      "e3-aggregate-u32": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-e3-aggregate-u32-v1.json",
+        "Answer F1": 0.08804209206295316,
+        "positions": 256,
+        "actual_completed_answers": 204,
+        "first_failed_empty_positions": 52,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.08723387799739968
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.09014800195207132
+          }
+        },
+        "all_original_completed_strings_and_failed_empty_jsonl_records_literal_equal": true
+      },
+      "e3-aggregate-seed1-u32": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-e3-aggregate-seed1-u32-v1.json",
+        "Answer F1": 0.08179025700801325,
+        "positions": 256,
+        "actual_completed_answers": 205,
+        "first_failed_empty_positions": 51,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.09293156442740273
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.05276008978847731
+          }
+        },
+        "all_original_completed_strings_and_failed_empty_jsonl_records_literal_equal": true
+      }
+    },
+    "each_method_denominator": 256,
+    "primary_remains_frozen_seed0_not_reselected": true,
+    "paired_intervals_and_all4_method_statistics": "PENDING",
+    "new_model_calls": 0,
+    "ledger_opened_or_written": false,
+    "no_sha_validation": true,
+    "main_source_author_complete_success_not_closed": true,
+    "adopted": false,
+    "goal_complete": false,
+    "closeout_file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-first3-methods-closeout-v1.json",
+    "scorer_script": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/score_final_confirmation_native.py",
+    "seed1_actual_scorer_exit_code": 0,
+    "seed1_drained_scorer_session_never_repoll": 3163,
+    "main_success_or_positive_advantage_not_inferred_from_native_overlap": true
+  },
+  "actual_idle_cost_settlement24": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v24.json",
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/settle_confirmation_seed1_idle_v24.py",
+    "actual_exit_code": 0,
+    "GNU_wrapped_settlement": false,
+    "new_closed_timers": 98,
+    "CPU_seconds": 66.59999999999998,
+    "timer_exit_counts": {
+      "0": 96,
+      "1": 2
+    },
+    "included_failed_timers": [
+      "reconcile-confirmation-primary-first48-quality-v1.time.txt",
+      "verify-progress-v45.time.txt"
+    ],
+    "generation_limits_embedding_unchanged": true,
+    "native_model_whole_client_parent_and_prior_costs_not_rebilled": true,
+    "after_idle24_timers": "PENDING while actual seed2 worker lives",
+    "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
+    "legacy_unknown_generation_embedding_last_closed_seed1": [
+      15,
+      1
+    ],
+    "seed1_closed_new_unknown_generation_embedding": {
+      "generation": 0,
+      "embedding": 0
+    }
+  },
+  "retained_failure_and_reflection": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first48-review-reconciliation-v1-failure-reflection.json",
+    "actual_failed_reconciliation_exit_code": 1,
+    "v1_timer_retained_and_paid_once_in_idle24": "reconcile-confirmation-primary-first48-quality-v1.time.txt",
+    "cause": "An extra hand-entered case45advisory eligibilityTrue conflicted with fixed common membershipFalse.",
+    "correction": "Metadata flag corrected from shared inventory. QualityF/materialS/raw records/mask122unchanged; old specification/binding/timer retained. Renderer now prints actual fixed membership for each case.",
+    "corrected_review_file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/source-author-reviewed-global40-to47-v2.json",
+    "corrected_first48_file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first48-source-author-review-reconciliation-v2.json",
+    "model_or_first_outcome_retry": false
+  },
+  "remaining_work": [
+    "Baseline quality168..255, primary quality64..255, seed1all256 andseed2all256 semantic reviews; retain firstF/U/all256denominators andsame common122stress.",
+    "Seed2remaining actual256positions/fullSource-SDK-first-wire-NNfinite-input audit/nativeF1/cost closure at actual terminal; no second model/HTTP worker whilelive.",
+    "All4 full-task Coutcomes, paired gains/losses and20000seed0family bootstrap/native strata/perseed/within-familymean/full operation andcost analysis;256families not1024independent.",
+    "Old64reserved query semantic eligibility andnativeTESTsemantics remain unopened; old64Sourcebodies exposed.",
+    "LME451ReaderJudge/Mem2Act400 actual own-policy/full-input/native-budget/scoring/exposure/cost followthrough; primary remains fixed seed0 versus strongsimple, no best-seed reselection.",
+    "All-stage figures/results/paper and full original-plan completion audit."
+  ],
+  "no_subagents_new_services_second_ledger_reset_refund_remote_or_Product_writes": true,
+  "no_source_K_menu_task_horizon_crop_compact_quantize_or_model_first_outcome_retry": true,
+  "methods_checkpoints_Host_budgets_N_or_general_scoring_changed": false,
+  "adopted": false,
+  "no_sha_validation": true
+}

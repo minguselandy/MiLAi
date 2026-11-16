@@ -1,0 +1,10 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "measurement_file": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v32.json",
+  "phases": 103,
+  "total_cpu_seconds": 783.2861924450268,
+  "generation_embedding_unchanged": true,
+  "closed_driver": "artifacts/host-intent-retrieval-v3/view-v4-d-v2/driver.json",
+  "scope": "Only measured local CPU phases, with native direct charges subtracted from each driver. Parent wall overlaps children. Unknown review/debug overhead retained as unknown."
+}

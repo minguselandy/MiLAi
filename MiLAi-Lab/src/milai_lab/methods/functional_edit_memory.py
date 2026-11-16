@@ -39,20 +39,39 @@ from milai_lab.memory.functional_state import (
     canonical,
     fragment_support,
     namespace,
+    project_request_targets,
     reference_key,
+    request_target_mapping,
     scope_leaves,
 )
+from milai_lab.memory.reader_projection import (
+    expand_host_packet,
+    expand_record,
+    project_host_packet,
+    project_record,
+)
+from milai_lab.memory.working_set import item_ref, read_evidence_basis, read_requirement_status
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_maintenance import (
     MaintenanceRecipe,
     ModelCall,
+    StageFit,
     has_pending_save,
     maintain_event,
     pending_work_refs,
     resume_maintenance,
 )
-from milai_lab.methods.edit_memory import Arm, EditMemory, InterfaceVersion
+from milai_lab.methods.edit_memory import (
+    REVISION_MEANING_INSTRUCTIONS,
+    Arm,
+    EditMemory,
+    InterfaceVersion,
+    MaintenanceMode,
+)
+from milai_lab.methods.memory_control import MemoryPolicy
+from milai_lab.methods.query_structure import QueryStructureBuilder, QueryStructurePolicy
+from milai_lab.methods.source_observations import SourceObservationBudget
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
 FUNCTIONAL_B0_METHOD = "milai_edit_b0_v1"
@@ -114,8 +133,24 @@ class FunctionalEditMemory(FunctionalMemory):
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
         maintenance_recipe: MaintenanceRecipe | None = None,
+        maintenance_mode: MaintenanceMode = "legacy",
+        writer_input: Literal["full", "dependency_region_v1"] = "full",
         query_time: str | None = None,
         query_calendar_context: str | None = None,
+        evidence_policy: Literal["legacy", "question_pack_v1"] = "legacy",
+        dependency_reading: bool = False,
+        dependency_read_call: ModelCall | None = None,
+        control_policy: MemoryPolicy | None = None,
+        control_steps: int = 8,
+        control_source_observation_tokens: int | None = None,
+        control_view_capacity: int = 1,
+        control_view_policy: QueryStructurePolicy = "incremental",
+        control_view_builder: QueryStructureBuilder = "generated",
+        control_internal_views: bool = True,
+        control_rank_pool: (Callable[[str, list[dict[str, Any]]],
+                                     list[dict[str, Any]]] | None) = None,
+        control_record: Callable[[dict[str, Any]], None] = lambda event: None,
+        control_available: Callable[[], bool] = lambda: True,
         **kwargs: Any,
     ) -> None:
         if arm not in FUNCTIONAL_ARMS.values():
@@ -126,18 +161,52 @@ class FunctionalEditMemory(FunctionalMemory):
         if arm == "Append-only":
             if interface_version != "I2" or maintenance_recipe is None:
                 raise ValueError("FUNCTIONAL_APPEND_REQUIRES_I2_MAINTENANCE_RECIPE")
-            self.writer = AppendMemory(self.service, features=features or EditFeatures())
+            self.writer = AppendMemory(self.service, features=features or EditFeatures(),
+                                       maintenance_mode=maintenance_mode)
         else:
             self.writer = EditMemory(
-                self.service, arm, interface_version=interface_version, features=features
+                self.service, arm, interface_version=interface_version, features=features,
+                maintenance_mode=maintenance_mode, writer_input=writer_input,
             )
         self.features = self.writer.features
         self.interface_version = interface_version
         self.maintenance_recipe = maintenance_recipe
         self.query_time = query_time
         self.query_calendar_context = query_calendar_context
+        self.evidence_policy = evidence_policy
+        self.dependency_reading = dependency_reading
+        self.dependency_read_call = dependency_read_call
+        self.control_policy = control_policy
+        self.control_steps = control_steps
+        self.control_source_observation = (SourceObservationBudget(
+            control_source_observation_tokens, self.token_count)
+            if control_source_observation_tokens is not None else None)
+        self.control_view_capacity = control_view_capacity
+        self.control_view_policy = control_view_policy
+        self.control_view_builder = control_view_builder
+        self.control_internal_views = control_internal_views
+        self.control_rank_pool = control_rank_pool
+        self.control_record = control_record
+        self.control_available = control_available
+        self.control_handed_off = False
+        if control_policy is not None:
+            self.policy["memory_control"] = type(control_policy).__name__
+        if not control_internal_views:
+            self.policy["internal_views"] = False
+        if control_view_builder != "generated":
+            self.policy["view_builder"] = control_view_builder
+        if dependency_reading:
+            if evidence_policy != "question_pack_v1" or dependency_read_call is None:
+                raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_PACKS_AND_CALLER")
+            self.policy["dependency_reading"] = True
+        if evidence_policy != "legacy":
+            self.policy["evidence_policy"] = evidence_policy
         if maintenance_recipe is not None:
             self.policy["maintenance_recipe"] = maintenance_recipe
+        if maintenance_mode != "legacy":
+            self.policy["maintenance_mode"] = maintenance_mode
+        if writer_input != "full":
+            self.policy["writer_input"] = writer_input
         self.conditioned = arm in {"B2", "M"}
         self.local = arm in {"B1", "M"}
         self.memory_method = next(name for name, value in FUNCTIONAL_ARMS.items() if value == arm)
@@ -151,9 +220,413 @@ class FunctionalEditMemory(FunctionalMemory):
         if self.features.enabled:
             self.policy["edit_features"] = canonical(self.features.settings())
 
+    @property
+    def read_tool_names(self) -> frozenset[str]:
+        return super().read_tool_names | (
+            {"read_evidence"} if self.evidence_policy == "question_pack_v1" else set())
+
+    def _evidence_pool(self, config: RunnableConfig) -> tuple[str, dict[str, Any]]:
+        from milai_lab.methods.evidence_reading import build_evidence_packs
+
+        bound = self._binding(config)
+        key = "evidence-pool:" + reference_key([
+            bound["session"], bound["message_id"], self.forget_epoch,
+            *([] if self.control_internal_views else ["no_internal_views"])])
+        stored = self.service.store.get(namespace(self.service), key)
+        dependencies = self.dependency_reading and self.control_internal_views
+        basis = (sorted([row["id"], row["value"]["revision"]]
+                        for row in self.service.records() if row["ok"])
+                 if dependencies else None)
+        # Compare actual visible revisions using JSON-stable pairs,
+        # not wall time or a digest, and never reuse old indices after rebuilding.
+        if stored is not None and (not dependencies
+                                   or stored.value.get("record_basis") == basis):
+            state = stored.value
+            if "materials" in state:
+                return key, state
+            return self._finish_dependency_pool(config, key, state)
+        current = self.service.source(bound["source_ref"])
+        assert current is not None
+        query = current["content"] if isinstance(current["content"], str) else canonical(
+            current["content"])
+        with self.service._locked():
+            refs = [row["event_id"] for row in self.service._visible_sources()
+                    if row["event_id"] != bound["source_ref"]]
+            native = self.service.search_sources(
+                query, limit=self.source_top_k, source_refs=refs,
+                tokenization=self.source_tokenization, include_scope=True)
+            # Current semantic revisions may legitimately use this message's newly
+            # committed update; excluding the query from raw history must not hide it.
+            records = (self.service.search(query, limit=self.semantic_top_k,
+                                           include_raw=False)["records"]
+                       if self.control_internal_views else [])
+            if self.control_internal_views and self.features.cross_record_dependencies:
+                from milai_lab.memory.external_support import dependent_record_candidates
+
+                records = dependent_record_candidates(self.service, records)
+        if dependencies:
+            state = {"binding": bound, "query": query, "native": native, "records": records,
+                     "record_basis": basis,
+                     "pool_generation": stored.value["pool_generation"] + 1 if stored else 0}
+            self.service.store.put(namespace(self.service), key, state, index=False)
+            return self._finish_dependency_pool(config, key, state)
+        with self.service._locked():
+            materials = build_evidence_packs(
+                self.service, query, self.query_time or "", native["source_materials"],
+                records, tokenization=self.source_tokenization,
+                calendar_context=self.query_calendar_context, source_scope=native["source_scope"])
+        scope = (materials[0]["source_scope"] if materials else {
+            "complete": native["source_scope"]["complete"],
+            "basis": native["source_scope"]["basis"], "required_ranges": [],
+        })
+        state = {"binding": bound, "materials": materials, "source_scope": scope,
+                 "selected": [], "expanded": [],
+                 "excluded": [], "task": "lookup", "candidate_page": 0, "gap": None}
+        self.service.store.put(namespace(self.service), key, state, index=False)
+        return key, state
+
+    def _finish_dependency_pool(
+        self, config: RunnableConfig, key: str, state: dict[str, Any],
+    ) -> tuple[str, dict[str, Any]]:
+        """Use the normal read receipt for metering, replay and unknown outcomes."""
+        from milai_lab.memory.functional_state import note_exposure
+        from milai_lab.methods.evidence_reading import (
+            build_evidence_packs,
+            decode_dependency_reads,
+            dependency_read_request,
+        )
+
+        selections = None
+        if state["records"]:
+            if "dependency_request" not in state:
+                state["dependency_request"] = dependency_read_request(
+                    self.service, state["query"], self.query_time or "", state["records"],
+                    calendar_context=self.query_calendar_context)
+                self.service.store.put(namespace(self.service), key, state, index=False)
+            request = state["dependency_request"]
+
+            def choose(bound: dict[str, Any]) -> dict[str, Any]:
+                assert self.dependency_read_call is not None
+                with self.service._locked():
+                    note_exposure(self.service, bound["source_ref"],
+                                  request["delivered_source_refs"])
+                response = self.dependency_read_call(
+                    "dependency_read", request["messages"], request["schema"])
+                return {"ok": True, "status": "dependency_selected", "selections":
+                        decode_dependency_reads(request, response), "operation_effect": "read_only"}
+
+            receipt = self._read(config, key + ":selection:" + str(state["pool_generation"]),
+                {"tool": "dependency_selection", "pool_generation": state["pool_generation"]},
+                choose, deliver_material=False)
+            state["dependency_read_receipt"] = receipt
+            self.service.store.put(namespace(self.service), key, state, index=False)
+            if not receipt.get("ok"):
+                raise FunctionalRejection("FUNCTIONAL_DEPENDENCY_SELECTION_FAILED:"
+                                          + receipt["status"])
+            selections = receipt["selections"]
+        native = state["native"]
+        materials = build_evidence_packs(
+            self.service, state["query"], self.query_time or "", native["source_materials"],
+            state["records"], dependency_selections=selections,
+            tokenization=self.source_tokenization, calendar_context=self.query_calendar_context,
+            source_scope=native["source_scope"])
+        scope = materials[0]["source_scope"] if materials else {
+            "complete": native["source_scope"]["complete"],
+            "basis": native["source_scope"]["basis"], "required_ranges": []}
+        state.update(materials=materials, source_scope=scope, selected=[], expanded=[], excluded=[],
+                     task="lookup", candidate_page=0, gap=None)
+        self.service.store.put(namespace(self.service), key, state, index=False)
+        return key, state
+
+    def _evidence_packet(
+        self, state: dict[str, Any], *, directory: list[dict[str, Any]] | None = None,
+        note_delivery: bool = False,
+    ) -> dict[str, Any]:
+        from milai_lab.memory.working_set import plan_delivery
+        from milai_lab.methods.evidence_reading import (
+            SOURCE_REUSE_INSTRUCTIONS,
+            open_evidence_packs,
+            pack_candidate,
+            pack_coverage,
+            project_packs,
+        )
+
+        materials = state["materials"]
+        selected = [open_evidence_packs(self.service, [materials[i]],
+                    expand_context=i in state["expanded"], refresh_current=True)[0]
+                    for i in state["selected"]]
+        base = {
+            "ok": True, "schema": "question_evidence_v1", "operation_effect": "read_only",
+            "evidence": project_packs(selected, state["selected"]),
+            "admitted_indices": state["selected"], "excluded_indices": state["excluded"],
+            "task": state["task"], "gap": state["gap"],
+            "range_coverage": pack_coverage(materials, selected, scope=state["source_scope"]),
+            "instructions": (
+                "Answer the original user request using evidence bodies. Candidates are navigation "
+                "only: select item_indices with read_evidence before asserting their facts. "
+                "Use task=range for counts/enumerations; complete means source coverage, not task "
+                "truth. A top-k lookup cannot establish a full range. expand_context selects packs "
+                "whose earlier captured exchanges are needed for subjects/conditions/negation. "
+                "If a needed subject/topic is outside the lookup candidates, task=range also "
+                "opens the captured source scope; this does not change the user's question. "
+                "All reads share the current request allowance. A semantic candidate's "
+                "history_read opens actual stored versions; original user statements cannot "
+                "prove what was saved in an earlier revision. Use actual application tools "
+                "for live business state. " + SOURCE_REUSE_INSTRUCTIONS
+            ),
+        }
+        if self.dependency_reading:
+            base["pool_generation"] = state["pool_generation"]
+            base["dependency_selection"] = {
+                "status": state.get("dependency_read_receipt", {}).get("status", "no_records"),
+                "uses_shared_read_allowance": bool(state["records"]),
+            }
+        candidates = directory if directory is not None else [
+            {**pack_candidate(open_evidence_packs(
+                self.service, [item], refresh_current=True)[0], index),
+             "evidence_read": {"tool": "read_evidence", "arguments": {"item_indices": [index],
+                **({"pool_generation": state["pool_generation"]}
+                   if self.dependency_reading else {})}},
+             **({"type": "record_candidate", "record_id": item["record_id"],
+                 "revision": item["revision"],
+                 "version_view": item.get("version_view", "current_at_snapshot")}
+                if item["kind"] == "semantic_view" else {})}
+            for index, item in enumerate(materials)
+            if state["task"] == "range" or not item.get("scope_only")]
+        mapping = request_target_mapping(self.service, state["binding"])
+
+        def navigation(packet: dict[str, Any]) -> dict[str, Any]:
+            projected, _ = project_request_targets(
+                mapping, {**packet, "forget_epoch": self.forget_epoch})
+            for candidate in projected["candidates"]:
+                if candidate.get("type") == "record_candidate":
+                    candidate["history_read"] = {"tool": "read_memory_history",
+                                                 "arguments": {"target": candidate["target"]}}
+            return projected
+
+        pages = plan_delivery(candidates, lambda rows: self.token_count(canonical({
+            **navigation({**base, "candidates": rows}),
+            "candidate_page": state["candidate_page"],
+            "candidate_page_count": len(candidates),
+        })) <= self.material_limit)["pages"]
+        page = state["candidate_page"]
+        packet = navigation({**base, "candidates": pages[page] if page < len(pages) else [],
+                             "candidate_page": page, "candidate_page_count": len(pages)})
+        if note_delivery:
+            packet = self._bind_request_targets(state["binding"], packet)
+            self._note_evidence_exposure(state, selected)
+        for candidate in packet["candidates"]:
+            candidate.pop("record_id", None)
+        return packet
+
+    def _note_evidence_exposure(
+        self, state: dict[str, Any], selected: list[dict[str, Any]],
+    ) -> None:
+        from milai_lab.memory.functional_state import note_exposure
+
+        refs = list(dict.fromkeys(span["source_ref"] for item in selected
+                                 for span in [*item.get("source_ranges", []),
+                                              *item.get("support_turns", [])]))
+        with self.service._locked():
+            note_exposure(self.service, state["binding"]["source_ref"], refs)
+
+    def evidence_material(
+        self, config: RunnableConfig, *, fresh_observations: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        from milai_lab.methods.evidence_reading import open_evidence_packs, pack_coverage
+
+        if self.control_policy is not None:
+            return self._dynamic_evidence_material(config, fresh_observations)
+        key, state = self._evidence_pool(config)
+        if not state.get("initialized"):
+            indices = [i for i, item in enumerate(state["materials"]) if not item.get("scope_only")]
+            all_items = open_evidence_packs(self.service, [state["materials"][i] for i in indices],
+                                            refresh_current=True)
+            trial = {**state, "selected": indices}
+            coverage = pack_coverage(state["materials"], all_items, scope=state["source_scope"])
+            if (coverage["complete"] and self.token_count(canonical(self._evidence_packet(trial)))
+                    <= self.material_limit):
+                state["selected"] = indices
+            state["initialized"] = True
+            self.service.store.put(namespace(self.service), key, state, index=False)
+        packet = self._evidence_packet(state, note_delivery=True)
+        if fresh_observations:
+            packet["fresh_observations"] = fresh_observations
+        return packet
+
+    def _dynamic_evidence_material(
+        self, config: RunnableConfig, fresh_observations: list[dict[str, Any]] | None,
+    ) -> dict[str, Any]:
+        from milai_lab.memory.functional_state import note_exposure
+        from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
+        from milai_lab.methods.evidence_reading import open_evidence_packs, project_packs
+        from milai_lab.methods.memory_control import (
+            MemoryAction,
+            MemoryControlState,
+            run_memory_control,
+        )
+
+        bound = self._binding(config)
+        current = self.service.source(bound["source_ref"])
+        assert current is not None and self.control_policy is not None
+        question = current["content"]
+        state = MemoryControlState(task={"request": question,
+            "query_time": self.query_time or "", "calendar_context": self.query_calendar_context,
+            "read_goal": self.view_state(config).get("read_goal"),
+            "mode": "read", "fresh_observations": fresh_observations or []})
+
+        packet = controlled_reader_packet
+
+        def refresh(messages: list[dict[str, str]], schema: dict[str, Any]) -> dict[str, Any]:
+            assert self.dependency_read_call is not None
+            return self.dependency_read_call("query_structure", messages, schema)
+
+        key = "dynamic-control:" + reference_key([bound["session"], bound["message_id"],
+            *([] if self.control_internal_views else ["no_internal_views"])])
+        stored = self.service.store.get(namespace(self.service), key)
+        if stored is None:
+            self.service.store.put(namespace(self.service), key, {"status": "started"}, index=False)
+
+            def load_pool() -> list[dict[str, Any]]:
+                materials = self._evidence_pool(config)[1]["materials"]
+                return (self.control_rank_pool(question, materials) if self.control_rank_pool
+                        else materials)
+
+            operations = EvidenceOperations(self.service, state,
+                load_pool=load_pool,
+                refresh_call=refresh,
+                fits=lambda items: self.token_count(canonical(packet(items, "budget_exhausted")))
+                    <= self.material_limit,
+                excluded_source_refs=(bound["source_ref"],),
+                view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
+                view_builder=self.control_view_builder,
+                internal_views=self.control_internal_views,
+                source_observation=self.control_source_observation)
+            memory = self
+
+            def record_control(event: dict[str, Any]) -> None:
+                if event.get("phase") == "decision_input":
+                    event["opened_original_source_ranges"] = [
+                        copy.deepcopy(span) for item in operations.opened.values()
+                        if item["kind"] == "original_source"
+                        and item.get("body_delivered") is True
+                        for span in item.get("source_ranges", [])]
+                    with self.service._locked():
+                        note_exposure(self.service, bound["source_ref"],
+                                      operations.observation_source_refs(state))
+                self.control_record(event)
+
+            class AdmittedOperations:
+                def actions(self, observed: MemoryControlState) -> list[MemoryAction]:
+                    return operations.actions(observed)
+
+                def execute(
+                    self, action: MemoryAction, observed: MemoryControlState,
+                ) -> dict[str, Any]:
+                    result = memory._read(config, "dynamic:" + str(
+                        observed.budget["remaining_control_steps"]),
+                        {"tool": "search_memory" if action.kind == "SEARCH" else "memory_control",
+                         "operation": action.kind, "target": action.target,
+                         "parameters": action.parameters},
+                        lambda _: operations.execute(action, observed), deliver_material=False)
+                    return result
+
+            result = run_memory_control(state, self.control_policy, AdmittedOperations(),
+                max_steps=self.control_steps, record=record_control,
+                can_continue=lambda: self.control_available()
+                    and bool(self.read_allowance(config)["reads_remaining"]))
+            self.control_record({"event": "memory_control_handoff", **result})
+            saved = {"status": "completed", "reason": result["reason"],
+                     "items": list(operations.opened.values()), "indices": list(operations.opened)}
+            self.service.store.put(namespace(self.service), key, saved, index=False)
+        else:
+            saved = stored.value
+            if saved["status"] != "completed":
+                raise FunctionalIntegrityError("DYNAMIC_CONTROL_OUTCOME_UNKNOWN")
+        actual = open_evidence_packs(self.service, saved["items"], refresh_current=True)
+        refs = [span["source_ref"] for item in actual
+                for span in [*item.get("source_ranges", []), *item.get("support_turns", []),
+                             *item.get("source_bindings", {}).values()]]
+        with self.service._locked():
+            note_exposure(self.service, bound["source_ref"], list(dict.fromkeys(refs)))
+        self.control_handed_off = True
+        return packet(project_packs(actual, saved["indices"]), saved["reason"])
+
+    def _evidence_tools(self) -> tuple[BaseTool, ...]:
+        if self.evidence_policy != "question_pack_v1":
+            return ()
+
+        def read_evidence(
+            item_indices: list[int], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            expand_context: list[int] | None = None,
+            task: Literal["lookup", "range"] = "lookup", candidate_page: int = 0,
+            gap: str | None = None,
+            pool_generation: int | None = None,
+        ) -> ToolMessage:
+            """Open complete evidence packs in priority order within the shared read allowance.
+
+            Indices name this request's candidates; no write/forget permission is issued.
+            task=range opens the captured source scope beyond top-k and reports coverage.
+            For a targeted read, give the actual missing subject/condition/history in gap.
+            Empty item_indices requests a candidate page. Use expand_context only for a
+            needed earlier exchange; it cannot read sources arriving after this request.
+            New selections have priority; fitting previously opened packs remain resident.
+            Excluded indices report the actual capacity omissions.
+            Copy pool_generation from the candidate navigation when provided; a changed
+            semantic revision rebuilds the dependency pool and invalidates its old indices.
+            """
+            from milai_lab.methods.evidence_reading import admit_pack_indices
+
+            def action(bound: dict[str, Any]) -> dict[str, Any]:
+                key, state = self._evidence_pool(config)
+                # Before the first rebuild, an omitted generation is unambiguous.
+                # Later pools require the supplied navigation generation so an old
+                # index cannot silently resolve to different material.
+                if self.dependency_reading and pool_generation != state["pool_generation"] and (
+                    pool_generation is not None or state["pool_generation"] != 0
+                ):
+                    raise FunctionalRejection("EVIDENCE_POOL_GENERATION_CHANGED")
+                if candidate_page < 0 or any(i < 0 or i >= len(state["materials"])
+                                             for i in [*item_indices, *(expand_context or [])]):
+                    raise FunctionalRejection("EVIDENCE_PACK_INDEX_UNAVAILABLE")
+                state.update(task=task, candidate_page=candidate_page, gap=gap,
+                             expanded=list(dict.fromkeys([
+                                 *state["expanded"], *(expand_context or [])])))
+                wanted = (list(range(len(state["materials"]))) if task == "range"
+                          else [*item_indices, *state["selected"]])
+                admission = admit_pack_indices(wanted, lambda indices: self.token_count(canonical(
+                    self._evidence_packet({**state, "selected": indices, "excluded": wanted},
+                                          directory=[])
+                )) <= self.material_limit)
+                state.update(selected=admission["admitted_indices"],
+                             excluded=admission["excluded_indices"])
+                self.service.store.put(namespace(self.service), key, state, index=False)
+                packet = self._evidence_packet(state, note_delivery=True)
+                return packet
+
+            result = self._read(config, tool_call_id, {
+                "tool": "read_evidence", "item_indices": item_indices,
+                "expand_context": expand_context, "task": task,
+                "candidate_page": candidate_page, "gap": gap,
+                **({"pool_generation": pool_generation} if self.dependency_reading else {}),
+            }, action, deliver_material=False)
+            return ToolMessage(name="read_evidence", tool_call_id=tool_call_id,
+                               content=canonical(result),
+                               status="success" if result.get("ok") else "error")
+
+        return (StructuredTool.from_function(read_evidence),)
+
     def instructions(self) -> str:
+        writer_instructions = self.writer.instructions() + " " + REVISION_MEANING_INSTRUCTIONS
+        reader_instructions = (
+            "Reader and forget use targets actually delivered in this request; a navigation "
+            "target does not grant permission to revise or forget unread text. "
+            if self.memory_view_mode != "legacy" else
+            "Read/confirmation/history/forget still use the existing Reader contracts. "
+        )
         if self.interface_version != "v1":
-            return self.writer.instructions() + (
+            return writer_instructions + (
                 "Functional tool arguments replace the proposals envelope. For a supported "
                 "durable new fact use save_memory when formation is warranted; for an actual "
                 "correction use update_memory with the applicable delivered target and evidence. "
@@ -165,14 +638,14 @@ class FunctionalEditMemory(FunctionalMemory):
                 "Functional save_memory takes proposal=create and optional scope. "
                 "update_memory takes proposal with target=r# from the latest writer packet. "
                 "Do not pass read_handle, persistent IDs, mapping IDs, or base_revision to these "
-                "writer tools. Read/confirmation/history/forget still use the existing Reader "
-                "contracts. Record scope stays unchanged on updates. A partial record is "
+                "writer tools. " + reader_instructions
+                + "Record scope stays unchanged on updates. A partial record is "
                 "unprocessed until all its text units have actually been read; the Host never "
                 "completes a replacement using unseen text. Memory receipts prove no business "
                 "outcome. Support review remains an optional caller callback. "
             )
         if not self.local:
-            return self.writer.instructions() + (
+            return writer_instructions + (
                 "The functional tool signatures replace the proposal envelope: save_memory "
                 "takes units/relations/scope; update_memory takes an actual read_handle and the "
                 "entire replacement units/relations. Include all retained text, qualifications "
@@ -194,7 +667,7 @@ class FunctionalEditMemory(FunctionalMemory):
             if self.conditioned
             else "keep conditions and qualifications in the selected plain text units. "
         )
-        return self.writer.instructions() + (
+        return writer_instructions + (
             "The functional tool signatures replace the proposal envelope: use save_memory "
             "with units/relations/scope, or update_memory with an actual read_handle and edits. "
             "Do not send action/target_record/base_revision to these tools. Copy edit_unit.unit_id "
@@ -305,8 +778,124 @@ class FunctionalEditMemory(FunctionalMemory):
             items.setdefault(identity, item)
         return list(items.values())
 
+    def _resident_continuations(
+        self, view: dict[str, Any], *, include_pending: bool = True,
+    ) -> list[dict[str, Any]]:
+        starts: dict[str, int] = {}
+        for ref in view["resident_refs"]:
+            starts[ref["snapshot_id"]] = max(
+                starts.get(ref["snapshot_id"], 0), ref["unit_index"] + 1)
+        for ref in view["pending_refs"] if include_pending else []:
+            if isinstance(ref, dict) and "snapshot_id" in ref and "unit_index" in ref:
+                starts[ref["snapshot_id"]] = min(
+                    starts.get(ref["snapshot_id"], ref["unit_index"]), ref["unit_index"])
+        continuations = []
+        for snapshot_id, start in starts.items():
+            snapshot = self.service.store.get(namespace(self.service), snapshot_id)
+            if snapshot is not None and not snapshot.value["kind"].endswith("_catalog") \
+                    and start < len(snapshot.value["items"]):
+                continuations.append({
+                    "tool": "read_page" if self.read_interface == "explicit_selectors_v1"
+                    else "read_memory",
+                    "arguments": {"cursor": snapshot_id + ":" + str(start)},
+                })
+        return continuations
+
+    def _fit_model_material(
+        self, config: RunnableConfig, material: dict[str, Any],
+        fresh_observations: list[dict[str, Any]] | None,
+    ) -> dict[str, Any]:
+        """Page a selected snapshot against the complete resident envelope.
+
+        The tool page and the following Host input have different wrappers. Use
+        the same final target/projection cost before changing temporary bodies;
+        originals and read receipts remain in their existing snapshots.
+        """
+        bound = self._binding(config)
+        mapping = request_target_mapping(self.service, bound)
+
+        def tokens(packet: dict[str, Any]) -> int:
+            projected, _ = project_request_targets(mapping, packet)
+            return self.token_count(canonical(self._project_read_packet(projected)))
+
+        if tokens(material) <= self.material_limit:
+            return material
+        view = material["memory_view"]
+        admission_key = "read-admission:" + reference_key([bound["session"], bound["message_id"]])
+        admission = self.service.store.get(namespace(self.service), admission_key)
+        latest = next((call for call in reversed(list(admission.value["calls"].values()))
+                       if call.get("result", {}).get("view_refs")
+                       and any(ref in view["resident_refs"]
+                               for ref in call["result"]["view_refs"])
+                       and not call["result"].get("kind", "").endswith("_catalog")), None) \
+            if admission else None
+        # Explicit retention is a model choice, not permission to silently evict
+        # a requested comparison. The unchanged final capacity refusal applies.
+        if latest and latest["arguments"].get("keep_resident"):
+            return material
+        focused = [ref for ref in view["resident_refs"]
+                   if ref["id"] in (view["focus"] if isinstance(view["focus"], list)
+                                    else [view["focus"]])]
+        if latest:
+            snapshot_id = latest["result"]["snapshot_id"]
+            start = latest["result"]["start"]
+        elif focused:
+            snapshot_id = focused[-1]["snapshot_id"]
+            start = min(ref["unit_index"] for ref in focused
+                        if ref["snapshot_id"] == snapshot_id)
+        else:
+            return material
+        snapshot = self.service.store.get(namespace(self.service), snapshot_id)
+        if snapshot is None or snapshot.value["kind"].endswith("_catalog"):
+            return material
+        pool_refs = [item_ref(unit, snapshot_id, index)
+                     for index, unit in enumerate(snapshot.value["items"])]
+        fixed = [item for item in material["items"] if item["type"] == "fragment" and (
+            item["source_ref"] == bound["source_ref"] or (item.get("role") == "tool"
+            and item.get("delivery_kind") != "redelivered_support"))]
+
+        def identity(ref: Any) -> str:
+            # Existing pending maintenance also uses source/attempt strings.
+            if not isinstance(ref, dict) or "snapshot_id" not in ref:
+                return canonical(ref)
+            return canonical([ref.get(name) for name in (
+                "kind", "id", "revision", "view", "range", "unit_id")])
+
+        fixed_ids = {item["source_ref"] for item in fixed}
+        fixed_refs = [ref for ref in view["resident_refs"]
+                      if ref["kind"] == "source" and ref["id"] in fixed_ids]
+
+        def resident_packet(page: dict[str, Any]) -> dict[str, Any]:
+            bodies = {canonical(self._progress_identity(item)): copy.deepcopy(item)
+                      for item in [*fixed, *expand_host_packet(page)["items"]]}
+            resident = [*fixed_refs, *page["view_refs"]]
+            opened = {identity(ref) for ref in resident}
+            pending = {identity(ref): copy.deepcopy(ref) for ref in [
+                *view["pending_refs"], *view["resident_refs"], *pool_refs,
+            ] if identity(ref) not in opened}
+            selected_view = {**view, "resident_refs": resident,
+                             "pending_refs": list(pending.values())}
+            actual = list(bodies.values())
+            following = self._resident_continuations(selected_view)
+            packet = {**material, "items": actual, **self._read_only_metadata(actual),
+                      "memory_view": selected_view, "reading_basis": read_evidence_basis(actual),
+                      "reading_requirement": read_requirement_status(
+                          selected_view, actual, continuations=following,
+                          fresh_observations=fresh_observations),
+                      "delivery_status": "partial" if pending else "complete_snapshot",
+                      "skipped_units": page["skipped_units"]}
+            packet.pop("continuations", None)
+            if following:
+                packet["continuations"] = following
+            return packet
+
+        page = self._page(snapshot_id, start, bound,
+                          packet_tokens=lambda packet: tokens(resident_packet(packet)))
+        return resident_packet(page)
+
     def model_material(
-        self, config: RunnableConfig, *, for_write: bool = False
+        self, config: RunnableConfig, *, for_write: bool = False,
+        fresh_observations: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Project actual resident material immediately before a model call.
 
@@ -314,6 +903,9 @@ class FunctionalEditMemory(FunctionalMemory):
         editor map. Direct I2 writing explicitly requests the current target map.
         Full conversation and read receipts remain in their original checkpoints.
         """
+        if (self.evidence_policy == "question_pack_v1" and not for_write
+                and not self.forget_requested):
+            return self.evidence_material(config, fresh_observations=fresh_observations)
         if self.memory_view_mode == "legacy":
             bound = self._binding(config)
             if for_write:
@@ -328,47 +920,88 @@ class FunctionalEditMemory(FunctionalMemory):
             for ref in card["pending_refs"]:
                 if ref not in view["pending_refs"]:
                     view["pending_refs"].append(ref)
+        progress = self.read_progress(config)
+        # The durable read trace retains every identity and page. The model
+        # already has current references/continuations below; repeating the
+        # trace arrays can displace the complete evidence it just read.
+        progress.pop("delivered_identities", None)
+        progress.pop("snapshot_pages", None)
         material = {
             "ok": True, "schema": "functional_material_v1", "kind": "resident",
+            "forget_epoch": self.forget_epoch,
             "items": items, **self._read_only_metadata(items),
-            "memory_view": view, "read_progress": self.read_progress(config),
+            "reading_basis": read_evidence_basis(items),
+            "memory_view": view, "read_progress": progress,
             "pending_maintenance": pending,
         }
-        page_ends: dict[str, int] = {}
-        for ref in material["memory_view"]["resident_refs"]:
-            page_ends[ref["snapshot_id"]] = max(
-                page_ends.get(ref["snapshot_id"], 0), ref["unit_index"] + 1
-            )
-        continuations = []
-        for snapshot_id, end in page_ends.items():
-            snapshot = self.service.store.get(namespace(self.service), snapshot_id)
-            if snapshot is not None and not snapshot.value["kind"].endswith("_catalog") \
-                    and end < len(snapshot.value["items"]):
-                continuations.append({
-                    "tool": "read_page" if self.read_interface == "explicit_selectors_v1"
-                    else "read_memory",
-                    "arguments": {"cursor": snapshot_id + ":" + str(end)},
-                })
+        continuations = self._resident_continuations(view, include_pending=not for_write)
         if continuations:
             material["continuations"] = continuations
+        material["reading_requirement"] = read_requirement_status(
+            view, items, continuations=continuations, fresh_observations=fresh_observations,
+        )
         bound = self._binding(config)
         ordinary = self.service.store.get(namespace(self.service), "ordinary:" + reference_key(
             [bound["session"], bound["message_id"], self.forget_epoch]
         ))
-        if ordinary is not None and ordinary.value.get("catalog_snapshot"):
-            directory = self._page(ordinary.value["catalog_snapshot"], 0, bound)
-            material["candidates"] = directory.get("candidates", [])
-            material["candidate_scope"] = "navigation_only_not_body_read_or_fact_support"
-            material["next_cursor"] = directory.get("next_cursor")
+
+        def with_directory(body: dict[str, Any], page: dict[str, Any]) -> dict[str, Any]:
+            return {**body, "candidates": page.get("candidates", []),
+                    "candidate_scope": "navigation_only_not_body_read_or_fact_support",
+                    "candidate_delivery_status": page["delivery_status"],
+                    "candidate_skipped_units": page["skipped_units"],
+                    "next_cursor": page.get("next_cursor")}
+
+        directory_snapshot = ordinary.value.get("catalog_snapshot") if ordinary else None
+        if directory_snapshot and not for_write:
+            # Reserve even an empty directory and its continuation before fitting
+            # bodies. Otherwise the following page's mandatory wrapper can exceed
+            # the limit after the resident page has already consumed the budget.
+            material = with_directory(material, {"delivery_status": "partial",
+                "skipped_units": [], "next_cursor": directory_snapshot + ":0"})
+        # Direct Writer calls expand a different packet below. Preserve their
+        # complete selected Source/target contract and existing capacity check.
+        fitted = material if for_write else self._fit_model_material(
+            config, material, fresh_observations)
+        if directory_snapshot:
+            mapping = request_target_mapping(self.service, bound)
+
+            def directory_tokens(page: dict[str, Any]) -> int:
+                packet, _ = project_request_targets(mapping, with_directory(fitted, page))
+                return self.token_count(canonical(self._project_read_packet(packet)))
+
+            # A directory that fits alone may overflow beside resident bodies.
+            # Page its navigation against the actual final envelope as well.
+            directory = self._page(directory_snapshot, 0, bound,
+                                   packet_tokens=None if for_write else directory_tokens)
+            fitted = with_directory(fitted, directory)
+        material = self.bind_request_targets(config, fitted)
+        if fitted["memory_view"] != view:
+            chosen = fitted["memory_view"]
+            self.focus_view(config, focus=chosen["focus"], read_goal=chosen["read_goal"],
+                            resident_refs=chosen["resident_refs"],
+                            pending_refs=chosen["pending_refs"])
+        continuations = material.get("continuations", [])
         if for_write and self.interface_version != "v1":
             packet = self._writer_packet(config, material)
             packet["memory_view"] = material["memory_view"]
             packet["pending_maintenance"] = pending
+            packet["reading_requirement"] = material["reading_requirement"]
             if "candidates" in material:
                 packet["candidates"] = material["candidates"]
                 packet["candidate_scope"] = material["candidate_scope"]
             if continuations:
-                packet["continuations"] = continuations
+                packet["continuations"] = material["continuations"]
+            if "next_target" in material:
+                packet["reader"]["next_target"] = material["next_target"]
+            packet["target_scope"] = material["target_scope"]
+            packet["request_targets"] = [
+                {key: item[key] for key in ("target", "target_kind", "record_id", "revision",
+                                           "source_ref", "source_revision", "start", "end",
+                                           "stored_history", "revision_evidence")
+                 if key in item}
+                for item in expand_host_packet(material).get("items", []) if "target" in item
+            ]
             return packet
         return material
 
@@ -386,6 +1019,17 @@ class FunctionalEditMemory(FunctionalMemory):
         self._binding(config)
         projected: list[BaseMessage] = []
         for message in messages:
+            if self.evidence_policy == "question_pack_v1" and isinstance(message, ToolMessage):
+                if message.name == "read_evidence":
+                    receipt = json.loads(str(message.content))
+                    receipt.pop("evidence", None)
+                    receipt.pop("candidates", None)
+                    receipt["material_location"] = "current_evidence_packet"
+                    projected.append(message.model_copy(update={"content": canonical(receipt)}))
+                else:
+                    # Existing explicit history/source tools still deliver their actual bodies.
+                    projected.append(message)
+                continue
             if not isinstance(message, ToolMessage) or message.name not in self.read_tool_names:
                 projected.append(message)
                 continue
@@ -400,6 +1044,8 @@ class FunctionalEditMemory(FunctionalMemory):
             result = copy.deepcopy(result)
             result["read_identities"] = [self._progress_identity(item) for item in result["items"]]
             result["items"] = []
+            result.pop("metadata_table", None)
+            result.pop("projection_instructions", None)
             result["material_location"] = "current_resident_view_or_original_read_reference"
             projected.append(message.model_copy(update={"content": canonical(result)}))
         return projected
@@ -454,6 +1100,7 @@ class FunctionalEditMemory(FunctionalMemory):
         new_attempt_id: str | None = None,
         execute: bool = True,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        stage_fit: StageFit | None = None,
         prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Continue an actual explicit save under the current public request.
@@ -488,29 +1135,34 @@ class FunctionalEditMemory(FunctionalMemory):
         current = self.service.source(bound["source_ref"])
         if current is None:
             raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
-        def messages_for_current(messages: list[dict[str, str]]) -> list[dict[str, str]]:
-            projected = copy.deepcopy(messages)
-            projected[0]["content"] += (
-                "\nCurrent maintenance scope (instructions for this attempt, "
-                "not fact evidence):\n" + json.dumps(current["content"], ensure_ascii=False)
-            )
-            return projected
-
-        def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
-            return model_call(stage, messages_for_current(messages), schema)
-
-        def capacity(messages: list[dict[str, str]]) -> bool:
-            return fit(messages_for_current(messages)) if fit is not None else True
-
         return self.maintain_delivery(
             config, delivery, request_id=prior_request_id, prior_request_id=prior_request_id,
             prior_session=prior_session, new_attempt_id=new_attempt_id,
-            date=state["date"], recipe=state["binding"]["recipe"], model_call=call,
-            allowed=allowed, execute=execute, fit=capacity if fit is not None else None,
+            date=state["date"], recipe=state["binding"]["recipe"], model_call=model_call,
+            allowed=allowed, execute=execute, fit=fit, stage_fit=stage_fit,
             prepare_delivery=prepare_delivery,
             selected_record_ids=state["binding"].get("selected_record_ids"),
-            memory_save_requested=True,
+            memory_save_requested=True, maintenance_scope=current["content"],
         )
+
+    @staticmethod
+    def maintenance_messages(
+        messages: list[dict[str, str]], maintenance_scope: str | None,
+    ) -> list[dict[str, str]]:
+        """Present current controls in the existing System, preserving actual evidence.
+
+        The quote creates no permission, source, or evidence alias. A mixed current
+        User source remains in its actual delivery; the Host selects which sources
+        belong to this attempt using the current declared request.
+        """
+        if maintenance_scope is None:
+            return messages
+        projected = copy.deepcopy(messages)
+        projected[0]["content"] += (
+            "\nCurrent maintenance scope (instructions for this attempt, "
+            "not fact evidence):\n" + json.dumps(maintenance_scope, ensure_ascii=False)
+        )
+        return projected
 
     def _commit(
         self, session: str, operation_id: str, proposal: dict[str, Any]
@@ -547,22 +1199,23 @@ class FunctionalEditMemory(FunctionalMemory):
         bound = self._binding(config)
         snapshot = self._snapshot(bound, self._record_units(row), "committed_current")
         page = self._page(snapshot, 0, bound)
-        self._cache_writer_items(config, page.get("items", []))
+        self._cache_writer_items(config, expand_host_packet(page).get("items", []))
         self._note_view_page(config, page, keep_resident=True, refresh_current=True)
 
     def _remember_page(self, config: RunnableConfig, result: dict[str, Any]) -> None:
         if result.get("ok"):
+            delivered = expand_host_packet(result)
             self.note_delivered_fragment_handles(
                 config,
                 [
                     unit["fragment_handle"]
-                    for unit in result.get("items", [])
+                    for unit in delivered.get("items", [])
                     if unit.get("type") == "fragment"
                 ],
                 redelivered=True,
             )
             if self.interface_version != "v1":
-                self._cache_writer_items(config, result.get("items", []), redelivered=True)
+                self._cache_writer_items(config, delivered.get("items", []), redelivered=True)
 
     @staticmethod
     def _progress_identity(item: dict[str, Any]) -> list[Any]:
@@ -650,11 +1303,13 @@ class FunctionalEditMemory(FunctionalMemory):
         execute: bool = True,
         selected_record_ids: list[str] | None = None,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        stage_fit: StageFit | None = None,
         prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
         prior_request_id: str | None = None,
         prior_session: str | None = None,
         new_attempt_id: str | None = None,
         memory_save_requested: bool = False,
+        maintenance_scope: str | None = None,
     ) -> dict[str, Any]:
         """Bind a current event or explicit consolidation to the ordinary Host commits."""
         if not allowed and (execute or prior_request_id is None):
@@ -678,7 +1333,8 @@ class FunctionalEditMemory(FunctionalMemory):
                     selected_record_ids = selected
 
         def commit(
-            operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any]
+            operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any],
+            dependency_receipts: list[dict[str, Any]],
         ) -> dict[str, Any]:
             self.service.store.put(
                 namespace(self.service), self._writer_key(config, "edit-writer-active:"),
@@ -688,7 +1344,10 @@ class FunctionalEditMemory(FunctionalMemory):
                 config, [row["evidence_id"] for row in mapping["evidence"].values()],
                 redelivered=delivery.get("replay", False),
             )
-            receipt = self.apply_writer_proposal(config, operation_id, proposal)
+            receipt = (self.apply_writer_proposal(
+                config, operation_id, proposal, dependency_receipts=dependency_receipts)
+                if self.features.cross_record_dependencies else
+                self.apply_writer_proposal(config, operation_id, proposal))
             if receipt.get("ok") and (receipt.get("status") == "committed"
                                      or receipt.get("original_status") == "committed"):
                 if self.memory_view_mode != "legacy":
@@ -710,7 +1369,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 if units:
                     snapshot = self._snapshot(bound, units, "maintenance_selected")
                     page = self._page(snapshot, 0, bound)
-                    self._cache_writer_items(config, page.get("items", []))
+                    self._cache_writer_items(config, expand_host_packet(page).get("items", []))
                     self._note_view_page(config, page)
                 else:
                     state = self.view_state(config)
@@ -718,11 +1377,23 @@ class FunctionalEditMemory(FunctionalMemory):
                                     resident_refs=[], pending_refs=state["pending_refs"])
             return prepared
 
+        def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
+            return model_call(stage, self.maintenance_messages(messages, maintenance_scope), schema)
+
+        def capacity(messages: list[dict[str, str]]) -> bool:
+            return fit(self.maintenance_messages(messages, maintenance_scope)) \
+                if fit is not None else True
+
+        def stage_capacity(stage: str, messages: list[dict[str, str]]) -> bool:
+            return stage_fit(stage, self.maintenance_messages(messages, maintenance_scope)) \
+                if stage_fit is not None else capacity(messages)
+
         options: dict[str, Any] = {
             "session": prior_session if prior_session is not None else bound["session"],
             "date": date, "recipe": recipe,
-            "model_call": model_call, "commit": commit, "selected_record_ids": selected_record_ids,
-            "fit": fit, "prepare_delivery": selected_delivery,
+            "model_call": call, "commit": commit, "selected_record_ids": selected_record_ids,
+            "fit": capacity if fit is not None else None, "prepare_delivery": selected_delivery,
+            "stage_fit": stage_capacity if stage_fit is not None else None,
             "memory_view_mode": self.memory_view_mode,
             "memory_save_requested": memory_save_requested,
         }
@@ -749,9 +1420,13 @@ class FunctionalEditMemory(FunctionalMemory):
         allowed: bool,
         execute: bool = True,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        stage_fit: StageFit | None = None,
         prior_request_fragments: list[dict[str, Any]] | None = None,
         skip_source_refs: list[str] | None = None,
         memory_save_requested: bool = False,
+        maintenance_scope: str | None = None,
+        prepare_source_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
+        result_observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> list[dict[str, Any]]:
         """Maintain current user input and actually delivered tool sources once each.
 
@@ -803,16 +1478,22 @@ class FunctionalEditMemory(FunctionalMemory):
                     selected_records=[], source_ranges=ranges,
                     redelivered_ranges=[],
                 )["sources"]
+            if prepare_source_delivery is not None:
+                delivery = prepare_source_delivery(delivery)
             request_id = "maintenance:" + canonical(
                 [bound["session"], bound["message_id"], bound["config_version"], ref]
             )
 
-            results.append(self.maintain_delivery(
+            result = self.maintain_delivery(
                 config, delivery, request_id=request_id,
                 date=source.get("occurred_at") or source["observed_at"], recipe=recipe,
-                model_call=model_call, allowed=allowed, execute=execute, fit=fit,
-                memory_save_requested=memory_save_requested,
-            ))
+                model_call=model_call, allowed=allowed, execute=execute,
+                fit=fit, stage_fit=stage_fit,
+                memory_save_requested=memory_save_requested, maintenance_scope=maintenance_scope,
+            )
+            results.append(result)
+            if result_observer is not None:
+                result_observer(result)
         return results
 
     def writer_context(
@@ -838,6 +1519,7 @@ class FunctionalEditMemory(FunctionalMemory):
         return self._writer_packet(config, page)
 
     def _writer_packet(self, config: RunnableConfig, page: dict[str, Any]) -> dict[str, Any]:
+        page = expand_host_packet(page)
         items = self._model_items(config)
         sources: list[dict[str, Any]] = []
         redelivered: list[dict[str, Any]] = []
@@ -920,6 +1602,8 @@ class FunctionalEditMemory(FunctionalMemory):
             }
             if "edit_matter_description" in fragments[0]:
                 state["matter_description"] = copy.deepcopy(fragments[0]["edit_matter_description"])
+            if "edit_support_group_count" in fragments[0]:
+                state["support_groups"] = []
             complete = len(by_unit) == fragments[0].get("edit_unit_count")
             for unit_id, chunks in by_unit.items():
                 chunks = sorted(chunks, key=lambda chunk: chunk["content_range"][0])
@@ -936,6 +1620,9 @@ class FunctionalEditMemory(FunctionalMemory):
                     for relation in chunk["edit_relations"]:
                         if relation not in state["relations"]:
                             state["relations"].append(copy.deepcopy(relation))
+                    for group in chunk.get("edit_support_groups", []):
+                        if group not in state["support_groups"]:
+                            state["support_groups"].append(copy.deepcopy(group))
                 if end != chunks[0]["content_total_codepoints"]:
                     complete = False
                 state["units"].append(
@@ -944,6 +1631,8 @@ class FunctionalEditMemory(FunctionalMemory):
             complete = complete and len(state["relations"]) == fragments[0].get(
                 "edit_relation_count", 0
             )
+            complete = complete and len(state.get("support_groups", [])) == fragments[0].get(
+                "edit_support_group_count", 0)
             if not complete:
                 unprocessed.append(
                     {
@@ -1018,44 +1707,23 @@ class FunctionalEditMemory(FunctionalMemory):
         result["required_packet_tokens"] = required
         return result
 
-    def context(
-        self, session: str, turn_id: str, config_version: str, *, query: str | None = None
+    def _deliver_request_targets(
+        self, binding: dict[str, Any], packet: dict[str, Any], *, from_tool: bool = False,
     ) -> dict[str, Any]:
-        result = super().context(session, turn_id, config_version, query=query)
+        """Persist adapter delivery before the base read caches or issues its targets."""
+        if not packet.get("ok"):
+            return packet
         config: RunnableConfig = {
                 "configurable": {
                     "user_id": self.service.owner,
-                    "v13_session": session,
-                    "v13_turn_id": turn_id,
-                    "v13_config_version": config_version,
+                    "v13_session": binding["session"],
+                    "v13_turn_id": binding["message_id"],
+                    "v13_config_version": binding["config_version"],
                 }
             }
-        self._remember_page(config, result)
-        self._note_read_progress(config, result, from_tool=False)
-        return result
-
-    def _read(
-        self,
-        config: RunnableConfig,
-        call_id: str,
-        arguments: dict[str, Any],
-        action: Callable[[dict[str, Any]], dict[str, Any]],
-    ) -> dict[str, Any]:
-        result = super()._read(config, call_id, arguments, action)
-        try:
-            self._remember_page(config, result)
-            self._note_read_progress(config, result, from_tool=True)
-        except Exception as error:
-            return {
-                "ok": False,
-                "status": "read_outcome_unknown",
-                "effect": "unconfirmed",
-                "phase": "fragment_delivery_persistence",
-                "error_type": type(error).__name__,
-                "delivered_raw_fragment_count": 0,
-                "recovery": "same_operation_id_only",
-            }
-        return result
+        self._remember_page(config, packet)
+        self._note_read_progress(config, packet, from_tool=from_tool)
+        return self._bind_request_targets(binding, packet)
 
     def _require_delivered(self, handles: list[str]) -> dict[str, Any]:
         support = fragment_support(self.service, handles)
@@ -1080,7 +1748,8 @@ class FunctionalEditMemory(FunctionalMemory):
             raise FunctionalRejection("FUNCTIONAL_EDIT_V2_SUPPORT_REQUIRED")
         prior = {
             ref["evidence_id"]
-            for item in [*old["edit_state"]["units"], *old["edit_state"]["relations"]]
+            for item in [*old["edit_state"]["units"], *old["edit_state"]["relations"],
+                         *old["edit_state"].get("support_groups", [])]
             for ref in item["evidence_refs"]
         }
         if not set(kept_support) <= prior or not set(kept_support) <= set(handles):
@@ -1097,6 +1766,7 @@ class FunctionalEditMemory(FunctionalMemory):
         proposal: dict[str, Any],
         *,
         scope: dict[str, Any] | None = None,
+        dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Operation-bound decoding before existing save/update/review/commit gates."""
         if self.interface_version == "v1":
@@ -1113,6 +1783,8 @@ class FunctionalEditMemory(FunctionalMemory):
         }
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
+        if dependency_receipts is not None:
+            requested["dependency_receipts"] = dependency_receipts
         with self.service._locked():
             prior = self.service.store.get(namespace(self.service), key)
             if prior is not None:
@@ -1137,6 +1809,7 @@ class FunctionalEditMemory(FunctionalMemory):
                     *proposal.get("relations", []),
                     *proposal.get("edits", []),
                     *proposal.get("unresolved_conditions", []),
+                    *proposal.get("support_groups", []),
                 ]
                 for clause in proposal.get("clauses", []):
                     support_items.append(clause)
@@ -1195,6 +1868,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 decoded.get("relations"),
                 scope,
                 _edit_metadata=decoded.get("_edit_metadata"),
+                _dependency_receipts=dependency_receipts,
             )
         if scope is not None:
             raise FunctionalRejection("FUNCTIONAL_EDIT_SCOPE_UPDATE_NOT_EXPOSED")
@@ -1208,6 +1882,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 decoded.get("edits", []),
                 _kept_support=kept,
                 _edit_metadata=decoded.get("_edit_metadata"),
+                _dependency_receipts=dependency_receipts,
             )
         return self.rewrite_edit(
             config,
@@ -1218,7 +1893,11 @@ class FunctionalEditMemory(FunctionalMemory):
             decoded.get("withdrawal_evidence"),
             _kept_support=kept,
             _edit_metadata=decoded.get("_edit_metadata"),
+            _dependency_receipts=dependency_receipts,
         )
+
+    def _project_read_packet(self, packet: dict[str, Any]) -> dict[str, Any]:
+        return project_host_packet(packet) if self.memory_view_mode != "legacy" else packet
 
     def _record_units(
         self, row: dict[str, Any], view: str = "current_at_snapshot"
@@ -1235,13 +1914,27 @@ class FunctionalEditMemory(FunctionalMemory):
         query_time = (
             self.query_time if self.query_time is not None else self.service.clock().isoformat()
         ) if self.features.temporal_scope else None
-        applicability = read_applicability(
-            state,
-            query_time=query_time,
-            query_calendar_context=self.query_calendar_context,
-            version_time=row["value"].get("committed_at") if self.features.temporal_scope else None,
-            include_temporal=self.features.temporal_scope,
-        ) if self.maintenance_recipe else {}
+        projection = None
+        if self.memory_view_mode != "legacy":
+            projection = expand_record(project_record({
+                "content": row["value"]["content"],
+                "applicability": self.writer.revision_view(
+                    row["value"], query_time=query_time,
+                    query_calendar_context=self.query_calendar_context,
+                ),
+            }, edit_state=state))
+            applicability = {
+                unit["unit_id"]: unit for unit in projection["applicability"]["units"]
+            }
+        else:
+            applicability = read_applicability(
+                state,
+                query_time=query_time,
+                query_calendar_context=self.query_calendar_context,
+                version_time=row["value"].get("committed_at")
+                if self.features.temporal_scope else None,
+                include_temporal=self.features.temporal_scope,
+            ) if self.maintenance_recipe else {}
         result = []
         for unit in state["units"]:
             text = unit["text"]
@@ -1268,7 +1961,16 @@ class FunctionalEditMemory(FunctionalMemory):
                         "method_arm": row["value"].get("method_arm", self.arm),
                     }
                 )
-                if self.features.enabled:
+                if self.features.enabled or projection is not None:
+                    if "support_groups" in state:
+                        result[-1]["edit_support_group_count"] = len(state["support_groups"])
+                        result[-1]["edit_support_groups"] = copy.deepcopy([
+                            group for group in state["support_groups"]
+                            if group["target_unit"] == unit["unit_id"]])
+                        result[-1]["edit_support_semantics"] = (
+                            "Stored model OR-of-AND interpretation, not verified truth. "
+                            "Foreign references require opening their actual current/bound "
+                            "record units; this page does not deliver those bodies.")
                     if "matter_description" in state:
                         result[-1]["edit_matter_description"] = state["matter_description"]
                     if "assertion" in unit:
@@ -1278,27 +1980,72 @@ class FunctionalEditMemory(FunctionalMemory):
                     if start == 0 and unit["unit_id"] in revision_scope:
                         result[-1]["revision_scope"] = revision_scope[unit["unit_id"]]
                 if start == 0 and unit["unit_id"] in applicability:
+                    meaning = applicability[unit["unit_id"]]
+                    if projection is not None:
+                        # Actual text and assertion/support are delivered above.
+                        # Related units use their delivered IDs, without copying
+                        # those bodies again into applicability.
+                        meaning = {key: value for key, value in meaning.items()
+                                   if key not in {"text", "role", "evidence_refs", "assertion",
+                                                  "local_exception"}}
                     result[-1]["applicability"] = {
                         "view": view, "basis": "stored_direct_relations_only",
-                        **applicability[unit["unit_id"]],
+                        **copy.deepcopy(meaning),
                     }
         result = result or [
             {
                 **record,
+                **({"content": "", "content_range": [0, 0], "content_total_codepoints": 0}
+                   if projection is not None else {}),
                 "edit_representation": state["representation"],
                 "edit_unit_count": 0,
                 "edit_relation_count": 0,
             }
         ]
+        if projection is not None:
+            result[0]["content_projection"] = projection["content_projection"]
+            result[0]["revision_context"] = {
+                key: copy.deepcopy(value) for key, value in projection["applicability"].items()
+                if key != "units"
+            }
+            if "content" in projection:
+                # Exact renderer equality did not prove this stored expression
+                # redundant. Preserve its existing fragments and page rules.
+                result.extend({
+                    **{key: value for key, value in item.items() if key != "stored_history"},
+                    "content_projection": "retained_unproven",
+                    "retained_rendered_expression": True,
+                } for item in ordinary)
         if "stored_history" in ordinary[0]:
             result[0]["stored_history"] = ordinary[0]["stored_history"]
         if self.features.enabled:
-            result[0]["revision_evidence"] = read_revision_evidence(self.service, row["value"])
-        if self.features.temporal_scope:
+            evidence = read_revision_evidence(self.service, row["value"])
+            if self.memory_view_mode != "legacy":
+                # A revision's originals are not another copy of its semantic
+                # body. Keep the selected ranges and source metadata; the existing
+                # source tool reads original wording under the same visibility
+                # and page allowance when the current question needs it.
+                evidence = [
+                    {**{key: value for key, value in part.items() if key != "content"},
+                     "read": {"tool": "read_source",
+                              "arguments": {"source_ref": part["source_ref"]}}}
+                    for part in evidence
+                ]
+            result[0]["revision_evidence"] = evidence
+        if self.features.temporal_scope and self.memory_view_mode == "legacy":
+            # New views already deliver each unit's actual applicability, clocks,
+            # support and direct relations. Repeating the entire revision here
+            # can prevent its first semantic unit from fitting into an ordinary
+            # read. Saved version identities remain in stored_history above.
             result[0]["revision_view"] = self.writer.revision_view(
                 row["value"], query_time=query_time,
                 query_calendar_context=self.query_calendar_context,
             )
+        if self.memory_view_mode != "legacy" and "retrieval_navigation" in row:
+            # Only the catalog uses this query-specific hint. Explicit reads use
+            # service.read() and keep the complete original body/support.
+            for item in result:
+                item["retrieval_navigation"] = row["retrieval_navigation"]
         return result
 
     def _record_basis(self, source_refs: list[str]) -> str:
@@ -1318,6 +2065,7 @@ class FunctionalEditMemory(FunctionalMemory):
         scope: dict[str, Any] | None = None,
         *,
         _edit_metadata: dict[str, Any] | None = None,
+        _dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         bound = self._binding(config)
         parsed = EditProposal.model_validate(
@@ -1333,6 +2081,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
             requested["edit_metadata"] = _edit_metadata
+        if _dependency_receipts is not None:
+            requested["dependency_receipts"] = _dependency_receipts
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -1342,7 +2092,6 @@ class FunctionalEditMemory(FunctionalMemory):
                 + [h for relation in parsed.relations for h in relation.evidence]
             )
         )
-        support = self._require_delivered(handles)
         state = form_state(parsed, self.service, conditioned=self.conditioned)
         if self.features.enabled:
             if _edit_metadata is None or (
@@ -1350,6 +2099,11 @@ class FunctionalEditMemory(FunctionalMemory):
             ):
                 raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
             decorate_state(state, _edit_metadata)
+            self.writer.bind_support_groups(
+                state, _edit_metadata, dependency_receipts=_dependency_receipts)
+            handles = list(dict.fromkeys([*handles, *(ref["evidence_id"]
+                for group in state.get("support_groups", []) for ref in group["evidence_refs"])]))
+        support = self._require_delivered(handles)
         saved_scope = self._scope(scope or {})
         refs = support["source_refs"]
         proposal = {
@@ -1403,6 +2157,7 @@ class FunctionalEditMemory(FunctionalMemory):
         *,
         _kept_support: list[str] | None = None,
         _edit_metadata: dict[str, Any] | None = None,
+        _dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         if not self.local:
             raise FunctionalRejection("FUNCTIONAL_EDIT_FULL_REWRITE_REQUIRED")
@@ -1417,6 +2172,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
             requested["edit_metadata"] = _edit_metadata
+        if _dependency_receipts is not None:
+            requested["dependency_receipts"] = _dependency_receipts
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -1438,8 +2195,11 @@ class FunctionalEditMemory(FunctionalMemory):
         )
         if any(edit.operation not in operations for edit in parsed.edits):
             raise FunctionalRejection(f"FUNCTIONAL_EDIT_{self.arm}_OPERATION_REQUIRED")
-        changed_handles = list(dict.fromkeys(h for edit in parsed.edits for h in edit.evidence))
-        if parsed.edits:
+        group_changes = (_edit_metadata or {}).get("support_groups", [])
+        changed_handles = list(dict.fromkeys([
+            *(h for edit in parsed.edits for h in edit.evidence),
+            *(ref["evidence_id"] for group in group_changes for ref in group["evidence_refs"])]))
+        if parsed.edits or group_changes:
             self._require_update_delivery(changed_handles, old, _kept_support)
             state = apply_local(
                 state,
@@ -1453,6 +2213,9 @@ class FunctionalEditMemory(FunctionalMemory):
                 if _edit_metadata is None:
                     raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
                 decorate_state(state, _edit_metadata, old=old["edit_state"], edits=parsed.edits)
+                self.writer.bind_support_groups(
+                    state, _edit_metadata, old=old["edit_state"],
+                    dependency_receipts=_dependency_receipts)
         content = render_state(state)
         equal = state == old["edit_state"] and content == old["content"]
         retract = not equal and not any(unit["role"] == "content" for unit in state["units"])
@@ -1464,7 +2227,8 @@ class FunctionalEditMemory(FunctionalMemory):
                     *changed_handles,
                     *(
                         ref["evidence_id"]
-                        for item in [*state["units"], *state["relations"]]
+                        for item in [*state["units"], *state["relations"],
+                                     *state.get("support_groups", [])]
                         for ref in item["evidence_refs"]
                     ),
                 ]
@@ -1540,6 +2304,7 @@ class FunctionalEditMemory(FunctionalMemory):
         *,
         _kept_support: list[str] | None = None,
         _edit_metadata: dict[str, Any] | None = None,
+        _dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Replace the whole B0/B2 representation, confirm it, or withdraw with evidence.
 
@@ -1564,6 +2329,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
             requested["edit_metadata"] = _edit_metadata
+        if _dependency_receipts is not None:
+            requested["dependency_receipts"] = _dependency_receipts
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -1602,7 +2369,6 @@ class FunctionalEditMemory(FunctionalMemory):
                     + (_edit_metadata.get("revision_evidence", []) if _edit_metadata else [])
                 )
             )
-            self._require_update_delivery(handles, old, _kept_support)
             state = form_state(parsed, self.service, conditioned=self.conditioned)
             if not any(unit["role"] == "content" for unit in state["units"]):
                 raise FunctionalRejection("FUNCTIONAL_EDIT_WITHDRAWAL_REQUIRES_EMPTY_UNITS")
@@ -1610,6 +2376,14 @@ class FunctionalEditMemory(FunctionalMemory):
             if _edit_metadata is None:
                 raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
             decorate_state(state, _edit_metadata, old=old_state)
+            self.writer.bind_support_groups(
+                state, _edit_metadata, dependency_receipts=_dependency_receipts)
+            group_handles = [ref["evidence_id"] for group in state.get("support_groups", [])
+                             for ref in group["evidence_refs"]]
+            if group_handles:
+                handles = list(dict.fromkeys([*handles, *group_handles]))
+        if not no_change and not retract:
+            self._require_update_delivery(handles, old, _kept_support)
         content = old["content"] if no_change else render_state(state)
         support = self._source_support(old)
         refs = list(
@@ -1938,4 +2712,4 @@ class FunctionalEditMemory(FunctionalMemory):
                 and mapping is not None
                 and "oneOf" not in update_schema
             )
-        )
+        ) + self._evidence_tools()

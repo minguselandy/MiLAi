@@ -1,0 +1,75 @@
+{
+  "status": "ACTIVE_SAVED_CPU_AND_PUBLIC_PATH_AUDIT_LIVE;FOUR_MORE_PUBLIC_SOURCE_REVIEWS",
+  "observed_at": "2026-10-22T06:14:22.866882+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v36.json",
+  "previous_turn_classification": "PROGRESS: four complete public-source reviews with actual prefix references saved and committed",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 0,
+    "completed_states": 443,
+    "planned_states": 876,
+    "completed_candidates": 0,
+    "deployment_selection": null,
+    "condition": "All seven saved CPU candidates, then matching selected train; CPU FP32 loaded, reference_compile=False, MHA fastpath=False, shared_actions12288/head2048. Unchanged."
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 107,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "public_source_review": {
+    "manifest": "data/manifests/training-generalization-feedback-source-review-v3.json",
+    "new_notes_families": [
+      "memops_F14",
+      "memops_A33",
+      "memops_C05",
+      "memops_B01"
+    ],
+    "new_source_units": 92,
+    "new_public_requests": 8,
+    "cumulative_new_note_families": 10,
+    "cumulative_source_units": 230,
+    "cumulative_public_requests": 20,
+    "new_prefix_sizes_each": [
+      7,
+      23
+    ],
+    "all_sources_read_including_assistant": true,
+    "source_copies_literal_equal": true,
+    "scope": "Existing exposed train histories only. New-note coverage is not all historical review coverage. No outputs, labels, source selection or conditions changed. Actual captured requests, Views, branches and answers still require later review.",
+    "findings": [
+      "F14: correction of one office reading differs from separate home readings; sample template and another person remain separate. Records transfer is explicitly completed.",
+      "A33: office and morning barefoot measurements coexist; predicted post-treatment height is not measured, and course completion/renewal remains pending. No medical advice adopted.",
+      "C05: May26 flight change completed; May28 extension rejected after a quote. Approved leave is not a flight change; budget is for two people and excludes paid flights.",
+      "B01: quiet small-group preference follows actual examples; stronger reported job acceptance still has an explicit finality qualification. Other offer and other people remain distinct."
+    ]
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "feedback_public_source_reviews_batches010_013_save_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v3.json",
+      "cpu_seconds": 0.0045440469999999955,
+      "wall_seconds": 0.004547606222331524,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.0045440469999999955,
+  "costs": "Only new four-note mechanical save/reference checks CPU0.004544047 pending. V36CPU0.006230720, V35CPU0.002314110 and V34CPU0.042770830 remain separate. V34 inventory10663.791232191 represents existing74phases, never a new charge. All prior pending and closedv1/v2/v3 unchanged. No offline settlement while savedCPU lives. Semantic reading/authoring/inspection unknown, not zero.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active."
+}

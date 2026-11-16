@@ -1,0 +1,29 @@
+{
+  "version": "dynamic-memory-control-memops-wave2-generative-v1",
+  "status": "PREPARED_NOT_RUN",
+  "runtime_source": "freeze current provenance-trace implementation before dispatch",
+  "source_review": "data/manifests/dynamic-memory-control-memops-source-wave2-v1.json",
+  "source_cohort": "data/manifests/dynamic-memory-control-memops-source-cohort-v1.json",
+  "fixture": "artifacts/dynamic-memory-control/memops-control-wave2-v1/histories.json",
+  "source_contract": "artifacts/dynamic-memory-control/memops-control-wave2-v1/source-review.json",
+  "config": "configs/dynamic-memory-operation-memops-wave2-generative-shared-v1.json",
+  "policy": "generative",
+  "positions": 36,
+  "families": [
+    "A01",
+    "B02",
+    "C01",
+    "D11",
+    "E07",
+    "F06"
+  ],
+  "source_turns": 138,
+  "constraints": [
+    "Current tasks are source-only; unrequested business mutation is not task success. Quoted original save/forget requests are not executed lifecycle effects.",
+    "Keep all allocated cases and original failures. No task replacement, truncation, view repair or teacher-choice copying.",
+    "3of180source-only full-context states exceed native8192, max8569. The generative Host has its declared larger context; native fitting/use requires actual-prefix admission after collection.",
+    "Read source declarations under their own dates/roles; captured-clock order is not an invented event date.",
+    "Source backgrounds and linguistic variation are not new independent reasoning templates merely because names differ."
+  ],
+  "queue": "Same sole serial queue after a reviewed idle boundary; no worker started. First six-background intake remains separately frozen and is not rerun."
+}

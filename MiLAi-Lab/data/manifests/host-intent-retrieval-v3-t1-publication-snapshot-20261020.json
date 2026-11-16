@@ -1,0 +1,167 @@
+{
+  "observed_at_utc": "2026-10-20T09:17:51.717042+00:00",
+  "status": "T1_RUNNING_SEED0_PAIR_COMPLETE",
+  "scope": "User resumed T1 only and requested GitHub publication; full experiment remains incomplete.",
+  "development_source_before_snapshot": "3e6b7665",
+  "driver_source_version": "def79755",
+  "model_source_version": "ba2bf8d8",
+  "driver": {
+    "status": "RUNNING",
+    "pid": 3509227,
+    "process_alive": true,
+    "state": "artifacts/host-intent-retrieval-v3/t1-completion-v1/driver.json",
+    "completed_followup_stages": 0,
+    "planned_followup_stages": 8
+  },
+  "active": {
+    "name": "t1-native-shared-seed1-v1",
+    "pid": 3509243,
+    "process_alive": true,
+    "status": "RUNNING",
+    "seed": 1,
+    "optimizer_updates": 100,
+    "planned_optimizer_updates": 524,
+    "train_sequence_rows": 1600,
+    "train_input_tokens": 5394075
+  },
+  "seed0": {
+    "status": "SEED0_BOTH_FITS_AND_COMMON_FINAL_EXPORTS_COMPLETE",
+    "results_manifest": "host-intent-retrieval-v3-t1-seed0-final-pair-v1.json",
+    "common_dev_rows": 1209,
+    "main": {
+      "memory_operation": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 446,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 39
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 446
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 114,
+            "accepted": 112
+          },
+          "READ": {
+            "selected": 375,
+            "accepted": 246
+          },
+          "HANDOFF": {
+            "selected": 127,
+            "accepted": 88
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.7538687968519157,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "instruction_applicability": {
+        "counts": {
+          "labelled": 349,
+          "correct": 316
+        },
+        "families": 241,
+        "family_macro_accuracy": 0.9024896265560165,
+        "confusion": [
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "does_not_satisfy",
+            "count": 155
+          },
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "satisfies",
+            "count": 16
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "does_not_satisfy",
+            "count": 17
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "satisfies",
+            "count": 161
+          }
+        ],
+        "scope": "Published candidate applicability labels; not factuality, calibrated confidence, operation preference or Host task success"
+      }
+    },
+    "operation_control": {
+      "memory_operation": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 472,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 40
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 472
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 112,
+            "accepted": 111
+          },
+          "READ": {
+            "selected": 366,
+            "accepted": 263
+          },
+          "HANDOFF": {
+            "selected": 138,
+            "accepted": 98
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.7876875550183688,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "instruction_applicability": {
+        "counts": {
+          "labelled": 349,
+          "correct": 200
+        },
+        "families": 241,
+        "family_macro_accuracy": 0.5570539419087137,
+        "confusion": [
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "does_not_satisfy",
+            "count": 80
+          },
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "satisfies",
+            "count": 91
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "does_not_satisfy",
+            "count": 58
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "satisfies",
+            "count": 120
+          }
+        ],
+        "scope": "Published candidate applicability labels; not factuality, calibrated confidence, operation preference or Host task success"
+      }
+    }
+  },
+  "remaining_sequence_manifest": "host-intent-retrieval-v3-t1-completion-sequence-v1.json",
+  "offline_v14": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "model_jobs_serialized": true,
+  "automatic_retry": false,
+  "t1_complete": false,
+  "interpretation": "Static native development diagnostics, not Host task efficacy. Counts are a timestamped snapshot; local driver continues.",
+  "publication_contents": "Code, tests, plans and summaries; raw data, checkpoints, stores and full logs remain ignored locally."
+}

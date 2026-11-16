@@ -1,0 +1,227 @@
+{
+  "status": "CLOSED",
+  "source_version": "7b6d7c2b",
+  "scope": "four fresh external development cases, not full benchmark or formal confirmation",
+  "conditions": {
+    "standard": {
+      "score": {
+        "benchmark": "longmemeval",
+        "cases": 4,
+        "complete_answers": 4,
+        "missing_answers": 0,
+        "judge_calls": 4,
+        "correct": 2,
+        "opportunities": 4
+      },
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 9,
+            "known_tokens": 155253,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 4,
+            "known_tokens": 4462,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 155253,
+      "per_case": [
+        {
+          "question_id": "6d550036",
+          "correct": false
+        },
+        {
+          "question_id": "75832dbd",
+          "correct": true
+        },
+        {
+          "question_id": "gpt4_f49edff3",
+          "correct": false
+        },
+        {
+          "question_id": "6aeb4375",
+          "correct": true
+        }
+      ]
+    },
+    "value_v1": {
+      "score": {
+        "benchmark": "longmemeval",
+        "cases": 4,
+        "complete_answers": 4,
+        "missing_answers": 0,
+        "judge_calls": 4,
+        "correct": 0,
+        "opportunities": 4
+      },
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 4,
+            "known_tokens": 17022,
+            "unknown_usage_responses": 0
+          },
+          "evidence_value_selection": {
+            "responses": 7,
+            "known_tokens": 111203,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 4,
+            "known_tokens": 3661,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 128225,
+      "per_case": [
+        {
+          "question_id": "6d550036",
+          "correct": false
+        },
+        {
+          "question_id": "75832dbd",
+          "correct": false
+        },
+        {
+          "question_id": "gpt4_f49edff3",
+          "correct": false
+        },
+        {
+          "question_id": "6aeb4375",
+          "correct": false
+        }
+      ],
+      "traces": [
+        {
+          "question_id": "6aeb4375",
+          "steps": 2,
+          "opened_indices": [],
+          "context_indices": [],
+          "value_stop": "model_stopped",
+          "search_full_pool": false,
+          "candidate_cost_evaluations": 115,
+          "source_pack_opens": 466,
+          "actions": [
+            [
+              "answer",
+              null,
+              null
+            ]
+          ]
+        },
+        {
+          "question_id": "6d550036",
+          "steps": 5,
+          "opened_indices": [
+            2,
+            12,
+            1
+          ],
+          "context_indices": [
+            2,
+            12
+          ],
+          "value_stop": "model_stopped",
+          "search_full_pool": false,
+          "candidate_cost_evaluations": 432,
+          "source_pack_opens": 2563,
+          "actions": [
+            [
+              "open",
+              "None of the 505 visible source excerpts definitively state a count of projects led by the user. Source 12 ('I've been leading the team') confirms leadership of at least one team/project but lacks a total count. Sources 2 and 3 mention a 'project' or 'solo project' but do not specify if the user is the sole leader or if there are others. The visible excerpts are dominated by home decor, travel, and creative hobbies, with project mentions being sparse or ambiguous.",
+              {
+                "item_index": 2,
+                "expand_context": true,
+                "gain": 0.1,
+                "answer_distinction": "subject"
+              }
+            ],
+            [
+              "supplement",
+              "Need to determine if the 'team' in s12 and 'solo project' in s34 are the only projects led by the user, or if other projects (e.g., s1, s3) are also led by the user, to provide an accurate count.",
+              {
+                "item_index": 12,
+                "expand_context": true,
+                "gain": 0.8,
+                "answer_distinction": "subject"
+              }
+            ],
+            [
+              "open",
+              "The user mentions leading a team of five engineers and completing a high-priority project (e2), and working on a solo Data Mining project (e34). There are mentions of other potential projects (e.g., case competition e63, web design e86, grant application e113) that need to be checked to see if the user was leading them.",
+              {
+                "item_index": 1,
+                "expand_context": false,
+                "gain": 0.6,
+                "answer_distinction": "subject"
+              }
+            ],
+            [
+              "answer",
+              null,
+              null
+            ]
+          ]
+        },
+        {
+          "question_id": "75832dbd",
+          "steps": 2,
+          "opened_indices": [],
+          "context_indices": [],
+          "value_stop": "model_stopped",
+          "search_full_pool": false,
+          "candidate_cost_evaluations": 109,
+          "source_pack_opens": 457,
+          "actions": [
+            [
+              "answer",
+              "No recent publications or conferences are mentioned in the provided memory. The source history contains queries about book clubs, postdoctoral positions, Baptist churches, travel, Marvel movies, skincare, bikes, cocktails, photography, weight loss, and deep learning research papers, but no recommendations for recent publications or conferences.",
+              null
+            ]
+          ]
+        },
+        {
+          "question_id": "gpt4_f49edff3",
+          "steps": 2,
+          "opened_indices": [],
+          "context_indices": [],
+          "value_stop": "model_stopped",
+          "search_full_pool": false,
+          "candidate_cost_evaluations": 116,
+          "source_pack_opens": 482,
+          "actions": [
+            [
+              "answer",
+              "Source 1 explicitly states 'I just ordered a customized phone case for my friend's birthday today' on 2023/02/20. However, the sources provided do not contain information about the specific dates for 'helping my friend prepare the nursery' or 'helping my cousin pick out stuff for her baby shower'. The question asks for the order of all three events, but only one event's date is available in the current memory view. Therefore, the full chronological order cannot be determined from the delivered material.",
+              null
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 28,
+    "generation": {
+      "known_tokens": 291601,
+      "charged_tokens": 291601,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "decision": "No value-policy advantage. Source-pool/duplicate-interval simplification alone does not establish task-value prediction. Pause expansion of the same prompt-only policy; build actual outcome-conditioned learning data and audit earliest selection failures. This is a research-route decision, not a pause of the user goal.",
+  "labels": "first official labels retained; no rejudge or selective sampling",
+  "semantic_review": "Full answer and original-source audit remains to be completed."
+}

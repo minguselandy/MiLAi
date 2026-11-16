@@ -1,0 +1,174 @@
+{
+  "status": "ORIGINAL_CE64_NATIVE_VERIFIED;SAVED12_RUNNING;SOURCE32_PAIR_CE_COMPARISON_AND_COMPACT_FAILURE_DIAGNOSTIC_CLOSED",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-29T03:49:48.297387+00:00",
+  "snapshot_kind": "Incremental checkpoint retaining all previous non-superseded evidence and full requirements.",
+  "previous_progress": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v186.json",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "previous_turn_classification": "Progress: actual source32 paired-vs-CE saved-CPU figure/tables and known-target units completed; two genuine old LME overflow cases re-encoded losslessly and measured. OriginalCE64 finished and passed original frozen native audit;18 fields settled idle; actual saved12 started.",
+  "original_counts": {
+    "native_fits_started": 5,
+    "native_fits_closed": 5,
+    "native_fits_total": 9,
+    "saved_CPU_jobs_closed": 25,
+    "full_saved_selections_closed": 4,
+    "whole_selected_retention_fits_closed": 4,
+    "new_saved_policy_Host_results": 0
+  },
+  "CE64_native": {
+    "terminal": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source64-continued-ce-terminal-v1.json",
+    "updates": 192,
+    "draws": 3072,
+    "train_input_tokens": 15920908,
+    "train_rows": 768,
+    "actual_old_operation_training_families": 201,
+    "curve": [
+      {
+        "update": 0,
+        "answer": 0.5179811507936508,
+        "delivery": 0.6067708333333333,
+        "old_operation": 0.807826854448818
+      },
+      {
+        "update": 12,
+        "answer": 0.5412946428571428,
+        "delivery": 0.6197916666666666,
+        "old_operation": 0.7303698729744793
+      },
+      {
+        "update": 24,
+        "answer": 0.5145089285714286,
+        "delivery": 0.5937499999999999,
+        "old_operation": 0.7511340821455249
+      },
+      {
+        "update": 48,
+        "answer": 0.5308779761904762,
+        "delivery": 0.5963541666666666,
+        "old_operation": 0.7778276598592233
+      },
+      {
+        "update": 96,
+        "answer": 0.5412946428571428,
+        "delivery": 0.6041666666666666,
+        "old_operation": 0.7608550527961031
+      },
+      {
+        "update": 192,
+        "answer": 0.5412946428571428,
+        "delivery": 0.6119791666666666,
+        "old_operation": 0.7649270890958009
+      }
+    ],
+    "native_selection_provisional": {
+      "answer": {
+        "update": 12,
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source64-continued-ce-seed0-u192-v1/checkpoints/update-12"
+      },
+      "delivery": {
+        "update": 12,
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source64-continued-ce-seed0-u192-v1/checkpoints/update-12"
+      }
+    },
+    "actual_saved_selection": null,
+    "earliest_tie_rule": "Native ANSWER12/96/192 tie; native12 chosen provisionally. All saved candidates still required; no selected-retention shortcut."
+  },
+  "live_model": {
+    "job_id": "source64-continued-ce-seed0-u192-v1/update-12",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source64-continued-ce-seed0-u192-v1/update-12/driver.json",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/source64-continued-ce-seed0-u192-v1/update-12/evaluation",
+    "coordinator_pid": 199843,
+    "child_pid": 199844,
+    "completed_states": 58,
+    "planned_states": 64,
+    "native_status": "RUNNING",
+    "launch_verification": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/detached-launches/source64-continued-ce-seed0-u192-v1/update-12/launch-verification-v1.json",
+    "automatic_retry": false
+  },
+  "next_original_queue": [
+    "After saved12 closes, original candidate verifier before idle costs, then saved24/48/96 and endpoint192(old860+feedback64).",
+    "Only after all actual CPU candidates, select ANSWER/delivery independently; native12 is not deployment selection.",
+    "Run only unique actual selected early old860 jobs, whole original retention audit, then CE128 and delivery32/64/128."
+  ],
+  "source32_comparison": {
+    "summary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-source32-pair-ce-dev-v2/summary-v1.json",
+    "figure": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-source32-pair-ce-dev-v2/original-source32-pair-ce-stage-v2.png",
+    "fixed192_pair_minus_CE_pp": {
+      "answer": 29.67509920634921,
+      "delivery": 27.083333333333336,
+      "old_operation": -3.5249697170694483
+    },
+    "eight_family_descriptive_95_intervals_pp": {
+      "answer": [
+        18.340773809523814,
+        42.336309523809526
+      ],
+      "delivery": [
+        19.270833333333336,
+        36.458333333333336
+      ]
+    },
+    "pair_feedback_known_states": 166,
+    "pair_feedback_all_unknown_states_retained": 26,
+    "pair_known_comparison_targets": 367,
+    "pair_unknown_comparison_targets": 195,
+    "pure_loss_or_pure_quality_or_Host_claim": false,
+    "four_final_figures_complete": false
+  },
+  "targeted_compact_input_diagnostic": {
+    "summary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/lme-known-overflow-compact-dev-v1/summary-v1.json",
+    "actual_old_question_rows": [
+      231,
+      445
+    ],
+    "old_overflow_inputs": 4,
+    "compact_overflow_inputs": 0,
+    "compact_max_tokens": [
+      15795,
+      15910
+    ],
+    "same_16384_limit": true,
+    "original_values_and_questions_retained": true,
+    "model_calls": 0,
+    "matched_compact_training_or_all451_or_View_prompt_coverage": false
+  },
+  "full_remaining_scope": [
+    "Original nine fits and their real Host results.",
+    "Q-direction/Q-tie/Q-cost and encoder/soft-target controls.",
+    "Old/new coverage, new actual prefixes, compact matched fitting.",
+    "F1/F2/F3 real Host comparisons, View semantic/lifecycle results.",
+    "Auxiliary scales/seeds and actual autonomous Host main table.",
+    "Complete external LongMemEval/STATE chains and four final main figures."
+  ],
+  "accounting": {
+    "settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source64-continued-ce-postfit-cpu-settlement-v1.json",
+    "settled_measures": {
+      "cpu_seconds": 51.794710866000294,
+      "measured_phases": 18,
+      "runs": 1
+    },
+    "all_v186_explicit_pending_and_current_comparison_compact_nativeaudit_work_settled": true,
+    "native_CE64_CPU_previously_recorded_not_rebilled": 7781.644185288,
+    "pending_disjoint_entries_excluding_this_progress": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/detached-launches/source64-continued-ce-seed0-u192-v1/update-12/launch.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.014709276999999996
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/detached-launches/source64-continued-ce-seed0-u192-v1/update-12/launch-verification-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.003296251
+      }
+    ],
+    "pending_explicit_field_count": 2,
+    "operational_ledger_written_while_live": false,
+    "unmeasured": "First failed source32 analysis CPU, interactive reasoning/edit/read/plot-script copy and monitoring/wait overhead, settlement bookkeeping and historical orphan uncertainty remain unknown, not zero.",
+    "progress_processing_cpu_pending": 0.018301867
+  },
+  "no_sha_validation": true,
+  "subagents_used": false,
+  "remote_writes": false
+}

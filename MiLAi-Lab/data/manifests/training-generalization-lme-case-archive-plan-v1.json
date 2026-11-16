@@ -1,0 +1,33 @@
+{
+  "status": "IMPLEMENTED_AND_SYNTHETICALLY_VERIFIED;NO_RESEARCH_COHORT_ARCHIVED",
+  "declared_at": "2026-10-22T03:33:01.052711+00:00",
+  "source_version": "a33974c0",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-archives-a33974c0/MiLAi-Lab",
+  "literal_files_equal": [
+    "src/milai_lab/runners/lme_archives.py",
+    "src/milai_lab/runners/lme_evaluation.py",
+    "src/milai_lab/harness/case_archive.py",
+    "tools/archive_lme_cases.py",
+    "tools/restore_case_archive.py"
+  ],
+  "format": "Existing case_blocks_v1 common-base fixed-offset byte blocks, through archive_case/restore_case. No new format, SHA or fingerprint validation. Existing primitive verifies every reconstructed byte before removing a working case.",
+  "workflow": "Explicit archive_lme_cases after matching prediction and scoring drivers are terminal. Complete inventory of all attempted runtimes, including failures, must match directories. Shared templates and all prediction/scoring/cohort files stay retained. Source runtime path now recorded before retrieval so its first failure has a declared location.",
+  "restoration": "archive_lme_cases.py restore PREDICTIONS ROW restores original runtime path without overwriting an existing case. Existing generic restore_case_archive.py supports explicit archive/base/destination. Retain unchanged shared templates; archive is not standalone. Restore observations outside runtime keep restored bytes identical.",
+  "case_boundaries": "Archive and restore index preserves actual prediction/scoring status and full planned count. Running stages, wrong cohort, unknown/missing runtimes and overlap with retained base reject before removal. Partial archive failures retain index and existing primitive evidence; no automatic retry.",
+  "validation": {
+    "passed": 14,
+    "new_tests": 8,
+    "skipped": 0,
+    "ruff_files": 4,
+    "mypy_files": 2,
+    "package_tools_boundaries": "PASS;6grandfatheredprivateedges unchanged",
+    "CLI_help": "PASS",
+    "scope": "Real temporary Store, complete mocked native prediction/scoring, full-file roundtrip including failed Reader/retrieval and untouched unattempted tail, bases/outcomes unchanged; live/missing/unlisted/base-overlap boundaries. No actual research model calls."
+  },
+  "full_store_probe": "Two independent complete preflight runtime copies, add one explicitly synthetic Source only to each case copy, retain exact expected copies, archive/restore using existing primitive and compare every file byte. No fabricated benchmark prediction/score status, no original Store changes.",
+  "costs": "Archive/restore CPU/wall reported separately from prediction/scoring and never automatically settled. Full-store probe pending; nested subclocks not added again. No prior research cases deleted or rewritten.",
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "new_model_calls": 0,
+  "new_training_labels": 0
+}

@@ -1,0 +1,19 @@
+{
+  "version": "dynamic-memory-control-followups-v7-admission",
+  "status": "STARTED_SERIAL",
+  "dispatcher": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/reviewed-followups-dispatch-v7.json",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/prepared-followups-v7.json",
+  "observed_pid": 1109944,
+  "observed_child_pid": 1109949,
+  "observed_active": "t1-original-shared-seed0-v2",
+  "settled_offline_phases_once": 9,
+  "runtime_versions": {
+    "both_t1_v2_fits": "0acc4b9a",
+    "new_sandbox": "dbf08661"
+  },
+  "prior_v6_failure_review": "dynamic-memory-control-t1-first-admission-results-v1.json",
+  "unchanged_base_development_reference": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-fitting-v1/t1-original-shared-seed0-v1/dev/0",
+  "initial_dev_repeated": false,
+  "new_budget": false,
+  "automatic_retry": false
+}

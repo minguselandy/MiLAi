@@ -1,0 +1,172 @@
+{
+  "status": "SOURCE_USER_TURN_PRE_REVIEW",
+  "source_version": "a2a91ea8",
+  "protocol": "configs/milai-innovation-value-supervision-v2.json",
+  "scope": "Author pre-review of all user turns in nominated support sessions, before new Reader outcomes. Assistant turns and complete noisy histories have not received full manual review. This is not independent blind review, a heldout result, or finalized training labels.",
+  "questions": [
+    {
+      "question_id": "0db4c65d",
+      "anchors": [
+        {
+          "original_session_id": "answer_b9e32ff8_1",
+          "turn_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "original_session_id": "answer_b9e32ff8_2",
+          "turn_indices": [
+            0
+          ]
+        }
+      ],
+      "observation": "Dec28 reading completion and Jan15 event support 18 elapsed days. The earlier title has a dataset spelling artifact (EvelynAGO); the shared author and subsequent reference connect the question. Do not repair stored text."
+    },
+    {
+      "question_id": "2a1811e2",
+      "anchors": [
+        {
+          "original_session_id": "answer_1cc3cd0c_1",
+          "turn_indices": [
+            0
+          ]
+        },
+        {
+          "original_session_id": "answer_1cc3cd0c_2",
+          "turn_indices": [
+            0
+          ]
+        }
+      ],
+      "observation": "Explicit event dates Feb26 and Mar19 support 21 elapsed days. The Holi session header is Mar26 12:48, later than the question header 12:05 that day; this dataset chronology issue remains visible. A strict as-of-source-arrival claim is not established."
+    },
+    {
+      "question_id": "07741c45",
+      "anchors": [
+        {
+          "original_session_id": "answer_7e9ad7b4_1",
+          "turn_indices": [
+            2
+          ]
+        },
+        {
+          "original_session_id": "answer_7e9ad7b4_2",
+          "turn_indices": [
+            0,
+            10
+          ]
+        }
+      ],
+      "observation": "Older under-bed storage; newer first turn describes sneakers in a closet shoe rack but final turn describes future storage there. Within-session factual/planned wording conflicts. Preserve official label and mark source ambiguity during training-label review."
+    },
+    {
+      "question_id": "08e075c7",
+      "anchors": [
+        {
+          "original_session_id": "answer_cdbe2250_1",
+          "turn_indices": [
+            2
+          ]
+        },
+        {
+          "original_session_id": "answer_cdbe2250_2",
+          "turn_indices": [
+            2
+          ]
+        }
+      ],
+      "observation": "June18 says six months; Sep2 explicitly says nine months. Current question Sep4 should use the latest reported duration, with approximate-duration wording preserved."
+    },
+    {
+      "question_id": "0ea62687",
+      "anchors": [
+        {
+          "original_session_id": "answer_dc5e537d_1",
+          "turn_indices": [
+            0
+          ]
+        },
+        {
+          "original_session_id": "answer_dc5e537d_2",
+          "turn_indices": [
+            0,
+            8
+          ]
+        }
+      ],
+      "observation": "Earlier 30 city MPG versus current 28 city MPG; difference two. Plans for filters and maintenance are not completed improvements."
+    },
+    {
+      "question_id": "10d9b85a",
+      "anchors": [
+        {
+          "original_session_id": "answer_e0585cb5_2",
+          "turn_indices": [
+            0
+          ]
+        },
+        {
+          "original_session_id": "answer_e0585cb5_1",
+          "turn_indices": [
+            2
+          ]
+        }
+      ],
+      "observation": "Apr10 lecture and Apr17/18 workshop give three distinct attendance days. This is a range question; nominated support subsets are offline supervision, not a coverage claim for a selector."
+    },
+    {
+      "question_id": "19b5f2b3",
+      "anchors": [
+        {
+          "original_session_id": "answer_5ff494b9",
+          "turn_indices": [
+            2,
+            4
+          ]
+        }
+      ],
+      "observation": "Past solo Japan trip lasted two weeks. New future Kyoto/Asia plans are separate."
+    },
+    {
+      "question_id": "1e043500",
+      "anchors": [
+        {
+          "original_session_id": "answer_3e012175",
+          "turn_indices": [
+            2
+          ]
+        }
+      ],
+      "observation": "User explicitly created Spotify playlist Summer Vibes. Duplicated unrelated raw session ID is retained as two original instances by the shared dataset adapter."
+    },
+    {
+      "question_id": "0a34ad58",
+      "anchors": [
+        {
+          "original_session_id": "answer_cebb7159",
+          "turn_indices": [
+            2,
+            6
+          ]
+        }
+      ],
+      "observation": "User already has Suica and downloaded TripIt; personalized Tokyo tips should use these. Preference scoring does not establish current transport prices or other world facts."
+    },
+    {
+      "question_id": "0edc2aef",
+      "anchors": [
+        {
+          "original_session_id": "answer_d586e9cd",
+          "turn_indices": [
+            0,
+            2,
+            4,
+            18
+          ]
+        }
+      ],
+      "observation": "User states preference for views and special amenities, transferable to Miami. Specific Seattle package details include assistant suggestions; do not treat those as independently verified hotel facts."
+    }
+  ]
+}

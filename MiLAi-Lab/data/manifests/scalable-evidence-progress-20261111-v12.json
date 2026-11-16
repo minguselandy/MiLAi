@@ -1,0 +1,289 @@
+{
+  "status": "PHASE12_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T04:39:49.136103+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v11.json",
+  "code_commits": [
+    "ef970f8a",
+    "5ebec703",
+    "e64d3587",
+    "caa5e8ae"
+  ],
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "loaded_relevant_code": "4bab6388",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 1180,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "m4-own-states-seed0-v1",
+      "loaded_relevant_code": "ef970f8a",
+      "owner_pid": 2383876,
+      "child_pid": 2383878,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 135,
+      "planned_optimizer_updates": 165
+    },
+    {
+      "name": "m2-prefix48-dev-families8to32-comparison-readouts-v1",
+      "loaded_relevant_code": "caa5e8ae",
+      "owner_pid": 2528022,
+      "child_pid": 2528023,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "closed_readouts": 56,
+      "failed_readouts": 0
+    }
+  ],
+  "M1_first_pass36k": {
+    "update": 1130,
+    "full_paper_dev": {
+      "accepted": 129,
+      "labelled": 278,
+      "macro": 0.4740324159967017
+    },
+    "native_aux_dev": {
+      "accepted": 319,
+      "labelled": 423,
+      "macro": 0.7560344827586207
+    },
+    "half_pass_native_accepted": 341,
+    "scope": "Original full3390-update run continues, no monotonic-gain claim. Native domain reference proxy, not Host outcome."
+  },
+  "budget_operation_curve": "/data/milai-experiments/20261111-scalable-evidence/i2-budget-operations-closed-curve-v1.json",
+  "I1_and_I2_closed_panels": "/data/milai-experiments/20261111-scalable-evidence/phase12-i1-i2-author-review-v1/summary.json",
+  "M2_closed_prefix_curves": "/data/milai-experiments/20261111-scalable-evidence/m2-prefix48-closed-curves-v1.json",
+  "M2_data": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/m2-available-first48-data-v1",
+    "raw_states": 96,
+    "source_opportunities": 48,
+    "new_feedback_states": 39,
+    "new_sft_states": 61,
+    "shared_replay": 96,
+    "common_known_label_states": 29,
+    "updates_each": 15,
+    "draws_each": 480,
+    "scope": "Full available targets at same collection opportunities, support differs; not isolated loss. First small learning slice, not adequate finalS2."
+  },
+  "tie_training": {
+    "flag": "--include-reviewed-ties",
+    "loss": "Explicit observed quality tie target0.5; unknowns masked; historical default unchanged",
+    "observed_sampled_tie_pairs": 129,
+    "gradient_and_related_tests": 27,
+    "first_fit_failure": "CLI quality-only pair-mass-mode flag rejected before model startup,0updates. Corrected explicitv2 uses unchanged already-normalized direct-pair masses."
+  },
+  "M2_first8_actual_result": {
+    "status": "FIRST_TRAINED_FEEDBACK_SFT_SOURCE_BOUND_DEV_COMPARISON_CLOSED",
+    "source_families": 8,
+    "actual_states": 16,
+    "logical_packets": 28,
+    "new_native_packets": 7,
+    "reused_native_packets": 21,
+    "new_Host_calls": 7,
+    "reused_first_readouts": 21,
+    "unique_failed_outcomes": 4,
+    "generation_delta": {
+      "charged_tokens": 37676,
+      "known_tokens": 37676,
+      "unknown_usage": 0
+    },
+    "reader_compute_already_recorded": {
+      "cpu_seconds": 1.3177960830000002,
+      "wall_seconds": 191.03550256695598,
+      "runs": 1
+    },
+    "by_policy": {
+      "fixed_context": {
+        "positions": 16,
+        "strict_complete": 6,
+        "core_complete": 7,
+        "failed": 2,
+        "material_sufficient": 8,
+        "material_unknown": 4,
+        "answer_unknown": 6,
+        "answer_incomplete": 4
+      },
+      "feedback": {
+        "positions": 16,
+        "strict_complete": 7,
+        "core_complete": 8,
+        "failed": 2,
+        "material_sufficient": 8,
+        "material_unknown": 4,
+        "answer_unknown": 5,
+        "answer_incomplete": 4
+      },
+      "continued_sft": {
+        "positions": 16,
+        "strict_complete": 6,
+        "core_complete": 7,
+        "failed": 2,
+        "material_sufficient": 8,
+        "material_unknown": 4,
+        "answer_unknown": 6,
+        "answer_incomplete": 4
+      }
+    },
+    "gross_position_token_usage_not_new_physical_cost": {
+      "fixed_context": {
+        "prompt_tokens": 22435,
+        "completion_tokens": 39863,
+        "total_tokens": 62298
+      },
+      "feedback": {
+        "prompt_tokens": 22147,
+        "completion_tokens": 42729,
+        "total_tokens": 64876
+      },
+      "continued_sft": {
+        "prompt_tokens": 21994,
+        "completion_tokens": 46706,
+        "total_tokens": 68700
+      }
+    },
+    "family_complete_rates": {
+      "fixed_context": {
+        "qasper-paper-1901.05287": 0.5,
+        "qasper-paper-1709.10367": 0.0,
+        "qasper-paper-1912.01772": 0.0,
+        "qasper-paper-1812.06864": 0.5,
+        "qasper-paper-1903.11437": 1.0,
+        "qasper-paper-1906.01040": 1.0,
+        "qasper-paper-1808.10245": 0.0,
+        "qasper-paper-1909.09067": 0.0
+      },
+      "feedback": {
+        "qasper-paper-1901.05287": 1.0,
+        "qasper-paper-1709.10367": 0.0,
+        "qasper-paper-1912.01772": 0.0,
+        "qasper-paper-1812.06864": 0.5,
+        "qasper-paper-1903.11437": 1.0,
+        "qasper-paper-1906.01040": 1.0,
+        "qasper-paper-1808.10245": 0.0,
+        "qasper-paper-1909.09067": 0.0
+      },
+      "continued_sft": {
+        "qasper-paper-1901.05287": 1.0,
+        "qasper-paper-1709.10367": 0.0,
+        "qasper-paper-1912.01772": 0.0,
+        "qasper-paper-1812.06864": 0.5,
+        "qasper-paper-1903.11437": 0.5,
+        "qasper-paper-1906.01040": 1.0,
+        "qasper-paper-1808.10245": 0.0,
+        "qasper-paper-1909.09067": 0.0
+      }
+    },
+    "scope": "Initial states share one actual outcome across all policies; post states use full-menu frozen choices with common fixed_context continuation. State-level rates are correlated within8 sources. Unknown answers are not asserted false; strict-complete counts are supported-resolution lower bounds. Host RNG unmatched, author nonblind/nonindependent. This is a small provisional prefix, not fullS2 or autonomous Host evaluation.",
+    "finding": "Feedback7/16 strict complete, fixed_context6/16, continuedSFT6/16; core8/7/7. All methods have8/16 sufficient material positions and2/16 first failures. The observed strict difference occurs at already adequate packets with different first-generation failures; no demonstrated material-quality advantage. Both learned policies obtain a partial Kaldi fact where baseline does not, but not the full3-model answer.",
+    "no_sha_validation": true
+  },
+  "M2_full32_development": {
+    "source": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-dev32-v1",
+    "reached_states": 64,
+    "original_actual_packets": 149,
+    "new_models_scored_states_each": 64,
+    "scoring_catalog": "/data/milai-experiments/20261111-scalable-evidence/m2-prefix48-dev64-scorers-v1.json",
+    "first8": {
+      "states": 16,
+      "logical_packets": 28,
+      "new_native": 7,
+      "native_reused": 21,
+      "new_Host": 7,
+      "Host_reused": 21
+    },
+    "remaining24": {
+      "states": 48,
+      "logical_packets": 79,
+      "new_native": 19,
+      "native_reused": 60,
+      "Host_status": "running"
+    },
+    "scope": "Same original S1-reached full menus, current model full argmax, same fixed_context4 continuation. Not HANDOFF-only ranking, not autonomous Host. DEV roles preserved and only evaluation exports."
+  },
+  "expanded_own_collection": {
+    "new_train_families": 177,
+    "new_raw_states": 776,
+    "new_labelled_states": 456,
+    "new_terminal_packets": 438,
+    "all_train_families": 337,
+    "all_raw_states": 1488,
+    "all_fit_states": 873,
+    "all_labelled_families": 235,
+    "all_unknown_states": 615,
+    "data": "/data/milai-experiments/20261111-scalable-evidence/s1-learner-train337-operation-data-v1",
+    "new_DEV_families": 32,
+    "new_DEV_raw": 130,
+    "new_DEV_labelled": 76,
+    "original_Source_banks_reused": true,
+    "scope": "First160CPU plus177CUDA FP32 collector, common frozenS1u101. Additional data and device changed, no pure throughput claim."
+  },
+  "M2_native_supply": {
+    "all_TRAIN_families": 337,
+    "actual_comparison_states": 674,
+    "actual_packets": 1639,
+    "new177_prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-all-v1",
+    "new177_states": 354,
+    "new177_packets": 859,
+    "TRAIN_Host_closed_states": 128,
+    "TRAIN_Host_closed_packets": 309,
+    "TRAIN_Host_unstarted_packets": 1330,
+    "TRAIN_Host_unstarted_families": 273,
+    "scope": "Native packet preparation is not completed semantic feedback or independent trial multiplication."
+  },
+  "M2_teacher_expansion": {
+    "families16to48": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families16to48-semantic-v1",
+    "families48to64": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families48to64-semantic-teacher-v1",
+    "known_delivery_states_across64": 50,
+    "known_answer_states_across64": 48,
+    "direction_delivery_states": 19,
+    "direction_answer_states": 17,
+    "note": "Last16 teacher-only, current prefix fits frozenfirst48; no hot data replacement. Model teacher is sameQwen as Host, not independent evaluation. Root spots and masked judgments retained."
+  },
+  "M4": {
+    "raw_source_opportunities": 337,
+    "labelled_source_families_each_arm": 235,
+    "new_rows_each_arm": 873,
+    "unique_own_states": 873,
+    "unique_fixed_states": 870,
+    "fixed_repeated_training_rows": 3,
+    "shared_old_replay_rows": 873,
+    "train_rows_each_arm": 1746,
+    "planned_draws_each_arm": 5238,
+    "planned_updates_each_arm": 165,
+    "same_source_family_state_counts_and_loss_weights": true,
+    "paired_new_input_tokens_before_replay": {
+      "own": 5113723,
+      "fixed": 5124631
+    },
+    "scope": "M4 visited-state distribution comparison from same337 TRAIN source opportunities, same235 labelled families and873 new draws plus873 shared replay per pass. Three fixed-source shortages are explicit repeated training rows, not new states or sources. All available own labels retained. Fixed selection uses source identity, eligibility and nearest existing token length, not scores/Host outcomes. Own collection mixes original160 CPU and177 CUDA, so collection-cost difference is not a pure collector speed claim. Reference supervision, not S2 semantic feedback. Recorded lengths reuse original native inference and old10k audit, no new model calls."
+  },
+  "M4_data": "/data/milai-experiments/20261111-scalable-evidence/m4-source-matched-state-data-v1",
+  "M4_fixed_arm_plan": "/data/milai-experiments/20261111-scalable-evidence/m4-fixed-states-seed0-v1-plan.json",
+  "M4_fixed_arm_status": "prepared_not_launched",
+  "cost_record": "/data/milai-experiments/20261111-scalable-evidence/phase12-compute-v1.json",
+  "additional_pending_preparation_cost": "/data/milai-experiments/20261111-scalable-evidence/m2-prefix48-dev-families8to32-comparison-prepared-v1/run.json",
+  "validation": {
+    "pair_and_quality_tests": 27,
+    "operation_feedback_tests": 7,
+    "scored_operation_and_handoff_tests": 3,
+    "actual_DEV_only_export_roles": true,
+    "initial_M2_128_predictions_equal": true,
+    "package_boundary": "pass",
+    "tools_boundary": "same6findings in untouched oldLME owners",
+    "source_api_permissions_canonical_changed": false,
+    "remote_push": false,
+    "services_restarted": false
+  },
+  "remaining": [
+    "Close source review of remaining24DEV model comparisons; no superiority claim from first8 material-equivalent results",
+    "Finish original36k3390 andM4own165; run predeclaredM4fixed165 and compare actual held-source tasks",
+    "Expand real TRAIN Host feedback over1330prepared endpoints in bounded batches and fit adequateS2, preserving unknowns and full-support vs strictmatched distinctions",
+    "Continuous Source/View current-model work, decisive seeds, newconfirmation96 and full quality/cost/generalization remain incomplete"
+  ]
+}

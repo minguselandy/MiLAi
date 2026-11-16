@@ -1,0 +1,51 @@
+{
+  "version": "dynamic-memory-control-source-provenance-review-v1",
+  "status": "VERIFIED_ON_CLOSED_BASE_AND_CE",
+  "checks": {
+    "base": {
+      "states": 171,
+      "same_inputs_gold_statuses": 171,
+      "summary": {
+        "source_run": "artifacts/dynamic-memory-control/t0-rollout-base-v1",
+        "source_status": "COMPLETED_WITH_FAILURES",
+        "states": 171,
+        "labelled_by_split": {
+          "dev": 171
+        },
+        "statuses": {
+          "acquire_evidence_preference": 125,
+          "ready_handoff_preference": 46
+        },
+        "unreviewed_view_contexts": 0,
+        "persisted_candidate_matches": 590,
+        "policy_choices_copied": false,
+        "scope": "Single-slot source-only own rollouts; inputs unchanged, actual pools only. View adequacy reviewed separately in the declared source contexts. No silent stale-view credit or future-source reconstruction."
+      }
+    },
+    "ce": {
+      "states": 80,
+      "same_inputs_gold_statuses": 80,
+      "summary": {
+        "source_run": "artifacts/dynamic-memory-control/t0-rollout-ce-seed0-v1",
+        "source_status": "COMPLETED_WITH_FAILURES",
+        "states": 80,
+        "labelled_by_split": {
+          "dev": 79
+        },
+        "statuses": {
+          "acquire_evidence_preference": 52,
+          "ready_handoff_preference": 27,
+          "forced_single_action_masked": 1
+        },
+        "unreviewed_view_contexts": 0,
+        "persisted_candidate_matches": 86,
+        "policy_choices_copied": false,
+        "scope": "Single-slot source-only own rollouts; inputs unchanged, actual pools only. View adequacy reviewed separately in the declared source contexts. No silent stale-view credit or future-source reconstruction."
+      }
+    }
+  },
+  "change": "Bind authored originals by actual capture_key and literal rendered role/body. New Host traces record actually opened source identity/version/ranges outside model state. Old traces use unique body/time matching; ambiguous identities are masked instead of assigning a future duplicate or generated echo.",
+  "boundary": "No source schema, permission, action catalogue, runtime policy input or old result/label file altered. Read-only original Store copies only; no model calls or repeated HTTP charges.",
+  "tests": "29related tests, Ruff,2modulemypy passed; package/tools boundaries checked separately.",
+  "cost": "New offline preparation CPU pending while live T2 holds the model queue."
+}

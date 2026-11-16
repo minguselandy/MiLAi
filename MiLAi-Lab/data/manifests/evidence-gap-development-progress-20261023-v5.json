@@ -1,0 +1,147 @@
+{
+  "status": "ACTIVE;READONLY_BOUNDARY_IMPLEMENTED;SAVED_CPU262_AND_CPU_ONLY_LME_RUNNING",
+  "observed_at": "2026-10-23T09:15:55.161395+00:00",
+  "previous_turn_classification": "progress plus verified live-job observation; no restart from stale status",
+  "current_progress": [
+    "Resumed original400unattempted LMECPU paths without model/HTTP/ledger writes",
+    "Added actual readonly training-artifact retrieval,StoreURI loader and explicit STATE CLI mode",
+    "Verified876closed update128outputs and advanced original262candidate"
+  ],
+  "source_version": "d9f53c61",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "readonly": {
+    "implementation": [
+      "src/milai_lab/methods/readonly_retrieval.py",
+      "src/milai_lab/runners/state_bench_adapter.py",
+      "tools/run_state_bench_local_pilot.py"
+    ],
+    "boundary": "SQLite mode=ro; no test Source capture,read-credential writes,persistent history/delivery snapshots,View refresh or recency writes. Task-local refs/cursors/allowance only.",
+    "supported": "Originals,existingsemantic/historicalrecords,prebuiltmulti-slotViews,scopedHandoff,full-envelopetokens,owner/visibility/known-refchecks; existing policies/meters reused.",
+    "CLI": "--memory-protocol readonly --memory-artifact artifact.json; dynamic remains default",
+    "official_sources": [
+      "https://github.com/microsoft/STATE-Bench/blob/main/docs/AGENT_LEARNING_TRACK.md",
+      "https://github.com/microsoft/STATE-Bench/blob/main/docs/memory/custom-hook.md"
+    ],
+    "official_full_protocol": "not_run_or_claimed;currentrunnerstilllocalQwenHost/simulator,deterministicstateonly",
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readonly-artifact-v1/artifact.json",
+    "actual_probe": {
+      "status": "PREBUILT_TRAIN_ARTIFACT_READONLY_SQLITE_QUERY_PROBE_PASSED",
+      "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readonly-artifact-v1/artifact.json",
+      "source_records": 39,
+      "queries": 2,
+      "store_bytes_unchanged": true,
+      "query_and_preference_not_captured": true,
+      "real_Host_tokenizer": true,
+      "complete_return_limit": 2048,
+      "model_calls": 0,
+      "HTTP_requests": 0,
+      "scope": "Real public training corpus and native readonly file handle; scripted fixed policy,not official task evaluation or semantic-quality certification.",
+      "cpu_seconds": 2.036371302,
+      "ledger_recorded": false,
+      "no_sha_validation": true
+    }
+  },
+  "validation": {
+    "affected_tests": {
+      "passed": 74,
+      "skipped": 1
+    },
+    "final_focused_overlapping_tests": {
+      "passed": 18,
+      "skipped": 1
+    },
+    "skip": "optional mempursuit dependency absent",
+    "real_SDK_sandbox_and_SQLite_write_prohibition": "PASS",
+    "readonly_URI": "readablepreparedartifact;writeattemptrejects;bytesunchanged",
+    "ruff": "PASS",
+    "scoped_mypy": "5modulesPASS with disclosed import-untyped/unused-ignore exclusions",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS existing11files/20dependencies/6grandfatheredprivate",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "saved_cpu128": {
+    "status": "COMPLETE_VERIFIED_SAVED_CPU_CANDIDATE",
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u128-v1",
+    "rows": 876,
+    "dev_macro": 0.7400113583277952,
+    "counts": {
+      "labelled": 616,
+      "accepted": 441,
+      "handoff_outside_reviewed_preference": 70,
+      "masked": 244
+    },
+    "families": 32,
+    "CPU_already_billed": 42698.668951127,
+    "verification": "Original literalinputs,lengths,finitepredictions,checkpoint/inferenceconditionandoriginalledgerphase",
+    "deployment_selection": null
+  },
+  "LME_continuation": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/lme-fixed-path-tail400-v1/plan.json",
+    "original_source": "a33974c0",
+    "original_indices": [
+      502,
+      901
+    ],
+    "new_questions": 200,
+    "new_paths": 400,
+    "old_completed_preserved": 501,
+    "old_interrupted_index": 501,
+    "interrupted_status": "row250selectionTrue lackscompletecase/archive;keptunknown,notrerun",
+    "immutable_bases": "original bases reused unchanged;newarchivesreference retainedbases",
+    "method_changes": null,
+    "per_case_body": "literal-equal original exceptbasepath/printedplannedcount",
+    "model_weights_loaded": 0,
+    "model_forwards": 0,
+    "HTTP_requests": 0,
+    "ledger_writes": false,
+    "scope": "input/pathcheck only;not451Readeranswers/nativeQAjudging"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1",
+      "driver_pid": 2925107,
+      "child_pid": 2925108,
+      "session": 47993,
+      "status": "RUNNING",
+      "completed": 26,
+      "planned": 876,
+      "neural_model": true,
+      "no_sha_validation": true
+    },
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/lme-fixed-path-tail400-v1",
+      "driver_pid": 2364262,
+      "child_pid": 2364263,
+      "session": 98205,
+      "status": "RUNNING",
+      "completed": 333,
+      "planned": 400,
+      "neural_model": false,
+      "no_sha_validation": true
+    }
+  ],
+  "scheduling": "Onlyone neural evaluator. Original independent CPU-only path audit may coexist. No second neuralmodel/probe/fit/E2 or offline settlement while262lives. Revalidate PID and artifacts; no restart solely on observation/session loss.",
+  "accounting": {
+    "closed_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u128-v1/settlement.json",
+    "phase": "evidence_gap_20261023_u128_readonly_preparation_v1",
+    "measures": {
+      "cpu_seconds": 44.69840771200115,
+      "measured_phases": 6,
+      "runs": 1
+    },
+    "u128_model_CPU_not_rebilled": 42698.668951127,
+    "live_costs": "pendingterminalmeasurements",
+    "old_prior_settlements_and_generalization_pending": "unchanged",
+    "unmeasured": "authoring,tests,reporting and other unmeasured overhead remainunknown"
+  },
+  "remaining": "Original262/393/524andselectedtrain/selection;otherfits/feedback32/64/128/T2/statecomparison/seeds;F1relevance/F2faithfulness/F3nativecapacity/simulatorcompletion;LMEReader/lifecycle/Host/officialfullprotocol/external/protected/finalfigures. M1-M5 not achieved.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_interfaces_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

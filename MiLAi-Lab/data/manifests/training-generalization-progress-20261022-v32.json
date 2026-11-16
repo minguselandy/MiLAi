@@ -1,0 +1,60 @@
+{
+  "status": "ACTIVE_GOAL;SAVED_CPU_AND_INPUT_AUDIT_LIVE;PROTECTED_ROLE_INVENTORY_RECONCILED",
+  "observed_at": "2026-10-22T05:19:51.969437+00:00",
+  "previous": "training-generalization-progress-20261022-v31.json",
+  "previous_turn_classification": "PROGRESS:feedback action bias/positive View-label coverage diagnosed. This turn revalidated live jobs and reconciled protected/exposed/paused metadata without opening protected bodies or selecting a new panel.",
+  "only_real_model": {
+    "session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "active_update": 0,
+    "completed_states": 116,
+    "planned_states": 876,
+    "planned_candidates": 7,
+    "deployment_selection": null,
+    "no_restart_or_recipe_change": true
+  },
+  "CPU_audit": {
+    "session": 37854,
+    "pid": 662822,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "closed_paths": 68,
+    "planned_paths": 902,
+    "native_overflow_paths": 0,
+    "Reader_overflow_paths": 0,
+    "scope": "Prefix only; no learned model/QA result; final cost unknown."
+  },
+  "protected_inventory": "training-generalization-protected-role-inventory-v1.json",
+  "findings": {
+    "MuSiQue_registered": 49,
+    "historically_source_reviewed": 14,
+    "source_reviewed_rows": 28,
+    "other_registered_groups": 35,
+    "other_exposure_status": "UNESTABLISHED,not blind merely by subtraction",
+    "new_final_panel_selected": false,
+    "prior_two_user_confirmation": "Explicit prior user pause retained; no signal/resume/duplicate queue. Semantic content had been accessed, not a fresh holdout.",
+    "STATE_test_bodies_opened": false,
+    "model_outcomes_used_for_selection": false
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "protected_confirmation_metadata_inventory_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/protected-confirmation-role-inventory-v1.json",
+      "cpu_seconds": 0.0012915410000000002,
+      "wall_seconds": 0.0012958813458681107,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.0012915410000000002,
+  "costs": "Only0.001291541measured metadata-program CPU pending. Prior exploratory reads/authoring unmeasured,unknown/not0. No offline settlement while model job lives; all previous pending and closedv1/v2/v3 unchanged.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "SavedCPU selection/allcandidates+selectedtrain,legacy savedCPU,corrected controls/aux/E3/seeds,STATE108E2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,server vision and full external/protected confirmation. Final protected panel needs exposure reconciliation and method/checkpoint/seed freeze; paused historical queue not resumed."
+}

@@ -1,0 +1,115 @@
+{
+  "status": "CLOSED_PARTIAL_FINAL_DELIVERY",
+  "source_code": "b1dc47cd",
+  "cost": {
+    "calls": 10,
+    "prompt_tokens": 39779,
+    "total_tokens": 45924,
+    "completion_tokens": 6145
+  },
+  "cases": [
+    {
+      "case": "pack-range",
+      "status": "COMPLETED",
+      "actual_reads": [
+        {
+          "body_count": 1,
+          "coverage": {
+            "complete": false,
+            "meaning": "source delivery coverage, not correctness or external-world completeness",
+            "missing_source_ranges": 2,
+            "required_source_ranges": 3,
+            "scope": "captured_visible_arrival_prefix",
+            "scope_available": true
+          }
+        },
+        {
+          "body_count": 3,
+          "coverage": {
+            "complete": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness",
+            "missing_source_ranges": 0,
+            "required_source_ranges": 3,
+            "scope": "captured_visible_arrival_prefix",
+            "scope_available": true
+          }
+        },
+        {
+          "body_count": 3,
+          "coverage": {
+            "complete": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness",
+            "missing_source_ranges": 0,
+            "required_source_ranges": 3,
+            "scope": "captured_visible_arrival_prefix",
+            "scope_available": true
+          }
+        }
+      ],
+      "unique_bodies_opened": [
+        "外部通知必须先确认；不影响内部通知。",
+        "B项目通知王芳。",
+        "A项目通知李明。"
+      ],
+      "final_body_texts": [
+        "外部通知必须先确认；不影响内部通知。",
+        "B项目通知王芳。",
+        "A项目通知李明。"
+      ],
+      "root_review": "All3requiredSources remain in finalinput; correct2projects/condition."
+    },
+    {
+      "case": "pack-context",
+      "status": "COMPLETED",
+      "actual_reads": [
+        {
+          "body_count": 4,
+          "coverage": {
+            "complete": false,
+            "meaning": "source delivery coverage, not correctness or external-world completeness",
+            "missing_source_ranges": 1,
+            "required_source_ranges": 5,
+            "scope": "captured_visible_arrival_prefix",
+            "scope_available": true
+          }
+        },
+        {
+          "body_count": 5,
+          "coverage": {
+            "complete": true,
+            "meaning": "source delivery coverage, not correctness or external-world completeness",
+            "missing_source_ranges": 0,
+            "required_source_ranges": 5,
+            "scope": "captured_visible_arrival_prefix",
+            "scope_available": true
+          }
+        },
+        {
+          "body_count": 1,
+          "coverage": {
+            "complete": false,
+            "meaning": "source delivery coverage, not correctness or external-world completeness",
+            "missing_source_ranges": 4,
+            "required_source_ranges": 5,
+            "scope": "captured_visible_arrival_prefix",
+            "scope_available": true
+          }
+        }
+      ],
+      "unique_bodies_opened": [
+        "项目澄海的外部联系人是周宁。",
+        "每次外发都需要本人再次确认吗？",
+        "对，必须先得到本人明确确认；不要直接发送。",
+        "我会等明确确认后再发。",
+        "独立项目青岚由陈雨负责内部通知，内部通知无需这个确认。"
+      ],
+      "final_body_texts": [
+        "独立项目青岚由陈雨负责内部通知，内部通知无需这个确认。"
+      ],
+      "root_review": "All5Sources opened acrosscalls but finalinput retains onlyQinglan. Earlierbody messagesprojectedaway; correctanswer doesnot prove finalinputclosure. Fixed separately by retaining fitting priorselections."
+    }
+  ],
+  "new_unknown": 0,
+  "embedding_tokens": 0,
+  "artifact_root": "artifacts/global-development/host-packs-run-v3"
+}

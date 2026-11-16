@@ -71,6 +71,11 @@ def test_legacy_byte_and_generic_baseline_copy_free_grammar() -> None:
     assert _action_prompt(original) == _action_prompt(original, tool_schema_communication="legacy")
     display = present_catalog(original, "shape_feedback_v1")
     assert original == before
+    assert display == original
+    assert shape_guidance(original, "shape_feedback_v1") == ""
+    assert _action_prompt(original, tool_schema_communication="shape_feedback_v1") == (
+        _action_prompt(original)
+    )
     assert display[0]["function"]["parameters"] == original[0]["function"]["parameters"]
     assert "field_support" not in json.dumps(display)
     assert "candidate_handle" not in shape_guidance(original, "shape_feedback_v1")
@@ -313,10 +318,11 @@ def test_actual_mock_model_wire_catalog_profile_and_paid_budget(
     if mode == "native":
         assert wire["tools"] == present_catalog(original, communication)
         assert wire["tools"][0]["function"]["parameters"] == original[0]["function"]["parameters"]
+        assert wire["messages"] == [{"role": "user", "content": "Ordinary synthetic request"}]
         assert "response_format" not in wire
     else:
         generated = wire["response_format"]["json_schema"]["schema"]
         assert generated == _action_schema(original, generation_only=True)
-    assert ("[shape_feedback_v1]" in wire["messages"][0]["content"]) == (communication != "legacy")
+    assert "[shape_feedback_v1]" not in wire["messages"][0]["content"]
     saved = json.loads((tmp_path / "local-ledger.json").read_text())
     assert saved["generation_requests"] == 1 and saved["generation"]["charged_tokens"] == 9

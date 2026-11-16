@@ -1,0 +1,124 @@
+{
+  "status": "ACTIVE;STATE_DYNAMIC_CAPTURE_READY;ORIGINAL_SAVED_CPU262_AND_LME_RUNNING",
+  "observed_at": "2026-10-23T09:32:25.668179+00:00",
+  "source_version": "279124ab",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v5.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "current_progress": [
+    "Opt-in actual STATE pre-call and control-step snapshots use existing recorder",
+    "Observed public Host frames retained separately from evaluator domain state",
+    "Original CPU queues revalidated and left running"
+  ],
+  "state_capture": {
+    "CLI": "--memory-protocol dynamic --retrieval-snapshots",
+    "actual_inputs": "SQLite online backup including WAL; complete executor checkpoint, actual prefix, allowance, candidates and bound selected/result events",
+    "public_frame": "Actual public STATE conversation, tool catalog and response; per-frame memory-call count; exact HTTP wire remains original trace.jsonl",
+    "protocol": "Distinct STATE schemas; functional replay refuses STATE roots",
+    "zero_decision_and_failure": "Retained without invented action/outcome",
+    "replay_validation": "Actual post-READ clone resumes with equal before/actions/packet and no prefix reexecution; captured bytes unchanged",
+    "new_real_model_runs": 0,
+    "new_HTTP_requests": 0,
+    "new_feedback_labels": 0,
+    "STATE_branch_runner_and_fixed_Host_continuation": "Still pending; mechanical replay test is not task feedback"
+  },
+  "validation": {
+    "affected_tests": {
+      "passed": 43,
+      "skipped": 1
+    },
+    "skip": "optional mempursuit dependency absent",
+    "first_failure": "tests-first.log retained; corrected test assumptions about public-turn resume and structured READ error handling",
+    "ruff": "PASS",
+    "scoped_mypy": "5 modules PASS; import-untyped and unused-ignore exclusions retained",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS existing 11 files/20 dependencies/6 grandfathered private",
+    "full_suite": "not_run",
+    "remote_CI": "not_run",
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-capture-validation-v1"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1",
+      "driver_pid": 2925107,
+      "child_pid": 2925108,
+      "session": 47993,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 89,
+      "planned": 876,
+      "neural_model": true,
+      "no_sha_validation": true
+    },
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/lme-fixed-path-tail400-v1",
+      "driver_pid": 2364262,
+      "child_pid": 2364263,
+      "session": 98205,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 367,
+      "planned": 400,
+      "neural_model": false,
+      "no_sha_validation": true
+    }
+  ],
+  "scheduling": "Onlyone neural evaluator. Original independent CPU-only path audit may coexist. No second neuralmodel/probe/fit/E2 or offline settlement while262lives. Revalidate PID and artifacts; no restart solely on observation/session loss.",
+  "accounting": {
+    "closed_validation_phases_pending": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-capture-validation-v1/package-boundary.json",
+        "exit_code": 0,
+        "cpu_seconds": 3.724202000000001
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-capture-validation-v1/ruff.json",
+        "exit_code": 0,
+        "cpu_seconds": 0.30986899999999995
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-capture-validation-v1/tests-corrected.json",
+        "exit_code": 0,
+        "cpu_seconds": 11.783917
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-capture-validation-v1/tests-final.json",
+        "exit_code": 0,
+        "cpu_seconds": 13.159346999999997
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-capture-validation-v1/tests-first.json",
+        "exit_code": 1,
+        "cpu_seconds": 12.283539
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-capture-validation-v1/tools-boundary.json",
+        "exit_code": 0,
+        "cpu_seconds": 7.769775000000001
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-capture-validation-v1/typing.json",
+        "exit_code": 0,
+        "cpu_seconds": 4.334869
+      }
+    ],
+    "pending_measured_cpu_seconds": 53.365517999999994,
+    "ledger_recorded": false,
+    "reason": "No offline settlement while original neural evaluator lives",
+    "prior_settlements_and_generalization_pending": "unchanged; see v5 and prior reports",
+    "unmeasured": "authoring and other unmeasured overhead remain unknown"
+  },
+  "preserved_unknowns": [
+    "u64 original index791 has no prediction and remains unknown; primary labelled metric is complete",
+    "LME original index501 has no completed case/archive; never retried",
+    "Existing F2 semantic errors and F5 failures retained"
+  ],
+  "remaining": "Original262/393/524andselectedtrain/selection;otherfits/feedback32/64/128/T2/statecomparison/seeds;F1relevance/F2faithfulness/F3nativecapacity/simulatorcompletion;LMEReader/lifecycle/Host/officialfullprotocol/external/protected/finalfigures. M1-M5 not achieved. STATE actual branch runner/fixed continuation after capture.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_interfaces_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

@@ -1,0 +1,71 @@
+{
+  "status": "BOTH_PREDICTIONS_CLOSED; FIRST_SCORES_RUNNING",
+  "source_version": "08de761d",
+  "independent_chains": 6,
+  "arrivals_per_arm": 24,
+  "questions_per_arm": 24,
+  "conditions": {
+    "plain": {
+      "maintenance": {
+        "responses": 24,
+        "prompt_tokens": 61421,
+        "completion_tokens": 93513,
+        "total_tokens": 154934,
+        "length": 2
+      },
+      "reader": {
+        "responses": 24,
+        "prompt_tokens": 33486,
+        "completion_tokens": 42446,
+        "total_tokens": 75932,
+        "length": 0
+      },
+      "embedding": {
+        "responses": 61,
+        "prompt_tokens": 2696,
+        "completion_tokens": 0,
+        "total_tokens": 2696,
+        "length": 0
+      }
+    },
+    "delta": {
+      "maintenance": {
+        "responses": 24,
+        "prompt_tokens": 68751,
+        "completion_tokens": 105129,
+        "total_tokens": 173880,
+        "length": 0
+      },
+      "reader": {
+        "responses": 24,
+        "prompt_tokens": 43018,
+        "completion_tokens": 41623,
+        "total_tokens": 84641,
+        "length": 0
+      },
+      "embedding": {
+        "responses": 63,
+        "prompt_tokens": 3618,
+        "completion_tokens": 0,
+        "total_tokens": 3618,
+        "length": 0
+      }
+    }
+  },
+  "prediction_generation_tokens": {
+    "plain": 230866,
+    "delta": 258521,
+    "difference": 27655,
+    "relative_difference": 0.11978810218914869
+  },
+  "input_note": "Same source/history/Reader/model/output ceiling; different representations, prompts and formed states. Not a format-only causal contrast.",
+  "judging_cost": "not yet closed; excluded from prediction totals and must be added separately",
+  "queue_ledger_reconciliation": "pending complete queue",
+  "decision": "Compact representation has no actual token-saving result in this batch, and semantic maintenance remains fallible. Keep both positive and negative mechanisms; evaluate query-local computation next, prepare targeted matched learning rather than add prohibitions or repeat successful cases only.",
+  "state_review_files": [
+    "innovation-v4-paired-v2-plain-review.json",
+    "innovation-v4-paired-v2-delta-review.json"
+  ],
+  "official_labels_modified": false,
+  "stable_architecture_advantage": false
+}

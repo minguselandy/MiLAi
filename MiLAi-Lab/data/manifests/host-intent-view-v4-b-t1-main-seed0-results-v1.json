@@ -1,0 +1,78 @@
+{
+  "status": "CLOSED_TASK_REVIEWED_VIEW_REVIEW_PARTIAL",
+  "arm": "t1-main-seed0",
+  "source_version": "d8447495",
+  "positions": 32,
+  "source_groups": 4,
+  "split": "exposed_train",
+  "grades": {
+    "laya-rich": {
+      "Q": 5,
+      "F": 4,
+      "C": 17,
+      "W": 6
+    }
+  },
+  "generation_tokens": 228299,
+  "generation_requests": 40,
+  "costs": {
+    "arm": "t1-main-seed0",
+    "status": "COMPLETED_WITH_FAILURES",
+    "positions": 32,
+    "wall_seconds": 817.2106800246984,
+    "cpu_seconds_nested": 80.345592929,
+    "already_billed_local_cpu_seconds": 41.99596753800188,
+    "local_cpu_not_yet_billed": 38.34962539099813,
+    "generation_requests": 40,
+    "generation": {
+      "charged_tokens": 228299,
+      "known_tokens": 228299,
+      "unknown_usage": 0
+    },
+    "compute_delta": {
+      "dynamic_memory_laya": {
+        "cpu_seconds": 32.552720644001965,
+        "forwards": 41,
+        "input_tokens": 217517,
+        "sequence_rows": 41,
+        "state_tokenizations": 41,
+        "state_tokens": 198039,
+        "wall_seconds": 19.85745991114527
+      },
+      "dynamic_memory_laya_load": {
+        "cpu_seconds": 9.443246893999913,
+        "loads": 1,
+        "wall_seconds": 6.632854303345084
+      }
+    },
+    "root": "artifacts/host-intent-retrieval-v3/view-v4-b-v1/t1-main-seed0",
+    "native_outputs": {
+      "completed_predictions": 41,
+      "max_input_tokens": 7941,
+      "input_tokens": 217517,
+      "truncated": 0,
+      "finite_logits": true,
+      "backend": "process-local MHA fastpath disabled",
+      "declared_max_len": 16384
+    }
+  },
+  "final_arrivals": {
+    "positions": 8,
+    "tool_calls": 0,
+    "grades": {
+      "F": 2,
+      "W": 6
+    }
+  },
+  "tool_calls": 9,
+  "returned_views": 0,
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-b-t1-main-seed0-review-v1/results.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-b-t1-main-seed0-review-v1/author-review.json",
+  "limitations": [
+    "One stochastic run on4previouslyexposedtraininggroups; no independentclaim.",
+    "Sourcequalified Q differs fromcorevaluefailure W; authorgradinguncertainty retained.",
+    "Native input/action/wire version changed fromhistoricalT1static scoring; no interchangeablebenchmarkclaim.",
+    "AnyViewsemantic audit remainsseparate from Hosttaskgrade."
+  ],
+  "runtime_local_cost_settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v22.json"
+}

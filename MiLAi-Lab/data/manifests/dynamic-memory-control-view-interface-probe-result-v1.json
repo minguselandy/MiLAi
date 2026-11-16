@@ -1,0 +1,173 @@
+{
+  "version": "dynamic-memory-control-view-interface-probe-result-v1",
+  "runtime_source": "538373e8",
+  "status": "COMPLETED",
+  "families": 6,
+  "generation_calls": 12,
+  "accepted_generations": 11,
+  "rejected_generations": 1,
+  "decision_observations": 98,
+  "reader_calls": 0,
+  "laya_calls": 0,
+  "task_answers_scored": 0,
+  "reviewed_view_stages": 12,
+  "task_text_adequate": 10,
+  "task_text_mixed": 1,
+  "current_view_state_valid": 6,
+  "observed_empty_outer_or_rules": 0,
+  "observed_capture_clock_as_temporal": 0,
+  "cost": {
+    "generation": {
+      "known_tokens": 24154,
+      "charged_tokens": 24154,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "compute": {
+    "wall_including_generation_seconds": 46.92574100848287,
+    "local_cpu_seconds": 1.1003600019999995,
+    "runs": 1,
+    "states": 98
+  },
+  "rows": [
+    {
+      "family": "ordered_precedence",
+      "phase": "cold",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": true,
+      "revision": 1,
+      "actual_rejection": null,
+      "note": "Special instruction plus priority support hard-shell packaging; pure AND route is explicit.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/ordered_precedence/report.json"
+    },
+    {
+      "family": "ordered_precedence",
+      "phase": "changed",
+      "task_text_adequacy": "inadequate",
+      "current_view_state_valid": false,
+      "revision": 1,
+      "actual_rejection": {
+        "ok": false,
+        "status": "view_rejected",
+        "effect": "none",
+        "error_type": "FunctionalRejection",
+        "reason": "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE"
+      },
+      "note": "Refresh rejected undefined node; old hard-shell view retained after special instruction was withdrawn.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/ordered_precedence/report.json"
+    },
+    {
+      "family": "fraction_scope",
+      "phase": "cold",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": false,
+      "revision": 1,
+      "actual_rejection": null,
+      "note": "Literal evidence supports unknown morning ratio, but graph makes aggregate ratio depend on batch structure and missing data.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/fraction_scope/report.json"
+    },
+    {
+      "family": "fraction_scope",
+      "phase": "changed",
+      "task_text_adequacy": "mixed",
+      "current_view_state_valid": false,
+      "revision": 2,
+      "actual_rejection": null,
+      "note": "New10/2fact and unresolved text support20%, but obsolete morning-unknown node remains. Aggregate dependency is unsupported.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/fraction_scope/report.json"
+    },
+    {
+      "family": "nonunique_identity",
+      "phase": "cold",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": false,
+      "revision": 1,
+      "actual_rejection": null,
+      "note": "Two identities and missing project justify uncertainty; graph wrongly uses OR so either entity alone proves two entities.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/nonunique_identity/report.json"
+    },
+    {
+      "family": "nonunique_identity",
+      "phase": "changed",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": true,
+      "revision": 2,
+      "actual_rejection": null,
+      "note": "New project field resolves Guangfan; old missing-fields statement made historical, invalid ambiguity inference removed.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/nonunique_identity/report.json"
+    },
+    {
+      "family": "count_distinct",
+      "phase": "cold",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": true,
+      "revision": 1,
+      "actual_rejection": null,
+      "note": "Closed list and distinct-count instruction support two, with valid routes and source dates.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/count_distinct/report.json"
+    },
+    {
+      "family": "count_distinct",
+      "phase": "changed",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": true,
+      "revision": 2,
+      "actual_rejection": null,
+      "note": "Adds distinct S13; old count nodes/rules removed; new set/count three, initial list retained as initial history.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/count_distinct/report.json"
+    },
+    {
+      "family": "negated_exception",
+      "phase": "cold",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": false,
+      "revision": 1,
+      "actual_rejection": null,
+      "note": "Literal facts support rejection; graph targets general prohibition and wrongly makes it depend on batch fact.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/negated_exception/report.json"
+    },
+    {
+      "family": "negated_exception",
+      "phase": "changed",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": false,
+      "revision": 2,
+      "actual_rejection": null,
+      "note": "Literal shielding facts support eligibility; graph still targets general permission rather than batch outcome.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/negated_exception/report.json"
+    },
+    {
+      "family": "joint_schedule",
+      "phase": "cold",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": true,
+      "revision": 1,
+      "actual_rejection": null,
+      "note": "Both intervals and simultaneous requirement support15:00–16:00; AND route and source times correct.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/joint_schedule/report.json"
+    },
+    {
+      "family": "joint_schedule",
+      "phase": "changed",
+      "task_text_adequacy": "adequate",
+      "current_view_state_valid": true,
+      "revision": 2,
+      "actual_rejection": null,
+      "note": "Changed interval and empty overlap updated; other participant preserved; source times/full conjunction correct.",
+      "source_report": "artifacts/dynamic-memory-control/view-interface-probe-v1/joint_schedule/report.json"
+    }
+  ],
+  "limitations": [
+    "Six exposed development families selected for executor diagnosis; no holdout or superiority claim.",
+    "Nonempty OR is enforced by generated schema, not semantic reasoning success; wrong AND/OR, dependency scope and updates remain.",
+    "One rejected refresh retains its old view and failure; no manual repair.",
+    "Reader was not executed: view task-text review is not QA.",
+    "Scripted prefixes differ from CE own-policy histories; stochastic generation and different before states preclude a clean causal effect size.",
+    "Original Store capture clocks and legacy stored any=[] retain their meanings."
+  ]
+}

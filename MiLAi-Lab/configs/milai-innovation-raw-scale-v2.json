@@ -1,0 +1,19 @@
+{
+  "name": "milai-innovation-raw-scale-v2",
+  "base_config": "configs/milai-innovation-scale-source-first-v1.json",
+  "generator": "tools/prepare_innovation_scale.py",
+  "source_counts": [
+    100,
+    1000,
+    5000
+  ],
+  "initial_reuse_prefixes": [
+    1,
+    4,
+    16
+  ],
+  "questions_per_size": 24,
+  "independent_target_scenarios": 1,
+  "scope": "Same source-first recipe and frozen code at all three sizes. Contiguous candidate indices use integer bounds instead of enumerating every valid ID. This is shared mechanical input compression, not a graph contribution. The100point is rerun under this version for a consistent scale curve; originalgraph comparison stays unchanged.",
+  "execution": "Prepare all three inputs; predict all three before first scoring. Existing continuous ledger, serial HTTP. No graph construction or semantic memory formation."
+}

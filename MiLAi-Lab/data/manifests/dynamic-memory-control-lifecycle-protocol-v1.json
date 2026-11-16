@@ -1,0 +1,24 @@
+{
+  "version": "dynamic-memory-control-lifecycle-v1",
+  "status": "PREPARED_NOT_STARTED",
+  "fixture": "data/fixtures/dynamic-memory-control/lifecycle-v1.json",
+  "config": "configs/dynamic-memory-operation-lifecycle-v1.json",
+  "policies": [
+    "fixed_context",
+    "rules"
+  ],
+  "positions": 16,
+  "independent_functional_templates": 1,
+  "required_evidence": [
+    "Actual semantic commits for two independent meanings and the requested correction; raw capture alone is insufficient.",
+    "Actual stored prior revision read for history, not an answer guessed from old source text.",
+    "Old/new target original Sources and derived assistant outputs unavailable after actual forget; exact current request trigger selected where required.",
+    "Unrelated preference/source remains accessible. Shared/partial-source restrictions are not relaxed to make the case pass.",
+    "Post-run SDK checks on a separate Store copy for source/history/view visibility; no model-position replay."
+  ],
+  "evaluation": "Task answers, real state transitions, source/semantic scope, history access, forget receipts and post-forget visibility judged separately. Failed/partial writes, refusals and source-only answers do not count as full lifecycle completion.",
+  "first_outcomes": "E0unchanged; this new version has no automatic retries or hand-repaired state.",
+  "next_queue": "Only after current V9 actual terminal review; freeze tested source before launch.",
+  "model_calls_by_preparation": 0,
+  "rules_reading": "Predeclared full-context4rule, shared context-read actions; distinct from the earlier narrow-read sandbox rule."
+}

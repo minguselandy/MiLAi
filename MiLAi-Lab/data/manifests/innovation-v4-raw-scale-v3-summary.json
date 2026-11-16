@@ -1,0 +1,2701 @@
+{
+  "status": "COMPLETED",
+  "source_version": "dc9d14cc",
+  "independent_target_scenarios": 1,
+  "scope": "One Aster target history with different amounts of unrelated depot history. Same frozen implementation across all sizes. Not three independent histories, not an external benchmark, and not a learned selector result.",
+  "sizes": {
+    "100": {
+      "initial_sources": 100,
+      "total_sources": 102,
+      "terminal_predict": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 102,
+          "judge_calls": 0,
+          "complete_answers": 24,
+          "known_reader_failures": 0
+        },
+        "resources_settled": true
+      },
+      "terminal_score": "SCORED",
+      "first_labels": {
+        "Correct": 24
+      },
+      "stages": {
+        "reader_packet": {
+          "responses": 24,
+          "input_tokens": 73751,
+          "output_tokens": 27140,
+          "total_tokens": 100891
+        },
+        "judge": {
+          "responses": 24,
+          "input_tokens": 23417,
+          "output_tokens": 23230,
+          "total_tokens": 46647
+        }
+      },
+      "prediction_tokens": 100891,
+      "reuse_prefixes_before_updates": {
+        "1": {
+          "queries": 1,
+          "reading_tokens": 4278,
+          "construction_model_tokens": 0
+        },
+        "4": {
+          "queries": 4,
+          "reading_tokens": 16998,
+          "construction_model_tokens": 0
+        },
+        "16": {
+          "queries": 16,
+          "reading_tokens": 67322,
+          "construction_model_tokens": 0
+        }
+      },
+      "source_retrieval_seconds": 0.8428297713398933,
+      "queries": [
+        {
+          "session": 99,
+          "question_index": 0,
+          "question": "Can Mira consult Aster's uncatalogued folios under the reported rules and credentials?",
+          "answer": "Based on the reported rules, Mira can consult the uncatalogued folios. The rules require completion of orientation and possession of either a current archive badge or a valid signed guest voucher. Mira has completed orientation and holds a valid signed guest voucher, satisfying the stated conditions.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4278,
+          "first_input_tokens": 3081,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.013861864805221558,
+              "assemble_seconds": 0.000521722249686718,
+              "index_seconds": 0.01325670164078474,
+              "rank_seconds": 0.014393772929906845,
+              "open_seconds": 0.010822934098541737,
+              "total_seconds": 0.053019190207123756
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 1,
+          "question": "Which allowed credential route does Mira have for the uncatalogued folios?",
+          "answer": "Based on the provided evidence, Mira's allowed credential route for the uncatalogued folios is the valid signed guest voucher, as she has completed orientation and her archive badge has expired.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4443,
+          "first_input_tokens": 3079,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014211539179086685,
+              "assemble_seconds": 0.00044566672295331955,
+              "index_seconds": 0.01082643587142229,
+              "rank_seconds": 0.0003745276480913162,
+              "open_seconds": 0.005952202714979649,
+              "total_seconds": 0.03192856628447771
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 2,
+          "question": "Does the expired archive badge alone remove Mira's reported access?",
+          "answer": "Based on the delivered source, no. The archive policy allows consultation with either a current archive badge or a valid signed guest voucher. Since Mira has completed orientation and holds a valid signed guest voucher, the expired badge alone does not remove her access.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4472,
+          "first_input_tokens": 3076,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.02115041483193636,
+              "assemble_seconds": 0.00042755529284477234,
+              "index_seconds": 0.011246786452829838,
+              "rank_seconds": 0.00038554519414901733,
+              "open_seconds": 0.0057814037427306175,
+              "total_seconds": 0.039114585146307945
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 3,
+          "question": "Does holding a valid voucher remove Aster's orientation requirement?",
+          "answer": "No, holding a valid voucher does not remove the orientation requirement. The rule states that consultation is permitted 'only after orientation and with either a current archive badge or a valid signed guest voucher,' meaning orientation is a mandatory prerequisite that applies regardless of whether a voucher is presented.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3805,
+          "first_input_tokens": 3075,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.01485266350209713,
+              "assemble_seconds": 0.000409918837249279,
+              "index_seconds": 0.010820603929460049,
+              "rank_seconds": 0.00036623515188694,
+              "open_seconds": 0.005755727179348469,
+              "total_seconds": 0.03231863118708134
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 4,
+          "question": "What is Mira's reported orientation status?",
+          "answer": "Mira has completed orientation.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3755,
+          "first_input_tokens": 3072,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014326455071568489,
+              "assemble_seconds": 0.00041135959327220917,
+              "index_seconds": 0.010740039870142937,
+              "rank_seconds": 0.00029547419399023056,
+              "open_seconds": 0.005654590204358101,
+              "total_seconds": 0.03154231887310743
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 5,
+          "question": "What is the reference index's latest reported location?",
+          "answer": "The reference index is in the white drawer.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3879,
+          "first_input_tokens": 3074,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.01430327259004116,
+              "assemble_seconds": 0.00041255541145801544,
+              "index_seconds": 0.010789154097437859,
+              "rank_seconds": 0.0003439709544181824,
+              "open_seconds": 0.005772116594016552,
+              "total_seconds": 0.031744569540023804
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 6,
+          "question": "Must both credential types be valid before a trained visitor can consult the folios?",
+          "answer": "No. According to the delivered source, a visitor only needs to have completed orientation and possess *either* a current archive badge *or* a valid signed guest voucher to consult the folios; both credentials are not required.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4553,
+          "first_input_tokens": 3080,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.01569117233157158,
+              "assemble_seconds": 0.00042276643216609955,
+              "index_seconds": 0.01083857286721468,
+              "rank_seconds": 0.0004329979419708252,
+              "open_seconds": 0.005734113976359367,
+              "total_seconds": 0.03323610220104456
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 7,
+          "question": "Is the reference index location a condition of folio access?",
+          "answer": "No, the reference index location is not a condition of folio access. The provided source explicitly states that \"its location does not determine access.\"",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4034,
+          "first_input_tokens": 3076,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014211036264896393,
+              "assemble_seconds": 0.0004109228029847145,
+              "index_seconds": 0.011827460490167141,
+              "rank_seconds": 0.00040944479405879974,
+              "open_seconds": 0.00570317730307579,
+              "total_seconds": 0.03268103115260601
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 8,
+          "question": "Can Mira use the archive badge route on the reported facts?",
+          "answer": "No. The reported facts state that Mira's archive badge has expired. Since the archive rule requires a *current* archive badge or a valid signed guest voucher, she cannot use the archive badge route. She may instead access the folios using her valid signed guest voucher.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4147,
+          "first_input_tokens": 3076,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.015168186277151108,
+              "assemble_seconds": 0.00045149587094783783,
+              "index_seconds": 0.01116406824439764,
+              "rank_seconds": 0.00048699136823415756,
+              "open_seconds": 0.00587852019816637,
+              "total_seconds": 0.03329601604491472
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 9,
+          "question": "Does Mira need a renewed badge while the signed voucher route is still allowed and valid?",
+          "answer": "No, Mira does not need a renewed badge. The Aster archive allows consultation of uncatalogued folios with either a current archive badge or a valid signed guest voucher. Since Mira has completed orientation and her signed guest voucher is valid, she meets the access requirements without needing to renew her expired badge.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4336,
+          "first_input_tokens": 3081,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014278399758040905,
+              "assemble_seconds": 0.0004097316414117813,
+              "index_seconds": 0.010948688723146915,
+              "rank_seconds": 0.00048281531780958176,
+              "open_seconds": 0.005752403289079666,
+              "total_seconds": 0.03199884667992592
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 10,
+          "question": "Which of Mira's credential statuses are explicitly reported?",
+          "answer": "Mira's archive badge is explicitly reported as expired, and her signed guest voucher is explicitly reported as valid.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4064,
+          "first_input_tokens": 3074,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.015317446552217007,
+              "assemble_seconds": 0.0004314770922064781,
+              "index_seconds": 0.012276957742869854,
+              "rank_seconds": 0.0004040738567709923,
+              "open_seconds": 0.00627535954117775,
+              "total_seconds": 0.0348432557657361
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 11,
+          "question": "What shared prerequisite would still be required if Mira later obtained a valid badge?",
+          "answer": "Completing orientation.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4022,
+          "first_input_tokens": 3079,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.01438330952078104,
+              "assemble_seconds": 0.0004162099212408066,
+              "index_seconds": 0.01082276925444603,
+              "rank_seconds": 0.000450674444437027,
+              "open_seconds": 0.005734844133257866,
+              "total_seconds": 0.03192561212927103
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 12,
+          "question": "Where does the latest report say to find Aster's reference index?",
+          "answer": "The latest report states that the reference index is in the white drawer.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4133,
+          "first_input_tokens": 3077,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014297012239694595,
+              "assemble_seconds": 0.0004194658249616623,
+              "index_seconds": 0.010781177319586277,
+              "rank_seconds": 0.0004056869074702263,
+              "open_seconds": 0.005737128667533398,
+              "total_seconds": 0.03175092861056328
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 13,
+          "question": "Does the report establish that Mira has satisfied the common prerequisite?",
+          "answer": "Yes, the report establishes that Mira has satisfied the stated prerequisites for consultation. It specifies that access requires completing orientation and possessing either a current archive badge or a valid signed guest voucher. The report confirms Mira has completed orientation and holds a valid signed guest voucher, thereby meeting the required conditions.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4418,
+          "first_input_tokens": 3076,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014434927143156528,
+              "assemble_seconds": 0.00043717771768569946,
+              "index_seconds": 0.011293970979750156,
+              "rank_seconds": 0.00048593245446681976,
+              "open_seconds": 0.0057236431166529655,
+              "total_seconds": 0.03252463694661856
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 14,
+          "question": "Is Mira's current voucher described as awaiting verification?",
+          "answer": "No, the delivered source describes Mira's signed guest voucher as \"valid,\" not as awaiting verification.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4228,
+          "first_input_tokens": 3074,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014328745193779469,
+              "assemble_seconds": 0.00043877214193344116,
+              "index_seconds": 0.010897744446992874,
+              "rank_seconds": 0.0003335708752274513,
+              "open_seconds": 0.005735918879508972,
+              "total_seconds": 0.031850263476371765
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 99,
+          "question_index": 15,
+          "question": "State the currently usable route for Mira without treating both credentials as required.",
+          "answer": "Based on the delivered source, Mira can consult uncatalogued folios (or access the reference index) using her valid signed guest voucher. The archive's policy requires orientation (which Mira has completed) and either a current archive badge or a valid signed guest voucher, meaning she only needs one credential to proceed.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4755,
+          "first_input_tokens": 3077,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014987988397479057,
+              "assemble_seconds": 0.0004580533131957054,
+              "index_seconds": 0.010923127643764019,
+              "rank_seconds": 0.0004222458228468895,
+              "open_seconds": 0.005820043385028839,
+              "total_seconds": 0.03273332118988037
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 100,
+            "returned_count": 20,
+            "visible_source_count": 100,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 100,
+          "question_index": 0,
+          "question": "Can Mira still consult the uncatalogued folios under the January 3 rules and reported state?",
+          "answer": "No. Under the rules effective from January 3, 2037, the signed guest voucher route is closed. The archive badge route still requires orientation and a current badge. Since Mira's badge remains expired and the voucher route is no longer available, she cannot consult the uncatalogued folios.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4591,
+          "first_input_tokens": 3090,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014453373849391937,
+              "assemble_seconds": 0.0004607466980814934,
+              "index_seconds": 0.011147554032504559,
+              "rank_seconds": 0.0004929713904857635,
+              "open_seconds": 0.005905145779252052,
+              "total_seconds": 0.032609278336167336
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 101,
+            "returned_count": 20,
+            "visible_source_count": 101,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 100,
+          "question_index": 1,
+          "question": "Did removing the voucher access route mean Mira's voucher itself became invalid?",
+          "answer": "No, removing the voucher access route did not mean Mira's voucher became invalid. The evidence explicitly states that the voucher remained valid even after it ceased to be an access route for Aster's uncatalogued folios.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3877,
+          "first_input_tokens": 3084,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.01430407352745533,
+              "assemble_seconds": 0.0004491647705435753,
+              "index_seconds": 0.01094566099345684,
+              "rank_seconds": 0.00043602194637060165,
+              "open_seconds": 0.005760961212217808,
+              "total_seconds": 0.03202848508954048
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 101,
+            "returned_count": 20,
+            "visible_source_count": 101,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 100,
+          "question_index": 2,
+          "question": "Did the January 3 policy change undo Mira's orientation completion?",
+          "answer": "No. The January 3 policy change did not undo Mira's orientation completion. The source explicitly states that \"Orientation and the reference index location have not changed,\" and the archive badge route still requires orientation. The policy only removed signed guest vouchers as an access route for uncatalogued folios.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4350,
+          "first_input_tokens": 3083,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014479816891252995,
+              "assemble_seconds": 0.0004170360043644905,
+              "index_seconds": 0.010828498750925064,
+              "rank_seconds": 0.00038481317460536957,
+              "open_seconds": 0.005685431882739067,
+              "total_seconds": 0.03191669192165136
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 101,
+            "returned_count": 20,
+            "visible_source_count": 101,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 100,
+          "question_index": 3,
+          "question": "What is the reference index's latest reported location after the policy change?",
+          "answer": "The reference index is in the white drawer.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4536,
+          "first_input_tokens": 3081,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014638801105320454,
+              "assemble_seconds": 0.0004434017464518547,
+              "index_seconds": 0.011366257444024086,
+              "rank_seconds": 0.000539642758667469,
+              "open_seconds": 0.00590823870152235,
+              "total_seconds": 0.03305596485733986
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 101,
+            "returned_count": 20,
+            "visible_source_count": 101,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 101,
+          "question_index": 0,
+          "question": "Where is the reference index according to the latest report?",
+          "answer": "the black cabinet",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3742,
+          "first_input_tokens": 3026,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.03249365650117397,
+              "assemble_seconds": 0.0012743528932332993,
+              "index_seconds": 0.025038053281605244,
+              "rank_seconds": 0.0003926297649741173,
+              "open_seconds": 0.005881992168724537,
+              "total_seconds": 0.06523592304438353
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 102,
+            "returned_count": 20,
+            "visible_source_count": 102,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 101,
+          "question_index": 1,
+          "question": "Did moving the index restore Mira's folio access?",
+          "answer": "No, moving the index did not restore Mira's folio access. The move changed no access rules, Mira's credentials, or her orientation record.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3855,
+          "first_input_tokens": 3026,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014750558882951736,
+              "assemble_seconds": 0.0004305122420191765,
+              "index_seconds": 0.011004095897078514,
+              "rank_seconds": 0.000426524318754673,
+              "open_seconds": 0.005938732996582985,
+              "total_seconds": 0.032695782370865345
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 102,
+            "returned_count": 20,
+            "visible_source_count": 102,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 101,
+          "question_index": 2,
+          "question": "Which access route remains permitted by policy, and what prevents Mira from using it?",
+          "answer": "The archive badge route remains permitted by policy. Mira is prevented from using it because her badge remains expired.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4373,
+          "first_input_tokens": 3069,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014820555225014687,
+              "assemble_seconds": 0.0004502246156334877,
+              "index_seconds": 0.011154782958328724,
+              "rank_seconds": 0.0005103191360831261,
+              "open_seconds": 0.005885515362024307,
+              "total_seconds": 0.03295576758682728
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 102,
+            "returned_count": 20,
+            "visible_source_count": 102,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 101,
+          "question_index": 3,
+          "question": "Did the move change the validity of Mira's voucher or the completed orientation?",
+          "answer": "No, the move did not change the validity of Mira's voucher or her completed orientation record.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4245,
+          "first_input_tokens": 3065,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.014882123097777367,
+              "assemble_seconds": 0.000463743694126606,
+              "index_seconds": 0.011262182146310806,
+              "rank_seconds": 0.002891993150115013,
+              "open_seconds": 0.006116336211562157,
+              "total_seconds": 0.03582400269806385
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 102,
+            "returned_count": 20,
+            "visible_source_count": 102,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        }
+      ]
+    },
+    "1000": {
+      "initial_sources": 1000,
+      "total_sources": 1002,
+      "terminal_predict": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 1002,
+          "judge_calls": 0,
+          "complete_answers": 24,
+          "known_reader_failures": 0
+        },
+        "resources_settled": true
+      },
+      "terminal_score": "SCORED",
+      "first_labels": {
+        "Correct": 23,
+        "Hallucination": 1
+      },
+      "stages": {
+        "reader_packet": {
+          "responses": 24,
+          "input_tokens": 73919,
+          "output_tokens": 26249,
+          "total_tokens": 100168
+        },
+        "judge": {
+          "responses": 24,
+          "input_tokens": 23432,
+          "output_tokens": 20927,
+          "total_tokens": 44359
+        }
+      },
+      "prediction_tokens": 100168,
+      "reuse_prefixes_before_updates": {
+        "1": {
+          "queries": 1,
+          "reading_tokens": 4087,
+          "construction_model_tokens": 0
+        },
+        "4": {
+          "queries": 4,
+          "reading_tokens": 16320,
+          "construction_model_tokens": 0
+        },
+        "16": {
+          "queries": 16,
+          "reading_tokens": 65779,
+          "construction_model_tokens": 0
+        }
+      },
+      "source_retrieval_seconds": 6.921797554008663,
+      "queries": [
+        {
+          "session": 999,
+          "question_index": 0,
+          "question": "Can Mira consult Aster's uncatalogued folios under the reported rules and credentials?",
+          "answer": "Yes, Mira can consult the uncatalogued folios. According to the reported rules, access requires completion of orientation and either a current archive badge or a valid signed guest voucher. Mira has completed orientation and holds a valid signed guest voucher, which satisfies the stated conditions.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4087,
+          "first_input_tokens": 3088,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.1620963104069233,
+              "assemble_seconds": 0.003768380731344223,
+              "index_seconds": 0.10749457031488419,
+              "rank_seconds": 0.004296566359698772,
+              "open_seconds": 0.01002393290400505,
+              "total_seconds": 0.28853817749768496
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 1,
+          "question": "Which allowed credential route does Mira have for the uncatalogued folios?",
+          "answer": "Mira's allowed credential route is the valid signed guest voucher, as she has completed orientation and her archive badge has expired.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3944,
+          "first_input_tokens": 3086,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.1633511194959283,
+              "assemble_seconds": 0.00427908543497324,
+              "index_seconds": 0.10199916549026966,
+              "rank_seconds": 0.0019341986626386642,
+              "open_seconds": 0.009524085558950901,
+              "total_seconds": 0.2863245280459523
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 2,
+          "question": "Does the expired archive badge alone remove Mira's reported access?",
+          "answer": "No. According to the source, access requires completed orientation and either a current archive badge or a valid signed guest voucher. Since Mira has completed orientation and holds a valid signed guest voucher, the expired archive badge alone does not remove her access.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4201,
+          "first_input_tokens": 3083,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.15897229500114918,
+              "assemble_seconds": 0.003852776251733303,
+              "index_seconds": 0.10349286440759897,
+              "rank_seconds": 0.0017684586346149445,
+              "open_seconds": 0.007099115289747715,
+              "total_seconds": 0.2760207336395979
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 3,
+          "question": "Does holding a valid voucher remove Aster's orientation requirement?",
+          "answer": "No, holding a valid voucher does not remove the orientation requirement. The rule specifies that consultation is permitted 'only after orientation and with either a current archive badge or a valid signed guest voucher,' meaning orientation is a mandatory prerequisite that applies regardless of whether one presents a badge or a voucher.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4088,
+          "first_input_tokens": 3082,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16412728000432253,
+              "assemble_seconds": 0.004101571626961231,
+              "index_seconds": 0.10029902029782534,
+              "rank_seconds": 0.0018820557743310928,
+              "open_seconds": 0.007718697190284729,
+              "total_seconds": 0.2790057323873043
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 4,
+          "question": "What is Mira's reported orientation status?",
+          "answer": "Mira has completed orientation.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3661,
+          "first_input_tokens": 3079,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.1628162357956171,
+              "assemble_seconds": 0.00395075511187315,
+              "index_seconds": 0.10321266949176788,
+              "rank_seconds": 0.0013425061479210854,
+              "open_seconds": 0.007137429900467396,
+              "total_seconds": 0.2793398192152381
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 5,
+          "question": "What is the reference index's latest reported location?",
+          "answer": "The reference index's latest reported location is the white drawer.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3925,
+          "first_input_tokens": 3081,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16191283985972404,
+              "assemble_seconds": 0.00390805397182703,
+              "index_seconds": 0.10297724790871143,
+              "rank_seconds": 0.0018684687092900276,
+              "open_seconds": 0.007677665911614895,
+              "total_seconds": 0.27926429081708193
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 6,
+          "question": "Must both credential types be valid before a trained visitor can consult the folios?",
+          "answer": "No. According to the provided source, consultation requires completing orientation and possessing *either* a current archive badge *or* a valid signed guest voucher, not both.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4430,
+          "first_input_tokens": 3087,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16047269757837057,
+              "assemble_seconds": 0.0036946283653378487,
+              "index_seconds": 0.10449999757111073,
+              "rank_seconds": 0.0026477761566638947,
+              "open_seconds": 0.008446993306279182,
+              "total_seconds": 0.28082071989774704
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 7,
+          "question": "Is the reference index location a condition of folio access?",
+          "answer": "No, the reference index location is not a condition of folio access. The source explicitly states that while the reference index is in the white drawer, its location does not determine access.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3912,
+          "first_input_tokens": 3083,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.1624900782480836,
+              "assemble_seconds": 0.00407709926366806,
+              "index_seconds": 0.10366039350628853,
+              "rank_seconds": 0.0034531736746430397,
+              "open_seconds": 0.008917456492781639,
+              "total_seconds": 0.2840558560565114
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 8,
+          "question": "Can Mira use the archive badge route on the reported facts?",
+          "answer": "No. Mira cannot use the archive badge route because her archive badge has expired. The reported facts state that access requires a *current* archive badge or a valid signed guest voucher. While she has completed orientation and holds a valid guest voucher, her expired badge does not satisfy the condition for the badge route.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4235,
+          "first_input_tokens": 3083,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.20546820387244225,
+              "assemble_seconds": 0.004079194739460945,
+              "index_seconds": 0.10348832421004772,
+              "rank_seconds": 0.001960255205631256,
+              "open_seconds": 0.00734024029225111,
+              "total_seconds": 0.32318871561437845
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 9,
+          "question": "Does Mira need a renewed badge while the signed voucher route is still allowed and valid?",
+          "answer": "No, Mira does not need a renewed badge. The archive allows access with either a current archive badge or a valid signed guest voucher. Since Mira has completed orientation and her signed guest voucher is valid, she satisfies the access requirements without needing to renew her expired badge.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4220,
+          "first_input_tokens": 3088,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.1625019870698452,
+              "assemble_seconds": 0.0038033584132790565,
+              "index_seconds": 0.10332402121275663,
+              "rank_seconds": 0.002409026026725769,
+              "open_seconds": 0.007978311739861965,
+              "total_seconds": 0.2809931645169854
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 10,
+          "question": "Which of Mira's credential statuses are explicitly reported?",
+          "answer": "Mira's archive badge is explicitly reported as expired, and her signed guest voucher is explicitly reported as valid.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3849,
+          "first_input_tokens": 3081,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.161257516592741,
+              "assemble_seconds": 0.00389079749584198,
+              "index_seconds": 0.1039896784350276,
+              "rank_seconds": 0.0037742694839835167,
+              "open_seconds": 0.007286171428859234,
+              "total_seconds": 0.2811141852289438
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 11,
+          "question": "What shared prerequisite would still be required if Mira later obtained a valid badge?",
+          "answer": "Orientation",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4083,
+          "first_input_tokens": 3086,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16549759358167648,
+              "assemble_seconds": 0.0038259532302618027,
+              "index_seconds": 0.10667309165000916,
+              "rank_seconds": 0.0023667728528380394,
+              "open_seconds": 0.00743071548640728,
+              "total_seconds": 0.2866134708747268
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 12,
+          "question": "Where does the latest report say to find Aster's reference index?",
+          "answer": "The latest report states that the reference index is in the white drawer.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4081,
+          "first_input_tokens": 3084,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.15910095069557428,
+              "assemble_seconds": 0.0038092685863375664,
+              "index_seconds": 0.10332818236202002,
+              "rank_seconds": 0.001965031959116459,
+              "open_seconds": 0.007466592825949192,
+              "total_seconds": 0.27652591466903687
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 13,
+          "question": "Does the report establish that Mira has satisfied the common prerequisite?",
+          "answer": "Yes, the report establishes that Mira has satisfied the common prerequisite. It specifies that consultation requires completing orientation and possessing either a current archive badge or a valid signed guest voucher. The report confirms Mira has completed orientation and holds a valid signed guest voucher, fulfilling the stated conditions.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4533,
+          "first_input_tokens": 3083,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16112524271011353,
+              "assemble_seconds": 0.050420332700014114,
+              "index_seconds": 0.10227383114397526,
+              "rank_seconds": 0.0019507929682731628,
+              "open_seconds": 0.007474876008927822,
+              "total_seconds": 0.3241048092022538
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 14,
+          "question": "Is Mira's current voucher described as awaiting verification?",
+          "answer": "No, Mira's current voucher is described as 'valid', not awaiting verification.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3869,
+          "first_input_tokens": 3081,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16232168767601252,
+              "assemble_seconds": 0.003710603341460228,
+              "index_seconds": 0.10226188786327839,
+              "rank_seconds": 0.0013789497315883636,
+              "open_seconds": 0.006991579197347164,
+              "total_seconds": 0.27761354204267263
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 999,
+          "question_index": 15,
+          "question": "State the currently usable route for Mira without treating both credentials as required.",
+          "answer": "Mira can consult uncatalogued folios. She has completed orientation and holds a valid signed guest voucher, which satisfies the condition of having either a current archive badge or a valid signed guest voucher.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4661,
+          "first_input_tokens": 3084,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16336996760219336,
+              "assemble_seconds": 0.004122253507375717,
+              "index_seconds": 0.1066582826897502,
+              "rank_seconds": 0.0024410858750343323,
+              "open_seconds": 0.008390296250581741,
+              "total_seconds": 0.2859129896387458
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1000,
+            "returned_count": 20,
+            "visible_source_count": 1000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 1000,
+          "question_index": 0,
+          "question": "Can Mira still consult the uncatalogued folios under the January 3 rules and reported state?",
+          "answer": "No. Under the January 3 rules, signed guest vouchers cease to be a valid access route for Aster's uncatalogued folios, even though Mira's voucher remains valid. The alternative archive badge route still requires orientation and a current badge, but Mira's badge is expired. Therefore, she cannot consult the uncatalogued folios.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4483,
+          "first_input_tokens": 3097,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.15962745528668165,
+              "assemble_seconds": 0.004040134139358997,
+              "index_seconds": 0.1024895878508687,
+              "rank_seconds": 0.0024686427786946297,
+              "open_seconds": 0.0076849451288580894,
+              "total_seconds": 0.27714688517153263
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1001,
+            "returned_count": 20,
+            "visible_source_count": 1001,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 1000,
+          "question_index": 1,
+          "question": "Did removing the voucher access route mean Mira's voucher itself became invalid?",
+          "answer": "No. According to the source, while signed guest vouchers ceased to be an access route for Aster's uncatalogued folios from 2037-01-03, the voucher itself did not become invalid. The text explicitly states that the voucher remains valid, and specifically notes that Mira's voucher remains valid.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4332,
+          "first_input_tokens": 3091,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.1587031651288271,
+              "assemble_seconds": 0.0038570770993828773,
+              "index_seconds": 0.10145519953221083,
+              "rank_seconds": 0.0021046260371804237,
+              "open_seconds": 0.008308855816721916,
+              "total_seconds": 0.2752744825556874
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1001,
+            "returned_count": 20,
+            "visible_source_count": 1001,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 1000,
+          "question_index": 2,
+          "question": "Did the January 3 policy change undo Mira's orientation completion?",
+          "answer": "The delivered material does not state whether Mira completed orientation or if the January 3 policy change undid it. It only confirms that the signed guest voucher access route is closed, the archive badge route still requires orientation, and that orientation requirements and the reference index location have not changed.",
+          "first_label": "Hallucination",
+          "reader_calls": 1,
+          "reading_tokens": 5255,
+          "first_input_tokens": 3090,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16217230632901192,
+              "assemble_seconds": 0.00383920781314373,
+              "index_seconds": 0.14586799498647451,
+              "rank_seconds": 0.0023186150938272476,
+              "open_seconds": 0.007391146384179592,
+              "total_seconds": 0.32258498575538397
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1001,
+            "returned_count": 20,
+            "visible_source_count": 1001,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 1000,
+          "question_index": 3,
+          "question": "What is the reference index's latest reported location after the policy change?",
+          "answer": "the white drawer",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4284,
+          "first_input_tokens": 3088,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16265071835368872,
+              "assemble_seconds": 0.003878694958984852,
+              "index_seconds": 0.10563459247350693,
+              "rank_seconds": 0.0025178026407957077,
+              "open_seconds": 0.00872491393238306,
+              "total_seconds": 0.2843841603025794
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1001,
+            "returned_count": 20,
+            "visible_source_count": 1001,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 1001,
+          "question_index": 0,
+          "question": "Where is the reference index according to the latest report?",
+          "answer": "According to the latest report, the Aster reference index is in the black cabinet.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3785,
+          "first_input_tokens": 3033,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16831253562122583,
+              "assemble_seconds": 0.003899926319718361,
+              "index_seconds": 0.10245989914983511,
+              "rank_seconds": 0.0017938986420631409,
+              "open_seconds": 0.007686183787882328,
+              "total_seconds": 0.28499547857791185
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1002,
+            "returned_count": 20,
+            "visible_source_count": 1002,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 1001,
+          "question_index": 1,
+          "question": "Did moving the index restore Mira's folio access?",
+          "answer": "No, moving the index did not restore Mira's folio access. The record explicitly states that the move changed no access rule, Mira's credentials, or orientation record.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3859,
+          "first_input_tokens": 3033,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16561720613390207,
+              "assemble_seconds": 0.004018737934529781,
+              "index_seconds": 0.10777205135673285,
+              "rank_seconds": 0.0026620859280228615,
+              "open_seconds": 0.008399696089327335,
+              "total_seconds": 0.2898308951407671
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1002,
+            "returned_count": 20,
+            "visible_source_count": 1002,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 1001,
+          "question_index": 2,
+          "question": "Which access route remains permitted by policy, and what prevents Mira from using it?",
+          "answer": "The archive badge route remains permitted by policy. Mira is prevented from using it because her badge remains expired.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3926,
+          "first_input_tokens": 3076,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16202702652662992,
+              "assemble_seconds": 0.003904370591044426,
+              "index_seconds": 0.1058971993625164,
+              "rank_seconds": 0.002281768247485161,
+              "open_seconds": 0.007105275057256222,
+              "total_seconds": 0.28207320999354124
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1002,
+            "returned_count": 20,
+            "visible_source_count": 1002,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 1001,
+          "question_index": 3,
+          "question": "Did the move change the validity of Mira's voucher or the completed orientation?",
+          "answer": "No, the move did not change the validity of Mira's voucher or her completed orientation. The source explicitly states that the move of the reference index changes no access rules, Mira's credentials, or orientation record.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4465,
+          "first_input_tokens": 3072,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 0.16219758614897728,
+              "assemble_seconds": 0.0038299718871712685,
+              "index_seconds": 0.10353508871048689,
+              "rank_seconds": 0.00238789152354002,
+              "open_seconds": 0.043281154707074165,
+              "total_seconds": 0.31607080716639757
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 1002,
+            "returned_count": 20,
+            "visible_source_count": 1002,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        }
+      ]
+    },
+    "5000": {
+      "initial_sources": 5000,
+      "total_sources": 5002,
+      "terminal_predict": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 5002,
+          "judge_calls": 0,
+          "complete_answers": 24,
+          "known_reader_failures": 0
+        },
+        "resources_settled": true
+      },
+      "terminal_score": "SCORED",
+      "first_labels": {
+        "Correct": 22,
+        "Omission": 1,
+        "Hallucination": 1
+      },
+      "stages": {
+        "reader_packet": {
+          "responses": 24,
+          "input_tokens": 73999,
+          "output_tokens": 25018,
+          "total_tokens": 99017
+        },
+        "judge": {
+          "responses": 24,
+          "input_tokens": 23402,
+          "output_tokens": 22563,
+          "total_tokens": 45965
+        }
+      },
+      "prediction_tokens": 99017,
+      "reuse_prefixes_before_updates": {
+        "1": {
+          "queries": 1,
+          "reading_tokens": 4089,
+          "construction_model_tokens": 0
+        },
+        "4": {
+          "queries": 4,
+          "reading_tokens": 16275,
+          "construction_model_tokens": 0
+        },
+        "16": {
+          "queries": 16,
+          "reading_tokens": 65699,
+          "construction_model_tokens": 0
+        }
+      },
+      "source_retrieval_seconds": 43.613714419305325,
+      "queries": [
+        {
+          "session": 4999,
+          "question_index": 0,
+          "question": "Can Mira consult Aster's uncatalogued folios under the reported rules and credentials?",
+          "answer": "Yes, Mira can consult the uncatalogued folios. She has completed the required orientation, and although her archive badge has expired, she holds a valid signed guest voucher, which satisfies the access requirement.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4089,
+          "first_input_tokens": 3093,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2573997871950269,
+              "assemble_seconds": 0.020704105496406555,
+              "index_seconds": 0.53033930901438,
+              "rank_seconds": 0.050430906005203724,
+              "open_seconds": 0.018044788390398026,
+              "total_seconds": 1.8860074197873473
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 1,
+          "question": "Which allowed credential route does Mira have for the uncatalogued folios?",
+          "answer": "Based on the provided source, the Aster archive requires orientation and either a current archive badge or a valid signed guest voucher to consult uncatalogued folios. Since Mira has completed orientation and her archive badge has expired, she can access the uncatalogued folios using her valid signed guest voucher.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4054,
+          "first_input_tokens": 3091,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2240099366754293,
+              "assemble_seconds": 0.021336643025279045,
+              "index_seconds": 0.5205706059932709,
+              "rank_seconds": 0.010920504108071327,
+              "open_seconds": 0.014718006365001202,
+              "total_seconds": 1.7970777517184615
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 2,
+          "question": "Does the expired archive badge alone remove Mira's reported access?",
+          "answer": "Based on the delivered source, no. The archive allows consultation after orientation with either a current archive badge or a valid signed guest voucher. Since Mira has completed orientation and holds a valid signed guest voucher, the expired badge alone does not remove her access.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4370,
+          "first_input_tokens": 3088,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2415846874937415,
+              "assemble_seconds": 0.02099267765879631,
+              "index_seconds": 0.5245959591120481,
+              "rank_seconds": 0.011992056854069233,
+              "open_seconds": 0.0161506999284029,
+              "total_seconds": 1.8209743462502956
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 3,
+          "question": "Does holding a valid voucher remove Aster's orientation requirement?",
+          "answer": "No, holding a valid voucher does not remove the orientation requirement. The rule states that consultation is permitted \"only after orientation and with either a current archive badge or a valid signed guest voucher,\" which makes orientation a mandatory prerequisite regardless of whether a voucher is presented.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3762,
+          "first_input_tokens": 3087,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.218303863890469,
+              "assemble_seconds": 0.021514813415706158,
+              "index_seconds": 0.5186142604798079,
+              "rank_seconds": 0.011654593050479889,
+              "open_seconds": 0.015172554180026054,
+              "total_seconds": 1.790708689019084
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 4,
+          "question": "What is Mira's reported orientation status?",
+          "answer": "Mira has completed orientation.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4043,
+          "first_input_tokens": 3084,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2336282012984157,
+              "assemble_seconds": 0.021084860898554325,
+              "index_seconds": 0.5298081692308187,
+              "rank_seconds": 0.007931037805974483,
+              "open_seconds": 0.017964735627174377,
+              "total_seconds": 1.8155968133360147
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 5,
+          "question": "What is the reference index's latest reported location?",
+          "answer": "The white drawer",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3725,
+          "first_input_tokens": 3086,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.258852339349687,
+              "assemble_seconds": 0.022604442201554775,
+              "index_seconds": 0.5447296602651477,
+              "rank_seconds": 0.009939766488969326,
+              "open_seconds": 0.01631086878478527,
+              "total_seconds": 1.8576189214363694
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 6,
+          "question": "Must both credential types be valid before a trained visitor can consult the folios?",
+          "answer": "No. The archive rule specifies that a visitor must have completed orientation and possess *either* a current archive badge *or* a valid signed guest voucher. Only one of the two credential types needs to be valid.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3925,
+          "first_input_tokens": 3092,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2514039175584912,
+              "assemble_seconds": 0.02162245102226734,
+              "index_seconds": 0.5407337248325348,
+              "rank_seconds": 0.014196902513504028,
+              "open_seconds": 0.015453889034688473,
+              "total_seconds": 1.8488841336220503
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 7,
+          "question": "Is the reference index location a condition of folio access?",
+          "answer": "No, the reference index location is not a condition of folio access. The source explicitly states that its location does not determine access.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3829,
+          "first_input_tokens": 3088,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.239849053323269,
+              "assemble_seconds": 0.02341882325708866,
+              "index_seconds": 0.5370437959209085,
+              "rank_seconds": 0.01571781001985073,
+              "open_seconds": 0.015162468887865543,
+              "total_seconds": 1.836643759161234
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 8,
+          "question": "Can Mira use the archive badge route on the reported facts?",
+          "answer": "No. The reported facts state that Mira's archive badge has expired, so she cannot use the archive badge route. She has completed orientation and holds a valid signed guest voucher, which serves as the alternative valid route for access.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4355,
+          "first_input_tokens": 3088,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.263999436981976,
+              "assemble_seconds": 0.02153901755809784,
+              "index_seconds": 0.518691735342145,
+              "rank_seconds": 0.011941700242459774,
+              "open_seconds": 0.015638514421880245,
+              "total_seconds": 1.8373571680858731
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 9,
+          "question": "Does Mira need a renewed badge while the signed voucher route is still allowed and valid?",
+          "answer": "No. The provided source states that the Aster archive allows consultation with either a current archive badge or a valid signed guest voucher. Since Mira has completed orientation and holds a valid signed guest voucher, she does not need a renewed badge while the voucher route remains allowed and valid.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4210,
+          "first_input_tokens": 3093,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.234308815561235,
+              "assemble_seconds": 0.021169740706682205,
+              "index_seconds": 0.5114166149869561,
+              "rank_seconds": 0.021006889641284943,
+              "open_seconds": 0.016138226725161076,
+              "total_seconds": 1.8116039531305432
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 10,
+          "question": "Which of Mira's credential statuses are explicitly reported?",
+          "answer": "Mira's archive badge is explicitly reported as expired, and her signed guest voucher is explicitly reported as valid.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3999,
+          "first_input_tokens": 3086,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2695308662950993,
+              "assemble_seconds": 0.022039784118533134,
+              "index_seconds": 0.5203619981184602,
+              "rank_seconds": 0.014899716712534428,
+              "open_seconds": 0.015343138948082924,
+              "total_seconds": 1.8485627053305507
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 11,
+          "question": "What shared prerequisite would still be required if Mira later obtained a valid badge?",
+          "answer": "Orientation",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4170,
+          "first_input_tokens": 3091,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.222763610072434,
+              "assemble_seconds": 0.02474892884492874,
+              "index_seconds": 0.514813557267189,
+              "rank_seconds": 0.013983151875436306,
+              "open_seconds": 0.014981972984969616,
+              "total_seconds": 1.7962059639394283
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 12,
+          "question": "Where does the latest report say to find Aster's reference index?",
+          "answer": "The latest report states that the reference index is in the white drawer.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3925,
+          "first_input_tokens": 3089,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2173009375110269,
+              "assemble_seconds": 0.02137847524136305,
+              "index_seconds": 0.5150311216711998,
+              "rank_seconds": 0.012717864476144314,
+              "open_seconds": 0.014837685972452164,
+              "total_seconds": 1.7863314803689718
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 13,
+          "question": "Does the report establish that Mira has satisfied the common prerequisite?",
+          "answer": "Yes, the report establishes that Mira has satisfied the common prerequisite. The archive policy requires completion of orientation and possession of either a current archive badge or a valid signed guest voucher for consultation. The report confirms Mira has completed orientation and holds a valid signed guest voucher, thereby fulfilling both conditions.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4260,
+          "first_input_tokens": 3088,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2391801504418254,
+              "assemble_seconds": 0.021983690559864044,
+              "index_seconds": 0.5204458506777883,
+              "rank_seconds": 0.01179552637040615,
+              "open_seconds": 0.015121753327548504,
+              "total_seconds": 1.814452214166522
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 14,
+          "question": "Is Mira's current voucher described as awaiting verification?",
+          "answer": "No, the delivered material describes Mira's signed guest voucher as valid, not awaiting verification.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4224,
+          "first_input_tokens": 3086,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2530654007568955,
+              "assemble_seconds": 0.021665259264409542,
+              "index_seconds": 0.5295068891718984,
+              "rank_seconds": 0.01168534904718399,
+              "open_seconds": 0.018127432093024254,
+              "total_seconds": 1.8415490984916687
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 4999,
+          "question_index": 15,
+          "question": "State the currently usable route for Mira without treating both credentials as required.",
+          "answer": "Mira can consult uncatalogued folios.",
+          "first_label": "Omission",
+          "reader_calls": 1,
+          "reading_tokens": 4759,
+          "first_input_tokens": 3089,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.233793606981635,
+              "assemble_seconds": 0.022350303828716278,
+              "index_seconds": 0.5275841178372502,
+              "rank_seconds": 0.012693442404270172,
+              "open_seconds": 0.015225052833557129,
+              "total_seconds": 1.8168034804984927
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5000,
+            "returned_count": 20,
+            "visible_source_count": 5000,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 5000,
+          "question_index": 0,
+          "question": "Can Mira still consult the uncatalogued folios under the January 3 rules and reported state?",
+          "answer": "No. Under the January 3 rules, signed guest vouchers are no longer a valid access route for Aster's uncatalogued folios, even though Mira's voucher remains valid. The alternative archive badge route requires a current badge and orientation; Mira's badge is expired, and there is no indication she has completed the required orientation. Therefore, she cannot consult the folios.",
+          "first_label": "Hallucination",
+          "reader_calls": 1,
+          "reading_tokens": 4671,
+          "first_input_tokens": 3097,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2372613372281194,
+              "assemble_seconds": 0.021535011008381844,
+              "index_seconds": 0.5193283734843135,
+              "rank_seconds": 0.01725090481340885,
+              "open_seconds": 0.015070813708007336,
+              "total_seconds": 1.816937405616045
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5001,
+            "returned_count": 20,
+            "visible_source_count": 5001,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 5000,
+          "question_index": 1,
+          "question": "Did removing the voucher access route mean Mira's voucher itself became invalid?",
+          "answer": "No. Based on the source report dated 2037-01-03, removing the voucher as an access route for Aster's uncatalogued folios did not invalidate Mira's voucher. The report explicitly states that vouchers ceased to be an access route 'even while a voucher is valid,' and specifically notes that 'the voucher remains valid.'",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4381,
+          "first_input_tokens": 3091,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.216904366388917,
+              "assemble_seconds": 0.02154955081641674,
+              "index_seconds": 0.5151085443794727,
+              "rank_seconds": 0.012626119889318943,
+              "open_seconds": 0.0150356600061059,
+              "total_seconds": 1.7861022567376494
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5001,
+            "returned_count": 20,
+            "visible_source_count": 5001,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 5000,
+          "question_index": 2,
+          "question": "Did the January 3 policy change undo Mira's orientation completion?",
+          "answer": "No. The source explicitly states that 'Orientation and the reference index location have not changed,' confirming that the January 3 policy change did not undo Mira's orientation completion.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4138,
+          "first_input_tokens": 3090,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2154932599514723,
+              "assemble_seconds": 0.02134146448224783,
+              "index_seconds": 0.514965464361012,
+              "rank_seconds": 0.012871013022959232,
+              "open_seconds": 0.014865768142044544,
+              "total_seconds": 1.7844974379986525
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5001,
+            "returned_count": 20,
+            "visible_source_count": 5001,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 5000,
+          "question_index": 3,
+          "question": "What is the reference index's latest reported location after the policy change?",
+          "answer": "in the white drawer",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4328,
+          "first_input_tokens": 3088,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2363303694874048,
+              "assemble_seconds": 0.021381668746471405,
+              "index_seconds": 0.5145767349749804,
+              "rank_seconds": 0.012563503347337246,
+              "open_seconds": 0.014964563772082329,
+              "total_seconds": 1.8057428086176515
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5001,
+            "returned_count": 20,
+            "visible_source_count": 5001,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        },
+        {
+          "session": 5001,
+          "question_index": 0,
+          "question": "Where is the reference index according to the latest report?",
+          "answer": "According to the latest report, the Aster reference index is located in the black cabinet.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3696,
+          "first_input_tokens": 3033,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2156072137877345,
+              "assemble_seconds": 0.021991859190165997,
+              "index_seconds": 0.5170007683336735,
+              "rank_seconds": 0.01047620177268982,
+              "open_seconds": 0.01537651289254427,
+              "total_seconds": 1.7862337213009596
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5002,
+            "returned_count": 20,
+            "visible_source_count": 5002,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 5001,
+          "question_index": 1,
+          "question": "Did moving the index restore Mira's folio access?",
+          "answer": "No, moving the index did not restore Mira's folio access. The source explicitly states that the move changed no access rule, Mira's credentials, or orientation record.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 3582,
+          "first_input_tokens": 3033,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2171007385477424,
+              "assemble_seconds": 0.02302179206162691,
+              "index_seconds": 0.5229413071647286,
+              "rank_seconds": 0.011037558317184448,
+              "open_seconds": 0.016232085414230824,
+              "total_seconds": 1.7973772194236517
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5002,
+            "returned_count": 20,
+            "visible_source_count": 5002,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 5001,
+          "question_index": 2,
+          "question": "Which access route remains permitted by policy, and what prevents Mira from using it?",
+          "answer": "The archive badge route remains permitted by policy. Mira is prevented from using it because her badge remains expired, and the route requires orientation.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4481,
+          "first_input_tokens": 3076,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2235768930986524,
+              "assemble_seconds": 0.02191605418920517,
+              "index_seconds": 0.5205095745623112,
+              "rank_seconds": 0.015810095705091953,
+              "open_seconds": 0.0156231839209795,
+              "total_seconds": 1.8046268355101347
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5002,
+            "returned_count": 20,
+            "visible_source_count": 5002,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": false
+        },
+        {
+          "session": 5001,
+          "question_index": 3,
+          "question": "Did the move change the validity of Mira's voucher or the completed orientation?",
+          "answer": "No, the move did not change the validity of Mira's voucher or her completed orientation. The source explicitly states that the move of the reference index changes no access rules, Mira's credentials, or her orientation record.",
+          "first_label": "Correct",
+          "reader_calls": 1,
+          "reading_tokens": 4041,
+          "first_input_tokens": 3072,
+          "opened_indices": [
+            0
+          ],
+          "source_retrieval": {
+            "retrieval": "source_flat_bm25",
+            "granularity": "session",
+            "tokenization": "unicode_v1",
+            "timings": {
+              "enumerate_seconds": 1.2505095023661852,
+              "assemble_seconds": 0.02264830842614174,
+              "index_seconds": 0.5131321670487523,
+              "rank_seconds": 0.017100656405091286,
+              "open_seconds": 0.0154401371255517,
+              "total_seconds": 1.8258188357576728
+            },
+            "index_text": "all_original_source_roles",
+            "requested_count": 20,
+            "indexed_count": 5002,
+            "returned_count": 20,
+            "visible_source_count": 5002,
+            "returned_source_count": 20,
+            "prefix": "captured_visible"
+          },
+          "first_input_contains_orientation_completion": true
+        }
+      ]
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 144,
+    "generation": {
+      "known_tokens": 437047,
+      "charged_tokens": 437047,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "receipt_minus_ledger_tokens": 0,
+  "response_minus_generation_requests": 0,
+  "cli_stage_wall_seconds": {
+    "prepare/100": 1.6946592330932617,
+    "prepare/1000": 1.4065089225769043,
+    "prepare/5000": 1.703260898590088,
+    "predict/100": 195.01774978637695,
+    "predict/1000": 390.94181537628174,
+    "predict/5000": 6847.549992799759,
+    "score/100": 151.563467502594,
+    "score/1000": 140.31939363479614,
+    "score/5000": 209.0324809551239
+  },
+  "latency_limit": "Shared machine; CPU training overlaps the later scale run. Whole CLI time includes capture, database, serialization/tokenization, generation and IO. Frozen version predates the later Source-identity lookup fix. No exclusive-GPU speed or asymptotic claim.",
+  "author_review": {
+    "coverage": "All72 complete answers read against the three relevant Source arrivals; four diagnostic requests/views checked in full. Original labels unchanged.",
+    "core_answers": {
+      "100": 24,
+      "1000": 23,
+      "5000": 23
+    },
+    "issues": [
+      {
+        "size": 100,
+        "session": 99,
+        "question_index": 15,
+        "core": true,
+        "note": "Adds voucher-based reference-index access, which the source does not establish; folio route is correct."
+      },
+      {
+        "size": 1000,
+        "session": 1000,
+        "question_index": 2,
+        "core": false,
+        "note": "Abstains about preserved orientation. Opens only the new policy; original orientation-complete Source is candidate1, but its excerpt ends before the completion fact. Reader stops without opening it."
+      },
+      {
+        "size": 5000,
+        "session": 4999,
+        "question_index": 15,
+        "core": false,
+        "note": "Says only that Mira can consult folios, omitting the requested usable credential route despite receiving the complete Source."
+      },
+      {
+        "size": 5000,
+        "session": 5000,
+        "question_index": 0,
+        "core": true,
+        "note": "Correct denial but claims no indication of completed orientation. As above, original Source is candidate1 but not opened; the original completion fact is absent from the actual request."
+      }
+    ],
+    "other_limits": "Some answers infer female pronouns without explicit Source support. Core counts are author judgments, not independent blind scores.",
+    "source_run": "artifacts/innovation-v4/raw-scale-v3",
+    "source_version": "dc9d14cc",
+    "independent_blind_review": false,
+    "official_labels_modified": false
+  },
+  "decision": "Raw retrieval remains a strong simple control. Larger distractor pools do not by themselves demonstrate structural-memory benefit. Observed failures distinguish stopping before an available complementary Source from failure to use already delivered facts; value learning must test both."
+}

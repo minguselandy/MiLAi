@@ -1,0 +1,380 @@
+{
+  "name": "jev-reader-semantic-contrasts-v1",
+  "source_data": "artifacts/jev-reader/source-qualified-label-pair-v1/data/reviewed_labels/train.jsonl",
+  "scope": "Prepared only; no training or predictions. All examples inherit original train family; no new independent families.",
+  "facets": [
+    {
+      "facet": "tony-birth",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which city was Tony Schumacher, the author, born?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          8
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Ludwigsburg",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "tony-death",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which city did Tony Schumacher, the author, die?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          8
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Ludwigsburg",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "gottlieb-birth",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which city was Gottlieb Schumacher born?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          2
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Zanesville",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "gottlieb-death",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which city did Gottlieb Schumacher die?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        2
+      ],
+      "expected_answer": null,
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "mick-birth",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which country was Mick Schumacher born?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          18
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Switzerland",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "apa-president",
+      "source_row": 28674,
+      "family": "musique-family-000407",
+      "split": "train",
+      "question": "Who was the first president of the American Psychological Association?",
+      "pool_source_indices": [
+        16,
+        12
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "G. Stanley Hall",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "journal-publisher-president",
+      "source_row": 28674,
+      "family": "musique-family-000407",
+      "split": "train",
+      "question": "Who was the first president of the association publishing Psychology of Addictive Behaviors?",
+      "pool_source_indices": [
+        16,
+        12
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16,
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "G. Stanley Hall",
+      "states": 3,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "journal-editor",
+      "source_row": 28674,
+      "family": "musique-family-000407",
+      "split": "train",
+      "question": "Who is named editor-in-chief of Psychology of Addictive Behaviors in the supplied passage?",
+      "pool_source_indices": [
+        16,
+        12
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Nancy M. Petry",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "journal-frequency",
+      "source_row": 28674,
+      "family": "musique-family-000407",
+      "split": "train",
+      "question": "How many times a year does Psychology of Addictive Behaviors publish, according to the supplied passage?",
+      "pool_source_indices": [
+        16,
+        12
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "8",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "rca-ceo",
+      "source_row": 3344,
+      "family": "musique-family-000410",
+      "split": "train",
+      "question": "Who became the new CEO of the RCA Records unit in the supplied passage?",
+      "pool_source_indices": [
+        12,
+        9,
+        1
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Peter Edge",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "epic-ceo",
+      "source_row": 3344,
+      "family": "musique-family-000410",
+      "split": "train",
+      "question": "Who became chairman and CEO of Epic Records in the supplied passage?",
+      "pool_source_indices": [
+        12,
+        9,
+        1
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "L.A. Reid",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "parent-ceo",
+      "source_row": 3344,
+      "family": "musique-family-000410",
+      "split": "train",
+      "question": "Who became chairman and CEO of Sony Music on July 1, 2011, according to the supplied passage?",
+      "pool_source_indices": [
+        12,
+        9,
+        1
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Doug Morris",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "album-band",
+      "source_row": 3344,
+      "family": "musique-family-000410",
+      "split": "train",
+      "question": "Which band released Two Lane Highway?",
+      "pool_source_indices": [
+        12,
+        9,
+        1
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Pure Prairie League",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "cornish-country",
+      "source_row": 5148,
+      "family": "musique-family-000892",
+      "split": "train",
+      "question": "In which country is Trinity Church in Cornish, New Hampshire?",
+      "pool_source_indices": [
+        19,
+        14,
+        10
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          10
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "United States",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "boston-city",
+      "source_row": 5148,
+      "family": "musique-family-000892",
+      "split": "train",
+      "question": "Which city is specified for the Trinity Church called Richardson's masterpiece?",
+      "pool_source_indices": [
+        19,
+        14,
+        10
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          14
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Boston",
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    },
+    {
+      "facet": "richardson-church-country",
+      "source_row": 5148,
+      "family": "musique-family-000892",
+      "split": "train",
+      "question": "In which country is the church designed by the same architect as Billings Memorial Library?",
+      "pool_source_indices": [
+        19,
+        14,
+        10
+      ],
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        19,
+        14
+      ],
+      "expected_answer": null,
+      "states": 4,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family."
+    }
+  ],
+  "states": 63,
+  "source_rows": 4,
+  "families": 4,
+  "status_counts": {
+    "reviewed_missing_complement": 33,
+    "reviewed_proof_complete": 27,
+    "reviewed_pool_insufficient": 3
+  },
+  "coverage": [
+    "complete versus missing evidence",
+    "same surname, different person",
+    "birth versus death (Tony birth/death coincide; no claim this pair isolates location discrimination)",
+    "same church name, different city",
+    "parent and subsidiary CEO identity",
+    "one paragraph versus conjunctive two-paragraph proof"
+  ],
+  "uncovered": [
+    "future plan versus achieved fact",
+    "alternative proof paths",
+    "new independent source families"
+  ],
+  "compute": {
+    "wall_seconds": 0.019337507896125317,
+    "cpu_seconds": 0.019327062000000006,
+    "runs": 1,
+    "http_requests": 0
+  }
+}

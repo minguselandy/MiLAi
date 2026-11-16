@@ -1,0 +1,132 @@
+{
+  "states": 2079,
+  "labelled": 1564,
+  "status_counts": {
+    "source_reviewed_preference": 1564,
+    "forced_single_action_masked": 105,
+    "reviewed_ambiguous_masked": 379,
+    "unreviewed_masked": 31
+  },
+  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-v1/train.jsonl",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-v1/combined-reviews-v6.json",
+  "input_changes": 0,
+  "teacher_actions_copied": false,
+  "scope": "All2079 actual primary train states retained.1564 source-reviewed preferences; partial/no-proof/forced/held rows masked. This is not the final T0 fitting dataset until generative supplement is reviewed.",
+  "status": "PRIMARY_RULES_LABELS_COMPLETE_GENERATIVE_SUPPLEMENT_PENDING",
+  "source_groups": 64,
+  "actual_source_requests_reviewed": 275,
+  "saved_version_requests_reviewed": 16,
+  "held_requests": [
+    {
+      "event_prefix": "rules-query_only/memops_A27/stage-2/chatcmpl-8e0945b185633c26:tool:0",
+      "request": {
+        "query": "User's workplace choices, preferences, locations worked, and badge status. Also include examples of coworkers' workplace choices for distinction."
+      },
+      "reason": "Hostaddsworklocations/remote-in-office/schedule requirements absent fromthe reviewed preference task; retainunreviewed ratherthan silentlymapparentproofs."
+    },
+    {
+      "event_prefix": "rules-rich/memops_A27/stage-0/chatcmpl-8879886bdd0f03e4:tool:0",
+      "request": {
+        "query": "What are the user's recurring workplace preferences and reported examples of these choices? Distinguish the user's actual choices from coworkers' choices and anticipated badge changes. Identify the user's current credential/badge status.",
+        "read_goal": {
+          "purpose": "To identify recurring workplace preferences and examples, while distinguishing the user's choices from coworkers' and badge changes.",
+          "evidence": [
+            "current_interpretation",
+            "saved_history",
+            "original_source",
+            "live_business"
+          ],
+          "required_points": [
+            "User's workplace choices (e.g., remote, in-office, schedule)",
+            "Examples of these choices",
+            "Coworkers' choices",
+            "Anticipated badge changes",
+            "User's current credential status"
+          ]
+        }
+      },
+      "reason": "Hostaddsworklocations/remote-in-office/schedule requirements absent fromthe reviewed preference task; retainunreviewed ratherthan silentlymapparentproofs."
+    },
+    {
+      "event_prefix": "rules-rich/memops_C04/stage-0/chatcmpl-96b55373d55b8c79:tool:0",
+      "request": {
+        "query": "Retrieve details from my medical reports regarding: 1. Scheduled follow-ups: specifically the clinician, department, hospital, and time for each current appointment. 2. The exact wording of the diagnosis I reported. 3. Identify any proposals to reschedule that have not yet been made or confirmed. 4. Note any conditional ENT follow-ups. 5. Identify any appointments belonging to my friend. 6. Ensure room information is not inferred from different procedures.",
+        "read_goal": {
+          "purpose": "Extract specific details about scheduled follow-ups, diagnosis, and separate special cases like rescheduling, ENT, and friend's appointments.",
+          "evidence": [
+            "saved_history",
+            "original_source"
+          ],
+          "required_points": [
+            "current_follow_up_details",
+            "diagnosis_wording",
+            "unmade_rescheduling_proposal",
+            "conditional_ENT_followup",
+            "friend_appointments",
+            "room_inference_check"
+          ]
+        },
+        "task_context": {
+          "target_scope": "current_public_message"
+        }
+      },
+      "reason": "Actual target_scope=current_public_message conflicts with history-wide request and reviewed source-session proof. Do not silently broaden that scope or declare those originals sufficient."
+    },
+    {
+      "event_prefix": "rules-rich/memops_E10/stage-2/chatcmpl-a533e2ece327ed5c:tool:0",
+      "request": {
+        "query": "What gym membership and assessment timing have I reported? Include any notice deadline implied by the stated interval. What are my coffee, contact, and birthday-gift preferences? Also, are there any preferences or plans for other people mentioned? Keep different people's plans separate and explicitly note any unstated dates or intervals.",
+        "read_goal": {
+          "purpose": "Gather user's gym membership details, assessment timing, notice deadline, and preferences for coffee, contact, and birthday gifts. Separate other people's plans and flag unstated dates.",
+          "required_points": [
+            "gym_membership_details",
+            "assessment_timing",
+            "notice_deadline",
+            "coffee_preference",
+            "contact_preference",
+            "birthday_gift_preference",
+            "other_people_preferences"
+          ],
+          "target_scope": "current_public_message"
+        }
+      },
+      "reason": "Actual read_goal.target_scope=current_public_message conflicts with requested historical gym/preferences evidence. Preserve field literally rather than silently broadening its scope."
+    },
+    {
+      "event_prefix": "rules-rich/memops_E14/stage-0/chatcmpl-886c198a818e1e8e:tool:0",
+      "request": {
+        "query": "Retrieve specific details about 'work meeting' changes, 'sister's' schedules, and any mentions of 'universal rules' or 'preferences'. Also look for any other commitment patterns or frequency issues beyond the book club, rent, and vitamins."
+      },
+      "reason": "Actual follow-up asks for additional facts beyond already named book-club/rent/vitamin routines at the early cut. No reviewed new fact witness; do not reward rereading excluded known routines or infer global absence from no new evidence."
+    }
+  ],
+  "source_preference_reasons": {
+    "reviewed_missing_original_progress": 1293,
+    "reviewed_originals_sufficient": 168,
+    "forced_single_action_masked": 105,
+    "no_reviewed_progress_masked": 254,
+    "reviewed_partial_evidence_only_masked": 23,
+    "no_reviewed_source_proof_masked": 74,
+    "nonoriginal_opened_material_requires_review": 3
+  },
+  "complete_audit": {
+    "states": 2079,
+    "input_equality": true,
+    "all_closed_positions": 272,
+    "actual_tool_deliveries": 302,
+    "matching_visible_and_returned_labels": 302,
+    "delivery_mismatches": [],
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "oversized": 0,
+    "max_sequence_tokens": 8807,
+    "max_state_dropped": 0,
+    "max_head_dropped": 0,
+    "state_projection": "shared",
+    "model_forwards": 0
+  },
+  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-primary-v14",
+  "reviewer": "assistant author, not independent judgment",
+  "cost_settlement": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v2.json",
+  "native_data_changed": false
+}

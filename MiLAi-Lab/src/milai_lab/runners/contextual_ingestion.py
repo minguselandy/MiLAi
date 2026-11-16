@@ -11,7 +11,7 @@ from dataclasses import asdict
 from typing import Any
 from uuid import uuid4
 
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 
 from milai_lab.methods.contextual_memory.material_view import source_subject_handle
 from milai_lab.methods.contextual_memory.revision import maintenance_records

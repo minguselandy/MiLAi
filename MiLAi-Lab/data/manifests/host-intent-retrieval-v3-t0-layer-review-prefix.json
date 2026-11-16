@@ -1,0 +1,11 @@
+{
+  "scope": "Targeted source-author review of3 discrepancies; not complete cohort attribution or a counterfactual effect estimate.",
+  "artifact": "artifacts/host-intent-retrieval-v3/data/t0-laya-dev-layer-review-prefix-v1.json",
+  "findings": [
+    "A19 rich late: current-contact reversion visible as candidate3 but omitted from return; obsolete Priya state answered.",
+    "A32 rich late: completed audit visible as candidate1 but earlier unfinished-audit state returned.",
+    "A32 query-only late: delivered setup/send-tonight and assistant secondary-use suggestion were promoted by final Host to completed action/user intention."
+  ],
+  "qualification": "No alternative branch executed; read-action availability does not prove additional full-packet admission or task success.",
+  "model_calls": 0
+}

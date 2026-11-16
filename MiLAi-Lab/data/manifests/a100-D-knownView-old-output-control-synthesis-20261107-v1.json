@@ -1,0 +1,502 @@
+{
+  "status": "KNOWN_VIEW9_AND_OLD_OUTPUT42_FIRST_RESULT_CONTROL_EVIDENCE_SYNTHESIZED",
+  "known_View": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/known-View/known-View-control-closeout-v1.json",
+    "Source_families": 3,
+    "planned_first_cells": 9,
+    "actual_first_tool_outcomes": 9,
+    "actual_Host_HTTP_dispatches": 8,
+    "retained_first_Host_preflight_failures": 1,
+    "answer_grades": {
+      "F": 1,
+      "W": 4,
+      "Q": 4
+    },
+    "material_statuses": {
+      "unknown": 1,
+      "partial": 8
+    },
+    "Host_View_occurrences_reviewed": 21,
+    "unique_Host_View_payloads_reviewed": 10,
+    "component_View_occurrences_bound": 2,
+    "unsent_component_View_not_credited_to_Host": 1,
+    "all_before_Source_values_literal_preserved_in_comparisons": 165,
+    "all_application_tables_literal_equal": true,
+    "semantic_records_or_business_writes": 0,
+    "native_Source_projection_read_only_verified": true,
+    "native_same_initial_observation_menu_and_known_refs_verified": true,
+    "complete_three_method_corrected_Host_frame_families": [
+      "memops_A33",
+      "memops_B03"
+    ],
+    "corrected_incremental_E3_paired_frame_families": [
+      "memops_A05",
+      "memops_A33",
+      "memops_B03"
+    ],
+    "invalid_baseline_A05_first_frame_retained": true,
+    "actual_operations_and_finite_inputs": {
+      "status": "NINE_NATIVE_FIRST_PACKET_TRACES_AND_ALL_LEARNED_FORWARDS_AUDITED_WITHOUT_REEXECUTION",
+      "positions": 9,
+      "Source_families": 3,
+      "selected_kinds": {
+        "REFRESH_VIEW": 7,
+        "SEARCH": 9,
+        "READ": 27,
+        "HANDOFF": 9
+      },
+      "operation_kinds": {
+        "REFRESH_VIEW": 7,
+        "SEARCH": 9,
+        "READ": 27,
+        "HANDOFF": 5
+      },
+      "all_selected_ids_in_actual_menu": true,
+      "all_first_native_before_and_menus_equal_to_actual_capture": true,
+      "all_native_known_ref_admissions": 9,
+      "all_actual_packets_equal_to_trace_and_ToolMessage": true,
+      "recorded_learned_forwards": 24,
+      "forced_learned_single_action_decisions_without_model": [],
+      "minimum_actual_input_tokens": 9361,
+      "maximum_actual_input_tokens": 13552,
+      "sum_actual_input_tokens_already_native_recorded": 287238,
+      "all_truncated_false": true,
+      "complete_native_before_full_bindings_menu_head_ID_order_literal_equal": true,
+      "same_corrected_Host_frames": {
+        "memops_A05": [
+          "view_cache_incremental",
+          "e3-aggregate-u32"
+        ],
+        "memops_A33": [
+          "view_cache",
+          "view_cache_incremental",
+          "e3-aggregate-u32"
+        ],
+        "memops_B03": [
+          "view_cache",
+          "view_cache_incremental",
+          "e3-aggregate-u32"
+        ]
+      },
+      "retained_failed_A05_baseline_frame_not_equal_to_corrected_frame_and_not_resent": true,
+      "new_model_loads": 0,
+      "new_model_forwards": 0,
+      "HTTP_calls": 0,
+      "ledger_opened_or_written": false,
+      "no_sha_validation": true,
+      "scope": "Exact offered native state/menu and actual selected operations for these9first component outcomes. Three learned cases only, not all Source-bank delivery or external capacity/adoption. Full Host wire equality applies only to actually sent corrected frames; A05baseline retained preflight failure has no provider input. Native/model cost already paid by original owners, no rebilling."
+    },
+    "actual_known_Host_tokens_already_paid": 75003,
+    "local_model_forwards_already_paid": 24,
+    "local_input_tokens_already_native_recorded": 287238,
+    "fresh_native_shared_admission_reservations": 33,
+    "admission_scope": "24 local policy calls plus9first final-readout reservations. One reservation is a retained preflight rejection with0HTTP. Do not label33 as actualHTTP/model responses or refund/reset the rejected slot.",
+    "whole_child_CPU_seconds_already_paid": 144.33048000000002,
+    "native_local_and_load_CPU_seconds_already_paid": 86.85622348397919,
+    "client_residual_CPU_seconds_already_paid": 57.474256516020816,
+    "GPU_reserved_job_interval_hours_including_failed_jobs_and_waits": 0.060981818240705046
+  },
+  "old_output": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/old-output/old-output-control-closeout-v1.json",
+    "Source_families": 7,
+    "planned_first_cells": 42,
+    "actual_first_tool_outcomes": 40,
+    "actual_Host_HTTP_dispatches": 40,
+    "answer_grades": {
+      "C": 22,
+      "F": 9,
+      "Q": 7,
+      "W": 4
+    },
+    "material_statuses": {
+      "complete": 27,
+      "partial": 13,
+      "unknown": 2
+    },
+    "Host_View_occurrences_reviewed": 49,
+    "unique_Host_View_payloads_reviewed": 16,
+    "component_View_occurrences_bound": 9,
+    "all_before_Source_values_literal_preserved_in_comparisons": 476,
+    "all_application_tables_literal_equal": true,
+    "semantic_records_or_business_writes": 0,
+    "native_Source_projection_read_only_verified": true,
+    "same_full_actual_Host_frames_all7families": true,
+    "actual_operations_and_finite_inputs": {
+      "status": "ALL_FORTY_NATIVE_FIRST_PACKETS_AND_TWELVE_LEARNED_TRAJECTORIES_BOUND_WITH_TWO_INITIAL_CAPACITY_FAILURES_RETAINED",
+      "positions": 42,
+      "actual_tool_packets_and_provider_inputs": 40,
+      "Source_families": 7,
+      "selected_kinds": {
+        "REFRESH_VIEW": 33,
+        "HANDOFF": 40,
+        "READ": 116,
+        "SEARCH": 36
+      },
+      "operation_kinds": {
+        "REFRESH_VIEW": 33,
+        "READ": 116,
+        "HANDOFF": 26,
+        "SEARCH": 36
+      },
+      "all_selected_ids_in_actual_menu": true,
+      "all_first_native_before_and_menus_equal_to_capture": true,
+      "all_native_K_reference_admissions": 118,
+      "recorded_learned_forwards": 93,
+      "forced_learned_single_action_decisions_without_model": [],
+      "minimum_actual_input_tokens": 4141,
+      "maximum_actual_input_tokens": 9795,
+      "sum_actual_input_tokens_already_native_recorded": 643723,
+      "all_truncated_false": true,
+      "same_full_Host_frame_across_conditions_and_methods_all7families": true,
+      "excluded_old_Source_ref_absent_from_all_actual_off_controller_states_actions_and_fresh_packets": true,
+      "structural_initial_capacity_failures": [
+        {
+          "case_index": 8,
+          "family": "memops_A05",
+          "condition": "prior_Host_output_searchable",
+          "capacity_preflight": {
+            "family": "memops_A05",
+            "condition": "prior_Host_output_searchable",
+            "captured_call": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/old-output/baseline-first14-v1/memops_A05/prior_Host_output_searchable/frozen-retrieval-calls/09dbf270-3377-44ab-8e3a-afd3fffd816c",
+            "initial_state_tokens": 20096,
+            "sequence_tokens": 16384,
+            "head_tokens": 629,
+            "full_head_tokens": 629,
+            "truncation_stats": {
+              "state_tokens": 20096,
+              "state_tokens_used": 15754,
+              "state_tokens_dropped": 4342,
+              "truncated": true
+            },
+            "complete_input_admitted": false,
+            "declared_K_reference_count": 7,
+            "native_K_container_count": 7,
+            "complete_native_state_and_all_action_bindings_literal_equal": true,
+            "actual_Host_prompt_tokens": 17245,
+            "no_state_K_menu_budget_or_projection_reduction": true
+          },
+          "new_forwards": 0,
+          "new_HTTP": 0,
+          "retained_in_denominator": true
+        },
+        {
+          "case_index": 11,
+          "family": "memops_A05",
+          "condition": "prior_Host_output_excluded",
+          "capacity_preflight": {
+            "family": "memops_A05",
+            "condition": "prior_Host_output_excluded",
+            "captured_call": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/old-output/baseline-first14-v1/memops_A05/prior_Host_output_excluded/frozen-retrieval-calls/9c5451dc-130c-4a62-a291-da51e159e3e5",
+            "initial_state_tokens": 19335,
+            "sequence_tokens": 16384,
+            "head_tokens": 611,
+            "full_head_tokens": 611,
+            "truncation_stats": {
+              "state_tokens": 19335,
+              "state_tokens_used": 15772,
+              "state_tokens_dropped": 3563,
+              "truncated": true
+            },
+            "complete_input_admitted": false,
+            "declared_K_reference_count": 7,
+            "native_K_container_count": 7,
+            "complete_native_state_and_all_action_bindings_literal_equal": true,
+            "actual_Host_prompt_tokens": 16951,
+            "no_state_K_menu_budget_or_projection_reduction": true
+          },
+          "new_forwards": 0,
+          "new_HTTP": 0,
+          "retained_in_denominator": true
+        }
+      ],
+      "new_model_loads": 0,
+      "new_model_forwards": 0,
+      "HTTP_calls": 0,
+      "ledger_opened_or_written": false,
+      "no_sha_validation": true,
+      "scope": "Additional acquisition factor only: full actual prior Host knowledge retained. Actual raw/derived Source bindings are separate from semantic quality. Complete native guard checks actual learned trajectory inputs; preflight first-input failures stay in denominator. Not full Source-bank delivery, autonomous improvement or external capacity proof."
+    },
+    "actual_known_Host_tokens_already_paid": 343013,
+    "local_model_forwards_already_paid": 93,
+    "local_input_tokens_already_native_recorded": 643723,
+    "fresh_native_shared_admission_reservations": 133,
+    "admission_scope": "Actual local forwards plus40actual final-readout reservations; structural A05 capacity preflight cells dispatch0 and reserve0. Shared count is not HTTP count. No reset/refund.",
+    "baseline_tool_collection_CPU_seconds_already_paid": 47.450369934,
+    "whole_child_CPU_seconds_observed_lower_bound_already_paid": 199.51,
+    "native_local_and_load_CPU_seconds_already_paid": 116.4836978450121,
+    "client_CPU_residual_observed_lower_bound_already_paid": 83.02630215498789,
+    "lost_parent_CPU_seconds": "unknown_not_zero",
+    "unobserved_child_cleanup_CPU": "unknown_not_zero",
+    "GPU_launch_to_observed_terminal_interval_hours_upper_bound": 0.30707771837711334,
+    "original_parent_exit_monitor_interrupted_no_experiment_restart": true,
+    "native_completion_plus_actual_process_terminal_validated": true
+  },
+  "old_output_comparison": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/old-output/old-output-family-comparison-v1.json",
+    "by_method_and_condition": [
+      {
+        "method": "view_cache",
+        "condition": "prior_Host_output_searchable",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 4,
+          "F": 3
+        },
+        "material_statuses": {
+          "complete": 5,
+          "partial": 2
+        },
+        "complete_successes": 4
+      },
+      {
+        "method": "view_cache",
+        "condition": "prior_Host_output_excluded",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 4,
+          "Q": 2,
+          "F": 1
+        },
+        "material_statuses": {
+          "complete": 6,
+          "partial": 1
+        },
+        "complete_successes": 4
+      },
+      {
+        "method": "view_cache_incremental",
+        "condition": "prior_Host_output_searchable",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 4,
+          "W": 1,
+          "Q": 2
+        },
+        "material_statuses": {
+          "complete": 5,
+          "partial": 2
+        },
+        "complete_successes": 4
+      },
+      {
+        "method": "view_cache_incremental",
+        "condition": "prior_Host_output_excluded",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 6,
+          "W": 1
+        },
+        "material_statuses": {
+          "complete": 5,
+          "partial": 2
+        },
+        "complete_successes": 6
+      },
+      {
+        "method": "e3-aggregate-u32",
+        "condition": "prior_Host_output_searchable",
+        "first_cells": 7,
+        "answer_grades": {
+          "F": 3,
+          "C": 2,
+          "W": 1,
+          "Q": 1
+        },
+        "material_statuses": {
+          "partial": 3,
+          "unknown": 1,
+          "complete": 3
+        },
+        "complete_successes": 2
+      },
+      {
+        "method": "e3-aggregate-u32",
+        "condition": "prior_Host_output_excluded",
+        "first_cells": 7,
+        "answer_grades": {
+          "C": 2,
+          "F": 2,
+          "W": 1,
+          "Q": 2
+        },
+        "material_statuses": {
+          "partial": 3,
+          "unknown": 1,
+          "complete": 3
+        },
+        "complete_successes": 2
+      }
+    ],
+    "comparisons": [
+      {
+        "name": "view_cache:searchable-minus-excluded",
+        "families": 7,
+        "gains": 1,
+        "losses": 1,
+        "difference_percentage_points": 0.0,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -42.857142857142854,
+          42.857142857142854
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": 0.0,
+          "memops_A14": 0.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": 1.0,
+          "memops_B03": -1.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "view_cache_incremental:searchable-minus-excluded",
+        "families": 7,
+        "gains": 0,
+        "losses": 2,
+        "difference_percentage_points": -28.571428571428573,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -57.14285714285714,
+          0.0
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": 0.0,
+          "memops_A14": 0.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": -1.0,
+          "memops_B03": -1.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "e3-aggregate-u32:searchable-minus-excluded",
+        "families": 7,
+        "gains": 1,
+        "losses": 1,
+        "difference_percentage_points": 0.0,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -42.857142857142854,
+          42.857142857142854
+        ],
+        "family_differences": {
+          "memops_A01": -1.0,
+          "memops_A05": 0.0,
+          "memops_A14": 1.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": 0.0,
+          "memops_B03": 0.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "prior_Host_output_searchable:view_cache_incremental-minus-view_cache",
+        "families": 7,
+        "gains": 1,
+        "losses": 1,
+        "difference_percentage_points": 0.0,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -42.857142857142854,
+          42.857142857142854
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": 0.0,
+          "memops_A14": 1.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": -1.0,
+          "memops_B03": 0.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "prior_Host_output_searchable:e3-aggregate-u32-minus-view_cache",
+        "families": 7,
+        "gains": 1,
+        "losses": 3,
+        "difference_percentage_points": -28.571428571428573,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -71.42857142857143,
+          28.57142857142857
+        ],
+        "family_differences": {
+          "memops_A01": -1.0,
+          "memops_A05": -1.0,
+          "memops_A14": 1.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": -1.0,
+          "memops_B03": 0.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "prior_Host_output_excluded:view_cache_incremental-minus-view_cache",
+        "families": 7,
+        "gains": 2,
+        "losses": 0,
+        "difference_percentage_points": 28.571428571428573,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          0.0,
+          57.14285714285714
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": 0.0,
+          "memops_A14": 1.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": 1.0,
+          "memops_B03": 0.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      },
+      {
+        "name": "prior_Host_output_excluded:e3-aggregate-u32-minus-view_cache",
+        "families": 7,
+        "gains": 0,
+        "losses": 2,
+        "difference_percentage_points": -28.571428571428573,
+        "family_bootstrap_95_percent_interval_percentage_points": [
+          -71.42857142857143,
+          0.0
+        ],
+        "family_differences": {
+          "memops_A01": 0.0,
+          "memops_A05": -1.0,
+          "memops_A14": 0.0,
+          "memops_A16": 0.0,
+          "memops_A29": 0.0,
+          "memops_A33": 0.0,
+          "memops_B03": -1.0
+        },
+        "draws": 20000,
+        "seed": 0,
+        "scope": "Descriptive seven TRAIN-family conditional first outcomes with failures retained; not independent confirmation or an isolated policy effect."
+      }
+    ],
+    "Host_generation_seed_matched": false,
+    "scope": "All old Host knowledge/messages/receipts remain common. Source exclusion changes additional acquisition only; paired Host completion changes include first-response stochastic/length failures. Seven correlated TRAIN families do not identify general harm/benefit, explain D final-update failures alone or justify adoption."
+  },
+  "reviewer": "Source-guided implementation assistant; no independent human/blind or multi-reviewer validation. Original labels unchanged.",
+  "scope": "Specific frozen TRAIN diagnostic controls; not new independent confirmation. Known View K, actual received material and searchability of prior Host output are distinct factors. Preflight failures, stochastic first generations and lost parent-monitor observation remain explicit. No experiments, models, costs, answers or grades rerun/repaired.",
+  "new_model_HTTP_or_tool_executions": 0,
+  "ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false
+}

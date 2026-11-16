@@ -1,0 +1,682 @@
+{
+  "status": "PHASE40_PROGRESS_COST_FEEDBACK_FIT_AND_DEV_CLOSED_PAIRED_GRADING_ARTIFACT_RESOLVED_FINAL_CONFIRMATION_READER_LIVE",
+  "observed_at_utc": "2026-11-11T21:31:57.871115+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v39.json",
+  "no_sha_validation": true,
+  "previous_turn_classification": "Progress: joined160application firstcosts/quality, closedfitresourceindex, savedTRAINstopping diagnostic. Currentturn waitedverifiedlivejobs toterminal andcompletedactualcostDEVchain.",
+  "active_jobs": [
+    {
+      "name": "qasper-confirm96-s3-old-readouts-v1",
+      "owner_pid": 2099264,
+      "child_pid": 2099265,
+      "actual_argv_checked": true,
+      "process_alive": true,
+      "run_status": "RUNNING",
+      "closed_readouts": 31,
+      "failed_readouts": 0
+    }
+  ],
+  "cost_fit": {
+    "status": "FIXED_U51_PAIRED_FIT_CLOSED_TASK_COMPARISON_PENDING",
+    "methods": {
+      "quality_tie": {
+        "original_quality_direction_support": {
+          "original_direction_pairs": 62,
+          "correctly_ordered": 59
+        },
+        "new_adequate_cost_support": {
+          "pairs": 94,
+          "correctly_ordered": 41,
+          "selected_winner": 16,
+          "selected_loser": 28,
+          "selected_outside_pair": 50
+        },
+        "HANDOFF_over_READ_support": {
+          "pairs": 18,
+          "correctly_ordered": 10,
+          "selected_winner": 0,
+          "selected_loser": 1,
+          "selected_outside_pair": 17
+        },
+        "full_reference_DEV_curve": [
+          {
+            "update": 17,
+            "counts": {
+              "labelled": 278,
+              "accepted": 89,
+              "masked": 202,
+              "handoff_outside_reviewed_preference": 2
+            },
+            "family_macro_acceptance": 0.3603735054627912
+          },
+          {
+            "update": 34,
+            "counts": {
+              "labelled": 278,
+              "accepted": 117,
+              "handoff_outside_reviewed_preference": 35,
+              "masked": 202
+            },
+            "family_macro_acceptance": 0.43951311585240155
+          },
+          {
+            "update": 51,
+            "counts": {
+              "labelled": 278,
+              "accepted": 110,
+              "handoff_outside_reviewed_preference": 23,
+              "masked": 202
+            },
+            "family_macro_acceptance": 0.4109687435580293
+          }
+        ],
+        "compute": {
+          "cpu_seconds": 2343.325877936,
+          "wall_seconds": 1858.4100123234093,
+          "train_sequence_rows": 1632,
+          "train_input_tokens": 8668371,
+          "stage_wall_seconds": {
+            "prepare": 26.0420123655349,
+            "evaluation": 980.0665000053123,
+            "training": 667.567649002187,
+            "save": 182.0263216206804
+          }
+        },
+        "checkpoint": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-feedback-seed0-v1/checkpoints/update-51"
+      },
+      "adequate_cost": {
+        "original_quality_direction_support": {
+          "original_direction_pairs": 62,
+          "correctly_ordered": 56
+        },
+        "new_adequate_cost_support": {
+          "pairs": 94,
+          "correctly_ordered": 75,
+          "selected_winner": 43,
+          "selected_loser": 15,
+          "selected_outside_pair": 36
+        },
+        "HANDOFF_over_READ_support": {
+          "pairs": 18,
+          "correctly_ordered": 16,
+          "selected_winner": 4,
+          "selected_loser": 1,
+          "selected_outside_pair": 13
+        },
+        "full_reference_DEV_curve": [
+          {
+            "update": 17,
+            "counts": {
+              "labelled": 278,
+              "accepted": 87,
+              "handoff_outside_reviewed_preference": 10,
+              "masked": 202
+            },
+            "family_macro_acceptance": 0.363056586270872
+          },
+          {
+            "update": 34,
+            "counts": {
+              "labelled": 278,
+              "accepted": 129,
+              "handoff_outside_reviewed_preference": 44,
+              "masked": 202
+            },
+            "family_macro_acceptance": 0.4930619975262833
+          },
+          {
+            "update": 51,
+            "counts": {
+              "labelled": 278,
+              "accepted": 120,
+              "handoff_outside_reviewed_preference": 37,
+              "masked": 202
+            },
+            "family_macro_acceptance": 0.4600533395176252
+          }
+        ],
+        "compute": {
+          "cpu_seconds": 2307.371363778,
+          "wall_seconds": 1847.793398205191,
+          "train_sequence_rows": 1632,
+          "train_input_tokens": 8668371,
+          "stage_wall_seconds": {
+            "prepare": 34.543288056738675,
+            "evaluation": 964.0779445609078,
+            "training": 665.3865614905953,
+            "save": 181.32607242744416
+          }
+        },
+        "checkpoint": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-adequate-cost-seed0-v1/checkpoints/update-51"
+      }
+    },
+    "TRAIN_full_choice_changes": {
+      "feedback_states": 131,
+      "changed_full_choice": 55,
+      "READ -> READ": 29,
+      "READ -> HANDOFF": 5,
+      "READ -> SEARCH": 1,
+      "SEARCH -> READ": 19,
+      "HANDOFF -> READ": 1
+    },
+    "scope": "Matched450rows/131feedback/319replay/S1u101/seed0/51updates/1632draws. Only94adequate delivery ties become observed-cost directions; both full-parameter. Original62quality directions and new94cost directions reported separately. Pair counts correlated within69states/53Sources;18HANDOFF cost pairs not18independent Sources. Outsidepair selections unknown, noterrors. TRAINordering/argmax and referenceDEV acceptance do not prove Host quality or complete-cost improvement. Final51fixed before fit; confirmation untouched. Actual DEV64/packets/readouts next.",
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 0.676865261,
+      "wall_seconds": 0.6768700499087572
+    }
+  },
+  "actual_DEV_choices": {
+    "status": "ACTUAL_FULL_BINDINGS_AND_PHYSICAL_FIRST_REUSE_CHECKED",
+    "native_packets": 113,
+    "new_native_packets": 6,
+    "reused_native_packets": 107,
+    "existing_physical_first_matches": 106,
+    "needed_new_firsts": 7,
+    "action_kinds": {
+      "fixed_context": {
+        "SEARCH": 32,
+        "READ": 31,
+        "HANDOFF": 1
+      },
+      "full_feedback": {
+        "SEARCH": 31,
+        "READ": 32,
+        "HANDOFF": 1
+      },
+      "continued_sft": {
+        "SEARCH": 32,
+        "HANDOFF": 5,
+        "READ": 27
+      },
+      "adequate_cost": {
+        "SEARCH": 26,
+        "READ": 36,
+        "HANDOFF": 2
+      }
+    },
+    "full_choice_differences_from_cost": {
+      "fixed_context": 33,
+      "full_feedback": 14,
+      "continued_sft": 21,
+      "original_S1_u101": 24
+    },
+    "root_source_spot_indices_among_new_firsts": [
+      0,
+      3,
+      6
+    ],
+    "scope": "DEV32/64oldreachedstates, same fixedcontext4 continuation. Frozenfinal51, no modelselection. Actualchoice differences nottaskgain. Spotindices fixedbefore newHostoutcomes. OriginalS1u101comparedfullbindingIDs fromsamebefore.",
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 1.0680567530000005,
+      "wall_seconds": 1.068153410218656
+    }
+  },
+  "cost_DEV_closeout": {
+    "latest_summary": "/data/milai-experiments/20261111-scalable-evidence/adequate-cost-dev32-closed-comparison-v2/summary.json",
+    "original_views_retained": "/data/milai-experiments/20261111-scalable-evidence/adequate-cost-dev32-closed-comparison-v1/summary.json",
+    "physical_new_firsts": 7,
+    "new_firsts_completed": 6,
+    "new_first_failures": 1,
+    "reused_firsts": 106,
+    "total_actual_packets": 113,
+    "all_failed_readouts": 4,
+    "new_teacher_states": 7,
+    "transferred_judgments": 106,
+    "transfer_conflicts": 0,
+    "Root_initial_spot_indices": [
+      0,
+      3,
+      6
+    ],
+    "views": {
+      "teacher_only": {
+        "by_method": {
+          "fixed_context": {
+            "positions": 64,
+            "complete_supported": 33,
+            "failed": 2,
+            "answer_status": {
+              "unknown": 19,
+              "complete": 33,
+              "incomplete": 12
+            },
+            "material_status": {
+              "unknown": 16,
+              "sufficient": 34,
+              "insufficient": 14
+            }
+          },
+          "adequate_cost": {
+            "positions": 64,
+            "complete_supported": 31,
+            "failed": 2,
+            "answer_status": {
+              "unknown": 23,
+              "complete": 31,
+              "incomplete": 10
+            },
+            "material_status": {
+              "unknown": 21,
+              "sufficient": 31,
+              "insufficient": 12
+            }
+          },
+          "full_feedback": {
+            "positions": 64,
+            "complete_supported": 32,
+            "failed": 2,
+            "answer_status": {
+              "unknown": 21,
+              "complete": 32,
+              "incomplete": 11
+            },
+            "material_status": {
+              "unknown": 18,
+              "sufficient": 32,
+              "insufficient": 14
+            }
+          },
+          "continued_sft": {
+            "positions": 64,
+            "complete_supported": 33,
+            "failed": 1,
+            "answer_status": {
+              "unknown": 22,
+              "complete": 33,
+              "incomplete": 9
+            },
+            "material_status": {
+              "unknown": 19,
+              "sufficient": 33,
+              "insufficient": 12
+            }
+          }
+        },
+        "paired_source_differences": {
+          "adequate_cost-full_feedback/complete_supported": {
+            "difference": -0.015625,
+            "source_bootstrap_95pct": [
+              -0.078125,
+              0.046875
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-full_feedback/material_sufficient": {
+            "difference": -0.015625,
+            "source_bootstrap_95pct": [
+              -0.078125,
+              0.046875
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-continued_sft/complete_supported": {
+            "difference": -0.03125,
+            "source_bootstrap_95pct": [
+              -0.125,
+              0.046875
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-continued_sft/material_sufficient": {
+            "difference": -0.03125,
+            "source_bootstrap_95pct": [
+              -0.125,
+              0.046875
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-fixed_context/complete_supported": {
+            "difference": -0.03125,
+            "source_bootstrap_95pct": [
+              -0.140625,
+              0.0625
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-fixed_context/material_sufficient": {
+            "difference": -0.046875,
+            "source_bootstrap_95pct": [
+              -0.15625,
+              0.046875
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          }
+        }
+      },
+      "source_author_corrected": {
+        "by_method": {
+          "fixed_context": {
+            "positions": 64,
+            "complete_supported": 32,
+            "failed": 2,
+            "answer_status": {
+              "complete": 32,
+              "unknown": 18,
+              "incomplete": 14
+            },
+            "material_status": {
+              "sufficient": 35,
+              "unknown": 14,
+              "insufficient": 15
+            }
+          },
+          "adequate_cost": {
+            "positions": 64,
+            "complete_supported": 34,
+            "failed": 2,
+            "answer_status": {
+              "complete": 34,
+              "unknown": 20,
+              "incomplete": 10
+            },
+            "material_status": {
+              "sufficient": 35,
+              "unknown": 18,
+              "insufficient": 11
+            }
+          },
+          "full_feedback": {
+            "positions": 64,
+            "complete_supported": 32,
+            "failed": 2,
+            "answer_status": {
+              "complete": 32,
+              "unknown": 19,
+              "incomplete": 13
+            },
+            "material_status": {
+              "sufficient": 33,
+              "unknown": 16,
+              "insufficient": 15
+            }
+          },
+          "continued_sft": {
+            "positions": 64,
+            "complete_supported": 32,
+            "failed": 1,
+            "answer_status": {
+              "complete": 32,
+              "unknown": 21,
+              "incomplete": 11
+            },
+            "material_status": {
+              "sufficient": 33,
+              "unknown": 18,
+              "insufficient": 13
+            }
+          }
+        },
+        "paired_source_differences": {
+          "adequate_cost-full_feedback/complete_supported": {
+            "difference": 0.03125,
+            "source_bootstrap_95pct": [
+              -0.03125,
+              0.09375
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-full_feedback/material_sufficient": {
+            "difference": 0.03125,
+            "source_bootstrap_95pct": [
+              -0.03125,
+              0.09375
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-continued_sft/complete_supported": {
+            "difference": 0.03125,
+            "source_bootstrap_95pct": [
+              -0.0625,
+              0.125
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-continued_sft/material_sufficient": {
+            "difference": 0.03125,
+            "source_bootstrap_95pct": [
+              -0.0625,
+              0.125
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-fixed_context/complete_supported": {
+            "difference": 0.03125,
+            "source_bootstrap_95pct": [
+              -0.0625,
+              0.109375
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-fixed_context/material_sufficient": {
+            "difference": 0.0,
+            "source_bootstrap_95pct": [
+              -0.09375,
+              0.078125
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          }
+        }
+      },
+      "paired_source_reviewed": {
+        "by_method": {
+          "fixed_context": {
+            "positions": 64,
+            "complete_supported": 32,
+            "failed": 2,
+            "answer_status": {
+              "complete": 32,
+              "unknown": 18,
+              "incomplete": 14
+            },
+            "material_status": {
+              "sufficient": 35,
+              "unknown": 14,
+              "insufficient": 15
+            }
+          },
+          "adequate_cost": {
+            "positions": 64,
+            "complete_supported": 33,
+            "failed": 2,
+            "answer_status": {
+              "complete": 33,
+              "unknown": 20,
+              "incomplete": 11
+            },
+            "material_status": {
+              "sufficient": 34,
+              "unknown": 18,
+              "insufficient": 12
+            }
+          },
+          "full_feedback": {
+            "positions": 64,
+            "complete_supported": 33,
+            "failed": 2,
+            "answer_status": {
+              "complete": 33,
+              "unknown": 19,
+              "incomplete": 12
+            },
+            "material_status": {
+              "sufficient": 34,
+              "unknown": 16,
+              "insufficient": 14
+            }
+          },
+          "continued_sft": {
+            "positions": 64,
+            "complete_supported": 31,
+            "failed": 1,
+            "answer_status": {
+              "complete": 31,
+              "unknown": 21,
+              "incomplete": 12
+            },
+            "material_status": {
+              "sufficient": 32,
+              "unknown": 18,
+              "insufficient": 14
+            }
+          }
+        },
+        "paired_source_differences": {
+          "adequate_cost-full_feedback/complete_supported": {
+            "difference": 0.0,
+            "source_bootstrap_95pct": [
+              0.0,
+              0.0
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-full_feedback/material_sufficient": {
+            "difference": 0.0,
+            "source_bootstrap_95pct": [
+              0.0,
+              0.0
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-continued_sft/complete_supported": {
+            "difference": 0.03125,
+            "source_bootstrap_95pct": [
+              -0.03125,
+              0.09375
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-continued_sft/material_sufficient": {
+            "difference": 0.03125,
+            "source_bootstrap_95pct": [
+              -0.03125,
+              0.09375
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-fixed_context/complete_supported": {
+            "difference": 0.015625,
+            "source_bootstrap_95pct": [
+              -0.03125,
+              0.0625
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          },
+          "adequate_cost-fixed_context/material_sufficient": {
+            "difference": -0.015625,
+            "source_bootstrap_95pct": [
+              -0.078125,
+              0.03125
+            ],
+            "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+          }
+        }
+      }
+    },
+    "Reader_generation": {
+      "charged_tokens": 31802,
+      "known_tokens": 31802,
+      "unknown_usage": 0
+    },
+    "teacher_generation": {
+      "charged_tokens": 28562,
+      "known_tokens": 28562,
+      "unknown_usage": 0
+    }
+  },
+  "paired_source_consistency_review": {
+    "file": "/data/milai-experiments/20261111-scalable-evidence/adequate-cost-dev32-transferred-reviews-v1/paired-discordance-source-reviews-v1.json",
+    "selected_states": 4,
+    "distinct_actual_branches": 10,
+    "changed_records": 7,
+    "selection": "Allfourhybridcomplete_supported discordant states costvsfullfeedback; everydistinctofferedcomparisonbranch inthese states, notonlythe apparentwinner. Outcome-selected explanatoryreview, notblindorrepresentativeaudit; allpreviousviewsretained.",
+    "findings": [
+      "Crowdsourcing question: identical material sets andhonestnonanswers wronglyreceiveddifferentcompletion; ambiguityretainedforallbranches.",
+      "Styletransfer: bothactualpackets/answerscontain100sentencehumanassessmentandfivequestions; bothcomplete despite nativeunanswerableannotation.",
+      "CMV antisociallabels: applysamepreviousRule2/comment-removalrequirementtoallbranches; genericmoderatoractionnotfullconcretelabel, allincomplete.",
+      "McGurk: bothactualanswerssupportedbydelivereddefinition/bimodalmechanism; costunknownlabelcontradictedpositivejudgerationale andactualSource; completesymmetric."
+    ],
+    "interpretation": "Teacher cost/full31/32; initialhybrid34/32; pairedSourceview33/33, fixed32,SFT31. Apparentcosttaskgainwasgrading-sensitive anddisappears withidentifiedsymmetriccorrections. All64cost/full binarycompletionindicatorsnowequal; degenerateSourceCI[0,0] isconditionalonthisposthocgradedvector, NOTcertaintyoreliminationofjudge/Host/seeduncertainty. No newTRAINlabels orglobalexhaustiveaudit."
+  },
+  "confirmation_closed": {
+    "fixed_context": {
+      "completed": 96,
+      "failed": 0
+    },
+    "scale36k": {
+      "completed": 91,
+      "failed": 5
+    },
+    "S3_own": {
+      "completed": 90,
+      "failed": 6
+    }
+  },
+  "confirmation_scope": "S3old96finalfirstcondition live. No confirmationanswers/quality inspectedorusedforselection. Fourmodels/primary/secondary/repeat32/Source8panel unchanged. Costmodel remainsDEVonly, neveraddedasconfirmationnominee.",
+  "cost_settlement": {
+    "recorded": true,
+    "phase": "milai_scalable_phase40_closed_preparations_20261112_v1",
+    "records": [
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/head-only-dev32-comparison-witness-v1/manifest.json",
+        "cpu_seconds": 1.639059581,
+        "wall_seconds": 1.639127285219729
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/head-only-dev32-transferred-reviews-v1/manifest.json",
+        "cpu_seconds": 0.851040404,
+        "wall_seconds": 0.8511408111080527
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-adequate-observed-cost-data-v1/manifest.json",
+        "cpu_seconds": 3.895060918,
+        "wall_seconds": 4.204682679846883
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-resource-quality-v1/summary.json",
+        "cpu_seconds": 2.143477424,
+        "wall_seconds": 2.1435231221839786
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/adequate-cost-existing-dev-first-cache-v1/run.json",
+        "cpu_seconds": 0.033501542999999995,
+        "wall_seconds": 0.033506840467453
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/adequate-cost-existing-model-train-diagnostic-v1.json",
+        "cpu_seconds": 0.244540107,
+        "wall_seconds": 0.2446043062955141
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/closed-fit-resource-table-v1/summary.json",
+        "cpu_seconds": 0.015186702999999996,
+        "wall_seconds": 0.015191333368420601
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/adequate-cost-closed-fit-v1/summary.json",
+        "cpu_seconds": 0.676865261,
+        "wall_seconds": 0.6768700499087572
+      }
+    ],
+    "measures": {
+      "cpu_seconds": 9.498731940999999,
+      "wall_seconds": 9.808646428398788,
+      "runs": 8
+    },
+    "scope": "Eightexplicitmeasuredclosedpreparation/analysisCPU stages, no nativefit/scorer/Reader/teacher orwholeapplicationdoublecount. Originalrawparent/author/unmeasuredCPU stillunknown. Phase36paidunion/figures excluded. Sumstagewall notend-to-end elapsed/GPUbusy.",
+    "no_sha_validation": true
+  },
+  "new_pending_costs": {
+    "adequate_cost_native_packet_whole_child_cpu_seconds": 47.639341,
+    "scope": "47.639341wholeCPU fromno-selfbilling native6new/107reuse collector, countonce notplusnestedruncompute. Laterinventory/witness/transfermeasuredpreps pendingnextstage; sourceauthor/review/untimedanalysisunknown. Nativefit/scorer/Reader/teacher alreadyselfbilled. No ledgerchangeswhilefinalReaderactive."
+  },
+  "next": [
+    "WaitactualfinalS3oldReaderterminal, thenrun score_confirmation96_firsts_v1.py and bind_confirmation96_review_panel_v1.py; preservefullrawanswers/officialmissingconvention/Sourceuncertainty",
+    "Runfourpredeclared8-drawrepeatjobsexplicitlyserial afterfirstmatrixclosed; use score_confirmation96_repeats_v1.py; nofirstreplacement",
+    "RunLME32twofixednominees/nativeJudge chain; keepactualfirstfailures andexplicitunattemptedcontinuations",
+    "Synthesizelearning/action/delivery/task/cost/generalization; goalnotcompletewithoutsupportedcapabilitychain. Currentcostroutelearnedtargetsbutnotactualtaskgain, avoidusinggradingartifactasreasonforexpansion."
+  ],
+  "validation": "Actualownedfit andS3ownReader terminal/procgone beforeDEVscore/native/Reader/teacher transitions. Same450inputrows/8668371train tokens/1632draws, costtargetonly94changes verified. Exact64score binding,113actualpackets,106physicalfirst/judgmenttransfer0conflicts. Sourcequotescheckedagainstactualreturnedmaterial forall10pairedreviews. No trackedruntimecodechange/newfullsuite.",
+  "boundaries": "GoalACTIVE/incomplete. NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchange/service restart/push. AllfirstfailuresunknownsandSource rolesretained. No confirmationtuning."
+}

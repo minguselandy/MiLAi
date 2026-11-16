@@ -1,0 +1,289 @@
+{
+  "status": "PHASE18_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T10:08:29.411582+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v17.json",
+  "no_sha_validation": true,
+  "code_commits": [
+    "6ef691e0",
+    "40610764",
+    "0cecfd92"
+  ],
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2155,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-repeat32-seed1-v1",
+      "owner_pid": 3451501,
+      "child_pid": 3451502,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 227,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m2-public-train16-all112-teacher-v1",
+      "owner_pid": 3786273,
+      "child_pid": 3786274,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_states": 5,
+      "masked_teacher_candidates": 4
+    }
+  ],
+  "seed1_large_closed": "/data/milai-experiments/20261111-scalable-evidence/s1-op3k-seed1-closed-curve-v1.json",
+  "M2_128source_semantics": {
+    "status": "AVAILABLE256_REVIEWED_COMPARISON_STATES",
+    "source_split": "train",
+    "families": 128,
+    "raw_comparison_states": 256,
+    "known_fit_states": {
+      "delivery": 108,
+      "answer": 103
+    },
+    "directional_fit_states": {
+      "delivery": 36,
+      "answer": 32
+    },
+    "parts": [
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-first16-semantic-v2",
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families16to48-semantic-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families48to64-semantic-teacher-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families64to96-semantic-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families96to128-semantic-teacher-v1"
+    ],
+    "scope": "Mixed teacher andexplicitRootspottedparts remainmarked; new64teacheronly. Unknowns masked, positive ties included, no adequateS2completionclaim."
+  },
+  "M2_new64_teacher": {
+    "status": "COMPLETED",
+    "pid": 3489040,
+    "compiled": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families96to128-witness-v1",
+    "planned_states": 64,
+    "closed_states": 64,
+    "unresolved_states": 0,
+    "masked_teacher_candidates": 33,
+    "source_split": "train",
+    "training_labels_allowed": true,
+    "reviewer": "Existing local Qwen Host model as offline training teacher",
+    "independent_evaluation": false,
+    "judge_attempts": 1,
+    "no_sha_validation": true,
+    "scope": "Offline teacher supervision only; no online controller or Host inputs changed.",
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families96to128-v1",
+    "readouts": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families96to128-readouts-v1",
+    "generation_before": {
+      "charged_tokens": 447253745,
+      "known_tokens": 446628580,
+      "unknown_usage": 16
+    },
+    "compute": {
+      "cpu_seconds": 5.865434756000001,
+      "wall_seconds": 1012.6501139299944,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 382945,
+      "known_tokens": 382945,
+      "unknown_usage": 0
+    }
+  },
+  "M2_last_original32": {
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families128to160-v2",
+    "selected_states": 64,
+    "comparison_states": 63,
+    "packets": 153,
+    "first_failed_preparation_retained": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families128to160-v1/preparation-first-failure.json"
+  },
+  "original_total_count_correction": {
+    "paper_families": 337,
+    "selected_states": 674,
+    "actual_comparison_states": 673,
+    "packets": 1639,
+    "reason": "One original selected post state has only plain/select-none HANDOFF options and no exported branch case; not fabricated into a comparison."
+  },
+  "public_train16_native_closed": {
+    "status": "COMPLETED",
+    "pid": 3203683,
+    "collection": "/data/milai-experiments/20261111-scalable-evidence/musique-public-shard-0-v1",
+    "config": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b64-collection-plan-v2/pilot8/config.json",
+    "checkpoint": "/data/milai-experiments/20261111-scalable-evidence/s1-op36k-seed0-v1/checkpoints/update-1130",
+    "device": "cpu",
+    "precision": "float32",
+    "projection": "shared_actions",
+    "planned_families": 16,
+    "completed_families": 16,
+    "closed_requests": 32,
+    "model_calls": 124,
+    "Host_calls": 0,
+    "no_sha_validation": true,
+    "automatic_retry": false,
+    "source_bank_reuse": true,
+    "new_Source_copies": 0,
+    "scope": "Frozen model public rollouts. Both models use the original lexical collector's first returned item as K, never their own potentially different cold output. Supplied requests, not autonomous Host. No offline labels enter execution.",
+    "active_family": "musique-family-000079",
+    "compute": {
+      "cpu_seconds": 8436.187173216,
+      "wall_seconds": 2232.353383410722,
+      "forwards": 124,
+      "sequence_rows": 124,
+      "input_tokens": 755070,
+      "state_tokenizations": 124,
+      "state_tokens": 659635,
+      "padded_input_tokens": 755070
+    }
+  },
+  "public_comparisons": {
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-initial-v1",
+    "families": 16,
+    "actual_states": 32,
+    "main_packets": 96,
+    "main_first_readouts": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "pid": 3582476,
+      "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-initial-v1",
+      "planned_families": 16,
+      "planned_states": 32,
+      "planned_unique_packets": 96,
+      "planned_policy_positions": 96,
+      "closed_readouts": 96,
+      "failed_readouts": 7,
+      "chat_invocations": 96,
+      "reused_readouts": 0,
+      "reuse_source": null,
+      "response_callbacks": 96,
+      "error_callbacks": 0,
+      "automatic_retry": false,
+      "no_sha_validation": true,
+      "answer_persisted_as_source": false,
+      "scope": "Actual public initial cold/fixed-receipt-K observation/menu and saved model input. Same EvidenceOperations and four-step fixed_context continuation as paper feedback. Replay work counters restored separately from actual measured cost, as existing collected_handoff; no Source data or original labels changed. Core operation packet, not a rerun of full public-message/admission history. Explicit referenced prior K plus current real acquired packet, not autonomous Host.",
+      "generation_before": {
+        "charged_tokens": 447636690,
+        "known_tokens": 447011525,
+        "unknown_usage": 16
+      },
+      "generation_requests_before": 90499,
+      "active": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-initial-readouts-v1/case-031/packet-0/readout.json",
+      "compute": {
+        "cpu_seconds": 7.354173746000001,
+        "wall_seconds": 2086.1948233824223,
+        "runs": 1
+      },
+      "generation_delta": {
+        "charged_tokens": 383393,
+        "known_tokens": 383393,
+        "unknown_usage": 0
+      }
+    },
+    "known_query_extensions": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-known-query-extra-v1/extension-bindings.json",
+    "extra_packets": 16,
+    "new_independent_states_from_extension": 0,
+    "same_initial_inputs_full_menus_and_fixed_K_verified": true,
+    "public_reference_context": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-reference-context-v1.json",
+    "reference_answerable_variants": 7,
+    "reference_missing_support_variants": 9,
+    "first96_bound": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-first96-bound-v1",
+    "binder_for_union": "/data/milai-experiments/20261111-scalable-evidence/bind_public_feedback_results_v1.py",
+    "scope": "CoreEvidenceOperations replay with exactactualmodel observation/menu, fixed4step continuation, actualpacket+referencedK. Onlywork counters restored asrecorded; no enlargedresourceallowance. Not fullpublicmessage/admission replay. No newSourcecopies/modelcalls inbranchprep. NativeActor originals remain unchanged.",
+    "all112_bound": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-all112-bound-v1",
+    "known_query_readouts": {
+      "status": "COMPLETED",
+      "pid": 3734225,
+      "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-known-query-extra-v1",
+      "planned_families": 16,
+      "planned_states": 16,
+      "planned_unique_packets": 16,
+      "planned_policy_positions": 16,
+      "closed_readouts": 16,
+      "failed_readouts": 0,
+      "chat_invocations": 16,
+      "reused_readouts": 0,
+      "reuse_source": null,
+      "response_callbacks": 16,
+      "error_callbacks": 0,
+      "automatic_retry": false,
+      "no_sha_validation": true,
+      "answer_persisted_as_source": false,
+      "scope": "Actual public initial cold/fixed-receipt-K observation/menu and saved model input. Same EvidenceOperations and four-step fixed_context continuation as paper feedback. Replay work counters restored separately from actual measured cost, as existing collected_handoff; no Source data or original labels changed. Core operation packet, not a rerun of full public-message/admission history. Explicit referenced prior K plus current real acquired packet, not autonomous Host.",
+      "generation_before": {
+        "charged_tokens": 448020083,
+        "known_tokens": 447394918,
+        "unknown_usage": 16
+      },
+      "generation_requests_before": 90595,
+      "active": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-known-query-readouts-v1/case-015/packet-0/readout.json",
+      "compute": {
+        "cpu_seconds": 1.8665178620000002,
+        "wall_seconds": 205.7164313197136,
+        "runs": 1
+      },
+      "generation_delta": {
+        "charged_tokens": 54075,
+        "known_tokens": 54075,
+        "unknown_usage": 0
+      }
+    },
+    "public_teacher_status": "RUNNING32states112outcomes"
+  },
+  "M6_view6_closed": {
+    "status": "30_ACTUAL_VIEW_BRANCH_FIRSTS_SOURCE_REVIEWED",
+    "families": 5,
+    "states": 6,
+    "branches": 30,
+    "answer_grades": {
+      "C": 3,
+      "F": 4,
+      "W": 17,
+      "Q": 6
+    },
+    "common_continuation_grades": {
+      "C": 2,
+      "F": 3,
+      "W": 10,
+      "Q": 3
+    },
+    "separate_mechanism_grades": {
+      "F": 1,
+      "C": 1,
+      "W": 7,
+      "Q": 3
+    },
+    "generation_delta": {
+      "charged_tokens": 299846,
+      "known_tokens": 299846,
+      "unknown_usage": 0
+    },
+    "material_budget_rejections": 13,
+    "empty_new_packets": [
+      "case00_refresh_only",
+      "case01_refresh_only",
+      "case03_refresh_only",
+      "case05_refresh_only"
+    ],
+    "scope": "Conditional full original Host contexts, otherbatchreceipts fixed; Root nonblind/nonindependent sourceauthor. Commoncontinuation18 and immediatehandoff12 separate. C onlyatunchangedA05; no demonstrated relevantupdate benefit. No semantic quality labels inferred just fromoperationname or answergrade. No feedback fit exports yet.",
+    "no_sha_validation": true
+  },
+  "closed_compute_recorded": "/data/milai-experiments/20261111-scalable-evidence/phase18-closed-compute-v1.json",
+  "verification": {
+    "teacher_and_known_receipt_tests_passed": 11,
+    "actual_public_branches": 112,
+    "ruff": "passed",
+    "package_boundary": "passed",
+    "tools_boundary": "same6legacydynamicimports inoldLMEowners; no newfinding"
+  },
+  "remaining": [
+    "Closepublicteacher32 andcompile fullknown/directionalsemanticfeedback usingits32boundrawstates; privateK-awareteacher enabled. Full112firstoutcomes alreadybound. Do not reuseQASPER collectionlookup forpublicrawexports.",
+    "Execute last32paper153, thennew177859 preparedfirstreadouts; sufficientknownfeedbackS2/SFT stillnotcompleted.",
+    "Finishrepeatseed1, preparedseed2pair, full36k3390; no newconfirmation96 consumed.",
+    "Remaining12continuousfamilies, actualSource/View role/time learning, postS2aggregation andfullgeneralization/cost remain."
+  ],
+  "scope": "Progress, notgoalcompletion. NoProduct/API/permission/Canonical modifications, no service restart/push/subagents. Allfirstfailures/unknowns/roles preserved. SourceViewgrades not converted automaticallyintofitlabels."
+}

@@ -11,11 +11,13 @@ from typing import Any
 import httpx
 import pytest
 from jsonschema import Draft202012Validator
+from langchain_core.embeddings import Embeddings
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.datasets.edit_benchmarks import ObservedSession
 from milai_lab.harness.artifact_io import read_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_memory import EditMemory
@@ -111,20 +113,20 @@ def test_temporary_changes_locate_then_use_existing_editor_without_becoming_memo
             assert packet["evidence"][1]["text"].startswith("Review Thursday")
             record = next(r for r in packet["records"] if r["matter"] == "Review schedule")
             clause = {"text": "User reports review Thursday.", "evidence": ["e2"],
-                      "assertion": {"source": "e2", "kind": "reported"}}
+                      "assertion": {"source_evidence": "e2", "kind": "reported"}}
             if arm in {"B0", "B2"}:
                 change = {"action": "rewrite", "clauses": [
                     {**clause, **({"conditions": []} if arm == "B2" else {})}
                 ]}
             else:
                 change = {"action": "edit", "edits": [{
-                    **clause, "operation": "change_value" if arm == "M" else "replace",
+                    **clause, "operation": "replace",
                     "target_unit": record["clauses"][0]["id"],
                 }]}
             envelope = {"creates": [{
                 "action": "create", "matter": "Ceramics plan", "clauses": [{
                     "text": "User plans ceramics Friday.", "evidence": ["e2"],
-                    "assertion": {"source": "e2", "kind": "reported"},
+                    "assertion": {"source_evidence": "e2", "kind": "reported"},
                     **({"conditions": []} if arm in {"B2", "M"} else {}),
                 }],
             }], "records": {record["id"]: change}}
@@ -274,6 +276,28 @@ def test_context_admission_matches_transported_thinking_mode(tmp_path: Path) -> 
                 response = read_json(tmp_path / "http" / key / "response.json")
                 assert saved["prompt_tokens"] == response["usage"]["prompt_tokens"]
 
+    run.settings["model"] = {"max_tokens": 1, "enable_thinking": True}
+    run.settings["stage_enable_thinking"] = {"reader": False}
+    with VLLMClient(
+        VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=1, enable_thinking=True),
+        transport=httpx.MockTransport(provider),
+    ) as client:
+        run.client = client
+        assert not run._fits(messages, enable_thinking=run.stage_thinking("reader"))
+        sent_before = len(sent)
+        with pytest.raises(ValueError, match="Context unavailable without loss"):
+            run.call("explicit-nonthinking-too-large", messages, structured=False,
+                     enable_thinking=run.stage_thinking("reader"))
+        assert len(sent) == sent_before
+        run.settings["context_tokens"] = nonthinking_count + 1 + 512
+        assert run.call("explicit-nonthinking", messages, structured=False,
+                        enable_thinking=run.stage_thinking("reader")) == "answer"
+        saved = read_json(tmp_path / "http/explicit-nonthinking/request.json")
+        wire = sent[-1]
+        assert wire["chat_template_kwargs"]["enable_thinking"] is False
+        assert saved["enable_thinking"] is False and saved["prompt_tokens"] == nonthinking_count
+        assert client.config.enable_thinking is True
+
 
 def observation(session: str, text: str) -> ObservedSession:
     return ObservedSession(
@@ -398,7 +422,7 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
         )
         requests.append(packet)
         evidence = packet["evidence"][0]["id"]
-        assertion = {"source": evidence, "kind": "reported"}
+        assertion = {"source_evidence": evidence, "kind": "reported"}
         if not packet["records"]:
             assert schema["properties"]["records"]["properties"] == {}
             envelope = {
@@ -425,7 +449,7 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
                 ]}
             else:
                 change = {"action": "edit", "edits": [
-                    {"operation": "change_value" if arm == "M" else "replace",
+                    {"operation": "replace",
                      "target_unit": unit["id"], "text": "Project schedule Thursday",
                      "evidence": [evidence], "assertion": assertion}
                 ]}
@@ -822,6 +846,162 @@ def test_shared_recipe_benchmark_persists_predictions_without_repeating_calls(tm
     assert summary["requests_without_confirmed_responses"] == 0
 
 
+def test_independent_benchmark_recipe_commits_edits_and_retrieves_both_routes(tmp_path):
+    """Actual new-mode contracts; scripted choices do not certify model semantics."""
+    run = execution(tmp_path, "M")
+    run.settings.update(
+        config_version="synthetic-dynamic-v1", maintenance_recipe="extract_then_edit",
+        maintenance_mode="event_delta_v1", memory_profile="unified_v1",
+        memory_view_mode="direct", source_access="independent_v1", source_top_k=20,
+        semantic_top_k=10, reader_projection="semantic_units_v1", source_tokens=40,
+        edit_features=EditFeatures(True, True, True, True, True, True).settings(),
+    )
+    seed_text = "Use paper labels. Keep box tracking."
+    correction_text = "Use linen labels now."
+    events = [
+        ObservedSession("first", "2030-01-01", tuple(
+            {"role": role, "content": text, "timestamp": "2030-01-01"}
+            for role, text in (("user", seed_text), ("assistant", "Noted."),
+                               ("user", "Keep box tracking."),
+                               ("assistant", "An assistant note with no new user request."))
+        )),
+        ObservedSession("second", "2030-01-02", (
+            {"role": "user", "content": correction_text, "timestamp": "2030-01-02"},
+            {"role": "assistant", "content": "Noted.", "timestamp": "2030-01-02"},
+        )),
+    ]
+
+    class Vectors(Embeddings):
+        def __init__(self):
+            self.documents = []
+
+        def embed_documents(self, texts):
+            self.documents.extend(texts)
+            return [[1.0, 0.0] for _ in texts]
+
+        def embed_query(self, text):
+            return [1.0, 0.0]
+
+    vectors = Vectors()
+    calls = []
+    active = events[0]
+    expected_triggers = []
+
+    def provider(request):
+        wire = json.loads(request.content)
+        payload = json.loads(wire["messages"][1]["content"])
+        calls.append(payload)
+        bound = service.public_turn(active.session_id)
+        assert bound and bound["message_id"] in expected_triggers
+        assert bound["source_ref"] == service.event_id(
+            active.session_id, bound["message_id"], "user")
+        if "directory" in payload:
+            envelope = {"record_ids": [row["record_id"] for row in payload["directory"]],
+                        "done": True}
+        else:
+            packet = payload["delivery"]
+            actual_turns = [int(service.source(ref["source_ref"])["capture_key"].split(":")[-1])
+                            for ref in current_sources[batch_index]]
+            assert bound["message_id"] == expected_triggers[batch_index]
+            assert int(bound["message_id"].split(":")[-1]) <= max(actual_turns)
+            current = packet["evidence"]
+            changing = next((e for e in current if e["text"] in {
+                seed_text, correction_text}), None)
+            if "changes" in payload["response_schema"]["properties"]:
+                envelope = {"changes": ([{
+                    "subject": "Labels", "statement": changing["text"],
+                    "evidence": [changing["id"]], "time": None, "scope": None,
+                }] if changing else [])}
+            elif changing is None:
+                envelope = {"creates": [], "records": {}}
+            elif changing["text"] == seed_text:
+                envelope = {"creates": [{"action": "create", "matter": "Label handling",
+                    "clauses": [{"text": text, "conditions": [],
+                                 "evidence": [changing["id"]],
+                                 "assertion": {"source_evidence": changing["id"],
+                                               "kind": "reported"}}
+                                for text in ("Labels are paper.", "Box tracking is required.")]
+                }], "records": {}}
+            else:
+                record = packet["records"][0]
+                envelope = {"creates": [], "records": {record["id"]: {
+                    "action": "edit", "edits": [{"operation": "replace",
+                        "target_unit": record["clauses"][0]["id"], "text": "Labels are linen.",
+                        "evidence": [changing["id"]], "assertion": {
+                            "source_evidence": changing["id"], "kind": "reported"}}]}}}
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop", "message": {
+            "content": json.dumps(envelope)}}], "usage": {"total_tokens": 8}})
+
+    # Observe the real batch/public-turn binding at the ordinary transport boundary.
+    original_call = run.call
+    batch_index = 0
+    current_sources = []
+
+    def call(key, messages, **kwargs):
+        nonlocal batch_index
+        batch_index = int(key.split("/batch-", 1)[1].split("/", 1)[0])
+        return original_call(key, messages, **kwargs)
+
+    run.call = call
+    with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
+                    transport=httpx.MockTransport(provider)) as client, \
+            SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        run.client = client
+        service = MemoryService(
+            store, ("dynamic", "alice"), "alice", tmp_path / "lock",
+            mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+            functional_contract="functional_v1", memory_profile="unified_v1",
+            semantic_retriever=SemanticRetriever(vectors, 2),
+        )
+        assert service.support_contract == "direct_support_v1"
+        for event_index, active in enumerate(events):
+            batches = natural_source_batches(active, run.tokenizer, run.settings["source_tokens"])
+            expected_triggers = ["turn:" + str(max(i for i in range(batch[-1]["turn"] + 1)
+                                                  if active.turns[i]["role"] == "user"))
+                                 for batch in batches]
+            current_sources = [[{"source_ref": service.event_id(
+                active.session_id, f"turn:{part['turn']}", active.turns[part["turn"]]["role"])}
+                for part in batch] for batch in batches]
+            key = f"halumem/alice/{event_index}"
+            changed = run.maintain(service, active, key)
+            complete = read_json(tmp_path / "maintenance" / key / "complete.json")
+            assert len(changed) == 1 and complete["status"] == "completed"
+            assert complete["unprocessed"] == []
+            committed = [r for r in complete["receipts"] if r["status"] == "committed"]
+            assert len(committed) == 1 and committed[0]["effect"] == "memory_only"
+            record = service.read(committed[0]["id"])["value"]
+            assert record["revision"] == event_index + 1
+            assert set(record["field_support"]) == {"content", "scope", "basis", "kind"}
+            if event_index == 0:
+                initial = copy.deepcopy(record)
+                assert expected_triggers[0] == "turn:0" and expected_triggers[-1] == "turn:2"
+            else:
+                assert record["edit_state"]["units"][1] == initial["edit_state"]["units"][1]
+                assert service.read(committed[0]["id"], 1)["value"] == initial
+            before_calls = len(calls)
+            assert run.maintain(service, active, key) == changed and len(calls) == before_calls
+
+        before_sources = service.sources()
+        materials = run.retrieve_material(service, "linen labels", "2030-01-02", "check")
+        assert {m["kind"] for m in materials} >= {"original_source", "semantic_view"}
+        assert any(m.get("record_id") == committed[0]["id"] for m in materials)
+        assert service.sources() == before_sources and vectors.documents
+        orphan = ObservedSession("assistant-only", "2030-01-03", (
+            {"role": "assistant", "content": "A historical assistant note.",
+             "timestamp": "2030-01-03"},
+        ))
+        before = service.records()
+        assert run.maintain(service, orphan, "halumem/alice/2") == []
+        gap = read_json(tmp_path / "maintenance/halumem/alice/2/complete.json")
+        assert gap["status"] == "incomplete"
+        assert gap["unprocessed"] == [{"phase": "public_turn_binding",
+                                        "reason": "public_user_source_required"}]
+        assert service.public_turn(orphan.session_id) is None
+        assert service.records() == before and len(calls) == before_calls
+        assert [s["role"] for s in service.sources() if s["session"] == orphan.session_id] == [
+            "assistant"]
+
+
 def test_shared_benchmark_source_and_reader_use_declared_nominal_calendar(tmp_path):
     run = execution(tmp_path, "M")
     run.settings.update(
@@ -962,7 +1142,10 @@ def test_predict_then_score_reuses_saved_answers_and_diagnostic_retrieval(tmp_pa
                     transport=httpx.MockTransport(provider)) as client:
         run.client = client
         predicted = run.halumem("predict")
-        assert predicted == {"status": "PREDICTIONS_SAVED", "sessions": 1, "judge_calls": 0}
+        assert predicted == {
+            "status": "PREDICTIONS_SAVED", "sessions": 1, "judge_calls": 0,
+            "complete_answers": 1, "known_reader_failures": 0,
+        }
         assert judge_calls == []
         snapshot = run.root / "predictions/halumem/alice/0/complete.json"
         original = snapshot.read_bytes()
@@ -1332,6 +1515,7 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
                         "interface_version": "I2", "additional_reads": 2})
     budget = RunBudget(RunLimits(generation_requests=6), tmp_path / "budget.json")
     final_ids = {}
+    selection_budgets = {}
 
     def factory(settings, root):
         run = execution(root, "M")
@@ -1343,6 +1527,17 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
             if "candidates" in packet:
                 assert {row["record_id"] for row in packet["candidates"]} == {
                     "actual-marker", "actual-poster"}
+                mode = settings["memory_view_mode"]
+                selection_budgets.setdefault(mode, []).append(packet["remaining_reads"])
+                system = wire["messages"][0]["content"]
+                if mode == "staged":
+                    assert "This call is the one selection before the final answer." in system
+                    assert "selected whole matters are delivered directly" in system
+                    assert "Previously opened bodies can be loaded again." not in system
+                    assert "Selecting another matter replaces the resident body" not in system
+                else:
+                    assert "Previously opened bodies can be loaded again." in system
+                    assert "Selecting another matter replaces the resident body" in system
                 first = not packet["opened_ids"]
                 content = json.dumps({"record_ids": ["actual-marker" if first else "actual-poster"],
                                       "keep_resident": not first, "done": not first})
@@ -1368,8 +1563,13 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
     compare(baseline, config, output, "fixture-only", [key])
     assert final_ids == {"legacy": ["actual-marker", "actual-poster"], "staged": ["actual-marker"],
                          "state_driven": ["actual-marker", "actual-poster"]}
+    assert selection_budgets == {"staged": [1], "state_driven": [2, 1]}
     for mode, requests in (("legacy", 1), ("staged", 2), ("state_driven", 3)):
-        assert read_json(output / mode / "terminal.json")["generation_requests"] == requests
+        terminal = read_json(output / mode / "terminal.json")
+        assert terminal["generation_requests"] == requests
+        assert terminal["generation_known_tokens"] == requests * 8
+        assert terminal["new_generation_unknown"] == 0
+        assert terminal["embedding_known_tokens"] == 0
         assert read_json(output / mode / "http" / key / "retrieval.json") == memories
     assert {p.name: p.read_bytes() for p in (baseline / "http" / key).iterdir()} == inputs
     assert budget.state["generation_requests"] == 6

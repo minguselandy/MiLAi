@@ -16,7 +16,7 @@ from dataclasses import asdict, replace
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 
 from milai_lab.methods.contextual_memory.decision_basis import (
     DecisionBasis,

@@ -1,0 +1,94 @@
+{
+  "status": "CLOSED_TASK_AND_RETURNED_VIEW_REVIEWED",
+  "source_version": "d8447495",
+  "source_groups": 4,
+  "positions": 32,
+  "streams": 8,
+  "split": "exposed_train",
+  "grades": {
+    "rules-rich": {
+      "Q": 8,
+      "W": 4,
+      "F": 4,
+      "C": 16
+    }
+  },
+  "by_group": {
+    "memops_B06": {
+      "Q": 5,
+      "W": 2,
+      "F": 1
+    },
+    "memops_C26": {
+      "C": 6,
+      "F": 2
+    },
+    "memops_D11": {
+      "Q": 3,
+      "C": 4,
+      "F": 1
+    },
+    "memops_F08": {
+      "C": 6,
+      "W": 2
+    }
+  },
+  "generation_tokens": 276431,
+  "generation_requests": 47,
+  "generation": {
+    "charged_tokens": 276431,
+    "known_tokens": 276431,
+    "unknown_usage": 0
+  },
+  "wall_seconds": 926.8824241496623,
+  "cpu_seconds_nested": 42.060836048,
+  "tool_calls": 8,
+  "final_arrivals": {
+    "positions": 8,
+    "tool_calls": 0,
+    "grades": {
+      "W": 4,
+      "F": 3,
+      "Q": 1
+    }
+  },
+  "returned_view_count": 2,
+  "stages": {
+    "host_request": {
+      "requests": 8,
+      "tokens": 14808,
+      "http_wall_seconds": 27.85257366579026
+    },
+    "view_generation": {
+      "requests": 7,
+      "tokens": 27047,
+      "http_wall_seconds": 37.00439295172691
+    },
+    "host_completion": {
+      "requests": 28,
+      "tokens": 185453,
+      "http_wall_seconds": 578.1245361790061
+    },
+    "host_incomplete": {
+      "requests": 4,
+      "tokens": 49123,
+      "http_wall_seconds": 214.82411458250135
+    }
+  },
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-b-rules-review-v1/results.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-b-rules-review-v1/author-review.json",
+  "view_review": "artifacts/host-intent-retrieval-v3/view-v4-b-rules-review-v1/view-review.json",
+  "limitations": [
+    "Four exposed training groups and one stochastic run; request positions are not independent samples.",
+    "All8 final-arrival positions lack a new tool call. Do not attribute this to a missed controller operation.",
+    "Valid old quotes can accompany wrong current answers; K reuse and updates require separate assessment.",
+    "Q reflects substantive qualifications/provenance and strict source-date interpretation; author grades are not official or independent.",
+    "Unreturned generated View semantics not fully reviewed."
+  ],
+  "compute": {
+    "wall_seconds": 3.020734716206789,
+    "cpu_seconds": 3.020618195
+  },
+  "ledger_recorded": true,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v22.json"
+}

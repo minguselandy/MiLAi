@@ -1,0 +1,1220 @@
+{
+  "version": "dynamic-memory-control-memops-intake-results-v1",
+  "status": "72_FIRST_ANSWERS_AND27_VIEW_CONTEXTS_REVIEWED",
+  "reviewer": "Codex author with visible method, source chronological contracts and original role-labelled turns; not independent or heldout.",
+  "cohorts": {
+    "pilot": {
+      "source_run": "memops-generative-shared-v1",
+      "families": 6,
+      "counts": {
+        "correct": 12,
+        "wrong": 19,
+        "no_answer": 3,
+        "qualified": 2
+      },
+      "costs": {
+        "attempted": 36,
+        "host_completed": 33,
+        "task_positions": 36,
+        "explicit_positions": 0,
+        "generation_known_tokens": 568466,
+        "generation_charged_tokens": 568466,
+        "generation_unknown_usage": 0,
+        "embedding_known_tokens": 0,
+        "embedding_charged_tokens": 0,
+        "embedding_unknown_usage": 0
+      },
+      "view_contexts": 15,
+      "view_task_sufficient": 10,
+      "view_task_inadequate": 2,
+      "view_task_masked": 3,
+      "view_review": "artifacts/dynamic-memory-control/memops-view-review-pilot-v1.json",
+      "rows": [
+        {
+          "history": "memops_A02",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available evidence:\n\n*   **Confirmed Current Department:** Strategic Analytics\n*   **Direct Manager:** Rachel Tseng\n*   **Status of Department Name Change:** The department was initially identified as \"Strategy & Insights,\" but this has been corrected and the official name is confirmed as **Strategic Analytics**. Therefore, the change to Strategic Analytics is a current reality, not just a planned or proposed future event.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/e941858a-c044-4911-9d28-64d8a865ba34-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/e941858a-c044-4911-9d28-64d8a865ba34-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Strategic Analytics, corrected from Strategy & Insights; Rachel Tseng is the direct manager. No pending department rename has yet been established.",
+          "note": null
+        },
+        {
+          "history": "memops_A02",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available evidence and conversation history, there is no recorded information regarding your confirmed current department, direct manager, or any planned, proposed, or cancelled department name changes at Meridian Consulting Group. The existing memory contains no records to distinguish between current, proposed, or cancelled arrangements for this request.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/8e0d45cf-7f3d-4d65-ac5a-72d8700e46c3-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/8e0d45cf-7f3d-4d65-ac5a-72d8700e46c3-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Strategic Analytics, corrected from Strategy & Insights; Rachel Tseng is the direct manager. No pending department rename has yet been established.",
+          "note": null
+        },
+        {
+          "history": "memops_A02",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the conversation records:\n\n*   **Confirmed Current Department:** Strategic Analytics (The department was initially stated as \"Strategy & Insights,\" but the confirmed official name is currently \"Strategic Analytics\").\n*   **Direct Manager:** Rachel Tseng.\n*   **Planned Name Changes:** A rebrand to **Applied Strategy & Analytics** is **planned** to take effect starting next quarter.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/f0f4f626-a849-4b62-943b-4ea5c6a4a091-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/f0f4f626-a849-4b62-943b-4ea5c6a4a091-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Current department remains Strategic Analytics and manager Rachel Tseng. Applied Strategy & Analytics is reported as a next-quarter rebrand, not an already effective current name; calendar anchor is unknown.",
+          "note": null
+        },
+        {
+          "history": "memops_A02",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the current conversation and available records, there is no information on file regarding your confirmed current department, direct manager, or the status of any department name changes at Meridian Consulting Group. The conversation history does not contain these details, so I cannot currently distinguish between any current, proposed, or cancelled information.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/8ec16a88-6902-4067-9075-a539b446b3b8-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/8ec16a88-6902-4067-9075-a539b446b3b8-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Current department remains Strategic Analytics and manager Rachel Tseng. Applied Strategy & Analytics is reported as a next-quarter rebrand, not an already effective current name; calendar anchor is unknown.",
+          "note": null
+        },
+        {
+          "history": "memops_A02",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "I cannot determine your confirmed current department, direct manager, or the status of any department name change (current, proposed, or cancelled) at Meridian Consulting Group. The current conversation history and memory evidence provided in the context do not contain the records or source text required to verify these details.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/f0b42663-2057-4f0d-9a9b-f32de63ceb78-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/f0b42663-2057-4f0d-9a9b-f32de63ceb78-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Strategic Analytics remains current and Rachel Tseng remains the manager. The planned rebrand was shelved; Strategy & Insights on the old form is stale.",
+          "note": null
+        },
+        {
+          "history": "memops_A02",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the conversation history:\n\n**Current Information:**\n- **Department:** Your confirmed current department at Meridian Consulting Group is **Strategic Analytics** (which replaced the earlier 'Strategy & Insights').\n- **Direct Manager:** Your direct manager is **Rachel Tseng**.\n\n**Cancelled/Unplanned Information:**\n- **Name Change:** The planned rebrand of your department to 'Applied Strategy & Analytics' is currently **cancelled/shelved** due to budget restructuring.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/06259172-7506-40e8-bb81-92979875a3f8-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/0ac4731f-f59f-4d7f-b53f-0b49dfd2014b/06259172-7506-40e8-bb81-92979875a3f8-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Strategic Analytics remains current and Rachel Tseng remains the manager. The planned rebrand was shelved; Strategy & Insights on the old form is stale.",
+          "note": null
+        },
+        {
+          "history": "memops_B01",
+          "step": "stage-0",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/8b69964f-1b3e-4517-8554-f90535fe118a-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/8b69964f-1b3e-4517-8554-f90535fe118a-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "expected": "Quiet, low-key one-on-one hangouts such as the corner-booth ramen visits with Darren; do not infer a diagnosis or an absolute preference covering every setting.",
+          "note": null
+        },
+        {
+          "history": "memops_B01",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on your past descriptions, you prefer small-group social interactions, specifically favoring one-on-one settings over large group energies. You value low-pressure, intimate social rituals that facilitate spontaneity and proximity, such as weeknight hangouts that do not require extensive planning.\n\nA key example supporting this preference is your recurring ritual of grabbing ramen at a specific spot on Hawthorne with Darren Liu. You sit in a quiet corner booth during these meetups, which you have identified as your preferred type of 'hangout'. This preference reflects your personal social style and is distinct from Darren's career plans or other external factors.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/96aa2356-7427-4b98-945f-be9f30c63f8b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/96aa2356-7427-4b98-945f-be9f30c63f8b-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Quiet, low-key one-on-one hangouts such as the corner-booth ramen visits with Darren; do not infer a diagnosis or an absolute preference covering every setting.",
+          "note": null
+        },
+        {
+          "history": "memops_B01",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on what you have actually said so far:\n\n**Preferred Social Setting**\nYou prefer small-group interactions, specifically favoring one-on-one settings over large group energies. You value low-pressure, intimate social rituals that allow for spontaneity and proximity-based meetups (such as weeknight hangouts that don't require extensive planning).\n\n**Supporting Examples**\n- You engage in a recurring one-on-one social ritual with Darren Liu to grab ramen at a specific spot on Hawthorne, where you sit in a quiet corner booth.\n- You explicitly identify this one-on-one ramen hangout as your preferred type of \"hangout\" (occurring at least twice a month).\n\nThese preferences focus on your direct social desires, distinct from other people's external plans, career goals, or relationship friction.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/de5daf33-0ff9-402f-a770-bf45d5e1f646-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/de5daf33-0ff9-402f-a770-bf45d5e1f646-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Intimate, quiet settings with one or two people: ramen corner booth and a small dive bar with conversation, preferred over crowded trendy bars and large outings.",
+          "note": null
+        },
+        {
+          "history": "memops_B01",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "I cannot determine your preferred social setting or supporting examples because the delivered memory evidence is empty. No record of your previous statements is currently accessible to me to distinguish your preferences from other people's plans.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/90ba1a05-c6d9-4813-a43b-866a63f08170-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/90ba1a05-c6d9-4813-a43b-866a63f08170-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Intimate, quiet settings with one or two people: ramen corner booth and a small dive bar with conversation, preferred over crowded trendy bars and large outings.",
+          "note": null
+        },
+        {
+          "history": "memops_B01",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available memory and history, there are no records of your preferred social setting. I have found no statements from you describing your preferences or providing examples. Consequently, I cannot distinguish your preferences from other people's plans.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/b71c6f4c-503a-481d-a9f0-7da07db83ad8-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/b71c6f4c-503a-481d-a9f0-7da07db83ad8-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "The same bounded quiet/intimate preference remains supported; Darren’s possible move and offers do not reverse the user’s social preference.",
+          "note": null
+        },
+        {
+          "history": "memops_B01",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available evidence, there is no record of past interactions or stated preferences in the current context. Therefore, I cannot determine your preferred social setting or provide supporting examples at this time.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/04171dd0-b586-49f2-8595-e2650ea6d9b5-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/9a59df93-0149-4118-858a-b83f57ef6e94/04171dd0-b586-49f2-8595-e2650ea6d9b5-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "The same bounded quiet/intimate preference remains supported; Darren’s possible move and offers do not reverse the user’s social preference.",
+          "note": null
+        },
+        {
+          "history": "memops_C02",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "The current records do not contain the confirmed deadline for the community arts grant application, nor is there any definition of the personal buffer rule provided to calculate the completion date.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/5480551d-a425-451b-a9ee-f1bf0bb0d99e-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/5480551d-a425-451b-a9ee-f1bf0bb0d99e-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Grant deadline April 18; the three-day early-completion rule implies April 15. The lease and workshop deadlines are separate.",
+          "note": null
+        },
+        {
+          "history": "memops_C02",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the provided records, the confirmed deadline for your community arts grant application is April 18. Applying your personal buffer rule of finishing tasks at least three days before the actual due date, the completion date is April 15.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/f5564ed0-c4d4-4acc-88e7-f0ea3ddd14b6-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/f5564ed0-c4d4-4acc-88e7-f0ea3ddd14b6-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Grant deadline April 18; the three-day early-completion rule implies April 15. The lease and workshop deadlines are separate.",
+          "note": null
+        },
+        {
+          "history": "memops_C02",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available records and current memory, no confirmed deadline has been found for the community arts grant application. Additionally, no record of a personal buffer rule exists to establish a derived completion date. No other deadlines or unconfirmed proposals are currently present in the evidence.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/40bf4790-6a1d-440c-a8e6-0955fbf5b41d-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/40bf4790-6a1d-440c-a8e6-0955fbf5b41d-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Grant deadline moved to April 14; personal completion target April 11.",
+          "note": null
+        },
+        {
+          "history": "memops_C02",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the currently available records and memory evidence, there is no confirmed deadline for your community arts grant application, nor are there any records of a personal buffer rule or the resulting completion date. The requested details are not present in the provided context.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/14b37be5-ac39-485c-bb0d-b3a5cf4d8959-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/14b37be5-ac39-485c-bb0d-b3a5cf4d8959-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Grant deadline moved to April 14; personal completion target April 11.",
+          "note": null
+        },
+        {
+          "history": "memops_C02",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the delivered memory evidence, no confirmed deadline was found for your community arts grant application. Similarly, no record of a personal buffer rule exists to calculate a completion date. The current records also do not contain any other deadlines or unconfirmed proposals.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/427d05c7-6c01-4f23-a1de-471ec5ec5f93-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/427d05c7-6c01-4f23-a1de-471ec5ec5f93-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Confirmed grant deadline April 14 and personal target April 11. April 22 grant extension was a rejected proposal, distinct from lease planning.",
+          "note": null
+        },
+        {
+          "history": "memops_C02",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "From the records, the confirmed deadline for your community arts grant application is April 14. Based on your personal buffer rule (completing tasks three days before the due date), the target completion date is April 11. Other deadlines and unconfirmed proposals are kept separate as requested.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/d2e82910-f23f-42cb-a867-545f1d969d33-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/32a86e82-c607-4f57-b388-4fb396dd6f95/d2e82910-f23f-42cb-a867-545f1d969d33-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Confirmed grant deadline April 14 and personal target April 11. April 22 grant extension was a rejected proposal, distinct from lease planning.",
+          "note": null
+        },
+        {
+          "history": "memops_D02",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on your latest confirmed reports, the spec sheet should currently show:\n\n- **Laptop Model:** ThinkPad X1 Carbon Gen 11 (14-inch matte display)\n- **Native Screen Resolution:** 2560 x 1600 (16:10 aspect ratio)\n\nThis confirms the 2560 x 1600 resolution, distinguishing it from the formerly reported and incorrect entry of 2560 x 1440.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/5b245b4c-6415-41be-b7c5-fa6ec7bdafda-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/5b245b4c-6415-41be-b7c5-fa6ec7bdafda-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "ThinkPad X1 Carbon Gen 11; resolution corrected to 2560 by 1600. The earlier 2560 by 1440 entry was wrong.",
+          "note": null
+        },
+        {
+          "history": "memops_D02",
+          "step": "stage-0-repeat",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/be5f0db0-6918-4313-81c9-81232268fe14-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/be5f0db0-6918-4313-81c9-81232268fe14-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "expected": "ThinkPad X1 Carbon Gen 11; resolution corrected to 2560 by 1600. The earlier 2560 by 1440 entry was wrong.",
+          "note": null
+        },
+        {
+          "history": "memops_D02",
+          "step": "stage-1",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/42228b5a-640c-4902-bcd6-b5854d32b30a-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/42228b5a-640c-4902-bcd6-b5854d32b30a-trace-0.jsonl",
+          "control_path": [],
+          "grade": "no_answer",
+          "expected": "ThinkPad X1 Carbon Gen 11; user now reports 1920 by 1200 from both OS display checks. This is a report in the source, not independent hardware verification.",
+          "note": null
+        },
+        {
+          "history": "memops_D02",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on your latest confirmed reports in this conversation, the spec sheet should currently show:\n\n**Laptop Model:** ThinkPad X1 Carbon Gen 11 (14-inch matte display)\n\n**Native Screen Resolution:** 2560 x 1600 (16:10 aspect ratio)\n\n**Distinctions from other entries:**\n- **Old Incorrect Entry:** The previously reported 2560 x 1440 is explicitly superseded by your later self-correction.\n- **Conflicting/OS-Reported Values:** The later report of 1920 x 1200 (observed via Linux xrandr) is treated as a specific OS-reported or reduced display setting, rather than the hardware's confirmed native panel specification. Your explicit correction to 2560 x 1600 remains the definitive native resolution driving the spec sheet.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/2af23237-5852-4230-9818-184329223ed9-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/2af23237-5852-4230-9818-184329223ed9-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "ThinkPad X1 Carbon Gen 11; user now reports 1920 by 1200 from both OS display checks. This is a report in the source, not independent hardware verification.",
+          "note": null
+        },
+        {
+          "history": "memops_D02",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available memory evidence and maintenance receipts, there are no latest confirmed reports, semantic commits, or history entries regarding a laptop model and native screen resolution. The system indicates that no such data has been saved or verified in the current conversation context.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/e45a5bf5-63f9-4677-a799-6f44ec98f0ee-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/e45a5bf5-63f9-4677-a799-6f44ec98f0ee-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "ThinkPad X1 Carbon Gen 11; keep 1920 by 1200 following the user’s direct recheck. Priya’s 2880 by 1800 lookup is disputed; 2560 by 1440 in an old email is explicitly stale.",
+          "note": null
+        },
+        {
+          "history": "memops_D02",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "No latest confirmed laptop model or native screen resolution is available to update the spec sheet. The delivered evidence and visible memory are empty, containing no records to distinguish from proposed, third-party, or old incorrect entries.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/2d8c4dcf-c9b1-4401-8d5c-31bc015f06c5-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/26241307-3e68-46ce-9425-034a07ee0868/2d8c4dcf-c9b1-4401-8d5c-31bc015f06c5-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "ThinkPad X1 Carbon Gen 11; keep 1920 by 1200 following the user’s direct recheck. Priya’s 2880 by 1800 lookup is disputed; 2560 by 1440 in an old email is explicitly stale.",
+          "note": null
+        },
+        {
+          "history": "memops_E01",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the delivered evidence:\n\n**Expressed Preference & Intention:** You strongly prefer communicating dates in writing (such as via email or Slack) rather than verbally, as written formats allow for verification and help prevent mixing up months under time pressure. You also have a stated intention to \"over-prepare with notes\" before meetings rather than winging it.\n\n**Actually Reported Use:** You have not yet implemented or actively used any specific written aids or safety nets during meetings. Despite your stated preference to use notes, your actual reported strategies have been limited to self-reflection, self-criticism, seeking external advice, and relying on a colleague (Raj) for real-time verbal support during client calls.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/ff525bb5-3d77-4896-95fb-2111ba1d792b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/ff525bb5-3d77-4896-95fb-2111ba1d792b-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "qualified",
+          "expected": "Prefers written dates so they can be checked; would rather prepare notes than improvise verbal dates under pressure. Actual use of a sticky-note system is not yet reported.",
+          "note": "Turns not-yet-reported aid use into categorical non-use; preference is correct but qualification is lost."
+        },
+        {
+          "history": "memops_E01",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the current evidence, there is no information recorded regarding your preferred method of communicating dates, nor is there any established data concerning your use of written aids during meetings. The available memory context contains no expressions of preference regarding dates and no reports of actual strategy usage for written aids.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/431c78fc-498c-4c89-9241-69d00dad9cb4-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/431c78fc-498c-4c89-9241-69d00dad9cb4-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Prefers written dates so they can be checked; would rather prepare notes than improvise verbal dates under pressure. Actual use of a sticky-note system is not yet reported.",
+          "note": null
+        },
+        {
+          "history": "memops_E01",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Preferred Communication Method:\nYou strongly prefer communicating dates in writing (via emails or Slack) rather than verbally, as this allows for verification. This preference arises from a persistent pattern of mixing up months during verbal delivery, particularly under time pressure.\n\nEstablished Use of Written Aids:\n*   **Expressed Preference/Intention:** You prefer to over-prepare with notes during meetings rather than 'winging it' to avoid errors.\n*   **Actually Reported Strategy:** You are currently using a sticky note on your monitor to externalize dates. This strategy involves listing key dates and refreshing the note daily. You have been actively using this system for about two weeks, and you report that it has successfully helped you intercept verbal errors under pressure.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/9ee05105-ee66-4627-ad96-4f637f9282e0-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/9ee05105-ee66-4627-ad96-4f637f9282e0-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Still prefers written communication. Has actually used monitor sticky notes for about two weeks, writes them fresh each morning and updates them as dates change; reports catching a verbal mistake using a note. Anti-month notation is only something to try.",
+          "note": null
+        },
+        {
+          "history": "memops_E01",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "There is no record of your preference for communicating dates. Regarding your use of written aids during meetings, there is no established information, so no distinction can be made between an expressed preference or intention and a strategy that has been reported using.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/80f2cd12-61c5-4bf3-a95c-8f3af10ce485-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/80f2cd12-61c5-4bf3-a95c-8f3af10ce485-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Still prefers written communication. Has actually used monitor sticky notes for about two weeks, writes them fresh each morning and updates them as dates change; reports catching a verbal mistake using a note. Anti-month notation is only something to try.",
+          "note": null
+        },
+        {
+          "history": "memops_E01",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on your reported history, your **preference and intention** is to communicate dates in writing (such as emails or Slack) to allow for verification, and you prefer to over-prepare with notes during meetings rather than \"winging it.\"\n\nYour **established actual strategy** is that you are currently using a \"sticky note\" placed on your monitor that lists key dates. You refresh this note daily and have been using it for about two weeks, which has helped you successfully intercept verbal errors under time pressure.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/c20945ac-07c8-4411-a766-c09bec134b00-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/c20945ac-07c8-4411-a766-c09bec134b00-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Written communication remains preferred and sticky notes are an established helpful habit. Slower pacing and repeating dates are discussed supports; direct evidence of trying the repetition technique is not supplied. Keep intentions for the next client meeting distinct from past effects.",
+          "note": null
+        },
+        {
+          "history": "memops_E01",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available context, there is no recorded preference for communicating dates and no reported strategy for using written aids during meetings. The current memory evidence is empty.\n\nExpressed preference: Not recorded.\nReported strategy: Not recorded.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/eb56ecc0-8c83-425f-a084-6817f65dd778-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/246573ff-ba7a-4b45-a321-78bd5f63e668/eb56ecc0-8c83-425f-a084-6817f65dd778-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Written communication remains preferred and sticky notes are an established helpful habit. Slower pacing and repeating dates are discussed supports; direct evidence of trying the repetition technique is not supplied. Keep intentions for the next client meeting distinct from past effects.",
+          "note": null
+        },
+        {
+          "history": "memops_F07",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on your reported descriptions, the environment and activity characteristics that help you unwind, along with the supporting concrete examples, are:\n\n**Environment Characteristics**\n*   **Overcast and Low-Contrast Lighting:** You find gray skies, lower contrast, and softer light to be calming and conducive to decompression. This is supported by your reports of these conditions feeling \"calming\" compared to the \"visual noise\" of bright, high-contrast environments.\n*   **Quiet and Low-Sensory:** You prefer conditions that are quiet and have low sensory input. You report finding relief in these conditions, specifically contrasting them with the \"overwhelming\" nature of \"bright sunny days\" and \"crowded environments.\"\n*   **Solitude:** You find comfort in non-crowded spaces, distinguishing this from the \"social awareness\" and \"visual noise\" of crowded areas.\n\n**Activity Characteristics**\n*   **Self-Directed Movement:** You engage in \"evening walks\" where you are not constrained by a schedule or destination.\n*   **Leisurely Pacing:** You characterize the activity as \"slow wandering.\"\n*   **Local Scope:** You primarily undertake these activities within your neighborhood.\n\n**Concrete Examples**\n*   **Visuals/Weather:** \"Gray skies,\" \"lower contrast,\" and \"softer light\" are cited as the specific environmental features that provide \"relief\" and \"decompression.\"\n*   **Action:** \"Slow wandering without a set route\" and \"evening walks\" are the specific activities you reported doing.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/24a4c276-801c-4894-8b01-17b83d78608f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/24a4c276-801c-4894-8b01-17b83d78608f-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "qualified",
+          "expected": "Reports calming overcast solo evening walks and feeling overwhelmed by bright crowded settings. The broader inference should remain limited to these reports.",
+          "note": "Core pattern correct, but lower contrast/softer light and sensory elaborations originated in assistant explanations and are attributed as direct user descriptions."
+        },
+        {
+          "history": "memops_F07",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "I do not have access to any past descriptions or history in the current context to analyze your preferences. Since no evidence was retrieved regarding your reported history, I cannot identify the environment and activity characteristics that help you unwind or provide the concrete examples you are looking for.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/e06e8508-6158-4d7d-8c42-156d9ed46e71-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/e06e8508-6158-4d7d-8c42-156d9ed46e71-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Reports calming overcast solo evening walks and feeling overwhelmed by bright crowded settings. The broader inference should remain limited to these reports.",
+          "note": null
+        },
+        {
+          "history": "memops_F07",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on your descriptions, the characteristics that help you unwind center on low-sensory environments and gentle, self-paced activities. Concrete examples include:\n\n• **Activity:** Taking slow, self-directed evening walks in your neighborhood without a fixed route or destination.\n• **Environmental Conditions:** Preferring overcast days with gray skies, softer light, and lower contrast.\n• **Sensory Factors:** Seeking out quiet, solitary spaces while avoiding bright sunny days and crowded environments, which tend to feel overstimulating.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/72050139-030e-49cd-9ce7-402341ec284b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/72050139-030e-49cd-9ce7-402341ec284b-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "A bounded preference for quiet, low-stimulation activities: overcast solo walks, calm-voice-only meditation without layered sounds, and handwritten night journaling rather than screens.",
+          "note": null
+        },
+        {
+          "history": "memops_F07",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available memory and evidence provided in the current context, there are no descriptions recorded regarding your reported preferences for environments or activities that help you unwind. Consequently, I cannot summarize your characteristics or provide concrete examples for this topic.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/cf0b1094-88a0-4376-a4f8-373c98180d9c-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/cf0b1094-88a0-4376-a4f8-373c98180d9c-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "A bounded preference for quiet, low-stimulation activities: overcast solo walks, calm-voice-only meditation without layered sounds, and handwritten night journaling rather than screens.",
+          "note": null
+        },
+        {
+          "history": "memops_F07",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "I do not have access to any past descriptions regarding what helps you unwind. The available memory evidence is empty, so I cannot identify the specific environment and activity characteristics or provide examples.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/c6dcaede-3488-4062-bc90-7fbd9cd36f02-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/c6dcaede-3488-4062-bc90-7fbd9cd36f02-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "The same low-stimulation pattern remains supported, including quiet one-on-one conversations. Prefers solo walks for decompression while tolerating some social walks; Marcus’s high-energy group recommendation concerns Marcus, not the user.",
+          "note": null
+        },
+        {
+          "history": "memops_F07",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on your descriptions, your preferences for unwinding center on seeking low-stimulation, stripped-down environments and simple, tactile activities. Here are the specific characteristics and concrete examples from your history that support this:\n\n**Environment Characteristics:**\n- **Low-stimulation and stripped-down:** You prefer environments that minimize sensory noise and complexity. \n  - *Example:* You find overcast conditions (gray skies, lower contrast, softer light) most calming for decompression, whereas bright, high-contrast sunny days and crowded spaces tend to overwhelm you with visual and social input.\n- **Quiet and nighttime-focused:** You gravitate toward times of day that naturally lack background noise and social pressure. \n  - *Example:* You consistently report choosing evening and nighttime hours as your primary window for processing and unwinding.\n\n**Activity Characteristics:**\n- **Solitary and unstructured movement:** You prefer self-directed exploration without goals or strict routes. \n  - *Example:* Taking slow, wandering evening walks through your neighborhood.\n- **Analog and screen-free processing:** You rely on tactile, physical outlets to avoid the stimulating nature of digital devices. \n  - *Example:* Journaling by hand in a plain notebook at night.\n- **Minimalist audio focus:** When engaging with audio, you prefer raw simplicity without added soundscapes. \n  - *Example:* Finding guided meditations effective only when they feature a calm voice alone; you report that layered sounds like music, chimes, or nature recordings cause tension rather than relaxation.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/85d49dce-ff6a-4d69-9cdb-2e8070044cd3-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-generative-shared-v1/generative/banks/65cd77a8-ece9-48ff-806c-75e1ffdf6995/85d49dce-ff6a-4d69-9cdb-2e8070044cd3-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "The same low-stimulation pattern remains supported, including quiet one-on-one conversations. Prefers solo walks for decompression while tolerating some social walks; Marcus’s high-energy group recommendation concerns Marcus, not the user.",
+          "note": null
+        }
+      ]
+    },
+    "wave2": {
+      "source_run": "memops-wave2-generative-shared-v1",
+      "families": 6,
+      "counts": {
+        "correct": 11,
+        "wrong": 15,
+        "no_answer": 8,
+        "qualified": 2
+      },
+      "costs": {
+        "attempted": 36,
+        "host_completed": 28,
+        "task_positions": 36,
+        "explicit_positions": 0,
+        "generation_known_tokens": 610781,
+        "generation_charged_tokens": 610781,
+        "generation_unknown_usage": 0,
+        "embedding_known_tokens": 0,
+        "embedding_charged_tokens": 0,
+        "embedding_unknown_usage": 0
+      },
+      "view_contexts": 12,
+      "view_task_sufficient": 10,
+      "view_task_inadequate": 2,
+      "view_task_masked": 0,
+      "view_review": "artifacts/dynamic-memory-control/memops-view-review-wave2-v1.json",
+      "rows": [
+        {
+          "history": "memops_A01",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "According to the confirmed reports:\n\n- **Direct Manager**: Diane Kowalski.\n- **Current Title**: Data Analyst. The change from the previous title (Junior Data Analyst) was implemented in February, so this is the current fact rather than a plan.\n- **Base Salary**: This detail has not been supplied.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/3b3be783-1c36-480e-b8d1-95a4a1b04fc3-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/3b3be783-1c36-480e-b8d1-95a4a1b04fc3-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Current title Data Analyst, corrected from Junior Data Analyst; direct manager Diane Kowalski. Salary has not yet been supplied and no future title change is established in this prefix.",
+          "note": null
+        },
+        {
+          "history": "memops_A01",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the confirmed reports and memory evidence currently available, I have not found any records for your current title, base salary, or direct manager at Bridgemark Solutions. These details have not yet been supplied or saved.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/3c9fabba-fa57-4a06-af39-f7dfbdbe3e87-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/3c9fabba-fa57-4a06-af39-f7dfbdbe3e87-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Current title Data Analyst, corrected from Junior Data Analyst; direct manager Diane Kowalski. Salary has not yet been supplied and no future title change is established in this prefix.",
+          "note": null
+        },
+        {
+          "history": "memops_A01",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available records and confirmed reports, none of the requested details—including your current title, base salary, and direct manager at Bridgemark Solutions—have been supplied. Consequently, I cannot distinguish current facts from any planned title changes.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/b64084a3-af86-41f0-812f-2dfb75ce2830-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/b64084a3-af86-41f0-812f-2dfb75ce2830-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Current title Senior Data Analyst, effective immediately/as of the reported yesterday; annual base salary74500, not72000; manager Diane Kowalski. Do not invent a calendar date for yesterday.",
+          "note": null
+        },
+        {
+          "history": "memops_A01",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the confirmed reports:\n\n- **Current Title**: Senior Data Analyst. (This is the current title effective as of the most recent report. Previously, the title was Data Analyst following a restructuring in February, and earlier Junior Data Analyst).\n- **Base Salary**: $74,500 annually.\n- **Direct Manager**: Diane Kowalski.\n\nNo planned title changes were identified in the reports; the change to Senior Data Analyst was reported as having taken effect effective 'yesterday' relative to the report date.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/ab84918b-a0a7-4287-82a5-d70d3feed2ea-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/ab84918b-a0a7-4287-82a5-d70d3feed2ea-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Current title Senior Data Analyst, effective immediately/as of the reported yesterday; annual base salary74500, not72000; manager Diane Kowalski. Do not invent a calendar date for yesterday.",
+          "note": null
+        },
+        {
+          "history": "memops_A01",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the confirmed reports and available context, the requested details—current title, base salary, and direct manager at Bridgemark Solutions—have not yet been supplied. No records exist in the current evidence to establish these facts or to distinguish them from planned changes.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/2ae6a89d-2424-4c9e-bfbe-2eac7d7d98e0-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/2ae6a89d-2424-4c9e-bfbe-2eac7d7d98e0-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Senior Data Analyst,74500annual base, Diane Kowalski. Lead Data Analyst is a not-yet-finalized next-quarter plan; old templates and other departments do not change the current title.",
+          "note": null
+        },
+        {
+          "history": "memops_A01",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available evidence, there are no confirmed reports or memory records detailing your role at Bridgemark Solutions. Consequently, your current title, base salary, and direct manager are missing. There are no historical reports, current arrangements, or future plans visible, so it is not possible to distinguish between current facts and planned changes.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/6993f7ab-1864-4797-9230-f82cf5366bc0-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/b81020c7-aee5-4337-a1cb-3954703166c4/6993f7ab-1864-4797-9230-f82cf5366bc0-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Senior Data Analyst,74500annual base, Diane Kowalski. Lead Data Analyst is a not-yet-finalized next-quarter plan; old templates and other departments do not change the current title.",
+          "note": null
+        },
+        {
+          "history": "memops_B02",
+          "step": "stage-0",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/cf615d05-955a-421c-84fd-839d175570f1-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/cf615d05-955a-421c-84fd-839d175570f1-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "expected": "Danny:2731 North Kedzie Avenue, Apartment4B, Logan Square, Chicago. Text is preferred over calls. Birthday/arrival date and a sending window have not yet been supplied.",
+          "note": null
+        },
+        {
+          "history": "memops_B02",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the provided conversation and memory, the necessary details to arrange Danny's birthday mailing are missing. Specifically, Danny's mailing address, arrival deadline, approximate sending window, and preferred contact channel are not established. I cannot proceed with the arrangement without this information and must not invent missing dates.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/fa4552cd-9cb5-4c3b-af5e-b3d8b1fa9c8f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/fa4552cd-9cb5-4c3b-af5e-b3d8b1fa9c8f-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Danny:2731 North Kedzie Avenue, Apartment4B, Logan Square, Chicago. Text is preferred over calls. Birthday/arrival date and a sending window have not yet been supplied.",
+          "note": null
+        },
+        {
+          "history": "memops_B02",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "I cannot provide the details for Danny's birthday mailing and heads-up, including the established address, arrival deadline, approximate sending window, and preferred contact channel, because the provided conversation and delivered memory evidence do not contain this information.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/aee7cdfc-63b3-4e05-9bb1-41b639f5f0ce-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/aee7cdfc-63b3-4e05-9bb1-41b639f5f0ce-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Use Danny’s established2731 North Kedzie Avenue Apartment4B address; arrive by October17, send about two weeks earlier/early October (approximately October3). Prefer text. Do not invent a year or guaranteed shipping duration.",
+          "note": null
+        },
+        {
+          "history": "memops_B02",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the current evidence and conversation history, there is no record regarding Danny's birthday mailing. I cannot provide the established address, arrival deadline, approximate sending window, or preferred contact channel as this information is missing from the current context.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/d6efb434-25d7-4aa8-a2ae-57c030b9486f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/d6efb434-25d7-4aa8-a2ae-57c030b9486f-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Use Danny’s established2731 North Kedzie Avenue Apartment4B address; arrive by October17, send about two weeks earlier/early October (approximately October3). Prefer text. Do not invent a year or guaranteed shipping duration.",
+          "note": null
+        },
+        {
+          "history": "memops_B02",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the conversation, here are the arrangements for Danny:\n\n**Established Address:**\n2731 North Kedzie Avenue, Apartment 4B, Logan Square, Chicago\n\n**Arrival Deadline:**\nOctober 17th\n\n**Approximate Sending Window:**\nEarly October (approximately two weeks before the arrival deadline)\n\n**Preferred Contact Channel:**\nText message to 773-505-8241",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/6a80c138-c631-47fc-84c3-5de9d12955c3-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/6a80c138-c631-47fc-84c3-5de9d12955c3-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Same Danny address, arrival by October17 and early-October sending window; text a heads-up. Rachel’s2745/Apartment2A is a different person’s address and must not replace Danny’s.",
+          "note": null
+        },
+        {
+          "history": "memops_B02",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "I cannot provide the established address, arrival deadline, approximate sending window, and preferred contact channel for Danny's birthday mailing because the relevant conversation and source context are missing.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/2d004596-ebcf-448a-8f71-a28530c50f35-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/44da4f00-0bc9-4140-8201-c16bd0d2cd3a/2d004596-ebcf-448a-8f71-a28530c50f35-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Same Danny address, arrival by October17 and early-October sending window; text a heads-up. Rachel’s2745/Apartment2A is a different person’s address and must not replace Danny’s.",
+          "note": null
+        },
+        {
+          "history": "memops_C01",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the records:\n\n**Latest Firm BrightFix Quote:** $240\nThis amount corrects an earlier quote of $220 from mid-March. It covers parts and labor.\n\n**Fan Installation Status:** Shelved (Planned but Not Completed)\nThe fan replacement project was shelved around March 25th due to a work deadline. There is no record of the installation being completed.\n\n**Conditional/Third-Party Prices:**\nNo firm quote was received from Dave's cousin (Marco or Miguel); their potential availability was considered as a conditional alternative.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/68649e03-da9d-4294-b4ef-fa39ebcce5c8-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/68649e03-da9d-4294-b4ef-fa39ebcce5c8-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Firm BrightFix quote corrected to240 for parts/labor, not220. No completed installation is reported; the project was shelved and is being revisited.",
+          "note": null
+        },
+        {
+          "history": "memops_C01",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the provided memory evidence, there are no records in your files regarding a firm BrightFix quote or the status of a fan installation. The memory evidence delivered was empty, indicating no relevant firm quotes or installation reports were found.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/9ce28744-74e6-4229-afd1-0ed0e6c0fdd4-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/9ce28744-74e6-4229-afd1-0ed0e6c0fdd4-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Firm BrightFix quote corrected to240 for parts/labor, not220. No completed installation is reported; the project was shelved and is being revisited.",
+          "note": null
+        },
+        {
+          "history": "memops_C01",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available records:\n\n**Latest BrightFix Quote:**\nThe latest firm quote from BrightFix Home Services is **$260**. This updated quote (provided after April 19th) cited a different wiring adapter required for the Panasonic model compared to previous estimates of $220 and $240.\n\n**Fan Installation Status:**\nThe fan installation is reported as **planned**, not completed. \n*   **Plan:** The user purchased the Panasonic WhisperCeiling FV-0811VF5 fan (cost $159) from Home Depot on April 19th and decided to install it themselves.\n*   **Timeline:** The user blocked out **Saturday, May 10th** specifically to perform the DIY installation.\n\n**Third-Party/Conditional Information:**\n*   There is a mention of a potential alternative contractor (Dave's cousin, Marco or Miguel), but no firm quote or confirmed price was received from this source.\n*   No third-party installation is scheduled; the user is proceeding with the DIY route.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/40e921c0-0389-484d-b2c4-97fbfef1dc44-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/40e921c0-0389-484d-b2c4-97fbfef1dc44-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Latest firm BrightFix quote260; user plans DIY installation on May10. Purchase of the fan is reported, but an installation plan is not a completed installation.",
+          "note": null
+        },
+        {
+          "history": "memops_C01",
+          "step": "stage-1-repeat",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/d59aa7c1-a7f4-405e-90d5-d4024debd40f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/d59aa7c1-a7f4-405e-90d5-d4024debd40f-trace-0.jsonl",
+          "control_path": [],
+          "grade": "no_answer",
+          "expected": "Latest firm BrightFix quote260; user plans DIY installation on May10. Purchase of the fan is reported, but an installation plan is not a completed installation.",
+          "note": null
+        },
+        {
+          "history": "memops_C01",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the available records, there is no information regarding a firm BrightFix quote, conditional prices, or a fan installation status (planned or completed).",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/06530931-8fee-4362-8c25-eaf6d876ecd2-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/06530931-8fee-4362-8c25-eaf6d876ecd2-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Firm reference quote remains260.245requires an undecided dryer-cleaning bundle;210was not a firm offer and230is another person’s contractor. Fan is still boxed, with May10DIY installation planned.",
+          "note": null
+        },
+        {
+          "history": "memops_C01",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "There is no record of a firm BrightFix quote or fan installation status in the provided memory. The evidence list is empty, so I cannot identify any quotes to separate into firm or conditional categories, nor can I report on the status of any fan installation.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/8474b20a-fb54-4ec9-81b7-5c1920506f55-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/0ebce48d-8c14-4a95-ac2a-be830ca86808/8474b20a-fb54-4ec9-81b7-5c1920506f55-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Firm reference quote remains260.245requires an undecided dryer-cleaning bundle;210was not a firm offer and230is another person’s contractor. Fan is still boxed, with May10DIY installation planned.",
+          "note": null
+        },
+        {
+          "history": "memops_D11",
+          "step": "stage-0",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/514e1285-b770-467c-ae65-6a13a792aa73-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/514e1285-b770-467c-ae65-6a13a792aa73-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "expected": "Olive & Thyme is the go-to; user values soft/warm light, low noise and comfortable solo seating. Usual cauliflower flatbread with green salad is established; avoid a universal dietary or personality inference.",
+          "note": null
+        },
+        {
+          "history": "memops_D11",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "The delivered evidence and current context contain no conversation history. Consequently, I cannot determine your preferred restaurant atmosphere, food, or established regular choice, nor can I distinguish between suggested, tentative, and confirmed preferences.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/979c2011-7207-423a-b2dd-5f18310a9a72-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/979c2011-7207-423a-b2dd-5f18310a9a72-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Olive & Thyme is the go-to; user values soft/warm light, low noise and comfortable solo seating. Usual cauliflower flatbread with green salad is established; avoid a universal dietary or personality inference.",
+          "note": null
+        },
+        {
+          "history": "memops_D11",
+          "step": "stage-1",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/4825f980-dd5e-4641-bc69-963a9dbe30bd-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/4825f980-dd5e-4641-bc69-963a9dbe30bd-trace-0.jsonl",
+          "control_path": [],
+          "grade": "no_answer",
+          "expected": "Olive & Thyme remains the only regular restaurant. Quiet, calm, uncramped settings including the patio and lighter/simple flavors are supported; rich risotto was not preferred.",
+          "note": null
+        },
+        {
+          "history": "memops_D11",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the conversation, your preferred restaurant atmosphere is calm, quiet, low-stimulation, with soft lighting, low music volume, and uncrowded, comfy seating. You also specifically value solo-diner friendly features like window counter seating and peaceful outdoor patios with low noise.\n\nYour preferred food profile consists of lighter, simpler flavors; specifically, you enjoy roasted cauliflower flatbread with house green salad. In contrast, mushroom risotto was found to be too rich and heavy.\n\nYour established regular choice is **Olive & Thyme**, which you have frequented since early February. This is distinguished from **Siam Garden**, which was a withdrawn option. Additionally, a tentative visit to try mushroom risotto at Olive & Thyme in late March was not a confirmed new preference, but rather a refinement of your taste away from richer dishes.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/34efd920-bca0-424a-8b68-0c876dfad957-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/34efd920-bca0-424a-8b68-0c876dfad957-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Olive & Thyme remains the only regular restaurant. Quiet, calm, uncramped settings including the patio and lighter/simple flavors are supported; rich risotto was not preferred.",
+          "note": null
+        },
+        {
+          "history": "memops_D11",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Your established regular choice is **Olive & Thyme**. You prefer a **calm, quiet, and low-stimulation atmosphere**, specifically valuing soft lighting, low music volume, and uncrowded or comfortable seating (such as a window counter or a peaceful outdoor patio). Regarding food, you favor **lighter, simpler flavors**; you have a specific preference for the **roasted cauliflower flatbread with house green salad**. A visit to try mushroom risotto was **tentative**, but it led to a refinement of your preferences rather than a confirmation of that dish, as you found it too rich and heavy.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/d955dc37-af72-4653-b7e4-276b5682305d-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/d955dc37-af72-4653-b7e4-276b5682305d-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Olive & Thyme remains the comfortable regular choice; quiet surroundings and lighter food remain supported. Green Fork’s live music is a concern; Basil & Vine’s rooftop is attractive but the DJ makes a visit tentative, not an established shift toward loud dining.",
+          "note": null
+        },
+        {
+          "history": "memops_D11",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the conversation, your established regular choice is Olive & Thyme. Your preferred atmosphere is calm, quiet, and low-stimulation, featuring soft lighting, low music volume, and comfortable, uncrowded seating. You prefer lighter, simpler food flavors, specifically the roasted cauliflower flatbread with house green salad. A visit to try the mushroom risotto at Olive & Thyme was a tentative experiment rather than a confirmed new preference; you rejected it as too rich and heavy. Conversely, a visit to Siam Garden was withdrawn, reinforcing that you have not shifted to a new regular choice.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/35287453-0874-4120-9544-c94c4b28a23f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/e3647135-b0d7-4506-9fbc-608934dcfe86/35287453-0874-4120-9544-c94c4b28a23f-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Olive & Thyme remains the comfortable regular choice; quiet surroundings and lighter food remain supported. Green Fork’s live music is a concern; Basil & Vine’s rooftop is attractive but the DJ makes a visit tentative, not an established shift toward loud dining.",
+          "note": null
+        },
+        {
+          "history": "memops_E07",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Your common pattern is a preference for stripped-down, basic, natural flavors without added sweeteners, seasonings, or flavorings, evidenced by your habits of drinking unsweetened cold-brew tea and eating plain rice crackers. The change in routine that remains tentative is the adoption of new eating and drinking habits initiated following a post-New Year doctor's appointment. Your specific personal hydration target is 2.5 liters of water per day, set by your doctor rather than a generic recommendation.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/d24311f8-5301-4b57-8ffc-4c4afc083b69-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/d24311f8-5301-4b57-8ffc-4c4afc083b69-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "qualified",
+          "expected": "Food/drink examples support plain, clean, unadorned flavors: unsweetened green tea and plain rice crackers. Leisure pattern is not yet established. Reported personal target is2.5liters/day; do not turn this report into medical advice.",
+          "note": "Food pattern and2.5Lreport correct; incorrectly calls already adopted habits a tentative routine change."
+        },
+        {
+          "history": "memops_E07",
+          "step": "stage-0-repeat",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/c8d6f0d4-085f-4425-ba63-aecdc3589eb6-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/c8d6f0d4-085f-4425-ba63-aecdc3589eb6-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "expected": "Food/drink examples support plain, clean, unadorned flavors: unsweetened green tea and plain rice crackers. Leisure pattern is not yet established. Reported personal target is2.5liters/day; do not turn this report into medical advice.",
+          "note": null
+        },
+        {
+          "history": "memops_E07",
+          "step": "stage-1",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "I cannot identify the common pattern, the tentative routine change, or your specific hydration target. The delivered memory evidence is empty, and no records of your food, drink, or leisure habits are available in the current context to support these inferences.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/2801d27f-7359-4877-b775-dcacd4b5baab-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/2801d27f-7359-4877-b775-dcacd4b5baab-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Simple/clean food and quiet, low-stimulation leisure are supported by tea/crackers, pond lunches and solo hikes. Personal target remains2.5liters/day. Keep the inference bounded to described preferences.",
+          "note": null
+        },
+        {
+          "history": "memops_E07",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on your reported evidence:\n\n**Common Pattern**: You demonstrate a strong preference for stripped-down, basic, and natural flavors, specifically avoiding added sweeteners, seasonings, or artificial flavorings. This is evidenced by your choice of plain, unsweetened overnight cold-brew green tea and plain rice crackers (rice and salt only).\n\n**Tentative Change**: You initiated changes to your eating and drinking habits following a doctor's appointment after the New Year (specifically late January or mid-February).\n\n**Hydration Target**: You reported a specific personal hydration target of **2.5 liters per day**. This target is distinguished as being set by a doctor, rather than a generic suggestion.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/ec043efa-f701-459f-a7b2-8ae30ae40698-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/ec043efa-f701-459f-a7b2-8ae30ae40698-trace-0.jsonl",
+          "control_path": [
+            "use_view",
+            "handoff"
+          ],
+          "grade": "qualified",
+          "expected": "Simple/clean food and quiet, low-stimulation leisure are supported by tea/crackers, pond lunches and solo hikes. Personal target remains2.5liters/day. Keep the inference bounded to described preferences.",
+          "note": "Food/target recalled, but tentative status invented and later leisure evidence absent."
+        },
+        {
+          "history": "memops_E07",
+          "step": "stage-2",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/21621fc7-792a-40c3-8a4a-8320d4221a65-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/21621fc7-792a-40c3-8a4a-8320d4221a65-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "expected": "Simple, quiet preferences and2.5liter personal target remain.3liters on a form is a generic suggestion explicitly rejected. Maya has reportedly signed the user up for a group, but trying it this Saturday and replacing the weekly solo routine remain tentative; actual weekly attendance is not established.",
+          "note": null
+        },
+        {
+          "history": "memops_E07",
+          "step": "stage-2-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "I cannot identify the common pattern, tentative routine change, or personal hydration target because the necessary evidence regarding your food, drink, and leisure habits is not currently available in the provided context.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/0894ca04-5aa3-4321-969a-52d956644540-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/63b00e9f-accc-44ca-ac3a-e346d6d5659f/0894ca04-5aa3-4321-969a-52d956644540-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "Simple, quiet preferences and2.5liter personal target remain.3liters on a form is a generic suggestion explicitly rejected. Maya has reportedly signed the user up for a group, but trying it this Saturday and replacing the weekly solo routine remain tentative; actual weekly attendance is not established.",
+          "note": null
+        },
+        {
+          "history": "memops_F06",
+          "step": "stage-0",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the described activities, the coping qualities are **slow, intentional, and solitary**, which also serve to provide a sense of **grounding** and facilitate **calm and decompression**.\n\nSpecific details distinguishing the experiences from plans or suggestions include:\n\n*   **Reported Experiences (Coping Qualities):** The user engages in **evening walks** along the river trail and **cooking simple, Japanese-inspired meals**. These activities are characterized by their slow pace and intentional nature. The user perceives them as grounding and solitary, providing decompression from distress. The user's therapist, Dr. Okafor, also identifies these activities as sharing the qualities of being slow, intentional, and solitary.\n\n*   **Temporal Context (Reported vs. Plans):** These are described as **reported experiences** that have been performed since the user's separation from Rachel on April 12th. The evidence notes that the walks \"started organically\" and the cooking \"started since the breakup,\" confirming these are established practices rather than future plans.\n\n*   **Distinction from Suggestions:** While the user's therapist identifies the qualities of these activities, the activities themselves were not described as suggestions from the therapist but as organic or self-initiated efforts to cope with the separation.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/5068a4a5-eddf-4bcc-956b-89d5882e9aac-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/5068a4a5-eddf-4bcc-956b-89d5882e9aac-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Reported evening river walks and simple cooking are quiet, intentional, largely solitary and grounding in the post-breakup period. Do not infer a lifelong identity or a clinical outcome.",
+          "note": null
+        },
+        {
+          "history": "memops_F06",
+          "step": "stage-0-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the reported experiences since the separation, the activities that help you cope are evening walks (along the river trail near your apartment) and cooking simple, Japanese-inspired meals. The qualities that aid in your coping include the fact that these activities are slow, intentional, and solitary, providing a sense of grounding, calm, and decompression. These are actual reported experiences that began during the period, distinguishing them from plans or suggestions.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/1947d372-52f6-4b0c-8d08-bbd3cf1fc5ca-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/1947d372-52f6-4b0c-8d08-bbd3cf1fc5ca-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Reported evening river walks and simple cooking are quiet, intentional, largely solitary and grounding in the post-breakup period. Do not infer a lifelong identity or a clinical outcome.",
+          "note": null
+        },
+        {
+          "history": "memops_F06",
+          "step": "stage-1",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/7505a68f-ca93-4b8a-babe-7a1abe084732-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/7505a68f-ca93-4b8a-babe-7a1abe084732-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "expected": "The pattern extends to bookstore browsing and ceramics reading: quiet, solitary and low-stimulation activities currently help. Earlier social habits and the sister’s recovery timeline do not establish a universal personality or predict recovery.",
+          "note": null
+        },
+        {
+          "history": "memops_F06",
+          "step": "stage-1-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the current context, no activities have been described or are accessible for analysis. Therefore, I cannot identify qualities that help you cope, nor can I distinguish between reported experiences, plans, or suggestions, as the necessary evidence is missing from the available records.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/bad88bc9-9c82-4c63-b902-bb147ebaeb17-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/bad88bc9-9c82-4c63-b902-bb147ebaeb17-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "expected": "The pattern extends to bookstore browsing and ceramics reading: quiet, solitary and low-stimulation activities currently help. Earlier social habits and the sister’s recovery timeline do not establish a universal personality or predict recovery.",
+          "note": null
+        },
+        {
+          "history": "memops_F06",
+          "step": "stage-2",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "Based on the reports regarding the period since the separation from Rachel (specifically since April 12th), the coping activities you have described are evening walks along the river trail near your apartment and cooking simple, Japanese-inspired meals. \n\nThe qualities of these activities that seem to help you cope, distinguishing them from plans or suggestions, include:\n\n*   **Experiential Nature:** These are reported experiences that you have engaged in since the breakup, distinct from future plans or advice.\n*   **Pacing and Intent:** Both the therapist (Dr. Okafor) and you describe the common quality of these activities as being **slow** and **intentional**.\n*   **Solitude and Grounding:** You perceive both the walks and the cooking as **solitary** activities that are **grounding**.\n*   **Effect:** You report that these activities provide you with **calm** and help with **decompression**.\n\nThe shared analysis identifies the key coping qualities across these activities as being slow, intentional, and solitary.",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/134e1ff6-4f2b-454e-ad61-a5f5ae1be4a0-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/134e1ff6-4f2b-454e-ad61-a5f5ae1be4a0-trace-0.jsonl",
+          "control_path": [
+            "refresh_view",
+            "use_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "expected": "Quiet, intentional, aesthetically rich/nourishing activities remain central. Pottery signup and agreeing to a gentle gallery visit are reported commitments, while attendance is still future. Small calm social settings may fit; the cousin’s running-club suggestion is not the user’s preference.",
+          "note": null
+        },
+        {
+          "history": "memops_F06",
+          "step": "stage-2-repeat",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/0d812e63-ee01-477c-89bf-82536f2927fe-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-wave2-generative-shared-v1/generative/banks/dedc8300-1a3c-47fb-b72d-62168c1d7044/0d812e63-ee01-477c-89bf-82536f2927fe-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "expected": "Quiet, intentional, aesthetically rich/nourishing activities remain central. Pottery signup and agreeing to a gentle gallery visit are reported commitments, while attendance is still future. Small calm social settings may fit; the cousin’s running-club suggestion is not the user’s preference.",
+          "note": null
+        }
+      ]
+    }
+  },
+  "qualifications": [
+    "12external synthetic training backgrounds, not12independent reasoning generators. No held semantic content consumed.",
+    "Reflection questions allow supported representative examples; every later example need not be repeated when the bounded preference remains unchanged. Such answers can be task-correct while lacking full-history coverage.",
+    "Empty delivery where the source history contains the answer is a system failure even when the refusal truthfully describes the empty packet.",
+    "Task sufficiency for an opened view is separate from full graph/state validity. Three contaminated view contexts remain masked; unknown is not forced false or HANDOFF.",
+    "No generated trajectory choice is copied as gold. Prefix supervision follows original-source witnesses and reviewed delivered views.",
+    "Source-recorded save/forget or external-action claims are conversation evidence, not executed Store deletion or business effects."
+  ],
+  "capacity": {
+    "version": "memops-actual-prefix-audit-v1",
+    "model_calls": 0,
+    "model_forwards": 0,
+    "selection": "All actual decision-input prefixes retained; gold masked pending source/view review. No rows deleted or truncated for training.",
+    "runs": {
+      "memops-generative-shared-v1": {
+        "actual_prefixes": 50,
+        "actual_shared_wire_inputs_matched": 50,
+        "typed_roundtrips": 50,
+        "raw": {
+          "rows": 50,
+          "maximum_full_tokens": 10676,
+          "over_capacity": 2,
+          "total_full_tokens": 216664
+        },
+        "shared": {
+          "rows": 50,
+          "maximum_full_tokens": 9169,
+          "over_capacity": 2,
+          "total_full_tokens": 196730
+        },
+        "native_admitted": false
+      },
+      "memops-wave2-generative-shared-v1": {
+        "actual_prefixes": 48,
+        "actual_shared_wire_inputs_matched": 48,
+        "typed_roundtrips": 48,
+        "raw": {
+          "rows": 48,
+          "maximum_full_tokens": 11314,
+          "over_capacity": 2,
+          "total_full_tokens": 218057
+        },
+        "shared": {
+          "rows": 48,
+          "maximum_full_tokens": 9496,
+          "over_capacity": 1,
+          "total_full_tokens": 196769
+        },
+        "native_admitted": false
+      }
+    }
+  }
+}

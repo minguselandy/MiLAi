@@ -1,0 +1,42 @@
+{
+  "status": "CLOSED_FIRST_SCORES",
+  "runtime_code": "c61e680f",
+  "original_runtime": "4c988f10",
+  "same_actual_saved_prefix_pool": true,
+  "new_formation": 0,
+  "new_retrieval": 0,
+  "new_embedding": 0,
+  "old_first_labels": [
+    "Correct",
+    "Correct"
+  ],
+  "new_first_labels": [
+    "invalid",
+    "Hallucination"
+  ],
+  "cost": {
+    "reading": {
+      "calls": 4,
+      "prompt_tokens": 68115,
+      "total_tokens": 72673,
+      "completion_tokens": 4558
+    },
+    "judge": {
+      "calls": 2,
+      "prompt_tokens": 1992,
+      "total_tokens": 7763,
+      "completion_tokens": 5771
+    }
+  },
+  "original_reading": {
+    "calls": 4,
+    "total_tokens": 118984
+  },
+  "new_unknown": {
+    "generation": 0,
+    "embedding": 0
+  },
+  "root_paired_review": "Bothold/new doganswers overattribute exploring differentpetbehaviors/species to User; Useractuallystates gentle/adaptable encounter and openness tonewexperiences/interactions. Judgeclaim that gentle/adaptable detail isfabricated conflicts with visibleUser Source. Roleanswer also retains healthcare/humanitarian framing chieflyfromAssistant. Labelsunchanged; no stablequalityclaim.",
+  "interpretation": "Readingtokensdecreased38.9%, but2selecteddevelopmentcases withchangedanswers/invalid are notqualitypreservation evidence. Sourceprojection structural equivalence was checked separately; stochastic selection/answering remain.",
+  "artifact_root": "artifacts/global-development/readpack-dedup-pilot-v1/MiLAi-memory-only"
+}

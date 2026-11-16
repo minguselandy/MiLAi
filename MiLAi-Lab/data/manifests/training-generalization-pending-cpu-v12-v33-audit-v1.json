@@ -1,0 +1,617 @@
+{
+  "status": "RECONCILED_DECLARED_V12_V33_CPU_ONLY;NOT_SETTLED",
+  "observed_at": "2026-10-22T05:48:38.991225+00:00",
+  "scope": "Explicit V12–V33 closed-phase declarations only, each checked against its canonical timing field. This is not total research cost or an exhaustive discovery of all historical unmeasured work. Preparation costs remain preparation even when the future experiment has not run.",
+  "phase_count": 74,
+  "cpu_seconds_pending": 10663.791232191,
+  "by_version": [
+    {
+      "version": 12,
+      "phases": 8,
+      "cpu_seconds": 955.13950202
+    },
+    {
+      "version": 13,
+      "phases": 2,
+      "cpu_seconds": 10.785345566999998
+    },
+    {
+      "version": 14,
+      "phases": 6,
+      "cpu_seconds": 10.127094437999999
+    },
+    {
+      "version": 15,
+      "phases": 3,
+      "cpu_seconds": 0.12204525500000002
+    },
+    {
+      "version": 16,
+      "phases": 14,
+      "cpu_seconds": 10.845186123
+    },
+    {
+      "version": 17,
+      "phases": 1,
+      "cpu_seconds": 3.843663422
+    },
+    {
+      "version": 18,
+      "phases": 13,
+      "cpu_seconds": 121.30936362899998
+    },
+    {
+      "version": 19,
+      "phases": 6,
+      "cpu_seconds": 2.7259986899999995
+    },
+    {
+      "version": 20,
+      "phases": 2,
+      "cpu_seconds": 12.369526700000002
+    },
+    {
+      "version": 21,
+      "phases": 0,
+      "cpu_seconds": 0
+    },
+    {
+      "version": 22,
+      "phases": 2,
+      "cpu_seconds": 1505.4605911400001
+    },
+    {
+      "version": 23,
+      "phases": 3,
+      "cpu_seconds": 549.9120196800001
+    },
+    {
+      "version": 24,
+      "phases": 2,
+      "cpu_seconds": 65.415592814
+    },
+    {
+      "version": 25,
+      "phases": 3,
+      "cpu_seconds": 7380.353031073
+    },
+    {
+      "version": 26,
+      "phases": 1,
+      "cpu_seconds": 2.6487895829999992
+    },
+    {
+      "version": 27,
+      "phases": 0,
+      "cpu_seconds": 0
+    },
+    {
+      "version": 28,
+      "phases": 0,
+      "cpu_seconds": 0
+    },
+    {
+      "version": 29,
+      "phases": 0,
+      "cpu_seconds": 0
+    },
+    {
+      "version": 30,
+      "phases": 5,
+      "cpu_seconds": 17.74150764
+    },
+    {
+      "version": 31,
+      "phases": 1,
+      "cpu_seconds": 6.057575553
+    },
+    {
+      "version": 32,
+      "phases": 1,
+      "cpu_seconds": 0.0012915410000000002
+    },
+    {
+      "version": 33,
+      "phases": 1,
+      "cpu_seconds": 8.933107323
+    }
+  ],
+  "duplicate_canonical_measurement_fields": 0,
+  "overlap_with_closed_settlement_files": 0,
+  "closed_settlements_verified_not_changed": [
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/compute-settlement-v1.json",
+      "phase": "training_generalization_20261021_preparation_and_feedback_dev_v1",
+      "ledger_phase": {
+        "cpu_seconds": 106.28886522499998,
+        "measured_phases": 19,
+        "runs": 1
+      }
+    },
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/compute-settlement-v2.json",
+      "phase": "training_generalization_20261021_feedback_diagnostics_preparation_v2",
+      "ledger_phase": {
+        "cpu_seconds": 10.304391396,
+        "measured_phases": 12,
+        "runs": 1
+      }
+    },
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/compute-settlement-v3.json",
+      "phase": "training_generalization_20261021_source_collection_preparation_v3",
+      "ledger_phase": {
+        "cpu_seconds": 1039.874442707,
+        "measured_phases": 63,
+        "runs": 1
+      }
+    }
+  ],
+  "excluded_pending": [
+    "Earlier old pending35 remains separate and untouched.",
+    "V11 pending E3 input audit/comparison and other preparation remain separate.",
+    "Live saved CPU evaluator children, parent/driver and all-public path audit are not terminal and are excluded; child compute is recorded by its existing evaluator.",
+    "This reconciliation program CPU is a new phase reported separately below."
+  ],
+  "not_added": "Copied reports, nested substep or wall times, synthetic fixture numbers, HTTP token usage, already recorded model compute and closed settlements.",
+  "unmeasured": "Authoring, manual review, monitoring, tests, imports/debug/freezing and other uninstrumented overhead remain unknown, not zero.",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_write_calls": 0,
+  "ledger_recorded": false,
+  "ledger_bytes_equal_before_after": true,
+  "model_calls": 0,
+  "no_sha_validation": true,
+  "compute": {
+    "cpu_seconds": 0.04277083,
+    "wall_seconds": 0.042774343863129616
+  },
+  "canonical_audit": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/pending-cpu-v12-v33-audit-v1.json",
+  "audit_program": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/audit_pending_cpu_v12_v33_v1.py",
+  "canonical_fields": [
+    {
+      "progress_version": 12,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/operation-input-diagnostics-v1/analysis.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 174.69675979099998
+    },
+    {
+      "progress_version": 12,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/operation-input-diagnostics-v1/native-crosscheck.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.198785822
+    },
+    {
+      "progress_version": 12,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-action-option-encoding-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 56.121801649
+    },
+    {
+      "progress_version": 12,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-input-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 163.472081469
+    },
+    {
+      "progress_version": 12,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-request-text-input-audit-v1/audit.json",
+      "cpu_json_pointer": "/cpu_seconds",
+      "cpu_seconds": 228.042429765
+    },
+    {
+      "progress_version": 12,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-study-amendment-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.294673981
+    },
+    {
+      "progress_version": 12,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-input-comparison-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 12.421719891
+    },
+    {
+      "progress_version": 12,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-readiness-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 319.891249652
+    },
+    {
+      "progress_version": 13,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-execution-plan-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 10.78527915
+    },
+    {
+      "progress_version": 13,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1/source-first-review-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 6.641699999999917e-05
+    },
+    {
+      "progress_version": 14,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-cohorts-v1/selection.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 4.474040162
+    },
+    {
+      "progress_version": 14,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-existing-capture-audit-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.211303438
+    },
+    {
+      "progress_version": 14,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-existing-quota-audit-v1/selection.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.48399824700000005
+    },
+    {
+      "progress_version": 14,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 4.221708271000001
+    },
+    {
+      "progress_version": 14,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-subset-layout-audit-v1/preparation.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.20661302399999998
+    },
+    {
+      "progress_version": 14,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-protocol-readiness-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.5294312959999999
+    },
+    {
+      "progress_version": 15,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-first-review-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.04538346200000001
+    },
+    {
+      "progress_version": 15,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-public-train-materials-v1/identity-policy-exposure-audit-v2.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.074666499
+    },
+    {
+      "progress_version": 15,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-review-readiness-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.0019952940000000016
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.00046414200000022277
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v2/preparation.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.04470747500000001
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-interface-amendment-v2.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.012735766999999995
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/state/preflight.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.7100718409999995
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/factorial/preflight.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.6382064010000006
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/feedback/preflight.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.6671143440000007
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-comparison-plan-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.34704848499999996
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/fixed_context/preflight.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.6345324479999999
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/rules/preflight.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.6196347970000007
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/jev_full/preflight.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.6218452719999998
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/jev_no_view/preflight.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.6252341249999995
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/jev_request_text/preflight.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.6251603989999994
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/no-view-existing-input-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 5.286915196
+    },
+    {
+      "progress_version": 16,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-interface-readiness-v2.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.011515431000000003
+    },
+    {
+      "progress_version": 17,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/curve-plot-mechanical-v1/plots/plot.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 3.843663422
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-small-media-projection-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 4.907140737
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-small-media-projection-v1/image-decoding-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 47.397397280999996
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-reader-capacity-preflight-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 7.357958726000001
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/first-operation-fit-v1/driver.json",
+      "cpu_json_pointer": "/orchestration_cpu_seconds",
+      "cpu_seconds": 0.003280556000000004
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-analysis-v1/analysis.json",
+      "cpu_json_pointer": "/analysis_compute/cpu_seconds",
+      "cpu_seconds": 9.279735039
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-paired-baselines-v1/comparisons.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 2.423479934
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-plots-v1/plot.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 4.4696244279999995
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-plots-v2/plot.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 4.613506991
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/after-legacy-fit-v1/driver.json",
+      "cpu_json_pointer": "/orchestration_cpu_seconds",
+      "cpu_seconds": 0.105343078
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-v2/driver.json",
+      "cpu_json_pointer": "/cpu_seconds",
+      "cpu_seconds": 40.012685504
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-branches-v2/selection.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.128499036
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-closure-v2.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.23594394400000002
+    },
+    {
+      "progress_version": 18,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-late-diagnostic-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.37476837500000004
+    },
+    {
+      "progress_version": 19,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-semantic-review-v2/preparation.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.182866036
+    },
+    {
+      "progress_version": 19,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-semantic-review-v2/review-closure-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.021819443999999993
+    },
+    {
+      "progress_version": 19,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-policy-mechanisms-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.44612361800000006
+    },
+    {
+      "progress_version": 19,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-return-capacity-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 1.0807059079999997
+    },
+    {
+      "progress_version": 19,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-return-capacity-v2.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.9565456540000001
+    },
+    {
+      "progress_version": 19,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-execution-plan-v2.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.03793803
+    },
+    {
+      "progress_version": 20,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-pixel-bounds-audit-v2/cuda452.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 5.532889467
+    },
+    {
+      "progress_version": 20,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-pixel-bounds-audit-v2/http457.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 6.836637233
+    },
+    {
+      "progress_version": 22,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-whole-bank-input-preflight-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 1393.082489669
+    },
+    {
+      "progress_version": 22,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-search-read-input-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 112.37810147100001
+    },
+    {
+      "progress_version": 23,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-input-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 133.56797044
+    },
+    {
+      "progress_version": 23,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-fixed-path-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 208.79061871800002
+    },
+    {
+      "progress_version": 23,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-range-fixed-path-audit-v2/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 207.553430522
+    },
+    {
+      "progress_version": 24,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-public-query-input-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 62.47938478099999
+    },
+    {
+      "progress_version": 24,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-offered-view-input-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 2.9362080330000007
+    },
+    {
+      "progress_version": 25,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-source-pages-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 6340.347716984
+    },
+    {
+      "progress_version": 25,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-source-search-cache-audit-v1/audit.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 1028.186257835
+    },
+    {
+      "progress_version": 25,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/report.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 11.819056254000001
+    },
+    {
+      "progress_version": 26,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-case-blocks-full-store-probe-v1/report.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 2.6487895829999992
+    },
+    {
+      "progress_version": 30,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-analysis-v1/analysis.json",
+      "cpu_json_pointer": "/analysis_compute/cpu_seconds",
+      "cpu_seconds": 10.538385121999998
+    },
+    {
+      "progress_version": 30,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-paired-baselines-v1/comparisons.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 2.5668583540000003
+    },
+    {
+      "progress_version": 30,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-plots-v1/plot.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 4.136362168000001
+    },
+    {
+      "progress_version": 30,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-late-diagnostic-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.45693724
+    },
+    {
+      "progress_version": 30,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-fit-v1/driver.json",
+      "cpu_json_pointer": "/orchestration_cpu_seconds",
+      "cpu_seconds": 0.04296475600000001
+    },
+    {
+      "progress_version": 31,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-feedback-action-diagnostic-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 6.057575553
+    },
+    {
+      "progress_version": 32,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/protected-confirmation-role-inventory-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.0012915410000000002
+    },
+    {
+      "progress_version": 33,
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-view-supervision-provenance-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 8.933107323
+    }
+  ],
+  "accounting": "The 74 phases are existing pending work, not 74 new phases. Only this audit program CPU0.042770830 is newly measured and is excluded from their10663.791232191 subtotal."
+}

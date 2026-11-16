@@ -1,0 +1,215 @@
+{
+  "status": "THREE_MATCHED_FINAL_FITS_CLOSED_NOT_YET_RELOADED",
+  "source_version": "ae3950f2",
+  "arms": [
+    {
+      "arm": "continued-ce",
+      "status": "COMPLETED",
+      "updates": 10,
+      "draws": 160,
+      "input_tokens": 821606,
+      "dev": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 450,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 41
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 450
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 113,
+            "accepted": 112
+          },
+          "READ": {
+            "selected": 373,
+            "accepted": 249
+          },
+          "HANDOFF": {
+            "selected": 130,
+            "accepted": 89
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.749538909329531,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "wall_seconds": 773.0210426356643,
+      "cpu_seconds": 1181.609250961,
+      "peak_cuda_allocated_bytes": [
+        7425845248,
+        0
+      ],
+      "feedback": {},
+      "checkpoint": "artifacts/host-intent-retrieval-v3/fitting/view-v4-continued-ce-seed0-v1/checkpoint"
+    },
+    {
+      "arm": "answer",
+      "status": "COMPLETED",
+      "updates": 10,
+      "draws": 160,
+      "input_tokens": 872537,
+      "dev": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 447,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 31
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 447
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 115,
+            "accepted": 113
+          },
+          "READ": {
+            "selected": 385,
+            "accepted": 251
+          },
+          "HANDOFF": {
+            "selected": 114,
+            "accepted": 83
+          },
+          "USE_VIEW": {
+            "selected": 1,
+            "accepted": 0
+          },
+          "REFRESH_VIEW": {
+            "selected": 1,
+            "accepted": 0
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.7553505427311435,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit",
+        "reviewed_branch_pairs": {
+          "counts": {},
+          "target": "answer",
+          "scope": "Ordering of reviewed branch pairs; not exhaustive policy or Host quality."
+        }
+      },
+      "wall_seconds": 792.9865871435031,
+      "cpu_seconds": 1209.275141166,
+      "peak_cuda_allocated_bytes": [
+        8504833536,
+        0
+      ],
+      "feedback": {
+        "sampled_feedback_states": 81,
+        "sampled_replay_states": 79,
+        "sampled_directional_pairs": 59,
+        "sampled_tie_pairs": 57,
+        "sampled_unknown_pairs": 133
+      },
+      "checkpoint": "artifacts/host-intent-retrieval-v3/fitting/view-v4-answer-seed0-v1/checkpoint"
+    },
+    {
+      "arm": "delivery",
+      "status": "COMPLETED",
+      "updates": 10,
+      "draws": 160,
+      "input_tokens": 872537,
+      "dev": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 440,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 37
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 440
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 115,
+            "accepted": 112
+          },
+          "READ": {
+            "selected": 377,
+            "accepted": 242
+          },
+          "HANDOFF": {
+            "selected": 123,
+            "accepted": 86
+          },
+          "USE_VIEW": {
+            "selected": 1,
+            "accepted": 0
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.7458460119373814,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit",
+        "reviewed_branch_pairs": {
+          "counts": {},
+          "target": "delivery",
+          "scope": "Ordering of reviewed branch pairs; not exhaustive policy or Host quality."
+        }
+      },
+      "wall_seconds": 787.3795954016969,
+      "cpu_seconds": 1195.401913084,
+      "peak_cuda_allocated_bytes": [
+        8504833536,
+        0
+      ],
+      "feedback": {
+        "sampled_feedback_states": 81,
+        "sampled_replay_states": 79,
+        "sampled_directional_pairs": 121,
+        "sampled_tie_pairs": 83,
+        "sampled_unknown_pairs": 45
+      },
+      "checkpoint": "artifacts/host-intent-retrieval-v3/fitting/view-v4-delivery-seed0-v1/checkpoint"
+    }
+  ],
+  "answer_delivery_equal_fields": [
+    "base_checkpoint",
+    "seed",
+    "max_len",
+    "head_max_len",
+    "batch_size",
+    "gradient_accumulation",
+    "encoder_lr",
+    "head_lr",
+    "precision",
+    "gradient_checkpointing",
+    "optimizer_updates",
+    "train_sequence_rows",
+    "train_input_tokens",
+    "data",
+    "dev_source",
+    "replay_weight",
+    "shuffle_options"
+  ],
+  "identical_sampling_and_lengths": true,
+  "identical_option_orders": 3,
+  "shared_training_input_tokens": 872537,
+  "scope": "Static in-process diagnostics; predetermined final10. No best-midpoint selection and no Host efficacy claim. All original tie/unknown states were sampled; directional label coverage differs explicitly.",
+  "result_file": "artifacts/host-intent-retrieval-v3/view-v4-three-fit-comparison-v1.json",
+  "training_driver": "artifacts/host-intent-retrieval-v3/view-v4-three-fits-v1/driver.json",
+  "training_pid": 2123239,
+  "training_terminal": "exec93763 exit0; parent/children absent",
+  "native_cpu_seconds": 3586.2863052109997,
+  "training_input_tokens": 2566680,
+  "persisted_evaluation": {
+    "status": "RUNNING",
+    "pid": 2287617,
+    "exec_session": 56236,
+    "driver": "artifacts/host-intent-retrieval-v3/view-v4-persisted-evaluations-v1/driver.json",
+    "plan": "artifacts/host-intent-retrieval-v3/view-v4-persisted-evaluation-plan-v1.json"
+  },
+  "full_goal": "INCOMPLETE: persisted evaluation, real Host D/E and external comparisons remain."
+}

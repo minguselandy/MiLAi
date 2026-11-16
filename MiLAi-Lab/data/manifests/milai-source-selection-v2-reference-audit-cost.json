@@ -1,0 +1,22 @@
+{
+  "status": "BOTH_NEW_CPU_AUDITS_RECORDED_ONCE",
+  "phases": {
+    "source_selection_v2_reference_boundary_v1": {
+      "wall_seconds": 0.4735901206731796,
+      "cpu_seconds": 0.47356933900000003,
+      "runs": 1
+    },
+    "source_selection_v2_reference_boundary_v2": {
+      "wall_seconds": 0.0971089769154787,
+      "cpu_seconds": 0.097109345,
+      "runs": 1
+    }
+  },
+  "generation_requests_delta": 0,
+  "generation_tokens_delta": 0,
+  "embedding_tokens_delta": 0,
+  "new_ledger": false,
+  "unmetered": "Source review,author analysis,tests,export/edit overhead not completely timed.",
+  "sha_checks": false,
+  "content_fingerprints": false
+}

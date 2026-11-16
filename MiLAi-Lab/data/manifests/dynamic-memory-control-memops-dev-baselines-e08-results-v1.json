@@ -1,0 +1,69 @@
+{
+  "version": "dynamic-memory-control-memops-dev-baselines-e08-results-v1",
+  "status": "ALL18_TASKS_AND8_VIEWS_1REUSE_AUTHOR_REVIEWED",
+  "task_counts": {
+    "fixed_context": {
+      "qualified": 6
+    },
+    "rules": {
+      "correct": 1,
+      "qualified": 5
+    },
+    "generative": {
+      "correct": 1,
+      "unfulfilled": 3,
+      "incomplete": 1,
+      "qualified": 1
+    }
+  },
+  "task_review": "artifacts/dynamic-memory-control/review-memops-dev-baselines-e08-v1/author-review.json",
+  "state_summary": {
+    "status": "ALL8_CONSTRUCTED_VIEWS_AND1_REUSE_AUTHOR_REVIEWED",
+    "constructed": 8,
+    "nodes_reviewed": 49,
+    "rules_reviewed": 24,
+    "reuse": {
+      "policy": "generative",
+      "step": "stage-1-repeat",
+      "revision": 1,
+      "meaning_supported": false,
+      "basis": "Reused old view lacks the new solitary morning and triple-check routine; final task answer is incomplete."
+    },
+    "scope": "Author-visible development review; factual nodes, logical rules, provenance, temporal applicability and final Reader answers separately assessed.",
+    "model_calls": 0
+  },
+  "state_review": "artifacts/dynamic-memory-control/review-memops-dev-baselines-e08-v1/state-inventory/author-review.json",
+  "effects": {
+    "fixed_context": {
+      "messages": 6,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 6,
+      "READ": 18
+    },
+    "rules": {
+      "messages": 6,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "SEARCH": 6,
+      "READ": 18,
+      "REFRESH_VIEW": 6,
+      "refresh_delivered": 6
+    },
+    "generative": {
+      "messages": 6,
+      "semantic_commits": 0,
+      "visibility_revocations": 0,
+      "business_effects": 0,
+      "business_observations": 0,
+      "REFRESH_VIEW": 2,
+      "refresh_delivered": 2,
+      "USE_VIEW": 1
+    }
+  },
+  "model_calls": 0
+}

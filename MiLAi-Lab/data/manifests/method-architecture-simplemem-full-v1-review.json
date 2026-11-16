@@ -1,0 +1,930 @@
+{
+  "status": "ALL_24_POST_QUERY_STATES_48_QA_REVIEWED",
+  "reviewer": "same source author/developer, not independent/blind",
+  "source_commit": "46bc516e",
+  "native_source_commit": "db80b6a",
+  "first_outputs_unchanged": true,
+  "rubric": "Same semantic target/preservation/time/source criteria as strong-v1; ambiguous dimensions null. Native generated entries are dated reports/interpretations, not original Sources. Labels alone do not prove stronger evidence.",
+  "state_boundary": "All native entries after actual first-query remainder flush at each checkpoint; source0 has no semantic flush before source1 query. This query-maintained state is not Strong post-arrival state UJS and is reported separately.",
+  "qa_rubric": "Core factual completeness and source faithfulness separate; explicit current refusal fails core despite correct historical names. Extra uncertainty about unspecified later changes separately flagged. No replacement of first Judge scores.",
+  "state_rows": [
+    {
+      "case": "method-screen-maps",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": true,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "FutureJune5 relocation and before-cabinet2 retained; S0 newspaper5 and map registration scopes remain. New entry incorrectly states registration rules FOR newspapers/periodicals unchanged, adding unsupported registration subject. Atsecond checkpoint labels prepared/no early move correctly added.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-maps/operations/retrieve/halumem/method-screen-maps/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": null,
+      "time_scope_correct": true,
+      "source_meaning_faithful": null,
+      "ujs_confirmed": false,
+      "ujs_possible": true,
+      "uncertain_dimensions": [
+        "preservation",
+        "source"
+      ],
+      "review": "Dated Qiao replaces Xia, Ye/front desk/non-transfer retained; later futureone-dayabsence/unknownsubstitute and unchangedcurrent schedule stored. Personal I useblue notebook becomes passive a blue notebook was used: exact owner retention ambiguous, not forced pass/failure.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-kiln/operations/retrieve/halumem/method-screen-kiln/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": true,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "FutureJune5 relocation and before-cabinet2 retained; S0 newspaper5 and map registration scopes remain. New entry incorrectly states registration rules FOR newspapers/periodicals unchanged, adding unsupported registration subject. Atsecond checkpoint labels prepared/no early move correctly added.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-maps/operations/retrieve/halumem/method-screen-maps/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": null,
+      "time_scope_correct": true,
+      "source_meaning_faithful": null,
+      "ujs_confirmed": false,
+      "ujs_possible": true,
+      "uncertain_dimensions": [
+        "preservation",
+        "source"
+      ],
+      "review": "Dated Qiao replaces Xia, Ye/front desk/non-transfer retained; later futureone-dayabsence/unknownsubstitute and unchangedcurrent schedule stored. Personal I useblue notebook becomes passive a blue notebook was used: exact owner retention ambiguous, not forced pass/failure.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-kiln/operations/retrieve/halumem/method-screen-kiln/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": true,
+      "source_meaning_faithful": true,
+      "ujs_confirmed": true,
+      "ujs_possible": true,
+      "uncertain_dimensions": [],
+      "review": "General paper/digital/loan rules and class-only practice-copy exception retained with correct limits; dated native metadata does not itself claim rule onset.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-archive/operations/retrieve/halumem/method-screen-archive/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": null,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [
+        "time"
+      ],
+      "review": "General rules restored and prior limited exception retained historically. New withdrawal entry calls it photocopying without gloves, conflating copying activity with reading student-practice copies. Exact09:00 withdrawal event is at best ambiguous from report time.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-archive/operations/retrieve/halumem/method-screen-archive/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "General evening ban/headphones/control/cables and recording-only20–21 Friday exception retained; cancellation correctly added atsecond checkpoint. Native wrongly resolves this Friday toJune5,2032, which is Saturday (actual FridayJune4), so historical exception date is wrong even after cancellation.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-studio/operations/retrieve/halumem/method-screen-studio/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "General evening ban/headphones/control/cables and recording-only20–21 Friday exception retained; cancellation correctly added atsecond checkpoint. Native wrongly resolves this Friday toJune5,2032, which is Saturday (actual FridayJune4), so historical exception date is wrong even after cancellation.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-studio/operations/retrieve/halumem/method-screen-studio/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": false,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Lu card expiry/valid invitation/reservation, Meng and silver retained chronologically. General rule drops on-site signing condition and permits any signed invitation, widening original scope.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-tickets/operations/retrieve/halumem/method-screen-tickets/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": false,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Adds cancellation/onlyscreening/invitationvalid and unchangedMeng; old expiry retained. Inherited on-site-signing rule omission remains; exact09:00 cancellation time derived from report without stated event time.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-tickets/operations/retrieve/halumem/method-screen-tickets/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Power alternatives/sharedfan/currentbattery/subtitle independence all retained. Socket deactivation is assigned exactJune2 09:00 event time from report timestamp.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-projection/operations/retrieve/halumem/method-screen-projection/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Adds fanstop/untilrecovery prohibition and unchangedsubtitle, preserves alternative supply/rules. Exactfanstop09:00 from report; topic calls stoppage failure without source evidence of fault.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-projection/operations/retrieve/halumem/method-screen-projection/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Both route dependencies/current closure+guide+indoor normal retained; initial entry says rules were defined onJune1 although Source only describes already applicable rules, inventing rule-onset date.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-walk/operations/retrieve/halumem/method-screen-walk/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Guide left/both route consequences and indoor open retained. Assigns guide departure exact09:00 report time; inherited rule-definition onset persists.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-walk/operations/retrieve/halumem/method-screen-walk/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Curtain AND light for originals versus light for photos, independent catalogue, both updates covered. Initial possible exhibition becomes actually exhibited, and rule establishment/date anchored to report time. Final repair assigned exact09:00, also not stated event time.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-exhibit/operations/retrieve/halumem/method-screen-exhibit/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Curtain AND light for originals versus light for photos, independent catalogue, both updates covered. Initial possible exhibition becomes actually exhibited, and rule establishment/date anchored to report time. Final repair assigned exact09:00, also not stated event time.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-exhibit/operations/retrieve/halumem/method-screen-exhibit/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": true,
+      "source_meaning_faithful": true,
+      "ujs_confirmed": true,
+      "ujs_possible": true,
+      "uncertain_dimensions": [],
+      "review": "Original handwritten12/essays8/no sales, later correction toactual17 duecopyerror retained as dated reporting actions rather than new inventory arrival.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-inventory/operations/retrieve/halumem/method-screen-inventory/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": false,
+      "non_target_postconditions": true,
+      "time_scope_correct": true,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Sale2/current15 and noessay sales retained, but actual retained handwritten inventory sheet becomes unrelated uncorrected hand-copied meter readings. Original17/12 andessays8 preserved; retention target wrong.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-inventory/operations/retrieve/halumem/method-screen-inventory/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": null,
+      "source_meaning_faithful": null,
+      "ujs_confirmed": false,
+      "ujs_possible": true,
+      "uncertain_dimensions": [
+        "time",
+        "source"
+      ],
+      "review": "JianLin original error corrected toJianLan without actual translator replacement; music/othercredit retained; later foreword idea unconfirmed/not translator retained. Since-creation scope is implicit rather than explicit; credits page becomes signed page and user/author attribution is not precisely retained. These fine meanings ambiguous, not forced pass/failure.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-credits/operations/retrieve/halumem/method-screen-credits/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": null,
+      "source_meaning_faithful": null,
+      "ujs_confirmed": false,
+      "ujs_possible": true,
+      "uncertain_dimensions": [
+        "time",
+        "source"
+      ],
+      "review": "JianLin original error corrected toJianLan without actual translator replacement; music/othercredit retained; later foreword idea unconfirmed/not translator retained. Since-creation scope is implicit rather than explicit; credits page becomes signed page and user/author attribution is not precisely retained. These fine meanings ambiguous, not forced pass/failure.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-credits/operations/retrieve/halumem/method-screen-credits/2/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": true,
+      "time_scope_correct": true,
+      "source_meaning_faithful": true,
+      "ujs_confirmed": true,
+      "ujs_possible": true,
+      "uncertain_dimensions": [],
+      "review": "No-booking14:00 Saturday, firstfloor/quiet secondfloor/personalattendance duty retained; futurebooking proposal undecided/no start retained; SaturdayJune5 resolved correctly.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-reservation/operations/retrieve/halumem/method-screen-reservation/1/qa/0/native-flush.json",
+      "accepted_policy_target_correct": true
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": false,
+      "non_target_postconditions": true,
+      "time_scope_correct": null,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [
+        "time"
+      ],
+      "review": "Accepted no-booking14:00 policy and duties retained. Native translates proposed three oclock as three points, so specific rejected15:00 proposal is lost; starting fromSaturday phrasing gives ambiguous onset to unchanged starttime.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-reservation/operations/retrieve/halumem/method-screen-reservation/2/qa/0/native-flush.json",
+      "accepted_policy_target_correct": true
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 1,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": false,
+      "time_scope_correct": true,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Currentpickup/shipping/packaging and unknownrumor location/date retained. User personal weekend organizing reassigned to store owner, who is a different/unspecified speaker.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-parcel/operations/retrieve/halumem/method-screen-parcel/1/qa/0/native-flush.json"
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 2,
+      "boundary": "after_query_remainder_flush",
+      "target_correct": true,
+      "non_target_postconditions": false,
+      "time_scope_correct": false,
+      "source_meaning_faithful": false,
+      "ujs_confirmed": false,
+      "ujs_possible": false,
+      "uncertain_dimensions": [],
+      "review": "Adds deferredrenovation/currentpickup/no permanentguarantee and unchangedmail/packaging. Inherited user-to-owner subject mistake remains; owner announcement assigned exact09:00 user report timestamp despite onlyjustsaid wording.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/native-banks/method-screen-parcel/operations/retrieve/halumem/method-screen-parcel/2/qa/0/native-flush.json"
+    }
+  ],
+  "qa_rows": [
+    {
+      "case": "method-screen-maps",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Correct4th/5th cabinet split, newspaper5/indoor exemption, no premature move, unchanged rules.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-maps/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "unsupported_time_scope_change"
+      ],
+      "review": "Current requested facts correct; explanation restricts unchanged registration/newspaper rules to beforeJune5 and implies new rule scope after relocation.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-maps/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Correct4th/5th cabinet split, newspaper5/indoor exemption, no premature move, unchanged rules.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-maps/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Correct4th/5th cabinet split, newspaper5/indoor exemption, no premature move, unchanged rules.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-maps/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "report_storage_clock_conflation"
+      ],
+      "review": "Correct current allocation; describes system update at2032 date, although native timestamp comes from Source report and actual memory generation occurred2026.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-kiln/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Qiao/Xia exit, Ye/front desk, undecidedfuture substitute/current Qiao, blue/non-transfer all answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-kiln/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Qiao/Xia exit, Ye/front desk, undecidedfuture substitute/current Qiao, blue/non-transfer all answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-kiln/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Qiao/Xia exit, Ye/front desk, undecidedfuture substitute/current Qiao, blue/non-transfer all answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-kiln/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Class-only practice exception, originals/othercopies/loan preservation, cancellation reason and digital/loan rules correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-archive/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Class-only practice exception, originals/othercopies/loan preservation, cancellation reason and digital/loan rules correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-archive/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Class-only practice exception, originals/othercopies/loan preservation, cancellation reason and digital/loan rules correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-archive/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Class-only practice exception, originals/othercopies/loan preservation, cancellation reason and digital/loan rules correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-archive/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "incorrect_relative_calendar_resolution"
+      ],
+      "review": "Correct relative room/time results, but repeats native invented June5 as Friday; June5,2032 is Saturday.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-studio/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Relative Friday20:30 room split,21:30/headphones, cancellation/history and control/cables preserved.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-studio/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Relative Friday20:30 room split,21:30/headphones, cancellation/history and control/cables preserved.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-studio/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Relative Friday20:30 room split,21:30/headphones, cancellation/history and control/cables preserved.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-studio/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": null,
+      "issues": [
+        "ambiguous_report_capture_wording"
+      ],
+      "review": "Core result correct; report/observation time2026 combines ambiguous clock terms while native report date2032 correct. No forced clock failure.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-tickets/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "dropped_rule_condition"
+      ],
+      "review": "Meng eligibility/poster correct; extra rule paraphrase drops on-site requirement for signed invitation.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-tickets/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Required admission/discussion differences, otherperson/poster, expiredcard/unchangedMeng answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-tickets/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "stale_extra_claim"
+      ],
+      "review": "Expiredcard/Meng correct; parenthesis says original discussion reservation remains, without marking it as historical despite cancellation.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-tickets/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Battery withfan, independent subtitles, fan-stop prohibition correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-projection/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "report_time_as_exact_event"
+      ],
+      "review": "No subtitle stoppage correct; explicitly says mains deactivation happened at09:00 report time, not stated event time.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-projection/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Battery withfan, independent subtitles, fan-stop prohibition correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-projection/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "unsupported_system_architecture"
+      ],
+      "review": "Current subtitle/independence correct; introduces independent control system and physical supply fault beyond separate battery/no shared fan facts.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-projection/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Lake versus roof conditions, both stopped after guide departure, indoor continues answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-walk/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "unsupported_causal_rule"
+      ],
+      "review": "Indoor continued correctly; generalizes rule to no bridge dependence though source rule only states no guide dependence. Current bridge-closed/open-indoor co-occurrence is not a universal rule.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-walk/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Lake versus roof conditions, both stopped after guide departure, indoor continues answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-walk/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Lake versus roof conditions, both stopped after guide departure, indoor continues answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-walk/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": null,
+      "issues": [
+        "ambiguous_native_observation_attribution"
+      ],
+      "review": "Core correct; calls delivered native entry an observation/source record, ambiguous between report description and independent observation.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-exhibit/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Original/photo restrictions, catalogue/light independence, repaired curtain and continued catalogue covered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-exhibit/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "incorrect_change_continuity"
+      ],
+      "review": "Current non-exhibition correct; says light is STILL unqualified although prior report said qualified and this report introduces failure.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-exhibit/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "unsupported_extra_uncertainty"
+      ],
+      "review": "Answers repaired/open; extra qualification says intactness unconfirmed despite source修好. Keeps core repaired state, but adds unsupported doubt about the stated condition.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-exhibit/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Actual17/original12, no newfive, current15 from17, essays8 all answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-inventory/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Actual17/original12, no newfive, current15 from17, essays8 all answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-inventory/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "invented_archiving_rule"
+      ],
+      "review": "Core inventory arithmetic/history correct; adds sheet archived according to regulations, though Source only says retained on file.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-inventory/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Actual17/original12, no newfive, current15 from17, essays8 all answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-inventory/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": null,
+      "issues": [
+        "ambiguous_author_content_attribution"
+      ],
+      "review": "Core names correct; attributes full correction explanation directly to author and anchors page sending to report date; source is user report about author page. Fine attribution ambiguous.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-credits/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": null,
+      "issues": [
+        "ambiguous_author_content_attribution"
+      ],
+      "review": "Credits correct; directly quotes unchanged-credit/correction explanation as author declaration though source is user paraphrase. Fine attribution ambiguous.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-credits/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "ActualJianLan/originalJianLin, musicMuAn/otherSuYao, unconfirmedinvitation/nottranslator, no realreplacement preserved.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-credits/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "ActualJianLan/originalJianLin, musicMuAn/otherSuYao, unconfirmedinvitation/nottranslator, no realreplacement preserved.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-credits/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "capture_report_clock_confusion"
+      ],
+      "review": "Coreproposal status correct; dates original user utterance2026 rather than2032 report date.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-reservation/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Undecided/no start then rejectedbooking2pm, floor uses and attendance duty correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-reservation/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Undecided/no start then rejectedbooking2pm, floor uses and attendance duty correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-reservation/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Undecided/no start then rejectedbooking2pm, floor uses and attendance duty correctly answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-reservation/2/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 1,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Unknownrelocation, Thursday/beige/tubes, currentNanChuang/notpermanent, unchangedarrangements answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-parcel/1/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 1,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Unknownrelocation, Thursday/beige/tubes, currentNanChuang/notpermanent, unchangedarrangements answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-parcel/1/qa/1/complete.json"
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 2,
+      "question_index": 0,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": true,
+      "issues": [],
+      "review": "Unknownrelocation, Thursday/beige/tubes, currentNanChuang/notpermanent, unchangedarrangements answered.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-parcel/2/qa/0/complete.json"
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 2,
+      "question_index": 1,
+      "answer_present": true,
+      "core_correct": true,
+      "source_faithful": false,
+      "issues": [
+        "subject_scope_generalization"
+      ],
+      "review": "Unchanged personal schedule answer given, but explanation generalizes personal weekend visits into all store organizing activities; native entry had incorrectly reassigned speaker to owner.",
+      "evidence_path": "artifacts/method-architecture/simplemem-full-v1/run/SimpleMem-native-common-reader/predictions/halumem/method-screen-parcel/2/qa/1/complete.json"
+    }
+  ]
+}

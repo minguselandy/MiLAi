@@ -1,0 +1,161 @@
+{
+  "study": "global-story-v1",
+  "runtime_code": "dbc3bda8",
+  "planned_messages": 17,
+  "attempted_messages": 16,
+  "terminal_messages": {
+    "COMPLETED": 14,
+    "FAILED": 2
+  },
+  "not_run": [
+    "reopen-after-forget"
+  ],
+  "acceptance": "NOT_PASSED",
+  "cost": {
+    "chat/completions": {
+      "calls": 66,
+      "wall_seconds": 761.0787205770612,
+      "prompt_tokens": 586614,
+      "total_tokens": 691404,
+      "completion_tokens": 104790
+    },
+    "embeddings": {
+      "calls": 72,
+      "wall_seconds": 2.7866304954513907,
+      "prompt_tokens": 3625,
+      "total_tokens": 3625,
+      "completion_tokens": 0
+    }
+  },
+  "new_unknown": {
+    "generation": 0,
+    "embedding": 0
+  },
+  "results": [
+    {
+      "message_id": "event-11",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "saved-history",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": []
+    },
+    {
+      "message_id": "event-12",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "event-1",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "event-6",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_INVALID_CONTENT",
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "event-2",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": []
+    },
+    {
+      "message_id": "event-4",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": []
+    },
+    {
+      "message_id": "forget-finance",
+      "status": "FAILED",
+      "error": "V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT",
+      "maintenance_status": []
+    },
+    {
+      "message_id": "event-3",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "event-7",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "event-8",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "event-5",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "after-effective",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": []
+    },
+    {
+      "message_id": "event-10",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "completed"
+      ]
+    },
+    {
+      "message_id": "event-9",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": [
+        "incomplete"
+      ]
+    },
+    {
+      "message_id": "before-effective",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance_status": []
+    }
+  ],
+  "findings": [
+    "event-6 exception cancellation committed but first response and one readonly recovery both failed with null content; no further retry",
+    "event-9 current B correction incomplete with edit output truncation; COMPLETED refers to Host delivery only, not semantic success",
+    "before-effective source answer correct; after-effective B remains Wang because correction was not committed",
+    "saved-history used read_source and read_evidence, not a historical revision read; answer labels original user source as stored historical version: history delivery NOT proven",
+    "forget-finance failed at resident material wrapper before any visibility operation; no actual forget performed"
+  ],
+  "artifact_root": "artifacts/global-development/global-story-v1",
+  "followup": "Separate copy of actual bank; declared new current requests and unchanged budgets, no original attempt overwritten"
+}

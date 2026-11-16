@@ -1,0 +1,99 @@
+{
+  "status": "T1_NEW_TRAIN_FULL_AUTHOR_REVIEW_COMPLETE",
+  "source_version": "c6b1f3bd",
+  "run": "artifacts/host-intent-retrieval-v3/runs/t1-new-train-fixed-context-v1",
+  "closed_positions": 228,
+  "program_completed": 165,
+  "failures": 63,
+  "failure_types": {
+    "VLLM_CHAT_TRUNCATED": 49,
+    "JSON_ACTION_MALFORMED": 14
+  },
+  "http_requests": 592,
+  "known_generation_tokens": 1951856,
+  "charged_generation_tokens": 1951856,
+  "new_unknown_usage": 0,
+  "new_embedding_tokens": 0,
+  "labels": {
+    "states": 1816,
+    "reviewed_requests": 358,
+    "reviewed_states": 1816,
+    "labelled": 1113,
+    "reasons": {
+      "reviewed_missing_original_progress": 877,
+      "no_reviewed_source_proof_masked": 515,
+      "reviewed_originals_sufficient": 236,
+      "reviewed_partial_evidence_only_masked": 153,
+      "no_reviewed_progress_masked": 35
+    },
+    "families_labelled": 62,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-full-v1/train.jsonl",
+    "reviews_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-full-v1/request-witness-reviews-v1.json"
+  },
+  "input_audit": {
+    "public_inputs_equal": 1816,
+    "metadata_changes_only": [
+      "label_status",
+      "source_review"
+    ],
+    "old_prefix_states": 1319,
+    "old_gold_changes": 0,
+    "closed_host_positions": 228,
+    "positions_with_states": 221,
+    "no_state_positions": [
+      35,
+      59,
+      72,
+      122,
+      133,
+      137,
+      138
+    ],
+    "model_calls": 0,
+    "wall_seconds": 2.9073479687795043,
+    "cpu_seconds": 2.907174707,
+    "ledger_recorded": false
+  },
+  "runtime_audit": {
+    "status": "PASS",
+    "phase": "host_intent_t1_train_full_runtime_audit_v2",
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "closed_host_positions": 228,
+    "executed_retrievals": 379,
+    "stateful_calls": 358,
+    "zero_state_calls": 21,
+    "tool_messages": 380,
+    "empty_deliveries": 159,
+    "termination_reasons": {
+      "policy_handoff": 220,
+      "budget_exhausted": 159
+    },
+    "max_full_packet_tokens": 1585,
+    "packets_over_actual_limit": 0,
+    "material_or_message_changes": 0,
+    "query_semantic_operations_in_final_status": 0,
+    "scope": "Exact actual control evidence and ToolMessage/packet equality; all source originals, no semantic-view snapshot transitions; no model loads or forwards.",
+    "wall_seconds": 6.752137577161193,
+    "cpu_seconds": 9.301732405
+  },
+  "task_review_counts": {
+    "QUALIFIED": 34,
+    "FAILED": 63,
+    "CORRECT": 82,
+    "WRONG": 49
+  },
+  "source_pools": 114,
+  "source_groups": 64,
+  "task_review": "artifacts/host-intent-retrieval-v3/data/t1-new-train-task-reviews-full-v1.json",
+  "zero_state_requests_review": "artifacts/host-intent-retrieval-v3/data/t1-new-train-witness-labels-full-v1/zero-state-request-reviews-v1.json",
+  "first_audit_failures": [
+    "artifacts/host-intent-retrieval-v3/data/t1-new-train-witness-labels-full-v1/input-audit-first-failure.json",
+    "artifacts/host-intent-retrieval-v3/data/t1-new-train-witness-labels-full-v1/runtime-audit.json"
+  ],
+  "cost_summary": "artifacts/host-intent-retrieval-v3/runs/t1-new-train-fixed-context-v1/collection-cost-summary-v1.json",
+  "offline_accounting": "Train collection ledger closed; v10 settled before dev start. New offline measurements pending v11 while dev runs; raw false flags in settled phases do not permit rebilling.",
+  "scope": "Author source/request/final-answer review, not independent judgment. No T1 fit yet. Old T0 and expanded T1 train groups will be integrated without concatenating overlapping prefixes. Full goal remains active."
+}

@@ -1,0 +1,262 @@
+{
+  "status": "PUBLICATION_CHECKPOINT_FULL_V4_INCOMPLETE",
+  "observed_at_utc": "2026-10-21T06:15:55.584365+00:00",
+  "observed_at_asia_shanghai": "2026-10-21T14:15:55.584365+08:00",
+  "branch": "feat/host-intent-retrieval-20261019",
+  "implementation_tip_before_publication": "a8bd9c65",
+  "authorization": "User requested current experiment summary and GitHub submission; no experiment pause or merge requested.",
+  "d_comparison": {
+    "status": "CLOSED_AUTHOR_REVIEWED",
+    "arms": {
+      "generative": {
+        "host_grades": {
+          "Q": 19,
+          "W": 14,
+          "C": 15,
+          "F": 16
+        },
+        "complete_Host_upper": 16,
+        "material": {
+          "partial": 43,
+          "complete": 18,
+          "insufficient": 3
+        },
+        "generation_requests": 220,
+        "generation_tokens": 1221393,
+        "embedding_tokens": 0
+      },
+      "rules": {
+        "host_grades": {
+          "C": 19,
+          "W": 22,
+          "Q": 18,
+          "F": 5
+        },
+        "complete_Host_upper": 19,
+        "material": {
+          "complete": 36,
+          "partial": 28
+        },
+        "generation_requests": 100,
+        "generation_tokens": 551227,
+        "embedding_tokens": 0
+      },
+      "fixed-context": {
+        "host_grades": {
+          "C": 21,
+          "W": 17,
+          "Q": 14,
+          "F": 12
+        },
+        "complete_Host_upper": 22,
+        "material": {
+          "complete": 38,
+          "partial": 26
+        },
+        "generation_requests": 88,
+        "generation_tokens": 513678,
+        "embedding_tokens": 0
+      },
+      "t1-main-seed0": {
+        "host_grades": {
+          "C": 19,
+          "W": 19,
+          "Q": 13,
+          "F": 13
+        },
+        "complete_Host_upper": 19,
+        "material": {
+          "complete": 37,
+          "partial": 27
+        },
+        "generation_requests": 88,
+        "generation_tokens": 537603,
+        "embedding_tokens": 0
+      },
+      "t1-control-seed0": {
+        "host_grades": {
+          "C": 16,
+          "W": 20,
+          "Q": 19,
+          "F": 9
+        },
+        "complete_Host_upper": 16,
+        "material": {
+          "complete": 36,
+          "partial": 28
+        },
+        "generation_requests": 89,
+        "generation_tokens": 525203,
+        "embedding_tokens": 0
+      },
+      "continued-ce-seed0": {
+        "host_grades": {
+          "C": 18,
+          "W": 19,
+          "Q": 17,
+          "F": 10
+        },
+        "complete_Host_upper": 18,
+        "material": {
+          "complete": 36,
+          "partial": 28
+        },
+        "generation_requests": 85,
+        "generation_tokens": 539523,
+        "embedding_tokens": 0
+      },
+      "answer-seed0": {
+        "host_grades": {
+          "C": 17,
+          "W": 17,
+          "F": 12,
+          "Q": 18
+        },
+        "complete_Host_upper": 19,
+        "material": {
+          "complete": 26,
+          "partial": 38
+        },
+        "generation_requests": 143,
+        "generation_tokens": 740852,
+        "embedding_tokens": 0
+      },
+      "delivery-seed0": {
+        "host_grades": {
+          "C": 21,
+          "W": 15,
+          "F": 10,
+          "Q": 18
+        },
+        "complete_Host_upper": 21,
+        "material": {
+          "complete": 33,
+          "partial": 31
+        },
+        "generation_requests": 93,
+        "generation_tokens": 588121,
+        "embedding_tokens": 0
+      },
+      "view-cache": {
+        "host_grades": {
+          "C": 20,
+          "Q": 19,
+          "F": 10,
+          "W": 15
+        },
+        "complete_Host_upper": 23,
+        "material": {
+          "complete": 31,
+          "partial": 33
+        },
+        "generation_requests": 112,
+        "generation_tokens": 631125,
+        "embedding_tokens": 0
+      },
+      "mempursuit": {
+        "host_grades": {
+          "C": 16,
+          "W": 19,
+          "F": 14,
+          "Q": 15
+        },
+        "complete_Host_upper": 19,
+        "material": {
+          "complete": 36,
+          "partial": 27,
+          "insufficient": 1
+        },
+        "generation_requests": 87,
+        "generation_tokens": 544446,
+        "embedding_tokens": 66045
+      }
+    },
+    "source_groups": 8,
+    "streams_per_arm": 16,
+    "positions_per_arm": 64,
+    "logical_positions": 640,
+    "generation_requests": 1105,
+    "generation_tokens": 6393171,
+    "embedding_tokens": 66045,
+    "evidence": "data/manifests/host-intent-view-v4-d-complete-results-v1.json",
+    "scope": "Exposed dev; source-author review; source group is the comparison unit, not 640 independent observations."
+  },
+  "coalent_train_pilot": {
+    "status": "CLOSED_REAL_MODEL_PILOT_AUTHOR_REVIEWED",
+    "positions": 16,
+    "source_groups": 2,
+    "host_grades": {
+      "W": 9,
+      "F": 4,
+      "C": 2,
+      "Q": 1
+    },
+    "material": {
+      "partial": 10,
+      "complete": 6
+    },
+    "cache_calls": 7,
+    "cache_hits": 3,
+    "generation_tokens": 191457,
+    "embedding_tokens": 7326,
+    "evidence": "data/manifests/host-intent-view-v4-coalent-pilot-results-v2.json",
+    "cpu_settlement": "data/manifests/host-intent-view-v4-offline-review-settlement-v34.json"
+  },
+  "coalent_d_comparison": {
+    "status": "RUNNING",
+    "pid": 4137372,
+    "process_alive_at_snapshot": true,
+    "completed_positions": 26,
+    "planned_positions": 64,
+    "source_version": "e4844f28",
+    "active": {
+      "history": "memops_C03-view-v4-d-content",
+      "policy": "coalent",
+      "interface": "rich",
+      "profile": "coalent-rich",
+      "request": "intermediate-arrivals"
+    },
+    "driver": "artifacts/host-intent-retrieval-v3/view-v4-d-coalent-v1/driver.json",
+    "launch": "artifacts/host-intent-retrieval-v3/view-v4-d-coalent-launch-v1.json",
+    "preparation": "data/manifests/host-intent-view-v4-d-coalent-preparation-v1.json",
+    "review_status": "NOT_CLOSED_NOT_AGGREGATED",
+    "automatic_retry": false
+  },
+  "state": {
+    "real_train_pilots": 3,
+    "deterministic_task_successes": 0,
+    "official_score_available": false,
+    "held_test_runs": 0,
+    "confirmation_plan_frozen": false
+  },
+  "pending_work": [
+    "Close and source-review Coalent D64; compare complete quality and cost.",
+    "Select and execute E3 matched text retraining/evaluation.",
+    "Run prepared E5 18-position coverage and selected 512/2048/4096 budget points.",
+    "Freeze and run held or external confirmation; exposed author-reviewed results are not independent confirmation.",
+    "Resolve conditional extra training seeds and GAM-style adaptation from evidence and cost.",
+    "Complete full v4 requirement audit before declaring completion."
+  ],
+  "accounting": {
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "pending33": "SETTLED_ONCE: 105 measured phases, 530.2117453299735 CPU seconds",
+    "pending34": "SETTLED_ONCE: 9 measured phases, 49.599711637 CPU seconds",
+    "current_pending": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v35.json",
+    "no_offline_settlement_while_model_active": true,
+    "unmeasured_manual_debug_publication_overhead": "UNKNOWN, not zero",
+    "scope": "D costs and pilot costs are separate subsets, not total project spend. Generation, embedding and local CPU stay separate."
+  },
+  "publication_scope": "Lab code, tests, configurations, protocols and compact result manifests. Raw data, weights, stores, environments and full traces remain ignored local artifacts.",
+  "product_schema_api_permissions_canonical_changed": false,
+  "validation": {
+    "prior_implementation_checks": "See linked execution record and per-change manifests; includes Coalent and STATE functional checks, Ruff/mypy and dependency-boundary checks.",
+    "publication_checks": "PASS: 92 outgoing/new JSON files parse; D10 grades/material counts and cost totals reconcile; pilot grades total16; report links resolve; outgoing paths are Lab-only; new publication changes pass whitespace check.",
+    "full_repository_tests": "NOT_RUN_FOR_PUBLICATION",
+    "remote_ci": "NOT_CLAIMED",
+    "package_boundary": "PASS in existing HTTP Python environment: active package DAG, pure facades, shared leaves and import paths.",
+    "tools_boundary": "PASS in existing HTTP Python environment: 11 files,20 dependencies,6 grandfathered private dependencies; no new dependency violation.",
+    "initial_boundary_attempt": "System Python3.10 import failed on enum.StrEnum before checks ran. Retried with existing supported project environment; source unchanged.",
+    "historical_whitespace_findings": "Whole outgoing-range check flags preserved state-bench patch context blank lines and v4 plan Markdown hard breaks/EOF blank. Original patch/plan bytes intentionally unchanged; these are outside new publication edits."
+  },
+  "sha_or_content_fingerprint_checks": "NOT_USED"
+}

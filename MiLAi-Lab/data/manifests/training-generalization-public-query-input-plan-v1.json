@@ -1,0 +1,36 @@
+{
+  "status": "DECLARED_BEFORE_ALL_PUBLIC_QUERY_INPUT_AUDIT",
+  "declared_at": "2026-10-22T01:13:50.660803+00:00",
+  "source_version": "bcebf420",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-source-ranges-bcebf420-v2/MiLAi-Lab",
+  "public_input_scope": "All451Smallquestions in original order,211/240in their exact native100trajectory pools;29originalquestionimages. Existing disclosed regression, not freshholdout.",
+  "reference_boundary": "Native raw question containers read only for id/domain/question/image; exact equality to prior two-field public projection. No answer/eval values accessed/exported or model calls. No question text displayed to author.",
+  "controller_matrix": {
+    "representations": [
+      "shared_actions",
+      "shared_actions_request_text"
+    ],
+    "internal_views": [
+      true,
+      false
+    ],
+    "delivery_selection": [
+      false,
+      true
+    ],
+    "initial_states_per_public_query": 8,
+    "planned_inputs": 3608,
+    "source_observation_tokens": 4096,
+    "max_len": 16384,
+    "head_max_len": 2048
+  },
+  "controller_scope": "Actual original Store initial observation reused within bank/condition because no newquery capture or operation occurs. Exact public task replaces task fields; actual offered actions regenerated and bindings compared. Preflight synthetic Source excluded. Initial codec/capacity only; does not check actual-query search/reads/View/own-policy trajectories.256source-range condition remains unchanged but is not exercised before SEARCH.",
+  "reader_scope": "All451native domain/question-only Reader requests, EMPTY memory context;29actual question images through local native Qwen image-grid counter, unchanged8192output reservation and64Kcontext. No HTTP, model weights, server usage or retrieval quality. Does not prove complete final memory-context capacity.",
+  "upstream": "Local native harness/metrics at declared2cc8c54; relevant source files clean; literal copies retained before counting; no native SHA path imported.",
+  "costs": "One final measured CPU audit phase pending, nested observations not separately billed. No original ledger mutations/offline settlement while training lives. Unmeasured authoring/import/validation overhead unknown, not zero.",
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "automatic_retry": false,
+  "models": 0,
+  "new_training_labels": 0
+}

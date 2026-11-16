@@ -1,0 +1,32 @@
+{
+  "version": "dynamic-memory-control-sandbox-progress-observation-v3",
+  "status": "PREPARED_NOT_STARTED",
+  "fixture": "data/fixtures/dynamic-memory-control/sandbox-progress-observation-v3.json",
+  "config": "configs/dynamic-memory-operation-sandbox-progress-observation-v3.json",
+  "policies": [
+    "fixed_context",
+    "rules"
+  ],
+  "message_positions": 10,
+  "source_family": "sandbox_evidence_plan_partial_label",
+  "comparison": "New-version usability validation on an input variant of the same functional template, not a new independent family or causal efficacy comparison. Old model inputs/results are not replayed or edited.",
+  "required_behavior": [
+    "Current requirements produce one correct6unit reservation during label outage; preserve partial effect.",
+    "Actual recovery-query receipts are available for rendering and verified object-reference selection without requiring a duplicate model-initiated query.",
+    "Readonly model answer retains requested actual fields and separate receipt/progress evidence.",
+    "Only the original label is completed after backend recovery; no duplicate reservation or parameter mutation.",
+    "Explicit business_mutation prohibition prevents action planning even if the same declaration inconsistently says perform."
+  ],
+  "boundaries": "Current permission, owner/application/object identity, source visibility, fresh-query and registered-plan checks remain. No synthesized business facts or semantic-plan auto-registration.",
+  "validation": {
+    "host_regression": 406,
+    "application_evaluator": 108,
+    "targeted_integration": 22,
+    "dispatch_source_projection": 13,
+    "mypy": "5changed modules passed",
+    "package_tools_boundaries": "passed"
+  },
+  "next_queue": "After old-version remaining rules5are terminal and reviewed; freeze new runtime before execution.",
+  "automatic_retry": false,
+  "model_calls_by_preparation": 0
+}

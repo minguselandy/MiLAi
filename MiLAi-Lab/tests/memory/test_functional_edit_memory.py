@@ -27,6 +27,7 @@ from milai_lab.memory.functional_state import (
     namespace,
     reference_key,
 )
+from milai_lab.memory.reader_projection import expand_host_packet
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.functional_edit_memory import (
@@ -611,6 +612,8 @@ def test_next_real_langgraph_dynamic_catalog_after_hook_and_original_wrapper(tmp
         with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES) as memory:
             memory.service.capture_user("s", "u", "Remember my quiet reminders.")
             proposal = next_sdk_create()
+            assertion = proposal["clauses"][0]["assertion"]
+            assertion["source_evidence"] = assertion.pop("source")
             if invalid:
                 proposal["clauses"][0]["evidence"] = ["e99"]
             model = ScriptModel(
@@ -2326,7 +2329,7 @@ def test_shared_recipe_recovery_preserves_effect_and_unknown_call(tmp_path, faul
             return {"proposals": [{"action": "create", "units": [
                 {"text": "The marker is blue.", "evidence": ["e1"]}]}]}
 
-        def commit(operation, proposal, mapping):
+        def commit(operation, proposal, mapping, dependency_receipts):
             memory.service.store.put(
                 namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
                 {"mapping_id": mapping["mapping_id"]}, index=False,
@@ -2343,7 +2346,7 @@ def test_shared_recipe_recovery_preserves_effect_and_unknown_call(tmp_path, faul
     with opened(tmp_path, arm="B1", interface_version="I2") as memory:
         # Resume through the same functional mutation boundary and operation ID.
         memory.context("s", "u", "functional-m-test-v1")
-        args["commit"] = lambda op, proposal, mapping: memory.apply_writer_proposal(
+        args["commit"] = lambda op, proposal, mapping, receipts: memory.apply_writer_proposal(
             cfg(), op, proposal)
         result = maintain_event(memory.writer, delivery, **args)
         assert len(calls) == count
@@ -2395,7 +2398,7 @@ def test_state_view_opens_whole_targets_and_continues_after_durable_commit(tmp_p
                 "text": "The marker is red." if "marker" in old else "The alarm is soft.",
             }]}]}
 
-        def commit(operation, proposal, mapping):
+        def commit(operation, proposal, mapping, dependency_receipts):
             memory.service.store.put(
                 namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
                 {"mapping_id": mapping["mapping_id"]}, index=False,
@@ -2413,7 +2416,7 @@ def test_state_view_opens_whole_targets_and_continues_after_durable_commit(tmp_p
     with opened(tmp_path, arm="B1", interface_version="I2") as memory:
         memory.context("s", "u", "functional-m-test-v1")
 
-        def commit(operation, proposal, mapping):
+        def commit(operation, proposal, mapping, dependency_receipts):
             memory.service.store.put(
                 namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
                 {"mapping_id": mapping["mapping_id"]}, index=False,
@@ -2495,6 +2498,8 @@ def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_pat
 
 
 def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path):
+    from jsonschema import Draft202012Validator
+
     from milai_lab.methods.edit_maintenance import (
         has_pending_save,
         maintain_event,
@@ -2508,7 +2513,7 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
                    memory_view_mode="state_driven", memory_save_requested=True)
     current = cfg()
 
-    def commit(operation, proposal, mapping):
+    def commit(operation, proposal, mapping, dependency_receipts):
         memory.service.store.put(
             namespace(memory.service), memory._writer_key(current, "edit-writer-active:"),
             {"mapping_id": mapping["mapping_id"]}, index=False,
@@ -2544,9 +2549,22 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
                 return {"record_ids": [next(row["record_id"] for row in packet["directory"]
                                             if row["description"] == target)],
                         "done": target == "Alarm tone"}
+            validator = Draft202012Validator(schema)
+            assert schema["required"] == ["creates", "records"]
+            explicit_empty = {"creates": [], "records": {}}
+            validator.validate(explicit_empty)
+            assert not validator.is_valid({})
+            empty_example, _ = json.JSONDecoder().raw_decode(messages[0]["content"].split(
+                "Complete empty envelope: ", 1)[1])
+            assert empty_example == explicit_empty
+            if "Complete formation envelope: " in messages[0]["content"]:
+                formation, _ = json.JSONDecoder().raw_decode(messages[0]["content"].split(
+                    "Complete formation envelope: ", 1)[1])
+                assert set(formation) == {"creates", "records"} and formation["records"] == {}
+                validator.validate(formation)
             if stage.endswith("work:1"):
-                return {}  # This completed scope has no semantic receipt.
-            return {"records": {"r1": {"action": "edit", "edits": [{
+                return explicit_empty  # This completed scope has no semantic receipt.
+            return {"creates": [], "records": {"r1": {"action": "edit", "edits": [{
                 "operation": "replace", "target_unit": "u1", "text": "The marker is blue.",
                 "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"},
             }]}}}
@@ -2556,6 +2574,12 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
         assert first["status"] == "completed" and len(first["receipts"]) == 1
         assert first["memory_view"]["pending_refs"] == ["save:work:1"]
         before_records = memory.service.records()
+        active = memory.service.store.get(namespace(memory.service),
+            memory._writer_key(current, "edit-writer-active:")).value
+        assert memory.writer.decode_envelope({}, active["mapping_id"]) == []
+        assert memory.writer.decode_envelope(
+            {"creates": [], "records": {}}, active["mapping_id"]) == []
+        assert memory.service.records() == before_records
         material = memory.model_material(cfg())
         assert material["memory_view"]["pending_refs"] == ["save:work:1"]
         assert material["pending_maintenance"][0]["pending_refs"] == ["save:work:1"]
@@ -2595,7 +2619,8 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
             assert len(packet["delivery"]["records"]) == 1
             assert packet["delivery"]["records"][0]["matter"] == "Alarm tone"
             assert "Remember the marker is blue and the alarm is soft." in messages[-1]["content"]
-            return {"records": {"r1": {"action": "edit", "edits": [{
+            assert schema["required"] == ["creates", "records"]
+            return {"creates": [], "records": {"r1": {"action": "edit", "edits": [{
                 "operation": "replace", "target_unit": "u1", "text": "The alarm is soft.",
                 "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"},
             }]}}}
@@ -2700,6 +2725,66 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
         assert all(not u["applicability"].get("exceptions") for u in current)
         assert current[0]["applicability"]["text"] == general["text"]
         assert memory.service.read(saved["id"])["value"] == before_read
+
+    from langchain_core.embeddings import Embeddings
+
+    from milai_lab.memory.retrieval import SemanticRetriever, semantic_keys, semantic_text
+
+    class NavigationVectors(Embeddings):
+        def __init__(self) -> None:
+            self.documents: list[str] = []
+            self.query_vector = [1.0, 0.0]
+
+        def embed_documents(self, texts: list[str]) -> list[list[float]]:
+            self.documents.extend(texts)
+            return [[1.0, 0.0] if "modifies:" in text else [0.0, 1.0] for text in texts]
+
+        def embed_query(self, text: str) -> list[float]:
+            return self.query_vector
+
+    with opened(tmp_path, arm="M", interface_version="I2",
+                maintenance_recipe="extract_then_edit", memory_view_mode="state_driven",
+                read_interface="explicit_selectors_v1") as memory:
+        vectors = NavigationVectors()
+        memory.service.semantic_retriever = SemanticRetriever(
+            vectors, 2, granularity="record_units",
+        )
+        before = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        turn(memory, "navigation", "What project visits apply this quarter?")
+        directory = memory.context("s", "navigation", "functional-m-test-v1")
+        candidate = next(item for item in directory["candidates"]
+                         if item.get("record_id") == saved["id"])
+        assert "Cosine-winning stored unit excerpt" in candidate["description"]
+        assert candidate["description"].endswith(general["text"])
+        assert all(item["type"] != "record" for item in directory["items"])
+        read = json.loads(invoke(memory, "read_memory", {"target": candidate["target"]},
+                                 "open-complete", "navigation").content)
+        assert read["ok"] and {unit["content"] for unit in read["items"]} == {
+            unit["text"] for unit in before["edit_state"]["units"]
+        }
+        material = memory.model_material(cfg("navigation"))
+        assert all("retrieval_navigation" not in item for item in material["items"])
+        assert memory.service.read(saved["id"])["value"] == before
+        assert vectors.documents == list(semantic_keys(before, granularity="record_units"))
+
+        vectors.query_vector = [0.0, 1.0]
+        turn(memory, "whole-navigation", "Read the whole project arrangement.")
+        directory = memory.context("s", "whole-navigation", "functional-m-test-v1")
+        candidate = next(item for item in directory["candidates"]
+                         if item.get("record_id") == saved["id"])
+        whole = semantic_text(before)
+        assert "Cosine-winning whole-record search key excerpt" in candidate["description"]
+        assert candidate["description"].endswith(whole[:240] + ("…" if len(whole) > 240 else ""))
+        assert all(item["type"] != "record" for item in directory["items"])
+        read = json.loads(invoke(memory, "read_memory", {"target": candidate["target"]},
+                                 "open-whole", "whole-navigation").content)
+        assert read["ok"] and {unit["content"] for unit in read["items"]} == {
+            unit["text"] for unit in before["edit_state"]["units"]
+        }
+        material = memory.model_material(cfg("whole-navigation"))
+        assert all("retrieval_navigation" not in item for item in material["items"])
+        assert vectors.documents == list(semantic_keys(before, granularity="record_units"))
+        assert memory.service.read(saved["id"])["value"] == before
 
 
 @pytest.mark.parametrize("query_time,calendar_context,expected", [
@@ -2888,8 +2973,47 @@ def test_shared_maintenance_delivers_selected_prior_request_beyond_recent_source
         assert (len(calls), len(previews)) == count and memory.service.records() == before
 
 
+@pytest.mark.parametrize("material_limit", [12000, 18000, 24000])
+def test_resident_paging_reserves_directory_and_keeps_unopened_continuations(
+    tmp_path, material_limit,
+):
+    features = EditFeatures(bound_references=True, source_metadata=True)
+    with opened(tmp_path, interface_version="I2", features=features) as seed:
+        texts = [f"Room {i} requires a personal booking; the other rooms keep their own rules."
+                 for i in range(6)]
+        writer_turn(seed, "seed", " ".join(texts))
+        saved = json.loads(invoke(seed, "save_memory", {"proposal": {
+            "action": "create", "clauses": [{"text": text, "conditions": [],
+                "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported"}}
+                for text in texts],
+        }}, "save", "seed").content)
+        assert saved["ok"], saved
+        before = copy.deepcopy(seed.service.read(saved["id"])["value"])
+        memory = FunctionalEditMemory(seed.service, len, material_limit=material_limit,
+            read_limit=12, interface_version="I2", features=features,
+            memory_view_mode="state_driven", read_interface="explicit_selectors_v1")
+        memory.service.capture_user("s", "u", "Read the room booking rules.")
+        directory = memory.context("s", "u", "functional-m-test-v1")
+        target = next(c["target"] for c in directory["candidates"]
+                      if c.get("record_id") == saved["id"])
+        page = json.loads(invoke(memory, "read_memory", {"target": target}, "read").content)
+        assert page["ok"]
+        material = memory.model_material(cfg())
+        assert len(canonical(material)) <= material_limit
+        assert "candidate_delivery_status" in material
+        shown = [u["content"] for u in expand_host_packet(material)["items"]
+                 if u["type"] == "record"]
+        assert shown and set(shown) <= set(texts)
+        if len(shown) < len(texts):
+            assert material["memory_view"]["pending_refs"]
+            assert material["continuations"]
+            assert material["delivery_status"] == "partial"
+        assert memory.service.read(saved["id"])["value"] == before
+
+
 def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path):
-    options = {"interface_version": "I2", "features": NEXT_FEATURES,
+    options = {"interface_version": "I2",
+               "features": EditFeatures(True, True, True, True, True, temporal_scope=True),
                "memory_profile": "unified_v1"}
     saved = []
     with opened(tmp_path, **options) as memory:
@@ -2912,11 +3036,31 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         directory = memory.context("s", "u", "functional-m-test-v1")
         assert directory["candidates"]
         assert all(item["type"] == "fragment" for item in directory["items"])
-        a_args = {"record_id": saved[0], "read_goal": "original_source"}
+        a_target = next(item["target"] for item in directory["candidates"]
+                        if item.get("record_id") == saved[0])
+        a_args = {"target": a_target, "read_goal": "original_source"}
         a = invoke(memory, "read_memory", a_args, "open-a")
+        # Compare actual metadata values after resolving the shared wire table.
+        a_page = expand_host_packet(json.loads(a.content))
+        a_row = memory.service.read(saved[0])["value"]
+        assert a_page["delivery_status"] == "complete_snapshot" and not a_page["skipped_units"]
+        assert [item["content"] for item in a_page["items"]] == [
+            unit["text"] for unit in a_row["edit_state"]["units"]
+        ]
+        assert all("revision_view" not in item for item in a_page["items"])
+        assert a_page["items"][0]["edit_unit"]["evidence_refs"] == (
+            a_row["edit_state"]["units"][0]["evidence_refs"])
+        assert a_page["items"][0]["edit_unit"]["assertion"] == (
+            a_row["edit_state"]["units"][0]["assertion"])
+        assert a_page["items"][0]["stored_history"]["revisions"] == [1]
+        revision_evidence = a_page["items"][0]["revision_evidence"]
+        assert revision_evidence and all("content" not in part for part in revision_evidence)
+        assert revision_evidence[0]["role"] == "user"
         assert memory.view_state(cfg())["read_goal"] == "original_source"
         first_refs = memory.view_state(cfg())["resident_refs"]
-        b = invoke(memory, "read_memory", {"record_id": saved[1]}, "open-b")
+        b_args = {"target": next(item["target"] for item in directory["candidates"]
+                                if item.get("record_id") == saved[1])}
+        b = invoke(memory, "read_memory", b_args, "open-b")
         material = memory.model_material(cfg())
         assert material["memory_view"]["read_goal"] == "original_source"
         assert {item["record_id"] for item in material["items"] if item["type"] == "record"} == {
@@ -2928,15 +3072,24 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
                           read_goal=material["memory_view"]["read_goal"],
                           resident_refs=first_refs)
         original_ref = memory.service.read(saved[0])["value"]["source_ref"]
-        original = json.loads(invoke(memory, "read_source", {"source_ref": original_ref},
+        original_read = revision_evidence[0]["read"]
+        assert original_read["tool"] == "read_source"
+        original_target = memory.resolve_request_target(cfg(), original_read["arguments"]["target"])
+        assert original_target["kind"] == "read_only_navigation"
+        assert original_target["credentials"] == {}
+        assert original_target["identity"]["read"] == {
+            "tool": "read_source", "arguments": {"source_ref": original_ref}}
+        original = json.loads(invoke(memory, original_read["tool"], original_read["arguments"],
                                      "original-words").content)
         assert original["ok"] and all(item["source_ref"] == original_ref
                                       for item in original["items"])
         assert memory.view_state(cfg())["read_goal"] == "original_source"
         writer = memory.model_material(cfg(), for_write=True)["writer_packet"]
         assert len(writer["records"]) == 1 and "weekday" in canonical(writer)
-        history = json.loads(invoke(memory, "read_memory", {
-            "record_id": saved[0], "revision": 1, "keep_resident": True,
+        revision_target = next(item["target"] for item in
+            a_page["items"][0]["stored_history"]["revision_targets"] if item["revision"] == 1)
+        history = json.loads(invoke(memory, "read_memory_revision", {
+            "target": revision_target, "keep_resident": True,
         }, "saved-history").content)
         assert history["ok"]
         assert memory.view_state(cfg())["read_goal"] == "original_source"
@@ -2960,7 +3113,7 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         assert memory.model_material(cfg())["memory_view"]["read_goal"] == "original_source"
         calls = [{"name": "read_memory", "args": args,
                   "id": call_id, "type": "tool_call"}
-                 for args, call_id in zip((a_args, {"record_id": saved[1]}),
+                 for args, call_id in zip((a_args, b_args),
                                          ("open-a", "open-b"), strict=True)]
         business_receipt = ToolMessage(name="get_reservation", tool_call_id="business",
                                        content='{"business_outcome":"confirmed"}')
@@ -2986,10 +3139,23 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         ).value["items"]
         assert {item["record_id"] for item in archive if item["type"] == "record"} == set(saved)
         mixed = json.loads(invoke(memory, "read_memory", {
-            "record_id": saved[0], "keep_resident": True,
+            "target": next(item["target"] for item in expand_host_packet(material)["items"]
+                           if item.get("record_id") == saved[0] and item.get("revision") == 2),
+            "keep_resident": True,
             "read_goal": "current_and_saved_history",
         }, "current-and-history").content)
         assert mixed["ok"]
+        assert mixed["delivery_status"] == "complete_snapshot" and not mixed["skipped_units"]
+        history_read = mixed["items"][0]["stored_history"]["read"]
+        old_and_current = json.loads(invoke(memory, history_read["tool"],
+            history_read["arguments"], "all-saved-history").content)
+        assert {item["revision"] for item in old_and_current["items"]} == {1, 2}
+        assert all(item["version_view"] == "historical_exact_revision"
+                   for item in old_and_current["items"])
+        assert {item["content"] for item in old_and_current["items"]} == {
+            "Use quiet reminders only on weekdays.", "Use written reminders only on weekdays.",
+        }
+        assert memory.service.records() == before
         assert memory.model_material(cfg())["memory_view"]["read_goal"] == (
             "current_and_saved_history")
         memory.service.capture_user("s", "next", "Only inspect the invoice arrangement.")
@@ -3026,6 +3192,8 @@ def test_current_refresh_keeps_original_maintenance_selection_binding(tmp_path):
 
 
 def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
+    from milai_lab.application.host_requests import visible_cards
+
     options = {"interface_version": "I2", "features": NEXT_FEATURES,
                "memory_profile": "unified_v1", "memory_view_mode": "state_driven",
                "maintenance_recipe": "extract_then_edit"}
@@ -3068,6 +3236,15 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
             "new-session", "resume", current_text,
         )["source_ref"]
         memory.context("new-session", "resume", "current-config-v2")
+        prior_cards = visible_cards(None, memory.service, current_ref,
+                                   pending_maintenance=memory.pending_maintenance(current_cfg))
+        assert len(prior_cards) == 1 and prior_cards[0]["kind"] == "memory_maintenance"
+        assert prior_cards[0]["session"] == "s"
+        assert prior_cards[0]["request_id"] == initial["request_id"]
+        assert prior_cards[0]["source_refs"] == [original_ref]
+        assert prior_cards[0]["checkpoint"] == pending[0]["checkpoint"]
+        assert [part["content"] for part in prior_cards[0]["user_fragments"]] == [original_text]
+        assert "requirements" not in prior_cards[0] and "progress" not in prior_cards[0]
 
         def inspect(messages):
             assert [message["role"] for message in messages] == ["system", "user"]
@@ -3145,3 +3322,251 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
         assert (len(calls), len(fitted)) == counts
         assert memory.service.store.get(ns, old_key).value == old_checkpoint
         assert memory.service.records() == before and memory.pending_maintenance(current_cfg) == []
+        assert visible_cards(None, memory.service, current_ref,
+                             pending_maintenance=memory.pending_maintenance(current_cfg)) == []
+
+        mixed_text = "Do not book anything. Remember that I now prefer quiet Friday reminders."
+        mixed_ref = memory.service.capture_user("new-session", "mixed", mixed_text)["source_ref"]
+        memory.context("new-session", "mixed", "current-config-v2")
+        mixed_cfg = copy.deepcopy(current_cfg)
+        mixed_cfg["configurable"]["v13_turn_id"] = "mixed"
+        mixed_calls, mixed_fits, mixed_fit_stages = [], [], []
+
+        def mixed_fit(messages):
+            assert [m["role"] for m in messages] == ["system", "user"]
+            assert json.loads(messages[0]["content"].split(
+                "not fact evidence):\n", 1)[1]) == mixed_text
+            mixed_fits.append(copy.deepcopy(messages))
+            return True
+
+        def mixed_stage_fit(stage, messages):
+            mixed_fit_stages.append(stage.partition(":")[0])
+            return mixed_fit(messages)
+
+        def mixed_save(stage, messages, schema):
+            assert messages == mixed_fits[-1]
+            mixed_calls.append(stage)
+            payload = json.loads(messages[-1]["content"])
+            if stage.startswith("select:"):
+                return {"record_ids": [row["id"]], "done": True}
+            assert payload["delivery"]["evidence"][0]["text"] == mixed_text
+            if stage == "extract":
+                return {"changes": [{"subject": "Reminder tone", "statement":
+                    "User prefers quiet Friday reminders.", "evidence": ["e1"],
+                    "time": None, "scope": None}]}
+            return {"records": {"r1": {"action": "edit", "edits": [{
+                "operation": "change_value", "target_unit": "u1", "evidence": ["e1"],
+                "text": "Use quiet reminders only on Fridays.",
+                "assertion": {"source": "e1", "kind": "reported"},
+            }]}}}
+
+        mixed_args = dict(recipe="extract_then_edit", model_call=mixed_save,
+                          stage_fit=mixed_stage_fit, maintenance_scope=mixed_text)
+        updated = memory.maintain_sources(mixed_cfg, allowed=True, **mixed_args)
+        assert updated[0]["status"] == "completed" and len(mixed_calls) == 3
+        assert mixed_fit_stages == ["extract", "select", "edit"]
+        current = memory.service.read(row["id"])["value"]
+        assert current["revision"] == 2
+        assert current["edit_state"]["units"][0]["assertion"]["source_ref"] == mixed_ref
+        counts = len(mixed_calls), len(mixed_fits)
+        assert memory.maintain_sources(mixed_cfg, allowed=False, **mixed_args) == []
+        assert (len(mixed_calls), len(mixed_fits)) == counts
+        memory.service.forget("new-session", "hide-prior", fragment_handles=[
+            part["fragment_handle"] for part in memory.service.source_fragments(original_ref)])
+        assert visible_cards(None, memory.service, current_ref,
+                             pending_maintenance=prior_cards) == []
+
+
+@pytest.mark.parametrize("fits_all", [True, False])
+def test_single_pass_propositions_skip_selector_only_for_complete_fitting_input(tmp_path, fits_all):
+    from milai_lab.methods.edit_maintenance import maintain_event
+
+    features = EditFeatures(True, True, True, True, True, proposition_updates=True)
+    with opened(tmp_path, interface_version="I2", features=features,
+                maintenance_recipe="single_pass", memory_view_mode="staged") as memory:
+        writer_turn(memory, "seed", "User reports quiet reminders.")
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": next_sdk_create()},
+                                  "create", "seed").content)
+        assert saved["ok"]
+        before = memory.service.read(saved["id"])["value"]
+        writer_turn(memory, "next", "Keep the same quiet reminders; no change.")
+        ref = memory._binding(cfg("next"))["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[])
+        calls = []
+
+        def call(stage, messages, schema):
+            calls.append(stage)
+            if stage.startswith("select"):
+                return {"record_ids": [saved["id"]], "done": True}
+            body = json.loads(messages[1]["content"])
+            assert body["delivery"]["records"]
+            assert "User reports quiet reminders." in str(body)
+            return {"creates": [], "records": {}}
+
+        result = maintain_event(memory.writer, delivery, session="s", request_id="preserve",
+            date="2030-01-01", recipe="single_pass", model_call=call,
+            candidate_record_ids=[saved["id"]], memory_view_mode="staged",
+            stage_fit=lambda stage, messages: fits_all or stage != "edit")
+        assert memory.service.read(saved["id"])["value"] == before
+        assert len(calls) == 1
+        if fits_all:
+            assert calls[0].startswith("edit:") and result["status"] == "completed"
+        else:
+            assert calls[0].startswith("select:") and result["status"] == "incomplete"
+
+
+@pytest.mark.parametrize("arm", ["M", "B2"])
+def test_host_tools_persist_support_groups_and_reopen_writer_projection(tmp_path, arm):
+    features = EditFeatures(bound_references=True, dependency_groups=True)
+    options = dict(arm=arm, interface_version="I2", features=features)
+    with opened(tmp_path, **options) as memory:
+        writer_turn(memory, "u", "A powered battery and a working fan permit projection.")
+        clauses = [{"text": t, "conditions": [], "evidence": ["e1"]} for t in (
+            "Battery powered.", "Fan works.", "Projection permitted.")]
+        proposal = {"action": "create", "clauses": clauses, "support_groups": [{
+            "target_unit": 2, "alternatives": [[0, 1]], "evidence": ["e1"]}]}
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": proposal}, "save").content)
+        assert saved["ok"], saved
+        original = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        assert len(original["edit_state"]["support_groups"]) == 1
+    with opened(tmp_path, **options) as memory:
+        packet = writer_turn(memory, "change",
+                             "Remove that support claim; retain all three statements.")
+        assert packet["writer_packet"]["records"][0]["support_groups"]
+        if arm == "M":
+            proposal = {"action": "edit", "target": "r1", "edits": [], "support_groups": [{
+                "operation": "remove", "target_unit": "u3", "evidence": ["e1"]}]}
+        else:
+            proposal = {"action": "rewrite", "target": "r1", "clauses": clauses,
+                        "support_groups": [{"target_unit": 2, "alternatives": [[0]],
+                                            "evidence": ["e1"]}]}
+        updated = json.loads(invoke(memory, "update_memory", {"proposal": proposal},
+                                    "update", "change").content)
+        assert updated["ok"] and updated["revision"] == 2, updated
+        new = memory.service.read(saved["id"])["value"]
+        if arm == "M":
+            assert new["edit_state"]["units"] == original["edit_state"]["units"]
+            assert new["edit_state"]["support_groups"] == []
+        else:
+            assert len(new["edit_state"]["support_groups"][0]["alternatives"][0]) == 1
+        assert memory.service.read(saved["id"], 1)["value"] == original
+        replay = json.loads(invoke(memory, "update_memory", {"proposal": proposal},
+                                   "update", "change").content)
+        assert replay["ok"] and memory.service.read(saved["id"])["value"] == new
+
+
+@pytest.mark.parametrize("remove_foreign", [False, True])
+def test_host_shared_maintenance_binds_preceding_receipt_and_keeps_partial_commit(
+    tmp_path, remove_foreign,
+):
+    from milai_lab.memory.external_support import inspect_external_unit
+
+    features = EditFeatures(bound_references=True, dependency_groups=True,
+                            cross_record_dependencies=True)
+    options = dict(arm="M", interface_version="I2", features=features,
+                   maintenance_recipe="single_pass")
+    with opened(tmp_path, **options) as memory:
+        def maintain(key, text, model):
+            writer_turn(memory, key, text)
+            return memory.maintain_sources(cfg(key), recipe="single_pass", model_call=model,
+                                           allowed=True)
+
+        def clause(text):
+            return {"text": text, "conditions": [], "evidence": ["e1"]}
+        first = maintain("ledger", "Card valid. Desk label blue.", lambda *_: {"proposals": [{
+            "action": "create", "clauses": [clause("Card valid."), clause("Desk label blue.")]}]})
+        credential = first[0]["receipts"][0]["id"]
+        second = maintain("eligibility", "Training complete and card validity support eligibility.",
+            lambda *_: {"proposals": [{"action": "create", "clauses": [
+                clause("Training complete."), clause("Eligible.")], "support_groups": [{
+                    "target_unit": 1, "alternatives": [[0, {"record": "r1", "unit": "u1"}]],
+                    "evidence": ["e1"]}]}]})
+        assert second[0]["status"] == "completed", second
+        target = second[0]["receipts"][0]["id"]
+        before = copy.deepcopy(memory.service.read(target)["value"])
+        old_credential = copy.deepcopy(memory.service.read(credential)["value"])
+
+        def update(_stage, messages, _schema):
+            packet = json.loads(messages[1]["content"])["delivery"]
+            records = packet["records"]
+            ledger = next(row for row in records if any(u["text"] == "Card valid."
+                                                       for u in row["clauses"]))
+            eligible = next(row for row in records if any(u["text"] == "Eligible."
+                                                         for u in row["clauses"]))
+            return {"proposals": [
+                {"action": "edit", "target": eligible["id"], "edits": [],
+                 "support_groups": [{"target_unit": eligible["clauses"][1]["id"],
+                    "alternatives": [[eligible["clauses"][0]["id"],
+                        {"record": ledger["id"], "unit": ledger["clauses"][0]["id"]}]],
+                    "evidence": ["e1"]}]},
+                {"action": "edit", "target": ledger["id"], "edits": [{
+                    "operation": "retract" if remove_foreign else "replace",
+                    "target_unit": ledger["clauses"][0]["id"], "evidence": ["e1"],
+                    **({} if remove_foreign else {"text": "Card renewed and valid."})}]},
+            ]}
+
+        text = ("Withdraw the card claim." if remove_foreign
+                else "Card renewed; eligibility unchanged.")
+        result = maintain("renew", text, update)
+        receipts = result[0]["receipts"]
+        assert receipts[0]["ok"] and receipts[0]["id"] == credential, receipts
+        current = memory.service.read(target)["value"]
+        if remove_foreign:
+            assert result[0]["status"] == "incomplete"
+            assert not receipts[1]["ok"] and "RETRACTED" in receipts[1]["reason"]
+            assert current == before
+        else:
+            assert result[0]["status"] == "completed", result
+            group = current["edit_state"]["support_groups"][0]
+            ref = next(iter(group["external_units"].values()))
+            assert ref["revision"] == 2 and inspect_external_unit(memory.service, ref)[
+                "status"] == "unchanged"
+            assert current["edit_state"]["units"] == before["edit_state"]["units"]
+            assert memory.maintain_sources(cfg("renew"), recipe="single_pass", model_call=update,
+                                          allowed=True) == result
+        assert memory.service.read(credential)["value"]["revision"] == 2
+        assert memory.service.read(credential, 1)["value"] == old_credential
+        assert memory.service.read(target, 1)["value"] == before
+
+
+@pytest.mark.parametrize("scope", ["record", "record_and_sources"])
+@pytest.mark.parametrize("dependency_reading", [False, True])
+def test_dynamic_search_after_forget_still_delivers_independent_record(
+    tmp_path, scope, dependency_reading,
+):
+    from milai_lab.methods.memory_control import FixedContextMemoryPolicy
+
+    options = dict(interface_version="I2", memory_profile="unified_v1",
+        source_access="independent_v1", memory_view_mode="staged",
+        features=EditFeatures(bound_references=True, dependency_groups=True,
+                              cross_record_dependencies=True),
+        evidence_policy="question_pack_v1", control_policy=FixedContextMemoryPolicy(),
+        dependency_reading=dependency_reading,
+        dependency_read_call=lambda stage, messages, schema: {
+            key: {"roots": [0], "excluded": [], "history_revisions": [],
+                  **({"support_choices": {}} if "support_choices" in entry["properties"] else {})}
+            for key, entry in schema["properties"].items()})
+    with opened(tmp_path, **options) as memory:
+        saved = []
+        for key, text in (("alarm", "Alarms are quiet."),
+                          ("temperature", "Temperature is displayed in Celsius.")):
+            writer_turn(memory, key, text)
+            receipt = json.loads(invoke(memory, "save_memory", {"proposal": {
+                "action": "create", "clauses": [
+                    {"text": text, "conditions": [], "evidence": ["e1"]}]}},
+                "save-" + key, key).content)
+            assert receipt["ok"], receipt
+            saved.append(receipt["id"])
+        before = memory.service.read(saved[1])["value"]
+        turn(memory, "forget-alarm", "Forget the alarm record; preserve temperature settings.")
+        handle = memory.service.read(saved[0])["candidate_handle"]
+        assert memory.service.forget("s", "remove-alarm", handle, scope=scope)["ok"]
+        assert memory.service.read(saved[0])["status"] == "visibility_revoked"
+
+    with opened(tmp_path, **options) as memory:
+        turn(memory, "query", "What temperature unit remains saved?")
+        packet = memory.evidence_material(cfg("query"))
+        assert packet["control_handoff"] != "operation_outcome_unknown"
+        assert "Temperature is displayed in Celsius." in canonical(packet)
+        assert memory.service.read(saved[1])["value"] == before
+        assert memory.service.read(saved[0], 1)["status"] == "visibility_revoked"

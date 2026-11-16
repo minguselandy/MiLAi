@@ -1,0 +1,34 @@
+{
+  "source_code": "a171b814",
+  "topics": {
+    "travel": {
+      "status": "completed",
+      "target_units_changed": 1,
+      "non_target_units_exactly_preserved": 4,
+      "other_records_exactly_preserved": 1,
+      "history_matches_actual_seed": true,
+      "new_exact_times": [
+        null
+      ],
+      "source_review": "Root: target change and stated qualifier retained; untouched preferences and their support remain exact. Not independent confirmation."
+    },
+    "clothing": {
+      "status": "completed",
+      "target_units_changed": 1,
+      "non_target_units_exactly_preserved": 3,
+      "other_records_exactly_preserved": 1,
+      "history_matches_actual_seed": true,
+      "new_exact_times": [
+        null
+      ],
+      "source_review": "Root: target change and stated qualifier retained; untouched preferences and their support remain exact. Not independent confirmation."
+    }
+  },
+  "total_cost_including_seed": {
+    "generation_calls": 4,
+    "input_tokens": 21330,
+    "output_tokens": 14821,
+    "embedding_calls": 6,
+    "embedding_tokens": 2804
+  }
+}

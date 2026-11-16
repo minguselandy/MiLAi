@@ -1,0 +1,58 @@
+{
+  "status": "ACTIVE_SAVED_CPU_AND_PUBLIC_PATH_AUDIT_LIVE;PENDING_COST_INVENTORY_RECONCILED",
+  "observed_at": "2026-10-22T05:49:58.935738+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v33.json",
+  "previous_turn_classification": "VERIFIED_WAIT: actual saved evaluator and public-path audit PIDs alive and counters advancing",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 0,
+    "completed_states": 218,
+    "planned_states": 876,
+    "completed_candidates": 0,
+    "deployment_selection": null,
+    "condition": "All7savedCPU candidates then matching selected train;CPUFP32loaded,reference_compileFalse,MHAfastpathFalse,shared_actions12288/head2048;unchanged"
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 89,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "pending_CPU_reconciliation": {
+    "manifest": "data/manifests/training-generalization-pending-cpu-v12-v33-audit-v1.json",
+    "existing_pending_phases": 74,
+    "existing_pending_CPU_seconds": 10663.791232191,
+    "new_research_cost": false,
+    "all_canonical_values_match": true,
+    "duplicate_measurement_fields": 0,
+    "closed_settlement_file_overlap": 0,
+    "scope": "V12-V33 only;oldpending35,V11/livejobs/unmeasured overhead remain separate. No settlement or ledger write."
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "pending_cpu_v12_v33_reconciliation_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/pending-cpu-v12-v33-audit-v1.json",
+      "cpu_seconds": 0.04277083,
+      "wall_seconds": 0.042774343863129616,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.04277083,
+  "costs": "Only new auditCPU0.042770830pending;10663.791232191is prior74phases,never an extra charge. Original ledger unchanged at observation;closedv1/v2/v3 verified and untouched. Trainers already billed. All other pending preserved. No offline settlement while savedCPU lives;unmeasured work unknown/not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active."
+}

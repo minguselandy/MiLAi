@@ -1,0 +1,32 @@
+{
+  "status": "ACTUAL_SAVED_VERSION_PREFERENCES_REVIEWED",
+  "counts": {
+    "requests": 16,
+    "states": 128,
+    "labelled": 103,
+    "reasons": {
+      "observed_search_locates_requested_record": 16,
+      "requested_saved_revision_read_fits_actual_packet": 31,
+      "requested_saved_revision_fully_opened": 43,
+      "history_navigation_for_requested_revision;not_body_sufficiency": 13,
+      "no_verified_delivery_path_masked": 25
+    }
+  },
+  "source_groups": 4,
+  "interfaces": [
+    "query_only",
+    "rich"
+  ],
+  "data": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v5/saved-version-reviews-v1.json",
+  "review_script": "artifacts/host-intent-retrieval-v3/data/review_saved_versions_v1.py",
+  "complete_saved_body_checks": 11,
+  "checks": "11 actually opened target revisions retain the complete saved content unit, equal to the source of the real save/update receipt. The other5 first-version requests never opened that target; no sufficiency label assigned.",
+  "navigation_preference": "Only the specifically requested record version; navigation does not certify body delivery.",
+  "read_preference": "Exact actual snapshot material and complete return packet fit, including existing opened material, references and bounded usage.",
+  "handoff_preference": "Only after the complete requested revision has actually been opened.",
+  "inputs_changed": false,
+  "production_banks_modified": false,
+  "model_calls": 0,
+  "reviewer": "assistant author, not independent judgment",
+  "qualification": "16 request-level interpretations were explicit offline annotations; no case routing or keyword rules added to runtime."
+}

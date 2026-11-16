@@ -1,0 +1,237 @@
+{
+  "status": "PREDECLARED_SOURCE_REVIEWED_DIAGNOSTIC_LABELS",
+  "reviewer": "Root author, not independent/blinded",
+  "source_inputs": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/memops-factor-extension-v1-preparation/original-impact-inputs.json",
+  "runtime_use": false,
+  "training_use": false,
+  "cases": [
+    {
+      "case": "case-0",
+      "family": "A01",
+      "labels": [
+        {
+          "alias": "u1",
+          "record": "r1",
+          "text": "Official title at Bridgemark Solutions is Junior Data Analyst, effective January 15th.",
+          "label": "direct_root",
+          "mask_reason": null
+        },
+        {
+          "alias": "u2",
+          "record": "r1",
+          "text": "Bridgemark Solutions is a mid-size consulting firm with roughly 200 employees, located downtown Portland on SW 5th Avenue.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u3",
+          "record": "r1",
+          "text": "The role was secured after months of searching, providing relief to the speaker.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u4",
+          "record": "r2",
+          "text": "My manager is Diane Kowalski, who heads the analytics team and has been at the company for about seven years.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u5",
+          "record": "r2",
+          "text": "The analytics team is pretty collaborative, though the speaker personally prefers working through problems on their own rather than in big group settings.",
+          "label": "other",
+          "mask_reason": null
+        }
+      ],
+      "rationale": "Current event changes the title within the actual compound unit; retain January15 historical meaning. Other flat manager/company/preference facts have no demonstrated successor relation.",
+      "admissible_root_sets": [
+        [
+          "u1"
+        ]
+      ]
+    },
+    {
+      "case": "case-1",
+      "family": "B01",
+      "labels": [
+        {
+          "alias": "u1",
+          "record": "r1",
+          "text": "My closest friend is Darren Liu, and we have been close since college for over eight years.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u2",
+          "record": "r1",
+          "text": "My best friend and I both live in Portland, and we grab ramen together at least twice a month at a spot on Hawthorne.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u3",
+          "record": "r1",
+          "text": "He is the one person I would call at 3 a.m. if something went wrong.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u4",
+          "record": "r1",
+          "text": "Darren's birthday is October 17th.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u5",
+          "record": "r1",
+          "text": "Darren's older brother Kevin recently got promoted to VP at a finance firm in Chicago.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u6",
+          "record": "r1",
+          "text": "Darren feels proud of his brother but also somewhat competitive, sometimes measuring himself against his career trajectory.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u7",
+          "record": "r1",
+          "text": "Darren's girlfriend Naomi has been with him for about two years. Naomi is apparently against the Seattle move, and the relationship tension is weighing heavily on him, leaving him torn up about it.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u8",
+          "record": "r1",
+          "text": "I helped Darren move some furniture into a storage unit in mid-April because he was downsizing his apartment.",
+          "label": "direct_root",
+          "mask_reason": null
+        },
+        {
+          "alias": "u9",
+          "record": "r1",
+          "text": "Afterwards we grabbed beers at a great little dive bar nearby.",
+          "label": null,
+          "mask_reason": "Afterwards beer visit shares the storage episode antecedent; remove versus retain with clarified context is ambiguous. No hard target."
+        },
+        {
+          "alias": "u10",
+          "record": "r1",
+          "text": "I always prefer those hole-in-the-wall spots over trendy cocktail bars.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u11",
+          "record": "r1",
+          "text": "Darren told me last week that he's leaning toward taking the Seattle job, though he hasn't officially accepted yet and said he'd probably decide by the end of May.",
+          "label": "other",
+          "mask_reason": null
+        }
+      ],
+      "rationale": "Storage help is explicitly forgotten; the independent general bar preference u10 must remain. Other flat friend facts are other, not automatically preserve_successor.",
+      "admissible_root_sets": [
+        [
+          "u8"
+        ],
+        [
+          "u8",
+          "u9"
+        ]
+      ]
+    },
+    {
+      "case": "case-2",
+      "family": "D02",
+      "labels": [
+        {
+          "alias": "u1",
+          "record": "r1",
+          "text": "The device is a ThinkPad X1 Carbon Gen 11.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u2",
+          "record": "r1",
+          "text": "The display is a 14-inch matte screen.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u3",
+          "record": "r1",
+          "text": "The screen resolution is 2560 by 1440.",
+          "label": "direct_root",
+          "mask_reason": null
+        },
+        {
+          "alias": "u4",
+          "record": "r1",
+          "text": "The processor is an i7-1365U.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u5",
+          "record": "r1",
+          "text": "The system has 32GB of RAM.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u6",
+          "record": "r1",
+          "text": "The system includes a 1TB SSD.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u7",
+          "record": "r1",
+          "text": "The device weighs about 1.12 kg.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u8",
+          "record": "r1",
+          "text": "The laptop was purchased on February 10th, 2024.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u9",
+          "record": "r1",
+          "text": "The warranty coverage lasts exactly two years from the purchase date.",
+          "label": "other",
+          "mask_reason": null
+        },
+        {
+          "alias": "u10",
+          "record": "r1",
+          "text": "The user wants to track when the warranty window closes without having to dig through paperwork.",
+          "label": "other",
+          "mask_reason": null
+        }
+      ],
+      "rationale": "Resolution correction changes actual old resolution unit. New16:10 statement may be added; no old aspect-ratio unit is invented. Other specifications and warranty facts remain outside target.",
+      "admissible_root_sets": [
+        [
+          "u3"
+        ]
+      ]
+    }
+  ],
+  "policy": "Reviewed current event and actual before aliases; no old Impact output used as gold. Ambiguous labels masked; ordinary untouched facts not labelled preserve_successor. Cases are three training families already exposed for development.",
+  "label_counts": {
+    "direct_root": 3,
+    "other": 22,
+    "masked": 1
+  }
+}

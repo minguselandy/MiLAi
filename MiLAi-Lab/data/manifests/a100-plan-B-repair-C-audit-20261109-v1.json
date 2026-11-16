@@ -1,0 +1,549 @@
+{
+  "passed": true,
+  "status": "ORIGINAL_B_FUNCTIONAL8_OLD57_READ_REPAIR_AND_C_HANDOFF_CONCRETE_OBLIGATIONS_AUDITED",
+  "timestamp_utc": "2026-11-09T10:33:40.341450+00:00",
+  "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_2XA100_40GB_20261104.md",
+  "entire_original763_UTF8_literal_equal_initial_audit": true,
+  "obligations": [
+    {
+      "id": "BC-01",
+      "original_plan_lines": [
+        287,
+        289,
+        506
+      ],
+      "original_literal_lines": [
+        "首轮候选层可包括 observed-Source fragment/full READ、另一必要范围、互补来源、已有 HANDOFF 子集。按固定 seed、真实可见字段和覆盖统计选择；不看 gold、不按题目 ID 或已知错误措辞选规则。",
+        "首个功能切片约 8 个 TRAIN 状态即可，验证实际读出的 Source 范围、observed 与 delivered 区分、后续选材以及 Host 收到的 packet；该集合不证明泛化。",
+        "| M1 | 修复采样面板、8 状态真实功能记录、旧 57 状态补采清单 | 原生负例实际入选，缺失绑定实际执行 |"
+      ],
+      "requirement": "8个真实功能首绑定：5 READ/3 HANDOFF，原文范围/实际交付/Host wire核对",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-02",
+      "original_plan_lines": [
+        222,
+        285,
+        287
+      ],
+      "original_literal_lines": [
+        "| B-repair | 已有 57 个 TRAIN 状态 | 至多 57 个缺失 READ 分支；另选最多 24 个真实已读集合状态、至多 48 个新 readout | 功能与机制补采，不新增独立来源 |",
+        "复用 `feedback_choices.py::decision_actions`、`prepare_view_feedback_branches.py --bindings` 和 reached wrapper。当前 wrapper 的 `branch_alternative` 主要为 `fixed_context / acquired_raw_delivery`；增加一项小型覆盖策略，从实际菜单中选欠覆盖的合法参数类型。",
+        "首轮候选层可包括 observed-Source fragment/full READ、另一必要范围、互补来源、已有 HANDOFF 子集。按固定 seed、真实可见字段和覆盖统计选择；不看 gold、不按题目 ID 或已知错误措辞选规则。"
+      ],
+      "requirement": "旧57状态139原结果和functional8按真实before/合法完整菜单/seed0复现，B64/C8不冒充补缺",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-03",
+      "original_plan_lines": [
+        222,
+        287,
+        309,
+        506
+      ],
+      "original_literal_lines": [
+        "| B-repair | 已有 57 个 TRAIN 状态 | 至多 57 个缺失 READ 分支；另选最多 24 个真实已读集合状态、至多 48 个新 readout | 功能与机制补采，不新增独立来源 |",
+        "首轮候选层可包括 observed-Source fragment/full READ、另一必要范围、互补来源、已有 HANDOFF 子集。按固定 seed、真实可见字段和覆盖统计选择；不看 gold、不按题目 ID 或已知错误措辞选规则。",
+        "使用现有 first-action intervention，首步按实际菜单绑定执行；后续使用相同策略规则与剩余预算，允许动作随读到的新证据变化。首轮可继承现有 fixed_context、reads4、首步后最多两个普通控制决策再 HANDOFF 的机制协议。",
+        "| M1 | 修复采样面板、8 状态真实功能记录、旧 57 状态补采清单 | 原生负例实际入选，缺失绑定实际执行 |"
+      ],
+      "requirement": "52个未覆盖READ首绑定实际打开并交付全部选择范围，覆盖5到57状态",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-04",
+      "original_plan_lines": [
+        309,
+        311
+      ],
+      "original_literal_lines": [
+        "使用现有 first-action intervention，首步按实际菜单绑定执行；后续使用相同策略规则与剩余预算，允许动作随读到的新证据变化。首轮可继承现有 fixed_context、reads4、首步后最多两个普通控制决策再 HANDOFF 的机制协议。",
+        "“相同后续策略”不是硬套相同动作串。短程结果要在自主 Host 中另行检验，不能直接外推长程收益。"
+      ],
+      "requirement": "实际首动作、原执行前缀、control boundary及共同有界续行保留",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-05",
+      "original_plan_lines": [
+        376,
+        697
+      ],
+      "original_literal_lines": [
+        "按以下链路分别报告：已取得关键材料 → 已进入 HANDOFF → 保持主体/时间/条件/否定 → Host 正确使用。材料覆盖是诊断，最终任务成功是主结果；来源 ID 存在不保证内容忠实。",
+        "MiLAi 仍是 Host 调用的记忆工具。沿现有来源、版本、权限、计量、模型池和执行器开发；不增加审核 Agent、第二数据库/账本、通用重试框架或 SHA/内容指纹门禁。选择来源与版本用于可复核，不作为另加审批流程。测试只解决本次设备、损失、绑定与返回的具体风险，随后尽快取得真实任务反馈。"
+      ],
+      "requirement": "104个新分支完整Source角色/时钟/正文与应用前后不变，259真实原文piece绑定",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-06",
+      "original_plan_lines": [
+        295,
+        309,
+        376
+      ],
+      "original_literal_lines": [
+        "在固定 reached state、before、请求、完整菜单、collector 版本和续行规则下，执行：argmax、简单 baseline、覆盖 alternative 的去重并集。现有上限为三个。",
+        "使用现有 first-action intervention，首步按实际菜单绑定执行；后续使用相同策略规则与剩余预算，允许动作随读到的新证据变化。首轮可继承现有 fixed_context、reads4、首步后最多两个普通控制决策再 HANDOFF 的机制协议。",
+        "按以下链路分别报告：已取得关键材料 → 已进入 HANDOFF → 保持主体/时间/条件/否定 → Host 正确使用。材料覆盖是诊断，最终任务成功是主结果；来源 ID 存在不保证内容忠实。"
+      ],
+      "requirement": "实际原请求/receipt/Provider wire核对，同state只允许真实packet改变",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-07",
+      "original_plan_lines": [
+        317,
+        318,
+        319,
+        320,
+        321
+      ],
+      "original_literal_lines": [
+        "| 实际质量左/右更好 | 保留成本比较之前的方向标签 | 计各自真实结果 |",
+        "| 两侧质量相同 | 保留 tie，不自动视为成功 | 各自可能都成功或都失败 |",
+        "| 未执行或无法判定 | unknown，不标成负例 | 未完成按既定任务协议保留分母 |",
+        "| Reader 执行失败 | 沿当前协议，answer 比较保持 unknown；delivery 可独立已知 | Host 完整成功分母中保留失败 |",
+        "| 质量相同但成本不同 | 质量仍是 tie；成本另记 | 质量与全成本并列报告 |"
+      ],
+      "requirement": "材料与答案方向在资源比较前独立，tie/unknown/失败首结果保持",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-08",
+      "original_plan_lines": [
+        222,
+        323,
+        499
+      ],
+      "original_literal_lines": [
+        "| B-repair | 已有 57 个 TRAIN 状态 | 至多 57 个缺失 READ 分支；另选最多 24 个真实已读集合状态、至多 48 个新 readout | 功能与机制补采，不新增独立来源 |",
+        "沿用 family/event 总权重，避免一个状态因产生更多 pair 就获得更大总损失质量。保留失败首结果，不靠重试选择更好答案。",
+        "形式相同的比较遵循同一计量范围。共享 baseline 分支的采集成本只按实际执行计一次，并明确用于哪些面板；不把共享数据当免费或重复独立证据。"
+      ],
+      "requirement": "52个保留旧判断逐字不变，原139与functional8/C8首结果不重试或重收成本",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-09",
+      "original_plan_lines": [
+        360,
+        362
+      ],
+      "original_literal_lines": [
+        "现有 HANDOFF 菜单已经覆盖许多单条、双条、View＋原文、全文与窄范围组合。先使用 `prepare_handoff_comparison.py` 和 `routing=handoff_only`，在同一真实已获得材料池中比较 fixed_context、已有 rules 和 learned。",
+        "首轮保持原菜单。这能判断已存在的好材料集合是否没有被选中，而不是同时改变菜单和模型后难以解释收益。[交付执行器][R6]、[交付准备入口][R12]"
+      ],
+      "requirement": "C8同真实已读池比较fixed_context/rules/learned，原24首结果和原菜单保持",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-10",
+      "original_plan_lines": [
+        360,
+        362,
+        368
+      ],
+      "original_literal_lines": [
+        "现有 HANDOFF 菜单已经覆盖许多单条、双条、View＋原文、全文与窄范围组合。先使用 `prepare_handoff_comparison.py` 和 `routing=handoff_only`，在同一真实已获得材料池中比较 fixed_context、已有 rules 和 learned。",
+        "首轮保持原菜单。这能判断已存在的好材料集合是否没有被选中，而不是同时改变菜单和模型后难以解释收益。[交付执行器][R6]、[交付准备入口][R12]",
+        "新增候选只引用实际 acquired/observed 内容或已获得全文覆盖的范围，继续使用原 `fits_delivery` 计算完整 packet。两种策略共用同一菜单。记录候选数和 head tokens；不静默截断原菜单，不让 gold 进入候选构造。"
+      ],
+      "requirement": "保存initial/B0/B1/E3共32完整输入/原HANDOFF子菜单/head顺序/finite argmax/无截断核对",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-11",
+      "original_plan_lines": [
+        320,
+        323,
+        374
+      ],
+      "original_literal_lines": [
+        "| Reader 执行失败 | 沿当前协议，answer 比较保持 unknown；delivery 可独立已知 | Host 完整成功分母中保留失败 |",
+        "沿用 family/event 总权重，避免一个状态因产生更多 pair 就获得更大总损失质量。保留失败首结果，不靠重试选择更好答案。",
+        "比较完整材料组，而不是只把单条相关分数相加。保留“单条没有收益、组合才有收益”的状态；已有 known_evidence 会改变还需要交付什么。Host 实际已收到的材料可以避免重复返回，但不能虚构 known_evidence_refs。"
+      ],
+      "requirement": "六个新增完整绑定仅执行一次；32保存选择按实际generation-request时序复用最早结果",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-12",
+      "original_plan_lines": [
+        222,
+        360,
+        362
+      ],
+      "original_literal_lines": [
+        "| B-repair | 已有 57 个 TRAIN 状态 | 至多 57 个缺失 READ 分支；另选最多 24 个真实已读集合状态、至多 48 个新 readout | 功能与机制补采，不新增独立来源 |",
+        "现有 HANDOFF 菜单已经覆盖许多单条、双条、View＋原文、全文与窄范围组合。先使用 `prepare_handoff_comparison.py` 和 `routing=handoff_only`，在同一真实已获得材料池中比较 fixed_context、已有 rules 和 learned。",
+        "首轮保持原菜单。这能判断已存在的好材料集合是否没有被选中，而不是同时改变菜单和模型后难以解释收益。[交付执行器][R6]、[交付准备入口][R12]"
+      ],
+      "requirement": "补7已读池14 HANDOFF/7完整NN输入/1222 Source值，禁止新增获取与原菜单变更",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-13",
+      "original_plan_lines": [
+        222,
+        227,
+        499
+      ],
+      "original_literal_lines": [
+        "| B-repair | 已有 57 个 TRAIN 状态 | 至多 57 个缺失 READ 分支；另选最多 24 个真实已读集合状态、至多 48 个新 readout | 功能与机制补采，不新增独立来源 |",
+        "这些分支上限不含取得 reached states 的前缀采集成本，也不等于模型/API 调用数。三个分支可形成多个 pair，但它们共享状态与执行结果，不是多个独立实验。",
+        "形式相同的比较遵循同一计量范围。共享 baseline 分支的采集成本只按实际执行计一次，并明确用于哪些面板；不把共享数据当免费或重复独立证据。"
+      ],
+      "requirement": "新READ57/57；已读池18/24、集合readout47/48，functional3+原24+保存6+补14合计",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-14",
+      "original_plan_lines": [
+        374,
+        376,
+        477
+      ],
+      "original_literal_lines": [
+        "比较完整材料组，而不是只把单条相关分数相加。保留“单条没有收益、组合才有收益”的状态；已有 known_evidence 会改变还需要交付什么。Host 实际已收到的材料可以避免重复返回，但不能虚构 known_evidence_refs。",
+        "按以下链路分别报告：已取得关键材料 → 已进入 HANDOFF → 保持主体/时间/条件/否定 → Host 正确使用。材料覆盖是诊断，最终任务成功是主结果；来源 ID 存在不保证内容忠实。",
+        "主指标为 Host 完整成功的来源族宏平均；配对报告 gains/losses、差值与家族 bootstrap 区间。持续更新同一来源的多轮请求按簇处理；训练 seeds 分别报告并可在族内聚合。"
+      ],
+      "requirement": "取得/交付/主体时间条件否定/Host使用分开；B52与C7质量及heading敏感性保留",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-15",
+      "original_plan_lines": [
+        495,
+        499,
+        672,
+        685
+      ],
+      "original_literal_lines": [
+        "至少保留：数据准备、采集前缀、分支执行、训练、候选筛选、正式 Host、外部确认；每项报告本地模型输入/输出与 GPU-hours、CPU/wall、Host tokens、API 调用、返回 tokens、已知/未知用量。",
+        "形式相同的比较遵循同一计量范围。共享 baseline 分支的采集成本只按实际执行计一次，并明确用于哪些面板；不把共享数据当免费或重复独立证据。",
+        "每个开发包在现有 ignored artifacts 下使用独立输出目录，记录数据准备、分支、模型、run/compute、实际 Host 结果与汇总。GitHub 发布可复核协议、代码和明确范围的摘要；大权重、原始数据库与完整日志沿当前项目方式保存。",
+        "这些是现有报告的必要字段，不是新建第二账本或审核层。"
+      ],
+      "requirement": "104真实新HTTP/387713已知tokens、失败9保留，原生/整child/父CPU只计一次",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    },
+    {
+      "id": "BC-16",
+      "original_plan_lines": [
+        346,
+        364,
+        366,
+        368,
+        370,
+        519,
+        520,
+        699
+      ],
+      "original_literal_lines": [
+        "| 旧 57 状态补采 | 只做机制定位；必要时用既有 128 更新预算作小配对 | 0、16、32、64、128，均为开发用途 |",
+        "### 8.2 仅在具体表达缺口时扩展有界候选",
+        "现有菜单不是任意子集空间，例如四条原文中的特定非前缀三元组合可能缺失。只有 TRAIN 定位发现具体且预算可容的集合缺口时，才围绕既有集合增加少量 add/remove/swap，建议初始新增上限 4–8 个作为实验参数。",
+        "新增候选只引用实际 acquired/observed 内容或已获得全文覆盖的范围，继续使用原 `fits_delivery` 计算完整 packet。两种策略共用同一菜单。记录候选数和 head tokens；不静默截断原菜单，不让 gold 进入候选构造。",
+        "新菜单属于新的实验版本，使用已有 F1 准备入口从真实 post-state 生成当前任务；不将它写回历史 capture 或回填旧结果。",
+        "- READ 改善而交付仍丢材料：优先 C，不反复单独扩大 READ 偏好训练。",
+        "- 原文与简单增量策略更好：保留简单方法，把学习职责缩小到有证据支持的部分。",
+        "最终允许简单方法获胜。若其质量和成本更好，产品采用简单方案，研究如实界定学习策略的价值范围。"
+      ],
+      "requirement": "已有合法材料集未胜rules；无已证菜单表达缺口，不扩菜单/新拟合/凑配额或采用",
+      "assessment": "PROVED_IN_STATED_B_REPAIR_C_SCOPE"
+    }
+  ],
+  "private_audits": {
+    "functional8": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-functional8-Source-input-v1.json",
+    "c8": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-C8-Source-saved-choices-v1.json",
+    "quality": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-repair66-quality-stop-v1.json"
+  },
+  "original_validator_replay_sidecars": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-B52-exact-mechanical-replay-v1.execution.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-C7-exact-mechanical-replay-v1.execution.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-C8-exact-mechanical-replay-v1.execution.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-old57-exact-coverage-replay-v1.execution.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-repair66-review-input-replay-v1.execution.json"
+  ],
+  "original_validator_replays_only_new_report_destinations": true,
+  "C8_only_dynamic_CPU_field_excluded_from_literal_report_comparison": "cpu_seconds_pending",
+  "functional8": {
+    "states": 8,
+    "actual_kinds": {
+      "READ": 5,
+      "HANDOFF": 3
+    },
+    "actual_Source_range_pieces": 16,
+    "whole_before_after_Source_values_compared": 445,
+    "applications_unchanged": true,
+    "actual_full_before_menu_prefix_bounded_continuation_packet_Reader_wire_verified": true,
+    "actual_HTTP": 8,
+    "known_Host_tokens": 30879,
+    "first_readout_statuses": {
+      "COMPLETED": 8
+    },
+    "fabricated_Host_known_refs": 0,
+    "semantic_records_or_business_writes": 0,
+    "scope": "Eight exposed TRAIN functional first bindings, not autonomous Host or independent confirmation.",
+    "passed": true,
+    "status": "ACTUAL_B_FUNCTIONAL_OR_C_HANDOFF_INPUT_SOURCE_AND_FIRST_RESULTS_RECONCILED",
+    "component": "functional8",
+    "timestamp_utc": "2026-11-09T10:23:40.737357+00:00",
+    "actual_frozen_runtime": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b-functional8",
+    "Source_author_implementation_review_not_independent_human_or_blind": true,
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_inputs_labels_or_first_results_changed": false,
+    "full763_line_completion_proven": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "goal_complete": false
+  },
+  "c8": {
+    "acquired_pools": 8,
+    "original_three_policy_firsts": 24,
+    "new_distinct_saved_bindings": 6,
+    "before_after_whole_Source_values_compared": 1737,
+    "actual_Source_range_pieces": 66,
+    "applications_unchanged": true,
+    "semantic_records_or_business_writes": 0,
+    "original_policy_model_inputs": 8,
+    "original_policy_model_input_tokens": 40047,
+    "original_policy_complete": {
+      "fixed_context": 4,
+      "rules": 4,
+      "laya": 1
+    },
+    "saved_model_whole_before_original_HANDOFF_menu_and_finite_head_checks": 32,
+    "saved_models_complete": {
+      "initial": 1,
+      "b0": 1,
+      "b1": 1,
+      "e3": 1
+    },
+    "saved_choices_earliest_actual_generation_request_verified": 32,
+    "E3_new_Reader_calls": 0,
+    "actual_HTTP": 30,
+    "known_Host_tokens": 103792,
+    "first_readout_statuses": {
+      "COMPLETED": 27,
+      "FAILED": 3
+    },
+    "all_Reader_wires_equal_except_actual_packet_within_state": true,
+    "initial_B0_B1_historical_mtime_selection_checked_against_actual_generation_request_chronology": true,
+    "original_menus_unchanged": true,
+    "menu_expansion_justified": false,
+    "adoption": false,
+    "scope": "Eight exposed TRAIN acquired pools, full declared HANDOFF restriction before encoding. Original24 plus six distinct saved-model bindings. First Reader failures retained; no autonomous Host or independent-source benefit established.",
+    "passed": true,
+    "status": "ACTUAL_B_FUNCTIONAL_OR_C_HANDOFF_INPUT_SOURCE_AND_FIRST_RESULTS_RECONCILED",
+    "component": "c8",
+    "timestamp_utc": "2026-11-09T10:25:29.016618+00:00",
+    "actual_frozen_runtime": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-c-handoff8",
+    "Source_author_implementation_review_not_independent_human_or_blind": true,
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_inputs_labels_or_first_results_changed": false,
+    "full763_line_completion_proven": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "goal_complete": false
+  },
+  "quality": {
+    "passed": true,
+    "status": "ORIGINAL_B_REPAIR_C_SOURCE_AUTHOR_JUDGMENTS_UNKNOWN_MASKS_EARLIEST_RESULTS_STATISTICS_BUDGET_AND_STOP_RECONCILED",
+    "timestamp_utc": "2026-11-09T10:27:02.998606+00:00",
+    "whole66_actual_answers_packets_Source_guides_reproduced_literal_equal": true,
+    "original52_retained_judgments_entire_literal_preserved": true,
+    "source_author_not_independent_or_blind": true,
+    "original57_states": 57,
+    "original_source_families": 56,
+    "observed_Source_READ_states_before_repair": 5,
+    "new52_all_missing_original_before_states_repaired": true,
+    "observed_Source_READ_states_after_repair": 57,
+    "new_READ_budget": {
+      "functional5": 5,
+      "remaining52": 52,
+      "total57": 57,
+      "ceiling57": 57
+    },
+    "B52_answer_statuses": {
+      "incomplete": 23,
+      "qualified": 9,
+      "complete": 15,
+      "incorrect": 1,
+      "failed": 4
+    },
+    "B52_material_statuses": {
+      "insufficient": 34,
+      "unknown": 1,
+      "sufficient": 17
+    },
+    "B52_complete_new": 15,
+    "B52_complete_retained": 18,
+    "B52_answer_directions": {
+      "tie": 39,
+      "left": 2,
+      "unknown": 6,
+      "right": 5
+    },
+    "B52_unknown_answer_pair_indices": [
+      2,
+      10,
+      26,
+      30,
+      33,
+      41
+    ],
+    "B52_paired_complete_statistics": {
+      "families": 52,
+      "gains": 0,
+      "losses": 3,
+      "difference_percentage_points": -5.769230769230769,
+      "family_bootstrap_95_percent_interval_pp": [
+        -13.461538461538462,
+        0.0
+      ],
+      "draws": 20000,
+      "seed": 0
+    },
+    "C7_complete": {
+      "rules": 3,
+      "E3": 2,
+      "denominator": 7
+    },
+    "C7_paired_complete_statistics": {
+      "families": 7,
+      "gains": 0,
+      "losses": 1,
+      "difference_percentage_points": -14.285714285714286,
+      "family_bootstrap_95_percent_interval_pp": [
+        -42.857142857142854,
+        0.0
+      ],
+      "draws": 20000,
+      "seed": 0
+    },
+    "C7_heading_only_sensitivity": {
+      "case_index": 62,
+      "stricter_no_heading_credit_rules_complete": 2,
+      "E3_complete": 2,
+      "all7families_kept": true,
+      "scope": "Conservative post-review sensitivity, not new scoring/training or a replacement of the Boolean-existence primary judgment."
+    },
+    "C_acquired_pool_budget": {
+      "prior11": 11,
+      "new7": 7,
+      "total18": 18,
+      "ceiling24": 24
+    },
+    "C_readout_budget": {
+      "functional3": 3,
+      "original24": 24,
+      "saved6": 6,
+      "new14": 14,
+      "total47": 47,
+      "ceiling48": 48
+    },
+    "B52_and_C7_original_native_HTTP_already_paid": 66,
+    "B52_and_C7_original_known_Host_tokens_already_paid": 253042,
+    "original_whole_child_CPU_seconds_already_paid": 172.541765,
+    "original_measured_parent_CPU_seconds_already_paid": 0.305818484,
+    "native_NN_load_whole_parent_not_double_added": true,
+    "new_fit_menu_expansion_quota_fill_or_adoption": false,
+    "scope": "Actual exposed TRAIN Source-author review reconciliation and descriptive family bootstrap. Failures remain complete-success denominator failures while answer-comparison unknowns remain unknown. C/B families overlap;66 is a count of new branch results, not independent confirmation tasks.",
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_inputs_labels_or_first_results_changed": false,
+    "full763_line_completion_proven": false,
+    "CPU_pending_actual_idle138": true,
+    "no_sha_validation": true,
+    "goal_complete": false
+  },
+  "B52_mechanics": {
+    "status": "CLOSED_FIRST_READ_BINDINGS_RAW_SOURCES_ACTUAL_READERS_AND_RETAINED_COMPARISONS_BOUND_NO_GRADES",
+    "bound_positions": 52,
+    "planned_positions": 52,
+    "immutable_completed_prefix_requires_full_reconciliation": false,
+    "actual_first_READs_opened": 52,
+    "new_selected_ranges_actually_delivered": 52,
+    "raw_Source_ranges_bound": 159,
+    "before_after_whole_Source_comparisons": 3829,
+    "first_readout_statuses": {
+      "COMPLETED": 48,
+      "FAILED": 4
+    },
+    "actual_HTTP_attempts_already_native_paid": 52,
+    "known_Host_tokens_already_native_paid": 194966,
+    "all_applications_unchanged": true,
+    "semantic_records_or_business_writes": 0,
+    "original_comparisons_reexecuted": 0,
+    "model_calls": 0,
+    "ledger_opened_or_written": false,
+    "no_sha_validation": true,
+    "scope": "Fixed old exposed TRAIN states and original supplied tasks; not autonomous Host or independent confirmation. Mechanical opening, returned literal ranges and unchanged Source/app state do not imply material sufficiency, View fidelity or answer correctness. All first Host failures retained; no grades copied from old comparisons."
+  },
+  "C7_mechanics": {
+    "status": "ALL14_NATIVE_F1_FIRST_OUTCOMES_ACTUAL_READER_SOURCE_EFFECTS_AND7_COMPLETE_LEARNED_INPUTS_BOUND_QUALITY_PENDING",
+    "positions": 14,
+    "actual_acquired_pools": 7,
+    "all_current_choices_legal_HANDOFF": 14,
+    "new_acquisition_operations": 0,
+    "raw_Source_ranges_bound": 18,
+    "before_after_whole_Source_comparisons": 1222,
+    "all_applications_unchanged": true,
+    "semantic_records_or_business_writes": 0,
+    "actual_model_forwards": 7,
+    "model_loads": 1,
+    "minimum_actual_input_tokens": 3837,
+    "maximum_actual_input_tokens": 5127,
+    "sum_actual_input_tokens_already_native_recorded": 32401,
+    "all_complete_state_and_full_original_HANDOFF_menus_preserved": true,
+    "all_truncated_false": true,
+    "all_7_Reader_pairs_literal_equal_outside_packet": true,
+    "first_readout_statuses": {
+      "COMPLETED": 12,
+      "FAILED": 2
+    },
+    "actual_new_Reader_HTTP": 14,
+    "actual_exact_first_Reader_reuses": 0,
+    "new_acquired_readout_budget_total": 47,
+    "readout_ceiling": 48,
+    "acquired_pool_count_including_prior": 18,
+    "pool_ceiling": 24,
+    "new_model_calls_created_by_audit": 0,
+    "ledger_opened_or_written": false,
+    "whole_quality_pending": true,
+    "no_sha_validation": true
+  },
+  "combined_new_first_branches": 104,
+  "combined_new_first_Reader_status": {
+    "COMPLETED": 95,
+    "FAILED": 9
+  },
+  "combined_known_Host_tokens_already_paid": 387713,
+  "whole_Source_value_comparisons": 7233,
+  "Source_piece_bindings": 259,
+  "no_current_ledger_total_claim": true,
+  "original139_first_outcomes_retained_and_not_reexecuted": true,
+  "original_B_C_implementation_source_author_review_not_independent_or_blind": true,
+  "figure_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-B-repair-C-figure-20261109-v1.json",
+  "failure_reflection": {
+    "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/audit-original-plan-C8-Source-saved-choices-v1.time.txt",
+    "reason": "New audit incorrectly used F1 policy-input validator for the six saved-choice first-action interventions. Original24 F1 and new6 actual full-menu intervention traces are now checked under their respective declared execution paths; no missing F1 event fabricated, no model/Reader repeated.",
+    "figure_layout": "Actually viewedv1 legend/footer overlap, corrected in v2 and finalPNG viewed again; both render timers retained."
+  },
+  "analyzers": [
+    "tools/audit_a100_plan_repair_mechanics.py",
+    "tools/audit_a100_plan_b_repair_c_handoff.py",
+    "tools/audit_a100_plan_repair_quality_stop.py"
+  ],
+  "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+  "original_Source_labels_models_or_firsts_changed": false,
+  "full763_line_completion_proven": false,
+  "CPU_pending_actual_idle138": true,
+  "no_sha_validation": true,
+  "goal_complete": false
+}

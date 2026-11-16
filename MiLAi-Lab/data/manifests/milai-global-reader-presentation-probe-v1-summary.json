@@ -1,0 +1,1298 @@
+{
+  "status": "ALL12_FIVE_VIEW_PROBES_CLOSED_NOT_QA",
+  "models": [
+    {
+      "model": "families32-0-native",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.01311945915222168,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 33,
+          "states": 168,
+          "family_macro": 0.19340463458110516,
+          "best_open": 29,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 33,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 5,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 37,
+          "states": 168,
+          "family_macro": 0.21033868092691618,
+          "best_open": 25,
+          "same_choice_as_same_reload_original": 127,
+          "both_reference_accepted": 27,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 6,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 4,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 39,
+          "states": 168,
+          "family_macro": 0.22442067736185384,
+          "best_open": 21,
+          "same_choice_as_same_reload_original": 114,
+          "both_reference_accepted": 25,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 4,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 1,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 40,
+          "states": 168,
+          "family_macro": 0.24260249554367205,
+          "best_open": 31,
+          "same_choice_as_same_reload_original": 115,
+          "both_reference_accepted": 27,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 5,
+            "supported_states": 36,
+            "source_best_open_accepted": 5,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 5,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 30,
+          "states": 168,
+          "family_macro": 0.17023172905525844,
+          "best_open": 23,
+          "same_choice_as_same_reload_original": 114,
+          "both_reference_accepted": 23,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 8,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 1,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families32-0-linear",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.02241569757461548,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 30,
+          "states": 168,
+          "family_macro": 0.1657754010695187,
+          "best_open": 22,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 30,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 11,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 7,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 24,
+          "states": 168,
+          "family_macro": 0.1370766488413547,
+          "best_open": 22,
+          "same_choice_as_same_reload_original": 105,
+          "both_reference_accepted": 19,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 5,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 2,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 32,
+          "states": 168,
+          "family_macro": 0.17754010695187164,
+          "best_open": 18,
+          "same_choice_as_same_reload_original": 85,
+          "both_reference_accepted": 17,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 8,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 8,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 36,
+          "states": 168,
+          "family_macro": 0.20784313725490194,
+          "best_open": 29,
+          "same_choice_as_same_reload_original": 95,
+          "both_reference_accepted": 19,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 13,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 7,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 31,
+          "states": 168,
+          "family_macro": 0.17950089126559712,
+          "best_open": 21,
+          "same_choice_as_same_reload_original": 101,
+          "both_reference_accepted": 16,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 3,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 3,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families32-1-native",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.016484975814819336,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 32,
+          "states": 168,
+          "family_macro": 0.17860962566844918,
+          "best_open": 19,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 32,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 12,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 8,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 27,
+          "states": 168,
+          "family_macro": 0.15365418894830657,
+          "best_open": 17,
+          "same_choice_as_same_reload_original": 88,
+          "both_reference_accepted": 18,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 4,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 1,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 34,
+          "states": 168,
+          "family_macro": 0.1976827094474153,
+          "best_open": 27,
+          "same_choice_as_same_reload_original": 97,
+          "both_reference_accepted": 23,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 11,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 4,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 34,
+          "states": 168,
+          "family_macro": 0.19714795008912656,
+          "best_open": 24,
+          "same_choice_as_same_reload_original": 97,
+          "both_reference_accepted": 24,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 5,
+            "supported_states": 36,
+            "source_best_open_accepted": 9,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 7,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 30,
+          "states": 168,
+          "family_macro": 0.17183600713012476,
+          "best_open": 19,
+          "same_choice_as_same_reload_original": 105,
+          "both_reference_accepted": 23,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 13,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 7,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families32-1-linear",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.006188392639160156,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 24,
+          "states": 168,
+          "family_macro": 0.13315508021390374,
+          "best_open": 13,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 24,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 1,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 32,
+          "states": 168,
+          "family_macro": 0.18253119429590015,
+          "best_open": 18,
+          "same_choice_as_same_reload_original": 124,
+          "both_reference_accepted": 21,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 3,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 24,
+          "states": 168,
+          "family_macro": 0.1336898395721925,
+          "best_open": 13,
+          "same_choice_as_same_reload_original": 133,
+          "both_reference_accepted": 19,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 3,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 30,
+          "states": 168,
+          "family_macro": 0.16844919786096255,
+          "best_open": 24,
+          "same_choice_as_same_reload_original": 115,
+          "both_reference_accepted": 21,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 2,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 31,
+          "states": 168,
+          "family_macro": 0.174331550802139,
+          "best_open": 14,
+          "same_choice_as_same_reload_original": 132,
+          "both_reference_accepted": 23,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 2,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families32-2-native",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.0050907135009765625,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 34,
+          "states": 168,
+          "family_macro": 0.19037433155080213,
+          "best_open": 21,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 34,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 34,
+          "states": 168,
+          "family_macro": 0.19037433155080213,
+          "best_open": 9,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 34,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 3,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 34,
+          "states": 168,
+          "family_macro": 0.19037433155080213,
+          "best_open": 17,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 34,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 5,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 34,
+          "states": 168,
+          "family_macro": 0.19037433155080213,
+          "best_open": 12,
+          "same_choice_as_same_reload_original": 167,
+          "both_reference_accepted": 34,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 1,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 34,
+          "states": 168,
+          "family_macro": 0.19037433155080213,
+          "best_open": 17,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 34,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 5,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 0,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families32-2-linear",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.0161343514919281,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 23,
+          "states": 168,
+          "family_macro": 0.12780748663101604,
+          "best_open": 14,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 23,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 5,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 2,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 23,
+          "states": 168,
+          "family_macro": 0.13279857397504458,
+          "best_open": 15,
+          "same_choice_as_same_reload_original": 82,
+          "both_reference_accepted": 15,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 6,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 2,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 24,
+          "states": 168,
+          "family_macro": 0.13262032085561495,
+          "best_open": 12,
+          "same_choice_as_same_reload_original": 75,
+          "both_reference_accepted": 13,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 8,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 5,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 30,
+          "states": 168,
+          "family_macro": 0.16524064171122993,
+          "best_open": 20,
+          "same_choice_as_same_reload_original": 104,
+          "both_reference_accepted": 17,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 8,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 3,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 1,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 26,
+          "states": 168,
+          "family_macro": 0.14545454545454545,
+          "best_open": 10,
+          "same_choice_as_same_reload_original": 107,
+          "both_reference_accepted": 18,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 3,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 2,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families128-0-native",
+      "reload_comparison": {
+        "same_choices": 165,
+        "states": 168,
+        "max_logit_delta": 0.014881134033203125,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 38,
+          "states": 168,
+          "family_macro": 0.21016042780748664,
+          "best_open": 35,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 38,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 9,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 5,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 31,
+          "states": 168,
+          "family_macro": 0.17112299465240643,
+          "best_open": 26,
+          "same_choice_as_same_reload_original": 107,
+          "both_reference_accepted": 26,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 8,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 4,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 39,
+          "states": 168,
+          "family_macro": 0.22210338680926914,
+          "best_open": 33,
+          "same_choice_as_same_reload_original": 83,
+          "both_reference_accepted": 26,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 9,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 8,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 37,
+          "states": 168,
+          "family_macro": 0.2124777183600713,
+          "best_open": 32,
+          "same_choice_as_same_reload_original": 120,
+          "both_reference_accepted": 26,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 3,
+            "supported_states": 36,
+            "source_best_open_accepted": 8,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 6,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 1,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 43,
+          "states": 168,
+          "family_macro": 0.24349376114081991,
+          "best_open": 34,
+          "same_choice_as_same_reload_original": 104,
+          "both_reference_accepted": 30,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 7,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families128-0-linear",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.055908799171447754,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 43,
+          "states": 168,
+          "family_macro": 0.25650623885918,
+          "best_open": 45,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 43,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 6,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 43,
+          "states": 168,
+          "family_macro": 0.2402852049910873,
+          "best_open": 39,
+          "same_choice_as_same_reload_original": 103,
+          "both_reference_accepted": 26,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 4,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 51,
+          "states": 168,
+          "family_macro": 0.2836007130124777,
+          "best_open": 39,
+          "same_choice_as_same_reload_original": 77,
+          "both_reference_accepted": 26,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 5,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 4,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 46,
+          "states": 168,
+          "family_macro": 0.2573975044563279,
+          "best_open": 41,
+          "same_choice_as_same_reload_original": 98,
+          "both_reference_accepted": 29,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 5,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 2,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 1,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 52,
+          "states": 168,
+          "family_macro": 0.2978609625668449,
+          "best_open": 41,
+          "same_choice_as_same_reload_original": 106,
+          "both_reference_accepted": 37,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 5,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 4,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families128-1-native",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.016654491424560547,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 46,
+          "states": 168,
+          "family_macro": 0.26898395721925134,
+          "best_open": 34,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 46,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 6,
+            "supported_states": 36,
+            "source_best_open_accepted": 8,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 3,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 1,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 52,
+          "states": 168,
+          "family_macro": 0.3105169340463458,
+          "best_open": 44,
+          "same_choice_as_same_reload_original": 122,
+          "both_reference_accepted": 36,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 8,
+            "supported_states": 36,
+            "source_best_open_accepted": 7,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 2,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 1,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 57,
+          "states": 168,
+          "family_macro": 0.3401069518716577,
+          "best_open": 54,
+          "same_choice_as_same_reload_original": 83,
+          "both_reference_accepted": 32,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 13,
+            "supported_states": 36,
+            "source_best_open_accepted": 14,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 6,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 2,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 53,
+          "states": 168,
+          "family_macro": 0.3080213903743315,
+          "best_open": 36,
+          "same_choice_as_same_reload_original": 123,
+          "both_reference_accepted": 40,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 3,
+            "supported_states": 36,
+            "source_best_open_accepted": 9,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 6,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 1,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 48,
+          "states": 168,
+          "family_macro": 0.2707664884135472,
+          "best_open": 35,
+          "same_choice_as_same_reload_original": 132,
+          "both_reference_accepted": 38,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 6,
+            "supported_states": 36,
+            "source_best_open_accepted": 9,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 4,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 1,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families128-1-linear",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.015327215194702148,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 51,
+          "states": 168,
+          "family_macro": 0.2935828877005348,
+          "best_open": 47,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 51,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 12,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 8,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 2,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 37,
+          "states": 168,
+          "family_macro": 0.20641711229946524,
+          "best_open": 27,
+          "same_choice_as_same_reload_original": 73,
+          "both_reference_accepted": 27,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 5,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 4,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 39,
+          "states": 168,
+          "family_macro": 0.24064171122994651,
+          "best_open": 39,
+          "same_choice_as_same_reload_original": 79,
+          "both_reference_accepted": 23,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 3,
+            "supported_states": 36,
+            "source_best_open_accepted": 12,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 10,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 50,
+          "states": 168,
+          "family_macro": 0.2827094474153298,
+          "best_open": 43,
+          "same_choice_as_same_reload_original": 113,
+          "both_reference_accepted": 37,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 16,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 13,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 52,
+          "states": 168,
+          "family_macro": 0.2905525846702317,
+          "best_open": 40,
+          "same_choice_as_same_reload_original": 110,
+          "both_reference_accepted": 41,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 11,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 8,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 2,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families128-2-native",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.017373085021972656,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 58,
+          "states": 168,
+          "family_macro": 0.3454545454545454,
+          "best_open": 52,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 58,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 9,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 6,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 61,
+          "states": 168,
+          "family_macro": 0.3575757575757575,
+          "best_open": 50,
+          "same_choice_as_same_reload_original": 110,
+          "both_reference_accepted": 48,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 11,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 10,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 72,
+          "states": 168,
+          "family_macro": 0.4185383244206773,
+          "best_open": 63,
+          "same_choice_as_same_reload_original": 86,
+          "both_reference_accepted": 45,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 6,
+            "supported_states": 36,
+            "source_best_open_accepted": 20,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 18,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 55,
+          "states": 168,
+          "family_macro": 0.3288770053475935,
+          "best_open": 50,
+          "same_choice_as_same_reload_original": 124,
+          "both_reference_accepted": 46,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 2,
+            "supported_states": 36,
+            "source_best_open_accepted": 13,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 9,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 56,
+          "states": 168,
+          "family_macro": 0.3336898395721924,
+          "best_open": 45,
+          "same_choice_as_same_reload_original": 118,
+          "both_reference_accepted": 46,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 0,
+            "supported_states": 36,
+            "source_best_open_accepted": 12,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 12,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    },
+    {
+      "model": "families128-2-linear",
+      "reload_comparison": {
+        "same_choices": 168,
+        "states": 168,
+        "max_logit_delta": 0.024919748306274414,
+        "scope": "Pre-saveFP32 versus storedF16reloadedFP32, not presentation invariance."
+      },
+      "variants": {
+        "original": {
+          "accepted": 65,
+          "states": 168,
+          "family_macro": 0.39180035650623884,
+          "best_open": 52,
+          "same_choice_as_same_reload_original": 168,
+          "both_reference_accepted": 65,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 2,
+            "supported_states": 36,
+            "source_best_open_accepted": 8,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 8,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "aliases": {
+          "accepted": 63,
+          "states": 168,
+          "family_macro": 0.3721925133689839,
+          "best_open": 51,
+          "same_choice_as_same_reload_original": 117,
+          "both_reference_accepted": 52,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 1,
+            "supported_states": 36,
+            "source_best_open_accepted": 10,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 8,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "candidate_order": {
+          "accepted": 60,
+          "states": 168,
+          "family_macro": 0.3467023172905525,
+          "best_open": 58,
+          "same_choice_as_same_reload_original": 77,
+          "both_reference_accepted": 43,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 5,
+            "supported_states": 36,
+            "source_best_open_accepted": 14,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 12,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "option_order": {
+          "accepted": 58,
+          "states": 168,
+          "family_macro": 0.3532976827094474,
+          "best_open": 47,
+          "same_choice_as_same_reload_original": 133,
+          "both_reference_accepted": 54,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 4,
+            "supported_states": 36,
+            "source_best_open_accepted": 10,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 9,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        },
+        "title_frame": {
+          "accepted": 62,
+          "states": 168,
+          "family_macro": 0.375222816399287,
+          "best_open": 47,
+          "same_choice_as_same_reload_original": 119,
+          "both_reference_accepted": 55,
+          "source_counts": {
+            "pool_insufficient_states": 100,
+            "strict_pool_insufficient_selected_sufficient": 3,
+            "supported_states": 36,
+            "source_best_open_accepted": 9,
+            "source_missing_complement_states": 30,
+            "source_missing_complement_accepted": 9,
+            "source_proof_complete_states": 6,
+            "source_proof_complete_accepted": 0,
+            "masked_states": 32
+          }
+        }
+      }
+    }
+  ],
+  "actual_compute_already_charged": {
+    "wall_seconds": 1551.4905496658757,
+    "cpu_seconds": 2377.6541182309998,
+    "runs": 12,
+    "forwards": 10080,
+    "sequence_rows": 10080,
+    "input_tokens": 29905968,
+    "state_tokenizations": 10080,
+    "state_tokens": 26582568
+  },
+  "input_mapping_review": "artifacts/jev-reader/global-reader-policy-qa-v1/probe-input-review.json",
+  "scope": "17devfamilies168correlatedstates eachmodel,5views10080freshforwards. Allviews useone storedF16reloadedFP32 model; no originaltrain predictions counted as the baseline.",
+  "findings": [
+    "families128/native/seed0 changes3/168choices aftercheckpointreload despite identicalaggregate38accepted. Other11models keepallchoices; rounding remainsa distinct factor.",
+    "Candidateordering andidentifier changes still alter manychoices; apparentaccuracy gains in a variant do not authorize choosing that presentation after results.",
+    "families32/native/seed2 is nearlyconstant-exhausted, givingnearperfectagreement butonly34/168referenceacceptance. Consistency is not semanticgeneralization.",
+    "Alternativeacceptableopens canchange identity whilebothremaincorrect; jointacceptance and source strata remain alongside exactagreement.",
+    "Sourceannotations arequalified andnative labels areweak; these are not own-policyQA or broadsemanticproof."
+  ],
+  "new_model_calls_in_summary": 0,
+  "model_selection_or_runtime_policy_changed": false
+}

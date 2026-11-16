@@ -1,0 +1,79 @@
+{
+  "version": "dynamic-memory-control-reviewed-followups-v4-admission",
+  "status": "ADMITTED_AFTER_VERIFIED_V3_TERMINAL",
+  "coordinator_pid": 1958241,
+  "initial_child_pid": 1958247,
+  "exec_session": 85326,
+  "source_plan": "artifacts/dynamic-memory-control/prepared-next-3654662b/jobs.json",
+  "source_dispatch": "artifacts/dynamic-memory-control/run_prepared_followups_v4.py",
+  "planned_jobs": [
+    {
+      "id": "t0-continued-full-native-seed0",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-3654662b/MiLAi-Lab"
+    },
+    {
+      "id": "t2-aggregate-full-native-seed0",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-3654662b/MiLAi-Lab"
+    },
+    {
+      "id": "m2-mechanical-native-seed0-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-5052477f/MiLAi-Lab"
+    },
+    {
+      "id": "m2-full-linear-seed0-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-5052477f/MiLAi-Lab"
+    },
+    {
+      "id": "t0-continued-full-native-seed0-qa-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-5052477f/MiLAi-Lab"
+    },
+    {
+      "id": "t2-aggregate-full-native-seed0-qa-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-5052477f/MiLAi-Lab"
+    },
+    {
+      "id": "sandbox-reservation-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-0593c57c/MiLAi-Lab"
+    },
+    {
+      "id": "memops-generative-shared-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-e2f731be/MiLAi-Lab"
+    },
+    {
+      "id": "memops-wave2-generative-shared-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-3654662b/MiLAi-Lab"
+    },
+    {
+      "id": "m3-every-rebuild-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-2b5c7fbc/MiLAi-Lab"
+    },
+    {
+      "id": "m3-on-demand-context-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-2b5c7fbc/MiLAi-Lab"
+    },
+    {
+      "id": "m3-laya-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-2b5c7fbc/MiLAi-Lab"
+    },
+    {
+      "id": "m3-generative-v1",
+      "runtime": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-2b5c7fbc/MiLAi-Lab"
+    }
+  ],
+  "offline_settlement": {
+    "phases": 36,
+    "wall_seconds": 144.70584214664996,
+    "cpu_seconds": 156.499139754,
+    "each_runs": 1,
+    "model_counters_unchanged": true,
+    "record": "artifacts/dynamic-memory-control/pending-offline-settlement-v4.json",
+    "unmeasured_work": [
+      "initial failed source namespace probe",
+      "source-contract drafting and first projections",
+      "initial strong bootstrap assembly before plotting import failed",
+      "initial metadata allocation that omitted Forget-only backgrounds"
+    ]
+  },
+  "held_jobs": "External native source intake remains held for shared-input fitting/admission.4slot and common-before diagnostics are separately prepared and not silently added to a running coordinator.",
+  "execution": "No automatic first-position retry, no new model services or budget. All original frozen method/data identities retained."
+}

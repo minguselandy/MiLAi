@@ -1,0 +1,259 @@
+{
+  "status": "ACTIVE;F5_LOCAL_DYNAMIC_THREE_ARMS_CLOSED;FULL_PLAN_INCOMPLETE",
+  "observed_at": "2026-10-23T04:07:50.346047+00:00",
+  "previous_goal_turn": "progress: implemented/tested code and closed actual functional rounds; current tree and actual processes revalidated",
+  "current_goal_turn": "progress: completed missing STATE policy/observation connections, closed3realHost/sandbox trajectories, reviewed failures and accounted actual costs",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "source_version": "8a824f72",
+  "changed_paths": [
+    "src/milai_lab/runners/state_bench_adapter.py",
+    "tools/run_state_bench_local_pilot.py",
+    "tests/unit/test_state_bench_adapter.py"
+  ],
+  "capabilities": [
+    "Host read_goal forwarded unchanged with trusted current domain/user/as_of and actual known references",
+    "Existing rules/cache/saved Laya factory, View callback and shared message/model budget reused",
+    "Actual tool occurrence identity survives upstream transcript regrouping without text dedup",
+    "Closed assistant replies and all public user messages captured; memory returns not recaptured as independent Sources"
+  ],
+  "runtime": {
+    "coordinator_pid": 1702283,
+    "session": 95684,
+    "status": "COMPLETED",
+    "all_known_processes_terminal_absent": true,
+    "queue_wall_seconds": 334.1534549975768,
+    "arms": [
+      {
+        "policy": "fixed_context",
+        "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v1/fixed_context",
+        "status": "COMPLETED_RESEARCH_TRAJECTORY",
+        "deterministic_state_score": 0,
+        "generation_requests": 9,
+        "generation_tokens": 32520,
+        "unknown_generation_increment": 0,
+        "Host_generation_calls": 7,
+        "simulator_calls": 2,
+        "memory_calls": 1,
+        "operation_choices": [
+          "search_0_8",
+          "search_0_16",
+          "context_0",
+          "context_2",
+          "handoff"
+        ],
+        "native_forwards": 0,
+        "native_input_tokens": 0,
+        "native_max_input_tokens": null,
+        "native_finite_complete_inputs": null,
+        "whole_driver_cpu_seconds_already_billed": 2.1313157349999994,
+        "nested_cpu_seconds_already_billed": 0.0,
+        "driver_overhead_already_billed": {
+          "wall_seconds": 59.81164107378572,
+          "cpu_seconds": 2.1313157349999994,
+          "runs": 1
+        },
+        "new_public_sources": 11,
+        "new_domain_tool_sources": 6,
+        "source_capture_literal_occurrences_match": true,
+        "memory_receipts_recaptured_as_sources": 0,
+        "author_review": {
+          "evidence": "EMPTY",
+          "failure": "Two expanded contexts exceeded full2048 envelope; observed-range dedup suppressed bounded original READ choices, then empty handoff.",
+          "original_task": "INCOMPLETE",
+          "outcome": "Actual sandbox cancels BK-1000 with52fee/298refund; BK-1001 remains confirmed, so three native state assertions are unmet.",
+          "visible_interaction": "Host offers cancellation of one named reservation; simulated user confirms it and subsequently emits TASK_DONE. Local simulator does not pursue the remaining original requirement.",
+          "attribution": "Memory delivery and task-scope/Host-simulator failures are separate. No claim that the policy alone caused the final state failure or that historical evidence was meaningfully used."
+        },
+        "deliveries": [
+          {
+            "complete_return_tokens": 63,
+            "later_Host_wires_containing_exact_envelope": 6
+          }
+        ]
+      },
+      {
+        "policy": "rules",
+        "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v1/rules",
+        "status": "COMPLETED_RESEARCH_TRAJECTORY",
+        "deterministic_state_score": 0,
+        "generation_requests": 8,
+        "generation_tokens": 35141,
+        "unknown_generation_increment": 0,
+        "Host_generation_calls": 6,
+        "simulator_calls": 2,
+        "memory_calls": 1,
+        "operation_choices": [
+          "search_0_8",
+          "source_fragment_8_observe",
+          "read_0_observe",
+          "read_1_observe",
+          "read_2_observe",
+          "handoff_select_9"
+        ],
+        "native_forwards": 0,
+        "native_input_tokens": 0,
+        "native_max_input_tokens": null,
+        "native_finite_complete_inputs": null,
+        "whole_driver_cpu_seconds_already_billed": 2.229030034000001,
+        "nested_cpu_seconds_already_billed": 0.0,
+        "driver_overhead_already_billed": {
+          "wall_seconds": 101.50102136097848,
+          "cpu_seconds": 2.229030034000001,
+          "runs": 1
+        },
+        "new_public_sources": 12,
+        "new_domain_tool_sources": 7,
+        "source_capture_literal_occurrences_match": true,
+        "memory_receipts_recaptured_as_sources": 0,
+        "author_review": {
+          "evidence": "OFF_SCOPE_HISTORICAL_ASSISTANT",
+          "failure": "Returned a prior assistant report about London/return-flight/hotel, not current Atlanta eligibility or current user preferences.",
+          "original_task": "INCOMPLETE",
+          "outcome": "Actual sandbox cancels BK-1000 with52fee/298refund; BK-1001 remains confirmed, so three native state assertions are unmet.",
+          "visible_interaction": "Host offers cancellation of one named reservation; simulated user confirms it and subsequently emits TASK_DONE. Local simulator does not pursue the remaining original requirement.",
+          "attribution": "Memory delivery and task-scope/Host-simulator failures are separate. No claim that the policy alone caused the final state failure or that historical evidence was meaningfully used."
+        },
+        "deliveries": [
+          {
+            "complete_return_tokens": 503,
+            "later_Host_wires_containing_exact_envelope": 5
+          }
+        ]
+      },
+      {
+        "policy": "laya",
+        "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v1/laya",
+        "status": "COMPLETED_RESEARCH_TRAJECTORY",
+        "deterministic_state_score": 0,
+        "generation_requests": 8,
+        "generation_tokens": 31283,
+        "unknown_generation_increment": 0,
+        "Host_generation_calls": 6,
+        "simulator_calls": 2,
+        "memory_calls": 1,
+        "operation_choices": [
+          "source_fragment_0",
+          "source_fragment_1",
+          "handoff"
+        ],
+        "native_forwards": 3,
+        "native_input_tokens": 25319,
+        "native_max_input_tokens": 8550,
+        "native_finite_complete_inputs": true,
+        "whole_driver_cpu_seconds_already_billed": 373.941166727,
+        "nested_cpu_seconds_already_billed": 371.9532612769981,
+        "driver_overhead_already_billed": {
+          "wall_seconds": 152.96029060799628,
+          "cpu_seconds": 1.9879054500019038,
+          "runs": 1
+        },
+        "new_public_sources": 10,
+        "new_domain_tool_sources": 5,
+        "source_capture_literal_occurrences_match": true,
+        "memory_receipts_recaptured_as_sources": 0,
+        "author_review": {
+          "evidence": "OFF_SCOPE_HISTORICAL_USER_AND_TOOL",
+          "failure": "Read first public-training user request and user_001 reservation result for a London business trip; current target is user_002 Atlanta economy.",
+          "original_task": "INCOMPLETE",
+          "outcome": "Actual sandbox cancels BK-1000 with52fee/298refund; BK-1001 remains confirmed, so three native state assertions are unmet.",
+          "visible_interaction": "Host offers cancellation of one named reservation; simulated user confirms it and subsequently emits TASK_DONE. Local simulator does not pursue the remaining original requirement.",
+          "attribution": "Memory delivery and task-scope/Host-simulator failures are separate. No claim that the policy alone caused the final state failure or that historical evidence was meaningfully used."
+        },
+        "deliveries": [
+          {
+            "complete_return_tokens": 515,
+            "later_Host_wires_containing_exact_envelope": 5
+          }
+        ]
+      }
+    ]
+  },
+  "study": {
+    "source_groups": 1,
+    "native_task": "1-cancel_economy_domestic",
+    "split": "train",
+    "initial_training_sources": 46,
+    "target_native_trajectory_in_memory": false,
+    "shared_conditions": {
+      "max_return_tokens": 2048,
+      "control_steps": 8,
+      "reads_per_message": 8,
+      "simple_policy_reads": 4,
+      "source_observation_tokens": 4096,
+      "JSON_action": true,
+      "Host_simulator": "existing Qwen",
+      "View_thinking": false
+    },
+    "Jev": "Published T1-main checkpoint,not new source256 selection;CPU/shared16384/head2048,MHAfastpathFalse",
+    "source_preparation": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-state-travel-pilot-preparation-v2",
+    "official_protocol": false,
+    "memory_mode": "local_dynamic_public_observations_and_views",
+    "official_read_only": "not implemented or claimed by this hook",
+    "initial_request": "autonomous Host-generated query, no initial forced old request",
+    "new_View_generations": 0,
+    "statistical_scope": "one exposed task/family,one run per arm; no population interval or independent confirmation"
+  },
+  "main_result": "All3native deterministic state checks0. Each cancelsBK-1000(52fee,298refund);BK-1001remains unchanged. Preserve native score and visible partial workflow separately.",
+  "failure_layers": {
+    "fixed_context": "Expanded contexts exceed2048 then observed-range dedup removes bounded raw READ alternatives despite empty delivery",
+    "rules": "Selected an off-scope historical assistant report for another London trip",
+    "Jev": "Selected first London/user001 original request/reservation list rather than current Atlanta/user002 material",
+    "Host_simulator_task_scope": "Each offers one booking cancellation; user simulator confirms it and endsTASK_DONE with original connection requirement unmet",
+    "scope": "Receipt presence in later Host wires is not meaningful-use or task-benefit proof; no policy-only causal claim"
+  },
+  "checks": {
+    "state_tests_passed": 11,
+    "state_tests_skipped": 1,
+    "skip": "optional mempursuit unavailable",
+    "before_change": "New tool-occurrence and rich-goal tests failed on original source",
+    "upstream_sdk_sandbox_and_hidden_context_tests": "PASS",
+    "real_source_occurrences": "18domain tools+9users+6finalassistant messages exactlymatchnative transcript;no retrieval-result copies",
+    "ruff": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS existing11files/20dependencies/6grandfathered private",
+    "mypy": "PASS2modules with local upstream path and disclosed import-untyped/unused-ignore exclusions;missing jsonschema stubs remain",
+    "full_suite": "not_run",
+    "remote_CI": "not_run",
+    "SHA_validation": false
+  },
+  "costs": {
+    "generation_requests": 25,
+    "generation_tokens": 98944,
+    "unknown_generation_increment": 0,
+    "already_billed_child_CPU": 378.301512496,
+    "additional_settlement": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v1/offline-settlement.json",
+      "phase": "evidence_gap_20261023_state_dynamic_f5_v1_offline_settlement",
+      "measures": {
+        "cpu_seconds": 39.32102426499998,
+        "measured_phases": 7,
+        "runs": 1
+      }
+    },
+    "prior_pending_read_cap_0_040418528": "included once in this settlement",
+    "prior_75_905835768": "unchanged,notrebilled",
+    "original_generalization_pending": "untouched",
+    "unmeasured": "development/tests/semantic author/archive subprocess/settlement remain unknown",
+    "accounting": "single original owned ledger; nested native load/forwards subtracted before child driver charge; coordinator child startup/rusage differences separate; nested wall times not summed"
+  },
+  "artifacts": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v1/plan.json",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v1/driver.json",
+    "results": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v1/review-results.json",
+    "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-8a824f72"
+  },
+  "next_actions": [
+    "Repair F3 bounded delivery from already acquired expanded context, preservingobservations/source ranges/knownrefs/visibility/readcost/supervision;do not simply allow repeatedreads or truncate text",
+    "Improve source choice using purpose,actor,scope,condition and actualbody;preserve off-scope failures as evidence",
+    "Continue F2 grounded statements/time/conditions and broader F1 ordinary-user/unrelated arrival streams;no repeat-until-success on this task",
+    "Complete original savedCPU/LME recovery, frozenfeedback32/64/128,newinitial/post comparison,seeds,Host/lifecycle,officialread-only/external/protected and4mainfigures"
+  ],
+  "milestones": "M1-M5 remain incomplete; no new training or newsource256 deployment selection",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_research_behavior_changed": true,
+  "no_subagents": true,
+  "no_new_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

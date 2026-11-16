@@ -1,0 +1,963 @@
+{
+  "version": "dynamic-memory-control-memops-intake-v1",
+  "status": "SOURCE_INTAKE_ONLY_NO_MODEL_OR_TRAINING",
+  "source": "https://github.com/MemTensor/MemOps",
+  "local_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main",
+  "license": "MIT, copied with local upstream snapshot; use existing literal source, no upstream generation calls",
+  "family_split_sources": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/memops-families-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-memops-families-v1.json"
+  ],
+  "split_conflicts": [
+    {
+      "family": "D16",
+      "local": "dev",
+      "other": "calibration",
+      "use": "excluded from this intake; retain more protected scope"
+    },
+    {
+      "family": "D22",
+      "local": "calibration",
+      "other": "test",
+      "use": "excluded from this intake; retain more protected scope"
+    },
+    {
+      "family": "C06",
+      "local": "calibration",
+      "other": "test",
+      "use": "excluded from this intake; retain more protected scope"
+    }
+  ],
+  "selection": "Six already-train background families spanning A-F and update/reflection/trajectory/remember operations. Training-development intake, not blind evaluation or natural conversation. A02 full dialogue already read here. Original operations/target labels do not become controller actions.",
+  "selected": [
+    {
+      "family": "A02",
+      "split": "train",
+      "file": "A02_update.json",
+      "segments": 3,
+      "turns": 24,
+      "characters": 11099,
+      "coordinates": [
+        {
+          "segment": 1,
+          "turn": 1,
+          "role": "user",
+          "characters": 262
+        },
+        {
+          "segment": 1,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 462
+        },
+        {
+          "segment": 1,
+          "turn": 3,
+          "role": "user",
+          "characters": 277
+        },
+        {
+          "segment": 1,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 500
+        },
+        {
+          "segment": 1,
+          "turn": 5,
+          "role": "user",
+          "characters": 301
+        },
+        {
+          "segment": 1,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 501
+        },
+        {
+          "segment": 1,
+          "turn": 7,
+          "role": "user",
+          "characters": 276
+        },
+        {
+          "segment": 1,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 484
+        },
+        {
+          "segment": 2,
+          "turn": 1,
+          "role": "user",
+          "characters": 256
+        },
+        {
+          "segment": 2,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 520
+        },
+        {
+          "segment": 2,
+          "turn": 3,
+          "role": "user",
+          "characters": 286
+        },
+        {
+          "segment": 2,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 521
+        },
+        {
+          "segment": 2,
+          "turn": 5,
+          "role": "user",
+          "characters": 283
+        },
+        {
+          "segment": 2,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 594
+        },
+        {
+          "segment": 2,
+          "turn": 7,
+          "role": "user",
+          "characters": 554
+        },
+        {
+          "segment": 2,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1122
+        },
+        {
+          "segment": 3,
+          "turn": 1,
+          "role": "user",
+          "characters": 260
+        },
+        {
+          "segment": 3,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 457
+        },
+        {
+          "segment": 3,
+          "turn": 3,
+          "role": "user",
+          "characters": 265
+        },
+        {
+          "segment": 3,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 537
+        },
+        {
+          "segment": 3,
+          "turn": 5,
+          "role": "user",
+          "characters": 288
+        },
+        {
+          "segment": 3,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 520
+        },
+        {
+          "segment": 3,
+          "turn": 7,
+          "role": "user",
+          "characters": 495
+        },
+        {
+          "segment": 3,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1078
+        }
+      ]
+    },
+    {
+      "family": "B01",
+      "split": "train",
+      "file": "B01_reflect.json",
+      "segments": 3,
+      "turns": 24,
+      "characters": 11970,
+      "coordinates": [
+        {
+          "segment": 1,
+          "turn": 1,
+          "role": "user",
+          "characters": 309
+        },
+        {
+          "segment": 1,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 434
+        },
+        {
+          "segment": 1,
+          "turn": 3,
+          "role": "user",
+          "characters": 338
+        },
+        {
+          "segment": 1,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 457
+        },
+        {
+          "segment": 1,
+          "turn": 5,
+          "role": "user",
+          "characters": 376
+        },
+        {
+          "segment": 1,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 542
+        },
+        {
+          "segment": 1,
+          "turn": 7,
+          "role": "user",
+          "characters": 659
+        },
+        {
+          "segment": 1,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 590
+        },
+        {
+          "segment": 2,
+          "turn": 1,
+          "role": "user",
+          "characters": 325
+        },
+        {
+          "segment": 2,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 437
+        },
+        {
+          "segment": 2,
+          "turn": 3,
+          "role": "user",
+          "characters": 352
+        },
+        {
+          "segment": 2,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 487
+        },
+        {
+          "segment": 2,
+          "turn": 5,
+          "role": "user",
+          "characters": 415
+        },
+        {
+          "segment": 2,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 594
+        },
+        {
+          "segment": 2,
+          "turn": 7,
+          "role": "user",
+          "characters": 702
+        },
+        {
+          "segment": 2,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 459
+        },
+        {
+          "segment": 3,
+          "turn": 1,
+          "role": "user",
+          "characters": 322
+        },
+        {
+          "segment": 3,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 503
+        },
+        {
+          "segment": 3,
+          "turn": 3,
+          "role": "user",
+          "characters": 339
+        },
+        {
+          "segment": 3,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 569
+        },
+        {
+          "segment": 3,
+          "turn": 5,
+          "role": "user",
+          "characters": 424
+        },
+        {
+          "segment": 3,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 542
+        },
+        {
+          "segment": 3,
+          "turn": 7,
+          "role": "user",
+          "characters": 667
+        },
+        {
+          "segment": 3,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1128
+        }
+      ]
+    },
+    {
+      "family": "C02",
+      "split": "train",
+      "file": "C02_trajectory_ops.json",
+      "segments": 3,
+      "turns": 24,
+      "characters": 12952,
+      "coordinates": [
+        {
+          "segment": 1,
+          "turn": 1,
+          "role": "user",
+          "characters": 336
+        },
+        {
+          "segment": 1,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 525
+        },
+        {
+          "segment": 1,
+          "turn": 3,
+          "role": "user",
+          "characters": 343
+        },
+        {
+          "segment": 1,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 554
+        },
+        {
+          "segment": 1,
+          "turn": 5,
+          "role": "user",
+          "characters": 392
+        },
+        {
+          "segment": 1,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 609
+        },
+        {
+          "segment": 1,
+          "turn": 7,
+          "role": "user",
+          "characters": 361
+        },
+        {
+          "segment": 1,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 641
+        },
+        {
+          "segment": 2,
+          "turn": 1,
+          "role": "user",
+          "characters": 356
+        },
+        {
+          "segment": 2,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 572
+        },
+        {
+          "segment": 2,
+          "turn": 3,
+          "role": "user",
+          "characters": 354
+        },
+        {
+          "segment": 2,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 578
+        },
+        {
+          "segment": 2,
+          "turn": 5,
+          "role": "user",
+          "characters": 415
+        },
+        {
+          "segment": 2,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 661
+        },
+        {
+          "segment": 2,
+          "turn": 7,
+          "role": "user",
+          "characters": 768
+        },
+        {
+          "segment": 2,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1311
+        },
+        {
+          "segment": 3,
+          "turn": 1,
+          "role": "user",
+          "characters": 340
+        },
+        {
+          "segment": 3,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 631
+        },
+        {
+          "segment": 3,
+          "turn": 3,
+          "role": "user",
+          "characters": 405
+        },
+        {
+          "segment": 3,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 676
+        },
+        {
+          "segment": 3,
+          "turn": 5,
+          "role": "user",
+          "characters": 388
+        },
+        {
+          "segment": 3,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 615
+        },
+        {
+          "segment": 3,
+          "turn": 7,
+          "role": "user",
+          "characters": 400
+        },
+        {
+          "segment": 3,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 721
+        }
+      ]
+    },
+    {
+      "family": "D02",
+      "split": "train",
+      "file": "D02_update.json",
+      "segments": 3,
+      "turns": 24,
+      "characters": 12686,
+      "coordinates": [
+        {
+          "segment": 1,
+          "turn": 1,
+          "role": "user",
+          "characters": 332
+        },
+        {
+          "segment": 1,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 491
+        },
+        {
+          "segment": 1,
+          "turn": 3,
+          "role": "user",
+          "characters": 328
+        },
+        {
+          "segment": 1,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 493
+        },
+        {
+          "segment": 1,
+          "turn": 5,
+          "role": "user",
+          "characters": 319
+        },
+        {
+          "segment": 1,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 469
+        },
+        {
+          "segment": 1,
+          "turn": 7,
+          "role": "user",
+          "characters": 529
+        },
+        {
+          "segment": 1,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1125
+        },
+        {
+          "segment": 2,
+          "turn": 1,
+          "role": "user",
+          "characters": 267
+        },
+        {
+          "segment": 2,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 354
+        },
+        {
+          "segment": 2,
+          "turn": 3,
+          "role": "user",
+          "characters": 359
+        },
+        {
+          "segment": 2,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 613
+        },
+        {
+          "segment": 2,
+          "turn": 5,
+          "role": "user",
+          "characters": 312
+        },
+        {
+          "segment": 2,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 581
+        },
+        {
+          "segment": 2,
+          "turn": 7,
+          "role": "user",
+          "characters": 689
+        },
+        {
+          "segment": 2,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1143
+        },
+        {
+          "segment": 3,
+          "turn": 1,
+          "role": "user",
+          "characters": 325
+        },
+        {
+          "segment": 3,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 386
+        },
+        {
+          "segment": 3,
+          "turn": 3,
+          "role": "user",
+          "characters": 309
+        },
+        {
+          "segment": 3,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 626
+        },
+        {
+          "segment": 3,
+          "turn": 5,
+          "role": "user",
+          "characters": 337
+        },
+        {
+          "segment": 3,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 549
+        },
+        {
+          "segment": 3,
+          "turn": 7,
+          "role": "user",
+          "characters": 589
+        },
+        {
+          "segment": 3,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1161
+        }
+      ]
+    },
+    {
+      "family": "E01",
+      "split": "train",
+      "file": "E01_remember.json",
+      "segments": 3,
+      "turns": 24,
+      "characters": 13508,
+      "coordinates": [
+        {
+          "segment": 1,
+          "turn": 1,
+          "role": "user",
+          "characters": 347
+        },
+        {
+          "segment": 1,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 516
+        },
+        {
+          "segment": 1,
+          "turn": 3,
+          "role": "user",
+          "characters": 375
+        },
+        {
+          "segment": 1,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 562
+        },
+        {
+          "segment": 1,
+          "turn": 5,
+          "role": "user",
+          "characters": 363
+        },
+        {
+          "segment": 1,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 573
+        },
+        {
+          "segment": 1,
+          "turn": 7,
+          "role": "user",
+          "characters": 334
+        },
+        {
+          "segment": 1,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 570
+        },
+        {
+          "segment": 2,
+          "turn": 1,
+          "role": "user",
+          "characters": 353
+        },
+        {
+          "segment": 2,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 548
+        },
+        {
+          "segment": 2,
+          "turn": 3,
+          "role": "user",
+          "characters": 386
+        },
+        {
+          "segment": 2,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 559
+        },
+        {
+          "segment": 2,
+          "turn": 5,
+          "role": "user",
+          "characters": 312
+        },
+        {
+          "segment": 2,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 562
+        },
+        {
+          "segment": 2,
+          "turn": 7,
+          "role": "user",
+          "characters": 721
+        },
+        {
+          "segment": 2,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1305
+        },
+        {
+          "segment": 3,
+          "turn": 1,
+          "role": "user",
+          "characters": 354
+        },
+        {
+          "segment": 3,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 575
+        },
+        {
+          "segment": 3,
+          "turn": 3,
+          "role": "user",
+          "characters": 382
+        },
+        {
+          "segment": 3,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 681
+        },
+        {
+          "segment": 3,
+          "turn": 5,
+          "role": "user",
+          "characters": 399
+        },
+        {
+          "segment": 3,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 599
+        },
+        {
+          "segment": 3,
+          "turn": 7,
+          "role": "user",
+          "characters": 806
+        },
+        {
+          "segment": 3,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1326
+        }
+      ]
+    },
+    {
+      "family": "F07",
+      "split": "train",
+      "file": "F07_reflect.json",
+      "segments": 3,
+      "turns": 24,
+      "characters": 13851,
+      "coordinates": [
+        {
+          "segment": 1,
+          "turn": 1,
+          "role": "user",
+          "characters": 356
+        },
+        {
+          "segment": 1,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 547
+        },
+        {
+          "segment": 1,
+          "turn": 3,
+          "role": "user",
+          "characters": 377
+        },
+        {
+          "segment": 1,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 493
+        },
+        {
+          "segment": 1,
+          "turn": 5,
+          "role": "user",
+          "characters": 409
+        },
+        {
+          "segment": 1,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 606
+        },
+        {
+          "segment": 1,
+          "turn": 7,
+          "role": "user",
+          "characters": 355
+        },
+        {
+          "segment": 1,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 687
+        },
+        {
+          "segment": 2,
+          "turn": 1,
+          "role": "user",
+          "characters": 340
+        },
+        {
+          "segment": 2,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 625
+        },
+        {
+          "segment": 2,
+          "turn": 3,
+          "role": "user",
+          "characters": 368
+        },
+        {
+          "segment": 2,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 566
+        },
+        {
+          "segment": 2,
+          "turn": 5,
+          "role": "user",
+          "characters": 374
+        },
+        {
+          "segment": 2,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 562
+        },
+        {
+          "segment": 2,
+          "turn": 7,
+          "role": "user",
+          "characters": 710
+        },
+        {
+          "segment": 2,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1415
+        },
+        {
+          "segment": 3,
+          "turn": 1,
+          "role": "user",
+          "characters": 335
+        },
+        {
+          "segment": 3,
+          "turn": 2,
+          "role": "assistant",
+          "characters": 609
+        },
+        {
+          "segment": 3,
+          "turn": 3,
+          "role": "user",
+          "characters": 433
+        },
+        {
+          "segment": 3,
+          "turn": 4,
+          "role": "assistant",
+          "characters": 726
+        },
+        {
+          "segment": 3,
+          "turn": 5,
+          "role": "user",
+          "characters": 302
+        },
+        {
+          "segment": 3,
+          "turn": 6,
+          "role": "assistant",
+          "characters": 691
+        },
+        {
+          "segment": 3,
+          "turn": 7,
+          "role": "user",
+          "characters": 622
+        },
+        {
+          "segment": 3,
+          "turn": 8,
+          "role": "assistant",
+          "characters": 1343
+        }
+      ]
+    }
+  ],
+  "planned_projection": "Original roles and anonymous per-segment session boundaries; preserve chronological turns; stop each probe before the subsequent assistant answer. Missing source dates remain unknown. Offline tasks/support witnesses separately reviewed.",
+  "qualification": "6 background families from one external synthetic benchmark; not 6 independent generation methods. Neither calibration nor test content opened or used for fitting.",
+  "model_calls": 0,
+  "training_rows": 0,
+  "sha_validation": false
+}

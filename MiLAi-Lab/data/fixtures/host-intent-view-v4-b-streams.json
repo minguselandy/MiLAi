@@ -1,0 +1,214 @@
+{
+  "schema": "host_intent_stream_recipe_v1",
+  "scope": "Development B: four existing T2 train groups, two separate cold-bank flows per group. Source roles/order/content/clocks retained; new request variants are not independent samples. Author-selected coverage, not blind confirmation. No prebuilt View, oracle action or future-source information supplied.",
+  "streams": [
+    {
+      "id": "memops_B06-view-v4-b-content",
+      "history_id": "memops_B06",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 14,
+          "content": "What kinds of family activities do I generally prefer, which reported experiences support this, and have I agreed to any larger-group exception? Keep preferences separate from an absolute prohibition and upcoming events separate from completed outings."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 14,
+          "content": "Based on what I have told you so far, describe the family outings that suit me and whether I have accepted any exception for a larger group. Separate actual reports from an absolute rule or a future event."
+        },
+        {
+          "id": "middle-arrivals",
+          "after_sources": 16,
+          "content": "What kinds of family activities do I generally prefer, which reported experiences support this, and have I agreed to any larger-group exception? Keep preferences separate from an absolute prohibition and upcoming events separate from completed outings."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What kinds of family activities do I generally prefer, which reported experiences support this, and have I agreed to any larger-group exception? Keep preferences separate from an absolute prohibition and upcoming events separate from completed outings."
+        }
+      ]
+    },
+    {
+      "id": "memops_B06-view-v4-b-originals",
+      "history_id": "memops_B06",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 14,
+          "content": "What kinds of family activities do I generally prefer, which reported experiences support this, and have I agreed to any larger-group exception? Keep preferences separate from an absolute prohibition and upcoming events separate from completed outings."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 14,
+          "content": "Explain my reported family-activity preferences and any agreed larger-group exception. Quote my own statements supporting the preference and any exception actually reported so far; keep quotations separate from interpretation and plans separate from completed outings."
+        },
+        {
+          "id": "middle-arrivals",
+          "after_sources": 16,
+          "content": "Explain my reported family-activity preferences and any agreed larger-group exception. Quote my own statements supporting the preference and any exception actually reported so far; keep quotations separate from interpretation and plans separate from completed outings."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "Explain my reported family-activity preferences and any agreed larger-group exception. Quote my own statements supporting the preference and any exception actually reported so far; keep quotations separate from interpretation and plans separate from completed outings."
+        }
+      ]
+    },
+    {
+      "id": "memops_C26-view-v4-b-content",
+      "history_id": "memops_C26",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 8,
+          "content": "What date, time, location and panel information are currently confirmed in my C26 interview reports, and what proposed change still awaits confirmation? Keep earlier errors, previous venue and Rina's separate interview distinct."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 8,
+          "content": "What should my C26 interview record currently say about the confirmed date, time, venue and panel? Explain what still awaits confirmation and distinguish any other person's schedule."
+        },
+        {
+          "id": "middle-arrivals",
+          "after_sources": 10,
+          "content": "What date, time, location and panel information are currently confirmed in my C26 interview reports, and what proposed change still awaits confirmation? Keep earlier errors, previous venue and Rina's separate interview distinct."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What date, time, location and panel information are currently confirmed in my C26 interview reports, and what proposed change still awaits confirmation? Keep earlier errors, previous venue and Rina's separate interview distinct."
+        }
+      ]
+    },
+    {
+      "id": "memops_C26-view-v4-b-originals",
+      "history_id": "memops_C26",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 8,
+          "content": "What date, time, location and panel information are currently confirmed in my C26 interview reports, and what proposed change still awaits confirmation? Keep earlier errors, previous venue and Rina's separate interview distinct."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 8,
+          "content": "Give the currently confirmed C26 interview logistics and any proposed change still awaiting confirmation. Quote my own reports supporting the latest confirmed time and any pending proposal, keeping them distinct from earlier errors and Rina's interview."
+        },
+        {
+          "id": "middle-arrivals",
+          "after_sources": 10,
+          "content": "Give the currently confirmed C26 interview logistics and any proposed change still awaiting confirmation. Quote my own reports supporting the latest confirmed time and any pending proposal, keeping them distinct from earlier errors and Rina's interview."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "Give the currently confirmed C26 interview logistics and any proposed change still awaiting confirmation. Quote my own reports supporting the latest confirmed time and any pending proposal, keeping them distinct from earlier errors and Rina's interview."
+        }
+      ]
+    },
+    {
+      "id": "memops_D11-view-v4-b-content",
+      "history_id": "memops_D11",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 16,
+          "content": "What does the conversation support about the restaurant atmosphere and food I prefer, and which place is my established regular choice? Distinguish a suggested or tentative visit from a confirmed new preference."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 16,
+          "content": "Based on my reports so far, which restaurant remains my regular place and what atmosphere and food suit me? Distinguish ideas for visiting somewhere new from a decision that I have actually made."
+        },
+        {
+          "id": "middle-arrivals",
+          "after_sources": 18,
+          "content": "What does the conversation support about the restaurant atmosphere and food I prefer, and which place is my established regular choice? Distinguish a suggested or tentative visit from a confirmed new preference."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What does the conversation support about the restaurant atmosphere and food I prefer, and which place is my established regular choice? Distinguish a suggested or tentative visit from a confirmed new preference."
+        }
+      ]
+    },
+    {
+      "id": "memops_D11-view-v4-b-originals",
+      "history_id": "memops_D11",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 16,
+          "content": "What does the conversation support about the restaurant atmosphere and food I prefer, and which place is my established regular choice? Distinguish a suggested or tentative visit from a confirmed new preference."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 16,
+          "content": "Describe my reported restaurant and food preferences and my established regular choice. Quote my own statements for these conclusions and for any contemplated change, distinguishing a suggested or tentative visit from an actual switch."
+        },
+        {
+          "id": "middle-arrivals",
+          "after_sources": 18,
+          "content": "Describe my reported restaurant and food preferences and my established regular choice. Quote my own statements for these conclusions and for any contemplated change, distinguishing a suggested or tentative visit from an actual switch."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "Describe my reported restaurant and food preferences and my established regular choice. Quote my own statements for these conclusions and for any contemplated change, distinguishing a suggested or tentative visit from an actual switch."
+        }
+      ]
+    },
+    {
+      "id": "memops_F08-view-v4-b-content",
+      "history_id": "memops_F08",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 4,
+          "content": "What code is currently supported as the historical InPost pickup reference for my early-March transaction, at which location, and what uncertainty or correction has occurred? Keep other services and people's codes separate; do not claim an old pickup reference is still usable."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 4,
+          "content": "What does my own history currently support as the code and location for that early-March InPost pickup? Explain corrections or unresolved uncertainty, without mixing in other transactions or treating a past code as currently valid."
+        },
+        {
+          "id": "middle-arrivals",
+          "after_sources": 8,
+          "content": "What code is currently supported as the historical InPost pickup reference for my early-March transaction, at which location, and what uncertainty or correction has occurred? Keep other services and people's codes separate; do not claim an old pickup reference is still usable."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What code is currently supported as the historical InPost pickup reference for my early-March transaction, at which location, and what uncertainty or correction has occurred? Keep other services and people's codes separate; do not claim an old pickup reference is still usable."
+        }
+      ]
+    },
+    {
+      "id": "memops_F08-view-v4-b-originals",
+      "history_id": "memops_F08",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 4,
+          "content": "What code is currently supported as the historical InPost pickup reference for my early-March transaction, at which location, and what uncertainty or correction has occurred? Keep other services and people's codes separate; do not claim an old pickup reference is still usable."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 4,
+          "content": "Identify the supported historical InPost pickup code and location for my early-March transaction. Quote my own statements establishing the value and any reported correction or resolved uncertainty. Keep other people's codes separate and do not imply this old code remains usable."
+        },
+        {
+          "id": "middle-arrivals",
+          "after_sources": 8,
+          "content": "Identify the supported historical InPost pickup code and location for my early-March transaction. Quote my own statements establishing the value and any reported correction or resolved uncertainty. Keep other people's codes separate and do not imply this old code remains usable."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "Identify the supported historical InPost pickup code and location for my early-March transaction. Quote my own statements establishing the value and any reported correction or resolved uncertainty. Keep other people's codes separate and do not imply this old code remains usable."
+        }
+      ]
+    }
+  ]
+}

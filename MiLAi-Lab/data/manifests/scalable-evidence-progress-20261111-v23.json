@@ -1,0 +1,106 @@
+{
+  "status": "PHASE23_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T12:11:20.408340+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v22.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2500,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed2-v1",
+      "owner_pid": 3905047,
+      "child_pid": 3905048,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 227,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m2-public-train16-query-once-missing17-readouts-v1",
+      "owner_pid": 38560,
+      "child_pid": 38561,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_readouts": 10,
+      "failed_readouts": 2
+    }
+  ],
+  "paper153_closed": {
+    "status": "COMPLETED_WITH_FAILURES",
+    "pid": 4096436,
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families128to160-v2",
+    "planned_families": 32,
+    "planned_states": 63,
+    "planned_unique_packets": 153,
+    "planned_policy_positions": 189,
+    "closed_readouts": 153,
+    "failed_readouts": 7,
+    "chat_invocations": 153,
+    "reused_readouts": 0,
+    "reuse_source": null,
+    "response_callbacks": 153,
+    "error_callbacks": 0,
+    "automatic_retry": false,
+    "no_sha_validation": true,
+    "answer_persisted_as_source": false,
+    "scope": "Conditional public task plus actual packet with empty known refs; not autonomous Host conversation or business execution",
+    "generation_before": {
+      "charged_tokens": 448873635,
+      "known_tokens": 448248470,
+      "unknown_usage": 16
+    },
+    "generation_requests_before": 90784,
+    "active": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families128to160-readouts-v2/case-062/packet-1/readout.json",
+    "compute": {
+      "cpu_seconds": 10.494691808999999,
+      "wall_seconds": 2154.176036713645,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 533200,
+      "known_tokens": 533200,
+      "unknown_usage": 0
+    }
+  },
+  "paper153_bound": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families128to160-witness-v2",
+  "public129_teacher_plan": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-129-teacher-v1-plan.json",
+  "public_same_state_SFT": {
+    "status": "REFERENCE_SFT_ON_SAME32_ACTUAL_INITIAL_STATES_NOT_FITTED",
+    "source_split": "train",
+    "raw_states": 32,
+    "labelled_states": 12,
+    "labelled_families": 7,
+    "label_status_counts": {
+      "unknown_textual_reference": 18,
+      "reference_acquisition": 12,
+      "unknown_reference_progress": 2
+    },
+    "same_model_inputs_and_state_ids_as_feedback": true,
+    "new_model_or_Host_calls": 0,
+    "no_sha_validation": true,
+    "scope": "SFTcounterpart referenceproxy, notteacherfeedback orHostquality. UsesoriginalexecutedlearnerSEARCHresults only; unavailable/otherbindings unjudged. Allraw32unknowns retained, no invented labels fromsemanticanswers.",
+    "compute": {
+      "cpu_seconds": 0.30796665600000006,
+      "wall_seconds": 0.3079964341595769
+    }
+  },
+  "public_SFT_input_alignment": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-matched-reference-sft-v1/input-alignment.json",
+  "source_reference_actual_step_checks": "/data/milai-experiments/20261111-scalable-evidence/m6-mixed-reference-operations-v1/actual-step-checks.json",
+  "remaining": [
+    "Closemissing17, bindnew129/32states and annotateuniononce. Explicitold112pairedsubset versus17newcoverage explorations, no inflatedstatecount.",
+    "Closepaper63semanticteacher, continue859newpaperfirsts and8continuousfamilies; actualSource/Viewtraining stillpending.",
+    "Finishseed2pair/main3390, adequateS2/SFT/postS2aggregation, frozennewconfirmation96/fullcost/generalization."
+  ],
+  "scope": "No model/Hostreruns forreferenceSFT oractual-stepverification. Raw32SFTstates sameinput/stateIDs asfeedback;12native-reference labels,20unknown. Differentlabelavailability remainsa declaredcomparison limitation. NoProduct/API/permission/Canonical changes,service restart/push/subagents.",
+  "cost_scope": "Closedreader153selfbilled; newreferenceSFTpreparation measuredpending; verification/author/unmeasured unknown. No duplicatewhole/nativestagebilling."
+}

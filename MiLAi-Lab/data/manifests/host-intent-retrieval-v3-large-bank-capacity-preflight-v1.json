@@ -1,0 +1,28 @@
+{
+  "phase": "host_intent_instructir_large_bank_observation_preflight_v1",
+  "status": "CAPACITY_GAP_CONFIRMED_WITH_SYNTHETIC_REQUEST",
+  "model_calls": 0,
+  "model_loads": 0,
+  "ledger_recorded": false,
+  "corpus_documents": 16072,
+  "serialized_shared_state_tokens": 2075367,
+  "full_action_head_tokens": 263,
+  "head_tokens_at_declared_limit": 263,
+  "declared_max_len": 12288,
+  "declared_head_max_len": 2048,
+  "state_exceeds_total_capacity": true,
+  "head_exceeds_capacity": false,
+  "real_benchmark_questions_read": 0,
+  "real_benchmark_predictions": 0,
+  "store_ingestion": false,
+  "actual_runtime_trace": false,
+  "scope": "Projected complete released corpus under the existing all-arrivals observation shape, with synthetic request and neutral source IDs/unknown timestamps. Source bodies retained, no model forward or QA inspection. Exact live UUID/timestamps would change length; this demonstrates a structural capacity gap, not benchmark performance.",
+  "code_evidence": [
+    "EvidenceOperations.__init__: every visible arrival body enters state.new_events",
+    "EvidenceOperations.actions: uncached initial refresh binds all source references",
+    "project_observation_state: lossless literal sharing, no dropping of unique source bodies"
+  ],
+  "required_work": "Reuse full Store with budgeted, navigable source observations before full external native-model evaluation; do not silently truncate, filter by qrels, or label external data for training. Existing history_directory pages stored versions of known semantic records, not the raw all-arrivals feed. Keep active T1 frozen recipe unchanged; any new observation configuration must be declared and compared fairly.",
+  "wall_seconds": 18.178752212785184,
+  "cpu_seconds": 20.558320989000002
+}

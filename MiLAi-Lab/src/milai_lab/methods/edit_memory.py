@@ -8,10 +8,13 @@ from __future__ import annotations
 
 import copy
 import json
+from collections.abc import Sequence
 from typing import Any, Literal
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
+from milai_lab.contracts.memory import ObservationProfile
+from milai_lab.memory.dependency_groups import apply_support_groups
 from milai_lab.memory.edit_units import (
     ARM_OPERATIONS,
     OPERATION_INSTRUCTIONS,
@@ -24,11 +27,14 @@ from milai_lab.memory.edit_units import (
     render_revision_view,
     render_state,
     source_evidence,
+    tool_source_origin,
     validate_applicability,
     writer_projection,
     writer_proposal_schema,
 )
+from milai_lab.memory.external_support import bind_external_unit, order_dependent_proposals
 from milai_lab.memory.functional_state import FunctionalRejection, body_text, resolve_fragment
+from milai_lab.memory.observation import maintenance_projection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import (
     EditFeatures,
@@ -38,11 +44,80 @@ from milai_lab.methods.edit_features import (
     feature_envelope_schema,
     feature_proposal_schema,
 )
+from milai_lab.methods.semantic_delta import (
+    INDEXED_INSTRUCTIONS,
+    compile_delta,
+    delta_messages,
+    delta_schema,
+)
+from milai_lab.methods.semantic_delta import (
+    INSTRUCTIONS as DELTA_INSTRUCTIONS,
+)
 
 Arm = Literal["B0", "B1", "B2", "M"]
 METHOD_VERSION = "milai_edit_v1"
 V2_METHOD_VERSION = "milai_edit_v2"
 InterfaceVersion = Literal["v1", "I1", "I2"]
+MaintenanceMode = Literal["legacy", "event_delta_v1", "semantic_delta_v1", "semantic_delta_v2"]
+
+REVISION_MEANING_INSTRUCTIONS = (
+    "Use the whole delivered matter to check linked conditions, exceptions and old overview "
+    "statements, including those without explicit edges. A local revision covers all supported "
+    "changes in their meaning; preserve unaffected scopes within mixed claims rather than "
+    "keeping obsolete wording. Replacing a unit's text discards everything omitted from the "
+    "replacement. Distinguish the changed assertion from independent old attributes within "
+    "that unit: silence in the new event does not withdraw them. Carry still-valid meanings "
+    "into the replacement or separate supported units in the same proposal, preserving their "
+    "subject, original report time and modal strength. Splitting or rewording old content needs "
+    "its delivered old Source bodies; do not present that content as newly reported. Unchanged "
+    "units stay untouched or use the permitted exact keep references. "
+    "Changed wording needs current correction evidence and any "
+    "necessary redelivered old Source bodies, never h alone. Combine dependent changes in "
+    "that target's single proposal. "
+)
+
+PATCH_TEXT_INSTRUCTIONS = (
+    "For one value or short phrase change inside a delivered content unit, use "
+    "patch_text with target_unit, old_text and new_text. Copy old_text exactly "
+    "and include enough context to match uniquely within that unit. A patched "
+    "unit has only this one edit in the proposal. The service "
+    "replaces that occurrence and preserves all remaining text and the target's "
+    "own delivered h support. Select current evidence and a current assertion; "
+    "assertion.keep is unavailable because the text changes. Explicitly retain "
+    "or update supported applicability in the current assertion. Use existing "
+    "edits for changes of subject, scope, attribution or cross-unit structure. "
+    "If old_text includes a shared predicate, negation or scope governing unchanged "
+    "coordinated items, new_text must explicitly preserve its meaning for those items. "
+    "Read the complete patched unit: unchanged characters alone do not preserve meaning. "
+    "If a local replacement cannot preserve it, use ordinary replace or split into "
+    "supported units. Preserve the source's reported tense, degree and uncertainty; "
+    "a report clock does not establish the event or effective time. "
+)
+
+
+PROPOSITION_UPDATE_INSTRUCTIONS = (
+    "\nEmit one complete clause for each independently changeable subject, attribute and period. "
+    "The matter label is navigation; do not add a catch-all summary that duplicates sibling "
+    "claims. Independent facts belong in parallel clauses, not conditions of an overview. "
+    "Conditions contain actual prerequisites or scope. Preserve shared negation, quantities, "
+    "subjects and modal strength in every claim they govern. "
+    "An empty change_candidates list means no extracted hints were supplied, not no new facts. "
+    "When the current source supplies a durable claim not already saved, create it even when "
+    "the old-record directory is empty. A restatement or bare acknowledgment may be a no-op. "
+    "Revise the complete affected expression. New wording uses current evidence and a new "
+    "assertion source; assertion.keep is for exact retained text only. Keep unrelated units "
+    "unchanged. Use the delivered old wording/support for retained parts of a compound claim. "
+    "Cancellation removes only the exception, preserving the applicable general rule. "
+    "Keep literal temporal wording in claim text. For precise time fields select time_choices "
+    "references; never regenerate dates or copy report/capture/commit clocks. These choices "
+    "locate temporal wording, not evidence that an event happened. Report-relative candidates "
+    "apply only when the phrase is anchored to this source's report day, not another speaker's "
+    "quoted clock. If the anchor is ambiguous or no supported choice exists, "
+    "omit the precise field. For an entire stated day use from=t# and until=t#:end, whose end "
+    "is exclusive. Different before/after claims need separate clauses and applicability. "
+    "A future schedule remains future, considering remains undecided, and gradual change "
+    "must not become an absolute reversal."
+)
 
 
 class EditMemory:
@@ -55,6 +130,8 @@ class EditMemory:
         *,
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
+        maintenance_mode: MaintenanceMode = "legacy",
+        writer_input: Literal["full", "dependency_region_v1"] = "full",
     ) -> None:
         if arm not in {"B0", "B1", "B2", "M"}:
             raise ValueError("EDIT_ARM_INVALID")
@@ -64,6 +141,32 @@ class EditMemory:
             raise ValueError("EDIT_INTERFACE_INVALID")
         self.interface_version = interface_version
         self.features = features or EditFeatures()
+        self.writer_input = writer_input
+        if writer_input not in {"full", "dependency_region_v1"}:
+            raise ValueError("WRITER_INPUT_INVALID")
+        if writer_input == "dependency_region_v1" and not (
+            self.features.dependency_updates and self.features.bound_references
+            and self.features.proposition_updates
+        ):
+            raise ValueError("LOCAL_WRITER_REQUIRES_BOUND_PROPOSITION_IMPACT")
+        if self.features.dependency_updates and (arm != "M" or interface_version != "I2"):
+            raise ValueError("DEPENDENCY_UPDATES_REQUIRE_M_I2")
+        if self.features.dependency_groups and (not self.conditioned or interface_version != "I2"):
+            raise ValueError("DEPENDENCY_GROUPS_REQUIRE_CONDITIONED_I2")
+        if maintenance_mode not in {
+            "legacy", "event_delta_v1", "semantic_delta_v1", "semantic_delta_v2",
+        }:
+            raise ValueError("EDIT_MAINTENANCE_MODE_INVALID")
+        if maintenance_mode != "legacy" and interface_version == "v1":
+            raise ValueError("EDIT_EVENT_MAINTENANCE_REQUIRES_V2")
+        self.maintenance_mode = maintenance_mode
+        if maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"} and not (
+            arm == "M" and interface_version == "I2" and self.features.bound_references
+            and self.features.source_metadata and self.features.matter_organization
+            and self.features.temporal_scope and self.features.proposition_updates
+            and self.features.dependency_groups and not self.features.dependency_updates
+        ):
+            raise ValueError("SEMANTIC_DELTA_REQUIRES_SOURCE_BOUND_M_WITH_GROUPS_WITHOUT_IMPACT")
         if self.features.enabled and interface_version == "v1":
             raise ValueError("EDIT_FEATURES_REQUIRE_V2_INTERFACE")
         self.method_version = METHOD_VERSION if interface_version == "v1" else V2_METHOD_VERSION
@@ -73,13 +176,15 @@ class EditMemory:
         return self.arm
 
     def proposal_schema(
-        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
+        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
+        for_generation: bool = True,
     ) -> dict[str, Any]:
         if self.interface_version == "v1":
             return EditProposal.model_json_schema()
         if self.features.enabled:
             schema = feature_proposal_schema(
-                self.arm, self.features, mapping or {}, allow_create=allow_create
+                self.arm, self.features, mapping or {}, allow_create=allow_create,
+                for_generation=for_generation,
             )
             if self.features.bound_references and mapping and mapping.get("records"):
                 variants = [
@@ -89,7 +194,8 @@ class EditMemory:
                 ]
                 for target in mapping["records"]:
                     scoped = feature_proposal_schema(
-                        self.arm, self.features, mapping, allow_create=False, target=target
+                        self.arm, self.features, mapping, allow_create=False, target=target,
+                        for_generation=for_generation,
                     )
                     for variant in scoped.get("oneOf", []):
                         variant["properties"]["target"] = {"type": "string", "const": target}
@@ -98,14 +204,21 @@ class EditMemory:
                         variants.append(variant)
                 return {"oneOf": variants}
             return schema
-        return writer_proposal_schema(self.arm, allow_create=allow_create)
+        return writer_proposal_schema(
+            self.arm, allow_create=allow_create, for_generation=for_generation
+        )
 
     def envelope_schema(
-        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
+        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
+        for_generation: bool = True,
     ) -> dict[str, Any]:
+        if self.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"} and for_generation:
+            return delta_schema(mapping or {}, allow_create=allow_create,
+                                indexed=self.maintenance_mode == "semantic_delta_v2")
         if self.features.enabled:
             return feature_envelope_schema(
-                self.arm, self.features, mapping or {}, allow_create=allow_create
+                self.arm, self.features, mapping or {}, allow_create=allow_create,
+                for_generation=for_generation,
             )
         return {
             "type": "object",
@@ -115,14 +228,52 @@ class EditMemory:
                 "proposals": {
                     "type": "array",
                     "minItems": 0,
-                    "items": self.proposal_schema(allow_create=allow_create),
+                    "items": self.proposal_schema(
+                        allow_create=allow_create, for_generation=for_generation
+                    ),
                 }
             },
         }
 
     def instructions(self, *, allow_create: bool = True) -> str:
+        if self.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"}:
+            return (INDEXED_INSTRUCTIONS if self.maintenance_mode == "semantic_delta_v2"
+                    else DELTA_INSTRUCTIONS)
+        guidance = PROPOSITION_UPDATE_INSTRUCTIONS if self.features.proposition_updates else ""
+        if self.features.dependency_groups:
+            guidance += (
+                " Use support_groups only for derived claims "
+                "with explicit sufficient premise routes. "
+                "Directly reported facts cite their sources and need no support group. "
+                "Route premises must be other units, never the target itself. "
+                "Each inner list is AND, outer alternatives are OR. Preserve uncertain or "
+                "conditional wording in the claims; a graph is a model interpretation, not "
+                "proof. Dependencies require delivered evidence; co-occurrence is insufficient. "
+                "Removing one premise loses its entire AND route, but other routes may remain. "
+                "Never invent a successor value or retract all successors just because one "
+                "support changed. For create/rewrite, group references index clauses before "
+                "condition expansion. For local edits use old u aliases or n0,n1,... counting "
+                "newly appended units; override creates content then its condition. Omitted "
+                "targets retain their groups, but changed target/premise meaning requires "
+                "explicitly resetting a still-valid group before using it as support. "
+                "An explicit empty alternatives list records no "
+                "remaining route; operation=remove removes that dependency claim itself. "
+            )
+        if self.features.cross_record_dependencies:
+            guidance += (
+                " A support premise in another delivered record uses {record:r#,unit:u#}. "
+                "Its unit must belong to that actual record. Targets remain local; references "
+                "cannot invent or copy foreign facts. Updates commit record by record; a "
+                "later failure does not undo an earlier commit. Explicit group resets bind "
+                "to confirmed preceding updates from the same proposal batch, otherwise to "
+                "the delivered version. Changed foreign support is not a verified proof. "
+                "external_bindings shows the recorded and delivered revisions; a version "
+                "difference calls for checking the premise, not automatic negation. "
+            )
+        if self.maintenance_mode == "event_delta_v1":
+            return self._event_instructions(allow_create=allow_create) + guidance
         if self.features.enabled:
-            return self._feature_instructions(allow_create=allow_create)
+            return self._feature_instructions(allow_create=allow_create) + guidance
         if self.interface_version != "v1":
             operations = ARM_OPERATIONS[self.arm]
             return (
@@ -220,16 +371,76 @@ class EditMemory:
         )
         return common + operation + representation
 
+    def _event_instructions(self, *, allow_create: bool) -> str:
+        """One current-event task; the issued schema supplies the legal action surface."""
+        instruction = (
+            "Maintain the meaning changed or added by this event. Read delivery.evidence first, "
+            "then its change_candidates and related old records. Candidates locate changes; "
+            "the original sources decide what is supported. Compare subject, value, time, scope "
+            "and strength. A broad old goal need not cover a new concrete step or qualification. "
+            "Preserve reported uncertainty, intentions and partial outcomes as such. "
+            "The source_table supplies actual speaker and report clocks; these are not an "
+            "inferred subject or effective time. prior_context resolves references only. "
+            "Tool fields describe only the object and fields actually observed; other Tool "
+            "prose remains an attributed report, not a verified business effect. "
+            "Within each affected matter, coordinate its changed claims, conditions and old "
+            "overview in one proposal, including dependencies without explicit edges. Keep "
+            "independently valid attributes when replacing a compound unit. Form separately "
+            "revisable assertions; ordinary attributes need not become conditions. "
+            "Use only the supplied r/u/e/h aliases and legal response schema. e selects "
+            "delivered original bodies; redelivered_support supplies old context. h keeps "
+            "the exact old unit or relation and its attribution, not proof of new wording. "
+            "Changed claims use supporting e; a removal needs the current change, not merely "
+            "an old affirmation. Source and version identities are resolved by the service. "
+        )
+        if self.arm in {"B0", "B2"}:
+            instruction += (
+                "Rewrite decides the complete retained set. Retain unchanged units with the "
+                "schema's exact keep references; omitted units are not silently restored. "
+            )
+        else:
+            instruction += (
+                "Local edits generate only changed units; all untouched units stay verbatim. "
+                "replace changes the whole selected unit text. Preserve its still-valid "
+                "independent meanings there or in supported separate units in the same edit. "
+            )
+        if self.features.patch_text and self.arm in {"B1", "M"}:
+            instruction += PATCH_TEXT_INSTRUCTIONS
+        if self.features.source_metadata:
+            instruction += (
+                "For new text choose assertion={source_evidence:e#,kind:reported|inferred|"
+                "observed|uncertain}. Exact retained attribution uses assertion={keep:h#}; "
+                "rewrite may omit text under the permitted keep/from_unit form. "
+            )
+        if self.arm == "M" and self.features.semantic_operations:
+            instruction += (
+                "Use add_exception/remove_exception only for an actual scoped alternative; "
+                "shared_conditions selects existing condition units. Reusing or removing an "
+                "exception does not infer a new global rule or revive an expired one. "
+            )
+        instruction += (
+            "Distinct new matters may be created alongside revisions. " if allow_create else
+            "Creation is unavailable for this work item. "
+        )
+        return instruction + (
+            "Return the supplied envelope with at most one container per existing record. "
+            "A justified no-op is allowed; it means no semantic write, not complete coverage "
+            "of every candidate or successful saving of the user's whole request."
+        )
+
     def _feature_instructions(self, *, allow_create: bool) -> str:
         empty = (
-            '{}'
+            '{"creates":[],"records":{}}'
             if self.features.single_record_changes
             else '{"proposals":[]}'
         )
         instruction = (
-            "Maintain the supported changes in the current dialogue. Read current evidence first "
-            "and use the delivered old matters to locate what needs revision. One event can revise "
-            "related old matters and create distinct new matters. Preserve still-valid history "
+            "Read current evidence first. Compare its supported assertions with the delivered "
+            "old matters by subject, value, time, scope and strength: what is already expressed, "
+            "what changes, and what adds distinct durable meaning? A broad existing goal does "
+            "not by itself cover a newly stated limitation, concrete step or qualified plan. "
+            "One event can revise related old matters and create distinct new matters. "
+            "Preserve still-valid history "
             "and qualifications. Preferences, intentions and plans remain attributed reports "
             "with their time and status. Redelivered support supplies old context. "
             "Return the supplied JSON envelope. When the current dialogue adds no supported "
@@ -239,7 +450,9 @@ class EditMemory:
             "Every r/u/e/h must be a candidate in THIS request. "
             "Only e has actually delivered body; "
             "h is EXISTING_SUPPORT_ONLY and cannot prove a changed claim or synonymous rewrite. "
-            "Copy retained text and role exactly when using only its own h. Changed claims and "
+            + ("" if self.arm == "B0" and self.features.source_metadata else
+               "Copy retained text and role exactly when using only its own h. ")
+            + "Changed claims and "
             "new relations require new e. Applicability and entailment are your decision, not "
             "certified by a source ID. Preserve subject, time, negation, "
             "qualification and uncertainty. Use one independently revisable assertion per "
@@ -259,7 +472,8 @@ class EditMemory:
             )
         if self.features.source_metadata:
             instruction += (
-                "Every generated unit or text edit selects assertion={source:e#,kind:reported|"
+                "Every generated unit or text edit selects "
+                "assertion={source_evidence:e#,kind:reported|"
                 "inferred|observed|uncertain} from that item's new evidence. The service records "
                 "the ACTUAL speaker role and occurrence time; this does not certify truth. "
                 "Preserve assertion ownership in wording too: a user's report is a user report; "
@@ -286,7 +500,10 @@ class EditMemory:
                 "shared calendar_context permits nominal ordering of timezone-unknown values; "
                 "it does not supply a physical timezone. Do not generate calendar_context. "
                 "Report/capture/version clocks are service metadata, "
-                "never inferred onset. Explicit retrospective reports may explain the past; "
+                "never inferred onset. Preserve relative time wording unless the Source supplies "
+                "anchored applicability boundaries; omit unknown effective_from/effective_until "
+                "instead of copying observed_date or observed_at. "
+                "Explicit retrospective reports may explain the past; "
                 "unspecified dates stay unknown and a plan's date does not prove completion. "
                 "Keep independently changeable limits/scopes as separate conditions with "
                 "their own support; exact kept units retain prior applicability. "
@@ -309,33 +526,43 @@ class EditMemory:
                 "No hidden body is filled in. retract_record is a separate entire-record "
                 "withdrawal with new actual e evidence and no replacement body. "
                 "No local edits are available. "
-                "In a rewrite, from_unit=u# identifies which delivered unit the generated "
-                "clause or condition continues, independently of evidence. Each prior unit "
-                "has at most one such continuation, with the same role. It permits retaining "
-                "the existing binding after a supported value change; it retains no old text "
-                "or support by itself. "
             )
+            if self.arm != "B0" or not self.features.source_metadata:
+                instruction += (
+                    "In a rewrite, from_unit=u# identifies which delivered unit the generated "
+                    "clause or condition continues, independently of evidence. Each prior unit "
+                    "has at most one such continuation, with the same role. It permits retaining "
+                    "the existing binding after a supported value change; it retains no old text "
+                    "or support by itself. "
+                )
             if self.features.source_metadata:
                 instruction += (
-                    "Exact unchanged text/role with from_unit=u# and assertion={keep:h#} "
-                    "for that same unit reuses its own support without repeating keep_support. "
+                    "For an unchanged old content clause, assertion={keep:h#} selects its "
+                    "actual text, support and attribution. Return this keep reference without "
+                    "text; keep_support need not be repeated. New or changed text selects "
+                    "assertion={source_evidence:e#,kind:reported/inferred/observed/uncertain}. "
+                    if self.arm == "B0" else
+                    "With from_unit=u# and assertion={keep:h#} for that same old unit, "
+                    "omit text to reuse its actual text, or repeat it exactly. This also reuses "
+                    "its own support without repeating keep_support. Exact old text with "
+                    "assertion={keep:h#} also reuses its support without from_unit. "
                     "Bindings still select their separate relation support. "
                 )
             instruction += "Changed text still selects actual e evidence. "
         elif self.arm == "M" and self.features.semantic_operations:
             instruction += (
-                "Within one record container use change_value for same-scope content, "
-                "add_exception for a local scoped alternative, "
-                "remove_exception for an existing local alternative, "
-                "or change_condition for a shared condition. add_exception retains its general "
-                "rule and only attaches explicitly selected shared_conditions. remove_exception "
+                "Within one record container use replace for same-scope changes to a delivered "
+                "content or condition unit; its actual role and linked units/edges remain. "
+                "Use add_exception for a local scoped alternative and remove_exception for an "
+                "existing local alternative. "
+                "add_exception retains its general rule and only attaches explicitly selected "
+                "shared_conditions. remove_exception "
                 "removes that alternative and its exclusive condition nodes, preserving general "
                 "rules/shared conditions; it cannot reconstruct an already lost general rule. "
-                "change_condition keeps actual linked units and edges. append/retract remain "
-                "available for other local formation/removal. Dependent changes to delivered units "
+                "append/retract remain available for other local formation/removal. "
+                "Dependent changes to delivered units "
                 "belong in the same ordered edits list; the record commits once. "
-                "Use the actual delivered role: change_value selects content, change_condition "
-                "selects condition, and shared_conditions selects only existing condition units. "
+                "shared_conditions selects only existing condition units. "
                 "A content clause mentioning a prerequisite has no condition binding. Do not "
                 "select it as a shared condition. With supporting new e, append a condition "
                 "with explicit attach_to targets and retract the obsolete clause when justified; "
@@ -347,6 +574,8 @@ class EditMemory:
                 + ", ".join(ARM_OPERATIONS[self.arm])
                 + ". Untouched units/support stay verbatim. "
             )
+        if self.features.patch_text and self.arm in {"B1", "M"}:
+            instruction += PATCH_TEXT_INSTRUCTIONS
         if self.conditioned:
             instruction += (
                 "Keep the value in content and express explicit applicability, limits and "
@@ -362,15 +591,13 @@ class EditMemory:
                 "stored structure; its wording cannot change it. "
             )
         else:
-            instruction += (
-                "Use content clauses without relations. Give each qualification its own "
-                "complete clause naming the matter and scope it limits. "
-            )
+            instruction += "Use content clauses without relations. "
         if self.features.single_record_changes:
             instruction += (
                 "creates is a list; records has at most one unique container per delivered r key. "
                 "Never repeat a record or split its dependent changes across containers. "
-                "Omit creates or records when empty. An existing change always names its r key "
+                "Return both creates and records; use [] and {} respectively when empty. "
+                "An existing change always names its r key "
                 "in records, even when only one record was delivered; never return a bare edit. "
             )
         instruction += (
@@ -399,7 +626,7 @@ class EditMemory:
         for formed_unit in formation_units:
             formed_unit["evidence"] = ["e1"]
             if self.features.source_metadata:
-                formed_unit["assertion"] = {"source": "e1", "kind": "reported"}
+                formed_unit["assertion"] = {"source_evidence": "e1", "kind": "reported"}
         create: dict[str, Any] = {"action": "create", "units": formation_units}
         if self.conditioned:
             create["relations"] = [
@@ -416,7 +643,7 @@ class EditMemory:
             "keep_support": ["h1"],
         }
         if self.features.source_metadata:
-            change["assertion"] = {"source": "e1", "kind": "reported"}
+            change["assertion"] = {"source_evidence": "e1", "kind": "reported"}
         if self.arm in {"B0", "B2"}:
             correction: dict[str, Any] = {
                 "action": "rewrite",
@@ -434,6 +661,10 @@ class EditMemory:
                 }
                 if self.features.source_metadata:
                     retained["assertion"] = {"keep": f"h{index}"}
+                    if self.arm == "B0":
+                        retained.pop("text")
+                        retained.pop("evidence")
+                        retained.pop("keep_support")
                 correction["units"].append(retained)
             if self.conditioned:
                 correction["relations"] = [
@@ -452,9 +683,7 @@ class EditMemory:
                 "edits": [
                     {
                         **change,
-                        "operation": "change_value"
-                        if self.arm == "M" and self.features.semantic_operations
-                        else "replace",
+                        "operation": "replace",
                         "target_unit": "u1",
                     }
                 ],
@@ -463,7 +692,8 @@ class EditMemory:
         def envelope(proposal: dict[str, Any], *, created: bool) -> dict[str, Any]:
             proposal = clause_proposal(proposal, conditioned=self.conditioned)
             if self.features.single_record_changes:
-                return {"creates": [proposal]} if created else {"records": {"r1": proposal}}
+                return {"creates": [proposal] if created else [],
+                        "records": {} if created else {"r1": proposal}}
             return {"proposals": [proposal if created else {**proposal, "target": "r1"}]}
 
         instruction += (
@@ -476,7 +706,7 @@ class EditMemory:
                 "inclusive to April 8 exclusive, with a framework-declared Source calendar. "
                 "Date condition fragment in that content's conditions[]: "
                 '{"text":"Only from April 1 inclusive to April 8 exclusive.",'
-                '"evidence":["e1"],"assertion":{"source":"e1","kind":"reported",'
+                '"evidence":["e1"],"assertion":{"source_evidence":"e1","kind":"reported",'
                 '"applicability":{"effective_from":"2025-04-01",'
                 '"effective_until":"2025-04-08"}},"binding":{"evidence":["e1"]}}. '
             )
@@ -527,8 +757,13 @@ class EditMemory:
                 result["keep_support"] = [support]
             if self.features.source_metadata:
                 result["assertion"] = (
-                    {"keep": support} if keep_attribution else {"source": "e1", "kind": "reported"}
+                    {"keep": support} if keep_attribution
+                    else {"source_evidence": "e1", "kind": "reported"}
                 )
+                if self.arm == "B0" and keep_attribution:
+                    result.pop("text")
+                    result.pop("evidence")
+                    result.pop("keep_support", None)
             return result
 
         def example_relation(
@@ -702,7 +937,7 @@ class EditMemory:
                     "edits": [
                         example_edit(
                             cutoff,
-                            "change_condition" if self.features.semantic_operations else "replace",
+                            "replace",
                             "u3",
                         )
                     ],
@@ -842,7 +1077,8 @@ class EditMemory:
             if not row.get("ok") or not isinstance(row.get("value"), dict):
                 raise FunctionalRejection("EDIT_RECORD_UNAVAILABLE")
             state = row["value"].get("edit_state") or {}
-            for item in [*state.get("units", []), *state.get("relations", [])]:
+            for item in [*state.get("units", []), *state.get("relations", []),
+                         *state.get("support_groups", [])]:
                 for ref in item["evidence_refs"]:
                     part = {
                         key: ref[key] for key in ("source_ref", "source_revision", "start", "end")
@@ -934,7 +1170,8 @@ class EditMemory:
             state = copy.deepcopy(version.get("edit_state"))
             refs = []
             if state:
-                for item in [*state["units"], *state["relations"]]:
+                for item in [*state["units"], *state["relations"],
+                             *state.get("support_groups", [])]:
                     for ref in item["evidence_refs"]:
                         if "evidence_id" not in ref:
                             ref.update(
@@ -978,6 +1215,92 @@ class EditMemory:
             self._source_attributes(delivery)
         return delivery
 
+    def observation_delivery(
+        self, delivery: dict[str, Any], profiles: list[ObservationProfile], *,
+        execution_only_origins: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Opt-in public field candidates over exact original JSON member ranges.
+
+        The original Tool Source remains readable. Deterministic candidates are
+        neither semantic records nor independent evidence; the editor still
+        decides which assertions to form. Unmatched sources retain extraction.
+        Event mode uses registered Tool contracts to separate execution receipts
+        from domain observations; it does not classify the wording of a result.
+        """
+        self._require_v2()
+        projected = copy.deepcopy(delivery)
+        sources, changes, extraction_ranges = [], [], []
+        execution_refs: list[str] = []
+        for row in delivery["sources"]:
+            actual = self.service.source(row["source_ref"])
+            if actual is None:
+                raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
+            event_mode = self.maintenance_mode == "event_delta_v1"
+            if (event_mode and actual["role"] == "tool"
+                    and actual["origin"] in execution_only_origins):
+                execution_refs.append(row["source_ref"])
+                continue
+            matching = [p for p in profiles if actual["role"] == "tool"
+                        and actual["origin"] in p.origins]
+            text = body_text(actual)
+            complete = row["start"] == 0 and row["end"] == len(text)
+            projection: dict[str, Any] = {"observations": []}
+            for profile in matching if event_mode else matching[:1]:
+                if complete:
+                    projection = maintenance_projection(actual, profile, text)
+                if projection["observations"]:
+                    break
+            observations = projection["observations"]
+            if not observations:
+                if event_mode and matching and complete:
+                    execution_refs.append(row["source_ref"])
+                    continue
+                sources.append(copy.deepcopy(row))
+                extraction_ranges.append({k: row[k] for k in ("source_ref", "start", "end")})
+                continue
+            spans = list(dict.fromkeys(
+                [span for observation in observations for span in observation["ranges"]]
+                + projection["unstructured_ranges"]
+            ))
+            fragments = self.prepare(
+                [row["source_ref"]], "", selected_records=[],
+                source_ranges=[{"source_ref": row["source_ref"], "start": start, "end": end}
+                               for start, end in spans],
+            )["sources"]
+            sources.extend(fragments)
+            by_span = {(fragment["start"], fragment["end"]): fragment for fragment in fragments}
+            extraction_ranges.extend(
+                {k: by_span[span][k] for k in ("source_ref", "start", "end")}
+                for span in projection["unstructured_ranges"]
+            )
+            for observation in observations:
+                changes.append({
+                    "basis": "actual_source_literal",
+                    "subject": (observation["object_ref"]["application"] + " "
+                                + observation["object_ref"]["external_id"]),
+                    "statement": observation["field"] + "=" + json.dumps(
+                        observation["literal_value"], ensure_ascii=False, separators=(",", ":")
+                    ),
+                    "field": observation["field"],
+                    "field_paths": observation["field_paths"],
+                    "literal_value": observation["literal_value"],
+                    "observed_at": observation["observed_at"],
+                    "resource_version": observation["resource_version"],
+                    "version_domain": observation["version_domain"],
+                    "current_verified": False,
+                    "evidence": [by_span[span]["evidence_id"] for span in observation["ranges"]],
+                    "time": None, "scope": None,
+                })
+        projected.update(sources=sources, result_maintenance={
+            "mode": ("event_scoped_observations_v1"
+                     if self.maintenance_mode == "event_delta_v1" else "literal_observations_v1"),
+            "literal_changes": changes,
+            "extraction_source_ranges": extraction_ranges,
+            **({"execution_source_refs": list(dict.fromkeys(execution_refs))}
+               if execution_refs else {}),
+        })
+        return projected
+
     def _source_attributes(self, delivery: dict[str, Any]) -> None:
         refs = [
             source["source_ref"]
@@ -985,7 +1308,8 @@ class EditMemory:
         ]
         for record in delivery.get("records", []):
             state = record.get("edit_state") or {}
-            for item in [*state.get("units", []), *state.get("relations", [])]:
+            for item in [*state.get("units", []), *state.get("relations", []),
+                         *state.get("support_groups", [])]:
                 refs.extend(ref["source_ref"] for ref in item["evidence_refs"])
                 assertion = item.get("assertion")
                 if assertion and "source_ref" in assertion:
@@ -1002,6 +1326,7 @@ class EditMemory:
                     "role": actual["role"],
                     "observed_at": actual["observed_at"],
                     "occurred_at": actual.get("occurred_at"),
+                    **({"origin": origin} if (origin := tool_source_origin(actual)) else {}),
                     **({"calendar_context": actual["calendar_context"]}
                        if "calendar_context" in actual else {}),
                 }
@@ -1028,11 +1353,62 @@ class EditMemory:
         change_candidates: list[dict[str, Any]] | None = None,
         prior_context: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, str]]:
+        if self.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"}:
+            return delta_messages(packet, date, schema or self.envelope_schema(
+                allow_create=allow_create), self.context_projection(prior_context or []),
+                indexed=self.maintenance_mode == "semantic_delta_v2")
+        if "dependency_regions" in packet:
+            # The extra phase predicts scope; the existing editor still decides
+            # the actual semantic delta and commits through the usual service.
+            messages = self.edit_messages(
+                {key: value for key, value in packet.items() if key != "dependency_regions"},
+                date, allow_create=allow_create, schema=schema,
+                change_candidates=change_candidates, prior_context=prior_context)
+            regional_payload = json.loads(messages[1]["content"])
+            regional_payload["dependency_regions"] = packet["dependency_regions"]
+            messages[1]["content"] = json.dumps(
+                regional_payload, ensure_ascii=False, separators=(",", ":"))
+            messages[0]["content"] += (
+                " Reconsider affected_units using the original sources. Read-only units are "
+                "context, not unit-text edit targets. support_update_targets separately permits "
+                "updating a preserved claim's support groups as its premises change. "
+                "Reachability does not require a change or a "
+                "retraction: retain claims when their remaining support or scope still holds. "
+                "New independently supported claims may be appended; do not duplicate old "
+                "read-only claims to evade the modification region.")
+            return messages
         response_schema = (
             schema if schema is not None else self.envelope_schema(allow_create=allow_create)
         )
         if self.features.bound_references:
             response_schema = compact_prompt_schema(response_schema)
+        if self.maintenance_mode == "event_delta_v1":
+            # Only presentation changes: e/h/r/u still resolve through the same
+            # issued mapping, and old support is not turned into a current event.
+            evidence = packet["evidence"]
+            ordered = {
+                "evidence": [e for e in evidence
+                             if e.get("delivery_kind", "current") == "current"],
+                "source_table": packet["source_table"],
+                "change_candidates": change_candidates or [],
+                "records": packet["records"],
+                "redelivered_support": [e for e in evidence
+                                        if e.get("delivery_kind") == "redelivered_support"],
+                "historical_support": packet["historical_support"],
+                **{k: v for k, v in packet.items() if k not in {
+                    "evidence", "source_table", "records", "historical_support"}},
+            }
+            if ordered["change_candidates"] == []:
+                del ordered["change_candidates"]
+            return [
+                {"role": "system", "content": self.instructions(allow_create=allow_create)},
+                {"role": "user", "content": json.dumps({
+                    "observed_date": date, "delivery": ordered,
+                    **({"prior_context": self.context_projection(prior_context)}
+                       if prior_context else {}),
+                    "response_schema": response_schema,
+                }, ensure_ascii=False, separators=(",", ":"))},
+            ]
         empty_instruction = (
             "An empty maintenance envelope means no maintenance, not a successful update."
             if "records" in response_schema.get("properties", {})
@@ -1041,20 +1417,24 @@ class EditMemory:
         payload: dict[str, Any] = {
             "observed_date": date,
             "delivery": packet,
-            "response_schema": response_schema,
         }
+        if change_candidates is not None:
+            payload["change_candidates"] = change_candidates
+            empty_instruction += (
+                " change_candidates are temporary locating hints; decide what to persist "
+                "from the original delivered sources and actual old state. A candidate can "
+                "misstate its source even when its source ID matches; it supplies no extra "
+                "evidence. Preserve the source's actual subject, attribution and modal strength."
+            )
         if prior_context:
             payload["prior_context"] = self.context_projection(prior_context)
             empty_instruction += (
                 " prior_context is earlier speech for resolving references, not a new event "
                 "or an instruction to save those old statements again."
             )
-        if change_candidates is not None:
-            payload["change_candidates"] = change_candidates
-            empty_instruction += (
-                " change_candidates are temporary locating hints; decide what to persist "
-                "from the original delivered sources and actual old state."
-            )
+        # Keep current material and its locating hints together, before the potentially
+        # large action schema. This changes presentation only, not the issued packet.
+        payload["response_schema"] = response_schema
         return [
             {
                 "role": "system",
@@ -1062,11 +1442,24 @@ class EditMemory:
                 + " Group distinct topics into separate records. Preserve dates and roles. "
                 "In every arm, form one independently stated clause per unit. In plain memory "
                 "keep its qualifications in that clause; in conditioned memory explicitly link "
-                "the same content and qualifications. Do not pack independent matters into a "
+                "actual applicability limits, not ordinary quantities, attributes or observed "
+                "states. Keep each independently mutable value self-contained with its subject "
+                "and still-applicable qualifications. Do not pack independent matters into a "
                 "single long unit or create duplicate records for the same matter. "
                 "Return the supplied envelope. At most one proposal per existing target in "
-                "this request; combine dependent changes in that target's single proposal. "
-                + empty_instruction,
+                "this request. "
+                + REVISION_MEANING_INSTRUCTIONS
+                + "A removal needs evidence of that cancellation. Redelivering a source that "
+                "affirmed an old rule does not support a new retraction of that rule. "
+                "Compare every explicit current Source value with actual delivered state, "
+                "including values the Source says to retain. If they differ, use a supported "
+                "same-scope change. An uncommitted prior request does not establish stored state. "
+                + empty_instruction
+                + (" Candidates marked actual_source_literal are program-projected fields of "
+                   "the actual Tool source, not LLM semantic formation. Their observation time "
+                   "is not a guarantee of live state. Preserve separate component outcomes."
+                   if any(change.get("basis") == "actual_source_literal"
+                          for change in change_candidates or []) else ""),
             },
             {
                 "role": "user",
@@ -1097,6 +1490,12 @@ class EditMemory:
         are selectable evidence for a candidate change.
         """
         self._require_v2()
+        projection = delivery.get("result_maintenance")
+        if projection is not None:
+            extraction = {(row["source_ref"], row["start"], row["end"])
+                          for row in projection["extraction_source_ranges"]}
+            delivery = {**delivery, "sources": [row for row in delivery["sources"]
+                        if (row["source_ref"], row["start"], row["end"]) in extraction]}
         packet, mapping = writer_projection(
             {**delivery, "records": [], "redelivered_sources": []},
             self.interface_version,
@@ -1123,6 +1522,11 @@ class EditMemory:
                 "required": ["subject", "statement", "evidence", "time", "scope"],
             },
         }
+        if self.features.proposition_updates:
+            changes["items"]["properties"]["time"]["description"] = (
+                "Copy the source's literal event/effective time expression, including relative "
+                "or uncertain wording. Do not calculate a date or copy the report/capture clock. "
+                "Use null when the selected source states no event/effective time.")
         if not references:
             changes["maxItems"] = 0
         schema = {
@@ -1131,19 +1535,34 @@ class EditMemory:
             "properties": {"changes": changes},
             "required": ["changes"],
         }
-        return {
+        request: dict[str, Any] = {
             "schema": schema,
             "mapping": mapping,
             "messages": [
                 {
                     "role": "system",
                     "content": (
-                        "Extract brief candidate propositions from this current event for "
-                        "memory maintenance. Preserve the subject, who asserts it, report or "
-                        "inference status, plans versus completed changes, qualifications and "
-                        "explicit time/scope. Select the actual supporting e fragments. Use "
-                        "null when time/scope is unspecified. Include independently stated "
+                        "Extract brief candidate propositions and change cues from current sources "
+                        "for memory maintenance. Preserve the subject, who asserts it, report or "
+                        "inference status, modal strength, qualifications and explicit time/scope. "
+                        "The subject is who the assertion describes, not automatically the speaker "
+                        "or a nearby named person. Resolve each assertion's pronouns from its "
+                        "actual sentence and dialogue; retain ambiguity when the source leaves "
+                        "the subject unclear. "
+                        "Considering a course remains considering; wishing to reduce work hours "
+                        "remains a wish; a plan does not imply a completed change. An assistant's "
+                        "suggested income remains an assistant suggestion, not a user's report. "
+                        "Limited improvement does not establish full resolution. "
+                        "Stay close to the source wording when summarizing would strengthen it. "
+                        "Choose the actual supporting e fragments; their role and report clock "
+                        "already come from the Source. time means the stated event or effective "
+                        "time, not observed_date or the report clock. Preserve relative time "
+                        "wording; use null when event time/scope is unspecified. "
+                        "Include independently stated "
                         "new facts and changes; omit social acknowledgments and bare queries. "
+                        "Keep each candidate self-contained with its explicit values and "
+                        "qualifications, including statements of what to retain. Such statements "
+                        "do not establish that stored state already matches them. "
                         "These candidates locate affected old matters for the existing editor; "
                         "they are not memory, verified facts or instructions to execute. The "
                         "editor can reject them or recognize a restatement. Return changes=[] "
@@ -1164,6 +1583,26 @@ class EditMemory:
                 },
             ],
         }
+        if self.maintenance_mode == "event_delta_v1":
+            request["messages"][0]["content"] = (
+                "Identify independently stated current facts and change cues that may need "
+                "memory maintenance. Return the supplied changes schema with supporting e "
+                "fragments. Keep the subject distinct from the speaker; preserve ambiguity, "
+                "attribution, modal strength and scope. A possibility remains a possibility; "
+                "partial improvement is not resolution. The source_table already supplies "
+                "role and report time. time is a stated event/effective time, with relative "
+                "wording preserved and unspecified time/scope null. Prior context only resolves "
+                "references. Candidates are locating hints, not facts, commands or required "
+                "writes. Acknowledgments and bare queries may yield changes=[]."
+            )
+        if self.features.proposition_updates:
+            request["messages"][0]["content"] += (
+                " time must quote the source's original temporal words, not normalize them. "
+                "Retain those words and the original modal strength in statement too. "
+                "Unknown event times stay null even when observed_date or a report timestamp "
+                "is present. Split independently changeable propositions without losing any "
+                "shared subject, negation, quantity or condition.")
+        return request
 
     @staticmethod
     def decode_changes(envelope: dict[str, Any], request: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1339,6 +1778,9 @@ class EditMemory:
         bound = self.load_mapping(mapping if isinstance(mapping, str) else mapping["mapping_id"])
         if not isinstance(mapping, str) and mapping != bound:
             raise FunctionalRejection("EDIT_MAPPING_CHANGED")
+        if self.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"}:
+            return compile_delta(envelope, bound,
+                                 indexed=self.maintenance_mode == "semantic_delta_v2")
         if not self.features.enabled:
             if (
                 not isinstance(envelope, dict)
@@ -1349,7 +1791,9 @@ class EditMemory:
             return [copy.deepcopy(proposal) for proposal in envelope["proposals"]]
         errors = list(
             Draft202012Validator(
-                self.envelope_schema(allow_create=bound["allow_create"], mapping=bound)
+                self.envelope_schema(
+                    allow_create=bound["allow_create"], mapping=bound, for_generation=False
+                )
             ).iter_errors(envelope)
         )
         if errors:
@@ -1360,9 +1804,10 @@ class EditMemory:
                 targets = [p["target"] for p in proposals if p.get("target")]
                 if len(targets) != len(set(targets)):
                     raise FunctionalRejection("EDIT_DUPLICATE_RECORD_CONTAINER")
-            return proposals  # type: ignore[no-any-return]
+            return (order_dependent_proposals(proposals)
+                    if self.features.cross_record_dependencies else proposals)
         selected_records = envelope.get("records", {})
-        return [
+        proposals = [
             *copy.deepcopy(envelope.get("creates", [])),
             *(
                 {**copy.deepcopy(selected_records[target]), "target": target}
@@ -1370,6 +1815,8 @@ class EditMemory:
                 if target in selected_records
             ),
         ]
+        return order_dependent_proposals(proposals) if self.features.cross_record_dependencies \
+            else proposals
 
     def decode_envelope(
         self, envelope: dict[str, Any], mapping: dict[str, Any] | str
@@ -1391,7 +1838,9 @@ class EditMemory:
         bound = self.load_mapping(mapping if isinstance(mapping, str) else mapping["mapping_id"])
         if not isinstance(mapping, str) and mapping != bound:
             raise FunctionalRejection("EDIT_MAPPING_CHANGED")
-        schema = self.proposal_schema(allow_create=bound["allow_create"], mapping=bound)
+        schema = self.proposal_schema(
+            allow_create=bound["allow_create"], mapping=bound, for_generation=False
+        )
         if self.features.enabled and "oneOf" not in schema:
             raise FunctionalRejection("EDIT_PUBLIC_ACTION_UNAVAILABLE")
         errors = list(Draft202012Validator(schema).iter_errors(proposal))
@@ -1426,6 +1875,22 @@ class EditMemory:
             return unit  # type: ignore[no-any-return]
 
         def supports(item: dict[str, Any]) -> tuple[list[str], list[dict[str, Any]]]:
+            retained_unit = (
+                item.get("from_unit") if proposal["action"] == "rewrite"
+                else item.get("target_unit") if item.get("operation") == "replace" else None
+            )
+            if (
+                self.features.source_metadata
+                and "keep_support" not in item
+                and (kept_alias := item.get("assertion", {}).get("keep"))
+            ):
+                support = bound["support"].get(kept_alias)
+                if support is not None and support.get("unit") and (
+                    support["unit"] == retained_unit
+                    or (proposal["action"] == "rewrite" and not retained_unit
+                        and support["record"] == target)
+                ):
+                    item["keep_support"] = [kept_alias]
             handles, kept = [], []
             for alias in item.get("evidence", []):
                 evidence = bound["evidence"].get(alias)
@@ -1467,9 +1932,15 @@ class EditMemory:
                        if "calendar_context" in actual else {}),
                 }
                 if self.features.temporal_scope and "applicability" in selected:
-                    validate_applicability(selected["applicability"],
+                    applicability = copy.deepcopy(selected["applicability"])
+                    if self.features.proposition_updates:
+                        from milai_lab.memory.source_times import bind_applicability
+
+                        applicability = bind_applicability(
+                            applicability, bound["time_choices"], item.get("evidence", []))
+                    validate_applicability(applicability,
                                            calendar_context=actual.get("calendar_context"))
-                    result["applicability"] = copy.deepcopy(selected["applicability"])
+                    result["applicability"] = applicability
                 if self.features.temporal_scope and "evidence_links" in selected:
                     links = {}
                     for stance, aliases in selected["evidence_links"].items():
@@ -1508,16 +1979,18 @@ class EditMemory:
         origins: list[set[str]] = []
         explicit_origins: set[str] = set()
         for item in proposal.get("units", []):
-            if (
-                proposal["action"] == "rewrite"
-                and self.features.source_metadata
-                and "from_unit" in item
-                and "keep_support" not in item
-                and (kept_alias := item["assertion"].get("keep"))
-            ):
-                support = bound["support"].get(kept_alias)
-                if support is not None and support.get("unit") == item["from_unit"]:
-                    item["keep_support"] = [kept_alias]
+            if proposal["action"] == "rewrite" and "text" not in item:
+                support = bound["support"].get(item["assertion"]["keep"])
+                retained_unit = item.get("from_unit")
+                if self.arm == "B0" and retained_unit is None and support is not None:
+                    retained_unit = support.get("unit")
+                if (support is None or support["record"] != target
+                        or not retained_unit or support.get("unit") != retained_unit):
+                    raise FunctionalRejection("EDIT_ASSERTION_UNIT_BINDING_INVALID")
+                prior_unit = alias_unit(retained_unit)
+                if self.arm == "B0" and prior_unit["role"] != "content":
+                    raise FunctionalRejection("EDIT_ASSERTION_UNIT_BINDING_INVALID")
+                item["text"] = prior_unit["text"]
             handles, kept = supports(item)
             origin = {support["unit"] for support in kept if "unit" in support}
             if len(origin) != len(kept) or len(origin) > 1:
@@ -1602,6 +2075,35 @@ class EditMemory:
             raise FunctionalRejection("EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE")
         if proposal.get("revision_evidence"):
             supports({"evidence": proposal["revision_evidence"]})
+        if self.features.dependency_groups and "support_groups" in proposal:
+            def group_reference(value: int | str | dict[str, str]) -> dict[str, Any]:
+                if isinstance(value, dict):
+                    record = value["record"]
+                    external = bound["units"].get(value["unit"])
+                    if (not self.features.cross_record_dependencies or external is None
+                            or external["record"] != record
+                            or (target and bound["records"][record]["record_id"]
+                                == bound["records"][target]["record_id"])):
+                        raise FunctionalRejection("EDIT_EXTERNAL_PREMISE_BINDING_INVALID")
+                    return {"external": {"record_id": bound["records"][record]["record_id"],
+                        "unit_id": external["unit_id"],
+                        "revision": bound["records"][record]["revision"]}}
+                if isinstance(value, int):
+                    return {"generated": value}
+                if value.startswith("n"):
+                    return {"generated": int(value[1:])}
+                return {"existing": alias_unit(value)["unit_id"]}
+
+            metadata["support_groups"] = []
+            for group in proposal["support_groups"]:
+                handles, _ = supports(group)
+                metadata["support_groups"].append({
+                    "operation": group.get("operation", "set"),
+                    "target": group_reference(group["target_unit"]),
+                    "alternatives": [[group_reference(ref) for ref in route]
+                                     for route in group.get("alternatives", [])],
+                    "evidence_refs": source_evidence(self.service, handles),
+                })
         if self.features.enabled:
             metadata["revision_evidence"] = list(
                 dict.fromkeys(metadata.get("revision_evidence", []))
@@ -1609,11 +2111,25 @@ class EditMemory:
             decoded["_edit_metadata"] = metadata
         return decoded
 
+    def bind_support_groups(
+        self, state: dict[str, Any], metadata: dict[str, Any], *,
+        old: dict[str, Any] | None = None,
+        dependency_receipts: list[dict[str, Any]] | None = None,
+    ) -> None:
+        """Shared support binding for Benchmark and ordinary Functional commits."""
+        if "support_groups" in metadata:
+            apply_support_groups(
+                state, metadata["support_groups"], old=old,
+                resolve_external=(lambda ref: bind_external_unit(
+                    self.service, ref, dependency_receipts or []))
+                if self.features.cross_record_dependencies else None)
+
     def apply(
         self,
         session: str,
         proposal_id: str,
         proposal: dict[str, Any],
+        *, dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Apply one parsed proposal through the existing service revision transaction."""
         withdrawal = (
@@ -1684,7 +2200,9 @@ class EditMemory:
             assert old is not None
             state = old.get("edit_state")
         else:
-            if self.arm not in {"B1", "M"} or parsed.units or parsed.relations or not parsed.edits:
+            if self.arm not in {"B1", "M"} or parsed.units or parsed.relations or (
+                not parsed.edits and not (metadata or {}).get("support_groups")
+            ):
                 raise FunctionalRejection("EDIT_LOCAL_OPERATIONS_REQUIRED")
             assert old is not None
             if "edit_state" not in old:
@@ -1716,6 +2234,10 @@ class EditMemory:
                 old=(old or {}).get("edit_state"),
                 edits=parsed.edits if parsed.action == "edit" else None,
             )
+            self.bind_support_groups(
+                state, metadata,
+                old=(old or {}).get("edit_state") if parsed.action == "edit" else None,
+                dependency_receipts=dependency_receipts)
         if parsed.action == "no_change":
             assert old is not None
             refs = old.get("source_refs", [old["source_ref"]])
@@ -1725,7 +2247,8 @@ class EditMemory:
             refs = list(
                 dict.fromkeys(
                     ref["source_ref"]
-                    for item in [*state["units"], *state["relations"]]
+                    for item in [*state["units"], *state["relations"],
+                                 *state.get("support_groups", [])]
                     for ref in item["evidence_refs"]
                 )
             )

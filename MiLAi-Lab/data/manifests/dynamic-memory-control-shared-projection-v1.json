@@ -1,0 +1,80 @@
+{
+  "version": "shared-observation-projection-audit-v3",
+  "status": "COMPLETED",
+  "splits": {
+    "memops_source_only": {
+      "rows": 181,
+      "roundtrip_equal": 181,
+      "raw": {
+        "max_full_tokens": 12745,
+        "oversized": 72,
+        "total_full_tokens": 1217565
+      },
+      "shared": {
+        "max_full_tokens": 8003,
+        "oversized": 0,
+        "total_full_tokens": 880374
+      }
+    },
+    "t0_train": {
+      "rows": 418,
+      "roundtrip_equal": 418,
+      "raw": {
+        "max_full_tokens": 4212,
+        "oversized": 0,
+        "total_full_tokens": 760658
+      },
+      "shared": {
+        "max_full_tokens": 3479,
+        "oversized": 0,
+        "total_full_tokens": 661924
+      }
+    },
+    "t0_dev": {
+      "rows": 139,
+      "roundtrip_equal": 139,
+      "raw": {
+        "max_full_tokens": 4301,
+        "oversized": 0,
+        "total_full_tokens": 256472
+      },
+      "shared": {
+        "max_full_tokens": 3461,
+        "oversized": 0,
+        "total_full_tokens": 220646
+      }
+    }
+  },
+  "model_calls": 0,
+  "model_forwards": 0,
+  "scope": "Pure serialization/inversion and real tokenizer admission on existing raw states. Same original sources, roles, dates, action criteria, gold/masks/splits. Not learned-policy semantic or quality validation, not an upper bound on future generated views.",
+  "selection": "No rows removed or truncated; input schema reference instructions included in token counts.",
+  "artifact": "artifacts/dynamic-memory-control/shared-projection-audit-v3",
+  "prior_prototypes": {
+    "literal_only": "memops-source-capacity-v3:60oversized, max10427",
+    "all_string_fields": "memops-literal-fields-v1:57oversized,max9962",
+    "row_prototype": "memops-state-rows-v1:0oversized,max7979; lacked formal literal-object escaping and explicit public encoding contract",
+    "first_public": "shared-projection-audit-v1:2oversized,max8413",
+    "tagged_public": "shared-projection-audit-v2:2oversized,max8348",
+    "adopted": "v3 also shares repeated candidate date literals; no original clock changed or omitted"
+  },
+  "deployment": "Opt-in state_projection shared. Default full/mechanical behavior retained; training/native/generative/export use the same projection. Source and Store execution remain unchanged.",
+  "cost": "Native Host projection is inside its measured local compute interval; overall control and Host wall time still recorded. These token counts alone do not establish net speed or task quality. All offline CPU records remain pending.",
+  "typed_roundtrip": {
+    "checks": {
+      "memops_source_only": {
+        "typed_json_roundtrip": 181,
+        "same_as_token_audit": 181
+      },
+      "t0_train": {
+        "typed_json_roundtrip": 418,
+        "same_as_token_audit": 418
+      },
+      "t0_dev": {
+        "typed_json_roundtrip": 139,
+        "same_as_token_audit": 139
+      }
+    },
+    "scope": "Direct complete JSON comparison, preserving boolean/int/float distinctions; no hash/digest or source alteration. Prior length measurements remain exact for this final projection."
+  }
+}

@@ -1,0 +1,2289 @@
+{
+  "version": "operation-t2-train-own-rollout-v1",
+  "scope": "Actual CE policy trajectories on the existing24 training families, never development/test families. Each starts empty. Reader answers and generated views remain actual first outputs, not teacher repairs.",
+  "histories": [
+    {
+      "id": "sealed_parcel",
+      "split": "training",
+      "source_family": "sealed_parcel",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，梧桐批次现在可以发运吗？还缺哪项前提？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "梧桐批次的完整发运条件为：封签完成且抽检通过，两项同时满足即可发运，否则不允许。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "梧桐批次的抽检已通过。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "梧桐批次的封签尚未完成。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能，还缺封签完成。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，梧桐批次现在可以发运吗？还缺哪项前提？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "不能，还缺封签完成。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，梧桐批次现在可以发运吗？还缺哪项前提？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "银杏批次新增一个包装工位，与梧桐无关。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能，还缺封签完成。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，梧桐批次现在可以发运吗？还缺哪项前提？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "梧桐批次封签现已完成，抽检结果仍有效。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "可以，封签和抽检两项前提均已满足。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "room_capacity",
+      "split": "training",
+      "source_family": "room_capacity",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，溪厅这次再安排6人，是否超过同时在场人数上限？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "溪厅同时在场人数上限为12人，所有预订人数合并计算。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "溪厅目前已有两组预订，分别为4人和3人，同一时段。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "这次新申请在相同时段增加6人。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "超过：4+3+6=13，大于12。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，溪厅这次再安排6人，是否超过同时在场人数上限？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "超过：4+3+6=13，大于12。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，溪厅这次再安排6人，是否超过同时在场人数上限？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "原3人那组取消了该时段的预订，4人那组仍在。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不超过：4+6=10，不大于12。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，溪厅这次再安排6人，是否超过同时在场人数上限？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "岭厅购买了6把新椅子，不影响溪厅上限。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不超过：4+6=10，不大于12。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "contingent_editor",
+      "split": "training",
+      "source_family": "contingent_editor",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，这份北窗稿件现在应交给谁复核？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "北窗稿件由宋禾复核；仅当宋禾缺席时才由魏宁代为复核。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "宋禾当前在岗。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "魏宁今天也在岗，但没有额外授权接替在岗的宋禾。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "宋禾。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，这份北窗稿件现在应交给谁复核？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "南窗稿件换了文件名，与北窗稿件无关。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "宋禾。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，这份北窗稿件现在应交给谁复核？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "宋禾。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，这份北窗稿件现在应交给谁复核？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "宋禾临时离岗，预计明天返回；当前由魏宁按原代班规则复核。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "魏宁。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "partial_delivery",
+      "split": "training",
+      "source_family": "partial_delivery",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，岚仓订购的零件已全部到货了吗？还差多少件？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "岚仓这张订单共订购40件同规格零件。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "岚仓第一批实收24件。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "岚仓第二批实收10件，目前没有其他实收批次。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "未全部到货，已收34件，还差6件。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，岚仓订购的零件已全部到货了吗？还差多少件？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "霁仓也订购了6件，但属于另一张订单。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "未全部到货，已收34件，还差6件。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，岚仓订购的零件已全部到货了吗？还差多少件？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "岚仓又实收最后6件，记录确认此订单已无未到货件。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "已全部到货，40件收齐。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，岚仓订购的零件已全部到货了吗？还差多少件？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "已全部到货，40件收齐。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "publication_revision",
+      "split": "training",
+      "source_family": "publication_revision",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，发布白鹭手册时，当前应采用哪一个审核版本？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "白鹭手册版本v1已经审核通过。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "白鹭手册v2仍在起草，未提交审核。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "发布规则要求采用当前已审核通过的最新版本。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "v1。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，发布白鹭手册时，当前应采用哪一个审核版本？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "白鹭手册v2现已审核通过，并声明取代v1用于今后的发布。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "v2；v1仅保留历史身份。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，发布白鹭手册时，当前应采用哪一个审核版本？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "v2；v1仅保留历史身份。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，发布白鹭手册时，当前应采用哪一个审核版本？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "青鹭手册也有一个v2，与白鹭版本无关。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "v2；v1仅保留历史身份。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "route_closure",
+      "split": "training",
+      "source_family": "route_closure",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，从橡站寄到松站，目前可用的已知路线是哪条？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "橡站至松站有北线和南线两条路线，任一开放路线都可使用。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "北线目前封闭。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "南线目前开放。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "南线。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，从橡站寄到松站，目前可用的已知路线是哪条？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "南线现在也封闭；尚未收到北线恢复开放或其他路线开放的消息。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "没有已知开放路线，不能断言可以寄送。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，从橡站寄到松站，目前可用的已知路线是哪条？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "东站通往柳站的支线开放，不连接橡站和松站。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "没有已知开放路线，不能断言可以寄送。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，从橡站寄到松站，目前可用的已知路线是哪条？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "没有已知开放路线，不能断言可以寄送。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "target_measurement",
+      "split": "training",
+      "source_family": "target_measurement",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，砾室设备的设定目标与最新测量值分别是多少？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "砾室设备的设定目标为20度。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "tool",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "砾室仪表最近一次测量值为22度。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai",
+              "origin": "authored_observation"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "测量记录表示观测值，并不自动改变设定目标。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "目标20度，最新测量22度。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，砾室设备的设定目标与最新测量值分别是多少？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "目标20度，最新测量22度。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砾室设备的设定目标与最新测量值分别是多少？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "另一间沙室的仪表读数为21度。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "目标20度，最新测量22度。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砾室设备的设定目标与最新测量值分别是多少？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "操作者将砾室设备设定目标改为21度；尚无新的测量结果。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "目标21度，最新测量仍为22度。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "access_window",
+      "split": "training",
+      "source_family": "access_window",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，7月2日14:00，能使用杉亭的临时展板吗？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "杉亭临时展板原可用窗口为7月2日13:00至15:00，含两个端点。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "本次询问的使用时刻是7月2日14:00。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "这块展板不适用旁边常设展板的全天开放规则。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "可以，14:00在原窗口内。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，7月2日14:00，能使用杉亭的临时展板吗？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "可以，14:00在原窗口内。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，7月2日14:00，能使用杉亭的临时展板吗？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "杉亭临时展板的可用窗口改为7月2日15:00至17:00，原窗口取消。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不可以，14:00早于新窗口。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，7月2日14:00，能使用杉亭的临时展板吗？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "杉亭入口的指示牌更换了颜色。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不可以，14:00早于新窗口。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "allocation_consumption",
+      "split": "training",
+      "source_family": "allocation_consumption",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，柳组这次再领3卷材料后，是否仍在分配额度内？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "柳组本轮分配材料额度为10卷。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "柳组已实际领取6卷。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "这次申请另领3卷；申请数不包含此前已领的6卷。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "是，累计9卷，不超过10卷。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，柳组这次再领3卷材料后，是否仍在分配额度内？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "槐组分配了3卷，不占柳组额度。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "是，累计9卷，不超过10卷。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，柳组这次再领3卷材料后，是否仍在分配额度内？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "是，累计9卷，不超过10卷。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，柳组这次再领3卷材料后，是否仍在分配额度内？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "库存管理员补记：柳组此前还有2卷已经领走但漏记，现累计已领8卷。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "否，累计11卷，超过10卷。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "tool_permission",
+      "split": "training",
+      "source_family": "tool_permission",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，星台文件目前已发布了吗？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "星台文件已获得发布许可。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "tool",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "操作日志目前只记录了预览成功，没有发布提交。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai",
+              "origin": "authored_observation"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "发布完成必须有发布提交回执，许可或预览不代表完成。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能称已发布；只有许可和预览，没有完成回执。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，星台文件目前已发布了吗？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "月台文件有一条发布失败日志，与星台不同。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能称已发布；只有许可和预览，没有完成回执。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，星台文件目前已发布了吗？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "操作日志新增发布提交成功回执，文件名为星台文件。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "已发布，存在对应提交成功回执。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，星台文件目前已发布了吗？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "已发布，存在对应提交成功回执。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "reservation_scope",
+      "split": "training",
+      "source_family": "reservation_scope",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，木桥展柜现在是否已为陶片展确认留位？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "木桥展柜为陶片展建立了临时预留。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "临时预留需要管理员确认才成为确认留位。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "管理员尚未确认该临时预留。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "尚未确认。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，木桥展柜现在是否已为陶片展确认留位？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "管理员已经确认木桥展柜给陶片展的留位。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "已确认。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，木桥展柜现在是否已为陶片展确认留位？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "已确认。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，木桥展柜现在是否已为陶片展确认留位？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "石桥展柜也有陶片展询价，但没有共享留位。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "已确认。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "alias_binding",
+      "split": "training",
+      "source_family": "alias_binding",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，现在“晨页”项目的负责人是谁？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "内部项目编号P17的负责人是杜清。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "项目P17由旧名“纸舟”正式改名为“晨页”，编号不变。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "另有编号P71的项目“晨光”，负责人是任林。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "杜清。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，现在“晨页”项目的负责人是谁？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "编号P17的负责人现在改为许遥，项目仍名“晨页”。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "许遥。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，现在“晨页”项目的负责人是谁？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "编号P71更换了晨光项目的展示图。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "许遥。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，现在“晨页”项目的负责人是谁？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "许遥。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "relative_order",
+      "split": "training",
+      "source_family": "relative_order",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，溪石试件的下一项必要步骤是什么？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "溪石试件流程依次为烘干、称量、封存，必须按此顺序。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "溪石试件的烘干已完成。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "溪石试件尚未称量，也未封存。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "称量。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，溪石试件的下一项必要步骤是什么？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "称量。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，溪石试件的下一项必要步骤是什么？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "另一块河石试件已经封存，不代表溪石的进度。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "称量。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，溪石试件的下一项必要步骤是什么？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "溪石试件称量已完成，尚未封存。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "封存。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "priority_exception",
+      "split": "training",
+      "source_family": "priority_exception",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，澄海组这份跨境样品清单应在几号提交？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "澄海组一般样品清单须在7月5日前提交。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "跨境样品清单属于例外，须在7月3日前提交。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "本份澄海组清单明确用于跨境样品。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "7月3日前。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，澄海组这份跨境样品清单应在几号提交？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "7月3日前。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，澄海组这份跨境样品清单应在几号提交？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "负责人撤回跨境清单的提前提交例外，此后所有澄海组清单统一在7月5日前提交。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "7月5日前。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，澄海组这份跨境样品清单应在几号提交？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "近海组仍按自己的7月3日截止规则执行。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "7月5日前。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "source_correction",
+      "split": "training",
+      "source_family": "source_correction",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，纠错后，青石展在6月10日的登记地点是哪里？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "青石展最初登记为6月10日在东厅举行。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "档案说明登记地点可能有录入误差，但尚无正式更正。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "西厅有另一场白石展，不是青石展。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "目前仅有东厅登记，尚无确定的更正地点。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，纠错后，青石展在6月10日的登记地点是哪里？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "东厅7月新增一场花展，与6月10日青石展无关。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "目前仅有东厅登记，尚无确定的更正地点。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，纠错后，青石展在6月10日的登记地点是哪里？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "目前仅有东厅登记，尚无确定的更正地点。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，纠错后，青石展在6月10日的登记地点是哪里？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "正式更正：青石展6月10日实际登记地点为西厅，原东厅是录入错误。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "西厅；更正的是6月10日的历史登记。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "delegation_boundary",
+      "split": "training",
+      "source_family": "delegation_boundary",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，云杉报告目前由谁做技术复核、由谁最终批准？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "云杉报告的最终批准人是韩松。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "韩松将技术复核委托给程羽，但保留最终批准权。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "技术复核意见不等于最终批准。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "程羽技术复核，韩松最终批准。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，云杉报告目前由谁做技术复核、由谁最终批准？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "另一份红杉报告仍由韩松批准。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "程羽技术复核，韩松最终批准。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，云杉报告目前由谁做技术复核、由谁最终批准？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "韩松现将最终批准权也正式移交给程羽，原技术复核委托不变。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "程羽技术复核并最终批准。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，云杉报告目前由谁做技术复核、由谁最终批准？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "程羽技术复核并最终批准。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "component_compatibility",
+      "split": "training",
+      "source_family": "component_compatibility",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，砚台插件当前能在这台引擎上启用吗？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "砚台插件的完整兼容条件为：引擎版本至少4.2且启用扩展模式，两项均满足即可启用。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "这台引擎版本为4.3。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "这台引擎尚未启用扩展模式。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能，缺扩展模式。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，砚台插件当前能在这台引擎上启用吗？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "这台4.3引擎现已启用扩展模式，版本未变。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "可以，两项条件均满足。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砚台插件当前能在这台引擎上启用吗？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "可以，两项条件均满足。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，砚台插件当前能在这台引擎上启用吗？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "另一台4.1引擎也启用了扩展模式。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "可以，两项条件均满足。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "unit_conversion",
+      "split": "training",
+      "source_family": "unit_conversion",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，按记录的换算，鹭池本次领用总量是多少小包？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "鹭池耗材记录规定每盒为4小包。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "鹭池本次领用2盒。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "鹭池还在同次领用中另取了3小包。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "11小包。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，按记录的换算，鹭池本次领用总量是多少小包？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "更正本次领用：整盒部分只有1盒，另取的3小包不变。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "7小包。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，按记录的换算，鹭池本次领用总量是多少小包？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "燕池使用每盒6小包的不同包装，不适用于鹭池。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "7小包。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，按记录的换算，鹭池本次领用总量是多少小包？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "7小包。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "coverage_gap",
+      "split": "training",
+      "source_family": "coverage_gap",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，榆园当天三处入口合计登记多少人？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "榆园当天只开放东、南、西三个入口，总数须包含这三处。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "东入口登记8人，南入口登记5人。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "西入口的当天登记数尚未提供。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "总数无法确定，已知东南合计13人，缺西入口。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，榆园当天三处入口合计登记多少人？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "总数无法确定，已知东南合计13人，缺西入口。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，榆园当天三处入口合计登记多少人？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "北入口当天未开放，也没有登记人数。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "总数无法确定，已知东南合计13人，缺西入口。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，榆园当天三处入口合计登记多少人？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "西入口当天登记数确认为7人。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "合计20人。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "conditional_reminder",
+      "split": "training",
+      "source_family": "conditional_reminder",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，现在给陆澈发夜间工作提醒，应使用哪种渠道？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "陆澈的普通工作提醒使用邮件。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "陆澈特别说明夜间工作提醒只用静默站内消息，不发邮件。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "这次提醒的时段明确为夜间，且属于工作提醒。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "静默站内消息。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，现在给陆澈发夜间工作提醒，应使用哪种渠道？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "静默站内消息。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，现在给陆澈发夜间工作提醒，应使用哪种渠道？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "陆澈取消夜间特殊渠道要求，此后工作提醒统一使用邮件。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "邮件。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，现在给陆澈发夜间工作提醒，应使用哪种渠道？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "陆澈的周末生活提醒仍用短信，与工作提醒不同。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "邮件。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "return_receipt",
+      "split": "training",
+      "source_family": "return_receipt",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，白帆借出的相机现在是否已经归还？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "白帆借出了一台相机。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "tool",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "借用者表示计划今天归还。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai",
+              "origin": "authored_observation"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "仓库目前没有该相机的归还入库回执。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "尚不能确认已归还，只有计划。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，白帆借出的相机现在是否已经归还？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "借用者还计划归还三脚架，但它是另一件物品。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "尚不能确认已归还，只有计划。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，白帆借出的相机现在是否已经归还？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "尚不能确认已归还，只有计划。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，白帆借出的相机现在是否已经归还？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "仓库记录了该相机归还入库成功的回执。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "已经归还，有对应入库回执。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "membership_expiry",
+      "split": "training",
+      "source_family": "membership_expiry",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，到2032年7月2日，槐舟的临时借阅资格是否仍有效？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "槐舟的临时借阅资格原有效至2032年6月30日结束。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "到期后资格自动失效，除非有明确延期。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "目前记录中没有延期。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "无效，原有效期已结束且无延期。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，到2032年7月2日，槐舟的临时借阅资格是否仍有效？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "另一位成员柏舟的资格7月2日到期，与槐舟无关。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "无效，原有效期已结束且无延期。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，到2032年7月2日，槐舟的临时借阅资格是否仍有效？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "管理员确认槐舟资格已延至2032年7月10日结束，其他条件不变。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "有效，延期覆盖7月2日。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，到2032年7月2日，槐舟的临时借阅资格是否仍有效？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "有效，延期覆盖7月2日。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "disjoint_constraints",
+      "split": "training",
+      "source_family": "disjoint_constraints",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，风铃组和海铃组目前各需要哪种出库复核？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "风铃组出库需要两人复核。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "海铃组出库只需要一人复核。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "两组流程独立，不因名称相近而共用要求。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "风铃两人，海铃一人。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，风铃组和海铃组目前各需要哪种出库复核？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "只有海铃组改为三人复核；风铃组两人复核要求不变。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "风铃两人，海铃三人。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，风铃组和海铃组目前各需要哪种出库复核？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "风铃两人，海铃三人。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，风铃组和海铃组目前各需要哪种出库复核？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "山铃组新增一位联络员，不属于风铃或海铃。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "风铃两人，海铃三人。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "measurement_replacement",
+      "split": "training",
+      "source_family": "measurement_replacement",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，镜湾样品第一次称量最终应采用的结果是多少？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "镜湾样品这次称量最初登记为18克。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "后来另做一次独立称量得到19克，但未声明更正第一次。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "这两次称量是独立操作，除非有明确更正声明，后次结果不自动覆盖前次。",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "18克；第二次19克不自动更正第一次。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，镜湾样品第一次称量最终应采用的结果是多少？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "计量员正式更正第一次称量：18克是录入错误，正确值为17克；第二次仍为19克。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "17克；正式更正第一次。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，镜湾样品第一次称量最终应采用的结果是多少？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "镜湖样品也重19克，是另一份样品。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "17克；正式更正第一次。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，镜湾样品第一次称量最终应采用的结果是多少？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "17克；正式更正第一次。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    }
+  ]
+}

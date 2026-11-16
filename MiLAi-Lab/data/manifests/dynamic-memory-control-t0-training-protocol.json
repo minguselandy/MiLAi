@@ -1,0 +1,49 @@
+{
+  "stage": "T0 first operation CE trial",
+  "data": "artifacts/dynamic-memory-control/operation-labels-v1",
+  "collection_source_version": "02f2ec20",
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "training": {
+    "seed": 0,
+    "optimizer_updates": 96,
+    "batch_size": 16,
+    "examples_drawn": 1536,
+    "learning_curve_updates": [
+      0,
+      48,
+      96
+    ],
+    "checkpoint_selection": "fixed final96 only; no best-dev or best-seed selection",
+    "objective": "soft-ce",
+    "encoder_and_native_head": "both trained from BASE",
+    "option_shuffle": true,
+    "weighting": "event then family normalized",
+    "max_len": 8192,
+    "head_max_len": 2048,
+    "physical_gpus": [
+      2,
+      3
+    ]
+  },
+  "data_counts": {
+    "train_families": 24,
+    "dev_families": 8,
+    "train_states": 418,
+    "labelled_train_states": 373,
+    "dev_states": 139,
+    "labelled_dev_states": 125,
+    "forced_masked_states": 59,
+    "max_sequence_tokens": 4301,
+    "truncation": false
+  },
+  "label_contract": "Author-reviewed source-grounded current-task preferences. Multiple acceptable progress routes retained. USE_VIEW means inspect, not trust. REFRESH labels assess supplied scope, not guaranteed executor success. Ready HANDOFF is an immediate-task cost preference, not an optimal future-workload label.",
+  "qualifications": [
+    "43/64 view stages have task-adequate literal facts; this is not graph/state correctness.",
+    "Some task-adequate views retain invalid/redundant rules or irrelevant timestamp errors, recorded in review.",
+    "Non-exhaustive reviewed source proof sets may omit alternative proofs; preference mismatch is not automatically task error.",
+    "Own-policy task rollouts and expanded families remain required after this trial.",
+    "Six E0 histories excluded from fitting; no holdout loaded."
+  ],
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "checksum_verification": false
+}

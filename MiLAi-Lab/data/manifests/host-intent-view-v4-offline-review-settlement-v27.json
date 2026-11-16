@@ -1,0 +1,19 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "phases": 8,
+  "total_cpu_seconds": 2.076517171,
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "measurement_file": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v27.json",
+  "generation_embedding_unchanged": true,
+  "native_training_cpu": "All three native fits charged directly by their original runners; not included again.",
+  "verified_closed_pids": [
+    2123239,
+    2123267,
+    2172645,
+    2226488
+  ],
+  "unmeasured": [
+    "Source archive extraction, wrapper assembly, interactive reviews/tests and imports outside timers unknown, not zero.",
+    "Training queue parent process CPU has no timer; child training compute is measured and billed by each existing runner. Do not call parent overhead zero."
+  ]
+}

@@ -1,0 +1,1824 @@
+{
+  "version": "dynamic-memory-control-t1-original-shared-external-dev-prefix-v1",
+  "status": "PARTIAL_SIX_COMPLETE_FAMILIES_OF_EIGHT",
+  "source_run": "t1-original-shared-evaluation-v1-remaining1",
+  "method_source": "0acc4b9a",
+  "planned_primary_families": 8,
+  "reviewed_complete_families": 6,
+  "planned_positions": 48,
+  "reviewed_positions": 36,
+  "remaining_families": [
+    "memops_E15",
+    "memops_F01"
+  ],
+  "counts": {
+    "correct": 11,
+    "unfulfilled": 15,
+    "length_failure": 4,
+    "incomplete": 2,
+    "wrong": 2,
+    "format_failure": 1,
+    "qualified": 1
+  },
+  "per_family": {
+    "A19": {
+      "correct": 4,
+      "unfulfilled": 2
+    },
+    "A32": {
+      "correct": 1,
+      "unfulfilled": 2,
+      "length_failure": 2,
+      "incomplete": 1
+    },
+    "B30": {
+      "correct": 2,
+      "unfulfilled": 3,
+      "length_failure": 1
+    },
+    "C03": {
+      "correct": 2,
+      "unfulfilled": 1,
+      "wrong": 1,
+      "format_failure": 1,
+      "qualified": 1
+    },
+    "D25": {
+      "wrong": 1,
+      "unfulfilled": 5
+    },
+    "E08": {
+      "correct": 2,
+      "incomplete": 1,
+      "length_failure": 1,
+      "unfulfilled": 2
+    }
+  },
+  "reviewer": "Codex author; method/source visible, not independent Judge",
+  "grading": "Complete source-faithful task criterion registered before review. Representative reflection examples accepted; missing required dimensions, unsupported attribution/qualification and empty-evidence handoff not full success. Qualified row retains core-correct annotation and ambiguity note.",
+  "source_proofs": "Author witnesses are sufficient, not exhaustive. Trace source coverage is diagnostic and not itself a grading rule; correct reuse need not reread irrelevant/new Sources.",
+  "records": [
+    {
+      "family": "memops_A19",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts.",
+      "answer": "According to your latest confirmed reports, your current primary emergency contact for both your work and CoreFit is **Karen Liu** (your older sister). \n\nYou completed the switch from your initial contact, Diane Liu, about a week after your original March forms. Karen is also listed as your primary contact for CoreFit, which you set up around the same time in mid-March to keep your records consistent.\n\nHowever, **no phone number has actually been supplied for Karen yet**. While you provided Diane's Tucson landline (520-334-7190) initially, you deferred providing Karen's number by stating you would give it to me \"in a bit.\" Therefore, the contact information for Karen is currently complete regarding her identity, but pending her phone number.",
+      "control_path": [
+        "search",
+        "context_3",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 6093,
+          "charged_tokens": 6093,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 41.90840599500007,
+            "forwards": 3,
+            "input_tokens": 6628,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 5962,
+            "wall_seconds": 11.33891050890088
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.365908632000128,
+            "loads": 1,
+            "wall_seconds": 2.6088448436930776
+          }
+        }
+      },
+      "wall_seconds": 36.04134514834732,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/e6c15ea3-3419-4f01-8356-0e236cfe9182-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/e6c15ea3-3419-4f01-8356-0e236cfe9182-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is your older sister, Karen Liu. The update from your initial contact (Diane Liu) to Karen Liu is a completed change for your work records, and you also listed her as the contact for your mid-March CoreFit membership. However, no phone number has actually been supplied for Karen yet; you explicitly noted that you would provide her number at a later point in the conversation.",
+      "control_path": [
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 7069,
+          "charged_tokens": 7069,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 55.292535918000794,
+            "forwards": 3,
+            "input_tokens": 7938,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 7244,
+            "wall_seconds": 15.117097420617938
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3899736100001974,
+            "loads": 1,
+            "wall_seconds": 2.643826298415661
+          }
+        }
+      },
+      "wall_seconds": 45.24516210053116,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/24bd46f1-57bf-4667-adc4-6368559959d1-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/24bd46f1-57bf-4667-adc4-6368559959d1-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-1",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts.",
+      "answer": "Based on the latest confirmed reports available in the current context, there is no primary emergency contact identified for work or CoreFit, and no phone number has been supplied. No completed changes, proposed primary contacts, or secondary contacts are recorded.",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 10441,
+          "charged_tokens": 10441,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 94.38866911099831,
+            "forwards": 2,
+            "input_tokens": 8927,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 8245,
+            "wall_seconds": 26.36090264748782
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3893761550000363,
+            "loads": 1,
+            "wall_seconds": 2.6410375656560063
+          }
+        }
+      },
+      "wall_seconds": 91.09617466758937,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/b1757201-568c-44f9-a9bc-5deaaa8a27a7-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/b1757201-568c-44f9-a9bc-5deaaa8a27a7-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-1-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for work (HR) and CoreFit is your coworker **Priya Nair**, with the phone number **503-772-4415**. \n\nYou confirmed you completed this change \"last week,\" replacing your previous contact, Karen Liu. \n\nTo distinguish the status of other contacts mentioned:\n*   **Diane Liu (Mom):** You completed updating her at work in early March (during an HR system migration), but this was a prior state that was subsequently changed.\n*   **Karen Liu:** She was your contact prior to the recent change and was confirmed reachable during a past bike accident.\n*   **Marcus Webb (Ex-boyfriend):** You confirmed removing his outdated information at a dentist's office.",
+      "control_path": [
+        "search",
+        "context_8",
+        "read_9",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s2t1",
+        "s2t3",
+        "s2t5",
+        "s2t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 9631,
+          "charged_tokens": 9631,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 246.64833590799753,
+            "forwards": 4,
+            "input_tokens": 20392,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 18952,
+            "wall_seconds": 69.83279856108129
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.229973091999909,
+            "loads": 1,
+            "wall_seconds": 3.3648665603250265
+          }
+        }
+      },
+      "wall_seconds": 118.16162311471999,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/2307ed9d-e35c-4086-b470-ca89ed7fe5c8-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/2307ed9d-e35c-4086-b470-ca89ed7fe5c8-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-2",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts.",
+      "answer": "Based on the latest confirmed reports provided in the system evidence, there is no primary emergency contact or phone number recorded for work or CoreFit. The available evidence contains no records of emergency contact details, so no completed or proposed changes regarding primary or secondary contacts can be distinguished.",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 7732,
+          "charged_tokens": 7732,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 208.1170159050016,
+            "forwards": 2,
+            "input_tokens": 13467,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 12560,
+            "wall_seconds": 59.088555379770696
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.446334542999921,
+            "loads": 1,
+            "wall_seconds": 2.7772205928340554
+          }
+        }
+      },
+      "wall_seconds": 105.55058737937361,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/643014e9-a3b8-433a-8752-cba55017594d-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/643014e9-a3b8-433a-8752-cba55017594d-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-2-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for work and CoreFit is Karen Liu, with the supplied phone number 503-461-2283. You officially updated both HR and CoreFit back to her this morning after she returned early from her trip. The proposed switch to Tom Brennan (503-889-3102) was never completed, and listing Priya as a secondary contact remains only a consideration that has not been submitted.",
+      "control_path": [
+        "search",
+        "read_10",
+        "context_10",
+        "read_15",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s3t1",
+        "s3t3",
+        "s3t5",
+        "s3t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 6250,
+          "charged_tokens": 6250,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 695.1264573150038,
+            "forwards": 5,
+            "input_tokens": 38065,
+            "sequence_rows": 5,
+            "state_tokenizations": 5,
+            "state_tokens": 35079,
+            "wall_seconds": 197.07419791817665
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.711857024999972,
+            "loads": 1,
+            "wall_seconds": 2.8352517327293754
+          }
+        }
+      },
+      "wall_seconds": 223.830069786869,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/09918f6e-2ac7-445d-ac52-4f64211b7cac-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8c910419-a585-42bc-9799-1a8a3ded678a/09918f6e-2ac7-445d-ac52-4f64211b7cac-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened.",
+      "answer": "The pattern your email-related choices support is a strong preference for centralized management, proactive security, and structural organization. You consistently treat your email as the single, critical hub for your digital life and prioritize maintaining order and tight security protocols.\n\n**Actually Completed Changes:**\n• **Inbox Cleanup & Unsubscribing:** On March 16, you completed a dedicated cleanup session, unsubscribing from promotional emails and reducing your unread count from ~4,000 to ~200.\n• **Password Reset:** Following the unauthorized access attempt on April 2, you successfully changed your password immediately upon regaining access.\n• **2FA Enrollment:** You enabled two-factor authentication and registered your current cell number (ending in 4738) as the recovery method.\n• **Primary Contact Confirmation:** You formally confirmed and requested to keep your long-standing personal email on file.\n\n**Primary Provider:**\n• **Gmail** (`marcus.t.holloway@gmail.com`), which you have utilized as your central personal hub continuously since 2014.\n\n**Distinction from Intentions and Proposals:**\n• Your realization that you \"should've set up 2FA years ago\" points to a historical gap, but the actual security action was completed immediately during the April 2 incident.\n• The assistant's suggestions regarding drafting specific filter rules, establishing a formal label taxonomy, and implementing other organizational strategies remain unexecuted proposals. There is no evidence these structural changes were implemented, nor was any email provider migration proposed or completed.",
+      "control_path": [
+        "search",
+        "read_1",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 12958,
+          "charged_tokens": 12958,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 66.2563686359972,
+            "forwards": 4,
+            "input_tokens": 9222,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 8271,
+            "wall_seconds": 18.043615179136395
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.1463300069999605,
+            "loads": 1,
+            "wall_seconds": 3.0209373822435737
+          }
+        }
+      },
+      "wall_seconds": 87.49086925666779,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/89180ab7-1a3d-4617-814d-e3f3cb06049e-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/89180ab7-1a3d-4617-814d-e3f3cb06049e-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-0-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened.",
+      "answer": "I cannot determine the pattern of your email-related choices, identify which changes have been completed, or specify your primary email provider because no relevant evidence, history, or source text was provided in the current context. The available memory evidence is empty, and no tools were available to retrieve the necessary information.",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 6720,
+          "charged_tokens": 6720,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 41.29567203899933,
+            "forwards": 2,
+            "input_tokens": 5328,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 4821,
+            "wall_seconds": 11.37830579932779
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.517430527000215,
+            "loads": 1,
+            "wall_seconds": 2.688929844647646
+          }
+        }
+      },
+      "wall_seconds": 61.16386416833848,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/3788cb64-716d-4780-9862-47d87ab46431-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/3788cb64-716d-4780-9862-47d87ab46431-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-1",
+      "label": "length_failure",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "First protocol/output failure preserved with its paid work; no task success credited.",
+      "question": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "handoff_reason": null,
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 9270,
+          "charged_tokens": 9270,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 56.153994746506214,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/351e7818-a331-4461-b4d1-23a7c9b3fec9-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/351e7818-a331-4461-b4d1-23a7c9b3fec9-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-1-repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "First protocol/output failure preserved with its paid work; no task success credited.",
+      "question": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 11877,
+          "charged_tokens": 11877,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 49.161641162001615,
+            "forwards": 1,
+            "input_tokens": 4381,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 4201,
+            "wall_seconds": 13.769809042103589
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.432358618000308,
+            "loads": 1,
+            "wall_seconds": 2.905915390700102
+          }
+        }
+      },
+      "wall_seconds": 84.04161805007607,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/2bc5e27d-dd6c-4fcc-8f47-7a8f86645f09-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/2bc5e27d-dd6c-4fcc-8f47-7a8f86645f09-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-2",
+      "label": "incomplete",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Retains Gmail and correctly reports security actions/app audit, but misses completed March inbox cleanup requested among completed changes; onlys1t5/s1t7,s2t1/s2t3,s3turns were delivered. Optional Proton-use intention is not firmly stated by user.",
+      "question": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened.",
+      "answer": "**Pattern of Choices**\nYour email choices reflect a pattern of prioritizing stability, convenience, and security hardening over the friction of migrating to a new provider. While you are security-conscious (enabling 2FA, auditing apps) and acknowledge the privacy benefits of services like ProtonMail, you view the logistical burden of migrating ten years of linked accounts (banking, medical, etc.) as a reason to remain on your existing setup rather than adopt a new primary provider.\n\n**Changes Actually Completed**\nYou have completed the following actions to secure your current infrastructure following a security incident:\n*   **Password Reset:** Changed your Gmail password immediately after regaining access on April 2, following a suspicious login attempt from Southeast Asia.\n*   **Two-Factor Authentication (2FA):** Enabled 2FA on your primary Gmail account.\n*   **Recovery Information:** Updated/confirmed the recovery phone number (ending in 4738) linked to your Gmail account.\n*   **Connected Apps Audit:** Completed an audit of your Google connected apps, successfully revoking access for approximately eight old services (including a game from 2017).\n\n**Current Primary Provider**\n**Gmail** remains your confirmed primary provider. Specifically, your active email address is `marcus.t.holloway@gmail.com` (with the middle initial \"T\"). \n*   *Incorrect Address:* `marcus.holloway@gmail.com` (without the T) belongs to someone in Ohio and should not be used.\n*   *Forgotten Address:* `marcus.holloway.personal@outlook.com` was flagged for disposal as it was a secondary account never utilized.\n\n**Distinctions: Actions vs. Intentions vs. Others' Proposals**\n*   **Danielle's Proposal (Not a completed change):** Your friend Danielle advocates for switching entirely to ProtonMail. She has proposed this change so heavily that she took the initiative to set up an account for you (`marcus.t.holloway@proton.me`) to hand over tonight.\n*   **Your Stated Intention:** You have explicitly rejected the idea of a full migration, stating that Gmail is your \"home base for the foreseeable future.\" You intend to use the ProtonMail account only as an optional, experimental secondary account for sensitive communications, if at all.",
+      "control_path": [
+        "search",
+        "read_8",
+        "context_8",
+        "read_11",
+        "read_15",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t5",
+        "s1t7",
+        "s2t1",
+        "s2t3",
+        "s3t1",
+        "s3t3",
+        "s3t5",
+        "s3t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 7333,
+          "charged_tokens": 7333,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 825.4482077159992,
+            "forwards": 6,
+            "input_tokens": 46128,
+            "sequence_rows": 6,
+            "state_tokenizations": 6,
+            "state_tokens": 42862,
+            "wall_seconds": 233.54649814311415
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.03473424699996,
+            "loads": 1,
+            "wall_seconds": 2.906018846668303
+          }
+        }
+      },
+      "wall_seconds": 260.36642292980105,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/dc7bb085-2fbf-4911-b95c-bc4dc42123ab-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/dc7bb085-2fbf-4911-b95c-bc4dc42123ab-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-2-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened.",
+      "answer": "I cannot determine the pattern of your email-related choices, identify completed changes, or establish your primary provider. The shared memory evidence is empty and I currently have no available tools to read your history or source data. Without this evidence, I cannot distinguish your reported actions from intentions, future plans, or other people's proposals.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 6719,
+          "charged_tokens": 6719,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 111.74022605400023,
+            "forwards": 1,
+            "input_tokens": 6915,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 6735,
+            "wall_seconds": 32.02791071962565
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.327303074999691,
+            "loads": 1,
+            "wall_seconds": 3.12042816542089
+          }
+        }
+      },
+      "wall_seconds": 71.30583836976439,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/120185ed-8a22-4f5b-9a80-f1992075e7a6-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f6f8d48-e79c-4d51-becd-9f03980a19b7/120185ed-8a22-4f5b-9a80-f1992075e7a6-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate.",
+      "answer": "For a professional introduction, you should use **Marc** for your college friend and **Chen Wei** for your former roommate.\n\n- **Confirmed personal preferences:** Marc (college friend, professional settings), Chen Wei (former roommate, full name)\n- **Historical nicknames:** \"Wei\" (former roommate)\n- **Future corporate branding:** None mentioned\n\nThe former roommate's naming preference was reported on **May 2nd**.",
+      "control_path": [
+        "search",
+        "context_3",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 6424,
+          "charged_tokens": 6424,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 43.852102717999514,
+            "forwards": 3,
+            "input_tokens": 6608,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 5942,
+            "wall_seconds": 11.905518256127834
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.810238937000122,
+            "loads": 1,
+            "wall_seconds": 2.9313545301556587
+          }
+        }
+      },
+      "wall_seconds": 39.466356789693236,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/85089e8f-4612-4863-aaf4-a24ff45d1688-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/85089e8f-4612-4863-aaf4-a24ff45d1688-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate.",
+      "answer": "**Confirmed Professional Preferences for Introductions:**\\n- College Friend: Marc\\n- Former Roommate: Chen Wei\\n\\n**When the Roommate’s Naming Preference Was Reported:**\\n- May 2nd\\n\\n**Historical Nicknames / Previous Names:**\\n- College Friend: Marcus\\n- Former Roommate: Wei\\n\\n**Future Corporate Branding:**\\n- Not specified in the source material.",
+      "control_path": [
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 11220,
+          "charged_tokens": 11220,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 61.24596282799757,
+            "forwards": 3,
+            "input_tokens": 7704,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 7010,
+            "wall_seconds": 17.38599259313196
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.6373028449997946,
+            "loads": 1,
+            "wall_seconds": 2.7773388316854835
+          }
+        }
+      },
+      "wall_seconds": 74.94216247275472,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/cce6be99-c01c-4274-8378-071144921561-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/cce6be99-c01c-4274-8378-071144921561-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-1",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate.",
+      "answer": "Based on the current memory evidence and available tools, there is no record of your college friend, your former roommate, their specific names, or any reported naming preferences. The shared maintenance receipt confirms no semantic commits or completed mutations for this scenario. Consequently, I cannot identify the correct names to use in a professional introduction or determine when the roommate's naming preference was reported. I am unable to categorize personal preferences, nicknames, or corporate branding as the necessary source material is missing.",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 6482,
+          "charged_tokens": 6482,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 100.5390421459997,
+            "forwards": 2,
+            "input_tokens": 8903,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 8221,
+            "wall_seconds": 27.91827369481325
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.7739547229998607,
+            "loads": 1,
+            "wall_seconds": 2.818338017910719
+          }
+        }
+      },
+      "wall_seconds": 64.01584448572248,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/ecf6ceb5-eefa-4327-9b9b-30c4c98bafbd-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/ecf6ceb5-eefa-4327-9b9b-30c4c98bafbd-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-1-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate.",
+      "answer": "I do not have access to the memory evidence or history required to identify the specific names of your college friend and former roommate, or to determine when the roommate's naming preference was reported. Consequently, I cannot separate confirmed personal preferences from historical nicknames or corporate branding. I am missing the necessary source data to answer this request.",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 8623,
+          "charged_tokens": 8623,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 118.81999330300096,
+            "forwards": 2,
+            "input_tokens": 9466,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 8764,
+            "wall_seconds": 34.31410975847393
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.7112979380003708,
+            "loads": 1,
+            "wall_seconds": 2.815925753675401
+          }
+        }
+      },
+      "wall_seconds": 84.21458368748426,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/a3f8f423-575c-4fc8-a021-01906a8ec125-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/a3f8f423-575c-4fc8-a021-01906a8ec125-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-2",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate.",
+      "answer": "No memories, tools, or history are available to retrieve your former roommate's names, nicknames, corporate branding, or the date their naming preference was reported. As a result, the requested introduction details and timeline for their naming preference are unknown.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 9443,
+          "charged_tokens": 9443,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 88.99915414000134,
+            "forwards": 1,
+            "input_tokens": 6187,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 6007,
+            "wall_seconds": 25.74421785864979
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.8952026599999954,
+            "loads": 1,
+            "wall_seconds": 2.872798196040094
+          }
+        }
+      },
+      "wall_seconds": 82.64116866048425,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/f5833a7d-7ba1-4bde-af94-7dfcc501d973-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/f5833a7d-7ba1-4bde-af94-7dfcc501d973-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-2-repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "First protocol/output failure preserved with its paid work; no task success credited.",
+      "question": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "handoff_reason": null,
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 9265,
+          "charged_tokens": 9265,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 55.933061310090125,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/11a5440d-3bda-49d5-a87f-b238365a90be-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/6c8e208d-19b3-4da7-ac98-c55a134e47ee/11a5440d-3bda-49d5-a87f-b238365a90be-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change.",
+      "answer": "Based on the provided conversation records, your latest confirmed follow-up appointment is scheduled for **May 14th at 9:30 AM** with **Dr. Liang** at **Riverside General**.\n\nThere is **no record** of any suggested time change awaiting your response for this appointment (or any other appointment in the current logs).\n\nYour mother's appointment is on May 6th at St. Luke's (which you noted you are driving her to). Kevin is not mentioned in the current context.\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n实时查询预订: \n\n- 结果: 未查到对象\n- 物品: \"medical_appointments\"",
+      "control_path": [
+        "search",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 10770,
+          "charged_tokens": 10770,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 47.79384408400074,
+            "forwards": 3,
+            "input_tokens": 6816,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 6150,
+            "wall_seconds": 13.06079571787268
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.173699413000577,
+            "loads": 1,
+            "wall_seconds": 2.980067325755954
+          }
+        }
+      },
+      "wall_seconds": 47.3790936935693,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/8ff909d0-7c24-4d73-8b44-f54fa33afe11-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/8ff909d0-7c24-4d73-8b44-f54fa33afe11-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change.",
+      "answer": "Based on your records, your latest confirmed follow-up appointment is with Dr. Liang at Riverside General on May 14th at 9:30 AM to review your physical therapy progress. There are currently no suggested time change proposals awaiting your response. I have kept your May 14th visit separate from your mother’s May 6th cardiology check-up at St. Luke’s, and there are no appointments on file for Kevin.",
+      "control_path": [
+        "search",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 12945,
+          "charged_tokens": 12945,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 68.60015575099897,
+            "forwards": 3,
+            "input_tokens": 8678,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 7984,
+            "wall_seconds": 18.940407359041274
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.842757445000643,
+            "loads": 1,
+            "wall_seconds": 2.9412532011047006
+          }
+        }
+      },
+      "wall_seconds": 87.6651004916057,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/041cd510-3d67-4560-ba6a-2f4816cb5bd0-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/041cd510-3d67-4560-ba6a-2f4816cb5bd0-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-1",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change.",
+      "answer": "I am unable to provide your latest confirmed follow-up appointment details (date, time, clinician, location) or the status of any pending time change proposals because no medical records or history were accessible in the current session context, and no tools are available to query the system. I was unable to locate your appointment separate from your mother's or Kevin's as no records were found.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 9975,
+          "charged_tokens": 9975,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 66.55735890900178,
+            "forwards": 1,
+            "input_tokens": 5251,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 5071,
+            "wall_seconds": 19.00765083078295
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.857163618999948,
+            "loads": 1,
+            "wall_seconds": 2.885493609122932
+          }
+        }
+      },
+      "wall_seconds": 78.89602398034185,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/f4817f44-f37f-475c-9810-66446a93d95a-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/f4817f44-f37f-475c-9810-66446a93d95a-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-1-repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Onlys2t3/s2t5 original reports delivered; omits known hospital and falsely uses unrelated local reservationnot_found to deny pending10:15proposal. Source-reported appointment is not the empty sandbox reservation database.",
+      "question": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change.",
+      "answer": "Based on the provided conversation records, the latest mentioned follow-up appointment was with Dr. Liang on May 14th at 9:45 AM. The specific location for this follow-up is not explicitly stated in the text (though your blood panel was at Riverside General's lab).\n\nNo current appointment record exists in the system (the query returned not_found). Therefore, there are no active appointments and no pending suggested time changes awaiting your response.\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n实时查询预订: \n\n- 结果: 未查到对象\n- 物品: \"appointment\"",
+      "control_path": [
+        "search",
+        "read_11",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s2t3",
+        "s2t5"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 16975,
+          "charged_tokens": 16975,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 287.5300049790021,
+            "forwards": 3,
+            "input_tokens": 19143,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 17820,
+            "wall_seconds": 81.91918599046767
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.237304415999461,
+            "loads": 1,
+            "wall_seconds": 3.167479930445552
+          }
+        }
+      },
+      "wall_seconds": 166.2856659097597,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/222e6985-2640-4038-a337-cbc5aeb5fbea-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/222e6985-2640-4038-a337-cbc5aeb5fbea-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-2",
+      "label": "format_failure",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "First protocol/output failure preserved with its paid work; no task success credited.",
+      "question": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n实时查询预订: \n\n- 结果: 未查到对象\n- 物品: \"my_reservation\"\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 14096,
+          "charged_tokens": 14096,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 257.8765690580003,
+            "forwards": 2,
+            "input_tokens": 15184,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 14277,
+            "wall_seconds": 72.65789175592363
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.5712023979995138,
+            "loads": 1,
+            "wall_seconds": 2.8250892544165254
+          }
+        }
+      },
+      "wall_seconds": 145.11744961701334,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/aff71edb-90ed-4310-8552-3cf9d2d1620d-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/aff71edb-90ed-4310-8552-3cf9d2d1620d-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-2-repeat",
+      "label": "qualified",
+      "full_task_success": false,
+      "requested_core_facts_correct": true,
+      "note": "Own date/time/clinician/location and no-pending status match. Ancillary claim that records do not include Kevin schedule is unsupported as a full-history statement: s3t1reports his priorPT11AM slot. Qualified due to current-versus-historical absence wording; retain core-success separately, do not silently count as fullsource-faithful success.",
+      "question": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change.",
+      "answer": "Your latest confirmed follow-up is with Dr. Liang at Riverside General on May 14th at 9:45 AM. There is no suggested time change awaiting your response; the previously booked 9:30 AM slot was a confirmed correction (not a pending proposal) that the clinic finalized as 9:45 AM. This appointment is kept separate from your mother's May 6th visit at St. Luke's, and while your records do not currently include Kevin's schedule, your follow-up is distinctly tied to Dr. Liang.",
+      "control_path": [
+        "search",
+        "read_14",
+        "context_9",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7",
+        "s2t1",
+        "s2t3"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 11293,
+          "charged_tokens": 11293,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 722.9599582739938,
+            "forwards": 4,
+            "input_tokens": 34633,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 32306,
+            "wall_seconds": 206.51160600502044
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 7.629473057000041,
+            "loads": 1,
+            "wall_seconds": 5.592533100396395
+          }
+        }
+      },
+      "wall_seconds": 261.3734402908012,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/813b4c46-9e3f-483b-b173-e3d175a49dfb-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/813b4c46-9e3f-483b-b173-e3d175a49dfb-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-0",
+      "label": "wrong",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Preference and KokuKitchen match, but invents that Lena was eating spicybanchan and treats her tolerance as known. Also turns unreported trials into categorical untried claims. Complete first-segment user reports were delivered, so this is not missing source acquisition.",
+      "question": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples.",
+      "answer": "Based on your reported experiences, here is the breakdown of your preferences, current status, and untried items:\n\n**Flavor and Heat Preferences**\n*   **Heat:** You have a **low tolerance for capsaicin (chili burn)**. You describe 'medium' spice at Thai restaurants as overwhelming ('drank three glasses of water') and actively avoid 'chili flakes.' However, you explicitly state you **enjoy the numbing sensation** of Sichuan peppercorns ('tingly feeling without the burn').\n*   **Flavor Profile:** You favor **'gentle warmth'** and rich, balanced meals. You enjoy **sweet and savory** profiles (bulgogi) and the use of **acidic/pickled elements** (pickled ginger) to complement rich dishes (beef curry).\n\n**Established Go-To Lunch Place**\n*   **Koku Kitchen:** This Japanese curry spot near your office is your established go-to. You have visited it regularly (four times) and have a standard order of 'mild beef curry with extra pickled ginger.'\n\n**Untried Food or Place Changes**\nBased on the evidence, the following variations or suggestions have not been tried:\n1.  **Japchae:** The assistant suggested 'japchae or the pickled radish' at the Korean BBQ. You only confirmed eating the pickled radish.\n2.  **The 'Thai Hot' Variation:** At the Thai place on Elm Street, you ordered 'medium' spice because 'medium' was too much for you; the 'Thai hot' version was not tried.\n3.  **Original Mapo Tofu:** You made a **modified** version of the mapo tofu (scaled down doubanjiang, added coconut milk). You have not tried the **original** high-spice version from Darren's recipe.\n4.  **Spicy Banchan:** At the Korean BBQ, you 'had to push it aside' the banchan that was 'basically all chili flakes.'\n\n**Tolerance Comparison**\n*   **You:** Low chili tolerance; sensitive to 'burn' but tolerant of numbing heat.\n*   **Darren:** Higher chili tolerance (Darren's original recipe was 'absolutely' too spicy for you).\n*   **Priya:** Higher chili tolerance (She enjoyed the same dish at 'Thai hot' while you found 'medium' too much).\n*   **Lena:** Higher chili tolerance/Indifference (She was eating the spicy banchan and laughed at your reaction to it).",
+      "control_path": [
+        "search",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 10966,
+          "charged_tokens": 10966,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 50.57364659900122,
+            "forwards": 3,
+            "input_tokens": 7268,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 6602,
+            "wall_seconds": 13.96894147247076
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.8867034970000987,
+            "loads": 1,
+            "wall_seconds": 1.8372006630524993
+          }
+        }
+      },
+      "wall_seconds": 67.47156319394708,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/ccafabdf-5947-447c-8093-9d5d51ce13ff-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/ccafabdf-5947-447c-8093-9d5d51ce13ff-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-0-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples.",
+      "answer": "I cannot determine your flavor and heat preferences, your go-to lunch place, or your untried suggestions because no historical memory or evidence of your reported meals is available in the current context. With the delivered evidence empty, I cannot distinguish your tolerance from others' or keep inferences bounded to your specific examples.",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 10375,
+          "charged_tokens": 10375,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 52.86741494099988,
+            "forwards": 2,
+            "input_tokens": 6092,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 5585,
+            "wall_seconds": 14.740974970161915
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.712437386000147,
+            "loads": 1,
+            "wall_seconds": 1.8537904666736722
+          }
+        }
+      },
+      "wall_seconds": 73.47213985584676,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/d8c5fb01-d130-4f49-b6ad-43f993bcfe69-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/d8c5fb01-d130-4f49-b6ad-43f993bcfe69-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-1",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples.",
+      "answer": "I cannot determine your reported meal flavor and heat preferences, your established go-to lunch place, or which suggested foods and places you have not tried because the relevant historical evidence or meal logs were not provided in the current context. As no reading tools are currently available to retrieve this missing information, I am unable to answer the question or distinguish your preferences from others.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 4596,
+          "charged_tokens": 4596,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 60.95039570299923,
+            "forwards": 1,
+            "input_tokens": 4904,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 4724,
+            "wall_seconds": 17.763015389442444
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3506587860001673,
+            "loads": 1,
+            "wall_seconds": 2.131062244065106
+          }
+        }
+      },
+      "wall_seconds": 40.143817791715264,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/bc9f3475-a86c-496c-be65-488bd9170c08-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/bc9f3475-a86c-496c-be65-488bd9170c08-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-1-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples.",
+      "answer": "I do not have access to your reported meal history or context in this current session, so I cannot analyze your flavor and heat preferences, identify your established go-to lunch place, or list the suggestions you have not tried. To provide this analysis, I would need the specific details of the meals you have reported eating.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 7395,
+          "charged_tokens": 7395,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 65.84906965299888,
+            "forwards": 1,
+            "input_tokens": 5125,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 4945,
+            "wall_seconds": 19.06791481655091
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.537508816999889,
+            "loads": 1,
+            "wall_seconds": 2.3857482438907027
+          }
+        }
+      },
+      "wall_seconds": 60.5973329199478,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/bc5ed685-8991-4023-a5c6-5fa75de1bfd5-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/bc5ed685-8991-4023-a5c6-5fa75de1bfd5-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-2",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples.",
+      "answer": "I do not have access to your reported meals, lunch history, or past conversations to determine your flavor and heat preferences, identify your established go-to lunch place, or note any untried suggested food or places. The available memory and evidence provided are empty, so I cannot separate your tolerance from others or provide specific recommendations based on your examples.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 4420,
+          "charged_tokens": 4420,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 125.11277678699844,
+            "forwards": 1,
+            "input_tokens": 7286,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 7106,
+            "wall_seconds": 36.77328582108021
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.889293523000106,
+            "loads": 1,
+            "wall_seconds": 1.952879425138235
+          }
+        }
+      },
+      "wall_seconds": 63.81725500989705,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/e2f58c2e-b27d-486d-a992-e7c8ad9b678d-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/e2f58c2e-b27d-486d-a992-e7c8ad9b678d-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-2-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples.",
+      "answer": "I cannot determine your flavor and heat preferences, your established go-to lunch place, or the specific food or place changes you have not tried because the delivered memory evidence is empty. The absence of recorded meals prevents me from distinguishing your tolerance from that of others.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 11518,
+          "charged_tokens": 11518,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 134.47103788000095,
+            "forwards": 1,
+            "input_tokens": 7559,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 7379,
+            "wall_seconds": 38.61137679312378
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.0654592540001886,
+            "loads": 1,
+            "wall_seconds": 2.0724538508802652
+          }
+        }
+      },
+      "wall_seconds": 108.04588634893298,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/b17ba8f7-9b9b-4cdf-a8cd-0ab40c64fbaa-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/3c7cf823-fb2b-4d18-aca2-63ad9ca9801c/b17ba8f7-9b9b-4cdf-a8cd-0ab40c64fbaa-trace-0.jsonl"
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me.",
+      "answer": "Based on the provided reports, your current review routine involves two main practices: using a spreadsheet template (switched to around mid-March) to visually track numbers and catch transposition errors before filing, and adhering to a strict cutoff of never filing any report after 4:00 PM (saving and reviewing unfinished reports the next morning to avoid cognitive fatigue).\n\nThere is no mention in the provided reports of a 'planned change' that is not yet in force; the procedures described (the spreadsheet template and the 4 PM cutoff) are reported as already active and effective.\n\nThe correct total for your Portland hotel stay (two nights at the Residence Inn on SW Morrison Street) is $378. The reports do not contain any figures, data, or speculations regarding coworkers.",
+      "control_path": [
+        "search",
+        "read_1",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s1t1",
+        "s1t3",
+        "s1t5",
+        "s1t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 5505,
+          "charged_tokens": 5505,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 62.31448975300009,
+            "forwards": 4,
+            "input_tokens": 8927,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 7962,
+            "wall_seconds": 17.04530311189592
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.362183327999901,
+            "loads": 1,
+            "wall_seconds": 2.2103664549067616
+          }
+        }
+      },
+      "wall_seconds": 37.642379748634994,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/bc16d5b0-caef-4226-85e6-27a22b6bc0d7-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/bc16d5b0-caef-4226-85e6-27a22b6bc0d7-trace-0.jsonl"
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "requested_core_facts_correct": true,
+      "note": "All requested source-report dimensions satisfied; no required future action promoted to completed.",
+      "question": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me.",
+      "answer": "Based on your reports, separating your records from coworkers' figures and excluding speculation:\n\n- **Current Review Routine:** You use a spreadsheet template to track numbers (switched to around mid-March) and follow a strict rule never to file a report after 4:00 PM, saving unfinished reviews to complete the next morning.\n\n- **Planned Change:** There is no planned change that is not in force. The changes you implemented—switching to the spreadsheet template and enforcing the 4:00 PM cutoff—are already active.\n\n- **Portland Hotel Total:** The correct total for your stay (two nights at the Residence Inn on SW Morrison Street) is $378.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 14963,
+          "charged_tokens": 14963,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 47.86947293900084,
+            "forwards": 2,
+            "input_tokens": 5818,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 5507,
+            "wall_seconds": 13.27429215144366
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.1258505139999215,
+            "loads": 1,
+            "wall_seconds": 2.3392704036086798
+          }
+        }
+      },
+      "wall_seconds": 82.61414272058755,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/eaf24c90-435b-4f5e-bd01-63de4e34162c-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/eaf24c90-435b-4f5e-bd01-63de4e34162c-trace-0.jsonl"
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-1",
+      "label": "incomplete",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Correct new morning/three-pass routine, but misses established4PM cutoff and hotel378; delivered onlysegment2. Mindset work is substituted for an unconfirmed procedural change. Not full task success.",
+      "question": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me.",
+      "answer": "Based on the provided reports:\n\n**Current Review Routine:**\nYou follow a routine where you review everything **alone, first thing in the morning with coffee**, before anyone else is in the office. You utilize a **triple-check method**: first checking **dollar figures**, then **quantities and headcounts**, and finally **dates and descriptions**. You prefer a well-organized spreadsheet layout for this solitary work to reduce anxiety and catch errors.\n\n**Planned Change Not Yet In Force:**\nYou have a planned, internal change in how you handle errors: you intend to **learn to not beat yourself up so much** when a mistake occurs. You acknowledge that your anxiety is disproportionate to the situation (e.g., worrying about client relationships even when they never see the error) and describe this mindset shift as a \"work in progress.\"\n\n**Portland Hotel Total:**\n**No total is reported** for the Portland hotel in the provided records. The text references a \"Portland expense report\" and a \"resubmission hassle,\" but no specific dollar amounts or totals are mentioned.\n\n**Distinctions:**\n*   **Your Records vs. Coworkers:** No specific coworker figures are listed in the evidence. The reports explicitly state you prefer to work before others arrive to avoid social interruptions, rather than reviewing coworker data.\n*   **Known Error Totals:** The only specific numerical error recorded in your reports is for the **Greenfield invoice** (listing 40 billable hours when the actual number was 38). This is distinct from the Portland report mentioned earlier.",
+      "control_path": [
+        "search",
+        "context_9",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [
+        "s2t1",
+        "s2t3",
+        "s2t5",
+        "s2t7"
+      ],
+      "cost": {
+        "generation": {
+          "known_tokens": 9632,
+          "charged_tokens": 9632,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 138.07051061600214,
+            "forwards": 3,
+            "input_tokens": 12719,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 11621,
+            "wall_seconds": 39.24458692781627
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.542650088000073,
+            "loads": 1,
+            "wall_seconds": 2.548556980676949
+          }
+        }
+      },
+      "wall_seconds": 86.40065466891974,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/3c49e0c9-f63a-430a-ba49-9cabb5f3d08b-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/3c49e0c9-f63a-430a-ba49-9cabb5f3d08b-trace-0.jsonl"
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-1-repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "First protocol/output failure preserved with its paid work; no task success credited.",
+      "question": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "handoff_reason": null,
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 9271,
+          "charged_tokens": 9271,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 55.80273134820163,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/930696e7-6e46-4c68-b5bb-c240c8ea1024-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/930696e7-6e46-4c68-b5bb-c240c8ea1024-trace-0.jsonl"
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-2",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me.",
+      "answer": "Based on the current evidence and memory, I cannot provide the requested information. The delivered memory evidence is empty, and no source reports are available to identify your review routine, planned changes, or the correct total for your Portland hotel. Without this data, I cannot separate your records from your coworkers' figures or distinguish your reported preferences from speculation.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 12822,
+          "charged_tokens": 12822,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 92.58909844599839,
+            "forwards": 1,
+            "input_tokens": 6288,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 6090,
+            "wall_seconds": 26.468320284970105
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.504463957000098,
+            "loads": 1,
+            "wall_seconds": 2.609365349635482
+          }
+        }
+      },
+      "wall_seconds": 104.56712841894478,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/a1358a6d-1ea2-413a-be01-dcaf4cfcb450-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/a1358a6d-1ea2-413a-be01-dcaf4cfcb450-trace-0.jsonl"
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-2-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "requested_core_facts_correct": null,
+      "note": "Original history contains the requested facts, but controller handed off empty evidence; a truthful refusal about that subset is still an unfulfilled system task.",
+      "question": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me.",
+      "answer": "Based on the provided evidence, I cannot determine the actual review routine you are following, the planned change that is not in force, or the correct total for your Portland hotel. The available records are empty, and I am unable to separate your reports from your coworkers' figures or address the speculation about your preferences.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "direct_user_turns_delivered": [],
+      "cost": {
+        "generation": {
+          "known_tokens": 9226,
+          "charged_tokens": 9226,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 110.56283732500015,
+            "forwards": 1,
+            "input_tokens": 6592,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 6394,
+            "wall_seconds": 31.786652844399214
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.5353553969998757,
+            "loads": 1,
+            "wall_seconds": 2.6620255950838327
+          }
+        }
+      },
+      "wall_seconds": 85.99928722996265,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/0fe00a33-00be-4fb3-bde3-2c4c266f6cdd-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/8ccc9cd9-68c1-4cef-a9a0-db69f18dc56a/0fe00a33-00be-4fb3-bde3-2c4c266f6cdd-trace-0.jsonl"
+    }
+  ],
+  "cost": {
+    "laya": {
+      "attempted": 36,
+      "host_completed": 31,
+      "task_positions": 36,
+      "explicit_positions": 0,
+      "generation_known_tokens": 340293,
+      "generation_charged_tokens": 340293,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0,
+      "dynamic_memory_laya_cpu_seconds": 5241.388432590997,
+      "dynamic_memory_laya_forwards": 80,
+      "dynamic_memory_laya_input_tokens": 374542,
+      "dynamic_memory_laya_sequence_rows": 80,
+      "dynamic_memory_laya_state_tokenizations": 80,
+      "dynamic_memory_laya_state_tokens": 348399,
+      "dynamic_memory_laya_wall_seconds": 1485.6889157230034,
+      "dynamic_memory_laya_load_cpu_seconds": 123.64374152900109,
+      "dynamic_memory_laya_load_loads": 33,
+      "dynamic_memory_laya_load_wall_seconds": 90.72366865165532
+    }
+  },
+  "conclusion": "Partial descriptive evidence only. Do not select a recipe or replace the declared8family primary set using these six completed families.",
+  "full_state_validity": "Not certified by answer grades. Source/record/view effects and relevant failures are separate.",
+  "model_calls_by_review": 0,
+  "superseded_by": "dynamic-memory-control-t1-original-shared-evaluation-results-v1.json author_review_revision2",
+  "historical_grade_note": "Original partial counts retained; full source-role audit later qualified E08/stage-0. Current authoritative grades are in the complete review."
+}

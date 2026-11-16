@@ -1,0 +1,82 @@
+{
+  "status": "PAIRED_DATA_PREPARED_NOT_TRAINED",
+  "protocol": {
+    "name": "jev-reader-source-qualified-label-pair-v1",
+    "training_tool": "tools/train_bounded_laya.py",
+    "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+    "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "data_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/source-qualified-label-pair-v1/data",
+    "output_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/source-qualified-label-pair-v1/runs",
+    "arms": [
+      "original_labels",
+      "reviewed_labels"
+    ],
+    "seeds": [
+      0,
+      1
+    ],
+    "epochs": 4,
+    "max_len": 8192,
+    "head_max_len": 512,
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "precision": "float32",
+    "batch_size": 4,
+    "gradient_accumulation": 4,
+    "learning_rates": {
+      "encoder": 2.5e-05,
+      "head": 0.0001
+    },
+    "weight_decay": 0.01,
+    "objective": "event-and-family-normalized soft-CE, same original recipe",
+    "training_rows": 86,
+    "training_families": 9,
+    "training_source_rows": 17,
+    "reviewed_pool_rows": 123,
+    "common_masked_rows": 37,
+    "changed_admitted_targets": 16,
+    "dev_rows": 30,
+    "dev_labelled": 22,
+    "dev_labelled_families": 3,
+    "initialization": "Both arms restart from the same original multilingual checkpoint, not the existing 602-state CE model. Seed/order/optimizer/weights/masks/input data are matched within each pair.",
+    "primary_evaluation": "Final epoch4 source-reviewed dev acceptance and within-family differences, reported separately for each declared seed. Epoch0/1/2/3 diagnostics never select checkpoint or alter protocol.",
+    "secondary_evaluation": "Retain original-label acceptance on the exact same admitted dev states; source-qualified and original metrics remain distinct.",
+    "interpretation_limits": [
+      "This isolates training-target changes on a common admitted subset; it does not estimate benefit of masking or cleaning the entire original 602-state corpus.",
+      "Nine effective training families and three labelled dev families are small and dev already exposed; no unseen-generalization or architecture/RL superiority claim.",
+      "Source annotations are assistant judgments with preserved qualifications, not independent human adjudication.",
+      "No new Reader QA, external benchmark labels, calibration/test loading, service changes or automatic retries.",
+      "Training loss curves and prefix acceptance do not establish on-policy QA or whole-pipeline net benefit."
+    ]
+  },
+  "literal_training_inputs_and_weights_equal": true,
+  "dev_input_and_labels_equal": true,
+  "all_target_action_sets_valid": true,
+  "new_model_calls": 0,
+  "training_started": false,
+  "length_audit": {
+    "positions": 232,
+    "train_max_tokens": 3403,
+    "dev_max_tokens": 3397,
+    "truncated": 0,
+    "literal_equal_between_arms": true
+  },
+  "preparation_compute": {
+    "reader_source_qualified_v2_completion": {
+      "runs": 2,
+      "wall_seconds": 0.8578593134880066,
+      "cpu_seconds": 0.857823421,
+      "model_calls": 0
+    },
+    "reader_source_label_pair_preparation_v1": {
+      "runs": 2,
+      "wall_seconds": 4.700439953245223,
+      "cpu_seconds": 4.684903828000001,
+      "model_calls": 0,
+      "audited_positions": 232,
+      "token_positions": 632952
+    }
+  }
+}

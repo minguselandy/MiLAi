@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Annotated, Any, Literal, cast
 
 import httpx
-from jsonschema import FormatChecker, ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import FormatChecker, ValidationError, validate
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool

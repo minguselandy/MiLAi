@@ -1,0 +1,416 @@
+{
+  "status": "FIRST_HOST_ATTEMPT_FAILED_AFTER_REAL_COMMIT",
+  "source_commit": "804d5fe2",
+  "driver": {
+    "status": "HOST_FIRST_ATTEMPTS_CLOSED",
+    "source_commit": "804d5fe2",
+    "driver_pid": 1347932,
+    "started_at": "2026-10-15T08:12:45.669602+00:00",
+    "steps": [
+      {
+        "phase": "prepare",
+        "pid": 1347962,
+        "started_at": "2026-10-15T08:12:45.670287+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T08:12:48.659203+00:00"
+      },
+      {
+        "phase": "run",
+        "pid": 1348141,
+        "started_at": "2026-10-15T08:12:48.660096+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T08:13:47.587730+00:00"
+      }
+    ],
+    "messages": 8,
+    "unknown_retry": false,
+    "closed_at": "2026-10-15T08:13:47.588096+00:00"
+  },
+  "messages": [
+    {
+      "index": 0,
+      "status": "FAILED",
+      "reason": null,
+      "error": "VLLM_CHAT_INVALID_CONTENT",
+      "error_type": "IncompleteChatResponse"
+    },
+    {
+      "index": 1,
+      "status": "NOT_RUN",
+      "reason": "prior_message_incomplete",
+      "error": null,
+      "error_type": null
+    },
+    {
+      "index": 2,
+      "status": "NOT_RUN",
+      "reason": "prior_message_incomplete",
+      "error": null,
+      "error_type": null
+    },
+    {
+      "index": 3,
+      "status": "NOT_RUN",
+      "reason": "prior_message_incomplete",
+      "error": null,
+      "error_type": null
+    },
+    {
+      "index": 4,
+      "status": "NOT_RUN",
+      "reason": "prior_message_incomplete",
+      "error": null,
+      "error_type": null
+    },
+    {
+      "index": 5,
+      "status": "NOT_RUN",
+      "reason": "prior_message_incomplete",
+      "error": null,
+      "error_type": null
+    },
+    {
+      "index": 6,
+      "status": "NOT_RUN",
+      "reason": "prior_message_incomplete",
+      "error": null,
+      "error_type": null
+    },
+    {
+      "index": 7,
+      "status": "NOT_RUN",
+      "reason": "prior_message_incomplete",
+      "error": null,
+      "error_type": null
+    }
+  ],
+  "actual_first_record": [
+    {
+      "ok": true,
+      "status": "found",
+      "id": "9a98338b-e88d-5be1-bc74-097e7908984f",
+      "value": {
+        "revision": 1,
+        "content": "Matter: credentials\nunit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de — Content: 许澄的会员卡及借阅凭条有效。 [Assertion: reported; speaker=user; occurred_at=2034-07-01T09:00:00+08:00]\n  Applies under: 凭据台账应单独保存，不与后续活动资格记录合并。 [Assertion: reported; speaker=user; occurred_at=2034-07-01T09:00:00+08:00]\nunit-4775b61e-20be-45ae-b568-b34da84359e1 — Content: 凭据柜的标签用蓝色。 [Assertion: reported; speaker=user; occurred_at=2034-07-01T09:00:00+08:00]",
+        "kind": "semantic",
+        "scope": {},
+        "basis": "user_statement",
+        "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+        "object_ref": null,
+        "fields": {},
+        "mode": "field_grounded",
+        "content_verification": "unchecked",
+        "source_status": "captured",
+        "fields_verification": "unchecked",
+        "observed_at": "2026-10-15T08:12:53.842831+00:00",
+        "committed_at": "2026-10-15T08:13:34.439235+00:00",
+        "session": "cross-event-0",
+        "retracted": false,
+        "edit_state": {
+          "matter_description": "credentials",
+          "relations": [
+            {
+              "evidence_refs": [
+                {
+                  "end": 52,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                  "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "relation_id": "relation-7ab9cf0f-c549-46e6-9ca3-6624593be11e",
+              "relation_type": "modifies",
+              "source_unit": "unit-669a8ec7-0907-40b0-ac15-18c8fbfd78bc",
+              "target_unit": "unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de"
+            }
+          ],
+          "representation": "conditioned_v1",
+          "units": [
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T08:12:53.842831+00:00",
+                "occurred_at": "2034-07-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 52,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                  "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "许澄的会员卡及借阅凭条有效。",
+              "unit_id": "unit-d2ebf5e3-27f7-4cec-8fc4-6ff48cb895de"
+            },
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T08:12:53.842831+00:00",
+                "occurred_at": "2034-07-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 52,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                  "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "condition",
+              "text": "凭据台账应单独保存，不与后续活动资格记录合并。",
+              "unit_id": "unit-669a8ec7-0907-40b0-ac15-18c8fbfd78bc"
+            },
+            {
+              "assertion": {
+                "calendar_context": "Asia/Shanghai",
+                "kind": "reported",
+                "observed_at": "2026-10-15T08:12:53.842831+00:00",
+                "occurred_at": "2034-07-01T09:00:00+08:00",
+                "role": "user",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1
+              },
+              "evidence_refs": [
+                {
+                  "end": 52,
+                  "evidence_id": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                  "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                  "source_revision": 1,
+                  "start": 0
+                }
+              ],
+              "role": "content",
+              "text": "凭据柜的标签用蓝色。",
+              "unit_id": "unit-4775b61e-20be-45ae-b568-b34da84359e1"
+            }
+          ]
+        },
+        "edit_operations": [],
+        "method_version": "milai_edit_v2",
+        "method_arm": "M",
+        "revision_evidence": [
+          "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+        ],
+        "functional_support": {
+          "basis": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+            ],
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1,
+                "start": 0,
+                "end": 52,
+                "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          },
+          "content": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+            ],
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1,
+                "start": 0,
+                "end": 52,
+                "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          },
+          "kind": {
+            "fragment_handles": [
+              "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]"
+            ],
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "quotes": [
+              {
+                "fragment_handle": "frag:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"source-f6427478-8056-4a34-b087-c60a59e9bca7\",1,0,52]",
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "source_revision": 1,
+                "start": 0,
+                "end": 52,
+                "content": "请单独保存凭据台账，不要与后续的活动资格记录合并：许澄的会员卡有效，借阅凭条也有效。凭据柜的标签用蓝色。"
+              }
+            ],
+            "semantic_support": "unchecked"
+          }
+        },
+        "source_refs": [
+          "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+        ],
+        "source_bindings": [
+          {
+            "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+            "role": "user",
+            "source_revision": 1
+          }
+        ],
+        "mutation_contract": "event_bound_v1",
+        "support_contract": "direct_support_v1",
+        "trigger_binding": {
+          "bank": [
+            "functional",
+            "run-first",
+            "cross-record-host",
+            "method-cross-host"
+          ],
+          "config_version": "milai-method-architecture-host-v1",
+          "message_id": "source",
+          "origin_phase": "start",
+          "owner": "method-cross-host",
+          "session": "cross-event-0",
+          "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+          "source_revision": 1,
+          "support_contract": "direct_support_v1",
+          "trigger_ref": "turn-a0d4aa8e-174c-4921-af6e-b5a54f0b0823"
+        },
+        "field_support": {
+          "basis": {
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "model_selected",
+            "content_verification": "unchecked"
+          },
+          "content": {
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "model_selected",
+            "content_verification": "unchecked"
+          },
+          "kind": {
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "model_selected",
+            "content_verification": "unchecked"
+          },
+          "scope": {
+            "source_refs": [
+              "source-f6427478-8056-4a34-b087-c60a59e9bca7"
+            ],
+            "source_bindings": [
+              {
+                "source_ref": "source-f6427478-8056-4a34-b087-c60a59e9bca7",
+                "role": "user",
+                "source_revision": 1
+              }
+            ],
+            "attribution": "model_selected",
+            "content_verification": "unchecked"
+          }
+        }
+      },
+      "observation_only": true,
+      "candidate_handle": "read:[[\"functional\",\"run-first\",\"cross-record-host\",\"method-cross-host\"],\"method-cross-host\",\"9a98338b-e88d-5be1-bc74-097e7908984f\",1]"
+    }
+  ],
+  "first_attempt": {
+    "semantic_commit": true,
+    "dependency_selection_completed": true,
+    "ordinary_answer_failed": true,
+    "business_effects": 0,
+    "returned_failure_receipt": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 已提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前允许记忆维护。\n\n记忆操作: {\"tool\": \"maintain_event\", \"id\": \"9a98338b-e88d-5be1-bc74-097e7908984f\", \"revision\": 1, \"status\": \"committed\"}\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+    "underlying_reply": "final model returned content=None, finish_reason=stop, reasoning only; not length or unknown usage"
+  },
+  "observed_chain": [
+    "model created actual credential ledger with both credentials and blue label",
+    "same shared dependency selector chose all3actual units; paid once",
+    "evidence pool generation0 had never been rebuilt and body was already delivered",
+    "Host called read_evidence(item_indices=[0]) without optional pool_generation",
+    "new guard rejected EVIDENCE_POOL_GENERATION_CHANGED even though initial indices were unambiguous",
+    "Host then tried read_source with unissued source identifier; rejected; shared reads exhausted",
+    "final no-tool generation returned no answer content; failure receipt honestly retains semantic commit",
+    "normal queue left remaining7messages NOT_RUN"
+  ],
+  "state_review": {
+    "core_credential_and_label_facts_present": true,
+    "issues": [
+      "two independently changeable credentials merged into one unit",
+      "organization instruction encoded as a condition modifying credential validity, although source gives no such eligibility condition"
+    ],
+    "reviewer": "same source author/developer; not independent or a successful cross-record Host story"
+  },
+  "costs": {
+    "generation": {
+      "responses": 6,
+      "tokens": 33482
+    },
+    "embedding": {
+      "responses": 3,
+      "tokens": 256
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 6,
+    "generation": {
+      "known_tokens": 33482,
+      "charged_tokens": 33482,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 256,
+      "charged_tokens": 256,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciled": true,
+  "next_repair": "allow omitted pool generation only before first rebuild; preserve changed-pool checks and verify via separate read-only recovery on a real bank copy",
+  "unknown_retry": false,
+  "original_outputs_untouched": true,
+  "full_W5_complete": false
+}

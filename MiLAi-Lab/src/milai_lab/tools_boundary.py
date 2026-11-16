@@ -172,6 +172,77 @@ def _classification(policy: ToolsBoundaryPolicy, path: str, module: str) -> str 
 
 def _reviewed_tool_loader(path: Path, tree: ast.Module, expression: str) -> bool:
     """Preserve the existing offline frozen-checker and native-source audit loaders."""
+    lme_loaders = {
+        "own_a100_lme_execution_v2.py": """
+def original_owner(protocol):
+    predecessor = read(protocol["execution_wiring_correction"]["predecessor_protocol"])
+    spec = importlib.util.spec_from_file_location(
+        "unchanged_lme_owner_v1", predecessor["frozen_owner_entry"])
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+""",
+        "own_a100_lme_observation_v3.py": """
+def load_entry(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+""",
+    }
+    if path.name in lme_loaders:
+        expected = ast.parse(lme_loaders[path.name]).body[0]
+        functions = {node.name: node for node in tree.body if isinstance(node, ast.FunctionDef)}
+        assert isinstance(expected, ast.FunctionDef)
+        actual = functions.get(expected.name)
+        if actual is None or ast.dump(actual) != ast.dump(expected):
+            return False
+        loader_calls = [
+            ast.unparse(node)
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Call)
+            and ast.unparse(node.func)
+            in {
+                "importlib.util.spec_from_file_location",
+                "importlib.util.module_from_spec",
+                "spec.loader.exec_module",
+            }
+        ]
+        reviewed_calls = {
+            ast.unparse(node) for node in ast.walk(expected) if isinstance(node, ast.Call)
+        }
+        if len(loader_calls) != 3 or expression not in reviewed_calls:
+            return False
+        if path.name == "own_a100_lme_observation_v3.py":
+            expected_owner = ast.parse("""
+def original_owner(protocol):
+    original = read(protocol["execution_wiring_correction"]["predecessor_protocol"])
+    return load_entry("unchanged_lme_owner_v1_for_v3", original["frozen_owner_entry"])
+""").body[0]
+            owner = functions.get("original_owner")
+            predecessors = [
+                ast.unparse(node)
+                for node in ast.walk(tree)
+                if isinstance(node, ast.Assign)
+                and any(isinstance(target, ast.Name) and target.id == "predecessor"
+                        for target in node.targets)
+            ]
+            if (owner is None or ast.dump(owner) != ast.dump(expected_owner)
+                    or predecessors != ["predecessor = read(correction['predecessor_protocol'])"]):
+                return False
+            callers = {
+                ast.unparse(node)
+                for node in ast.walk(tree)
+                if isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id == "load_entry"
+            }
+            return callers == {
+                "load_entry('unchanged_lme_owner_v1_for_v3', original['frozen_owner_entry'])",
+                "load_entry('unchanged_lme_owner_v2_for_bridge_validation', "
+                "predecessor['frozen_owner_entry'])",
+            }
+        return True
     checker_names = {
         "audit_v0218_chain.py": ("v0218_frozen_checker", "checker_spec"),
         "audit_v0218_discovery.py": ("discovery_frozen_checker", "loader"),

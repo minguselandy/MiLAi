@@ -455,3 +455,37 @@ def test_make_model_explicit_opt_in_and_legacy_default(
     assert legacy.client.budget is durable.client.budget is budget
     legacy.client.close()
     durable.client.close()
+
+
+def test_admission_versions_change_only_for_new_public_messages(tmp_path: Path) -> None:
+    from copy import deepcopy
+
+    path = tmp_path / 'admission.json'
+    host = {'model': 'same-model', 'temperature': 1, 'max_tokens': 8192}
+    original_scope = scope()
+    first = admission.DurableGenerationAdmission(
+        path, 'old', original_scope, host, 2, 'start', 0)
+    assert first.reserve(host, 2) == 1
+    original = deepcopy(read_json(path)['messages'][first.key])
+    later_scope = {**original_scope, 'session': 'new-session',
+                   'request_ref': 'new-actual-source', 'config_version': 'policy-v2'}
+    later = admission.DurableGenerationAdmission(path, 'new', later_scope, host, 2, 'start', 0)
+    assert later.reserve(host, 2) == 1
+    saved = read_json(path)
+    assert saved['messages'][first.key] == original
+    assert saved['messages'][later.key]['identity']['config_version'] == 'policy-v2'
+    assert saved['configuration']['config_version'] == original_scope['config_version']
+    resumed = admission.DurableGenerationAdmission(
+        path, 'old', original_scope, host, 2, 'resume', 1)
+    assert resumed.reserve(host, 2) == 2
+    changed_old = {**original_scope, 'config_version': 'policy-v2'}
+    with pytest.raises(ValueError, match='MESSAGE_IDENTITY_CHANGED'):
+        admission.DurableGenerationAdmission(path, 'old', changed_old, host, 2, 'resume', 1)
+    with pytest.raises(ValueError, match='MESSAGE_ALREADY_STARTED'):
+        admission.DurableGenerationAdmission(path, 'old', changed_old, host, 2, 'start', 0)
+    with pytest.raises(ValueError, match='CAPACITY_EXCEEDED'):
+        resumed.reserve(host, 2)
+    with pytest.raises(ValueError, match='STATE_INCOMPATIBLE'):
+        admission.DurableGenerationAdmission(path, 'another', later_scope, host, 3, 'start', 0)
+    assert read_json(path)['messages'][first.key]['count'] == 2
+    assert read_json(path)['messages'][later.key]['count'] == 1

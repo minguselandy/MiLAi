@@ -1,0 +1,84 @@
+{
+  "status": "POST_HOC_TARGETED_AUTHOR_REVIEW",
+  "reviewer": "same development assistant, not independent adjudicator",
+  "cases": [
+    {
+      "case_id": "row-866",
+      "kind": "REFERENCE_PROOF_NOT_ENTAILING_QUERY",
+      "observed": "The annotated biography states birth in Copenhagen; the question asks place of death. The annotated two-document set does not establish death location.",
+      "scope": "Reviewed annotated paragraphs; full20pool not independently adjudicated."
+    },
+    {
+      "case_id": "row-3445",
+      "kind": "REFERENCE_ENTITY_COLLISION",
+      "observed": "Lawton birthplace is New Brunswick, New Jersey; the other annotated passage concerns New Brunswick in Canada and says southeast of Edmundston, not a shared border.",
+      "scope": "Annotated linkage is unreliable; full-pool sufficiency not independently certified."
+    },
+    {
+      "case_id": "row-5026",
+      "kind": "REFERENCE_RELATION_AMBIGUITY",
+      "observed": "The marked district paragraph places Gulran in Herat province and names Kushk as its eastern neighbor. The query refers to the birth city containing a region; the gold Kushk is not uniquely supported by this chain."
+    },
+    {
+      "case_id": "row-8077",
+      "kind": "REFERENCE_ENTITY_COLLISION",
+      "observed": "The house is in Newton, Massachusetts; the second marked passage is Newton, Texas. Gold Newton County follows the mismatched location."
+    },
+    {
+      "case_id": "row-10637",
+      "kind": "GENRE_GRANULARITY_AMBIGUITY",
+      "observed": "The answer commedia per musica is supplied as the work genre, while the reference asks for the composer genre opera. This needs semantic adjudication, not an automatic hallucination label."
+    },
+    {
+      "case_id": "row-19869",
+      "kind": "UNANSWERABLE_LABEL_REQUIRES_REVIEW",
+      "observed": "The unanswerable counterpart still supplies the work genre; whether that suffices for the composer-genre question is ambiguous."
+    },
+    {
+      "case_id": "row-37002",
+      "kind": "REFERENCE_PROOF_NOT_ENTAILING_QUERY",
+      "observed": "Marked passages describe DVD release and distribution/licensing; they do not establish the production studio ownership requested by the question.",
+      "scope": "Annotated proof reviewed, not an exhaustive full-pool absence proof."
+    },
+    {
+      "case_id": "row-39565",
+      "kind": "LOCATION_AND_ATTRACTION_AMBIGUITY",
+      "observed": "Gold refers to an Orlando attraction; the cited alternative is a Hollywood King Kong replacement. The Spielberg passage identifies a Universal studio internship, leaving the intended site/attraction underspecified."
+    },
+    {
+      "case_id": "row-36340",
+      "kind": "ALTERNATIVE_ACCEPTED_ANSWER_DIRECTLY_SUPPORTED",
+      "observed": "Prince of Wales is explicit in the selected biography and accepted by the reference aliases; the question does not specify the time of the paternal office. Requiring the entire canonical support set overstates necessary evidence."
+    },
+    {
+      "case_id": "row-17008",
+      "kind": "ANSWER_BEARING_TEXT_WITH_INCOMPLETE_BINDING",
+      "observed": "The selected text explicitly gives the 15million transfer destination Newcastle, while the maximum-goal qualification is not established in that selected set. Do not equate answer EM with complete reference proof."
+    },
+    {
+      "case_id": "row-37282",
+      "kind": "ANSWER_BEARING_TEXT_WITH_INCOMPLETE_BINDING",
+      "observed": "The selected Colorado peak paragraph directly names the range; the hospital-state link is missing from the selected set."
+    },
+    {
+      "case_id": "row-38432",
+      "kind": "BACKGROUND_KNOWLEDGE_OR_REFERENCE_GRANULARITY",
+      "observed": "Selected text gives Kentucky birthplace; country inference uses geographic background rather than all three canonical paragraphs. The sufficiency protocol must distinguish these interpretations."
+    },
+    {
+      "case_id": "row-24439",
+      "kind": "READER_ANSWER_FIELD_CONTAMINATION",
+      "observed": "The answer string contains James Dearden followed by true and source IDs, despite separate structured fields. JSON schema validity did not prevent content-format error."
+    },
+    {
+      "case_id": "row-28960",
+      "kind": "ANSWER_SURFACE_QUALIFIER",
+      "observed": "about30000 is penalized relative to30000 by the native token metric. Do not classify this surface mismatch as an established wrong numeric value without source review."
+    }
+  ],
+  "raw_official_scores_unchanged": true,
+  "new_model_calls": 0,
+  "new_labels_used_for_training": false,
+  "scope": "Selected mismatches and apparent shortcut successes only; not a population-wide error rate or full20paragraph semantic audit.",
+  "consequence": "Canonical support flags are not an exhaustive semantic sufficiency oracle. Future derived-label versions must allow reviewed alternatives or mask ambiguity; do not expand training by treating these labels as certain."
+}

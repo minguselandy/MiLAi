@@ -1,0 +1,29 @@
+{
+  "name": "jev-meme-reader-confirm-v1",
+  "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/meme_nofiller.json",
+  "selection": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1-preparation/selection.json",
+  "settings_source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/actual-config.json",
+  "source_version": "set_at_dispatch",
+  "variants": [
+    "baseline",
+    "compact"
+  ],
+  "compact_system_prompt": "Answer the question at its requested time using the supplied memories. Treat attributed reports as premises for reasoning within this scenario, preserving uncertainty. Apply explicit conditional rules when later reports establish their conditions, including chains of rules. If a value depended on a condition that changed, distinguish the previous value from what is now known; do not assume it stayed current without support. State rule-derived conclusions as derived, not independently observed. Use no outside facts. For verbatim recall, preserve the original wording.",
+  "temperature": 1.0,
+  "sampling": {
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 1.5,
+    "repetition_penalty": 1.0
+  },
+  "seeds": [
+    20261017,
+    20261018
+  ],
+  "output_limit": 8192,
+  "scope": "Four metadata-frozen new-to-registered-study stories, distinct active-edge templates; two seeds per story. Same complete raw-source prefix and native before/after questions for both frozen Reader instructions. Shared underlying domain DAGs limit independence. Source-only view differs from prior mixed-state pilot; no maintenance or exact mixed-view replication claim.",
+  "scoring": "Open references and author-review first responses only after all scheduled calls close. Native Cas/Abs/Del require sameepisode/sameseed/samevariant beforepass. Retain ambiguous/missing and all failures; no semantic retry.",
+  "sampling_basis": "Localmodelcard general-thinking sampling, explicitly sent. Output remains8192 matched to previous diagnostic, not modelcard32768. No server or modelweight changes.",
+  "unknown_retry": false
+}

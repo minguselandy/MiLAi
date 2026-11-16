@@ -1,0 +1,96 @@
+{
+  "status": "WORKFLOW_IMPLEMENTED_AND_SYNTHETICALLY_VERIFIED;FULL_CORPUS_INPUT_PREFLIGHT_RUNNING;NOT_DISPATCHED",
+  "declared_at": "2026-10-22T00:11:18.631084+00:00",
+  "source_version": "ec2bc88a",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-reader-ec2bc88a/MiLAi-Lab",
+  "prior_media_protocol": "training-generalization-lme-media-bridge-v1.json",
+  "complete_input_scope": "All451originalSmallquestions,200selectedtrajectories/5095states/5124images;originalorderedhaystacks preserved. Priorcontactdisclosed,notfreshhistoryholdout. No nativeQAanswer or evalspec reaches retrieval/Reader.",
+  "workflow": {
+    "prediction_entrypoint": "tools/run_lme_predictions.py",
+    "scoring_entrypoint": "tools/score_lme_predictions.py",
+    "prediction": "Full suppliedcohortonce;nativepoolorder,actualStoreclonesperquestion,sharedloadedcontrollerpool acrossbanks. Publicquery/imageonly. NoQA filteringbygold pointers.",
+    "scoring": "Separatecall afterpredictiondriverterminal. Nativebinaryrules/rubrics/boxedparser/aggregate. Referencesfromliteralprivateinputcopyretainedbeforeprediction;neverswappedfrommutableupstreamafteroutputs. ActualsavedReaderresponsechecked,Readerneverregenerated.",
+    "failures": "Firstfailure retained;noautomaticretry. FailedReader/Judge andunattemptedtail remainunscoredinfullplanneddenominator. Nativefullmetrics onlywithfullscoredcoverage;subsetconditionalmetrics andallplannedbounds separately. ValidmodelUNKNOWN obeysnativezero-score rule,distinctfrommissingoutcome.",
+    "native_source_loading": "Onlyexplicitinspected AST function/constant exports,withstaticstdlib dependencies. No wholesaleupstreammodule initialization,unresolvedimports,SDKnetwork constructor,automaticretries or trajectorySHA path. Literalnativecodefilescopiedinto prediction artifacts. Boundaryrulesnotweakened."
+  },
+  "inference": {
+    "interpreter": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+    "additional_sites": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages",
+      "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-reader-pillow-overlay-v1"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "controller_runtime": "KeepTransformers4.52.3/torch2.7 fromthedeclaredCUDAenv,matchingpersistedCPUcontrollerselection;donot silentlyswitchLaya toHTTPenv4.57.6.",
+    "mha_fastpath": false,
+    "controller_device": "cpu",
+    "reader_and_judge": "UseexistinglocalQwen3.6-35B-A3B-FP8 Host DTO/config;notpaperQwen3.5-9B/GPTjudge reproduction. No newservice/modelsetting/limit changes.",
+    "query_image": "Originalimage reachesfixedReader;existingfinitecontrollerremainstextual,notcaptioned orsilentlyupgradedtovisualencoder.",
+    "image_capacity": "ExplicitImageHostCapacity usescompleteinlinewireimages andnativeQwenpatchgrid. Source/Questionimages retained;no memory-context clipping toforceadmission. Nativeoverflow isretainedfailure."
+  },
+  "budget_and_accounting": {
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "Reader_gate": "FixedReaderresumesactualexistingpublic-queryDurableGenerationAdmission;retrieval+Reader remainwithinunchanged24call cap. ExhaustionpreventssendingReaderHTTP.",
+    "Judge_gate": "AtmostoneofflineJudgecall fornativeLLMmetric;separatefromHosttaskallowance,butchargedtosamequeue/ledger. Exactmetrics neednoJudgecall.",
+    "queue": "Samequeryruntime queue-admission.json acrossretrieval/Reader/Judge;unchanged600requests/8Mreservedtokens,noreset. EachquestionStoreclone isdeclaredbenchmarkisolation,notsame-case retry.",
+    "unknown_usage": "Keepactualreceipt/Noneandoriginalchargedreservation,notfabricatedzero.",
+    "CPU": "PerrequestfrontendCPU,exclusiveReader/scorerorchestration,andwholeprocessnestedobservations keptseparate. LocalcontrollercomputeandHTTPmayalreadybebilled;neversum nestedcopies. Noautomaticofflinesettlement."
+  },
+  "pixel_config_correction": {
+    "problem": "Both4.52.3and4.57.6slowQwenprocessors replace valid size dict bylibrarydefaults;from_pretrained pixelkwargs updateattributesafterconstructor withoutrebuilding size.",
+    "implementation": "Resolve nativeimageprocessorclass,thenconstructwithfulllocalconfig andexplicitdeclaredpixelbounds. Effectiveconfigretainedinreceipts. Noenvironmentupgrade ormodel-code patch.",
+    "declared_pixels": {
+      "shortest_edge": 65536,
+      "longest_edge": 16777216
+    },
+    "verified_native_geometry": {
+      "64x128": 72,
+      "800x480": 375,
+      "1000x480": 465,
+      "1280x720": 880,
+      "2048x1024": 2048
+    },
+    "old_preflight_qualification": "Existing5124assets useonlythethreemiddle sizes,so375/465/880previouscounts remainunchanged. Earliercomponentagreement testsdidnotproveconfigbounds;newtestscheckdeclaredrange andsmall/large behavior.",
+    "actual_server_vision_usage": "StillNOTVERIFIED;syntheticmeteredserverprobe mustwaitforrealmodelslot."
+  },
+  "validation": {
+    "new_native_protocol_tests": 15,
+    "Reader_accounting_budget_privacy_tests": 7,
+    "whole_cohort_real_Store_mock_HTTP_tests": 3,
+    "new_pixel_and_complete_image_Reader_tests": 3,
+    "existing_image_regressions": 6,
+    "unique_tests_passed": 34,
+    "skipped": 0,
+    "pixel_environment_checks": "new3tests runinboth4.52.3and4.57.6;notdoublecounted",
+    "ruff_changed_python_files": 10,
+    "mypy_implementation_files": 6,
+    "package_and_tools_boundaries": "PASS;6grandfatheredprivateedgesunchanged",
+    "entrypoint_help": "bothCLI helpcommands passed",
+    "all_generation_in_tests": "MockHTTPonly;realnetworkblocked;isolatedtestledger only,notresearchoutcomes"
+  },
+  "whole_bank_preflight": {
+    "status": "RUNNING_CPU_ONLY",
+    "session": 21998,
+    "pid": 3985384,
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-whole-bank-input-preflight-v1/audit.json",
+    "process_record": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-whole-bank-input-preflight-v1-process.json",
+    "scope": "ActualStoreingestion ofboth100trajectorypools(3458and1837Sourceunits) andsyntheticinitial-state tokenization. No actualQAcontentdisplay/modelweights/HTTP.",
+    "input_conditions": "Unpagedexistingdefaultversus4096-tokenexistingSourceObservationPages candidate. Thisisnotafinalexternalinputamendment untilactualaudit. Fullbank remainsavailable;noSource dropping.",
+    "remaining_scope": "Onlyinitialpagesplannedinthisaudit;laterpagecoverage,actualquery/search/View states andownpolicyinputs stillneed checks. No complete-cohort modelreadinessclaim."
+  },
+  "dispatch_conditions": [
+    "Currentcorrectedfitparent/child terminal andnoothermodeljob",
+    "Finalmethod/checkpoints/seedsselectedandfrozenwithoutLMEoutcomes",
+    "Fullcorpuscapacity/pagingcondition explicitlyvalidatedandmatchedacrossarms,alloriginalSourcesavailable",
+    "Meteredexisting-servervision/usageprobe passes;no service changes",
+    "OriginalLedger/queue/modelsettings unchanged;firstoutputs/failuresretained"
+  ],
+  "model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "scope": "Workflow implementationandmechanicalvalidation only. Full451actualexternalruns,source-faithfulHostendpoint,protected/multiseedconfirmationremainrequired."
+}

@@ -1,0 +1,1297 @@
+{
+  "status": "CLOSED_FIRST_ANSWERS_AND_RECEIPTS_RECONCILED_READONLY",
+  "roots": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memconflict-reader-v1",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memconflict-native-reader-diagnostic-v1",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memconflict-dense-v1",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memconflict-dense-control-v1"
+  ],
+  "reader_answers_verified": 84,
+  "pool_source_spans_verified": {
+    "memconflict-reader-v1": 120,
+    "memconflict-native-reader-diagnostic-v1": 120,
+    "memconflict-dense-v1": 120,
+    "memconflict-dense-control-v1": 120
+  },
+  "reviewed_witness_turns_verified": 21,
+  "dense_and_ce_runtime_inputs_literal_equal": true,
+  "natural_reader_prompt_and_sampling_equal": true,
+  "methods": {
+    "memconflict-reader-v1/bm25-k2": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 1.0,
+      "costs": {
+        "reader_input_tokens": 2273,
+        "reader_output_tokens": 182,
+        "read_count": 12,
+        "reader_wall_seconds": 1.8762346552684903,
+        "selection_load_inclusive_wall_seconds": 0.003982437774538994,
+        "selection_case_wall_seconds": 9.058322757482529e-05
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 0.003982437774538994,
+        "cpu_seconds": 0.12747507700000016,
+        "device": "cpu",
+        "physical_gpu": null,
+        "reference_compile": null
+      }
+    },
+    "memconflict-reader-v1/bm25-k20": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 2.0,
+      "costs": {
+        "reader_input_tokens": 11700,
+        "reader_output_tokens": 215,
+        "read_count": 120,
+        "reader_wall_seconds": 3.0954200690612197,
+        "selection_load_inclusive_wall_seconds": 0.002999170683324337,
+        "selection_case_wall_seconds": 8.599832653999329e-05
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 0.002999170683324337,
+        "cpu_seconds": 0.03191956600000001,
+        "device": "cpu",
+        "physical_gpu": null,
+        "reference_compile": null
+      }
+    },
+    "memconflict-reader-v1/bm25-k4": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 1.0,
+      "costs": {
+        "reader_input_tokens": 3291,
+        "reader_output_tokens": 162,
+        "read_count": 24,
+        "reader_wall_seconds": 1.8312076749280095,
+        "selection_load_inclusive_wall_seconds": 0.002967333421111107,
+        "selection_case_wall_seconds": 8.078757673501968e-05
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 0.002967333421111107,
+        "cpu_seconds": 0.11991574599999999,
+        "device": "cpu",
+        "physical_gpu": null,
+        "reference_compile": null
+      }
+    },
+    "memconflict-reader-v1/laya-ce-adaptive": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 1.0,
+      "costs": {
+        "reader_input_tokens": 1888,
+        "reader_output_tokens": 182,
+        "read_count": 8,
+        "reader_wall_seconds": 1.6770245404914021,
+        "selection_load_inclusive_wall_seconds": 8.560166041366756,
+        "selection_case_wall_seconds": 1.4500137232244015
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 8.560166041366756,
+        "cpu_seconds": 10.592963641,
+        "model_forwards": 14,
+        "encoder_sequence_rows": 14,
+        "token_positions": 28369,
+        "tokenizer_calls": 326,
+        "tokenizer_wall_seconds": 0.06744517851620913,
+        "peak_cuda_allocated_bytes": 2665849344,
+        "device": "cuda:0",
+        "physical_gpu": 3,
+        "reference_compile": false
+      }
+    },
+    "memconflict-reader-v1/laya-ce-k2": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 1.0,
+      "costs": {
+        "reader_input_tokens": 2235,
+        "reader_output_tokens": 182,
+        "read_count": 12,
+        "reader_wall_seconds": 1.723964679054916,
+        "selection_load_inclusive_wall_seconds": 9.711138938553631,
+        "selection_case_wall_seconds": 1.675273629836738
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 9.711138938553631,
+        "cpu_seconds": 13.293705534,
+        "model_forwards": 12,
+        "encoder_sequence_rows": 12,
+        "token_positions": 24612,
+        "tokenizer_calls": 282,
+        "tokenizer_wall_seconds": 0.25540794152766466,
+        "peak_cuda_allocated_bytes": 2665849344,
+        "device": "cuda:0",
+        "physical_gpu": 3,
+        "reference_compile": false
+      }
+    },
+    "memconflict-reader-v1/laya-ce-k4": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 2.0,
+      "costs": {
+        "reader_input_tokens": 3229,
+        "reader_output_tokens": 196,
+        "read_count": 24,
+        "reader_wall_seconds": 2.1036945451050997,
+        "selection_load_inclusive_wall_seconds": 9.32232696376741,
+        "selection_case_wall_seconds": 2.2099811183288693
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 9.32232696376741,
+        "cpu_seconds": 10.592432727,
+        "model_forwards": 24,
+        "encoder_sequence_rows": 24,
+        "token_positions": 48920,
+        "tokenizer_calls": 540,
+        "tokenizer_wall_seconds": 0.10770792048424482,
+        "peak_cuda_allocated_bytes": 2665849344,
+        "device": "cuda:0",
+        "physical_gpu": 3,
+        "reference_compile": false
+      }
+    },
+    "memconflict-native-reader-diagnostic-v1/full-pool-native": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 2.0,
+      "costs": {
+        "reader_input_tokens": 9440,
+        "reader_output_tokens": 505,
+        "read_count": 120,
+        "reader_wall_seconds": 4.685473864898086
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      }
+    },
+    "memconflict-native-reader-diagnostic-v1/reviewed-context-native": {
+      "native_aa_per_case": [
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "native_aa_sum": 5.0,
+      "costs": {
+        "reader_input_tokens": 2165,
+        "reader_output_tokens": 280,
+        "read_count": 21,
+        "reader_wall_seconds": 2.308678445406258
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      }
+    },
+    "memconflict-dense-v1/dense-k1": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "native_aa_sum": 2.0,
+      "costs": {
+        "reader_input_tokens": 1246,
+        "reader_output_tokens": 189,
+        "read_count": 6,
+        "reader_wall_seconds": 2.0553566878661513,
+        "selection_load_inclusive_wall_seconds": 0.001722327433526516,
+        "selection_case_wall_seconds": 5.016569048166275e-05
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 0.001722327433526516,
+        "cpu_seconds": 0.0017200660000002976,
+        "device": "cpu",
+        "physical_gpu": null,
+        "reference_compile": null,
+        "peak_cuda_allocated_bytes": null
+      }
+    },
+    "memconflict-dense-v1/dense-k2": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 3.0,
+      "costs": {
+        "reader_input_tokens": 1550,
+        "reader_output_tokens": 246,
+        "read_count": 12,
+        "reader_wall_seconds": 2.0251543959602714,
+        "selection_load_inclusive_wall_seconds": 0.0024964502081274986,
+        "selection_case_wall_seconds": 6.209034472703934e-05
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 0.0024964502081274986,
+        "cpu_seconds": 0.0340529820000004,
+        "device": "cpu",
+        "physical_gpu": null,
+        "reference_compile": null,
+        "peak_cuda_allocated_bytes": null
+      }
+    },
+    "memconflict-dense-v1/dense-k20": {
+      "native_aa_per_case": [
+        1.0,
+        0.5,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "native_aa_sum": 5.5,
+      "costs": {
+        "reader_input_tokens": 7982,
+        "reader_output_tokens": 419,
+        "read_count": 120,
+        "reader_wall_seconds": 3.9146410515531898,
+        "selection_load_inclusive_wall_seconds": 0.002905961126089096,
+        "selection_case_wall_seconds": 8.649658411741257e-05
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 0.002905961126089096,
+        "cpu_seconds": 0.033175869999999996,
+        "device": "cpu",
+        "physical_gpu": null,
+        "reference_compile": null,
+        "peak_cuda_allocated_bytes": null
+      }
+    },
+    "memconflict-dense-v1/dense-k4": {
+      "native_aa_per_case": [
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "native_aa_sum": 5.0,
+      "costs": {
+        "reader_input_tokens": 2256,
+        "reader_output_tokens": 276,
+        "read_count": 24,
+        "reader_wall_seconds": 2.2984862150624394,
+        "selection_load_inclusive_wall_seconds": 0.00271600391715765,
+        "selection_case_wall_seconds": 5.508866161108017e-05
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 0.00271600391715765,
+        "cpu_seconds": 0.0067145109999997565,
+        "device": "cpu",
+        "physical_gpu": null,
+        "reference_compile": null,
+        "peak_cuda_allocated_bytes": null
+      }
+    },
+    "memconflict-dense-control-v1/laya-ce-adaptive": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "native_aa_sum": 1.0,
+      "costs": {
+        "reader_input_tokens": 1126,
+        "reader_output_tokens": 198,
+        "read_count": 4,
+        "reader_wall_seconds": 1.717625874094665,
+        "selection_load_inclusive_wall_seconds": 8.13133321609348,
+        "selection_case_wall_seconds": 1.0545761873945594
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 8.13133321609348,
+        "cpu_seconds": 10.099534598,
+        "model_forwards": 10,
+        "encoder_sequence_rows": 10,
+        "token_positions": 18104,
+        "tokenizer_calls": 236,
+        "tokenizer_wall_seconds": 0.045369770377874374,
+        "device": "cuda:0",
+        "physical_gpu": 3,
+        "reference_compile": false,
+        "peak_cuda_allocated_bytes": 2110628864
+      }
+    },
+    "memconflict-dense-control-v1/laya-ce-k4": {
+      "native_aa_per_case": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "native_aa_sum": 2.0,
+      "costs": {
+        "reader_input_tokens": 2271,
+        "reader_output_tokens": 443,
+        "read_count": 24,
+        "reader_wall_seconds": 3.3401437383145094,
+        "selection_load_inclusive_wall_seconds": 9.704498458653688,
+        "selection_case_wall_seconds": 1.9369164519011974
+      },
+      "reader_settings": {
+        "base_url": "http://127.0.0.1:7860/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 512,
+        "timeout": 300,
+        "enable_thinking": false,
+        "max_calls": 12
+      },
+      "selection_compute": {
+        "runs": 1,
+        "wall_seconds": 9.704498458653688,
+        "cpu_seconds": 11.984726972,
+        "model_forwards": 24,
+        "encoder_sequence_rows": 24,
+        "token_positions": 42958,
+        "tokenizer_calls": 540,
+        "tokenizer_wall_seconds": 0.09317059814929962,
+        "device": "cuda:0",
+        "physical_gpu": 3,
+        "reference_compile": false,
+        "peak_cuda_allocated_bytes": 2110628864
+      }
+    }
+  },
+  "receipts": {
+    "memconflict-reader-v1/laya-ce-adaptive/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 2070
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-reader-v1/score-json-object-v2": {
+      "totals": {
+        "generation_responses": 36,
+        "generation_tokens": 26799
+      },
+      "finish_reasons": {
+        "stop": 36
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-reader-v1/bm25-k4/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 3453
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-reader-v1/laya-ce-k2/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 2417
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-reader-v1/bm25-k2/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 2455
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-reader-v1/bm25-k20/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 11915
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-reader-v1/score": {
+      "totals": {
+        "generation_responses": 12,
+        "generation_tokens": 10116
+      },
+      "finish_reasons": {
+        "length": 1,
+        "stop": 11
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-reader-v1/score-continuation-v1": {
+      "totals": {
+        "generation_responses": 24,
+        "generation_tokens": 18764
+      },
+      "finish_reasons": {
+        "stop": 24
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-reader-v1/laya-ce-k4/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 3425
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-native-reader-diagnostic-v1/full-pool-native/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 9945
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-native-reader-diagnostic-v1/reviewed-context-native/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 2445
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-native-reader-diagnostic-v1/score": {
+      "totals": {
+        "generation_responses": 12,
+        "generation_tokens": 10878
+      },
+      "finish_reasons": {
+        "stop": 12
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-v1/dense-k1/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 1435
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-v1/retrieval": {
+      "totals": {
+        "embedding_responses": 161,
+        "embedding_tokens": 153964
+      },
+      "finish_reasons": {},
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-v1/dense-k4/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 2532
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-v1/dense-k2/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 1796
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-v1/score": {
+      "totals": {
+        "generation_responses": 24,
+        "generation_tokens": 18226
+      },
+      "finish_reasons": {
+        "stop": 24
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-v1/dense-k20/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 8401
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-control-v1/laya-ce-adaptive/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 1324
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-control-v1/score": {
+      "totals": {
+        "generation_responses": 12,
+        "generation_tokens": 8606
+      },
+      "finish_reasons": {
+        "stop": 12
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-dense-control-v1/laya-ce-k4/reader": {
+      "totals": {
+        "generation_responses": 6,
+        "generation_tokens": 2714
+      },
+      "finish_reasons": {
+        "stop": 6
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-judge-validation-v1": {
+      "totals": {
+        "generation_responses": 4,
+        "generation_tokens": 1990
+      },
+      "finish_reasons": {
+        "stop": 4
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-judge-validation-float-v1": {
+      "totals": {
+        "generation_responses": 1,
+        "generation_tokens": 499
+      },
+      "finish_reasons": {
+        "stop": 1
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    },
+    "memconflict-owner-scope-probe-v2": {
+      "totals": {
+        "generation_responses": 1,
+        "generation_tokens": 635
+      },
+      "finish_reasons": {
+        "stop": 1
+      },
+      "ledger_differences": {
+        "generation_tokens": 0,
+        "generation_unknown": 0,
+        "embedding_tokens": 0,
+        "embedding_unknown": 0,
+        "generation_requests": 0
+      }
+    }
+  },
+  "actual_recorded_http_totals": {
+    "generation_responses": 210,
+    "generation_tokens": 152840,
+    "embedding_responses": 161,
+    "embedding_tokens": 153964
+  },
+  "judge_repair_same_messages_verified": 36,
+  "first_judge_calls": 12,
+  "continuation_unattempted_calls": 24,
+  "witness_pool_coverage": {
+    "memconflict-reader-v1": {
+      "case-0": [
+        {
+          "session": 2,
+          "turn": 0,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 3,
+          "turn": 0,
+          "candidate_ranks_zero_based": []
+        }
+      ],
+      "case-1": [
+        {
+          "session": 0,
+          "turn": 0,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 0,
+          "turn": 1,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 0,
+          "turn": 21,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 8,
+          "turn": 0,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 8,
+          "turn": 16,
+          "candidate_ranks_zero_based": [
+            19
+          ]
+        },
+        {
+          "session": 8,
+          "turn": 50,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 10,
+          "turn": 0,
+          "candidate_ranks_zero_based": []
+        }
+      ],
+      "case-2": [
+        {
+          "session": 0,
+          "turn": 8,
+          "candidate_ranks_zero_based": [
+            17
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 68,
+          "candidate_ranks_zero_based": [
+            0
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 69,
+          "candidate_ranks_zero_based": [
+            15
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 70,
+          "candidate_ranks_zero_based": [
+            1
+          ]
+        }
+      ],
+      "case-3": [
+        {
+          "session": 3,
+          "turn": 0,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 3,
+          "turn": 2,
+          "candidate_ranks_zero_based": []
+        }
+      ],
+      "case-4": [
+        {
+          "session": 0,
+          "turn": 16,
+          "candidate_ranks_zero_based": [
+            0
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 34,
+          "candidate_ranks_zero_based": [
+            1
+          ]
+        }
+      ],
+      "case-5": [
+        {
+          "session": 4,
+          "turn": 12,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 14,
+          "turn": 6,
+          "candidate_ranks_zero_based": [
+            0
+          ]
+        },
+        {
+          "session": 14,
+          "turn": 60,
+          "candidate_ranks_zero_based": [
+            1
+          ]
+        },
+        {
+          "session": 14,
+          "turn": 61,
+          "candidate_ranks_zero_based": [
+            3
+          ]
+        }
+      ]
+    },
+    "memconflict-dense-v1": {
+      "case-0": [
+        {
+          "session": 2,
+          "turn": 0,
+          "candidate_ranks_zero_based": [
+            1
+          ]
+        },
+        {
+          "session": 3,
+          "turn": 0,
+          "candidate_ranks_zero_based": [
+            6
+          ]
+        }
+      ],
+      "case-1": [
+        {
+          "session": 0,
+          "turn": 0,
+          "candidate_ranks_zero_based": [
+            5
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 1,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 0,
+          "turn": 21,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 8,
+          "turn": 0,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 8,
+          "turn": 16,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 8,
+          "turn": 50,
+          "candidate_ranks_zero_based": []
+        },
+        {
+          "session": 10,
+          "turn": 0,
+          "candidate_ranks_zero_based": [
+            2
+          ]
+        }
+      ],
+      "case-2": [
+        {
+          "session": 0,
+          "turn": 8,
+          "candidate_ranks_zero_based": [
+            0
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 68,
+          "candidate_ranks_zero_based": [
+            1
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 69,
+          "candidate_ranks_zero_based": [
+            6
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 70,
+          "candidate_ranks_zero_based": [
+            2
+          ]
+        }
+      ],
+      "case-3": [
+        {
+          "session": 3,
+          "turn": 0,
+          "candidate_ranks_zero_based": [
+            0
+          ]
+        },
+        {
+          "session": 3,
+          "turn": 2,
+          "candidate_ranks_zero_based": [
+            4
+          ]
+        }
+      ],
+      "case-4": [
+        {
+          "session": 0,
+          "turn": 16,
+          "candidate_ranks_zero_based": [
+            2
+          ]
+        },
+        {
+          "session": 0,
+          "turn": 34,
+          "candidate_ranks_zero_based": [
+            1
+          ]
+        }
+      ],
+      "case-5": [
+        {
+          "session": 4,
+          "turn": 12,
+          "candidate_ranks_zero_based": [
+            3
+          ]
+        },
+        {
+          "session": 14,
+          "turn": 6,
+          "candidate_ranks_zero_based": [
+            2
+          ]
+        },
+        {
+          "session": 14,
+          "turn": 60,
+          "candidate_ranks_zero_based": [
+            12
+          ]
+        },
+        {
+          "session": 14,
+          "turn": 61,
+          "candidate_ranks_zero_based": []
+        }
+      ]
+    }
+  },
+  "source_review_scope": "All 84 Reader answers inspected; 21 reviewed witness turns plus targeted dense/source passages inspected semantically. All pool spans checked against raw dataset text and prefix boundaries. Not a second full 240-paragraph semantic review.",
+  "new_model_calls": 0,
+  "sha_checks": 0,
+  "sibling_artifacts_modified": false,
+  "additional_input_audit": {
+    "native_questions_verified": 6,
+    "embedding_queries_verified": 6,
+    "embedding_documents_verified": 2445,
+    "embedding_prefix_checks": [
+      {
+        "case_id": "case-0",
+        "documents_before_query": 351,
+        "latest_session": 3
+      },
+      {
+        "case_id": "case-1",
+        "documents_before_query": 640,
+        "latest_session": 10
+      },
+      {
+        "case_id": "case-2",
+        "documents_before_query": 82,
+        "latest_session": 11
+      },
+      {
+        "case_id": "case-3",
+        "documents_before_query": 348,
+        "latest_session": 3
+      },
+      {
+        "case_id": "case-4",
+        "documents_before_query": 842,
+        "latest_session": 12
+      },
+      {
+        "case_id": "case-5",
+        "documents_before_query": 182,
+        "latest_session": 14
+      }
+    ],
+    "source_span_mode": "Exact original title plus a literal original turn substring; before its native question session.",
+    "model_calls": 0,
+    "wall_seconds": 1.5396901536732912,
+    "cpu_seconds": 1.539606567
+  },
+  "dense_shared_retrieval": {
+    "embedding_responses": 161,
+    "embedding_tokens": 153964,
+    "preparation_wall_seconds": 27.938066139817238,
+    "preparation_cpu_seconds": 22.470785208000002,
+    "insertion_wall_seconds": 23.823025537654757,
+    "query_and_rank_wall_seconds": 0.4463642854243517,
+    "scope": "Original incremental retrieval cost, charged once there; every standalone dense method must include applicable ingestion/query work. Not recharged by this read-only reconciliation."
+  },
+  "review_notes": {
+    "case-0": "The native label says a marital-status change; visible statements establish single-to-dating relationship change. Legal marital meaning remains ambiguous. Do not turn this into a certain training target or mark careful scope distinctions incorrect by fiat.",
+    "case-1": "Both Paul and Michael self-introductions enter dense C20; the full Reader acknowledges both but selects latest Michael and receives partial native credit .5. No visible authority resolves which name is true; keep the native score and source uncertainty separate.",
+    "case-2": "Old CE-k4 wrongly transfers the crowded-commute audio condition to academic reading. Dense p0 restores direct long-commute/weekend evidence. Dense CE-k4 also describes a desire for weekends rather than commute reading; p4 literally supports that desire, so this extra clause is not rejected merely for differing from the brief gold answer. It is not an enacted cancellation of commute reading.",
+    "case-3": "Dense p0 directly states just got married. CE instead selects unrelated Maria/single and context about Taylor, then both CE arms abstain. This is a real selection failure after candidate coverage was repaired.",
+    "case-4": "Dense p2 restores quiet-and-both-free condition, delivered at k4 and CE-k4. Dense k2 only gives unspecified shared evenings yet the native Judge gives full credit; do not equate that score with complete condition fidelity.",
+    "case-5": "Dense p3 supplies 1978-06-22 and p2 preserves the conflicting 1990 report; k4 includes both. CE-k4 excludes both specific date statements and adaptive opens only a generic discrepancy passage. Original JSON arms often asserted the explicitly disputed 1990 as certain."
+  },
+  "limits": [
+    "Only two already exposed personas and six questions; no broad or independent confirmation.",
+    "Original structured Reader versus dense natural Reader is not a retrieval-only contrast; compare the existing full-pool-native arm for the common-prompt full-pool contrast.",
+    "Native scores are retained, including .5 partial credit; source fidelity and question/identity ambiguity are reported separately.",
+    "Author-reviewed context is a diagnostic with unmeasured human effort, not an oracle upper bound or deployable method.",
+    "No new model requests or test labels entered training; sibling records were read only."
+  ],
+  "recorded_local_selector_totals": {
+    "model_forwards": 84,
+    "input_token_positions": 162963,
+    "scope": "Previously executed sibling selectors, not new calls or recharges."
+  }
+}

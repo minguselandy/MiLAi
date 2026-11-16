@@ -1,0 +1,68 @@
+{
+  "source_run": "artifacts/dynamic-memory-control/e0-v1-remaining2",
+  "source_status": "COMPLETED_WITH_FAILURES",
+  "attempted": 116,
+  "planned": 116,
+  "totals": {
+    "fixed": {
+      "attempted": 29,
+      "host_completed": 28,
+      "task_positions": 24,
+      "explicit_positions": 5,
+      "generation_known_tokens": 391940,
+      "generation_charged_tokens": 391940,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 336,
+      "embedding_charged_tokens": 336,
+      "embedding_unknown_usage": 0
+    },
+    "rules": {
+      "attempted": 29,
+      "host_completed": 27,
+      "task_positions": 24,
+      "explicit_positions": 5,
+      "generation_known_tokens": 409619,
+      "generation_charged_tokens": 409619,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 896,
+      "embedding_charged_tokens": 896,
+      "embedding_unknown_usage": 0
+    },
+    "laya": {
+      "attempted": 29,
+      "host_completed": 28,
+      "task_positions": 24,
+      "explicit_positions": 5,
+      "generation_known_tokens": 278141,
+      "generation_charged_tokens": 278141,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 895,
+      "embedding_charged_tokens": 895,
+      "embedding_unknown_usage": 0,
+      "dynamic_memory_laya_cpu_seconds": 4666.182486976999,
+      "dynamic_memory_laya_forwards": 169,
+      "dynamic_memory_laya_input_tokens": 498117,
+      "dynamic_memory_laya_sequence_rows": 169,
+      "dynamic_memory_laya_state_tokenizations": 169,
+      "dynamic_memory_laya_state_tokens": 461127,
+      "dynamic_memory_laya_wall_seconds": 1355.5650781150907,
+      "dynamic_memory_laya_load_cpu_seconds": 224.84809878600015,
+      "dynamic_memory_laya_load_loads": 29,
+      "dynamic_memory_laya_load_wall_seconds": 190.81888672802597
+    },
+    "generative": {
+      "attempted": 29,
+      "host_completed": 27,
+      "task_positions": 24,
+      "explicit_positions": 5,
+      "generation_known_tokens": 590670,
+      "generation_charged_tokens": 590670,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 990,
+      "embedding_charged_tokens": 990,
+      "embedding_unknown_usage": 0
+    }
+  },
+  "semantic_grades_created": false,
+  "scope": "Actual first-response outcomes/costs; transport completion is not task/state success"
+}

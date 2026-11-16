@@ -1,0 +1,707 @@
+{
+  "status": "PHASE41_CONFIRMATION_CLOSED_LOCAL_CHAIN_VERIFIED_LME_ACTIVE",
+  "observed_at_utc": "2026-11-11T22:56:13.150518+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v40.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "lme-small32-s1u1130-v1-continuation-v2",
+      "owner_pid": 2418781,
+      "child_pid": 2418783,
+      "owner_status": "RUNNING",
+      "driver_status": "RUNNING",
+      "actual_process_alive": true,
+      "actual_argv_matches": true,
+      "active_row": 6,
+      "case_status_counts": {
+        "COMPLETED": 5,
+        "FAILED_RETRIEVING": 1,
+        "NOT_RUN": 25,
+        "PREPARING_INPUT": 1
+      }
+    }
+  ],
+  "confirmation_firsts": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-firsts-native-score-v1/summary.json",
+    "physical_calls": 384,
+    "completed": 370,
+    "failures": 14,
+    "methods": {
+      "fixed_context": {
+        "positions": 96,
+        "completed_scored": 96,
+        "unscored": 0,
+        "official_full_answer_f1": 0.056658201298785356,
+        "completed_only_f1": 0.05665820129878536,
+        "missing_outcome_bounds": [
+          0.056658201298785356,
+          0.056658201298785356
+        ],
+        "native_answer_f1_by_type": {
+          "extractive": 0.09750703458341656,
+          "abstractive": 0.060942131245942936,
+          "boolean": 0.011339936523616003,
+          "none": 0.0
+        },
+        "scope": "OfficialfullF1 assigns0tomissing; executionfailures notassertedsemanticerrors. Completed-onlyconditional, missingnessnotassumedrandom. EvidenceF1inapplicable toanswer-onlyoutput; no favorableanswer-spanextraction."
+      },
+      "scale_36k_final": {
+        "positions": 96,
+        "completed_scored": 91,
+        "unscored": 5,
+        "official_full_answer_f1": 0.04960061065665889,
+        "completed_only_f1": 0.052325918934497326,
+        "missing_outcome_bounds": [
+          0.04960061065665889,
+          0.10168394398999221
+        ],
+        "native_answer_f1_by_type": {
+          "extractive": 0.0904212430826219,
+          "abstractive": 0.05041938727473118,
+          "boolean": 0.012054860199874347,
+          "none": 0.0
+        },
+        "scope": "OfficialfullF1 assigns0tomissing; executionfailures notassertedsemanticerrors. Completed-onlyconditional, missingnessnotassumedrandom. EvidenceF1inapplicable toanswer-onlyoutput; no favorableanswer-spanextraction."
+      },
+      "S3_own_final": {
+        "positions": 96,
+        "completed_scored": 90,
+        "unscored": 6,
+        "official_full_answer_f1": 0.06082577211549565,
+        "completed_only_f1": 0.06488082358986202,
+        "missing_outcome_bounds": [
+          0.06082577211549565,
+          0.12332577211549565
+        ],
+        "native_answer_f1_by_type": {
+          "extractive": 0.10914561734666062,
+          "abstractive": 0.07591822532269436,
+          "boolean": 0.012695009394870149,
+          "none": 0.0
+        },
+        "scope": "OfficialfullF1 assigns0tomissing; executionfailures notassertedsemanticerrors. Completed-onlyconditional, missingnessnotassumedrandom. EvidenceF1inapplicable toanswer-onlyoutput; no favorableanswer-spanextraction."
+      },
+      "S3_old_S1_final": {
+        "positions": 96,
+        "completed_scored": 93,
+        "unscored": 3,
+        "official_full_answer_f1": 0.05414110496501249,
+        "completed_only_f1": 0.055887592221948355,
+        "missing_outcome_bounds": [
+          0.05414110496501249,
+          0.0853911049650125
+        ],
+        "native_answer_f1_by_type": {
+          "extractive": 0.10054712489279963,
+          "abstractive": 0.04775276242616855,
+          "boolean": 0.009372357928929483,
+          "none": 0.0
+        },
+        "scope": "OfficialfullF1 assigns0tomissing; executionfailures notassertedsemanticerrors. Completed-onlyconditional, missingnessnotassumedrandom. EvidenceF1inapplicable toanswer-onlyoutput; no favorableanswer-spanextraction."
+      }
+    },
+    "contrasts": {
+      "primary_contrast": {
+        "left": "scale_36k_final",
+        "right": "fixed_context",
+        "official_full_f1_difference": -0.0070575906421264465,
+        "source_bootstrap_95pct": [
+          -0.020537193595171102,
+          0.004810394560983561
+        ],
+        "unscored_outcome_difference_bounds": [
+          -0.007057590642126466,
+          0.045025742691206856
+        ],
+        "common_completed": 91,
+        "common_completed_difference": -0.006330704048185655,
+        "scope": "96paperSourceclusters, onequestion/source. Intervalonofficialmissing=0metric; doesnotremoveHoststochasticity/annotationbias/trainingseeduncertainty. Unknownexecutionoutcome bounds andcommoncompletedconditionaldifference separate."
+      },
+      "secondary_contrast": {
+        "left": "S3_own_final",
+        "right": "S3_old_S1_final",
+        "official_full_f1_difference": 0.006684667150483175,
+        "source_bootstrap_95pct": [
+          -0.004015689219146703,
+          0.01702865723036132
+        ],
+        "unscored_outcome_difference_bounds": [
+          -0.02456533284951684,
+          0.06918466715048316
+        ],
+        "common_completed": 87,
+        "common_completed_difference": 0.008921344926588928,
+        "scope": "96paperSourceclusters, onequestion/source. Intervalonofficialmissing=0metric; doesnotremoveHoststochasticity/annotationbias/trainingseeduncertainty. Unknownexecutionoutcome bounds andcommoncompletedconditionaldifference separate."
+      }
+    },
+    "interpretation": "BothprespecifiedSourceintervalsinclude0; no stablemeanadvantage. Fullraw-answer tokenF1 isnot semantic/supportedaccuracy orofficialleaderboardreproduction. No answerextraction; missing=0convention notsemanticerrorimputation."
+  },
+  "confirmation_repeats": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-repeat-comparison-v2/summary.json",
+    "calls": 32,
+    "completed": 31,
+    "failures": 1,
+    "methods": {
+      "fixed_context": {
+        "first": {
+          "positions": 8,
+          "scored": 8,
+          "official_missing_zero_mean": 0.03447484670096414,
+          "completed_only_mean": 0.034474846700964144,
+          "missing_bounds": [
+            0.03447484670096414,
+            0.03447484670096414
+          ]
+        },
+        "second": {
+          "positions": 8,
+          "scored": 8,
+          "official_missing_zero_mean": 0.027924775921860785,
+          "completed_only_mean": 0.027924775921860785,
+          "missing_bounds": [
+            0.027924775921860785,
+            0.027924775921860785
+          ]
+        },
+        "common_completed": 8,
+        "common_completed_second_minus_first": -0.00655007077910336,
+        "mean_absolute_common_change": 0.018676133002794616,
+        "raw_answer_identical_common_completed": 0,
+        "second_generation_delta": {
+          "charged_tokens": 29717,
+          "known_tokens": 29717,
+          "unknown_usage": 0
+        }
+      },
+      "scale_36k_final": {
+        "first": {
+          "positions": 8,
+          "scored": 7,
+          "official_missing_zero_mean": 0.018152875792898437,
+          "completed_only_mean": 0.020746143763312498,
+          "missing_bounds": [
+            0.018152875792898437,
+            0.14315287579289843
+          ]
+        },
+        "second": {
+          "positions": 8,
+          "scored": 8,
+          "official_missing_zero_mean": 0.02891588526779956,
+          "completed_only_mean": 0.02891588526779956,
+          "missing_bounds": [
+            0.02891588526779956,
+            0.02891588526779956
+          ]
+        },
+        "common_completed": 7,
+        "common_completed_second_minus_first": 0.00783629654274414,
+        "mean_absolute_common_change": 0.01654842413305419,
+        "raw_answer_identical_common_completed": 0,
+        "second_generation_delta": {
+          "charged_tokens": 22073,
+          "known_tokens": 22073,
+          "unknown_usage": 0
+        }
+      },
+      "S3_own_final": {
+        "first": {
+          "positions": 8,
+          "scored": 8,
+          "official_missing_zero_mean": 0.029115757351793416,
+          "completed_only_mean": 0.029115757351793413,
+          "missing_bounds": [
+            0.029115757351793416,
+            0.029115757351793416
+          ]
+        },
+        "second": {
+          "positions": 8,
+          "scored": 8,
+          "official_missing_zero_mean": 0.030973378235942955,
+          "completed_only_mean": 0.03097337823594295,
+          "missing_bounds": [
+            0.030973378235942955,
+            0.030973378235942955
+          ]
+        },
+        "common_completed": 8,
+        "common_completed_second_minus_first": 0.0018576208841495365,
+        "mean_absolute_common_change": 0.010718598628045587,
+        "raw_answer_identical_common_completed": 0,
+        "second_generation_delta": {
+          "charged_tokens": 31283,
+          "known_tokens": 31283,
+          "unknown_usage": 0
+        }
+      },
+      "S3_old_S1_final": {
+        "first": {
+          "positions": 8,
+          "scored": 8,
+          "official_missing_zero_mean": 0.025636310883835636,
+          "completed_only_mean": 0.02563631088383564,
+          "missing_bounds": [
+            0.025636310883835636,
+            0.025636310883835636
+          ]
+        },
+        "second": {
+          "positions": 8,
+          "scored": 7,
+          "official_missing_zero_mean": 0.01661258086007178,
+          "completed_only_mean": 0.01898580669722489,
+          "missing_bounds": [
+            0.01661258086007178,
+            0.14161258086007178
+          ]
+        },
+        "common_completed": 7,
+        "common_completed_second_minus_first": -0.010312834312872981,
+        "mean_absolute_common_change": 0.010312834312872981,
+        "raw_answer_identical_common_completed": 0,
+        "second_generation_delta": {
+          "charged_tokens": 35002,
+          "known_tokens": 35002,
+          "unknown_usage": 0
+        }
+      }
+    },
+    "contrasts": {
+      "primary_contrast": {
+        "left": "scale_36k_final",
+        "right": "fixed_context",
+        "same_eight_source_official_differences": {
+          "first_f1": -0.016321970908065708,
+          "second_f1": 0.0009911093459387763
+        }
+      },
+      "secondary_contrast": {
+        "left": "S3_own_final",
+        "right": "S3_old_S1_final",
+        "same_eight_source_official_differences": {
+          "first_f1": 0.003479446467957775,
+          "second_f1": 0.014360797375871169
+        }
+      }
+    },
+    "scope": "Eight prespecified Sources, two draws per method; descriptive stochastic sensitivity only. No best-of-two, first replacement, 16-independent-source claim, model selection, or evidence-F1 inference. Raw answers scored without answer extraction. Missing=0 is the official metric convention only.",
+    "numeric_fix": "v2 computesmissingintegerbeforeaddingtoscore; avoidsroundoffreversingmissing0bounds. Means/contrastsunchangedfromv1, no experimentchange."
+  },
+  "source_review": {
+    "summary": {
+      "status": "ALL8_PREDECLARED_SOURCES_32_FIRST_OUTCOMES_SOURCE_REVIEWED",
+      "methods": {
+        "S3_own_final": {
+          "positions": 8,
+          "complete_supported": 2,
+          "material_status": {
+            "sufficient": 2,
+            "insufficient": 5,
+            "unknown": 1
+          },
+          "answer_status": {
+            "complete": 2,
+            "incomplete": 4,
+            "unknown": 2
+          },
+          "answer_support": {
+            "supported": 7,
+            "qualified": 1
+          },
+          "first_failures": 0
+        },
+        "scale_36k_final": {
+          "positions": 8,
+          "complete_supported": 1,
+          "material_status": {
+            "sufficient": 3,
+            "insufficient": 4,
+            "unknown": 1
+          },
+          "answer_status": {
+            "unknown": 4,
+            "complete": 1,
+            "incomplete": 3
+          },
+          "answer_support": {
+            "qualified": 3,
+            "supported": 4,
+            "unknown": 1
+          },
+          "first_failures": 1
+        },
+        "S3_old_S1_final": {
+          "positions": 8,
+          "complete_supported": 1,
+          "material_status": {
+            "sufficient": 1,
+            "insufficient": 6,
+            "unknown": 1
+          },
+          "answer_status": {
+            "complete": 1,
+            "incomplete": 6,
+            "unknown": 1
+          },
+          "answer_support": {
+            "supported": 5,
+            "qualified": 3
+          },
+          "first_failures": 0
+        },
+        "fixed_context": {
+          "positions": 8,
+          "complete_supported": 2,
+          "material_status": {
+            "sufficient": 2,
+            "insufficient": 5,
+            "unknown": 1
+          },
+          "answer_status": {
+            "complete": 2,
+            "incomplete": 5,
+            "unknown": 1
+          },
+          "answer_support": {
+            "supported": 4,
+            "qualified": 4
+          },
+          "first_failures": 0
+        }
+      },
+      "scope": "SmallfixedSourcepanel, notrepresentativequalityestimateorindependenthumanrating. Samecriterionappliedacrossfourmethods perSource; nativeannotations mayconflictwithdeliveredmaterial. Fullrawanswer supportcanbequalifiedbeyondcorrectrequestedcore. Firstfailuresunknown. No model/prompt/cohortchanges fromresults. Methodkey andaggregatenative scores openedonlyafterallletterreviews saved; Root remainsnonindependent/cannotclaimblind.",
+      "no_sha_validation": true,
+      "compute": {
+        "cpu_seconds": 0.003930523999999998,
+        "wall_seconds": 0.003934991545975208
+      }
+    },
+    "reviews": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-source-review-v1/reviews.json",
+    "positions": [
+      0,
+      12,
+      24,
+      36,
+      48,
+      60,
+      72,
+      84
+    ],
+    "all32_letter_reviews_saved_before_key_and_aggregate_opened": true,
+    "scope": "Methodlabels hiddenincompactpresentation; Rootsameexecutionagent, nonindependent/notguaranteedblind/notpaper-author. Smallfixedpanelnotrepresentativequalityestimate. No TRAINlabels/modelchanges."
+  },
+  "local_capability_chain": {
+    "artifact": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-source12-mechanism-v2.json",
+    "family": "qasper-paper-1607.03542",
+    "source_position": 12,
+    "study_TRAIN_source_overlap": 0,
+    "identical_first_three_model_inputs": [
+      true,
+      true,
+      true
+    ],
+    "identical_step2_full_action_menu": true,
+    "read8_minus_handoff_logit_margins": {
+      "S3_own_final": 0.9811122417449951,
+      "S3_old_S1_final": -0.5736020803451538
+    },
+    "S3_own_actions": [
+      "search",
+      "read_2",
+      "read_8",
+      "handoff"
+    ],
+    "S3_old_actions": [
+      "search",
+      "read_2",
+      "handoff"
+    ],
+    "mechanism": "Own-state referenceaggregation vsoldS1-state control sharesS2u51initialization/23labelledTRAINfamilies/per-familycounts/108replay/648draws/21updates. Own108unique vsold87+21repeats is the declared state-support treatment. InthisnewpaperbothperformSEARCH thenREAD2 with identical projectedinputs throughnextdecision; ownchoosesREAD8, oldHANDOFF. READ8obtains current-workFreebasequerywitness; ownthenhands off andReaderanswersFreebase. Oldpacketcontainsgenericprior-work sentence andReadercannotidentifytheKB. Fixedprefix4also lacks current-workwitness; scale36k takes sameusefulREAD8path. No question-specific rule orannotationaccess online.",
+    "repeat_interpretation": "Bothsuccessfulmodels againanswerFreebase usingthecurrent-workwitness. Fixedbaseline distinguishesprior-work mentionsfromunknowncurrentKB; oldS1state modelsecondcallfails. SameoneSource, notnewindependentgeneralization samples; firstsunchanged.",
+    "limits": "OneSource frompredeclared8-source reviewwithin96confirmation; illustrativelocal capabilitychain, notstableaggregate/seed/causaltraining-component superiority. Full96secondarydifferenceCI crosses0; allsource outcomesretained. Sameprojectedmodelinputs/fullmenuproved, notbitwiseidentityofentireStore/runtimeinternals. Hostdraws separate; taskbenefit evidencedbyactualmaterialandfirstanswers, notfullcostclaim. No pretrainingisolationclaim. No retraining/selectionfromthisconfirmationexample.",
+    "baseline_scope": "FixedContextMemoryPolicy(reads=4) withcontext-candidateheuristic, notsimplyfirstfourordinaryREADs."
+  },
+  "confirmation_resources": {
+    "status": "ALL384_FIRST_CALL_RESOURCES_BOUND",
+    "methods": {
+      "fixed_context": {
+        "Sources": 96,
+        "first_HTTP_calls": 96,
+        "completed_firsts": 96,
+        "failed_firsts": 0,
+        "controller_decisions": 579,
+        "NN_calls": 0,
+        "selected_READ_actions": 387,
+        "packet_body_tokens": 121914,
+        "Reader_prompt_tokens_known": 148530,
+        "Reader_completion_tokens_known": 155977,
+        "Reader_total_tokens_known": 304507,
+        "Reader_generation_delta": {
+          "charged_tokens": 304507,
+          "known_tokens": 304507,
+          "unknown_usage": 0
+        },
+        "whole_policy_child_cpu_seconds": 38.554228,
+        "whole_policy_owner_wall_seconds": 37.21609247010201,
+        "Reader_client_cpu_seconds": 7.592294277000001,
+        "Reader_client_wall_seconds": 1041.4884246569127,
+        "measured_policy_plus_Reader_client_cpu_seconds": 46.146522277,
+        "scope": "One whole-policy child plus Reader process, disjoint stages. Policy whole CPU was already paid phase36; Reader self-billed. Do not charge this report or nested policy run compute again. READ selections include failed attempts and are not necessarily successful source opens."
+      },
+      "scale_36k_final": {
+        "Sources": 96,
+        "first_HTTP_calls": 96,
+        "completed_firsts": 91,
+        "failed_firsts": 5,
+        "controller_decisions": 414,
+        "NN_calls": 414,
+        "selected_READ_actions": 222,
+        "packet_body_tokens": 65075,
+        "Reader_prompt_tokens_known": 91691,
+        "Reader_completion_tokens_known": 234201,
+        "Reader_total_tokens_known": 325892,
+        "Reader_generation_delta": {
+          "charged_tokens": 325892,
+          "known_tokens": 325892,
+          "unknown_usage": 0
+        },
+        "whole_policy_child_cpu_seconds": 450.126327,
+        "whole_policy_owner_wall_seconds": 257.9940351517871,
+        "Reader_client_cpu_seconds": 7.3936749420000005,
+        "Reader_client_wall_seconds": 1534.320040899329,
+        "measured_policy_plus_Reader_client_cpu_seconds": 457.520001942,
+        "scope": "One whole-policy child plus Reader process, disjoint stages. Policy whole CPU was already paid phase36; Reader self-billed. Do not charge this report or nested policy run compute again. READ selections include failed attempts and are not necessarily successful source opens."
+      },
+      "S3_own_final": {
+        "Sources": 96,
+        "first_HTTP_calls": 96,
+        "completed_firsts": 90,
+        "failed_firsts": 6,
+        "controller_decisions": 406,
+        "NN_calls": 406,
+        "selected_READ_actions": 214,
+        "packet_body_tokens": 61188,
+        "Reader_prompt_tokens_known": 87804,
+        "Reader_completion_tokens_known": 270332,
+        "Reader_total_tokens_known": 358136,
+        "Reader_generation_delta": {
+          "charged_tokens": 358136,
+          "known_tokens": 358136,
+          "unknown_usage": 0
+        },
+        "whole_policy_child_cpu_seconds": 407.37928999999997,
+        "whole_policy_owner_wall_seconds": 244.35956640262157,
+        "Reader_client_cpu_seconds": 7.281625147,
+        "Reader_client_wall_seconds": 1781.2548460168764,
+        "measured_policy_plus_Reader_client_cpu_seconds": 414.66091514699997,
+        "scope": "One whole-policy child plus Reader process, disjoint stages. Policy whole CPU was already paid phase36; Reader self-billed. Do not charge this report or nested policy run compute again. READ selections include failed attempts and are not necessarily successful source opens."
+      },
+      "S3_old_S1_final": {
+        "Sources": 96,
+        "first_HTTP_calls": 96,
+        "completed_firsts": 93,
+        "failed_firsts": 3,
+        "controller_decisions": 367,
+        "NN_calls": 367,
+        "selected_READ_actions": 175,
+        "packet_body_tokens": 52127,
+        "Reader_prompt_tokens_known": 78743,
+        "Reader_completion_tokens_known": 272765,
+        "Reader_total_tokens_known": 351508,
+        "Reader_generation_delta": {
+          "charged_tokens": 351508,
+          "known_tokens": 351508,
+          "unknown_usage": 0
+        },
+        "whole_policy_child_cpu_seconds": 331.054888,
+        "whole_policy_owner_wall_seconds": 202.76708519924432,
+        "Reader_client_cpu_seconds": 7.238346351999999,
+        "Reader_client_wall_seconds": 1786.060061024502,
+        "measured_policy_plus_Reader_client_cpu_seconds": 338.293234352,
+        "scope": "One whole-policy child plus Reader process, disjoint stages. Policy whole CPU was already paid phase36; Reader self-billed. Do not charge this report or nested policy run compute again. READ selections include failed attempts and are not necessarily successful source opens."
+      }
+    },
+    "scope": "Actual full cold-policy/given-query first outcomes, all failures retained. Method inference, Reader usage and client CPU shown jointly; neither fewer packet tokens nor fewer actions establishes complete-cost benefit. Training/data-production and shared Source initialization are not allocated to each condition; Host-server GPU/energy/money and parent work remain outside these client totals. Job wall is not GPU busy time. No ledger writes.",
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 0.531930897,
+      "wall_seconds": 0.53201222140342
+    }
+  },
+  "continuous_update_opportunities": {
+    "artifact": "/data/milai-experiments/20261111-scalable-evidence/m6-target-update-opportunities-v2/summary.json",
+    "summary": {
+      "status": "CLOSED_RELEVANT_UPDATE_OPPORTUNITIES_MEASURED",
+      "conditions": {
+        "source-reference": {
+          "relevant_update_positions": 31,
+          "families": 16,
+          "answer_grades": {
+            "W": 24,
+            "Q": 2,
+            "F": 5
+          },
+          "incoming_Sources": 242,
+          "successful_Source_capture_receipts": 242,
+          "source_capture_count_mismatched_positions": 0,
+          "opportunity_categories": {
+            "completed_Host_without_recorded_retrieval_or_controller": {
+              "positions": 23,
+              "families": 14,
+              "answer_grades": {
+                "W": 21,
+                "Q": 2
+              },
+              "model_calls": 0,
+              "retrieval_results": 0
+            },
+            "failed_first_without_recorded_retrieval_or_controller": {
+              "positions": 4,
+              "families": 4,
+              "answer_grades": {
+                "F": 4
+              },
+              "model_calls": 0,
+              "retrieval_results": 0
+            },
+            "controller_activated": {
+              "positions": 4,
+              "families": 4,
+              "answer_grades": {
+                "W": 3,
+                "F": 1
+              },
+              "model_calls": 24,
+              "retrieval_results": 7
+            }
+          }
+        },
+        "continued-replay": {
+          "relevant_update_positions": 31,
+          "families": 16,
+          "answer_grades": {
+            "W": 19,
+            "F": 11,
+            "Q": 1
+          },
+          "incoming_Sources": 242,
+          "successful_Source_capture_receipts": 242,
+          "source_capture_count_mismatched_positions": 0,
+          "opportunity_categories": {
+            "completed_Host_without_recorded_retrieval_or_controller": {
+              "positions": 19,
+              "families": 13,
+              "answer_grades": {
+                "W": 18,
+                "Q": 1
+              },
+              "model_calls": 0,
+              "retrieval_results": 0
+            },
+            "failed_first_without_recorded_retrieval_or_controller": {
+              "positions": 10,
+              "families": 9,
+              "answer_grades": {
+                "F": 10
+              },
+              "model_calls": 0,
+              "retrieval_results": 0
+            },
+            "controller_activated": {
+              "positions": 2,
+              "families": 2,
+              "answer_grades": {
+                "W": 1,
+                "F": 1
+              },
+              "model_calls": 16,
+              "retrieval_results": 2
+            }
+          }
+        }
+      },
+      "scope": "Same31 previously declared target-changing positions per arm, excluding only A02 intermediate irrelevant update. Classify from actual first traces and Source arrival receipts; no new model/Host calls or label changes. Completed answer with zero retrieval results and zero controller calls is a system failure opportunity outside the learned controller choice, not an observed REFRESH refusal. Failed firsts remain separate and do not establish deliberate Host bypass. Controller activation does not prove adequate retrieval or evidence delivery. Categories count related positions, not independent Sources; Host RNG and exposed generated source limitations remain. Does not prescribe forcing retrieval or changing Host boundaries, and does not excuse end-task failures.",
+      "specific_example": "C01 reference-adapted arm answers old240/shelved after incoming Source reports260/DIYMay10; both update positions have no retrieval or model decision. Original sources and Host-first outcomes retained.",
+      "no_sha_validation": true,
+      "ledger_write": false,
+      "compute": {
+        "cpu_seconds": 0.645668668,
+        "wall_seconds": 0.6456742193549871
+      }
+    },
+    "interpretation": "31relevantupdates/arm still0C. Sourcecaptures242/242each. Reference23completedwithoutretrieval/NN,4failedwithout,4activated; replay19/10/2. MostfailuresnotobservedREFRESHrefusals. Activatedsubsetalsofails; no excuseforend-taskfailures orforcedretrieval."
+  },
+  "figures": [
+    "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-first-contrast-figure-v1/contrasts.png",
+    "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-first-contrast-figure-v1/contrasts.pdf",
+    "/data/milai-experiments/20261111-scalable-evidence/m6-update-opportunity-figure-v1/opportunities.png",
+    "/data/milai-experiments/20261111-scalable-evidence/m6-update-opportunity-figure-v1/opportunities.pdf"
+  ],
+  "fit_resource_table": {
+    "status": "MEASURED_CLOSED_TOP_LEVEL_FIT_SEGMENTS_INDEXED",
+    "jobs": 29,
+    "by_status": {
+      "FAILED": 1,
+      "COMPLETED": 28
+    },
+    "by_category": {
+      "research": 22,
+      "startup": 2,
+      "engineering": 5
+    },
+    "measured_cpu_seconds_sum": 240148.42530532702,
+    "gpu_job_resource_hours_sum_NOT_busy_hours": 44.53047164098023,
+    "pending_jobs": [],
+    "resumed_segment_rows": [],
+    "scope": "Snapshot of closed native fit compute files directly under the study artifact root, including startup/engineering/retained failure as separate categories. A measured resource table, not the entire goal cost or a hardware-matched method comparison. Initial model lineage is recorded per row; shared upstream fitting is not silently charged again for every descendant. Evaluation schedules differ. No cost from live or billing-wait jobs counted as closed.",
+    "excluded_or_unknown": [
+      "Data production, retrieval/Host/teacher and standalone evaluation",
+      "Historical shared initialization and any nested resume-equivalence engineering jobs",
+      "Parent process/unmeasured author work",
+      "Actual GPU activity, energy, monetary prices"
+    ],
+    "no_sha_validation": true,
+    "ledger_write": false,
+    "compute": {
+      "cpu_seconds": 0.024916162,
+      "wall_seconds": 0.02493870072066784
+    }
+  },
+  "LME": {
+    "original_attempt": "/data/milai-experiments/20261111-scalable-evidence/lme-small32-s1u1130-v1",
+    "first_failure": "MissingPIL beforeall32questionattempts; allNOT_RUN,0NN/Host. Owner2276859/child2276860closed, wholeCPU11.300262pending, notplusnested2.076.",
+    "continuation": "/data/milai-experiments/20261111-scalable-evidence/lme-small32-s1u1130-v1-continuation-v2",
+    "overlay": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-reader-pillow-overlay-v1",
+    "fix": "ReuseexistingPython3.11Pillowpath fromclosedLME451; processPYTHONPATH beforeTransformers import andexplicit--site-packages. No installation/upgrade/servicechange. SameSource/questions/images/model/Host.",
+    "unstarted_plans_fixed": [
+      "lme-small32-s2feedbacku51-v1",
+      "lme-small32-s1u1130-scores-v1",
+      "lme-small32-s2feedbacku51-scores-v1"
+    ],
+    "first_scorer_input": "/data/milai-experiments/20261111-scalable-evidence/lme-small32-s1u1130-v1-continuation-v2",
+    "scope": "TwofixednomineesS1u1130/S2u51.32questionssharing2full100trajectorybanks, exposedtransfer not32independentSources/full451/newblind. Preservefailedfirsts andexplicitunattemptedcontinuations; requireall32attemptedbeforescore. Updateactualcontinuationrootifneeded.",
+    "observed_progress": "Realcontinuationv2hascompletedquestionsafterreusinglegacycompletedSourceimports; currentcountsrecorded, no retryrow0. Source/Reader/methodunchanged exceptcorrectassetrootbinding, allsourcepixels retained.",
+    "second_failure": "Continuationv1failedrow0whilebinding Sourceimages: thincohort symlink resolvedoutsideitsdeclaredassetroot. FAILED_RETRIEVING retained,31NOT_RUN. WholechildCPU804.242474pending;0NN/HostbeforeSourcebankbuild/bindingfailure, no nativeCPU tosubtract.",
+    "code_fix": {
+      "commit": "91b3f707",
+      "files": [
+        "src/milai_lab/runners/lme_evaluation.py",
+        "src/milai_lab/runners/lme_v2.py",
+        "tools/run_lme_predictions.py",
+        "tests/unit/test_lme_continuation.py"
+      ],
+      "behavior": "Optional--asset-rootseparatescohortmetadatafromoriginalreleasedimages; asset_pathboundary unchanged. CompleteSourceimportreports savedbeforeimagebinding andlegacybankreportreusedforpartialbackendclosure. RebindimagesusingexistingSourceIDs withoutreimport/previousquery; preservesfailedrow0andoriginalfiles. Defaultassetroot remainscohort/inheritedroot.",
+      "asset_root": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/complete-small-snapshot",
+      "tests": "21targetedtests passed;Ruff/diff/packageDAG passed;toolsboundarysame6preexistingdynamicLMEimports."
+    }
+  },
+  "cost_scope": "No ledgerwriteswhileLMEactive. PAIDphase40eightpreps9.498731941 once. PendingcostDEVnativewhole47.639341, LMEPILfailurewhole11.300262(bothNOselfbill; no nestedaddition), latestofflinepreps/scoring/plots. Readers/repeats/teachers/train/evaluatorsselfbilled; confirmationpolicywholepaidphase36. UntimedRoot/parentworkunknown. Resourceassemblyowner-fieldKeyError fixedbeforeoutput; no firstexperimentchanged. AdditionalLMEpartialSource-buildfailurewhole804.242474CPU pending(no localmodel/Host happened); currentcontinuationnativecomponentswillselfbill, whole-minus-native residualrequiresactualclosedinventory.",
+  "validation": "4first+4repeatownersactualterminal;384+32physicalcalls retained. Nativefunctionsboundfullrawanswers/actualwires; Source12exact3modelinputs/fullmenuproved. All32Rootquotescheckedwithinactualreturnedmaterial beforeunblindingkeys/aggregate. Repeatv2means/contrastsunchanged andmissing0boundsequal. Bothscientificplotsrendered/viewed. No trackedruntimecodechange/newfullsuite. Runtimepathrepair91b3f707 subsequentlyadded;21LMEtests passed inclactualsyntheticStore/sourceimage/queryimagebytepreservation, originalfailedfilesunchanged, failedrow0retained, outside-rootpaths rejected. Actualnative32cohortcontinues successfully.",
+  "next": [
+    "FinishLME32firstnominee andnativeJudge; preservefirsts/explicitunattemptedcontinuations ifneeded; thensecondfixednominee32/nativeJudge",
+    "Settleclosedunbilledwhole/prep scopes onceatapplicationgap, excludingcontainednativecosts",
+    "Assemblegloballearning/action/delivery/task/cost/generalization report andrequirementsaudit. LocalnewSource capabilitychainnowexists; stableaggregateadvantageunproved. Goalnotcompletewhileexternalchain/cost/auditremain."
+  ],
+  "boundaries": "GoalACTIVE/incomplete, progress notblocked. NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchange/service restart/push. Source roles/firstfailures/unknownsretained; no postconfirmationtraining/selection."
+}

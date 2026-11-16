@@ -1,0 +1,73 @@
+{
+  "status": "PREPARED_NOT_STARTED",
+  "execution_source_version": "d8447495",
+  "scope": "Eight new ordinary user requests on copies of closed actual histories. The common wording asks to inspect reports added after the first answer; no forced tool call or internal operation. Original results and costs retained.",
+  "cases": [
+    {
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-w4-generative-v1",
+      "history": "memops_A29-view-v4-a",
+      "source_group": "memops_A29",
+      "first_completed_request": "initial",
+      "stored_reports_after_first_answer": 19
+    },
+    {
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-w4-generative-v1",
+      "history": "memops_B05-view-v4-a",
+      "source_group": "memops_B05",
+      "first_completed_request": "initial",
+      "stored_reports_after_first_answer": 19
+    },
+    {
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/generative",
+      "history": "memops_B06-view-v4-b-content",
+      "source_group": "memops_B06",
+      "first_completed_request": "initial",
+      "stored_reports_after_first_answer": 9
+    },
+    {
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/generative",
+      "history": "memops_C26-view-v4-b-content",
+      "source_group": "memops_C26",
+      "first_completed_request": "initial",
+      "stored_reports_after_first_answer": 15
+    },
+    {
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/generative",
+      "history": "memops_D11-view-v4-b-content",
+      "source_group": "memops_D11",
+      "first_completed_request": "initial",
+      "stored_reports_after_first_answer": 7
+    },
+    {
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-b-v1/generative",
+      "history": "memops_F08-view-v4-b-content",
+      "source_group": "memops_F08",
+      "first_completed_request": "same-sources",
+      "stored_reports_after_first_answer": 19
+    },
+    {
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-c-supplement-v1",
+      "history": "memops_C23-view-v4-c-supplement",
+      "source_group": "memops_C23",
+      "first_completed_request": "initial",
+      "stored_reports_after_first_answer": 16
+    },
+    {
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-c-supplement-v1",
+      "history": "memops_D23-view-v4-c-supplement",
+      "source_group": "memops_D23",
+      "first_completed_request": "initial",
+      "stored_reports_after_first_answer": 16
+    }
+  ],
+  "positions": 8,
+  "source_groups": 8,
+  "split": "train",
+  "automatic_retry": false,
+  "common_request_prefix": "Please inspect the stored reports that arrived after your first answer in this conversation before answering again. Use them to verify whether the earlier answer is still supported; do not assume a previously returned interpretation covers those reports.",
+  "compute": {
+    "wall_seconds": 0.006401229649782181,
+    "cpu_seconds": 0.006400925000000002
+  },
+  "ledger_recorded": false
+}

@@ -1,0 +1,37 @@
+{
+  "name": "milai-global-reader-response-review-v1",
+  "status": "FROZEN_BEFORE_READER_OUTCOMES",
+  "created_epoch": 1792218099.550617,
+  "cohorts": [
+    "milai-global-reader-policy-qa-v1",
+    "milai-global-reserved-policy-qa-v1"
+  ],
+  "review_unit": "One actual firstresponse for one exactmessages/schema input; map its annotation to all corresponding methodpositions afterwards.",
+  "review_views": "Method names omitted and responseorder within eachcase shuffled withseed20261019; shared literal document text may reference an already printed complete view. Author review still not independent.",
+  "dimensions": {
+    "answer_target": "correct / incorrect / ambiguous_or_qualified / no_answer",
+    "source_grounding": "supported_by_delivered_material / unsupported_claim / correct_insufficiency / uncertain",
+    "citation_grounding": "adequate / inadequate / not_applicable / uncertain",
+    "output_contract": "valid / insufficient_nonempty_answer / schema_or_generation_failure / missing"
+  },
+  "rules": [
+    "Read eachcompletefirstfinalanswer and its actualdeliveredsource subset before assigning quality; fullpoolproof availability is not enough.",
+    "Correctabstention on an insufficientselectedsubset is not a Readerreasoningfailure, but can expose controllerloss when fullpoolhas a validproof.",
+    "Knownsourceproof delivery is a mechanical controllermeasure; it does not certify answermeaning/citations.",
+    "Native reference metrics remainunchanged. Source-derivednumeric answers, alternativeproofs, targetscope and timephase differences get separateannotations; no training changes.",
+    "A validcoreanswer with unsupportedextra detail or wrongcitations retains both observations; do not hide the error behind exactmatch.",
+    "Ambiguousquestions and qualifiedinterpretations keepcoverage/uncertainty; do not silently discard them or force onehuman interpretation into universalgold.",
+    "A newly discovered legitimateproof after predictions is exploratory supplemental evidence; preserve originalprepredictionannotations and apply any supplementalanalysis to all methods, notjust one winner.",
+    "Preserve firstconfirmedfailures and unknownusage. No retries, answerrewrites, addedprompt examples or methodselection from reviewedresponses."
+  ],
+  "cost_rules": [
+    "Nativeactualreceipts and originalledgerdeltas count sharedcalls once.",
+    "Standalonepermethod includes allcontrollerprefixwork and thatmethodsuniqueReaderinputs, including externallyreused firstresponses.",
+    "Reportdenseindex/queryembeddings, retrieval, coldload/localpreparation, probes/training and outputtokenwork separately; tokenizers are notequivalentFLOPs.",
+    "Unknownusage staysunknown and ledgerchargedreservation remainsvisible; missingembeddingcompletion_tokens is not missinggenerationwork.",
+    "Warmcomponent wall sums are not measuredstandaloneproductionlatency; authorreview notfullymetered and neverdeclaredzero."
+  ],
+  "new_model_calls": 0,
+  "runtime_behavior_changed": false,
+  "sha_checks": false
+}

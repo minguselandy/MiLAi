@@ -1,0 +1,88 @@
+{
+  "name": "jev-reader-source-qualified-v3",
+  "status": "SELECTION_FIXED_BEFORE_NEW_SOURCE_REVIEW",
+  "selection_rule": "In original C20 train order, first two not-previously-reviewed train families with two support groups and first two with three; retain all their sampled rows. No model outcome or dev selection.",
+  "previously_reviewed_families": [
+    "musique-family-000407",
+    "musique-family-000410",
+    "musique-family-000416",
+    "musique-family-000527",
+    "musique-family-000550",
+    "musique-family-000678",
+    "musique-family-000690",
+    "musique-family-000760",
+    "musique-family-000838",
+    "musique-family-000840",
+    "musique-family-000848",
+    "musique-family-000892"
+  ],
+  "new_families": {
+    "musique-family-000058": 2,
+    "musique-family-000577": 2,
+    "musique-family-000844": 3,
+    "musique-family-000890": 3
+  },
+  "new_rows": [
+    {
+      "row": 10214,
+      "family": "musique-family-000058",
+      "split": "train",
+      "answerable_full_context": true,
+      "known_support_groups": 2
+    },
+    {
+      "row": 18645,
+      "family": "musique-family-000058",
+      "split": "train",
+      "answerable_full_context": false,
+      "known_support_groups": 0
+    },
+    {
+      "row": 39085,
+      "family": "musique-family-000577",
+      "split": "train",
+      "answerable_full_context": true,
+      "known_support_groups": 2
+    },
+    {
+      "row": 39296,
+      "family": "musique-family-000577",
+      "split": "train",
+      "answerable_full_context": false,
+      "known_support_groups": 0
+    },
+    {
+      "row": 6352,
+      "family": "musique-family-000844",
+      "split": "train",
+      "answerable_full_context": true,
+      "known_support_groups": 3
+    },
+    {
+      "row": 33599,
+      "family": "musique-family-000844",
+      "split": "train",
+      "answerable_full_context": false,
+      "known_support_groups": 1
+    },
+    {
+      "row": 38572,
+      "family": "musique-family-000890",
+      "split": "train",
+      "answerable_full_context": true,
+      "known_support_groups": 3
+    },
+    {
+      "row": 38628,
+      "family": "musique-family-000890",
+      "split": "train",
+      "answerable_full_context": false,
+      "known_support_groups": 1
+    }
+  ],
+  "source_decisions": "artifacts/jev-reader/data/decisions-c20-v1/train.jsonl",
+  "source_families": "artifacts/jev-reader/data/families-v1/train.jsonl",
+  "review_scope": "Read entire pools, distinguish source-supported facts from reference decomposition, record alternative proofs or ambiguity; no current dev promotion into train. New-to-review train families are not unseen benchmark families: old C20 models have trained on these source rows.",
+  "model_calls": 0,
+  "training_started": false
+}

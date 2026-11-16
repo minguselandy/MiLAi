@@ -1,0 +1,861 @@
+{
+  "status": "ALL4_FULL256_NATIVE_OPERATION_SOURCE_DELIVERY_AND_INCLUSIVE_INFERENCE_COST_CENSUS_CLOSED",
+  "timestamp_utc": "2026-11-07T07:14:44.140446+00:00",
+  "positions_each": 256,
+  "methods": {
+    "fixed-prefix": {
+      "positions": 256,
+      "main_C": 149,
+      "material_S": 150,
+      "native_statuses": {
+        "COMPLETED": 216,
+        "FAILED": 40
+      },
+      "HTTP_responses": 590,
+      "known_Host_prompt_tokens": 1233461,
+      "known_Host_completion_tokens": 751932,
+      "known_Host_total_tokens": 1985393,
+      "native_provider_wall_seconds": 5044.777456057258,
+      "initial_original_Source_count": 18932,
+      "initial_original_Source_characters": 8491230,
+      "native_tool_return_packets": 340,
+      "distinct_tool_packets_in_actual_responded_provider_inputs": 343,
+      "final_or_failed_last_bound_tool_receipts": 343,
+      "literal_original_ranges": 1012,
+      "received_original_range_characters_including_repeated_pieces": 713599,
+      "full_original_range_pieces": 902,
+      "ambiguous_original_range_pieces": 0,
+      "selected_action_counts": {
+        "SEARCH": 625,
+        "READ": 1012,
+        "HANDOFF": 253
+      },
+      "operation_kind_status_counts": {
+        "SEARCH:searched": 625,
+        "READ:opened": 1012
+      },
+      "native_retrieval_usage_counts": {
+        "control_steps": 1890,
+        "known_reference_reads": 4,
+        "operations": 1637,
+        "material_budget_rejections": 0,
+        "read_operations": 1012
+      },
+      "termination_reason_counts": {
+        "policy_handoff": 253,
+        "budget_exhausted": 87
+      },
+      "final_or_failed_last_material_kinds": {
+        "original_source": 1012
+      },
+      "current_tool_counts": {
+        "tool_attempts": 343,
+        "tool_returns": 343,
+        "tool_errors": 3
+      },
+      "NN_forwards": 0,
+      "NN_input_tokens": 0,
+      "native_NN_CPU_seconds_nested": 0,
+      "native_NN_preparation_seconds": 0,
+      "native_NN_inference_seconds": 0,
+      "native_NN_wall_seconds": 0,
+      "owners": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/pilot8/anchor-owner-v1.json",
+          "whole_child_CPU_seconds": 35.360213,
+          "wall_seconds": 183.7004296593368,
+          "already_recorded_native_CPU": {},
+          "client_CPU_residual": 35.360213,
+          "parent_CPU_seconds_through_billing": 0.118245314,
+          "new_unknown_usage": {
+            "generation": 0,
+            "embedding": 0
+          }
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/anchor-owner-v1.json",
+          "whole_child_CPU_seconds": 781.31931,
+          "wall_seconds": 7114.619124698453,
+          "already_recorded_native_CPU": {},
+          "client_CPU_residual": 781.31931,
+          "parent_CPU_seconds_through_billing": 0.189366797,
+          "new_unknown_usage": {
+            "generation": 0,
+            "embedding": 0
+          }
+        }
+      ],
+      "whole_job_child_inclusive_CPU_plus_measured_parent_CPU": 816.987135111,
+      "sum_actual_owner_wall_seconds": 7298.3195543577895,
+      "GPU2_job_interval_hours_including_HTTP_IO_wait_not_GPU_busy_hours": null,
+      "retained_unmetered_author_launch_cleanup_CPU": "unknown_not_zero",
+      "returned_packets_without_responded_input": 0,
+      "wire_packets_without_native_result": 3,
+      "all_original_Source_and_common_native_return_wire_packet_comparisons_literal_equal": true
+    },
+    "e3-aggregate-u32": {
+      "positions": 256,
+      "main_C": 148,
+      "material_S": 149,
+      "native_statuses": {
+        "COMPLETED": 204,
+        "FAILED": 52
+      },
+      "HTTP_responses": 591,
+      "known_Host_prompt_tokens": 1410401,
+      "known_Host_completion_tokens": 803651,
+      "known_Host_total_tokens": 2214052,
+      "native_provider_wall_seconds": 5416.177335889079,
+      "initial_original_Source_count": 18932,
+      "initial_original_Source_characters": 8491230,
+      "native_tool_return_packets": 335,
+      "distinct_tool_packets_in_actual_responded_provider_inputs": 341,
+      "final_or_failed_last_bound_tool_receipts": 341,
+      "literal_original_ranges": 1513,
+      "received_original_range_characters_including_repeated_pieces": 1074084,
+      "full_original_range_pieces": 1348,
+      "ambiguous_original_range_pieces": 0,
+      "selected_action_counts": {
+        "SEARCH": 343,
+        "READ": 1675,
+        "HANDOFF": 18
+      },
+      "operation_kind_status_counts": {
+        "SEARCH:searched": 343,
+        "READ:opened": 1572,
+        "READ:material_budget_exhausted": 96,
+        "READ:observed": 6,
+        "HANDOFF:delivery_selected": 11,
+        "READ:source_observation_page": 1
+      },
+      "native_retrieval_usage_counts": {
+        "control_steps": 2036,
+        "known_reference_reads": 0,
+        "operations": 2029,
+        "material_budget_rejections": 96,
+        "read_operations": 1675
+      },
+      "termination_reason_counts": {
+        "budget_exhausted": 317,
+        "policy_handoff": 18
+      },
+      "final_or_failed_last_material_kinds": {
+        "original_source": 1513
+      },
+      "current_tool_counts": {
+        "tool_attempts": 341,
+        "tool_returns": 341,
+        "tool_errors": 6
+      },
+      "NN_forwards": 2036,
+      "NN_input_tokens": 12747290,
+      "native_NN_CPU_seconds_nested": 1930.8691569279997,
+      "native_NN_preparation_seconds": 51.73017080780119,
+      "native_NN_inference_seconds": 1016.6528934538364,
+      "native_NN_wall_seconds": 1070.3840520950034,
+      "owners": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/learned-owner-v1.json",
+          "whole_child_CPU_seconds": 2635.191604,
+          "wall_seconds": 7687.708161925897,
+          "already_recorded_native_CPU": {
+            "dynamic_memory_laya": 1939.9386650790111,
+            "dynamic_memory_laya_load": 8.10247759799995
+          },
+          "client_CPU_residual": 687.150461322989,
+          "parent_CPU_seconds_through_billing": 0.110969492,
+          "new_unknown_usage": {
+            "generation": 0,
+            "embedding": 0
+          }
+        }
+      ],
+      "whole_job_child_inclusive_CPU_plus_measured_parent_CPU": 2635.302573492,
+      "sum_actual_owner_wall_seconds": 7687.708161925897,
+      "GPU2_job_interval_hours_including_HTTP_IO_wait_not_GPU_busy_hours": 2.135474490351561,
+      "retained_unmetered_author_launch_cleanup_CPU": "unknown_not_zero",
+      "returned_packets_without_responded_input": 0,
+      "wire_packets_without_native_result": 6,
+      "all_original_Source_and_common_native_return_wire_packet_comparisons_literal_equal": true
+    },
+    "e3-aggregate-seed1-u32": {
+      "positions": 256,
+      "main_C": 131,
+      "material_S": 139,
+      "native_statuses": {
+        "COMPLETED": 205,
+        "FAILED": 51
+      },
+      "HTTP_responses": 565,
+      "known_Host_prompt_tokens": 1320295,
+      "known_Host_completion_tokens": 815763,
+      "known_Host_total_tokens": 2136058,
+      "native_provider_wall_seconds": 5481.664887465537,
+      "initial_original_Source_count": 18932,
+      "initial_original_Source_characters": 8491230,
+      "native_tool_return_packets": 310,
+      "distinct_tool_packets_in_actual_responded_provider_inputs": 313,
+      "final_or_failed_last_bound_tool_receipts": 313,
+      "literal_original_ranges": 1388,
+      "received_original_range_characters_including_repeated_pieces": 1014573,
+      "full_original_range_pieces": 1215,
+      "ambiguous_original_range_pieces": 0,
+      "selected_action_counts": {
+        "SEARCH": 381,
+        "READ": 1561,
+        "HANDOFF": 17
+      },
+      "operation_kind_status_counts": {
+        "SEARCH:searched": 381,
+        "READ:opened": 1435,
+        "READ:material_budget_exhausted": 56,
+        "READ:observed": 70,
+        "HANDOFF:delivery_selected": 5
+      },
+      "native_retrieval_usage_counts": {
+        "control_steps": 1959,
+        "known_reference_reads": 0,
+        "operations": 1947,
+        "material_budget_rejections": 56,
+        "read_operations": 1561
+      },
+      "termination_reason_counts": {
+        "budget_exhausted": 293,
+        "policy_handoff": 17
+      },
+      "final_or_failed_last_material_kinds": {
+        "original_source": 1388
+      },
+      "current_tool_counts": {
+        "tool_attempts": 313,
+        "tool_returns": 313,
+        "tool_errors": 3
+      },
+      "NN_forwards": 1959,
+      "NN_input_tokens": 12353161,
+      "native_NN_CPU_seconds_nested": 1885.7103681470062,
+      "native_NN_preparation_seconds": 48.245677065104246,
+      "native_NN_inference_seconds": 991.2574512120336,
+      "native_NN_wall_seconds": 1040.5588316535577,
+      "owners": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32/learned-owner-v1.json",
+          "whole_child_CPU_seconds": 2546.614015,
+          "wall_seconds": 7645.406356122345,
+          "already_recorded_native_CPU": {
+            "dynamic_memory_laya_load": 6.662404252000215,
+            "dynamic_memory_laya": 1897.1903147900011
+          },
+          "client_CPU_residual": 642.7612959579988,
+          "parent_CPU_seconds_through_billing": 0.092552207,
+          "new_unknown_usage": {
+            "generation": 0,
+            "embedding": 0
+          }
+        }
+      ],
+      "whole_job_child_inclusive_CPU_plus_measured_parent_CPU": 2546.7065672070003,
+      "sum_actual_owner_wall_seconds": 7645.406356122345,
+      "GPU2_job_interval_hours_including_HTTP_IO_wait_not_GPU_busy_hours": 2.123723988920295,
+      "retained_unmetered_author_launch_cleanup_CPU": "unknown_not_zero",
+      "returned_packets_without_responded_input": 0,
+      "wire_packets_without_native_result": 3,
+      "all_original_Source_and_common_native_return_wire_packet_comparisons_literal_equal": true
+    },
+    "e3-aggregate-seed2-u32": {
+      "positions": 256,
+      "main_C": 115,
+      "material_S": 103,
+      "native_statuses": {
+        "COMPLETED": 195,
+        "FAILED": 61
+      },
+      "HTTP_responses": 616,
+      "known_Host_prompt_tokens": 1282499,
+      "known_Host_completion_tokens": 905381,
+      "known_Host_total_tokens": 2187880,
+      "native_provider_wall_seconds": 6059.930178110488,
+      "initial_original_Source_count": 18932,
+      "initial_original_Source_characters": 8491230,
+      "native_tool_return_packets": 366,
+      "distinct_tool_packets_in_actual_responded_provider_inputs": 369,
+      "final_or_failed_last_bound_tool_receipts": 369,
+      "literal_original_ranges": 962,
+      "received_original_range_characters_including_repeated_pieces": 708653,
+      "full_original_range_pieces": 868,
+      "ambiguous_original_range_pieces": 0,
+      "selected_action_counts": {
+        "SEARCH": 548,
+        "READ": 1260,
+        "HANDOFF": 163
+      },
+      "operation_kind_status_counts": {
+        "SEARCH:searched": 548,
+        "READ:opened": 1177,
+        "READ:observed": 51,
+        "READ:material_budget_exhausted": 16,
+        "HANDOFF:delivery_selected": 87,
+        "READ:source_observation_page": 16
+      },
+      "native_retrieval_usage_counts": {
+        "control_steps": 1971,
+        "known_reference_reads": 7,
+        "operations": 1895,
+        "material_budget_rejections": 16,
+        "read_operations": 1260
+      },
+      "termination_reason_counts": {
+        "budget_exhausted": 203,
+        "policy_handoff": 163
+      },
+      "final_or_failed_last_material_kinds": {
+        "original_source": 962
+      },
+      "current_tool_counts": {
+        "tool_attempts": 369,
+        "tool_returns": 369,
+        "tool_errors": 3
+      },
+      "NN_forwards": 1971,
+      "NN_input_tokens": 11790893,
+      "native_NN_CPU_seconds_nested": 1715.9605418350031,
+      "native_NN_preparation_seconds": 48.961748357862234,
+      "native_NN_inference_seconds": 911.3321244930848,
+      "native_NN_wall_seconds": 960.8314917981625,
+      "owners": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-owner-v1.json",
+          "whole_child_CPU_seconds": 2398.03001,
+          "wall_seconds": 8258.279234327376,
+          "already_recorded_native_CPU": {
+            "dynamic_memory_laya": 1728.1082746413886,
+            "dynamic_memory_laya_load": 8.301686305000203
+          },
+          "client_CPU_residual": 661.6200490536112,
+          "parent_CPU_seconds_through_billing": 0.127463247,
+          "new_unknown_usage": {
+            "generation": 0,
+            "embedding": 0
+          }
+        }
+      ],
+      "whole_job_child_inclusive_CPU_plus_measured_parent_CPU": 2398.157473247,
+      "sum_actual_owner_wall_seconds": 8258.279234327376,
+      "GPU2_job_interval_hours_including_HTTP_IO_wait_not_GPU_busy_hours": 2.293966455008421,
+      "retained_unmetered_author_launch_cleanup_CPU": "unknown_not_zero",
+      "returned_packets_without_responded_input": 0,
+      "wire_packets_without_native_result": 3,
+      "all_original_Source_and_common_native_return_wire_packet_comparisons_literal_equal": true
+    }
+  },
+  "native_first_failures_retained_and_charged": true,
+  "all1024_first_native_results_and_trace_paths_bound": true,
+  "whole_job_CPU_includes_native_model_load_forward_and_client_residual_once": true,
+  "Source_delivery_scope": "Every initial original Source body/role/origin compared to native Source. Literal material ranges refer to completed-final or failed-last actual input Tool receipts, not all initial/history material. Returned retrieval packets and distinct packets in every actual responded provider input are separately counted and whole-dict compared on common call IDs. Unanswered provider requests may be missing from this responded-wire union. Equal text with distinct Source identities stays distinct; ambiguity retained, not arbitrarily deduplicated. Characters are not tokens and repeated received pieces are counted as volume, not independent facts.",
+  "operation_scope": "All selected action bindings and operation-result phases are separate. Selection and successful opening do not guarantee handoff or enough material. READ, budget rejection and HANDOFF retain native definitions. Native NN timings are measured instrumentation, not CUDA kernel busy time or effective16k context evidence.",
+  "cost_scope": "Closed confirmation inference only; includes all failed first outcomes and measured whole childCPU plus parent through billing, with NN/load CPU nested and never added twice. Job wall/GPU2occupancy includes HTTP waits/copies/load and is not activeGPUkernelhours or HostGPU0/1compute. Setup/training/panel-selection/analysis/archives and unknown author/launch/cleanup remain separate for final full-project costs. Native usage/paid owner receipts are read only; no second ledger, monetary-price estimate or new charge.",
+  "quality_scope": "Joined frozen source-author whole-task labels; no mediator subgroup establishes a causal delivery/quality effect, no result-based seed/stratum/budget/scorer selection or adoption.",
+  "readonly_schema_failure_reflection": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/inspect-native-cost-schema-v2-reflection-v1.json",
+  "new_model_HTTP_calls": 0,
+  "operational_ledger_opened_or_written": false,
+  "native_or_prior_cost_rebilled": false,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "full_per_position_native_bindings": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/operations-source-delivery-inference-cost-all4-v1.json",
+  "wire_error_reconciliation": {
+    "fixed-prefix": {
+      "counts": {
+        "native_schema_enum_rejection_before_tool_execution": 3
+      },
+      "all_error_positions_and_native_packets": [
+        {
+          "method": "fixed-prefix",
+          "index": 25,
+          "family": "qasper-paper-1702.03342",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-fixed-prefix-remaining248/fixed-rich/banks/364f514c-dae5-4ba3-85be-bf6ca6e59253/29b3fbd6-605a-4ae0-93c9-3dbceef19a02-trace-0.jsonl",
+          "call_id": "chatcmpl-bfb3c97227065d5d:tool:0",
+          "literal_wire_error_packet": {
+            "error": {
+              "expected": [
+                "current_interpretation",
+                "saved_history",
+                "original_source",
+                "live_business"
+              ],
+              "keyword": "enum",
+              "path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "read_goal",
+                  "evidence",
+                  0
+                ]
+              },
+              "schema_path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "properties",
+                  "read_goal",
+                  "anyOf",
+                  1,
+                  "properties",
+                  "evidence",
+                  "items",
+                  "enum"
+                ]
+              }
+            },
+            "feedback_utf8_limit": 4096,
+            "instance_root": "tool_arguments",
+            "origin": "jsonschema",
+            "status": "error",
+            "tool_executed": false
+          },
+          "native_status": "COMPLETED",
+          "quality": "C",
+          "material": "S"
+        },
+        {
+          "method": "fixed-prefix",
+          "index": 93,
+          "family": "qasper-paper-1703.10344",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-fixed-prefix-remaining248/fixed-rich/banks/b53bffc2-e139-4709-ac9f-d5c7610f066c/e6b5398d-e855-4ae2-8c96-9ec124eac0a7-trace-0.jsonl",
+          "call_id": "chatcmpl-8eba170fd011328c:tool:0",
+          "literal_wire_error_packet": {
+            "error": {
+              "expected": [
+                "current_interpretation",
+                "saved_history",
+                "original_source",
+                "live_business"
+              ],
+              "keyword": "enum",
+              "path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "read_goal",
+                  "evidence",
+                  0
+                ]
+              },
+              "schema_path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "properties",
+                  "read_goal",
+                  "anyOf",
+                  1,
+                  "properties",
+                  "evidence",
+                  "items",
+                  "enum"
+                ]
+              }
+            },
+            "feedback_utf8_limit": 4096,
+            "instance_root": "tool_arguments",
+            "origin": "jsonschema",
+            "status": "error",
+            "tool_executed": false
+          },
+          "native_status": "COMPLETED",
+          "quality": "C",
+          "material": "P"
+        },
+        {
+          "method": "fixed-prefix",
+          "index": 198,
+          "family": "qasper-paper-1809.08731",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-fixed-prefix-remaining248/fixed-rich/banks/045db97f-5cd2-413d-a1ae-b54287a75c23/38d9257b-4a8d-40fd-b169-3a93d05a77d1-trace-0.jsonl",
+          "call_id": "chatcmpl-b2ce0c38a73bac2c:tool:0",
+          "literal_wire_error_packet": {
+            "error": {
+              "expected": [
+                "current_interpretation",
+                "saved_history",
+                "original_source",
+                "live_business"
+              ],
+              "keyword": "enum",
+              "path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "read_goal",
+                  "evidence",
+                  0
+                ]
+              },
+              "schema_path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "properties",
+                  "read_goal",
+                  "anyOf",
+                  1,
+                  "properties",
+                  "evidence",
+                  "items",
+                  "enum"
+                ]
+              }
+            },
+            "feedback_utf8_limit": 4096,
+            "instance_root": "tool_arguments",
+            "origin": "jsonschema",
+            "status": "error",
+            "tool_executed": false
+          },
+          "native_status": "COMPLETED",
+          "quality": "I",
+          "material": "P"
+        }
+      ],
+      "native_milai_retrieve_result_events": 340,
+      "all_distinct_tool_messages_in_responded_provider_inputs": 343
+    },
+    "e3-aggregate-u32": {
+      "counts": {
+        "native_read_limit_rejection_before_control_loop": 5,
+        "native_schema_enum_rejection_before_tool_execution": 1
+      },
+      "all_error_positions_and_native_packets": [
+        {
+          "method": "e3-aggregate-u32",
+          "index": 13,
+          "family": "qasper-paper-1712.05999",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-u32/case-013/runtime/banks/bf5bbcd3-4580-4804-96bf-b7274719895f/2574a241-5302-40c9-b866-c2de227d1cf9-trace-0.jsonl",
+          "call_id": "chatcmpl-bc76f1c21cfa4cf4:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "COMPLETED",
+          "quality": "I",
+          "material": "P"
+        },
+        {
+          "method": "e3-aggregate-u32",
+          "index": 151,
+          "family": "qasper-paper-1909.01383",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-u32/case-151/runtime/banks/ce492ec9-0b84-4e13-85ab-84237aa6b2d0/196e062f-f998-4913-b582-b04b8313a89a-trace-0.jsonl",
+          "call_id": "chatcmpl-8b041d4581939e19:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "COMPLETED",
+          "quality": "C",
+          "material": "P"
+        },
+        {
+          "method": "e3-aggregate-u32",
+          "index": 151,
+          "family": "qasper-paper-1909.01383",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-u32/case-151/runtime/banks/ce492ec9-0b84-4e13-85ab-84237aa6b2d0/196e062f-f998-4913-b582-b04b8313a89a-trace-0.jsonl",
+          "call_id": "chatcmpl-a184a068831eb780:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "COMPLETED",
+          "quality": "C",
+          "material": "P"
+        },
+        {
+          "method": "e3-aggregate-u32",
+          "index": 174,
+          "family": "qasper-paper-1801.06482",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-u32/case-174/runtime/banks/47ab8b54-8269-4632-b1fc-2c97f0d69a1b/9af31874-8ae0-4f19-9347-062754e8d6cd-trace-0.jsonl",
+          "call_id": "chatcmpl-bbb74a5198bfce57:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "FAILED",
+          "quality": "F",
+          "material": "P"
+        },
+        {
+          "method": "e3-aggregate-u32",
+          "index": 211,
+          "family": "qasper-paper-1810.10254",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-u32/case-211/runtime/banks/e021a2fe-fd7a-472e-b85c-c71e76542ca2/de27bd7c-a3e8-4522-81fa-96965e1a5891-trace-0.jsonl",
+          "call_id": "chatcmpl-9600fd31beefcb78:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "FAILED",
+          "quality": "F",
+          "material": "P"
+        },
+        {
+          "method": "e3-aggregate-u32",
+          "index": 223,
+          "family": "qasper-paper-1907.04152",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-u32/case-223/runtime/banks/919c35e9-2aa8-45f5-add6-74f9c2cc27b7/c06dde09-0b36-406c-85a3-29ed506c977b-trace-0.jsonl",
+          "call_id": "chatcmpl-b844070ee7637b24:tool:0",
+          "literal_wire_error_packet": {
+            "error": {
+              "expected": [
+                "current_interpretation",
+                "saved_history",
+                "original_source",
+                "live_business"
+              ],
+              "keyword": "enum",
+              "path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "read_goal",
+                  "evidence",
+                  0
+                ]
+              },
+              "schema_path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "properties",
+                  "read_goal",
+                  "anyOf",
+                  1,
+                  "properties",
+                  "evidence",
+                  "items",
+                  "enum"
+                ]
+              }
+            },
+            "feedback_utf8_limit": 4096,
+            "instance_root": "tool_arguments",
+            "origin": "jsonschema",
+            "status": "error",
+            "tool_executed": false
+          },
+          "native_status": "COMPLETED",
+          "quality": "C",
+          "material": "P"
+        }
+      ],
+      "native_milai_retrieve_result_events": 335,
+      "all_distinct_tool_messages_in_responded_provider_inputs": 341
+    },
+    "e3-aggregate-seed1-u32": {
+      "counts": {
+        "native_read_limit_rejection_before_control_loop": 3
+      },
+      "all_error_positions_and_native_packets": [
+        {
+          "method": "e3-aggregate-seed1-u32",
+          "index": 57,
+          "family": "qasper-paper-1608.01084",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed1-u32/case-057/runtime/banks/f37a8406-3d72-47f0-a7e9-add8d47173f3/7e638b9d-b074-4d3e-bb80-5a1e3ab3bd63-trace-0.jsonl",
+          "call_id": "chatcmpl-a94609240b6087ba:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "FAILED",
+          "quality": "F",
+          "material": "P"
+        },
+        {
+          "method": "e3-aggregate-seed1-u32",
+          "index": 75,
+          "family": "qasper-paper-2003.03106",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed1-u32/case-075/runtime/banks/095aec61-107d-4587-9907-497f208d1d4f/adb57851-5fb1-4376-9cca-09a56fe877a5-trace-0.jsonl",
+          "call_id": "chatcmpl-81782d844ec328ee:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "FAILED",
+          "quality": "F",
+          "material": "S"
+        },
+        {
+          "method": "e3-aggregate-seed1-u32",
+          "index": 231,
+          "family": "qasper-paper-1704.00939",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed1-u32/case-231/runtime/banks/4e442206-b0d8-4bac-a7b0-dae28215cfd9/bf0c90b9-c11c-4181-a5c1-2bb97dec8a0f-trace-0.jsonl",
+          "call_id": "chatcmpl-9be296401a280613:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "FAILED",
+          "quality": "F",
+          "material": "S"
+        }
+      ],
+      "native_milai_retrieve_result_events": 310,
+      "all_distinct_tool_messages_in_responded_provider_inputs": 313
+    },
+    "e3-aggregate-seed2-u32": {
+      "counts": {
+        "native_read_limit_rejection_before_control_loop": 2,
+        "native_schema_enum_rejection_before_tool_execution": 1
+      },
+      "all_error_positions_and_native_packets": [
+        {
+          "method": "e3-aggregate-seed2-u32",
+          "index": 75,
+          "family": "qasper-paper-2003.03106",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed2-u32/case-075/runtime/banks/095aec61-107d-4587-9907-497f208d1d4f/adb57851-5fb1-4376-9cca-09a56fe877a5-trace-0.jsonl",
+          "call_id": "chatcmpl-b5609f4b0a2ee89e:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "COMPLETED",
+          "quality": "I",
+          "material": "P"
+        },
+        {
+          "method": "e3-aggregate-seed2-u32",
+          "index": 96,
+          "family": "qasper-paper-1909.03405",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed2-u32/case-096/runtime/banks/54505649-0772-4d61-a7c4-2aa0463dc6e8/ed7ec089-f81c-4b1d-ba2c-d72968b085c9-trace-0.jsonl",
+          "call_id": "chatcmpl-8f4af9d99fa7d169:tool:0",
+          "literal_wire_error_packet": {
+            "evidence": [],
+            "ok": false,
+            "schema": "milai_retrieval_result_v1",
+            "termination_reason": "read_limit_exhausted",
+            "usage": {
+              "control_steps": 0,
+              "known_reference_reads": 0,
+              "operations": 0,
+              "read_operations": 0
+            }
+          },
+          "native_status": "FAILED",
+          "quality": "F",
+          "material": "P"
+        },
+        {
+          "method": "e3-aggregate-seed2-u32",
+          "index": 164,
+          "family": "qasper-paper-1703.04001",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed2-u32/case-164/runtime/banks/f00ec842-3a92-4032-a294-0af911d8dc48/00ef14fb-a91e-48d4-b3cf-4c36421c2750-trace-0.jsonl",
+          "call_id": "chatcmpl-a814c8e6d7075667:tool:0",
+          "literal_wire_error_packet": {
+            "error": {
+              "expected": [
+                "current_interpretation",
+                "saved_history",
+                "original_source",
+                "live_business"
+              ],
+              "keyword": "enum",
+              "path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "read_goal",
+                  "evidence",
+                  0
+                ]
+              },
+              "schema_path": {
+                "omitted_segments": 0,
+                "segments": [
+                  "properties",
+                  "read_goal",
+                  "anyOf",
+                  1,
+                  "properties",
+                  "evidence",
+                  "items",
+                  "enum"
+                ]
+              }
+            },
+            "feedback_utf8_limit": 4096,
+            "instance_root": "tool_arguments",
+            "origin": "jsonschema",
+            "status": "error",
+            "tool_executed": false
+          },
+          "native_status": "COMPLETED",
+          "quality": "C",
+          "material": "P"
+        }
+      ],
+      "native_milai_retrieve_result_events": 366,
+      "all_distinct_tool_messages_in_responded_provider_inputs": 369
+    }
+  },
+  "native_tool_return_packets_field_definition": "Count of native milai_retrieve_result trace events, not all Tool messages; all15wiremessages without that event are separately classified native schema/read-limit errors. No returned packet silently dropped or inferred successful."
+}

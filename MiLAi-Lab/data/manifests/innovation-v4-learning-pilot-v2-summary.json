@@ -1,0 +1,274 @@
+{
+  "status": "TRAINING_AND_EVALUATION_CLOSED",
+  "training_protocol": {
+    "model_path": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/models/qwen25-05b",
+    "model_source": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4,
+    "seed": 20261016,
+    "rank": 4,
+    "alpha": 8,
+    "learning_rate": 0.0005,
+    "epochs": 1,
+    "examples": 15,
+    "example_order": [
+      "innovation-grant-noop-ack",
+      "innovation-shared-transition-3-reference",
+      "innovation-shared-formation-reference-v3",
+      "innovation-studio-transition-3-reference",
+      "innovation-grant-transition-3-reference",
+      "innovation-grant-formation-reference-v3",
+      "innovation-grant-noop-restatement",
+      "innovation-studio-formation-reference-v3",
+      "innovation-harbor-transition-2-reference",
+      "innovation-orchid-formation-reference-v3",
+      "innovation-harbor-formation-reference-001",
+      "innovation-catalog-formation-reference-v3",
+      "innovation-harbor-transition-1-reference",
+      "innovation-catalog-transition-1-reference",
+      "innovation-orchid-transition-1-reference"
+    ],
+    "objectives": [
+      "imitation",
+      "quality_weighted",
+      "relation_consequence"
+    ],
+    "input_tokens_per_arm": 41627,
+    "target_tokens_per_arm": 1764,
+    "max_sequence_tokens": 5698,
+    "auxiliary_examples": 1,
+    "matching": "Identical sequences, order, initialization, parameters and optimizer steps. Every response position is projected in every arm, including zero-weight auxiliary tokens. Only loss weights differ; each update normalized by its supervised weight sum.",
+    "quality_proxy": "2x weights on text, kind, evidence aliases and applicability values; not a learned correctness reward or a preference optimization claim.",
+    "relation_objective": "Quality weights plus 2x rule spans and nonempty consequence labels.",
+    "scope": "Exposed author references; pipeline pilot, not a generalization result.",
+    "data_formats": [
+      "indexed_separate"
+    ],
+    "reference_authoring_cost": "Not independently metered; not zero.",
+    "torch": "2.7.0+cu126",
+    "transformers": "4.52.3",
+    "python": "3.10.12",
+    "source_version": "c9aedeb7",
+    "cpu_model": "Intel Xeon Processor (Skylake, IBRS)"
+  },
+  "training": {
+    "imitation": {
+      "status": "COMPLETED",
+      "objective": "imitation",
+      "optimizer_steps": 15,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 650.9653418064117,
+      "wall_seconds": 319.983925643377,
+      "cpu_seconds": 1177.8404293199999,
+      "process_peak_rss_mib": 21634.6953125,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0,
+      "evaluation": "not yet run"
+    },
+    "quality_weighted": {
+      "status": "COMPLETED",
+      "objective": "quality_weighted",
+      "optimizer_steps": 15,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 657.3573417663574,
+      "wall_seconds": 288.8207934005186,
+      "cpu_seconds": 1075.964612827,
+      "process_peak_rss_mib": 21634.6953125,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0,
+      "evaluation": "not yet run"
+    },
+    "relation_consequence": {
+      "status": "COMPLETED",
+      "objective": "relation_consequence",
+      "optimizer_steps": 15,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 657.8099764585495,
+      "wall_seconds": 285.8546420261264,
+      "cpu_seconds": 1068.1468651569999,
+      "process_peak_rss_mib": 21634.6953125,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0,
+      "evaluation": "not yet run"
+    }
+  },
+  "evaluation": {
+    "relation_consequence": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "relation_consequence",
+        "device": "cpu",
+        "generation_batches": 1,
+        "model_http_requests": 0,
+        "padded_input_tokens": 4440,
+        "logical_prompt_tokens": 4220,
+        "completion_tokens_including_eos": 36,
+        "wall_seconds": 12.364049165509641,
+        "cpu_seconds": 47.55768147099997,
+        "process_peak_rss_mib": 3735.1953125,
+        "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "cases": [
+        {
+          "case_id": "learning-eval-future-two-scopes",
+          "status": "no_change",
+          "records": 0,
+          "error": null
+        },
+        {
+          "case_id": "learning-eval-or-unknown-alternative",
+          "status": "invalid_or_rejected",
+          "records": 0,
+          "error": "Extra data: line 1 column 28 (char 27)"
+        },
+        {
+          "case_id": "learning-eval-history-and-exception",
+          "status": "no_change",
+          "records": 0,
+          "error": null
+        },
+        {
+          "case_id": "learning-eval-total-proposal-nontarget",
+          "status": "no_change",
+          "records": 0,
+          "error": null
+        }
+      ]
+    },
+    "quality_weighted": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "quality_weighted",
+        "device": "cpu",
+        "generation_batches": 1,
+        "model_http_requests": 0,
+        "padded_input_tokens": 4440,
+        "logical_prompt_tokens": 4220,
+        "completion_tokens_including_eos": 36,
+        "wall_seconds": 12.370897405780852,
+        "cpu_seconds": 47.79088166600002,
+        "process_peak_rss_mib": 3729.984375,
+        "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "cases": [
+        {
+          "case_id": "learning-eval-future-two-scopes",
+          "status": "no_change",
+          "records": 0,
+          "error": null
+        },
+        {
+          "case_id": "learning-eval-or-unknown-alternative",
+          "status": "no_change",
+          "records": 0,
+          "error": null
+        },
+        {
+          "case_id": "learning-eval-history-and-exception",
+          "status": "no_change",
+          "records": 0,
+          "error": null
+        },
+        {
+          "case_id": "learning-eval-total-proposal-nontarget",
+          "status": "no_change",
+          "records": 0,
+          "error": null
+        }
+      ]
+    },
+    "imitation": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "imitation",
+        "device": "cpu",
+        "generation_batches": 1,
+        "model_http_requests": 0,
+        "padded_input_tokens": 4440,
+        "logical_prompt_tokens": 4220,
+        "completion_tokens_including_eos": 36,
+        "wall_seconds": 12.55214262008667,
+        "cpu_seconds": 48.39955960399999,
+        "process_peak_rss_mib": 3727.5859375,
+        "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "cases": [
+        {
+          "case_id": "learning-eval-future-two-scopes",
+          "status": "invalid_or_rejected",
+          "records": 0,
+          "error": "Extra data: line 1 column 28 (char 27)"
+        },
+        {
+          "case_id": "learning-eval-or-unknown-alternative",
+          "status": "invalid_or_rejected",
+          "records": 0,
+          "error": "Extra data: line 1 column 28 (char 27)"
+        },
+        {
+          "case_id": "learning-eval-history-and-exception",
+          "status": "invalid_or_rejected",
+          "records": 0,
+          "error": "Extra data: line 1 column 28 (char 27)"
+        },
+        {
+          "case_id": "learning-eval-total-proposal-nontarget",
+          "status": "invalid_or_rejected",
+          "records": 0,
+          "error": "Extra data: line 1 column 28 (char 27)"
+        }
+      ]
+    },
+    "base": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "base",
+        "device": "cpu",
+        "generation_batches": 1,
+        "model_http_requests": 0,
+        "padded_input_tokens": 4440,
+        "logical_prompt_tokens": 4220,
+        "completion_tokens_including_eos": 407,
+        "wall_seconds": 41.1332872370258,
+        "cpu_seconds": 155.617443046,
+        "process_peak_rss_mib": 3524.3515625,
+        "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "cases": [
+        {
+          "case_id": "learning-eval-future-two-scopes",
+          "status": "applied",
+          "records": 1,
+          "error": null
+        },
+        {
+          "case_id": "learning-eval-or-unknown-alternative",
+          "status": "applied",
+          "records": 1,
+          "error": null
+        },
+        {
+          "case_id": "learning-eval-history-and-exception",
+          "status": "applied",
+          "records": 1,
+          "error": null
+        },
+        {
+          "case_id": "learning-eval-total-proposal-nontarget",
+          "status": "applied",
+          "records": 1,
+          "error": null
+        }
+      ]
+    }
+  },
+  "source_review": {
+    "base": "Four records committed: future roles and correction/exception copied as compound units; OR case lacks person state and copper box; grant case omits members, proposal and silver cover. Not full formation success.",
+    "imitation": "All four outputs are empty edits with an extra brace; invalid JSON, no commit.",
+    "quality_weighted": "All four outputs are valid empty edits despite new source facts; no semantic write.",
+    "relation_consequence": "Three empty edits and one extra-brace invalid; no semantic write."
+  },
+  "conclusion": "Native task separation and balanced small references do not establish learning benefit. Parameters changed, but the learned policies collapse toward no-op on exposed formation cases. Preserve the no-op option; improve actual outcome supervision/data rather than mask the failure with forced edits.",
+  "scope": "15 references over6 histories;27 logical assignments from one rule. Four already-exposed development evaluation cases, not independent confirmation. CPU training/local generation costs separately reported; no HTTP or model-service changes."
+}

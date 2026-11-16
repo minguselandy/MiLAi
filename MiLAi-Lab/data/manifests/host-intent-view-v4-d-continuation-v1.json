@@ -1,0 +1,41 @@
+{
+  "status": "RUNNING_UNEXECUTED_POSITIONS_ONLY",
+  "source_version": "11798c8d",
+  "plan": "artifacts/host-intent-retrieval-v3/view-v4-d-continuation-plan-v1.json",
+  "driver": "artifacts/host-intent-retrieval-v3/view-v4-d-continuation-v1/driver.json",
+  "parent_pid": 3434203,
+  "active_pid": 3434228,
+  "original_terminal_driver": "artifacts/host-intent-retrieval-v3/view-v4-d-v2/driver.json",
+  "original_answer_first44": "artifacts/host-intent-retrieval-v3/view-v4-d-v2/answer-seed0",
+  "logical_answer_cohort": {
+    "first44": "artifacts/host-intent-retrieval-v3/view-v4-d-v2/answer-seed0",
+    "last20": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-continuation-v1/answer-seed0-remaining20",
+    "remaining_histories": [
+      "memops_E08-view-v4-d-originals",
+      "memops_E15-view-v4-d-content",
+      "memops_E15-view-v4-d-originals",
+      "memops_F01-view-v4-d-content",
+      "memops_F01-view-v4-d-originals"
+    ]
+  },
+  "remaining_positions": 212,
+  "resource_continuity": {
+    "original": {
+      "requests": 600,
+      "reserved_tokens": 8000000
+    },
+    "already_reserved": {
+      "requests": 100,
+      "reserved_tokens": 1200520
+    },
+    "remaining": {
+      "requests": 500,
+      "reserved_tokens": 6799480
+    },
+    "evidence": "artifacts/host-intent-retrieval-v3/view-v4-d-v2/answer-seed0/laya-rich/queue-admission.json",
+    "scope": "Residual sub-run caps preserve original aggregate600requests/8Mreservedtokens. Actual usage continues original single ledger."
+  },
+  "no_retries_or_old_result_rewrites": true,
+  "unchanged": "Frozen11798c8d method code, same weights, Host prompt/settings,16384/2048 input/head caps,2048return budget,8steps, source order and cold-stream requests. Only remaining queue reservation caps deducted from original usage.",
+  "accounting": "pending-v32 settled783.2861924450268CPU at verified idle; generation/embedding unchanged. New pending-v33 for subsequent offline work. Extra model reload costs retained."
+}
