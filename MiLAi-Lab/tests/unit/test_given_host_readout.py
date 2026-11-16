@@ -75,7 +75,7 @@ def test_given_branch_reads_its_actual_packet_without_original_evidence_or_state
     assert report["readout_origin"] == "actual_same_before_branch"
     delivered = json.loads(wires[0]["messages"][1]["content"])
     assert delivered["memory"] == read_json(case / "replay.json")["result"]["retrieval_result"]
-    assert "4312" not in json.dumps(delivered)
+    assert source()["content"] not in json.dumps(delivered)
     assert read_json(output / "frame.json")["schema"] == "given_request_branch_host_readout_v1"
     assert (captured / "call.json").read_bytes() == call_bytes
     assert result_path.read_bytes() == result_bytes
@@ -335,7 +335,7 @@ def test_later_revocation_cannot_be_bypassed_with_a_captured_tool_receipt(tmp_pa
     assert report["reason"] == "GIVEN_READOUT_VISIBILITY_REVOKED"
     assert not wires and report["actual_http_attempts"] == 0
     assert not (tmp_path / "readout/request.json").exists()
-    assert "4312" not in json.dumps(report)
+    assert source()["content"] not in json.dumps(report)
 
 
 def test_actual_known_delivery_cannot_be_omitted_from_a_claimed_host_readout(tmp_path, monkeypatch):

@@ -61,12 +61,16 @@ def test_closed_bank_and_final_provider_input_precede_later_source_arrivals(tmp_
     freeze = read_json(root / "input-freeze.json")
     assert read_json(Path(freeze["config"]["budget_path"])) == ledger
     retained = {p.relative_to(captured): p.read_bytes() for p in captured.rglob("*") if p.is_file()}
+    later_text = "A later source says the code is 9999."
     later = message(root, bank="bank", owner="alice", session="host", message_id="later",
         content="Check again.", incoming_sources=[{**source(), "event_key": "later",
-            "content": "A later source says the code is 9999."}], previous_host_message="first")
+            "content": later_text}], previous_host_message="first")
     assert later["status"] == "COMPLETED", later.get("error")
-    assert "9999" not in json.dumps(report["memory_store_values"])
-    assert "9999" in json.dumps(later["sources"])
+    # Short digits can occur in timing values and UUIDs; test the actual later source.
+    assert later_text not in json.dumps(report["memory_store_values"])
+    later_sources = [row for row in later["sources"] if row.get("content") == later_text]
+    assert len(later_sources) == 1
+    assert later_sources[0]["event_id"] not in json.dumps(report["memory_store_values"])
     assert retained == {p.relative_to(captured): p.read_bytes()
                         for p in captured.rglob("*") if p.is_file()}
 
