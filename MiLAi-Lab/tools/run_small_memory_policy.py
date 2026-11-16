@@ -174,7 +174,8 @@ def train(args: argparse.Namespace) -> None:
         adaptation=args.adaptation, set_interaction=args.set_interaction,
         readout=args.readout, joint_max_tokens=args.joint_max_tokens,
         joint_layout=args.joint_layout, state_representation=args.state_representation,
-        action_representation=args.action_representation)
+        action_representation=args.action_representation,
+        lora_target_modules=tuple(args.lora_target_modules))
     rows = read_jsonl(args.data)
     if not rows or any(row["split"] != "train" for row in rows):
         raise ValueError("Training requires nonempty declared TRAIN observations")
@@ -655,6 +656,7 @@ def main() -> None:
     fitting.add_argument("--action-representation",
                          choices=["binding_v1", "query_pair_v2", "query_delivery_pair_v3"],
                          default="binding_v1")
+    fitting.add_argument("--lora-target-modules", nargs="+", default=["q_proj", "v_proj"])
     rolling = sub.add_parser("rollout")
     rolling.add_argument("--fixture", type=Path, required=True)
     rolling.add_argument("--reader-config", type=Path, required=True)

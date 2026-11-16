@@ -1,4 +1,31 @@
-# CURRENT 2026-11-17: P04 binding-conditioned readout fits RUNNING
+# CURRENT 2026-11-17: P05 true context-overfit48 RUNNING
+
+Full goal ACTIVE/incomplete; R/current-state-v2.json is latest. R=/data/milai-experiments/
+20261116-small-memory-control. No subagents/SHA/fingerprints/newservices/defaultchanges/push.
+Native P02 six-policy matrix CLOSED/scored: fixed/rules48/48, M0/M1/M2/choice5/6/5/7of48,
+16roots.93newcalls+195reused positions in that matrix;14failed positions retained.
+Live native P04-eight-policy-devfit16-firsts-v1 handle84648; P05 encoder LoRA18288 GPU3.
+P05 frozen M0 CLOSED200,best27/48. Check actual run/PID first; no duplicate launches.
+P04 both fits and16rootDEVtrajectories CLOSED. Query-pair/delivery-pair best197/318of768,
+query changes10/33of256,both correct7/22; actual completeDEVpackets0/5of48. Not a benefit.
+Their declared originalReader firsts remain required after existing native matrix closes.
+P05 source P05-context-overfit-v1-source. Same48actualstates from first4TRAINroots,
+all3queries/all4prefixes, samev3input/head/200steps/seed0/batch16/micro1. Frozen vs explicitly
+inspected encoder query/value LoRA; no field/date/domain parser. Actual GPU preflight:
+initial heads exactly equal, embedding frozen, encoderLoRA_B gradient nonzero;294912encoder
+trainable +393729head. Head now initialized BEFORE adapter RNG; old saved inference weights
+still load, older fresh-run reproduction uses saved original sources. No new source count.
+Local commit b956886f saves P04; new LoRA/initialization snapshot P05-context-overfit-v1-source.
+Unified253selectedtests PASS/4oldGPUskip before this delta; Ruff/mypy small model PASS,
+actual LoRA gradient/head preflight PASS. No fullCI or T/M/confirmation claim.
+Public-observation diagnostic predicts10176/10176actual branch field coverages without
+offline Root/answers; not a deployed policy/natural-semantic guarantee.26closed local scopes
+settled once,189actual new responses715293tokens,newunknown0;4nativeparents not rebilled.
+Next: close native matrices without retries/replacements, score full planned denominators;
+inspect48fit/query reversals/savedLoRAupdates, then useful16rootDEV. Settle only measured
+closed local scopes in original ledger when native client idle; never rebill parents/copies.
+
+# CURRENT 2026-11-17: P04 binding-conditioned readout checkpoint
 
 Full goal ACTIVE/incomplete. Latest state R/current-state-v2.json supersedes older blocks.
 R=/data/milai-experiments/20261116-small-memory-control. No subagents/SHA/fingerprints,

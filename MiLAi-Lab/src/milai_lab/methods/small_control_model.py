@@ -31,6 +31,7 @@ class SmallControlConfig:
     joint_layout: str = "literal_json_v2"
     state_representation: str = "whole_v1"
     action_representation: str = "binding_v1"
+    lora_target_modules: tuple[str, ...] = ("q_proj", "v_proj")
 
 
 def conditioned_chunks(body: list[int], context: list[int], limit: int) -> list[list[int]]:
@@ -109,16 +110,24 @@ class SmallControlModel:
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
         self.encoder = AutoModel.from_pretrained(config.backbone, local_files_only=True)
+        # Initialize the common head before adapter RNG draws, so matched frozen
+        # and LoRA encoder probes really begin with the same head parameters.
+        width = self.encoder.config.hidden_size
+        self.head = build_action_head(width, config.hidden_size,
+                                      set_interaction=config.set_interaction).to(self.device)
         if config.adaptation == "lora":
             from peft import LoraConfig, get_peft_model  # type: ignore[import-not-found]
 
-            # These modules are inspected for the decoder route; other backbones
-            # must explicitly supply a suitable adaptation instead of silent matching.
-            if not any(name.endswith("q_proj") for name, _ in self.encoder.named_modules()):
-                raise ValueError("LoRA route requires inspected q_proj/v_proj modules")
+            # Targets are explicit and inspected, never silently remapped between
+            # backbone families (e.g. encoder query/value vs decoder q_proj/v_proj).
+            targets = list(config.lora_target_modules)
+            names = [name for name, _ in self.encoder.named_modules()]
+            if not targets or any(not any(name.endswith("." + target)
+                                         for name in names) for target in targets):
+                raise ValueError("LoRA route requires inspected explicit target modules")
             self.encoder = get_peft_model(self.encoder, LoraConfig(
                 r=16, lora_alpha=32, lora_dropout=0.05,
-                target_modules=["q_proj", "v_proj"], bias="none"))
+                target_modules=targets, bias="none"))
         elif config.adaptation == "frozen":
             self.encoder.requires_grad_(False)
         if config.adaptation != "frozen":
@@ -126,9 +135,6 @@ class SmallControlModel:
             if config.adaptation == "lora":
                 self.encoder.enable_input_require_grads()
         self.encoder.to(self.device)
-        width = self.encoder.config.hidden_size
-        self.head = build_action_head(width, config.hidden_size,
-                                      set_interaction=config.set_interaction).to(self.device)
         self.counters: dict[str, int] = dict(forwards=0, input_tokens=0, padded_tokens=0,
                                             texts=0, chunked_texts=0, chunks=0, joint_sequences=0)
 
