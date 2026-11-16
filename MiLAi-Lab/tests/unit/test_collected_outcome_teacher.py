@@ -119,3 +119,17 @@ def test_only_explicit_known_items_change_teacher_context_and_cold_rubric_is_unc
     cold, _ = teacher_input(case, 0)
     assert "known_evidence" not in cold["candidates"][0]
     assert teacher_rubric(cold) == RUBRIC
+
+
+def test_paired_quote_delimiters_preserve_literal_body_and_do_not_admit_other_sources():
+    payload, reviews = fixture()
+    raw_quote = "\u201cCedar is the code.\u201d"
+    reviews["reviews"][0]["evidence_quotes"] = [raw_quote]
+    result = parse_review(json.dumps(reviews), payload)
+    assert result["reviews"][0]["answer_status"] == "complete"
+    assert result["reviews"][0]["evidence_quotes"] == [raw_quote]
+    reviews["reviews"][1].update(material_status="sufficient", evidence_quotes=[raw_quote])
+    result = parse_review(json.dumps(reviews), payload)
+    assert result["reviews"][1]["material_status"] == "unknown"
+    reviews["reviews"][0]["evidence_quotes"] = ["\u201cCedar is NOT the code.\u201d"]
+    assert parse_review(json.dumps(reviews), payload)["reviews"][0]["answer_status"] == "unknown"

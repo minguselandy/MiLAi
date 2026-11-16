@@ -5,7 +5,7 @@ import copy
 from collections import Counter, defaultdict
 from typing import Any
 
-from milai_lab.methods.laya_memory_policy import operation_payload
+from milai_lab.methods.control_observation import operation_payload
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 
 

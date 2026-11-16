@@ -13,6 +13,7 @@ import jsonschema
 
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import http_budget_scope
+from milai_lab.memory.evidence_quotes import quote_in_text
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.contextual_scoring import _judge
@@ -109,9 +110,11 @@ def parse_grade(content: str, payload: dict) -> dict:
                for text in literal_strings(message.get("content"))]
     masks = []
     for quote in parsed["source_quotes"]:
-        if not any(quote["quote"] in text for text in sources.get(quote["source_index"], [])):
+        if not any(quote_in_text(quote["quote"], text)
+                   for text in sources.get(quote["source_index"], [])):
             masks.append("quote_absent_from_selected_original_source")
-    if any(not any(quote in text for text in context) for quote in parsed["context_quotes"]):
+    if any(not any(quote_in_text(quote, text) for text in context)
+           for quote in parsed["context_quotes"]):
         masks.append("quote_absent_from_actual_user_tool_context")
     if parsed["outcome"] == "supported":
         if parsed["grounding"] != "actual_context" or not parsed["context_quotes"]:

@@ -1,10 +1,25 @@
 """Training-state persistence beside existing inference checkpoints, without digests."""
 from __future__ import annotations
 
+import json
 import math
 import random
 from pathlib import Path
 from typing import Any
+
+from milai_lab.harness.artifact_io import write_json
+
+
+def record_training_invocation(root: Path, record: dict[str, Any],
+                               measures: dict[str, Any]) -> None:
+    """Retain every measured invocation when resume advances the current run record.
+
+    This is execution evidence, not a second budget ledger or a native charge.
+    Incomplete historical invocations without timings remain unmeasured.
+    """
+    write_json(root / "run.json", {**record, "invocation": measures})
+    with (root / "invocations.jsonl").open("a") as stream:
+        stream.write(json.dumps({"status": record["status"], **measures}) + "\n")
 
 
 class TrainingInterruption(Exception):

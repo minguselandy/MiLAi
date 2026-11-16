@@ -1,0 +1,183 @@
+{
+  "experiment": "E00-small-memory-control-v1",
+  "status": "E00_VERTICAL_SLICE_CLOSED_GOAL_ACTIVE",
+  "base": "2b4b1738",
+  "plan": "docs/MILAI_SMALL_MODEL_MEMORY_CONTROL_PLAN_20261116_v1.md",
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/small-memory-control-20261116",
+  "artifact_root": "/data/milai-experiments/20261116-small-memory-control",
+  "sha_validation": false,
+  "subagents": false,
+  "primary_route": "quality_A_not_yet_confirmed",
+  "hypothesis": "Three replaceable legal-action scorers can learn reliable observed-branch directions; this does not imply full-menu or task success.",
+  "nearest_controls": [
+    "frozen pretrained embeddings plus MLP",
+    "same E5 encoder with full tuning",
+    "Qwen3-0.6B hidden state plus LoRA and the same action head"
+  ],
+  "fixed": {
+    "data": "/data/milai-experiments/20261116-small-memory-control/historical-quality600-v1/overfit.jsonl",
+    "states": 64,
+    "source_groups": 63,
+    "directional_pairs": 130,
+    "unknown_pairs": 92,
+    "tie_pairs": 46,
+    "seed": 0,
+    "model_input": "observation and complete actions only",
+    "steps": 200
+  },
+  "differences": {
+    "M0": "frozen encoder; batch16; FP32",
+    "M1": "full encoder tuning; batch4; BF16 forward; LR3e-5/head3e-4",
+    "M2": "decoder LoRA rank16 q_proj/v_proj; batch4; BF16 forward; LR1e-4/head3e-4"
+  },
+  "fairness_limit": "E00 probes have different state exposures/batches; not E01 matched-work model selection.",
+  "full_historical_opportunity_pool": {
+    "path": "/data/milai-experiments/20261116-small-memory-control/historical-all600-v3",
+    "states": 600,
+    "source_groups": 481,
+    "directional_states": 249,
+    "unknown_pairs": 1454,
+    "directional_pairs": 540,
+    "tie_pairs": 468,
+    "splits": {
+      "train": {
+        "states": 482,
+        "groups": 385,
+        "outcomes": {
+          "unknown": 1169,
+          "tie": 380,
+          "left": 398,
+          "right": 43
+        }
+      },
+      "dev_fit": {
+        "states": 58,
+        "groups": 48,
+        "outcomes": {
+          "unknown": 148,
+          "left": 44,
+          "tie": 44,
+          "right": 2
+        }
+      },
+      "dev_select": {
+        "states": 60,
+        "groups": 48,
+        "outcomes": {
+          "unknown": 137,
+          "right": 6,
+          "left": 47,
+          "tie": 44
+        }
+      },
+      "overfit": {
+        "states": 64,
+        "groups": 63,
+        "outcomes": {
+          "right": 15,
+          "unknown": 92,
+          "left": 115,
+          "tie": 46
+        }
+      }
+    }
+  },
+  "exposure": "All reused source families are previously exposed TRAIN. No new CONFIRM content opened.",
+  "checkpoints": {
+    "M0": "/data/milai-experiments/20261116-small-memory-control/E00-M0-overfit64-seed0-v1/checkpoint",
+    "M1": "/data/milai-experiments/20261116-small-memory-control/E00-M1-overfit64-seed0-v1/checkpoint",
+    "M2_dual": "/data/milai-experiments/20261116-small-memory-control/E00-M2-overfit64-seed0-v1/checkpoint",
+    "M2_joint_wrapped_v1": "/data/milai-experiments/20261116-small-memory-control/E00-M2-joint-overfit64-seed0-v1/checkpoint"
+  },
+  "source_snapshots": {
+    "M0": "/data/milai-experiments/20261116-small-memory-control/E00-M0-overfit64-seed0-v1/source",
+    "M1_M2": "/data/milai-experiments/20261116-small-memory-control/E00-training-v2-source",
+    "calibration": "/data/milai-experiments/20261116-small-memory-control/E00-measurement-v1-source",
+    "M2_joint": "/data/milai-experiments/20261116-small-memory-control/E00-joint-v1-source",
+    "measurement_v2": "/data/milai-experiments/20261116-small-memory-control/E00-measurement-v2-source",
+    "deterministic_recovery": "/data/milai-experiments/20261116-small-memory-control/E00-deterministic-v1-source",
+    "M0_complete_reproduction_source": "/data/milai-experiments/20261116-small-memory-control/E00-M0-reproduction-source"
+  },
+  "cost_bound": "Finite 200-update probes per route; fixed 200 first calibration calls; project planning envelope 240 device-hours. No automatic reruns or unlimited sweeps.",
+  "decision_rule": "First establish gradients/binding/masks. Use source-disjoint offline diagnostics and complete DEV Reader tasks before selecting any route. Failures remain.",
+  "completion": {
+    "engineering": false,
+    "training_benefit_T": false,
+    "method_benefit_M": false,
+    "innovation": false
+  },
+  "known_limits": [
+    "Historical data only. No new-source training or method benefit has been established.",
+    "M0 has more state exposure than M1/M2; E00 is not E01 matched-work selection.",
+    "Default GPU training is not exactly repeatable. Deterministic eight-update recovery is verified separately.",
+    "Joint v1 wraps already serialized JSON. Future literal_json_v2 is not fitted; old checkpoints keep v1 inputs.",
+    "Expanded v2 has 17 fitted groups in development. It was not used for selection; v3 preserves original source roles and has zero overlap.",
+    "Calibration remains protocol-limited. Unsupported assertions are not automatically genuine unknown task outcomes.",
+    "Semantic contrasts are C author diagnostics, not actual executed branches or natural task labels.",
+    "Some interruption/analysis/server costs are unmeasured, not zero.",
+    "All four endpoints select READ on the 64 full menus; 56/59/60/61 chosen actions were not observed in the old branch supervision. This is unmeasured quality, not a negative label."
+  ],
+  "mechanisms_to_test": [
+    "I1 delivery awareness vs removed delivery flags",
+    "I3 budget conditioning vs no budget input and unseen budgets"
+  ],
+  "results": {
+    "E00-M0-overfit64-seed0-v1": {
+      "initial_correct_pairs": 72,
+      "final_correct_pairs": 130,
+      "directional_pairs": 130,
+      "run": "/data/milai-experiments/20261116-small-memory-control/E00-M0-overfit64-seed0-v1/run.json"
+    },
+    "E00-M1-overfit64-seed0-v1": {
+      "initial_correct_pairs": 72,
+      "final_correct_pairs": 125,
+      "directional_pairs": 130,
+      "run": "/data/milai-experiments/20261116-small-memory-control/E00-M1-overfit64-seed0-v1/run.json"
+    },
+    "E00-M2-overfit64-seed0-v1": {
+      "initial_correct_pairs": 33,
+      "final_correct_pairs": 129,
+      "directional_pairs": 130,
+      "run": "/data/milai-experiments/20261116-small-memory-control/E00-M2-overfit64-seed0-v1/run.json"
+    },
+    "E00-M2-joint-overfit64-seed0-v1": {
+      "initial_correct_pairs": 89,
+      "final_correct_pairs": 120,
+      "directional_pairs": 130,
+      "run": "/data/milai-experiments/20261116-small-memory-control/E00-M2-joint-overfit64-seed0-v1/run.json"
+    }
+  },
+  "artifacts": {
+    "deterministic_recovery": "/data/milai-experiments/20261116-small-memory-control/E00-deterministic-GPU-recovery-comparison-v1.json",
+    "default_recovery_variability": "/data/milai-experiments/20261116-small-memory-control/E00-joint-gpu-recovery-repeat-diagnostic-v1.json",
+    "source_split_correction": "/data/milai-experiments/20261116-small-memory-control/E00-expanded-source-split-correction-v1.json",
+    "cost": "/data/milai-experiments/20261116-small-memory-control/E00-cost-disclosure-v1.json",
+    "semantic_heads": "/data/milai-experiments/20261116-small-memory-control/E00-semantic-diagnostic-head-summary-v1.json",
+    "semantic_encoder_control": "/data/milai-experiments/20261116-small-memory-control/E00-semantic-encoder-control-v1.json",
+    "label_reparse": "/data/milai-experiments/20261116-small-memory-control/E00-calibration200-reparse-v2/summary.json",
+    "calibration_followup": "/data/milai-experiments/20261116-small-memory-control/E00-calibration-missing-fact-v2/summary.json",
+    "old_layout_compatibility": "/data/milai-experiments/20261116-small-memory-control/E00-joint-legacy-layout-compatibility-v2.json",
+    "full_menu_coverage": "/data/milai-experiments/20261116-small-memory-control/E00-full-menu-supervision-coverage-v1.json",
+    "binding_changes": "/data/milai-experiments/20261116-small-memory-control/E00-full-binding-change-summary-v1.json"
+  },
+  "required_next": [
+    "Four-axis independent measurement contract and genuinely unreviewable cases",
+    "Collect actual outcomes for current-policy full-menu choices; do not restrict online selection to the labelled subset",
+    "Query/state representation and semantically balanced real D0 branches with K/O delivery conditions",
+    "Complete W0 historical checkpoint/global exposure inventory",
+    "E01/E02 source-disjoint complete DEV tasks, usable bridge and frozen strong simple comparator",
+    "E03 scaling, E04 two own-state rounds, E05 at least two mechanisms, E06 three seeds",
+    "E07 preregistered fresh confirmation/Reader/budget transfer meeting section15; E08 4/8/16-session maintenance"
+  ],
+  "validation": {
+    "affected_tests_passed": 78,
+    "legacy_GPU_tests_skipped": 4,
+    "actual_GPU_deterministic_recovery": "verified separately,116tensors plus optimizer/scheduler/RNG/progress/decisions",
+    "ruff": "PASS",
+    "strict_mypy_modules": 6,
+    "package_DAG": "PASS",
+    "full_repository_CI": "NOT_RUN",
+    "remote_publication": "NOT_REQUESTED_OR_PERFORMED"
+  },
+  "next_experiment_card": "data/manifests/small-memory-control-next-block-20261117-v1.json"
+}

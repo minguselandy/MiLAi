@@ -75,3 +75,16 @@ def test_original_projection_is_a_literal_copy_and_cannot_mutate_bound_artifact(
     assert projected == original
     projected["actual_final_provider_messages"][0]["content"] = "changed"
     assert original["actual_final_provider_messages"][0]["content"] != "changed"
+
+
+def test_outer_quote_syntax_is_allowed_but_actual_context_and_source_indices_stay_required():
+    quoted = "\u201cI finished Pachinko\u201d"
+    content = grade(source_quotes=[{"source_index": 2, "quote": quoted}],
+                    context_quotes=[quoted])
+    result = parse_grade(content, payload())
+    assert result["outcome"] == "supported"
+    assert result["context_quotes"] == [quoted]
+    wrong = grade(source_quotes=[{"source_index": 4, "quote": quoted}], context_quotes=[quoted])
+    assert parse_grade(wrong, payload())["outcome"] == "unknown"
+    assistant = grade(context_quotes=["\u201cThe answer is Friday\u201d"])
+    assert parse_grade(assistant, payload())["outcome"] == "unknown"

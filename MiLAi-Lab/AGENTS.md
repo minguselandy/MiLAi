@@ -1,3 +1,37 @@
+# CURRENT 2026-11-17: small-model memory-control plan ACTIVE
+
+Execute docs/MILAI_SMALL_MODEL_MEMORY_CONTROL_PLAN_20261116_v1.md in full. Work here,
+small-memory-control-20261116, from merged baseline2b4b1738. Original user plan/file in
+jev-read-decisions-20261016 remains untouched. Old phase44/PR125 and other queues are CLOSED.
+No subagents, SHA/checksum/content fingerprints, Product/default changes, new services,
+automatic retries, push or merge. Use physical GPUs2,3; preserve BGE and Reader services.
+Artifacts R=/data/milai-experiments/20261116-small-memory-control (local, ignored).
+
+All model/Reader handles of this E00 slice are TERMINAL, no background coordinator.
+Revalidate actual processes before future launch; never restart from state files alone.
+Read docs/MILAI_SMALL_MODEL_MEMORY_CONTROL_EXECUTION_20261116.md and R/current-state-v1.json.
+M0/M1/M2 each200updates; observed pairs130/125/129of130; joint M2v1=120of130, one forward.
+Four real SQLite/Reader smokes CLOSED, same1677-token material bodies, forced stop, not benefit.
+Semantic C contrasts: heads15/15/11/12of24, encoder cosine18/24; no natural-quality claim.
+All64full-menu choices areREAD;56/59/60/61unobserved. Collect their actual outcomes; do not
+label unobserved choices wrong or prune the deployment menu to the labelled subset.
+Default GPU runs drift even without restart. Deterministic actual GPU resume:116tensors,
+optimizer/scheduler/Torch/CUDA/Python RNG/progress/scores/choices all exact on4states8updates.
+Current literal_json_v2 fixes double serialization; NOT fitted. Old joint checkpoints explicitly
+load wrapped_json_v1 with verified identical scores. Keep model input versions intact.
+Use historical-all600-v3 for expansion:600states/481groups, existing source roles inherited.
+v2 would put17fitted sources inDEV; never used for selection. v3 overlap0. Original64fit unchanged.
+Calibration original200 +40novel actual firsts CLOSED, one original failure retained;160shared
+firsts not rerun. Four-axis completion/support/correctness and genuine unreviewability still need
+work. Do not call natural calibration passed or rewrite old phase44 outcomes.
+Measured20compute scopes SETTLED ONCE in ORIGINAL budget;244native chat responses544142tokens,
+newunknown0. Untimed interruption/analysis/server scopes remain unmeasured, not zero. New
+trainer retains invocations.jsonl. No second ledger or rebilling original/parent scopes.
+Tests78passed/4oldGPUskipped; actual separate GPU recovery verified. Ruff,6-module strict mypy,
+active packageDAG passed. Full CI, T/M/innovation and complete engineering remain unverified.
+Next: outcome contract + real semantically balanced D0/K-O data + query/state representation,
+then E01/E02 and all E03-E08/section15 requirements. No fresh CONFIRM opened; full goal ACTIVE.
+
 # CURRENT 2026-11-16: GitHub integration authorized
 
 The user requested GitHub submission and completion of the merge. PR125 integrates

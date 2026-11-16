@@ -1,0 +1,37 @@
+{
+  "experiment": "E00-next-measurement-data-query-v2",
+  "status": "DESIGNED_NOT_EXECUTED",
+  "parent": "small-memory-control-E00-20261116-v1.json",
+  "hypotheses": [
+    {
+      "id": "M00",
+      "change": "Four independent outcome axes and explicit review-input availability",
+      "reason": "Unsupported factual assertions and genuinely unreviewable records were conflated. Completion/correctness/support are not interchangeable.",
+      "minimum_comparison": "Known complete, partial, contradicted, unsupported, failed and input-unavailable cases; original 240 firsts retained; no regrading old confirmation.",
+      "rule": "Known negative components may disprove grounded completion; genuinely unknown components are not automatically zero. Preserve unavailable input separately from an actually empty packet."
+    },
+    {
+      "id": "D00",
+      "change": "New real branches for current policy choices and K/O delivery conditions",
+      "reason": "56/59/60/61 of64 full-menu choices were unmeasured despite strong observed-pair fitting.",
+      "protocol": "Root/dependency split first; independent before copies; immediate handoff, frozen strong action, current model choice and random alternative deduplicated. Keep at least30percent random sampling. Actual Reader firsts and execution/material/answer/cost separate.",
+      "rule": "Do not call unobserved actions bad, prune them from the deployment menu, or count duplicate/repeated results as independent sources."
+    },
+    {
+      "id": "P01",
+      "change": "Explicit query/state representation or semantic-prior control, same backbone/data",
+      "reason": "Encoder cosine18/24 exceeds learned heads15/15/11/12 on C author semantic contrasts; role/number/negation and same-kind binding failures need diagnosis before scaling.",
+      "minimum_comparison": "Existing full-state readout vs legal query-conditioned readout; a simple semantic/fixed baseline and a usable bridge; all measured actual complete DEV tasks, not only these24 probes.",
+      "rule": "Literal JSON v2 must be newly fitted and versioned. Do not silently change old checkpoint inputs or attach gold support paths."
+    }
+  ],
+  "limits": [
+    "G0 remains incomplete; no new model enlargement or RL just to increase compute.",
+    "Historical all600-v3 preserves source roles. No fresh CONFIRM opened.",
+    "The original E01-E08, three seeds, at least two mechanisms, external transfer, long maintenance and section15 acceptance remain required.",
+    "Quality_A remains the primary route until any preregistered pre-confirmation decision. No post-confirmation route or denominator change."
+  ],
+  "sha_validation": false,
+  "subagents": false,
+  "new_services": false
+}
