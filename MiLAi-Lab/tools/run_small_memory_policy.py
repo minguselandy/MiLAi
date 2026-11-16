@@ -173,7 +173,8 @@ def train(args: argparse.Namespace) -> None:
         chunk_tokens=args.chunk_tokens, encode_batch_size=args.encode_batch_size,
         adaptation=args.adaptation, set_interaction=args.set_interaction,
         readout=args.readout, joint_max_tokens=args.joint_max_tokens,
-        joint_layout=args.joint_layout, state_representation=args.state_representation)
+        joint_layout=args.joint_layout, state_representation=args.state_representation,
+        action_representation=args.action_representation)
     rows = read_jsonl(args.data)
     if not rows or any(row["split"] != "train" for row in rows):
         raise ValueError("Training requires nonempty declared TRAIN observations")
@@ -651,6 +652,9 @@ def main() -> None:
     fitting.add_argument("--deterministic", action="store_true")
     fitting.add_argument("--state-representation", choices=["whole_v1", "query_residual_v1"],
                          default="whole_v1")
+    fitting.add_argument("--action-representation",
+                         choices=["binding_v1", "query_pair_v2", "query_delivery_pair_v3"],
+                         default="binding_v1")
     rolling = sub.add_parser("rollout")
     rolling.add_argument("--fixture", type=Path, required=True)
     rolling.add_argument("--reader-config", type=Path, required=True)

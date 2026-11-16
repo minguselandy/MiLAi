@@ -205,7 +205,45 @@ def legacy_control_input(row: dict[str, Any]) -> dict[str, Any]:
     return {"observation": observation, "actions": [asdict(a) for a in payload_actions(row)]}
 
 
-def control_texts(online: dict[str, Any]) -> tuple[str, list[str]]:
+def proposed_delivery_projection(observation: dict[str, Any],
+                                 action: dict[str, Any]) -> dict[str, Any]:
+    """Resolve a bound HANDOFF using only already visible material projections.
+
+    This does not open a Source, reconstruct a hidden body or certify semantics.
+    An unavailable projection stays explicitly unresolved instead of using a
+    different item's body. Retrieved scopes take their exact offered range.
+    """
+    parameters = action["parameters"]
+    if not parameters:
+        return {"material_projection": copy.deepcopy(observation["visible_evidence"]),
+                "unresolved_indices": [], "scope": "current_visible_projection"}
+    scopes = {item["item_index"]: item["evidence"]
+              for item in observation.get("retrieved_scopes", []) if "evidence" in item}
+    acquired: dict[str, Any] = {}
+    for item in [*observation["visible_evidence"], *observation.get("observed_evidence", [])]:
+        label = item["label"]
+        if label in acquired and acquired[label] != item:
+            raise ValueError("Conflicting visible material projections for one local label")
+        acquired[label] = item
+        for alias in item.get("also_selected_as", []):
+            if alias in acquired and acquired[alias] != item:
+                raise ValueError("Conflicting visible material projections for one local alias")
+            acquired[alias] = item
+    projections, unresolved = [], []
+    for index in parameters["delivery_indices"]:
+        item = (scopes.get(index) if index in parameters.get("retrieved_scope_indices", [])
+                else acquired.get(f"e{index}"))
+        if item is None:
+            unresolved.append(index)
+        elif item not in projections:
+            projections.append(copy.deepcopy(item))
+    return {"material_projection": projections, "unresolved_indices": unresolved,
+            "source_alias_scope": "local_observation_not_rendered_reader_aliases",
+            "scope": "bound_acquired_projection_only_not_semantic_proof"}
+
+
+def control_texts(online: dict[str, Any], *, delivery_context: bool = False,
+                  ) -> tuple[str, list[str]]:
     """Serialize only the online allowlist, with no action-ID or menu-position feature.
 
     Target descriptions include already visible matching material. This does not open
@@ -232,8 +270,11 @@ def control_texts(online: dict[str, Any]) -> tuple[str, list[str]]:
         if bound_source is not None:
             matching.extend(item for item in observation.get("new_events", [])
                             if item.get("source_ref") == bound_source)
-        descriptions.append(dumps({"kind": action["kind"], "target": action["target"],
-                                   "parameters": parameters, "visible_target": matching}))
+        description = {"kind": action["kind"], "target": action["target"],
+                       "parameters": parameters, "visible_target": matching}
+        if delivery_context and action["kind"] == "HANDOFF":
+            description["proposed_delivery"] = proposed_delivery_projection(observation, action)
+        descriptions.append(dumps(description))
     return dumps(observation), descriptions
 
 

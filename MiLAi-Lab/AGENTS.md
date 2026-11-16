@@ -1,4 +1,24 @@
-# CURRENT 2026-11-17: P02 executable context-contrast bridge RUNNING
+# CURRENT 2026-11-17: P04 binding-conditioned readout fits RUNNING
+
+Full goal ACTIVE/incomplete. Latest state R/current-state-v2.json supersedes older blocks.
+R=/data/milai-experiments/20261116-small-memory-control. No subagents/SHA/fingerprints,
+new services/default changes, push or merge; preserve original Reader/BGE/shared budget.
+Live: P02-six-policy-devfit16-firsts-v1 handle38822; P04 query-pair fit38526 GPU2;
+P04 query+delivery-pair fit62619 GPU3. Check actual run/PID/handles before any launch.
+P04 source snapshot P04-binding-conditioned-v1-source, card P04-binding-conditioned-card-v1.
+Two M0 fits only: unchanged768state/64root CE data,head/seed/200steps. Query fragments and
+candidate chunks interact directly; v3 additionally resolves HANDOFF projections only
+from legal visible/acquired materials. Unresolved stays explicit, no hidden DB/body lookup.
+All long query/body tokens kept; repeated physical tokens charged. Local controller Source
+aliases are not represented as rendered Reader aliases.22selectedtests passed inclactual
+observe-only→HANDOFF body/range/role/time equivalence; oldraw4scorecompatibility diff0.
+P02/P03 objective/query residual branches CLOSED negative; do not expand them. All three
+P02 actual DEV trajectories CLOSED, M0 native5/48 vsfixed/rules48/48; M1/M2/choice actual
+firsts still in existing matrix. Native first failures always retained/shared, never retried.
+Local checkpoint aefab76c saves P02 work; P04 changes remain working until validated.
+No fresh CONFIRM, task/innovation/adoption success, full CI, or full W0 exposure audit claim.
+
+# CURRENT 2026-11-17: P02 executable context-contrast bridge checkpoint
 
 Full original small-model plan is ACTIVE/incomplete. This block supersedes older CURRENT
 blocks. Work only in small-memory-control-20261116; preserve original/other worktrees.

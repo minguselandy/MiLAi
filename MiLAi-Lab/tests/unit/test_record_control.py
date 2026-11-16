@@ -11,7 +11,8 @@ from milai_lab.datasets.record_control import (
     score_first,
 )
 from milai_lab.harness.artifact_io import read_json
-from small_control_records import source_service, structural_row
+from milai_lab.methods.control_observation import proposed_delivery_projection
+from small_control_records import environment, source_service, structural_row
 
 
 def packet(records):
@@ -106,3 +107,28 @@ def test_real_source_branches_change_with_query_and_stop_after_sufficiency(tmp_p
         assert best_kinds(opposite) == {"READ"}
         assert list(service.source_arrivals(None)["events"]) == before_records
         assert len(cold["offline_supervision"]["observed_action_ids"]) == len(cold["actions"])
+
+
+def test_proposed_projection_matches_real_handoff_of_observe_only_material(tmp_path):
+    from dataclasses import asdict
+
+    root = make_root(5, "train", 29)
+    capacity = SimpleNamespace(text_tokens=lambda text: len(text.split()))
+    with source_service(root, tmp_path / "bank", initialize=True) as service:
+        state, operations = environment(service, root["queries"][0], capacity, 2048)
+        read = next(a for a in operations.actions(state) if a.kind == "READ"
+                    and "observed_source" in a.parameters and a.parameters.get("observe_only"))
+        assert operations.execute(read, state)["ok"]
+        assert not state.visible_evidence and state.observed_evidence
+        handoff = next(a for a in operations.actions(state)
+                       if a.kind == "HANDOFF" and a.parameters.get("delivery_indices") == [0]
+                       and not a.parameters.get("retrieved_scope_indices"))
+        projection = proposed_delivery_projection(state.project(), asdict(handoff))
+        assert operations.execute(handoff, state)["ok"]
+        # Reader rendering assigns global source aliases; the controller projection
+        # keeps per-item aliases. All actual content and reporting/range metadata agree.
+        def bodies(items):
+            return [{key: value for key, value in source.items() if key != "source"}
+                    for item in items for source in item["evidence"]]
+        assert bodies(projection["material_projection"]) == bodies(operations.reader_evidence())
+        assert not projection["unresolved_indices"]

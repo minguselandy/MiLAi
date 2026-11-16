@@ -30,6 +30,27 @@ class SmallControlConfig:
     joint_max_tokens: int = 8192
     joint_layout: str = "literal_json_v2"
     state_representation: str = "whole_v1"
+    action_representation: str = "binding_v1"
+
+
+def conditioned_chunks(body: list[int], context: list[int], limit: int) -> list[list[int]]:
+    """Keep every token; expose every body chunk to every bounded query fragment.
+
+    Long contexts form an explicit Cartesian product rather than truncating a
+    task or pretending that a late body fragment attended an absent query.
+    The encoder's ordinary counters charge all repeated prefix/body tokens.
+    """
+    if limit < 8:
+        raise ValueError("Chunk capacity is too small")
+    if not context:
+        return [body[start:start + limit] for start in range(0, max(1, len(body)), limit)]
+    result: list[list[int]] = []
+    for start in range(0, len(context), limit // 2):
+        prefix = context[start:start + limit // 2]
+        available = limit - len(prefix)
+        result.extend(prefix + body[offset:offset + available]
+                      for offset in range(0, max(1, len(body)), available))
+    return result
 
 
 def build_action_head(width: int, hidden: int, *, set_interaction: bool = False) -> Any:
@@ -77,6 +98,11 @@ class SmallControlModel:
             raise ValueError("Unknown state representation")
         if config.readout == "joint" and config.state_representation != "whole_v1":
             raise ValueError("Query residual is a separate dual-encoder representation")
+        if config.action_representation not in {
+                "binding_v1", "query_pair_v2", "query_delivery_pair_v3"}:
+            raise ValueError("Unknown action representation")
+        if config.readout == "joint" and config.action_representation != "binding_v1":
+            raise ValueError("Binding-conditioned encoding is a separate dual readout")
         self.config, self.device = config, torch.device(device)
         self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             config.backbone, local_files_only=True)
@@ -114,7 +140,7 @@ class SmallControlModel:
         self.encoder.train(mode and self.config.adaptation != "frozen")
         self.head.train(mode)
 
-    def encode(self, texts: list[str]) -> Any:
+    def encode(self, texts: list[str], *, prefixes: list[str] | None = None) -> Any:
         import torch
         import torch.nn.functional as F  # type: ignore[import-not-found]
 
@@ -122,14 +148,24 @@ class SmallControlModel:
         limit = self.config.chunk_tokens - self.tokenizer.num_special_tokens_to_add()
         if limit < 8:
             raise ValueError("Chunk capacity is too small")
+        if prefixes is not None and len(prefixes) != len(texts):
+            raise ValueError("A conditional encoding needs one actual prefix per text")
         for owner, text in enumerate(texts):
             prefix = "query: " if self.config.family != "decoder" else ""
-            ids = self.tokenizer.encode(prefix + text, add_special_tokens=False, verbose=False)
+            context = prefixes[owner] if prefixes is not None else ""
+            if context:
+                context_ids = self.tokenizer.encode(prefix + "Task request:\n" + context
+                    + "\nCandidate binding:\n", add_special_tokens=False, verbose=False)
+                ids = self.tokenizer.encode(text, add_special_tokens=False, verbose=False)
+            else:
+                context_ids = []
+                ids = self.tokenizer.encode(prefix + text, add_special_tokens=False, verbose=False)
             self.counters["texts"] += 1
-            self.counters["chunked_texts"] += int(len(ids) > limit)
-            for start in range(0, max(1, len(ids)), limit):
+            token_chunks = conditioned_chunks(ids, context_ids, limit)
+            self.counters["chunked_texts"] += int(len(token_chunks) > 1)
+            for tokens in token_chunks:
                 chunks.append({"input_ids": self.tokenizer.build_inputs_with_special_tokens(
-                    ids[start:start + limit])})
+                    tokens)})
                 owners.append(owner)
         vectors = []
         for start in range(0, len(chunks), self.config.encode_batch_size):
@@ -165,22 +201,29 @@ class SmallControlModel:
 
         if self.config.readout == "joint":
             return self.joint_features(online)
-        states, queries, actions, owners, lengths = [], [], [], [], []
+        states, queries, actions, owners, lengths, action_queries = [], [], [], [], [], []
         for index, row in enumerate(online):
-            state_text, action_texts = control_texts(row)
+            state_text, action_texts = control_texts(row, delivery_context=(
+                self.config.action_representation == "query_delivery_pair_v3"))
             if not action_texts:
                 raise ValueError("A policy state requires at least one action")
             states.append(state_text)
-            if self.config.state_representation == "query_residual_v1":
+            if (self.config.state_representation == "query_residual_v1"
+                    or self.config.action_representation != "binding_v1"):
                 task = row["observation"]["task"]
                 query = task.get("request", task.get("query"))
                 if not isinstance(query, str) or not query:
                     raise ValueError("Query-conditioned input needs the actual task query")
-                queries.append(query)
+                if self.config.state_representation == "query_residual_v1":
+                    queries.append(query)
+                if self.config.action_representation != "binding_v1":
+                    action_queries.extend([query] * len(action_texts))
             actions.extend(action_texts)
             owners.extend([index] * len(action_texts))
             lengths.append(len(action_texts))
-        vectors = self.encode(states + queries + actions)
+        texts = states + queries + actions
+        vectors = (self.encode(texts, prefixes=[""] * (len(states) + len(queries)) + action_queries)
+                   if action_queries else self.encode(texts))
         state_vectors = vectors[:len(states)]
         if queries:
             import torch.nn.functional as F
