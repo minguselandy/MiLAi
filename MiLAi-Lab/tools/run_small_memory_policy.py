@@ -173,7 +173,7 @@ def train(args: argparse.Namespace) -> None:
         chunk_tokens=args.chunk_tokens, encode_batch_size=args.encode_batch_size,
         adaptation=args.adaptation, set_interaction=args.set_interaction,
         readout=args.readout, joint_max_tokens=args.joint_max_tokens,
-        joint_layout=args.joint_layout)
+        joint_layout=args.joint_layout, state_representation=args.state_representation)
     rows = read_jsonl(args.data)
     if not rows or any(row["split"] != "train" for row in rows):
         raise ValueError("Training requires nonempty declared TRAIN observations")
@@ -357,7 +357,6 @@ def rollout(args: argparse.Namespace) -> None:
     """Run real SQLite evidence operations and one existing Reader first response."""
     from langgraph.store.sqlite import SqliteStore
 
-    from milai_lab.harness.artifact_io import read_json
     from milai_lab.harness.contextual_artifacts import Trace, http_budget_scope
     from milai_lab.memory.service import MemoryService
     from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
@@ -462,7 +461,15 @@ def rollout(args: argparse.Namespace) -> None:
 
 def calibrate(args: argparse.Namespace) -> None:
     """One first judge response per fixed case, keeping every failure and unknown."""
-    from milai_lab.harness.artifact_io import read_json
+    if args.protocol in {"four_axes_v3", "four_axes_v4", "four_axes_v5"}:
+        from milai_lab.methods.control_calibration import four_axis_cases
+        from milai_lab.runners.control_review import review_cases
+
+        if args.reuse_firsts:
+            raise ValueError("The four-axis protocol requires its own first judge responses")
+        settings = read_json(args.reader_config)["entrypoints"]["functional"]
+        review_cases(four_axis_cases(), settings, args.output, protocol=args.protocol)
+        return
     from milai_lab.harness.contextual_artifacts import Trace, http_budget_scope
     from milai_lab.methods.control_calibration import calibration_cases
     from milai_lab.providers.contextual_capacity import HostCapacity
@@ -584,7 +591,6 @@ def evaluate_saved(args: argparse.Namespace) -> None:
     """Source-disjoint offline diagnostic; full-task quality still requires rollout."""
     import torch
 
-    from milai_lab.harness.artifact_io import read_json
 
     torch.set_num_threads(args.threads)
     args.output.mkdir(parents=True, exist_ok=False)
@@ -643,6 +649,8 @@ def main() -> None:
     fitting.add_argument("--joint-layout", choices=["literal_json_v2", "wrapped_json_v1"],
                          default="literal_json_v2")
     fitting.add_argument("--deterministic", action="store_true")
+    fitting.add_argument("--state-representation", choices=["whole_v1", "query_residual_v1"],
+                         default="whole_v1")
     rolling = sub.add_parser("rollout")
     rolling.add_argument("--fixture", type=Path, required=True)
     rolling.add_argument("--reader-config", type=Path, required=True)
@@ -654,7 +662,9 @@ def main() -> None:
     calibration = sub.add_parser("calibrate")
     calibration.add_argument("--reader-config", type=Path, required=True)
     calibration.add_argument("--output", type=Path, required=True)
-    calibration.add_argument("--protocol", choices=["literal_v1", "missing_fact_v2"],
+    calibration.add_argument("--protocol",
+                             choices=["literal_v1", "missing_fact_v2",
+                                      "four_axes_v3", "four_axes_v4", "four_axes_v5"],
                              default="literal_v1")
     calibration.add_argument("--reuse-firsts", type=Path)
     evaluation = sub.add_parser("evaluate")
@@ -663,7 +673,64 @@ def main() -> None:
     evaluation.add_argument("--output", type=Path, required=True)
     evaluation.add_argument("--device", default="cpu")
     evaluation.add_argument("--threads", type=int, default=4)
+    reviewing = sub.add_parser("review")
+    reviewing.add_argument("--cases", type=Path, required=True)
+    reviewing.add_argument("--reader-config", type=Path, required=True)
+    reviewing.add_argument("--output", type=Path, required=True)
+    collection = sub.add_parser("collect")
+    collection.add_argument("--pool", type=Path, required=True)
+    collection.add_argument("--checkpoint", type=Path, required=True)
+    collection.add_argument("--reader-config", type=Path, required=True)
+    collection.add_argument("--output", type=Path, required=True)
+    collection.add_argument("--states", type=int, default=16)
+    collection.add_argument("--random-fraction", type=float, default=.30)
+    collection.add_argument("--seed", type=int, default=17)
+    collection.add_argument("--device", default="cpu")
+    collection.add_argument("--horizons", type=int, nargs="+", default=[0, 2])
+    records = sub.add_parser("records")
+    records.add_argument("--reader-config", type=Path, required=True)
+    records.add_argument("--output", type=Path, required=True)
+    records.add_argument("--train-roots", type=int, default=64)
+    records.add_argument("--dev-roots", type=int, default=16)
+    records.add_argument("--seed", type=int, default=29)
+    records.add_argument("--material-tokens", type=int, default=2048)
+    record_rollouts = sub.add_parser("record-rollouts")
+    record_rollouts.add_argument("--dataset", type=Path, required=True)
+    record_rollouts.add_argument("--reader-config", type=Path, required=True)
+    record_rollouts.add_argument("--output", type=Path, required=True)
+    record_rollouts.add_argument("--checkpoint", nargs=2, action="append", default=[])
+    record_rollouts.add_argument("--split", choices=["dev_fit", "dev_select"], default="dev_fit")
+    record_rollouts.add_argument("--roots", type=int)
+    record_rollouts.add_argument("--device", default="cpu")
+    record_rollouts.add_argument("--material-tokens", type=int, default=2048)
+    record_rollouts.add_argument("--control-steps", type=int, default=8)
+    record_score = sub.add_parser("record-score")
+    record_score.add_argument("--readouts", type=Path, required=True)
+    record_score.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.command in {"records", "record-rollouts", "record-score"}:
+        from small_control_records import (
+            prepare_record_rollouts,
+            prepare_records,
+            score_record_readouts,
+        )
+
+        {"records": prepare_records, "record-rollouts": prepare_record_rollouts,
+         "record-score": score_record_readouts}[
+            args.command](args)
+        return
+    if args.command == "collect":
+        from small_control_branches import collect
+
+        collect(args)
+        return
+    if args.command == "review":
+        from milai_lab.runners.control_review import review_cases
+
+        review_cases(read_json(args.cases),
+            read_json(args.reader_config)["entrypoints"]["functional"], args.output,
+            protocol="four_axes_v5_actual_branches")
+        return
     {"prepare": prepare, "train": train, "rollout": rollout, "calibrate": calibrate,
      "evaluate": evaluate_saved}[
         args.command](args)

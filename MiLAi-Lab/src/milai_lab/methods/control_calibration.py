@@ -75,3 +75,66 @@ def calibration_cases(protocol: str = "literal_v1") -> list[dict[str, Any]]:
             "payload": {"question": question, "offline_reference_annotations": [],
                         "candidates": [candidate]}})
     return cases
+
+
+def four_axis_cases() -> list[dict[str, Any]]:
+    """200 fixed cases; unreviewable means missing capture, not an empty actual packet."""
+    import random
+
+    cases: list[dict[str, Any]] = []
+    for stratum, count in (("complete", 40), ("partial", 40), ("contradicted", 40),
+                            ("unsupported", 40), ("failed", 20), ("unreviewable", 20)):
+        for variant in range(count):
+            index = len(cases)
+            chinese = variant % 2 == 0
+            actor, amount = f"Subject-{index}", 1500 + index * 19
+            text = (f"{actor}的批准额度为{amount}积分，自2025年7月1日起生效。" if chinese else
+                    f"{actor}'s approved limit is {amount} credits, effective 1 July 2025.")
+            question = (f"{actor}的批准额度和生效日期是什么？" if chinese else
+                        f"What are {actor}'s approved limit and effective date?")
+            answer: str | None = (f"{amount}积分；2025年7月1日。" if chinese else
+                      f"{amount} credits; 1 July 2025.")
+            expected: dict[str, Any] = {"execution_status": "COMPLETED",
+                "material_sufficiency": "sufficient", "answer_support": "supported",
+                "answer_completeness": "complete", "primary_outcome": True}
+            if stratum == "complete" and variant % 8 in {6, 7}:
+                text = (f"{actor}从未获得批准，因此不存在批准额度或生效日期。" if chinese else
+                        f"{actor} has never been approved, so no approved limit or effective "
+                        "date exists.")
+                answer = ("尚未批准，所以没有批准额度或生效日期。" if chinese else
+                          "No approval has occurred, so there is no approved limit "
+                          "or effective date.")
+            if stratum == "partial":
+                answer = f"{amount}积分。" if chinese else f"{amount} credits."
+                expected.update(answer_completeness="incomplete", primary_outcome=False)
+            elif stratum == "contradicted":
+                answer = (f"{amount + 400}积分；2025年7月1日。" if chinese else
+                          f"{amount + 400} credits; 1 July 2025.")
+                expected.update(answer_support="unsupported", primary_outcome=False)
+            elif stratum == "unsupported":
+                text = (f"{actor}在文档团队任职。" if chinese else
+                        f"{actor} works in the documentation team.")
+                expected.update(material_sufficiency="insufficient", answer_support="unsupported",
+                                primary_outcome=False)
+            elif stratum == "failed":
+                answer = None
+                expected.update(execution_status="FAILED", answer_support="unknown",
+                                answer_completeness="unknown", primary_outcome=False)
+            evidence: Any = [{"label": "e0", "kind": "original_source", "evidence": [{
+                "source": "s0", "role": "tool", "origin": "controlled_reference",
+                "content": text}]}]
+            if stratum == "unsupported" and variant % 4 < 2:
+                evidence = []  # Known empty delivery is a measurable negative, not missing data.
+            available = "complete"
+            if stratum == "unreviewable":
+                evidence, available = None, "missing_delivery_capture"
+                expected.update(material_sufficiency="unknown", answer_support="unknown",
+                                answer_completeness="unknown", primary_outcome=None)
+            cases.append({"sample_id": f"axes3-{stratum}-{variant:02d}", "stratum": stratum,
+                "language": "zh" if chinese else "en", "question": question,
+                "execution_status": expected["execution_status"], "review_input_status": available,
+                "delivered_evidence": evidence, "answer": answer, "expected": expected,
+                "label_grade": "A_defined_symbolic_attributes_only",
+                "scope": "Author-designed controlled calibration, not natural-task accuracy"})
+    random.Random(17).shuffle(cases)  # noqa: S311 -- frozen presentation order
+    return cases

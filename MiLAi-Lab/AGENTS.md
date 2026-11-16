@@ -1,3 +1,41 @@
+# CURRENT 2026-11-17: P02 executable context-contrast bridge RUNNING
+
+Full original small-model plan is ACTIVE/incomplete. This block supersedes older CURRENT
+blocks. Work only in small-memory-control-20261116; preserve original/other worktrees.
+No subagents, SHA/checksums/fingerprints, new services/default changes, push or merge.
+R=/data/milai-experiments/20261116-small-memory-control; read R/current-state-v2.json.
+M00 v3/v4, M01 v5, D00 16-root collection/122 first branch positions/122 reviews and P01
+matched query experiment are CLOSED. D00 has108actual Reader calls+14shared identical wires,
+7failed positions retained. v5 symbolic positives40/40 does NOT validate natural labels.
+Natural author/agent24-case/3-root audit has disagreements and mapping exposed before
+serialized annotation freeze: do not claim independent/blinded adjudication or use these
+provisional natural labels for bulk primary-utility training. Preserve all old firsts.
+P01 query residual did not improve matched semantic15/24 or oldDEV42/46. Replacing only
+pooled state vector leaves pair fit130/130 and almost all choices unchanged; action vectors
+still contain state-derived source text, so this is a feature diagnostic, not proof of no state use.
+P02 uses ordinary MemoryService/SQLite/EvidenceOperations, all legal read-only branches,
+same public observation and budgets. Generated registry formal semantics are an explicit
+controlled condition, not a natural benchmark. 64TRAIN roots/768states,16DEV-fit/192 and
+16DEV-select/192. Same bank/prefix contrasting queries cause actual READ/HANDOFF reversals.
+Labels measure exact requested-field coverage, then nonterminal operation and packet cost;
+they are STRUCTURAL BRIDGE labels, not Reader success. Five real semantics tests pass.
+All P02/P03 fits and GPU trajectory preparations are now CLOSED. Only native Reader
+matrix P02-six-policy-devfit16-firsts-v1 is live, handle38822, original shared budget.
+Check actual run.json/PIDs/handles before acting; never restart because a handle is absent.
+P02 TRAIN best full bindings M0/M1/M2=208/294/183of768, despite high pair scores. Across256
+same-menu query reversals, choices change1/0/20, both correct0/0/2. All three actual DEV
+trajectories are closed; complete packets5/7/6of48,16roots. M0 native task firsts5/48,
+4length failures retained; fixed/rules48/48 each. Matrix adds M1/M2/choice firsts without
+retrying or replacing known old firsts. A metadata adapter adds required request_id after
+the baseline driver failed before any chat; failed invocation and compute retained.
+Choice CE M0 gives222/768 and1/256query changes. Matched query residual gives222/768,
+0/256changes. Objective-only and pooled-query-residual branches STOPPED; no scaling.
+W0 S1 and10k+Q both actually load/forward onCPU, not merely readable files; global exposure
+inventory remains partial. Core tests35passed/4legacyGPUskip, architecture/quote tests213passed,
+selected10source/tool mypy and Ruff pass. No full CI/T/M gain or fresh CONFIRM claim.
+M00/D00/P01 measured12compute scopes settled once in original budget.770actual new responses,
+1102983tokens,newunknown0. D00 parent compute and copied adapter timers not rebilled. P02 pending.
+
 # CURRENT 2026-11-17: small-model memory-control plan ACTIVE
 
 Execute docs/MILAI_SMALL_MODEL_MEMORY_CONTROL_PLAN_20261116_v1.md in full. Work here,

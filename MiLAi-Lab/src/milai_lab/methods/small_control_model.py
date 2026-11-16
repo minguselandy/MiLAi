@@ -29,6 +29,7 @@ class SmallControlConfig:
     readout: str = "dual"
     joint_max_tokens: int = 8192
     joint_layout: str = "literal_json_v2"
+    state_representation: str = "whole_v1"
 
 
 def build_action_head(width: int, hidden: int, *, set_interaction: bool = False) -> Any:
@@ -72,6 +73,10 @@ class SmallControlModel:
             raise ValueError("Joint causal markers require the decoder route")
         if config.joint_layout not in {"literal_json_v2", "wrapped_json_v1"}:
             raise ValueError("Unknown joint input layout")
+        if config.state_representation not in {"whole_v1", "query_residual_v1"}:
+            raise ValueError("Unknown state representation")
+        if config.readout == "joint" and config.state_representation != "whole_v1":
+            raise ValueError("Query residual is a separate dual-encoder representation")
         self.config, self.device = config, torch.device(device)
         self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             config.backbone, local_files_only=True)
@@ -160,17 +165,29 @@ class SmallControlModel:
 
         if self.config.readout == "joint":
             return self.joint_features(online)
-        states, actions, owners, lengths = [], [], [], []
+        states, queries, actions, owners, lengths = [], [], [], [], []
         for index, row in enumerate(online):
             state_text, action_texts = control_texts(row)
             if not action_texts:
                 raise ValueError("A policy state requires at least one action")
             states.append(state_text)
+            if self.config.state_representation == "query_residual_v1":
+                task = row["observation"]["task"]
+                query = task.get("request", task.get("query"))
+                if not isinstance(query, str) or not query:
+                    raise ValueError("Query-conditioned input needs the actual task query")
+                queries.append(query)
             actions.extend(action_texts)
             owners.extend([index] * len(action_texts))
             lengths.append(len(action_texts))
-        vectors = self.encode(states + actions)
-        return (vectors[:len(states)], vectors[len(states):],
+        vectors = self.encode(states + queries + actions)
+        state_vectors = vectors[:len(states)]
+        if queries:
+            import torch.nn.functional as F
+
+            state_vectors = F.normalize(state_vectors + vectors[len(states):len(states) * 2],
+                                        dim=-1)
+        return (state_vectors, vectors[len(states) + len(queries):],
                 torch.tensor(owners, device=self.device), lengths)
 
     def joint_layout(self, online: dict[str, Any]) -> tuple[list[int], int, list[int]]:

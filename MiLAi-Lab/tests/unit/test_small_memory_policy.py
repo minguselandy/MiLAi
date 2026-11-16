@@ -255,3 +255,27 @@ def test_source_expansion_preserves_the_existing_training_and_development_roles(
                                seed=0, overfit=2, split_manifest=manifest))
     assignments = json.loads((tmp_path / "expanded/manifest.json").read_text())["groups"]
     assert assignments["known_train"] == "train" and assignments["known_dev"] == "dev_fit"
+
+
+def test_query_residual_uses_actual_query_without_extra_information_or_head_parameters():
+    torch = pytest.importorskip("torch")
+    from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
+
+    model = SmallControlModel.__new__(SmallControlModel)
+    model.device = torch.device("cpu")
+    model.config = SmallControlConfig("frozen_mlp", "test",
+                                      state_representation="query_residual_v1")
+    seen = []
+
+    def encode(texts):
+        seen.extend(texts)
+        return torch.tensor([[1., 0.], [0., 1.], [1., 1.], [-1., 1.]])
+
+    model.encode = encode
+    row = control_input(MemoryControlState(task={"request": "Actual query"}), [
+        MemoryAction("r", "READ", "candidate", {"index": 0}),
+        MemoryAction("h", "HANDOFF", "Reader")])
+    states, actions, owners, lengths = model.features([{**row, "expected": "SECRET"}])
+    assert seen[1] == "Actual query" and "SECRET" not in str(seen)
+    assert torch.allclose(states[0], torch.tensor([2**-.5, 2**-.5]))
+    assert actions.shape == (2, 2) and owners.tolist() == [0, 0] and lengths == [2]
