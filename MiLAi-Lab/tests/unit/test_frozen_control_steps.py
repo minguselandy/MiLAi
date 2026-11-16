@@ -15,9 +15,11 @@ from milai_lab.runners.functional import message
 
 
 def captured_after(directory, kind):
-    return next(path for path in directory.glob("*/steps/*")
-                if read_json(path / "call.json")["initial_observation"]["last_result"][
-                    "action"]["kind"] == kind)
+    # Filesystem iteration order need not match the original control-step order.
+    matches = [path for path in directory.glob("*/steps/*")
+               if read_json(path / "call.json")["initial_observation"]["last_result"][
+                   "action"]["kind"] == kind]
+    return min(matches, key=lambda path: read_json(path / "call.json")["control_step"])
 
 
 @pytest.mark.parametrize("after", ["SEARCH", "READ"])
@@ -189,6 +191,7 @@ def test_post_search_read_branch_uses_absolute_budget_and_relative_intervention_
     assert original["status"] == "COMPLETED", original.get("error")
     captured = captured_after(snapshots, "SEARCH")
     call = read_json(captured / "call.json")
+    assert call["control_step"] == 1  # Restore after the first, not the second, search.
     read = next(a for a in call["initial_actions"] if a["kind"] == "READ"
                 and a["parameters"] == {"index": 0})
     executed = []

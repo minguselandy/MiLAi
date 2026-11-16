@@ -5,6 +5,7 @@ import socket
 import httpx
 import pytest
 from PIL import Image
+from test_contextual_capacity import TOKENIZER
 from test_lme_protocol import UPSTREAM
 from test_v13_5_functional_integration import prepared
 
@@ -17,7 +18,7 @@ from milai_lab.runners.lme_reader import predict_reader
 
 @pytest.fixture(scope="module")
 def capacity():
-    return ImageHostCapacity({"model": "mechanical", "tokenizer_path": "/cra/qwen36-35B",
+    return ImageHostCapacity({"model": "mechanical", "tokenizer_path": str(TOKENIZER),
         "context_tokens": 65536, "output_tokens": 128, "batch_source_tokens": 1024,
         "safety_tokens": 32, "related_reserve_tokens": 0, "schema_reserve_tokens": 0,
         "source_message_overhead_tokens": 2})
@@ -38,7 +39,7 @@ def test_fixed_reader_preserves_two_images_and_uses_native_image_capacity(tmp_pa
         business_tools=[], memory_view_mode="staged",
         memory_control={"policy":"fixed_context","reads":4,"max_control_steps":6})
     settings = read_json(tmp_path/"settings.json")
-    settings["capacity"]["tokenizer_path"] = "/cra/qwen36-35B"
+    settings["capacity"]["tokenizer_path"] = str(TOKENIZER)
     config = tmp_path/"image-settings.json"
     write_json(config, settings)
     runtime = tmp_path/"image-runtime"

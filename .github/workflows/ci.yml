@@ -438,6 +438,8 @@ jobs:
     needs: boundaries
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      MILAI_TEST_TOKENIZER: ${{ github.workspace }}/MiLAi-Lab/artifacts/ci-qwen-tokenizer
     steps:
       - uses: actions/checkout@v4
         with:
@@ -456,7 +458,10 @@ jobs:
           enable-cache: true
       - name: Install locked LangMem baseline
         working-directory: MiLAi-Lab
-        run: uv sync --frozen --dev --group baseline-langmem --python 3.11
+        run: |
+          uv sync --frozen --dev --group baseline-langmem --python 3.11
+          # Download only the four tokenizer/processor assets, never model weights.
+          uv run --no-sync python -c 'import os; from huggingface_hub import snapshot_download; snapshot_download("Qwen/Qwen3.6-35B-A3B-FP8", revision="95a723d08a9490559dae23d0cff1d9466213d989", allow_patterns=["tokenizer.json", "tokenizer_config.json", "chat_template.jinja", "preprocessor_config.json"], local_dir=os.environ["MILAI_TEST_TOKENIZER"])'
       - name: Check LangMem foundation boundary and adapter
         working-directory: MiLAi-Lab
         run: |

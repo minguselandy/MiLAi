@@ -417,6 +417,8 @@ jobs:
     needs: [classify, boundaries]
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      MILAI_TEST_TOKENIZER: ${{ github.workspace }}/MiLAi-Lab/artifacts/ci-qwen-tokenizer
     steps:
       - uses: actions/checkout@v4
         with:
@@ -437,6 +439,8 @@ jobs:
         working-directory: MiLAi-Lab
         run: |
           uv sync --frozen --dev --group baseline-langmem --python 3.11
+          # Download only the four tokenizer/processor assets, never model weights.
+          uv run --no-sync python -c 'import os; from huggingface_hub import snapshot_download; snapshot_download("Qwen/Qwen3.6-35B-A3B-FP8", revision="95a723d08a9490559dae23d0cff1d9466213d989", allow_patterns=["tokenizer.json", "tokenizer_config.json", "chat_template.jinja", "preprocessor_config.json"], local_dir=os.environ["MILAI_TEST_TOKENIZER"])'
           uv run --no-sync python -c 'import langchain_core, langgraph, langmem, openai'
           uv run --no-sync milai-lab-check-boundary
           uv run --no-sync ruff check src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/providers/chat_bridge.py src/milai_lab/providers/request_pipeline.py src/milai_lab/methods/langmem_recipe.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/application src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py tools/run_langmem_foundation.py tools/prepare_langmem_foundation.py tools/summarize_langmem_foundation.py tests/unit/test_langmem_foundation.py

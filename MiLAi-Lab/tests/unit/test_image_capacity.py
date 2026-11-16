@@ -7,6 +7,7 @@ import json
 import httpx
 import pytest
 from PIL import Image
+from test_contextual_capacity import TOKENIZER
 from transformers.models.qwen3_vl.processing_qwen3_vl import Qwen3VLProcessor
 
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
@@ -17,7 +18,7 @@ from milai_lab.providers.image_capacity import ImageHostCapacity
 @pytest.fixture(scope="module")
 def capacity():
     return ImageHostCapacity({"model": "local-image-reader-mechanical-test",
-        "tokenizer_path": "/cra/qwen36-35B", "context_tokens": 65536, "output_tokens": 128,
+        "tokenizer_path": str(TOKENIZER), "context_tokens": 65536, "output_tokens": 128,
         "safety_tokens": 32, "batch_source_tokens": 1024,
         "related_reserve_tokens": 0, "schema_reserve_tokens": 0,
         "source_message_overhead_tokens": 2, "enable_thinking": True})

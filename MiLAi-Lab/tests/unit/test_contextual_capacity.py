@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from copy import deepcopy
 from itertools import pairwise
 from pathlib import Path
@@ -20,7 +21,7 @@ from milai_lab.providers.contextual_capacity import (
 )
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 
-TOKENIZER = Path("/cra/qwen36-35B")
+TOKENIZER = Path(os.environ.get("MILAI_TEST_TOKENIZER", "/cra/qwen36-35B"))
 
 
 @pytest.fixture(scope="module")
