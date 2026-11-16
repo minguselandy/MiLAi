@@ -64,10 +64,19 @@ def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatc
 
     monkeypatch.setattr(rollout, 'HostCapacity', lambda _: capacity)
     monkeypatch.setattr(rollout, 'NativeDecision', Decision)
+    # The decision model is synthetic; record only its runtime-configuration calls.
+    runtime_calls = []
+    monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(
+        set_num_threads=lambda count: runtime_calls.append(("threads", count)),
+        backends=SimpleNamespace(mha=SimpleNamespace(
+            set_fastpath_enabled=lambda enabled: runtime_calls.append(("fastpath", enabled)),
+        )),
+    ))
     output = tmp_path / 'output'
     monkeypatch.setattr(sys, 'argv', ['rollout', str(collection), str(config), 'unused-model',
                                     str(output), '--families', '1', '--requests-per-family', '0'])
     rollout.main()
+    assert runtime_calls == [("threads", 4), ("fastpath", False)]
     run = json.loads((output / 'run.json').read_text())
     assert run['completed_families'] == 1 and run['closed_requests'] == 4
     assert run['planned_native_requests'] == 2 and len(inputs) > 8

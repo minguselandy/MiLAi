@@ -1,5 +1,6 @@
 """Pinned upstream prompt and metric functions on synthetic questions only."""
 import base64
+import os
 import shutil
 from pathlib import Path
 
@@ -7,7 +8,10 @@ import pytest
 
 from milai_lab.datasets.lme_protocol import NativeLmeProtocol
 
-UPSTREAM = Path("/cra/memory/mx_memory/benchmarks/LongMemEval-V2")
+UPSTREAM = Path(os.environ.get(
+    "MILAI_LME_RESEARCH_PATH",
+    str(Path(__file__).resolve().parents[2] / "artifacts/ci-lme-native"),
+))
 
 
 @pytest.fixture

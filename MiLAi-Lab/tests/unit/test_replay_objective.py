@@ -94,7 +94,7 @@ def test_all_accepted_actions_have_zero_set_gradient_without_uniformizing():
     assert result['ce_gradient_l1'] > .99
 
 
-def test_replay_flag_cannot_silently_change_non_pair_training(monkeypatch, tmp_path, capsys):
+def test_replay_flag_requires_pair_or_utility_training(monkeypatch, tmp_path, capsys):
     from train_bounded_laya import main
 
     monkeypatch.setattr(sys, 'argv', ['train_bounded_laya.py', str(tmp_path / 'data'),
@@ -103,5 +103,5 @@ def test_replay_flag_cannot_silently_change_non_pair_training(monkeypatch, tmp_p
     with pytest.raises(SystemExit) as error:
         main()
     assert error.value.code == 2
-    assert '--replay-objective applies only to pair training' in capsys.readouterr().err
+    assert '--replay-objective applies only to pair or utility training' in capsys.readouterr().err
     assert not (tmp_path / 'output').exists()
