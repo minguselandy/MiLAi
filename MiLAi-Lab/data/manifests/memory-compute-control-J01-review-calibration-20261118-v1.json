@@ -1,0 +1,89 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "V2_FIXTURES_AND_RUBRIC_FROZEN_NO_JUDGE_CALLS",
+  "fixture_protocol": "review-contract-fixtures-v2",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "card": "J01-review-contract-calibration-card-v2.json",
+  "rubric": "J01-rubric-before-any-judge-v2.json",
+  "validation": "J01-freeze-validation-v2.json",
+  "erratum": "J01-before-judge-protocol-erratum-v1.json",
+  "literal_delta_audit": "J01-v2-literal-delta-audit-v1.json",
+  "original_v1_files_and_labels_preserved": true,
+  "source_parent_commit": "b354b5e6",
+  "generator": "tools/prepare_review_contract_calibration.py",
+  "tests": "tests/unit/test_review_contract_calibration.py",
+  "population": {
+    "source_worlds": 20,
+    "cases": 180,
+    "kinds": 9,
+    "cases_per_kind": 20,
+    "seed": 20261118,
+    "judge_cases": "J01-review-contract-calibration-v2/judge-cases.json",
+    "private_truth": "J01-review-contract-calibration-v2/private-truth.json",
+    "prospective_pilot_case_codes": "J01-review-contract-calibration-v2/pilot-case-codes.json",
+    "prospective_pilot_cases": 10,
+    "pilot_selection": "World0 all9kinds plus world1 supported comparison, before any model output"
+  },
+  "kinds": [
+    "supported literal or numeric comparison",
+    "missing delivered evidence",
+    "wrong answer with sufficient evidence",
+    "actual common schema rejection",
+    "actual common Source revocation",
+    "scripted UNKNOWN execution boundary",
+    "user question is not confirmation",
+    "literal temporal condition",
+    "partial interval world has conflicting possible query truths"
+  ],
+  "expected_axis_counts": {
+    "material_status": {"SUFFICIENT": 120, "INSUFFICIENT": 40, "UNKNOWN": 20},
+    "task_resolution": {"True": 20, "False": 120, "None": 40},
+    "answer_grounding": {"True": 40, "False": 100, "None": 40}
+  },
+  "actual_operations": {
+    "source_captures": 90,
+    "explicit_common_open_calls_including_empty": 130,
+    "source_revocations": 20,
+    "scope": "New isolated fixture SQLite files only; existing user/benchmark banks untouched"
+  },
+  "blinding": {
+    "public_inputs": "Question, query time, actual delivered packet, scripted observation and origin only",
+    "expected_labels_kind_proof_and_pilot_flags_not_in_public_inputs": true,
+    "scripted_observations_not_model_firsts": true
+  },
+  "validation_results": {
+    "unit_tests": "2 PASS; real visibility/schema paths and repeat generation equality",
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "v1_six_process_CPU_seconds_sum": 34.133523326,
+    "v2_six_process_CPU_seconds_sum": 36.436784314,
+    "v2_sum_process_wall_seconds_not_end_to_end": 39.77719996590167,
+    "literal_delta_audit_CPU_seconds": 0.011451568000000002,
+    "cost_scope": "13scopes:6v1processes+6v2processes+1delta audit; exclude nested generator runs and summaries from rebilling",
+    "earlier_editing_checks_assistant_report_cost": "UNKNOWN"
+  },
+  "limitations": [
+    "Before any judge call v2 removed20 invented missing-case citations and corrected20 record-confirmation material statuses to sufficient; all other values and pilot codes unchanged",
+    "Executable source/schema/visibility/constraint properties are not independent natural semantic truth",
+    "180cases are clustered in20programmaticworlds, not180 independent natural sources or final confirmation",
+    "UNKNOWN execution case is scripted, not an actual observed service transport failure",
+    "Interval rule defines partial-world truth status and unsupported assertion separately, not a natural truth oracle",
+    "No independent reviewer model ability, natural applicability, human agreement or G1/G2/G3 established",
+    "No C06 label replacement or grade upgrade; all previous B limits retained"
+  ],
+  "model_or_judge_pilot_calls_admitted": false,
+  "Reader_calls": 0,
+  "judge_calls": 0,
+  "GPU_job_requested": false,
+  "current_C06_source": "S13/188a5239 unchanged",
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "research_policy_weights_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "full_goal": "ACTIVE_INCOMPLETE",
+  "remote_commit_checked": false,
+  "push_or_merge": false
+}
