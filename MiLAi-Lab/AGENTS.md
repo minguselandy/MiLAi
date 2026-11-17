@@ -1,5 +1,34 @@
 # CURRENT 2026-11-17: memory compute v2 ACTIVE in an isolated worktree
 
+LATEST authority is /data/milai-experiments/20261117-memory-compute-control/current-state-v4.json.
+S02/S03/S04 sources15076ede/13032465/3efeefc1 frozen. D00 parent preparation CLOSED:
+64TRAIN roots/256actual states/869independent bound executions at declared steps1/2/3/5,
+h2 only. NOT256Reader-labelled states or a usable trained start. All full goal gates remain.
+ONLY current admitted model HTTP is D00-block00-TRAIN8-firsts-v1, exec18184, PID2582711 at
+last verified observation. Revalidate actual run.json and /proc before acting; never restart
+because observation/handle expired. Block00 has8roots/32states/110actual bound positions;
+blocks01-07 NOT_STARTED and require previous-block yield/cost/unknown review, no auto expansion.
+Reuse only D00-own-earliest-first-index-v2: earliest actual conditional first, failures included;
+older mixed indexv1 was superseded BEFORE anyD00HTTP. No profile-repeat replacement.
+
+S02 stopped-state calibration CLOSED28bound firsts:18newcalls/10exact-wire reuse/3failed,
+86433newtokens/U0. Four actual roots, h0direction2states/5pairs; h2direction3states/9pairs.
+K/O matters:2statesK1/O2,2K2/O2; plainK0/4 vsactualmodelHANDOFFbinding1/4. Conditional
+fixed/random acquisitionh2=2/4 is NOT new model rollout improvement. No semantic truth claim:
+native EM+physical reference spans only. New observed_execution_v2 masks absent/unknown
+transport; definite response length failures remain failures. Old default/results untouched.
+Actual resource targets keep reusedReader latency/tokens UNKNOWN; Source local28 measured,
+Reader18measured/10reusedunknown. Originalqualitylabels/onlineinputs exactly equal.
+S03 inherited TRAIN4QASPER papers now have real R2/R3 differences4/4, via adjacent captured
+turn radius1.14successfulR3reads/8failedops,2budget-endedpaths retained; finalUTF8material
+all<=2048,maxactualmemoryobjects142/256.0Readercalls, noqualitybenefit or long-input claim.
+Tests67/S03union130/S04narrow60passed; Ruff/mypy5/6/3files andtoolsboundarypass, notfullCI.
+11closedlocalphases settled ONCE/readback beforeD00HTTP; nativeS02phase not rebilled.
+ReceiptS02-S04-closed-cost-disclosure-v1; canonical-index-v2 preparation is newlypending.
+Never manually settle while current HTTP lives. Source snapshots/firsts/failures remain frozen.
+
+The following S00/S01 block is historical progress within the same ACTIVE full v2 goal.
+
 LATEST S00/S01 ALL TERMINAL. Authority:
 /data/milai-experiments/20261117-memory-compute-control/current-state-v1.json.
 Sources4fdcf98b/c0115a94 frozen; T00 MLP/latent both96updates, reload0. Full-menu structural

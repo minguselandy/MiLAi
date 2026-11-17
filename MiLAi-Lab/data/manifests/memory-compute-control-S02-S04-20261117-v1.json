@@ -1,0 +1,497 @@
+{
+  "schema": "camc.execution.S02_S04.v1",
+  "goal_status": "ACTIVE_INCOMPLETE",
+  "source_versions": {
+    "S02": "15076ede",
+    "S03": "13032465",
+    "S04": "3efeefc1"
+  },
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "S02": {
+    "actual_reached_states": 4,
+    "roots": 4,
+    "actual_bound_branches": 28,
+    "horizons": [
+      0,
+      2
+    ],
+    "new_Reader_calls": 18,
+    "quality_wire_reuses": 10,
+    "retained_failed_positions": 3,
+    "new_response_finish_reasons": {
+      "stop": 16,
+      "length": 2
+    },
+    "actual_new_Reader_tokens": {
+      "prompt_tokens": 21674,
+      "completion_tokens": 64759,
+      "total_tokens": 86433
+    },
+    "new_unknown_usage": 0,
+    "outcome_protocol": "observed_execution_v2; missing/unknown execution masked, actual length failure retained; semantic material sufficiency stays unknown",
+    "feedback": {
+      "quality-h0": {
+        "states": 4,
+        "roots": 4,
+        "directional_states": 2,
+        "directional_roots": 2,
+        "directional_pairs": 5,
+        "target_ties": 13,
+        "unknown_pairs": 0,
+        "directional_states_per_1000_total_feedback_tokens": 0.023139310217162427,
+        "directional_states_per_1000_known_input_tokens": 0.09227646027498385,
+        "actual_feedback_input_tokens": 21674,
+        "actual_calls_with_unknown_input_tokens": 0,
+        "token_denominator_scope": "All actual native firsts in the common feedback block; includes both horizons, excludes shared copies"
+      },
+      "structure-h0": {
+        "states": 4,
+        "roots": 4,
+        "directional_states": 3,
+        "directional_roots": 3,
+        "directional_pairs": 10,
+        "target_ties": 8,
+        "unknown_pairs": 0,
+        "directional_states_per_1000_total_feedback_tokens": 0.03470896532574364,
+        "directional_states_per_1000_known_input_tokens": 0.13841469041247578,
+        "actual_feedback_input_tokens": 21674,
+        "actual_calls_with_unknown_input_tokens": 0,
+        "token_denominator_scope": "All actual native firsts in the common feedback block; includes both horizons, excludes shared copies"
+      },
+      "weak_answer-h0": {
+        "states": 4,
+        "roots": 4,
+        "directional_states": 3,
+        "directional_roots": 3,
+        "directional_pairs": 7,
+        "target_ties": 8,
+        "unknown_pairs": 3,
+        "directional_states_per_1000_total_feedback_tokens": 0.03470896532574364,
+        "directional_states_per_1000_known_input_tokens": 0.13841469041247578,
+        "actual_feedback_input_tokens": 21674,
+        "actual_calls_with_unknown_input_tokens": 0,
+        "token_denominator_scope": "All actual native firsts in the common feedback block; includes both horizons, excludes shared copies"
+      },
+      "quality-h2": {
+        "states": 4,
+        "roots": 4,
+        "directional_states": 3,
+        "directional_roots": 3,
+        "directional_pairs": 9,
+        "target_ties": 9,
+        "unknown_pairs": 0,
+        "directional_states_per_1000_total_feedback_tokens": 0.03470896532574364,
+        "directional_states_per_1000_known_input_tokens": 0.13841469041247578,
+        "actual_feedback_input_tokens": 21674,
+        "actual_calls_with_unknown_input_tokens": 0,
+        "token_denominator_scope": "All actual native firsts in the common feedback block; includes both horizons, excludes shared copies"
+      },
+      "structure-h2": {
+        "states": 4,
+        "roots": 4,
+        "directional_states": 3,
+        "directional_roots": 3,
+        "directional_pairs": 9,
+        "target_ties": 9,
+        "unknown_pairs": 0,
+        "directional_states_per_1000_total_feedback_tokens": 0.03470896532574364,
+        "directional_states_per_1000_known_input_tokens": 0.13841469041247578,
+        "actual_feedback_input_tokens": 21674,
+        "actual_calls_with_unknown_input_tokens": 0,
+        "token_denominator_scope": "All actual native firsts in the common feedback block; includes both horizons, excludes shared copies"
+      },
+      "weak_answer-h2": {
+        "states": 4,
+        "roots": 4,
+        "directional_states": 3,
+        "directional_roots": 3,
+        "directional_pairs": 6,
+        "target_ties": 6,
+        "unknown_pairs": 6,
+        "directional_states_per_1000_total_feedback_tokens": 0.03470896532574364,
+        "directional_states_per_1000_known_input_tokens": 0.13841469041247578,
+        "actual_feedback_input_tokens": 21674,
+        "actual_calls_with_unknown_input_tokens": 0,
+        "token_denominator_scope": "All actual native firsts in the common feedback block; includes both horizons, excludes shared copies"
+      }
+    },
+    "resource_projection": "Quality/online inputs exactly equal original v2 after removing observed_costs; local costs known28, new Reader timings18, reused Reader timings10 unknown. UTF8 packet measurement separate from legacy ASCII proxy.",
+    "results": {
+      "current_model/h0": {
+        "planned_positions": 4,
+        "unit": "state_horizon_action",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 1,
+        "primary_false": 3,
+        "primary_unknown": 0,
+        "answer_EM": 1,
+        "reference_support_complete": 1
+      },
+      "current_model/h2": {
+        "planned_positions": 4,
+        "unit": "state_horizon_action",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 1,
+        "primary_false": 3,
+        "primary_unknown": 0,
+        "answer_EM": 1,
+        "reference_support_complete": 1
+      },
+      "immediate_stop/h0": {
+        "planned_positions": 4,
+        "unit": "state_horizon_action",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 0,
+        "primary_false": 4,
+        "primary_unknown": 0,
+        "answer_EM": 0,
+        "reference_support_complete": 0
+      },
+      "immediate_stop/h2": {
+        "planned_positions": 4,
+        "unit": "state_horizon_action",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 0,
+        "primary_false": 4,
+        "primary_unknown": 0,
+        "answer_EM": 0,
+        "reference_support_complete": 0
+      },
+      "query_once4/h0": {
+        "planned_positions": 4,
+        "unit": "state_horizon_action",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 1,
+        "primary_false": 3,
+        "primary_unknown": 0,
+        "answer_EM": 3,
+        "reference_support_complete": 1
+      },
+      "query_once4/h2": {
+        "planned_positions": 4,
+        "unit": "state_horizon_action",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 2,
+        "primary_false": 2,
+        "primary_unknown": 0,
+        "answer_EM": 3,
+        "reference_support_complete": 2
+      },
+      "random_alternative/h0": {
+        "planned_positions": 4,
+        "unit": "state_horizon_action",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 0,
+        "primary_false": 4,
+        "primary_unknown": 0,
+        "answer_EM": 1,
+        "reference_support_complete": 0
+      },
+      "random_alternative/h2": {
+        "planned_positions": 4,
+        "unit": "state_horizon_action",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 2,
+        "primary_false": 2,
+        "primary_unknown": 0,
+        "answer_EM": 2,
+        "reference_support_complete": 2
+      }
+    },
+    "scope": "Four exposed TRAIN roots for calibration, not a new-source effect, G1 proof or formal own-state round"
+  },
+  "S03": {
+    "inherited_TRAIN_papers": 4,
+    "sources_per_paper": [
+      64,
+      32,
+      38,
+      52
+    ],
+    "context_turn_radius": 1,
+    "different_final_wires": 4,
+    "material_audit": [
+      {
+        "root": "qasper-paper-1903.07398",
+        "branches": [
+          {
+            "policy": [
+              "fixed_r2_4"
+            ],
+            "actual_UTF8_material_tokens": 768,
+            "legacy_ASCII_proxy_tokens": 768,
+            "within_common_material_budget": true,
+            "delivered_ranges": 4
+          },
+          {
+            "policy": [
+              "fixed_context4"
+            ],
+            "actual_UTF8_material_tokens": 1633,
+            "legacy_ASCII_proxy_tokens": 1633,
+            "within_common_material_budget": true,
+            "delivered_ranges": 12
+          }
+        ],
+        "R2_R3_wire_different": true
+      },
+      {
+        "root": "qasper-paper-1802.00273",
+        "branches": [
+          {
+            "policy": [
+              "fixed_r2_4"
+            ],
+            "actual_UTF8_material_tokens": 1272,
+            "legacy_ASCII_proxy_tokens": 1282,
+            "within_common_material_budget": true,
+            "delivered_ranges": 4
+          },
+          {
+            "policy": [
+              "fixed_context4"
+            ],
+            "actual_UTF8_material_tokens": 1886,
+            "legacy_ASCII_proxy_tokens": 1905,
+            "within_common_material_budget": true,
+            "delivered_ranges": 8
+          }
+        ],
+        "R2_R3_wire_different": true
+      },
+      {
+        "root": "qasper-paper-1704.00177",
+        "branches": [
+          {
+            "policy": [
+              "fixed_r2_4"
+            ],
+            "actual_UTF8_material_tokens": 1020,
+            "legacy_ASCII_proxy_tokens": 1020,
+            "within_common_material_budget": true,
+            "delivered_ranges": 4
+          },
+          {
+            "policy": [
+              "fixed_context4"
+            ],
+            "actual_UTF8_material_tokens": 1711,
+            "legacy_ASCII_proxy_tokens": 1711,
+            "within_common_material_budget": true,
+            "delivered_ranges": 11
+          }
+        ],
+        "R2_R3_wire_different": true
+      },
+      {
+        "root": "qasper-paper-1905.13413",
+        "branches": [
+          {
+            "policy": [
+              "fixed_r2_4"
+            ],
+            "actual_UTF8_material_tokens": 1122,
+            "legacy_ASCII_proxy_tokens": 1122,
+            "within_common_material_budget": true,
+            "delivered_ranges": 4
+          },
+          {
+            "policy": [
+              "fixed_context4"
+            ],
+            "actual_UTF8_material_tokens": 1815,
+            "legacy_ASCII_proxy_tokens": 1815,
+            "within_common_material_budget": true,
+            "delivered_ranges": 9
+          }
+        ],
+        "R2_R3_wire_different": true
+      }
+    ],
+    "actual_paths": [
+      {
+        "event_id": "qasper-paper-1903%2E07398/question-0",
+        "policy": "fixed_r2_4",
+        "reason": "policy_handoff",
+        "unique_R3_candidate_indices": 64,
+        "legal_R3_action_variants": 128,
+        "successful_R3_reads": 0,
+        "failed_operations": 0,
+        "maximum_observed_memory_objects": 132
+      },
+      {
+        "event_id": "qasper-paper-1903%2E07398/question-0",
+        "policy": "fixed_context4",
+        "reason": "policy_handoff",
+        "unique_R3_candidate_indices": 64,
+        "legal_R3_action_variants": 128,
+        "successful_R3_reads": 4,
+        "failed_operations": 0,
+        "maximum_observed_memory_objects": 142
+      },
+      {
+        "event_id": "qasper-paper-1802%2E00273/question-0",
+        "policy": "fixed_r2_4",
+        "reason": "policy_handoff",
+        "unique_R3_candidate_indices": 32,
+        "legal_R3_action_variants": 64,
+        "successful_R3_reads": 0,
+        "failed_operations": 0,
+        "maximum_observed_memory_objects": 68
+      },
+      {
+        "event_id": "qasper-paper-1802%2E00273/question-0",
+        "policy": "fixed_context4",
+        "reason": "budget_exhausted",
+        "unique_R3_candidate_indices": 32,
+        "legal_R3_action_variants": 64,
+        "successful_R3_reads": 3,
+        "failed_operations": 4,
+        "maximum_observed_memory_objects": 85
+      },
+      {
+        "event_id": "qasper-paper-1704%2E00177/question-0",
+        "policy": "fixed_r2_4",
+        "reason": "policy_handoff",
+        "unique_R3_candidate_indices": 38,
+        "legal_R3_action_variants": 76,
+        "successful_R3_reads": 0,
+        "failed_operations": 0,
+        "maximum_observed_memory_objects": 80
+      },
+      {
+        "event_id": "qasper-paper-1704%2E00177/question-0",
+        "policy": "fixed_context4",
+        "reason": "policy_handoff",
+        "unique_R3_candidate_indices": 38,
+        "legal_R3_action_variants": 76,
+        "successful_R3_reads": 4,
+        "failed_operations": 0,
+        "maximum_observed_memory_objects": 91
+      },
+      {
+        "event_id": "qasper-paper-1905%2E13413/question-0",
+        "policy": "fixed_r2_4",
+        "reason": "policy_handoff",
+        "unique_R3_candidate_indices": 52,
+        "legal_R3_action_variants": 104,
+        "successful_R3_reads": 0,
+        "failed_operations": 0,
+        "maximum_observed_memory_objects": 108
+      },
+      {
+        "event_id": "qasper-paper-1905%2E13413/question-0",
+        "policy": "fixed_context4",
+        "reason": "budget_exhausted",
+        "unique_R3_candidate_indices": 52,
+        "legal_R3_action_variants": 104,
+        "successful_R3_reads": 3,
+        "failed_operations": 4,
+        "maximum_observed_memory_objects": 128
+      }
+    ],
+    "Reader_calls": 0,
+    "scope": "Genuine different actual R2/R3 materials, all final UTF8 packets<=2048; no semantic/task benefit established; larger excluded papers retained in parent pool"
+  },
+  "D0": {
+    "source_roots": 64,
+    "actual_states": 256,
+    "actual_action_branch_executions": 869,
+    "actual_state_steps": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "horizon": 2,
+    "Reader_blocks": [
+      {
+        "block": 0,
+        "roots": 8,
+        "states": 32,
+        "bound_actions": 110
+      },
+      {
+        "block": 1,
+        "roots": 8,
+        "states": 32,
+        "bound_actions": 107
+      },
+      {
+        "block": 2,
+        "roots": 8,
+        "states": 32,
+        "bound_actions": 105
+      },
+      {
+        "block": 3,
+        "roots": 8,
+        "states": 32,
+        "bound_actions": 111
+      },
+      {
+        "block": 4,
+        "roots": 8,
+        "states": 32,
+        "bound_actions": 111
+      },
+      {
+        "block": 5,
+        "roots": 8,
+        "states": 32,
+        "bound_actions": 107
+      },
+      {
+        "block": 6,
+        "roots": 8,
+        "states": 32,
+        "bound_actions": 111
+      },
+      {
+        "block": 7,
+        "roots": 8,
+        "states": 32,
+        "bound_actions": 107
+      }
+    ],
+    "feedback_status": "Block00 firsts admitted; blocks01-07 not started. Not 256 labelled states or completed D0 training.",
+    "first_reuse_index": "/data/milai-experiments/20261117-memory-compute-control/D00-own-earliest-first-index-v2",
+    "reuse_rule": "Canonical actual chronological earliest conditional first, including failures, selected before D0 admission. Original method firsts untouched; profiler repetitions excluded."
+  },
+  "cost_receipt": "/data/milai-experiments/20261117-memory-compute-control/S02-S04-closed-cost-disclosure-v1.json",
+  "pending_after_receipt": [
+    "/data/milai-experiments/20261117-memory-compute-control/D00-own-earliest-first-index-v2/run.json"
+  ],
+  "checks": {
+    "S02_affected_tests": 67,
+    "S03_affected_tests": 130,
+    "S04_narrow_tests": 60,
+    "ruff": "PASS",
+    "mypy": "S02 five files/S03 six/S04 three pass; external jsonschema stubs import-untyped only excluded",
+    "tools_boundary": "PASS",
+    "full_pytest": "NOT_RUN",
+    "remote_CI": "NOT_RUN"
+  },
+  "G1": "not_established",
+  "G2": "not_established",
+  "G3": "not_established",
+  "product_adoption": "not_eligible",
+  "remaining": "Existing View admission/final-Reader packaging capacity audit and same-budget repair; Reliable full semantic/task calibration; full D0 feedback and usable trained start; matched T2/result objectives; actual new-root DEV and strong simple controls; P/D, two formal own-state rounds and fixed-data exposure controls; three seeds, mechanisms/ablations, power/frozen new confirmation, external/Reader/budget transfer and full research artifacts. Conditional F/A/X only when justified. No completion from code/data counts.",
+  "sha_validation": false
+}
