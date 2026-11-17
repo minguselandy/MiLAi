@@ -1,6 +1,45 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06 block03 closed/block04 active; P01 prototype
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06 block04 closed/block05 waiting; S15 recovery
 
-LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v32.json.
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v33.json.
+C06 remains frozen S13/188a5239. Block04 original68161/PID45399 TERMINAL96positions:
+72new24reuse5failed283821tokens/U0.72fresh B blind judgments frozen BEFORE scores45resolved/
+24unresolved3unknown.17directionalstates8roots34pairs93known3unknown,maxUTF8material2014.
+Fiveblocks160states40roots490positions265new225reuse30failed983808tokens/U0;79directional
+states36roots165pairs449known41unknown. Still provisionalB/no independent human/second model,
+NOT complete reliable D0/G1/G2/G3. Original64root D0 target retained, not40 substitute.
+Only block05 eligible/prepared96positions72wires, canonical575earliest primary firsts keeps
+failed/excludes repeats/profile; frozen N00-N07/I000-I071. Coordinator exec26194/PID180805
+WAITING actual externalR34kernelowner88677, cmd wait_and_run_R34_firsts_v1.py. Verified /proc
+FLOCK+bothcmdlines;0HTTP/no client/no firsts directory. REVALIDATE before actions, NEVERrestart
+lost observation. On original lease release it settles9closed locals once/readback and runs
+ONLYblock05. Nativeblock04 already auto billed once. Blocks06/07NOT_ADMITTED. Do not edit
+running driver to add new costs; S15five later closed checks carry next original idle scope.
+Full first32 audit ONLY128states: rank62valid/66masked/28sources, rank+valueBCE0.5=126valid/
+2masked/32sources.2735fullmenu positions,2341unexecuted; not extra labels/negatives. Weak SFT
+valid state/source windows matchable; sampled draws are not exact epochs. No fits admitted.
+S15/4e92de2b future small-policy recovery now binds all literal observation/action/label/mask/
+type/order values via once-written data sidecar; no SHA/digest/fingerprint. New schema v2;
+legacy no-data callers retainv1. Strict new path cannot certify missing old full-data proof;
+original frozen trainer or explicit new-stage inference initialization retained, no fallback.
+11CPU regressions/Ruff/mypy/package/tools PASS: actual6vs2+4 optimizer/RNG equality, real
+smalltrainer2to3 unchanged resumes; same-ID mask change terminalFAILED0newupdates/exposure,
+old recovery kept. GPU recovery not rerun; old same-data v1 evidence preserved.5final checks
+75.0907CPU sec PENDING original scope; aggregate not separately billable, earlier workUNKNOWN.
+S14/P01 unchanged, pure prototype not integrated/no task/capacity gain. J00 read-only model
+inventory found qwen2.5-32b17shards65.53GB BF16; single40GBcard insufficient, quant dependency
+absent. NO model/judge/service/download/install started. A separate preregistered calibration
+and original-budget/resource plan required before pilot. Candidate inventory is not capability.
+Source256states64roots775branches and own488states/140new unlabelled observations unchanged,
+NOT D3round1. Full D0/D1/calibration/P-D/two ownstate+same exposure/3seeds/strong baseline/power/
+newconfirmation/transfer/delivery INCOMPLETE. No Product/default/researchweights/protectedbody/
+push/merge. SHA OFF. Unmeasured editing/failed checks/review/report/serverGPU/fullactivity/
+physicalIO/energy/money UNKNOWN. Incremental reuse is not full-lifecycle efficiency.
+
+The following v32 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C06 block03 closed/block04 active; P01 prototype
+
+Previous authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v32.json.
 ALL current C06 branches/Reader remain S13/188a5239. Block03 exec46244/PID4144203 TERMINAL:
 97positions73new24reuse3lengthfail244663tokens/U0;73fresh B blind judgments frozen BEFORE
 scores38resolved27unresolved8unknown. Quality12directionalstates6roots26pairs/86known11unknown,
