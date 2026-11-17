@@ -1,6 +1,40 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; J01v2 calibration fixtures frozen/no judge
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06block05closed/block06active; J02gate failed
 
-LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v34.json.
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v35.json.
+S13C06 unchanged.05CLOSED96positions72new24reuse5fail266720tokens/U0;72Bblind judgments
+frozen BEFORE scores43resolved21unresolved8unknown.13directionalstates8roots23pairs82known/
+14unknown,maxUTF8material1982. Sixblocks192states48/64roots586positions337new249reuse35fail,
+1250528tokens/U0;92directionalstates44roots188pairs531known55unknown. NOT completeD0/G1/G2/G3.
+37closedlocals SETTLED ONCE/readback at C06-before-block06-closed-cost-v1, includingS15five,
+J01thirteen,J02seven verification/prep commands, failedload+CPUstage+scoredmodel+analysis.
+No native05/nestedworker/per-forward/per-file rebill. Local inputtokens/forwards/streambytes
+separate numericaxes; not HTTPgenerationtokens. Actual06Reader exec98279/PID567581/S13,
+94positions71wires647canonicalfirsts; ONLY06admitted. Revalidate run+/proc, NEVERlost-handle
+restart. After94close review all71 O00-O07/J000-J070 before scores/yield, only thenblock07.
+Old05wait26194/PID180805 intentionally cancelled0calls after observedR34->R35poll misses,
+no firsts/receipt existed. Originalstate/driver retained; new05v2queued kernelflock then
+released before normal original-budgetscope; racepreclientonly/noFIFO guarantee. It admitted
+and CLOSED33428/PID468861. Not goal pause or observation-loss restart; methods/data unchanged.
+S17/9a4e740b separate local27-code conditional forward pilot, fixedJ01v2public10cases/2worlds,
+twoencodings20forwards22954tokens,no privateoracle inmodel. Firstload3/17shards396sec,Ddisk
+sleep,0forwards; ownchild stopped508.73sec/1017.45twoGPUallocationsec,all20NOT_RUN,kept raw.
+Only own reproduciblemypycache81.88MB removed. J03CPUstage copied25files65539393633bytes
+to owned /dev/shm/milai-camc-qwen25-32b-J03-v1,344.90wall/118.61CPU/noGPU. Source readonly.
+Separatev2same20prompts/maps completed42.35wall/84.70GPUallocationsec; allraw frozen BEFORE
+oracle. Gate FAILED:2/10both encodings allaxes exact,6encodingdisagreements6falsepositive
+resolutionresults2illegalcombos; axes15/20material11/20task12/20grounding. DO NOT expand to180
+or grade-upC06; protocol negative, not general model inability. No text/rationale generation.
+All failedload/stage/v2 costs retained; hotload not wholecold efficiency. ActiveGPU/wholeIO/
+energy/moneyUNKNOWN. Cache temporarily retained as owned model asset, never delete siblings.
+Full64rootD0/learningcurves/D1/P-D/two ownstate+matchedexposure/3seeds/strongbaseline/power/
+newCONFIRM/transfer/delivery incomplete. Own488observations unlabelled/notD3round. No public
+default/researchweights/protectedbody/push/merge. SHA/fingerprintsOFF. Preserve raw negatives.
+
+The following v34 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; J01v2 calibration fixtures frozen/no judge
+
+Previous authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v34.json.
 S16/bfebb152 ONLY J01v2fixture generator, frozen S16-source; C06 stillS13, S15 recovery unchanged.
 J01v2 CLOSED180scripted cases20programmaticworlds9kinds;90actualcaptures130commonopens20revokes.
 2tests/Ruff/mypy/package/toolsPASS. Allcasecodes/rubric/private oracle/pilot10 frozen BEFORE any
