@@ -1,4 +1,69 @@
-# CURRENT 2026-11-17: R09 corrected labels/R08 ENV2 DEV CLOSED; R10 value DEV firsts RUNNING
+# CURRENT 2026-11-17: R10 value firsts CLOSED/negative; all jobs TERMINAL; full goal ACTIVE
+
+This supersedes historical blocks below. Full original small-model plan ACTIVE/INCOMPLETE.
+R=/data/milai-experiments/20261116-small-memory-control/current-state-v3.json authoritative.
+No subagents/SHA/checksums/contentfingerprints/newservices/Productdefaults/push/merge. Preserve
+originalReader/BGE/sharedbudget. No firstanswerretry/replacement or fabricatedindependentreview.
+ALLMODEL/READERHANDLESINTHISSLICE TERMINAL; no backgroundcoordinator. Do NOTrestart fromstale
+handles10434/51991/92946/93448/16584. Revalidateactualprocessesbeforeanyfuturelaunch.
+Latestlocalcodecommit40360c07 valuecalibrationafterc310d10f repair/a56455da nativepipeline.
+CurrentrepoonlyclosureAGENTS/reportupdatespending; finaldocscommitneeded.482selectedtestsPASS,
+fullRuff/valuemypyPASS;earlier6filemypy/core59/362sourcematrixPASS. Notfullpytest/remoteCI.
+R10-env2-sixteen-condition-DEVfit32-firsts-v1 CLOSED512positions,29newcalls/483reuse,32failed
+positionskept,121131tokens,newunknown0. ScoresR10-env2-sixteen-condition-DEVfit32-scores-v1 CLOSED:
+M0pair+valuegamma.25=1/32(primary)/1referencecomplete/7answerEM;v2pair2/32,usableinit13,cosine18.
+Trainingfit/BCEimprovementandfewerstepsdidNOTyieldtaskbenefit. PerfinitecardSTOPvalueweight
+branch/noextratuning or automaticrepeat/scale. No T/M/G1/innovation/adoption success.
+R08ENV2all15 actualDEV CLOSED:rawpairM0/M1/M2=4/2/0of32;v2pair2;fourusablezero-starts13;
+cosine18,S1=11,10kQ=8,fixed/query/rules13,empty0.480positions46new/434reuse28failed185695tokens.
+Samecapturedcoldbefore/menu perrootincldiagnostictiming;sourcebankbackup. OldENV1scorespreserved.
+R09actualENV2D0 CLOSED236positions/29new207reuse13failed125464tokens;scored/compiledR09-env2-
+TRAIN16-feedback-v1. BOTHh0/h2all32observedqualitytargets+inputsEXACToldR03afterrealreplay;
+R09-quality-target-revalidation-v1.json. Do notassumeforunexecuted/newstates. Structure/weak
+labels differ;usefreshENV2datasets. h2quality9states/8roots/23pairs;structure25/15/72. Native
+costsaremarginalrevalidation,NOTnewlabel/sourceyield. ActualsafeBefore/menu/firstaction/horizon/
+remainingbudget236strictlymatched;30branchwireschanged,29unique;nooldlabelsblindlycopied.
+R10ONE M0optionalvalue.25BCE,118knownobserved0/1outcomes across32states/16roots. Samev2init/
+LR/100steps/seed0;maskedunknown/unexecuted;qualitytiesneverinventdirection. Separatepair/value
+wholewindow/sourceweighteddenominators,notmicroaverage. Trainpair23/23,exposurepair451/value1600,
+21.38secs. StateBCE1.762→.0461,Brier.413→.00849 BUTfullmenuUNEXECUTED29/32andtask1/32.
+Defaultsγ0preserveoldpairbehavior. Valueisrealizedh2first,NOTfulltrajectoryexpectedvalue.
+R11-env2-policy-behavior-diagnosis-v1:rawpairbudgetends19/25/31of32,v2pair19;value1budgetend/
+31activehandoff,mean3.66stepsvs6.78v2pair;cosine/Ruleallactive~5.97/5.72. Materialcoveragevalue
+1/32:doNOTcallefficiencywin. Whole-systemcostandqualitymustbejointlyassessed.
+CRITICALfixedexecutorbug:latefixedSEARCHreplacedmaterialindicesafterdirectSourceREADanddidn't
+publishderivedretrievedscopes. Fixedappend/indexretention+postSEARCHprojection;Rulesaliases;
+validcurrentnarrowK/fullOexplicitdelivery. FailedR08-v1prep root11step6/10closedroots/0Readercalls
+retained. Newprogramrunsall32samecoldstate,notReaderfirstretry. OldENV1pathsauditM0late4/32,
+M1late6/32,M2/simple/history0;D0h2late30/118,27missingpublicscopes. Oldresultsvalidoldenv,not
+cleantrainingattribution. Actualrevalidationnotassumption showedtheseD0qualitytargetsunchanged.
+Source-handlesprojectionv2explicitencoder-onlycopy;publicanchoredrefs/derivedIDs/targetsaliased,
+literalbody/queryIDsprotected,unobservedbinding-onlystringsretained. Actualactions/params/prior
+original. Oldv1inputunchanged.32TRAINdual/jointalphaequal;matched4initialheadtensors;newM0v2
+8sourceUUID/shortalias0binding/maxscorediff0,rawall3=1/8UUID/3/8short. Decoderreverse3/8raw,
+notnaturallyequivariant. Engineeringrepairnotinnovation/qualitygain. Alloldsource snapshotskept.
+Data:onlyTRAIN64/DEV-fit32exported. DEV-select128/CONFIRM1000metadatareserved/sealed. All3256
+assignedquestionrootsall-context-articledisjoint;exclude96343localMuSiQuetitles. E5officialKILT
+HotpotQA~70ksupervised/Wikipedia disclosed,exactquestionoverlapunmapped,nopretraining-unseenclaim.
+NativeadaptedanswerEM ANDactualreferencecoverage ANDcompletefirst;notjointEM/fullexplanationtruth.
+OldD00freeformjudgeunreliable/notbulkprimaryutility. Independenthumanreviewunavailable,notclaimed.
+LatestcostR10-final-value-cost-disclosure-v1 settled2closedCPUscope/R10parent29responses121131
+readbackonly;prior7scopeR08-R10receipt/46responses185695 and3scopeR09/29responses125464retained.
+AllrecordedclosedslicescopespaidonceinORIGINALledger,parents/copiesnotrebilled. Unmeasured
+startup/analysis/serverGPU/CPU/energy/moneyremainunknownnotzero. No secondledger.
+Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+NEXT RESEARCH:buildusableTRAINEDT1 withactualstructuralprogress/interface/safeK-O/stopcoverage,
+thenrealoutcomesfromsamebridge. Considerboundedfull-legal-menuACTUALstructuralbranchdata on
+clear32-64TRAINstates (native-referencepropertyonly,notReaderutility),andown-statedistribution/
+strongcosinebaselinecoverage. Do notjustexpand9directionstates/fillCweaklabels/markunexecuted
+negative,retunegammaorselectweakBstar. No nextT1/full-menu/own-statecollectorimplementedyet.
+Source snapR09-env2-replay-v1repairedexecutor,R10-observed-value-v1supportsoptionalvalue. G1
+usabletrainedbridge/actualnewsourcegainstillnotmet;constructingzerohead+RulepriorisNOTT1training.
+Formal E01-E08/2objectivesqualifiedroutes/scaling2k5k10k/twoown-staterounds/3seeds/atleasttwo
+mechanisms/ablations/counterexamples/strongBstar/newCONFIRM/secondReader/budgettransfer/L4/8/16
+remainrequired. EntiregoalACTIVE;notcomplete/blocked/pausedfromtheseprogress/negativecheckpoints.
+
+# HISTORICAL CHECKPOINT: R10 value firsts were running before final closure
 
 Supersedes allhistoricalblocksbelow. Fulloriginalsmall-memorygoal ACTIVE/INCOMPLETE.
 R=/data/milai-experiments/20261116-small-memory-control; authoritativecurrent-state-v3.json.

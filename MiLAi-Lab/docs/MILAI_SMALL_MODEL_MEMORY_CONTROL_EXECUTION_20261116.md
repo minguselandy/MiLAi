@@ -266,3 +266,9 @@ R10只增加一个M0目标对照：使用同32实际状态、同16根、相同�
 该100步已关闭，成对有效曝光451与对照相同，价值有效曝光1600，墙时21.38秒。已观察比较保持23/23，训练内状态平均BCE由纯成对的1.762变为0.046，Brier由0.413变为0.00849。最高分未执行绑定反而为29/32（对照21/32），因此概率拟合也不能冒充完整选择正确率或任务收益。已准备同冷状态DEV32，16条件512位置中只有29个新wire，正在补齐实际首答。[拟合范围](../artifacts/small-memory-control-20261116/R10-observed-value-fit-audit-v1.json) [首答协议](../artifacts/small-memory-control-20261116/R10-value-DEVfit32-firsts-card-v1.json)
 
 最新选择集482 passed，新增价值mask、单动作/未知、分量全局归一化检查；价值损失mypy与全Lab Ruff通过，未宣称完整CI。R09后的3个关闭本地范围及修复后DEV/R10的7个关闭范围均已在原预算结算一次；原生29/46个响应及父计算只核对、不重扣，新增unknown均为0。R10运行中首答仍待关闭，所有缺失成本保持未知。[检查记录](../artifacts/small-memory-control-20261116/R10-broad-validation-v1.json) [R09收据](../artifacts/small-memory-control-20261116/R09-env2-feedback-cost-disclosure-v1.json) [R10关闭范围](../artifacts/small-memory-control-20261116/R08-R10-value-closed-cost-disclosure-v1.json)
+
+R10现全部关闭：512位置、29个新实际调用、483个复用位置、32个失败位置保留，121131 tokens，新增unknown为0。价值校准的实际主指标1/32，参考覆盖1/32，答案EM7/32；对照纯成对2/32、可用起点13/32、余弦18/32。依卡停止继续调价值权重或扩大相同短程配方。训练内BCE/成对准确率改善和较少控制步骤都未形成任务收益。[最终有限对照](../artifacts/small-memory-control-20261116/R10-env2-sixteen-condition-DEVfit32-scores-v1/summary.json)
+
+实际轨迹诊断：原M0/M1/M2成对策略分别19/25/31个任务预算耗尽，句柄修正M0为19；价值校准降至1，主动HANDOFF31/32、平均3.66步，但材料覆盖仍不足。规则与余弦均32/32主动交付、平均5.72/5.97步。读取、O获取、当前K/显式交付、主动停止、预算强停及Reader首答已分开，不能把“停止变多/步数变少”记为成功。下一步必须建立可用的已训练T1，并补足真实自身状态及动作覆盖；不把未执行候选标负，也不以弱标签填满规模。[行为诊断](../artifacts/small-memory-control-20261116/R11-env2-policy-behavior-diagnosis-v1.json)
+
+本轮全部模型/Reader句柄已终止，最终评分与行为诊断两个关闭本地范围已在原台账结算一次，29个实际响应及父计算只核对未重扣。原计划仍ACTIVE：G1训练收益、G2方法收益及创新机制均未成立；完整E01–E08、正式三seed、两个机制及消融/反例、新来源确认、迁移和4/8/16会话维护都不能由这些有限负结果替代。[最终关闭范围](../artifacts/small-memory-control-20261116/R10-final-value-cost-disclosure-v1.json)
