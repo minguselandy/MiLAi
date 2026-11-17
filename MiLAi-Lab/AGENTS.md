@@ -1,129 +1,63 @@
-# CURRENT 2026-11-17: R12 actual full-menu T1 collected; M0 fit32/32; M1/M2fit +M0Reader RUNNING
+# CURRENT 2026-11-17: R12 DEV all0/32 CLOSED; R14 own-state DEV Reader LIVE
 
-Supersedes historical blocks. Original FULLsmall-modelplan ACTIVE/INCOMPLETE. Authoritative
-R=/data/milai-experiments/20261116-small-memory-control/current-state-v4.json. v3historical/stale.
-No subagents/SHA/checksums/contentfingerprints/newservices/Productdefaults/push/merge.
-PreserveoriginalReader/BGE/budget. No Readerfirstretry/replacement, noindependentreviewinvented.
-Latestcommit987440ff (closureafter40360c07value/c310d10frepair/a56455danative). Currentuncommitted:
-native_t1_structural.py/CLI/3semantictests. Fullgoalnotcomplete;don'treopenoldfailedpair/valuebranch.
-LIVE: M1T1 exec95865 PID971513 physicalGPU2;M2T1 exec63810 PID972330 physicalGPU3;
-M0T1Reader exec75010 PID990614 originalReader. Revalidateactualrun/PIDs,NOduplicate/retry.
-R12-M1/M2-full-menu-T1-200-seed0-v1/run.json;R12-M0-seventeen-condition-DEVfit32-firsts-v1/run.json.
-HTTPleaselive:DO NOTmanuallysettlecompute;alloldR10/R08/R09nativehandlesTERMINAL.
-R12-full-menu-TRAIN8-v1 CLOSED:8preassignedTRAINroots/32actualstates,2188branches,h0/h2separate.
-Everyofferedlegalbindingactuallyexecuted:1094perhorizon,menus19-46actions,all32stateseligibleCE.
-State types initial/search/after2Kreads/matching2Oreads8each. Samecoldsourcebank/checkpoint per
-K/Opath,exactactualacquiredmaterialmatched. PrefixsourceschosenbyfrozenE5cosineamongoffered
-unexpandedREADindices,no goldselection. Fullmenusnotprunedforbranchlabels/inference.
-PrivateSQLitecopyperroot/setup/query_onlyON,freshMemoryService/EvidenceOpscheckpoint perbranch;
-SQLchanges0,Readercalls0,110.72secs. Completedreadonly6stepcontrolsmokePASS. v1smokeFAILED
-onlycompactlogexpectedresultoncurrentHANDOFF(nooperation);preserved0Readercalls,metadatafix
-v2smoke1 CLOSED4states/282branches20.33secs. Neveroverwritefailed/successfulartifactdirectories.
-StructuraltargetA_native_reference_propertyONLY: tier2actualcompleteSFdelivery; tier1nonterminal
-acquisitionprogress(KunionO),coveragefirstthenactualnonterminaloperationcostonties. DeliveredK
-andacquiredKunionOcoveragekeptseparate. Flat/no-progressmenusmasked,unknownmasked. NoReader
-utility/semantictruth/source-successclaim;standardstructuralwarmstartnotinnovation.
-R12-M0-full-menu-T1-200-seed0-v1 CLOSED200updates,32statefull-menugood5→32/32,CE.000328,
-28.53secs;matchedR08M0v2zeroRuleinitialization. Actualsave/reloaddone,checkpoints100/200.
-Nottrainedutility/taskgain. R12-M0-T1-DEVfit32-prepared-v1 CLOSED32actualtrajectoriescommoncold;
-joinedR12-M0-seventeen-condition-DEVfit32-prepared-v1=544positions,N32,only31newwiresvsR10,
-materialmax716<=2048. Readerfirstsrunning75010;oldsameevent/wirefirsts inclfailures reused.
-AfterM0ReaderALLterminal native-score ->R12-M0-seventeen-condition-DEVfit32-scores-v1,
-controlsR05-DEVfit32-sources-v1/controls.jsonl. Nooffline-onlyrouteelimination.
-R12-three-route-T1-card-v1.json/shareddata32states/8roots/full-menuCE/200updates/batch16/micro1/
-seed0/checkpoint100,200. M1encoderquery/valueLoRA LR3e-5/head1e-3,encodebatch16fwdgrouping;
-M2jointQwen0.6q_proj/v_projLoRALR1e-4/head3e-4. Bothnewv2zero-outputinitializationsCLOSED,
-functionalRulepriorstart;M2actualALL32fulljointinputsfitmax5030/16384,no droppedtokens.
-Fixed3routeplanbeforetaskresults;differentactualtokens/padding/workseparate,notmatchedtokenclaim.
-SourceR12-full-menu-v2-source frozen forcollection/fits/DEV. Keephead/data/configsourceversion.
-Latestnewtest12PASS(3structuralsemantics+9nativeactualSQL);structuralmypy/RuffPASS. Unified
-R12-broad-validation-v1 CLOSED485PASS; mpy85498PASS,matrix13304PASS(362sources). Prior482
-selected/core59mypyPASS,notfullpytest/remoteCI. Task-onlymergeddepsenvfor-Itests,no sharedenv mutation.
-Cost: R12-closed-preparation-cost-disclosure-v1 settled11CLOSEDscopesonceoriginalledger incl
-retainedfailedsmoke/data/M0fit/prep/M1-M2init,0newnativecalls;LIVE M1/M2fits/M0firstsNOTsettled.
-Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json. Neverrebill
-parents/copiedreadouts. Startup/analysis/serverGPU/energy/moneyunknownnotzero. No secondledger.
-PriorENV2negativeactualtask:pairM0/M1/M2=4/2/0,v2pair2,value1of32;usableinit13,cosine18.
-ValueBCEtrainimprovedbuttask1,stoppedgammaweights/failedh2pairautomaticexpansion. Onlystructure
-T1nownew,notclaimingoutcomeutility. R09qualityh2only9states8roots23pairs;118knownabsolutevalues,
-allobservedqualitytargetsrevalidatedsameENV1on32states;structure/weakfreshandseparate.
-ExecutorstableSEARCHindices/publicscopes/K-O/aliasesfixed. OldENV1negative/failedartifactskept.
-Source-handleprojectionv2explicitencoder-only,realbindingsunchanged;literalbody/queryIDsprotected.
-Oldv1inputunchanged;UUID/shortaliasmodeltextproof32,8sourceneuralv2probe0changes;engineeringonly.
-OnlyTRAIN64/DEVfit32exported;DEV-select128/CONFIRM1000remainmetadatareserved/sealed.3256assigned
-rootsall-context-articledisjoint,96343localMuSiQuetitlesexcluded. E5officialKILT HotpotQA~70k/
-Wikipedia exposuredisclosed,nofoundation-unseenclaim. NativeanswerEM+actualspans+completefirst
-adaptation,notofficialjointEM/explanationtruth. OldD00naturaljudgeunreliable/notbulkutility.
-NEXT:pollconfirmed95865/63810/75010,neverduplicate. M0actualDEVscorewhenclosed. M1/M2afterfits
-full-menu32state/K-O/savedLoRAaudit,thenactualDEV32/commoncold/sourcebanks/readouts withliteral
-wirefirstreuse. Finishnewchecks/docs/AGENTS/state/localcommit. EntireformalE01-E08,strongusable
-TRAINEDbridge/strongBstar/scaling/2ownstaterounds/3seeds/2mechanisms/ablations/counterexamples/
-newCONFIRM/secondReader/budgettransfer/L4/8/16stillrequired. GoalACTIVE,no falsecompletion.
+FULL original small-model plan ACTIVE/INCOMPLETE. Authoritative state:
+/data/milai-experiments/20261116-small-memory-control/current-state-v4.json.
+R=/data/milai-experiments/20261116-small-memory-control. v3 and blocks below are historical.
+No subagents/SHA/checksums/content fingerprints/new services/Product defaults/push/merge.
+Preserve original Reader/BGE/budget. No Reader first retry/replacement or independent review invented.
+Parent source03bcb3b0; this closure adds optional captured-prefix manifest/semantic test,
+stale NativeDecision test counter fixture repair, report/AGENTS. R14 frozen source snapshot:
+R14-captured-prefix-v1-source (prior R12-full-menu-v2-source unchanged).
 
-# HISTORICAL CHECKPOINT: R10 negative slice closed before native structural T1
+ONLY LIVE Reader: R14-twenty-condition-DEVfit32-firsts-v1 exec86918 PID1121873.
+640positions/N32,30new same-event wires,actualUTFmaterialmax1329/2048; all19old conditions/
+failed firsts strictly reused from R12-three-route-nineteen-condition-DEVfit32-firsts-v1.
+Original Reader/material2048/control8/commonR05coldstate. No manual ledger while HTTP lease live.
+After terminal score unique R14-twenty-condition-DEVfit32-scores-v1 controlsR05DEVfit32.
+R12Reader35776 and scorer6614 confirmed TERMINAL:608positions,47newcalls/561reuse,
+39failedpositions,160885tokens,newunknown0. M0/M1/M2primary0/0/0of32 vsRule13/cosine18.
+No usable trained bridge/G1. Do not duplicate/retry native firsts.
+AllR12 M0/M1/M2 fits and DEV preparation jobs CLOSED, handles95865/63810/75010/17959 terminal.
+R12 full-menu TRAIN8:32states(initial/search/K/O8each),2188actualbranches(h0/h2separate1094),
+alllegalmenus19–46,SQL0/Reader0. LiteralmatchedacquiredK/O, gold offline only. Structural target
+complete reference delivery, else acquisition progress, then actual control cost; flat/unknown
+masked. Not Reader utility, semantic proof or innovation. K/O good sets overlap.
+M0/M1/M2 TRAINfull-menu5→32/32,32/32,24/32; all200updates,actualsave/reload. M1LoRAB24/24
+changed,M2 56/56changed,reload0. ActualDEV M0 primary0/32 vsRule13/cosine18. M1/M2actualprimary0/32 each, referencecoverage0/32,1/32. Do not infer usable bridge from fit.
 
-This supersedes historical blocks below. Full original small-model plan ACTIVE/INCOMPLETE.
-R=/data/milai-experiments/20261116-small-memory-control/current-state-v3.json authoritative.
-No subagents/SHA/checksums/contentfingerprints/newservices/Productdefaults/push/merge. Preserve
-originalReader/BGE/sharedbudget. No firstanswerretry/replacement or fabricatedindependentreview.
-ALLMODEL/READERHANDLESINTHISSLICE TERMINAL; no backgroundcoordinator. Do NOTrestart fromstale
-handles10434/51991/92946/93448/16584. Revalidateactualprocessesbeforeanyfuturelaunch.
-Latestlocalcodecommit40360c07 valuecalibrationafterc310d10f repair/a56455da nativepipeline.
-CurrentrepoonlyclosureAGENTS/reportupdatespending; finaldocscommitneeded.482selectedtestsPASS,
-fullRuff/valuemypyPASS;earlier6filemypy/core59/362sourcematrixPASS. Notfullpytest/remoteCI.
-R10-env2-sixteen-condition-DEVfit32-firsts-v1 CLOSED512positions,29newcalls/483reuse,32failed
-positionskept,121131tokens,newunknown0. ScoresR10-env2-sixteen-condition-DEVfit32-scores-v1 CLOSED:
-M0pair+valuegamma.25=1/32(primary)/1referencecomplete/7answerEM;v2pair2/32,usableinit13,cosine18.
-Trainingfit/BCEimprovementandfewerstepsdidNOTyieldtaskbenefit. PerfinitecardSTOPvalueweight
-branch/noextratuning or automaticrepeat/scale. No T/M/G1/innovation/adoption success.
-R08ENV2all15 actualDEV CLOSED:rawpairM0/M1/M2=4/2/0of32;v2pair2;fourusablezero-starts13;
-cosine18,S1=11,10kQ=8,fixed/query/rules13,empty0.480positions46new/434reuse28failed185695tokens.
-Samecapturedcoldbefore/menu perrootincldiagnostictiming;sourcebankbackup. OldENV1scorespreserved.
-R09actualENV2D0 CLOSED236positions/29new207reuse13failed125464tokens;scored/compiledR09-env2-
-TRAIN16-feedback-v1. BOTHh0/h2all32observedqualitytargets+inputsEXACToldR03afterrealreplay;
-R09-quality-target-revalidation-v1.json. Do notassumeforunexecuted/newstates. Structure/weak
-labels differ;usefreshENV2datasets. h2quality9states/8roots/23pairs;structure25/15/72. Native
-costsaremarginalrevalidation,NOTnewlabel/sourceyield. ActualsafeBefore/menu/firstaction/horizon/
-remainingbudget236strictlymatched;30branchwireschanged,29unique;nooldlabelsblindlycopied.
-R10ONE M0optionalvalue.25BCE,118knownobserved0/1outcomes across32states/16roots. Samev2init/
-LR/100steps/seed0;maskedunknown/unexecuted;qualitytiesneverinventdirection. Separatepair/value
-wholewindow/sourceweighteddenominators,notmicroaverage. Trainpair23/23,exposurepair451/value1600,
-21.38secs. StateBCE1.762→.0461,Brier.413→.00849 BUTfullmenuUNEXECUTED29/32andtask1/32.
-Defaultsγ0preserveoldpairbehavior. Valueisrealizedh2first,NOTfulltrajectoryexpectedvalue.
-R11-env2-policy-behavior-diagnosis-v1:rawpairbudgetends19/25/31of32,v2pair19;value1budgetend/
-31activehandoff,mean3.66stepsvs6.78v2pair;cosine/Ruleallactive~5.97/5.72. Materialcoveragevalue
-1/32:doNOTcallefficiencywin. Whole-systemcostandqualitymustbejointlyassessed.
-CRITICALfixedexecutorbug:latefixedSEARCHreplacedmaterialindicesafterdirectSourceREADanddidn't
-publishderivedretrievedscopes. Fixedappend/indexretention+postSEARCHprojection;Rulesaliases;
-validcurrentnarrowK/fullOexplicitdelivery. FailedR08-v1prep root11step6/10closedroots/0Readercalls
-retained. Newprogramrunsall32samecoldstate,notReaderfirstretry. OldENV1pathsauditM0late4/32,
-M1late6/32,M2/simple/history0;D0h2late30/118,27missingpublicscopes. Oldresultsvalidoldenv,not
-cleantrainingattribution. Actualrevalidationnotassumption showedtheseD0qualitytargetsunchanged.
-Source-handlesprojectionv2explicitencoder-onlycopy;publicanchoredrefs/derivedIDs/targetsaliased,
-literalbody/queryIDsprotected,unobservedbinding-onlystringsretained. Actualactions/params/prior
-original. Oldv1inputunchanged.32TRAINdual/jointalphaequal;matched4initialheadtensors;newM0v2
-8sourceUUID/shortalias0binding/maxscorediff0,rawall3=1/8UUID/3/8short. Decoderreverse3/8raw,
-notnaturallyequivariant. Engineeringrepairnotinnovation/qualitygain. Alloldsource snapshotskept.
-Data:onlyTRAIN64/DEV-fit32exported. DEV-select128/CONFIRM1000metadatareserved/sealed. All3256
-assignedquestionrootsall-context-articledisjoint;exclude96343localMuSiQuetitles. E5officialKILT
-HotpotQA~70ksupervised/Wikipedia disclosed,exactquestionoverlapunmapped,nopretraining-unseenclaim.
-NativeadaptedanswerEM ANDactualreferencecoverage ANDcompletefirst;notjointEM/fullexplanationtruth.
-OldD00freeformjudgeunreliable/notbulkprimaryutility. Independenthumanreviewunavailable,notclaimed.
-LatestcostR10-final-value-cost-disclosure-v1 settled2closedCPUscope/R10parent29responses121131
-readbackonly;prior7scopeR08-R10receipt/46responses185695 and3scopeR09/29responses125464retained.
-AllrecordedclosedslicescopespaidonceinORIGINALledger,parents/copiesnotrebilled. Unmeasured
-startup/analysis/serverGPU/CPU/energy/moneyremainunknownnotzero. No secondledger.
+R13 actual same8TRAIN own trajectories referencecompleteM0/M1/M2=2/1/1of8;Rule5/cosine4.
+Allactivehandoff,meansteps2.375/2.25/4; teacher prefix fits fail within TRAIN roots too.
+R14 selects ALL3route finalpre-handoff8TRAIN each by behavior before labels,24states. Manifest
+loads exact original checkpoint path/index and verifies event/policy. Existing K/O path kept.
+Single-root112branch smokePASS; full960branches,h0/h2separate480,SQL0/Reader0,52.19sec.
+Both horizons21directional:17actualstopsinferior/4good/3flatmasked. No unexecuted negatives.
+R14-structural-aggregation-v1 old32x3/new24x4 ->96:96nominal replay entries,56unique states/
+8roots,12masked copies. NOT new effective N or formalT3 result supervision.
+R14-M0-own-prestop-T1-200-seed0-v1 exec95897 CLOSED200updates fromsamezeroRulev2,44.66sec;
+old32/32+new21/21directionalaccepted,reload0,nominal1600old/1600new,effective1600/1398.
+R14-M0-T1-TRAIN8-prepared-v1 and DEVfit32 counterparts CLOSED, handles1265/40767 TERMINAL. TRAINreference7/8 (was2);DEV2/32 (was0,cosine22),mean5.06steps/30active2budget.
+Not qualified source generalization. R14actualReader86918 nowlive; reuse all R12three-route
+firsts including failures. No gamma/LR sweep/automatic data expansion.
+
+Checks: new15native/captured/referencePASS,structuralmypy1PASS,CIruff(src tests tools)PASS.
+OldNativeDecisionfixture omitted existing padded_input_tokens counter; test-only fix thenPASS.
+Wrongtestpath0tests and ruff . scanning intentional datafixtures2254olderrors retained, noautofix.
+Prior485selected/mypy59/362matrixPASS, notfullpytest/remoteCI. Source/code/data actual snapshots kept.
+R12-R14-closed-local-cost-disclosure-v1 settled26closedscopes once originalledger after both
+R12drivers terminal; native78responses274120tokens readback only/newunknown0. LocalGPUassigned
+upper.727967h/knownCPU2788.135sec,notwhole-systemtotal. Prior11scope receipt retained. Current
+R14nativeparent and eventualscore pending; no manualsettle while native live, no parent rebill.
 Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
-NEXT RESEARCH:buildusableTRAINEDT1 withactualstructuralprogress/interface/safeK-O/stopcoverage,
-thenrealoutcomesfromsamebridge. Considerboundedfull-legal-menuACTUALstructuralbranchdata on
-clear32-64TRAINstates (native-referencepropertyonly,notReaderutility),andown-statedistribution/
-strongcosinebaselinecoverage. Do notjustexpand9directionstates/fillCweaklabels/markunexecuted
-negative,retunegammaorselectweakBstar. No nextT1/full-menu/own-statecollectorimplementedyet.
-Source snapR09-env2-replay-v1repairedexecutor,R10-observed-value-v1supportsoptionalvalue. G1
-usabletrainedbridge/actualnewsourcegainstillnotmet;constructingzerohead+RulepriorisNOTT1training.
-Formal E01-E08/2objectivesqualifiedroutes/scaling2k5k10k/twoown-staterounds/3seeds/atleasttwo
-mechanisms/ablations/counterexamples/strongBstar/newCONFIRM/secondReader/budgettransfer/L4/8/16
-remainrequired. EntiregoalACTIVE;notcomplete/blocked/pausedfromtheseprogress/negativecheckpoints.
+Unmeasuredstartup/analysis/serverGPU/CPU/energy/moneyunknownnotzero; nosecondledger.
+
+OnlyTRAIN64/DEVfit32exported; DEV-select128/CONFIRM1000sealed metadata.3256rootsall-context
+articledisjoint,96343localMuSiQuetitlesexcluded; E5officialKILT HotpotQA~70k/Wikipedia exposure
+known,nofoundation-unseenclaim. AdaptednativeanswerEM AND actualSFspan ANDcompletefirst,
+not officialjointEM/explanationtruth. OldunreliableD00notbulkprimaryutility; noindependentreviewer.
+Full goal still requires usable trained bridge/actualsource gains/formal E01-E08/strongBstar/
+matched2k5k10k/twoown-outcome-rounds/3finalseeds/≥2mechanisms+ablations+counterexamples/
+newsourceCONFIRM/secondReader+budgettransfer/L4/8/16. Do not complete/blocked/paused from
+finite progress/negative probes. Source-state-generalization is current research issue.
 
 # HISTORICAL CHECKPOINT: R10 value firsts were running before final closure
 

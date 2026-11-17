@@ -3,7 +3,7 @@ import copy
 
 import pytest
 
-from native_t1_structural import structural_supervision
+from native_t1_structural import captured_prefix_states, structural_supervision
 
 
 def coverage(covered, required=2):
@@ -49,3 +49,24 @@ def test_flat_no_progress_and_unknown_menus_stay_masked_and_missing_execution_is
     assert labels["good_action_ids"] == [] and "read" not in labels["structural_ranks"]
     with pytest.raises(ValueError, match="entire actual offered menu"):
         structural_supervision(actions, results[:1], coverage(0))
+
+
+def test_captured_prefix_loads_the_exact_actual_event_and_policy_without_reconstruction(tmp_path):
+    import json
+
+    saved = {"event_id": "root/question", "policy": "learned", "decision": {
+        "step": 2, "before": {"task": {"request": "literal"}}, "actions": []},
+        "executor_checkpoint": {"observed": {"0": "actual original"}}}
+    path = tmp_path / "decisions.jsonl"
+    path.write_text(json.dumps(saved) + "\n")
+    selector = {"name": "pre_stop", "record_index": 0,
+                "checkpoint_path": str(path), "policy": "learned"}
+    manifest = {"events": {"root/question": [selector]}}
+    assert captured_prefix_states(manifest, "root/question") == {"pre_stop": saved}
+    selector["policy"] = "other"
+    with pytest.raises(ValueError, match="another event or policy"):
+        captured_prefix_states(manifest, "root/question")
+    selector["policy"] = "learned"
+    manifest["events"]["root/question"].append(copy.deepcopy(selector))
+    with pytest.raises(ValueError, match="unique names"):
+        captured_prefix_states(manifest, "root/question")

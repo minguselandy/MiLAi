@@ -872,6 +872,8 @@ def main() -> None:
     native_structural.add_argument("--roots", type=int, default=8)
     native_structural.add_argument("--device", default="cpu")
     native_structural.add_argument("--material-tokens", type=int, default=2048)
+    native_structural.add_argument("--captured-states", type=Path,
+        help="Manifest of exact saved decision file/indices, instead of the fixed K/O prefix")
     args = parser.parse_args()
     if args.command == "initialize":
         initialize_model(args)

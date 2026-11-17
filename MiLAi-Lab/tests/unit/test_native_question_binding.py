@@ -21,7 +21,7 @@ def test_single_question_identity_survives_native_preparation(
     decision.model = None
     decision.max_len, decision.head_max_len = 512, 256
     decision.counters = dict(forwards=0, sequence_rows=0, input_tokens=0,
-                             state_tokenizations=0, state_tokens=0)
+                             state_tokenizations=0, state_tokens=0, padded_input_tokens=0)
     observed = []
     convert = train.to_internal
 

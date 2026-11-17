@@ -78,6 +78,26 @@ class PrefixPolicy:
         return selected
 
 
+def captured_prefix_states(manifest: dict[str, Any], event_id: str,
+                           ) -> dict[str, dict[str, Any]]:
+    """Load literal actual decisions, addressed by file/index rather than copied observations."""
+    selectors = manifest["events"][event_id]
+    selected = {}
+    for selector in selectors:
+        name, index = selector["name"], selector["record_index"]
+        if (not isinstance(name, str) or not name or "/" in name or name in selected
+                or not isinstance(index, int) or isinstance(index, bool) or index < 0):
+            raise ValueError(
+                "Captured state selectors require unique names and nonnegative indices")
+        saved = read_jsonl(Path(selector["checkpoint_path"]))[index]
+        if saved["event_id"] != event_id or saved["policy"] != selector["policy"]:
+            raise ValueError("Captured decision belongs to another event or policy")
+        selected[name] = saved
+    if not selected:
+        raise ValueError("Captured structural collection requires at least one actual decision")
+    return selected
+
+
 def collect(args: Any) -> None:
     import torch  # type: ignore[import-not-found]
 
@@ -90,17 +110,24 @@ def collect(args: Any) -> None:
     if not histories or any(history["split"] != "train" for history in histories):
         raise ValueError("Full-menu structural probe uses explicitly assigned TRAIN roots only")
     controls = {row["source_group"]: row for row in read_jsonl(args.controls)}
-    encoder = SmallControlModel(SmallControlConfig("frozen_mlp",
-        str(args.backbone.resolve())), device=args.device)
-    encoder.train(False)
+    captured_path = getattr(args, "captured_states", None)
+    captured_manifest = read_json(captured_path) if captured_path else None
+    encoder = None if captured_manifest is not None else SmallControlModel(
+        SmallControlConfig("frozen_mlp", str(args.backbone.resolve())), device=args.device)
+    if encoder is not None:
+        encoder.train(False)
     run: dict[str, Any] = {"status": "RUNNING", "pid": os.getpid(),
         "sources": str(args.sources), "collection": str(args.collection),
         "config": str(args.reader_config), "roots": len(histories), "closed_roots": 0,
         "device": args.device, "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
         "Reader_calls": 0, "sha_validation": False, "horizons": [0, 2],
+        "captured_states": str(captured_path) if captured_path else None,
         "execution_contract": "stable_material_indices_search_scope_sync_v2",
-        "scope": "Actual complete legal menus and matched K/O prefixes, native reference "
-                 "structural warm-start only. No Reader utility or source-success claim."}
+        "scope": ("Actual complete legal menus from literal captured decisions. "
+                  if captured_manifest is not None else
+                  "Actual complete legal menus and matched K/O prefixes. ")
+                 + "Native reference structural warm-start only. No Reader utility "
+                   "or source-success claim."}
     write_json(args.output / "run.json", run)
     datasets: dict[int, list[dict[str, Any]]] = {0: [], 2: []}
     states, comparisons = [], []
@@ -124,9 +151,12 @@ def collect(args: Any) -> None:
                 state, operations = environment(service(), request, capacity, args.material_tokens)
                 state.budget.update(remaining_control_steps=8, reader_capacity_reserved=True)
                 cold, cold_checkpoint = copy.deepcopy(state.project()), operations.checkpoint()
-                selected: dict[str, dict[str, Any]] = {}
+                selected: dict[str, dict[str, Any]] = (captured_prefix_states(
+                    captured_manifest, history["id"] + "/" + request["id"])
+                    if captured_manifest is not None else {})
                 prefix_traces = {}
-                for mode in ("K", "O"):
+                for mode in (() if captured_manifest is not None else ("K", "O")):
+                    assert encoder is not None
                     local = MemoryControlState(**copy.deepcopy(cold))
                     local, executor = environment(service(), request, capacity,
                         args.material_tokens, state=local, checkpoint=cold_checkpoint)
@@ -150,8 +180,9 @@ def collect(args: Any) -> None:
                         selected.update(initial=captured[0], search=captured[1], K=captured[3])
                     else:
                         selected["O"] = captured[3]
-                if selected["K"]["executor_checkpoint"]["observed"] != selected["O"][
-                        "executor_checkpoint"]["observed"]:
+                if (captured_manifest is None
+                        and selected["K"]["executor_checkpoint"]["observed"]
+                        != selected["O"]["executor_checkpoint"]["observed"]):
                     raise ValueError("K/O prefixes acquired different actual material")
                 write_json(bank / "prefix-trajectories.json", prefix_traces)
                 write_json(bank / "states.json", selected)
@@ -226,5 +257,6 @@ def collect(args: Any) -> None:
         raise
     finally:
         run.update(wall_seconds=time.perf_counter()-tick, cpu_seconds=time.process_time()-cpu,
-            encoder_counters=encoder.counters, compute_ledger_status="pending_idle_settlement")
+            encoder_counters=encoder.counters if encoder is not None else {},
+            compute_ledger_status="pending_idle_settlement")
         write_json(args.output / "run.json", run)

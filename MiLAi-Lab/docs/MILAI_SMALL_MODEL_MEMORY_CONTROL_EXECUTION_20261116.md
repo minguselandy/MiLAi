@@ -286,3 +286,21 @@ M0从相同句柄投影v2可用零残差起点执行200步结构CE，完整菜�
 M1编码器query/value LoRA与M2联合解码器q_proj/v_proj LoRA使用共同32状态、CE目标、200更新、batch16/micro1/seed0，实际训练中，尚无最终成绩。M1的encoder batch固定为16用于前向分组；实际tokens/padding/工作量分别报告。M2对全部32个完整输入做容量预检，最大5030/16384 tokens，无丢弃或截断。每路线最多该一个拟合配置，不能仅依据离线准确率淘汰路线，仍需真实DEV。[三路线协议](../artifacts/small-memory-control-20261116/R12-three-route-T1-card-v1.json)
 
 新增结构语义与原生SQLite窄验证12 passed，统一选择集485 passed，工具mypy、全Lab Ruff及362源验证矩阵通过；不称完整pytest/远端CI。11个已关闭准备/检查范围已在原台账结算一次，包含保留失败smoke及初始化；M1/M2运行中拟合和M0运行中首答未结算，未测部分仍未知。当前权威状态改为current-state-v4.json，旧v3只作历史。[检查](../artifacts/small-memory-control-20261116/R12-broad-validation-v1.json) [关闭范围](../artifacts/small-memory-control-20261116/R12-closed-preparation-cost-disclosure-v1.json)
+
+R12的M0实际DEV现已关闭：544位置、31个新调用、513个复用位置、36个失败位置原样保留，113235 tokens，新增unknown为0。结构T1的主指标0/32、答案EM3/32、参考完整覆盖0/32；相同起点13/32、余弦18/32。训练内32/32不是可用bridge或任务收益。[实际首答评分](../artifacts/small-memory-control-20261116/R12-M0-seventeen-condition-DEVfit32-scores-v1/summary.json)
+
+M1/M2均关闭200次更新并保存重载。M1完整菜单接受率由5/32升至32/32、平均CE约0.00005436，24个LoRA B张量均实际改变；M2为24/32、CE约0.7082，56个LoRA B张量均改变，重载最大差均为0。两者全部DEV32轨迹已执行，参考完整交付为0/32和1/32。三路线19条件共608位置，M1/M2仅新增47个同事件Host wire，最大实际UTF8材料800/2048；原Reader正在补齐首答，仍复用所有旧失败首答。[M1核对](../artifacts/small-memory-control-20261116/R12-M1-full-menu-fit-audit-v1.json) [M2核对](../artifacts/small-memory-control-20261116/R12-M2-full-menu-fit-audit-v1.json) [首答卡](../artifacts/small-memory-control-20261116/R12-three-route-DEVfit32-firsts-card-v1.json)
+
+## R13–R14：从教师前缀拟合转向实际停止边界
+
+R13在相同8个TRAIN来源的原始冷状态上执行三模型完整自身轨迹。M0/M1/M2完整参考交付仅2/8、1/8、1/8，规则5/8、余弦4/8；三者均主动停止，平均步数2.375、2.25、4。字面训练前缀匹配仅初始状态各8个，这一检查包含计时字段，只说明精确回放范围，不称语义新颖度。负结果在训练来源上已出现，不能只归因于新来源；它指向教师前缀与自身后续状态不匹配。[实际轨迹诊断](../artifacts/small-memory-control-20261116/R13-actual-own-trajectory-diagnosis-v1.json)
+
+R14依行为选择三条路线各8个最终HANDOFF前状态，共24个，不按参考结果筛选来源或状态。新增可选captured-states清单只保存原始checkpoint文件与行号，加载时核对实际事件和策略，沿用完整before/menu/checkpoint及只读分支执行；原有固定K/O前缀模式保留。单根112分支验证后，全部24状态采集960个实际分支，h=0/h=2各480，SQL变化0、Reader调用0、墙时52.19秒。两种horizon均21个有方向状态：17个实际停止在结构属性上较差、4个停止为好动作，另3个平坦状态保持mask。该监督仍只表示原生参考跨度进展，既不是Reader效用，也不算正式T3结果聚合。[有界卡](../artifacts/small-memory-control-20261116/R14-own-prestop-structural-card-v1.json) [实际采集](../artifacts/small-memory-control-20261116/R14-own-prestop-TRAIN8-v1/run.json)
+
+仅执行卡中一个M0配置：从同一零残差规则起点训练200步，旧32状态各3份、新24状态各4份，使名义replay条目96:96；实际只有56个唯一状态、8个来源，12个条目因平坦状态mask。两角色名义曝光各1600，有效方向曝光1600/1398。旧32与新21有方向状态均被接受，重载差0；实际全轨迹TRAIN参考完整交付由2/8升至7/8，DEV则2/32、平均5.06步，30次主动交付和2次预算耗尽。自身状态监督修复了部分训练内轨迹，仍未建立来源外任务收益，也不能把增读记为效率收益。[拟合](../artifacts/small-memory-control-20261116/R14-M0-fit-audit-v1.json) [轨迹](../artifacts/small-memory-control-20261116/R14-actual-trajectory-diagnosis-v1.json)
+
+新增捕获状态与原生参考窄检查15 passed，工具mypy及CI指定范围src/tests/tools的Ruff通过。检查还暴露旧NativeDecision测试手工构造的计数字段缺少padded_input_tokens，已仅修复测试夹具并重新通过；第一次错误测试路径未运行测试。扩大到ruff check .会扫描刻意存放的非合规data fixtures，产生2254项旧错误，未自动修复，正确CI范围通过；这些尝试不隐藏，也不称全仓完整CI。后续本地计量范围仍待原Reader空闲后在原台账结算，服务端/未计时成本保持未知。
+
+R12三路线实际DEV首答现全部关闭：608位置、47个新调用、561个复用位置、39个失败位置保留，160885 tokens、无新增unknown。M0/M1/M2的主指标均0/32，答案EM分别3/3/4，参考完整覆盖0/0/1；规则主指标13、余弦18。三路线已完成真实优化、保存重载与完整DEV读出，但这批教师前缀T1没有建立可用bridge，不升级为G1或正式方法收益。[三路线评分](../artifacts/small-memory-control-20261116/R12-three-route-nineteen-condition-DEVfit32-scores-v1/summary.json)
+
+两次R12原生任务均终止后，26个新关闭本地范围已在原台账结算一次，包括两条适配路线拟合/准备/审查、R13、R14采集/拟合/轨迹/拼接及有记录的检查范围。两个原生父范围只核对未重扣，78个真实响应合计274120 tokens与原生记录相同；本地分配GPU墙时上界约0.728小时、已计CPU约2788.14秒，未测部分依然未知。R14作为第20条件已准备640位置，仅30个新wire、实际材料最大1329/2048，原Reader当前补齐首答；旧19条件及失败首答继续严格复用，不纠错、不重试。[关闭范围收据](../artifacts/small-memory-control-20261116/R12-R14-closed-local-cost-disclosure-v1.json) [R14首答协议](../artifacts/small-memory-control-20261116/R14-own-prestop-DEVfit32-firsts-card-v1.json)
