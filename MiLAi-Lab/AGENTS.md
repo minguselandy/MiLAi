@@ -1,4 +1,29 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C05 closed/C06 firstblock active
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06 offline64 complete/block00 closed
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v29.json.
+S13/188a5239 frozen. ALLGPUpreparation/firstblockReaderjobs TERMINAL. FullD0Source-only
+pool CLOSED256states64roots775independentbranches, allactualfirstbefore/menu/bindings,
+maxstep7/material<=2048. Remaining56max2030/no violations;totalGPUjob566.6073sec.
+Currentactorown64observations CLOSED488states/140newvsfixedprefix, unlabelled/notD3round.
+Block00firstsCLOSED102:37new65reuse6failed143480tokens/U0.79Bjudgments frozenbefore
+scores(61fresh/18exactC05task-wire-first reuse),42resolved31unresolved6unknown. Quality
+feedback32states17directionalstates7roots39pairs/93known9unknownvalues; horizonmode
+remainingbudget explicitlyQofrecordedfrozenpolicy, notglobaloptimal. Alloldh2/firsts kept.
+OnlyNEXTblock01reviewedadmissioncard:32states8roots100boundpositions/76uniquewires,
+blindreviewset/rubricfrozen, canonical347earliestprimaryfirsts/repeatexcluded. Reader
+coordinator exec92490/PID4021033 WAITING actualexternalR30kernelowner3974483 atverified
+lastobservation. Revalidateactual/proccommands+run.json; NEVERrestartfromlosthandle.
+Onlyafteractualleaseidle+originalscopeacquired willsettle11closedlocalsONCE/readback
+andrunblock01. Nativeblock00alreadybilledonce, donotrebill; blocks02-07NOTADMITTED.
+No modelweightschanged/newfits/protectedbody/publicdefault/push/merge. SHAchecksOFF.
+GradeBprojectawareassistant/nohumansecondreviewer andallunknown/costlimits retained;
+incrementalreuseyield isNOTfull-lifecycleefficiency. FullReaderD0/D1/ownstate2rounds+
+sameexposurecontrols/P-D/3seeds/strongsimplefreeze/power/newCONFIRM/transfer/delivery
+remain INCOMPLETE; G1/G2/G3notestablished. SeeC06-block00-feedback-review-v1 andv29.
+
+The following v27 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C05 closed/C06 firstblock active
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v27.json.
 S12/2dcdc610 savedcheckpointcontinuation andS13/188a5239remaining-budget mode frozen.
