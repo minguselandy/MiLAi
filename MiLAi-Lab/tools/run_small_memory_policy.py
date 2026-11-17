@@ -182,6 +182,7 @@ def train(args: argparse.Namespace) -> None:
         lora_target_modules=tuple(args.lora_target_modules),
         feature_normalization=args.feature_normalization, prior_policy=args.prior_policy,
         prior_reads=args.prior_reads, prior_margin=args.prior_margin,
+        prior_menu_order=args.prior_menu_order,
         head_initialization=args.head_initialization,
         object_architecture=args.object_architecture, object_width=args.object_width,
         object_heads=args.object_heads, object_slots=args.object_slots,
@@ -769,6 +770,8 @@ def main() -> None:
                          default="none")
     fitting.add_argument("--prior-reads", type=int, default=4)
     fitting.add_argument("--prior-margin", type=float, default=1.0)
+    fitting.add_argument("--prior-menu-order", choices=["offered_v1", "bound_parameters_v2"],
+                         default="offered_v1")
     fitting.add_argument("--head-initialization", choices=["standard_v1", "zero_output_v1"],
                          default="standard_v1")
     initialization = sub.add_parser("initialize")

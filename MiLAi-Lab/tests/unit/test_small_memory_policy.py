@@ -279,3 +279,29 @@ def test_query_residual_uses_actual_query_without_extra_information_or_head_para
     assert seen[1] == "Actual query" and "SECRET" not in str(seen)
     assert torch.allclose(states[0], torch.tensor([2**-.5, 2**-.5]))
     assert actions.shape == (2, 2) and owners.tolist() == [0, 0] and lengths == [2]
+
+
+def test_declared_bound_prior_keeps_full_binding_after_menu_reorder_and_id_rename():
+    torch = pytest.importorskip("torch")
+    from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
+
+    model = SmallControlModel.__new__(SmallControlModel)
+    model.config = SmallControlConfig("frozen_mlp", "test", prior_policy="fixed_context",
+                                     prior_menu_order="bound_parameters_v2")
+    state = MemoryControlState(task={"request": "Which report?"},
+        pending_candidates=[{"item_index": 7, "control_pool_rank": 0},
+                            {"item_index": 2, "control_pool_rank": 1}])
+    actions = [MemoryAction("a", "READ", "candidate 7", {"index": 7}),
+        MemoryAction("b", "READ", "candidate 2", {"index": 2}),
+        MemoryAction("end", "HANDOFF", "Reader")]
+    scored = model.with_prior(torch.zeros(3), control_input(state, actions))
+    assert actions[int(scored.argmax())].parameters == {"index": 7}
+    reversed_actions = [MemoryAction(f"new-{i}", a.kind, a.target, a.parameters)
+                        for i, a in enumerate(reversed(actions))]
+    other = model.with_prior(torch.zeros(3), control_input(state, reversed_actions))
+    assert reversed_actions[int(other.argmax())].parameters == {"index": 7}
+    assert [float(v) for v in other] == [float(v) for v in reversed(scored)]
+    # Existing saved configurations keep their original offered-order semantics.
+    model.config.prior_menu_order = "offered_v1"
+    legacy = model.with_prior(torch.zeros(3), control_input(state, reversed_actions))
+    assert reversed_actions[int(legacy.argmax())].parameters == {"index": 2}

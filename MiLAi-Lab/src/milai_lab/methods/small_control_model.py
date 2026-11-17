@@ -47,6 +47,7 @@ class SmallControlConfig:
     prior_policy: str = "none"
     prior_reads: int = 4
     prior_margin: float = 1.0
+    prior_menu_order: str = "offered_v1"
     head_initialization: str = "standard_v1"
     object_architecture: str = "latent_pointer"
     object_width: int = 384
@@ -135,6 +136,8 @@ class SmallControlModel:
             raise ValueError("Unknown explicitly declared policy prior")
         if config.prior_margin <= 0:
             raise ValueError("Policy prior margin must be positive")
+        if config.prior_menu_order not in {"offered_v1", "bound_parameters_v2"}:
+            raise ValueError("Unknown declared prior menu order")
         if config.adaptation not in {"frozen", "full", "lora"}:
             raise ValueError("Unknown backbone adaptation")
         if config.family == "frozen_mlp" and config.adaptation != "frozen":
@@ -403,7 +406,12 @@ class SmallControlModel:
         policy = {"fixed_context": FixedContextMemoryPolicy,
                   "rules": RulesMemoryPolicy}[self.config.prior_policy](
                       reads=self.config.prior_reads)
-        chosen = policy.choose(state, actions)
+        if self.config.prior_menu_order == "bound_parameters_v2":
+            from milai_lab.methods.small_memory_policy import bound_prior_menu
+
+            chosen = policy.choose(state, bound_prior_menu(state, actions))
+        else:
+            chosen = policy.choose(state, actions)
         original_ids = [a.id for a in actions]
         ids = original_ids if action_ids is None else action_ids
         if len(ids) != len(original_ids) or set(ids) != set(original_ids) or chosen not in ids:

@@ -1,6 +1,7 @@
 """A replaceable score adapter on the existing finite-operation executor."""
 from __future__ import annotations
 
+import json
 import time
 from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
@@ -24,6 +25,38 @@ class PolicyScores:
 
 class ControlScorer(Protocol):
     def score(self, online: dict[str, Any]) -> PolicyScores: ...
+
+
+def bound_prior_menu(state: MemoryControlState,
+                     actions: list[MemoryAction]) -> list[MemoryAction]:
+    """Order a baseline's input by visible ranks/bindings, not action IDs or presentation.
+
+    This does not prune the legal menu or read a Source. The optional model
+    configuration declares this order; historical priors keep their offered order.
+    """
+    ranks = {p["item_index"]: p.get("control_pool_rank", p["item_index"])
+             for p in state.pending_candidates}
+
+    def order(action: MemoryAction) -> tuple[Any, ...]:
+        p = action.parameters
+        binding = json.dumps({"kind": action.kind, "target": action.target, "parameters": p},
+                             ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        if action.kind == "READ":
+            index = p.get("index")
+            rank = ranks.get(index, index) if isinstance(index, int) else float("inf")
+            return (action.kind, rank, bool(p.get("history_directory")),
+                    bool(p.get("observe_only")), not bool(p.get("expand_context")), binding)
+        if action.kind == "HANDOFF":
+            return (action.kind, bool(p), tuple(p.get("delivery_indices", [])),
+                    tuple(p.get("retrieved_scope_indices", [])), binding)
+        if action.kind == "SEARCH":
+            query_order = {"request": 0, "required_point": 1, "observed_material": 2,
+                           "known_material": 3}
+            return (action.kind, query_order.get(p.get("query_from", "request"), 4),
+                    p.get("index", -1), p.get("limit", 0), binding)
+        return (action.kind, binding)
+
+    return sorted(actions, key=order)
 
 
 @dataclass
