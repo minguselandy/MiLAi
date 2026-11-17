@@ -1,0 +1,218 @@
+{
+  "schema": "camc.execution.C00_C04.v1",
+  "goal_status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "source_versions": {
+    "S07": "cbcf26ba",
+    "S08": "6404fa44",
+    "S09": "f68a70b4"
+  },
+  "T16": {
+    "status": "COMPLETED_NO_GAIN",
+    "source_version": "cbcf26ba",
+    "conditions": {
+      "outcome_latent": 3,
+      "outcome_mlp": 3,
+      "warm_latent": 3,
+      "warm_mlp": 3,
+      "weak_latent": 3,
+      "weak_mlp": 3
+    },
+    "roots_per_condition": 8,
+    "same_checkpoints_and_initial_states": true,
+    "firsts": {
+      "closed": 48,
+      "new_calls": 2,
+      "exact_wire_reused_firsts": 46,
+      "failed_positions": 0,
+      "generation_delta": {
+        "charged_tokens": 9748,
+        "known_tokens": 9748,
+        "unknown_usage": 0
+      }
+    },
+    "decision": "All6models3/8; route does not improve quality and removes prior exploratory greedy gains. No justification for continuing identical teacher-route trials. Do not count reducedNNcalls/forcedteacher actions as training or efficiency gain.",
+    "strong_simple_baseline": "cosine4/6both6/8on same8roots",
+    "goal_status": "ACTIVE_INCOMPLETE",
+    "sha_validation": false
+  },
+  "D00_block02": {
+    "status": "REVIEWED_DEFER_BLOCK03_PENDING_CALIBRATION",
+    "block": 2,
+    "closed_positions": 105,
+    "new_calls": 86,
+    "reused_firsts": 19,
+    "failed_positions": 8,
+    "new_tokens": 318250,
+    "unknown_usage_delta": 0,
+    "states": 32,
+    "roots": 8,
+    "directional_states_native_property": 16,
+    "directional_roots_native_property": 7,
+    "directional_pairs_native_property": 43,
+    "calibration_findings": "/data/milai-experiments/20261117-memory-compute-control/C00-TRAIN16-blind-calibration-v1/summary-v1.json",
+    "decision": "Feedback is measurable but native negatives are not validated semantic negatives. Preserve block02observedv2 results; pause automatic admissions of blocks03-07 pending reviewed-protocol signal/learning diagnosis. This is queue gating, not a user-goal pause; full objective remainsACTIVE.",
+    "live_external_http_owner_observed": 3162713,
+    "external_command": "wait_and_run_R24_M1_firsts_v1.py",
+    "next_offline": "Rescore blocks00/01 only with explicit120reviewindex, compare sameonline inputs and valid label masks; only preregister finite matched controls if actual usable signal remains.",
+    "sha_validation": false
+  },
+  "C00_C01": {
+    "calibration_cases": 120,
+    "TRAIN_roots": 16,
+    "independence": "project-aware assistant, different from Qwen generation, nohuman/secondreviewer;Bprovisional",
+    "reviewed_task_counts": {
+      "resolved": 54,
+      "unresolved": 46,
+      "unknown": 20
+    },
+    "native_negative_reviewed_resolved": 12,
+    "original_scores_preserved": true,
+    "grade_erratum": "/data/milai-experiments/20261117-memory-compute-control/C01-feedback-grade-erratum-v1.json",
+    "preferred_feedback": "C01block00/01reviewed-feedback-v2"
+  },
+  "C02": {
+    "status": "CLOSED_NO_GAIN",
+    "firsts": 104,
+    "new_calls": 29,
+    "reused": 75,
+    "failed_positions": 2,
+    "new_known_tokens": 113009,
+    "native_success_learned_warm_matched_controls": 4,
+    "limited_review_success_same_conditions": 6,
+    "paired_wins_losses_ties_vs_warm": [
+      0,
+      0,
+      8
+    ],
+    "semantic_cosine6_difference_identification_bound": [
+      -0.125,
+      0.0
+    ]
+  },
+  "C03": {
+    "status": "COMPLETED_TRAIN_STRUCTURAL_SIGNAL_ONLY",
+    "roots": 64,
+    "source_version": "f68a70b4",
+    "summary": {
+      "plain_QQ": {
+        "1": {
+          "mean_document_recall": 0.390625,
+          "all_required_doc_roots": 0
+        },
+        "2": {
+          "mean_document_recall": 0.6640625,
+          "all_required_doc_roots": 27
+        },
+        "4": {
+          "mean_document_recall": 0.828125,
+          "all_required_doc_roots": 45
+        },
+        "6": {
+          "mean_document_recall": 0.8984375,
+          "all_required_doc_roots": 52
+        }
+      },
+      "plain_QP": {
+        "1": {
+          "mean_document_recall": 0.40625,
+          "all_required_doc_roots": 0
+        },
+        "2": {
+          "mean_document_recall": 0.671875,
+          "all_required_doc_roots": 29
+        },
+        "4": {
+          "mean_document_recall": 0.828125,
+          "all_required_doc_roots": 45
+        },
+        "6": {
+          "mean_document_recall": 0.90625,
+          "all_required_doc_roots": 53
+        }
+      },
+      "bound_QQ": {
+        "1": {
+          "mean_document_recall": 0.390625,
+          "all_required_doc_roots": 0
+        },
+        "2": {
+          "mean_document_recall": 0.5859375,
+          "all_required_doc_roots": 20
+        },
+        "4": {
+          "mean_document_recall": 0.7109375,
+          "all_required_doc_roots": 29
+        },
+        "6": {
+          "mean_document_recall": 0.84375,
+          "all_required_doc_roots": 45
+        }
+      },
+      "bound_QP": {
+        "1": {
+          "mean_document_recall": 0.3828125,
+          "all_required_doc_roots": 0
+        },
+        "2": {
+          "mean_document_recall": 0.578125,
+          "all_required_doc_roots": 17
+        },
+        "4": {
+          "mean_document_recall": 0.703125,
+          "all_required_doc_roots": 29
+        },
+        "6": {
+          "mean_document_recall": 0.796875,
+          "all_required_doc_roots": 39
+        }
+      }
+    },
+    "paired_complete_reference_doc_at4": {
+      "plain_QQ_vs_bound_QQ": {
+        "wins": 17,
+        "losses": 1,
+        "ties": 46
+      },
+      "plain_QP_vs_plain_QQ": {
+        "wins": 4,
+        "losses": 4,
+        "ties": 56
+      },
+      "bound_QP_vs_bound_QQ": {
+        "wins": 3,
+        "losses": 3,
+        "ties": 58
+      }
+    },
+    "interpretation": "Formatting ratherthan roleprefix is the large measured factor: cleanquestion/excerpt coversallannotateddocs at4 in45/64 vs29/64fullJSONbinding. Rolechange alone leaves45/64plain and29/64bound. This is frozen cosine structuralnavigation, not learnedhead or taskbenefit. Plain removesmetadata for thisdiagnostic; nextdeploymentprojection must retainalllegal metadata/conditions in a separate representation, and equalcapacitycontrol.",
+    "next_step_condition": "AfterC02actualtask results, consider onepreregistered semantic/binding factorization with exactinformation parity and usabletrainedstart. Do notsimplychange query->passage for allJSONobjects or claim generalization fromTRAINrecall.",
+    "Reader_calls": 0,
+    "scheduled_GPU_job_seconds": 10.000470752827823,
+    "sha_validation": false
+  },
+  "C04": {
+    "card": "/data/milai-experiments/20261117-memory-compute-control/C04-semantic-binding-factorization-card-v1.json",
+    "status": "CODE_TESTED_NOT_FITTED",
+    "default_old_layout_preserved": true,
+    "capacity_and_missingtext_mask_matched": true,
+    "first_lane_complete_unchanged": true,
+    "no_Source_or_Reader_added_by_projection": true,
+    "next": "2actualtrainedusablewarmfunctions before anyoutcome claims"
+  },
+  "cost_receipts": [
+    "/data/milai-experiments/20261117-memory-compute-control/C00-C02-and-T16-closed-cost-v1.json",
+    "/data/milai-experiments/20261117-memory-compute-control/C02-before-firsts-closed-cost-v1.json"
+  ],
+  "pending_costs": [
+    "C02blindpacket/completedpacket preprocessing",
+    "C02reviewindexexport+2score+comparisonanalysis local",
+    "C03frozenencoding10.00047GPUjobseconds; no nestedcounters doublecount",
+    "Actualassistantreview/test/import/report compute remainsUNKNOWN; C02nativephase alreadycharged once113009tokens"
+  ],
+  "validation": "T16:52tests; C01:30tests plus17grade-regressions; C04:29tests. Ruff/mypy and package/toolsboundaryPASS. No fullCI or remote verification.",
+  "sha_validation": false,
+  "no_public_API_Schema_permission_Canonical_default_change": true,
+  "no_push_or_merge": true,
+  "current_authority": "/data/milai-experiments/20261117-memory-compute-control/current-state-v15.json"
+}

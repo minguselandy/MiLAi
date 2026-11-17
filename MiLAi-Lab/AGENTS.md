@@ -1,4 +1,50 @@
-# CURRENT 2026-11-17: memory compute v2 ACTIVE in an isolated worktree
+# CURRENT 2026-11-17: memory compute v2 ACTIVE; C02 closed, C04 prototype
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v15.json.
+ALL ourReader/localmodeljobs TERMINAL. C02closed104positions29new75reuse2lengthfail,
+113009tokens/U0; nofirstretry. Method-blind29reviews frozenbefore methodcomparison:
+19resolved/8unresolved/2unknown, assistantBonly. Warm/weakcoverage/native/reviewed
+botharchitectures identical8rootoutcomes: native4/8, limitedreview6/8,0wins0loss8ties
+vswarm. Cosine6review6true1false1unknown; worstcasebound[-.125,0], noG1/G2claim.
+C03TRAIN64 frozenencoding: cleanquestion/excerpt45/64completewitnessdocs@4 vsfullJSON
+29/64 (17win1loss46tie); prefixrolealone aggregateunchanged. Structuralonly, notquality.
+C04singleM0 factorizationcard preregistered. Prototype keepscompleteoriginalJSONlane
+and addsplainsemanticlane; samecapacity rawduplicatecontrol andmissingtextmask.
+29tests/Ruff/mypy3/package-toolsboundaryPASS; NOTFITTED. FreezeS10 and establish2
+actualusabletrained24updatewarmfunctions before anyoutcomefits ornewDEVfirsts.
+R26externalHTTPowner3332047 actualkernel/proc verified; neverstop/restart/edit it.
+RevalidatebeforeHTTP/manualsettlement. C02nativephasealreadybilledonce; newlocal
+C02blindindex/scores/comparison andC03probe10GPUjobsec PENDING, neverrebillnested
+drivercounters. Allsourcefirsts, errors andgradeerrata retained; SHAchecks disabled.
+D00blocks03-07 NOT_STARTED; fullG1/G2/G3, D1/P-D/ownstates/3seeds/power/newconfirmation/
+transfer/deliverables still INCOMPLETE. See executiondoc and C00-C04trackedmanifest.
+
+The following v12 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-17: memory compute v2 ACTIVE; source S09
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v12.json.
+D00block02 CLOSED105/105,86new/19reuse/8failed,318250tokens/U0; frozenS04 unchanged.
+Blocks03-07 NOT_STARTED pending calibration/learning diagnostic. C00 method-code-blind
+assistantreview120conditionalpositions/16TRAINroots CLOSEDlimited:54resolved/46unresolved/
+20unknown. Native42positives accepted;12native negatives resolved in reviewed taskscope.
+Different model from Qwen but project-aware/no human/secondreviewer; NOT formal truth.
+S08/6404fa44 explicit reviewed_execution_v3 masks unreviewed semantic quality; S09/f68a70b4
+preserves per-action grades (v1feedback gradeerratum retained; useC01feedback-v2 only).
+T16sixsamecheckpoints actual48rollouts CLOSED;46exactpriorfirsts/2NOT_EXECUTED. AllMLP
+requests returnfixed3/8;latent nativebound3–5/8, belowcosine6/8. No G1/G2/efficiency claim.
+ExternalHTTPowner3162713 wait_and_run_R24_M1_firsts_v1.py verified actual kernel/proc;
+revalidate before newHTTP/manualsettlement; neverstop/restart/edit sibling jobs.
+C02 only new finitefit study:64sameonline states/16TRAINroots, samequalityknown masks;
+12valuechanges native_masked vsreviewed plus sameexposureweak.2architectures/6fits,
+fixed96updates/seed0, physicalGPU3; exec35697. Fixed next8exportedDEVfit indices8:16
+source/article-disjointTRAIN64+priorDEV8; localfixedcollection exec15668. Revalidate
+existing run.json+/proc; neverrestart from lostobservations. All goalgates/3seeds/new
+confirmation/P-D/ownstate/power/transfer still INCOMPLETE; SHA/checksum disabled.
+
+The following v10 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-17: memory compute v2 ACTIVE in an isolated worktree
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v10.json.
 External3073512 lease observed released; original scope acquired successfully. Four pending

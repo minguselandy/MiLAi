@@ -187,7 +187,8 @@ def train(args: argparse.Namespace) -> None:
         object_architecture=args.object_architecture, object_width=args.object_width,
         object_heads=args.object_heads, object_slots=args.object_slots,
         object_blocks=args.object_blocks, object_ffn_width=args.object_ffn_width,
-        object_dropout=args.object_dropout, maximum_memory_objects=args.maximum_memory_objects)
+        object_dropout=args.object_dropout, maximum_memory_objects=args.maximum_memory_objects,
+        object_feature_layout=args.object_feature_layout)
     rows = read_jsonl(args.data)
     if not rows or any(row["split"] != "train" for row in rows):
         raise ValueError("Training requires nonempty declared TRAIN observations")
@@ -753,6 +754,9 @@ def main() -> None:
     fitting.add_argument("--object-ffn-width", type=int, default=1024)
     fitting.add_argument("--object-dropout", type=float, default=.1)
     fitting.add_argument("--maximum-memory-objects", type=int, default=256)
+    fitting.add_argument("--object-feature-layout",
+                         choices=["literal_v1", "dual_raw_v1", "dual_semantic_v1"],
+                         default="literal_v1")
     fitting.add_argument("--joint-max-tokens", type=int, default=8192)
     fitting.add_argument("--joint-layout", choices=["literal_json_v2", "wrapped_json_v1"],
                          default="literal_json_v2")

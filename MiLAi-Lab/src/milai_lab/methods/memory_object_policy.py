@@ -38,6 +38,41 @@ def object_control_texts(online: dict[str, Any]) -> tuple[list[str], list[str]]:
     return [dumps({"task": task}), dumps({"context": observation}), *objects], actions
 
 
+def object_semantic_texts(objects: list[str], actions: list[str],
+                          ) -> tuple[list[str], list[str]]:
+    """A supplementary text view; complete raw objects/bindings stay in the first lane.
+
+    This resolves no external references. Text absent from the supplied projection
+    remains absent; arbitrary schemas and all metadata still have their raw lane.
+    """
+    text_fields = {"content", "excerpt", "text", "statement", "claim", "summary"}
+
+    def text(value: Any) -> str:
+        pieces: list[str] = []
+
+        def collect(item: Any) -> None:
+            if isinstance(item, dict):
+                if item.get("body_delivered") is False:
+                    return
+                for key, child in item.items():
+                    if key in text_fields and isinstance(child, str):
+                        pieces.append(child)
+                    else:
+                        collect(child)
+            elif isinstance(item, list):
+                for child in item:
+                    collect(child)
+
+        collect(value)
+        return "\n".join(pieces)
+
+    task = json.loads(objects[0])["task"]
+    query = task.get("request", task.get("query"))
+    memories = [query if isinstance(query, str) else "", "",
+                *(text(json.loads(item)["object"]) for item in objects[2:])]
+    return memories, [text(json.loads(item)) for item in actions]
+
+
 def build_object_head(embedding_width: int, *, architecture: str = "latent_pointer",
                       width: int = 384, heads: int = 6, slots: int = 16,
                       blocks: int = 4, ffn_width: int = 1024, dropout: float = .1) -> Any:

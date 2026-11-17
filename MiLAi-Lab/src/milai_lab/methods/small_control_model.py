@@ -57,6 +57,7 @@ class SmallControlConfig:
     object_ffn_width: int = 1024
     object_dropout: float = .1
     maximum_memory_objects: int = 256
+    object_feature_layout: str = "literal_v1"
 
 
 def conditioned_chunks(body: list[int], context: list[int], limit: int) -> list[list[int]]:
@@ -146,6 +147,10 @@ class SmallControlModel:
             raise ValueError("Use the model's original observation projection")
         if config.readout not in {"dual", "joint", "objects"}:
             raise ValueError("Unknown control readout")
+        if config.object_feature_layout not in {"literal_v1", "dual_raw_v1", "dual_semantic_v1"}:
+            raise ValueError("Unknown object feature layout")
+        if config.readout != "objects" and config.object_feature_layout != "literal_v1":
+            raise ValueError("Object feature layouts require the object readout")
         if config.readout == "joint" and config.family != "decoder":
             raise ValueError("Joint causal markers require the decoder route")
         if config.joint_layout not in {"literal_json_v2", "wrapped_json_v1"}:
@@ -178,7 +183,8 @@ class SmallControlModel:
                 raise ValueError("Object readout uses its explicit object-head configuration")
             if config.maximum_memory_objects < 0:
                 raise ValueError("Memory object capacity must be nonnegative")
-            self.head = build_object_head(width, architecture=config.object_architecture,
+            object_width = width * (1 if config.object_feature_layout == "literal_v1" else 2)
+            self.head = build_object_head(object_width, architecture=config.object_architecture,
                 width=config.object_width, heads=config.object_heads, slots=config.object_slots,
                 blocks=config.object_blocks, ffn_width=config.object_ffn_width,
                 dropout=config.object_dropout).to(self.device)
@@ -323,7 +329,10 @@ class SmallControlModel:
     def object_features(self, online: list[dict[str, Any]]) -> tuple[Any, Any, Any, list[int]]:
         import torch
 
-        from milai_lab.methods.memory_object_policy import object_control_texts
+        from milai_lab.methods.memory_object_policy import (
+            object_control_texts,
+            object_semantic_texts,
+        )
 
         projections = [object_control_texts(row) for row in online]
         capacity = self.config.maximum_memory_objects + 2
@@ -334,6 +343,20 @@ class SmallControlModel:
         object_texts = [text for objects, _ in projections for text in objects]
         action_texts = [text for _, actions in projections for text in actions]
         vectors = self.encode(object_texts + action_texts)
+        if self.config.object_feature_layout != "literal_v1":
+            semantics = [object_semantic_texts(objects, actions)
+                         for objects, actions in projections]
+            texts = ([text for objects, _ in semantics for text in objects]
+                     + [text for _, actions in semantics for text in actions])
+            available = [i for i, text in enumerate(texts) if text]
+            semantic_vectors = torch.zeros_like(vectors)
+            if available:
+                semantic_vectors[available] = (
+                    vectors[available] if self.config.object_feature_layout == "dual_raw_v1"
+                    else self.encode([texts[i] for i in available]))
+            # Same dimensionality and missing-text mask in both explicit controls.
+            # The complete original vectors are retained without any field deletion.
+            vectors = torch.cat((vectors, semantic_vectors), dim=-1)
         offset, states = 0, []
         for objects, _ in projections:
             current = vectors[offset:offset + len(objects)]
