@@ -47,6 +47,10 @@ def collect(args: Any) -> None:
         "planned_roots": len(histories), "closed_roots": 0, "Reader_calls": 0,
         "horizons": args.horizons, "continuation_policy": "query_once_context(reads4)",
         "terminal_handoff": "current", "seed": args.seed, "sha_validation": False,
+        "collection_policy": getattr(args, "collection_policy", "query_once4"),
+        "state_sampling": getattr(args, "state_sampling", "initial_and_post"),
+        "material_formation": parent.get("material_formation", "token_ranges_v1"),
+        "source_directory_only": parent.get("source_directory_only", False),
         "scope": "Same actual before, complete legal menu and remaining budget. Independent "
                  "SQLite read-only branch copies; no native labels used for sampling/decisions."}
     write_json(args.output / "run.json", run)
@@ -55,14 +59,21 @@ def collect(args: Any) -> None:
             bank = args.collection / "banks" / history["id"]
             mapping = read_json(bank / "source-map.json")
             for request in history["requests"]:
-                path = bank / f"{request['id']}-query_once4-checkpoints.jsonl"
+                path = bank / (f"{request['id']}-"
+                    f"{getattr(args, 'collection_policy', 'query_once4')}-checkpoints.jsonl")
                 captured = read_jsonl(path)
                 initial = next(x for x in captured if x["decision"]["step"] == 0)
                 post = [x for x in captured if x["decision"]["step"] > 0
                         and x["decision"]["before"].get("observed_materials")]
-                chosen = [initial]
-                if post:
-                    chosen.append(rng.choice(post) if ordinal % 2 == 0 else post[-1])
+                sampling = getattr(args, "state_sampling", "initial_and_post")
+                if sampling == "last_observed":
+                    if not post:
+                        raise ValueError("Declared last-observed sampling needs an actual state")
+                    chosen = [post[-1]]
+                else:
+                    chosen = [initial]
+                    if post:
+                        chosen.append(rng.choice(post) if ordinal % 2 == 0 else post[-1])
                 for saved in chosen:
                     event = saved["decision"]
                     before = event["before"]
@@ -76,6 +87,13 @@ def collect(args: Any) -> None:
                     nominees = [("immediate_stop", stop), ("query_once4", fixed),
                                 ("current_model", current)]
                     remaining = [a for a in actions if a.id not in {key for _, key in nominees}]
+                    if sampling == "last_observed":
+                        # Acquire genuinely new material, rather than sampling another
+                        # delivery subset. Availability and bindings come from the executor.
+                        remaining = [a for a in remaining if a.kind == "READ"
+                            and not a.parameters.get("observe_only")
+                            and not a.parameters.get("history_directory")
+                            and "source_observation_cursor" not in a.parameters]
                     if remaining:
                         nominees.append(("random_alternative", rng.choice(remaining).id))
                     unique: list[MemoryAction] = []
@@ -92,8 +110,8 @@ def collect(args: Any) -> None:
                     state_number = len(selected_states)
                     selected_states.append({"family": history["source_group"],
                         "event_id": saved["event_id"], "step": event["step"],
-                        "source_sampling": "first_metadata_shuffled_TRAIN_roots_100percent_random",
-                        "state_sampling": "initial_or_half_random_half_prestop_post_acquisition",
+                        "source_sampling": "fixed_prefix_of_declared_TRAIN_export",
+                        "state_sampling": sampling,
                         "before": before, "actions": event["actions"],
                         "nominations": nominees, "model_scores": asdict(scored)})
                     for horizon in args.horizons:
@@ -104,6 +122,8 @@ def collect(args: Any) -> None:
                             "before": before, "actions": event["actions"],
                             "choices": {name: a.id for a in unique for name in methods[a.id]},
                             "branches": []}
+                        if sampling == "last_observed":
+                            case["response_event_id"] = saved["event_id"]
                         for bi, action in enumerate(unique):
                             destination = args.output / f"state-{state_number:03d}-h{horizon}-b{bi}"
                             copy_source_bank(bank / "memory.sqlite", destination)
@@ -115,11 +135,16 @@ def collect(args: Any) -> None:
                                 state = MemoryControlState(**copy.deepcopy(before))
                                 state, operations = environment(service, request, capacity,
                                     args.material_tokens, state=state,
-                                    checkpoint=saved["executor_checkpoint"])
+                                    checkpoint=saved["executor_checkpoint"],
+                                    evidence_units=parent.get("material_formation") ==
+                                        "whole_paragraph_v1_R2_whole_turn_R3",
+                                    source_directory_only=parent.get(
+                                        "source_directory_only", False))
                                 restored_actions = [asdict(a) for a in operations.actions(state)]
                                 if (state.project() != before
                                         or restored_actions != event["actions"]):
                                     raise ValueError("Actual replay before/menu differs")
+                                branch_tick, branch_cpu = time.perf_counter(), time.process_time()
                                 result = execute_branch(operations, before, action, event["step"],
                                     horizon, terminal_handoff="current",
                                     policy_name="query_once_context")
@@ -129,10 +154,18 @@ def collect(args: Any) -> None:
                                     "calendar_context": "Asia/Shanghai"},
                                     request["retrieval_request"], packet, settings))
                                 capacity.check(wire["messages"])
+                                measured = {"local_action_to_request_wall_seconds":
+                                    time.perf_counter() - branch_tick,
+                                    "local_action_to_request_cpu_seconds":
+                                    time.process_time() - branch_cpu,
+                                    "scope": "Execute actual first action/continuation, package "
+                                        "and capacity check; excludes branch bank copy, "
+                                        "nomination encoder and Reader. Overlaps trace phases."}
                                 case["branches"].append({"action": asdict(action),
                                     "policies": methods[action.id], "packet": packet,
                                     "actual_delivered_source_ranges": delivered,
                                     "readout_request": wire, "continuation": result,
+                                    "measured_costs": measured,
                                     "body_tokens": capacity.text_tokens(json.dumps(packet)),
                                     "condition_provenance": {"role": "ACTUAL_TRAIN_BRANCH",
                                         "horizon": horizon, "before_step": event["step"],

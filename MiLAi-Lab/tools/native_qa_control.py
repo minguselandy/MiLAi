@@ -385,7 +385,8 @@ def score_packets(args: Any) -> None:
             score = score_reference_first(controls[case["family"]],
                 branch["actual_delivered_source_ranges"],
                 read_json(response) if response.exists() else None,
-                observed_status=record["status"])
+                observed_status=record["status"],
+                outcome_protocol=getattr(args, "outcome_protocol", "legacy_v1"))
             for name in branch["policies"]:
                 results.append({"event_id": case["event_id"], "group_id": case["family"],
                     "policy": name, "outcome": score, "first_path": str(folder / "readout.json"),
@@ -418,6 +419,7 @@ def score_packets(args: Any) -> None:
     write_json(args.output / "summary.json", summaries)
     write_json(args.output / "run.json", {"status": "COMPLETED", "pid": os.getpid(),
         "readouts": str(args.readouts), "controls": str(args.controls), "Reader_calls": 0,
+        "outcome_protocol": getattr(args, "outcome_protocol", "legacy_v1"),
         "wall_seconds": time.perf_counter()-tick, "cpu_seconds": time.process_time()-cpu,
         "sha_validation": False, "compute_ledger_status": "pending_idle_settlement",
         "scope": "Native answer EM plus actual delivered reference spans, NOT official jointEM "
@@ -535,6 +537,7 @@ def compile_feedback(args: Any) -> None:
                     "horizon": case["horizon"], "state_index": case["state_index"],
                     "projection_version": "control-observation-v1",
                     "continuation": preparation["continuation_policy"],
+                    "outcome_protocol": score_run.get("outcome_protocol", "legacy_v1"),
                     "not_full_trajectory_value_or_all_action_oracle": True}}
             datasets.setdefault(key, []).append(row)
     summaries = {}

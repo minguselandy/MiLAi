@@ -107,6 +107,30 @@ def test_allocation_uses_all_context_articles_and_keeps_confirmation_reserved():
     assert short["status"] == "INSUFFICIENT_DISJOINT_ROOTS"
 
 
+def test_v2_missing_transport_is_unknown_without_changing_legacy_or_literal_coverage():
+    _, ref = export_question(example(), "train", ordinal=0)
+    complete = ref["reference_support_spans"]
+    for captured in [complete, []]:
+        missing = score_reference_first(ref, captured, None, observed_status="FAILED",
+                                        outcome_protocol="observed_execution_v2")
+        assert missing["execution_status"] == "UNKNOWN"
+        assert missing["primary_outcome"] is None and not missing["quality_target_known"]
+        assert missing["reference_support"]["complete"] == bool(captured)
+        assert missing["semantic_material_sufficiency"] is None
+    unrun = score_reference_first(ref, complete, None, observed_status="NOT_EXECUTED",
+                                  outcome_protocol="observed_execution_v2")
+    assert unrun["execution_status"] == "NOT_RUN" and unrun["primary_outcome"] is None
+    length = score_reference_first(ref, complete, response("Paris", "length"),
+                                   outcome_protocol="observed_execution_v2")
+    assert length["execution_status"] == "FAILED" and length["primary_outcome"] is False
+    nonterminal = score_reference_first(ref, complete, response("Paris", None),
+                                        outcome_protocol="observed_execution_v2")
+    assert nonterminal["execution_status"] == "UNKNOWN"
+    assert nonterminal["primary_outcome"] is None
+    assert score_reference_first(ref, complete, None, observed_status="FAILED")[
+        "primary_outcome"] is False
+
+
 def test_native_feedback_keeps_unknown_unseen_quality_ties_and_cost_axes_separate():
     from native_qa_control import observed_supervision
 

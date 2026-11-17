@@ -55,20 +55,29 @@ def reference_coverage(required: list[dict[str, Any]],
 
 def score_reference_first(reference: dict[str, Any], delivered: list[dict[str, Any]] | None,
                            response: dict[str, Any] | None, *,
-                           observed_status: str | None = None) -> dict[str, Any]:
+                           observed_status: str | None = None,
+                           outcome_protocol: str = "legacy_v1") -> dict[str, Any]:
     """Do not extract a favorable substring or treat malformed research JSON as unknown.
 
     A plain first answer can still match the native reference. Otherwise use the
     explicit answer field, or the entire raw text when no valid field is available.
     Explanations and semantic material sufficiency are outside this metric's scope.
     """
+    if outcome_protocol not in {"legacy_v1", "observed_execution_v2"}:
+        raise ValueError("Unknown declared native outcome protocol")
     coverage = reference_coverage(reference["reference_support_spans"], delivered)
     execution, output_format, answer = "UNKNOWN", "unavailable", None
-    if response is None and observed_status in {"FAILED", "NOT_EXECUTED"}:
+    if (response is None and observed_status in {"FAILED", "NOT_EXECUTED"}
+            and outcome_protocol == "legacy_v1"):
         execution = "FAILED"
+    if (response is None and observed_status == "NOT_EXECUTED"
+            and outcome_protocol == "observed_execution_v2"):
+        execution = "NOT_RUN"
     if response is not None:
         choice = response["choices"][0]
         execution = "COMPLETED" if choice["finish_reason"] == "stop" else "FAILED"
+        if choice["finish_reason"] is None and outcome_protocol == "observed_execution_v2":
+            execution = "UNKNOWN"
         if execution == "COMPLETED":
             raw = choice["message"]["content"]
             if isinstance(raw, str):
@@ -81,8 +90,12 @@ def score_reference_first(reference: dict[str, Any], delivered: list[dict[str, A
                     pass
     scores = hotpot_answer_scores(answer, reference["native_answer"]) if answer is not None else {
         "exact_match": None, "f1": None}
-    if execution == "FAILED" or scores["exact_match"] is False or coverage["complete"] is False:
-        primary: bool | None = False
+    if outcome_protocol == "observed_execution_v2" and execution in {"UNKNOWN", "NOT_RUN"}:
+        # Missing transport responses are not semantic negatives. Literal range
+        # coverage remains separately measurable, including when it is incomplete.
+        primary: bool | None = None
+    elif execution == "FAILED" or scores["exact_match"] is False or coverage["complete"] is False:
+        primary = False
     elif (execution == "COMPLETED" and scores["exact_match"] is True
           and coverage["complete"] is True):
         primary = True
@@ -92,6 +105,12 @@ def score_reference_first(reference: dict[str, Any], delivered: list[dict[str, A
         "scored_answer": answer, "native_answer_em": scores["exact_match"],
         "native_answer_f1": scores["f1"], "reference_support": coverage,
         "primary_outcome": primary,
-        "metric_version": "native-answer-em-and-delivered-reference-spans-v1",
+        "metric_version": "native-answer-em-and-delivered-reference-spans-" + (
+            "v2" if outcome_protocol == "observed_execution_v2" else "v1"),
+        **({"observed_transport_status": observed_status,
+            "semantic_material_sufficiency": None,
+            "quality_target_known": primary is not None,
+            "outcome_protocol": outcome_protocol}
+           if outcome_protocol == "observed_execution_v2" else {}),
         "scope": "Native reference answer correctness and literal reference delivery; "
                  "not official jointEM, explanation truth, or semantic sufficiency"}

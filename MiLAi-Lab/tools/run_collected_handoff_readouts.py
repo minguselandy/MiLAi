@@ -43,7 +43,8 @@ def reusable_readout(
         if (
             record["status"] in {"COMPLETED", "FAILED"}
             and record["family"] == case["family"]
-            and record["event_id"] == case["event_id"]
+            and record.get("response_event_id", record["event_id"]) == case.get(
+                "response_event_id", case["event_id"])
             and (share_identical_packets or record["action"] == branch["action"])
             and wire == branch["readout_request"]
         ):
@@ -150,6 +151,8 @@ def main() -> None:
                             "status": "RUNNING",
                             "family": case["family"],
                             "event_id": case["event_id"],
+                            **({"response_event_id": case["response_event_id"]}
+                               if "response_event_id" in case else {}),
                             "request_id": case["request_id"],
                             "policies": branch["policies"],
                             "action": branch["action"],

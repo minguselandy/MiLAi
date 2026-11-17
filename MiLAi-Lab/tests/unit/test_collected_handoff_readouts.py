@@ -42,3 +42,21 @@ def test_reuse_keeps_failed_first_result_and_requires_same_full_wire_and_action(
         is None
     )
     assert reusable_readout({**case, "event_id": "f/q/2"}, branch, prior) is None
+
+
+def test_branch_analysis_identity_can_share_the_same_declared_task_first_without_retry():
+    action = {"id": "plain_stop", "kind": "HANDOFF", "parameters": {}}
+    wire = {"messages": [{"role": "user", "content": "same actual task and packet"}]}
+    record = {"family": "f", "event_id": "original-task", "status": "FAILED",
+              "action": {**action, "id": "original-policy"}, "reason": "length"}
+    path = Path("first/readout.json")
+    prior = [(path, record, wire)]
+    case = {"family": "f", "event_id": "original-task/step-3/h0",
+            "response_event_id": "original-task"}
+    branch = {"action": action, "readout_request": wire}
+    assert reusable_readout(case, branch, prior, share_identical_packets=True) == (path, record)
+    assert reusable_readout(case, branch, prior) is None
+    assert reusable_readout({**case, "family": "other"}, branch, prior,
+                            share_identical_packets=True) is None
+    assert reusable_readout(case, {**branch, "readout_request": {"messages": []}}, prior,
+                            share_identical_packets=True) is None
