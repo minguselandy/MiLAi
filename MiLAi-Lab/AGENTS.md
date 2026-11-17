@@ -1,6 +1,35 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06 block04 closed/block05 waiting; S15 recovery
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; J01v2 calibration fixtures frozen/no judge
 
-LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v33.json.
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v34.json.
+S16/bfebb152 ONLY J01v2fixture generator, frozen S16-source; C06 stillS13, S15 recovery unchanged.
+J01v2 CLOSED180scripted cases20programmaticworlds9kinds;90actualcaptures130commonopens20revokes.
+2tests/Ruff/mypy/package/toolsPASS. Allcasecodes/rubric/private oracle/pilot10 frozen BEFORE any
+model. Role query asks whether record confirms: question-only record suffices for No, not world
+effect. Before judges corrected20material I->S and20missing-case citation e0->empty; entirev1
+kept, erratum+full literal delta show other inputs/labels/order/pilot unchanged. USE v2 ONLY.
+These are scoped source/schema/visibility/constraint fixtures, NOT actual model firsts/natural
+semantic truth/180independent roots. UNKNOWNexecution scripted, not real network failure.
+NO judge/Reader/GPU/model/service calls or C06B label replacement/upgrade; ability unproven.
+J01pending13costscopes:6v1processes+6v2processes+1delta. Nested generator runs/summaries not
+rebilled. S15five also pending. Existing05coordinator ONLY knows its9 earlierlocals; do not edit.
+Own coordinator26194/PID180805 VERIFIEDWAITING actual externalR34kernelowner88677; both /proc
+commands+FLOCK reverified.0HTTP/no client/no firsts. Preserve handle; neverrestart lost observation.
+After actual release original scope settles9once/readback and onlyblock05(96positions/72wires).
+Review all frozen N00-N07/I000-I071 before scores/yield;06/07NOT_ADMITTED. MainD0 remains
+160states40/64roots/Bfeedback, not full reliableD0. Own488observations unlabelled/notD3round.
+Next independent step may prepare separately registered guarded10case review pilot on fixedv2
+cases/rubric, original token/compute accounting+fresh GPU2/3; candidate32B BF16 exceeds1card,
+no quant dependency. Fixtures/inventory do NOT admit calls, no services/install/sibling edits.
+Full D0/D1/P-D/ownstate2rounds+matchedexposure/3seeds/strongbaseline/power/newCONFIRM/transfer/
+delivery incomplete, G1/G2/G3notestablished. SHA/fingerprints OFF; no protectedbody/default/
+researchweights/push/merge. Unmeasured editing/review/report/serverGPU/fullactivity/IO/energy
+UNKNOWN; no full-lifecycle efficiency claim. See J01manifest and current-state-v34.
+
+The following v33 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C06 block04 closed/block05 waiting; S15 recovery
+
+Previous authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v33.json.
 C06 remains frozen S13/188a5239. Block04 original68161/PID45399 TERMINAL96positions:
 72new24reuse5failed283821tokens/U0.72fresh B blind judgments frozen BEFORE scores45resolved/
 24unresolved3unknown.17directionalstates8roots34pairs93known3unknown,maxUTF8material2014.
