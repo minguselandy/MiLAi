@@ -1,27 +1,32 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06 block01 closed/block02 active
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06 block02 closed/block03 active
 
-LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v30.json.
-S13/188a5239 remains frozen; no new weights/defaults/protected-body exposure. Block01
-exec92490/PID4021033 TERMINAL100 positions:44new56reuse10failed167340tokens/U0. All76
-fresh method-blind B judgments frozen BEFORE method scores:50resolved19unresolved7unknown.
-Quality32states/17directionalstates/8roots/37pairs,93known7unknownvalues,maxmaterial1944.
-Two current-protocol blocks now64states16roots202positions:81new121reuse310820tokens,
-16failed,34directionalstates15roots76pairs/186known16unknown. Still provisional B feedback,
-NOT completed reliable D0 or G1/G2/G3. All original firsts/failures/unknowns retained.
-Only next block02 admitted after yield/cost review;8closed locals SETTLED ONCE/readback
-at C06-before-block02-closed-cost-v1, block01 native phase not rebilled. Current live Reader
-exec77241/PID4093794, frozen S13; actual /proc/locks +cmdline verified.95bound positions/
-32states8roots,71unique wires, canonical391earliest primary firsts, no repeats/profiles.
-REVALIDATE existing run.json and actual process; NEVER restart a lost observation/handle.
-After all95 close, review ALL frozen71 cases K00-K07/F000-F070 under unchanged rubric,
-freeze judgments BEFORE scores/yield. Artifacts C06-frozen-blind-review-v1.py complete/
-compile and C06-prepare-next-block-v1.py are literal-value helpers, no SHA/fingerprints.
-Blocks03-07 NOT_ADMITTED; no automatic fits. Source pool256states64roots775branches and
-own observations488states/140new remain as v29; observations are unlabelled, NOT D3round1.
-Full D0/D1/calibration/P-D/two own-state rounds+same exposure/3seeds/strong baseline/
-source power/new confirmation/transfer/delivery remain INCOMPLETE. No Product/Archive/
-default/push/merge change; SHA OFF. Unmeasured review/report/serverGPU/fullactivityGPU/
-physicalIO/energy/money UNKNOWN. Incremental reuse yield is not full-lifecycle efficiency.
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v31.json.
+S13/188a5239 frozen; no new weights/defaults/protected bodies. Block01 exec92490 and
+block02 exec77241/PID4093794 TERMINAL. Block02 closed95positions39new56reuse6failed,
+144504tokens/U0. All71 fresh method-blind B judgments frozen BEFORE scores:43resolved/
+20unresolved/8unknown. Quality16directionalstates7roots29pairs/84known11unknownvalues,
+maxUTF8material2022. K00 actual yes/no question vs Foreign Language Film reference type
+mismatch/undefined foreign retained; K05 largest harbor does not prove largest city.
+No old question/reference/first/review corrected; unknowns masked, not forced negatives.
+Three current-protocol blocks now96states24roots297positions:120new177reuse22failed,
+455324tokens/U0,50directionalstates22roots105pairs/270known27unknown. Provisional B only,
+NOT completed reliable D0 or G1/G2/G3. First16 signal audit (NOTall24):76directionpairs,
+61HANDOFF-READ/15READ-READ; latter5involvefailures,10bothcompleted,7differentSourcebags
+cover5states3roots. Samebag3pairs still differ in order/metadata/first; no causal proof.
+Only block03 admitted after yield/cost review;9closed locals SETTLED ONCE/readback at
+C06-before-block03-closed-cost-v1; block02 native not rebilled. Current Reader exec46244/
+PID4144203, actual /proc/locks+cmdline verified; S13 frozen.97positions/32states8roots,
+73uniquewires; canonical430earliest primary firsts excludes repeats/profile but keeps fails.
+REVALIDATE existing run.json/process; NEVER restart from missing observation/handle.
+After all97 close, review ALL frozen73 cases L00-L07/G000-G072 under unchanged rubric,
+freeze judgments BEFORE score/yield. C06-frozen-blind-review-v1.py complete/compile and
+C06-prepare-next-block-v1.py are literal helpers; actual297positions validated, no hashes.
+Blocks04-07 NOT_ADMITTED; no automatic fits. Source256states64roots775branches and own
+488states/140new observations unchanged, unlabelled/NOT D3round1. Full D0/D1/calibration/
+P-D/two own-state rounds+same exposure/3seeds/strong baseline/source power/new confirmation/
+transfer/delivery INCOMPLETE. No Product/Archive/default/push/merge; SHA OFF. Unmeasured
+review/report/serverGPU/fullactivityGPU/physicalIO/energy/money UNKNOWN. Reuse incremental
+yield is not full-lifecycle efficiency. Latest tracked manifest C06-block02-closed-20261118-v1.
 
 The following v29 and earlier blocks are historical observations.
 
