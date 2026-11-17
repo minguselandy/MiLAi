@@ -1,4 +1,33 @@
-# CURRENT 2026-11-17: R18 CLOSED no task gain; ALL jobs TERMINAL; full goal ACTIVE
+# CURRENT 2026-11-17: memory compute v2 ACTIVE in an isolated worktree
+
+Execute docs/MILAI_MEMORY_COMPUTE_POLICY_PLAN_20261117_v2.md in full; progress and remaining
+requirements are docs/MILAI_MEMORY_COMPUTE_POLICY_EXECUTION_20261117.md. No completion from
+code, loss, weights, synthetic checks or finite negative results. G1/G2/G3 remain unproven.
+Worktree memory-compute-control-20261117, branch feat/memory-compute-control-20261117,
+base fcd5dfe2 from the committed v1 implementation. Other worktree's uncommitted numeric
+features and R19 Reader job are NOT ours to edit/restart. Revalidate actual processes before
+new HTTP or shared-ledger settlement. Older CURRENT/LIVE blocks below describe v1 history.
+
+No subagents, SHA/checksum/content-fingerprint verification, new services, second ledger,
+Product/default changes, push or merge. Original Reader/BGE and continuous budget only.
+Our artifacts: /data/milai-experiments/20261117-memory-compute-control (ignored symlink).
+Shared ledger: /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Do not settle offline measurements while any HTTP job holds the shared admission lease.
+All v1 TRAIN/DEV exposure remains global exposure; no protected data opened for this block.
+
+WP00-WP04 first implementation reuses neutral projection, actual EvidenceOperations and
+the existing trainer. Explicit paragraph R2/full captured-turn R3, directory-only initial
+observations, separate acquired/selected material, object MLP/latent pointer. Old default
+dual/joint/Laya paths remain. Unknown resource measurements stay null, nested wall intervals
+must not be summed. Whole paragraphs can be insufficient or over capacity; no semantic proof.
+Checks:99 affected tests passed/4 legacy GPU recovery skips; Ruff and package/tools boundary
+pass. Nine-file mypy pass with only unavailable jsonschema stub imports excluded via the
+import-untyped diagnostic flag. Actual GPU save/load/rollout and all research gates pending.
+Registered before execution: E00 fixed R2/R3 four exposed TRAIN roots; T00 one random actual
+v1 R17 state per TRAIN root (64 total), two heads same 96-update schedule, no G1 claim.
+Cards/data under the artifact root. Preserve all first failures, costs and frozen sources.
+
+# HISTORICAL v1 checkpoint: R18 CLOSED no task gain; full v1 goal ACTIVE
 
 Authoritative R=/data/milai-experiments/20261116-small-memory-control/current-state-v4.json.
 All blocks below/v3 are historical and contain obsolete live fields. FULL original small-model

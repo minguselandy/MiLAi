@@ -2,10 +2,49 @@
 from __future__ import annotations
 
 import json
+import re
 from bisect import bisect_right
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
+from itertools import pairwise
 from typing import Any
+
+
+def evidence_unit_packs(material: dict[str, Any], *,
+                        scope_only: bool = False) -> list[dict[str, Any]]:
+    """R2 whole paragraphs, R3 whole captured turn, both exact source ranges.
+
+    Paragraph boundaries are a frozen extractive formation rule, not a semantic
+    sufficiency certificate. An oversized paragraph stays whole and may fail
+    delivery. Qualifiers in other paragraphs require an actual context READ.
+    Whitespace remains covered; no tokenizer boundary cuts a negation or number.
+    """
+    packs = []
+    for ordinal, turn in enumerate(json.loads(material["text"])):
+        text, base = turn["content"], turn["range"][0]
+        boundaries = [0, *[match.end() for match in re.finditer(r"\n[ \t]*\n", text)], len(text)]
+        boundaries = list(dict.fromkeys(boundaries))
+        intervals = list(pairwise(boundaries)) or [(0, 0)]
+        turn_range = [material["turn_range"][0] + ordinal,
+                      material["turn_range"][0] + ordinal + 1]
+        for left, right in intervals:
+            span = {"source_ref": turn["source_ref"],
+                    "source_revision": turn["source_revision"],
+                    "start": base + left, "end": base + right}
+            context = {**span, "start": base, "end": base + len(text)}
+            focused = {**turn, "content": text[left:right],
+                       "range": [span["start"], span["end"]]}
+            packs.append({**material,
+                "id": f"{material['id']}:unit:{ordinal}:{span['start']}:{span['end']}",
+                "source_ranges": [span], "focus_source_ranges": [span],
+                "context_source_ranges": [context], "turn_range": turn_range,
+                "context_turn_range": turn_range,
+                "text": json.dumps([focused], ensure_ascii=False),
+                "index_text": focused["content"], "pack_kind": "paragraph_evidence_unit_v1",
+                "evidence_representation": {"formation": "whole_paragraph_v1", "level": "R2",
+                    "context_level": "R3", "source_ranges": [span], "context_ranges": [context]},
+                "scope_only": scope_only})
+    return packs
 
 
 @dataclass(frozen=True)

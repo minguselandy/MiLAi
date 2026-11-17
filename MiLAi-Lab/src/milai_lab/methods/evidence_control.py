@@ -72,12 +72,15 @@ class EvidenceOperations:
         source_observation: SourceObservationBudget | None = None,
         delivery_selection: bool = False,
         checkpoint: dict[str, Any] | None = None,
+        source_directory_only: bool = False,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
         self.materials: list[dict[str, Any]] = []
         self.opened: dict[int, dict[str, Any]] = {}
         self.delivery_selection = delivery_selection
+        if source_directory_only and source_observation is not None:
+            raise ValueError("Directory-only observation cannot page unseen source bodies")
         self.observed: dict[int, dict[str, Any]] = {}
         self.delivered_view_slots: dict[str, int] = {}
         self.known_materials = known_materials or []
@@ -105,6 +108,7 @@ class EvidenceOperations:
             **({"internal_views": False} if not internal_views else {}),
             **({"view_updates": False} if not view_updates else {}),
             **({"exclude_given_requests": True} if exclude_given_requests else {}),
+            **({"source_directory_only": True} if source_directory_only else {}),
         }
         if checkpoint is not None:
             self.restore_checkpoint(checkpoint, source_observation)
@@ -154,7 +158,8 @@ class EvidenceOperations:
             source_discovery=feed["query"], bound_source_lookups=len(bound_refs),
             **({"deferred_source_lookups": len(deferred_lookups)} if deferred_lookups else {}))
         state.new_events = [{"source_ref": e["event_id"], "role": e["role"],
-            "content": body_text(e), "origin": e.get("origin"),
+            **({"content": body_text(e)} if not source_directory_only else {}),
+            "origin": e.get("origin"),
             **{key: e[key] for key in ("capture_context", "calendar_context") if key in e},
             "delivery": "controller_observation; Reader uses visible_evidence",
             "reported_at": e.get("occurred_at"), "captured_at": e["observed_at"]}
@@ -598,7 +603,7 @@ class EvidenceOperations:
                 "selected": self.opened.get(i) == item,
                 **{key: copy.deepcopy(item[key]) for key in (
                     "kind", "id", "revision", "version_view", "visibility", "body_delivered",
-                    "source_ranges", "source_bindings") if key in item}}
+                    "source_ranges", "source_bindings", "evidence_representation") if key in item}}
                 for i, item in self.observed.items()]
             state.retrieved_scopes = [{"item_index": i,
                 "source_ranges": copy.deepcopy(item["source_ranges"]),

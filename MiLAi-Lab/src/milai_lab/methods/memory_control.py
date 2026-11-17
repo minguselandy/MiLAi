@@ -4,9 +4,11 @@ from __future__ import annotations
 import copy
 import time
 from collections.abc import Callable
+from contextlib import nullcontext
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Protocol
 
+from milai_lab.harness.compute_profile import ComputeProfile
 from milai_lab.methods.evidence_selection import (
     interpretation_handoff,
     interpretation_only,
@@ -77,6 +79,7 @@ def run_memory_control(
     intervention: FirstActionIntervention | None = None,
     start_step: int = 0,
     prefix_trace: list[dict[str, Any]] | None = None,
+    profile: ComputeProfile | None = None,
 ) -> dict[str, Any]:
     """Each next decision sees the completed operation, never a predicted result."""
     reason = "budget_exhausted"
@@ -86,11 +89,13 @@ def run_memory_control(
                             reader_capacity_reserved=True)
         if not can_continue():
             break
-        actions = operations.actions(state)
+        with profile.span("action_menu") if profile else nullcontext():
+            actions = operations.actions(state)
         if not actions:
             reason = "no_available_operation"
             break
-        before = state.project()
+        with profile.span("observation_projection") if profile else nullcontext():
+            before = state.project()
         event: dict[str, Any] = {"event": "memory_control_step", "step": step, "before": before,
                                 "actions": [asdict(a) for a in actions]}
         record({"phase": "decision_input", **copy.deepcopy(event)})
@@ -109,7 +114,10 @@ def run_memory_control(
             selection_mode = ("intervention_first_action" if relative_step == 0
                               else "intervention_handoff")
         else:
-            selected = actions[0].id if forced else policy.choose(state, actions)
+            with profile.span("forced_selection" if forced else "policy") if (
+                profile is not None
+            ) else nullcontext():
+                selected = actions[0].id if forced else policy.choose(state, actions)
             selection_mode = "only_available_action" if forced else "policy"
         # The sole action boundary binds the returned ID to actual supplied parameters.
         action = next((a for a in actions if a.id == selected), None)
@@ -126,7 +134,8 @@ def run_memory_control(
                 trace.append(event)
                 break
         started = time.perf_counter()
-        result = operations.execute(action, state)
+        with profile.span("operation_" + action.kind) if profile else nullcontext():
+            result = operations.execute(action, state)
         state.last_result = {"action": asdict(action), **result}
         event.update(result=copy.deepcopy(result),
                      operation_wall_seconds=time.perf_counter() - started)

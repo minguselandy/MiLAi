@@ -180,7 +180,11 @@ def train(args: argparse.Namespace) -> None:
         lora_target_modules=tuple(args.lora_target_modules),
         feature_normalization=args.feature_normalization, prior_policy=args.prior_policy,
         prior_reads=args.prior_reads, prior_margin=args.prior_margin,
-        head_initialization=args.head_initialization)
+        head_initialization=args.head_initialization,
+        object_architecture=args.object_architecture, object_width=args.object_width,
+        object_heads=args.object_heads, object_slots=args.object_slots,
+        object_blocks=args.object_blocks, object_ffn_width=args.object_ffn_width,
+        object_dropout=args.object_dropout, maximum_memory_objects=args.maximum_memory_objects)
     rows = read_jsonl(args.data)
     if not rows or any(row["split"] != "train" for row in rows):
         raise ValueError("Training requires nonempty declared TRAIN observations")
@@ -721,7 +725,16 @@ def main() -> None:
                          help="New optimizer/stage from a matching usable starting checkpoint")
     fitting.add_argument("--interrupt-after", type=int)
     fitting.add_argument("--profile", action="store_true")
-    fitting.add_argument("--readout", choices=["dual", "joint"], default="dual")
+    fitting.add_argument("--readout", choices=["dual", "joint", "objects"], default="dual")
+    fitting.add_argument("--object-architecture", choices=["object_mlp", "latent_pointer"],
+                         default="latent_pointer")
+    fitting.add_argument("--object-width", type=int, default=384)
+    fitting.add_argument("--object-heads", type=int, default=6)
+    fitting.add_argument("--object-slots", type=int, default=16)
+    fitting.add_argument("--object-blocks", type=int, default=4)
+    fitting.add_argument("--object-ffn-width", type=int, default=1024)
+    fitting.add_argument("--object-dropout", type=float, default=.1)
+    fitting.add_argument("--maximum-memory-objects", type=int, default=256)
     fitting.add_argument("--joint-max-tokens", type=int, default=8192)
     fitting.add_argument("--joint-layout", choices=["literal_json_v2", "wrapped_json_v1"],
                          default="literal_json_v2")
@@ -811,7 +824,8 @@ def main() -> None:
     native_collect.add_argument("--output", type=Path, required=True)
     native_collect.add_argument("--roots", type=int, default=8)
     native_collect.add_argument("--methods", nargs="+",
-                                choices=["fixed_context4", "query_once4", "rules4", "empty"],
+                                choices=["fixed_r2_4", "fixed_context4", "query_once4",
+                                         "rules4", "empty"],
                                 default=["fixed_context4", "query_once4", "rules4", "empty"])
     native_collect.add_argument("--checkpoint", nargs=2, action="append", default=[])
     native_collect.add_argument("--historical-checkpoint", nargs=2, action="append", default=[],
@@ -822,6 +836,12 @@ def main() -> None:
     native_collect.add_argument("--device", default="cpu")
     native_collect.add_argument("--material-tokens", type=int, default=2048)
     native_collect.add_argument("--control-steps", type=int, default=8)
+    native_collect.add_argument("--evidence-units", action="store_true",
+                                help="Whole-paragraph R2 and captured-turn R3, no token cuts")
+    native_collect.add_argument("--source-directory-only", action="store_true",
+                                help="Do not expose full Source bodies in arrival observations")
+    native_collect.add_argument("--profile-retrieval", action="store_true",
+                                help="Inclusive phase intervals; Reader latency remains unknown")
     native_collect.add_argument("--reuse-banks", type=Path,
                                 help="SQLite backups preserving captured identities for pairing")
     native_collect.add_argument("--initial-states-from", type=Path,

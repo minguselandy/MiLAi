@@ -20,7 +20,11 @@ from milai_lab.memory.working_set import material_ref, plan_delivery
 from milai_lab.methods.dependency_memory import query_support
 from milai_lab.methods.edit_maintenance import parse_object
 from milai_lab.methods.edit_memory import EditMemory
-from milai_lab.methods.source_ranges import SourceRangeBudget, source_range_packs
+from milai_lab.methods.source_ranges import (
+    SourceRangeBudget,
+    evidence_unit_packs,
+    source_range_packs,
+)
 
 
 def unit_closure(state: dict[str, Any], unit_id: str) -> tuple[list[str], list[dict[str, Any]]]:
@@ -88,6 +92,7 @@ def build_evidence_packs(
     dependency_selections: dict[str, Any] | None = None,
     source_range_budget: SourceRangeBudget | None = None,
     source_range_limit: int = 16,
+    evidence_units: bool = False,
 ) -> list[dict[str, Any]]:
     """Split only the captured pool; default to complete exchanges with prior context.
 
@@ -96,12 +101,18 @@ def build_evidence_packs(
     An explicit range budget instead ranks literal fragments inside this same pool,
     with adjacent same-Source ranges as context and a declared candidate limit.
     """
+    if evidence_units and source_range_budget is not None:
+        raise ValueError("Choose whole evidence units or token ranges explicitly")
     source_packs = []
     retrieved_ids = {item["id"] for item in originals}
     additional = (service.read_source_materials([
         item for item in source_scope["materials"] if item["id"] not in retrieved_ids
     ]) if source_scope is not None else [])
     for material in [*originals, *additional]:
+        if evidence_units:
+            source_packs.extend(evidence_unit_packs(material,
+                scope_only=material["id"] not in retrieved_ids))
+            continue
         if source_range_budget is not None:
             source_packs.extend(source_range_packs(material, source_range_budget,
                 scope_only=material["id"] not in retrieved_ids))
@@ -389,6 +400,8 @@ def open_evidence_packs(
             if expand_context:
                 item["source_ranges"] = item.get("context_source_ranges", item["source_ranges"])
                 item["turn_range"] = item.get("context_turn_range", item["turn_range"])
+                if "evidence_representation" in item:
+                    item["evidence_representation"]["level"] = "R3"
             actual = service.read_source_materials([item])[0]
             focus = {span["source_ref"] for span in item.get(
                 "focus_source_ranges", item["source_ranges"])}
@@ -762,7 +775,9 @@ def pack_candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
                and item.get("body_delivered") is not False else {}),
             "excerpt": text[:160], "excerpt_truncated": len(text) > 160,
             "date": item.get("date"), "visibility": item.get("visibility", "visible"),
-            "can_expand_context": bool(item.get("context_source_ranges"))}
+            "can_expand_context": bool(item.get("context_source_ranges")),
+            **({"evidence_representation": copy.deepcopy(item["evidence_representation"])}
+               if "evidence_representation" in item else {})}
 
 
 

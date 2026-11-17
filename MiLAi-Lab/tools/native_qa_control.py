@@ -6,6 +6,7 @@ import json
 import os
 import time
 from collections.abc import Callable
+from contextlib import nullcontext
 from dataclasses import asdict
 from functools import partial
 from itertools import combinations
@@ -15,6 +16,7 @@ from typing import Any
 from langgraph.store.sqlite import SqliteStore  # type: ignore[import-not-found]
 
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
+from milai_lab.harness.compute_profile import ComputeProfile
 from milai_lab.memory.functional_state import body_text
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
@@ -26,6 +28,7 @@ from milai_lab.methods.evidence_reading import (
 from milai_lab.methods.laya_memory_policy import LayaMemoryPolicy
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
+    FixedMemoryPolicy,
     MemoryControlState,
     MemoryPolicy,
     RulesMemoryPolicy,
@@ -49,6 +52,7 @@ def no_refresh(*_: Any) -> Any:
 def environment(service: MemoryService, request: dict[str, Any], capacity: Any,
                 material_tokens: int, *, state: MemoryControlState | None = None,
                 checkpoint: dict[str, Any] | None = None,
+                evidence_units: bool = False, source_directory_only: bool = False,
                 ) -> tuple[MemoryControlState, EvidenceOperations]:
     """Same supplied retrieval query and executor; no native labels enter this function."""
     query = request["query"]
@@ -64,7 +68,9 @@ def environment(service: MemoryService, request: dict[str, Any], capacity: Any,
         found = service.search_sources(query, limit=16, tokenization="unicode_v1",
                                        include_scope=True)
         return build_evidence_packs(service, query, "2026-11-17", found["source_materials"], [],
-            source_scope=found["source_scope"], source_range_budget=ranges, source_range_limit=16)
+            source_scope=found["source_scope"],
+            source_range_budget=None if evidence_units else ranges, source_range_limit=16,
+            evidence_units=evidence_units)
 
     def fits(items: list[dict[str, Any]]) -> bool:
         return bool(capacity.text_tokens(json.dumps(controlled_reader_packet(items, "policy"),
@@ -72,7 +78,9 @@ def environment(service: MemoryService, request: dict[str, Any], capacity: Any,
 
     operations = EvidenceOperations(service, state, load_pool=pool, refresh_call=no_refresh,
         fits=fits, internal_views=False, view_updates=False, delivery_selection=True,
-        source_observation=SourceObservationBudget(2048, capacity.text_tokens),
+        source_observation=(None if source_directory_only else
+                            SourceObservationBudget(2048, capacity.text_tokens)),
+        source_directory_only=source_directory_only,
         checkpoint=checkpoint)
     return state, operations
 
@@ -201,6 +209,7 @@ def prepare_packets(args: Any) -> None:
                             for h in histories):
         raise ValueError("Only explicitly exported non-confirm roots may enter the native pilot")
     factories: dict[str, Callable[[], MemoryPolicy]] = {
+                 "fixed_r2_4": lambda: FixedMemoryPolicy(reads=4),
                  "fixed_context4": lambda: FixedContextMemoryPolicy(reads=4),
                  "query_once4": lambda: QueryOnceContextPolicy(reads=4),
                  "rules4": lambda: RulesMemoryPolicy(reads=4), "empty": EmptyPolicy}
@@ -238,6 +247,9 @@ def prepare_packets(args: Any) -> None:
         "reused_source_banks": str(args.reuse_banks) if args.reuse_banks else None,
         "initial_states_from": str(args.initial_states_from) if args.initial_states_from else None,
         "execution_contract": "stable_material_indices_search_scope_sync_v2",
+        "material_formation": ("whole_paragraph_v1_R2_whole_turn_R3"
+                               if getattr(args, "evidence_units", False) else "token_ranges_v1"),
+        "source_directory_only": getattr(args, "source_directory_only", False),
         "historical_models": historical_configs,
         "cosine_models": {name: {"backbone": model.config.backbone, "reads": args.cosine_reads,
             "selection": "Frozen query/passage cosine on legal navigation excerpts; fixed "
@@ -267,16 +279,22 @@ def prepare_packets(args: Any) -> None:
                     case = {"family": history["source_group"], "event_id": key, "case_key": key,
                         "request_id": request["id"], "choices": {}, "branches": []}
                     for name in names:
+                        profile = (ComputeProfile() if getattr(args, "profile_retrieval", False)
+                                   else None)
+                        retrieval_tick, retrieval_cpu = time.perf_counter(), time.process_time()
                         initial = (read_jsonl(args.initial_states_from / "banks" / history["id"] /
                             f"{request['id']}-rules4-checkpoints.jsonl")[0]
                             if args.initial_states_from else None)
                         if initial is not None and initial["decision"]["before"]["task"][
                                 "request"] != request["query"]:
                             raise ValueError("Captured initial observation belongs to another task")
-                        state, operations = environment(service, request, capacity,
-                            args.material_tokens, state=MemoryControlState(**copy.deepcopy(
-                                initial["decision"]["before"])) if initial else None,
-                            checkpoint=initial["executor_checkpoint"] if initial else None)
+                        with profile.span("source_inventory") if profile else nullcontext():
+                            state, operations = environment(service, request, capacity,
+                                args.material_tokens, state=MemoryControlState(**copy.deepcopy(
+                                    initial["decision"]["before"])) if initial else None,
+                                checkpoint=initial["executor_checkpoint"] if initial else None,
+                                evidence_units=getattr(args, "evidence_units", False),
+                                source_directory_only=getattr(args, "source_directory_only", False))
                         if initial is not None and (
                                 [asdict(a) for a in operations.actions(state)] !=
                                 initial["decision"]["actions"]
@@ -300,13 +318,21 @@ def prepare_packets(args: Any) -> None:
                                     stream.write(json.dumps(saved, ensure_ascii=False) + "\n")
 
                         trace = run_memory_control(state, policy, operations,
-                            max_steps=args.control_steps, record=capture)
-                        packet, delivered = actual_packet(operations, mapping)
-                        wire = separate_answer_fields(given_packet_request({
-                            "content": request["content"], "query_time": "2026-11-17",
-                            "calendar_context": "Asia/Shanghai"}, request["retrieval_request"],
-                            packet, settings))
-                        capacity.check(wire["messages"])
+                            max_steps=args.control_steps, record=capture, profile=profile)
+                        with profile.span("evidence_packaging") if profile else nullcontext():
+                            packet, delivered = actual_packet(operations, mapping)
+                        with profile.span("reader_request_capacity") if profile else nullcontext():
+                            wire = separate_answer_fields(given_packet_request({
+                                "content": request["content"], "query_time": "2026-11-17",
+                                "calendar_context": "Asia/Shanghai"}, request["retrieval_request"],
+                                packet, settings))
+                            capacity.check(wire["messages"])
+                        measured = (profile.report() if profile else {})
+                        if profile is not None:
+                            measured.update(retrieval_to_request_wall_seconds=(
+                                time.perf_counter() - retrieval_tick),
+                                retrieval_to_request_cpu_seconds=time.process_time()-retrieval_cpu,
+                                end_to_end_seconds=None, Reader_executed=False)
                         action = {"id": name, "kind": "HANDOFF", "target": "actual_policy_packet",
                                   "parameters": {}}
                         case["choices"][name] = name
@@ -317,7 +343,8 @@ def prepare_packets(args: Any) -> None:
                             "execution_result": {"ok": trace["reason"] !=
                                                  "operation_outcome_unknown",
                                                  "status": trace["reason"]}})
-                        trajectories.append({"event_id": key, "policy": name, "trace": trace})
+                        trajectories.append({"event_id": key, "policy": name, "trace": trace,
+                                             **({"profile": measured} if profile else {})})
                     cases.append(case)
             run["closed_roots"] += 1
             write_json(args.output / "cases.json", cases)

@@ -48,6 +48,14 @@ class SmallControlConfig:
     prior_reads: int = 4
     prior_margin: float = 1.0
     head_initialization: str = "standard_v1"
+    object_architecture: str = "latent_pointer"
+    object_width: int = 384
+    object_heads: int = 6
+    object_slots: int = 16
+    object_blocks: int = 4
+    object_ffn_width: int = 1024
+    object_dropout: float = .1
+    maximum_memory_objects: int = 256
 
 
 def conditioned_chunks(body: list[int], context: list[int], limit: int) -> list[list[int]]:
@@ -133,7 +141,7 @@ class SmallControlModel:
             raise ValueError("M0 requires a frozen encoder")
         if config.projection_version not in {"control-observation-v1", VISIBLE_SOURCE_HANDLES_V2}:
             raise ValueError("Use the model's original observation projection")
-        if config.readout not in {"dual", "joint"}:
+        if config.readout not in {"dual", "joint", "objects"}:
             raise ValueError("Unknown control readout")
         if config.readout == "joint" and config.family != "decoder":
             raise ValueError("Joint causal markers require the decoder route")
@@ -157,10 +165,25 @@ class SmallControlModel:
         # Initialize the common head before adapter RNG draws, so matched frozen
         # and LoRA encoder probes really begin with the same head parameters.
         width = self.encoder.config.hidden_size
-        self.head = build_action_head(width, config.hidden_size,
-            set_interaction=config.set_interaction,
-            feature_normalization=config.feature_normalization,
-            initialization=config.head_initialization).to(self.device)
+        if config.readout == "objects":
+            from milai_lab.methods.memory_object_policy import build_object_head
+
+            if (config.state_representation != "whole_v1"
+                    or config.action_representation != "binding_v1" or config.set_interaction
+                    or config.feature_normalization != "raw_v1"
+                    or config.head_initialization != "standard_v1"):
+                raise ValueError("Object readout uses its explicit object-head configuration")
+            if config.maximum_memory_objects < 0:
+                raise ValueError("Memory object capacity must be nonnegative")
+            self.head = build_object_head(width, architecture=config.object_architecture,
+                width=config.object_width, heads=config.object_heads, slots=config.object_slots,
+                blocks=config.object_blocks, ffn_width=config.object_ffn_width,
+                dropout=config.object_dropout).to(self.device)
+        else:
+            self.head = build_action_head(width, config.hidden_size,
+                set_interaction=config.set_interaction,
+                feature_normalization=config.feature_normalization,
+                initialization=config.head_initialization).to(self.device)
         if config.adaptation == "lora":
             from peft import LoraConfig, get_peft_model  # type: ignore[import-not-found]
 
@@ -260,6 +283,8 @@ class SmallControlModel:
             return self.joint_features(online)
         if self.config.projection_version == VISIBLE_SOURCE_HANDLES_V2:
             online = [visible_source_handle_input(row) for row in online]
+        if self.config.readout == "objects":
+            return self.object_features(online)
         states, queries, actions, owners, lengths, action_queries = [], [], [], [], [], []
         for index, row in enumerate(online):
             state_text, action_texts = control_texts(row, delivery_context=(
@@ -291,6 +316,31 @@ class SmallControlModel:
                                         dim=-1)
         return (state_vectors, vectors[len(states) + len(queries):],
                 torch.tensor(owners, device=self.device), lengths)
+
+    def object_features(self, online: list[dict[str, Any]]) -> tuple[Any, Any, Any, list[int]]:
+        import torch
+
+        from milai_lab.methods.memory_object_policy import object_control_texts
+
+        projections = [object_control_texts(row) for row in online]
+        capacity = self.config.maximum_memory_objects + 2
+        if any(len(objects) > capacity for objects, _ in projections):
+            raise ValueError("MEMORY_OBJECT_CAPACITY: partition explicitly; no objects dropped")
+        if any(not actions for _, actions in projections):
+            raise ValueError("A policy state requires an offered action")
+        object_texts = [text for objects, _ in projections for text in objects]
+        action_texts = [text for _, actions in projections for text in actions]
+        vectors = self.encode(object_texts + action_texts)
+        offset, states = 0, []
+        for objects, _ in projections:
+            current = vectors[offset:offset + len(objects)]
+            states.append(torch.cat((current, current.new_zeros((capacity - len(objects),
+                                                               current.shape[-1])))))
+            offset += len(objects)
+        lengths = [len(actions) for _, actions in projections]
+        owners = torch.repeat_interleave(torch.arange(len(online), device=self.device),
+                                        torch.tensor(lengths, device=self.device))
+        return torch.stack(states), vectors[offset:], owners, lengths
 
     def joint_layout(self, online: dict[str, Any]) -> tuple[list[int], int, list[int]]:
         if self.config.projection_version == VISIBLE_SOURCE_HANDLES_V2:
