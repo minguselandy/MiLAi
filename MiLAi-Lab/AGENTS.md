@@ -1,22 +1,41 @@
-# CURRENT 2026-11-17: R12 DEV all0/32 CLOSED; R14 own-state DEV Reader LIVE
+# CURRENT 2026-11-17: R16 breadth Reader + R17 own-state CPU collection LIVE
 
 FULL original small-model plan ACTIVE/INCOMPLETE. Authoritative state:
 /data/milai-experiments/20261116-small-memory-control/current-state-v4.json.
 R=/data/milai-experiments/20261116-small-memory-control. v3 and blocks below are historical.
 No subagents/SHA/checksums/content fingerprints/new services/Product defaults/push/merge.
 Preserve original Reader/BGE/budget. No Reader first retry/replacement or independent review invented.
-Parent source03bcb3b0; this closure adds optional captured-prefix manifest/semantic test,
+Source checkpoint b3b48253 includes optional captured-prefix manifest/semantic test,
 stale NativeDecision test counter fixture repair, report/AGENTS. R14 frozen source snapshot:
 R14-captured-prefix-v1-source (prior R12-full-menu-v2-source unchanged).
 
-ONLY LIVE Reader: R14-twenty-condition-DEVfit32-firsts-v1 exec86918 PID1121873.
-640positions/N32,30new same-event wires,actualUTFmaterialmax1329/2048; all19old conditions/
-failed firsts strictly reused from R12-three-route-nineteen-condition-DEVfit32-firsts-v1.
-Original Reader/material2048/control8/commonR05coldstate. No manual ledger while HTTP lease live.
-After terminal score unique R14-twenty-condition-DEVfit32-scores-v1 controlsR05DEVfit32.
-R12Reader35776 and scorer6614 confirmed TERMINAL:608positions,47newcalls/561reuse,
-39failedpositions,160885tokens,newunknown0. M0/M1/M2primary0/0/0of32 vsRule13/cosine18.
-No usable trained bridge/G1. Do not duplicate/retry native firsts.
+LIVE1 R16-twentyone-condition-DEVfit32-firsts-v1 exec18172 PID1246815 originalReader.
+672positions/N32,23newwires,materialmax973/2048;all20R14same-eventfirstsinclfailures reused.
+No manual ledger while native lease live. After terminal native-score uniqueR16-twentyone-
+condition-DEVfit32-scores-v1 controlsR05DEVfit32. Do not duplicate/retry.
+LIVE2 R17-full-menu-own-TRAIN64-v1 exec81492 PID1252457 CPU:all95noninitial actualR16M0
+TRAIN64decisions, same64roots,selectedbeforelabels;fullmenus/h0-h2separate/SQLreadonly,
+planned600sec100MB/Reader0. CardR17-breadth-own-state-T1-card-v1.json. After CLOSED run
+prepare_R17_common_data_v1.py:exactold256teacher+newuniqueownx3,checkexactduplicate labels,
+nominalnear1:1roles/sourceinverse-countweights. SingleM0CE200/seed0/LR.001/samezeroRulev2;
+notformalT3/E03/cleanfactorial/innovation. No source/LR/gamma automaticexpansion. If combined
+trajectorygeneralization stillfails, next boundedhypothesis must change representation/objective.
+R16CPUcollection1092/M0fit31938/TRAINprep56264/DEVprep63255 allTERMINAL. New56roots224states,
+15608branches/SQL0/Reader0,1023.54wall/1077.68CPU/~124MB<1200sec300MB. Combinedold8exact32+
+new224=256states/64roots/17796branches,h0/h2separate8898;h2eligible254,menus15–60.
+InitialSEARCHgoodold2/8,new28/56. M0fit200fullmenu55/254→248/254,CE.168889,reload0;
+nominalold393/new2807,valid393/2780,sourcevalid27–65. All64capturedcoldstarts prepared.
+ActualTRAIN64referencebreadth11(old2/new9),old8head3,Rule26,cosine45. DEVbreadth4/32,
+mean2.656steps,initialREAD29/SEARCH2/HANDOFF1,allactivehandoff. No qualifiedbridge/taskclaim.
+R16-closed-breadth-preparation-cost-disclosure-v1 settled10closedscopes originalledger once,
+localGPUassignedupper.05547h/knownCPU1272.843sec. R16nativeparent/R17live costs pending.
+No newruntimecode beyond committedb3b48253; currentdocclosurependingcommit.
+All PRIOR Reader jobs TERMINAL. R14Reader86918/PID1121873 and score5501 closed:
+640positions,30newcalls/610reuse,42failedpositions,117158tokens,newunknown0. Actual M0ownT1
+primary0/32,answerEM5,referencecomplete2; Rule13/cosine18. Within-source7/8 did not transfer.
+R12Reader35776/scorer6614 terminal:608positions,47newcalls/561reuse,39failedpositions,
+160885tokens,newunknown0. M0/M1/M2primary0/0/0of32. No usable trained bridge/G1.
+OriginalReader/BGE/budget unchanged. No retry or replacement of any failed first.
 AllR12 M0/M1/M2 fits and DEV preparation jobs CLOSED, handles95865/63810/75010/17959 terminal.
 R12 full-menu TRAIN8:32states(initial/search/K/O8each),2188actualbranches(h0/h2separate1094),
 alllegalmenus19–46,SQL0/Reader0. LiteralmatchedacquiredK/O, gold offline only. Structural target
@@ -36,8 +55,8 @@ R14-structural-aggregation-v1 old32x3/new24x4 ->96:96nominal replay entries,56un
 R14-M0-own-prestop-T1-200-seed0-v1 exec95897 CLOSED200updates fromsamezeroRulev2,44.66sec;
 old32/32+new21/21directionalaccepted,reload0,nominal1600old/1600new,effective1600/1398.
 R14-M0-T1-TRAIN8-prepared-v1 and DEVfit32 counterparts CLOSED, handles1265/40767 TERMINAL. TRAINreference7/8 (was2);DEV2/32 (was0,cosine22),mean5.06steps/30active2budget.
-Not qualified source generalization. R14actualReader86918 nowlive; reuse all R12three-route
-firsts including failures. No gamma/LR sweep/automatic data expansion.
+Not qualified source generalization. R14actualReader86918 nowCLOSEDprimary0/32; all R12three-route
+firsts including failures reused. No gamma/LR sweep/automatic data expansion.
 
 Checks: new15native/captured/referencePASS,structuralmypy1PASS,CIruff(src tests tools)PASS.
 OldNativeDecisionfixture omitted existing padded_input_tokens counter; test-only fix thenPASS.
@@ -45,8 +64,9 @@ Wrongtestpath0tests and ruff . scanning intentional datafixtures2254olderrors re
 Prior485selected/mypy59/362matrixPASS, notfullpytest/remoteCI. Source/code/data actual snapshots kept.
 R12-R14-closed-local-cost-disclosure-v1 settled26closedscopes once originalledger after both
 R12drivers terminal; native78responses274120tokens readback only/newunknown0. LocalGPUassigned
-upper.727967h/knownCPU2788.135sec,notwhole-systemtotal. Prior11scope receipt retained. Current
-R14nativeparent and eventualscore pending; no manualsettle while native live, no parent rebill.
+upper.727967h/knownCPU2788.135sec,notwhole-systemtotal. Prior11scope receipt retained. SubsequentR14-R16-closed-diagnosis-cost-disclosure-v1 settled5CPUscopes/native30responses
+117158tokens readbackonly/newunknown0. OnlyR16livecollector +later2analysis scopes pending.
+No parent rebill; nativeReaderidle now, checkbeforemanualsettlement.
 Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Unmeasuredstartup/analysis/serverGPU/CPU/energy/moneyunknownnotzero; nosecondledger.
 
@@ -58,6 +78,16 @@ Full goal still requires usable trained bridge/actualsource gains/formal E01-E08
 matched2k5k10k/twoown-outcome-rounds/3finalseeds/≥2mechanisms+ablations+counterexamples/
 newsourceCONFIRM/secondReader+budgettransfer/L4/8/16. Do not complete/blocked/paused from
 finite progress/negative probes. Source-state-generalization is current research issue.
+
+Additional global diagnosis: R15initialvisibility complete controller reference spans7/8tinyTRAIN,
+30/56otherTRAIN,20/32DEV. Controller pages are not Reader evidence; source breadth hypothesis
+fixed before R14score. R16 failureaxes: all4T1conditions selectedillegal0/toolfailed0; material
+coverage dominates. R14complete-span answers Casio/Overwatch differ from native references;
+author surface/semantic-review flags only, primary unchanged. Even accepting2 cases gives2/32.
+KOmechanism audit:4/8pairs sharedgoodcompletebindings,4require differentacceptedbinding,all8
+actualmenus differ. No proof of explicit marker contribution or innovation; I1/I2/I3 remain open.
+Confirmation power planning ONLY: roughN933 forδ.05/pd.3; N3920 for2ppNI/pd.2; reserved1000
+metadata not guaranteed sufficient. Confirmation remains sealed, no formal protocol frozen.
 
 # HISTORICAL CHECKPOINT: R10 value firsts were running before final closure
 

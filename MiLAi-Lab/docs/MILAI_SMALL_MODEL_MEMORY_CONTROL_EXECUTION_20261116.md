@@ -304,3 +304,27 @@ R14依行为选择三条路线各8个最终HANDOFF前状态，共24个，不按�
 R12三路线实际DEV首答现全部关闭：608位置、47个新调用、561个复用位置、39个失败位置保留，160885 tokens、无新增unknown。M0/M1/M2的主指标均0/32，答案EM分别3/3/4，参考完整覆盖0/0/1；规则主指标13、余弦18。三路线已完成真实优化、保存重载与完整DEV读出，但这批教师前缀T1没有建立可用bridge，不升级为G1或正式方法收益。[三路线评分](../artifacts/small-memory-control-20261116/R12-three-route-nineteen-condition-DEVfit32-scores-v1/summary.json)
 
 两次R12原生任务均终止后，26个新关闭本地范围已在原台账结算一次，包括两条适配路线拟合/准备/审查、R13、R14采集/拟合/轨迹/拼接及有记录的检查范围。两个原生父范围只核对未重扣，78个真实响应合计274120 tokens与原生记录相同；本地分配GPU墙时上界约0.728小时、已计CPU约2788.14秒，未测部分依然未知。R14作为第20条件已准备640位置，仅30个新wire、实际材料最大1329/2048，原Reader当前补齐首答；旧19条件及失败首答继续严格复用，不纠错、不重试。[关闭范围收据](../artifacts/small-memory-control-20261116/R12-R14-closed-local-cost-disclosure-v1.json) [R14首答协议](../artifacts/small-memory-control-20261116/R14-own-prestop-DEVfit32-firsts-card-v1.json)
+
+R14实际首答现关闭：640位置、30个新调用、610复用、42个失败位置保留，117158 tokens、新增unknown为0。自身停止边界聚合的主指标仍0/32、答案EM5/32、参考完整交付2/32；训练内7/8未转化为DEV任务收益，此固定配置关闭。来源配对探索性bootstrap相对规则差−40.625pp，95%百分位区间[−56.25,−25]pp；相对余弦差−56.25pp，区间[−71.875,−37.5]pp。它们只反映当前DEV32的来源抽样与单训练seed，不是正式确认或多重比较控制；自身版本对教师版本全平局所得[0,0]退化区间不证明等价或非劣。[实际评分](../artifacts/small-memory-control-20261116/R14-twenty-condition-DEVfit32-scores-v1/summary.json) [配对检查](../artifacts/small-memory-control-20261116/R14-exploratory-paired-root-comparison-v1.json)
+
+分轴复核发现四个结构训练条件均无非法选择或失败工具回执；M0/M1完整参考交付为0，M2仅一例完整交付但Reader达到8192输出上限。自身聚合版本的两例完整交付均完成回答，却分别输出Casio、Overwatch，与原生参考完整字符串不同。它们是作者标记的表面形式/语义待审例，不改主指标、不虚构独立裁决、不用F1替换EM；即使两例全部计入，也最多2/32，仍低于既有余弦18/32。基准属性与语义充分性保持区分。[失败分层](../artifacts/small-memory-control-20261116/R16-closed-T1-failure-axes-v1.json)
+
+## R15–R16：来源广度与机制可辨识性
+
+初始页面诊断发现，原8个TRAIN根中7个已在控制器可见片段中覆盖全部原生参考跨度；其余56个TRAIN根为30/56，DEV为20/32。控制器页面不是Reader证据，该观察只支持检验来源/导航状态多样性，不构成新的动作结果标签。R16因此预先冻结一次来源广度对照：旧8根32状态及标签逐字保留，只采集其余预分配56根的相同四类教师前缀和完整合法分支；h0/h2分开、SQL只读、无Reader调用。其后最多一个M0、同起点/200步/seed0/LR，匹配3200个名义状态曝光，不冒充逐来源曝光、tokens或正式E03匹配。采集仍在CPU执行，未按结果挑选来源，也未自动扩到500/10k。[初始可见性](../artifacts/small-memory-control-20261116/R15-initial-source-visibility-diagnosis-v1.json) [有界对照卡](../artifacts/small-memory-control-20261116/R16-source-breadth-T1-card-v1.json)
+
+K/O机制审查进一步区分“拟合正确”和“使用了显式标记”：8对匹配正文中，两个horizon均有4对共享可接受完整绑定、4对需要不同可接受绑定；8对的完整合法绑定集合也均不同。因此后续I1必须保留真实合法菜单并检查其代理信息，不能把K/O拟合当作标记贡献或创新证据。I2/I3等机制也仍需实际任务消融及正反例，目前不计任何机制验收通过。[可辨识性审查](../artifacts/small-memory-control-20261116/R16-KO-mechanism-identifiability-v1.json)
+
+确认集仍封存。依据原计划15.4的正态近似，5pp收益且配对不一致率0.30粗略需933个独立配对单位；真实差为0、2pp非劣且不一致率0.20约需3920个。预留1000个元数据根不自动保证功效。当前仅保存规划敏感性，正式N、来源依赖组、唯一主比较与迁移条件仍须在有竞争力候选出现后、解封前冻结；不以当前负效果估计正收益功效。[规划范围](../artifacts/small-memory-control-20261116/R16-confirmation-power-planning-only-v1.json)
+
+R14全部原生句柄关闭后，又在原台账结算5个已关闭CPU分析范围；30个实际响应117158 tokens只核对未重扣、无新增unknown。R16运行中采集和之后新增分析尚待独立关闭；所有缺失成本继续记未知。[关闭收据](../artifacts/small-memory-control-20261116/R14-R16-closed-diagnosis-cost-disclosure-v1.json)
+
+R16广度采集现已关闭：新增56根、224状态、15608个实际分支，SQL变更0、Reader调用0，1023.54秒墙时、1077.68秒CPU，约124MB，未超过1200秒/300MB的计划界限。与原8根逐字数据合并后为64根、256状态、17796分支；h0/h2各8898分支、各253/254个可比较状态，菜单15–60动作。h2初始状态SEARCH为好动作的比例，旧来源2/8、新来源28/56；h0即时获取目标不奖励SEARCH，因此两个horizon仍严格分开。[共同数据](../artifacts/small-memory-control-20261116/R16-common-TRAIN64-structural-v1/run.json)
+
+唯一预定M0已完成200更新，完整菜单接受率55/254→248/254，旧32/32、新216/222，平均CE2.463→0.168889，重载最大差0。3200个名义曝光中，旧8根393、新56根2807，有效393/2780，逐来源名义曝光35–65、有效27–65，不能说与8根实验逐来源工作量相同。[拟合审查](../artifacts/small-memory-control-20261116/R16-M0-fit-audit-v1.json)
+
+完整TRAIN64轨迹中，广度模型参考交付11/64（旧8根2、新56根9），旧8根教师模型3/64，规则26/64、余弦45/64；广度模型平均2.484步，仅5/64初始选择SEARCH。DEV为4/32、平均2.656步，初始29 READ、2 SEARCH、1 HANDOFF，全部主动停止。来源广度改善了部分覆盖，教师前缀接受率仍未兑现为完整自身轨迹。DEV已拼接为21条件672位置，仅23个新wire、UTF8材料最大973/2048，当前补齐原Reader首答；不据离线覆盖宣称任务收益。[实际轨迹](../artifacts/small-memory-control-20261116/R16-actual-trajectory-diagnosis-v1.json) [首答协议](../artifacts/small-memory-control-20261116/R16-breadth-DEVfit32-firsts-card-v1.json)
+
+R16首答启动前，10个已关闭准备/分析范围在原台账结算一次，本地GPU分配墙时上界约0.05547小时、已计CPU1272.84秒；共同冷状态包装成本包含在共同数据准备中，不另扣。原Reader运行时继续禁止手工结算。[准备收据](../artifacts/small-memory-control-20261116/R16-closed-breadth-preparation-cost-disclosure-v1.json)
+
+R17只检验既有来源广度与自身分布监督的组合：使用同64个TRAIN来源，按行为选入广度模型已关闭轨迹中的全部95个非初始决策，采集完整合法菜单的h0/h2实际分支。采集前冻结选择，不按标签筛选；合并时核对字面相同before/menu的属性标签，冲突则停止，重复输入不增加唯一状态数。预定只训练一个M0配置，旧教师数据一次、新唯一自身状态各3个replay条目，披露实际角色/来源曝光。这不算干净2×2因果消融、正式T3结果聚合或创新验收；不新增来源，不调LR/gamma。当前只读CPU采集中，之后仍需完整轨迹及原Reader首答。[有界组合卡](../artifacts/small-memory-control-20261116/R17-breadth-own-state-T1-card-v1.json)
