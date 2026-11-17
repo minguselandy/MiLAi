@@ -138,6 +138,7 @@ def evaluate(model: SmallControlModel, rows: list[dict[str, Any]],
                 state, actions = features[i]
                 scores = model.head(state, actions, torch.zeros(
                     len(actions), device=model.device, dtype=torch.long))
+                scores = model.with_prior(scores, row)
             ids = [a["id"] for a in row["actions"]]
             loss = state_loss(scores, ids, row["offline_supervision"])
             if loss is not None:
@@ -176,7 +177,9 @@ def train(args: argparse.Namespace) -> None:
         joint_layout=args.joint_layout, state_representation=args.state_representation,
         action_representation=args.action_representation,
         lora_target_modules=tuple(args.lora_target_modules),
-        feature_normalization=args.feature_normalization)
+        feature_normalization=args.feature_normalization, prior_policy=args.prior_policy,
+        prior_reads=args.prior_reads, prior_margin=args.prior_margin,
+        head_initialization=args.head_initialization)
     rows = read_jsonl(args.data)
     if not rows or any(row["split"] != "train" for row in rows):
         raise ValueError("Training requires nonempty declared TRAIN observations")
@@ -185,7 +188,12 @@ def train(args: argparse.Namespace) -> None:
     started, cpu_started = time.perf_counter(), time.process_time()
     write_json(args.output / "run.json", {"status": "RUNNING", "pid": os.getpid(),
         "data": str(args.data.resolve()), "config": asdict(config), "steps_planned": args.steps})
-    model = SmallControlModel(config, device=args.device)
+    if args.resume is not None and args.initialize_from is not None:
+        raise ValueError("Choose exact recovery or new-stage initialization, not both")
+    model = (SmallControlModel.load(args.initialize_from, device=args.device)
+             if args.initialize_from is not None else SmallControlModel(config, device=args.device))
+    if asdict(model.config) != asdict(config):
+        raise ValueError("Starting checkpoint must have the same declared model/input/prior config")
     initial = {k: v.detach().clone() for k, v in model.head.state_dict().items()}
     groups = [{"params": list(model.head.parameters()),
                "lr": args.head_learning_rate or args.learning_rate}]
@@ -196,8 +204,11 @@ def train(args: argparse.Namespace) -> None:
     scheduler = make_scheduler(optimizer, args.steps, warmup_fraction=.05,
                               warmup_max_updates=20, floor_ratio=.1, mode="warmup-cosine")
     contract = {"data": str(args.data.resolve()), "samples": [r["sample_id"] for r in rows],
+                "initialize_from": (str(args.initialize_from.resolve())
+                                    if args.initialize_from is not None else None),
                 "config": asdict(config), "seed": args.seed, "steps": args.steps,
                 "batch_states": args.batch_states, "microbatch_states": args.microbatch_states,
+                "checkpoint_steps": args.checkpoint_steps,
                 "learning_rate": args.learning_rate, "head_learning_rate": args.head_learning_rate,
                 "deterministic": args.deterministic,
                 "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG")}
@@ -276,7 +287,9 @@ def train(args: argparse.Namespace) -> None:
                     for local, (i, length) in enumerate(zip(micro, lengths, strict=True)):
                         action_ids = ([a["id"] for a in inputs[local]["actions"]]
                                       if cached is None else [a["id"] for a in rows[i]["actions"]])
-                        loss = state_loss(scores[offset:offset + length],
+                        local_scores = model.with_prior(scores[offset:offset + length],
+                                                        rows[i], action_ids)
+                        loss = state_loss(local_scores,
                                           action_ids, rows[i]["offline_supervision"])
                         weight = 1 / source_counts[rows[i]["group_id"]]
                         terms.append(loss * weight / denominator)
@@ -302,6 +315,8 @@ def train(args: argparse.Namespace) -> None:
             if (step + 1) % args.save_every == 0 or step + 1 == args.steps:
                 save_training_state(args.output / "recovery.pt", recovery, optimizer, scheduler,
                                     contract=contract, progress=progress)
+            if step + 1 in args.checkpoint_steps:
+                model.save(args.output / "checkpoints" / f"step-{step + 1:04d}")
             if (step + 1) % 20 == 0 or step + 1 == args.steps:
                 print(json.dumps(record), flush=True)
             if args.interrupt_after == step + 1:
@@ -615,6 +630,39 @@ def evaluate_saved(args: argparse.Namespace) -> None:
         "scope": "Historical exposed-source offline diagnostic; not real-task generalization"})
 
 
+def initialize_model(args: argparse.Namespace) -> None:
+    """Save a declared usable policy start; no claim that construction is training."""
+    import torch
+
+    args.output.mkdir(parents=True, exist_ok=False)
+    tick, cpu = time.perf_counter(), time.process_time()
+    torch.set_num_threads(4)
+    random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    values = read_json(args.model_config)
+    if "lora_target_modules" in values:
+        values["lora_target_modules"] = tuple(values["lora_target_modules"])
+    config = SmallControlConfig(**values)
+    model = SmallControlModel(config, device=args.device)
+    model.train(False)
+    model.save(args.output / "checkpoint")
+    last = model.head.network[-1]
+    zero = bool(last.weight.detach().count_nonzero() == 0
+                and last.bias.detach().count_nonzero() == 0)
+    write_json(args.output / "run.json", {"status": "COMPLETED", "pid": os.getpid(),
+        "config": asdict(config), "seed": args.seed, "optimizer_updates": 0,
+        "device": args.device, "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+        "zero_neural_output": zero, "Reader_calls": 0, "sha_validation": False,
+        "trainable_parameters": sum(p.numel() for p in model.parameters()),
+        "wall_seconds": time.perf_counter()-tick, "cpu_seconds": time.process_time()-cpu,
+        "compute_ledger_status": "pending_idle_settlement",
+        "scope": "Constructed initialization checkpoint, not fitted performance. Declared "
+            "policy logits and neural residual are always combined; model failures raise. "
+            "The base inherits its declared executor-menu order sensitivity."})
+    print(json.dumps({"initialized": str(args.output), "prior": config.prior_policy,
+                      "zero_neural_output": zero}), flush=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -643,8 +691,12 @@ def main() -> None:
     fitting.add_argument("--device", default="cpu")
     fitting.add_argument("--threads", type=int, default=4)
     fitting.add_argument("--save-every", type=int, default=50)
+    fitting.add_argument("--checkpoint-steps", type=int, nargs="+", default=[],
+                         help="Preserve declared inference checkpoints for later DEV selection")
     fitting.add_argument("--set-interaction", action="store_true")
     fitting.add_argument("--resume", type=Path)
+    fitting.add_argument("--initialize-from", type=Path,
+                         help="New optimizer/stage from a matching usable starting checkpoint")
     fitting.add_argument("--interrupt-after", type=int)
     fitting.add_argument("--profile", action="store_true")
     fitting.add_argument("--readout", choices=["dual", "joint"], default="dual")
@@ -660,6 +712,17 @@ def main() -> None:
     fitting.add_argument("--lora-target-modules", nargs="+", default=["q_proj", "v_proj"])
     fitting.add_argument("--feature-normalization", choices=["raw_v1", "block_layernorm_v2"],
                          default="raw_v1")
+    fitting.add_argument("--prior-policy", choices=["none", "fixed_context", "rules"],
+                         default="none")
+    fitting.add_argument("--prior-reads", type=int, default=4)
+    fitting.add_argument("--prior-margin", type=float, default=1.0)
+    fitting.add_argument("--head-initialization", choices=["standard_v1", "zero_output_v1"],
+                         default="standard_v1")
+    initialization = sub.add_parser("initialize")
+    initialization.add_argument("--model-config", type=Path, required=True)
+    initialization.add_argument("--output", type=Path, required=True)
+    initialization.add_argument("--device", default="cpu")
+    initialization.add_argument("--seed", type=int, default=0)
     rolling = sub.add_parser("rollout")
     rolling.add_argument("--fixture", type=Path, required=True)
     rolling.add_argument("--reader-config", type=Path, required=True)
@@ -716,7 +779,92 @@ def main() -> None:
     record_score = sub.add_parser("record-score")
     record_score.add_argument("--readouts", type=Path, required=True)
     record_score.add_argument("--output", type=Path, required=True)
+    from prepare_native_qa_control import add_commands
+
+    add_commands(sub)
+    native_collect = sub.add_parser("native-collect")
+    native_collect.add_argument("--sources", type=Path, required=True)
+    native_collect.add_argument("--reader-config", type=Path, required=True)
+    native_collect.add_argument("--output", type=Path, required=True)
+    native_collect.add_argument("--roots", type=int, default=8)
+    native_collect.add_argument("--methods", nargs="+",
+                                choices=["fixed_context4", "query_once4", "rules4", "empty"],
+                                default=["fixed_context4", "query_once4", "rules4", "empty"])
+    native_collect.add_argument("--checkpoint", nargs=2, action="append", default=[])
+    native_collect.add_argument("--historical-checkpoint", nargs=2, action="append", default=[],
+                                help="Named original shared-actions Laya/S1 checkpoint")
+    native_collect.add_argument("--cosine-backbone", type=Path,
+                                help="Frozen E5 query/passage cosine acquisition baseline")
+    native_collect.add_argument("--cosine-reads", type=int, default=4)
+    native_collect.add_argument("--device", default="cpu")
+    native_collect.add_argument("--material-tokens", type=int, default=2048)
+    native_collect.add_argument("--control-steps", type=int, default=8)
+    native_collect.add_argument("--reuse-banks", type=Path,
+                                help="SQLite backups preserving captured identities for pairing")
+    native_score = sub.add_parser("native-score")
+    native_score.add_argument("--readouts", type=Path, required=True)
+    native_score.add_argument("--controls", type=Path, required=True)
+    native_score.add_argument("--output", type=Path, required=True)
+    native_feedback = sub.add_parser("native-feedback")
+    native_feedback.add_argument("--scores", type=Path, required=True)
+    native_feedback.add_argument("--output", type=Path, required=True)
+    native_feedback.add_argument("--weak-likelihood", type=Path)
+    native_likelihood = sub.add_parser("native-likelihood")
+    native_likelihood.add_argument("--prepared", type=Path, required=True)
+    native_likelihood.add_argument("--controls", type=Path, required=True)
+    native_likelihood.add_argument("--teacher-model", type=Path, required=True)
+    native_likelihood.add_argument("--output", type=Path, required=True)
+    native_likelihood.add_argument("--device", default="cpu")
+    native_likelihood.add_argument("--max-input-tokens", type=int, default=16384)
+    native_bound = sub.add_parser("native-reference-bound")
+    native_bound.add_argument("--sources", type=Path, required=True)
+    native_bound.add_argument("--controls", type=Path, required=True)
+    native_bound.add_argument("--banks", type=Path, required=True)
+    native_bound.add_argument("--reader-config", type=Path, required=True)
+    native_bound.add_argument("--output", type=Path, required=True)
+    native_bound.add_argument("--roots", type=int, default=8)
+    native_bound.add_argument("--material-tokens", type=int, default=2048)
+    native_branches = sub.add_parser("native-branches")
+    native_branches.add_argument("--collection", type=Path, required=True)
+    native_branches.add_argument("--sources", type=Path, required=True)
+    native_branches.add_argument("--checkpoint", type=Path, required=True)
+    native_branches.add_argument("--reader-config", type=Path, required=True)
+    native_branches.add_argument("--output", type=Path, required=True)
+    native_branches.add_argument("--roots", type=int, default=16)
+    native_branches.add_argument("--seed", type=int, default=20261117)
+    native_branches.add_argument("--horizons", type=int, nargs="+", default=[0, 2])
+    native_branches.add_argument("--material-tokens", type=int, default=2048)
+    native_branches.add_argument("--device", default="cpu")
     args = parser.parse_args()
+    if args.command == "initialize":
+        initialize_model(args)
+        return
+    if args.command == "native-likelihood":
+        from native_qa_likelihood import collect
+
+        collect(args)
+        return
+    if args.command == "native-branches":
+        from native_qa_branches import collect
+
+        collect(args)
+        return
+    if args.command == "native-reference-bound":
+        from native_qa_control import prepare_reference_bound
+
+        prepare_reference_bound(args)
+        return
+    if args.command in {"native-collect", "native-score", "native-feedback"}:
+        from native_qa_control import compile_feedback, prepare_packets, score_packets
+
+        {"native-collect": prepare_packets, "native-score": score_packets,
+         "native-feedback": compile_feedback}[args.command](args)
+        return
+    if args.command in {"native-partition", "native-export"}:
+        from prepare_native_qa_control import export, partition
+
+        {"native-partition": partition, "native-export": export}[args.command](args)
+        return
     if args.command in {"records", "record-rollouts", "record-score"}:
         from small_control_records import (
             prepare_record_rollouts,

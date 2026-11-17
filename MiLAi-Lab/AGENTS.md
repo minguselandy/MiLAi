@@ -1,40 +1,75 @@
-# CURRENT 2026-11-17: P07 Reader firsts RUNNING; R00 metadata preparation CLOSED
+# CURRENT 2026-11-17: R05 fits/R06 firsts CLOSED; R07 13-condition firsts RUNNING
 
-Full original small-model control goal ACTIVE/INCOMPLETE. Latest artifacts:
-R=/data/milai-experiments/20261116-small-memory-control/current-state-v2.json.
-No subagents, SHA/checksums/fingerprints, new services/Product defaults, push or merge.
-All P02–P07 fits and16rootDEVtrajectory preparations CLOSED. Only live model job:
-P07-twelve-policy-devfit16-firsts-v1, exec60836, PID3840195 (revalidate actual PID/status).
-576planned policy positions on48tasks/16roots, prior480positions reused only by exact
-declared same-event/wire first identity, including failures; NEVER restart/retry/replace firsts.
-P02/P04/P05/P06 task first scores closed: fixed/rules48/48; M0/M1/M2/CE5/6/5/7;
-query-pair/delivery-pair0/5; encoderLoRA48/normalized-head7/8. No benefit/adoption claim.
-P05 true48state/4root fit: frozen27, encoderLoRA42. All24saved LoRA B tensors nonzero,
-initialheads exactly equal, embeddings frozen. P06 parameter-free blockLayerNorm fit46/48,
-querypairs14/16 bothcorrect; same393729headparams. Raw default preserved. Numeric probe:
-initial hiddenRMS.0255→.516; GELU departure from.5x1.66%→30.05%. Necessary baseline, not novelty.
-P07 normalized4/16/64root curves: TRAIN46/48,135/192,443/768; held16rootDEV complete
-packets8/10/12of48, fixed48/48. Same200updates/3200samples, epochs differ. Per card only
-two new fits; no automatic expansion of poorly generalizing frozen recipe.
-R00 checked native QA as measurement fallback, not by model results. Only Hotpot validation
-id/context.title read; no question/answer/support/sentences inspected for scoring/training.
-All localMuSiQue title IDs96343 conservatively excluded;4538of7405eligible,3288greedy
-all-context-title-disjoint candidates. No confirmation frozen/opened/evaluated. HFParquet
-conversion documented after originalCMUHTTPS failed. Native support-reference metric must
-be labeled an adaptation, not officialjointEM/semantic truth; reuse existing MuSiQue/QASPER
-executor where possible. TRAINshards NOTdownloaded; no Hotpot model job begun.
-PyArrow18.1 isolated R/R00-native-source-preparation-v1/deps (prepend toPYTHONPATH formetadata).
-Lockedtyping deps R/locked-typing-deps; use PYTHONPATH=src:R/locked-typing-deps forCI-mypy,
-NOT MYPYPATH (the latter incorrectly audits third-party stubs as owned code).
-Lab fullRuff, package/tools boundaries, verificationmatrix360sources andCIcore57filemypy PASS.
-Memory/evidence_quotes source registration repaired. Final unified255testsPASS/4oldGPUskip,
-including matched-head actual tinyBERT/LoRA regression. Fullpytest/remoteCI not claimed.
-Current working delta: opt-in feature_normalization raw_v1/block_layernorm_v2, tests,
-Lab source_identity registration and this report. No fullCI/T/M/success/innovation claim.
-Next: close native60836, score with frozenP06source, settle remaining closed scopes once
-in ORIGINAL budget (parents/copies already charged must not rebill). Preserve all negatives;
-advance reliable native-reference natural task protocol/source roles before more toy scale.
-Full E01-E08, strong usablebridge/G1,3seeds,2mechanisms, confirmation/transfer/L remain required.
+Full original small-model memory-control goal ACTIVE/INCOMPLETE. Authoritative state:
+R=/data/milai-experiments/20261116-small-memory-control/current-state-v3.json. v2 historical.
+Work only small-memory-control-20261116. No subagents/SHA/checksums/fingerprints/newservices/
+Productdefaults/push/merge. Preserve originalReader/BGE and ORIGINAL shared budget only.
+No corrective retries/replacement of first answers. No independent human review available.
+ONLY live model/Reader job: R07-thirteen-condition-DEVfit32-firsts-v1 exec52319 (readPID/run);
+416positions/32article-disjointroots,272sameeventfullwires. ReusesR06allidenticalfirsts inclfailures,
+expect119newactualwires. Revalidate, no duplicate launches/retries. Do not manually settle compute
+while nativeHTTPlease is active. AllGPU2/3offline jobs CLOSED. R06exec83331 is TERMINAL.
+R06-nine-condition-DEVfit32-firsts-v1 CLOSED:288positions,153calls/135shared,16failedpositions,
+551899tokens,newunknown0. ScoredR06-nine-condition-DEVfit32-scores-v1: fixed/query/rules/3starts
+13/32 each, S1=11/32,10k+Q=9/32,empty0. Referencecoverage21/21/22/3starts22/old16/empty0.
+R07-thirteen-condition-DEVfit32-prepared-v1 CLOSED:416positions/272sameeventwires,13conditions:
+4simple,3usablezero-residualstarts,2historicalS1/10k+Q,3quality100fits,encoder_cosine4.
+CommonRules4branches literal-equal across allactualsame-sourcebankbackups. CardR07-thirteen-
+condition-DEVfit32-firsts-card-v1.json. NoDEV-select/CONFIRMcheckpointselection here.
+AfterR07CLOSE use native-score withcontrolsR05-DEVfit32-sources-v1/controls.jsonl; outputnew
+R07-thirteen-condition-DEVfit32-scores-v1. Never rerun existing R06scores/readouts.
+R03 actualTRAIN16 feedback CLOSED:32realstates,64state-horizons,236uniqueactualbranches,
+192Readercalls/44shared,10failedpositionskept,684597tokens,newunknown0. h0/h2separate.
+R03-actual-TRAIN16-feedback-v1: qualityh0=6directionstates/6roots/14pairs;h2=9/8/23.
+All32rows/16roots are not effectivequalitylabels; h2only0.048directionsper1000inputtokens.
+Observed-onlycomparisons,unknownmasked,qualitytieskept;Cweak/propertystuctureseparate.
+R05actualqualityfits M0/M1/M2 CLOSED100updates/seed0, exactR04usableinitialization/freshoptimizer,
+commonnominal1600statepositions,451effectiveexposureseach. Pairinitial3/23all;final23/23/19.
+Saved50/100inferencecheckpoints andfinalrecovery. Actualheadchanges;all24/56LoRA B tensors
+nonzeroafterzerostart. Times16.08/681.17/245.64sec. AuditR05-actual-fit-audit-v1.json.
+Fullmenufinalchoices UNEXECUTED21/20/16of32; NEVER callthemnegatives or fulltaskaccuracy.
+Onlyfixedh2realizedfirstlabels,notexpectedvalue/fulllearnedpolicyreturn. ActualDEVfirstsrequired.
+R05isfinitelearnabilityprobe,notformalE01/E02completion or T1warmstartconvergence.
+R04usableM0/M1/M2 are explicitRules4logit+zero-neuralresidual,0updatesconstruction. Actual
+TRAIN8andDEVfit32nonforcedNNtrajectories/packet/wirematchRules4;3clockfieldsexcluded/rawkept.
+All384TRAINstatesfitM2 16k,max9998,nodrops/truncation. AlwaysNNfornonforcedpolicydecisions;
+executorone-option/budgetforcedstepsseparate. Modelerrorsraise,nofallback. Priorinherits
+executor-menuorder sensitivity; notwholehybridpermutationequivariance. Oldnoneprior/rawdefaultskept.
+R02actualTRAIN8 primaryempty0,fixed/query4,rules5,oldregistryNN0,offlinegoldparagraphbound8of8;
+48positions/40calls/8shared/2failedkept. Bound notonlinepolicy/Bstar. Native adaptedanswerEM AND
+actualreferencecoverage ANDcompletefirst, NOTofficialjointEM/semanticexplanationtruth.
+R01rolesTRAIN2000/DEVfit128/DEVselect128/CONFIRM1000metadatareserved. All3256questionroots
+mutuallydisjoint acrossallprovidedarticlecontexttitles;32273articleIDs. Exclude96343localMuSiQue
+articleIDs conservatively. ExportedonlyTRAIN64andDEVfit32. DEV-select/CONFIRMlabelsremainsealed.
+W0officialE5card https://huggingface.co/intfloat/multilingual-e5-small disclosesKILT HotpotQA~70k
+supervisedtrainingpairs+Wikipedia. Exactcurrentquestionoverlapnotmapped: nofoundation-unseen
+claim. W0-E5-official-training-exposure-v1.json. Preservepartitions/firsts, nooutcome-filter/resplit.
+R07frozenE5cosine4 usesactualquery:/passage:legalnavigationexcerpts,4originalcontextreads,
+sharedFixedContextHANDOFF;nohiddenbody/reflookup. ActualDEV32 CLOSED. NotofficialE5reproduction.
+CsmallteacherlikelihoodR05 CLOSED236packets/237FP32forwards,221785main+926probeinputtokens;
+probe2.08e-5meanlogpchange,tolerance1e-4. Not35BReaderlikelihood ortrueutility.
+R06historicalNativeDecision/Laya originalshared_actions/16384/2048actualDEV32CLOSED154/159forwards.
+P02-P07controlledregistrynegative;fixed/rules48/48,normalized4/16/64=8/10/11realfirsts. Stop
+samefrozenrecipeautomatic scale. OldD00freeformnaturaljudge labels notadmittedforbulkprimaryutility.
+Cost: newestR05-R07-closed-cost-disclosure-v1 settles13newclosedlocalscopes/R06parentreadbackonly,
+153responses551899tokens notrebilled. PriorR02-R05receipt18scopes/232responses817910tokensretained.
+Allnewclosedlocalfit/prep/checkscopes throughR07materialbudgetcheck settledonce. R07livefirstspending. SomeGPU/CPU/startup/server/analysisunknownnotzero. Originalledger
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json; nosecondledger.
+ActualUTF8wirematerialcheck: R03/R06/R07 max1553/1616/1838, all<=2048. Legacybody_tokens
+ASCIIJSONproxy, notexactwirecost; costprefs Cproxy unusedinquality/lambda.
+Checks:473selectedunit+architecturePASS (R07-broad-validation-v1.json/log);fullRuffPASS;
+8selectedchangedsource/toolmypyPASS acrosschecks;core58direct+optionalprotocol=59mypyPASS;
+362sourceverificationmatrixPASS. Notfullpytest/remoteCI. Task-onlyverification-env-v1 .pth
+referencesexistingHTTP/CUDA/main deps incl-I subprocess;no sharedinstall/envmutation.
+Next: close/scoreR07, retainfullrootdenominators/failedfirsts. R06alreadyclosed/scored/settled.
+Fullmenu8of9directionalM0choicesremainunexecuted: needactualcoverage, notfake negatives/Cweakfill.
+Allobserved0/1values also exist even onqualityties: possibleboundedM0pointwisevalue calibration
+(gamma.25) next, but no value-code/fit yet. First finite opaqueSourceRef/candidatealias probe is
+required: modelserialization currently keeps rawSourceUUIDs. Do not claim identity invariance.
+NoR08code/preparationyet. Formal E01-E08,3seeds,atleast2mechanisms/
+ablations/counterexamples, strongBstar,CONFIRM/Reader/budgettransfer,L4/8/16stillrequired.
+Do not markfullgoalcomplete/blocked/paused fromprogress. Source snapshots R05v1fit,R06v1legacy/
+trainedDEV,R07v1cosine arefrozen. Latestlocalcheckpoint see current-state-v3 artifact; no push/merge.
 
 # CURRENT 2026-11-17: P05 true context-overfit48 checkpoint
 

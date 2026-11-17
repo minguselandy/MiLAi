@@ -13,6 +13,12 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.methods.control_observation import control_texts, joint_control_texts
+from milai_lab.methods.memory_control import (
+    FixedContextMemoryPolicy,
+    MemoryAction,
+    MemoryControlState,
+    RulesMemoryPolicy,
+)
 from milai_lab.methods.small_memory_policy import PolicyScores
 
 
@@ -33,6 +39,10 @@ class SmallControlConfig:
     action_representation: str = "binding_v1"
     lora_target_modules: tuple[str, ...] = ("q_proj", "v_proj")
     feature_normalization: str = "raw_v1"
+    prior_policy: str = "none"
+    prior_reads: int = 4
+    prior_margin: float = 1.0
+    head_initialization: str = "standard_v1"
 
 
 def conditioned_chunks(body: list[int], context: list[int], limit: int) -> list[list[int]]:
@@ -56,11 +66,14 @@ def conditioned_chunks(body: list[int], context: list[int], limit: int) -> list[
 
 
 def build_action_head(width: int, hidden: int, *, set_interaction: bool = False,
-                      feature_normalization: str = "raw_v1") -> Any:
+                      feature_normalization: str = "raw_v1",
+                      initialization: str = "standard_v1") -> Any:
     import torch  # type: ignore[import-not-found]
 
     if feature_normalization not in {"raw_v1", "block_layernorm_v2"}:
         raise ValueError("Unknown action-head feature normalization")
+    if initialization not in {"standard_v1", "zero_output_v1"}:
+        raise ValueError("Unknown action-head initialization")
 
     class ActionHead(torch.nn.Module):  # type: ignore[misc]
         def __init__(self) -> None:
@@ -68,6 +81,9 @@ def build_action_head(width: int, hidden: int, *, set_interaction: bool = False,
             self.network = torch.nn.Sequential(
                 torch.nn.Linear(width * (5 if set_interaction else 4), hidden),
                 torch.nn.GELU(), torch.nn.Linear(hidden, 1))
+            if initialization == "zero_output_v1":
+                torch.nn.init.zeros_(self.network[-1].weight)
+                torch.nn.init.zeros_(self.network[-1].bias)
 
         def forward(self, state: Any, actions: Any, owners: Any) -> Any:
             selected = state[owners]
@@ -90,6 +106,10 @@ class SmallControlModel:
 
         if config.family not in {"frozen_mlp", "encoder", "decoder"}:
             raise ValueError("Unknown small control family")
+        if config.prior_policy not in {"none", "fixed_context", "rules"}:
+            raise ValueError("Unknown explicitly declared policy prior")
+        if config.prior_margin <= 0:
+            raise ValueError("Policy prior margin must be positive")
         if config.adaptation not in {"frozen", "full", "lora"}:
             raise ValueError("Unknown backbone adaptation")
         if config.family == "frozen_mlp" and config.adaptation != "frozen":
@@ -122,7 +142,8 @@ class SmallControlModel:
         width = self.encoder.config.hidden_size
         self.head = build_action_head(width, config.hidden_size,
             set_interaction=config.set_interaction,
-            feature_normalization=config.feature_normalization).to(self.device)
+            feature_normalization=config.feature_normalization,
+            initialization=config.head_initialization).to(self.device)
         if config.adaptation == "lora":
             from peft import LoraConfig, get_peft_model  # type: ignore[import-not-found]
 
@@ -154,7 +175,8 @@ class SmallControlModel:
         self.encoder.train(mode and self.config.adaptation != "frozen")
         self.head.train(mode)
 
-    def encode(self, texts: list[str], *, prefixes: list[str] | None = None) -> Any:
+    def encode(self, texts: list[str], *, prefixes: list[str] | None = None,
+               text_role: str = "query") -> Any:
         import torch
         import torch.nn.functional as F  # type: ignore[import-not-found]
 
@@ -164,8 +186,12 @@ class SmallControlModel:
             raise ValueError("Chunk capacity is too small")
         if prefixes is not None and len(prefixes) != len(texts):
             raise ValueError("A conditional encoding needs one actual prefix per text")
+        if text_role not in {"query", "passage"}:
+            raise ValueError("Encoder text role must be query or passage")
+        if self.config.family == "decoder" and text_role != "query":
+            raise ValueError("Query/passage retrieval prefixes require an encoder backbone")
         for owner, text in enumerate(texts):
-            prefix = "query: " if self.config.family != "decoder" else ""
+            prefix = text_role + ": " if self.config.family != "decoder" else ""
             context = prefixes[owner] if prefixes is not None else ""
             if context:
                 context_ids = self.tokenizer.encode(prefix + "Task request:\n" + context
@@ -289,13 +315,40 @@ class SmallControlModel:
         return (F.normalize(states.float(), dim=-1), F.normalize(actions.float(), dim=-1),
                 owners, lengths)
 
+    def with_prior(self, scores: Any, online: dict[str, Any],
+                   action_ids: list[str] | None = None) -> Any:
+        """Declared baseline logits plus learned residual; never an error fallback.
+
+        The baseline always consumes the original executor menu. Training may
+        reorder neural readout positions; IDs align the SAME baseline binding.
+        Inference still scores every offered action and raises on model failures.
+        """
+        if self.config.prior_policy == "none":
+            return scores
+        import torch
+
+        state = MemoryControlState(**online["observation"])
+        actions = [MemoryAction(**a) for a in online["actions"]]
+        policy = {"fixed_context": FixedContextMemoryPolicy,
+                  "rules": RulesMemoryPolicy}[self.config.prior_policy](
+                      reads=self.config.prior_reads)
+        chosen = policy.choose(state, actions)
+        original_ids = [a.id for a in actions]
+        ids = original_ids if action_ids is None else action_ids
+        if len(ids) != len(original_ids) or set(ids) != set(original_ids) or chosen not in ids:
+            raise ValueError("Policy prior must align with the complete original menu")
+        prior = torch.tensor([self.config.prior_margin if key == chosen else 0.0 for key in ids],
+                             device=scores.device, dtype=scores.dtype)
+        return scores + prior
+
     def score(self, online: dict[str, Any]) -> PolicyScores:
         import torch
 
         self.train(False)
         with torch.no_grad():
             states, actions, owners, _ = self.features([online])
-            scores = self.head(states, actions, owners).float().cpu().tolist()
+            logits = self.with_prior(self.head(states, actions, owners), online)
+            scores = logits.float().cpu().tolist()
         return PolicyScores([a["id"] for a in online["actions"]], scores)
 
     def save(self, root: Path) -> None:
@@ -314,6 +367,8 @@ class SmallControlModel:
         import torch
 
         values = json.loads((root / "config.json").read_text())
+        if "lora_target_modules" in values:
+            values["lora_target_modules"] = tuple(values["lora_target_modules"])
         if values.get("readout") == "joint" and "joint_layout" not in values:
             values["joint_layout"] = "wrapped_json_v1"
         config = SmallControlConfig(**values)
