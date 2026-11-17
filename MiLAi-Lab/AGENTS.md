@@ -1,4 +1,31 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06 offline64 complete/block00 closed
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06 block01 closed/block02 active
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v30.json.
+S13/188a5239 remains frozen; no new weights/defaults/protected-body exposure. Block01
+exec92490/PID4021033 TERMINAL100 positions:44new56reuse10failed167340tokens/U0. All76
+fresh method-blind B judgments frozen BEFORE method scores:50resolved19unresolved7unknown.
+Quality32states/17directionalstates/8roots/37pairs,93known7unknownvalues,maxmaterial1944.
+Two current-protocol blocks now64states16roots202positions:81new121reuse310820tokens,
+16failed,34directionalstates15roots76pairs/186known16unknown. Still provisional B feedback,
+NOT completed reliable D0 or G1/G2/G3. All original firsts/failures/unknowns retained.
+Only next block02 admitted after yield/cost review;8closed locals SETTLED ONCE/readback
+at C06-before-block02-closed-cost-v1, block01 native phase not rebilled. Current live Reader
+exec77241/PID4093794, frozen S13; actual /proc/locks +cmdline verified.95bound positions/
+32states8roots,71unique wires, canonical391earliest primary firsts, no repeats/profiles.
+REVALIDATE existing run.json and actual process; NEVER restart a lost observation/handle.
+After all95 close, review ALL frozen71 cases K00-K07/F000-F070 under unchanged rubric,
+freeze judgments BEFORE scores/yield. Artifacts C06-frozen-blind-review-v1.py complete/
+compile and C06-prepare-next-block-v1.py are literal-value helpers, no SHA/fingerprints.
+Blocks03-07 NOT_ADMITTED; no automatic fits. Source pool256states64roots775branches and
+own observations488states/140new remain as v29; observations are unlabelled, NOT D3round1.
+Full D0/D1/calibration/P-D/two own-state rounds+same exposure/3seeds/strong baseline/
+source power/new confirmation/transfer/delivery remain INCOMPLETE. No Product/Archive/
+default/push/merge change; SHA OFF. Unmeasured review/report/serverGPU/fullactivityGPU/
+physicalIO/energy/money UNKNOWN. Incremental reuse yield is not full-lifecycle efficiency.
+
+The following v29 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C06 offline64 complete/block00 closed
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v29.json.
 S13/188a5239 frozen. ALLGPUpreparation/firstblockReaderjobs TERMINAL. FullD0Source-only
