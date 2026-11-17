@@ -588,3 +588,17 @@ C05卡仅比较相同 before/首动作、相同h2下的教师read4与冻结当�
 [current-state-v20.json](../artifacts/memory-compute-control-20261117/current-state-v20.json)，
 另见 [C04关闭/C05登记清单](../data/manifests/memory-compute-control-C04-closed-C05-20261118-v1.json)。
 完整用户目标保持ACTIVE，未消费DEV-select或CONFIRM正文，SHA校验持续禁用。
+
+## C05：可选保存模型续跑接入
+
+按已登记卡，在共享 `execute_branch` 上增加可选策略工厂，原教师默认保持不变；原生
+分支 CLI 新增 `--continuation-checkpoint`，从保存权重构造每分支独立的策略状态。与
+提名使用同一检查点时共享只读模型实例，编码器计数只记录一次，并分别记录提名与
+真实续跑调用次数。每步仍使用共同执行器提供的实际反馈和完整菜单，模型异常直接
+传播，不触发教师兜底。
+
+17项首次相关测试及25项共享执行器/分支回归通过（有重叠，不合并为独立测试数），
+Ruff、三个模块 mypy、包/工具边界通过。真实SQLite回归覆盖同 before/首动作、保存
+策略改变实际交付范围；有限步数、工厂状态隔离、默认教师行为与失败传播均检查。
+预定8个实际 step5 均存在，K=4/剩余3步。下一步冻结源码并生成两组同提名的实际副本，
+仍不拟合权重、不读取保护集；Reader准入必须等待完整的逐项对照审计。

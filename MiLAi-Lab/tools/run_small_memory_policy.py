@@ -917,6 +917,8 @@ def main() -> None:
     native_branches.add_argument("--collection", type=Path, required=True)
     native_branches.add_argument("--sources", type=Path, required=True)
     native_branches.add_argument("--checkpoint", type=Path, required=True)
+    native_branches.add_argument("--continuation-checkpoint", type=Path,
+        help="Optional saved policy for bounded continuation; default teacher unchanged")
     native_branches.add_argument("--reader-config", type=Path, required=True)
     native_branches.add_argument("--output", type=Path, required=True)
     native_branches.add_argument("--roots", type=int, default=16)

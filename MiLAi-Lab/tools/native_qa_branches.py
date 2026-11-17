@@ -7,6 +7,7 @@ import os
 import random
 import time
 from dataclasses import asdict
+from functools import partial
 from typing import Any
 
 from langgraph.store.sqlite import SqliteStore  # type: ignore[import-not-found]
@@ -15,6 +16,7 @@ from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.small_control_model import SmallControlModel
+from milai_lab.methods.small_memory_policy import SmallMemoryPolicy
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners.given_host_readout import given_packet_request, separate_answer_fields
 from native_qa_control import actual_packet, environment, material_options
@@ -37,6 +39,13 @@ def collect(args: Any) -> None:
     if not histories or any(h["split"] != "train" for h in histories):
         raise ValueError("Feedback branches require declared TRAIN roots")
     model = SmallControlModel.load(args.checkpoint, device=args.device)
+    continuation_path = getattr(args, "continuation_checkpoint", None)
+    continuation_model = None
+    if continuation_path is not None:
+        continuation_model = (model if continuation_path.resolve() == args.checkpoint.resolve() else
+            SmallControlModel.load(continuation_path, device=args.device))
+    factory = (partial(SmallMemoryPolicy, continuation_model)
+               if continuation_model is not None else None)
     rng = random.Random(args.seed)  # noqa: S311 -- prospective source/state/action sampling
     cases: list[dict[str, Any]] = []
     selected_states: list[dict[str, Any]] = []
@@ -45,7 +54,12 @@ def collect(args: Any) -> None:
         "sources": str(args.sources), "checkpoint": str(args.checkpoint),
         "device": args.device, "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
         "planned_roots": len(histories), "closed_roots": 0, "Reader_calls": 0,
-        "horizons": args.horizons, "continuation_policy": "query_once_context(reads4)",
+        "horizons": args.horizons,
+        "continuation_policy": ("saved_checkpoint_policy" if factory is not None else
+                                "query_once_context(reads4)"),
+        "continuation_checkpoint": str(continuation_path) if continuation_path else None,
+        "continuation_model_shared_with_nomination": continuation_model is model,
+        "continuation_policy_calls": 0, "nomination_score_calls": 0,
         "terminal_handoff": "current", "seed": args.seed, "sha_validation": False,
         "collection_policy": getattr(args, "collection_policy", "query_once4"),
         "state_sampling": getattr(args, "state_sampling", "initial_and_post"),
@@ -89,6 +103,7 @@ def collect(args: Any) -> None:
                     before = event["before"]
                     actions = [MemoryAction(**a) for a in event["actions"]]
                     scored = model.score({"observation": before, "actions": event["actions"]})
+                    run["nomination_score_calls"] += 1
                     current = scored.action_ids[max(range(len(scored.scores)),
                                                     key=scored.scores.__getitem__)]
                     fixed = QueryOnceContextPolicy(reads=4).choose(
@@ -156,7 +171,11 @@ def collect(args: Any) -> None:
                                 branch_tick, branch_cpu = time.perf_counter(), time.process_time()
                                 result = execute_branch(operations, before, action, event["step"],
                                     horizon, terminal_handoff="current",
-                                    policy_name="query_once_context")
+                                    policy_name=("saved_checkpoint_policy" if factory is not None
+                                                 else "query_once_context"),
+                                    policy_factory=factory)
+                                run["continuation_policy_calls"] += (
+                                    result.get("continuation_policy_calls") or 0)
                                 packet, delivered = actual_packet(operations, mapping)
                                 wire = separate_answer_fields(given_packet_request({
                                     "content": request["content"], "query_time": "2026-11-17",
@@ -199,4 +218,7 @@ def collect(args: Any) -> None:
         write_json(args.output / "selected-states.json", selected_states)
         run.update(wall_seconds=time.perf_counter()-tick, cpu_seconds=time.process_time()-cpu,
             model_counters=model.counters, compute_ledger_status="pending_idle_settlement")
+        # A shared instance's encoder counters already include both roles; do not add twice.
+        if continuation_model is not None and continuation_model is not model:
+            run["continuation_model_counters"] = continuation_model.counters
         write_json(args.output / "run.json", run)
