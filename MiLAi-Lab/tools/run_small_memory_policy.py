@@ -260,6 +260,20 @@ def train(args: argparse.Namespace) -> None:
             valid = [i for i in indices if state_loss(torch.zeros(len(rows[i]["actions"])),
                 [a["id"] for a in rows[i]["actions"]], rows[i]["offline_supervision"]) is not None]
             denominator = sum(1 / source_counts[rows[i]["group_id"]] for i in valid)
+            component_denominators, component_scales = {}, None
+            if any(rows[i]["offline_supervision"].get("value_loss_weight", 0) for i in indices):
+                pair_valid = [i for i in indices if state_loss(
+                    torch.zeros(len(rows[i]["actions"])), [a["id"] for a in rows[i]["actions"]],
+                    {**rows[i]["offline_supervision"], "value_loss_weight": 0}) is not None]
+                value_valid = [i for i in indices
+                    if rows[i]["offline_supervision"].get("value_loss_weight", 0)
+                    and any(v is not None for v in rows[i]["offline_supervision"].get(
+                        "observed_values", {}).values())]
+                component_denominators = {"pair": sum(
+                    1 / source_counts[rows[i]["group_id"]] for i in pair_valid),
+                    "value": sum(1 / source_counts[rows[i]["group_id"]] for i in value_valid)}
+                component_scales = {key: denominator / value if value else 0.0
+                                    for key, value in component_denominators.items()}
             optimizer.zero_grad(set_to_none=True)
             model.train()
             numerator = 0.0
@@ -291,7 +305,8 @@ def train(args: argparse.Namespace) -> None:
                         local_scores = model.with_prior(scores[offset:offset + length],
                                                         rows[i], action_ids)
                         loss = state_loss(local_scores,
-                                          action_ids, rows[i]["offline_supervision"])
+                            action_ids, rows[i]["offline_supervision"],
+                            component_scales=component_scales)
                         weight = 1 / source_counts[rows[i]["group_id"]]
                         terms.append(loss * weight / denominator)
                         numerator += float(loss.detach()) * weight
@@ -307,6 +322,8 @@ def train(args: argparse.Namespace) -> None:
                       "loss_sum": numerator,
                       "loss": numerator / denominator if denominator else None,
                       "wall_seconds": time.perf_counter() - tick}
+            if component_denominators:
+                record["component_denominators"] = component_denominators
             history.append(record)
             record["encoder_work"] = {key: value - counters_before[key]
                                       for key, value in model.counters.items()}

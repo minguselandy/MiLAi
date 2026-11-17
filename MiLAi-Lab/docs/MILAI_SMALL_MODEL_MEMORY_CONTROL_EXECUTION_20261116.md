@@ -254,3 +254,15 @@ R07全部416位置关闭：新增119次实际调用、297个复用位置、25个
 R09已独立重放R03全部236个实际TRAIN绑定、64个状态/horizon机会、16根；逐条核对原安全before、菜单、首动作、续跑、原剩余预算及来源版本。30个分支的完整Host wire改变，其中29个是新唯一条件；165个唯一条件仍能复用原首次。没有复制旧质量标签。本块不是新来源扩量或自身状态聚合；修复后的冻结小教师C代理也重新计算，不将旧wire的弱标签套给新wire。当前先运行29个新条件的实际首答，关闭后才编译新执行器监督。[实际重放](../artifacts/small-memory-control-20261116/R09-env2-TRAIN16-replayed-v1/run.json)
 
 最新选择集479 passed，涵盖Source句柄投影、实际迟搜索、K/O及别名回归；相关6个源/工具mypy、全Lab Ruff及362源验证矩阵通过，不称完整pytest/远端CI。新收据已将15个关闭的计算范围（含保留的失败准备）在原台账结算一次；R07原生父计量只核对，119个实际响应426083 tokens未重扣，新增unknown为0。R09正在进行的首答尚未结算。[最新检查](../artifacts/small-memory-control-20261116/R08-broad-validation-v1.json) [关闭范围收据](../artifacts/small-memory-control-20261116/R07-R09-closed-cost-disclosure-v1.json)
+
+## R09反馈关闭与R10价值校准有限对照
+
+R09全部236位置关闭：29个新实际调用、207个复用位置、13个失败位置保留，125464 tokens，新增unknown为0。h=2仍为9方向状态/8根/23对；重执行并评分后，全部32状态的已观察质量值、方向及在线输入恰好与旧版相同。该结论来自实际重新验证，不是预设旧标签可迁移。结构h=2为25方向状态/15根/72对，弱标签亦单独保留。复用后的tokens只表示本轮边际重新验证成本，不能把相同9个方向算成新标签或新来源效率改善。[重新验证](../artifacts/small-memory-control-20261116/R09-quality-target-revalidation-v1.json)
+
+修复后共同冷状态的15条件首答现也全部关闭：480位置，46个新调用、434个复用位置、28个失败位置，185695 tokens，新增unknown为0。原三条成对路线4/32、2/32、0/32；句柄修正M0为2/32；四种可用起点与规则各13/32，余弦18/32，S1为11/32、旧10k+Q为8/32。程序修复和身份稳定性恢复没有建立任务训练收益，不能作为采用证据。[修复后实际评分](../artifacts/small-memory-control-20261116/R08-env2-fifteen-condition-DEVfit32-scores-v1/summary.json)
+
+R10只增加一个M0目标对照：使用同32实际状态、同16根、相同初始化/100步/LR，将已观察动作的118个明确0/1结果加入gamma=0.25价值BCE。未知和未执行动作不标负；质量平局仍不造方向，已知全失败平局可提供绝对值监督。成对项和值项各按全更新窗口的有效来源权重分母归一，再累积microbatch；测试核对了未知梯度为0及microbatch划分等价。全32个训练输入经现代码与原v2快照逐字兼容，既有纯成对M0仍是匹配对照。[有限对照卡](../artifacts/small-memory-control-20261116/R10-value-calibration-card-v1.json)
+
+该100步已关闭，成对有效曝光451与对照相同，价值有效曝光1600，墙时21.38秒。已观察比较保持23/23，训练内状态平均BCE由纯成对的1.762变为0.046，Brier由0.413变为0.00849。最高分未执行绑定反而为29/32（对照21/32），因此概率拟合也不能冒充完整选择正确率或任务收益。已准备同冷状态DEV32，16条件512位置中只有29个新wire，正在补齐实际首答。[拟合范围](../artifacts/small-memory-control-20261116/R10-observed-value-fit-audit-v1.json) [首答协议](../artifacts/small-memory-control-20261116/R10-value-DEVfit32-firsts-card-v1.json)
+
+最新选择集482 passed，新增价值mask、单动作/未知、分量全局归一化检查；价值损失mypy与全Lab Ruff通过，未宣称完整CI。R09后的3个关闭本地范围及修复后DEV/R10的7个关闭范围均已在原预算结算一次；原生29/46个响应及父计算只核对、不重扣，新增unknown均为0。R10运行中首答仍待关闭，所有缺失成本保持未知。[检查记录](../artifacts/small-memory-control-20261116/R10-broad-validation-v1.json) [R09收据](../artifacts/small-memory-control-20261116/R09-env2-feedback-cost-disclosure-v1.json) [R10关闭范围](../artifacts/small-memory-control-20261116/R08-R10-value-closed-cost-disclosure-v1.json)

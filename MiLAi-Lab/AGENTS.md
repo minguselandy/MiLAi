@@ -1,4 +1,67 @@
-# CURRENT 2026-11-17: R09 corrected D0 firsts RUNNING; R08 env2 15-policy DEV READY
+# CURRENT 2026-11-17: R09 corrected labels/R08 ENV2 DEV CLOSED; R10 value DEV firsts RUNNING
+
+Supersedes allhistoricalblocksbelow. Fulloriginalsmall-memorygoal ACTIVE/INCOMPLETE.
+R=/data/milai-experiments/20261116-small-memory-control; authoritativecurrent-state-v3.json.
+No subagents/SHA/checksums/contentfingerprints/newservices/Productdefaults/push/merge. Original
+Reader/BGE/sharedbudgetonly. No firstretry/replacement, no inventedindependentreview.
+Latestlocalcommit c310d10f repairaftera56455da. CURRENTUNCOMMITTED:optionalobserved-valueBCE,
+separateglobalwindowcomponentdenominators,3tests/reportupdates. Defaultpairbehaviorretained.
+ONLYLIVE model/Readerjob R10-env2-sixteen-condition-DEVfit32-firsts-v1 exec10434 PID782947
+(revalidate).512positions/32roots,only29newwirefirsts,reusesallR08identicalfirsts inclfailures.
+SourceR10-observed-value-v1-source. Do notduplicate/retry or settlecompute whileHTTPleaseactive.
+AllofflineGPU2/3fits/preps/probes CLOSED. No othernativejob. R08exec51991/R09exec92946TERMINAL.
+AfterR10ALLterminal native-score controlsR05-DEVfit32-sources-v1/controls.jsonl ->
+R10-env2-sixteen-condition-DEVfit32-scores-v1. Do notrescoreintoexistingclosedfolders.
+R09ENV2D0 CLOSED236positions,29newcalls/207reuse,13failedpositions,125464tokens,newunknown0.
+R09-env2-TRAIN16-scores-v1 and R09-env2-TRAIN16-feedback-v1 CLOSED. FreshCteacherR09recomputed.
+Actualrevalidation BOTHh0/h2all32onlineinputs/observedIDs/values/preferences EXACTsameasoldR03;
+R09-quality-target-revalidation-v1.json. This isobservedfactafterrealreplay, not assumedtransfer.
+ThereforeoldpairfitqualitytargetsrevalidatedonfixedO,notunexecutedactions/newstates. Structure/
+weaklabels differ;usefreshENV2data. h2quality9directionstates/8roots/23pairs;structure25/15/72.
+Feedbackcostratiosaremarginalrevalidation/reusecost,NOTnewlabel/sourceproductionefficiency.
+R08ENV2all15DEVfirstsCLOSED480positions,46newcalls/434reuse,28failedpositions,185695tokens,
+newunknown0. R08-env2-fifteen-condition-DEVfit32-scores-v1 CLOSED: M0/M1/M2pair100=4/2/0of32;
+M0visiblehandlespair100=2;all4usablezero-starts13,rules/fixed/query13,cosine18,S1=11,10kQ=8,empty0.
+NoG1/T/M/taskgain;stopautomaticpair-onlyh2scaling. Sourcealiasrepairisengineering,notinnovation.
+R10cardR10-value-calibration-card-v1.json ONE M0gamma.25variant. Samev2init/head/data/LR/100steps,
+118actualobserved0/1outcomes acrossall32states/16roots. Tieskeepnosourcedirection; unknownand
+unexecutedmasked. PairandBCEeachstate-mean,eachseparateglobalwindow/sourceweighteddenominator;
+wholemicroaccumulationtestpasses. No valuehead extras, same393729head/frozenE5+Rules4prior.
+R10-M0-pair-value100-seed0-v1 CLOSED100updates,1600unionexposures,pair451/value1600,seedschedule
+sameasR08pairbaseline;21.38sec. Pair23/23. TrainingstateBCE1.762→.0461/Brier.413→.00849;
+fullmenufinalUNEXECUTED29/32vs21baseline. NOTtaskcalibration/gain. Value targets singlefirsth2,
+notfullexpectedreturn. Oldv2andcurrent32encodertextsEXACTequal (R10trainingviewcompatibility).
+R10-value-DEVfit32-prepared-v1 andR10-env2-sixteen-condition-DEVfit32-prepared-v1 CLOSED;
+commoncoldstate/Rulessamewire,29newconditions,materialmax1105. ActualfirstsR10currentlyrunning.
+R11-env2-policy-behavior-diagnosis-v1.json:pairM0/M1/M2budgetexhausted19/25/31of32;v2pair19;
+valuecandidate1/32budgetend/31activehandoff,meansteps3.656vs6.781v2pair. Qualitypending,nocostwinclaim.
+R08fix:latefixedSEARCHoverwrotematerialindicesafterSourceREADandleftpublicretrievedscopesstale.
+Fixedstableappend+postSEARCHprojection;RulesaliasesandvalidnarrowK/fullOdelivery. FailedR08v1
+prep root11step6/10closedroots/0Readercalls retained,notretriedover. ENV2all15samecapturedcold
+before/menu perroot incldiagnostictiming,sourcebankbackup. OldnegativeENV1results retained.
+R09replaystrictoldbefore/menu/firstbinding/horizon/remainingbudget236branches;30changedwires,
+only29newunique. Notownstateaggregation/newsourcecoverage. Allsamewirefailuresreused.
+Sourcehandlesv2explicitencoder-onlyprojection:publicSourceRefrelations/derivedIDs/targetsaliased,
+literalidentifiersinbody/queryprotected,action-onlyunknownrefsretained. Realexecutionparamslive
+original. Oldv1inputunchanged. Raw8sourceUUIDrename1/8/short3/8forall3;v2M0neuralprobe0changes/
+maxdiff0;all32dual/jointmodeltextalphaequal. Decoderreverse3/8old,notpermutationequivariant.
+OnlyTRAIN64/DEVfit32exported;DEV-select128/CONFIRM1000stillmetadatareserved/sealed. All3256roles
+article-disjoint;96343localMuSiQuetitlesexcluded. E5officialKILT HotpotQA~70k+Wikipedia exposure
+disclosed;nocoldpretraining-unseenclaim. Native-referenceEM+actualspan+completefirst adaptation,
+NOTofficialjointEM/fullsemantictruth. NaturalD00judge notadmitted. Noindependenthumanreview.
+Costs newestR08-R10-value-closed-cost-disclosure-v1 settles7closedlocalscopes+R08parentreadback
+46responses185695tokens notrebilled;R09feedbackreceipt3scopes/29responses125464tokens;earlier
+receiptsretained. R10livefirstsandR11diagnosticpending. Originalledgeronly,no secondledger;
+startup/server/analysis/energy/moneyunmeasurednotzero.
+Checks:latestR10-broad-validation-v1=482selectedunit+architecturePASS;fullRuff/valuemypyPASS;
+prior6changedfilemypy/362sourcematrix/core59mypyPASS. Notfullpytest/remoteCI. Newvaluecommitpending.
+Next:close/scoreR10samefullrootdenominator/failures. Do nottuneadditionalvalueweightsifnogain.
+NeedusableTRAINEDT1(structuralprogress/interface),richersafeactualstate/actioncoverage,strong
+BstarandrealDEV beforeformalE01-E08/scaling/2self-staterounds/3seeds/2mechanismablations/
+counterexamples/newCONFIRM/secondReader/budgettransfer/L4/8/16. Sourcegeometry/fit/body-only
+savingsnotresearchsuccess. OriginalgoalremainsACTIVE;notcomplete/blocked/paused.
+
+# HISTORICAL CHECKPOINT: R09 feedback was running before R10 value diagnosis
 
 This block supersedes historical CURRENT blocks below. Full original goal ACTIVE/INCOMPLETE.
 R=/data/milai-experiments/20261116-small-memory-control; authoritative current-state-v3.json.
