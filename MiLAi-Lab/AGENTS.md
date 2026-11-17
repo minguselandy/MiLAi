@@ -1,6 +1,6 @@
 # CURRENT 2026-11-18: memory compute v2 ACTIVE; C06block06closed/block07active; C07recipe only
 
-LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v36.json.
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v37.json.
 C06 remains S13/188a5239.06 CLOSED94positions71new23reuse3fail280987tokens/U0; all71 Bblind
 judgments frozen before scores39resolved22unresolved10unknown.16directionalstates8roots29pairs,
 79known15unknown,maxUTF8material1944. Sevenblocks224states56roots680positions408new272reuse
@@ -18,6 +18,12 @@ C07prospective card ONLY: first16/32/64roots x weak/native_masked/reviewed, same
 warmstart,12/24/48updates,oneLR/seed0,finite9fits. Partial192states48roots each189valid,full
 inputs/menus equal,native-reviewedknownmask equal,weakvalidexposure equal. NO fit admission
 before full64review+matching/numerical/cost/freshGPU checks; NO DEVreadout admission yet.
+C07partial48 numerical preflight passed actual first16/32 declared sampling windows: same
+validindices/source denominators allarms, same value-component denominators native/reviewed.
+Synthetic shared-logit full-vs-micro4 gradientmax5.96e-8/loss1.94e-7;10509zero-gradient checks
+across overlapping subsets, no real model loaded or optimizer update. Full64audit pending.
+2.418CPU seconds pending next original idle scope once. Input-subset/future finite9fit drivers
+syntax-only prepared, NOT executed/admitted; explicit full64review/numerical admission required.
 J02fixed-code pilot negative unchanged/no expansion or labelupgrade. Only completed owned
 /dev/shm/milai-camc-qwen25-32b-J03-v1 removed after users absent:25files65.54GB released,
 original models/evidence unchanged. Oldv35 cache-retained observation superseded.

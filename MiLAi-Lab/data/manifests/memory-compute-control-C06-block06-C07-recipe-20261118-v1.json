@@ -2,7 +2,7 @@
   "schema": "memory_compute_control_progress_v1",
   "status": "ACTIVE_INCOMPLETE",
   "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
-  "latest_state": "current-state-v36.json",
+  "latest_state": "current-state-v37.json",
   "C06_frozen_source": "S13/188a5239",
   "closed_block06": {
     "states": 32,
@@ -76,7 +76,16 @@
     "finite_recipe": "First16/32/64roots x3arms, same usable M0raw warmstart,12/24/48updates,oneLRseed0,9fits only",
     "research_fits_executed": 0,
     "prerequisite": "Full64C06review+numerical/exposure/cost/freshGPU review required before fit admission",
-    "DEV_readouts_admitted": 0
+    "DEV_readouts_admitted": 0,
+    "numerical_preflight": "C07-partial48-numerical-preflight-v1.json",
+    "numerical_scope": "Actual first16/32 sampling windows/source denominators + shared synthetic logits only; full64pending/no model/optimizer update",
+    "synthetic_gradient_max_absolute_error": 5.960464477539063e-08,
+    "zero_gradient_checks_across_overlapping_subsets": 10509,
+    "future_scripts_syntax_only_not_executed": [
+      "C07-prepare-finite-fit-inputs-v1.py",
+      "C07-train-finite-learningcurve-v1.py"
+    ],
+    "new_measured_CPU_seconds_pending_original_scope": 2.418042161
   },
   "J03_owned_tmpfs_cleanup": {
     "evidence": "J03-owned-tmpfs-cleanup-v1.json",
@@ -105,7 +114,7 @@
     "JSON_counts_links_source_diff": "PASS",
     "source_code_changed_after_final_test_pass": false,
     "repeated_unit_tests": 0,
-    "rollback_commit": "d7f87f8a",
+    "rollback_commit": "37ed1960",
     "remote_checked": false
   },
   "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
