@@ -1,5 +1,36 @@
 # CURRENT 2026-11-17: memory compute v2 ACTIVE in an isolated worktree
 
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v6.json.
+User resumed after interruption; original block00 was found terminal/absent, NOT restarted.
+Block00 CLOSED110actual positions/32states/8roots,85newcalls25reuse9failed,332480tokens/U0.
+quality-h2 has20directional states/6roots/57pairs,86ties; native EM+physical spans only,
+not independent semantic truth or model improvement. Feedbackv3 corrects a hardcoded horizon
+description to h2 only; original online/quality/cost rows equalv2. Old files preserved.
+ReviewD00-block00-review-v1 permits next fixed block. ONLY live model HTTP at latest actual
+observation is D00-block01-TRAIN8-firsts-v1, exec1248 PID2915162,107bound positions/32states/
+8roots; frozen S04/3efeefc1. Verify run.json plus actual /proc command, never restart from
+expired observation. Blocks02-07 NOT_STARTED; terminal feedback/yield/cost review before next.
+
+S05 source121089e6 adds optional memory_control.view_tables=true (defaultFALSE), no semantic
+field deletion: exact typed map-column projection of nodes/rules/locators/metadata, same
+admission/final renderer, saved snapshot presentation immutable across caller toggles.
+Actual first old rejected View exactly reconstructed:10nodes/0rules,body694tokens; full2107
+over2048, table2034within2048 under alltermination labels, all decoded evidence exactlyequal.
+Engineering capacity evidence for this case, NOT global143-case repair or Reader quality gain.
+Normal given-request SQLite path exercised with0generation; same-limit actual View delivery,
+unknown/type/order/rule preservation, cached re-read and revocation regressions pass.
+New revocation regression exposed old repeat-open KeyError on redacted View; open_structure
+now keeps tombstones unavailable and never restores missing producer bindings/body.
+119affectedPASS, final4newcontractsPASS, Ruff/pass;5source-filemypy in actual dependencyenv
+passes with only externalimport-untyped/legacyunused-ignore exclusions; package/tools DAGPASS.
+No fullpytest/remoteCI. Sixclosed local scopes settledONCE/readback BEFOREblock01HTTP;
+nativeblock00 phase preservedonce, no tokenrebill. ReceiptS05-and-D00-block00-closed-cost-v1.
+Next training still needs a usable trained same-architecture start and matched outcome/weak
+controls, fullD0labels/semanticcalibration, actual new-root gains, P/D, own-state controls,
+3seeds/ablations/frozenconfirmation/power/transfer and final artifacts. Goal ACTIVE/INCOMPLETE.
+
+The following v4 and earlier observations are historical; current authority is v6 above.
+
 LATEST authority is /data/milai-experiments/20261117-memory-compute-control/current-state-v4.json.
 S02/S03/S04 sources15076ede/13032465/3efeefc1 frozen. D00 parent preparation CLOSED:
 64TRAIN roots/256actual states/869independent bound executions at declared steps1/2/3/5,
