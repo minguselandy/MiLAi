@@ -272,3 +272,17 @@ R10现全部关闭：512位置、29个新实际调用、483个复用位置、32�
 实际轨迹诊断：原M0/M1/M2成对策略分别19/25/31个任务预算耗尽，句柄修正M0为19；价值校准降至1，主动HANDOFF31/32、平均3.66步，但材料覆盖仍不足。规则与余弦均32/32主动交付、平均5.72/5.97步。读取、O获取、当前K/显式交付、主动停止、预算强停及Reader首答已分开，不能把“停止变多/步数变少”记为成功。下一步必须建立可用的已训练T1，并补足真实自身状态及动作覆盖；不把未执行候选标负，也不以弱标签填满规模。[行为诊断](../artifacts/small-memory-control-20261116/R11-env2-policy-behavior-diagnosis-v1.json)
 
 本轮全部模型/Reader句柄已终止，最终评分与行为诊断两个关闭本地范围已在原台账结算一次，29个实际响应及父计算只核对未重扣。原计划仍ACTIVE：G1训练收益、G2方法收益及创新机制均未成立；完整E01–E08、正式三seed、两个机制及消融/反例、新来源确认、迁移和4/8/16会话维护都不能由这些有限负结果替代。[最终关闭范围](../artifacts/small-memory-control-20261116/R10-final-value-cost-disclosure-v1.json)
+
+## R12：完整合法菜单的结构化T1探针
+
+依据前述负结果，本块不扩大9个方向状态或继续调gamma，改为补齐T1的接口、真实证据进展和交付监督。预先固定前8个TRAIN根，每根构造初始、SEARCH后、两次选入K、相同两次仅观察O，共32个实际状态。前缀只用冻结E5余弦选择已提供的未展开READ候选，不用答案或支持标签选状态/来源；完整菜单在分支和推理中保持不变。K/O两条路径的实际已获取材料逐字匹配。[实验卡](../artifacts/small-memory-control-20261116/R12-full-menu-structural-card-v1.json)
+
+每根先备份原SQLite，再setup并启用query_only；各分支使用新的MemoryService和实际执行器checkpoint。单根完整只读轨迹验证通过。第一版smoke仅因压缩日志误认为当前HANDOFF必有operation result而失败，原产物及费用保留，未调用Reader；第二版明确记录该无操作回执为None。8根完整采集关闭：2188个实际分支，h=0/h=2各1094个完整绑定，32状态各19–46个合法动作全部执行，SQL变更0、Reader调用0，墙时110.72秒。[采集记录](../artifacts/small-memory-control-20261116/R12-full-menu-TRAIN8-v1/run.json)
+
+结构目标只定义原生参考跨度这一程序属性：优先实际完整交付；否则奖励真实非终止获取进展，覆盖相同后按实际非终止操作数选最少者。K交付覆盖和K∪O已获取覆盖分别保存，平坦/无进展状态mask，不将未知或未执行动作标负。这不是Reader效用、完整语义充分性或官方jointEM。两个horizon分别存储；各有32个可比较状态，根来源仍为8，不能将2188个分支称为独立任务。[全菜单审查](../artifacts/small-memory-control-20261116/R12-full-menu-TRAIN8-audit-v1.json)
+
+M0从相同句柄投影v2可用零残差起点执行200步结构CE，完整菜单好动作集合接受率由5/32变为32/32，initial/search/K/O四类均8/8，最终平均CE约0.000328；实际保存重载、100/200步checkpoint保留，墙时28.53秒。K/O好动作集合可能有交集，因此32/32不证明模型使用了K/O标记，也不证明来源外收益。已完成32根完整DEV轨迹，17条件544位置只有31个新Host wire，正在原Reader上补齐首答。[M0拟合核对](../artifacts/small-memory-control-20261116/R12-M0-full-menu-fit-audit-v1.json)
+
+M1编码器query/value LoRA与M2联合解码器q_proj/v_proj LoRA使用共同32状态、CE目标、200更新、batch16/micro1/seed0，实际训练中，尚无最终成绩。M1的encoder batch固定为16用于前向分组；实际tokens/padding/工作量分别报告。M2对全部32个完整输入做容量预检，最大5030/16384 tokens，无丢弃或截断。每路线最多该一个拟合配置，不能仅依据离线准确率淘汰路线，仍需真实DEV。[三路线协议](../artifacts/small-memory-control-20261116/R12-three-route-T1-card-v1.json)
+
+新增结构语义与原生SQLite窄验证12 passed，统一选择集485 passed，工具mypy、全Lab Ruff及362源验证矩阵通过；不称完整pytest/远端CI。11个已关闭准备/检查范围已在原台账结算一次，包含保留失败smoke及初始化；M1/M2运行中拟合和M0运行中首答未结算，未测部分仍未知。当前权威状态改为current-state-v4.json，旧v3只作历史。[检查](../artifacts/small-memory-control-20261116/R12-broad-validation-v1.json) [关闭范围](../artifacts/small-memory-control-20261116/R12-closed-preparation-cost-disclosure-v1.json)

@@ -1,4 +1,66 @@
-# CURRENT 2026-11-17: R10 value firsts CLOSED/negative; all jobs TERMINAL; full goal ACTIVE
+# CURRENT 2026-11-17: R12 actual full-menu T1 collected; M0 fit32/32; M1/M2fit +M0Reader RUNNING
+
+Supersedes historical blocks. Original FULLsmall-modelplan ACTIVE/INCOMPLETE. Authoritative
+R=/data/milai-experiments/20261116-small-memory-control/current-state-v4.json. v3historical/stale.
+No subagents/SHA/checksums/contentfingerprints/newservices/Productdefaults/push/merge.
+PreserveoriginalReader/BGE/budget. No Readerfirstretry/replacement, noindependentreviewinvented.
+Latestcommit987440ff (closureafter40360c07value/c310d10frepair/a56455danative). Currentuncommitted:
+native_t1_structural.py/CLI/3semantictests. Fullgoalnotcomplete;don'treopenoldfailedpair/valuebranch.
+LIVE: M1T1 exec95865 PID971513 physicalGPU2;M2T1 exec63810 PID972330 physicalGPU3;
+M0T1Reader exec75010 PID990614 originalReader. Revalidateactualrun/PIDs,NOduplicate/retry.
+R12-M1/M2-full-menu-T1-200-seed0-v1/run.json;R12-M0-seventeen-condition-DEVfit32-firsts-v1/run.json.
+HTTPleaselive:DO NOTmanuallysettlecompute;alloldR10/R08/R09nativehandlesTERMINAL.
+R12-full-menu-TRAIN8-v1 CLOSED:8preassignedTRAINroots/32actualstates,2188branches,h0/h2separate.
+Everyofferedlegalbindingactuallyexecuted:1094perhorizon,menus19-46actions,all32stateseligibleCE.
+State types initial/search/after2Kreads/matching2Oreads8each. Samecoldsourcebank/checkpoint per
+K/Opath,exactactualacquiredmaterialmatched. PrefixsourceschosenbyfrozenE5cosineamongoffered
+unexpandedREADindices,no goldselection. Fullmenusnotprunedforbranchlabels/inference.
+PrivateSQLitecopyperroot/setup/query_onlyON,freshMemoryService/EvidenceOpscheckpoint perbranch;
+SQLchanges0,Readercalls0,110.72secs. Completedreadonly6stepcontrolsmokePASS. v1smokeFAILED
+onlycompactlogexpectedresultoncurrentHANDOFF(nooperation);preserved0Readercalls,metadatafix
+v2smoke1 CLOSED4states/282branches20.33secs. Neveroverwritefailed/successfulartifactdirectories.
+StructuraltargetA_native_reference_propertyONLY: tier2actualcompleteSFdelivery; tier1nonterminal
+acquisitionprogress(KunionO),coveragefirstthenactualnonterminaloperationcostonties. DeliveredK
+andacquiredKunionOcoveragekeptseparate. Flat/no-progressmenusmasked,unknownmasked. NoReader
+utility/semantictruth/source-successclaim;standardstructuralwarmstartnotinnovation.
+R12-M0-full-menu-T1-200-seed0-v1 CLOSED200updates,32statefull-menugood5→32/32,CE.000328,
+28.53secs;matchedR08M0v2zeroRuleinitialization. Actualsave/reloaddone,checkpoints100/200.
+Nottrainedutility/taskgain. R12-M0-T1-DEVfit32-prepared-v1 CLOSED32actualtrajectoriescommoncold;
+joinedR12-M0-seventeen-condition-DEVfit32-prepared-v1=544positions,N32,only31newwiresvsR10,
+materialmax716<=2048. Readerfirstsrunning75010;oldsameevent/wirefirsts inclfailures reused.
+AfterM0ReaderALLterminal native-score ->R12-M0-seventeen-condition-DEVfit32-scores-v1,
+controlsR05-DEVfit32-sources-v1/controls.jsonl. Nooffline-onlyrouteelimination.
+R12-three-route-T1-card-v1.json/shareddata32states/8roots/full-menuCE/200updates/batch16/micro1/
+seed0/checkpoint100,200. M1encoderquery/valueLoRA LR3e-5/head1e-3,encodebatch16fwdgrouping;
+M2jointQwen0.6q_proj/v_projLoRALR1e-4/head3e-4. Bothnewv2zero-outputinitializationsCLOSED,
+functionalRulepriorstart;M2actualALL32fulljointinputsfitmax5030/16384,no droppedtokens.
+Fixed3routeplanbeforetaskresults;differentactualtokens/padding/workseparate,notmatchedtokenclaim.
+SourceR12-full-menu-v2-source frozen forcollection/fits/DEV. Keephead/data/configsourceversion.
+Latestnewtest12PASS(3structuralsemantics+9nativeactualSQL);structuralmypy/RuffPASS. Unified
+R12-broad-validation-v1 CLOSED485PASS; mpy85498PASS,matrix13304PASS(362sources). Prior482
+selected/core59mypyPASS,notfullpytest/remoteCI. Task-onlymergeddepsenvfor-Itests,no sharedenv mutation.
+Cost: R12-closed-preparation-cost-disclosure-v1 settled11CLOSEDscopesonceoriginalledger incl
+retainedfailedsmoke/data/M0fit/prep/M1-M2init,0newnativecalls;LIVE M1/M2fits/M0firstsNOTsettled.
+Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json. Neverrebill
+parents/copiedreadouts. Startup/analysis/serverGPU/energy/moneyunknownnotzero. No secondledger.
+PriorENV2negativeactualtask:pairM0/M1/M2=4/2/0,v2pair2,value1of32;usableinit13,cosine18.
+ValueBCEtrainimprovedbuttask1,stoppedgammaweights/failedh2pairautomaticexpansion. Onlystructure
+T1nownew,notclaimingoutcomeutility. R09qualityh2only9states8roots23pairs;118knownabsolutevalues,
+allobservedqualitytargetsrevalidatedsameENV1on32states;structure/weakfreshandseparate.
+ExecutorstableSEARCHindices/publicscopes/K-O/aliasesfixed. OldENV1negative/failedartifactskept.
+Source-handleprojectionv2explicitencoder-only,realbindingsunchanged;literalbody/queryIDsprotected.
+Oldv1inputunchanged;UUID/shortaliasmodeltextproof32,8sourceneuralv2probe0changes;engineeringonly.
+OnlyTRAIN64/DEVfit32exported;DEV-select128/CONFIRM1000remainmetadatareserved/sealed.3256assigned
+rootsall-context-articledisjoint,96343localMuSiQuetitlesexcluded. E5officialKILT HotpotQA~70k/
+Wikipedia exposuredisclosed,nofoundation-unseenclaim. NativeanswerEM+actualspans+completefirst
+adaptation,notofficialjointEM/explanationtruth. OldD00naturaljudgeunreliable/notbulkutility.
+NEXT:pollconfirmed95865/63810/75010,neverduplicate. M0actualDEVscorewhenclosed. M1/M2afterfits
+full-menu32state/K-O/savedLoRAaudit,thenactualDEV32/commoncold/sourcebanks/readouts withliteral
+wirefirstreuse. Finishnewchecks/docs/AGENTS/state/localcommit. EntireformalE01-E08,strongusable
+TRAINEDbridge/strongBstar/scaling/2ownstaterounds/3seeds/2mechanisms/ablations/counterexamples/
+newCONFIRM/secondReader/budgettransfer/L4/8/16stillrequired. GoalACTIVE,no falsecompletion.
+
+# HISTORICAL CHECKPOINT: R10 negative slice closed before native structural T1
 
 This supersedes historical blocks below. Full original small-model plan ACTIVE/INCOMPLETE.
 R=/data/milai-experiments/20261116-small-memory-control/current-state-v3.json authoritative.

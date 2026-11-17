@@ -862,9 +862,24 @@ def main() -> None:
     native_replay.add_argument("--prepared", type=Path, required=True)
     native_replay.add_argument("--output", type=Path, required=True)
     native_replay.add_argument("--material-tokens", type=int, default=2048)
+    native_structural = sub.add_parser("native-structural")
+    native_structural.add_argument("--collection", type=Path, required=True)
+    native_structural.add_argument("--sources", type=Path, required=True)
+    native_structural.add_argument("--controls", type=Path, required=True)
+    native_structural.add_argument("--reader-config", type=Path, required=True)
+    native_structural.add_argument("--backbone", type=Path, required=True)
+    native_structural.add_argument("--output", type=Path, required=True)
+    native_structural.add_argument("--roots", type=int, default=8)
+    native_structural.add_argument("--device", default="cpu")
+    native_structural.add_argument("--material-tokens", type=int, default=2048)
     args = parser.parse_args()
     if args.command == "initialize":
         initialize_model(args)
+        return
+    if args.command == "native-structural":
+        from native_t1_structural import collect
+
+        collect(args)
         return
     if args.command == "native-replay":
         from native_qa_replay import replay
