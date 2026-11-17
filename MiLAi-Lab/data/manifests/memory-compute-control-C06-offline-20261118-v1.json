@@ -1,0 +1,74 @@
+{
+  "schema": "camc.C06_offline_admitted_block00.v1",
+  "goal_status": "ACTIVE_INCOMPLETE",
+  "source_version": "188a5239",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "D0target": {
+    "roots": 64,
+    "actual_states": 256,
+    "feedback_only_first_block_admitted": true
+  },
+  "firstblock": {
+    "roots": 8,
+    "states": 32,
+    "actual_bound_positions": 102,
+    "named_alias_positions": 128,
+    "effective_horizons": [
+      2,
+      4,
+      5,
+      6
+    ],
+    "actual_checkpoint_continuation_calls": 289,
+    "all_actual_first_before_menus_bound": true,
+    "max_step": 7,
+    "maximum_UTF8_material_tokens": 2002,
+    "independent_banks": 102,
+    "unique_originaltask_fullwires": 79
+  },
+  "own_observations": {
+    "roots": 64,
+    "common_cold_before_menu": 64,
+    "actual_before_states": 488,
+    "new_full_before_menu_vs_fixedprefix": 140,
+    "maximum_UTF8_material_tokens": 2014,
+    "model_counters": {
+      "current_actor": {
+        "forwards": 1665,
+        "input_tokens": 6514109,
+        "padded_tokens": 9463768,
+        "texts": 21357,
+        "chunked_texts": 2108,
+        "chunks": 23692,
+        "joint_sequences": 0
+      }
+    },
+    "scope": "Prospectiveactualcurrentpolicyobservations only, notfeedback/learning/D3roundcomplete."
+  },
+  "offline_scheduled_GPU_job_seconds": 174.15889462828636,
+  "not_kernel_or_D3_adaptation": true,
+  "closed_cost_receipt": "/data/milai-experiments/20261117-memory-compute-control/C06-before-block00-closed-cost-v1.json",
+  "local_scope_count_settled_once": 19,
+  "native_C05_phases_not_rebilled": true,
+  "admission_driver": "/data/milai-experiments/20261117-memory-compute-control/C06-wait-and-admit-block00-v1.py",
+  "admission_session": 10528,
+  "admission_pid": 3948179,
+  "remaining_offline_card": "/data/milai-experiments/20261117-memory-compute-control/C06-remaining-offline-preparation-card-v1.json",
+  "remaining_offline_session": 10535,
+  "remaining_offline_parent_pid": 3962891,
+  "remaining_offline_child_pid": 3962893,
+  "remaining_feedback_blocks_NOT_ADMITTED": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "sha_validation": false,
+  "unknown_costs": "Actualreview/test/import/report/waitwork/serverGPU/fullactivity/IO/energy/money; nozerofill",
+  "no_new_weights_protected_body_services_or_defaultchanges": true,
+  "current_authority": "/data/milai-experiments/20261117-memory-compute-control/current-state-v27.json",
+  "required_next": "Inspectexistingprocesses, finishSourcepreparationauds andfirstblockall79blindtaskreviews, then cost/yield/unknownreview. No restart orautomaticexpansion."
+}

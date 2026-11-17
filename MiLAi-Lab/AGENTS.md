@@ -1,4 +1,33 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C04 closed, C05 registered
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C05 closed/C06 firstblock active
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v27.json.
+S12/2dcdc610 savedcheckpointcontinuation andS13/188a5239remaining-budget mode frozen.
+C05primaryCLOSED48boundpositions/64aliases,27new21reuse3fail100437tokens/U0.38blindB
+reviews frozenbeforemethodunblinding. Completedknownchanges3roots/materialchanges2,
+directionsbothways; conditionalfeedbackonly, NOTnewtraining/G1/D3round. Fixedall8root
+stopvariance repeats8new30133tokens/U0/1fail:executiondiscordance2roots/nativequality3/
+reviewedquality2. No primaryreplacement/average orNinflation. C05/P00manifesttracked.
+P00oldView143positions129versions,0rules,90/125largewhole-textJSONover2048; no new
+delivery/closure/qualityclaim. Needgenuineconditionalfixturesandboundedwholeunits.
+C06firstoffline8ROOT32states CLOSED102bound/128aliases, h6/5/4/2,289actualactorcalls,
+maxmaterial2002,independentbanks.79uniquewires/blindcases fixedbeforefirsts. Current
+actoractual64ROOTownobservations CLOSED488states/140newvsfixedprefix,maxmaterial2014;
+unlabelledobservationsONLY, noadaptation/tworoundclaim. OfflineGPUjob174.1589sec.
+R29externallease actuallyreleased; coordinatoracquiredoriginalscope,19closedlocals
+settledONCE/readback atC06-before-block00-closed-cost-v1; nativeC05notrebilled.
+NOWC06-block00-TRAIN8-firsts-v1 active102positions,exec10528/PID3948179/SourceS13.
+ONLYthisfeedbackblockadmitted, canonical310primaryfirsts/repeatsexcluded. Revalidate
+actual/proccommand+run.json, neverrestartbecausehandle/observationexpired. Afterterminal
+reviewall79blindoutcomes beforescores; actualsourceN8, not102/128. Noautomaticblock01.
+Remaining56TRAINSource-onlypreparation active,exec10535 coordinatorPID3962891 child
+3962893,SourceS13GPU3,registeredseed20261118; totalC06GPUcap1800 minusalready174.1589.
+NoReaderinthisofflinejob, feedbackblocks01-07NOTADMITTED. Preserveoldh2targets asdistinct.
+No moresemanticfits; fullD0/D1/ownstates2rounds+sameexposure/P-D/3seeds/power/newCONFIRM/
+transfer/deliveryremainINCOMPLETE. SHA OFF, no protectedbody/productdefault/push/merge.
+
+The following v20 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C04 closed, C05 registered
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v20.json.
 ALL ownjobs TERMINAL. S10actors6ca4988f/S11budgetcontrol e6d89173 frozen. C04complete:
