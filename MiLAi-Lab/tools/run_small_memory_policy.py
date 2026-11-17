@@ -881,6 +881,8 @@ def main() -> None:
     native_feedback.add_argument("--scores", type=Path, required=True)
     native_feedback.add_argument("--output", type=Path, required=True)
     native_feedback.add_argument("--weak-likelihood", type=Path)
+    native_feedback.add_argument("--include-cost-targets", action="store_true",
+                                 help="Keep phase costs; reused Reader latency remains unknown")
     native_likelihood = sub.add_parser("native-likelihood")
     native_likelihood.add_argument("--prepared", type=Path, required=True)
     native_likelihood.add_argument("--controls", type=Path, required=True)
@@ -909,8 +911,10 @@ def main() -> None:
     native_branches.add_argument("--device", default="cpu")
     native_branches.add_argument("--collection-policy", default="query_once4")
     native_branches.add_argument("--state-sampling",
-                                 choices=["initial_and_post", "last_observed"],
+                                 choices=["initial_and_post", "last_observed", "declared_steps"],
                                  default="initial_and_post")
+    native_branches.add_argument("--state-steps", type=int, nargs="+",
+                                 help="Predeclared actual captured decision indices")
     native_replay = sub.add_parser("native-replay")
     native_replay.add_argument("--prepared", type=Path, required=True)
     native_replay.add_argument("--output", type=Path, required=True)

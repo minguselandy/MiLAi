@@ -241,6 +241,30 @@ def test_reference_span_receipt_follows_real_source_reads_not_citation_metadata(
             capture_sources(service, changed, mapping)
 
 
+def test_reused_quality_has_no_fake_Reader_latency_and_UTF8_material_is_counted():
+    from native_qa_control import observed_resource_targets
+
+    branch = {"packet": {"evidence": "完整原文🙂"}, "measured_costs": {
+        "local_action_to_request_wall_seconds": .03,
+        "local_action_to_request_cpu_seconds": .02}}
+    original = copy.deepcopy(branch)
+    reused = {"reused_from": "old-first", "new_generation": False,
+              "wall_seconds": .0001, "cpu_seconds": .0001,
+              "usage": {"prompt_tokens": 123, "completion_tokens": 456}}
+    cost = observed_resource_targets(branch, reused, len)
+    assert cost["reader_wall_seconds"] is None and cost["reader_input_tokens"] is None
+    assert cost["local_action_to_request_wall_seconds"] == .03
+    assert cost["material_UTF8_tokens"] == len(json.dumps(branch["packet"], ensure_ascii=False))
+    assert cost["material_UTF8_tokens"] < len(json.dumps(branch["packet"]))
+    assert cost["end_to_end_seconds"] is None and cost["measured_gpu_kernel_seconds"] is None
+    actual = {"new_generation": True, "wall_seconds": 2.5, "cpu_seconds": .1,
+              "usage": {"prompt_tokens": 123, "completion_tokens": 456}, "status": "FAILED"}
+    real_cost = observed_resource_targets(branch, actual, len)
+    assert real_cost["reader_wall_seconds"] == 2.5 and real_cost["reader_output_tokens"] == 456
+    assert real_cost["reader_attempted_for_this_branch"]
+    assert branch == original
+
+
 def test_search_after_source_read_keeps_indices_and_publishes_new_bounded_scopes(tmp_path):
     import re
     from types import SimpleNamespace

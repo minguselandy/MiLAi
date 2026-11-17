@@ -49,6 +49,7 @@ def collect(args: Any) -> None:
         "terminal_handoff": "current", "seed": args.seed, "sha_validation": False,
         "collection_policy": getattr(args, "collection_policy", "query_once4"),
         "state_sampling": getattr(args, "state_sampling", "initial_and_post"),
+        "declared_state_steps": getattr(args, "state_steps", None),
         "material_formation": parent.get("material_formation", "token_ranges_v1"),
         "source_directory_only": parent.get("source_directory_only", False),
         "evidence_context_turn_radius": parent.get("evidence_context_turn_radius", 0),
@@ -67,7 +68,15 @@ def collect(args: Any) -> None:
                 post = [x for x in captured if x["decision"]["step"] > 0
                         and x["decision"]["before"].get("observed_materials")]
                 sampling = getattr(args, "state_sampling", "initial_and_post")
-                if sampling == "last_observed":
+                if sampling == "declared_steps":
+                    steps = getattr(args, "state_steps", None)
+                    if not steps or sorted(set(steps)) != steps or min(steps) < 0:
+                        raise ValueError("Declare sorted distinct nonnegative actual state steps")
+                    by_step = {row["decision"]["step"]: row for row in captured}
+                    if not set(steps) <= by_step.keys():
+                        raise ValueError("Declared steps absent from actual captured trajectory")
+                    chosen = [by_step[step] for step in steps]
+                elif sampling == "last_observed":
                     if not post:
                         raise ValueError("Declared last-observed sampling needs an actual state")
                     chosen = [post[-1]]
@@ -88,7 +97,7 @@ def collect(args: Any) -> None:
                     nominees = [("immediate_stop", stop), ("query_once4", fixed),
                                 ("current_model", current)]
                     remaining = [a for a in actions if a.id not in {key for _, key in nominees}]
-                    if sampling == "last_observed":
+                    if sampling in {"last_observed", "declared_steps"}:
                         # Acquire genuinely new material, rather than sampling another
                         # delivery subset. Availability and bindings come from the executor.
                         remaining = [a for a in remaining if a.kind == "READ"
@@ -115,6 +124,8 @@ def collect(args: Any) -> None:
                         "state_sampling": sampling,
                         "before": before, "actions": event["actions"],
                         "nominations": nominees, "model_scores": asdict(scored)})
+                    with (args.output / "selected-states.jsonl").open("a") as stream:
+                        stream.write(json.dumps(selected_states[-1], ensure_ascii=False) + "\n")
                     for horizon in args.horizons:
                         event_id = saved["event_id"] + f"/step-{event['step']}/h{horizon}"
                         case = {"family": history["source_group"], "event_id": event_id,
@@ -123,7 +134,7 @@ def collect(args: Any) -> None:
                             "before": before, "actions": event["actions"],
                             "choices": {name: a.id for a in unique for name in methods[a.id]},
                             "branches": []}
-                        if sampling == "last_observed":
+                        if sampling in {"last_observed", "declared_steps"}:
                             case["response_event_id"] = saved["event_id"]
                         for bi, action in enumerate(unique):
                             destination = args.output / f"state-{state_number:03d}-h{horizon}-b{bi}"
@@ -171,9 +182,9 @@ def collect(args: Any) -> None:
                                     "execution_result": {"ok": result["reason"] !=
                                         "operation_outcome_unknown", "status": result["reason"]}})
                         cases.append(case)
+                        with (args.output / "completed-cases.jsonl").open("a") as stream:
+                            stream.write(json.dumps(case, ensure_ascii=False) + "\n")
             run["closed_roots"] = ordinal + 1
-            write_json(args.output / "cases.json", cases)
-            write_json(args.output / "selected-states.json", selected_states)
             write_json(args.output / "run.json", run)
             print(json.dumps({"closed_roots": ordinal+1, "states": len(selected_states),
                               "branches": sum(len(c["branches"]) for c in cases)}), flush=True)
@@ -182,6 +193,10 @@ def collect(args: Any) -> None:
         run.update(status="FAILED", error=f"{type(error).__name__}: {error}")
         raise
     finally:
+        # Append completed shards while collecting, then emit compatible final
+        # files once. Do not rewrite the complete growing corpus after each root.
+        write_json(args.output / "cases.json", cases)
+        write_json(args.output / "selected-states.json", selected_states)
         run.update(wall_seconds=time.perf_counter()-tick, cpu_seconds=time.process_time()-cpu,
             model_counters=model.counters, compute_ledger_status="pending_idle_settlement")
         write_json(args.output / "run.json", run)

@@ -497,6 +497,36 @@ def observed_supervision(case: dict[str, Any], outcomes: list[dict[str, Any]],
                  "do not establish explanation truth or general semantic sufficiency."}
 
 
+def observed_resource_targets(branch: dict[str, Any], first: dict[str, Any],
+                              count: Callable[[str], int]) -> dict[str, Any]:
+    """Real local measurements, with response reuse excluded from latency targets.
+
+    Cloned-bank preparation and separately dispatched Reader calls do not form
+    one uninterrupted end-to-end measurement. Missing axes stay unknown.
+    """
+    local = branch.get("measured_costs", {})
+    fresh = bool(first.get("new_generation") and not first.get("reused_from"))
+    usage = first.get("usage") or {}
+    return {
+        "local_action_to_request_wall_seconds": local.get("local_action_to_request_wall_seconds"),
+        "local_action_to_request_cpu_seconds": local.get("local_action_to_request_cpu_seconds"),
+        "reader_wall_seconds": first.get("wall_seconds") if fresh else None,
+        "reader_cpu_seconds": first.get("cpu_seconds") if fresh else None,
+        "reader_input_tokens": usage.get("prompt_tokens") if fresh else None,
+        "reader_output_tokens": usage.get("completion_tokens") if fresh else None,
+        "material_UTF8_tokens": count(json.dumps(branch["packet"], ensure_ascii=False)),
+        "end_to_end_seconds": None, "measured_gpu_kernel_seconds": None,
+        "physical_source_read_bytes": None, "host_device_bytes": None,
+        "reader_attempted_for_this_branch": fresh,
+        "quality_response_reused": bool(first.get("reused_from")),
+        "resource_status": "partially_measured",
+        "scope": "Original operation/continuation on an isolated copied bank plus packaging; "
+            "local cache/OS conditions not controlled for deployment benchmarking. "
+            "Reader client stage measured only for new call attempts, not provider GPU time. "
+            "Stage scopes overlap enclosing preparation/driver and must not be added twice.",
+    }
+
+
 def compile_feedback(args: Any) -> None:
     """Keep h0/h2 as different datasets and never infer unexecuted action negatives."""
     args.output.mkdir(parents=True, exist_ok=False)
@@ -508,6 +538,10 @@ def compile_feedback(args: Any) -> None:
     native = read_json(readouts / "run.json")
     prepared = Path(native["prepared"])
     preparation = read_json(prepared / "run.json")
+    capacity = None
+    if getattr(args, "include_cost_targets", False):
+        settings = read_json(Path(preparation["config"]))["entrypoints"]["functional"]
+        capacity = HostCapacity(settings["capacity"])
     likelihood: dict[tuple[int, int], dict[str, Any]] = {}
     weak_run: dict[str, Any] = {}
     if args.weak_likelihood:
@@ -531,7 +565,8 @@ def compile_feedback(args: Any) -> None:
         if roles[case["family"]] != "train" or "horizon" not in case:
             raise ValueError("Outcome learning requires actual TRAIN same-state branches")
         outcomes, firsts = [], []
-        for bi, _ in enumerate(case["branches"]):
+        costs = {}
+        for bi, branch in enumerate(case["branches"]):
             first = str(readouts / f"case-{ci:03d}" / f"packet-{bi}" / "readout.json")
             firsts.append(first)
             outcome = dict(by_first[first])
@@ -543,6 +578,9 @@ def compile_feedback(args: Any) -> None:
                     raise ValueError("Weak score differs from actual branch binding/Reader wire")
                 outcome["weak_answer_mean_logprob"] = weak["mean_answer_logprob"]
             outcomes.append(outcome)
+            if capacity is not None:
+                costs[branch["action"]["id"]] = observed_resource_targets(
+                    branch, read_json(Path(first)), capacity.text_tokens)
         targets = ["quality", "structure", "weak_answer"]
         if args.weak_likelihood:
             targets.append("weak_likelihood")
@@ -559,6 +597,8 @@ def compile_feedback(args: Any) -> None:
                     "continuation": preparation["continuation_policy"],
                     "outcome_protocol": score_run.get("outcome_protocol", "legacy_v1"),
                     "not_full_trajectory_value_or_all_action_oracle": True}}
+            if capacity is not None:
+                row["offline_supervision"]["observed_costs"] = costs
             datasets.setdefault(key, []).append(row)
     summaries = {}
     known_tokens = native["generation_delta"]["known_tokens"]
@@ -596,6 +636,7 @@ def compile_feedback(args: Any) -> None:
     write_json(args.output / "run.json", {"status": "COMPLETED", "pid": os.getpid(),
         "scores": str(args.scores), "Reader_calls": 0, "sha_validation": False,
         "weak_likelihood": str(args.weak_likelihood) if args.weak_likelihood else None,
+        "resource_targets": "actual_local_and_fresh_Reader_v1" if capacity else None,
         "wall_seconds": time.perf_counter()-tick, "cpu_seconds": time.process_time()-cpu,
         "compute_ledger_status": "pending_idle_settlement",
         "scope": "No lambda or scalar cost reward chosen. Quality ties remain ties; token "

@@ -80,26 +80,36 @@ def test_same_before_material_protocol_and_independent_actual_read_branches(tmp_
 
     monkeypatch.setattr(native_qa_branches, "HostCapacity", Capacity)
     monkeypatch.setattr(native_qa_branches.SmallControlModel, "load", lambda *a, **kw: Scorer())
-    output = tmp_path / "branches"
-    native_qa_branches.collect(SimpleNamespace(collection=collection, sources=sources,
-        reader_config=config, output=output, checkpoint=Path("unused-test-checkpoint"),
-        device="cpu", roots=1, seed=17, horizons=[0, 2], material_tokens=2048,
-        collection_policy="learned", state_sampling="last_observed"))
-    cases = json.loads((output / "cases.json").read_text())
-    assert len(cases) == 2 and {c["horizon"] for c in cases} == {0, 2}
-    last = captured[-1]["decision"]
-    for case in cases:
-        assert case["before"] == last["before"] and case["actions"] == last["actions"]
-        assert case["response_event_id"] == "original-task"
-        stop = next(b for b in case["branches"] if b["action"]["kind"] == "HANDOFF")
-        read = next(b for b in case["branches"] if b["action"]["kind"] == "READ")
-        assert len(stop["actual_delivered_source_ranges"]) == 1
-        assert len(read["actual_delivered_source_ranges"]) == 2
-        assert stop["continuation"]["trace"][0]["before"] == read["continuation"]["trace"][0][
-            "before"]
-        assert read["measured_costs"]["local_action_to_request_wall_seconds"] > 0
-    assert len(list(output.glob("state-*/memory.sqlite"))) == 4
-    assert json.loads((output / "run.json").read_text())["Reader_calls"] == 0
+    for sampling, requested, expected in [("last_observed", None, [2]),
+                                           ("declared_steps", [1, 2], [1, 2])]:
+        output = tmp_path / sampling
+        native_qa_branches.collect(SimpleNamespace(collection=collection, sources=sources,
+            reader_config=config, output=output, checkpoint=Path("unused-test-checkpoint"),
+            device="cpu", roots=1, seed=17, horizons=[0, 2], material_tokens=2048,
+            collection_policy="learned", state_sampling=sampling, state_steps=requested))
+        cases = json.loads((output / "cases.json").read_text())
+        assert len(cases) == len(expected) * 2 and {c["horizon"] for c in cases} == {0, 2}
+        by_step = {row["decision"]["step"]: row["decision"] for row in captured}
+        for case in cases:
+            step = case["branches"][0]["condition_provenance"]["before_step"]
+            actual = by_step[step]
+            assert step in expected
+            assert case["before"] == actual["before"] and case["actions"] == actual["actions"]
+            assert case["response_event_id"] == "original-task"
+            stop = next(b for b in case["branches"] if b["action"]["kind"] == "HANDOFF")
+            read = next(b for b in case["branches"] if b["action"]["kind"] == "READ")
+            assert len(stop["actual_delivered_source_ranges"]) == step - 1
+            assert len(read["actual_delivered_source_ranges"]) == (
+                step if case["horizon"] == 0 else 2)
+            assert stop["continuation"]["trace"][0]["before"] == read["continuation"]["trace"][0][
+                "before"]
+            assert read["measured_costs"]["local_action_to_request_wall_seconds"] > 0
+        shards = [json.loads(line) for line in (output / "completed-cases.jsonl").read_text(
+            ).splitlines()]
+        assert shards == cases
+        assert len(list(output.glob("state-*/memory.sqlite"))) == sum(
+            len(c["branches"]) for c in cases)
+        assert json.loads((output / "run.json").read_text())["Reader_calls"] == 0
 
 
 def test_context_protocol_cannot_change_when_restoring_before_the_first_search(tmp_path):
