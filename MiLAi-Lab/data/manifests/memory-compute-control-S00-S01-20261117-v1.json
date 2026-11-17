@@ -1,0 +1,193 @@
+{
+  "schema": "camc.execution.S00_S01.v1",
+  "goal_status": "ACTIVE_INCOMPLETE",
+  "source_versions": {
+    "implementation": "4fdcf98b",
+    "complete_rollout_profiling": "c0115a94"
+  },
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/memory-compute-control-20261117",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "protocol": "Full original v2, default route A retained; no CONFIRM/DEV-select bodies opened",
+  "training": {
+    "object_mlp": {
+      "run": "/data/milai-experiments/20261117-memory-compute-control/T00-object-mlp-seed0-v1",
+      "status": "COMPLETED",
+      "initial_choice": {
+        "accepted": 19,
+        "labelled_states": 61,
+        "all_states": 64
+      },
+      "final_choice": {
+        "accepted": 46,
+        "labelled_states": 61,
+        "all_states": 64
+      },
+      "initial_loss": 1.992665277152765,
+      "final_loss": 1.7589040506081504,
+      "trainable_parameters": 460161,
+      "total_resident_parameters": 118113921,
+      "updates": 96,
+      "nominal_state_exposures": 1536,
+      "valid_state_exposures": 1452,
+      "wall_seconds": 20.213624145835638,
+      "reload_max_difference": 0.0
+    },
+    "latent_pointer": {
+      "run": "/data/milai-experiments/20261117-memory-compute-control/T00-latent-pointer-seed0-v1",
+      "status": "COMPLETED",
+      "initial_choice": {
+        "accepted": 12,
+        "labelled_states": 61,
+        "all_states": 64
+      },
+      "final_choice": {
+        "accepted": 45,
+        "labelled_states": 61,
+        "all_states": 64
+      },
+      "initial_loss": 1.9923618543343466,
+      "final_loss": 1.5116959419406828,
+      "trainable_parameters": 1056385,
+      "total_resident_parameters": 118710145,
+      "updates": 96,
+      "nominal_state_exposures": 1536,
+      "valid_state_exposures": 1452,
+      "wall_seconds": 26.373072888702154,
+      "reload_max_difference": 0.0
+    }
+  },
+  "quality": {
+    "fixed": {
+      "fixed_context4": {
+        "planned_positions": 4,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 3,
+        "primary_false": 1,
+        "primary_unknown": 0,
+        "answer_EM": 4,
+        "reference_support_complete": 3
+      },
+      "fixed_r2_4": {
+        "planned_positions": 4,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 2,
+        "primary_false": 2,
+        "primary_unknown": 0,
+        "answer_EM": 2,
+        "reference_support_complete": 3
+      }
+    },
+    "learned": {
+      "latent_pointer": {
+        "planned_positions": 4,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 1,
+        "primary_false": 3,
+        "primary_unknown": 0,
+        "answer_EM": 1,
+        "reference_support_complete": 1
+      },
+      "object_mlp": {
+        "planned_positions": 4,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 4,
+        "roots": 4,
+        "role": "normal_policy_condition",
+        "primary_true": 0,
+        "primary_false": 4,
+        "primary_unknown": 0,
+        "answer_EM": 0,
+        "reference_support_complete": 0
+      }
+    },
+    "metric_scope": "Adapted native answer EM and physically delivered native reference spans and complete first. Not official jointEM or independent full semantic truth. Four exposed TRAIN roots, no inferential G1/G2 comparison."
+  },
+  "precision_diagnostic": {
+    "roots": 4,
+    "identical_R2_R3_wires": 4,
+    "context_expansion_options": 0,
+    "interpretation": "One paragraph per captured source. This cohort cannot identify evidence precision effects."
+  },
+  "actual_new_Reader_calls": 15,
+  "logical_first_positions": 16,
+  "profiling_repetition_positions": 1,
+  "quality_wire_reuses": 2,
+  "actual_Reader_tokens": {
+    "prompt": 17538,
+    "completion": 41692,
+    "total": 59230
+  },
+  "new_unknown_usage": 0,
+  "original_length_failures_retained": 1,
+  "normal_task_profile": {
+    "run": "/data/milai-experiments/20261117-memory-compute-control/E00-one-normal-task-v1",
+    "wall_seconds": 12.656633745878935,
+    "Reader_seconds": 11.403840266168118,
+    "scope": "One cold normal conditional task, no population latency or speedup claim"
+  },
+  "GPU_recovery": [
+    {
+      "architecture": "object_mlp",
+      "all_recovery_state_equal": true,
+      "top_level_keys": [
+        "schema",
+        "contract",
+        "model",
+        "optimizer",
+        "scheduler",
+        "torch_rng",
+        "cuda_rng",
+        "python_rng",
+        "progress"
+      ],
+      "uninterrupted": "/data/milai-experiments/20261117-memory-compute-control/T00-object_mlp-recovery-continuous-v1",
+      "resumed": "/data/milai-experiments/20261117-memory-compute-control/T00-object_mlp-recovery-interrupted-v1"
+    },
+    {
+      "architecture": "latent_pointer",
+      "all_recovery_state_equal": true,
+      "top_level_keys": [
+        "schema",
+        "contract",
+        "model",
+        "optimizer",
+        "scheduler",
+        "torch_rng",
+        "cuda_rng",
+        "python_rng",
+        "progress"
+      ],
+      "uninterrupted": "/data/milai-experiments/20261117-memory-compute-control/T00-latent_pointer-recovery-continuous-v1",
+      "resumed": "/data/milai-experiments/20261117-memory-compute-control/T00-latent_pointer-recovery-interrupted-v1"
+    }
+  ],
+  "cost_receipt": "/data/milai-experiments/20261117-memory-compute-control/S00-S01-closed-cost-disclosure-v1.json",
+  "G1": "not_established",
+  "G2": "not_established",
+  "G3": "unsupported_by_current_experiments",
+  "product_adoption": "not_eligible",
+  "tests": {
+    "affected_suite_pass": 99,
+    "legacy_GPU_recovery_skips": 4,
+    "post_runner_change_narrow_pass": 32,
+    "new_actual_GPU_recovery_architectures": 2,
+    "ruff": "PASS",
+    "mypy": "9 files pass with import-untyped disabled only for unavailable external jsonschema stubs; later2 changed runner files pass same settings",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "full_pytest": "NOT_RUN",
+    "remote_CI": "NOT_RUN"
+  },
+  "next_discriminating_experiment": "Actual same-before handoff-versus-additional-read feedback at reached TRAIN states, with reliable outcome masks and fixed continuation; obtain natural material whose R2/R3 actually differ before E03",
+  "remaining": "D0 256-512 real current-protocol states, usable trained start, quality feedback calibration, D1/T2/P, two own-state rounds with same-exposure controls, D/cache/refresh, conditional F/A/X, three seeds, strong simple baseline freeze, source-cluster power and new CONFIRM, transfer and final research deliverables",
+  "sha_validation": false
+}

@@ -1,5 +1,23 @@
 # CURRENT 2026-11-17: memory compute v2 ACTIVE in an isolated worktree
 
+LATEST S00/S01 ALL TERMINAL. Authority:
+/data/milai-experiments/20261117-memory-compute-control/current-state-v1.json.
+Sources4fdcf98b/c0115a94 frozen; T00 MLP/latent both96updates, reload0. Full-menu structural
+choice19→46/61 and12→45/61, not utility. Actual TRAIN4 first metrics MLP0/4,latent1/4 vs
+fixed-context3/4; fixed-R2=2/4. All4 R2/R3 wires identical/0expansion options, so no precision
+effect identified. Both models SEARCH+2READ+HANDOFF with steps remaining; no task gain.
+New process loads and executes actual complete bindings from same cold before, separate banks.
+Both new heads pass actual GPU8update recovery(3+5), complete parameters/optimizer/RNG/progress.
+E00 firsts8/T01 firsts8 plus1profiling repeat:15newcalls/2strict wire reuses,59230tokens,newU0;
+1original length failure retained. No retries or original outcome repair. Normal cold profiling
+12.6566s/Reader11.4038s; no prefetch branch. All15closed local phases settled ONCE/readback,
+native Reader phases not rebilled. Receipt S00-S01-closed-cost-disclosure-v1.json. Unknown
+kernel/service/physical bytes/startup/analysis costs remain unknown. No second ledger.
+Next: actual same-before stop/additional-read outcome supervision at reached TRAIN states;
+obtain genuinely distinct natural R2/R3 before E03. Do not scale failed structural objectives
+or declare G1/G2. D0/D1/current-protocol feedback, usable trained start, own-state controls,
+D, three seeds, ablations, new confirmation, transfer and full final delivery remain required.
+
 Execute docs/MILAI_MEMORY_COMPUTE_POLICY_PLAN_20261117_v2.md in full; progress and remaining
 requirements are docs/MILAI_MEMORY_COMPUTE_POLICY_EXECUTION_20261117.md. No completion from
 code, loss, weights, synthetic checks or finite negative results. G1/G2/G3 remain unproven.
@@ -20,9 +38,11 @@ the existing trainer. Explicit paragraph R2/full captured-turn R3, directory-onl
 observations, separate acquired/selected material, object MLP/latent pointer. Old default
 dual/joint/Laya paths remain. Unknown resource measurements stay null, nested wall intervals
 must not be summed. Whole paragraphs can be insufficient or over capacity; no semantic proof.
-Checks:99 affected tests passed/4 legacy GPU recovery skips; Ruff and package/tools boundary
+Checks:99 affected tests passed/4 legacy GPU recovery skips; later runner32passed;
+Ruff and package/tools boundary
 pass. Nine-file mypy pass with only unavailable jsonschema stub imports excluded via the
-import-untyped diagnostic flag. Actual GPU save/load/rollout and all research gates pending.
+import-untyped diagnostic flag. Actual GPU save/load/rollout/recovery above now completed;
+all remaining research gates stay pending.
 Registered before execution: E00 fixed R2/R3 four exposed TRAIN roots; T00 one random actual
 v1 R17 state per TRAIN root (64 total), two heads same 96-update schedule, no G1 claim.
 Cards/data under the artifact root. Preserve all first failures, costs and frozen sources.
