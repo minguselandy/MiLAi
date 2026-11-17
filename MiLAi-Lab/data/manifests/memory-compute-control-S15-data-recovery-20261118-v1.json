@@ -1,0 +1,56 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "IMPLEMENTED_VERIFIED_NOT_RESEARCH_FIT",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "card": "S15-literal-training-data-recovery-card-v1.json",
+  "validation": "S15-implementation-validation-v1.json",
+  "source_parent_commit": "979716ef",
+  "changed_paths": [
+    "tools/training_recovery.py",
+    "tools/run_small_memory_policy.py",
+    "tests/unit/test_literal_training_recovery.py"
+  ],
+  "problem": "Metadata-only recovery bound a data path and sample IDs, without proving unchanged observation/action/supervision/mask values",
+  "new_contract": {
+    "schema": "bounded-training-state-v2",
+    "data": "One full literal JSON-value sidecar, preserving field order and JSON types",
+    "comparison": "Full observations/action bindings/labels/masks/provenance compared before restoring parameters/optimizer/scheduler/RNG",
+    "repeated_saves": "Existing complete data sidecar validated but not rewritten",
+    "small_policy_trainer": "Always supplies actual loaded rows for new saves and restores",
+    "rejected_resume": "Terminal FAILED with restore stage and zero new optimizer updates/state exposure; original checkpoint retained",
+    "legacy": "No-data callers retain v1; strict small-policy recovery cannot certify old checkpoints lacking full-data evidence. Original frozen trainers and separate inference checkpoint initialization remain available"
+  },
+  "checks": {
+    "unit_tests": 11,
+    "continuous_vs_resumed_CPU": "6 versus2+4: exact parameters, AdamW state, scheduler and Torch/Python RNG",
+    "actual_small_policy_trainer": "Unchanged data resumed2to3; same-ID mask mutation rejected and original checkpoint bytes retained",
+    "mutation_cases": ["text", "action binding", "source revision", "known value", "unknown mask", "JSON type", "field order"],
+    "ruff": "PASS",
+    "mypy": "PASS; exact command records existing untyped Torch-profiler exemption",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "GPU_recovery_rerun": false,
+    "measured_final_check_CPU_seconds_sum": 75.090691806,
+    "sum_command_wall_seconds_not_end_to_end": 72.85002623591572,
+    "cost_settlement": "Only five per-command scopes; aggregate not separately billable",
+    "earlier_editing_failed_checks_assistant_report_cost": "UNKNOWN"
+  },
+  "scope_limits": [
+    "Data binding strengthens recovery validation, without claiming cryptographic integrity",
+    "Original unchanged-data v1 numerical recovery evidence remains valid; old artifacts not rewritten",
+    "CPU functional tests are not a new research training gain or GPU recovery result",
+    "Current C06 branches/Reader continue frozen S13/188a5239"
+  ],
+  "Reader_calls": 0,
+  "GPU_jobs_requested": false,
+  "research_policy_weights_changed": false,
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "training_recovery_artifact_protocol_changed": true,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "full_goal": "ACTIVE_INCOMPLETE",
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "remote_commit_checked": false,
+  "push_or_merge": false
+}

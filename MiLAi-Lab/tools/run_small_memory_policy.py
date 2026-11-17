@@ -219,11 +219,24 @@ def train(args: argparse.Namespace) -> None:
                 "batch_states": args.batch_states, "microbatch_states": args.microbatch_states,
                 "checkpoint_steps": args.checkpoint_steps,
                 "learning_rate": args.learning_rate, "head_learning_rate": args.head_learning_rate,
+                "training_data_validation": "full-json-values-v1",
                 "deterministic": args.deterministic,
                 "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG")}
     recovery = RecoveryParameters(model)
-    progress = (restore_training_state(args.resume, recovery, optimizer, scheduler,
-                                      contract=contract) if args.resume else {"step": 0})
+    try:
+        progress = (restore_training_state(args.resume, recovery, optimizer, scheduler,
+                                          contract=contract, data=rows)
+                    if args.resume else {"step": 0})
+    except Exception as exc:
+        measures = {"initial_step": None, "final_step": None,
+                    "optimizer_updates_this_invocation": 0, "states_exposed_this_invocation": 0,
+                    "cpu_seconds": time.process_time() - cpu_started,
+                    "wall_seconds": time.perf_counter() - started}
+        record_training_invocation(args.output, {"status": "FAILED", "pid": os.getpid(),
+            "stage": "restore_training_state", "contract": contract,
+            "error": f"{type(exc).__name__}: {exc}", "sha_validation": False,
+            "reader_calls": 0, **measures}, measures)
+        raise
     initial_step = progress["step"]
     source_counts = Counter(row["group_id"] for row in rows)
     cached = None
@@ -340,7 +353,7 @@ def train(args: argparse.Namespace) -> None:
             progress = {"step": step + 1}
             if (step + 1) % args.save_every == 0 or step + 1 == args.steps:
                 save_training_state(args.output / "recovery.pt", recovery, optimizer, scheduler,
-                                    contract=contract, progress=progress)
+                                    contract=contract, progress=progress, data=rows)
             if step + 1 in args.checkpoint_steps:
                 model.save(args.output / "checkpoints" / f"step-{step + 1:04d}")
             if (step + 1) % 20 == 0 or step + 1 == args.steps:
@@ -350,7 +363,7 @@ def train(args: argparse.Namespace) -> None:
                     profiler.stop()
                     profiler = None
                 save_training_state(args.output / "recovery.pt", recovery, optimizer, scheduler,
-                                    contract=contract, progress=progress)
+                                    contract=contract, progress=progress, data=rows)
                 persist({"status": "INTERRUPTED", **progress,
                          "contract": contract, "pid": os.getpid()})
                 return
