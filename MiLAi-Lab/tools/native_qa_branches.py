@@ -24,6 +24,19 @@ from prepare_collected_operation_feedback import QueryOnceContextPolicy, execute
 from small_control_branches import copy_source_bank
 
 
+def continuation_horizons(before: dict[str, Any], mode: str,
+                          fixed: list[int]) -> list[int]:
+    """An explicit return horizon; never add to the captured remaining allowance."""
+    if mode == "fixed":
+        return fixed
+    if mode != "remaining_budget":
+        raise ValueError("Unknown continuation horizon mode")
+    remaining = before["budget"]["remaining_control_steps"]
+    if type(remaining) is not int or remaining < 1:
+        raise ValueError("Remaining-budget continuation needs a positive actual allowance")
+    return [remaining - 1]
+
+
 def collect(args: Any) -> None:
     import torch  # type: ignore[import-not-found]
 
@@ -49,12 +62,16 @@ def collect(args: Any) -> None:
     rng = random.Random(args.seed)  # noqa: S311 -- prospective source/state/action sampling
     cases: list[dict[str, Any]] = []
     selected_states: list[dict[str, Any]] = []
+    horizon_mode = getattr(args, "horizon_mode", "fixed")
     run: dict[str, Any] = {"status": "RUNNING", "pid": os.getpid(),
         "collection": str(args.collection), "config": str(args.reader_config),
         "sources": str(args.sources), "checkpoint": str(args.checkpoint),
         "device": args.device, "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
         "planned_roots": len(histories), "closed_roots": 0, "Reader_calls": 0,
-        "horizons": args.horizons,
+        "horizons": args.horizons if horizon_mode == "fixed" else "remaining_budget_per_state",
+        "horizon_mode": horizon_mode,
+        "return_scope": ("frozen_policy_remaining_budget" if horizon_mode == "remaining_budget"
+                         else "fixed_bounded_continuation"),
         "continuation_policy": ("saved_checkpoint_policy" if factory is not None else
                                 "query_once_context(reads4)"),
         "continuation_checkpoint": str(continuation_path) if continuation_path else None,
@@ -141,11 +158,12 @@ def collect(args: Any) -> None:
                         "nominations": nominees, "model_scores": asdict(scored)})
                     with (args.output / "selected-states.jsonl").open("a") as stream:
                         stream.write(json.dumps(selected_states[-1], ensure_ascii=False) + "\n")
-                    for horizon in args.horizons:
+                    for horizon in continuation_horizons(before, horizon_mode, args.horizons):
                         event_id = saved["event_id"] + f"/step-{event['step']}/h{horizon}"
                         case = {"family": history["source_group"], "event_id": event_id,
                             "case_key": event_id, "request_id": request["id"],
-                            "horizon": horizon, "state_index": state_number,
+                            "horizon": horizon, "horizon_mode": horizon_mode,
+                            "state_index": state_number,
                             "before": before, "actions": event["actions"],
                             "choices": {name: a.id for a in unique for name in methods[a.id]},
                             "branches": []}
@@ -197,7 +215,7 @@ def collect(args: Any) -> None:
                                     "body_tokens": capacity.text_tokens(json.dumps(packet)),
                                     "condition_provenance": {"role": "ACTUAL_TRAIN_BRANCH",
                                         "horizon": horizon, "before_step": event["step"],
-                                        "state_index": state_number},
+                                        "horizon_mode": horizon_mode, "state_index": state_number},
                                     "execution_result": {"ok": result["reason"] !=
                                         "operation_outcome_unknown", "status": result["reason"]}})
                         cases.append(case)
@@ -218,6 +236,7 @@ def collect(args: Any) -> None:
         write_json(args.output / "selected-states.json", selected_states)
         run.update(wall_seconds=time.perf_counter()-tick, cpu_seconds=time.process_time()-cpu,
             model_counters=model.counters, compute_ledger_status="pending_idle_settlement")
+        run["effective_horizons"] = sorted({case["horizon"] for case in cases})
         # A shared instance's encoder counters already include both roles; do not add twice.
         if continuation_model is not None and continuation_model is not model:
             run["continuation_model_counters"] = continuation_model.counters

@@ -924,6 +924,8 @@ def main() -> None:
     native_branches.add_argument("--roots", type=int, default=16)
     native_branches.add_argument("--seed", type=int, default=20261117)
     native_branches.add_argument("--horizons", type=int, nargs="+", default=[0, 2])
+    native_branches.add_argument("--horizon-mode", choices=["fixed", "remaining_budget"],
+        default="fixed", help="Fixed horizons or captured remaining allowance after first action")
     native_branches.add_argument("--material-tokens", type=int, default=2048)
     native_branches.add_argument("--device", default="cpu")
     native_branches.add_argument("--collection-policy", default="query_once4")

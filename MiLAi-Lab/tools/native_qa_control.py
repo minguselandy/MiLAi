@@ -632,8 +632,13 @@ def compile_feedback(args: Any) -> None:
                     "horizon": case["horizon"], "state_index": case["state_index"],
                     "projection_version": "control-observation-v1",
                     "continuation": preparation["continuation_policy"],
+                    "continuation_checkpoint": preparation.get("continuation_checkpoint"),
+                    "horizon_mode": preparation.get("horizon_mode", "fixed"),
                     "outcome_protocol": score_run.get("outcome_protocol", "legacy_v1"),
-                    "not_full_trajectory_value_or_all_action_oracle": True}}
+                    **({"remaining_budget_return_of_frozen_policy": True,
+                        "not_global_optimal_or_all_action_oracle": True}
+                       if preparation.get("horizon_mode") == "remaining_budget" else
+                       {"not_full_trajectory_value_or_all_action_oracle": True})}}
             if capacity is not None:
                 row["offline_supervision"]["observed_costs"] = costs
             datasets.setdefault(key, []).append(row)

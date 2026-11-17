@@ -80,25 +80,35 @@ def test_same_before_material_protocol_and_independent_actual_read_branches(tmp_
 
     monkeypatch.setattr(native_qa_branches, "HostCapacity", Capacity)
     monkeypatch.setattr(native_qa_branches.SmallControlModel, "load", lambda *a, **kw: Scorer())
-    for sampling, requested, expected, learned in [("last_observed", None, [2], False),
-            ("declared_steps", [1, 2], [1, 2], False), ("declared_steps", [1], [1], True)]:
-        output = tmp_path / (sampling + ("-checkpoint" if learned else ""))
+    for sampling, requested, expected, learned, mode in [
+            ("last_observed", None, [2], False, "fixed"),
+            ("declared_steps", [1, 2], [1, 2], False, "fixed"),
+            ("declared_steps", [1], [1], True, "fixed"),
+            ("declared_steps", [1, 2], [1, 2], True, "remaining_budget")]:
+        output = tmp_path / (sampling + ("-checkpoint" if learned else "") + "-" + mode)
         native_qa_branches.collect(SimpleNamespace(collection=collection, sources=sources,
             reader_config=config, output=output, checkpoint=Path("unused-test-checkpoint"),
             continuation_checkpoint=Path("unused-test-checkpoint") if learned else None,
+            horizon_mode=mode,
             device="cpu", roots=1, seed=17, horizons=[0, 2], material_tokens=2048,
             collection_policy="learned", state_sampling=sampling, state_steps=requested))
         cases = json.loads((output / "cases.json").read_text())
-        assert len(cases) == len(expected) * 2 and {c["horizon"] for c in cases} == {0, 2}
+        assert len(cases) == len(expected) * (2 if mode == "fixed" else 1)
+        assert {c["horizon"] for c in cases} == ({0, 2} if mode == "fixed" else {2, 3})
         by_step = {row["decision"]["step"]: row["decision"] for row in captured}
         for case in cases:
             step = case["branches"][0]["condition_provenance"]["before_step"]
             actual = by_step[step]
+            if mode == "remaining_budget":
+                assert case["horizon"] == actual["before"]["budget"][
+                    "remaining_control_steps"] - 1
             assert step in expected
             assert case["before"] == actual["before"] and case["actions"] == actual["actions"]
             assert case["response_event_id"] == "original-task"
             stop = next(b for b in case["branches"] if b["action"]["kind"] == "HANDOFF")
             read = next(b for b in case["branches"] if b["action"]["kind"] == "READ")
+            assert all(e["step"] < 5 for branch in case["branches"]
+                       for e in branch["continuation"]["trace"])
             assert len(stop["actual_delivered_source_ranges"]) == step - 1
             assert len(read["actual_delivered_source_ranges"]) == (
                 step if case["horizon"] == 0 or learned else 2)

@@ -4,6 +4,7 @@ import copy
 import pytest
 
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
+from native_qa_branches import continuation_horizons
 from prepare_collected_operation_feedback import execute_branch
 
 
@@ -68,3 +69,31 @@ def test_continuation_checkpoint_failure_propagates_without_teacher_fallback():
             MemoryAction("read-4", "READ", "next actual item", {"index": 4}), 5, 2,
             terminal_handoff="current", policy_name="saved_checkpoint_policy",
             policy_factory=Broken)
+
+
+def test_remaining_budget_return_executes_early_state_through_original_limit():
+    initial = MemoryControlState(task={"request": "Question"},
+        budget={"remaining_control_steps": 7, "reader_capacity_reserved": True}).project()
+
+    class ReadPolicy:
+        def __init__(self):
+            self.calls = 0
+
+        def choose(self, state, actions):
+            self.calls += 1
+            return next(a.id for a in actions if a.kind == "READ")
+
+    first = MemoryAction("read-0", "READ", "next actual item", {"index": 0})
+    horizon = continuation_horizons(initial, "remaining_budget", [0, 2])[0]
+    result = execute_branch(Operations(), initial, first, 1, horizon,
+        terminal_handoff="current", policy_name="saved_checkpoint_policy",
+        policy_factory=ReadPolicy)
+    assert [e["step"] for e in result["trace"]] == list(range(1, 8))
+    assert len(result["state"]["visible_evidence"]) == 7
+    assert result["continuation_policy_calls"] == 6
+    assert result["reason"] == "budget_exhausted"
+    assert continuation_horizons(initial, "fixed", [0, 2]) == [0, 2]
+    for invalid in [0, -1, True]:
+        with pytest.raises(ValueError, match="positive actual allowance"):
+            continuation_horizons({"budget": {"remaining_control_steps": invalid}},
+                                  "remaining_budget", [2])

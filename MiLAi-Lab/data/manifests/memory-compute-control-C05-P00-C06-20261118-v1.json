@@ -1,0 +1,68 @@
+{
+  "schema": "camc.C05_closed_P00_C06_registered.v1",
+  "goal_status": "ACTIVE_INCOMPLETE",
+  "source_version_C05": "2dcdc610",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "C05": {
+    "states": 8,
+    "roots": 8,
+    "unique_bound_positions": 48,
+    "named_alias_positions": 64,
+    "same_before_menu_nomination_first_binding": true,
+    "nomination_score_delta": 0,
+    "actor_continuation_calls": 30,
+    "unique_primary_wires": 38,
+    "material_max_tokens": 2040,
+    "primary_new_calls": 27,
+    "primary_reuse": 21,
+    "primary_failures": 3,
+    "primary_tokens": 100437,
+    "unknown_usage_delta": 0,
+    "blind_B_judgments": [
+      26,
+      8,
+      4
+    ],
+    "completed_known_changed_roots": 3,
+    "known_material_changed_roots": 2,
+    "conditional_current_model_teacher_actor": [
+      7,
+      6
+    ],
+    "conditional_random_teacher_actor": [
+      4,
+      7
+    ],
+    "not_G1_or_own_state_round": true
+  },
+  "fixed_repeats": {
+    "selected": "Stopbindingeachofall8roots, independentfirststatus/quality",
+    "new_calls": 8,
+    "tokens": 30133,
+    "failures": 1,
+    "execution_discordant_roots": 2,
+    "native_quality_discordant_roots": 3,
+    "reviewed_quality_discordant_roots": 2,
+    "firsts_not_replaced_or_averaged": true,
+    "independent_source_N": 8
+  },
+  "P00": {
+    "positions": 143,
+    "unique_versions": 129,
+    "conflicts": 0,
+    "rules": 0,
+    "large_views": 125,
+    "large_node_texts_only_JSON_over2048": 90,
+    "text_only_max_tokens": 17950,
+    "single_node_text_over2048": 0,
+    "not_delivery_or_semantic_dependency_proof": true
+  },
+  "C06_card": "/data/milai-experiments/20261117-memory-compute-control/C06-policy-consistent-D0-card-v1.json",
+  "C06_status": "Remainingbudgetmodecodevalidated37tests/Ruff/mypy3/boundaryPASS, notyetfrozenorgenerated",
+  "cost_status": "16closedlocalscopes pendingoriginalidlelease; exactexternalR29kernelownerverified3857290. No16phasewrites afterrejection andno dependentReader dispatched. Native3phasesalreadychargedonce.",
+  "pending_receipt": "/data/milai-experiments/20261117-memory-compute-control/C05-pending-closed-local-cost-v1.json",
+  "no_default_public_API_Schema_permission_Canonical_change": true,
+  "sha_validation": false,
+  "no_protected_body_or_push_merge": true,
+  "global_remaining": "D0reliable256states/D1/P-D/actualownstate2rounds+exposurecontrols/3seeds/strongsimplefreeze/power/newCONFIRM/transfer/finaldeliverables; G1/G2/G3unestablished."
+}
