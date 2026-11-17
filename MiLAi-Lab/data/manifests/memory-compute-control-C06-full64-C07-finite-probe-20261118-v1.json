@@ -1,0 +1,163 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v39.json",
+  "source_versions": {
+    "C06branch_policy_requests": "S13/188a5239",
+    "Reader_interrupted_first_recovery": "S18/c2f8635d",
+    "C07_training_and_reload": "S15/4e92de2b"
+  },
+  "full_C06_coverage": {
+    "states": 256,
+    "source_roots": 64,
+    "actual_bound_positions": 775,
+    "unique_original_task_wires": 585,
+    "new_attempts_including_interrupted": 479,
+    "reused_positions": 296,
+    "new_known_Reader_tokens": 1806710,
+    "charged_tokens": 1816005,
+    "known_failed_positions": 47,
+    "unknown_execution_positions": 1,
+    "unknown_usage_delta": 1,
+    "unknown_reservation_retained_tokens": 9295,
+    "directional_states": 121,
+    "directional_roots": 58,
+    "directional_pairs": 240,
+    "known_branch_values": 692,
+    "unknown_branch_values": 83,
+    "maximum_actual_material_UTF8_tokens": 2030,
+    "review_grade": "B_project_aware_assistant_provisional_no_independent_truth",
+    "review": "C06-full64-feedback-and-fit-readiness-review-v2.json",
+    "signal": "C06-full64-feedback-signal-audit-v4.json",
+    "canonical_first_lineage": "C06-earliest-primary-through-block07-index-v1/run.json",
+    "canonical789_not_D0samplecount": true
+  },
+  "measurement_corrections": {
+    "citation_diagnostic_only": "C06-block06-citation-label-diagnostic-erratum-v1.json",
+    "four_outer_labels_previously_misread_as_array_positions": true,
+    "old_judgments_scores_and_quality_values_masks_preferences_preserved": true,
+    "fullwirecount506to585": "Block00metadata key differed; v2literal fullwire count recovers79, all originalfiles retained",
+    "forensic_tail_response_exposure": "Up to4records; originalcodes/order/sourcecriteria unchanged; projectawareB limitation disclosed"
+  },
+  "C07": {
+    "status": "FINITE_C07_CLOSED_SCORES_FIT_NO_OBSERVED_POLICY_CHANGE",
+    "admission": "C07-finite-fit-admission-v1.json",
+    "data": "C07-full64-matched-data-v1/run.json",
+    "inputs": "C07-learningcurve-inputs-v1/run.json",
+    "valid_states_each_arm": 252,
+    "masked_states_each_arm": 4,
+    "sizes_roots": [
+      16,
+      32,
+      64
+    ],
+    "arms": [
+      "weak_coverage_matched",
+      "native_masked",
+      "reviewed"
+    ],
+    "same_usable_start": "C04-mlp-raw-duplicate-warm24-seed0-v1/checkpoint",
+    "model_directories": [
+      "C07-mlp-raw-weak_coverage_matched-TRAIN16-seed0-v1",
+      "C07-mlp-raw-native_masked-TRAIN16-seed0-v1",
+      "C07-mlp-raw-reviewed-TRAIN16-seed0-v1",
+      "C07-mlp-raw-weak_coverage_matched-TRAIN32-seed0-v1",
+      "C07-mlp-raw-native_masked-TRAIN32-seed0-v1",
+      "C07-mlp-raw-reviewed-TRAIN32-seed0-v1",
+      "C07-mlp-raw-weak_coverage_matched-TRAIN64-seed0-v1",
+      "C07-mlp-raw-native_masked-TRAIN64-seed0-v1",
+      "C07-mlp-raw-reviewed-TRAIN64-seed0-v1"
+    ],
+    "saved_models": 9,
+    "trainable_parameters_each": 656769,
+    "seed": 0,
+    "learning_rate": 0.0003,
+    "updates_per_size_each_arm": [
+      12,
+      24,
+      48
+    ],
+    "batch_states": 16,
+    "microbatch_states": 4,
+    "actual_total_optimizer_updates": 252,
+    "actual_total_valid_state_draws": 3990,
+    "nominal_total_draws": 4032,
+    "valid_draws_each_arm_by_size": [
+      192,
+      380,
+      758
+    ],
+    "actual_valid_windows_source_and_value_denominators_equal": true,
+    "all9_heads_changed_saved": true,
+    "same_warm_initial_score_difference": 0.0,
+    "fresh_process_fixed_first_TRAIN_row_max_difference_all9": 0.0,
+    "actual_new_encoder_forwards_and_saved_tensor_equality_verified": true,
+    "fresh_scope_is_one_fixed_state_per_model_not_taskproof": true,
+    "strict_S15_training_data_full_literal_sidecars_all9_equal": true,
+    "all9_own_TRAIN_fullmenu_choice_changes_vs_samewarm": 0,
+    "full64_reviewed_observed_pair_accuracy_before_after": [
+      0.8291666666666667,
+      0.8625
+    ],
+    "full64_reviewed_mean_state_Brier_before_after": [
+      0.20946437793546074,
+      0.164987964552164
+    ],
+    "known_better_action_states_than_warm_top": 22,
+    "known_better_action_roots": 16,
+    "known_improvement_not_achieved_in_argmax": true,
+    "numeric_G0": "PASS weights/save/data/reload; policy learning exit notproven",
+    "TRAIN_numbers_not_QA_or_G1_proof": true,
+    "Reader_DEV_calls": 0,
+    "no_extra_epochs_LR_seeds_admitted": true,
+    "not_ownstate_adaptation_round": true,
+    "closed_review": "C07-finite-probe-closed-review-v1.json",
+    "numerical_review": "C07-training-numerical-review-v1.json",
+    "fresh_reload": "C07-fresh-reload-probe-v1.json",
+    "known_opportunity_audit": "C07-observed-opportunity-versus-warm-top-audit-v1.json"
+  },
+  "costs": {
+    "training_plus_reload_CPU_seconds": 357.65327776000004,
+    "training_plus_reload_scheduled_GPU_job_seconds": 311.54960070643574,
+    "stage_GPU_cap_seconds": 900,
+    "receipts": [
+      "C07-before-finite-fit-closed-cost-v1.json",
+      "C07-finite-fit-closed-cost-v1.json",
+      "C07-fresh-reload-closed-cost-v1.json",
+      "C07-after-finite-probe-local-closed-cost-v1.json"
+    ],
+    "parent_training_and_fresh_driver_once_no_nested_rebill": true,
+    "whole_active_GPU_IO_energy_money_and_interrupted_original_fullcost": "UNKNOWN",
+    "no_new_HTTP_token_billing_for_local_fits": true
+  },
+  "next_action": "Register bounded complete cold-trajectory/new-root and input/prior attribution diagnostics; zero Reader initially. No D1expansion or added epochs from thisfinite negative decision result. Full goal remains.",
+  "remaining_full_goal": [
+    "Independent reliable calibration",
+    "M1 and mechanism P/D development and actual task validation",
+    "D1 reliable comparison states/learning curves if justified",
+    "Two actual ownstate rounds plus matched oldpool controls and replay",
+    "Three training seeds",
+    "Strong simple baseline selection freeze",
+    "Source/group power and new confirmation",
+    "Second Reader or external transfer",
+    "Complete deliverables with costs and negative evidence"
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "own_live_jobs": 0,
+  "research_model_weights_created": true,
+  "old_C06_collector_weights_changed": false,
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false,
+  "validation": {
+    "JSON_counts_links_and_full_literal_data": "PASS",
+    "S15_trainer_and_S18_reader_full_bytes": "PASS",
+    "source_code_changed_after_S18_tests": false,
+    "repeated_source_tests_after_document_only_change": 0,
+    "rollback_commit": "46833acb",
+    "remote_checked": false
+  }
+}

@@ -1,4 +1,41 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; block07 interrupted-first recovery/S18
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06full64closed/C07ninefits no TRAINchoicechange
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v39.json.
+All own jobs TERMINAL, /proccommands absent/empty, no live ownReader/GPU. C06all8blocks CLOSED:
+256states64roots775positions585unique taskwires,479newattempts296reused,1806710known tokens/
+1816005charged,47knownfailedpositions1UNKNOWNexecution/usageU1/9295reservation retained.
+121directionalstates58roots240pairs692known83unknown; stillBprovisional/no independenttruth.
+Final block07 recovery95positions23new72reused9knownfail1unknown90494newtokens/U0; original
+48attempts193996charged/U1 included in fulltotals. Raw stale RUNNINGprefix preserved, not live.
+S13branch/policy/prompt unchanged, S18/c2f8635dReader UNKNOWNreuse only, S15/4e92de2btrainer.
+Full64signal:217stop/read vs23read/read pairs;15bothcompleted/differentranges only13states8roots.
+5469fullmenu positions4694unexecuted NOTnegative. All3arms256rows64roots252valid4masked,
+known masks/fullonline inputs equal. Full16/32/64window numerical audit PASS, no GPU/model then.
+C07finite9M0rawfits now CLOSED: first16/32/64roots xweak/native_masked/reviewed, sameusable
+C04raw-warm24start,oneLR3e-4/seed0,12/24/48updates,batch16/micro4,656769trainable each.
+252actualupdates3990valid/4032nominaldraws; perarm192/380/758valid exposure, same denominators.
+Allheads actually changed/saved, initialscores allarms0diff. Fresh independentprocess fixed
+firstTRAINrow permodel9reloads0diff, exact savedtensors/newencoderforwards; only thatscope.
+TRAINloss/pair/Brier improve but ALL9own-TRAIN fullmenu choices unchanged vs samewarm.
+Full64warm-top204alreadybestknown,30unknown,22havebetterexecutedaction across16sources;
+none corrected. NumericG0 PASS, policy learning/generalization/G1/G2/G3NOTestablished.
+Training+freshCPU357.6533s/GPUallocation311.5496s below900cap, parentonce/readback, no child
+rebill.13prep+training+fresh+4postlocal scopes settled; lostold fullcost/manualwork/activeGPU/
+IO/energy/money UNKNOWN. No current pending measured scope. No Reader/DEVcalls for C07fits.
+Preserve negative9fit result; NO extraepochs/LR/seeds under thatcard. Next register only bounded
+cold fulltrajectories/input-prior attribution before paying identicalwire Readercalls/D1expansion.
+NextDEV-fit8indices24:32/all9saved+samewarm/fixed4/strongcosine7 is prospective, NOTadmitted yet.
+Four block06 citation diagnostics corrected SIDEcar (outerelabel != arrayposition), task/material/
+grounding targets,masks,prefs/scores unchanged. Fullwirecountv1 missedblock00/79 dueoptionalkey;
+v2actual585count correction retained, no labelchange. Forensicup-to4response exposure disclosedB.
+Full reliablecalibration/D1/M1/P-D/two ownstate+matchedoldpool/3seeds/strongbaseline/power/new
+CONFIRM/transfer/delivery INCOMPLETE.488ownobservations stillunlabelled/notD3round. Newresearch
+head files only; oldC06collector/Public/Product/Archive/default/permissions/protectedbody unchanged.
+No push/merge. SHA/fingerprints OFF. See C07-finite-probe-closed-review-v1.json before new work.
+
+The following v38 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; block07 interrupted-first recovery/S18
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v38.json.
 Old07PID675321 VERIFIED ABSENT, exec51779unknownprocess, no FLOCK holder. RawRUNNING62closed
