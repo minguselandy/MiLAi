@@ -1,0 +1,51 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "IMPLEMENTED_TESTED_NOT_INTEGRATED_OR_DEPLOYED",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "card": "P01-whole-view-unit-projection-card-v1.json",
+  "validation": "P01-implementation-validation-v1.json",
+  "module": "src/milai_lab/methods/query_structure_projection.py",
+  "tests": "tests/unit/test_query_structure_projection.py",
+  "source_parent_commit": "01eb339b",
+  "operation": "Explicitly partial projection of whole nodes and every connected recorded rule on an already opened Reader View",
+  "invariants": [
+    "All AND prerequisites and every OR-of-AND route retained; cycles terminate",
+    "Reverse incident rules included so selecting a premise does not silently omit connected exceptions",
+    "Whole literal nodes, rules, negations, unknowns, temporal fields, roles and clocks preserved",
+    "Typed and prose source references plus linked metadata retained; e1 does not alias e10",
+    "Explicit parent totals and partial coverage; original scope is not complete delivery coverage",
+    "Full selection is literal identity; unused source locator/metadata entries can be omitted in partial delivery",
+    "No new Source body, fact, truth evaluation or automatic relevance selector",
+    "Full parent must be opened under common visibility/version checks first; unavailable projected parents rejected"
+  ],
+  "checks": {
+    "unit_tests": "18 PASS, including actual SQLite source revocation and composition with lossless tables",
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "measured_verification_CPU_seconds_sum": 18.698700945,
+    "sum_command_wall_seconds_not_end_to_end": 16.39726000186056,
+    "settlement": "Only five per-command closed scopes; aggregate is not separately billable",
+    "earlier_editing_failed_checks_assistant_and_report_cost": "UNKNOWN"
+  },
+  "limitations": [
+    "Recorded graph closure is not proof of semantic completeness or interpretation truth",
+    "Partial delivery changes information; not claimed lossless relative to complete parent",
+    "Large whole components can remain over budget and are never truncated",
+    "No current runtime integration, trained precision policy or natural-task gain",
+    "The old143View cases had zero rules and do not validate conditional closure"
+  ],
+  "Reader_calls": 0,
+  "GPU_job_requested": false,
+  "current_C06_source": "S13/188a5239 unchanged",
+  "Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "model_weights_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "full_goal": "ACTIVE_INCOMPLETE",
+  "remote_commit_checked": false,
+  "push_or_merge": false
+}
