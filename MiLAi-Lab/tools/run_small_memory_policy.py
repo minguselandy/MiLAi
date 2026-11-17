@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
-from milai_lab.methods.control_observation import legacy_control_input
+from milai_lab.methods.control_observation import VISIBLE_SOURCE_HANDLES_V2, legacy_control_input
 from milai_lab.methods.small_control_learning import state_loss
 from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
 from training_recovery import (
@@ -173,6 +173,7 @@ def train(args: argparse.Namespace) -> None:
     config = SmallControlConfig(args.family, str(args.backbone.resolve()),
         chunk_tokens=args.chunk_tokens, encode_batch_size=args.encode_batch_size,
         adaptation=args.adaptation, set_interaction=args.set_interaction,
+        projection_version=args.projection_version,
         readout=args.readout, joint_max_tokens=args.joint_max_tokens,
         joint_layout=args.joint_layout, state_representation=args.state_representation,
         action_representation=args.action_representation,
@@ -694,6 +695,9 @@ def main() -> None:
     fitting.add_argument("--checkpoint-steps", type=int, nargs="+", default=[],
                          help="Preserve declared inference checkpoints for later DEV selection")
     fitting.add_argument("--set-interaction", action="store_true")
+    fitting.add_argument("--projection-version",
+                         choices=["control-observation-v1", VISIBLE_SOURCE_HANDLES_V2],
+                         default="control-observation-v1")
     fitting.add_argument("--resume", type=Path)
     fitting.add_argument("--initialize-from", type=Path,
                          help="New optimizer/stage from a matching usable starting checkpoint")
@@ -801,6 +805,8 @@ def main() -> None:
     native_collect.add_argument("--control-steps", type=int, default=8)
     native_collect.add_argument("--reuse-banks", type=Path,
                                 help="SQLite backups preserving captured identities for pairing")
+    native_collect.add_argument("--initial-states-from", type=Path,
+                                help="Same captured cold rules4 state/checkpoint for every method")
     native_score = sub.add_parser("native-score")
     native_score.add_argument("--readouts", type=Path, required=True)
     native_score.add_argument("--controls", type=Path, required=True)
@@ -835,9 +841,18 @@ def main() -> None:
     native_branches.add_argument("--horizons", type=int, nargs="+", default=[0, 2])
     native_branches.add_argument("--material-tokens", type=int, default=2048)
     native_branches.add_argument("--device", default="cpu")
+    native_replay = sub.add_parser("native-replay")
+    native_replay.add_argument("--prepared", type=Path, required=True)
+    native_replay.add_argument("--output", type=Path, required=True)
+    native_replay.add_argument("--material-tokens", type=int, default=2048)
     args = parser.parse_args()
     if args.command == "initialize":
         initialize_model(args)
+        return
+    if args.command == "native-replay":
+        from native_qa_replay import replay
+
+        replay(args)
         return
     if args.command == "native-likelihood":
         from native_qa_likelihood import collect

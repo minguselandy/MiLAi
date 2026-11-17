@@ -12,7 +12,12 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-from milai_lab.methods.control_observation import control_texts, joint_control_texts
+from milai_lab.methods.control_observation import (
+    VISIBLE_SOURCE_HANDLES_V2,
+    control_texts,
+    joint_control_texts,
+    visible_source_handle_input,
+)
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     MemoryAction,
@@ -114,7 +119,7 @@ class SmallControlModel:
             raise ValueError("Unknown backbone adaptation")
         if config.family == "frozen_mlp" and config.adaptation != "frozen":
             raise ValueError("M0 requires a frozen encoder")
-        if config.projection_version != "control-observation-v1":
+        if config.projection_version not in {"control-observation-v1", VISIBLE_SOURCE_HANDLES_V2}:
             raise ValueError("Use the model's original observation projection")
         if config.readout not in {"dual", "joint"}:
             raise ValueError("Unknown control readout")
@@ -241,6 +246,8 @@ class SmallControlModel:
 
         if self.config.readout == "joint":
             return self.joint_features(online)
+        if self.config.projection_version == VISIBLE_SOURCE_HANDLES_V2:
+            online = [visible_source_handle_input(row) for row in online]
         states, queries, actions, owners, lengths, action_queries = [], [], [], [], [], []
         for index, row in enumerate(online):
             state_text, action_texts = control_texts(row, delivery_context=(
@@ -274,6 +281,8 @@ class SmallControlModel:
                 torch.tensor(owners, device=self.device), lengths)
 
     def joint_layout(self, online: dict[str, Any]) -> tuple[list[int], int, list[int]]:
+        if self.config.projection_version == VISIBLE_SOURCE_HANDLES_V2:
+            online = visible_source_handle_input(online)
         prefix, options = joint_control_texts(online,
             wrapped_json=self.config.joint_layout == "wrapped_json_v1")
         ids = self.tokenizer.encode(prefix, add_special_tokens=False, verbose=False)

@@ -234,3 +234,23 @@ R06现已全部关闭并评分：固定/query-once/rules及三种可用起点均
 加入余弦策略后，最新同组回归加该策略检查共473 passed；默认查询编码兼容、导航权限、候选排列/别名、完整展开参数、预算停止和模型异常传播均有覆盖。CI核心58个直接文件加既有可选协议共59文件mypy通过；3个本轮变更模型/策略/工具的补充mypy及全Lab Ruff通过，362源验证矩阵通过。未运行完整pytest/远端CI。[最新检查](../artifacts/small-memory-control-20261116/R07-broad-validation-v1.json)
 
 完整原计划保持ACTIVE：尚需可靠结果训练、真实DEV选型、E01–E08、两种机制、三seed、新来源确认、迁移与长期维护；无任务收益或方法采用结论。
+
+## R07关闭与R08接口修复
+
+R07全部416位置关闭：新增119次实际调用、297个复用位置、25个失败位置保留，426083 tokens，新增unknown为0。原100步三路线的实际DEV主指标为3/32、2/32、1/32，均低于各自13/32可用起点；材料参考覆盖为5/32、2/32、1/32。冻结编码器余弦基线为18/32，参考覆盖22/32。成对拟合没有转为完整任务收益，停止该配方的自动扩量；该开发集尚不能作B*冻结或正式确认结论。[实际评分](../artifacts/small-memory-control-20261116/R07-thirteen-condition-DEVfit32-scores-v1/summary.json)
+
+按计划进行8个独立TRAIN根、初始/获取后交替的身份探针。同输入重复和动作ID重命名均0/8变化；仅更换不改变正文和引用关系的Source UUID，M0/M1/M2都改变1/8完整绑定，最大分数变化3.54/3.94/1.06。短对象别名均改变3/8。Decoder反转菜单改变3/8，不能声称排列等变。该诊断不用Reader或答案标签，不作为任务质量。[原模型探针](../artifacts/small-memory-control-20261116/R08-alias-invariance-v1.json)
+
+新增显式可选的模型投影`control-observation-visible-source-handles-v2`：只将公共观测中已锚定的Source句柄及结构引用替换为一致局部别名，保留实际正文/问题中的标识符及未观察的绑定字符串。实际执行器仍持有原完整参数，模型返回原动作ID；旧checkpoint的v1输入不变。全部32个实际TRAIN状态在UUID及短别名变换后，双塔和联合模型文本均一致。M0新起点的4个头张量与原起点完全相同，仍为零残差构造；相同数据/100步后保持已观察比较23/23。在8源神经探针中，UUID/短别名的动作和分数变化均为0。此为有限接口修复，不是创新或任务收益。[输入证明](../artifacts/small-memory-control-20261116/R08-model-input-alias-proof-v1.json) [修复后探针](../artifacts/small-memory-control-20261116/R08-visible-handles-invariance-v1.json)
+
+第一次新投影DEV准备在第11根、第6步明确失败，10根已关闭，Reader调用为0；原错误、checkpoint及29.84秒已测墙时均保留。保存状态显示：晚于直接Source读取的固定SEARCH覆盖了已有material索引，并未同步公开的retrieved_scopes，合法HANDOFF因而引用了观测中缺失的窄范围。最初对去重别名的归因不完整，以保存状态的路径核对为准。修复为保留已有索引并追加检索结果、在SEARCH后同步已获取范围的公开投影；同时补齐规则对去重别名的索引和同一对象“当前窄K/完整O”的交付解析。[失败准备](../artifacts/small-memory-control-20261116/R08-visible-handles-DEVfit32-prepared-v1/run.json)
+
+路径核对发现：旧M0/M1的DEV各4/32、6/32条轨迹经过晚搜索，M2及各简单/历史对照为0；R03的h=2有30/118分支经过该路径，其中27分支还缺少菜单已提供的公开窄范围。旧首答和负结果仍是执行器v1的实际观察，不能把全部差值归因于训练，也不把受影响旧标签当作修复后执行器的主监督。[路径范围](../artifacts/small-memory-control-20261116/R08-environment-v1-path-audit-v1.json)
+
+修复后已有29项针对性回归通过，包括实际SQLite中先READ再SEARCH的索引保留、可见范围同步、合法别名及K/O交付；相关5文件mypy及全Lab Ruff通过。正在以冻结源版本重新准备15个条件：每根使用同一实际捕获的冷状态和执行器checkpoint，包括相同的诊断计时字段；原32根、来源版本、正文、Reader和预算均不变。旧失败不覆盖，无首答纠错重试。此前权重仍来自v1反馈，本块是环境修复及输入投影的诊断比较；受影响反馈还需在修复后重放，不能提前宣称训练收益。[修复后协议](../artifacts/small-memory-control-20261116/R08-env2-common-initial-card-v1.json)
+
+该15条件准备现全部关闭，共480位置、292个同事件不同wire，最大实际Unicode材料仍为1838 tokens。每根所有条件的冷before相同，共同rules4分支逐字一致，四个零残差起点均交付相同规则材料。相对旧R07只需46个新wire；其余旧首答可按条件完全一致复用，失败也保留。共同初始状态同时固定了诊断计时字段，所以不能把所有跨版本轨迹变化只归于索引修复。[修复后完整准备](../artifacts/small-memory-control-20261116/R08-env2-fifteen-condition-DEVfit32-prepared-v1/run.json)
+
+R09已独立重放R03全部236个实际TRAIN绑定、64个状态/horizon机会、16根；逐条核对原安全before、菜单、首动作、续跑、原剩余预算及来源版本。30个分支的完整Host wire改变，其中29个是新唯一条件；165个唯一条件仍能复用原首次。没有复制旧质量标签。本块不是新来源扩量或自身状态聚合；修复后的冻结小教师C代理也重新计算，不将旧wire的弱标签套给新wire。当前先运行29个新条件的实际首答，关闭后才编译新执行器监督。[实际重放](../artifacts/small-memory-control-20261116/R09-env2-TRAIN16-replayed-v1/run.json)
+
+最新选择集479 passed，涵盖Source句柄投影、实际迟搜索、K/O及别名回归；相关6个源/工具mypy、全Lab Ruff及362源验证矩阵通过，不称完整pytest/远端CI。新收据已将15个关闭的计算范围（含保留的失败准备）在原台账结算一次；R07原生父计量只核对，119个实际响应426083 tokens未重扣，新增unknown为0。R09正在进行的首答尚未结算。[最新检查](../artifacts/small-memory-control-20261116/R08-broad-validation-v1.json) [关闭范围收据](../artifacts/small-memory-control-20261116/R07-R09-closed-cost-disclosure-v1.json)

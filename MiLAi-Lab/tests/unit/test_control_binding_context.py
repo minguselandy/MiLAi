@@ -34,6 +34,34 @@ def test_bound_selection_uses_observed_body_and_exact_retrieved_scope():
     assert len(result["material_projection"]) == 1 and not result["unresolved_indices"]
 
 
+def test_current_narrow_K_and_full_O_of_one_index_remain_distinct():
+    narrow, full = item(0, "selected narrow range"), item(0, "full acquired original")
+    observation = {"visible_evidence": [narrow], "observed_evidence": [full],
+        "retrieved_scopes": [{"item_index": 0, "evidence": narrow}]}
+    assert proposed_delivery_projection(observation, {"parameters": {}})[
+        "material_projection"] == [narrow]
+    assert proposed_delivery_projection(observation, {"parameters": {"delivery_indices": [0]}})[
+        "material_projection"] == [full]
+    scoped = proposed_delivery_projection(observation, {"parameters": {
+        "delivery_indices": [0], "retrieved_scope_indices": [0]}})
+    assert scoped["material_projection"] == [narrow]
+    observation["observed_evidence"].append(item(0, "conflicting acquired body"))
+    with pytest.raises(ValueError, match="within one observation layer"):
+        proposed_delivery_projection(observation, {"parameters": {"delivery_indices": [0]}})
+
+
+def test_rules_score_an_offered_deduplicated_alias_as_the_acquired_body():
+    from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, RulesMemoryPolicy
+
+    material = {**item(0, "Alpha duty"), "also_selected_as": ["e1"]}
+    state = MemoryControlState(task={"request": "Alpha duty", "read_goal": {
+        "evidence": ["original_source"]}}, visible_evidence=[material],
+        observed_materials=[{"item_index": i, "kind": "original_source"} for i in [0, 1]])
+    actions = [MemoryAction("alias", "HANDOFF", "acquired alias", {"delivery_indices": [1]}),
+               MemoryAction("current", "HANDOFF", "Reader")]
+    assert RulesMemoryPolicy(reads=1).choose(state, actions) == "alias"
+
+
 def test_readout_context_has_no_offline_or_local_action_id_feature():
     observation = {"task": {"request": "Find the current owner"},
         "visible_evidence": [], "observed_evidence": [item(2, "current owner Ada")],

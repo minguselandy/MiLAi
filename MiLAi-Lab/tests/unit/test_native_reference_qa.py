@@ -215,3 +215,47 @@ def test_reference_span_receipt_follows_real_source_reads_not_citation_metadata(
         changed["sources"][0]["content"] += "Changed body."
         with pytest.raises(ValueError, match="literal body"):
             capture_sources(service, changed, mapping)
+
+
+def test_search_after_source_read_keeps_indices_and_publishes_new_bounded_scopes(tmp_path):
+    import re
+    from types import SimpleNamespace
+
+    from langgraph.store.sqlite import SqliteStore
+
+    from milai_lab.memory.service import MemoryService
+    from milai_lab.methods.memory_control import RulesMemoryPolicy
+    from native_qa_control import actual_packet, capture_sources, environment
+
+    native = example()
+    native["context"]["sentences"][0].append(" filler" * 450)
+    history, _ = export_question(native, "train", ordinal=0)
+    capacity = SimpleNamespace(text_tokens=lambda text: len(text.split()),
+        tokenizer=lambda text, **kwargs: {"offset_mapping": [
+            (m.start(), m.end()) for m in re.finditer(r"\S+", text)]})
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("late-search-test", "author"), "author", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        mapping = capture_sources(service, history)
+        state, operations = environment(service, history["requests"][0], capacity, 2048)
+        direct = next(a for a in operations.actions(state) if a.kind == "READ"
+            and a.parameters.get("observed_source", {}).get("end", 0) > 2000
+            and not a.parameters.get("observe_only"))
+        assert operations.execute(direct, state)["ok"]
+        original = copy.deepcopy(operations.observed[0])
+        original_material = copy.deepcopy(operations.materials[0])
+        search = next(a for a in operations.actions(state) if a.kind == "SEARCH")
+        assert operations.execute(search, state)["ok"]
+        assert operations.materials[0] == original_material
+        assert operations.observed[0] == original
+        assert all(c["item_index"] > 0 for c in state.pending_candidates)
+        scopes = {s["item_index"] for s in state.retrieved_scopes}
+        assert scopes and scopes == set(operations.retrieved_scopes())
+        menu = operations.actions(state)
+        assert all(set(a.parameters.get("retrieved_scope_indices", [])) <= scopes for a in menu)
+        assert RulesMemoryPolicy(reads=1).choose(state, menu) in {a.id for a in menu}
+        narrowed = next(a for a in menu if a.kind == "HANDOFF"
+                        and a.parameters.get("retrieved_scope_indices"))
+        assert operations.execute(narrowed, state)["ok"]
+        packet, receipt = actual_packet(operations, mapping)
+        assert packet["evidence"] and receipt

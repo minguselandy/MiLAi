@@ -638,7 +638,19 @@ class EvidenceOperations:
                     **({"retrieved_scope_indices": narrowed} if narrowed else {})}
         if action.kind == "SEARCH":
             if self.search_pool is None:
-                self.materials = self.internal_pool(self.load_pool())
+                found = self.internal_pool(self.load_pool())
+                if not self.materials:
+                    self.materials = found
+                else:
+                    fixed_pool_keys = {(item["kind"], item.get("id", item.get("record_id")),
+                                        item.get("revision"), item.get("version_view"))
+                                       for item in self.materials}
+                    for item in found:
+                        fixed_pool_key = (item["kind"], item.get("id", item.get("record_id")),
+                                          item.get("revision"), item.get("version_view"))
+                        if fixed_pool_key not in fixed_pool_keys:
+                            self.materials.append(item)
+                            fixed_pool_keys.add(fixed_pool_key)
             else:
                 parameters = action.parameters
                 if "query_from" not in parameters:
@@ -670,6 +682,8 @@ class EvidenceOperations:
                                         for i, item in enumerate(self.materials)
                                         if i not in self.acquired
                                         and not item.get("source_observation_read")]
+            if self.delivery_selection:
+                self._deliver(state)
             return {"ok": True, "status": "searched", "candidates": len(self.materials),
                     **action.parameters,
                     **({"query": query} if self.search_pool is not None else {}),

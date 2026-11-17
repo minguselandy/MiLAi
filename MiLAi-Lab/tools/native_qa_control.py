@@ -6,6 +6,7 @@ import json
 import os
 import time
 from collections.abc import Callable
+from dataclasses import asdict
 from functools import partial
 from itertools import combinations
 from pathlib import Path
@@ -235,6 +236,8 @@ def prepare_packets(args: Any) -> None:
         "sources": str(args.sources), "planned_roots": len(histories), "closed_roots": 0,
         "device": args.device, "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
         "reused_source_banks": str(args.reuse_banks) if args.reuse_banks else None,
+        "initial_states_from": str(args.initial_states_from) if args.initial_states_from else None,
+        "execution_contract": "stable_material_indices_search_scope_sync_v2",
         "historical_models": historical_configs,
         "cosine_models": {name: {"backbone": model.config.backbone, "reads": args.cosine_reads,
             "selection": "Frozen query/passage cosine on legal navigation excerpts; fixed "
@@ -264,8 +267,22 @@ def prepare_packets(args: Any) -> None:
                     case = {"family": history["source_group"], "event_id": key, "case_key": key,
                         "request_id": request["id"], "choices": {}, "branches": []}
                     for name in names:
+                        initial = (read_jsonl(args.initial_states_from / "banks" / history["id"] /
+                            f"{request['id']}-rules4-checkpoints.jsonl")[0]
+                            if args.initial_states_from else None)
+                        if initial is not None and initial["decision"]["before"]["task"][
+                                "request"] != request["query"]:
+                            raise ValueError("Captured initial observation belongs to another task")
                         state, operations = environment(service, request, capacity,
-                                                        args.material_tokens)
+                            args.material_tokens, state=MemoryControlState(**copy.deepcopy(
+                                initial["decision"]["before"])) if initial else None,
+                            checkpoint=initial["executor_checkpoint"] if initial else None)
+                        if initial is not None and (
+                                [asdict(a) for a in operations.actions(state)] !=
+                                initial["decision"]["actions"]
+                                or state.project() != initial["decision"]["before"]):
+                            raise ValueError(
+                                "Captured common cold state/menu differs after restore")
                         policy = (SmallMemoryPolicy(models[name]) if name in models
                                   else factories[name]())
                         checkpoint_path = bank / f"{request['id']}-{name}-checkpoints.jsonl"

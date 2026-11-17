@@ -1,4 +1,134 @@
-# CURRENT 2026-11-17: R05 fits/R06 firsts CLOSED; R07 13-condition firsts RUNNING
+# CURRENT 2026-11-17: R09 corrected D0 firsts RUNNING; R08 env2 15-policy DEV READY
+
+This block supersedes historical CURRENT blocks below. Full original goal ACTIVE/INCOMPLETE.
+R=/data/milai-experiments/20261116-small-memory-control; authoritative current-state-v3.json.
+No subagents/SHA/checksums/contentfingerprints/newservices/Productdefaults/push/merge.
+OriginalReader/BGE/budget unchanged. No firstanswerretries/replacements, no invented independentreview.
+Latestlocalcommit a56455da; workingchanges R08visibleSourceprojection +SEARCHindex/scope/K-O/
+aliasrepairs,commoninitialstates,replaytool/tests/report. Finalrepairlocalcommit stillneeded.
+ONLY LIVE model/Readerjob: R09-env2-TRAIN16-firsts-v1 exec92946 (readPID/run).236positions/
+64state-horizon cases/32actualstates/16roots. SourceR09-env2-replay-v1-source. Reuseoriginal
+R03firstsincludingfailures;165uniqueoldwires/29newconditionalwires. Do not duplicate/retry.
+WhilethisHTTPleaseactive DO NOT manualsettlecompute. AllGPU2/3offlinepreps/fits/probes CLOSED.
+R09prep R09-env2-TRAIN16-replayed-v1 CLOSED236branches;oldbefore/menu/firstbinding/horizon/
+remainingbudgetallmatched.30changedbranchwires,29newunique. No oldqualitylabels copied.
+R09-env2-frozen-teacher-likelihood-v1 CLOSED236newpackets/237FP32forwards,220995maininputtokens;
+Cproxyonly. OnceR09firstsALLterminal: native-score -> R09-env2-TRAIN16-scores-v1, controlsR01-
+TRAIN64-sources-v1/controls.jsonl; then native-feedback --weak-likelihood R09-env2-frozen-teacher-
+likelihood-v1 -> R09-env2-TRAIN16-feedback-v1. KeepENV1andENV2labelsseparate,h0/h2separate.
+R08-env2-fifteen-condition-DEVfit32-prepared-v1 CLOSED480positions/32roots/292sameeventuniquewires.
+Newwirecount46vsoldR07;actualUTF8materialmax1838<=2048. All15commoncoldbeforeperroot identical;
+sharedRules4branchesliteral-equal,fourzero-startpackets/wireequalRules4. CardR08-env2-fifteen-
+condition-firsts-card-v1.json. Env2DEVReaderNOTlaunchedyet. AfterR09closure/score/costsettlement,
+driverR08env2with --reuse-readouts R07-thirteen-condition-DEVfit32-firsts-v1
+--share-identical-packets (sourceR09v1orR08v2). Expected46newcalls;neverreplaceoldfailure.
+Allcurrentweights trainedENV1; ENV2comparisonisdiagnostictransfer/inputablation,NOTcorrected
+feedbacktraininggain. Neednewenv2labels beforefittingagain. No valueobjectivecode/fit added.
+CriticalRootCause: fixedSEARCHusedtoREPLACEmaterialsafterdirectSourceREAD,corruptingstableindices;
+publicretrievedscopeswerenotupdatedafterSEARCH. R08firstDEVprep FAILEDroot11step6,10rootsclosed,
+0Readercalls,29.84wallsecs retained. Do NOToverwrite/retrythatdirectory. Initialalias-only
+attributionwaswrong;rootcapturedobserved0 existed,retrieved0missing. Fixedappend/indexretention,
+postSEARCHpublicprojection;Rulesdedupaliaslookup;explicitdeliveryfullO vsnarrowcurrentKcorrect.
+R08-env2commoncard/all15newprogramsources/failedartifactpreserved. NewprepsstartSAMEsafeoldcold
+snapshot via --initial-states-from/--reuse-banks R05-seven-condition-DEVfit32-initial-v1.
+R08-environment-v1-path-audit:oldDEVlateSEARCHM0=4/32,M1=6/32,M2/simple/history0;oldTRAINh2
+30/118latebranches,27missingpublicscopes. OldENV1firsts/negativeoutcomesretained;notautomatic
+ENV2supervision. R09actualreplaynowprovidesnewconditions,notownstateaggregationornewsourcecoverage.
+R07ENV1actualDEV CLOSED416positions,119newcalls/297reuse,25failedpositions,426083tokens,unknown0.
+R07scores CLOSED: M0/M1/M2quality100=3/2/1of32;usableRule13each,cosine4=18,S1=11,10kQ=9,
+fixed/query/rules13,empty0. Stopautomaticpair-onlyh2recipescaling;noadoption. E5officialcard
+KILT HotpotQA~70ksupervisedtrain+Wikipedia disclosed;exactquestionoverlapunmapped,no coldclaim.
+R08identityprobe8sources:rawall3UUIDrename1/8,shortalias3/8;repeat/actionID0,decoderreverse3/8.
+Opt-in control-observation-visible-source-handles-v2 aliasespublicanchoredSourceRefrelations,
+protectsliteralcontent/query identifiers,retainsunobservedbinding-onlyrefs. Encoder-onlycopy;
+realactions/params/priororiginal. Oldv1checkpointinputunchanged. All32TRAINdual/jointtexts
+UUID/short-alpha-equal. MatchednewM0init4headtensors;100steps23/23/451effectivepositions;
+8sourceneuralUUID/shortprobe0binding/scoredifferences. Engineeringfix,nottaskgain/novelty.
+R05actual3fits100updates;observedpairs3→23/23/19of23,451effectivestatesfrom9states/8roots;
+fullmenufinalUNEXECUTED21/20/16of32,notnegatives/fulltaskaccuracy. OldR03h2pairs23areENV1.
+OnlyTRAIN64andDEV-fit32exported;DEV-select128/CONFIRM1000metadatareservedstillsealed. All3256
+rolesarticle-disjoint,exclude96343localMuSiQuetitles;basepretrainingexposureseparate/partiallyknown.
+Metric adaptednativeanswerEM ANDactualreferencespancoverage ANDcompletefirst, NOTofficialjointEM
+or explanationtruth. OfflinegoldparagraphboundTRAIN8=8/8,notpolicy/Bstar. OldfreeformD00judge
+labels notadmittedforbulkprimaryutility. Noindependenthumanreviewclaimed.
+Latestchecks:479selectedunit+architecturePASS;29targetedbinding/executorregressionsPASS;
+6changedsource/toolmypyPASS/fullRuffPASS/362sourceverificationmatrixPASS;priorcore59mypyPASS.
+Notfullpytest/remoteCI. Task-onlyverification-env-v1 mergesexistingdepsby.pth;no sharedenv mutation.
+NewestR07-R09-closed-cost-disclosure-v1 SETTLED15closedlocalscopes inclfailedprep;R07parent
+readbackonly119responses426083tokensnotrebilled,unknown0. Earlierreceiptsretained. R09live
+firsts pending. Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+No secondledger. Untimedstartup/analysis/serverGPU/CPU/energy/moneyunknownnotzero.
+Next: closeexistingR09firsts92946;score/compilefreshENV2D0;recordyieldbeforemorefits. Thenclosed
+costsoriginalledgeronce andactualR08env2DEVfirsts wR07reuse. Finalrepairsource/report/localcommit.
+Formal E01-E08,usabletrainedT1,strongBstar,3seeds,2mechanisms/ablations/counterexamples,
+newCONFIRM/secondReader/budgettransfer/L4/8/16remainrequired;goalnotcomplete/blocked/paused.
+
+# HISTORICAL CHECKPOINT: R08 env2 comparisons were preparing
+
+Supersedes every historical CURRENT block below. Full original goal ACTIVE/INCOMPLETE.
+Authoritative R=/data/milai-experiments/20261116-small-memory-control/current-state-v3.json.
+No subagents/SHA/checksums/contentfingerprints/newservices/Productdefaults/push/merge.
+OriginalReader/BGE/sharedbudget unchanged. No firstanswerretry/replacement. No independent reviewer.
+Localcheckpoint a56455da saved R01-R07 native/reference/residual/weak/historical/cosine work.
+CURRENT UNCOMMITTED: explicitsource-handleprojectionv2 +sourceSEARCHindex/scope/K-O/aliasrepairs,
+newtests/common-initial-stateoption/report. Source snapshots R08-visible-handles-v1-source oldbug,
+R08-visible-handles-v2-source repaired/current. Do not silently useoldsource fornewprepareddata.
+NO LIVE READER job. R07exec52319 is terminal (pollclosureifneeded),firsts416/119newcalls/297reuse,
+25failedpositionskept,426083tokens,newunknown0. R07-thirteen-condition-DEVfit32-scores-v1 CLOSED:
+M0/M1/M2quality100=3/2/1of32 vsusable13each;cosine4=18/32;S1/10kQ=11/9;simple13,empty0.
+AlltheseareENV1results; noadoption, noautomaticpair-onlyh2recipescaling. E5officialKILTHotpot~70k
+supervisedexposure+Wikipedia disclosed; nocoldpretraining-unseenclaim. DEV-select/CONFIRMsealed.
+ONLYLIVE model jobs: env2preparetrained exec93448 physicalGPU2 andenv2preparereference exec16584
+physicalGPU3 (readR08-env2-{trained,reference}-DEVfit32-prepared-v1/run.jsonforPID/status).
+15conditions aftercommonRulesmerge:trained6 +reference10 minusduplicateRules. Samecapturedcold
+Rules4state/checkpoint perroot via --initial-states-from R05-seven-condition-DEVfit32-initial-v1,
+SQLitebackup --reuse-banks samepath. Actualcoldbefore/menuequivalencecheckedbeforeeachpolicy.
+R08-env2-common-initial-card-v1.json freezesnewcondition; all32fixedDEV-fitroots, nooutcome-filter.
+R08 sourcealiasdiagnostic:8independentTRAINstates;repeat/actionIDrename0changes;opaqueUUID
+rename1/8andshortalias3/8 forall3routes;decoderreverse3/8. RawopaqueIDsaffectedlearnedlogits.
+Opt-inprojection control-observation-visible-source-handles-v2 normalizesONLYvisibleSourceRef
+values/relations/derivedID/targetdescriptions;literalbody/queryidentifiersexcluded/protected,
+action-onlyunobservedstringsretained. Originalactions/params/priormenu staywith executor.
+Oldv1checkpointskeepv1input. All32TRAINrows UUID/short aliasesdual/jointserializedtextequal.
+R08M0v2newinit4headtensorsexactR04M0,zerooutput,0updatesconstruction. Matching100stepfitCLOSED,
+23/23pairs,451effectiveexposures,15.11secs;notT1convergence/taskgain. R08-M0-visible-handles-
+quality100-seed0-v1/checkpoint. Neural8sourcev2probeUUID/shortalias0changes/maxscorediff0;
+reverse0bindingchanges/diff7.15e-6. Strongfiniteengineeringproof,notnaturalquality.
+CRITICAL: R08-visible-handles-DEVfit32-prepared-v1 FAILED atroot11/step6 after10closedroots,
+0Readercalls,29.84wallsecs retained. Do NOToverwrite/automaticretrythisdirectory.
+Rootcause latefixedSEARCH replacedmaterialindicesafterdirectSourceREAD anddidnotpublishnew
+retrieved_scopes. FailurewasNOTactuallymissingobservedalias0 (observed0existed;retrieved0missing).
+Repaired fixedsearchappend/indexretention +_deliver(state)aftersearch;Rulesaliaslookup and
+validsame-indexcurrentnarrowK/fullOdeliveryprojection also repaired. No hiddenfallback.
+ActualSQLite29regressionsPASS incllateSEARCH/state-menu/ranges +K/O/aliases;selected5filemypy and
+fullRuffPASS beforelatest metadata updates. Newstructurallabels mustusecorrectedexecutor!
+R08-environment-v1-path-audit-v1.json: oldDEVlateSEARCH M0=4/32,M1=6/32,M2=0,simple/historical0.
+R03TRAINh2lateSEARCH30/118branches,27missingpublicscopes. Oldfirsts/labelsarevalidENV1observations,
+notautomaticallyENV2supervision. DO NOTbulk-traincorrectedpolicyonaffectedoldh2labels orfillthem
+withCweaklabels. NeedactualreplayfromsafeR03capturedqueryoncebefore/oldfirstbindingsunderenv2,
+reuseonlyEXACTHostwirefirsts inclfailures;changedwiregetsnewdeclaredenv2first. Notimplemented yet.
+Important: oldR03beforestates arequery-once SEARCH-FIRST, soactualcold/postprefixes safe;newfull
+branchesneedstrictbefore/menucheck. Do notresumeR08failedinconsistentmidstate;newprogramstarts
+fromsamepredeclaredcoldstates,oldfailurepreserved and noReaderoutputshavebeenreplaced.
+R08env2weightscurrentlystilltrainedfromENV1feedback; comparison isdiagnostictransfer/inputablation,
+notcorrected-feedbacktraininggain. All15neednewcommon-environmentpreparationbeforereadout; old
+R07samewirefirstsmaybeREUSED inclfailures, changedwiremusthavefirstnewconditionalcall.
+NoR08env2Readerlaunchedyet. No pointwisevalueobjectivecode/fit added; postponeuntilenv2feedback.
+Costs newestsettledR05-R07receipt13localscopes+R06parentreadback153responses551899tokens;prior
+R02-R05receipt18scopes+232responses817910tokens retained. R07nativeparentandnewR08scopespending;
+settleonlyCLOSEDscopesinORIGINALledgerwhennoReaderlease,notpreparationsthatarestillrunning.
+Budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json. Neverrebillparents/copies.
+Unmeasuredstartup/server/analysis/GPUassignmentsremainunknownnotzero. No secondledger.
+Previouscheckpoint473selectedtests/core59mypy/362sourcematrix/fullRuffPASS. Currenttargeted
+source-handle3tests,29binding/executorregressions andselectedmypyPASS;finalunifiedchecksneeded.
+Next: closeenv2preparations93448/16584,diagnosespecificerrorsifany;join15caseswithliteralcommon
+Rules4wirechecks. Freezeenv2readoutprotocol,verifyactualUTF8material<=2048,scoreoldR07alreadydone.
+ReplayoldD0inrepairedenv2preservingbefore/action/horizon/remainingbudget andonlyconditionalHost
+wirereuse;don'ttransfercorruptedindicesorreplacefirsts. NoR09replaycodeyet. Full E01-E08,
+usabletrainedT1,3seeds,atleast2mechanisms/ablations/counterexamples,strongBstar,newconfirmation,
+secondReader/budgettransfer,L4/8/16remainrequired. Do notcomplete/pause/blockgoalfromthis progress.
+
+# HISTORICAL CHECKPOINT: R07 firsts were running before R08 execution repair
 
 Full original small-model memory-control goal ACTIVE/INCOMPLETE. Authoritative state:
 R=/data/milai-experiments/20261116-small-memory-control/current-state-v3.json. v2 historical.

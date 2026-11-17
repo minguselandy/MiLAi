@@ -3,8 +3,9 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 from dataclasses import asdict
-from typing import Any
+from typing import Any, cast
 
 from milai_lab.memory.literal_projection import (
     compact_observation_state,
@@ -39,6 +40,7 @@ RETRIEVAL_INSTRUCTIONS = (
 )
 
 COMPACT_ACTION_PROJECTIONS = {"compact_actions", "compact_actions_request_text"}
+VISIBLE_SOURCE_HANDLES_V2 = "control-observation-visible-source-handles-v2"
 ACTION_BOUND_PROJECTIONS = {
     "shared_actions", "shared_actions_request_text", *COMPACT_ACTION_PROJECTIONS}
 ACTION_BINDING_INSTRUCTIONS = (
@@ -198,6 +200,92 @@ def control_input(state: MemoryControlState, actions: list[MemoryAction]) -> dic
     return {"observation": state.project(), "actions": [asdict(a) for a in actions]}
 
 
+def visible_source_handle_input(online: dict[str, Any]) -> dict[str, Any]:
+    """Alias visible machine Source handles while retaining every literal body/query.
+
+    Only handles anchored in the public observation are aliased. Handles that
+    occur in literal content remain literal everywhere. Unobserved binding-only
+    strings stay unchanged; no object lookup or hidden source access is involved.
+    This is an encoder view: executable actions and their actual parameters remain
+    with the caller, which continues to bind the returned original action ID.
+    """
+    data = {key: copy.deepcopy(online[key]) for key in ("observation", "actions")}
+    literal_keys = {"content", "excerpt", "request", "query", "text"}
+    literals: list[str] = []
+    strings: list[str] = []
+
+    def collect_literals(value: Any) -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if isinstance(key, str):
+                    strings.append(key)
+                if key in literal_keys and isinstance(item, str):
+                    literals.append(item)
+                collect_literals(item)
+        elif isinstance(value, list):
+            for item in value:
+                collect_literals(item)
+        elif isinstance(value, str):
+            strings.append(value)
+
+    collect_literals(data)
+    refs: list[str] = []
+
+    def collect_refs(value: Any) -> None:
+        if isinstance(value, dict):
+            for key in sorted(value):
+                if key not in literal_keys:
+                    candidates = ([value[key]] if key == "source_ref" else
+                                  value[key] if key == "source_refs"
+                                  and isinstance(value[key], list) else [])
+                    for ref in candidates:
+                        if (isinstance(ref, str) and ref and ref not in refs
+                                and not ref.startswith("@source-handle:")):
+                            refs.append(ref)
+                    collect_refs(value[key])
+        elif isinstance(value, list):
+            for item in value:
+                collect_refs(item)
+
+    anchors = ("new_events", "visible_evidence", "observed_evidence", "observed_materials",
+               "pending_candidates")
+    observation = data["observation"]
+    for key in anchors:
+        collect_refs(observation.get(key))
+    for key in sorted(observation):
+        if key not in anchors:
+            collect_refs(observation[key])
+    aliases: dict[str, str] = {}
+    number = 0
+    for ref in refs:
+        if any(ref in text for text in literals):
+            continue
+        alias = f"@source-handle:{number}"
+        while any(alias in text for text in strings):
+            number += 1
+            alias = f"@source-handle:{number}"
+        aliases[ref] = alias
+        number += 1
+
+    pattern = (re.compile(r"(?<!\w)(?:" + "|".join(
+        re.escape(ref) for ref in sorted(aliases, key=len, reverse=True)) + r")(?!\w)")
+        if aliases else None)
+
+    def replace(value: Any, key: str | None = None) -> Any:
+        if isinstance(value, dict):
+            return {aliases.get(name, name): replace(item, name) for name, item in value.items()}
+        if isinstance(value, list):
+            return [replace(item, key) for item in value]
+        if isinstance(value, str):
+            if key in {"source_ref", "source_refs"}:
+                return aliases.get(value, value)
+            if key in {"target", "id"} and pattern is not None:
+                return pattern.sub(lambda match: aliases[match.group()], value)
+        return value
+
+    return cast(dict[str, Any], replace(data))
+
+
 def legacy_control_input(row: dict[str, Any]) -> dict[str, Any]:
     """Recover saved legal input; leave all offline supervision outside the observation."""
     observation = copy.deepcopy(expand_observation_state(observation_object(row["state"])))
@@ -220,15 +308,17 @@ def proposed_delivery_projection(observation: dict[str, Any],
     scopes = {item["item_index"]: item["evidence"]
               for item in observation.get("retrieved_scopes", []) if "evidence" in item}
     acquired: dict[str, Any] = {}
-    for item in [*observation["visible_evidence"], *observation.get("observed_evidence", [])]:
-        label = item["label"]
-        if label in acquired and acquired[label] != item:
-            raise ValueError("Conflicting visible material projections for one local label")
-        acquired[label] = item
-        for alias in item.get("also_selected_as", []):
-            if alias in acquired and acquired[alias] != item:
-                raise ValueError("Conflicting visible material projections for one local alias")
-            acquired[alias] = item
+    for layer in [observation["visible_evidence"], observation.get("observed_evidence", [])]:
+        current_layer: dict[str, Any] = {}
+        for item in layer:
+            for label in [item["label"], *item.get("also_selected_as", [])]:
+                if label in current_layer and current_layer[label] != item:
+                    raise ValueError(
+                        "Conflicting material projections within one observation layer")
+                current_layer[label] = item
+        # Explicit delivery indices address the acquired original. Its current
+        # selection can be a narrower K projection of the same object index.
+        acquired.update(current_layer)
     projections, unresolved = [], []
     for index in parameters["delivery_indices"]:
         item = (scopes.get(index) if index in parameters.get("retrieved_scope_indices", [])

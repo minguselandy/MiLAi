@@ -107,8 +107,10 @@ def original_evidence_action(
     known: set[str] = set()
     for material in state.task.get("known_evidence", []):
         known.update(original_terms(material))
-    observed = {int(item["label"][1:]): item
-                for item in [*state.visible_evidence, *(state.observed_evidence or [])]}
+    observed = {}
+    for item in [*state.visible_evidence, *(state.observed_evidence or [])]:
+        for label in [item["label"], *item.get("also_selected_as", [])]:
+            observed[int(label[1:])] = item
     raw = {i: original_terms(item) for i, item in observed.items()
            if item["kind"] == "original_source" and any(
                row.get("capture_context") != "given_retrieval_request"
