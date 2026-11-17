@@ -1,4 +1,34 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06block06closed/block07active; C07recipe only
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; block07 interrupted-first recovery/S18
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v38.json.
+Old07PID675321 VERIFIED ABSENT, exec51779unknownprocess, no FLOCK holder. RawRUNNING62closed
++1inflight preserved; do NOT infer live job from stale file.47known responses184701tokens,
+48attempts193996charged/1unknown/9295reservation retained, no refund/reset/retry. CauseUNKNOWN.
+Sidecar closes only original inflight as UNKNOWN; oldraw untouched. Explicit finite recovery
+admits ONLY23never-dispatched unique original requests, totalattemptcap71 incl old48. New full
+matrix C06-block07-TRAIN8-firsts-recovery-v2, detached finitePID774921 (not a service), real
+/proc/locks FLOCK+cmdline verified. Revalidate /proc+run; NEVER restart lost observation.
+Branch/method/policy/requests remain S13/188a5239. RecoveryReader S18/c2f8635d solely permits
+closedUNKNOWNreuse and separate unknown counters; rawRUNNING ineligible.13tests/Ruff/mypy/
+package/tools boundaries PASS. First mypy missed local imports, failed evidence retained;
+fixedMYPYPATHsrc:tools isolatedv2 passed.11closedscopes settled once/readback before recovery,
+including failedcheck and partial originalCPU/wall axes, NOT full lostjobcost or newtokenbill.
+Original71P00-P07/K000-K070 packets/codes/order/wires unchanged; only private first_path rebind
+to C06-block07-blind-calibration-recovery-v2. Up to4forensic trace records incidentally exposed
+response text; no judgments/scores/criteria changes. Disclose Bprojectawarelimit, not independent
+review. After95terminal freeze ALL71judgments before scores, full64review includes owndeltaU1.
+First56 audit:217directionpairs195stop/read22read/read; of latter5failure,17bothcompleted,
+3same finalranges14different;14pairs only12states7sources. Descriptive, NOT precision gain.
+C07v2 prospective recipe unchanged9fits/samewarm/LR/seed/updates; helpers derive actual first
+roots from scores and never fabricate nativeUNKNOWN values. Full64yield/unknown-cost/numerical/
+exposure/freshGPU before fit admission; no DEVreadouts/D1expansion. S15 trainer unchanged.
+Full D0reliability/D1/P-D/two ownstate+matchedoldpool/3seeds/power/newCONFIRM/transfer/delivery
+incomplete, G1/G2/G3notestablished. No Product/Archive/default/protectedbody/push/merge changes.
+SHA/fingerprints OFF. Original interrupted fullCPU/wall/serverGPU/IO/energy/money UNKNOWN.
+
+The following v37 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C06block06closed/block07active; C07recipe only
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v37.json.
 C06 remains S13/188a5239.06 CLOSED94positions71new23reuse3fail280987tokens/U0; all71 Bblind

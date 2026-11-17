@@ -1,0 +1,99 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v38.json",
+  "source": "S18/c2f8635d",
+  "C06_branch_policy_request_source": "S13/188a5239 unchanged",
+  "S15_trainer_unchanged": true,
+  "original07": {
+    "pid_verified_absent": 675321,
+    "tool_session_missing": 51779,
+    "raw_stale_RUNNNING_file_preserved": true,
+    "closed_positions": 62,
+    "inflight_unknown_first": 1,
+    "actual_attempts": 48,
+    "complete_responses": 47,
+    "known_tokens": 184701,
+    "charged_tokens": 193996,
+    "unknown_usage_delta": 1,
+    "unknown_reserved_tokens_not_refunded": 9295,
+    "cause": "UNKNOWN"
+  },
+  "fix": "Only explicitly closedUNKNOWN first is reusable on literal originaltask/fullwire; rawRUNNING ineligible, unknown counter separate, no regeneration/refund",
+  "targeted_validation": {
+    "pytest": 13,
+    "Ruff": "PASS",
+    "mypy": "PASS after explicitMYPYPATHsrc:tools; initialfailed imports retained",
+    "package_tools_boundaries": "PASS",
+    "regressions": "Unknown first reused across distinct bindings with0chat calls; quality staysunknown; alteredtask/wire/RUNNING do not inherit",
+    "rollback_commit": "85546a7f"
+  },
+  "recovery": {
+    "driver": "C06-recover-block07-missing-firsts-v2.py",
+    "finite_detached_pid_at_observation": 774921,
+    "not_service": true,
+    "only_never_dispatched_unique_requests": 23,
+    "total_original_plus_recovery_attempt_cap": 71,
+    "original_block_cap": 128,
+    "new_matrix": "C06-block07-TRAIN8-firsts-recovery-v2/run.json",
+    "rebound_panel": "C06-block07-blind-calibration-recovery-v2",
+    "same_all71codes_packets_tasks_wires_order": true,
+    "only_changed_private_binding": "first_path",
+    "incidental_forensic_trace_response_exposure": "Up to4tailrecords; disclosed, no sourcecriteria/judgments/scores changes, Bprojectawareonly",
+    "all_old_raws_and_failed_unknown_firsts_kept": true
+  },
+  "costs": {
+    "receipt": "C06-before-block07-recovery-closed-cost-v2.json",
+    "settled_once_scopes": 11,
+    "failed_mypy_cost_retained": true,
+    "partial_interrupted_job_measures": {
+      "closed_readout_cpu_seconds_lower_bound": 4.622868355000001,
+      "closed_readout_wall_seconds_sum_not_job_latency": 756.5373607650399,
+      "closed_readout_positions": 62,
+      "runs": 1
+    },
+    "partial_not_full_job_latency_or_CPU": true,
+    "full_interrupted_CPU_wall_serverGPU_IO_energy_money": "UNKNOWN",
+    "no_second_real_ledger_or_token_rebill": true
+  },
+  "first56_signal": {
+    "artifact": "C06-first56-feedback-signal-audit-v2.json",
+    "states": 224,
+    "roots": 56,
+    "directional_pairs": 217,
+    "stop_read": 195,
+    "read_read": 22,
+    "read_read_failure": 5,
+    "read_read_both_completed": 17,
+    "read_read_both_completed_different_ranges": 14,
+    "last_category_states": 12,
+    "last_category_roots": 7,
+    "unexecuted_actions_not_negative": 4105,
+    "limits": "Range differences descriptive, not causal precision gain or semantic calibration; no D1expansion"
+  },
+  "C07": {
+    "card": "C07-full-D0-learning-curve-prospective-card-v2.json",
+    "compiler": "C07-compile-matched-data-v2.py",
+    "full64_numerical_and_inputs_checks_required": true,
+    "recipe_9fits_model_warm_LR_seed_updates_objectives_unchanged": true,
+    "fits_executed": 0,
+    "DEV_readouts_admitted": 0,
+    "no_unknown_native_imputation": true
+  },
+  "references": [
+    "C06-block07-interruption-ledger-inspection-v1.json",
+    "C06-block07-interruption-recovery-card-v1.json",
+    "C06-block07-recovery-panel-preparation-v1.json",
+    "C06-block07-recovery-launch-v2.json",
+    "C06-block07-recovery-admission-v2.json"
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "full_goal_remaining": "ReliableD0/calibration,matchedlearningcurves,D1,P-D,twoownstate+matchedoldpool,3seeds,strongbaseline,power,newconfirmation,transfer,delivery",
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "research_policy_weights_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false
+}
