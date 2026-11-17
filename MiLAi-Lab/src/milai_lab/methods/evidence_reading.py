@@ -13,6 +13,7 @@ from jsonschema import Draft202012Validator
 from milai_lab.memory.dependency_groups import select_support_routes, support_status
 from milai_lab.memory.edit_units import read_revision_evidence
 from milai_lab.memory.external_support import inspect_external_unit
+from milai_lab.memory.literal_projection import expand_literal_maps, project_literal_maps
 from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.retrieval import flat_bm25_rank, merge_candidates
 from milai_lab.memory.service import MemoryService
@@ -645,6 +646,40 @@ SOURCE_REUSE_INSTRUCTIONS = (
     "another observation or event. reported_at dates the source's report; captured_at and "
     "version_time date system storage, not the reported event or the claim's validity."
 )
+
+
+def project_view_tables(evidence: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Opt-in literal map tables; raw text, rules, roles, clocks and locators survive exactly."""
+    paths = (("interpretation", "nodes"), ("interpretation", "rules"),
+             ("source_locations",), ("source_metadata", "by_alias"))
+    result = []
+    for item in evidence:
+        if item["kind"] != "query_structure" or "literal_map_tables" in item:
+            result.append(copy.deepcopy(item))
+            continue
+        projected, encoded = project_literal_maps(item, paths)
+        if encoded:
+            projected["literal_map_tables"] = {"format": "map_columns_v1", "paths": encoded,
+                "instructions": "Keys align with rows; rows follow non-shared columns. "
+                    "Merge shared fields with each row; all literal values, identities "
+                    "and order remain unchanged."}
+        result.append(projected if encoded and len(json.dumps(projected, ensure_ascii=False)) <
+                      len(json.dumps(item, ensure_ascii=False)) else copy.deepcopy(item))
+    return result
+
+
+def expand_view_tables(evidence: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Recover an opted-in Reader representation, preserving every original field and type."""
+    result = []
+    for item in evidence:
+        plain = copy.deepcopy(item)
+        encoding = plain.pop("literal_map_tables", None)
+        if encoding is not None:
+            if encoding["format"] != "map_columns_v1":
+                raise ValueError("Unknown View table representation")
+            plain = expand_literal_maps(plain, encoding["paths"])
+        result.append(plain)
+    return result
 
 
 def project_packs(

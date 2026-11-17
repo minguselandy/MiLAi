@@ -561,7 +561,8 @@ def compile_feedback(args: Any) -> None:
             raise ValueError("Policy aliases disagree about the identical actual first")
         by_first[path] = outcome
     datasets: dict[str, list[dict[str, Any]]] = {}
-    for ci, case in enumerate(read_json(prepared / "cases.json")):
+    cases = read_json(prepared / "cases.json")
+    for ci, case in enumerate(cases):
         if roles[case["family"]] != "train" or "horizon" not in case:
             raise ValueError("Outcome learning requires actual TRAIN same-state branches")
         outcomes, firsts = [], []
@@ -631,7 +632,7 @@ def compile_feedback(args: Any) -> None:
             "actual_feedback_input_tokens": input_tokens,
             "actual_calls_with_unknown_input_tokens": input_unknown,
             "token_denominator_scope": "All actual native firsts in the common feedback block; "
-                                       "includes both horizons, excludes shared copies"}
+                f"horizons={sorted({case['horizon'] for case in cases})}; excludes shared copies"}
     write_json(args.output / "summary.json", summaries)
     write_json(args.output / "run.json", {"status": "COMPLETED", "pid": os.getpid(),
         "scores": str(args.scores), "Reader_calls": 0, "sha_validation": False,
