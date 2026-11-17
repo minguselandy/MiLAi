@@ -252,7 +252,8 @@ def prepare_packets(args: Any) -> None:
         cosine[name] = SmallControlModel(SmallControlConfig("frozen_mlp",
             str(args.cosine_backbone.resolve())), device=args.device)
         cosine[name].train(False)
-        factories[name] = partial(EncoderCosineMemoryPolicy, cosine[name], args.cosine_reads)
+        factories[name] = partial(EncoderCosineMemoryPolicy, cosine[name], args.cosine_reads,
+            reserve_handoff_step=not getattr(args, "cosine_allow_budget_handoff", False))
     names = [*args.methods, *models, *historical, *cosine]
     if len(set(names)) != len(names):
         raise ValueError("Checkpoint policy names must differ from baseline names")
@@ -274,6 +275,7 @@ def prepare_packets(args: Any) -> None:
         "teacher_continuation_steps": getattr(args, "teacher_continuation_steps", None),
         "historical_models": historical_configs,
         "cosine_models": {name: {"backbone": model.config.backbone, "reads": args.cosine_reads,
+            "reserve_handoff_step": not getattr(args, "cosine_allow_budget_handoff", False),
             "selection": "Frozen query/passage cosine on legal navigation excerpts; fixed "
                          "original-context reads, then admitted real packet"}
                           for name, model in cosine.items()},

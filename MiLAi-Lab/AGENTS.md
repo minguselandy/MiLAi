@@ -1,4 +1,30 @@
-# CURRENT 2026-11-17: memory compute v2 ACTIVE; C02 closed, C04 prototype
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C04 original9 closed
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v19.json.
+ALL ownjobs TERMINAL. S10/6ca4988f frozen; C04sixfits CLOSED, actual2warm64rootfunctions
+each384/384boundchoices+befores and64/64wires/ends matchedfixedbaseline.4objectivestage
+fits96updates1361valid/175masked, nonzeroweights/reload0. Nineconditions72DEV8actual
+trajectories commoncoldbefore/menu, maxmaterial1765/2048, frozenquerytimeNov17 preserved.
+FirstsCLOSED72:36new36reuse1lengthfail118323tokens/U0. Blind36Bjudgments frozenbefore
+methodunblinding:20resolved10unresolved6unknown. Dualsemantic4true2false2unknown vs
+matchingwarm/weak5/2/1; nosemanticgain, do notextend samefits. Rawquality6/1/1(native3vs
+warm2) onlyoneknownsourcewin, unknown/small/exposedDEV preventG1/G2. Allfirsts retained.
+Budget7control preregistered becauseactorcan7READs thencommonbudgetend, cosine reserves
+laststep thus6READs afterSEARCH. Opt-in --cosine-allow-budget-handoff tested44+2/Ruff/
+mypy3/package-toolsboundaryPASS, NOTYETEXECUTED. FreezeS11 then actualsame8roots/8steps/
+2048/separatebank,<=8newReader, totalC04cap72unchanged. Default/oldmodels untouched.
+Revalidateactual kernelleaseowner beforeHTTP/manualsettlement; nootherjob changes.
+17localscopes settledonce beforeC04firsts; C04nativeauto alreadybilledonce. Newclosed
+profiler/reviewinputs/index/scores/comparison localsPENDING, no nestedcounterrebill.
+CUPTI599/993kernelcategories ononeTRAINstate; oldnamefiltermissed5/8kernels, correction
+sidecar retainedrawtrace. No wholedeploymentactiveGPU/serverGPU/speedclaim. SHAoff.
+Afterbudgetcontrol audit actualownstate/continuationrewardspan/data coverage; no arbitrary
+repeatfits. D00blocks03-07notadmitted; fullG1/G2/G3/D1/P-D/ownstate2rounds/3seeds/power/
+newCONFIRM/transfer/delivery remain INCOMPLETE. No protectedbody exposure/push/merge.
+
+The following v15 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-17: memory compute v2 ACTIVE; C02 closed, C04 prototype
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v15.json.
 ALL ourReader/localmodeljobs TERMINAL. C02closed104positions29new75reuse2lengthfail,

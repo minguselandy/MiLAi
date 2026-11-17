@@ -861,6 +861,8 @@ def main() -> None:
     native_collect.add_argument("--cosine-backbone", type=Path,
                                 help="Frozen E5 query/passage cosine acquisition baseline")
     native_collect.add_argument("--cosine-reads", type=int, default=4)
+    native_collect.add_argument("--cosine-allow-budget-handoff", action="store_true",
+                                help="Permit last-step acquisition and common budget-end return")
     native_collect.add_argument("--device", default="cpu")
     native_collect.add_argument("--material-tokens", type=int, default=2048)
     native_collect.add_argument("--control-steps", type=int, default=8)

@@ -96,13 +96,15 @@ class EncoderCosineMemoryPolicy:
     """
     encoder: QueryPassageEncoder
     reads: int = 4
+    reserve_handoff_step: bool = True
 
     def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
         handoff = FixedContextMemoryPolicy(self.reads).choose(
             state, [a for a in actions if a.kind == "HANDOFF"])
         acquired = {item["item_index"] for item in state.observed_materials or []
                     if item["kind"] == "original_source"}
-        if len(acquired) >= self.reads or state.budget.get("remaining_control_steps") == 1:
+        if (len(acquired) >= self.reads or (self.reserve_handoff_step
+                and state.budget.get("remaining_control_steps") == 1)):
             return handoff
         search = next((a for a in actions if a.kind == "SEARCH"), None)
         if search is not None:
