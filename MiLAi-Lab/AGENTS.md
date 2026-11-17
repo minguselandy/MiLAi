@@ -1,4 +1,29 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C04 original9 closed
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C04 closed, C05 registered
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v20.json.
+ALL ownjobs TERMINAL. S10actors6ca4988f/S11budgetcontrol e6d89173 frozen. C04complete:
+10conditions80positions43new37reuse2lengthfail148324tokens/U0. Cosine7actualSEARCH+7READ
+at8steps in7/8roots, otherroot3sources; maxmaterial1866, all8commoncoldbefore/menu.
+Nativecosine7=3/8 matchesrawquality3/8 perroot; limitedBreview5true2false1unknown vsraw
+6/1/1, differencebound[0,.25] includes0. NoG1/G2/G3. Semantic4/2/2vswarm5/2/1 notbetter;
+doNOTextend samefits orpicknewseeds. Alloldfirsts/references/unknowns retained.
+C05card REGISTERED_NOT_IMPLEMENTED. ExistingactualD00audit: lateK4READ69branches all
+teacherHANDOFFnext; currentfixedRawcheckpoint scoresREAD64 andsameHANDOFF5 onexact
+poststates. Disagreement isNOTqualityproof. NativeQAonegivenquerypool, no dynamicquery
+routing. Implement OPTIONALcheckpointcontinuationfactory onsharedexecute_branch/
+nativebranches, preservedefaultteacher, test samebefore/menu/firstbindings andh2.
+Pilotfixedfirst8TRAINactualstep5K4/remaining3,<=64newReader/300GPUjobsec, no fits; notD3
+ownstate round1. Gate expansiononactualsupportedfeedback/costyield. C05card atartifactroot.
+Allmeasuredclosedscopes settledONCE/readback, latestC04-final-closed-cost-v1; C7native
+alreadybilledonce30001tokens. Unmeasuredreview/test/import/report/kernelanalysis +external
+serverGPU/fullactivityGPU/physicalIO/energy/money UNKNOWN, notzero. Revalidateactualkernel
+leaseowner beforefutureHTTP/settlement; do nottouchotherjobs. SourcefrozenquerytimeNov17
+held acrossNov18. D00blocks03-07notadmitted; fullD1/P-D/ownstates2rounds/3seeds/power/
+newCONFIRM/transfer/deliveryremain INCOMPLETE. SHAchecks OFF, no protectedbody/push/merge.
+
+The following v19 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C04 original9 closed
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v19.json.
 ALL ownjobs TERMINAL. S10/6ca4988f frozen; C04sixfits CLOSED, actual2warm64rootfunctions

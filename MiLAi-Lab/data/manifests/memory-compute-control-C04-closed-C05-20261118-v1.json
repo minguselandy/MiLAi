@@ -1,0 +1,99 @@
+{
+  "schema": "camc.execution.C04_closed_C05_registered.v1",
+  "goal_status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "source_versions": {
+    "S10_actor": "6ca4988f",
+    "S11_baseline": "e6d89173"
+  },
+  "samecapacity_controller_trainable_params": 656769,
+  "C04_warm": {
+    "fits": 2,
+    "updates": 24,
+    "valid_exposures": 768,
+    "teacher_fullmenu_match_each": 256,
+    "actual_TRAIN_roots_each": 64,
+    "same_complete_bindings_and_before_each": 384,
+    "same_final_wires_each": 64,
+    "reload_difference": 0,
+    "not_traininggain": true
+  },
+  "C04_objectives": {
+    "fits": 4,
+    "updates": 96,
+    "nominal_exposures": 1536,
+    "valid_exposures": 1361,
+    "masked_exposures": 175,
+    "same_every_step_valid_mask_and_source_weights": true,
+    "actual_weights_updated_and_reload0": true
+  },
+  "C04": {
+    "status": "C04_CLOSED_NO_ESTABLISHED_G1_G2",
+    "source_roots": 8,
+    "positions": 80,
+    "new_calls": 43,
+    "reused": 37,
+    "failed_positions": 2,
+    "new_tokens": 148324,
+    "semantic_quality": [
+      4,
+      2,
+      2
+    ],
+    "matching_semantic_warm": [
+      5,
+      2,
+      1
+    ],
+    "raw_quality": [
+      6,
+      1,
+      1
+    ],
+    "cosine7": [
+      5,
+      2,
+      1
+    ],
+    "not_established": [
+      "G1",
+      "G2",
+      "G3"
+    ]
+  },
+  "source_role": "FixedexposedDEVfit16:24, allarticle/rootdisjointTRAIN64andpriorDEV16; noDEVselect/CONFIRM opened; notpretrainingunseen. FrozenpublicquerytimeNov17 despiteactualcalendarNov18.",
+  "reviewer_limit": "Original36cases blindedbeforemethodscores; supplement7singlecontrolknown plus1exactpriorreviewreuse. Bproject-awareassistantonly, differentfromQwengeneration, nohuman/secondreviewer orformaltruthclaim. Unknowns retained; samefirst unknowntruthcoupled.",
+  "budget7_control": "Actual7READs at8steps in7/8roots;3READs+HANDOFF whenonly3sources. All8commoninitialbefore/menu, maxmaterial1866, defaultreserve behaviorunchanged.7newcalls1exactreuse30001tokensU0,1lengthfailurepreserved.",
+  "no_old_firsts_or_references_overwritten": true,
+  "kernel_measurement": {
+    "artifact": "/data/milai-experiments/20261117-memory-compute-control/C04-controller-kernel-probe-v1/kernel-category-analysis-v1.json",
+    "kernel_counts": [
+      599,
+      993
+    ],
+    "scope": "1fixedTRAINstate/profilecall each. Oldnamefiltermissed5/8kernels; rawprofilesretained. No generalrelative speed/fullserverGPUclaim."
+  },
+  "C05": {
+    "status": "CARD_REGISTERED_NOT_IMPLEMENTED",
+    "card": "/data/milai-experiments/20261117-memory-compute-control/C05-continuation-policy-calibration-card-v1.json",
+    "audit": "/data/milai-experiments/20261117-memory-compute-control/C05-current-policy-continuation-audit-v1/run.json",
+    "states": 69,
+    "TRAIN_roots": 64,
+    "teacher_HANDOFF_next": 69,
+    "current_READ_next": 64,
+    "current_same_HANDOFF": 5,
+    "scope": "ExistingactualpostREADsnapshots only, zeroSourceoperations/Reader/newlabels. Notqualityproof orD3round."
+  },
+  "cost_receipts": [
+    "/data/milai-experiments/20261117-memory-compute-control/C02-C04-before-firsts-closed-cost-v1.json",
+    "/data/milai-experiments/20261117-memory-compute-control/C04-budget7-before-firsts-closed-cost-v1.json",
+    "/data/milai-experiments/20261117-memory-compute-control/C04-final-closed-cost-v1.json"
+  ],
+  "pending_measured_cost_scopes": [],
+  "unmeasured_costs": "Actualassistantreview/test/import/report/auxiliaryserialization/kernelcategoryanalysis andexternalserver/fullactivityGPU/physicalIO/energy/money UNKNOWN; do notfillzero or claimwholecostcompleteness.",
+  "validation": "S10:29tests/Ruff/mypy3/package-toolsboundaryPASS. S11:44relatedtests+2focusedrerun,Ruff/mypy3/package-toolsboundaryPASS; nofullCI orremoteverification.",
+  "public_API_Schema_permission_Canonical_default_changed": false,
+  "sha_validation": false,
+  "no_push_or_merge": true,
+  "current_authority": "/data/milai-experiments/20261117-memory-compute-control/current-state-v20.json"
+}
