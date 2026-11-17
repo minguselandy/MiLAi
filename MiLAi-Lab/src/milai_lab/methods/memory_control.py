@@ -118,7 +118,8 @@ def run_memory_control(
                 profile is not None
             ) else nullcontext():
                 selected = actions[0].id if forced else policy.choose(state, actions)
-            selection_mode = "only_available_action" if forced else "policy"
+            selection_mode = ("only_available_action" if forced else
+                              getattr(policy, "selection_mode", "policy"))
         # The sole action boundary binds the returned ID to actual supplied parameters.
         action = next((a for a in actions if a.id == selected), None)
         if action is None:
@@ -236,6 +237,48 @@ class OneShotMemoryPolicy:
         }:
             return next(a.id for a in actions if a.kind == "HANDOFF")
         return FixedMemoryPolicy(self.reads).choose(state, actions)
+
+
+@dataclass
+class TeacherContinuationPolicy:
+    """One learned decision followed by a frozen, bounded teacher continuation.
+
+    This is an explicit routing condition on the common executor, not a model
+    failure fallback. Actual budget movement, including forced steps, controls
+    the cadence. A HANDOFF still terminates through the normal action boundary.
+    """
+
+    learner: MemoryPolicy
+    teacher_factory: Callable[[], MemoryPolicy]
+    continuation_steps: int = 2
+    selection_mode: str = field(default="policy", init=False)
+    learned_calls: int = field(default=0, init=False)
+    teacher_calls: int = field(default=0, init=False)
+    _state: MemoryControlState | None = field(default=None, init=False, repr=False)
+    _next_learned_remaining: int | None = field(default=None, init=False, repr=False)
+    _teacher: MemoryPolicy | None = field(default=None, init=False, repr=False)
+
+    def __post_init__(self) -> None:
+        if self.continuation_steps < 0:
+            raise ValueError("Teacher continuation steps must be nonnegative")
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        remaining = state.budget["remaining_control_steps"]
+        if self._state is not state:
+            self._state = state
+            self._next_learned_remaining = None
+            self._teacher = None
+        if self._next_learned_remaining is None or remaining <= self._next_learned_remaining:
+            self.selection_mode = "policy"
+            selected = self.learner.choose(state, actions)
+            self.learned_calls += 1
+            self._next_learned_remaining = remaining - self.continuation_steps - 1
+            self._teacher = self.teacher_factory()
+            return selected
+        assert self._teacher is not None
+        self.selection_mode = "frozen_continuation"
+        self.teacher_calls += 1
+        return self._teacher.choose(state, actions)
 
 
 @dataclass

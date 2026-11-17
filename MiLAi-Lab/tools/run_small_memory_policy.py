@@ -860,6 +860,8 @@ def main() -> None:
     native_collect.add_argument("--device", default="cpu")
     native_collect.add_argument("--material-tokens", type=int, default=2048)
     native_collect.add_argument("--control-steps", type=int, default=8)
+    native_collect.add_argument("--teacher-continuation-steps", type=int,
+                                help="Explicit learned decision then bounded frozen teacher steps")
     native_collect.add_argument("--evidence-units", action="store_true",
                                 help="Whole-paragraph R2 and captured-turn R3, no token cuts")
     native_collect.add_argument("--evidence-context-turn-radius", type=int, default=0,

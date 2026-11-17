@@ -32,6 +32,7 @@ from milai_lab.methods.memory_control import (
     MemoryControlState,
     MemoryPolicy,
     RulesMemoryPolicy,
+    TeacherContinuationPolicy,
     run_memory_control,
 )
 from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
@@ -269,6 +270,7 @@ def prepare_packets(args: Any) -> None:
                                if getattr(args, "evidence_units", False) else "token_ranges_v1"),
         "evidence_context_turn_radius": getattr(args, "evidence_context_turn_radius", 0),
         "source_directory_only": getattr(args, "source_directory_only", False),
+        "teacher_continuation_steps": getattr(args, "teacher_continuation_steps", None),
         "historical_models": historical_configs,
         "cosine_models": {name: {"backbone": model.config.backbone, "reads": args.cosine_reads,
             "selection": "Frozen query/passage cosine on legal navigation excerpts; fixed "
@@ -325,6 +327,11 @@ def prepare_packets(args: Any) -> None:
                                 "Captured common cold state/menu differs after restore")
                         policy = (SmallMemoryPolicy(models[name]) if name in models
                                   else factories[name]())
+                        continuation_steps = getattr(args, "teacher_continuation_steps", None)
+                        if name in models and continuation_steps is not None:
+                            policy = TeacherContinuationPolicy(policy,
+                                lambda: QueryOnceContextPolicy(reads=4),
+                                continuation_steps)
                         checkpoint_path = bank / f"{request['id']}-{name}-checkpoints.jsonl"
 
                         def capture(event: dict[str, Any], *, path: Path = checkpoint_path,
