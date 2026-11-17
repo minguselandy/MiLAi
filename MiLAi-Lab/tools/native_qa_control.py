@@ -246,6 +246,7 @@ def prepare_packets(args: Any) -> None:
         "device": args.device, "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
         "reused_source_banks": str(args.reuse_banks) if args.reuse_banks else None,
         "initial_states_from": str(args.initial_states_from) if args.initial_states_from else None,
+        "initial_policy": getattr(args, "initial_policy", "rules4"),
         "execution_contract": "stable_material_indices_search_scope_sync_v2",
         "material_formation": ("whole_paragraph_v1_R2_whole_turn_R3"
                                if getattr(args, "evidence_units", False) else "token_ranges_v1"),
@@ -283,7 +284,8 @@ def prepare_packets(args: Any) -> None:
                                    else None)
                         retrieval_tick, retrieval_cpu = time.perf_counter(), time.process_time()
                         initial = (read_jsonl(args.initial_states_from / "banks" / history["id"] /
-                            f"{request['id']}-rules4-checkpoints.jsonl")[0]
+                            (f"{request['id']}-{getattr(args, 'initial_policy', 'rules4')}"
+                             "-checkpoints.jsonl"))[0]
                             if args.initial_states_from else None)
                         if initial is not None and initial["decision"]["before"]["task"][
                                 "request"] != request["query"]:

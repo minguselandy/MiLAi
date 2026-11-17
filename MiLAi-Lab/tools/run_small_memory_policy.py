@@ -7,11 +7,13 @@ import os
 import random
 import time
 from collections import Counter
+from contextlib import nullcontext
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
+from milai_lab.harness.compute_profile import ComputeProfile
 from milai_lab.methods.control_observation import VISIBLE_SOURCE_HANDLES_V2, legacy_control_input
 from milai_lab.methods.small_control_learning import state_loss
 from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
@@ -409,6 +411,8 @@ def rollout(args: argparse.Namespace) -> None:
     from run_collected_handoff_readouts import parse_readout
 
     args.output.mkdir(parents=True, exist_ok=False)
+    started, cpu_started = time.perf_counter(), time.process_time()
+    profile = ComputeProfile() if getattr(args, "profile_phases", False) else None
     fixture = read_json(args.fixture)
     settings = read_json(args.reader_config)["entrypoints"]["functional"]
     capacity = HostCapacity(settings["capacity"])
@@ -423,7 +427,6 @@ def rollout(args: argparse.Namespace) -> None:
            "scope": fixture.get("scope", "G0 actual execution; not formal confirmation")}
     write_json(args.output / "run.json", run)
     trace = Trace(args.output / "trace.jsonl", "small_memory_rollout")
-    started, cpu_started = time.perf_counter(), time.process_time()
     with http_budget_scope(settings) as budget:
         assert budget is not None
         before_generation = dict(budget.state["generation"])
@@ -431,18 +434,20 @@ def rollout(args: argparse.Namespace) -> None:
             with SqliteStore.from_conn_string(str(args.output / "memory.sqlite")) as store:
                 service = MemoryService(store, ("small-control", "author"),
                     "author", args.output / "memory.lock", functional_contract="functional_v1")
-                for i, source in enumerate(fixture["sources"]):
-                    if source["role"] == "tool":
-                        service.capture_tool("source", str(i),
-                            source.get("origin", "reference_document"), source["content"], None)
-                    else:
-                        service.capture_user("source", str(i), source["content"])
+                with profile.span("cold_source_capture") if profile else nullcontext():
+                    for i, source in enumerate(fixture["sources"]):
+                        if source["role"] == "tool":
+                            service.capture_tool("source", str(i),
+                                source.get("origin", "reference_document"), source["content"], None)
+                        else:
+                            service.capture_user("source", str(i), source["content"])
 
                 def pool() -> list[dict[str, Any]]:
                     found = service.search_sources(fixture["query"], limit=32,
                         tokenization="unicode_v1", include_scope=True)
                     return build_evidence_packs(service, fixture["query"], public["query_time"],
-                        found["source_materials"], [], source_scope=found["source_scope"])
+                        found["source_materials"], [], source_scope=found["source_scope"],
+                        evidence_units=getattr(args, "evidence_units", False))
 
                 def no_generation(*_: Any) -> Any:
                     raise ValueError("R-track keeps View generation disabled")
@@ -460,26 +465,33 @@ def rollout(args: argparse.Namespace) -> None:
                     except CapacityExceeded:
                         return False
 
-                ops = EvidenceOperations(service, state, load_pool=pool, refresh_call=no_generation,
-                    fits=fits, internal_views=False, view_updates=False)
+                with profile.span("source_inventory") if profile else nullcontext():
+                    ops = EvidenceOperations(service, state, load_pool=pool,
+                        refresh_call=no_generation, fits=fits, internal_views=False,
+                        view_updates=False,
+                        delivery_selection=getattr(args, "delivery_selection", False),
+                        source_directory_only=getattr(args, "source_directory_only", False))
                 policy = memory_policy({"policy": "small", "checkpoint": str(args.checkpoint),
                     "device": args.device} if args.checkpoint else {"policy": "fixed_context"},
                     budget, call=no_generation, admit=lambda: None, record=trace)
                 result = run_memory_control(state, policy, ops, max_steps=args.control_steps,
-                                            record=trace)
-                packet = controlled_reader_packet(ops.reader_evidence(), result["reason"])
-                wire = separate_answer_fields(given_packet_request(
-                    public, request, packet, settings))
+                                            record=trace, profile=profile)
+                with profile.span("evidence_packaging") if profile else nullcontext():
+                    packet = controlled_reader_packet(ops.reader_evidence(), result["reason"])
+                    wire = separate_answer_fields(given_packet_request(
+                        public, request, packet, settings))
                 write_json(args.output / "control-result.json", result)
                 write_json(args.output / "reader-request.json", wire)
-                capacity_receipt = capacity.check(wire["messages"])
+                with profile.span("reader_request_capacity") if profile else nullcontext():
+                    capacity_receipt = capacity.check(wire["messages"])
                 run["reader_calls"] = 1
                 write_json(args.output / "run.json", run)
                 with VLLMClient(VLLMConfig(**settings["host"]), budget=budget,
                                 capacity=capacity, emit=trace) as client:
-                    response = client.chat(wire["messages"],
-                        response_format=wire["response_format"],
-                        enable_thinking=wire["chat_template_kwargs"]["enable_thinking"])
+                    with profile.span("Reader") if profile else nullcontext():
+                        response = client.chat(wire["messages"],
+                            response_format=wire["response_format"],
+                            enable_thinking=wire["chat_template_kwargs"]["enable_thinking"])
                 write_json(args.output / "reader-response.json", response)
                 run.update(parse_readout(response,
                                         wire["response_format"]["json_schema"]["schema"]))
@@ -496,6 +508,11 @@ def rollout(args: argparse.Namespace) -> None:
                        for k, v in budget.state["generation"].items()},
                        wall_seconds=time.perf_counter() - started,
                        cpu_seconds=time.process_time() - cpu_started, sha_validation=False)
+            if profile is not None:
+                run.update(compute_profile=profile.report(),
+                    timing_scope="Fixture/config loading through first parsed Reader terminal; "
+                        "includes cold Source capture and model load; excludes imports. "
+                        "Inclusive nested phases are not added to total or billed twice.")
             write_json(args.output / "run.json", run)
 
 
@@ -767,6 +784,10 @@ def main() -> None:
     rolling.add_argument("--device", default="cpu")
     rolling.add_argument("--material-tokens", type=int, default=2048)
     rolling.add_argument("--control-steps", type=int, default=8)
+    rolling.add_argument("--evidence-units", action="store_true")
+    rolling.add_argument("--source-directory-only", action="store_true")
+    rolling.add_argument("--delivery-selection", action="store_true")
+    rolling.add_argument("--profile-phases", action="store_true")
     calibration = sub.add_parser("calibrate")
     calibration.add_argument("--reader-config", type=Path, required=True)
     calibration.add_argument("--output", type=Path, required=True)
@@ -823,7 +844,7 @@ def main() -> None:
     native_collect.add_argument("--reader-config", type=Path, required=True)
     native_collect.add_argument("--output", type=Path, required=True)
     native_collect.add_argument("--roots", type=int, default=8)
-    native_collect.add_argument("--methods", nargs="+",
+    native_collect.add_argument("--methods", nargs="*",
                                 choices=["fixed_r2_4", "fixed_context4", "query_once4",
                                          "rules4", "empty"],
                                 default=["fixed_context4", "query_once4", "rules4", "empty"])
@@ -846,6 +867,8 @@ def main() -> None:
                                 help="SQLite backups preserving captured identities for pairing")
     native_collect.add_argument("--initial-states-from", type=Path,
                                 help="Same captured cold rules4 state/checkpoint for every method")
+    native_collect.add_argument("--initial-policy", default="rules4",
+                                help="Named captured method supplying the actual common cold state")
     native_score = sub.add_parser("native-score")
     native_score.add_argument("--readouts", type=Path, required=True)
     native_score.add_argument("--controls", type=Path, required=True)
