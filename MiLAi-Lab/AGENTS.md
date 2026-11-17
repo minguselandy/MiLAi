@@ -1,5 +1,45 @@
 # CURRENT 2026-11-17: memory compute v2 ACTIVE in an isolated worktree
 
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v8.json.
+All own model jobs TERMINAL. External shared budget FLOCK holder3073512 was verified in
+/proc/locks +actual command wait_and_run_R22_R23_firsts_v1.py, sibling v1 task; NEVER stop,
+restart or edit it. Revalidate same actual holder before any new budget/Reader admission.
+T15cosine6 admission exec93982 exited1 HTTP_OWNER_BUSY BEFOREclient/provider,0calls/0firsts.
+Original staleRUNNING preserved, run finalizedNOT_EXECUTED_ADMISSION_REJECTED from absentPID.
+No first retry. A dependent Reader admission was incorrectly attempted after settlement
+preflight rejected; incidentT15-admission-rejection-v1.json records this. Fourlocal scopes
+PENDING atT13-T15-pending-cost-v1.json; failed preflight settlednone. Wait actualowneridle,
+then settleonce/readback and re-admit only the unrun8positions in NEW output, not oldfolder.
+
+T10 weak observed-subset teacher warm fits CLOSED24updates each on256states/64TRAIN roots,
+same explicit fixed_context4 prior margin1, frozenE5. Both initial/final teacher match256/256,
+weights changed/reload0. T11 independent newprocess actual64root fullrollouts each matched
+fixed baseline384/384fullbindings+befores,64/64finalwires+terminalreasons. Usable saved
+trained function established in thisscope; this is NOT training benefit or G1 completion.
+T12 same warm start/same32actualstates8TRAIN roots/observedsubsets/fullmenus,96updates1536
+validexposures perarm: weakteacher vs nativepair1+valueBCE.5; 4fitsCLOSED/reload0. Fullmenu
+unobservedtop8/32MLP,13/32latent is NOT automaticallywrong; rollout was actuallymeasured.
+T13 Source-disjoint fromTRAIN fixed8oldexposedDEV-fit roots,8conditions64firstpositions,
+33newcalls31reuse,102744tokens/U0,0transportfailed. Nativeprimary warm/weak/fixed=3/8,
+outcomeMLP5/8,latent4/8,cosine4=6/8. Allpaired bootstrap lowerbounds0 for trainedgain;
+learning direction only, G1/G2 NOTestablished. Outcome MLP5/8budgetended,latent8/8.
+Preserveallfirsts and small/exposed/canonicalmetric limits; no checkpoint/seed selected.
+T15samebudgetcosine6 prepared to test extraacquisition baseline; NOTexecuted dueownerbusy.
+
+S06 broaderaudit143exactoldrejectedViews,allKempty,plain0fit/table18fit/125stilltoolarge;
+no newReader or semanticqualityclaims. Source d8cde46a adds OPT-IN prior_menu_order=
+bound_parameters_v2; oldoffered_v1default preserved, NOcheckpointupgraded. Legacy menu
+reversal changedprior192/256; boundnormal/reversed256/256 and1470actual broaderbefores
+allpreserve normalchoices+reversal. 24testsPASS/4oldGPUrecoverySKIP,Ruff/mypy3files and
+package/toolsboundaryPASS. Actual T13 usedfrozenS05, no livehotedit or attribution mix.
+23closedlocalphases settledonce BEFORET13HTTP; nativeblock01notrebilled. Receipt
+T10-T13-block01-closed-cost-v1.json. T13nativeautoalreadycharged;4pendinglocalnotsettled.
+T12driverJSON hadtrailingliteralbackslashn; originalsretained, observedJSONparsedfirst
+object; nativefitrecords/checkpointsvalid,no restart. Fullscope/confirmation/3seeds/
+calibration/P-D/own-state/transfer/researchdelivery and robust model gain STILLINCOMPLETE.
+
+The following v6/v4 and earlier blocks are historical. Current authority is v8 above.
+
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v6.json.
 User resumed after interruption; original block00 was found terminal/absent, NOT restarted.
 Block00 CLOSED110actual positions/32states/8roots,85newcalls25reuse9failed,332480tokens/U0.

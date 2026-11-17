@@ -1,0 +1,429 @@
+{
+  "schema": "camc.execution.T10_T15.v1",
+  "goal_status": "ACTIVE_INCOMPLETE",
+  "source_versions": {
+    "T10_T13": "121089e6",
+    "T14_bound_prior": "d8cde46a"
+  },
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "T10": {
+    "states": 256,
+    "TRAIN_roots": 64,
+    "labels": "C weak frozen teacher choice over actually executed comparison subset; no QA outcomes/answers or unexecuted negatives",
+    "updates": 24,
+    "fixed_prior": "fixed_context4 margin1, explicit same component throughout",
+    "training": {
+      "T10-object-mlp-warm-seed0-v1": {
+        "status": "COMPLETED",
+        "step": 24,
+        "states_exposed_this_invocation": 768,
+        "head_parameter_l2_change": 1.1186668925662813,
+        "wall_seconds": 38.94536850787699,
+        "cpu_seconds": 40.242223224,
+        "initial_loss": 0.6214812933467329,
+        "final_loss": 0.6175837842747569,
+        "reload_difference": 0.0
+      },
+      "T10-latent-pointer-warm-seed0-v1": {
+        "status": "COMPLETED",
+        "step": 24,
+        "states_exposed_this_invocation": 768,
+        "head_parameter_l2_change": 1.3665415939142702,
+        "wall_seconds": 43.37449279241264,
+        "cpu_seconds": 44.949403786,
+        "initial_loss": 0.6212849612347782,
+        "final_loss": 0.6177370380610228,
+        "reload_difference": 0.0
+      }
+    },
+    "full_menu_teacher_choices": {
+      "initial": 256,
+      "final": 256
+    },
+    "actual_deployment_parity": {
+      "status": "COMPLETED",
+      "source_version": "121089e6",
+      "methods": {
+        "warm_mlp": {
+          "roots": 64,
+          "compared_decisions": 384,
+          "same_full_action_bindings": 384,
+          "same_actual_before_states": 384,
+          "same_final_wires": 64,
+          "same_terminal_reasons": 64
+        },
+        "warm_latent": {
+          "roots": 64,
+          "compared_decisions": 384,
+          "same_full_action_bindings": 384,
+          "same_actual_before_states": 384,
+          "same_final_wires": 64,
+          "same_terminal_reasons": 64
+        }
+      },
+      "Reader_calls": 0,
+      "scope": "Actual saved trained warm checkpoints deployed in new processes over all64 TRAIN roots; same frozen cold before and distinct copied banks. Parity is not learning-effect or new-root G1 evidence.",
+      "sha_validation": false,
+      "wall_seconds": 0.408922859467566,
+      "cpu_seconds": 0.408887106
+    }
+  },
+  "T12": {
+    "data": "same32 online states8TRAIN roots/full menus/observed subsets, initialized from the same trained T10 per architecture",
+    "nominal_and_valid_state_exposures_per_arm": 1536,
+    "objectives": [
+      "weak observed teacher choice",
+      "actual native observed pair rank1+valueBCE0.5, separate component valid denominators"
+    ],
+    "training": {
+      "T12-mlp-weak-96-seed0-v1": {
+        "status": "COMPLETED",
+        "step": 96,
+        "states_exposed_this_invocation": 1536,
+        "head_parameter_l2_change": 6.423362407465603,
+        "wall_seconds": 14.536676010116935,
+        "cpu_seconds": 15.391228216000002,
+        "initial_loss": 0.6259482111781836,
+        "final_loss": 0.4081206489354372,
+        "reload_difference": 0.0
+      },
+      "T12-mlp-outcome-96-seed0-v1": {
+        "status": "COMPLETED",
+        "step": 96,
+        "states_exposed_this_invocation": 1536,
+        "head_parameter_l2_change": 6.623261626869884,
+        "wall_seconds": 14.525569825433195,
+        "cpu_seconds": 16.736740041,
+        "initial_loss": 0.7819300107657909,
+        "final_loss": 0.38395257014781237,
+        "reload_difference": 0.0
+      },
+      "T12-latent-weak-96-seed0-v1": {
+        "status": "COMPLETED",
+        "step": 96,
+        "states_exposed_this_invocation": 1536,
+        "head_parameter_l2_change": 4.980737918321759,
+        "wall_seconds": 23.46137116011232,
+        "cpu_seconds": 24.694632238,
+        "initial_loss": 0.6260064672678709,
+        "final_loss": 0.31184316985309124,
+        "reload_difference": 0.0
+      },
+      "T12-latent-outcome-96-seed0-v1": {
+        "status": "COMPLETED",
+        "step": 96,
+        "states_exposed_this_invocation": 1536,
+        "head_parameter_l2_change": 5.462281279334877,
+        "wall_seconds": 22.337457484565675,
+        "cpu_seconds": 24.422146478000002,
+        "initial_loss": 0.7766802310943604,
+        "final_loss": 0.19918681116541848,
+        "reload_difference": 0.0
+      }
+    },
+    "full_menu_unobserved_argmax_on_training32": {
+      "MLP_outcome": 8,
+      "latent_outcome": 13
+    },
+    "scope": "Unobserved choices are not presumed wrong; actual deployment required. Native reference property is not complete semantic truth."
+  },
+  "T13": {
+    "source_role": "fixed8 previously exposed DEV-fit roots disjoint from TRAIN64, not confirmation",
+    "first_positions": 64,
+    "new_calls": 33,
+    "reused_firsts": 31,
+    "failed_positions": 0,
+    "new_generation_delta": {
+      "charged_tokens": 102744,
+      "known_tokens": 102744,
+      "unknown_usage": 0
+    },
+    "outcomes": {
+      "encoder_cosine4": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 6,
+        "primary_false": 2,
+        "primary_unknown": 0,
+        "answer_EM": 6,
+        "reference_support_complete": 7
+      },
+      "fixed_context4": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 3,
+        "primary_false": 5,
+        "primary_unknown": 0,
+        "answer_EM": 4,
+        "reference_support_complete": 6
+      },
+      "outcome_latent": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 4,
+        "primary_false": 4,
+        "primary_unknown": 0,
+        "answer_EM": 4,
+        "reference_support_complete": 6
+      },
+      "outcome_mlp": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 5,
+        "primary_false": 3,
+        "primary_unknown": 0,
+        "answer_EM": 5,
+        "reference_support_complete": 7
+      },
+      "warm_latent": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 3,
+        "primary_false": 5,
+        "primary_unknown": 0,
+        "answer_EM": 4,
+        "reference_support_complete": 6
+      },
+      "warm_mlp": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 3,
+        "primary_false": 5,
+        "primary_unknown": 0,
+        "answer_EM": 4,
+        "reference_support_complete": 6
+      },
+      "weak_latent": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 3,
+        "primary_false": 5,
+        "primary_unknown": 0,
+        "answer_EM": 4,
+        "reference_support_complete": 6
+      },
+      "weak_mlp": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 3,
+        "primary_false": 5,
+        "primary_unknown": 0,
+        "answer_EM": 4,
+        "reference_support_complete": 6
+      }
+    },
+    "paired_exploratory_analysis": {
+      "status": "COMPLETED_EXPLORATORY",
+      "analysis_seed": 0,
+      "bootstrap_repetitions": 20000,
+      "method": "Root-paired bootstrap on8previously exposed DEV-fit sources; trainingseed0 only. Small sample and metric/calibration limitations; not confirmation, independence or statistical power proof.",
+      "comparisons": [
+        {
+          "new": "outcome_mlp",
+          "base": "warm_mlp",
+          "roots": 8,
+          "paired_difference": 0.25,
+          "cluster_bootstrap_95": [
+            0.0,
+            0.625
+          ],
+          "wins": 2,
+          "losses": 0,
+          "ties": 6
+        },
+        {
+          "new": "outcome_mlp",
+          "base": "weak_mlp",
+          "roots": 8,
+          "paired_difference": 0.25,
+          "cluster_bootstrap_95": [
+            0.0,
+            0.625
+          ],
+          "wins": 2,
+          "losses": 0,
+          "ties": 6
+        },
+        {
+          "new": "outcome_latent",
+          "base": "warm_latent",
+          "roots": 8,
+          "paired_difference": 0.125,
+          "cluster_bootstrap_95": [
+            0.0,
+            0.375
+          ],
+          "wins": 1,
+          "losses": 0,
+          "ties": 7
+        },
+        {
+          "new": "outcome_latent",
+          "base": "weak_latent",
+          "roots": 8,
+          "paired_difference": 0.125,
+          "cluster_bootstrap_95": [
+            0.0,
+            0.375
+          ],
+          "wins": 1,
+          "losses": 0,
+          "ties": 7
+        },
+        {
+          "new": "outcome_mlp",
+          "base": "encoder_cosine4",
+          "roots": 8,
+          "paired_difference": -0.125,
+          "cluster_bootstrap_95": [
+            -0.375,
+            0.0
+          ],
+          "wins": 0,
+          "losses": 1,
+          "ties": 7
+        },
+        {
+          "new": "outcome_latent",
+          "base": "encoder_cosine4",
+          "roots": 8,
+          "paired_difference": -0.25,
+          "cluster_bootstrap_95": [
+            -0.625,
+            0.0
+          ],
+          "wins": 0,
+          "losses": 2,
+          "ties": 6
+        }
+      ],
+      "G1": "not_established",
+      "G2": "not_established",
+      "sha_validation": false
+    },
+    "budget_ended_paths": {
+      "outcome_MLP": 5,
+      "outcome_latent": 8
+    },
+    "conclusion": "Observed training-direction signal versus saved usable trained start/weak control, but paired lower bound0 and cheaper relevance baseline higher. G1/G2 not established; no best-seed/checkpoint selection."
+  },
+  "S06_broader_Views": {
+    "rejected_operations": 143,
+    "exact_logged_view_measured": 143,
+    "not_available": 0,
+    "standalone_plain_fits": 0,
+    "standalone_tables_fit": 18,
+    "original_empty_K": 143,
+    "empty_K_fixed_by_tables": 18,
+    "still_too_large_standalone": 125
+  },
+  "T14_order": {
+    "legacy_prior_changed_under_menu_reversal": 192,
+    "states": 256,
+    "new_option": "prior_menu_order=bound_parameters_v2",
+    "default": "offered_v1 preserved",
+    "same_normal_and_reversed_prior_on_training": 256,
+    "broader_actual_menu_audit": [
+      {
+        "condition": "D00-TRAIN64-fixed-prefixes-v1",
+        "actual_decisions": 384,
+        "same_normal_prior": 384,
+        "same_reversed_prior": 384
+      },
+      {
+        "condition": "T11-warm-mlp-TRAIN64-v1",
+        "actual_decisions": 384,
+        "same_normal_prior": 384,
+        "same_reversed_prior": 384
+      },
+      {
+        "condition": "T11-warm-latent-TRAIN64-v1",
+        "actual_decisions": 384,
+        "same_normal_prior": 384,
+        "same_reversed_prior": 384
+      },
+      {
+        "condition": "T13-warm-mlp-DEVfit8-v1",
+        "actual_decisions": 48,
+        "same_normal_prior": 48,
+        "same_reversed_prior": 48
+      },
+      {
+        "condition": "T13-weak-mlp-DEVfit8-v1",
+        "actual_decisions": 48,
+        "same_normal_prior": 48,
+        "same_reversed_prior": 48
+      },
+      {
+        "condition": "T13-outcome-mlp-DEVfit8-v1",
+        "actual_decisions": 60,
+        "same_normal_prior": 60,
+        "same_reversed_prior": 60
+      },
+      {
+        "condition": "T13-warm-latent-DEVfit8-v1",
+        "actual_decisions": 48,
+        "same_normal_prior": 48,
+        "same_reversed_prior": 48
+      },
+      {
+        "condition": "T13-weak-latent-DEVfit8-v1",
+        "actual_decisions": 50,
+        "same_normal_prior": 50,
+        "same_reversed_prior": 50
+      },
+      {
+        "condition": "T13-outcome-latent-DEVfit8-v1",
+        "actual_decisions": 64,
+        "same_normal_prior": 64,
+        "same_reversed_prior": 64
+      }
+    ],
+    "no_model_checkpoint_upgraded": true,
+    "tests": "24passed4legacyGPUskipped; Ruff/mypy3files/package/toolsboundariespass"
+  },
+  "T15": {
+    "status": "NOT_EXECUTED_ADMISSION_REJECTED",
+    "actual_calls": 0,
+    "purpose": "same-budget cosine6 baseline to disambiguate extra-reading benefit",
+    "incident": "/data/milai-experiments/20261117-memory-compute-control/T15-admission-rejection-v1.json",
+    "no_first_retried": true
+  },
+  "cost": {
+    "closed_receipt": "/data/milai-experiments/20261117-memory-compute-control/T10-T13-block01-closed-cost-v1.json",
+    "closed_local_scopes": 23,
+    "scheduled_GPU_job_hours": 0.10341689467999256,
+    "pending": "/data/milai-experiments/20261117-memory-compute-control/T13-T15-pending-cost-v1.json",
+    "native_Reader_phases_not_rebilled": true
+  },
+  "G1": "not_established",
+  "G2": "not_established",
+  "G3": "not_established",
+  "product_adoption": "not_eligible",
+  "remaining": "Reviewed re-admission of unrunT15 after actual shared owner idle; broaden independent training sources/feedback and real semantic calibration, correct full-menu/continuation/representation drift; full D0 blocks, P/D, two own-state rounds and exposure controls, three seeds/mechanism interventions, frozen source-level confirmation/power, transfer, actual View quality and bounded large Views, final artifacts. Original full objective unchanged.",
+  "sha_validation": false
+}
