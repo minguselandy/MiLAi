@@ -1,93 +1,69 @@
-# CURRENT 2026-11-17: R16 breadth Reader + R17 own-state CPU collection LIVE
+# CURRENT 2026-11-17: R18 CLOSED no task gain; ALL jobs TERMINAL; full goal ACTIVE
 
-FULL original small-model plan ACTIVE/INCOMPLETE. Authoritative state:
-/data/milai-experiments/20261116-small-memory-control/current-state-v4.json.
-R=/data/milai-experiments/20261116-small-memory-control. v3 and blocks below are historical.
+Authoritative R=/data/milai-experiments/20261116-small-memory-control/current-state-v4.json.
+All blocks below/v3 are historical and contain obsolete live fields. FULL original small-model
+plan ACTIVE/INCOMPLETE; do not complete/blocked/paused from finite negative results.
 No subagents/SHA/checksums/content fingerprints/new services/Product defaults/push/merge.
-Preserve original Reader/BGE/budget. No Reader first retry/replacement or independent review invented.
-Source checkpoint b3b48253 includes optional captured-prefix manifest/semantic test,
-stale NativeDecision test counter fixture repair, report/AGENTS. R14 frozen source snapshot:
-R14-captured-prefix-v1-source (prior R12-full-menu-v2-source unchanged).
+Original Reader/BGE/shared budget only; no first retries/replacements or invented independent review.
+Runtime geometry source R18-geometry-v1-source; older R14/R12 snapshots preserved. Parent source
+b3b48253/docs6b4814c0; this closure adds opt-in geometry head/CLI/3 tests and final evidence.
 
-LIVE1 R16-twentyone-condition-DEVfit32-firsts-v1 exec18172 PID1246815 originalReader.
-672positions/N32,23newwires,materialmax973/2048;all20R14same-eventfirstsinclfailures reused.
-No manual ledger while native lease live. After terminal native-score uniqueR16-twentyone-
-condition-DEVfit32-scores-v1 controlsR05DEVfit32. Do not duplicate/retry.
-LIVE2 R17-full-menu-own-TRAIN64-v1 exec81492 PID1252457 CPU:all95noninitial actualR16M0
-TRAIN64decisions, same64roots,selectedbeforelabels;fullmenus/h0-h2separate/SQLreadonly,
-planned600sec100MB/Reader0. CardR17-breadth-own-state-T1-card-v1.json. After CLOSED run
-prepare_R17_common_data_v1.py:exactold256teacher+newuniqueownx3,checkexactduplicate labels,
-nominalnear1:1roles/sourceinverse-countweights. SingleM0CE200/seed0/LR.001/samezeroRulev2;
-notformalT3/E03/cleanfactorial/innovation. No source/LR/gamma automaticexpansion. If combined
-trajectorygeneralization stillfails, next boundedhypothesis must change representation/objective.
-R16CPUcollection1092/M0fit31938/TRAINprep56264/DEVprep63255 allTERMINAL. New56roots224states,
-15608branches/SQL0/Reader0,1023.54wall/1077.68CPU/~124MB<1200sec300MB. Combinedold8exact32+
-new224=256states/64roots/17796branches,h0/h2separate8898;h2eligible254,menus15–60.
-InitialSEARCHgoodold2/8,new28/56. M0fit200fullmenu55/254→248/254,CE.168889,reload0;
-nominalold393/new2807,valid393/2780,sourcevalid27–65. All64capturedcoldstarts prepared.
-ActualTRAIN64referencebreadth11(old2/new9),old8head3,Rule26,cosine45. DEVbreadth4/32,
-mean2.656steps,initialREAD29/SEARCH2/HANDOFF1,allactivehandoff. No qualifiedbridge/taskclaim.
-R16-closed-breadth-preparation-cost-disclosure-v1 settled10closedscopes originalledger once,
-localGPUassignedupper.05547h/knownCPU1272.843sec. R16nativeparent/R17live costs pending.
-No newruntimecode beyond committedb3b48253; currentdocclosurependingcommit.
-All PRIOR Reader jobs TERMINAL. R14Reader86918/PID1121873 and score5501 closed:
-640positions,30newcalls/610reuse,42failedpositions,117158tokens,newunknown0. Actual M0ownT1
-primary0/32,answerEM5,referencecomplete2; Rule13/cosine18. Within-source7/8 did not transfer.
-R12Reader35776/scorer6614 terminal:608positions,47newcalls/561reuse,39failedpositions,
-160885tokens,newunknown0. M0/M1/M2primary0/0/0of32. No usable trained bridge/G1.
-OriginalReader/BGE/budget unchanged. No retry or replacement of any failed first.
-AllR12 M0/M1/M2 fits and DEV preparation jobs CLOSED, handles95865/63810/75010/17959 terminal.
-R12 full-menu TRAIN8:32states(initial/search/K/O8each),2188actualbranches(h0/h2separate1094),
-alllegalmenus19–46,SQL0/Reader0. LiteralmatchedacquiredK/O, gold offline only. Structural target
-complete reference delivery, else acquisition progress, then actual control cost; flat/unknown
-masked. Not Reader utility, semantic proof or innovation. K/O good sets overlap.
-M0/M1/M2 TRAINfull-menu5→32/32,32/32,24/32; all200updates,actualsave/reload. M1LoRAB24/24
-changed,M2 56/56changed,reload0. ActualDEV M0 primary0/32 vsRule13/cosine18. M1/M2actualprimary0/32 each, referencecoverage0/32,1/32. Do not infer usable bridge from fit.
+NO LIVE research jobs. R16Reader18172/score55823, R17collect81492/fit91316/preps38413/37875/
+Reader76243/score7211, R18fit81593/preps68704/8799/Reader47637/score89833 all TERMINAL.
+Do not restart or retry these jobs. Current-state-v4 has exact runs; no pending human approval.
+Native metric frozen adapted answerEM AND physical nativeSFspan coverage AND completed first,
+not officialjointEM/semantic truth. All failure positions retained; author alias-review flags only.
+Actual DEVfit32: Ruleprior13/32, strong frozenE5cosine18/32. T1 teacher8 M0/M1/M2 all0/32;
+R14own8 M0=0; R16breadth64=2; R17breadth+own64=1; R18geometry=1. G1 usable trained bridge,
+T/M adoption and innovation remain unmet. Do not call above-zero or training fit project success.
+R12TRAIN8teacher32states/2188branches;R14actualown24/960branches,TRAINreference2→7/8 butDEV0.
+R16remaining56TRAIN closed224states15608branches/SQL0/Reader0,1023.54wall1077.68CPU/~124MB;
+combinedold32exact+new224=256states64roots17796branches,h0/h2separate8898,254h2eligible.
+M0CE200fit55→248/254;actualTRAINreference11/64 vsRule26/cosine45,DEV4/32,primary2/32.
+R17all95noninitial actualM0TRAIN64states selectedbeforelabels,4146branchesSQL0Reader0,
+237.18wall233.16CPU. 5exactteacherduplicates/labelsidentical =>90newunique +old256 =346unique,
+64roots/526replay256old270own/35masked. h2actualchoices33good51inferior11flat among95.
+CE200/seed0/samezeroRulev2:old209/254+own77/79,nominal1556/1644,valid1540/1448,reload0.
+ActualTRAINreference20/64,DEV2/32/28active4budget; actualprimary1/32,24calls91121tokens/newU0.
 
-R13 actual same8TRAIN own trajectories referencecompleteM0/M1/M2=2/1/1of8;Rule5/cosine4.
-Allactivehandoff,meansteps2.375/2.25/4; teacher prefix fits fail within TRAIN roots too.
-R14 selects ALL3route finalpre-handoff8TRAIN each by behavior before labels,24states. Manifest
-loads exact original checkpoint path/index and verifies event/policy. Existing K/O path kept.
-Single-root112branch smokePASS; full960branches,h0/h2separate480,SQL0/Reader0,52.19sec.
-Both horizons21directional:17actualstopsinferior/4good/3flatmasked. No unexecuted negatives.
-R14-structural-aggregation-v1 old32x3/new24x4 ->96:96nominal replay entries,56unique states/
-8roots,12masked copies. NOT new effective N or formalT3 result supervision.
-R14-M0-own-prestop-T1-200-seed0-v1 exec95897 CLOSED200updates fromsamezeroRulev2,44.66sec;
-old32/32+new21/21directionalaccepted,reload0,nominal1600old/1600new,effective1600/1398.
-R14-M0-T1-TRAIN8-prepared-v1 and DEVfit32 counterparts CLOSED, handles1265/40767 TERMINAL. TRAINreference7/8 (was2);DEV2/32 (was0,cosine22),mean5.06steps/30active2budget.
-Not qualified source generalization. R14actualReader86918 nowCLOSEDprimary0/32; all R12three-route
-firsts including failures reused. No gamma/LR sweep/automatic data expansion.
+R18 opt-in block_layernorm_stats_v3 retains each normalized block sum+L2norm;4blocks+8scalars,
+head393729→395777(+2048); default/raw/v2 unchanged. Unit-vector counterexample verified v2 can
+map aligned/opposed unit inputs to identical blocks, not proof of actualE5 failure cause.
+InitialR18-M0-geometry-start-seed0-v1 FAILED strict independent CUDA bitwise assertion; preserved,
+GPUtimeunknown. v2init matchedTorchdeterministic+CUBLAS4096:12actualTRAIN/DEVinputs oldnonzero
+checkpointscore/shared-head/repeat differences0; oldhiddencolumns/bias/outputmatched,statscols0,
+prior0diff/save-load0. Missingdependency startup + failedsettlement preflight preserved; no ledger
+mutation before preflight failure, no Reader retry. New R18 matched sameR17data/schedule/tokens,
+CE200teacher209/254+own77/79 unchanged,CE.430769,statsall2048updatedL2.70155,reload0.
+ActualTRAINreference20/64,DEV2/32; all32DEVHostwires +deliveryranges exactlyR17. All736positions
+reused/51failedkept/0newcalls or tokens/U; primary1/32. Singlegeometryconfig CLOSED/noadoption.
+Four derived firsts-card experiment-ID prefixes corrected with previousID retained in metadata;
+no frozen mainprotocol/inputs/wires/firsts/outcomes changed.
 
-Checks: new15native/captured/referencePASS,structuralmypy1PASS,CIruff(src tests tools)PASS.
-OldNativeDecisionfixture omitted existing padded_input_tokens counter; test-only fix thenPASS.
-Wrongtestpath0tests and ruff . scanning intentional datafixtures2254olderrors retained, noautofix.
-Prior485selected/mypy59/362matrixPASS, notfullpytest/remoteCI. Source/code/data actual snapshots kept.
-R12-R14-closed-local-cost-disclosure-v1 settled26closedscopes once originalledger after both
-R12drivers terminal; native78responses274120tokens readback only/newunknown0. LocalGPUassigned
-upper.727967h/knownCPU2788.135sec,notwhole-systemtotal. Prior11scope receipt retained. SubsequentR14-R16-closed-diagnosis-cost-disclosure-v1 settled5CPUscopes/native30responses
-117158tokens readbackonly/newunknown0. OnlyR16livecollector +later2analysis scopes pending.
-No parent rebill; nativeReaderidle now, checkbeforemanualsettlement.
-Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
-Unmeasuredstartup/analysis/serverGPU/CPU/energy/moneyunknownnotzero; nosecondledger.
+Checks:20narrowPASS/4unaffectedGPU-onlyLaya recoverySKIP;491selectedunit+architecturePASS;
+model+runner2mypyPASS;CIruffsrc/tests/toolsPASS;gitdiffcheckPASS.7preexistingCLItypingerrors
+reproducedfrozenv14 thenfixed type-only annotations/optional importtypingcomments. Notfullpytest/
+remoteCI. Prior362matrix/59coremypy recordedhistorical; no new sourcefile outsideexistingmodule.
+AllrecordedCLOSEDscopes settled once ORIGINALledger throughR18-final-closure-cost-disclosure-v1.
+Latest17scopeR16-R18receipt readback47responses183902tokens only, R18fit6scope +final3scope;
+allreuseparent0newgeneration. Failedinit GPUduration/startup/analysis/residentReader+BGECPU/GPU/
+energy/money unknown notzero. No secondledger or parent/copy rebill. Originalbudget:
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 
-OnlyTRAIN64/DEVfit32exported; DEV-select128/CONFIRM1000sealed metadata.3256rootsall-context
-articledisjoint,96343localMuSiQuetitlesexcluded; E5officialKILT HotpotQA~70k/Wikipedia exposure
-known,nofoundation-unseenclaim. AdaptednativeanswerEM AND actualSFspan ANDcompletefirst,
-not officialjointEM/explanationtruth. OldunreliableD00notbulkprimaryutility; noindependentreviewer.
-Full goal still requires usable trained bridge/actualsource gains/formal E01-E08/strongBstar/
-matched2k5k10k/twoown-outcome-rounds/3finalseeds/≥2mechanisms+ablations+counterexamples/
-newsourceCONFIRM/secondReader+budgettransfer/L4/8/16. Do not complete/blocked/paused from
-finite progress/negative probes. Source-state-generalization is current research issue.
-
-Additional global diagnosis: R15initialvisibility complete controller reference spans7/8tinyTRAIN,
-30/56otherTRAIN,20/32DEV. Controller pages are not Reader evidence; source breadth hypothesis
-fixed before R14score. R16 failureaxes: all4T1conditions selectedillegal0/toolfailed0; material
-coverage dominates. R14complete-span answers Casio/Overwatch differ from native references;
-author surface/semantic-review flags only, primary unchanged. Even accepting2 cases gives2/32.
-KOmechanism audit:4/8pairs sharedgoodcompletebindings,4require differentacceptedbinding,all8
-actualmenus differ. No proof of explicit marker contribution or innovation; I1/I2/I3 remain open.
-Confirmation power planning ONLY: roughN933 forδ.05/pd.3; N3920 for2ppNI/pd.2; reserved1000
-metadata not guaranteed sufficient. Confirmation remains sealed, no formal protocol frozen.
+NEXT: change hypothesis on fixedR17data. Inspect actual public mechanical-state schema/counts/
+selection/remainingbudget/actionkind+params and quantify information lost under text pooling.
+Consider one preregistered typed public feature representation +V0ablation; do not invent fields,
+use nativeanswers/SFlabels online, add source fingerprints or repeat failed data/LR/gamma/normalizer
+sweeps. Strongcosine/Rule controls retained. All3routes already actualfit/save/load/DEVmeasured;
+formal bridge/E01/E02 still unmet, no automatic 2k/5k/10k expansion of failed recipes.
+OnlyTRAIN64/DEVfit32 exported. DEV-select128/CONFIRM1000 remain sealedmetadata.3256roots allcontext
+article-disjoint,96343MuSiQuetitlesexcluded. E5officialKILT HotpotQA~70k/Wikipedia exposure known,
+no foundation-unseen claim. Independenthumanreviewunavailable, not invented. KOaudit4/8sharedgood
+bindings,all8menusdiffer: explicitmarkereffectnotidentified. I1/I2/I3notaccepted. Powerplanning
+ONLY:N~933for5pp/pd.3;~3920for2ppNI/pd.2; reserved1000notautomaticallysufficient.
+Full goal still requires trainedusablebridge/actualsourcegains/formalE01-E08/strongBstar/matched
+scaling/twoown-outcome-rounds/threefinalseeds/≥2mechanisms+ablations+positive/negativechains/
+newsourceconfirmation/secondReader+budgettransfer/L4/8/16. No partial-success redefinition.
 
 # HISTORICAL CHECKPOINT: R10 value firsts were running before final closure
 

@@ -328,3 +328,23 @@ R16广度采集现已关闭：新增56根、224状态、15608个实际分支，S
 R16首答启动前，10个已关闭准备/分析范围在原台账结算一次，本地GPU分配墙时上界约0.05547小时、已计CPU1272.84秒；共同冷状态包装成本包含在共同数据准备中，不另扣。原Reader运行时继续禁止手工结算。[准备收据](../artifacts/small-memory-control-20261116/R16-closed-breadth-preparation-cost-disclosure-v1.json)
 
 R17只检验既有来源广度与自身分布监督的组合：使用同64个TRAIN来源，按行为选入广度模型已关闭轨迹中的全部95个非初始决策，采集完整合法菜单的h0/h2实际分支。采集前冻结选择，不按标签筛选；合并时核对字面相同before/menu的属性标签，冲突则停止，重复输入不增加唯一状态数。预定只训练一个M0配置，旧教师数据一次、新唯一自身状态各3个replay条目，披露实际角色/来源曝光。这不算干净2×2因果消融、正式T3结果聚合或创新验收；不新增来源，不调LR/gamma。当前只读CPU采集中，之后仍需完整轨迹及原Reader首答。[有界组合卡](../artifacts/small-memory-control-20261116/R17-breadth-own-state-T1-card-v1.json)
+
+R17现已完整关闭：95个自身状态、4146实际分支、SQL变更0、Reader调用0，237.18秒墙时、233.16秒CPU。5个与教师数据字面重复的输入标签完全一致，保留其执行证据，训练时不算新唯一状态。h2有84个有方向状态，实际选择33个可接受、51个较差；去重后90个新状态，与旧256状态合为346唯一状态/64根，526个名义replay条目（256旧、270新）、35个mask。200步后旧209/254、新77/79，名义曝光1556/1644、有效1540/1448，重载差0。TRAIN完整参考交付20/64，DEV2/32，28次主动停止、4次预算耗尽。[聚合](../artifacts/small-memory-control-20261116/R17-common-TRAIN64-structural-v1/run.json) [拟合](../artifacts/small-memory-control-20261116/R17-M0-fit-audit-v1.json)
+
+R17实际首答为1/32、答案EM3/32、参考完整交付2/32；704位置中24个新调用、680复用、48失败位置保留，91121 tokens、无新增unknown。它没有超过广度版本2/32，更未接近规则13/32或余弦18/32。两个有限自身分布监督配置已保留负结果，不继续扩大相同修复配方。[实际评分](../artifacts/small-memory-control-20261116/R17-twentytwo-condition-DEVfit32-scores-v1/summary.json)
+
+## R18：保留归一化几何的单次表示对照
+
+本块转向表示假设，不再增加来源或改replay权重。四块LayerNorm会删除各块均值和尺度；对单位向量，state×action的分量和就是余弦。在一个可执行反例中，同向与反向的常量单位向量在四个归一化块中完全相同，原头无法区分。该反例只证明可能的信息丢失，不证明它解释了真实E5错误。[数学诊断](../artifacts/small-memory-control-20261116/R18-normalization-geometry-diagnosis-v1.json)
+
+新增显式可选block_layernorm_stats_v3，在原归一化块旁保留各块分量和与L2范数，M0增加8个标量、2048个头参数（393729→395777）；旧raw/v2和默认设置保持原行为。新起点复制旧隐藏层列、bias和输出层，新统计列全0。独立CUDA编码的首版逐位断言失败，失败目录/未知GPU时长保留；按训练已声明的Torch确定性与CUBLAS配置，12个实际输入上旧非零checkpoint的新旧分数差、同模型重复差及共享特征头差均0，新起点prior与实际保存重载差也为0。未修订任何旧Reader首答。最初缺少依赖路径的诊断启动失败和随后台账预检失败亦披露；该预检尚未进入budget scope，没有台账变更。[匹配起点](../artifacts/small-memory-control-20261116/R18-M0-geometry-start-seed0-v2/run.json) [保留失败](../artifacts/small-memory-control-20261116/R18-M0-geometry-start-seed0-v1/run.json)
+
+使用与R17完全相同的526条数据、346唯一状态、64根、200步和采样schedule；实际骨干token工作量也相同。统计列2048个参数均更新、L2变化0.70155，重载差0；旧209/254、新77/79与R17相同，CE约0.43077。完整TRAIN参考交付20/64、DEV2/32；32个DEV终点Host wire和物理送达跨度逐个与R17相同。23条件736位置全部复用首次结果，51失败位置保留，新增Reader调用/tokens/unknown均为0；几何版本主指标1/32、EM3/32、参考2/32。此单配置关闭：信息保留、实际参数更新和工程正确性没有带来任务收益，不作几何机制或G1采用主张。[拟合](../artifacts/small-memory-control-20261116/R18-M0-fit-audit-v1.json) [完整比较](../artifacts/small-memory-control-20261116/R18-closed-geometry-comparison-v1.json)
+
+检查为20个窄测试通过、4个未涉及的GPU专用旧Laya恢复测试跳过；统一受影响单元/架构集491 passed，87.14秒墙时、81.52秒子CPU。模型与runner两个源文件mypy通过，规定src/tests/tools范围Ruff通过。扩大的runner类型检查在冻结旧版与当前版复现同7个旧错误，已用可选依赖typing注释和异构JSON字典类型声明修复，不改变请求或运行行为。不称完整pytest/远端CI。[检查记录](../artifacts/small-memory-control-20261116/R18-broad-validation-v1.json)
+
+四个由克隆脚本生成的首答卡曾保留先前阶段的实验ID前缀，现只更正描述性ID，并在metadata_erratum保留旧值；主实验卡、冻结协议、执行输入、wire、首次回答和结果均未变化。原台账的17个关闭范围收据包含R16/R17合计47个真实响应183902 tokens的只核对记录；随后R18六个拟合/准备范围及最终三个评分/元数据范围均结算一次，全量复用父范围没有新增生成扣费。失败初始化的GPU时长、启动/分析/常驻服务/能耗金额仍未知，不按0计。[ID勘误](../artifacts/small-memory-control-20261116/R18-firsts-card-id-errata-v1.json) [17范围](../artifacts/small-memory-control-20261116/R16-R18-closed-preparation-cost-disclosure-v1.json) [最终关闭](../artifacts/small-memory-control-20261116/R18-final-closure-cost-disclosure-v1.json)
+
+所有本块作业均已终止，全原计划继续ACTIVE。下一项应在固定R17数据上核查真实公开机械状态的表示：例如实际已获取/已选材料数、剩余控制预算、动作种类和参数模式，而非再做来源量、损失权重或归一化网格。任何新特征只能读取实际在线契约，先核查字段并给V0对照，不能读原生答案/支持标签或发明字段。可用已训练bridge、正式E01–E08、三seed、至少两个创新机制及消融/正反例、新来源确认、迁移与4/8/16会话维护仍未由本轮负结果满足。
+
+本次实现范围仅为Lab的显式可选研究决策头、runner类型声明及测试；Product Schema/API/权限/Canonical语义没有改变。源码回滚点为本地父提交6b4814c0；冻结研究源码与失败/成功产物均保留。未推送或核对远端，未宣称远端CI；当前科研debt仍是可用训练起点和实际来源外收益，而非代码门禁。

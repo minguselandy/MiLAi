@@ -75,7 +75,8 @@ def build_action_head(width: int, hidden: int, *, set_interaction: bool = False,
                       initialization: str = "standard_v1") -> Any:
     import torch  # type: ignore[import-not-found]
 
-    if feature_normalization not in {"raw_v1", "block_layernorm_v2"}:
+    if feature_normalization not in {
+            "raw_v1", "block_layernorm_v2", "block_layernorm_stats_v3"}:
         raise ValueError("Unknown action-head feature normalization")
     if initialization not in {"standard_v1", "zero_output_v1"}:
         raise ValueError("Unknown action-head initialization")
@@ -83,8 +84,11 @@ def build_action_head(width: int, hidden: int, *, set_interaction: bool = False,
     class ActionHead(torch.nn.Module):  # type: ignore[misc]
         def __init__(self) -> None:
             super().__init__()
+            blocks = 5 if set_interaction else 4
+            statistics_width = blocks * 2 if feature_normalization == (
+                "block_layernorm_stats_v3") else 0
             self.network = torch.nn.Sequential(
-                torch.nn.Linear(width * (5 if set_interaction else 4), hidden),
+                torch.nn.Linear(width * blocks + statistics_width, hidden),
                 torch.nn.GELU(), torch.nn.Linear(hidden, 1))
             if initialization == "zero_output_v1":
                 torch.nn.init.zeros_(self.network[-1].weight)
@@ -97,8 +101,16 @@ def build_action_head(width: int, hidden: int, *, set_interaction: bool = False,
                 pooled = torch.zeros_like(state).index_add(0, owners, actions)
                 counts = torch.bincount(owners, minlength=len(state)).clamp_min(1)
                 features.append((pooled / counts[:, None])[owners])
-            if feature_normalization == "block_layernorm_v2":
+            statistics = (torch.stack([value for block in features for value in (
+                block.sum(dim=-1), torch.linalg.vector_norm(block, dim=-1))], dim=-1)
+                if feature_normalization == "block_layernorm_stats_v3" else None)
+            if feature_normalization in {"block_layernorm_v2", "block_layernorm_stats_v3"}:
                 features = [torch.nn.functional.layer_norm(block, (width,)) for block in features]
+            if statistics is not None:
+                # Unit-vector product sums retain cosine; sums and norms preserve
+                # the block mean/scale that LayerNorm alone removes. Online inputs
+                # and complete binding alignment remain unchanged.
+                features.append(statistics)
             return self.network(torch.cat(features, dim=-1)).squeeze(-1)
 
     return ActionHead()

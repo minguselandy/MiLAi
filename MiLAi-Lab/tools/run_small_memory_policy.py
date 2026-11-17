@@ -113,7 +113,7 @@ class RecoveryParameters:
                 for name, parameter in module.named_parameters() if parameter.requires_grad}
 
     def load_state_dict(self, values: dict[str, Any]) -> None:
-        import torch
+        import torch  # type: ignore[import-not-found]
 
         parameters = self.state_dict()
         if values.keys() != parameters.keys():
@@ -317,7 +317,7 @@ def train(args: argparse.Namespace) -> None:
                 scheduler.step()
             if model.device.type == "cuda":
                 torch.cuda.synchronize(model.device)
-            record = {"step": step + 1, "valid_states": len(valid),
+            record: dict[str, Any] = {"step": step + 1, "valid_states": len(valid),
                       "masked_states": len(indices) - len(valid), "denominator": denominator,
                       "loss_sum": numerator,
                       "loss": numerator / denominator if denominator else None,
@@ -391,7 +391,7 @@ def train(args: argparse.Namespace) -> None:
 
 def rollout(args: argparse.Namespace) -> None:
     """Run real SQLite evidence operations and one existing Reader first response."""
-    from langgraph.store.sqlite import SqliteStore
+    from langgraph.store.sqlite import SqliteStore  # type: ignore[import-not-found]
 
     from milai_lab.harness.contextual_artifacts import Trace, http_budget_scope
     from milai_lab.memory.service import MemoryService
@@ -547,7 +547,8 @@ def calibrate(args: argparse.Namespace) -> None:
                             capacity=HostCapacity(settings["capacity"]), emit=trace) as client:
                 for case in cases:
                     payload = case["payload"]  # Offline expected labels never enter messages.
-                    request = {"messages": [{"role": "system", "content": teacher_rubric(payload)},
+                    request: dict[str, Any] = {"messages": [
+                        {"role": "system", "content": teacher_rubric(payload)},
                         {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}],
                         "response_format": {"type": "json_schema", "json_schema": {
                             "name": "source_calibration", "schema": SCHEMA}}}
@@ -731,7 +732,8 @@ def main() -> None:
                          choices=["binding_v1", "query_pair_v2", "query_delivery_pair_v3"],
                          default="binding_v1")
     fitting.add_argument("--lora-target-modules", nargs="+", default=["q_proj", "v_proj"])
-    fitting.add_argument("--feature-normalization", choices=["raw_v1", "block_layernorm_v2"],
+    fitting.add_argument("--feature-normalization", choices=[
+        "raw_v1", "block_layernorm_v2", "block_layernorm_stats_v3"],
                          default="raw_v1")
     fitting.add_argument("--prior-policy", choices=["none", "fixed_context", "rules"],
                          default="none")
