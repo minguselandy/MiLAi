@@ -1,0 +1,117 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v36.json",
+  "C06_frozen_source": "S13/188a5239",
+  "closed_block06": {
+    "states": 32,
+    "source_roots": 8,
+    "bound_positions": 94,
+    "new_calls": 71,
+    "reused": 23,
+    "failed_positions": 3,
+    "new_tokens": 280987,
+    "unknown_usage_delta": 0,
+    "blind_cases": 71,
+    "directional_states": 16,
+    "directional_roots": 8,
+    "directional_pairs": 29,
+    "known_branch_values": 79,
+    "unknown_branch_values": 15,
+    "actual_material_UTF8_tokens_max": 1944
+  },
+  "blind_review": {
+    "grade": "B_project_aware_assistant_provisional",
+    "task_resolution_true_false_unknown": [
+      39,
+      22,
+      10
+    ],
+    "all_frozen_before_method_scores": true,
+    "initial_compile_rejection_and_pre_score_encoding_correction": "C06-block06-blind-calibration-v1/pre-score-axis-encoding-correction-v1.json",
+    "changed_task_material_rubric_judgments": false,
+    "explanation_grounding_false_retained": [
+      "J063",
+      "J066"
+    ]
+  },
+  "cumulative_current_protocol_feedback": {
+    "states": 224,
+    "source_roots": 56,
+    "bound_positions": 680,
+    "new_calls": 408,
+    "reused_positions": 272,
+    "new_tokens": 1531515,
+    "failed_positions": 38,
+    "directional_states": 108,
+    "directional_roots": 52,
+    "directional_pairs": 217,
+    "known_branch_values": 610,
+    "unknown_branch_values": 70
+  },
+  "only_admitted_next_block": {
+    "block": 7,
+    "positions": 95,
+    "source_roots": 8,
+    "unique_task_wires": 71,
+    "canonical_earliest_primary_firsts": 718,
+    "tool_session_at_observation": 51779,
+    "pid_at_observation": 675321,
+    "run": "C06-block07-TRAIN8-firsts-v1/run.json",
+    "source_criteria_frozen_before_opening_generated_answers": "C06-block07-blind-calibration-v1/source-sufficiency-notes-before-readout-review-v1.json",
+    "settlement_receipt": "C06-before-block07-closed-cost-v1.json",
+    "local_closed_scopes_settled_once": 10,
+    "native06_and_nested_scopes_not_rebilled": true
+  },
+  "C07": {
+    "status": "PROSPECTIVE_RECIPE_AND_PARTIAL_DATA_ONLY",
+    "card": "C07-full-D0-learning-curve-prospective-card-v1.json",
+    "compiler": "C07-compile-matched-data-v1.py",
+    "partial_data_run": "C07-partial48-matched-data-v1/run.json",
+    "partial_states": 192,
+    "partial_roots": 48,
+    "valid_states_each_arm": 189,
+    "inputs_fullmenus_known_masks_valid_exposure_checked": true,
+    "finite_recipe": "First16/32/64roots x3arms, same usable M0raw warmstart,12/24/48updates,oneLRseed0,9fits only",
+    "research_fits_executed": 0,
+    "prerequisite": "Full64C06review+numerical/exposure/cost/freshGPU review required before fit admission",
+    "DEV_readouts_admitted": 0
+  },
+  "J03_owned_tmpfs_cleanup": {
+    "evidence": "J03-owned-tmpfs-cleanup-v1.json",
+    "files": 25,
+    "logical_bytes_released": 65539393633,
+    "source_models_all_evidence_other_worktrees_preserved": true,
+    "settled_once_in_above10_scopes": true
+  },
+  "J02": "Negative fixed-code pilot unchanged; no expansion or grade-up",
+  "references": [
+    "C06-block06-feedback-review-v1.json",
+    "C06-block06-reviewed-task-index-v1.json",
+    "C06-block07-admission-preparation-v1.json",
+    "C06-block07-admission-card-v1.json",
+    "C06-feedback-blocks-v8.json"
+  ],
+  "limitations": [
+    "Project-aware assistant B reviews lack independent qualified human/model truth",
+    "Conditional frozen-policy returns, no global oracle",
+    "Incomplete full64D0; nine fits not admitted yet",
+    "D1/P-D/two own-state rounds/matched old-pool/three seeds/power/new confirmation/transfer/delivery remain",
+    "Unmeasured review/report/failed compile/full GPU activity/physical IO/energy/money UNKNOWN"
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "validation": {
+    "JSON_counts_links_source_diff": "PASS",
+    "source_code_changed_after_final_test_pass": false,
+    "repeated_unit_tests": 0,
+    "rollback_commit": "d7f87f8a",
+    "remote_checked": false
+  },
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "research_policy_weights_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false
+}

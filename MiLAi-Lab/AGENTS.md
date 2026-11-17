@@ -1,4 +1,33 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06block05closed/block06active; J02gate failed
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06block06closed/block07active; C07recipe only
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v36.json.
+C06 remains S13/188a5239.06 CLOSED94positions71new23reuse3fail280987tokens/U0; all71 Bblind
+judgments frozen before scores39resolved22unresolved10unknown.16directionalstates8roots29pairs,
+79known15unknown,maxUTF8material1944. Sevenblocks224states56roots680positions408new272reuse
+38failed1531515tokens/U0;108directionalstates52roots217pairs610known70unknown. NOT fullD0/G1.
+Initial compile rejected2 main-answer/explanation grounding encodings; original draft preserved,
+explicit pre-score correction separates explanation_grounding=false. No task/material/rubric
+judgments changed, no scores existed then. Keep both2009leave/2015departure distinctions and
+partial broad-career answers/missing identity links unknown, not forced native negatives.
+Only final07 admitted95positions71wires718canonicalearliestfirsts; originalsession51779/PID675321.
+Actual /proc/locks FLOCK+cmdline verified. REVALIDATE run/process; NEVERlost-handle restart.
+After all95firsts close review ALL71 P00-P07/K000-K070 under unchangedrubric/source notes,
+then scores/full64yield-cost-unknown review. 10closedlocals SETTLEDONCE/readback before07,
+including C07partial48data prep and J03ownedtmpfs cleanup; native06/nestedscopes not rebilled.
+C07prospective card ONLY: first16/32/64roots x weak/native_masked/reviewed, sameusableM0raw
+warmstart,12/24/48updates,oneLR/seed0,finite9fits. Partial192states48roots each189valid,full
+inputs/menus equal,native-reviewedknownmask equal,weakvalidexposure equal. NO fit admission
+before full64review+matching/numerical/cost/freshGPU checks; NO DEVreadout admission yet.
+J02fixed-code pilot negative unchanged/no expansion or labelupgrade. Only completed owned
+/dev/shm/milai-camc-qwen25-32b-J03-v1 removed after users absent:25files65.54GB released,
+original models/evidence unchanged. Oldv35 cache-retained observation superseded.
+Full D0/D1/P-D/two ownstate+matchedoldpool/3seeds/strongbaseline/power/newCONFIRM/transfer/
+delivery incomplete;488ownobservations unlabelled/not adaptation round. No public defaults,
+Product/Archive/researchweights/protectedbody/push/merge changes. SHA/fingerprints OFF.
+
+The following v35 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C06block05closed/block06active; J02gate failed
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v35.json.
 S13C06 unchanged.05CLOSED96positions72new24reuse5fail266720tokens/U0;72Bblind judgments
