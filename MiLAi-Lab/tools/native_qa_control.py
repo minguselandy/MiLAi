@@ -42,6 +42,7 @@ from milai_lab.methods.source_ranges import SourceRangeBudget
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners.given_host_readout import given_packet_request, separate_answer_fields
 from milai_lab.scorers.reference_qa import score_reference_first
+from milai_lab.scorers.reviewed_task import TaskReviewIndex, reviewed_task_outcome
 from prepare_collected_operation_feedback import QueryOnceContextPolicy
 from small_control_branches import copy_source_bank
 
@@ -392,6 +393,11 @@ def prepare_packets(args: Any) -> None:
 
 
 def score_packets(args: Any) -> None:
+    protocol = getattr(args, "outcome_protocol", "legacy_v1")
+    reviews_path = getattr(args, "semantic_reviews", None)
+    if (protocol == "reviewed_execution_v3") != (reviews_path is not None):
+        raise ValueError("Reviewed protocol requires an explicit semantic review artifact only")
+    reviews = TaskReviewIndex(read_json(reviews_path)) if reviews_path is not None else None
     args.output.mkdir(parents=True, exist_ok=False)
     tick, cpu = time.perf_counter(), time.process_time()
     native = read_json(args.readouts / "run.json")
@@ -413,7 +419,10 @@ def score_packets(args: Any) -> None:
                 branch["actual_delivered_source_ranges"],
                 read_json(response) if response.exists() else None,
                 observed_status=record["status"],
-                outcome_protocol=getattr(args, "outcome_protocol", "legacy_v1"))
+                outcome_protocol="observed_execution_v2" if reviews is not None else protocol)
+            if reviews is not None:
+                score = reviewed_task_outcome(score, reviews.find(
+                    case, branch["readout_request"], record))
             for name in branch["policies"]:
                 results.append({"event_id": case["event_id"], "group_id": case["family"],
                     "policy": name, "outcome": score, "first_path": str(folder / "readout.json"),
@@ -446,11 +455,15 @@ def score_packets(args: Any) -> None:
     write_json(args.output / "summary.json", summaries)
     write_json(args.output / "run.json", {"status": "COMPLETED", "pid": os.getpid(),
         "readouts": str(args.readouts), "controls": str(args.controls), "Reader_calls": 0,
-        "outcome_protocol": getattr(args, "outcome_protocol", "legacy_v1"),
+        "outcome_protocol": protocol,
+        "semantic_reviews": str(reviews_path) if reviews_path is not None else None,
         "wall_seconds": time.perf_counter()-tick, "cpu_seconds": time.process_time()-cpu,
         "sha_validation": False, "compute_ledger_status": "pending_idle_settlement",
-        "scope": "Native answer EM plus actual delivered reference spans, NOT official jointEM "
-                 "or semantic explanation truth; all planned firsts retained."})
+        "scope": ("Explicit offline reviewed task resolution; native diagnostics separate. "
+                  "Unreviewed semantic outcomes unknown; review grade/limits retained."
+                  if reviews is not None else "Native answer EM plus actual delivered reference "
+                  "spans, NOT official jointEM or semantic explanation truth; "
+                  "all firsts retained.")})
     print(json.dumps(summaries, indent=2), flush=True)
 
 

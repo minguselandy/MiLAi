@@ -880,8 +880,12 @@ def main() -> None:
     native_score.add_argument("--readouts", type=Path, required=True)
     native_score.add_argument("--controls", type=Path, required=True)
     native_score.add_argument("--output", type=Path, required=True)
-    native_score.add_argument("--outcome-protocol", choices=["legacy_v1", "observed_execution_v2"],
+    native_score.add_argument("--outcome-protocol",
+                              choices=["legacy_v1", "observed_execution_v2",
+                                       "reviewed_execution_v3"],
                               default="legacy_v1")
+    native_score.add_argument("--semantic-reviews", type=Path,
+                              help="Explicit offline task/wire/first-bound review artifact")
     native_feedback = sub.add_parser("native-feedback")
     native_feedback.add_argument("--scores", type=Path, required=True)
     native_feedback.add_argument("--output", type=Path, required=True)
