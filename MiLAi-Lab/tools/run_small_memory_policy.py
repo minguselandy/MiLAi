@@ -859,6 +859,8 @@ def main() -> None:
     native_collect.add_argument("--control-steps", type=int, default=8)
     native_collect.add_argument("--evidence-units", action="store_true",
                                 help="Whole-paragraph R2 and captured-turn R3, no token cuts")
+    native_collect.add_argument("--evidence-context-turn-radius", type=int, default=0,
+                                help="R3 includes this many adjacent captured turns on each side")
     native_collect.add_argument("--source-directory-only", action="store_true",
                                 help="Do not expose full Source bodies in arrival observations")
     native_collect.add_argument("--profile-retrieval", action="store_true",

@@ -93,6 +93,7 @@ def build_evidence_packs(
     source_range_budget: SourceRangeBudget | None = None,
     source_range_limit: int = 16,
     evidence_units: bool = False,
+    evidence_context_turn_radius: int = 0,
 ) -> list[dict[str, Any]]:
     """Split only the captured pool; default to complete exchanges with prior context.
 
@@ -103,6 +104,8 @@ def build_evidence_packs(
     """
     if evidence_units and source_range_budget is not None:
         raise ValueError("Choose whole evidence units or token ranges explicitly")
+    if evidence_context_turn_radius and not evidence_units:
+        raise ValueError("Evidence context radius requires explicit evidence-unit formation")
     source_packs = []
     retrieved_ids = {item["id"] for item in originals}
     additional = (service.read_source_materials([
@@ -111,7 +114,8 @@ def build_evidence_packs(
     for material in [*originals, *additional]:
         if evidence_units:
             source_packs.extend(evidence_unit_packs(material,
-                scope_only=material["id"] not in retrieved_ids))
+                scope_only=material["id"] not in retrieved_ids,
+                context_turn_radius=evidence_context_turn_radius))
             continue
         if source_range_budget is not None:
             source_packs.extend(source_range_packs(material, source_range_budget,

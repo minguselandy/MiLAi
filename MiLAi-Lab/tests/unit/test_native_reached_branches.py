@@ -4,12 +4,17 @@ import re
 from pathlib import Path
 from types import SimpleNamespace
 
+import pytest
 from langgraph.store.sqlite import SqliteStore
 
 import native_qa_branches
 from milai_lab.datasets.hotpot_memory import export_question
 from milai_lab.memory.service import MemoryService
-from milai_lab.methods.memory_control import FixedMemoryPolicy, run_memory_control
+from milai_lab.methods.memory_control import (
+    FixedMemoryPolicy,
+    MemoryControlState,
+    run_memory_control,
+)
 from milai_lab.methods.small_memory_policy import PolicyScores
 from native_qa_control import capture_sources, environment
 
@@ -95,3 +100,25 @@ def test_same_before_material_protocol_and_independent_actual_read_branches(tmp_
         assert read["measured_costs"]["local_action_to_request_wall_seconds"] > 0
     assert len(list(output.glob("state-*/memory.sqlite"))) == 4
     assert json.loads((output / "run.json").read_text())["Reader_calls"] == 0
+
+
+def test_context_protocol_cannot_change_when_restoring_before_the_first_search(tmp_path):
+    request = {"query": "quota", "retrieval_request": {"query": "quota",
+               "read_goal": {"evidence": ["original_source"]}}}
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("protocol", "author"), "author", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        service.capture_user("s", "one", "Quota fourteen.")
+        state, ops = environment(service, request, Capacity(), 2048, evidence_units=True,
+                                 source_directory_only=True, evidence_context_turn_radius=1)
+        saved = ops.checkpoint()
+        assert not ops.searched
+        with pytest.raises(ValueError, match="CHECKPOINT_CONFIGURATION_CHANGED"):
+            environment(service, request, Capacity(), 2048,
+                state=MemoryControlState(**state.project()), checkpoint=saved,
+                evidence_units=True, source_directory_only=True, evidence_context_turn_radius=0)
+        restored_state, restored = environment(service, request, Capacity(), 2048,
+            state=MemoryControlState(**state.project()), checkpoint=saved,
+            evidence_units=True, source_directory_only=True, evidence_context_turn_radius=1)
+        assert restored_state.project() == state.project()
+        assert restored.checkpoint() == saved

@@ -73,6 +73,7 @@ class EvidenceOperations:
         delivery_selection: bool = False,
         checkpoint: dict[str, Any] | None = None,
         source_directory_only: bool = False,
+        material_protocol: str | None = None,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
@@ -109,6 +110,7 @@ class EvidenceOperations:
             **({"view_updates": False} if not view_updates else {}),
             **({"exclude_given_requests": True} if exclude_given_requests else {}),
             **({"source_directory_only": True} if source_directory_only else {}),
+            **({"material_protocol": material_protocol} if material_protocol else {}),
         }
         if checkpoint is not None:
             self.restore_checkpoint(checkpoint, source_observation)

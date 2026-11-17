@@ -116,6 +116,39 @@ def test_R3_budget_failure_preserves_R2_delivery_but_records_actual_observation(
         assert "Context includes an exception" not in json.dumps(ops.reader_evidence())
 
 
+def test_adjacent_source_context_opens_real_role_version_ranges_and_excludes_outside_pool(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("adjacent", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        refs = [service.capture_user("s", "prior", "The quota concerns only Alice.")["source_ref"],
+                service.capture_tool("s", "current", "registry", "The quota is 14.", None)[
+                    "source_ref"],
+                service.capture_user("s", "next", "Except on Friday: do not ship.")["source_ref"]]
+        service.capture_user("other", "outside", "Outside pool secret must not appear.")
+        bodies = [service.source(ref)["content"] for ref in refs]
+        material = service.read_source_materials([{"kind": "original_source", "id": "captured",
+            "session_id": "s", "turn_range": [7, 10], "source_ranges": [
+                {"source_ref": ref, "source_revision": 1, "start": 0, "end": len(body)}
+                for ref, body in zip(refs, bodies, strict=True)]}])[0]
+        units = evidence_unit_packs(material, context_turn_radius=1)
+        middle = units[1]
+        r2 = open_evidence_packs(service, [middle])[0]
+        assert [t["content"] for t in json.loads(r2["text"])] == [bodies[1]]
+        r3 = open_evidence_packs(service, [middle], expand_context=True)[0]
+        actual = json.loads(r3["text"])
+        assert [t["content"] for t in actual] == bodies
+        assert [t["role"] for t in actual] == ["user", "tool", "user"]
+        assert [t["source_ref"] for t in actual] == refs
+        assert all(t["source_revision"] == 1 for t in actual)
+        assert r3["turn_range"] == [7, 10] and r2["turn_range"] == [8, 9]
+        assert "Outside pool secret" not in r3["text"]
+        handle = service.source_fragment_range(refs[2], 0, len(bodies[2]))["fragment_handle"]
+        service.forget("s", "forget", fragment_handles=[handle])
+        current = open_evidence_packs(service, [middle], expand_context=True)[0]
+        assert bodies[2] not in current["text"]
+        assert service.source(refs[0]) is not None
+
+
 def test_object_projection_excludes_offline_data_but_retains_all_public_collections():
     online = {"observation": MemoryControlState(task={"request": "Who?"},
         pending_candidates=[{"item_index": 0, "excerpt": "Alice; not Bob"}],

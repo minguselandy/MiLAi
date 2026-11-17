@@ -53,6 +53,7 @@ def environment(service: MemoryService, request: dict[str, Any], capacity: Any,
                 material_tokens: int, *, state: MemoryControlState | None = None,
                 checkpoint: dict[str, Any] | None = None,
                 evidence_units: bool = False, source_directory_only: bool = False,
+                evidence_context_turn_radius: int = 0,
                 ) -> tuple[MemoryControlState, EvidenceOperations]:
     """Same supplied retrieval query and executor; no native labels enter this function."""
     query = request["query"]
@@ -70,7 +71,8 @@ def environment(service: MemoryService, request: dict[str, Any], capacity: Any,
         return build_evidence_packs(service, query, "2026-11-17", found["source_materials"], [],
             source_scope=found["source_scope"],
             source_range_budget=None if evidence_units else ranges, source_range_limit=16,
-            evidence_units=evidence_units)
+            evidence_units=evidence_units,
+            evidence_context_turn_radius=evidence_context_turn_radius)
 
     def fits(items: list[dict[str, Any]]) -> bool:
         return bool(capacity.text_tokens(json.dumps(controlled_reader_packet(items, "policy"),
@@ -81,8 +83,21 @@ def environment(service: MemoryService, request: dict[str, Any], capacity: Any,
         source_observation=(None if source_directory_only else
                             SourceObservationBudget(2048, capacity.text_tokens)),
         source_directory_only=source_directory_only,
+        material_protocol=(f"whole_paragraph_v1/context_turn_radius={evidence_context_turn_radius}"
+                           if evidence_context_turn_radius else None),
         checkpoint=checkpoint)
     return state, operations
+
+
+def material_options(run: dict[str, Any]) -> dict[str, Any]:
+    """Replay the parent's declared material conditions, including legacy snapshots."""
+    formation = run.get("material_formation", "token_ranges_v1")
+    if formation not in {"token_ranges_v1", "whole_paragraph_v1_R2_whole_turn_R3",
+                         "whole_paragraph_v1_R2_adjacent_turns_R3"}:
+        raise ValueError("Unknown captured material formation")
+    return {"evidence_units": formation != "token_ranges_v1",
+            "source_directory_only": run.get("source_directory_only", False),
+            "evidence_context_turn_radius": run.get("evidence_context_turn_radius", 0)}
 
 
 def actual_packet(operations: EvidenceOperations, mapping: dict[str, str]) -> tuple[
@@ -248,8 +263,11 @@ def prepare_packets(args: Any) -> None:
         "initial_states_from": str(args.initial_states_from) if args.initial_states_from else None,
         "initial_policy": getattr(args, "initial_policy", "rules4"),
         "execution_contract": "stable_material_indices_search_scope_sync_v2",
-        "material_formation": ("whole_paragraph_v1_R2_whole_turn_R3"
+        "material_formation": (("whole_paragraph_v1_R2_adjacent_turns_R3"
+                                if getattr(args, "evidence_context_turn_radius", 0)
+                                else "whole_paragraph_v1_R2_whole_turn_R3")
                                if getattr(args, "evidence_units", False) else "token_ranges_v1"),
+        "evidence_context_turn_radius": getattr(args, "evidence_context_turn_radius", 0),
         "source_directory_only": getattr(args, "source_directory_only", False),
         "historical_models": historical_configs,
         "cosine_models": {name: {"backbone": model.config.backbone, "reads": args.cosine_reads,
@@ -296,7 +314,9 @@ def prepare_packets(args: Any) -> None:
                                     initial["decision"]["before"])) if initial else None,
                                 checkpoint=initial["executor_checkpoint"] if initial else None,
                                 evidence_units=getattr(args, "evidence_units", False),
-                                source_directory_only=getattr(args, "source_directory_only", False))
+                                source_directory_only=getattr(args, "source_directory_only", False),
+                                evidence_context_turn_radius=getattr(
+                                    args, "evidence_context_turn_radius", 0))
                         if initial is not None and (
                                 [asdict(a) for a in operations.actions(state)] !=
                                 initial["decision"]["actions"]

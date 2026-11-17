@@ -17,7 +17,7 @@ from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.small_control_model import SmallControlModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners.given_host_readout import given_packet_request, separate_answer_fields
-from native_qa_control import actual_packet, environment
+from native_qa_control import actual_packet, environment, material_options
 from prepare_collected_operation_feedback import QueryOnceContextPolicy, execute_branch
 from small_control_branches import copy_source_bank
 
@@ -51,6 +51,7 @@ def collect(args: Any) -> None:
         "state_sampling": getattr(args, "state_sampling", "initial_and_post"),
         "material_formation": parent.get("material_formation", "token_ranges_v1"),
         "source_directory_only": parent.get("source_directory_only", False),
+        "evidence_context_turn_radius": parent.get("evidence_context_turn_radius", 0),
         "scope": "Same actual before, complete legal menu and remaining budget. Independent "
                  "SQLite read-only branch copies; no native labels used for sampling/decisions."}
     write_json(args.output / "run.json", run)
@@ -136,10 +137,7 @@ def collect(args: Any) -> None:
                                 state, operations = environment(service, request, capacity,
                                     args.material_tokens, state=state,
                                     checkpoint=saved["executor_checkpoint"],
-                                    evidence_units=parent.get("material_formation") ==
-                                        "whole_paragraph_v1_R2_whole_turn_R3",
-                                    source_directory_only=parent.get(
-                                        "source_directory_only", False))
+                                    **material_options(parent))
                                 restored_actions = [asdict(a) for a in operations.actions(state)]
                                 if (state.project() != before
                                         or restored_actions != event["actions"]):
