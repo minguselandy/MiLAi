@@ -1,5 +1,24 @@
 # CURRENT 2026-11-17: memory compute v2 ACTIVE in an isolated worktree
 
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v10.json.
+External3073512 lease observed released; original scope acquired successfully. Four pending
+T13/T15 local phases settledONCE/readback, T13native notrebilled; receiptT13-T15-closed-cost-v2.
+Previously rejected T15v1 stays0calls/rejected. Reviewed NEWv2 executed8firsts/8newcalls,
+30071tokens/U0/0failed. Nativeprimary cosine6=6/8, sameas cosine4; outcomeMLP5/8,latent4/8,
+warm/weak3/8. No G1/G2 or budget-allocation learning claim. T15score settledonce, nativev2
+preservedonce; receiptT15-score-closed-cost-v1. No SHA/checksum or replacement fingerprints.
+
+After explicit diagnostic review ONLY D00-block02-TRAIN8-firsts-v1 is now admitted, frozen
+S04/3efeefc1, exec44192 PID3126245 at verified last observation.105boundpositions/32states/
+8TRAINroots. Revalidate run.json+actual/proccommand; never restart on observation expiry.
+Blocks03-07 NOT_STARTED and need complete preceding-block yield/unknown/cost review.
+Next independent experiment must target measured semantic representation/continuation or
+full-menu coverage drift with matched controls; no arbitrary repeat of samefit/no final
+confirmation exposure. FullG1/G2/G3, calibration/P-D/ownstate/3seeds/power/transfer/delivery
+still unproven. All original firsts, failures and rejected-admission history preserved.
+
+The following v8 and earlier observations are historical; current authority is v10 above.
+
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v8.json.
 All own model jobs TERMINAL. External shared budget FLOCK holder3073512 was verified in
 /proc/locks +actual command wait_and_run_R22_R23_firsts_v1.py, sibling v1 task; NEVER stop,

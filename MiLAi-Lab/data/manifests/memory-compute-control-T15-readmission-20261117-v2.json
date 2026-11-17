@@ -1,0 +1,39 @@
+{
+  "schema": "camc.T15_review.v2",
+  "status": "COMPLETED",
+  "source_version": "121089e6",
+  "reviewed_readmission": "/data/milai-experiments/20261117-memory-compute-control/T15-reviewed-readmission-v2.json",
+  "original_v1_rejection_preserved": true,
+  "positions": 8,
+  "actual_new_calls": 8,
+  "failed_positions": 0,
+  "new_generation_delta": {
+    "charged_tokens": 30071,
+    "known_tokens": 30071,
+    "unknown_usage": 0
+  },
+  "native_property_results": {
+    "planned_positions": 8,
+    "unit": "complete_task_trajectory",
+    "unique_question_tasks": 8,
+    "roots": 8,
+    "role": "normal_policy_condition",
+    "primary_true": 6,
+    "primary_false": 2,
+    "primary_unknown": 0,
+    "answer_EM": 6,
+    "reference_support_complete": 7
+  },
+  "comparison": {
+    "cosine4": 6,
+    "cosine6": 6,
+    "outcome_MLP": 5,
+    "outcome_latent": 4,
+    "tasks": 8
+  },
+  "conclusion": "Six-read relevance baseline remains6/8, learning still below strong simple baseline. No G1/G2 proof; investigate source representation and continuation/distribution mismatch before expanding the same fit recipe.",
+  "Reader_scope": "Old exposed DEV-fit fixed8, canonical property only, no source/metric/seed selection",
+  "native_cost_phase": "camc_T15_cosine6_DEVfit8_firsts_v2",
+  "local_score_cost_receipt": "/data/milai-experiments/20261117-memory-compute-control/T15-score-closed-cost-v1.json",
+  "sha_validation": false
+}
