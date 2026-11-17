@@ -476,6 +476,10 @@ def observed_supervision(case: dict[str, Any], outcomes: list[dict[str, Any]],
     if len(set(observed)) != len(observed) or not set(observed) <= {
             action["id"] for action in case["actions"]}:
         raise ValueError("Actual branches must bind distinct members of the original full menu")
+    reviewed = target == "quality" and any(
+        o.get("outcome_protocol") == "reviewed_execution_v3" for o in outcomes)
+    if reviewed and any(o.get("outcome_protocol") != "reviewed_execution_v3" for o in outcomes):
+        raise ValueError("Do not mix reviewed semantic and native property targets")
     values: list[float | None] = []
     for outcome in outcomes:
         if target == "quality":
@@ -506,15 +510,25 @@ def observed_supervision(case: dict[str, Any], outcomes: list[dict[str, Any]],
                 "right" if b < a else "tie", "axis": "legacy_ASCII_JSON_packet_token_proxy",
                 "left_tokens": a, "right_tokens": b, "used_in_quality_loss": False,
                 "label_grade": "C_serialization_token_proxy_not_native_HTTP_usage",
-                "condition": "equal_known_native_primary_outcome"})
-    return {"label_grade": "C_weak_answer_proxy" if target.startswith("weak_") else
-            "A_declared_native_reference_property_only", "target": target,
+                "condition": ("equal_known_reviewed_task_outcome" if reviewed else
+                              "equal_known_native_primary_outcome")})
+    grades = {action: ((o.get("task_review") or {})["grade"] if o.get("task_review") else
+                      "A_observed_execution_failure_only" if o["execution_status"] == "FAILED"
+                      else "UNKNOWN_unreviewed_semantic_outcome")
+              for action, o in zip(observed, outcomes, strict=True)} if reviewed else {}
+    return {"label_grade": ("explicit_review_grades_by_action" if reviewed else
+            "C_weak_answer_proxy" if target.startswith("weak_") else
+            "A_declared_native_reference_property_only"), "target": target,
+        **({"quality_source_grades": grades} if reviewed else {}),
         "comparison_tolerance": tolerance,
         "observed_action_ids": observed, "preferences": preferences,
         "cost_preferences_separate": cost_preferences,
         "observed_values": dict(zip(observed, values, strict=True)),
-        "scope": "Observed subset only; full online menu retained. Native-reference properties "
-                 "do not establish explanation truth or general semantic sufficiency."}
+        "scope": ("Observed subset only; full online menu retained. Explicit review grades, "
+                  "independence/calibration limits and unknown masks retained; no native "
+                  "semantic-negative fallback." if reviewed else "Observed subset only; full "
+                  "online menu retained. Native-reference properties do not establish "
+                  "explanation truth or general semantic sufficiency.")}
 
 
 def observed_resource_targets(branch: dict[str, Any], first: dict[str, Any],

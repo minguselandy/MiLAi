@@ -68,3 +68,21 @@ def test_same_task_and_entire_wire_and_observed_first_are_required_without_hashi
                                "entries": [entry, duplicate]})
     with pytest.raises(ValueError, match="explicit adjudication"):
         conflict.find(case, wire, record)
+
+
+def test_feedback_compiler_keeps_provisional_grade_and_does_not_upgrade_to_native_A():
+    from native_qa_control import observed_supervision
+
+    case = {"actions": [{"id": key} for key in ["a", "b", "c", "unexecuted"]],
+            "branches": [{"action": {"id": key}, "body_tokens": 32} for key in ["a", "b", "c"]]}
+    native = {"execution_status": "COMPLETED", "primary_outcome": False}
+    outcomes = [reviewed_task_outcome(native, review()), reviewed_task_outcome(native, None),
+                reviewed_task_outcome({**native, "execution_status": "FAILED"}, None)]
+    quality = observed_supervision(case, outcomes, "quality")
+    assert quality["label_grade"] == "explicit_review_grades_by_action"
+    assert quality["quality_source_grades"] == {"a": "B_assistant_provisional",
+        "b": "UNKNOWN_unreviewed_semantic_outcome", "c": "A_observed_execution_failure_only"}
+    assert quality["observed_values"] == {"a": 1.0, "b": None, "c": 0.0}
+    assert [p["outcome"] for p in quality["preferences"]] == ["unknown", "left", "unknown"]
+    with pytest.raises(ValueError, match="mix reviewed semantic"):
+        observed_supervision(case, [outcomes[0], native, outcomes[2]], "quality")
