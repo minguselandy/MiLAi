@@ -1,0 +1,104 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v42.json",
+  "source": "S20/7d25c40f",
+  "P03_runtime": {
+    "card": "P03-common-executor-unit-delivery-card-v1.json",
+    "modules": [
+      "src/milai_lab/methods/evidence_control.py",
+      "src/milai_lab/methods/evidence_reading.py"
+    ],
+    "optin": "view_unit_selections finiteper-slot complete node groups",
+    "kind": "Existing USE_VIEW, no alternate executor loop",
+    "binding": "ParentID/revision/node list, monotone union/fullupgrade, budget and attemptedbinding checkpoint",
+    "rendering": "Raw parent ALLbindings retained; common open checks even omittedSource before normalizedprojected whole-unit pruning",
+    "contract": "Explicitpartial/no semanticcompleteness certification, wholeconnected rules/allroutes/globalunknowns/scope/roles/clocks",
+    "persistent_View_body_unchanged": true,
+    "defaultpath_unchanged": true
+  },
+  "validation": {
+    "distinct_targeted_and_existing_regression_tests": 149,
+    "targeted_initial": 50,
+    "existing_regression": 99,
+    "final_targeted_repeat_after_typeguards": 25,
+    "Ruff_mypy_package_tools_boundaries": "PASS",
+    "initialRuff_typefailures_retained": true,
+    "no_Reader_GPU_or_modelcalls_in_unit_checks": true,
+    "rollback_commit": "5b6dce44",
+    "remote_checked": false
+  },
+  "controlled_pilot": {
+    "card": "P03-controlled-Reader-pilot-card-v1.json",
+    "fixture_v1_failed_contract": "P03-controlled-worlds-v1/failed-run.json",
+    "fixture_v2": "P03-controlled-worlds-v2/run.json",
+    "private_truth": "P03-controlled-worlds-v2/private-executable-truth.json",
+    "preflight": "P03-controlled-pilot-preflight-v1.json",
+    "worlds": 10,
+    "base_patterns": 5,
+    "lengths": [
+      "short",
+      "oversized"
+    ],
+    "conditions": [
+      "full_view",
+      "unit_view",
+      "original_source"
+    ],
+    "actual_executions": 30,
+    "same_before_menu_matches": 30,
+    "independent_condition_Dbs": 30,
+    "material_complete_positions": 25,
+    "oversized_fullview_budget_failures": 5,
+    "unit_and_original_complete_worlds_each": 10,
+    "max_actual_UTF8_material_tokens": 855,
+    "scripted_View_compiler_calls": 10,
+    "actual_builder_model_calls": 0,
+    "oracle": "Independent Booleancompletion/dateparse agrees with frozencontrolledrecordformula, not naturalworld semantics",
+    "grader_freeze": "P03-controlled-grader-freeze-v1.json",
+    "grading_script": "P03-grade-controlled-firsts-v1.py",
+    "grounded_success_requires_complete_material_and_enum": true,
+    "unsupported_lucky_answer_separate": true,
+    "unknown_execution_masked_not_false": true,
+    "explanation_citation_semantics_not_programmaticallyverified": true,
+    "no_learnedselector_or_naturalquality_proof": true
+  },
+  "only_live_job": {
+    "pid": 1355450,
+    "source": "S20/7d25c40f",
+    "launch": "P03-Reader-launch-v1.json",
+    "driver": "P03-run-controlled-firsts-v1.py",
+    "admission_state": "P03-Reader-admission-state-v1.json",
+    "observed": "WAITING_KERNEL_RELEASE_NO_BUDGET_OR_CLIENT",
+    "external_kernel_owner_pid": 1297193,
+    "external_owner_command_name": "run_R40_reader_blocks_v1.py",
+    "actual_both_proc_commands_and_FLOCK_verified": true,
+    "Reader_calls_before_admission": 0,
+    "firsts_dir_yet_created": false,
+    "unique_first_call_cap": 30,
+    "no_automaticretry_or_lostobservation_restart": true,
+    "not_service": true
+  },
+  "costs": {
+    "thirteen_closed_scopes_pending_existingqueueddriver": true,
+    "failed_fixture_v1_and_failedchecks_kept": true,
+    "no_original_ledger_read_write_or_client_while_externalowner": true,
+    "afterrelease_original_scope_settle_once_readback": true,
+    "no_nested_fixture_test_worker_rebill": true,
+    "own_C06_unknown_reservation_retained": [
+      1,
+      9295
+    ],
+    "activeGPU_fullIO_energy_money_unmeasuredmanual": "UNKNOWN",
+    "no_second_real_ledger": true
+  },
+  "next_action": "Revalidate originalwaiter and realkernelowner; keep handle. After fixed30terminal applyfrozengrade, inspect scopedlimits, thenactualPlearning/independentcalibration/M1/P-D/data/ownstate/seeds/power/newconfirm/transfer/full delivery. Not engineering-only completion.",
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "model_weights_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false
+}

@@ -1,4 +1,40 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C10QAclosednegative/P02capacityfeasible
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; S20unitdelivery/P03controlledReader waitingR40
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v42.json.
+S20/7d25c40f frozen. CommonEvidenceOperations optin view_unit_selections provides finite per-slot
+nodegroups as completeUSE_VIEW parentID/revision/nodebindings; defaultpath unchanged. Monotone
+unionexpansion/fullupgrade, failedfull-budget attempt not retried as samebinding, checkpoint
+config/attempts retained. Raw openedparent retains ALLsourcebindings; mandatory commonparent
+open checks ALLparents before Readerpruning, even omittedSource. Readerselection applied AFTER
+fullnormalized provenance/aliases; actualwholeconnectedrules/allORroutes/globalunknowns/scope/
+roles/clocks retained, explicitpartial/semanticcompletenessNOTcertified. PersistentView untouched.
+50targeted+99existingregression =149distincttestsPASS; aftertypeguards final25targeted repeat
+PASS. Ruff/mypy/package/toolsPASS. InitialRuff/type failures kept; 3legacydeprecationwarnings
+unchanged. No Product/Schema/API/permission/publicdefault changes or new modeltraining.
+P03controlledpilot prepared10worlds=5ternaryeligibilitypatterns xshort/oversized,3conditions
+fullView/unitView/originalSource,30actualindependentDB executions/exactsamebefore+menus. Scripted
+fixtureViewcompiler10calls, actualmodelcalls0. SeparateBooleancompletion/dateparse validates
+frozenexpectedyes/no/unknown. Materialcomplete25/30: only5oversizedfullViews budgetfail; unit
+andoriginal10/10complete,maxmaterial855. No task or learnedP gain yet; synthetic scopedtruthonly.
+Fixturev1invalidretrievalcontract failed beforeReader, raw/cost retained; v2usesexisting
+current_interpretation/known_evidence_refs, no tasktruth/condition changes. Scopedgrader frozen
+BEFORE outputs: P03-grade-controlled-firsts-v1.py, complete material+matching enum required;
+unsupportedlucky match separate, unknowntransport masked. Explanation/citation semantics unverified.
+Only30Readerfirsts queued, finitePID1355450/S20 actualalive; WAITINGKERNELRELEASE on external
+R40PID1297193, run_R40_reader_blocks_v1.py, real/proc/locks FLOCK+bothcommands verified.0client/
+0calls/no firsts directory. Revalidate actualjobs, NEVERrestart lostobservation or blockedwait.
+After release existingdriver settles13closedS20/fixture scopes ONCE/readback thenonlyfixed30
+firsts. Do not edit runningdriver or manually touchbusy originalledger. Allcosts remain in sole
+originalser-v20ledger; parent/worker/innerfixtures not rebilled. No newservice/sibling changes.
+After30terminal run frozen scopedgrader, inspectlimits then planactualPlearning; not natural
+semanticcalibration/independentreview/G1/G2/G3 or genericqualityproof. Mixedlengths intentional,
+no all-long-only victory. Fullcalibration/M1/D1/P-D/twoownstate+matchedoldpool/3seeds/strongbaseline/
+power/newCONFIRM/transfer/delivery incomplete. Preserve C10negative/Bunknowns/C06UNKNOWN9295/
+oldcost/citationcount errata. No protectedbody/default/push/merge changes. SHA/fingerprints OFF.
+
+The following v41 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C10QAclosednegative/P02capacityfeasible
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v41.json.
 No live own jobs; C10PID1160426 actualabsent/terminal. All80positions CLOSED44new36reuse,
