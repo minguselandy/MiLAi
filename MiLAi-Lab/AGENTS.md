@@ -1,4 +1,40 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; P05naturalclosed/P06preflight/C12costsignal
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; S23costloss/C13sixclosed_NOdecisionchange
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v47.json.
+S23/7c48c92e independent success-cost pairloss default0; measuredsame-axis finitecost +2actually
+observed native&B-success witnesses required. Failure/unknown/unexecuted nevercheap-success.
+Perstatepairmean + sourcebalanced completeupdate separatepair/value/cost denominators. Oldzero
+costpath exact.39tests/Ruff/mypy/boundariesPASS; real256states3arms48windows,504exactoldloss/
+13996zero explicit unknown/unexecutedgrads, maxwhole/microgradienterror2.384e-7. Failedchecker
+v1sharedgraphfreed beforesecondgrad kept, v2retain_graph fixed; nomodelupdatesduringchecks.
+C13finite6fits CLOSED: M0/M1 each ownT10usablewarm24literalV1/V2/offeredprior1 config, sameC06
+256rows64roots252valid/4masked/48updates/LR3e-4/seed0/batch16micro4/758validdrawseach. Weak /
+qualityonly /quality+costλ1, onlyoneweight/finalstep.288updates4548validdraws,6headsrealchanged/
+saved/fullJSONrecovery; initialscoreswithinarch0diff, freshindependentprocess6fixedfirstloads
+0scorediff/tensorsequal/realencoderforwards.4zerocostcontrols exactlyreplicateC11savedtensors.
+All6TRAIN256argmaxunchanged; cost164pairrankMLPplus100vsweak103, M1plus99vsweak101. Standalone
+costloss worsens .67546->.68127(M0),.67570->.68208(M1); totaldecline mainlyquality, NOTcostlearning.
+NoDEV/Readeradmitted afterfailedobservedstatelearnability; TRAINunchangeddoesnotproveunseen
+policiesequivalent. No additionalepochs/LR/costweight/prior/seed underC13, noG1/G2/G3claim.
+323.389CPU/291.323GPUallocated training+fresh (notkernel), caps600+120. Prep8closedscopes
+SETTLEDONCE/readback. Training1905386/fresh1931877/prepcost1905385 TERMINAL/procabsent.
+Onlycost-only1958502 waits5closedpostfit scopes; actualR40B1648312 FLOCK+bothcmdverified.
+Onrelease settleonce/readback, no nestedfit/freshworker/innerreport rebill; neverrestartlostobs.
+OldC06UNKNOWN9295reservation retained, no token/unknowncounterchange/newledger/busyload.
+Failedcheckerfullcost/manual/import/activeGPU/wholeIO/energy/money UNKNOWNnot0. Private data/
+checkpoints/reviews ignored, olddata/weights untouched. SourceAPI/Product/Archive/defaults/
+permissions/protectedbodies/push/merge unchanged. SHA/fingerprintsOFF. Fullgoal ACTIVE_INCOMPLETE.
+Next inspectolderT0/T00proof first; then NEWsmallfixedstatefitability diagnostic ifcurrentcost/
+priorobjectivewasnotcovered. Distinguish sharedobjective/representation/optimization from data
+orcapacity; do notrepeatfullrecipe orbuildnewmoduleswithoutmeasuredreason. DefaultrouteAUNCHANGED.
+Strongcheapquotas/semantic/basecache controls/reliablecalibration/P-D/D1yieldgates/2ownstate+
+matchedoldpoolreplay/3seeds/nestedrepresentations/power/newCONFIRM/transfer/finaldelivery remain.
+P05naturalnoR3qualitywin/P06unlabelledpreflight/C12signalonly/D02engineeringnotlearning/C11negatives
+remain; cannotfinishat numerics/module/losstarget/actualweightchange or subsetoverfit.
+
+The following v46 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; P05naturalclosed/P06preflight/C12costsignal
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v46.json.
 P05S03inherited4releasedTRAINQASPERpapers actual8firsts CLOSED0fail0unknown28440tokens/U0.

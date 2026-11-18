@@ -1,0 +1,491 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v47.json",
+  "previous_manifest": "memory-compute-control-P05-P06-C12-20261118-v1.json",
+  "source": "S23/7c48c92e",
+  "rollback_commit": "6bb6aa89",
+  "C13": {
+    "source": "S23/7c48c92e",
+    "tests": "39targetedPASS/Ruff/mypy/package/toolsPASS; zero-cost old exact losses504 and all25648window independent gradients checked",
+    "data": {
+      "states": 256,
+      "roots": 64,
+      "valid_per_arm": 252,
+      "masked_per_arm": 4,
+      "quality_pair_states": 121,
+      "value_states": 252,
+      "cost_pair_states": 99,
+      "cost_direction_pairs": 164,
+      "cost_roots": 41,
+      "all_online_inputs_menus_and_old_quality_values_unchanged": true
+    },
+    "fits": 6,
+    "architectures": [
+      "object_mlp",
+      "latent_pointer"
+    ],
+    "arms": [
+      "weak_coverage_matched",
+      "quality_only",
+      "quality_plus_cost"
+    ],
+    "usable_starts": [
+      "/data/milai-experiments/20261117-memory-compute-control/T10-object-mlp-warm-seed0-v1/checkpoint",
+      "/data/milai-experiments/20261117-memory-compute-control/T10-latent-pointer-warm-seed0-v1/checkpoint"
+    ],
+    "fixed_recipe": "48updates/LR3e-4/seed0/batch16micro4, one costweight1 onlyplusarm, ownusablewarm24 starts/configs, newoptimizer/noDEVselection",
+    "actual_updates": 288,
+    "actual_valid_draws_each": 758,
+    "actual_valid_draws_total": 4548,
+    "all6_heads_changed_saved_strict_literal_recovery_and_fresh_load": true,
+    "initial_scores_within_architecture_max_error": 0.0,
+    "fresh_fixed_first_state_score_max_error": 0.0,
+    "fresh_scope": "One fixed first TRAIN sample per savedhead in one new process; not full-policy generalization.",
+    "zero_cost_controls_C11_saved_tensors_exact": [
+      {
+        "architecture": "object_mlp",
+        "arm": "weak_coverage_matched",
+        "C11_reference": "/data/milai-experiments/20261117-memory-compute-control/C11-mlp-literal-weak_coverage_matched-TRAIN64-seed0-v1/checkpoint",
+        "max_saved_head_tensor_error": 0.0,
+        "all_saved_tensors_exact": true
+      },
+      {
+        "architecture": "object_mlp",
+        "arm": "quality_only",
+        "C11_reference": "/data/milai-experiments/20261117-memory-compute-control/C11-mlp-literal-reviewed-TRAIN64-seed0-v1/checkpoint",
+        "max_saved_head_tensor_error": 0.0,
+        "all_saved_tensors_exact": true
+      },
+      {
+        "architecture": "latent_pointer",
+        "arm": "weak_coverage_matched",
+        "C11_reference": "/data/milai-experiments/20261117-memory-compute-control/C11-latent-literal-weak_coverage_matched-TRAIN64-seed0-v1/checkpoint",
+        "max_saved_head_tensor_error": 0.0,
+        "all_saved_tensors_exact": true
+      },
+      {
+        "architecture": "latent_pointer",
+        "arm": "quality_only",
+        "C11_reference": "/data/milai-experiments/20261117-memory-compute-control/C11-latent-literal-reviewed-TRAIN64-seed0-v1/checkpoint",
+        "max_saved_head_tensor_error": 0.0,
+        "all_saved_tensors_exact": true
+      }
+    ],
+    "all6_TRAIN256choices_changed_vs_own_usable_start": 0,
+    "cost_and_choice_diagnostics": [
+      {
+        "architecture": "object_mlp",
+        "arm": "weak_coverage_matched",
+        "cost_pair_before": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 99,
+          "cost_pair_accuracy": 0.6036585365853658
+        },
+        "cost_pair_after": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 103,
+          "cost_pair_accuracy": 0.6280487804878049
+        },
+        "fullmenu_choices_changed_vs_own_start": 0,
+        "roots_with_choice_changes": 0,
+        "both_observed_agreed_success_top_material_comparisons": {
+          "reduced": 0,
+          "roots_reduced": 0,
+          "increased": 0,
+          "equal": 141
+        }
+      },
+      {
+        "architecture": "object_mlp",
+        "arm": "quality_only",
+        "cost_pair_before": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 99,
+          "cost_pair_accuracy": 0.6036585365853658
+        },
+        "cost_pair_after": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 99,
+          "cost_pair_accuracy": 0.6036585365853658
+        },
+        "fullmenu_choices_changed_vs_own_start": 0,
+        "roots_with_choice_changes": 0,
+        "both_observed_agreed_success_top_material_comparisons": {
+          "reduced": 0,
+          "roots_reduced": 0,
+          "increased": 0,
+          "equal": 141
+        }
+      },
+      {
+        "architecture": "object_mlp",
+        "arm": "quality_plus_cost",
+        "cost_pair_before": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 99,
+          "cost_pair_accuracy": 0.6036585365853658
+        },
+        "cost_pair_after": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 100,
+          "cost_pair_accuracy": 0.6097560975609756
+        },
+        "fullmenu_choices_changed_vs_own_start": 0,
+        "roots_with_choice_changes": 0,
+        "both_observed_agreed_success_top_material_comparisons": {
+          "reduced": 0,
+          "roots_reduced": 0,
+          "increased": 0,
+          "equal": 141
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "arm": "weak_coverage_matched",
+        "cost_pair_before": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 99,
+          "cost_pair_accuracy": 0.6036585365853658
+        },
+        "cost_pair_after": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 101,
+          "cost_pair_accuracy": 0.6158536585365854
+        },
+        "fullmenu_choices_changed_vs_own_start": 0,
+        "roots_with_choice_changes": 0,
+        "both_observed_agreed_success_top_material_comparisons": {
+          "reduced": 0,
+          "roots_reduced": 0,
+          "increased": 0,
+          "equal": 141
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "arm": "quality_only",
+        "cost_pair_before": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 99,
+          "cost_pair_accuracy": 0.6036585365853658
+        },
+        "cost_pair_after": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 96,
+          "cost_pair_accuracy": 0.5853658536585366
+        },
+        "fullmenu_choices_changed_vs_own_start": 0,
+        "roots_with_choice_changes": 0,
+        "both_observed_agreed_success_top_material_comparisons": {
+          "reduced": 0,
+          "roots_reduced": 0,
+          "increased": 0,
+          "equal": 141
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "arm": "quality_plus_cost",
+        "cost_pair_before": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 99,
+          "cost_pair_accuracy": 0.6036585365853658
+        },
+        "cost_pair_after": {
+          "cost_pairs": 164,
+          "correct_cost_pairs": 99,
+          "cost_pair_accuracy": 0.6036585365853658
+        },
+        "fullmenu_choices_changed_vs_own_start": 0,
+        "roots_with_choice_changes": 0,
+        "both_observed_agreed_success_top_material_comparisons": {
+          "reduced": 0,
+          "roots_reduced": 0,
+          "increased": 0,
+          "equal": 141
+        }
+      }
+    ],
+    "separate_observed_component_means": [
+      {
+        "architecture": "object_mlp",
+        "arm": "weak_coverage_matched",
+        "initial": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.6093856066711678
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.3175653610674162
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6754559733048834
+          }
+        },
+        "final": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.5556174091810038
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.3066491359283054
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6777002314726511
+          }
+        }
+      },
+      {
+        "architecture": "object_mlp",
+        "arm": "quality_only",
+        "initial": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.6093856066711678
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.3175653610674162
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6754559733048834
+          }
+        },
+        "final": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.5117475812839083
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.2911692745392285
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6975554215787637
+          }
+        }
+      },
+      {
+        "architecture": "object_mlp",
+        "arm": "quality_plus_cost",
+        "initial": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.6093856066711678
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.3175653610674162
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6754559733048834
+          }
+        },
+        "final": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.5468889192855062
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.29707313216631376
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6812719732823999
+          }
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "arm": "weak_coverage_matched",
+        "initial": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.6098080962157446
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.3206986480998614
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6757038946103568
+          }
+        },
+        "final": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.5625715105494192
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.3059825553662247
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6787108860232614
+          }
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "arm": "quality_only",
+        "initial": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.6098080962157446
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.3206986480998614
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6757038946103568
+          }
+        },
+        "final": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.48502799757748594
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.2862664053127879
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.7065000458799228
+          }
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "arm": "quality_plus_cost",
+        "initial": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.6098080962157446
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.3206986480998614
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6757038946103568
+          }
+        },
+        "final": {
+          "quality_pair": {
+            "states": 121,
+            "mean": 0.5500076108973874
+          },
+          "value_BCE_weighted": {
+            "states": 252,
+            "mean": 0.2986092317908529
+          },
+          "success_cost_pair": {
+            "states": 99,
+            "mean": 0.6820812475199651
+          }
+        }
+      }
+    ],
+    "scope": "ProvisionalB/native agreed observed success and actual UTF8material axis only. Neither costrank fitting nor serializedmaterial is semantic calibration, totalReader/lifecycle saving or a policy gain. Unknown/unexecuted remainunlabelled, samefullmenuargmax doesnotprove allnewtasks equivalent.",
+    "disposition": "Do not extend C13updates/LR/weight/prior/seeds or spend identical-policy DEV/Reader calls. The component is numerically correct but this48update recipe has not learned a decision change. Before another full-scale recipe, a separately bounded small fixed-state fitting/representation/optimizer diagnostic should distinguish ability to fit observed preferences from generalization and full-menu coverage. Do not attribute failure to model capacity or missing data without that evidence.",
+    "G0": "NUMERICAL_SAVE_RELOAD_PASS_POLICY_LEARNABILITY_EXIT_NOT_MET",
+    "parent_training_and_fresh_CPU_seconds": 323.38926410500005,
+    "parent_training_and_fresh_GPU_allocated_seconds": 291.32284405175596
+  },
+  "artifacts": {
+    "prospective_card": "C13-cost-auxiliary-prospective-card-v1.json",
+    "matched_data": "C13-matched-cost-auxiliary-data-v1",
+    "numerical_preflight": "C13-real-window-numerical-preflight-v1.json",
+    "numerical_checker_failure": "C13-numerical-preflight-v1-failure-note.json",
+    "fit_admission": "C13-finite-fit-admission-v1.json",
+    "training_driver": "C13-training-driver-v1.json",
+    "training_numerics": "C13-training-numerical-review-v1.json",
+    "cost_policy_diagnostics": "C13-cost-policy-diagnostics-v1.json",
+    "fresh_loads": "C13-fresh-reload-probe-v1.json",
+    "closed_review": "C13-finite-probe-closed-review-v1.json"
+  },
+  "validation": {
+    "targeted_tests_passed": 39,
+    "Ruff_mypy_package_tools_boundaries": "PASS",
+    "actual_real_data_schedule_windows": 144,
+    "zero_cost_oldloss_exact_checks": 504,
+    "unknown_unexecuted_direct_zero_grad_checks": 13996,
+    "max_gradient_error": 2.384185791015625e-07,
+    "all6initialscore_equivalence_within_architecture": 0.0,
+    "all6same_process_reload_and_fresh_fixed_sample_error": 0.0,
+    "4C11zerocost_saved_tensor_replications": "exact all tensors0error",
+    "failed_checker_v1_scope": "Reference and combined losses shared logits; missing retain_graph caused a prefit verifier RuntimeError. v2retains reference graph. Productionloss/data unchanged; failedfullcostUNKNOWNnot0, no modelupdate/Reader then.",
+    "source_fullbytes_vs_frozen": "Recheck beforecommit; SHA OFF"
+  },
+  "costs": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "C13_preparation8_receipt": "C13-before-finite-fits-cost-v1.json",
+    "C13_preparation8_status": "SETTLED_ONCE_AND_READ_BACK",
+    "C13_postfit5_status": "WAITING_ORIGINAL_SCOPE_COST_ONLY",
+    "C13_postfit5_state": "C13-after-fit-cost-state-v1.json",
+    "C13_postfit5_receipt": "C13-after-finite-fits-cost-v1.json",
+    "C13_training_and_fresh_GPU_allocated_seconds": 291.32284405175596,
+    "C13_training_and_fresh_CPU_seconds": 323.38926410500005,
+    "no_nestedfit_freshworker_innerdiagnostic_or_numerical_rebill": true,
+    "Reader_calls_new": 0,
+    "generation_tokens_requests_unknown_counters_unchanged": true,
+    "C06_unknown_usage_delta_retained": 1,
+    "C06_unknown_reservation_retained": 9295,
+    "failed_checker_fullcost_manual_import_activeGPU_wholeIO_energy_money": "UNKNOWN_NOT_ZERO",
+    "no_busy_budget_reads_or_secondledger": true
+  },
+  "live_jobs": [
+    {
+      "kind": "C13_closed5cost_only_original_scope_wait",
+      "pid": 1958502,
+      "driver": "/data/milai-experiments/20261117-memory-compute-control/C13-settle-after-fit-cost-v1.py",
+      "state": "/data/milai-experiments/20261117-memory-compute-control/C13-after-fit-cost-state-v1.json",
+      "closed_scopes": 5,
+      "Reader_or_model_calls": 0,
+      "never_restart_lost_observation": true
+    }
+  ],
+  "checkpoints": [
+    "/data/milai-experiments/20261117-memory-compute-control/C13-mlp-literal-weak_coverage_matched-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C13-mlp-literal-quality_only-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C13-mlp-literal-quality_plus_cost-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C13-latent-literal-weak_coverage_matched-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C13-latent-literal-quality_only-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C13-latent-literal-quality_plus_cost-TRAIN64-seed0-v1/checkpoint"
+  ],
+  "next_action": "First inspect olderT0/T00/overfit evidence so a newabilityprobe is not duplicate. C13costterm didnotfit; all6 fullTRAINchoicesunchanged. Separate observed-state fitting from generalization: a new bounded smallfixedstate probe with knownquality/cost constraints and sameprior/input can test sharedobjective/representation/optimizer limitations before anotherfullrecipe. Do not claim modelcapacity failure or data insufficiency from48updates. Do notextendC13LR/weight/prior/epochs/seeds or callnewDEV/Reader underthiscard. No inference that unseenpolicyunchanged solelyfromTRAINargmax equality. Strong cheapquota/semantic/basecache controls, reliablecalibration/D1yield/P-D/2ownstate+matchedoldpoolreplay/3seeds/nestedrepresentation/power/newconfirm/transfer/delivery allremain. DefaultrouteA unchanged, no beforeconfirmationrouteBrevision here. Revalidatecostonly1958502andactualR40B1648312; training1905386/fresh1931877/prepcost1905385terminal, neverrestartlostobservation.",
+  "remaining_full_goal": [
+    "Reliable outcome calibration and honest unknown/failure treatment before D1 scaling; C06 complete256states64roots remains B provisional, J02fixed-code ability gate failed.",
+    "Heterogeneous general Source/partialView/fullView/refresh tradeoffs, strong cheap rule/query controls, usable explicitV3M0/M1 starts and actual matched outcome training; P03rawSource cheaper counterexample retained.",
+    "P precision and D revision/refresh contribution under same actual information and complete costs; controlled projection/enum proof alone is insufficient.",
+    "Two actual own-state label/train/deploy rounds, equal-exposure old-pool controls and replay; old488own observations are unlabelled, not round1.",
+    "Finalcandidate three training seeds, frozen strong simple baselines, source/group power, genuinely new independent confirmation firsts.",
+    "SecondReader/external task/budget/scale transfer and complete method/model/config/data/reproduction/cost/negative-result deliverables.",
+    "Conditional F/A/X only after measured bottleneck and separate bounded admission.",
+    "Plan representation/capacity work remains: trained nested64/128/256-dimensional and1/2/4-group representations with fullprecision reference, actual64/128/256+candidate pools and budgets; no arbitrary untrained truncation claim. D1 targets500–1000naturalroots and>=2k reliable comparisonstates are yield-gated, not satisfied by correlated pairs."
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "default_route": "A_unchanged",
+  "protected_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "public_Product_Archive_defaults_permissions_changed": false,
+  "push_or_merge": false,
+  "remote_checked": false
+}
