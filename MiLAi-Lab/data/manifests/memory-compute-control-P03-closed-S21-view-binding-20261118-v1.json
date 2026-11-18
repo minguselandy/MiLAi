@@ -1,0 +1,108 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v43.json",
+  "P03_closed": {
+    "Reader_source": "S20/7d25c40f",
+    "firsts": "P03-controlled-Reader-firsts-v1/run.json",
+    "grade": "P03-controlled-Reader-graded-v1.json",
+    "closed_review": "P03-controlled-Reader-closed-review-v1.json",
+    "worlds": 10,
+    "base_patterns": 5,
+    "lengths": 2,
+    "conditions": 3,
+    "new_calls": 30,
+    "known_failure_or_unknown_firsts": 0,
+    "new_known_Reader_tokens": 86165,
+    "unknown_usage_delta": 0,
+    "formula_grounded_success": {
+      "full_view": [
+        5,
+        5,
+        0
+      ],
+      "unit_view": [
+        10,
+        0,
+        0
+      ],
+      "original_source": [
+        10,
+        0,
+        0
+      ]
+    },
+    "unsupported_fullView_lucky_match_not_counted": 1,
+    "material_token_totals": {
+      "full_view": 4596,
+      "unit_view": 8088,
+      "original_source": 2300
+    },
+    "unit_to_raw_ratio": 3.5165217391304346,
+    "scope": "A_executable_controlled_record_formula/enum+actualsupport only; not naturaltruth/humanjudge competence or explanation/citation verification",
+    "mechanism": "Recovers5oversizedViewmaterialfailures with completeconnected units, normalworlds preserved",
+    "raw_source_counterexample": "10/10 and2300tokens, cheaperthanunitView8088; no G2efficiency or learnedP claim",
+    "not_ten_independent_natural_roots": true
+  },
+  "S21": {
+    "source": "S21/c5b93baf",
+    "card": "P04-bound-view-input-projection-card-v1.json",
+    "projection_version": "control-observation-bound-view-units-v3",
+    "online_only": "Visibleuniqueparent target/slot/revision -> exactwholeconnectednode/rule content, publicbindings/roles/clocks/querytimes",
+    "missing_invisible_stale_parent_explicit_unresolved": true,
+    "no_Store_Source_or_gold_lookup": true,
+    "fullrawbindings_retained": true,
+    "objects_dual_joint_wired": true,
+    "ordered_node_rows_v1": "Recordedorder/literalnodevalues+IDs, no opaqueIDsort-dependent semanticorder; Readerformat unchanged",
+    "oldV1_V2input_and_checkpoints_unchanged": true,
+    "targeted_tests": 21,
+    "Ruff_mypy_package_tools_boundaries": "PASS",
+    "actualTinyBert_legalfeatures_live_offline_and_save_reload": "PASS score0diff",
+    "failedlint_and_alias_invariance_test_kept": true,
+    "no_research_training_fits": true,
+    "files": [
+      "src/milai_lab/methods/control_observation.py",
+      "src/milai_lab/methods/memory_object_policy.py",
+      "src/milai_lab/methods/small_control_model.py",
+      "tools/run_small_memory_policy.py"
+    ]
+  },
+  "costs": {
+    "P03native_compute_auto_once": {
+      "cpu_seconds": 3.8358597869999995,
+      "wall_seconds": 375.3669472914189,
+      "runs": 1
+    },
+    "P03_before_Reader_13closed_scopes_once": "P03-before-Reader-closed-cost-v1.json",
+    "new_12closed_local_scopes_queued_costonly": true,
+    "settler_launch": "P04-cost-settlement-launch-v1.json",
+    "settler_state": "P04-cost-settlement-state-v1.json",
+    "own_live_cost_only_waiter_pid": 1453297,
+    "external_R40_actual_kernel_holder_pid": 1297193,
+    "actual_both_commands_and_kernel_FLOCK_verified": true,
+    "no_busy_ledger_reads_or_secondledger": true,
+    "no_native_worker_fixture_TinyEncoder_rebill": true,
+    "failed_checks_kept": true,
+    "own_C06_unknown_reservation_retained": [
+      1,
+      9295
+    ],
+    "activeGPU_IO_energy_money_manualwork": "UNKNOWN"
+  },
+  "next_action": "Finish finitecost settlement when originallease free; do not restartwaiter. Heterogeneous/natural-backed samebefore Source/partial/full/refresh tradeoffs, strong cheapcontrols, usableV3M0/M1starts and actualmatched learning/ownstate/replay/seeds/independentcalibration/power/newconfirm/transfer/delivery remain. Not complete at testedprojection or scriptedoracle.",
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "old_model_weights_or_configs_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false,
+  "validation": {
+    "JSON_counts_paths_currentS21fullbytes": "PASS",
+    "source_changed_after_final_pass": false,
+    "repeated_tests_after_doconly_change": 0,
+    "rollback_commit": "8515cb53",
+    "remote_checked": false
+  }
+}

@@ -1,4 +1,36 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; S20unitdelivery/P03controlledReader waitingR40
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; P03taskpilotclosed/S21Viewboundinput/costwait
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v43.json.
+P03originalReader1355450 TERMINAL30firsts/0fail0unknown86165tokens/U0; scopedgrader appliedALL30.
+Controlledrecordformula+enum+material success fullView5/10,unitView10/10,rawSource10/10. Only5
+oversizedfullViews fail delivery; shortworlds allcorrect. Sourcefree luckymatch1NOTtasksuccess.
+Unit8088materialtokens vsraw2300=3.5165x; rawcounterexample retained, no G2/efficiencywin/learnedP.
+These10worlds share5basepatterns/twolengths, not10naturalindependentroots; explanations/citations
+not verified byenumgrader, no naturalBlabel or independentreviewcompetence upgrade. G1/G2/G3
+fulllearnedmechanism/transfer incomplete; do not train neural on uniformlydominatedtoyroute.
+S21/c5b93baf frozen, P04card binds inputgap: oldUSE_VIEWdescriptions onlyids/params, notselected
+body. Explicit control-observation-bound-view-units-v3 resolves uniqueVISIBLEpublicparent/
+slot/revision to completeconnectednodes/rules, rawbindings/roles/clocks/old+requestedquerytime.
+No Store/SourceIO/truth. Missing/invisible/stale parent explicitunresolved; all raw parameters
+stay. Objects/dual/jointwired; CLI/config version explicit, oldV1/V2/checkpoints unchanged.
+OpaqueNodeIDsorting initially changed semantictext order; failedtest preserved, fixedV3ordered
+node rows retain recordedorder/fullliteralvalues/IDs; semantic aliasrenaming nowinvariant.
+21targetedtests/Ruff/mypy/package/toolsPASS inclactualTinyBert localfeature/offline/live/save/
+reload0diff. No researchSGD or checkpoint selection. Do not silently initializeoldmodels asV3.
+P03beforeReader13closedscopes SETTLEDONCE/readback. NEW12closedS21/P03grade/review scopes only
+queued costsettlerPID1453297, actualalivewaitingexternalR40PID1297193 realFLOCK+bothcmdverified.
+It is finite COSTONLY,0client/modelcalls, NOTReaderjob. Preservehandle, neverrestartlostobs;
+onrelease originalscope settles12once/readback, nativeP03/worker/Tinytests not rebilled. No
+originalledger read/write whileexternalowner. Failures/lint/alias-test costs kept. SHA/fingerprints
+OFF; oldC06UNKNOWN9295reservation/fullcost/citationcount errata remain. No publicdefaults/
+Product/Archive/permissions/protectedbody/push/merge changes. Fullgoal ACTIVE_INCOMPLETE.
+Next heterogeneous/natural-backed samebefore Source/partial/fullView/refresh tradeoffs andstrong
+cheapquery/rule controls, usableV3M0/M1starts, reliableoutcomes/matchedexposure/twoownstate+replay/
+3seeds/power/newCONFIRM/transfer/delivery stillrequired; not finish at module or scriptedoracle.
+
+The following v42 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; S20unitdelivery/P03controlledReader waitingR40
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v42.json.
 S20/7d25c40f frozen. CommonEvidenceOperations optin view_unit_selections provides finite per-slot
