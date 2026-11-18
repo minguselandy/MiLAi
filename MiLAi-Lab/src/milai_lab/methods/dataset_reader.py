@@ -9,7 +9,11 @@ from string import ascii_uppercase
 from typing import Any
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
-from milai_lab.datasets.memory_control_reader_task import ReaderTask
+from milai_lab.datasets.memory_control_reader_task import (
+    LONGMEMEVAL_S,
+    MEMORYAGENTBENCH_EVENTQA,
+    ReaderTask,
+)
 from milai_lab.methods.evidence_control import controlled_reader_packet
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 
@@ -32,6 +36,15 @@ _NATIVE_PROMPTS = {
     PERSONA: (
         "Choose the single best option using the conversation in the supplied material. "
         "Return its letter in selected_option."
+    ),
+    LONGMEMEVAL_S: (
+        "Answer the dated question from the supplied dialogue. Use the reported session dates "
+        "for temporal questions. Say that the information is unavailable when the evidence is "
+        "insufficient. List the supporting evidence labels from the packet."
+    ),
+    MEMORYAGENTBENCH_EVENTQA: (
+        "Use the supplied narrative to select the subsequent event. Give the text of the "
+        "selected option in answer and list the supporting evidence labels from the packet."
     ),
 }
 

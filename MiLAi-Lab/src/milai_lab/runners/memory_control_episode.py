@@ -253,9 +253,11 @@ def start_cold(
     budget: int,
     *,
     use_memory: bool = True,
+    pool: CorpusPool | None = None,
 ) -> tuple[CorpusExecution, dict[str, float]]:
     started = time.perf_counter()
-    pool = CorpusPool(db, task["root_id"], load_sources=use_memory)
+    if pool is None or not use_memory:
+        pool = CorpusPool(db, task["root_id"], load_sources=use_memory)
     focus = (
         pool.rank(task["query"], dataset.config["states"]["candidate_limit"]) if use_memory else []
     )
@@ -276,10 +278,13 @@ def episode_before_reader(
     model: SmallControlModel | None,
     budget: int,
     seed: int,
+    *,
+    pool: CorpusPool | None = None,
 ) -> dict[str, Any]:
     started, cpu = time.perf_counter(), time.process_time()
     counters = dict(model.counters) if model else {}
-    session, costs = start_cold(dataset, db, task, budget, use_memory=arm["policy"] != "B0")
+    session, costs = start_cold(dataset, db, task, budget, use_memory=arm["policy"] != "B0",
+                                pool=pool)
     if arm["policy"] == "G":
         gold = task_annotation(db, task)
         if task["dataset"] == MUSIQUE:

@@ -9,6 +9,9 @@ from typing import Any
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA
 
+LONGMEMEVAL_S = "longmemeval_s_cleaned"
+MEMORYAGENTBENCH_EVENTQA = "memoryagentbench_eventqa_full"
+
 
 @dataclass(frozen=True)
 class ReaderTask:
