@@ -11,7 +11,7 @@ from tokenizers import Tokenizer  # type: ignore[import-untyped]
 from milai_lab.datasets.memory_control_views import SourceObject, Span
 
 _WORD = re.compile(r"[^\W_]+", re.UNICODE)
-_SENTENCE = re.compile(r"[^.!?。！？\n]+[.!?。！？]*")
+_SENTENCE = re.compile(r"[^.!?\u3002\uff01\uff1f\n]+[.!?\u3002\uff01\uff1f]*")
 
 
 def query_terms(query: str) -> set[str]:
@@ -19,8 +19,11 @@ def query_terms(query: str) -> set[str]:
 
 
 def excerpt(
-    terms: set[str], ranges: list[Span], objects: Mapping[int, SourceObject],
-    encoder: Tokenizer, limit: int,
+    terms: set[str],
+    ranges: list[Span],
+    objects: Mapping[int, SourceObject],
+    encoder: Tokenizer,
+    limit: int,
 ) -> tuple[int, dict[str, Any]] | None:
     selected: tuple[int, int, int, int] | None = None
     best = 0
@@ -33,8 +36,12 @@ def excerpt(
             score = len({match.group().casefold() for match in hits})
             if score > best:
                 best = score
-                selected = (oid, sentence.start(), sentence.end(),
-                            sentence.start() + hits[0].start())
+                selected = (
+                    oid,
+                    sentence.start(),
+                    sentence.end(),
+                    sentence.start() + hits[0].start(),
+                )
     if selected is None:
         return None
     oid, start, end, hit = selected
@@ -51,7 +58,12 @@ def excerpt(
         text = body[a:b]
         count = len(encoder.encode(text, add_special_tokens=False).ids)
         if count <= limit:
-            return oid, {"text": text, "start": a, "end": b,
-                         "encoder_tokens": count, "role": objects[oid].role}
+            return oid, {
+                "text": text,
+                "start": a,
+                "end": b,
+                "encoder_tokens": count,
+                "role": objects[oid].role,
+            }
         right -= 1
     return None

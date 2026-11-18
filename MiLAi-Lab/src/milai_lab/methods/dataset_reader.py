@@ -46,32 +46,46 @@ class ReaderTask:
     def schema(self) -> dict[str, Any]:
         if self.source == PERSONA:
             fields: dict[str, Any] = {
-                "selected_option": {"enum": list(ascii_uppercase[:len(self.options)])}
+                "selected_option": {"enum": list(ascii_uppercase[: len(self.options)])}
             }
         else:
-            fields = {"answer": {"type": "string"},
-                      "evidence": {"type": "array", "items": {"type": "string"}}}
+            fields = {
+                "answer": {"type": "string"},
+                "evidence": {"type": "array", "items": {"type": "string"}},
+            }
             if self.source == MUSIQUE:
                 fields["answerable"] = {"type": "boolean"}
-        return {"type": "object", "properties": fields,
-                "required": list(fields), "additionalProperties": False}
+        return {
+            "type": "object",
+            "properties": fields,
+            "required": list(fields),
+            "additionalProperties": False,
+        }
 
 
 def reader_task(
-    source: str, query: str, task_id: int, annotation: dict[str, Any], option_seed: int,
+    source: str,
+    query: str,
+    task_id: int,
+    annotation: dict[str, Any],
+    option_seed: int,
 ) -> tuple[ReaderTask, frozenset[str]]:
     if source != PERSONA:
         return ReaderTask(source, query), frozenset()
     wrong, correct = annotation["incorrect_answers"], annotation.get("correct_answer")
     choices = [correct, *wrong] if isinstance(wrong, list) else []
-    if (not 2 <= len(choices) <= len(ascii_uppercase)
-            or any(not isinstance(text, str) or not text.strip() for text in choices)):
+    if not 2 <= len(choices) <= len(ascii_uppercase) or any(
+        not isinstance(text, str) or not text.strip() for text in choices
+    ):
         return ReaderTask(source, query, invalid_reason="invalid_options"), frozenset()
     rng = random.Random(option_seed + task_id)  # noqa: S311 -- fixed public option order
     rng.shuffle(choices)
     # Match the original evaluator even if an identical option text occurs twice.
-    correct_letters = frozenset(letter for letter, text in zip(ascii_uppercase, choices)
-                                if text == correct)
+    correct_letters = frozenset(
+        letter
+        for letter, text in zip(ascii_uppercase[: len(choices)], choices, strict=True)
+        if text == correct
+    )
     return ReaderTask(source, query, tuple(choices)), correct_letters
 
 
@@ -108,29 +122,53 @@ class DatasetReader:
         tokens = self.capacity.text_tokens(serialized)
         material_fits = tokens <= limit
         if public.invalid_reason:
-            return PacketPlan(packet, tokens, material_fits, None, None, None,
-                              public.invalid_reason)
-        payload = {"request": public.query, **({"options": dict(zip(ascii_uppercase, public.options))}
-                                              if public.options else {}), "memory": packet}
+            return PacketPlan(
+                packet, tokens, material_fits, None, None, None, public.invalid_reason
+            )
+        payload = {
+            "request": public.query,
+            **(
+                {
+                    "options": dict(
+                        zip(ascii_uppercase[: len(public.options)], public.options, strict=True)
+                    )
+                }
+                if public.options
+                else {}
+            ),
+            "memory": packet,
+        }
         wire = {
             "model": self.settings["host"]["model"],
             "temperature": TEMPERATURE,
             "max_tokens": OUTPUT_TOKENS,
             "chat_template_kwargs": {"enable_thinking": ENABLE_THINKING},
             "messages": [
-                {"role": "system", "content": self.settings["system_prompt"] + "\n"
-                 + _NATIVE_PROMPTS[public.source]},
+                {
+                    "role": "system",
+                    "content": self.settings["system_prompt"]
+                    + "\n"
+                    + _NATIVE_PROMPTS[public.source],
+                },
                 {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
             ],
-            "response_format": {"type": "json_schema", "json_schema": {
-                "name": "native_memory_answer", "schema": public.schema()}},
+            "response_format": {
+                "type": "json_schema",
+                "json_schema": {"name": "native_memory_answer", "schema": public.schema()},
+            },
         }
         host_fits = True
         try:
-            check = self.capacity.check(wire["messages"], output_tokens=OUTPUT_TOKENS,
-                                        enable_thinking=ENABLE_THINKING)
+            check = self.capacity.check(
+                wire["messages"], output_tokens=OUTPUT_TOKENS, enable_thinking=ENABLE_THINKING
+            )
         except CapacityExceeded as exc:
             check, host_fits = exc.receipt, False
-        failure = ("material_budget_exhausted" if not material_fits else
-                   "host_request_capacity_exceeded" if not host_fits else None)
+        failure = (
+            "material_budget_exhausted"
+            if not material_fits
+            else "host_request_capacity_exceeded"
+            if not host_fits
+            else None
+        )
         return PacketPlan(packet, tokens, material_fits, wire, check, host_fits, failure)

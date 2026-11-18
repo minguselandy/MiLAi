@@ -21,6 +21,9 @@ def state_loss(scores: Any, action_ids: list[str], supervision: dict[str, Any], 
     import torch  # type: ignore[import-not-found]
     import torch.nn.functional as F  # type: ignore[import-not-found]
 
+    pair_weight = float(supervision.get("pair_loss_weight", 1.0))
+    if pair_weight < 0 or not math.isfinite(pair_weight):
+        raise ValueError("Preference loss weight must be finite and nonnegative")
     value_weight = float(supervision.get("value_loss_weight", 0.0))
     if value_weight < 0 or not math.isfinite(value_weight):
         raise ValueError("Observed value loss weight must be finite and nonnegative")
@@ -54,7 +57,7 @@ def state_loss(scores: Any, action_ids: list[str], supervision: dict[str, Any], 
         logits = scores[[positions[key] for key in comparable]].float()
         good = [index for index, key in enumerate(comparable) if key in good_ids]
         terms.append(torch.logsumexp(logits, 0) - torch.logsumexp(logits[good], 0))
-    pair_loss = torch.stack(terms).mean() if terms else None
+    pair_loss = torch.stack(terms).mean() * pair_weight if terms and pair_weight else None
     if not value_weight and not cost_weight and not weak_weight:
         return (pair_loss * component_scales["pair"]
                 if pair_loss is not None and component_scales is not None else pair_loss)

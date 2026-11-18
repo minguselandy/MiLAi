@@ -20,7 +20,11 @@ from milai_lab.methods.control_observation import control_input
 from milai_lab.methods.corpus_navigation import excerpt, query_terms
 from milai_lab.methods.dataset_reader import DatasetReader, PacketPlan, ReaderTask
 from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
-from milai_lab.methods.literal_delivery_union import DELIVERY_PROTOCOL, LiteralDelivery, literal_delivery
+from milai_lab.methods.literal_delivery_union import (
+    DELIVERY_PROTOCOL,
+    LiteralDelivery,
+    literal_delivery,
+)
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 
 
@@ -39,8 +43,16 @@ class CorpusPool:
 
     forget_epoch = 0  # The pinned snapshot has no mutations.
 
-    def __init__(self, db: sqlite3.Connection, root_id: int) -> None:
+    def __init__(self, db: sqlite3.Connection, root_id: int, *, load_sources: bool = True) -> None:
         self.root_id = root_id
+        self._documents: list[dict[str, Any]] | None = None
+        self.cache = SourceSearchCache()
+        if not load_sources:
+            self.objects = {}
+            self.by_ref = {}
+            self.views = {}
+            self.focus_ids = []
+            return
         self.objects = {
             row["id"]: SourceObject(
                 row["id"],
@@ -74,17 +86,17 @@ class CorpusPool:
                 (root_id,),
             )
         }
-        self.documents = [
-            {"id": row["id"], "index_text": self.search_text(self.views[row["id"]])}
-            for row in db.execute(
-                """
-                SELECT v.id FROM objects o JOIN views v ON v.object_id=o.id
-                JOIN candidates c ON c.focus_id=v.id WHERE o.root_id=? ORDER BY o.position,v.page
-            """,
-                (root_id,),
-            )
-        ]
-        self.cache = SourceSearchCache()
+        self.focus_ids = [row["id"] for row in db.execute("""
+            SELECT v.id FROM objects o JOIN views v ON v.object_id=o.id
+            JOIN candidates c ON c.focus_id=v.id WHERE o.root_id=? ORDER BY o.position,v.page
+        """, (root_id,))]
+
+    @property
+    def documents(self) -> list[dict[str, Any]]:
+        if self._documents is None:
+            self._documents = [{"id": vid, "index_text": self.search_text(self.views[vid])}
+                               for vid in self.focus_ids]
+        return self._documents
 
     def ref(self, oid: int) -> str:
         return f"s{self.objects[oid].position}"
@@ -202,7 +214,8 @@ class CorpusExecution:
     """Replay actually opened views and use EvidenceOperations for all legal actions."""
 
     def __init__(
-        self, pool: CorpusPool, query: str, focus: list[int], reader: Tokenizer, material_limit: int,
+        self, pool: CorpusPool, query: str, focus: list[int], reader: Tokenizer,
+        material_limit: int,
         *, public_task: ReaderTask | None = None, host: DatasetReader | None = None,
         navigation: dict[int, dict[str, Any]] | None = None,
         shared_preflight: dict[tuple[tuple[str, ...], str], tuple[int, bool | None, str | None]]

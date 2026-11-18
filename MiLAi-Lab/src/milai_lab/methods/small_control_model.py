@@ -223,6 +223,7 @@ class SmallControlModel:
                                             texts=0, chunked_texts=0, chunks=0, joint_sequences=0)
         self._base_encoding_cache = None
         self._base_encoder_versions = None
+        self.batch_tokens_by_length = False
 
     def configure_base_encoding_cache(self, max_bytes: int = 0) -> None:
         """Runtime-only optimization; old checkpoints and defaults stay unchanged."""
@@ -348,9 +349,12 @@ class SmallControlModel:
                     tokens)})
                 owners.append(owner)
         vectors = []
+        order: range | list[int] = range(len(chunks))
+        if getattr(self, "batch_tokens_by_length", False):
+            order = sorted(order, key=lambda i: len(chunks[i]["input_ids"]))
         for start in range(0, len(chunks), self.config.encode_batch_size):
-            batch = self.tokenizer.pad(chunks[start:start + self.config.encode_batch_size],
-                                       padding=True, return_tensors="pt").to(self.device)
+            offered = [chunks[i] for i in order[start:start + self.config.encode_batch_size]]
+            batch = self.tokenizer.pad(offered, padding=True, return_tensors="pt").to(self.device)
             mask = batch["attention_mask"]
             self.counters["forwards"] += 1
             self.counters["input_tokens"] += int(mask.sum())
@@ -370,20 +374,28 @@ class SmallControlModel:
                     pooled = (output * mask[..., None]).sum(1) / mask.sum(1)[:, None]
                 vectors.append(F.normalize(pooled.float(), dim=-1))
         vectors_tensor = torch.cat(vectors)
+        if isinstance(order, list):
+            original_order = torch.tensor(sorted(range(len(order)), key=order.__getitem__),
+                                          device=self.device)
+            vectors_tensor = vectors_tensor[original_order]
         owner_tensor = torch.tensor(owners, device=self.device)
         summed = vectors_tensor.new_zeros((len(texts), vectors_tensor.shape[-1])).index_add(
             0, owner_tensor, vectors_tensor)
         counts = torch.bincount(owner_tensor, minlength=len(texts))[:, None]
         return F.normalize(summed / counts, dim=-1)
 
-    def features(self, online: list[dict[str, Any]]) -> tuple[Any, Any, Any, list[int]]:
+    def features(
+        self, online: list[dict[str, Any]], *, pad_to_batch: bool = False,
+    ) -> tuple[Any, Any, Any, list[int]]:
         if self._base_encoding_cache is None:
-            return self._features_uncached(online)
+            return self._features_uncached(online, pad_to_batch=pad_to_batch)
         self._check_base_encoder()
         with self._base_encoding_cache.scope():
-            return self._features_uncached(online)
+            return self._features_uncached(online, pad_to_batch=pad_to_batch)
 
-    def _features_uncached(self, online: list[dict[str, Any]]) -> tuple[Any, Any, Any, list[int]]:
+    def _features_uncached(
+        self, online: list[dict[str, Any]], *, pad_to_batch: bool = False,
+    ) -> tuple[Any, Any, Any, list[int]]:
         import torch
 
         if self.config.readout == "joint":
@@ -391,7 +403,7 @@ class SmallControlModel:
         if self.config.projection_version in {VISIBLE_SOURCE_HANDLES_V2, BOUND_VIEW_UNITS_V3}:
             online = [visible_source_handle_input(row) for row in online]
         if self.config.readout == "objects":
-            return self.object_features(online)
+            return self.object_features(online, pad_to_batch=pad_to_batch)
         states, queries, actions, owners, lengths, action_queries = [], [], [], [], [], []
         for index, row in enumerate(online):
             state_text, action_texts = control_texts(row, delivery_context=(
@@ -425,7 +437,9 @@ class SmallControlModel:
         return (state_vectors, vectors[len(states) + len(queries):],
                 torch.tensor(owners, device=self.device), lengths)
 
-    def object_features(self, online: list[dict[str, Any]]) -> tuple[Any, Any, Any, list[int]]:
+    def object_features(
+        self, online: list[dict[str, Any]], *, pad_to_batch: bool = False,
+    ) -> tuple[Any, Any, Any, list[int]]:
         import torch
 
         from milai_lab.methods.memory_object_policy import (
@@ -441,6 +455,8 @@ class SmallControlModel:
             raise ValueError("MEMORY_OBJECT_CAPACITY: partition explicitly; no objects dropped")
         if any(not actions for _, actions in projections):
             raise ValueError("A policy state requires an offered action")
+        if pad_to_batch:
+            capacity = max(len(objects) for objects, _ in projections)
         object_texts = [text for objects, _ in projections for text in objects]
         action_texts = [text for _, actions in projections for text in actions]
         vectors = self.encode(object_texts + action_texts)

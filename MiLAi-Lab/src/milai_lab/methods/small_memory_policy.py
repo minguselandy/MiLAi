@@ -103,7 +103,8 @@ class EncoderCosineMemoryPolicy:
             state, [a for a in actions if a.kind == "HANDOFF"])
         acquired = {item["item_index"] for item in state.observed_materials or []
                     if item["kind"] == "original_source"}
-        if (len(acquired) >= self.reads or (self.reserve_handoff_step
+        if (state.budget.get("successful_reads", len(acquired)) >= self.reads
+                or (self.reserve_handoff_step
                 and state.budget.get("remaining_control_steps") == 1)):
             return handoff
         search = next((a for a in actions if a.kind == "SEARCH"), None)
@@ -126,8 +127,10 @@ class EncoderCosineMemoryPolicy:
         indices = sorted(options)
         with torch.no_grad():
             query = self.encoder.encode([state.task["request"]], text_role="query")
-            passages = self.encoder.encode([candidates[i]["excerpt"] for i in indices],
-                                           text_role="passage")
+            passages = self.encoder.encode([
+                candidates[i].get("navigation_excerpt", {}).get("text", candidates[i]["excerpt"])
+                for i in indices
+            ], text_role="passage")
             scores = (passages @ query[0]).float().cpu().tolist()
         import math
 

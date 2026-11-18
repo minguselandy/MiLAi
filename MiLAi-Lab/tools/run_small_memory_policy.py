@@ -289,7 +289,9 @@ def train(args: argparse.Namespace) -> None:
     if args.data.is_dir() or args.data.suffix == ".sqlite3":
         from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 
-        dataset = MemoryControlDataset(args.data)
+        dataset = MemoryControlDataset(
+            args.data, require_complete=not (args.dry_run or args.prepare_features_only),
+            observation_protocol=args.observation_protocol, outcome_runs=tuple(args.outcome_run))
     if getattr(args, "dry_run", False):
         if dataset is None or config.readout != "objects":
             raise ValueError("The dataset dry run requires the SQLite package and object readout")
@@ -298,6 +300,16 @@ def train(args: argparse.Namespace) -> None:
         write_json(args.output / "dataset-dry-run.json", report)
         print(json.dumps(report), flush=True)
         return
+    if dataset is not None and dataset.revision:
+        from memory_control_coverage import train_coverage
+
+        args.epochs = 3 if args.epochs is None else args.epochs
+        train_coverage(args, config, dataset, RecoveryParameters)
+        return
+    if (args.epochs is not None or args.feature_store is not None or args.prepare_features_only
+            or args.supervision_mode != "weak" or args.outcome_run):
+        raise ValueError("Coverage options require the V1.1 SQLite package")
+    args.steps = 200 if args.steps is None else args.steps
     declared_windows = None
     if dataset is None:
         rows = read_jsonl(args.data)
@@ -813,17 +825,68 @@ def evaluate_saved(args: argparse.Namespace) -> None:
     """Source-disjoint offline diagnostic; full-task quality still requires rollout."""
     import torch
 
-
     torch.set_num_threads(args.threads)
+    if args.episode_plan:
+        from milai_lab.runners.memory_control_episode import evaluate_episodes
+        from milai_lab.scorers.memory_control_episode_metrics import summarize
+
+        population = read_json(args.episode_plan)
+        if args.registered_arm is not None:
+            if args.baseline or args.checkpoint:
+                raise ValueError("Select the registered arm or supply a DEV configuration")
+            arm, = [a for a in population["arms"] if a["name"] == args.registered_arm]
+        else:
+            if bool(args.checkpoint) == bool(args.baseline):
+                raise ValueError("Choose exactly one episode checkpoint or baseline")
+            contract = (read_json(checkpoint_run(args.checkpoint))["contract"]
+                        if args.checkpoint else {})
+            observation = args.observation_protocol or contract.get(
+                "observation_protocol", "semantic_nav_v1")
+            arm = {
+                "name": args.arm_name or args.baseline or args.checkpoint.parent.name,
+                "policy": args.baseline or "checkpoint",
+                "observation_protocol": observation, "reads": args.reads,
+                "stop": args.stop, "precision": args.precision,
+            }
+            if args.checkpoint:
+                arm.update(checkpoint=str(args.checkpoint.resolve()), seed=contract.get("seed"))
+        evaluate_episodes(args.data, args.episode_plan, arm, args.output, device=args.device,
+                          max_reader_requests=args.max_reader_requests)
+        write_json(args.output / "native-summary.json", summarize(args.output))
+        return
+    if not args.checkpoint:
+        raise ValueError("The offline evaluator requires an actual checkpoint")
     args.output.mkdir(parents=True, exist_ok=False)
+    fit_run = read_json(checkpoint_run(args.checkpoint))["contract"]
     if args.data.is_dir() or args.data.suffix == ".sqlite3":
         from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 
-        dataset = MemoryControlDataset(args.data)
+        dataset = MemoryControlDataset(args.data,
+                                       observation_protocol=fit_run.get("observation_protocol"))
+        if dataset.revision:
+            from memory_control_coverage import offline_evaluation
+            from milai_lab.methods.frozen_feature_store import FrozenFeatureStore
+
+            index = dataset.index("dev", trainable=True)
+            if set(fit_run["fitted_groups"]) & {f"{r.dataset}/{r.group}" for r in index}:
+                raise ValueError("Development source groups overlap the fitted sources")
+            model = SmallControlModel.load(args.checkpoint, device=args.device)
+            cache = (FrozenFeatureStore(args.feature_store, dataset, model)
+                     if args.feature_store else None)
+            if cache:
+                cache.open(index)
+            result = offline_evaluation(model, dataset, index, size=args.batch_states,
+                                        workers=args.loader_workers, cache=cache,
+                                        predictions=args.output / "predictions.jsonl")
+            write_json(args.output / "result.json", result)
+            write_json(args.output / "run.json", {"status": "COMPLETED", "pid": os.getpid(),
+                "checkpoint": str(args.checkpoint.resolve()), "data": str(args.data.resolve()),
+                "source_overlap": 0, "model_counters": model.counters, "reader_calls": 0,
+                "states": result["states"], "groups": result["groups"]})
+            return
         rows = dataset.rows([row.id for row in dataset.index("validation")])
     else:
         rows = read_jsonl(args.data)
-    fit_run = read_json(args.checkpoint.parent / "run.json")["contract"]
     if "fitted_groups" in fit_run:
         training_groups = set(fit_run["fitted_groups"])
     else:
@@ -843,6 +906,14 @@ def evaluate_saved(args: argparse.Namespace) -> None:
         "scope": "Historical exposed-source offline diagnostic; not real-task generalization"})
 
 
+def checkpoint_run(checkpoint: Path) -> Path:
+    for parent in (checkpoint.parent, checkpoint.parent.parent):
+        path = parent / "run.json"
+        if path.is_file():
+            return path
+    raise ValueError(f"No training receipt beside {checkpoint}")
+
+
 def initialize_model(args: argparse.Namespace) -> None:
     """Save a declared usable policy start; no claim that construction is training."""
     import torch
@@ -859,7 +930,7 @@ def initialize_model(args: argparse.Namespace) -> None:
     model = SmallControlModel(config, device=args.device)
     model.train(False)
     model.save(args.output / "checkpoint")
-    last = model.head.network[-1]
+    last = model.head.output[-1] if config.readout == "objects" else model.head.network[-1]
     zero = bool(last.weight.detach().count_nonzero() == 0
                 and last.bias.detach().count_nonzero() == 0)
     write_json(args.output / "run.json", {"status": "COMPLETED", "pid": os.getpid(),
@@ -897,7 +968,20 @@ def main() -> None:
     fitting.add_argument("--family", choices=["frozen_mlp", "encoder", "decoder"], required=True)
     fitting.add_argument("--backbone", type=Path, required=True)
     fitting.add_argument("--adaptation", choices=["frozen", "full", "lora"], default="frozen")
-    fitting.add_argument("--steps", type=int, default=200)
+    fitting.add_argument("--steps", type=int, help="Explicit optimizer-update ceiling")
+    fitting.add_argument("--epochs", type=int, help="Full V1.1 coverage epochs, default 3")
+    fitting.add_argument("--supervision-mode", choices=["weak", "outcome"], default="weak")
+    fitting.add_argument("--outcome-run", action="append", default=[])
+    fitting.add_argument("--observation-protocol", choices=["metadata_v1", "semantic_nav_v1"])
+    fitting.add_argument("--feature-store", type=Path)
+    fitting.add_argument("--feature-store-read-only", action="store_true")
+    fitting.add_argument("--prepare-features-only", action="store_true")
+    fitting.add_argument("--feature-batch-states", type=int, default=32)
+    fitting.add_argument("--loader-workers", type=int, default=2)
+    fitting.add_argument("--bf16", action="store_true")
+    fitting.add_argument("--skip-offline-dev", action="store_true",
+                         help="Use only scheduled full-policy evaluation or a recovery diagnostic")
+    fitting.add_argument("--bucket-encoder-lengths", action="store_true")
     fitting.add_argument("--batch-states", type=int, default=16)
     fitting.add_argument("--microbatch-states", type=int, default=4)
     fitting.add_argument("--chunk-tokens", type=int, default=512)
@@ -980,11 +1064,46 @@ def main() -> None:
                              default="literal_v1")
     calibration.add_argument("--reuse-firsts", type=Path)
     evaluation = sub.add_parser("evaluate")
-    evaluation.add_argument("--checkpoint", type=Path, required=True)
+    evaluation.add_argument("--checkpoint", type=Path)
     evaluation.add_argument("--data", type=Path, required=True)
     evaluation.add_argument("--output", type=Path, required=True)
     evaluation.add_argument("--device", default="cpu")
     evaluation.add_argument("--threads", type=int, default=4)
+    evaluation.add_argument("--batch-states", type=int, default=16)
+    evaluation.add_argument("--loader-workers", type=int, default=2)
+    evaluation.add_argument("--feature-store", type=Path)
+    evaluation.add_argument("--episode-plan", type=Path)
+    evaluation.add_argument("--registered-arm")
+    evaluation.add_argument("--baseline", choices=["B0", "B1", "B2", "B3", "B4"])
+    evaluation.add_argument("--arm-name")
+    evaluation.add_argument("--observation-protocol", choices=["semantic_nav_v1", "metadata_v1"])
+    evaluation.add_argument("--stop", choices=["fixed", "learned"], default="fixed")
+    evaluation.add_argument("--precision", choices=["learned", "R2", "R3"], default="learned")
+    evaluation.add_argument("--reads", type=int, default=4)
+    evaluation.add_argument("--max-reader-requests", type=int)
+    lock_eval = sub.add_parser("lock-evaluation")
+    lock_eval.add_argument("--data", type=Path, required=True)
+    lock_eval.add_argument("--output", type=Path, required=True)
+    lock_eval.add_argument("--role", required=True, choices=["dev", "confirm"])
+    lock_eval.add_argument("--target-tasks", type=int)
+    lock_eval.add_argument("--seed", type=int, default=20261118)
+    lock_eval.add_argument("--budget", type=int, default=2048)
+    lock_eval.add_argument("--arms-file", type=Path)
+    compare = sub.add_parser("compare-episodes")
+    compare.add_argument("--policy-run", type=Path, action="append", required=True)
+    compare.add_argument("--baseline-run", type=Path, required=True)
+    compare.add_argument("--output", type=Path, required=True)
+    compare.add_argument("--bootstrap-repeats", type=int, default=2000)
+    compare.add_argument("--seed", type=int, default=20261118)
+    collect_reached = sub.add_parser("collect-policy-states")
+    collect_reached.add_argument("--data", type=Path, required=True)
+    collect_reached.add_argument("--run-id", required=True)
+    collect_reached.add_argument("--checkpoint", action="append", type=Path, required=True)
+    collect_reached.add_argument("--output", type=Path, required=True)
+    collect_reached.add_argument("--target-states", type=int, default=12000)
+    collect_reached.add_argument("--task-limit", type=int)
+    collect_reached.add_argument("--seed", type=int, default=20261118)
+    collect_reached.add_argument("--device", default="cpu")
     reviewing = sub.add_parser("review")
     reviewing.add_argument("--cases", type=Path, required=True)
     reviewing.add_argument("--reader-config", type=Path, required=True)
@@ -1133,6 +1252,33 @@ def main() -> None:
     native_structural.add_argument("--captured-states", type=Path,
         help="Manifest of exact saved decision file/indices, instead of the fixed K/O prefix")
     args = parser.parse_args()
+    if args.command == "lock-evaluation":
+        from milai_lab.runners.memory_control_episode import lock_episode_population
+
+        lock_episode_population(
+            args.data, args.output, role=args.role,
+            target_tasks=args.target_tasks or (600 if args.role == "dev" else 1500),
+            seed=args.seed, allowed_arms=read_json(args.arms_file) if args.arms_file else [],
+            budget=args.budget,
+        )
+        return
+    if args.command == "compare-episodes":
+        from milai_lab.scorers.memory_control_episode_metrics import paired_comparison
+
+        write_json(args.output, paired_comparison(
+            args.policy_run, args.baseline_run, repeats=args.bootstrap_repeats, seed=args.seed))
+        return
+    if args.command == "collect-policy-states":
+        import fcntl
+
+        from milai_lab.runners.memory_control_policy_states import collect
+
+        with (args.data.parent / ".build.lock").open("a") as guard:
+            fcntl.flock(guard.fileno(), fcntl.LOCK_EX)
+            collect(args.data, args.run_id, args.checkpoint, args.output,
+                    target_states=args.target_states, task_limit=args.task_limit,
+                    seed=args.seed, device=args.device)
+        return
     if args.command == "initialize":
         initialize_model(args)
         return

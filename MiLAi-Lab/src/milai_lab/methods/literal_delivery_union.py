@@ -30,13 +30,19 @@ def literal_delivery(
     groups: dict[tuple[str, str, str], list[tuple[int, dict[str, Any]]]] = {}
     order: list[tuple[int, dict[str, Any], list[tuple[int, dict[str, Any]]] | None]] = []
     for index, item in opened.items():
-        if (item["kind"] != "original_source" or item.get("visibility") != "visible"
-                or item.get("body_delivered") is not True or item.get("unavailable_source_ranges")):
+        if (
+            item["kind"] != "original_source"
+            or item.get("visibility") != "visible"
+            or item.get("body_delivered") is not True
+            or item.get("unavailable_source_ranges")
+        ):
             order.append((index, item, None))
             continue
-        key = (item["session_id"],
-               json.dumps(item.get("source_access_scope"), sort_keys=True, ensure_ascii=False),
-               item.get("source_representation", "original_exchange"))
+        key = (
+            item["session_id"],
+            json.dumps(item.get("source_access_scope"), sort_keys=True, ensure_ascii=False),
+            item.get("source_representation", "original_exchange"),
+        )
         group = groups.setdefault(key, [])
         if not group:
             order.append((index, item, group))
@@ -45,26 +51,30 @@ def literal_delivery(
     evidence = []
     aliases: dict[str, dict[str, Any]] = {}
     unique_chars, overlap = 0, 0
-    for index, original, group in order:
-        if group is None:
+    for index, original, selected_group in order:
+        if selected_group is None:
             evidence.append(project_pack(original, index))
             continue
-        before = [span for _, item in group for span in item["source_ranges"]]
+        before = [span for _, item in selected_group for span in item["source_ranges"]]
         merged = merge_source_ranges(sorted(before, key=lambda span: position(span["source_ref"])))
         covered = sum(span["end"] - span["start"] for span in merged)
         unique_chars += covered
         overlap += sum(span["end"] - span["start"] for span in before) - covered
-        items = [item for _, item in group]
-        descriptor = {**original, "source_ranges": merged, "turn_range": [
-            min(item["turn_range"][0] for item in items),
-            max(item["turn_range"][1] for item in items),
-        ]}
+        items = [item for _, item in selected_group]
+        descriptor = {
+            **original,
+            "source_ranges": merged,
+            "turn_range": [
+                min(item["turn_range"][0] for item in items),
+                max(item["turn_range"][1] for item in items),
+            ],
+        }
         actual = read([descriptor])[0]
         if actual["visibility"] != "visible":
             raise ValueError("Literal Source visibility changed during delivery planning")
         projected = project_pack({**descriptor, **actual}, index)
-        if len(group) > 1:
-            projected["also_selected_as"] = [f"e{i}" for i, _ in group[1:]]
+        if len(selected_group) > 1:
+            projected["also_selected_as"] = [f"e{i}" for i, _ in selected_group[1:]]
         local: dict[tuple[str, int], str] = {}
         for span, piece in zip(actual["source_ranges"], projected["evidence"], strict=True):
             key_span = (span["source_ref"], span["source_revision"])

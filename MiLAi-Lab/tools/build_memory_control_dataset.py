@@ -359,6 +359,69 @@ def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
                                         budget_scope=args.budget_scope, task_limit=args.task_limit)
         print(result)
         return int(not result["scope_complete"] and args.task_limit is None)
+    if command in {"validate", "report"} and "parent_release" in config:
+        from milai_lab.runners.memory_control_revision_validation import validate_revision
+
+        verified = validate_revision(db_path)
+        write_json(root / "reports" / "revision-validation.json", verified)
+        if command == "report":
+            audit = supervision_audit(db_path, parent=False)
+            write_json(root / "reports" / "revision-supervision.json", audit)
+            with closing(connect(db_path)) as db:
+                outcome_statuses = [dict(row) for row in db.execute("""
+                    SELECT run_id,execution_status,count(*) AS branches,
+                           count(DISTINCT state_id) AS before_states
+                    FROM action_outcomes GROUP BY run_id,execution_status
+                """)]
+            write_json(root / "reports" / "revision-report.json", {
+                **verified, "statistics": "revision-supervision.json",
+                "parent_statistics": "parent-supervision.json",
+                "source_roles": "../manifests/experiment-groups.json",
+                "outcomes": outcome_statuses,
+            })
+        print(verified["status"])
+        return 0
+    if command in {"prepare-outcomes", "execute-outcomes", "score-outcomes"}:
+        from milai_lab.runners.memory_control_outcome_run import (
+            execute_outcomes,
+            prepare_outcomes,
+            score_outcomes,
+        )
+
+        if not args.run_id.replace("-", "").replace("_", "").isalnum():
+            raise ValueError("Run ID must use letters, digits, hyphens or underscores")
+        dataset = MemoryControlDataset(db_path, require_complete=False)
+        if command == "prepare-outcomes":
+            from milai_lab.methods.control_observation import control_input
+            from milai_lab.methods.memory_control import FixedContextMemoryPolicy
+            from milai_lab.methods.small_control_model import SmallControlModel
+
+            if (len(args.checkpoint) > 2 or (args.action and not args.state_id)
+                    or (args.policy_pool and args.state_id)):
+                raise ValueError("Use at most two checkpoints or explicit diagnostic actions")
+            suggestions = [("fixed_context4", FixedContextMemoryPolicy().choose)]
+            for path in args.checkpoint:
+                model = SmallControlModel.load(path, device=args.device)
+
+                def recommend(state: Any, actions: Any, policy: Any = model) -> str:
+                    scored = policy.score(control_input(state, actions))
+                    return max(zip(scored.scores, scored.action_ids, strict=True))[1]
+
+                suggestions.append((str(path.resolve()), recommend))
+            result = prepare_outcomes(dataset, args.run_id, limit=args.state_limit,
+                                      state_ids=args.state_id, explicit_actions=args.action,
+                                      seed=args.seed, suggestions=suggestions,
+                                      policy_pool=args.policy_pool)
+        elif command == "execute-outcomes":
+            result = execute_outcomes(dataset, args.run_id, limit=args.limit)
+        else:
+            result = score_outcomes(dataset, args.run_id, seal=args.seal)
+        output = root / "reports" / "outcomes" / args.run_id / (
+            f"{command}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}.json"
+        )
+        write_json(output, result)
+        print(f"{command} receipt at {output}")
+        return 0
     if command in {"acquire", "all"}:
         result = acquire(root / "raw", config["sources"], workers=args.download_workers)
         write_json(root / "manifests/acquisition.json", result)
@@ -442,7 +505,7 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     for name in ("all", "acquire", "normalize", "build", "validate", "probe", "report"):
         sub.add_parser(name)
-    revise = sub.add_parser("revise", help="Create a derived database and freeze native group roles")
+    revise = sub.add_parser("revise", help="Derive V1.1 and freeze native group roles")
     revise.add_argument("--parent", type=Path, help="Existing V1 dataset directory")
     revise.add_argument("--roles", type=Path, required=True, help="Historical group declarations")
     audit_train = sub.add_parser("audit-train", help="Measure role and weak-supervision coverage")
@@ -451,6 +514,21 @@ def main() -> int:
     observations.add_argument("--budget-scope", default="all",
                               choices=["all", "primary", "train_variants", "dev_diagnostics"])
     observations.add_argument("--task-limit", type=int, help="Explicit incremental build size")
+    prepare_outcome = sub.add_parser("prepare-outcomes", help="Prepare durable actual branches")
+    prepare_outcome.add_argument("--run-id", required=True)
+    prepare_outcome.add_argument("--state-limit", type=int, default=3000)
+    prepare_outcome.add_argument("--state-id", type=int, action="append", default=[])
+    prepare_outcome.add_argument("--action", action="append", default=[])
+    prepare_outcome.add_argument("--checkpoint", type=Path, action="append", default=[])
+    prepare_outcome.add_argument("--policy-pool")
+    prepare_outcome.add_argument("--device", default="cpu")
+    prepare_outcome.add_argument("--seed", type=int, default=20261118)
+    execute_outcome = sub.add_parser("execute-outcomes", help="Use the original Reader ledger")
+    execute_outcome.add_argument("--run-id", required=True)
+    execute_outcome.add_argument("--limit", type=int, required=True)
+    score_outcome = sub.add_parser("score-outcomes", help="Score and ingest completed Reader calls")
+    score_outcome.add_argument("--run-id", required=True)
+    score_outcome.add_argument("--seal", action="store_true")
     collect = sub.add_parser(
         "collect-outcomes", help="Prepare matched local branches and Host wires"
     )
@@ -463,7 +541,10 @@ def main() -> int:
     root = (args.root or Path(config["data_root"])).resolve()
     root.mkdir(parents=True, exist_ok=True)
     (root / "reports").mkdir(exist_ok=True)
-    with (root / ".build.lock").open("a") as guard:
+    name = ".outcomes.lock" if args.command in {
+        "prepare-outcomes", "execute-outcomes", "score-outcomes",
+    } else ".build.lock"
+    with (root / name).open("a") as guard:
         fcntl.flock(guard.fileno(), fcntl.LOCK_EX)
         return stage(args, root, config)
 
