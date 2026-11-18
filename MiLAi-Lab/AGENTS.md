@@ -1,4 +1,37 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C08/C09closed/S19/C10Reader44active
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C10QAclosednegative/P02capacityfeasible
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v41.json.
+No live own jobs; C10PID1160426 actualabsent/terminal. All80positions CLOSED44new36reuse,
+6knownfailed0unknown152978tokens/U0.44Bjudgments frozen BEFORE methodscores23true14false7unknown.
+Prior1all4models+fixed4 each6true1false1unknown; prior0native/reviewed4/2/2,weak2/5/1,warm3/4/1;
+cosine7=7/1/0. No bestprior/model selected. Reviewed0-vsusable1 all8unknownassignment delta
+[-.375,0], nominalsourcebootstrapunknownenvelope[-.875,.5]; smallN/Bonly/notformalCIproof.
+TRAINpriorreversal18/22 did NOT establish complete-policy generalization. Preserve allnegatives,
+no retuningLR/epochs/priorconstant on8rootresult. G1/G2/G3NOTestablished; source S19 unchanged.
+P02original143rejectionpositions/129loggedversions/9banks copiedread-only. V1generated-only
+profile rejectedall129 before tokenmeasurement, INCONCLUSIVE notcapacityfailure; kept cost.
+Exact logged producer semantics is legacyEXTRACTIVE_SEMANTICS. V2recognizes it BEFORE token
+measurement, reusesownedv1copiedparent snapshots. All129commonMemoryServiceparentvisibility/
+revision checks passed, actual roles/clocks/locators used. CurrentrealReaderwrapper fullplain
+2204..46793/table2070..40431 all>2048; first/query-overlap/largest whole-node projections each
+fitALL129versions/143positions,657..801tokens, wholefields/globalunknowns/scope/aliasclosure
+and losslessroundtrip preserved. All0typedrules, no semanticcompleteness/taskgain/integration.
+Notexacthistoricalwire reproduction; earlierabbreviatedstandalone audits notdirect comparison.
+OnlyownedcopiedDBs written; no originalStore/Source/model/default changes or Reader/GPUcalls.
+9closedlocal scopes SETTLEDONCE/readback at C10-P02-after-closed-local-cost-v1, includesP02v1
+inconclusive costs; nativeC10alreadyauto billed, no nestedbank/profile rebill. No pendingmeasured
+scope. Badscore shell command failed beforePython, unmeasuredUNKNOWN; corrected before scoring.
+NextP03 commonexecutor opt-in wholeViewunit delivery: ParentID/revision/node completebindings,
+allparentvisibility/version checks BEFORE pruning, explicitpartialclosure/roles/clocks/unknowns;
+genuineconditionalfixtures +actualReader required before learnedP/qualityclaims. Do not narrow
+fullgoal to renderer/data production. Reliablecalibration/M1/D1/P-D/twoactualownstate+matched
+oldpool/3seeds/strongbaseline/power/newCONFIRM/transfer/delivery incomplete.488oldownobservations
+stillunlabelled/notD3. C06lostUNKNOWN/9295reservation, oldcost/errata remain. No protectedbody/
+Product/Archive/permission/default/push/merge changes. SHA/fingerprints OFF. Fullgoal ACTIVE.
+
+The following v40 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C08/C09closed/S19/C10Reader44active
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v40.json.
 C06full64/C07ninefit facts remain v39. C08 actual12conditions x8DEV-fit24:32 CLOSED96executions,

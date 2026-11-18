@@ -1,0 +1,222 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v41.json",
+  "source": "S19/ec0e6b6d unchanged",
+  "C10": {
+    "status": "CLOSED_PRIOR_INTERVENTION_DEV_NEGATIVE_VS_USABLE_START",
+    "firsts": "C10-prior-DEVfit8-firsts-v1/run.json",
+    "conditions": 10,
+    "source_roots": 8,
+    "nominal_positions": 80,
+    "new_unique_calls": 44,
+    "reused_positions": 36,
+    "known_failure_positions": 6,
+    "unknown_execution_positions": 0,
+    "new_known_tokens": 152978,
+    "unknown_usage_delta": 0,
+    "frozen_before_scores_true_false_unknown": [
+      23,
+      14,
+      7
+    ],
+    "review_grade": "B_project_aware_assistant_provisional",
+    "reviewed_index": "C10-prior-reviewed-task-index-v1.json",
+    "review": "C10-prior-DEVfit8-closed-review-v1.json",
+    "native_scores": "C10-prior-DEVfit8-native-scores-v1/run.json",
+    "reviewed_scores": "C10-prior-DEVfit8-reviewed-scores-v1/run.json",
+    "reviewed_summary_true_false_unknown": {
+      "encoder_cosine7": [
+        7,
+        1,
+        0
+      ],
+      "fixed_context4": [
+        6,
+        1,
+        1
+      ],
+      "native64_prior0": [
+        4,
+        2,
+        2
+      ],
+      "native64_prior1": [
+        6,
+        1,
+        1
+      ],
+      "reviewed64_prior0": [
+        4,
+        2,
+        2
+      ],
+      "reviewed64_prior1": [
+        6,
+        1,
+        1
+      ],
+      "usable_warm24_prior0": [
+        3,
+        4,
+        1
+      ],
+      "usable_warm24_prior1": [
+        6,
+        1,
+        1
+      ],
+      "weak64_prior0": [
+        2,
+        5,
+        1
+      ],
+      "weak64_prior1": [
+        6,
+        1,
+        1
+      ]
+    },
+    "native_summary_true_false_unknown": {
+      "encoder_cosine7": [
+        3,
+        5,
+        0
+      ],
+      "fixed_context4": [
+        4,
+        4,
+        0
+      ],
+      "native64_prior0": [
+        1,
+        7,
+        0
+      ],
+      "native64_prior1": [
+        4,
+        4,
+        0
+      ],
+      "reviewed64_prior0": [
+        1,
+        7,
+        0
+      ],
+      "reviewed64_prior1": [
+        4,
+        4,
+        0
+      ],
+      "usable_warm24_prior0": [
+        2,
+        6,
+        0
+      ],
+      "usable_warm24_prior1": [
+        4,
+        4,
+        0
+      ],
+      "weak64_prior0": [
+        1,
+        7,
+        0
+      ],
+      "weak64_prior1": [
+        4,
+        4,
+        0
+      ]
+    },
+    "reviewed0_vs_usable1_all8_unknown_delta_bounds": [
+      -0.375,
+      0.0
+    ],
+    "source_bootstrap_unknown_envelope95": [
+      -0.875,
+      0.5
+    ],
+    "all8roots_kept_unknowns_samefirst_jointly_tied": true,
+    "formal_significance_or_best_variant_selection": false,
+    "no_new_default_or_extra_training_search": true
+  },
+  "P02": {
+    "card_v1": "P02-whole-unit-full-wrapper-capacity-card-v1.json",
+    "audit_v1": "P02-full-wrapper-capacity-v1/run.json",
+    "v1_inconclusive_not_capacity_failure": true,
+    "card_v2": "P02-whole-unit-full-wrapper-capacity-card-v2.json",
+    "audit_v2": "P02-full-wrapper-capacity-v2/run.json",
+    "closed_review": "P02-full-wrapper-capacity-closed-review-v1.json",
+    "old_positions": 143,
+    "unique_versions": 129,
+    "copied_banks": 9,
+    "valid_parent_snapshots": 129,
+    "recognized_producer": "Exact recorded EXTRACTIVE_SEMANTICS, originalsemantics retained, builder restored for currentrenderer beforemeasurement",
+    "full_plain_tokens": [
+      2204,
+      46793
+    ],
+    "full_table_tokens": [
+      2070,
+      40431
+    ],
+    "full_plain_or_table_fitting_versions": 0,
+    "all3fixed_whole_node_candidates_each_fitting_versions": 129,
+    "fullwrapper_projection_tokens": [
+      657,
+      801
+    ],
+    "fixed_projection_fit_positions": 143,
+    "whole_nodes_rules_unknowns_scope_roles_clocks_aliases_preserved": true,
+    "lossless_roundtrip_and_full_selection_identity_checked": true,
+    "typed_rules": 0,
+    "not_historicalwire_or_task_sufficiency_proof": true,
+    "originalStore_Source_cache_or_model_changes": false,
+    "no_Runtime_integration_or_learnedP_gain": true,
+    "Reader_GPU_calls": 0,
+    "v1_CPU_seconds": 7.4118249370000004,
+    "v2_CPU_seconds": 19.327630212000003
+  },
+  "costs": {
+    "new_closed_local_scopes_once": 9,
+    "receipt": "C10-P02-after-closed-local-cost-v1.json",
+    "C10native_phase_auto_compute_not_rebilled": true,
+    "P02v1inconclusive_and_v2costs_both_kept": true,
+    "no_nested_bank_profile_worker_rebill": true,
+    "own_C06_unknown_usage_reservation_retained": [
+      1,
+      9295
+    ],
+    "unmeasured_failed_shell_launch_manual_fullGPU_IO_energy_money": "UNKNOWN",
+    "no_second_real_ledger": true
+  },
+  "next_action": "P03optin unit delivery in commonexecutor/Reader with complete parentID/revision/nodebindings and allparent visibility/version checks beforepruning; explicitpartial/roles/clocks/unknowns, genuineconditionalfixtures andactualReader required. No retuneprior or labelscale from8rootnegative. Fullgoal remains.",
+  "remaining": [
+    "Reliableindependentcalibration",
+    "M1 andD1if justified",
+    "P/Dactual learnedtask effects",
+    "Twoownstate+matchedoldpool/replay",
+    "3seeds",
+    "Strongbaseline/power/newCONFIRM",
+    "SecondReader/externaltransfer",
+    "Deliverables"
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "own_live_jobs": 0,
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "old_model_weights_or_configs_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false,
+  "validation": {
+    "JSON_counts_paths_and_frozen_source_fullbytes": "PASS",
+    "source_changed_sinceS19checks": false,
+    "repeated_unit_tests": 0,
+    "S19existing_targeted_tests": 28,
+    "rollback_commit": "aa184fd2",
+    "remote_checked": false
+  }
+}
