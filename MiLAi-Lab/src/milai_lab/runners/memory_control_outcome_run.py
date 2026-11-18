@@ -16,7 +16,7 @@ import httpx
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
 from milai_lab.datasets.memory_control_reader_task import reader_task
-from milai_lab.datasets.memory_control_store import connect, dumps, packed, unpack
+from milai_lab.datasets.memory_control_store import connect, dumps, get_meta, packed, unpack
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, http_budget_scope
 from milai_lab.methods.dataset_control_states import CONTINUATION, task_annotation
 from milai_lab.methods.dataset_corpus_runtime import CorpusExecution
@@ -52,6 +52,7 @@ STATE_SUBSAMPLING = (
     ("explore", 0.15),
 )
 METERING = "native_vllm_shared_ledger_v1"
+SAMPLER = "native_group_source_caps_balanced_strata_v3"
 Chooser = Callable[[MemoryControlState, list[MemoryAction]], str]
 
 
@@ -130,7 +131,7 @@ def select_states(
         is not None
     )
     pools = defaultdict(list)
-    primary = 2048
+    primary = get_meta(db, "derivation")["revision"]["primary_budget"]
     for row in db.execute("""
         SELECT s.id, s.recipe, t.dataset, t.native_group, s.actions, v.material_budget,
                v.action_feasibility, w.evidence, v.diagnostics
@@ -166,7 +167,6 @@ def select_states(
             axes.add("explore")
         pools[row["dataset"]].append((row["id"], row["native_group"], axes))
     rng = random.Random(seed + len(used))  # noqa: S311 -- repeatable sampling
-    selected: list[tuple[int, str]] = []
     total = sum(DEFAULT_STATE_QUOTAS.values())
     quota = {
         source: min(max(0, target - prior[source]), round(limit * target / total))
@@ -174,27 +174,57 @@ def select_states(
     }
     if sum(quota.values()) < limit and (s := max(quota, key=quota.__getitem__)):
         quota[s] = min(DEFAULT_STATE_QUOTAS[s] - prior[s], quota[s] + limit - sum(quota.values()))
-    for source, rows in sorted(pools.items()):
-        group_order = list(group_round_robin(rows, rng))
-        count = max(0, quota[source])
-        selected_source: dict[int, str] = {}
-        for stratum, fraction in STATE_SUBSAMPLING:
-            target = min(count - len(selected_source), round(count * fraction))
-            candidates = (
-                (sid, labels)
-                for sid, labels in group_order
-                if sid not in selected_source and stratum in labels
-            )
-            for _ in range(target):
-                entry = next(candidates, None)
-                if entry is None:
-                    break
-                selected_source[entry[0]] = stratum
-        for sid, _ in group_order:
-            if len(selected_source) >= count:
+    ordered = {source: list(group_round_robin(rows, rng)) for source, rows in sorted(pools.items())}
+    chosen: dict[str, dict[int, str]] = {source: {} for source in ordered}
+    random_fraction = dict(STATE_SUBSAMPLING)["random"]
+    for source, rows in ordered.items():
+        n = round(quota[source] * random_fraction)
+        chosen[source].update((sid, "random") for sid, _ in rows[:n])
+
+    targets = {
+        stratum: round(sum(quota.values()) * fraction)
+        for stratum, fraction in STATE_SUBSAMPLING
+        if stratum != "random"
+    }
+
+    candidates_by_axis: dict[str, dict[str, list[int]]] = {}
+    for stratum in targets:
+        candidates_by_axis[stratum] = {
+            source: [sid for sid, labels in rows if sid not in chosen[source] and stratum in labels]
+            for source, rows in ordered.items()
+        }
+    options: dict[str, deque[tuple[str, Iterator[int]]]] = {}
+    for stratum, per_source in candidates_by_axis.items():
+        # Use sources with fewer replacement opportunities for the current axis.
+        # A broad stop/budget stratum should leave room for precision and exploration.
+        priority = sorted(
+            per_source,
+            key=lambda source: sum(
+                min(len(candidates[source]), quota[source] - len(chosen[source]))
+                for name, candidates in candidates_by_axis.items()
+                if name != stratum
+            ),
+        )
+        options[stratum] = deque((source, iter(per_source[source])) for source in priority)
+    placed: Counter[str] = Counter()
+    while active := [axis for axis, n in targets.items() if placed[axis] < n and options[axis]]:
+        stratum = min(active, key=lambda name: placed[name] / targets[name])
+        source, source_iter = options[stratum].popleft()
+        selected_source = chosen[source]
+        if len(selected_source) >= quota[source]:
+            continue
+        sid = next((sid for sid in source_iter if sid not in selected_source), None)
+        if sid is not None:
+            selected_source[sid] = stratum
+            placed[stratum] += 1
+            options[stratum].appendleft((source, source_iter))
+
+    for source, rows in ordered.items():
+        for sid, _ in rows:
+            if len(chosen[source]) >= quota[source]:
                 break
-            selected_source.setdefault(sid, "unfilled_stratum_random")
-        selected.extend(selected_source.items())
+            chosen[source].setdefault(sid, "unfilled_stratum_random")
+    selected = [item for source in chosen.values() for item in source.items()]
     rng.shuffle(selected)
     return selected
 
@@ -209,10 +239,6 @@ def choose_actions(
     bounds = {a.id: a for a in viable}
     reads = [a for a in viable if a.kind == "READ"]
     chosen = dict.fromkeys(["handoff", *(policy(session.state, viable) for policy in suggestions)])
-    if reads:
-        chosen.setdefault(reads[0].id)
-    if len(chosen) < 3 and reads:
-        chosen.setdefault(rng.choice(reads).id)
     context_pairs = [
         (a.id, f"read_{a.parameters['index']}")
         for a in reads
@@ -223,6 +249,8 @@ def choose_actions(
             chosen.setdefault(focus)
             chosen.setdefault(expanded)
             break
+    if reads and len(chosen) < 5:
+        chosen.setdefault(reads[0].id)
     unused = [a.id for a in reads if a.id not in chosen]
     if unused and len(chosen) < 5:
         chosen[rng.choice(unused)] = None
@@ -370,6 +398,7 @@ def prepare_outcomes(
         "comparison_protocol": comparison_protocol(dataset),
         "observation_protocol": dataset.observation_protocol,
         "selection_seed": seed,
+        "selection_protocol": SAMPLER,
         "dataset_run_id": dataset.run_id,
         "sealed": False,
         "recommendations": [name for name, _ in suggestions],
