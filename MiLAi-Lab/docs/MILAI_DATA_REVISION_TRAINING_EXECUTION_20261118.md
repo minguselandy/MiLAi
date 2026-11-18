@@ -121,12 +121,17 @@ L2 变化为 51.915，训练和离线 DEV 共用 5,965.20 秒。末轮离线 AP 
 QASPER、Persona 上分别为 0.1949、0.1505、0.1150。M1/N1 已沿同一冻结训练路线
 从 N1 特征缓存启动。实际覆盖和检查点见 `M1-W-N0-seed11/coverage.json` 和
 `M1-W-N0-seed11/checkpoint`。
+M1/N0 的 CPU 6,299.58 秒、CUDA 调用段 6,005.23 秒已在原共享台账结算一次。
+结算收据为 `M1-W-N0-compute-settlement.json`。
 
 DEV 协调器在等待 B* 时接续到按检查点就绪顺序调度。B* 登记后，M0/N0、M0/N1、M1/N0
 可以先用 GPU 2 评估，最后一臂就绪时加入。四臂各完成已注册的 605 个位置后计算 2×2 对照。
 已就绪三臂分别在同一批 12 个不同 DEV 原生组上实际重放，均生成 12 个可提交请求。
 GPU 2 上的平均本地 episode 耗时依上述顺序为 1.417、1.642、1.526 秒。该测量只包含本地
 重放，Reader 请求数为 0。见 `WO-dev-ready-arms-handoff.json` 和 `early-W-DEV-replay.json`。
+三臂随后在同一批 100 个 MuSiQue 位置回收实际 Reader 回复，覆盖 50 个完整原生对。
+三臂相对 B* 的原生组分差依次为 −3.10、−0.40、−5.04 点。M0/N1 相对 M0/N0 的点估计为
++2.70，分组 95% 区间为 [−7.82, 13.34]。首批实际对照见 `dev-early-W-first-musiques-v1.json`。
 
 宽 M0/N1 已完成三轮、6,066 次更新和 776,154 次状态曝光。M0/N0 末轮头与其初始化头
 在固定停止和相同合法候选下，各完成 7 个 DEV 任务和 7 次 Reader 请求。训练头在该小样本
@@ -196,6 +201,9 @@ B3 与 B1 的 98 个请求逐项相同，原始分差为 +1.33 点，复用实�
 
 Gold 材料诊断 `G` 在正式 B0 到 B4 完成并登记 B* 后，从同一 DEV605 人群发起实际 Reader
 请求并独立出具原生质量和成本。协调状态见 `gold-dev-coordinator.json`。
+首次调用的冻结 CLI 仅登记 B0 到 B4，G 在参数解析时退出，请求数为 0。已核对后切到
+支持 G 的 `500ee850` 冻结入口，首批 100 个位置已收回。原始日志和交接见
+`gold-dev-source-correction.json`。
 
 主 DEV 的 B0 到 B4 在共享 Reader 租约下分块提交。605 个任务的正式结果、B* 选择、
 24,000 个 core 状态上的正式 O、12,000 个策略到达状态上的 P、参数匹配和三种子确认继续
@@ -203,6 +211,12 @@ Gold 材料诊断 `G` 在正式 B0 到 B4 完成并登记 B* 后，从同一 DEV
 诊断分支用于验证执行闭环和训练消费。
 03:44 已回收 2,100 个正式 DEV 位置的终态收据，B0 为 500 个，B1 到 B4 各 400 个。
 04:02，所有臂均至少收回 500 个位置，B0 已收回 600 个，共 2,600 个位置。
+04:22，五臂均收齐 605 个位置，共 3,025 个实际终态。公共对照包含 222 个原生组。
+B1 以来源等权宏分 26.4602、平均 Reader input 1,162.03 token 冻结为 B*。
+完整 DEV 上 B3 和 B1 的 605 个请求逐项相同，原始分差 −0.25 点在复用实测回复后为 0。
+B2 相对 B1 增加 49.88% 输入 token，原始分差 −0.74 点，95% 区间为 [−3.24, 1.56]。
+复用同请求的实测回复后，B2 的差为 −0.014 点。见 `dev-baseline-selection.json` 和
+`dev-baseline-paired-full-v1.json`。
 首次 3,000 状态的抽样在 Reader 派发前冻结。MuSiQue／QASPER／Persona 数量为
 2,000／625／375，覆盖 2,964 个任务和 2,689 个原生组。分层得到 1,200 个代表性样本、
 375 个可行 R2/R3 配对样本、600 个停止或预算边界样本、227 个探索样本，另有 598 个
@@ -253,6 +267,39 @@ O/P 各轮检查点评分。该 outcome 角色与 TRAIN loaders 隔离。seed 11
 seed 29/47。三个 seed 都有实际检查点后才登记最终确认组和 22 个比较臂。该流程的
 实际执行状态记录在 `v11-followthrough.json`。
 
+## 外部静态转移评估
+
+LongMemEval S 的 500 题与历史评估暴露清单逐项核对。原始会话 ID 的重叠关系把它们连成
+一个历史组。本轮将该来源用于已暴露的外部回归。适配器复用原会话排序、角色、字面区间
+和实际日期，用相同的 R2/R3、可行性与 Reader 交付入口运行。读取公开会话时仅取原始文本、
+角色和日期。一个真实问题的离线答案、答案会话和 `has_answer` 变更后，公开历史和最终
+Reader 请求逐项复现。评分在 Reader 结果封存后使用项目原 Reader 部署的模型执行 LongMemEval
+题型判分规则。回归身份来自 `data/manifests/jev-longmemeval-exposure-final-v1-20261017.json`。
+
+MemoryAgentBench 使用官方 Accurate Retrieval 发布中 `eventqa_full` 的全部五个原始
+上下文和 500 个问题位置。同名题号在不同上下文重复，运行按发布行号和原生题号共同绑定。
+读取时使用发布的原始文本、实际换行和题目自带选项，沿用普通检索及区间交付。
+适配协议评估已形成的静态来源上的选读能力。EventQA 从 Reader 的结构化答复取答案文本，
+按官方归一化的子串精确匹配计分，并按五个上下文报告。发布身份为
+`7ea066982b140a19337e17e60d45d4076e042faf`。
+[发布数据](https://huggingface.co/datasets/ai-hyz/MemoryAgentBench/tree/7ea066982b140a19337e17e60d45d4076e042faf)
+[官方评分定义](https://github.com/HUST-AI-HYZ/MemoryAgentBench/blob/main/utils/eval_other_utils.py)。
+
+| 来源 | 登记位置 | 原生上下文组 | 完整材料 token 范围 | 完整材料超预算 | 实测完整 Host 请求超限 |
+|---|---:|---:|---:|---:|---:|
+| LongMemEval S | 500 | 1 | 133,732–152,150 | 500/500 | 500/500 |
+| EventQA 全文版 | 500 | 5 | 693,761–1,440,826 | 500/500 | 5/5，每个上下文一题 |
+
+材料预算为 2,048 token，容量核验覆盖登记队列，并保留所有超限位置的实际计数。
+B1 和 M0/W/N1 的匹配诊断均完成请求准备。LongMemEval 每个原生题型取最前两个位置，
+共 12 题每臂。EventQA 每个上下文取最前两个位置，共 10 题每臂，20 个真实 Reader 请求均
+已回收。外部运行使用原共享台账，容量、匹配准备和运行状态见运行根的 `external`。
+Reader 执行源码冻结为 `03171d94`。
+
+EventQA 匹配诊断中，B1 与 M0/W/N1 分别命中 7/10 和 5/10，Reader 输入 token 分别为
+13,799 和 23,780。所有调用均有提供方用量，20 个回复通过结构化解析。十个任务的
+两臂请求均有实际差异。逐上下文得分和成本见 `external/eventqa-pilot-matched.json`。
+
 ## 重放入口
 
 在本工作树的 `MiLAi-Lab` 中执行以下命令。源码冻结版目录与运行脚本记录在运行根。
@@ -284,3 +331,23 @@ MILAI_CONFIG=configs/datasets/memory_control_v1_1.json
 `launch-WO-dev.py` 和 `launch-G-dev.py` 保存正式调用参数。Core 协调器核对两臂 W
 的完整覆盖、检查点和相同数据顺序后开始采集。运行状态由实际进程和收据确认。Reader
 使用原共享台账，局部计算成本可在各段关闭后从对应收据核对。
+
+外部运行根中的 `external/launch-external-v11-pilots.py` 保存两个来源的实际 Reader
+和评分调用。以下入口可重建 EventQA 的独立输入、参考和容量记录。
+
+```bash
+MILAI_EXT="$MILAI_RUN/external"
+MILAI_PARQUET_PY=/data/miniconda3/envs/langgraph/bin/python
+"$MILAI_PARQUET_PY" tools/extract_memory_control_eventqa.py \
+  --parquet "$MILAI_EXT/memoryagentbench/Accurate_Retrieval-00000-of-00001.parquet" \
+  --source-revision 7ea066982b140a19337e17e60d45d4076e042faf \
+  --public "$MILAI_EXT/replay/eventqa-public.json" \
+  --references "$MILAI_EXT/replay/eventqa-references.json"
+"$MILAI_PY" tools/run_memory_control_external.py --data "$MILAI_DB" --source eventqa \
+  --input "$MILAI_EXT/replay/eventqa-public.json" \
+  --output "$MILAI_EXT/replay/eventqa-full-capacity.json" capacity --workers 3
+"$MILAI_PY" tools/run_memory_control_external.py --data "$MILAI_DB" --source longmemeval \
+  --input /cra/memory/mx_memory/benchmarks/LongMemEval/data/longmemeval_s_cleaned.json \
+  --exposure data/manifests/jev-longmemeval-exposure-final-v1-20261017.json \
+  --output "$MILAI_EXT/replay/longmemeval-capacity.json" capacity --workers 4
+```
