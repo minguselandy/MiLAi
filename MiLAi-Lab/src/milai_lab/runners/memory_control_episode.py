@@ -6,7 +6,7 @@ import json
 import random
 import sqlite3
 import time
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
 from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
@@ -78,18 +78,26 @@ def lock_episode_population(
                 source_rows[row["dataset"]][row["native_group"]].append(row["id"])
         rng = random.Random(seed)  # noqa: S311 -- registered source allocation
         cohort: list[dict[str, Any]] = []
+        remaining: dict[str, deque[str]] = {}
+
+        def take_group(dataset: str) -> int:
+            group = remaining[dataset].popleft()
+            ids = source_rows[dataset][group]
+            cohort.extend({"task_id": task, "dataset": dataset, "native_group": group}
+                          for task in ids)
+            return len(ids)
+
         for dataset, groups in sorted(source_rows.items()):
             order = sorted(groups)
             rng.shuffle(order)
+            remaining[dataset] = deque(order)
             selected = 0
-            for group in order:
-                if selected >= target_tasks // len(source_rows):
-                    break
-                ids = groups[group]
-                cohort.extend(
-                    {"task_id": task, "dataset": dataset, "native_group": group} for task in ids
-                )
-                selected += len(ids)
+            while remaining[dataset] and selected < target_tasks // len(source_rows):
+                selected += take_group(dataset)
+        while len(cohort) < target_tasks and any(remaining.values()):
+            for dataset, queue in remaining.items():
+                if queue and len(cohort) < target_tasks:
+                    take_group(dataset)
         if not cohort or len({row["dataset"] for row in cohort}) != len(source_rows):
             raise ValueError("Target does not admit a group from every available source")
         population = {
@@ -101,7 +109,11 @@ def lock_episode_population(
             "material_budget": budget,
             "seed": seed,
             "arms": allowed_arms,
-            "selection": "native_group_whole_group_seeded_v1",
+            "selection": "native_group_whole_group_seeded_redistribution_v2",
+            "eligible_tasks_by_source": {
+                source: sum(len(ids) for ids in groups.values())
+                for source, groups in source_rows.items()
+            },
             "inference_order": "same_task_order_for_all_arms",
             "primary_quality": "equal_source_macro_v1",
             "bootstrap_repeats": 2000,

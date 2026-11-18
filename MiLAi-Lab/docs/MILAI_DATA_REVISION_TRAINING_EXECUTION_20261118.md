@@ -50,6 +50,9 @@ temperature 0，最多 512 输出 token，关闭 thinking，显式保留输出�
 token 减少反映序列化变化。单独选取的 48 条真实重叠路径来自 48 个 DEV 原生组，
 原始选读区间平均合并 595 个重复字符，实际序列化包平均少 10.1 token。
 详见 `fixed-delivery-comparison-v1.json` 和 `fixed-delivery-overlap-diagnostic.json`。
+在 1,536 和 3,072 预算下分别再执行 1,210 条固定路径。V1 分别无法交付 91 条和 2 条
+V1.1 路径。QASPER DEV 的超预算弱正 READ 数在 1,536、2,048、3,072 下依次为
+1,022、329、35。评估端将用各预算的实际 Reader 结果检验这些可行性差异。
 
 ## 已运行的训练与 Reader 诊断
 
