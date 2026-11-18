@@ -1,4 +1,40 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C11matchedM0M1closed/nochangedpolicy
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; D02basecachemeasured/S22defaultOFF
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v45.json.
+D02fixed8C11actualM1trajectories literalinput audit exactlyreproduced1933texts/549946tokens/
+144forwards;65.4%tokens potentiallyreusable, originalpolicystage86.9%retrievalwall. S22/b84e00e7
+optin processlocalbounded frozen independent-encoder basevector cache; defaultOFF/oldconfig
+unchanged. Literalrole+prefix+fulltext keys, current-featureinput-only, payload+key bytecap,
+Python/RSSoverheadUNKNOWN. Currentworkspace/head fullyrerun, no relation/taskconditioned reuse.
+Nativeparameter/buffermutationversions reset, trainingclear, adaptive/joint/decodercache rejected;
+residenttokenizer immutable. NativeQA explicitflag coldpertask saved-model path, countersreported.
+103testsPASS/4existingallocatedGPUrecoverySKIP, plus2realSQLiteunselectedparentSource-revoke
+M0/M1cachechecksPASS=105distinct; Ruff/mypy/package/toolsPASS. Failedinitiallint/3mock__new__
+regressions+checkerHANDOFFmissingresult retained, finalfixes passed.105notallGPUrecoverytests.
+ActualGPU3E5balanced2modes x2architectures x8exposedroots:192scoredstate-modes, everyfullhead
+rerun; maxscoreerror2.98e-7/sameactions. Eacharch549946->190125actualtokens/144->56forwards;
+MLPscorewall4.761->2.113s(2.253x),M1 4.816->2.257s(2.133x), notReader/endtoend/wholelifecost.
+32completeactualtasks/40distinctDBsinclcommon,192exactbefore/menu/selected/result matches,
+allactualSource ranges/packet/fullwire sameC11. NoSGD/Reader/newquality. B6/1/1 andnative4/4/0
+inherited, notconfirmation. Fullparent94.949CPU/80.484allocatedGPU sec(notkernel), cap240.
+C11previous11 andD02new16closedcostscopes SETTLEDONCE/readback; oldC11wait1561151/D02wait1644147/
+modeldriver1623816 terminal/absent. Collectorclockv1fieldnamedwholeprocess excluded imports;
+v2clarifiesfunctioncollectorinclload only, numericalvaluesunchanged, parentcostincludesworkers.
+Onlyonecost-only1652663 waits ONEextra metadata scope; actualnewR40B1648312 run_R40B_unissued_reader_blocks_v1.py
+FLOCK+commandsverified. PreviousR40/1297193 gone. Neverrestartlostobs; onrelease settleonce/readback.
+No busyledgerreads/newledger/nestedfit/probe/condition/testrebill. FailedcheckerfullCPU/wall,
+manual/import/wholeIO/kernel/RSSoverhead/energy/money UNKNOWNnot0. C06UNKNOWN9295retained.
+D02establishes strongsimple base-cachebaseline, NOT learnedD/G1/G2/fulllearnedG3. Recompute
+currentqueryworkspace; do nottrain neuralgate to imitateexact validity or compareonlyuncached.
+NextheterogeneousP/D Source/partial-fullView/refresh realoutcomes+cheapquery/rulecontrols,
+reliablecalibration/explicitV3usableM0M1+matchedlearning/twoactualownstate+matchedoldpoolreplay/
+3seeds/power/newCONFIRM/transfer/delivery remain. KeepC11/C07/C10negative/P03rawcheaper/J02failedgate;
+old488ownstatesunlabelled/notround1. Sourcepermissions/Product/Archive/defaults/protectedbodies/
+push/merge unchanged. SHA/fingerprints OFF. Fulloriginalgoal ACTIVE_INCOMPLETE.
+
+The following v44 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C11matchedM0M1closed/nochangedpolicy
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v44.json.
 C11S15 finite6 fits CLOSED: literalV1objects/V2projection/frozenE5, minimalM0/M1 each ownusable

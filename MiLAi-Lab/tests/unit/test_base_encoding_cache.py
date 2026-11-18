@@ -2,6 +2,7 @@
 import copy
 import json
 from dataclasses import replace
+from datetime import UTC, datetime
 
 import pytest
 
@@ -172,3 +173,62 @@ def test_runtime_optin_not_saved_or_loaded_and_unsupported_adaptation_rejected(m
     cached.config = replace(cached.config, adaptation="full")
     with pytest.raises(ValueError, match="frozen independent encoder"):
         cached.configure_base_encoding_cache(1)
+
+
+@pytest.mark.parametrize("architecture", ["object_mlp", "latent_pointer"])
+def test_real_unselected_source_revoke_removes_cached_parent_vectors(models, tmp_path,
+                                                                  architecture):
+    from langgraph.store.sqlite import SqliteStore
+
+    from milai_lab.memory.service import MemoryService
+    from milai_lab.methods.control_observation import BOUND_VIEW_UNITS_V3
+    from milai_lab.methods.evidence_control import EvidenceOperations
+    from milai_lab.methods.memory_control import MemoryControlState
+    from milai_lab.methods.query_structure import build_query_structure
+
+    torch = pytest.importorskip("torch")
+    cached, baseline, _ = models(architecture)
+    for model in (cached, baseline):
+        model.config = replace(model.config, maximum_memory_objects=16,
+                               projection_version=BOUND_VIEW_UNITS_V3)
+    cached.configure_base_encoding_cache(200_000)
+    with SqliteStore.from_conn_string(str(tmp_path / "lifecycle.sqlite")) as store:
+        service = MemoryService(store, ("base-cache", "alice"), "alice", tmp_path / "lock",
+            functional_contract="functional_v1",
+            clock=lambda: datetime(2032, 5, 2, tzinfo=UTC))
+        alpha = service.capture_user("s", "alpha", "alpha is recorded.")["source_ref"]
+        beta = service.capture_user("s", "beta", "beta is recorded.")["source_ref"]
+
+        def build(messages, schema):
+            aliases = [s["id"] for s in json.loads(messages[1]["content"])["sources"]]
+            return {"scope": "alpha and beta records", "nodes": [
+                {"id": "n0", "text": "alpha is recorded.", "kind": "reported",
+                 "evidence": [aliases[0]]},
+                {"id": "n1", "text": "beta is recorded.", "kind": "reported",
+                 "evidence": [aliases[1]]}],
+                "rules": [], "remove": [], "remove_rules": [], "unresolved": []}
+
+        build_query_structure(service, "alpha task", "2032-05-02", [alpha, beta],
+                              policy="incremental", call=build)
+        state = MemoryControlState(task={"request": "alpha task", "query_time": "2032-05-02"})
+        ops = EvidenceOperations(service, state, load_pool=lambda: [],
+            refresh_call=lambda *_: pytest.fail("No model refresh admitted in this test"),
+            fits=lambda _: True, view_updates=False, delivery_selection=True,
+            source_directory_only=True, view_unit_selections={"current": [["n0"]]})
+        action = next(a for a in ops.actions(state) if a.kind == "USE_VIEW"
+                      and a.parameters.get("view_nodes") == ["n0"])
+        assert ops.execute(action, state)["ok"]
+        actions = ops.actions(state)
+        before = {"observation": state.project(), "actions": [a.__dict__ for a in actions]}
+        cached.score(before)
+        assert any("beta is recorded" in key[2] for key in cached._base_encoding_cache.entries)
+        fragments = [f["fragment_handle"] for f in service.source_fragments(beta)]
+        assert service.forget("s", "withdraw-unselected-parent", fragment_handles=fragments)["ok"]
+        actions = ops.actions(state)
+        assert not any(a.kind == "USE_VIEW" for a in actions)
+        assert ops.reader_evidence()[0]["visibility"] == "support_unavailable"
+        after = {"observation": state.project(), "actions": [a.__dict__ for a in actions]}
+        actual = cached.score(after)
+        expected = baseline.score(after)
+        assert torch.allclose(torch.tensor(actual.scores), torch.tensor(expected.scores), atol=1e-6)
+        assert not any("beta is recorded" in key[2] for key in cached._base_encoding_cache.entries)

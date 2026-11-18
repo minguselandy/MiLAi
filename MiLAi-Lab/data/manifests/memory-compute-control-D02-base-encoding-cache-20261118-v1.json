@@ -1,0 +1,284 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v45.json",
+  "previous_manifest": "memory-compute-control-C11-matched-M0-M1-20261118-v1.json",
+  "source": "S22/b84e00e7",
+  "rollback_commit": "e7faf6f5",
+  "D02_artifacts": {
+    "profiling_card": "D02-base-cache-profiling-card-v1.json",
+    "reuse_audit": "D02-base-encoding-reuse-audit-v1.json",
+    "real_probe_card": "D02-real-cache-probe-card-v1.json",
+    "finite_driver": "D02-real-cache-driver-v1.json",
+    "balanced_replay": "D02-real-cache-replay-v1.json",
+    "closed_review": "D02-real-cache-closed-review-v2.json",
+    "old_review_preserved": "D02-real-cache-closed-review-v1.json",
+    "old_checker_failure": "D02-close-v1-failure-note.json"
+  },
+  "D02": {
+    "source": "S22/b84e00e7",
+    "balanced_real_encoder_replay": [
+      {
+        "architecture": "object_mlp",
+        "roots": 8,
+        "modes": {
+          "no_cache": {
+            "scoring_states": 48,
+            "wall_seconds": 4.760791069827974,
+            "cpu_seconds": 4.765546468000004,
+            "full_workspace_head_forwards": 48,
+            "actual_encoder_work": {
+              "texts": 1933,
+              "chunks": 2038,
+              "forwards": 144,
+              "input_tokens": 549946,
+              "padded_tokens": 783895
+            }
+          },
+          "cache": {
+            "scoring_states": 48,
+            "wall_seconds": 2.1131059546023607,
+            "cpu_seconds": 2.1136378360000023,
+            "full_workspace_head_forwards": 48,
+            "actual_encoder_work": {
+              "texts": 581,
+              "chunks": 662,
+              "forwards": 56,
+              "input_tokens": 190125,
+              "padded_tokens": 262503
+            }
+          }
+        },
+        "ratio_no_cache_to_cache_scoring_wall": 2.252982657807071,
+        "actual_encoder_input_token_reduction": 0.6542842388161747,
+        "max_score_error": 1.1920928955078125e-07,
+        "peak_cache_accounted_bytes": 146654
+      },
+      {
+        "architecture": "latent_pointer",
+        "roots": 8,
+        "modes": {
+          "no_cache": {
+            "scoring_states": 48,
+            "wall_seconds": 4.815523630939424,
+            "cpu_seconds": 4.816828889,
+            "full_workspace_head_forwards": 48,
+            "actual_encoder_work": {
+              "texts": 1933,
+              "chunks": 2038,
+              "forwards": 144,
+              "input_tokens": 549946,
+              "padded_tokens": 783895
+            }
+          },
+          "cache": {
+            "scoring_states": 48,
+            "wall_seconds": 2.2572392588481307,
+            "cpu_seconds": 2.2578691320000033,
+            "full_workspace_head_forwards": 48,
+            "actual_encoder_work": {
+              "texts": 581,
+              "chunks": 662,
+              "forwards": 56,
+              "input_tokens": 190125,
+              "padded_tokens": 262503
+            }
+          }
+        },
+        "ratio_no_cache_to_cache_scoring_wall": 2.133368721132728,
+        "actual_encoder_input_token_reduction": 0.6542842388161747,
+        "max_score_error": 2.980232238769531e-07,
+        "peak_cache_accounted_bytes": 146654
+      }
+    ],
+    "complete_actual_task_executions": 32,
+    "source_roots": 8,
+    "all_actual_before_menu_selected_result_comparisons": 192,
+    "complete_original_task_full_wire_matches": 32,
+    "distinct_database_files_including_common": 40,
+    "complete_native_conditions": [
+      {
+        "condition": "latent_cache",
+        "architecture": "latent_pointer",
+        "cache_bytes": 1048576,
+        "complete_tasks": 8,
+        "all_before_menus_actions_results_ranges_packets_wires_equal_old": true,
+        "policy_wall_seconds": 2.8084136974066496,
+        "retrieval_to_request_wall_seconds": 3.5617986731231213,
+        "actual_encoder_counters": {
+          "forwards": 56,
+          "input_tokens": 190125,
+          "padded_tokens": 262503,
+          "texts": 581,
+          "chunked_texts": 75,
+          "chunks": 662,
+          "joint_sequences": 0
+        },
+        "cache_counters": {
+          "requests": 1933,
+          "hits": 1352,
+          "misses": 581,
+          "same_call_reuses": 0,
+          "evictions": 0,
+          "stale_input_removals": 176,
+          "oversized_skips": 0,
+          "resets": 9,
+          "completed_feature_calls": 48,
+          "peak_accounted_bytes": 146654,
+          "entries": 51,
+          "accounted_bytes": 132560,
+          "max_accounted_bytes": 1048576,
+          "byte_scope": "Literal UTF-8 keys + tensor payloads; Python overhead/RSS unknown",
+          "scope": "Current public encoder inputs only; full workspace recomputed"
+        },
+        "collector_wall_seconds_including_load_excluding_module_imports": 6.816064594313502
+      },
+      {
+        "condition": "mlp_no_cache",
+        "architecture": "object_mlp",
+        "cache_bytes": 0,
+        "complete_tasks": 8,
+        "all_before_menus_actions_results_ranges_packets_wires_equal_old": true,
+        "policy_wall_seconds": 5.104674474336207,
+        "retrieval_to_request_wall_seconds": 5.857151161879301,
+        "actual_encoder_counters": {
+          "forwards": 144,
+          "input_tokens": 549946,
+          "padded_tokens": 783895,
+          "texts": 1933,
+          "chunked_texts": 99,
+          "chunks": 2038,
+          "joint_sequences": 0
+        },
+        "cache_counters": null,
+        "collector_wall_seconds_including_load_excluding_module_imports": 9.020055805332959
+      },
+      {
+        "condition": "mlp_cache",
+        "architecture": "object_mlp",
+        "cache_bytes": 1048576,
+        "complete_tasks": 8,
+        "all_before_menus_actions_results_ranges_packets_wires_equal_old": true,
+        "policy_wall_seconds": 2.6614435827359557,
+        "retrieval_to_request_wall_seconds": 3.4238739972934127,
+        "actual_encoder_counters": {
+          "forwards": 56,
+          "input_tokens": 190125,
+          "padded_tokens": 262503,
+          "texts": 581,
+          "chunked_texts": 75,
+          "chunks": 662,
+          "joint_sequences": 0
+        },
+        "cache_counters": {
+          "requests": 1933,
+          "hits": 1352,
+          "misses": 581,
+          "same_call_reuses": 0,
+          "evictions": 0,
+          "stale_input_removals": 176,
+          "oversized_skips": 0,
+          "resets": 9,
+          "completed_feature_calls": 48,
+          "peak_accounted_bytes": 146654,
+          "entries": 51,
+          "accounted_bytes": 132560,
+          "max_accounted_bytes": 1048576,
+          "byte_scope": "Literal UTF-8 keys + tensor payloads; Python overhead/RSS unknown",
+          "scope": "Current public encoder inputs only; full workspace recomputed"
+        },
+        "collector_wall_seconds_including_load_excluding_module_imports": 6.752220122143626
+      },
+      {
+        "condition": "latent_no_cache",
+        "architecture": "latent_pointer",
+        "cache_bytes": 0,
+        "complete_tasks": 8,
+        "all_before_menus_actions_results_ranges_packets_wires_equal_old": true,
+        "policy_wall_seconds": 5.283980427309871,
+        "retrieval_to_request_wall_seconds": 6.044569422490895,
+        "actual_encoder_counters": {
+          "forwards": 144,
+          "input_tokens": 549946,
+          "padded_tokens": 783895,
+          "texts": 1933,
+          "chunked_texts": 99,
+          "chunks": 2038,
+          "joint_sequences": 0
+        },
+        "cache_counters": null,
+        "collector_wall_seconds_including_load_excluding_module_imports": 9.304792736656964
+      }
+    ],
+    "runtime_default": "Cache OFF; opt-in max1MiB literalUTF8+tensorpayload, cold per actual task, entries limited to current feature inputs. Python overhead/RSS not a strict accounted-byte bound.",
+    "correctness_scope": "Frozen independent base encodings only, literal role/prefix/text, no digest or approximate match. All current workspace/head forwards rerun. Full input/config changes and native encoder parameter/buffer mutation versions invalidate; training clears; adaptive/joint/decoder cache use rejected. Resident tokenizer must remain immutable.",
+    "quality_scope": "All32 exact same original-task wire + actual ranges as C11, so frozen prior B6/1/1 and native4/4/0 inherited, not new QA or independence evidence. No newly generated firsts/failures/unknowns. Neither learned refresh nor trained-policy benefit established.",
+    "cost_scope": "Replay timing balances order inside each source with resident model and CUDA synchronization. Complete run phase times also include tokenizer/projection/head/current cache bookkeeping; process cost and load measured separately. No Reader latency/serverGPU/wholeIO/energy/money/end-to-end or lifecycle saving claim.",
+    "parent_CPU_seconds": 94.949082674,
+    "parent_scheduled_GPU_job_seconds": 80.48420899361372,
+    "scientific_disposition": "Adopt base-only cache as a strong simple opt-in D baseline for subsequent work, and keep current-query workspace recomputation. A learned refresh policy must improve beyond this baseline. Do not train a neural gate merely to imitate exact literal validity, and do not use the previous no-cache cost as the only comparator.",
+    "timing_field_scope_erratum": "v1 native condition field whole_process_wall_seconds_including_load was named too broadly: its clock starts inside prepare_packets after torch/module imports. Values unchanged, now explicitly collector time. Parent GPU/CPU job costs include worker startup/import/load/replay/execution once. No timing or quality result changed."
+  },
+  "validation": {
+    "final_relevant_regression": "103passed4existingallocated-GPU-recoverySKIP; D02-verification-pytest-v2.log",
+    "added_real_unselected_Source_revoke_M0_M1": "2passed; D02-verification-revoke-pytest-v1.log",
+    "distinct_tests_passed": 105,
+    "Ruff": "PASS ruff-v3 plusrevoke-ruff-v1",
+    "mypy": "PASS mypy-v2",
+    "package_tools_boundaries": "PASS boundary-v1/tools-boundary-v1; dependencyimports unchanged afterminorclass-defaultfix",
+    "initial_failures_preserved": "Rufftestsemicolon; regression3uninitialized__new__mockattrs+61pass; defaultclassNonefixed, finalall103pass. CheckerHANDOFFresultoptional KeyError fixedonlyinretainedv2checker; no runtime/modelrerun.",
+    "source": "S22/b84e00e7; later2tests only, sourceimplementationunchanged",
+    "live_source_vs_frozen_fullbytes": "checked atfreeze; recheck beforecommit, noSHA"
+  },
+  "costs": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "C11_11_scope_receipt": "C11-after-closed-cost-v1.json",
+    "C11_status": "SETTLED_ONCE_AND_READ_BACK",
+    "D02_16_scope_receipt": "D02-after-closed-cost-v1.json",
+    "D02_16_status": "SETTLED_ONCE_AND_READ_BACK",
+    "D02_one_timing_field_scope_status": "WAITING_ORIGINAL_SCOPE_COST_ONLY",
+    "D02_one_timing_field_scope_receipt": "D02-after-time-scope-clarification-cost-v1.json",
+    "D02_one_timing_field_scope_state": "D02-time-scope-cost-state-v1.json",
+    "D02_parent_CPU_seconds": 94.949082674,
+    "D02_parent_GPU_allocated_seconds": 80.48420899361372,
+    "no_inner_replay_condition_or_test_rebill": true,
+    "all_failed_measured_checks_kept": true,
+    "failed_close_v1_complete_cost": "UNKNOWN_NOT_ZERO",
+    "activeGPU_RSS_overhead_wholeIO_energy_money_manualwork_unmeasured_imports": "UNKNOWN",
+    "generation_tokens_requests_unknown_counters_unchanged": true,
+    "C06_own_unknown_delta": 1,
+    "C06_unknown_reservation_retained": 9295,
+    "no_new_ledger_or_busy_budget_load": true
+  },
+  "live_jobs": [
+    {
+      "kind": "D02_one_closed_timing_scope_metadata_cost_only",
+      "pid": 1652663,
+      "driver": "/data/milai-experiments/20261117-memory-compute-control/D02-settle-time-scope-cost-v1.py",
+      "state": "/data/milai-experiments/20261117-memory-compute-control/D02-time-scope-cost-state-v1.json",
+      "closed_scopes": 1,
+      "Reader_or_model_calls": 0,
+      "never_restart_lost_observation": true
+    }
+  ],
+  "next_action": "Use exact base-only cache as a strong simple baseline in future D comparisons; rebuild full current-query workspace each decision. Next finite heterogeneous P/D source/current-or-stale-View/refresh actual outcome cohort with cheap query/rule controls and reliable scoped calibration, explicitV3 usableM0/M1/matchedresulttraining. Do not train a gate to imitate exact cache validity or compare only againstuncached. Fullownstate2rounds+matchedoldpool/replay/3seeds/power/newconfirmation/transfer/finaldeliveries retained. Revalidate onlyone costwait1652663 andactualR40B1648312; previousR40/C11/D02modeljobs terminal. No identicalReaderretries or protectedbodies.",
+  "remaining_full_goal": [
+    "Reliable outcome calibration and honest unknown/failure treatment before D1 scaling; C06 complete256states64roots remains B provisional, J02fixed-code ability gate failed.",
+    "Heterogeneous general Source/partialView/fullView/refresh tradeoffs, strong cheap rule/query controls, usable explicitV3M0/M1 starts and actual matched outcome training; P03rawSource cheaper counterexample retained.",
+    "P precision and D revision/refresh contribution under same actual information and complete costs; controlled projection/enum proof alone is insufficient.",
+    "Two actual own-state label/train/deploy rounds, equal-exposure old-pool controls and replay; old488own observations are unlabelled, not round1.",
+    "Finalcandidate three training seeds, frozen strong simple baselines, source/group power, genuinely new independent confirmation firsts.",
+    "SecondReader/external task/budget/scale transfer and complete method/model/config/data/reproduction/cost/negative-result deliverables.",
+    "Conditional F/A/X only after measured bottleneck and separate bounded admission."
+  ],
+  "G1": "NOT_ESTABLISHED",
+  "G2": "NOT_ESTABLISHED",
+  "G3": "NOT_ESTABLISHED_FULL_LEARNED_MECHANISM",
+  "protected_bodies_opened": false,
+  "public_Product_Archive_defaults_permissions_changed": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false,
+  "remote_checked": false
+}
