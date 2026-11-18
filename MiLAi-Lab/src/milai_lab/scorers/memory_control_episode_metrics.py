@@ -189,6 +189,26 @@ def paired_comparison(
         or set(baseline_seeds) != set(seed_labels)
     ):
         raise ValueError("Multi-seed baseline arms must match the fitted policy seed IDs")
+    wires: dict[str, Counter[str]] = defaultdict(Counter)
+    baseline_by_seed = dict(zip(baseline_seeds, baselines, strict=True))
+    for policy, model_seed in zip(policy_runs, seed_labels, strict=True):
+        baseline = baselines[0] if len(baselines) == 1 else baseline_by_seed[model_seed]
+        for tid in policy.keys() & baseline.keys():
+            left, right = policy[tid], baseline[tid]
+            if "grade" not in left or "grade" not in right:
+                continue
+            a, b = left.get("reader_wire"), right.get("reader_wire")
+            if not isinstance(a, dict) or not isinstance(b, dict):
+                continue
+            counts = wires[left["dataset"]]
+            if a != b:
+                counts["different_requests"] += 1
+                continue
+            counts["identical_requests"] += 1
+            counts["identical_requests_different_native_grade"] += left["grade"] != right["grade"]
+            x, y = left["grade"].get("training_quality"), right["grade"].get("training_quality")
+            if x is not None and y is not None:
+                counts["identical_requests_different_training_quality"] += x != y
     registered: dict[str, dict[str, list[int]]] = defaultdict(lambda: defaultdict(list))
     declared_unavailable = population.get("predeclared_unevaluable_tasks", {})
     for row in population["tasks"]:
@@ -317,6 +337,7 @@ def paired_comparison(
         "reader_input_token_savings": point_cost,
         "token_savings_interval_95": cost_ci,
         "source_strata": strata,
+        "scored_request_equality_by_source": dict(wires),
         "independent_groups": {k: len(v) for k, v in registered.items()},
         "repeats": repeats,
         "bootstrap_seed": seed,
