@@ -1,0 +1,148 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v40.json",
+  "S19": "ec0e6b6d",
+  "C08": {
+    "card": "C08-cold-DEVfit8-trajectory-card-v1.json",
+    "audit": "C08-cold-execution-literal-audit-v1.json",
+    "fixed_DEV_fit_indices": [
+      24,
+      32
+    ],
+    "roots": 8,
+    "conditions": 12,
+    "executions": 96,
+    "extra_common_CPU_executions": 8,
+    "same_before_menu_matches": 96,
+    "isolated_database_files": 104,
+    "all9saved_C07models_complete_action_and_wire_changes_vs_samewarm": 0,
+    "unique_task_full_wires": 16,
+    "max_actual_material_UTF8_tokens": 1695,
+    "Reader_calls": 0,
+    "CPU_seconds": 210.48262044,
+    "scheduled_GPU_job_seconds": 166.1185912815854,
+    "limits": "Fixed8development sources, no QA/general equivalence claim or cold-OS latency benchmark"
+  },
+  "C09": {
+    "card": "C09-prior-decomposition-card-v1.json",
+    "audit": "C09-prior-decomposition-v1.json",
+    "binding_types": "C09-unexecuted-binding-types-v1.json",
+    "type": "Storedscore TRAINalgebraicdiagnostic",
+    "reviewed64_known_better_states": 22,
+    "prior_reverses_residual_pair_order": 18,
+    "removed_bias_tops_unexecuted": 184,
+    "unexecuted_top_types": {
+      "READ:index": 166,
+      "READ:index,observe_only": 18
+    },
+    "unknown_unexecuted_not_negative": true,
+    "no_deployment_config_weights_or_threshold_selection_change": true,
+    "Reader_calls": 0
+  },
+  "S19_changes": {
+    "tools": [
+      "tools/native_qa_control.py",
+      "tools/run_small_memory_policy.py"
+    ],
+    "test": "tests/unit/test_native_prepare_interventions.py",
+    "initial_decision_index": "Explicit captured logicalpoint, task/prefix/lastresult consistency, consumedsteps retained",
+    "inference_prior_margin": "Explicit runtime config override, original/effective configs recorded, savedmodels unchanged",
+    "default_options_unchanged": true,
+    "targeted_tests": 28,
+    "Ruff_mypy_package_tools_boundaries": "PASS",
+    "initialRufffailure_retained_and_billed": true,
+    "source_root": "S19-source"
+  },
+  "C10": {
+    "card": "C10-prior-after-lookup-card-v1.json",
+    "function_audit": "C10-prior-function-audit-v1.json",
+    "four_fixed_heads": [
+      "usable_warm24",
+      "weak64",
+      "native64",
+      "reviewed64"
+    ],
+    "prior_margins": [
+      1,
+      0
+    ],
+    "other_controls": [
+      "fixed_context4",
+      "encoder_cosine7"
+    ],
+    "conditions": 10,
+    "roots": 8,
+    "executions": 80,
+    "same_afterlookup_before_menu_matches": 80,
+    "total_control_budget_including_inherited_lookup": 8,
+    "remaining_control_steps_after_lookup": 7,
+    "inherited_prefix_steps": 80,
+    "independent_databases_including_common": 88,
+    "prior1_and_controls_exact_C08_wire_matches": 48,
+    "all4prior0_changed_requests_vs_paired_prior1_each": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "unique_task_full_wires": 44,
+    "maximum_actual_material_UTF8_tokens": 1858,
+    "saved4models_config_and_weight_fullbytes_unchanged": true,
+    "CPU_seconds": 182.827583579,
+    "scheduled_GPU_job_seconds": 150.66646991577,
+    "new_training_updates": 0,
+    "not_learned_queryrouting": true,
+    "prefix_costs_inherited_not_new_latency": true,
+    "firsts_admission": "C10-prior-Reader-admission-card-v1.json",
+    "firsts_run": "C10-prior-DEVfit8-firsts-v1/run.json",
+    "only_active_Reader_pid_at_observation": 1160426,
+    "source": "S19/ec0e6b6d",
+    "maximum_new_unique_Reader_calls": 44,
+    "bound_positions": 80,
+    "all10conditions_kept_no_bestselection": true,
+    "blind_panel": "C10-prior-blind-calibration-v1",
+    "all44codes_packets_sourcecriteria_frozen_before_answers": true,
+    "judgments_then_method_scores_required": true,
+    "review_grade": "B_project_aware_assistant_provisional_no_qualified_independent_truth",
+    "quality_results": "PENDING"
+  },
+  "costs": {
+    "fourteen_closed_C08_C09_S19_scopes_once": "C10-before-prior-study-closed-cost-v1.json",
+    "four_closed_C10_scopes_once": "C10-before-Reader-closed-cost-v1.json",
+    "no_nested_condition_or_profile_rebill": true,
+    "failed_checks_retained": true,
+    "own_C06_unknown_usage_delta_and_reservation_retained": [
+      1,
+      9295
+    ],
+    "running_Reader_only_auto_billed_at_close": true,
+    "pending_measured_local": "C10-function-prior-investigation-review-v1.json",
+    "whole_activeGPU_IO_energy_money_manual_and_lostoriginaljobcost": "UNKNOWN",
+    "no_second_real_ledger": true
+  },
+  "next_action": "Poll original Reader PID/run/FLOCK; never losthandle restart. After80positions/44firsts close review all frozen44R/Mcases before methodscores, retain failures/unknowns, no bestprior orcheckpoint selection from8roots. Fullgoal unchanged.",
+  "full_goal_remaining": [
+    "Reliable independent calibration",
+    "M1/P-D with actual task validation",
+    "Two actual ownstate rounds and matchedoldpool/replay",
+    "Three training seeds",
+    "Strongbaseline freeze and sourcegroup power/newconfirmation",
+    "SecondReader/external transfer and complete deliverables"
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "public_Runtime_Schema_API_permissions_Product_Archive_defaults_changed": false,
+  "old_model_weight_or_config_files_changed": false,
+  "DEV_select_CONFIRM_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false,
+  "validation": {
+    "JSON_counts_artifact_links_and_fullbytes": "PASS",
+    "targeted_current_source_tests": 28,
+    "S19source_frozen_after_finalchecks": true,
+    "rollback_commit": "0ce59cba",
+    "remote_checked": false
+  }
+}

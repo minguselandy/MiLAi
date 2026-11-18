@@ -1,4 +1,38 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C06full64closed/C07ninefits no TRAINchoicechange
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C08/C09closed/S19/C10Reader44active
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v40.json.
+C06full64/C07ninefit facts remain v39. C08 actual12conditions x8DEV-fit24:32 CLOSED96executions,
+104isolatedDBs incl common8,96exactbefore/menu matches. All9savedC07models sameactionbindings,
+material/order/fullReaderwire as usablewarm;16unique taskwires,0Readercalls. Onlyfixed8DEV scope.
+C09storedscores: full64reviewed prior reverses18/22known-better pair orders, but priorofftop184/
+256unexecuted:166READ:index18READ:index,observe_only. Unknown/unexecuted NOTnegative. Configs/
+weights unchanged; prior removal NOT quality win. No extraepochs/LR/seeds under finiteC07card.
+S19/ec0e6b6d frozen: generic native initial-decision-index checks task/prefix/lastresult and
+consumedsteps; inference-prior-margin runtime-only records original/effectiveconfig, no save.
+Defaults0/None unchanged.28targetedtests/Ruff/mypy/package/toolsPASS; initialRufffail retained.
+C10 completed4fixedheads(usablewarm/weak64/native64/reviewed64)xprior1/0 +fixed4/cosine7 =80
+executions/88DBs. All80same actual AFTER provided-query lookup before/menu; inheritedSearch0
+counts within total8, leaves7.48prior1/control wires reproduceC08 exactly. All4prior0 variants
+change8/8requests;44unique taskwires,maxUTF8material1858, savedweights/configbytes unchanged.
+Not learned query routing or cold-OS latency: lookup shared for pairing, old timing inherited.
+Only44Readerfirsts nowadmitted,80positions, originalscope/PID1160426/S19; actual /proc/locks
+FLOCK+cmdline verified. Revalidate /proc+run, NEVER restart lost observation. C10-run-firsts-v1.py
+is finite detachedprocess, notservice. Preserve failed/unknown firsts/no automaticretry; inherited
+unknown18/ownC06delta1/9295reservation neverreset/refunded. No newweights or bestprior selection.
+44M000-M043/R00-R07 packets/codes/rubric/sourcecriteria FROZEN BEFORE generatedanswers. After80
+terminal use C06-frozen-blind-review-v1.py complete C10-prior-blind-calibration-v1; judgeALL44
+under frozenSourceNotes BEFORE methodscore. Then taskindex/native+reviewedscore onC08subset
+controls. Bprojectaware/no qualified independent review, behaviorchange is NOTG1/G2/G3.
+14closedC08/C09/S19scopes and4C10local scopes settledONCE/readback, no child/profile rebill.
+Only C10-function-prior-investigation-review-v1.json CPU scope pending; runningReader auto bills
+atclose, never manually settlebusy ledger. FullactiveGPU/IO/energy/money/manual/lostoldjobcost
+UNKNOWN. No Product/Archive/default/permission/protectedbody/push/merge changes. SHA/fingerprints
+OFF. Reliablecalibration/M1/P-D/twoownstate+matchedoldpool/3seeds/power/newCONFIRM/transfer/
+delivery INCOMPLETE,488oldownobservations stillunlabelled/notD3round. Fullgoal ACTIVE.
+
+The following v39 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C06full64closed/C07ninefits no TRAINchoicechange
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v39.json.
 All own jobs TERMINAL, /proccommands absent/empty, no live ownReader/GPU. C06all8blocks CLOSED:
