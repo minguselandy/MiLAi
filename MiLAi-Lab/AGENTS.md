@@ -1,4 +1,34 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; P03taskpilotclosed/S21Viewboundinput/costwait
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C11matchedM0M1closed/nochangedpolicy
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v44.json.
+C11S15 finite6 fits CLOSED: literalV1objects/V2projection/frozenE5, minimalM0/M1 each ownusable
+T10trainedstart, exactsameconfig exceptarchitecture; offered_v1 prior/fixed4margin1 preserved.
+FullC06 data256states64roots252valid/4masked, weak/native_masked/reviewed each48updates/LR3e-4/
+seed0/batch16micro4/758validdraws.6realheads changed/saved/recoveryfullJSON; initialscoreswithin
+arch0diff, independentprocess6loads/tensorsequal/realencoderforwards/fixedfirstscores0diff.
+All6 TRAINargmaxunchanged.80complete actualDEVfit24:32 tasks (2starts+6fits+fixed4/cosine7),
+88distinctDBsinclcommon,80exactbefore/menu; all6sameboundactions/ranges/packets/fullwires asown
+usable start.16unique taskwires,max1695material,8controlbudget. All80fulloriginaltask/wire match
+frozenC10firsts; nativealsoactualranges. B6T1F1U allstarts/fits/fixed4,cosine7=7T1F0U; native
+EM/support separately4T4F vs3T5F. No favorablemetricselection, no newReadercall/token or QA/
+performance/confirmationclaim. Allconfig/weightsbytes unchanged. Minimalattentiondidnotunlock
+thisrecipe, notuniversalarchitecturefailure/G3. Noextraepochs/LR/prior/seedunderC11card.
+484.199CPU/423.474GPUallocated seconds train+fresh+deployment parentonce, notactivekernels.
+PreviousP04cost-only1453297 TERMINAL12closedscopes settled/readback, actualprocessgone.
+Onlynewlivejob cost-only1561151 waits originalscope11C11closedscopes; actualR40/1297193FLOCK
++bothcommands verified. Neverrestart lostobs, no model/clientcalls. Onrelease settleonce/readback.
+Failedpreflightv1metadata-equality retained, v2checks actualonlinefields; fullprovenance unchanged.
+OldC06UNKNOWN/9295reserve, costs/failedchecks/C07/C10negatives/P03rawcheaper/J02failedgate kept.
+Nextbounded heterogeneousSource/partial-fullView/refresh tradeoff+cheapquery/rulecontrols,
+reliablecalibration, explicitV3usableM0/M1+matchedoutcomes/P-D/twoactualownstate+oldpoolreplay/
+3seeds/power/newCONFIRM/transfer/full delivery remain. Old488ownstatesunlabelled/notround1.
+Do not keepfitting oldfixedpriorrecipe or finish at save/load/module/oracle. Fullgoal ACTIVE;
+G1/G2/G3 NOTESTABLISHED. No protectedbodies/Product/Archive/permission/default/push/merge changes.
+SHA/fingerprints OFF; actualoriginalledgeronly, no busyload/secondledger/nestedcostrebill.
+
+The following v43 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; P03taskpilotclosed/S21Viewboundinput/costwait
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v43.json.
 P03originalReader1355450 TERMINAL30firsts/0fail0unknown86165tokens/U0; scopedgrader appliedALL30.

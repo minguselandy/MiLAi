@@ -1,0 +1,138 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v44.json",
+  "previous_manifest": "memory-compute-control-P03-closed-S21-view-binding-20261118-v1.json",
+  "C11": {
+    "source": "S15/4e92de2b",
+    "models": [
+      "object_mlp",
+      "latent_pointer"
+    ],
+    "common_input": "V2 visible source handles, object literal_v1, same frozen E5, offered_v1 fixed-context4 prior/margin1; own already-usable trained T10 starts",
+    "finite_fits": 6,
+    "TRAIN_roots": 64,
+    "TRAIN_states": 256,
+    "trainable_parameters": {
+      "object_mlp": 460161,
+      "latent_pointer": 1056385
+    },
+    "arms": [
+      "weak_coverage_matched",
+      "native_masked",
+      "reviewed"
+    ],
+    "updates_each": 48,
+    "updates_total": 288,
+    "nominal_draws_total": 4608,
+    "valid_state_draws_each": 758,
+    "valid_state_draws_total": 4548,
+    "within_architecture_initial_score_max_error": 0.0,
+    "fresh_process_fixed_first_sample_max_error": 0.0,
+    "all6_TRAIN_argmax_changes": 0,
+    "complete_DEVfit": {
+      "roots": 8,
+      "conditions": 10,
+      "executions": 80,
+      "actual_initial_before_menu_matches": 80,
+      "distinct_databases_including_common": 88,
+      "unique_original_task_full_wires": 16,
+      "all6_learned_binding_and_wire_changes_vs_own_start": 0,
+      "max_material_UTF8_tokens": 1695,
+      "control_budget": 8,
+      "all_checkpoint_weight_and_config_bytes_unchanged": true
+    },
+    "stage_CPU_seconds": 484.19876260800004,
+    "stage_scheduled_GPU_job_seconds": 423.4735827026889,
+    "G0": "PASS numerical update/save/reload/exposure/deployment; policy learnability exit not met",
+    "G1": "NOT_ESTABLISHED_NO_CHANGED_POLICY_VS_USABLE_START",
+    "G2": "NOT_ESTABLISHED",
+    "G3": "NOT_ESTABLISHED",
+    "interpretation": "This controlled minimal M1 did not unlock decision improvement under the current inputs, prior and sparse observed returns. It rules out absence of attention as a sufficient explanation for this finite recipe; it does not establish that attention never helps or isolate attention causally.",
+    "stop_current_recipe": "All6 preserved; no extra updates, LR, prior, seed or checkpoint selection under C11. Do not expand identical-wire Reader calls or pretend pair/loss fit is a task gain."
+  },
+  "artifacts": {
+    "card": "C11-matched-architecture-card-v1.json",
+    "training": "C11-training-driver-v1.json",
+    "numerics": "C11-training-numerical-review-v1.json",
+    "fresh": "C11-fresh-reload-probe-v1.json",
+    "complete_function": "C11-complete-DEVfit-literal-audit-v1.json",
+    "frozen_B_feedback": "C11-inherited-Reader-feedback-v1.json",
+    "separate_native_feedback": "C11-inherited-native-feedback-v1.json",
+    "closed_review": "C11-finite-probe-closed-review-v1.json",
+    "preflight_failure": "C11-preflight-v1-failure-note.json"
+  },
+  "all6_saved_checkpoints": [
+    "/data/milai-experiments/20261117-memory-compute-control/C11-mlp-literal-weak_coverage_matched-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C11-mlp-literal-native_masked-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C11-mlp-literal-reviewed-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C11-latent-literal-weak_coverage_matched-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C11-latent-literal-native_masked-TRAIN64-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C11-latent-literal-reviewed-TRAIN64-seed0-v1/checkpoint"
+  ],
+  "frozen_source": "S15/4e92de2b",
+  "code_source_changed": false,
+  "validation": "Actual6training+6freshloads+80complete taskexecutions, strictliteraldata/config/savedtensor andbefore/menu/ranges/wire checks; no repeatpackage tests for documentation-only change",
+  "costs": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "previous_P04_12closed_scopes": "P04-after-closed-local-cost-v1.json",
+    "previous_P04_status": "SETTLED_ONCE_AND_READ_BACK",
+    "current_C11_status": "WAITING_ORIGINAL_SCOPE_COST_ONLY",
+    "current_C11_closed_scopes": 11,
+    "current_C11_sources": [
+      "C11-matched-architecture-card-v1.json",
+      "C11-training-driver-v1.json",
+      "C11-training-numerical-review-v1.json",
+      "C11-fresh-reload-driver-v1.json",
+      "C11-complete-DEVfit-card-v1.json",
+      "C11-complete-DEVfit-driver-v1.json",
+      "C11-complete-DEVfit-literal-audit-v1.json",
+      "C11-inherited-Reader-feedback-v1.json",
+      "C11-inherited-native-feedback-v1.json",
+      "C11-finite-probe-closed-review-v1.json",
+      "C11-preflight-v1-failure-note.json"
+    ],
+    "current_C11_receipt": "C11-after-closed-cost-v1.json",
+    "current_C11_state": "C11-cost-settlement-state-v1.json",
+    "no_inner_fit_probe_condition_rebill": true,
+    "new_Reader_calls": 0,
+    "new_Reader_tokens": 0,
+    "C06_known_unknown_delta": 1,
+    "C06_unknown_reservation_retained": 9295,
+    "no_token_or_unknown_counter_changes": true,
+    "activeGPU_wholeIO_energy_money_manualwork_imports": "UNKNOWN; failedpreflightv1 tool-wall0.7244s retained, CPUunknown",
+    "no_busy_original_ledger_reads_or_new_ledgers": true
+  },
+  "live_jobs": [
+    {
+      "kind": "C11_closed_compute_only_original_scope_wait",
+      "pid": 1561151,
+      "driver": "/data/milai-experiments/20261117-memory-compute-control/C11-settle-closed-costs-v1.py",
+      "state": "/data/milai-experiments/20261117-memory-compute-control/C11-cost-settlement-state-v1.json",
+      "closed_scopes": 11,
+      "Reader_or_model_calls": 0,
+      "observed_status": "WAITING_ORIGINAL_SCOPE_COST_ONLY",
+      "never_restart_lost_observation": true
+    }
+  ],
+  "next_action": "Return to an explicitly bounded heterogeneous Source/partial-View/full-View/refresh decision hypothesis with strong cheap query/rule controls and honest source/build costs, retaining the P03 raw-cheaper counterexample. Reliable outcome calibration gates scaling. V3 usable starts and actual matched result training, P/D effect, two actual own-state rounds plus matched old-pool/replay, final three-seed/power/new-confirmation/transfer and delivery remain.",
+  "full_remaining": [
+    "Reliable outcome calibration and honest unknown/failure treatment before D1 scaling; C06 complete256states64roots remains B provisional, J02fixed-code ability gate failed.",
+    "Heterogeneous general Source/partialView/fullView/refresh tradeoffs, strong cheap rule/query controls, usable explicitV3M0/M1 starts and actual matched outcome training; P03rawSource cheaper counterexample retained.",
+    "P precision and D revision/refresh contribution under same actual information and complete costs; controlled projection/enum proof alone is insufficient.",
+    "Two actual own-state label/train/deploy rounds, equal-exposure old-pool controls and replay; old488own observations are unlabelled, not round1.",
+    "Finalcandidate three training seeds, frozen strong simple baselines, source/group power, genuinely new independent confirmation firsts.",
+    "SecondReader/external task/budget/scale transfer and complete method/model/config/data/reproduction/cost/negative-result deliverables.",
+    "Conditional F/A/X only after measured bottleneck and separate bounded admission."
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "native_and_B_metrics_separate": true,
+  "protected_bodies_opened": false,
+  "public_Product_Archive_defaults_permissions_changed": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "push_or_merge": false,
+  "rollback_commit": "9a34a8cd",
+  "remote_checked": false
+}
