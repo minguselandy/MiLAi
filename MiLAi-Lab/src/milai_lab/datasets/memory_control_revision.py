@@ -219,10 +219,11 @@ def derive(parent: Path, root: Path, revision: dict[str, Any], role_file: Path) 
 
 
 def supervision_audit(path: Path, *, parent: bool) -> dict[str, Any]:
-    """Use V1 weak labels or V1.1 labels and feasibility, without loading gold bodies."""
+    """Audit weak labels, exact feasibility and admitted group-level annotation fields."""
     strata: dict[tuple[str, ...], Counter[str]] = defaultdict(Counter)
     budgets: dict[tuple[str, ...], set[int]] = defaultdict(set)
     groups: dict[tuple[str, ...], set[str]] = defaultdict(set)
+    persona_states: dict[tuple[str, str], Counter[str]] = defaultdict(Counter)
     with closing(connect(path)) as db:
         parent_max = get_meta(db, "parent_state_max")
         revised = parent_max is not None
@@ -279,12 +280,19 @@ def supervision_audit(path: Path, *, parent: bool) -> dict[str, Any]:
             c["material_tokens"] += row["material_tokens"]
             c[f"coverage/{row['corpus_coverage']}"] += 1
             c[f"sampling/{row['sampling']}"] += 1
+            persona = None
+            if row["dataset"] == "personamem_v2":
+                persona = persona_states[row["role"], row["native_group"]]
+                persona["states"] += 1
+                persona["positive_states"] += bool(n_pos)
             if row["action_feasibility"] is not None:
                 fits = [feasible for feasible, _ in unpack(row["action_feasibility"])]
                 feasible_positive = sum(
                     y is True and f is True for y, f in zip(labels, fits, strict=True)
                 )
                 c["feasible_positive_states"] += feasible_positive > 0
+                if persona is not None:
+                    persona["feasible_positive_states"] += feasible_positive > 0
                 c["positive_but_no_feasible_states"] += n_pos > 0 and not feasible_positive
                 c["infeasible_positive_reads"] += sum(
                     y is True and f is False for y, f in zip(labels, fits, strict=True)
@@ -295,6 +303,29 @@ def supervision_audit(path: Path, *, parent: bool) -> dict[str, Any]:
                 for name, value in unpack(row["diagnostics"]).items():
                     if value is not None:
                         c[name] += value
+        persona_strata: dict[tuple[str, str, str], Counter[str]] = defaultdict(Counter)
+        if revised and not parent:
+            for row in db.execute("""
+                SELECT t.experiment_role,t.native_group,a.data
+                FROM experiment_tasks t JOIN annotations a ON a.task_id=t.id
+                WHERE t.dataset='personamem_v2' AND t.experiment_role IN ('train','dev')
+            """):
+                annotations = unpack(row["data"])
+                aligned = bool(annotations["snippet_fully_visible"])
+                persona = persona_states[row["experiment_role"], row["native_group"]]
+                persona["native_tasks"] += 1
+                persona["aligned_native_tasks"] += aligned
+                for field in ("who", "updated", "sensitive_info", "pref_type"):
+                    key = (row["experiment_role"], field, str(annotations.get(field)))
+                    persona_strata[key]["tasks"] += 1
+                    persona_strata[key]["aligned_evidence_tasks"] += aligned
+            for role, group, status, n in db.execute("""
+                SELECT t.experiment_role,t.native_group,o.execution_status,count(*)
+                FROM action_outcomes o JOIN states s ON s.id=o.state_id
+                JOIN experiment_tasks t ON t.id=s.task_id
+                WHERE t.dataset='personamem_v2' GROUP BY 1,2,3
+            """):
+                persona_states[role, group][f"outcome/{status}"] += n
         return {
             "database": str(path),
             "dataset_run_id": get_meta(db, "run_id"),
@@ -316,6 +347,14 @@ def supervision_audit(path: Path, *, parent: bool) -> dict[str, Any]:
                     **c,
                 )
                 for key, c in sorted(strata.items())
+            ],
+            "persona_groups": [
+                {"role": role, "persona": group, **c}
+                for (role, group), c in sorted(persona_states.items())
+            ],
+            "persona_strata": [
+                {"role": role, "attribute": field, "category": category, **c}
+                for (role, field, category), c in sorted(persona_strata.items())
             ],
             "outcomes": dict(
                 db.execute(

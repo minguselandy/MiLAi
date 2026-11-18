@@ -151,7 +151,7 @@ class MemoryControlDataset:
         public, _ = reader_task(row["dataset"], row["query"], task_id, annotation or {},
                                 self.revision["option_seed"])
         navigation: dict[int, dict[str, Any]] = {}
-        if self.encoder_tokenizer is not None:
+        if self.encoder_tokenizer is not None and focus:
             saved = db.execute("SELECT excerpts FROM task_navigation WHERE task_id=?",
                                (task_id,)).fetchone()
             navigation = ({int(k): v for k, v in unpack(saved[0]).items()} if saved else

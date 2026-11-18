@@ -52,12 +52,16 @@ def stopped_checkpoints(paths: list[Path]) -> list[dict[str, Any]]:
     if len(paths) != 2:
         raise ValueError("Policy-state collection needs both trained outcome arms")
     arms = []
-    for name, path in zip(("M0", "M1"), paths, strict=True):
+    for name, architecture, path in zip(
+        ("M0", "M1"), ("object_mlp", "latent_pointer"), paths, strict=True,
+    ):
         run = json.loads((path.parent / "run.json").read_text())
         if run["status"] != "COMPLETED" or run["contract"]["supervision_mode"] != "outcome":
             raise ValueError("Policy expansion requires both completed outcome fits")
         if run["contract"]["observation_protocol"] != "semantic_nav_v1":
             raise ValueError("The public state pool uses the common semantic observation")
+        if run["contract"]["config"]["object_architecture"] != architecture:
+            raise ValueError(f"{name} policy collection requires the matching architecture")
         arms.append(
             {
                 "name": name,

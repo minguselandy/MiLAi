@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import random
 import sqlite3
 import time
@@ -11,11 +12,17 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from milai_lab.datasets.memory_control_normalize import MUSIQUE
 from milai_lab.datasets.memory_control_reader_task import reader_task
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import connect, get_meta
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, http_budget_scope
-from milai_lab.methods.dataset_control_states import task_annotation
+from milai_lab.methods.dataset_control_states import (
+    Evidence,
+    evidence_for,
+    full_objects,
+    task_annotation,
+)
 from milai_lab.methods.dataset_corpus_runtime import CorpusExecution, CorpusPool
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
@@ -140,6 +147,37 @@ class PolicyMenu:
         return self.policy.choose(state, options)
 
 
+@dataclass
+class GoldDiagnostic:
+    session: CorpusExecution
+    evidence: Evidence
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        handoff = next(action.id for action in actions if action.kind == "HANDOFF")
+        pool = self.session.pool
+        delivered = [
+            span for vid in self.session.opened.values() for span in pool.views[vid].ranges
+        ]
+        positive = self.evidence.positive
+        complete = full_objects(delivered, pool, positive)
+        if not self.evidence.sets or any(group <= complete for group in self.evidence.sets):
+            return handoff
+        best: tuple[int, int] = (0, 0)
+        selected = handoff
+        remaining = positive - complete
+        for action in actions:
+            view_id = pool.bound_view(self.session.focus, action)
+            if view_id is None:
+                continue
+            additional = pool.views[view_id].ranges
+            after = full_objects([*delivered, *additional], pool, remaining)
+            new_chars = sum(end - start for oid, start, end in additional if oid in remaining)
+            value = (len(after), new_chars)
+            if value > best:
+                best, selected = value, action.id
+        return selected
+
+
 def make_policy(
     dataset: MemoryControlDataset,
     arm: dict[str, Any],
@@ -158,6 +196,8 @@ def make_policy(
         return FixedContextMemoryPolicy(reads), None
     if name == "B3":
         return RulesMemoryPolicy(reads), None
+    if name == "G":
+        return FixedMemoryPolicy(reads), None
     if name == "B4":
         path = dataset.tokenizers["encoder"]["path"]
         model = SmallControlModel(
@@ -214,6 +254,12 @@ def episode_before_reader(
     started, cpu = time.perf_counter(), time.process_time()
     counters = dict(model.counters) if model else {}
     session, costs = start_cold(dataset, db, task, budget, use_memory=arm["policy"] != "B0")
+    if arm["policy"] == "G":
+        gold = task_annotation(db, task)
+        if task["dataset"] == MUSIQUE:
+            gold["object_locators"] = [(oid, json.loads(place)) for oid, place in db.execute(
+                "SELECT id,location FROM objects WHERE root_id=?", (task["root_id"],))]
+        policy = GoldDiagnostic(session, evidence_for(task["dataset"], gold, session.pool))
     steps = dataset.config["states"]["control_steps"]
     initial = session.menu(steps)
     initial_state = session.online(initial)
@@ -348,6 +394,8 @@ def evaluate_episodes(
     population = read_json(manifest)
     if population["protocol"] != EVALUATION_PROTOCOL:
         raise ValueError("Invalid registered episode protocol")
+    if arm["policy"] == "G" and population["role"] != "dev":
+        raise ValueError("Gold-guided execution is an isolated development diagnostic")
     if population["role"] == "confirm" and arm not in population["arms"]:
         raise ValueError("Confirmation permits only the preregistered arm configuration")
     dataset = MemoryControlDataset(data, observation_protocol=arm["observation_protocol"])

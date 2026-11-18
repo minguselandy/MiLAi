@@ -1074,7 +1074,7 @@ def main() -> None:
     evaluation.add_argument("--feature-store", type=Path)
     evaluation.add_argument("--episode-plan", type=Path)
     evaluation.add_argument("--registered-arm")
-    evaluation.add_argument("--baseline", choices=["B0", "B1", "B2", "B3", "B4"])
+    evaluation.add_argument("--baseline", choices=["B0", "B1", "B2", "B3", "B4", "G"])
     evaluation.add_argument("--arm-name")
     evaluation.add_argument("--observation-protocol", choices=["semantic_nav_v1", "metadata_v1"])
     evaluation.add_argument("--stop", choices=["fixed", "learned"], default="fixed")
@@ -1109,6 +1109,7 @@ def main() -> None:
     collect_reached.add_argument("--task-limit", type=int)
     collect_reached.add_argument("--seed", type=int, default=20261118)
     collect_reached.add_argument("--device", default="cpu")
+    collect_reached.add_argument("--threads", type=int, default=4)
     reviewing = sub.add_parser("review")
     reviewing.add_argument("--cases", type=Path, required=True)
     reviewing.add_argument("--reader-config", type=Path, required=True)
@@ -1298,8 +1299,11 @@ def main() -> None:
     if args.command == "collect-policy-states":
         import fcntl
 
+        import torch
+
         from milai_lab.runners.memory_control_policy_states import collect
 
+        torch.set_num_threads(args.threads)
         with (args.data.parent / ".build.lock").open("a") as guard:
             fcntl.flock(guard.fileno(), fcntl.LOCK_EX)
             collect(args.data, args.run_id, args.checkpoint, args.output,
