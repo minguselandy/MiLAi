@@ -122,6 +122,12 @@ QASPER、Persona 上分别为 0.1949、0.1505、0.1150。M1/N1 已沿同一冻�
 从 N1 特征缓存启动。实际覆盖和检查点见 `M1-W-N0-seed11/coverage.json` 和
 `M1-W-N0-seed11/checkpoint`。
 
+DEV 协调器在等待 B* 时接续到按检查点就绪顺序调度。B* 登记后，M0/N0、M0/N1、M1/N0
+可以先用 GPU 2 评估，最后一臂就绪时加入。四臂各完成已注册的 605 个位置后计算 2×2 对照。
+已就绪三臂分别在同一批 12 个不同 DEV 原生组上实际重放，均生成 12 个可提交请求。
+GPU 2 上的平均本地 episode 耗时依上述顺序为 1.417、1.642、1.526 秒。该测量只包含本地
+重放，Reader 请求数为 0。见 `WO-dev-ready-arms-handoff.json` 和 `early-W-DEV-replay.json`。
+
 宽 M0/N1 已完成三轮、6,066 次更新和 776,154 次状态曝光。M0/N0 末轮头与其初始化头
 在固定停止和相同合法候选下，各完成 7 个 DEV 任务和 7 次 Reader 请求。训练头在该小样本
 的来源等权宏分高 16.67 点，等权 Reader input token 高 24.2%。质量差全部来自 MuSiQue
@@ -152,6 +158,12 @@ B1 和 B2 的 100 个请求逐项相同，含种子和解码参数。独立调�
 三来源 605 个固定任务的完整矩阵。首批串行 client 实测速率与按规划规模换算的阶段工时
 保存在 `reader-phased-throughput-estimate-v1.json`。
 
+三个带记忆的 DEV 基线 B1、B2、B3 各回收首 500 个位置后，1,500 次调用均有提供方用量。
+MuSiQue、QASPER、PersonaMem 的实测 Reader client 吞吐分别为 1.180、1.423、1.911 次/秒。
+按正式 core 的来源配额和计划的 105,600 至 132,000 次调用线性换算，Reader client
+用时为 22.79 至 28.48 小时。该估算以当前实测速率为条件，量纲只覆盖 Reader client 调用。
+分来源 token、延迟和估算假设见 `reader-mixed-source-throughput-v2.json`。
+
 已完成 MuSiQue 全部 200 个正式 DEV 任务上的五臂，共 1,000 个 Reader 结果、100 个原生组。
 B1 相对 B0 高 20.67 个原生组质量点，配对 95% 区间为 [13.52, 28.42]。B1、B2、B3 的
 200 个请求逐项相同，报告单列重复调用波动。另在 PersonaMem 首 100 个任务的 32 个完整
@@ -176,6 +188,12 @@ B2 相对 B1 的 200 个请求均有实际变化，配对准确率差为 0.00 �
 并保留各预算层的全体抽样结果。收据为
 `dev-persona-200-position-read-precision-sensitivity.json`。
 
+QASPER 的首 98 个登记位置已在五臂全部收回，其中 97 个任务组成 24 个完整原生组。
+B2 相对 B1 的 F1 差为 +2.52 点，95% 区间为 [−5.13, 9.22]，输入 token 均值从
+1,010.00 增至 2,194.21。B4 在这批组上相对 B1 高 9.19 点，区间为 [2.36, 15.94]。
+B3 与 B1 的 98 个请求逐项相同，原始分差为 +1.33 点，复用实测回复后为 0。
+分组和五臂成本见 `dev-qasper-first-98x5-conditional-read.json`。
+
 Gold 材料诊断 `G` 在正式 B0 到 B4 完成并登记 B* 后，从同一 DEV605 人群发起实际 Reader
 请求并独立出具原生质量和成本。协调状态见 `gold-dev-coordinator.json`。
 
@@ -184,6 +202,7 @@ Gold 材料诊断 `G` 在正式 B0 到 B4 完成并登记 B* 后，从同一 DEV
 由各自的实际训练、评分与请求收据证明。已入库的 12 个同状态诊断分支和 16 个策略到达
 诊断分支用于验证执行闭环和训练消费。
 03:44 已回收 2,100 个正式 DEV 位置的终态收据，B0 为 500 个，B1 到 B4 各 400 个。
+04:02，所有臂均至少收回 500 个位置，B0 已收回 600 个，共 2,600 个位置。
 首次 3,000 状态的抽样在 Reader 派发前冻结。MuSiQue／QASPER／Persona 数量为
 2,000／625／375，覆盖 2,964 个任务和 2,689 个原生组。分层得到 1,200 个代表性样本、
 375 个可行 R2/R3 配对样本、600 个停止或预算边界样本、227 个探索样本，另有 598 个
@@ -214,6 +233,16 @@ R2/R3，固定续程后 104 对请求不同、15 对汇合到同一请求。该�
 本地计算已在原台账各结算一次。这些收据分别见
 `policy-closure-actual-reader-and-supervision-audit.json`、`policy-closure-M0-fit-v2/run.json`
 和 `wide-and-policy-diagnostic-compute-settlement.json`。
+
+条件扩读报告使用已入库的实际分支，按同 before state、重复编号、绑定及种子配对。
+同一绑定的重复和同一原生组的多个状态依次取均值。独立原生组支持分组重采样。
+报告保留各预算的实际可用配对、原始分支质量、相同终端请求贡献归零的敏感性结果、
+重复方向冲突和两侧都由提供方计量的 token 差。已在两次诊断的全部 28 条入库分支上执行。
+一个 QASPER R2/R3 对的分支质量差为 +67.35 点，增加 88 个 Reader input token。
+一个 PersonaMem 对的分差为 0，增加 190 个 token。这两项各来自一个原生组。
+四个 MuSiQue 策略到达状态上有 12 个 READ 与 HANDOFF 配对，等原生组权重的分支质量
+差为 −33.33 点。收据为 `v11-reader-closure-conditional-read-contrasts.json` 和
+`v11-policy-closure-conditional-read-contrasts.json`。
 
 后续协调器以已结束的 seed 11 O 训练和整任务 DEV 结果为依赖。公共 P 池按来源轮转原生组，
 以真实策略轨迹去重，目标为 12,000 个 TRAIN 状态。P 每轮覆盖两池的全部可训练状态，
@@ -247,6 +276,8 @@ MILAI_CONFIG=configs/datasets/memory_control_v1_1.json
   --run-id v11-reader-closure --limit 16
 "$MILAI_PY" tools/build_memory_control_dataset.py --config "$MILAI_CONFIG" score-outcomes \
   --run-id v11-reader-closure --seal
+"$MILAI_PY" tools/report_memory_control_outcome_contrasts.py --data "$MILAI_DB" \
+  --run-id v11-reader-closure --output "$MILAI_RUN/v11-reader-closure-conditional-read-contrasts.json"
 ```
 
 运行根中的 `launch-W-seed11.sh`、`launch-dev-baselines.sh`、`launch-core-and-O.py`、
