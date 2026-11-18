@@ -1,4 +1,47 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; C14smallfitPASS/outsidefitcoverageUNKNOWN
+# USER PAUSED RESEARCH GOAL 2026-11-18
+
+The user paused the research goal. Do not start experiments or resume goal work without a user resume.
+Only the already requested GitHub branch submission is being completed. Research results remain incomplete.
+
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C15actualtasksNEGATIVE/GitHubpushauthorized
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v49.json.
+UserexplicitlyrequestsGitHubsubmission. Currentorigin git@github.com:minguselandy/MiLAi.git,
+branchfeat/memory-compute-control-20261117; SSHreadconnectionpassed. FinishC15recordcommit,
+pushcurrentbranch andverifytransport/ref; no needrepeatpermission. No merge requested. Historical
+no-push notes below were preauthorization; currentuserauthorization takesprecedence.
+C15random8oldTRAINroots outsideC14curated8,100%randomquota,7conditions actual56coldtasks+8common/
+64DBs. All56initialbefore/menu EXACT, all4savedweights/configbytesunchanged, alllegalmenus kept.
+Bothfitmodels8/8binding/ranges/wires differ vsownwarm;31/34newactualbeforemenus. All56nonempty,
+0failedops,max1947material. All8hadNOcontext-upgradebindings; warm/fixedR2/context4 equalwires,
+so no genuineprecisionclaim, onlyselection/delivery/stopping.4savedmodels same1MiBbasecache.
+27fulloriginaltaskwires resolved18new9earlieststrictreuse,0fail0unknown55089known/chargedtokens/U0.
+All27blindgradesfrozen15T6F6U beforemethod/native tables. Warm/fixed4=4T1F3U,fitMLP3T3F2U,
+fitM1 2T4F2U,cosine7=6T1F1U. Native separatelywarm2/8,MLP3/8,M1 1/8,cosine6/8. No favorablemetric
+selection. Materials7921warm/5455MLP/4452M1/12987cosine; smaller doesnotpreservequality/totalcost.
+Pairedunknownbounds MLP-warm[-.5,.125],M1-warm[-.625,0],MLP-cos[-.5,-.125],M1-cos[-.625,-.25],
+notconfidenceinterval.8oldBmatchingreusegrades agree,1reuseoldBnotfound. Alloldlabels/firsts kept.
+Rawreviewlowercase material enum rejected, uppercaseadapterONLY; rawfrozenjsonl saved, all27
+values/grounding/notesunchanged beforetables. Rawreusedfirst retains oldusage/wall asprovenance;
+currentbranchresourceAPI nullsHTTPaxes, not0/savings. Initialcostcheckerwrongrawfieldassumption
+kept/fixedv2 without rerunningmodels/Reader. CoordinatorS22label inheritedbutactualPYTHONPATH
+S23verified; ReaderfilesS22/S23fullbytes equal. Metadataonlyerratum, no livecode/packet edit.
+C14old7cost+ C15prep5 SETTLEDONCE/readback; native18autoCPU2.847/wall184.252. Rolloutparent
+106.872CPU/64.145GPUallocated sec, notkernel. PrepCPU/wallrecordomittedGPUaxis: onlyaddmissing
+GPUaxis to SAMEcamc_C15_rollout_parent_v1, preserveCPU/wall/runs, neverdoublebill.
+New7localclosedscopes+GPUaxis supplement alsoSETTLEDONCE/readback; noownlivejobs.
+No SourceAPI/implementationchange(S23/7c48c92e), noDEV/CONFIRM/newSGD. Private sources/answers/
+reviews/DBs/checkpoints ignored. SHA/fingerprintsOFF, originalledgeronly/no busyload/counterreset,
+oldC06UNKNOWN9295retained. Failedchecks/fullmanual/import/serverGPU/IO/energy/money UNKNOWNnot0.
+C14memorizationNOTG1, C15actualtasknegative. Next diagnoseactualselection/delivery/stop and
+full-data/partial-label stability withmatchedweak/quality/cost and explicitweakbehaviouranchors,
+never semanticnegatives forunexecutedactions. Ownstate-roundrequireslabels/train/deploy+matched
+oldpool/replay. Reliability/P-D/D1yield/3seeds/nestedrepresentation/power/newconfirm/transfer/
+complete delivery remain. DefaultqualityrouteAunchanged; fullgoal/G1/G2/G3 INCOMPLETE.
+
+The following v48 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; C14smallfitPASS/outsidefitcoverageUNKNOWN
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v48.json.
 HistoricalT00 inspected:64states96updates oldstructuralh2/randomheads/priornone didnotcover

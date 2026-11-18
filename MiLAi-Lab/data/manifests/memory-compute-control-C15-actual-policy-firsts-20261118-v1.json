@@ -1,0 +1,920 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "PAUSED_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v49.json",
+  "previous_manifest": "memory-compute-control-C14-fixed-fitability-20261118-v1.json",
+  "source": "S23/7c48c92e",
+  "implementation_source_changed": false,
+  "rollback_commit": "10f0dd19",
+  "C15": {
+    "status": "CLOSED_RANDOM8_ACTUAL_POLICY_TASKS_NEGATIVE_FOR_CURATED_FIT_HEADS",
+    "source": "S23/7c48c92e",
+    "roots": 8,
+    "conditions": 7,
+    "actual_task_trajectories": 56,
+    "extra_common_actual_trajectories": 8,
+    "exact_initial_before_menu_matches": 56,
+    "distinct_DBs_including_common": 64,
+    "unique_task_wires": 27,
+    "new_firsts": 18,
+    "strict_original_task_wire_reuses": 9,
+    "known_failed_firsts": 0,
+    "unknown_executions": 0,
+    "new_known_and_charged_tokens": 55089,
+    "new_unknown_usage_delta": 0,
+    "frozen_reviewed_summaries": {
+      "encoder_cosine7": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 6,
+        "primary_false": 1,
+        "primary_unknown": 1,
+        "answer_EM": 6,
+        "reference_support_complete": 7
+      },
+      "fit_latent": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 2,
+        "primary_false": 4,
+        "primary_unknown": 2,
+        "answer_EM": 1,
+        "reference_support_complete": 2
+      },
+      "fit_mlp": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 3,
+        "primary_false": 3,
+        "primary_unknown": 2,
+        "answer_EM": 3,
+        "reference_support_complete": 3
+      },
+      "fixed_context4": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 4,
+        "primary_false": 1,
+        "primary_unknown": 3,
+        "answer_EM": 5,
+        "reference_support_complete": 3
+      },
+      "fixed_r2_4": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 4,
+        "primary_false": 1,
+        "primary_unknown": 3,
+        "answer_EM": 5,
+        "reference_support_complete": 3
+      },
+      "warm_latent": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 4,
+        "primary_false": 1,
+        "primary_unknown": 3,
+        "answer_EM": 5,
+        "reference_support_complete": 3
+      },
+      "warm_mlp": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 4,
+        "primary_false": 1,
+        "primary_unknown": 3,
+        "answer_EM": 5,
+        "reference_support_complete": 3
+      }
+    },
+    "native_property_summaries_separate": {
+      "encoder_cosine7": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 6,
+        "primary_false": 2,
+        "primary_unknown": 0,
+        "answer_EM": 6,
+        "reference_support_complete": 7
+      },
+      "fit_latent": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 1,
+        "primary_false": 7,
+        "primary_unknown": 0,
+        "answer_EM": 1,
+        "reference_support_complete": 2
+      },
+      "fit_mlp": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 3,
+        "primary_false": 5,
+        "primary_unknown": 0,
+        "answer_EM": 3,
+        "reference_support_complete": 3
+      },
+      "fixed_context4": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 2,
+        "primary_false": 6,
+        "primary_unknown": 0,
+        "answer_EM": 5,
+        "reference_support_complete": 3
+      },
+      "fixed_r2_4": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 2,
+        "primary_false": 6,
+        "primary_unknown": 0,
+        "answer_EM": 5,
+        "reference_support_complete": 3
+      },
+      "warm_latent": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 2,
+        "primary_false": 6,
+        "primary_unknown": 0,
+        "answer_EM": 5,
+        "reference_support_complete": 3
+      },
+      "warm_mlp": {
+        "planned_positions": 8,
+        "unit": "complete_task_trajectory",
+        "unique_question_tasks": 8,
+        "roots": 8,
+        "role": "normal_policy_condition",
+        "primary_true": 2,
+        "primary_false": 6,
+        "primary_unknown": 0,
+        "answer_EM": 5,
+        "reference_support_complete": 3
+      }
+    },
+    "material_function_summaries": [
+      {
+        "condition": "warm_mlp",
+        "role": "usable_start",
+        "roots": 8,
+        "terminal_reasons": {
+          "policy_handoff": 8
+        },
+        "steps_sum": 48,
+        "material_UTF8_tokens_sum": 7921,
+        "empty_original_material_tasks": 0,
+        "failed_operations": 0,
+        "structural_before_menu_matches_old_C06": 0,
+        "structural_selected_old_observed": 0,
+        "encoder_counters": {
+          "warm_mlp": {
+            "forwards": 56,
+            "input_tokens": 191046,
+            "padded_tokens": 256671,
+            "texts": 580,
+            "chunked_texts": 65,
+            "chunks": 651,
+            "joint_sequences": 0
+          }
+        },
+        "cache_counters": {
+          "warm_mlp": {
+            "requests": 1932,
+            "hits": 1352,
+            "misses": 580,
+            "same_call_reuses": 0,
+            "evictions": 0,
+            "stale_input_removals": 176,
+            "oversized_skips": 0,
+            "resets": 9,
+            "completed_feature_calls": 48,
+            "peak_accounted_bytes": 139643,
+            "entries": 50,
+            "accounted_bytes": 111084,
+            "max_accounted_bytes": 1048576,
+            "byte_scope": "Literal UTF-8 keys + tensor payloads; Python overhead/RSS unknown",
+            "scope": "Current public encoder inputs only; full workspace recomputed"
+          }
+        }
+      },
+      {
+        "condition": "fit_mlp",
+        "role": "curated_diagnostic_policy",
+        "roots": 8,
+        "terminal_reasons": {
+          "budget_exhausted": 3,
+          "policy_handoff": 5
+        },
+        "steps_sum": 50,
+        "material_UTF8_tokens_sum": 5455,
+        "empty_original_material_tasks": 0,
+        "failed_operations": 0,
+        "structural_before_menu_matches_old_C06": 0,
+        "structural_selected_old_observed": 0,
+        "encoder_counters": {
+          "fit_mlp": {
+            "forwards": 63,
+            "input_tokens": 209015,
+            "padded_tokens": 280019,
+            "texts": 609,
+            "chunked_texts": 78,
+            "chunks": 703,
+            "joint_sequences": 0
+          }
+        },
+        "cache_counters": {
+          "fit_mlp": {
+            "requests": 2090,
+            "hits": 1481,
+            "misses": 609,
+            "same_call_reuses": 0,
+            "evictions": 0,
+            "stale_input_removals": 186,
+            "oversized_skips": 0,
+            "resets": 9,
+            "completed_feature_calls": 50,
+            "peak_accounted_bytes": 184820,
+            "entries": 50,
+            "accounted_bytes": 111039,
+            "max_accounted_bytes": 1048576,
+            "byte_scope": "Literal UTF-8 keys + tensor payloads; Python overhead/RSS unknown",
+            "scope": "Current public encoder inputs only; full workspace recomputed"
+          }
+        }
+      },
+      {
+        "condition": "warm_latent",
+        "role": "usable_start",
+        "roots": 8,
+        "terminal_reasons": {
+          "policy_handoff": 8
+        },
+        "steps_sum": 48,
+        "material_UTF8_tokens_sum": 7921,
+        "empty_original_material_tasks": 0,
+        "failed_operations": 0,
+        "structural_before_menu_matches_old_C06": 0,
+        "structural_selected_old_observed": 0,
+        "encoder_counters": {
+          "warm_latent": {
+            "forwards": 56,
+            "input_tokens": 191046,
+            "padded_tokens": 256671,
+            "texts": 580,
+            "chunked_texts": 65,
+            "chunks": 651,
+            "joint_sequences": 0
+          }
+        },
+        "cache_counters": {
+          "warm_latent": {
+            "requests": 1932,
+            "hits": 1352,
+            "misses": 580,
+            "same_call_reuses": 0,
+            "evictions": 0,
+            "stale_input_removals": 176,
+            "oversized_skips": 0,
+            "resets": 9,
+            "completed_feature_calls": 48,
+            "peak_accounted_bytes": 139643,
+            "entries": 50,
+            "accounted_bytes": 111084,
+            "max_accounted_bytes": 1048576,
+            "byte_scope": "Literal UTF-8 keys + tensor payloads; Python overhead/RSS unknown",
+            "scope": "Current public encoder inputs only; full workspace recomputed"
+          }
+        }
+      },
+      {
+        "condition": "fit_latent",
+        "role": "curated_diagnostic_policy",
+        "roots": 8,
+        "terminal_reasons": {
+          "budget_exhausted": 2,
+          "policy_handoff": 6
+        },
+        "steps_sum": 52,
+        "material_UTF8_tokens_sum": 4452,
+        "empty_original_material_tasks": 0,
+        "failed_operations": 0,
+        "structural_before_menu_matches_old_C06": 0,
+        "structural_selected_old_observed": 0,
+        "encoder_counters": {
+          "fit_latent": {
+            "forwards": 66,
+            "input_tokens": 220308,
+            "padded_tokens": 297349,
+            "texts": 628,
+            "chunked_texts": 88,
+            "chunks": 734,
+            "joint_sequences": 0
+          }
+        },
+        "cache_counters": {
+          "fit_latent": {
+            "requests": 2201,
+            "hits": 1573,
+            "misses": 628,
+            "same_call_reuses": 0,
+            "evictions": 0,
+            "stale_input_removals": 195,
+            "oversized_skips": 0,
+            "resets": 9,
+            "completed_feature_calls": 52,
+            "peak_accounted_bytes": 193793,
+            "entries": 50,
+            "accounted_bytes": 111039,
+            "max_accounted_bytes": 1048576,
+            "byte_scope": "Literal UTF-8 keys + tensor payloads; Python overhead/RSS unknown",
+            "scope": "Current public encoder inputs only; full workspace recomputed"
+          }
+        }
+      },
+      {
+        "condition": "fixed_r2_4",
+        "role": "cheap_fixed_control",
+        "roots": 8,
+        "terminal_reasons": {
+          "policy_handoff": 8
+        },
+        "steps_sum": 48,
+        "material_UTF8_tokens_sum": 7921,
+        "empty_original_material_tasks": 0,
+        "failed_operations": 0,
+        "structural_before_menu_matches_old_C06": 0,
+        "structural_selected_old_observed": 0,
+        "encoder_counters": {},
+        "cache_counters": null
+      },
+      {
+        "condition": "fixed_context4",
+        "role": "fixed_context_control",
+        "roots": 8,
+        "terminal_reasons": {
+          "policy_handoff": 8
+        },
+        "steps_sum": 48,
+        "material_UTF8_tokens_sum": 7921,
+        "empty_original_material_tasks": 0,
+        "failed_operations": 0,
+        "structural_before_menu_matches_old_C06": 0,
+        "structural_selected_old_observed": 0,
+        "encoder_counters": {},
+        "cache_counters": null
+      },
+      {
+        "condition": "encoder_cosine7",
+        "role": "strong_semantic_control",
+        "roots": 8,
+        "terminal_reasons": {
+          "budget_exhausted": 8
+        },
+        "steps_sum": 64,
+        "material_UTF8_tokens_sum": 12987,
+        "empty_original_material_tasks": 0,
+        "failed_operations": 0,
+        "structural_before_menu_matches_old_C06": 0,
+        "structural_selected_old_observed": 0,
+        "encoder_counters": {
+          "encoder_cosine7": {
+            "forwards": 112,
+            "input_tokens": 19071,
+            "padded_tokens": 22663,
+            "texts": 448,
+            "chunked_texts": 0,
+            "chunks": 448,
+            "joint_sequences": 0
+          }
+        },
+        "cache_counters": null
+      }
+    ],
+    "full_root_paired_unknown_sensitivity": [
+      {
+        "candidate": "fit_mlp",
+        "control": "warm_mlp",
+        "roots": 8,
+        "paired_mean_unknown_assignment_bounds": [
+          -0.5,
+          0.125
+        ],
+        "pairs": [
+          {
+            "family": "hotpot-5ac2863155429963665199f6",
+            "candidate": true,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              0,
+              0
+            ]
+          },
+          {
+            "family": "hotpot-5ab446225542991779162c52",
+            "candidate": null,
+            "control": null,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              1
+            ]
+          },
+          {
+            "family": "hotpot-5ac3c3235542995ef918c22e",
+            "candidate": true,
+            "control": null,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              0,
+              1
+            ]
+          },
+          {
+            "family": "hotpot-5a7ea8805542994959419a48",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a737f00554299623ed4abb7",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5ab313e455429976abd1bc55",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a8ef1455542995a26add573",
+            "candidate": true,
+            "control": false,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              1,
+              1
+            ]
+          },
+          {
+            "family": "hotpot-5a752c025542993748c897dc",
+            "candidate": null,
+            "control": null,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              1
+            ]
+          }
+        ],
+        "not_a_confidence_interval": true
+      },
+      {
+        "candidate": "fit_latent",
+        "control": "warm_latent",
+        "roots": 8,
+        "paired_mean_unknown_assignment_bounds": [
+          -0.625,
+          0.0
+        ],
+        "pairs": [
+          {
+            "family": "hotpot-5ac2863155429963665199f6",
+            "candidate": true,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              0,
+              0
+            ]
+          },
+          {
+            "family": "hotpot-5ab446225542991779162c52",
+            "candidate": null,
+            "control": null,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              1
+            ]
+          },
+          {
+            "family": "hotpot-5ac3c3235542995ef918c22e",
+            "candidate": true,
+            "control": null,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              0,
+              1
+            ]
+          },
+          {
+            "family": "hotpot-5a7ea8805542994959419a48",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a737f00554299623ed4abb7",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5ab313e455429976abd1bc55",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a8ef1455542995a26add573",
+            "candidate": false,
+            "control": false,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              0,
+              0
+            ]
+          },
+          {
+            "family": "hotpot-5a752c025542993748c897dc",
+            "candidate": null,
+            "control": null,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              1
+            ]
+          }
+        ],
+        "not_a_confidence_interval": true
+      },
+      {
+        "candidate": "fit_mlp",
+        "control": "encoder_cosine7",
+        "roots": 8,
+        "paired_mean_unknown_assignment_bounds": [
+          -0.5,
+          -0.125
+        ],
+        "pairs": [
+          {
+            "family": "hotpot-5ac2863155429963665199f6",
+            "candidate": true,
+            "control": false,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              1,
+              1
+            ]
+          },
+          {
+            "family": "hotpot-5ab446225542991779162c52",
+            "candidate": null,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              0
+            ]
+          },
+          {
+            "family": "hotpot-5ac3c3235542995ef918c22e",
+            "candidate": true,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              0,
+              0
+            ]
+          },
+          {
+            "family": "hotpot-5a7ea8805542994959419a48",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a737f00554299623ed4abb7",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5ab313e455429976abd1bc55",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a8ef1455542995a26add573",
+            "candidate": true,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              0,
+              0
+            ]
+          },
+          {
+            "family": "hotpot-5a752c025542993748c897dc",
+            "candidate": null,
+            "control": null,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              1
+            ]
+          }
+        ],
+        "not_a_confidence_interval": true
+      },
+      {
+        "candidate": "fit_latent",
+        "control": "encoder_cosine7",
+        "roots": 8,
+        "paired_mean_unknown_assignment_bounds": [
+          -0.625,
+          -0.25
+        ],
+        "pairs": [
+          {
+            "family": "hotpot-5ac2863155429963665199f6",
+            "candidate": true,
+            "control": false,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              1,
+              1
+            ]
+          },
+          {
+            "family": "hotpot-5ab446225542991779162c52",
+            "candidate": null,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              0
+            ]
+          },
+          {
+            "family": "hotpot-5ac3c3235542995ef918c22e",
+            "candidate": true,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              0,
+              0
+            ]
+          },
+          {
+            "family": "hotpot-5a7ea8805542994959419a48",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a737f00554299623ed4abb7",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5ab313e455429976abd1bc55",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a8ef1455542995a26add573",
+            "candidate": false,
+            "control": true,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "family": "hotpot-5a752c025542993748c897dc",
+            "candidate": null,
+            "control": null,
+            "same_first_wire": false,
+            "unknown_assignment_delta_bounds": [
+              -1,
+              1
+            ]
+          }
+        ],
+        "not_a_confidence_interval": true
+      }
+    ],
+    "reviewed_first_reuse_consistency": {
+      "same_old_B_values_codes": [
+        "M001",
+        "M002",
+        "M008",
+        "M011",
+        "M018",
+        "M020",
+        "M021",
+        "M026"
+      ],
+      "old_B_disagreement_details": [],
+      "no_matching_old_B_grade_codes": [
+        "M022"
+      ],
+      "old_firsts_and_labels_never_overwritten": true,
+      "scope": "New27caseBpanel judged beforemethod/native tables with inheritedcriteria; any disagreement remains explicit, not favorable-label replacement."
+    },
+    "actual_parent_rollout_CPU_seconds": 106.871602099,
+    "actual_parent_GPU_allocated_seconds": 64.14533968828619,
+    "actual_new_Reader_client_compute": {
+      "cpu_seconds": 2.8467006009999993,
+      "wall_seconds": 184.25248283613473,
+      "runs": 1
+    },
+    "reuse_cost_scope": "Current reused branch resource-target HTTP fields null, not0/currentlatency/savings. Raw copied first receipts retain original usage/wall as provenance, never newwork; only new18knownusage billed. Per-condition material logicalcost is not currentfullHTTP/lifecycle cost.",
+    "scope": "Allrandom8oldTRAINroots outsidecurated8fit, stillT10weak/projectexposed. Diagnosticmemoized heads, not selectedformalG1candidate. Bprojectaware/noqualifiedindependentreview, unknowns retained. Fullpolicydifferences includeobjectselection/delivery/stopping. All8have noofferedcontext-upgradebindings and fixedR2/context4 identicalwires, so no Pprecision contribution claimed. No source/task/menu masking byoldlabels or ownstate-adaptation training.",
+    "interpretation": "Smaller Reader materials from C14heads didnotpreserve taskquality: observed-known-only fitting is insufficient. The real newlegalchoices require feedback and better coverage/generalization. Do notinfer that unexecuted choices were inherently bad fromoldlabels, or that lessmaterial proves savings. Strongcosinecontrol remains better onthispanel. No newepochs/LR/architecture or candidateacceptance frommemorization."
+  },
+  "artifacts": {
+    "rollout_card": "C15-random8-cold-rollout-card-v1.json",
+    "random_sources": "C15-random8-outside-curated-fit-sources-v1",
+    "rollout_driver": "C15-cold-rollout-driver-v1.json",
+    "cold_material_audit": "C15-cold-material-audit-v1.json",
+    "Reader_preparation": "C15-firsts-preparation-v1.json",
+    "Reader_card": "C15-Reader-admission-card-v1.json",
+    "Reader_prepared": "C15-TRAIN8-Reader-prepared-v1",
+    "firsts": "C15-TRAIN8-firsts-v1",
+    "blind_panel": "C15-random8-blind-review-v1",
+    "reviewed_index": "C15-reviewed-task-index-v1.json",
+    "native_scores": "C15-native-scores-v1",
+    "reviewed_scores": "C15-reviewed-scores-v1",
+    "closed_review": "C15-actual-task-closed-review-v1.json",
+    "provenance_cost_axis_erratum": "C15-provenance-cost-axis-clarification-v1.json",
+    "review_enum_adapter": "C15-review-enum-adapter-note-v1.json",
+    "reused_resource_checker_erratum": "C15-reused-resource-scope-checker-erratum-v1.json",
+    "cost_index_schema_erratum": "C15-cost-index-schema-erratum-v1.json"
+  },
+  "validation": {
+    "exact_initial_before_menu_matches": 56,
+    "independent_DBs_including_common": 64,
+    "saved_checkpoint_fullbytes_unchanged": true,
+    "all27task_wire_first_bindings_checked": true,
+    "all27reviews_frozen_before_method_and_native_scores": true,
+    "raw_lowercase_reviews_preserved_enum_only_adapter": true,
+    "8matched_old_B_reuse_grades_agree_1oldgrade_notfound": true,
+    "all18actualnewusage_sum": 55089,
+    "new_model_updates": 0,
+    "implementation_source_changed": false,
+    "no_package_tests_repeated_for_analysis_docs": true
+  },
+  "costs": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "C14_previous7_receipt": "C14-after-closed-cost-v1.json",
+    "C14_previous7_status": "SETTLED_ONCE_AND_READ_BACK",
+    "C15_preparation5_receipt": "C15-before-firsts-cost-v1.json",
+    "C15_preparation5_status": "SETTLED_ONCE_AND_READ_BACK",
+    "C15_native_phase": "camc_C15_TRAIN8_frozen_policy_firsts_v1",
+    "C15_new_Reader_known_and_charged_tokens": 55089,
+    "C15_unknown_usage_delta": 0,
+    "C15_native_auto_compute": {
+      "cpu_seconds": 2.8467006009999993,
+      "wall_seconds": 184.25248283613473,
+      "runs": 1
+    },
+    "C15_rollout_parent_CPU_seconds": 106.871602099,
+    "C15_rollout_parent_GPU_allocated_seconds": 64.14533968828619,
+    "C15_aftercycle7_state": "C15-after-cycle-cost-state-v1.json",
+    "C15_aftercycle7_receipt": "C15-after-cycle-cost-v1.json",
+    "C15_aftercycle7_status": "TERMINAL_COSTS_SETTLED_NO_CLIENT_CALLS",
+    "missing_GPU_axis": "Addonlygpu_allocation_wall_seconds toexistingcamc_C15_rollout_parent_v1; CPU/wall/runs preserved, neverrebilled",
+    "reused_resource_scope": "Rawfirst receipts keepoldusage/wall; currentbranchresourceAPI nullsHTTPaxes forreuse, never0/saving",
+    "old_C06_unknown_reservation_retained": 9295,
+    "failed_checker_compile_manual_import_activeGPU_wholeIO_energy_money": "UNKNOWN_NOT_ZERO",
+    "no_busy_budget_load_secondledger_counterreset": true
+  },
+  "live_jobs": [],
+  "next_action": "Useactualfailed/successful trajectories to diagnose selection/delivery/stopping and initial/own-state coverage. Before morefullrecipe fits, define a bounded full-data/partial-label stability study with equal-exposure weak+quality/cost controls and explicit anchors only asweakbehaviour/self-supervision, never semantic-negative labels for unexecutedactions. Any newactual ownstate training must include matchedoldpool/replay and preserve randomsourcequota, calibration and newconfirmation boundaries. No routeBswitch or formalownstate-round claim fromthispilot. UserauthorizedGitHubpublication now: finishreviewableC15docs/manifestcommit andpush currentfeat/memory-compute-control-20261117 branch toorigin minguselandy/MiLAi, verifytransport/ref withoutartifactSHAvalidation. Thisdoesnotcompletefullresearchgoal. C15actuallearnedheadnegative, no blindepoch/modelscale; define equalexposurefull-data/coverage/stability orownstatefeedback pilot withweakbehaviouranchors explicitlynotqualitynegatives. Preservealloldlabels and firsts. Noformaladaptationround untilactualnew-state-label/train/deploy+matchedoldpoolreplay. DefaultrouteA/reliability/nestedrepresentation/3seeds/power/newconfirm/transfer/delivery remain.",
+  "remaining_full_goal": [
+    "Reliable outcome calibration and honest unknown/failure treatment before D1 scaling; C06 complete256states64roots remains B provisional, J02fixed-code ability gate failed.",
+    "Heterogeneous general Source/partialView/fullView/refresh tradeoffs, strong cheap rule/query controls, usable explicitV3M0/M1 starts and actual matched outcome training; P03rawSource cheaper counterexample retained.",
+    "P precision and D revision/refresh contribution under same actual information and complete costs; controlled projection/enum proof alone is insufficient.",
+    "Two actual own-state label/train/deploy rounds, equal-exposure old-pool controls and replay; old488own observations are unlabelled, not round1.",
+    "Finalcandidate three training seeds, frozen strong simple baselines, source/group power, genuinely new independent confirmation firsts.",
+    "SecondReader/external task/budget/scale transfer and complete method/model/config/data/reproduction/cost/negative-result deliverables.",
+    "Conditional F/A/X only after measured bottleneck and separate bounded admission.",
+    "Plan representation/capacity work remains: trained nested64/128/256-dimensional and1/2/4-group representations with fullprecision reference, actual64/128/256+candidate pools and budgets; no arbitrary untrained truncation claim. D1 targets500–1000naturalroots and>=2k reliable comparisonstates are yield-gated, not satisfied by correlated pairs."
+  ],
+  "publication": {
+    "user_authorized": true,
+    "target": "https://github.com/minguselandy/MiLAi",
+    "branch": "feat/memory-compute-control-20261117",
+    "status": "PREPARED_FOR_PUSH_AFTER_THIS_RECORD_COMMIT",
+    "merge_requested": false,
+    "research_paused_only_GitHub_submission_continues": true
+  },
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "default_route": "A_unchanged",
+  "protected_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "public_Product_Archive_defaults_permissions_changed": false,
+  "remote_checked": "Read-onlySSHremoteconnectionpassed; branchpublicationpendingthiscommit",
+  "user_paused_research_goal": true
+}
