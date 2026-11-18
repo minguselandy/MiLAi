@@ -1,0 +1,761 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v48.json",
+  "previous_manifest": "memory-compute-control-C13-success-cost-auxiliary-20261118-v1.json",
+  "source": "S23/7c48c92e",
+  "implementation_source_changed": false,
+  "rollback_commit": "8429fb5b",
+  "C14": {
+    "source": "S23/7c48c92e",
+    "historical_scope": "T00priornone structuralh2/randomheads didnotcover currentquality+cost withprior1; C14isnot a duplicate current-target test or extension ofC13.",
+    "selection_scope": "EightdeliberatelycuratedoldTRAINstates/eightroots(4cost/4quality opportunities), chosen in originalorder from usableinitial predictions, not C13finalresults. Fulloldrowvalues retained. Not a population effect estimate.",
+    "fits": 2,
+    "updates_each": 256,
+    "valid_draws_each": 2048,
+    "loss_and_parameters": [
+      {
+        "architecture": "object_mlp",
+        "changed_fullmenu_choices": 8,
+        "fixed_smallset_fitting_gate_met": true,
+        "loss_before": 1.8596030473709106,
+        "loss_after": 0.00820542877772823,
+        "head_l2_change": 13.801727244540526,
+        "same_process_reload_max_error": 0.0
+      },
+      {
+        "architecture": "latent_pointer",
+        "changed_fullmenu_choices": 8,
+        "fixed_smallset_fitting_gate_met": true,
+        "loss_before": 1.862668439745903,
+        "loss_after": 0.00023210532935991068,
+        "head_l2_change": 8.213664924836548,
+        "same_process_reload_max_error": 0.0
+      }
+    ],
+    "fixed_fitting_metrics": [
+      {
+        "architecture": "object_mlp",
+        "initial": {
+          "quality_pairs": 15,
+          "quality_pairs_correct": 7,
+          "quality_pair_accuracy": 0.4666666666666667,
+          "cost_pairs": 5,
+          "cost_pairs_correct": 1,
+          "cost_pair_accuracy": 0.2,
+          "observed_subset_top_accepted": 0,
+          "full_menu_top_accepted": 0,
+          "full_menu_top_unlabelled": 0,
+          "details": [
+            {
+              "sample_id": "hotpot-5a8033e95542996402f6a47e/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "handoff",
+                "read_6"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a8cf895554299441c6b9f90/question/step-3/h4",
+              "accepted_observed_constraints": [
+                "read_6"
+              ],
+              "observed_subset_top": "read_2",
+              "full_menu_top": "read_2",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a72177c55429971e9dc925b/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_5"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a72874e5542994cef4bc31c/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_5"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a79cc035542994f819ef0a6/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_3"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 0.0
+            },
+            {
+              "sample_id": "hotpot-5ae7526d5542995703ce8be6/question/step-5/h2",
+              "accepted_observed_constraints": [
+                "read_4"
+              ],
+              "observed_subset_top": "handoff",
+              "full_menu_top": "handoff",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 0.0
+            },
+            {
+              "sample_id": "hotpot-5a86d6e15542996432c571eb/question/step-1/h6",
+              "accepted_observed_constraints": [
+                "read_9"
+              ],
+              "observed_subset_top": "read_0",
+              "full_menu_top": "read_0",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 0.0
+            },
+            {
+              "sample_id": "hotpot-5ab723a45542992aa3b8c7ac/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "handoff",
+                "read_7"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 0.0
+            }
+          ]
+        },
+        "final": {
+          "quality_pairs": 15,
+          "quality_pairs_correct": 15,
+          "quality_pair_accuracy": 1.0,
+          "cost_pairs": 5,
+          "cost_pairs_correct": 5,
+          "cost_pair_accuracy": 1.0,
+          "observed_subset_top_accepted": 8,
+          "full_menu_top_accepted": 7,
+          "full_menu_top_unlabelled": 1,
+          "details": [
+            {
+              "sample_id": "hotpot-5a8033e95542996402f6a47e/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "handoff",
+                "read_6"
+              ],
+              "observed_subset_top": "read_6",
+              "full_menu_top": "read_6",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a8cf895554299441c6b9f90/question/step-3/h4",
+              "accepted_observed_constraints": [
+                "read_6"
+              ],
+              "observed_subset_top": "read_6",
+              "full_menu_top": "read_6",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a72177c55429971e9dc925b/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_5"
+              ],
+              "observed_subset_top": "read_5",
+              "full_menu_top": "read_5",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a72874e5542994cef4bc31c/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_5"
+              ],
+              "observed_subset_top": "read_5",
+              "full_menu_top": "read_5",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a79cc035542994f819ef0a6/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_3"
+              ],
+              "observed_subset_top": "read_3",
+              "full_menu_top": "read_8",
+              "full_top_unlabelled": true,
+              "full_top_recorded_quality": null
+            },
+            {
+              "sample_id": "hotpot-5ae7526d5542995703ce8be6/question/step-5/h2",
+              "accepted_observed_constraints": [
+                "read_4"
+              ],
+              "observed_subset_top": "read_4",
+              "full_menu_top": "read_4",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a86d6e15542996432c571eb/question/step-1/h6",
+              "accepted_observed_constraints": [
+                "read_9"
+              ],
+              "observed_subset_top": "read_9",
+              "full_menu_top": "read_9",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5ab723a45542992aa3b8c7ac/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "handoff",
+                "read_7"
+              ],
+              "observed_subset_top": "read_7",
+              "full_menu_top": "read_7",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            }
+          ]
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "initial": {
+          "quality_pairs": 15,
+          "quality_pairs_correct": 8,
+          "quality_pair_accuracy": 0.5333333333333333,
+          "cost_pairs": 5,
+          "cost_pairs_correct": 1,
+          "cost_pair_accuracy": 0.2,
+          "observed_subset_top_accepted": 0,
+          "full_menu_top_accepted": 0,
+          "full_menu_top_unlabelled": 0,
+          "details": [
+            {
+              "sample_id": "hotpot-5a8033e95542996402f6a47e/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "handoff",
+                "read_6"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a8cf895554299441c6b9f90/question/step-3/h4",
+              "accepted_observed_constraints": [
+                "read_6"
+              ],
+              "observed_subset_top": "read_2",
+              "full_menu_top": "read_2",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a72177c55429971e9dc925b/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_5"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a72874e5542994cef4bc31c/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_5"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a79cc035542994f819ef0a6/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_3"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 0.0
+            },
+            {
+              "sample_id": "hotpot-5ae7526d5542995703ce8be6/question/step-5/h2",
+              "accepted_observed_constraints": [
+                "read_4"
+              ],
+              "observed_subset_top": "handoff",
+              "full_menu_top": "handoff",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 0.0
+            },
+            {
+              "sample_id": "hotpot-5a86d6e15542996432c571eb/question/step-1/h6",
+              "accepted_observed_constraints": [
+                "read_9"
+              ],
+              "observed_subset_top": "read_0",
+              "full_menu_top": "read_0",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 0.0
+            },
+            {
+              "sample_id": "hotpot-5ab723a45542992aa3b8c7ac/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "handoff",
+                "read_7"
+              ],
+              "observed_subset_top": "read_1",
+              "full_menu_top": "read_1",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 0.0
+            }
+          ]
+        },
+        "final": {
+          "quality_pairs": 15,
+          "quality_pairs_correct": 15,
+          "quality_pair_accuracy": 1.0,
+          "cost_pairs": 5,
+          "cost_pairs_correct": 5,
+          "cost_pair_accuracy": 1.0,
+          "observed_subset_top_accepted": 8,
+          "full_menu_top_accepted": 7,
+          "full_menu_top_unlabelled": 1,
+          "details": [
+            {
+              "sample_id": "hotpot-5a8033e95542996402f6a47e/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "handoff",
+                "read_6"
+              ],
+              "observed_subset_top": "read_6",
+              "full_menu_top": "read_6",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a8cf895554299441c6b9f90/question/step-3/h4",
+              "accepted_observed_constraints": [
+                "read_6"
+              ],
+              "observed_subset_top": "read_6",
+              "full_menu_top": "read_6",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a72177c55429971e9dc925b/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_5"
+              ],
+              "observed_subset_top": "read_5",
+              "full_menu_top": "read_5",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a72874e5542994cef4bc31c/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_5"
+              ],
+              "observed_subset_top": "read_5",
+              "full_menu_top": "read_5",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a79cc035542994f819ef0a6/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "read_3"
+              ],
+              "observed_subset_top": "read_3",
+              "full_menu_top": "read_8",
+              "full_top_unlabelled": true,
+              "full_top_recorded_quality": null
+            },
+            {
+              "sample_id": "hotpot-5ae7526d5542995703ce8be6/question/step-5/h2",
+              "accepted_observed_constraints": [
+                "read_4"
+              ],
+              "observed_subset_top": "read_4",
+              "full_menu_top": "read_4",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5a86d6e15542996432c571eb/question/step-1/h6",
+              "accepted_observed_constraints": [
+                "read_9"
+              ],
+              "observed_subset_top": "read_9",
+              "full_menu_top": "read_9",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            },
+            {
+              "sample_id": "hotpot-5ab723a45542992aa3b8c7ac/question/step-2/h5",
+              "accepted_observed_constraints": [
+                "handoff",
+                "read_7"
+              ],
+              "observed_subset_top": "read_7",
+              "full_menu_top": "read_7",
+              "full_top_unlabelled": false,
+              "full_top_recorded_quality": 1.0
+            }
+          ]
+        }
+      }
+    ],
+    "fresh_loads": [
+      {
+        "architecture": "object_mlp",
+        "fixed_sample_index": 0,
+        "sample_id": "hotpot-5a8033e95542996402f6a47e/question/step-2/h5",
+        "max_score_error": 0.0,
+        "new_encoder_forwards": 3
+      },
+      {
+        "architecture": "object_mlp",
+        "fixed_sample_index": 4,
+        "sample_id": "hotpot-5a79cc035542994f819ef0a6/question/step-2/h5",
+        "max_score_error": 0.0,
+        "new_encoder_forwards": 3
+      },
+      {
+        "architecture": "latent_pointer",
+        "fixed_sample_index": 0,
+        "sample_id": "hotpot-5a8033e95542996402f6a47e/question/step-2/h5",
+        "max_score_error": 0.0,
+        "new_encoder_forwards": 3
+      },
+      {
+        "architecture": "latent_pointer",
+        "fixed_sample_index": 4,
+        "sample_id": "hotpot-5a79cc035542994f819ef0a6/question/step-2/h5",
+        "max_score_error": 0.0,
+        "new_encoder_forwards": 3
+      }
+    ],
+    "all8_fit_scores_rechecked_during_all256fresh_scoring": true,
+    "old_TRAIN_outside_curated_fit_scores": [
+      {
+        "architecture": "object_mlp",
+        "partition": "curated_fit",
+        "states": 8,
+        "roots": 8,
+        "changed_fullmenu_choices_vs_usable_warm": 8,
+        "top_categories": {
+          "known_review_success": 7,
+          "known_review_failure": 0,
+          "observed_unknown": 0,
+          "unexecuted_unlabelled": 1
+        },
+        "observed_subset_top_known_nondominated_success": 8,
+        "quality_correct_pairs": 15,
+        "quality_pairs": 15,
+        "cost_correct_pairs": 5,
+        "cost_pairs": 5
+      },
+      {
+        "architecture": "object_mlp",
+        "partition": "other_states_same_fit_roots",
+        "states": 24,
+        "roots": 8,
+        "changed_fullmenu_choices_vs_usable_warm": 24,
+        "top_categories": {
+          "known_review_success": 3,
+          "known_review_failure": 2,
+          "observed_unknown": 0,
+          "unexecuted_unlabelled": 19
+        },
+        "observed_subset_top_known_nondominated_success": 11,
+        "quality_correct_pairs": 24,
+        "quality_pairs": 32,
+        "cost_correct_pairs": 5,
+        "cost_pairs": 17
+      },
+      {
+        "architecture": "object_mlp",
+        "partition": "other_roots",
+        "states": 224,
+        "roots": 56,
+        "changed_fullmenu_choices_vs_usable_warm": 190,
+        "top_categories": {
+          "known_review_success": 56,
+          "known_review_failure": 9,
+          "observed_unknown": 11,
+          "unexecuted_unlabelled": 148
+        },
+        "observed_subset_top_known_nondominated_success": 114,
+        "quality_correct_pairs": 180,
+        "quality_pairs": 193,
+        "cost_correct_pairs": 41,
+        "cost_pairs": 142
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "curated_fit",
+        "states": 8,
+        "roots": 8,
+        "changed_fullmenu_choices_vs_usable_warm": 8,
+        "top_categories": {
+          "known_review_success": 7,
+          "known_review_failure": 0,
+          "observed_unknown": 0,
+          "unexecuted_unlabelled": 1
+        },
+        "observed_subset_top_known_nondominated_success": 8,
+        "quality_correct_pairs": 15,
+        "quality_pairs": 15,
+        "cost_correct_pairs": 5,
+        "cost_pairs": 5
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "other_states_same_fit_roots",
+        "states": 24,
+        "roots": 8,
+        "changed_fullmenu_choices_vs_usable_warm": 24,
+        "top_categories": {
+          "known_review_success": 3,
+          "known_review_failure": 2,
+          "observed_unknown": 0,
+          "unexecuted_unlabelled": 19
+        },
+        "observed_subset_top_known_nondominated_success": 12,
+        "quality_correct_pairs": 25,
+        "quality_pairs": 32,
+        "cost_correct_pairs": 5,
+        "cost_pairs": 17
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "other_roots",
+        "states": 224,
+        "roots": 56,
+        "changed_fullmenu_choices_vs_usable_warm": 198,
+        "top_categories": {
+          "known_review_success": 47,
+          "known_review_failure": 10,
+          "observed_unknown": 11,
+          "unexecuted_unlabelled": 156
+        },
+        "observed_subset_top_known_nondominated_success": 113,
+        "quality_correct_pairs": 182,
+        "quality_pairs": 193,
+        "cost_correct_pairs": 41,
+        "cost_pairs": 142
+      }
+    ],
+    "baseline_top_categories": [
+      {
+        "architecture": "object_mlp",
+        "partition": "curated_fit",
+        "usable_warm_top_categories": {
+          "known_review_failure": 4,
+          "known_review_success": 4
+        }
+      },
+      {
+        "architecture": "object_mlp",
+        "partition": "other_states_same_fit_roots",
+        "usable_warm_top_categories": {
+          "known_review_success": 15,
+          "known_review_failure": 8,
+          "observed_unknown": 1
+        }
+      },
+      {
+        "architecture": "object_mlp",
+        "partition": "other_roots",
+        "usable_warm_top_categories": {
+          "observed_unknown": 29,
+          "known_review_success": 162,
+          "known_review_failure": 33
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "curated_fit",
+        "usable_warm_top_categories": {
+          "known_review_failure": 4,
+          "known_review_success": 4
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "other_states_same_fit_roots",
+        "usable_warm_top_categories": {
+          "known_review_success": 15,
+          "known_review_failure": 8,
+          "observed_unknown": 1
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "other_roots",
+        "usable_warm_top_categories": {
+          "observed_unknown": 29,
+          "known_review_success": 162,
+          "known_review_failure": 33
+        }
+      }
+    ],
+    "unexecuted_top_action_families": [
+      {
+        "architecture": "object_mlp",
+        "partition": "curated_fit",
+        "unexecuted_fullmenu_top_kinds": {
+          "READ": 1
+        }
+      },
+      {
+        "architecture": "object_mlp",
+        "partition": "other_states_same_fit_roots",
+        "unexecuted_fullmenu_top_kinds": {
+          "READ": 19
+        }
+      },
+      {
+        "architecture": "object_mlp",
+        "partition": "other_roots",
+        "unexecuted_fullmenu_top_kinds": {
+          "READ": 138,
+          "HANDOFF": 6,
+          "READ:observe_only": 4
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "curated_fit",
+        "unexecuted_fullmenu_top_kinds": {
+          "READ": 1
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "other_states_same_fit_roots",
+        "unexecuted_fullmenu_top_kinds": {
+          "READ": 19
+        }
+      },
+      {
+        "architecture": "latent_pointer",
+        "partition": "other_roots",
+        "unexecuted_fullmenu_top_kinds": {
+          "READ": 136,
+          "READ:observe_only": 15,
+          "HANDOFF": 5
+        }
+      }
+    ],
+    "interpretation": "Both architectures can fit these8known constraints and overcome the same usableprior; deterministic input/loss/prior impossibility is not established. Fixedset acceptance and high observedqualitypair rank do not establish coverage or generalized cost preference. Outside fit subset many chosen legalbindings were neverexecuted inC06; these are missing outcomes, not failurelabels. Curated diversity and perstate exposure both changed, so dataset size vs optimization vs sharing cannot be causally separated here.",
+    "G0": "SMALL_FIXED_OBSERVED_CONSTRAINT_FITTING_GATE_MET_ONLY",
+    "CPU_seconds_parent_training_fresh_fullscore": 144.181606102,
+    "GPU_allocated_seconds_training_fresh_fullscore": 127.93335801549256,
+    "caps_training_fresh_fullscore": [
+      240,
+      60,
+      120
+    ]
+  },
+  "artifacts": {
+    "fit_card_and_selection": "C14-small-set-fitting-card-v1.json",
+    "fixed8_data": "C14-curated-known8-fit-data-v1/train.jsonl",
+    "training_driver": "C14-training-driver-v1.json",
+    "fixed_fit_review": "C14-fixed-fit-review-v1.json",
+    "fresh_probe": "C14-fresh-load-v1.json",
+    "fresh_parent": "C14-fresh-load-driver-v1.json",
+    "other_state_scoring_card": "C14-other-training-state-scoring-card-v1.json",
+    "other_state_scoring_parent": "C14-other-state-score-driver-v1.json",
+    "other_old_TRAIN_scores": "C14-other-training-state-scores-v1.json",
+    "closed_review": "C14-fitability-closed-review-v1.json"
+  },
+  "validation": {
+    "old_T00_inspected": "T00card/twoactualruncontracts/initialfinal:64states96updates/priornone structuralh2, notcurrentcostgoal",
+    "new_fixed_fits": 2,
+    "curated_rows_source_groups": 8,
+    "old_rows_literals_unchanged": true,
+    "constraints_fit_per_model": {
+      "quality_correct": 15,
+      "quality_total": 15,
+      "cost_correct": 5,
+      "cost_total": 5,
+      "observed_subset_accepted": 8,
+      "full_menu_accepted": 7,
+      "full_menu_unexecuted_unlabelled": 1
+    },
+    "fresh_heads": 2,
+    "prospective_fixed_fresh_samples_each": 2,
+    "new_process_full_scores_each": 256,
+    "all8fixed_rows_score_rechecked_tolerance": 1e-06,
+    "scope": "No new sourcecode, real2fits/fresh/read-onlyscores, no repeatedpackage tests for artifact/doc changes. ExistingS23 remains byteequal."
+  },
+  "costs": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "C13_previous5_receipt": "C13-after-finite-fits-cost-v1.json",
+    "C13_previous5_status": "SETTLED_ONCE_AND_READ_BACK",
+    "C14_7_status": "WAITING_ORIGINAL_SCOPE_COST_ONLY",
+    "C14_7_state": "C14-cost-settlement-state-v1.json",
+    "C14_7_receipt": "C14-after-closed-cost-v1.json",
+    "C14_three_parent_CPU_seconds": 144.181606102,
+    "C14_three_parent_GPU_allocated_seconds": 127.93335801549256,
+    "no_innerfit_freshworker_fullscoreworker_rebill": true,
+    "Reader_calls_new": 0,
+    "token_unknown_counters_unchanged": true,
+    "C06_own_unknown_usage_delta_retained": 1,
+    "C06_unknown_reservation_retained": 9295,
+    "manual_historical_reading_imports_activeGPU_wholeIO_energy_money": "UNKNOWN_NOT_ZERO",
+    "no_busy_budget_load_or_secondledger": true
+  },
+  "live_jobs": [
+    {
+      "kind": "C14_closed7scope_cost_only_wait",
+      "pid": 2051677,
+      "driver": "/data/milai-experiments/20261117-memory-compute-control/C14-settle-closed-cost-v1.py",
+      "state": "/data/milai-experiments/20261117-memory-compute-control/C14-cost-settlement-state-v1.json",
+      "closed_scopes": 7,
+      "Reader_or_model_calls": 0,
+      "never_restart_lost_observation": true
+    }
+  ],
+  "checkpoints": [
+    "/data/milai-experiments/20261117-memory-compute-control/C14-mlp-known8-fit256-seed0-v1/checkpoint",
+    "/data/milai-experiments/20261117-memory-compute-control/C14-latent-known8-fit256-seed0-v1/checkpoint"
+  ],
+  "next_action": "Do not call memorization G1 or expand epochs/LR/architecture without evidence. First inspect the newly preferred legalaction families and gather a bounded actual rollout/branch-coverage pilot under frozen savedpolicy, samebefore/simplecontrols and >=30%randomsourcequota, with actual material/Reader outcomes where admitted. Fullmenus remainlegal; never mask unknownactions by offline labels, impute failure, or report unknowns as qualitywins. Reliable outcome calibration and matched old-pool/replay are still required before ownstate adaptation rounds. Inspect actual unknownbinding families: other56roots M0unexecuted READ138/HANDOFF6/READobserve4, M1READ136/observe15/HANDOFF5. Most are ordinaryREAD, so include cheap fixedR2 vsfixedcontext/simplequerycontrols. Newbounded actual saved-policy coldrollout/material pilot should fix randomTRAINsource selection beforeoutputs, sameactualinitialbefore/menu, allfulllegalbindings/8control2048material, >=30%randomquota, originalearliestfulltask/wirefirstreuse only; Readeradmission separate after material/function gate, notautomatic. C14isdiagnosticmemoizedhead notselectedgeneralizationcandidate orformalownstate-round1. Keepunknownchoices unlabeled, donotmaskbyofflineobservedIDs or blindlyincreaseepochs. Reliableoutcomes/matchedoldpoolreplay/twoactualadaptationrounds/3seeds/strongcachebaseline/power/newconfirmation/transfer/nestedrepresentation/full delivery remain. Revalidateonlycost2051677andexternalR40B1648312; C13cost1958502+allC14modeljobs terminal, neverrestartlostobservation.",
+  "remaining_full_goal": [
+    "Reliable outcome calibration and honest unknown/failure treatment before D1 scaling; C06 complete256states64roots remains B provisional, J02fixed-code ability gate failed.",
+    "Heterogeneous general Source/partialView/fullView/refresh tradeoffs, strong cheap rule/query controls, usable explicitV3M0/M1 starts and actual matched outcome training; P03rawSource cheaper counterexample retained.",
+    "P precision and D revision/refresh contribution under same actual information and complete costs; controlled projection/enum proof alone is insufficient.",
+    "Two actual own-state label/train/deploy rounds, equal-exposure old-pool controls and replay; old488own observations are unlabelled, not round1.",
+    "Finalcandidate three training seeds, frozen strong simple baselines, source/group power, genuinely new independent confirmation firsts.",
+    "SecondReader/external task/budget/scale transfer and complete method/model/config/data/reproduction/cost/negative-result deliverables.",
+    "Conditional F/A/X only after measured bottleneck and separate bounded admission.",
+    "Plan representation/capacity work remains: trained nested64/128/256-dimensional and1/2/4-group representations with fullprecision reference, actual64/128/256+candidate pools and budgets; no arbitrary untrained truncation claim. D1 targets500–1000naturalroots and>=2k reliable comparisonstates are yield-gated, not satisfied by correlated pairs."
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "default_route": "A_unchanged",
+  "protected_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "public_Product_Archive_defaults_permissions_changed": false,
+  "push_or_merge": false,
+  "remote_checked": false
+}

@@ -1,4 +1,39 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; S23costloss/C13sixclosed_NOdecisionchange
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; C14smallfitPASS/outsidefitcoverageUNKNOWN
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v48.json.
+HistoricalT00 inspected:64states96updates oldstructuralh2/randomheads/priornone didnotcover
+currentquality+cost/prior1. NewC14fixed8oldTRAINstates/8roots(4cost+4quality opportunities from
+usableinitial only, noC13finalselection),2models ownT10warm24 sameconfig,256updates all8per
+update/LR3e-4/seed0/λcost1.2048validdraws each, noextraC13epochs or tuning. Bothquality15/15,
+cost5/5, observedsubsetchoices8/8 accepted; fullmenus7/8knownaccepted+1unexecutedUNLABELLED.
+All8argmaxchange, lossM0 1.8596->.008205/M1 1.8627->.0002321; realweights/fullJSONrecovery/
+fresh2heads4fixedsamples0error. Readonlyall256oldTRAINscores also recheckall8fitsamples<=1e-6.
+Canfitthese8constraints; NOTG1/generalization/capacityproof. Diversity/exposure/batchchanged,
+so cannotattribute cause uniquely. T10weakwarm exposedall64roots; otherRootsNOTunseen/DEV.
+Partitions8curated/24otherstatesofsame8roots/224statesofother56roots. Other56roots M0quality
+180/193/cost41/142/fulltopunexecuted148(READ138/HANDOFF6/observe4),M1quality182/193/cost41/142/
+unexecuted156(READ136/observe15/HANDOFF5); observedunknown11each. Other24samefitroots each
+19unexecutedtops. Highobservedpairrankdoesnotprovefullmenupolicy. UnknownsNOTerrororqualitywin.
+Next NEWboundedfrozenpolicy actualcoldrollout/material/coveragepilot withsamebefore/simple
+fixedR2/context/querycontrols and>=30%randomsourcequota; Reader separately gated, earliestfull
+originaltask/wire onlyreuse. No maskinglegalmenus byofflineobservedIDs, fakeunexecutednegatives,
+blindepochs/biggermodel ormemory-sampleG1claims. C14notformalownstate-round1/candidateselection.
+No sourcecodechange(S23/7c48c92e byteequal), noDEV/Reader/confirm. 144.182CPU/127.933GPUallocated
+all3parents, caps240+60+120; notactivekernel/lifecycle. C13old5costscopes SETTLED/readback,
+allC14modeldrivers1995776/2004768/2016008 terminal/absent; no restartlostobservation.
+Onlycost-only2051677 waits7C14closedscopes, actualexternalR40B1648312 FLOCK+bothcommandsverified.
+Onrelease settlesonce/readback; no innerfit/fresh/fullscoreworker rebill.
+Manualhistoricalread/import/activeGPU/wholeIO/energy/money UNKNOWNnot0. OldC06UNKNOWN9295
+reservation retained, originalledgeronly/no busyload/secondledger/tokenorunknowncounterreset.
+Private data/checkpoints ignored, olddata/weights untouched. SourceAPI/Product/Archive/defaults/
+permissions/protectedbodies/push/merge unchanged. SHA/fingerprintsOFF, defaultrouteAunchanged.
+Fullgoal/G1/G2/G3 incomplete: reliablecalibration/D1yield/P-D/twoactualownstate+matchedoldpool/
+replay/3seeds/nestedrepresentations/power/newCONFIRM/transfer/finaldelivery remain. Do notfinish
+at fittingknownsubset; preserveC13failedfullrecipe/P05noqualitywin/C11/C07/C10negatives.
+
+The following v47 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; S23costloss/C13sixclosed_NOdecisionchange
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v47.json.
 S23/7c48c92e independent success-cost pairloss default0; measuredsame-axis finitecost +2actually
