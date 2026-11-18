@@ -13,7 +13,8 @@ OBJECT_COLLECTIONS = (
 )
 
 
-def object_control_texts(online: dict[str, Any]) -> tuple[list[str], list[str]]:
+def object_control_texts(online: dict[str, Any], *, view_unit_context: bool = False,
+                         ) -> tuple[list[str], list[str]]:
     """Only the online observation; every actual collection item is retained.
 
     Task/global context occupy the first two tokens. Other tokens are objects,
@@ -34,7 +35,7 @@ def object_control_texts(online: dict[str, Any]) -> tuple[list[str], list[str]]:
         for item in observation.pop(collection, []) or []:
             objects.append(dumps({"collection": collection, "object": item}))
     task = observation.pop("task")
-    _, actions = control_texts(online, delivery_context=True)
+    _, actions = control_texts(online, delivery_context=True, view_unit_context=view_unit_context)
     return [dumps({"task": task}), dumps({"context": observation}), *objects], actions
 
 

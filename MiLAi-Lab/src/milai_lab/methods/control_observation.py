@@ -41,6 +41,7 @@ RETRIEVAL_INSTRUCTIONS = (
 
 COMPACT_ACTION_PROJECTIONS = {"compact_actions", "compact_actions_request_text"}
 VISIBLE_SOURCE_HANDLES_V2 = "control-observation-visible-source-handles-v2"
+BOUND_VIEW_UNITS_V3 = "control-observation-bound-view-units-v3"
 ACTION_BOUND_PROJECTIONS = {
     "shared_actions", "shared_actions_request_text", *COMPACT_ACTION_PROJECTIONS}
 ACTION_BINDING_INSTRUCTIONS = (
@@ -332,7 +333,47 @@ def proposed_delivery_projection(observation: dict[str, Any],
             "scope": "bound_acquired_projection_only_not_semantic_proof"}
 
 
+def proposed_view_unit_projection(observation: dict[str, Any],
+                                  action: dict[str, Any]) -> dict[str, Any]:
+    """Resolve selected View content from the supplied observation, without Store access."""
+    parameters = action["parameters"]
+    matches = [v for v in observation.get("views", [])
+               if v.get("id") == action["target"]
+               and v.get("slot", "current") == parameters.get("slot", "current")]
+    if len(matches) > 1:
+        raise ValueError("Conflicting public View targets in one observation")
+    if not matches:
+        return {"status": "unresolved_parent", "scope": "public_observation_only"}
+    view = matches[0]
+    if (view.get("visibility") != "visible" or view.get("body_delivered") is False
+            or not isinstance(view.get("interpretation"), dict)):
+        return {"status": "parent_unavailable", "scope": "public_observation_only"}
+    bound_revision = parameters.get("view_revision", view["revision"])
+    if type(bound_revision) is not int or bound_revision != view["revision"]:
+        return {"status": "parent_revision_mismatch", "scope": "public_observation_only"}
+    from milai_lab.methods.query_structure_projection import project_structure_units
+
+    parent = {"kind": "query_structure", "visibility": "visible",
+        "revision": view["revision"], "interpretation": copy.deepcopy(view["interpretation"]),
+        "source_bindings": copy.deepcopy(view["source_bindings"]),
+        "source_metadata": {"by_alias": copy.deepcopy(view.get("source_metadata", {}))},
+        "semantics": view.get("interpretation_semantics"),
+        "parent_query_time": view.get("query_time"),
+        "requested_query_time": observation.get("task", {}).get("query_time")}
+    requested = parameters.get("view_nodes", list(parent["interpretation"]["nodes"]))
+    selected = project_structure_units(parent, requested)
+    # JSON map-key sorting must not turn opaque node aliases into semantic
+    # ordering. Rows retain recorded order and the complete literal node value.
+    selected["interpretation"]["nodes"] = [
+        {"node_id": node_id, "node": value}
+        for node_id, value in selected["interpretation"]["nodes"].items()]
+    selected["node_map_encoding"] = "ordered_node_rows_v1"
+    return {"status": "bound_public_view_units", "parent_id": view["id"],
+            **selected, "scope": "Observed interpretation only; no new Source or truth proof"}
+
+
 def control_texts(online: dict[str, Any], *, delivery_context: bool = False,
+                  view_unit_context: bool = False,
                   ) -> tuple[str, list[str]]:
     """Serialize only the online allowlist, with no action-ID or menu-position feature.
 
@@ -364,11 +405,14 @@ def control_texts(online: dict[str, Any], *, delivery_context: bool = False,
                        "parameters": parameters, "visible_target": matching}
         if delivery_context and action["kind"] == "HANDOFF":
             description["proposed_delivery"] = proposed_delivery_projection(observation, action)
+        if view_unit_context and action["kind"] == "USE_VIEW":
+            description["proposed_view_units"] = proposed_view_unit_projection(observation, action)
         descriptions.append(dumps(description))
     return dumps(observation), descriptions
 
 
-def joint_control_texts(online: dict[str, Any], *, wrapped_json: bool = False
+def joint_control_texts(online: dict[str, Any], *, wrapped_json: bool = False,
+                       view_unit_context: bool = False,
                         ) -> tuple[str, list[str]]:
     """Lossless shared state and complete bindings, with request-local option aliases.
 
@@ -382,6 +426,10 @@ def joint_control_texts(online: dict[str, Any], *, wrapped_json: bool = False
         last["action"].pop("id", None)
     state["action_bindings"] = [{**copy.deepcopy(action), "id": f"a{index}"}
                                 for index, action in enumerate(online["actions"])]
+    if view_unit_context:
+        for action in state["action_bindings"]:
+            if action["kind"] == "USE_VIEW":
+                action["proposed_view_units"] = proposed_view_unit_projection(state, action)
     compact = compact_observation_state(project_observation_state(state))
     # compact_observation_state already returns JSON text. Preserve the wrapped
     # v1 layout only for its explicitly versioned existing checkpoints.

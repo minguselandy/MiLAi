@@ -14,7 +14,11 @@ from typing import Any
 
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.harness.compute_profile import ComputeProfile
-from milai_lab.methods.control_observation import VISIBLE_SOURCE_HANDLES_V2, legacy_control_input
+from milai_lab.methods.control_observation import (
+    BOUND_VIEW_UNITS_V3,
+    VISIBLE_SOURCE_HANDLES_V2,
+    legacy_control_input,
+)
 from milai_lab.methods.small_control_learning import state_loss
 from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
 from training_recovery import (
@@ -750,7 +754,8 @@ def main() -> None:
                          help="Preserve declared inference checkpoints for later DEV selection")
     fitting.add_argument("--set-interaction", action="store_true")
     fitting.add_argument("--projection-version",
-                         choices=["control-observation-v1", VISIBLE_SOURCE_HANDLES_V2],
+                         choices=["control-observation-v1", VISIBLE_SOURCE_HANDLES_V2,
+                                  BOUND_VIEW_UNITS_V3],
                          default="control-observation-v1")
     fitting.add_argument("--resume", type=Path)
     fitting.add_argument("--initialize-from", type=Path,

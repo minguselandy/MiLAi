@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.methods.control_observation import (
+    BOUND_VIEW_UNITS_V3,
     VISIBLE_SOURCE_HANDLES_V2,
     control_texts,
     joint_control_texts,
@@ -143,7 +144,9 @@ class SmallControlModel:
             raise ValueError("Unknown backbone adaptation")
         if config.family == "frozen_mlp" and config.adaptation != "frozen":
             raise ValueError("M0 requires a frozen encoder")
-        if config.projection_version not in {"control-observation-v1", VISIBLE_SOURCE_HANDLES_V2}:
+        if config.projection_version not in {
+            "control-observation-v1", VISIBLE_SOURCE_HANDLES_V2, BOUND_VIEW_UNITS_V3,
+        }:
             raise ValueError("Use the model's original observation projection")
         if config.readout not in {"dual", "joint", "objects"}:
             raise ValueError("Unknown control readout")
@@ -290,14 +293,15 @@ class SmallControlModel:
 
         if self.config.readout == "joint":
             return self.joint_features(online)
-        if self.config.projection_version == VISIBLE_SOURCE_HANDLES_V2:
+        if self.config.projection_version in {VISIBLE_SOURCE_HANDLES_V2, BOUND_VIEW_UNITS_V3}:
             online = [visible_source_handle_input(row) for row in online]
         if self.config.readout == "objects":
             return self.object_features(online)
         states, queries, actions, owners, lengths, action_queries = [], [], [], [], [], []
         for index, row in enumerate(online):
             state_text, action_texts = control_texts(row, delivery_context=(
-                self.config.action_representation == "query_delivery_pair_v3"))
+                self.config.action_representation == "query_delivery_pair_v3"),
+                view_unit_context=self.config.projection_version == BOUND_VIEW_UNITS_V3)
             if not action_texts:
                 raise ValueError("A policy state requires at least one action")
             states.append(state_text)
@@ -334,7 +338,9 @@ class SmallControlModel:
             object_semantic_texts,
         )
 
-        projections = [object_control_texts(row) for row in online]
+        projections = [object_control_texts(row,
+            view_unit_context=self.config.projection_version == BOUND_VIEW_UNITS_V3)
+            for row in online]
         capacity = self.config.maximum_memory_objects + 2
         if any(len(objects) > capacity for objects, _ in projections):
             raise ValueError("MEMORY_OBJECT_CAPACITY: partition explicitly; no objects dropped")
@@ -369,10 +375,11 @@ class SmallControlModel:
         return torch.stack(states), vectors[offset:], owners, lengths
 
     def joint_layout(self, online: dict[str, Any]) -> tuple[list[int], int, list[int]]:
-        if self.config.projection_version == VISIBLE_SOURCE_HANDLES_V2:
+        if self.config.projection_version in {VISIBLE_SOURCE_HANDLES_V2, BOUND_VIEW_UNITS_V3}:
             online = visible_source_handle_input(online)
         prefix, options = joint_control_texts(online,
-            wrapped_json=self.config.joint_layout == "wrapped_json_v1")
+            wrapped_json=self.config.joint_layout == "wrapped_json_v1",
+            view_unit_context=self.config.projection_version == BOUND_VIEW_UNITS_V3)
         ids = self.tokenizer.encode(prefix, add_special_tokens=False, verbose=False)
         state_position = len(ids) - 1
         positions = []
