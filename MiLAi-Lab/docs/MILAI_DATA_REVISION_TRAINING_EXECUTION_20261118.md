@@ -134,6 +134,9 @@ B1 和 B2 的 100 个请求逐项相同，含种子和解码参数。独立调�
 28 个原生评分记录不同。该配对差量化了 Reader 的重复调用波动。后续精度归因也会报告
 实际改动 Reader 输入的任务。首批结果和请求等同性分别见
 `dev-first-musiques-paired-cost-and-quality.json` 和 `first-musiques-b1-b2-wire-equivalence.json`。
+02:46，B0 到 B4 均已回收首批 100 个任务，共 500 个 Reader 收据。基线选择继续等待
+三来源 605 个固定任务的完整矩阵。首批串行 client 实测速率与按规划规模换算的阶段工时
+保存在 `reader-phased-throughput-estimate-v1.json`。
 
 主 DEV 的 B0 到 B4 在共享 Reader 租约下分块提交。605 个任务的正式结果、B* 选择、
 24,000 个 core 状态上的正式 O、12,000 个策略到达状态上的 P、参数匹配和三种子确认继续
