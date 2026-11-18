@@ -132,6 +132,15 @@ GPU 2 上的平均本地 episode 耗时依上述顺序为 1.417、1.642、1.526 
 三臂随后在同一批 100 个 MuSiQue 位置回收实际 Reader 回复，覆盖 50 个完整原生对。
 三臂相对 B* 的原生组分差依次为 −3.10、−0.40、−5.04 点。M0/N1 相对 M0/N0 的点估计为
 +2.70，分组 95% 区间为 [−7.82, 13.34]。首批实际对照见 `dev-early-W-first-musiques-v1.json`。
+三臂随后在全部 200 个 MuSiQue DEV 位置上完成比较，覆盖 100 个完整原生组。
+相对 B* 的点估计依次为 −1.72、−5.73、−4.49 点，各区间均跨 0。
+M0/N1 相对 M0/N0 的分差为 −4.01 点，95% 区间为 [−10.66, 3.07]；
+两臂 Reader input token 均值分别为 1,058.19 和 1,066.27。见
+`dev-early-W-MuSiQue-full-stratum-v1.json`。
+
+M1/N1 已完成首轮 2,022 个更新并进入第二轮。首轮离线 DEV 弱证据 AP 按 MuSiQue、
+QASPER、Persona 顺序为 0.1953、0.1278、0.0876。原生来源明细见
+`M1-W-N1-seed11/dev-epoch-1.json`。
 
 宽 M0/N1 已完成三轮、6,066 次更新和 776,154 次状态曝光。M0/N0 末轮头与其初始化头
 在固定停止和相同合法候选下，各完成 7 个 DEV 任务和 7 次 Reader 请求。训练头在该小样本
@@ -241,6 +250,29 @@ R2/R3，固定续程后 104 对请求不同、15 对汇合到同一请求。该�
 03:37 核对两条等待协调器及实际数据库后，将 core 和 P 冻结到 `4e3bb0c7`。
 交接收据为 `outcome-coordinator-v3-handoff.json`，其中记录新进程及正式分支登记为空。
 
+正式 core 的 24,000 个已登记状态中，22,162 个已经具备 N1 编码缓存。缓存动作顺序、
+向量维数和文件区间逐项对照实际数据。其余 1,838 个状态来自弱监督未知或不可行范围，
+分别为 MuSiQue 4 个、QASPER 1,488 个、Persona 346 个。O 可在实际 outcome 封存后
+为进入训练的新增状态追加向量。以独立缓存实测，三条已有轨迹的 354,816 字节逐项保持，
+追加了因策略实际到达的四个状态，新增状态按根、任务、状态排序。见
+`core-24000-frozen-feature-coverage-audit.json` 和 `outcome-feature-append-preflight.json`。
+
+宽 M0 从完整 W/N1 初始化，M1 从 W/N1 第一轮检查点初始化，两者使用封存的
+`v11-reader-closure` 真实 outcome 做 O 缓存演练。两臂各覆盖 3 个状态、3 轮，
+各完成 3 次 GPU bf16 更新，实际编码器前向均为 0。头参数 L2 变化分别为 0.3532 和
+0.3080。每次更新的 value 与 pair 有效状态数为 3 和 1。收据位于
+`outcome-cache-rehearsal-M0-wide/run.json` 和 `outcome-cache-rehearsal-M1/run.json`。
+
+在 48 个已登记的真实 TRAIN 状态上，两模型分别在线编码的提案段为 25.43 秒，共 154 次
+编码器前向。在线共享编码为 12.56 秒、77 次前向，推荐绑定逐项一致，最大 logit 差
+为 2.38e-7。正式 CLI 在独立数据库上用实际 M0/W/N1 和 M1/W/N1 第一轮检查点再复核
+24 个状态、104 条分支，两种模式的动作、种子、材料、Reader 请求和写入顺序逐项相同。
+两个入口均使用四个正式分支工作进程，端到端用时分别为 40.80 和 37.90 秒。
+04:55 将仍在等待上游的 core 和 P 协调器切到 `e3421cd6`，启用在线共享冻结编码器。
+新入口逐项比较编码器配置、词表与实际参数张量，并各自运行原有控制头。
+收据为 `core-proposal-encoding-pair-benchmark-v1.json`、`shared-proposal-cli-validation-v1.json`
+和 `outcome-coordinator-shared-encoder-handoff.json`。
+
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
 在 4 个状态上完成 1 次实际参数更新，控制头 L2 变化 0.007288。宽 M0 W 和该诊断更新的
@@ -299,6 +331,12 @@ Reader 执行源码冻结为 `03171d94`。
 EventQA 匹配诊断中，B1 与 M0/W/N1 分别命中 7/10 和 5/10，Reader 输入 token 分别为
 13,799 和 23,780。所有调用均有提供方用量，20 个回复通过结构化解析。十个任务的
 两臂请求均有实际差异。逐上下文得分和成本见 `external/eventqa-pilot-matched.json`。
+
+LongMemEval 两臂各有 12 个实际回答和判分，B1 与 M0/W/N1 各答对 4 个。Reader 输入 token
+分别为 16,790 和 25,911，判分输入 token 分别为 2,267 和 2,127。两臂的 24 次判分在
+同一次原共享台账租约内完成，写入原定输出路径。实际外部诊断的 44 个回答与 24 个判分、
+EventQA 的固定文本评分均已收齐。配对分层和成本见 `external/longmemeval-pilot-matched.json`，
+原租约结算与终态见 `external/longmemeval-single-lease.json` 和 `external/pilot-coordinator.json`。
 
 ## 重放入口
 
