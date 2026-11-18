@@ -316,9 +316,9 @@ def supervision_audit(path: Path, *, parent: bool) -> dict[str, Any]:
                 persona["native_tasks"] += 1
                 persona["aligned_native_tasks"] += aligned
                 for field in ("who", "updated", "sensitive_info", "pref_type"):
-                    key = (row["experiment_role"], field, str(annotations.get(field)))
-                    persona_strata[key]["tasks"] += 1
-                    persona_strata[key]["aligned_evidence_tasks"] += aligned
+                    annotation_key = (row["experiment_role"], field, str(annotations.get(field)))
+                    persona_strata[annotation_key]["tasks"] += 1
+                    persona_strata[annotation_key]["aligned_evidence_tasks"] += aligned
             for role, group, status, n in db.execute("""
                 SELECT t.experiment_role,t.native_group,o.execution_status,count(*)
                 FROM action_outcomes o JOIN states s ON s.id=o.state_id
