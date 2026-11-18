@@ -139,9 +139,20 @@ B1 和 B2 的 100 个请求逐项相同，含种子和解码参数。独立调�
 用上述 100 对真实 DEV 回复在内存中复放编译器，10 对标量质量差在旧规则下会生成方向监督，
 新规则下为 0。此前 3 个 TRAIN 诊断状态的目标和偏好逐项一致。审计见
 `outcome-supervision-wire-pooling-audit.json`。
+02:54，正式 core 和 P/确认协调器在两者均等待上游、正式分支表为空时重新冻结到
+`34b7888d`。交接收据为 `outcome-coordinator-v2-handoff.json`，原等待记录归入
+`outcome-orchestration-before-v2`。正式 W 与 DEV 基线继续使用各自的冻结源码。
 02:46，B0 到 B4 均已回收首批 100 个任务，共 500 个 Reader 收据。基线选择继续等待
 三来源 605 个固定任务的完整矩阵。首批串行 client 实测速率与按规划规模换算的阶段工时
 保存在 `reader-phased-throughput-estimate-v1.json`。
+
+已完成 MuSiQue 全部 200 个正式 DEV 任务上的五臂，共 1,000 个 Reader 结果、100 个原生组。
+B1 相对 B0 高 20.67 个原生组质量点，配对 95% 区间为 [13.52, 28.42]。B1、B2、B3 的
+200 个请求逐项相同，报告单列重复调用波动。另在 PersonaMem 首 100 个任务的 32 个完整
+原生组上，94 个任务实现 B0/B1 成对评分，B1 高 6.38 点，区间为 [2.15, 11.58]。
+两个来源的实际 Reader input token 分别由 59,898 增至 214,314、由 51,147 增至 128,908。
+基线仍按完整 DEV605 选取。收据为 `dev-completed-musiques-200x5.json` 与
+`dev-first-persona-pairs-B0-B1.json`。
 
 主 DEV 的 B0 到 B4 在共享 Reader 租约下分块提交。605 个任务的正式结果、B* 选择、
 24,000 个 core 状态上的正式 O、12,000 个策略到达状态上的 P、参数匹配和三种子确认继续
@@ -151,6 +162,20 @@ B1 和 B2 的 100 个请求逐项相同，含种子和解码参数。独立调�
 375 个可行 R2/R3 配对样本、600 个停止或预算边界样本、227 个探索样本，另有 598 个
 按组轮转回补的样本。模型推荐与真实分支仍由 seed 11 的 W 检查点和后续执行产生。
 创新方向优先检验紧预算下的条件扩读收益，并同时对照停止策略和 Reader 利用率。
+
+正式 core sampler 已通过 8 批只读核验。24,000 个不同 TRAIN 状态按上述三来源依次为
+16,000／5,000／3,000，覆盖 11,385／888／65 个原生组。3,000 个状态进入精度层，
+4,798 个状态因其余分层容量不足回补到随机轮转。41 个状态的记录菜单没有可行 READ，
+仍保留原样。另在其中 119 个分层选取的 QASPER／PersonaMem 原生组各真实重放一对
+R2/R3，固定续程后 104 对请求不同、15 对汇合到同一请求。该回放只准备请求。
+详见 `core-sampling-24000-native-audit.json` 和 `core-focus-context-wire-contrast-audit.json`。
+
+4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
+计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
+在 4 个状态上完成 1 次实际参数更新，控制头 L2 变化 0.007288。宽 M0 W 和该诊断更新的
+本地计算已在原台账各结算一次。这些收据分别见
+`policy-closure-actual-reader-and-supervision-audit.json`、`policy-closure-M0-fit-v2/run.json`
+和 `wide-and-policy-diagnostic-compute-settlement.json`。
 
 后续协调器以已结束的 seed 11 O 训练和整任务 DEV 结果为依赖。公共 P 池按来源轮转原生组，
 以真实策略轨迹去重，目标为 12,000 个 TRAIN 状态。P 每轮覆盖两池的全部可训练状态，
