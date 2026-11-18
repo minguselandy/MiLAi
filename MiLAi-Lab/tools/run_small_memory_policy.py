@@ -10,7 +10,7 @@ from collections import Counter
 from contextlib import nullcontext
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.harness.compute_profile import ComputeProfile
@@ -19,7 +19,7 @@ from milai_lab.methods.control_observation import (
     VISIBLE_SOURCE_HANDLES_V2,
     legacy_control_input,
 )
-from milai_lab.methods.small_control_learning import state_loss
+from milai_lab.methods.small_control_learning import state_loss, weak_evidence_targets
 from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
 from training_recovery import (
     make_scheduler,
@@ -28,6 +28,8 @@ from training_recovery import (
     save_training_state,
 )
 
+if TYPE_CHECKING:
+    from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 
 def prepare(args: argparse.Namespace) -> None:
     """Reuse actual closed branch reviews; preserve unknown/tie and historical exposure."""
@@ -135,6 +137,7 @@ def evaluate(model: SmallControlModel, rows: list[dict[str, Any]],
 
     model.train(False)
     predictions, correct, total, losses = [], 0, 0, []
+    weak_correct, weak_total = 0, 0
     with torch.no_grad():
         for i, row in enumerate(rows):
             if features is None:
@@ -155,14 +158,103 @@ def evaluate(model: SmallControlModel, rows: list[dict[str, Any]],
                 margin = float(scores[ids.index(pair["left"])] - scores[ids.index(pair["right"])])
                 correct += int(margin > 0 if pair["outcome"] == "left" else margin < 0)
                 total += 1
+            for index, label in weak_evidence_targets(ids, row["offline_supervision"]):
+                weak_correct += int(bool(scores[index] > 0) == label)
+                weak_total += 1
             predictions.append({"sample_id": row["sample_id"], "action_ids": ids,
                                 "scores": scores.float().cpu().tolist(),
                                 "choice": ids[int(scores.argmax())]})
-    return {"states": len(rows), "directional_pairs": total, "correct_pairs": correct,
+    weak = {"weak_evidence_known_actions": weak_total,
+            "weak_evidence_correct_actions": weak_correct} if weak_total else {}
+    return {"states": len(rows), "directional_pairs": total, "correct_pairs": correct, **weak,
             "pair_acceptance": correct / total if total else None,
             "mean_state_loss": sum(losses) / len(losses) if losses else None,
             "predictions": predictions,
-            "scope": "Offline observed-pair diagnostic, not full-menu correctness or task success"}
+            "scope": ("Offline native-evidence auxiliary agreement" if weak_total else
+                      "Offline observed-pair diagnostic, "
+                      "not full-menu correctness or task success")}
+
+
+def verify_dataset_batch(dataset: MemoryControlDataset, config: SmallControlConfig, *,
+                         device: str) -> dict[str, Any]:
+    """Use the trainer's real object encoder, both alignment paths and the masked loss."""
+    import torch
+
+    model = SmallControlModel(config, device=device)
+    model.train(False)
+    batch = dataset.smoke_batch("train") + dataset.smoke_batch("validation")
+    online = [{key: row[key] for key in ("observation", "actions")} for row in batch]
+    states, action_features, owners, lengths = model.features(online)
+    scores = model.head(states, action_features, owners)
+    scores.retain_grad()
+    max_actions = max(lengths)
+    legal = torch.arange(max_actions)[None, :] < torch.tensor(lengths)[:, None]
+    known = torch.zeros_like(legal)
+    terms, row_counts = [], []
+    offset = 0
+    for i, (row, size) in enumerate(zip(batch, lengths, strict=True)):
+        ids = [a["id"] for a in row["actions"]]
+        supervision = row["offline_supervision"]
+        labels = weak_evidence_targets(ids, supervision)
+        for j, _ in labels:
+            known[i, j] = True
+        if known[i, :size].tolist() != supervision["weak_evidence_known_mask"]:
+            raise ValueError("The saved evidence mask disagrees with the actual loss")
+        if size != len(ids) or (owners[offset:offset + size] != i).any():
+            raise ValueError("The ragged action features have a binding mismatch")
+        if states[i, row["object_count"] + 2:].count_nonzero():
+            raise ValueError("A padded memory object is visible to the controller")
+        if (row["execution"] != {"status": "not_executed", "outcome": None, "cost": None}
+                or supervision["observed_action_ids"]):
+            raise ValueError("Native evidence was treated as an execution result")
+        term = state_loss(model.with_prior(scores[offset:offset + size], row), ids, supervision)
+        if term is None:
+            raise ValueError("A verified loaded group has no known evidence objective")
+        terms.append(term)
+        offset += size
+        row_counts.append({"dataset": row["provenance"]["dataset"], "split": row["split"],
+                           "sample_id": row["sample_id"], "objects": row["object_count"],
+                           "legal_actions": size, "weak_known": len(labels)})
+    if offset != scores.numel() or (known & ~legal).any():
+        raise ValueError("Padding entered the actual legal or known set")
+    loss = torch.stack(terms).mean()
+    loss.backward()
+    unknown_gradient = scores.grad.cpu()[~known[legal]]
+    if not torch.isfinite(scores.grad).all() or unknown_gradient.count_nonzero():
+        raise ValueError("Unknown evidence targets entered the loss")
+    if not any(p.grad is not None and p.grad.count_nonzero() for p in model.head.parameters()):
+        raise ValueError("The real model head did not receive a weak-target gradient")
+    return {"status": "PASSED", "architecture": config.object_architecture,
+            "run_id": dataset.run_id, "reader_calls": 0, "optimizer_steps": 0,
+            "rows": row_counts, "state_shape": list(states.shape),
+            "action_shape": list(action_features.shape), "mask_shape": list(legal.shape),
+            "padded_action_positions": int((~legal).sum()),
+            "unknown_legal_actions": int((legal & ~known).sum()),
+            "unknown_actions_with_nonzero_gradient": int(unknown_gradient.count_nonzero()),
+            "loss": float(loss.detach()), "encoder": dict(model.counters)}
+
+
+def frozen_features(model: SmallControlModel, rows: list[dict[str, Any]], *,
+                    batch_size: int) -> list[tuple[Any, Any]]:
+    """Reuse the encoder's existing exact-text cache across scheduled native states."""
+    import torch
+
+    model.configure_base_encoding_cache(32 * 1024 * 1024)
+    model.train(False)
+    order = sorted(range(len(rows)), key=lambda i: (
+        rows[i]["group_id"], rows[i]["object_count"]))
+    cached: dict[int, tuple[Any, Any]] = {}
+    with torch.no_grad():
+        for start in range(0, len(order), batch_size):
+            indices = order[start:start + batch_size]
+            state, actions, _, lengths = model.features([rows[i] for i in indices])
+            offset = 0
+            for index, (i, length) in enumerate(zip(indices, lengths, strict=True)):
+                cached[i] = (state[index:index + 1].detach(),
+                             actions[offset:offset + length].detach())
+                offset += length
+    model.configure_base_encoding_cache(0)
+    return [cached[i] for i in range(len(rows))]
 
 
 def train(args: argparse.Namespace) -> None:
@@ -193,7 +285,28 @@ def train(args: argparse.Namespace) -> None:
         object_blocks=args.object_blocks, object_ffn_width=args.object_ffn_width,
         object_dropout=args.object_dropout, maximum_memory_objects=args.maximum_memory_objects,
         object_feature_layout=args.object_feature_layout)
-    rows = read_jsonl(args.data)
+    dataset = None
+    if args.data.is_dir() or args.data.suffix == ".sqlite3":
+        from milai_lab.methods.memory_control_dataset import MemoryControlDataset
+
+        dataset = MemoryControlDataset(args.data)
+    if getattr(args, "dry_run", False):
+        if dataset is None or config.readout != "objects":
+            raise ValueError("The dataset dry run requires the SQLite package and object readout")
+        args.output.mkdir(parents=True, exist_ok=False)
+        report = verify_dataset_batch(dataset, config, device=args.device)
+        write_json(args.output / "dataset-dry-run.json", report)
+        print(json.dumps(report), flush=True)
+        return
+    declared_windows = None
+    if dataset is None:
+        rows = read_jsonl(args.data)
+    else:
+        windows = dataset.windows(args.steps, args.batch_states, args.seed)
+        ids = list(dict.fromkeys(sid for window in windows for sid in window))
+        positions = {sid: index for index, sid in enumerate(ids)}
+        rows = dataset.rows(ids)
+        declared_windows = [[positions[sid] for sid in window] for window in windows]
     if not rows or any(row["split"] != "train" for row in rows):
         raise ValueError("Training requires nonempty declared TRAIN observations")
     if args.resume is None:
@@ -226,6 +339,12 @@ def train(args: argparse.Namespace) -> None:
                 "training_data_validation": "full-json-values-v1",
                 "deterministic": args.deterministic,
                 "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG")}
+    if dataset is not None:
+        contract["dataset_release"] = dataset.config["dataset_release"]
+        contract["dataset_processing_version"] = dataset.config["processing_version"]
+        contract["dataset_run_id"] = dataset.run_id
+        contract["sampling"] = dataset.config["states"]["source_sampling"]
+        contract["fitted_groups"] = sorted({row["group_id"] for row in rows})
     recovery = RecoveryParameters(model)
     try:
         progress = (restore_training_state(args.resume, recovery, optimizer, scheduler,
@@ -242,10 +361,13 @@ def train(args: argparse.Namespace) -> None:
             "reader_calls": 0, **measures}, measures)
         raise
     initial_step = progress["step"]
-    source_counts = Counter(row["group_id"] for row in rows)
+    source_counts = (Counter(row["group_id"] for row in rows) if dataset is None else
+                     {row["group_id"]: 1 for row in rows})
     cached = None
     preparation_started = time.perf_counter()
-    if config.adaptation == "frozen":
+    if config.adaptation == "frozen" and config.readout == "objects" and dataset is not None:
+        cached = frozen_features(model, rows, batch_size=args.microbatch_states)
+    elif config.adaptation == "frozen":
         model.train(False)
         cached = []
         with torch.no_grad():
@@ -256,8 +378,10 @@ def train(args: argparse.Namespace) -> None:
     if not args.resume:
         write_json(args.output / "initial.json", evaluate(model, rows, cached))
     schedule_rng = random.Random(args.seed)  # noqa: S311 -- shared route exposure
-    schedule = [schedule_rng.sample(range(len(rows)), min(args.batch_states, len(rows)))
-                for _ in range(args.steps)]
+    schedule = declared_windows if declared_windows is not None else [
+        schedule_rng.sample(range(len(rows)), min(args.batch_states, len(rows)))
+        for _ in range(args.steps)]
+
     if model.device.type == "cuda":
         torch.cuda.reset_peak_memory_stats(model.device)
     history = []
@@ -288,11 +412,13 @@ def train(args: argparse.Namespace) -> None:
             component_denominators, component_scales = {}, None
             if any(rows[i]["offline_supervision"].get("value_loss_weight", 0)
                    or rows[i]["offline_supervision"].get("success_cost_loss_weight", 0)
+                   or rows[i]["offline_supervision"].get("weak_evidence_loss_weight", 0)
                    for i in indices):
                 pair_valid = [i for i in indices if state_loss(
                     torch.zeros(len(rows[i]["actions"])), [a["id"] for a in rows[i]["actions"]],
                     {**rows[i]["offline_supervision"], "value_loss_weight": 0,
-                     "success_cost_loss_weight": 0}) is not None]
+                     "success_cost_loss_weight": 0,
+                     "weak_evidence_loss_weight": 0}) is not None]
                 value_valid = [i for i in indices
                     if rows[i]["offline_supervision"].get("value_loss_weight", 0)
                     and any(v is not None for v in rows[i]["offline_supervision"].get(
@@ -300,13 +426,20 @@ def train(args: argparse.Namespace) -> None:
                 component_denominators = {"pair": sum(
                     1 / source_counts[rows[i]["group_id"]] for i in pair_valid),
                     "value": sum(1 / source_counts[rows[i]["group_id"]] for i in value_valid)}
+                weak_valid = [i for i in indices if
+                    rows[i]["offline_supervision"].get("weak_evidence_loss_weight", 0)
+                    and any(rows[i]["offline_supervision"]["weak_evidence_known_mask"])]
+                if weak_valid:
+                    component_denominators["weak_evidence"] = sum(
+                        1 / source_counts[rows[i]["group_id"]] for i in weak_valid)
                 if any(rows[i]["offline_supervision"].get("success_cost_loss_weight", 0)
                        for i in indices):
                     cost_valid = [i for i in indices if state_loss(
                         torch.zeros(len(rows[i]["actions"])),
                         [a["id"] for a in rows[i]["actions"]],
                         {**rows[i]["offline_supervision"], "preferences": [],
-                         "good_action_ids": [], "value_loss_weight": 0}) is not None]
+                         "good_action_ids": [], "value_loss_weight": 0,
+                         "weak_evidence_loss_weight": 0}) is not None]
                     component_denominators["success_cost"] = sum(
                         1 / source_counts[rows[i]["group_id"]] for i in cost_valid)
                 component_scales = {key: denominator / value if value else 0.0
@@ -683,10 +816,19 @@ def evaluate_saved(args: argparse.Namespace) -> None:
 
     torch.set_num_threads(args.threads)
     args.output.mkdir(parents=True, exist_ok=False)
-    rows = read_jsonl(args.data)
-    fit_run = read_json(args.checkpoint.parent / "run.json")
-    training = read_jsonl(Path(fit_run["contract"]["data"]))
-    training_groups = {r["group_id"] for r in training}
+    if args.data.is_dir() or args.data.suffix == ".sqlite3":
+        from milai_lab.methods.memory_control_dataset import MemoryControlDataset
+
+        dataset = MemoryControlDataset(args.data)
+        rows = dataset.rows([row.id for row in dataset.index("validation")])
+    else:
+        rows = read_jsonl(args.data)
+    fit_run = read_json(args.checkpoint.parent / "run.json")["contract"]
+    if "fitted_groups" in fit_run:
+        training_groups = set(fit_run["fitted_groups"])
+    else:
+        training = read_jsonl(Path(fit_run["data"]))
+        training_groups = {r["group_id"] for r in training}
     if training_groups & {r["group_id"] for r in rows}:
         raise ValueError("Development source groups overlap actual fitted sources")
     tick, cpu = time.perf_counter(), time.process_time()
@@ -746,7 +888,11 @@ def main() -> None:
     data.add_argument("--split-manifest", type=Path,
                       help="Preserve existing root-source roles when expanding historical data")
     fitting = sub.add_parser("train")
-    fitting.add_argument("--data", type=Path, required=True)
+    fitting.add_argument("--data", type=Path, required=True,
+                         help="Existing JSONL or the memory-control SQLite data package")
+    fitting.add_argument("--dry-run", action="store_true",
+                         help="Verify real clean dataset batches without optimizer updates")
+
     fitting.add_argument("--output", type=Path, required=True)
     fitting.add_argument("--family", choices=["frozen_mlp", "encoder", "decoder"], required=True)
     fitting.add_argument("--backbone", type=Path, required=True)

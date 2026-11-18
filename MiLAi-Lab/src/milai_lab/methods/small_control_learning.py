@@ -5,6 +5,16 @@ import math
 from typing import Any
 
 
+def weak_evidence_targets(action_ids: list[str], supervision: dict[str, Any],
+                          ) -> list[tuple[int, bool]]:
+    """Known native annotation targets are independent of executed outcomes."""
+    values = supervision.get("weak_evidence_values", {})
+    if not set(values) <= set(action_ids) or any(
+            value is not None and type(value) is not bool for value in values.values()):
+        raise ValueError("Weak evidence requires nullable boolean targets for legal actions")
+    return [(i, values[key]) for i, key in enumerate(action_ids) if values.get(key) is not None]
+
+
 def state_loss(scores: Any, action_ids: list[str], supervision: dict[str, Any], *,
                component_scales: dict[str, float] | None = None) -> Any:
     """Average within a state before weighting states across the complete update window."""
@@ -17,7 +27,10 @@ def state_loss(scores: Any, action_ids: list[str], supervision: dict[str, Any], 
     cost_weight = float(supervision.get("success_cost_loss_weight", 0.0))
     if cost_weight < 0 or not math.isfinite(cost_weight):
         raise ValueError("Success cost loss weight must be finite and nonnegative")
-    if len(action_ids) <= 1 and not value_weight and not cost_weight:
+    weak_weight = float(supervision.get("weak_evidence_loss_weight", 0.0))
+    if weak_weight < 0 or not math.isfinite(weak_weight):
+        raise ValueError("Weak evidence loss weight must be finite and nonnegative")
+    if len(action_ids) <= 1 and not value_weight and not cost_weight and not weak_weight:
         return None
     positions = {key: index for index, key in enumerate(action_ids)}
     observed = set(supervision.get("observed_action_ids", []))
@@ -42,7 +55,7 @@ def state_loss(scores: Any, action_ids: list[str], supervision: dict[str, Any], 
         good = [index for index, key in enumerate(comparable) if key in good_ids]
         terms.append(torch.logsumexp(logits, 0) - torch.logsumexp(logits[good], 0))
     pair_loss = torch.stack(terms).mean() if terms else None
-    if not value_weight and not cost_weight:
+    if not value_weight and not cost_weight and not weak_weight:
         return (pair_loss * component_scales["pair"]
                 if pair_loss is not None and component_scales is not None else pair_loss)
     values = supervision.get("observed_values", {})
@@ -83,7 +96,9 @@ def state_loss(scores: Any, action_ids: list[str], supervision: dict[str, Any], 
             cost_terms.append(F.softplus(scores[positions[bad]].float()
                                          - scores[positions[good]].float()))
     cost_loss = torch.stack(cost_terms).mean() if cost_terms else None
-    scales = component_scales or {"pair": 1.0, "value": 1.0, "success_cost": 1.0}
+    weak = weak_evidence_targets(action_ids, supervision) if weak_weight else []
+    scales = component_scales or {"pair": 1.0, "value": 1.0, "success_cost": 1.0,
+                                  "weak_evidence": 1.0}
     combined = []
     if pair_loss is not None:
         combined.append(pair_loss * scales["pair"])
@@ -91,6 +106,11 @@ def state_loss(scores: Any, action_ids: list[str], supervision: dict[str, Any], 
         combined.append(value_loss * value_weight * scales["value"])
     if cost_loss is not None:
         combined.append(cost_loss * cost_weight * scales["success_cost"])
+    if weak:
+        logits = scores[[i for i, _ in weak]].float()
+        labels = torch.tensor([v for _, v in weak], device=scores.device, dtype=torch.float32)
+        combined.append(F.binary_cross_entropy_with_logits(logits, labels)
+                        * weak_weight * scales["weak_evidence"])
     return sum(combined) if combined else None
 
 
