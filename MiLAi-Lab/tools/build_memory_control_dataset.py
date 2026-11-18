@@ -17,9 +17,11 @@ from typing import Any
 from milai_lab.datasets.memory_control_acquire import acquire
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER, normalize
 from milai_lab.datasets.memory_control_report import read_json, report, write_json
+from milai_lab.datasets.memory_control_revision import derive, supervision_audit
 from milai_lab.datasets.memory_control_store import DB_NAME, connect, get_meta, set_meta, unpack
 from milai_lab.datasets.memory_control_views import build_views, resolve_tokenizers
 from milai_lab.methods.dataset_control_states import build_states
+from milai_lab.methods.dataset_revision_states import build_observations
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.runners.memory_control_dataset_rollout import prepare_branches
 from milai_lab.runners.memory_control_dataset_validation import (
@@ -340,6 +342,23 @@ def probe(root: Path, config: dict[str, Any]) -> None:
 def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
     command = args.command
     db_path = root / DB_NAME
+    if command == "revise":
+        derive(args.parent or Path(config["parent_root"]), root, config, args.roles)
+        print(f"Roles frozen in {db_path}")
+        return 0
+    if command == "audit-train":
+        result = supervision_audit(db_path, parent=args.parent_states)
+        version = result["state_version"]
+        output = root / "reports" / f"{version}-supervision.json"
+        write_json(output, result)
+        print(f"Supervision counts written to {output}")
+        return 0
+    if command == "build-observations":
+        with closing(connect(db_path, writable=True)) as db:
+            result = build_observations(db_path, db, workers=args.state_workers,
+                                        budget_scope=args.budget_scope, task_limit=args.task_limit)
+        print(result)
+        return int(not result["scope_complete"] and args.task_limit is None)
     if command in {"acquire", "all"}:
         result = acquire(root / "raw", config["sources"], workers=args.download_workers)
         write_json(root / "manifests/acquisition.json", result)
@@ -423,6 +442,15 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     for name in ("all", "acquire", "normalize", "build", "validate", "probe", "report"):
         sub.add_parser(name)
+    revise = sub.add_parser("revise", help="Create a derived database and freeze native group roles")
+    revise.add_argument("--parent", type=Path, help="Existing V1 dataset directory")
+    revise.add_argument("--roles", type=Path, required=True, help="Historical group declarations")
+    audit_train = sub.add_parser("audit-train", help="Measure role and weak-supervision coverage")
+    audit_train.add_argument("--parent-states", action="store_true")
+    observations = sub.add_parser("build-observations", help="Regenerate V1.1 states and labels")
+    observations.add_argument("--budget-scope", default="all",
+                              choices=["all", "primary", "train_variants", "dev_diagnostics"])
+    observations.add_argument("--task-limit", type=int, help="Explicit incremental build size")
     collect = sub.add_parser(
         "collect-outcomes", help="Prepare matched local branches and Host wires"
     )

@@ -163,7 +163,8 @@ class FixedMemoryPolicy:
                     and not action.parameters.get("history_directory")
                     and "source_observation_cursor" not in action.parameters
                     and "observed_source" not in action.parameters
-                    and len(state.visible_evidence) < self.reads):
+                    and state.budget.get("successful_reads", len(state.visible_evidence))
+                    < self.reads):
                 return action.id
         return next(a.id for a in actions if a.kind == "HANDOFF")
 
@@ -178,7 +179,7 @@ class FixedContextMemoryPolicy:
         search = next((a for a in actions if a.kind == "SEARCH"), None)
         if search is not None:
             return search.id
-        if len(state.visible_evidence) < self.reads:
+        if state.budget.get("successful_reads", len(state.visible_evidence)) < self.reads:
             for expanded in (True, False):
                 read = next((a for a in actions if a.kind == "READ"
                     and bool(a.parameters.get("expand_context")) == expanded

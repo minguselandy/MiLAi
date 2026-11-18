@@ -238,13 +238,14 @@ def select_read(
     *,
     first: bool,
 ) -> tuple[MemoryAction | None, bool]:
-    reads = [action for action in actions if action.kind == "READ"]
+    reads = [action for action in session.feasible_menu(actions) if action.kind == "READ"]
     if not reads:
         return None, False
     if random_source:
         return rng.choice(reads), False
     labels, _ = targets(session, actions, target)
-    positives = [action for action, label in zip(actions, labels, strict=True) if label is True]
+    positives = [action for action, label in zip(actions, labels, strict=True)
+                 if label is True and action in reads]
     if first:
         focus_reads = [a for a in reads if not a.parameters.get("expand_context")]
         for action in focus_reads:
@@ -288,7 +289,21 @@ def plan_task(
     session = CorpusExecution(
         pool, task["query"], focus, reader, config["views"]["reader_material_tokens"]
     )
-    rng = random.Random(config["seed"] + task["id"])  # noqa: S311 -- recorded state selection
+    for actions, limit, recipe, sampling in task_prefix_states(
+        task["id"], session, evidence, cfg, config["seed"], random_source,
+    ):
+        yield plan_state(task, session, actions, evidence, limit, recipe, sampling, maximum_objects)
+
+
+def task_prefix_states(
+    task_id: int,
+    session: CorpusExecution,
+    evidence: Evidence,
+    cfg: dict[str, Any],
+    seed: int,
+    random_source: bool,
+) -> Iterator[tuple[list[MemoryAction], int, str, str]]:
+    rng = random.Random(seed + task_id)  # noqa: S311 -- recorded state selection
     steps = cfg["control_steps"]
     initial = session.menu(steps)
     search = next(a for a in initial if a.kind == "SEARCH")
@@ -302,7 +317,7 @@ def plan_task(
         sampling = (
             "random_source" if random_source else "annotation_seeded" if seeded else "lexical"
         )
-        yield plan_state(task, session, actions, evidence, limit, recipe, sampling, maximum_objects)
+        yield actions, limit, recipe, sampling
         if i + 1 >= cfg["max_states_per_task"]:
             break
         action, seed = select_read(session, actions, evidence, rng, random_source, first=i == 0)

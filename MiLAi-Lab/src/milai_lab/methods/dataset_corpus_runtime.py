@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import time
 from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from typing import Any, cast
@@ -16,7 +17,10 @@ from milai_lab.memory.retrieval import SourceSearchCache
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.source_materials import read_original_materials
 from milai_lab.methods.control_observation import control_input
+from milai_lab.methods.corpus_navigation import excerpt, query_terms
+from milai_lab.methods.dataset_reader import DatasetReader, PacketPlan, ReaderTask
 from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
+from milai_lab.methods.literal_delivery_union import DELIVERY_PROTOCOL, LiteralDelivery, literal_delivery
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 
 
@@ -163,6 +167,26 @@ class CorpusPool:
             )
         return descriptor
 
+    def navigation(
+        self, query: str, focus: list[int], encoder: Tokenizer, limit: int,
+    ) -> dict[int, dict[str, Any]]:
+        if limit <= 0:
+            raise ValueError("Positive navigation token capacity is required")
+        terms = query_terms(query)
+        result = {}
+        for vid in focus:
+            found = excerpt(terms, self.views[vid].ranges, self.objects, encoder, limit)
+            if found is not None:
+                oid, fields = found
+                result[vid] = {
+                    "source_ref": self.ref(oid), "source_revision": 1, **fields,
+                }
+        return result
+
+    def normalized_delivery(self, opened: dict[int, dict[str, Any]]) -> LiteralDelivery:
+        return literal_delivery(opened, self.read_source_materials,
+                                lambda ref: self.by_ref[ref].position)
+
     def bound_view(self, candidates: list[int], action: MemoryAction) -> int | None:
         if action.kind != "READ":
             return None
@@ -178,10 +202,20 @@ class CorpusExecution:
     """Replay actually opened views and use EvidenceOperations for all legal actions."""
 
     def __init__(
-        self, pool: CorpusPool, query: str, focus: list[int], reader: Tokenizer, material_limit: int
+        self, pool: CorpusPool, query: str, focus: list[int], reader: Tokenizer, material_limit: int,
+        *, public_task: ReaderTask | None = None, host: DatasetReader | None = None,
+        navigation: dict[int, dict[str, Any]] | None = None,
+        shared_preflight: dict[tuple[tuple[str, ...], str], tuple[int, bool | None, str | None]]
+        | None = None,
     ) -> None:
         self.pool, self.focus, self.reader = pool, focus, reader
         self.material_limit = material_limit
+        if (public_task is None) != (host is None):
+            raise ValueError("Exact delivery requires both a public Reader task and its Host")
+        self.public_task, self.host = public_task, host
+        self.preflight_wall_ms = 0.0
+        self._feasibility: dict[str, tuple[bool | None, str | None]] = {}
+        self.shared_preflight = shared_preflight
         self.state = MemoryControlState(
             task={
                 "request": query,
@@ -191,7 +225,13 @@ class CorpusExecution:
                 },
             }
         )
+        navigation = navigation or {}
         menu = [pool.descriptor(vid) for vid in focus]
+        if host is not None:
+            for rank, (vid, item) in enumerate(zip(focus, menu, strict=True)):
+                item["control_pool_rank"] = rank
+                if vid in navigation:
+                    item["navigation_excerpt"] = navigation[vid]
 
         def unavailable(*_: Any) -> Any:
             raise RuntimeError("The pinned static corpus has no version generation")
@@ -207,12 +247,18 @@ class CorpusExecution:
             internal_views=False,
             view_updates=False,
             source_directory_only=True,
+            material_protocol=DELIVERY_PROTOCOL if host else None,
+            delivery_projection=(lambda items: pool.normalized_delivery(items).evidence)
+            if host else None,
         )
         self.state.budget.pop("source_inventory_wall_seconds")
         self.prefix: list[str] = []
         self.opened: dict[int, int] = {}
-        self.used_tokens = self.material_cost([])
+        self.initial_packet = self.plan_packet([]) if host else None
+        self.used_tokens = (self.initial_packet.material_tokens if self.initial_packet
+                            else self.material_cost([]))
         self.trial_tokens = self.used_tokens
+        self.trial_failure: str | None = None
 
     def material_cost(self, items: list[dict[str, Any]]) -> int:
         packet = controlled_reader_packet(items, "policy_handoff")
@@ -221,25 +267,79 @@ class CorpusExecution:
         )
 
     def fits(self, items: list[dict[str, Any]]) -> bool:
+        if self.host is not None:
+            plan = self.plan_packet(items)
+            self.trial_tokens, self.trial_failure = plan.material_tokens, plan.failure_reason
+            return plan.feasible is True
         self.trial_tokens = self.material_cost(items)
         return self.trial_tokens <= self.material_limit
 
-    def actions(self, state: MemoryControlState) -> list[MemoryAction]:
+    def plan_packet(self, evidence: list[dict[str, Any]]) -> PacketPlan:
+        if self.host is None or self.public_task is None:
+            raise ValueError("No Reader protocol with full Host capacity")
+        return self.host.plan(evidence, self.public_task, self.material_limit)
+
+    def feasibility(self, action: MemoryAction) -> tuple[bool | None, str | None]:
+        if self.host is None or action.kind != "READ":
+            return None, None
+        if action.id not in self._feasibility:
+            started = time.perf_counter()
+            key = (tuple(self.prefix), action.id)
+            counts = self.shared_preflight.get(key) if self.shared_preflight is not None else None
+            if counts is None:
+                index = action.parameters["index"]
+                item = self.ops.open_bound_read(index,
+                                                action.parameters.get("expand_context", False))
+                if item.get("body_delivered") is False:
+                    counts = 0, False, "source_unavailable"
+                else:
+                    evidence = self.ops.project_delivery({**self.ops.opened, index: item})
+                    packet = self.plan_packet(evidence)
+                    counts = (packet.material_tokens, packet.host_fits,
+                              self.public_task.invalid_reason if self.public_task else None)
+                    if packet.host_fits is False:
+                        counts = packet.material_tokens, False, "host_request_capacity_exceeded"
+                if self.shared_preflight is not None:
+                    self.shared_preflight[key] = counts
+            material_tokens, host_fits, reason = counts
+            result = ((False, "material_budget_exhausted") if material_tokens > self.material_limit
+                      else (host_fits, reason))
+            self._feasibility[action.id] = result
+            self.preflight_wall_ms += (time.perf_counter() - started) * 1000
+        return self._feasibility[action.id]
+
+    def feasible_menu(self, actions: list[MemoryAction]) -> list[MemoryAction]:
+        if self.host is None:
+            return actions
+        return [action for action in actions if action.kind != "READ"
+                or self.feasibility(action)[0] is True]
+
+    def raw_actions(self, state: MemoryControlState) -> list[MemoryAction]:
         state.budget.update(
             reader_material_tokens=self.material_limit,
             remaining_reader_material_tokens=self.material_limit - self.used_tokens,
         )
+        if self.host is not None:
+            state.budget["successful_reads"] = sum(a != "search" for a in self.prefix)
         return self.ops.actions(state)
+
+    def actions(self, state: MemoryControlState) -> list[MemoryAction]:
+        return self.feasible_menu(self.raw_actions(state))
 
     def menu(self, steps: int) -> list[MemoryAction]:
         self.state.budget.update(
             remaining_control_steps=steps - len(self.prefix), reader_capacity_reserved=True
         )
-        return self.actions(self.state)
+        return self.raw_actions(self.state)
 
     def execute(self, action: MemoryAction, state: MemoryControlState) -> dict[str, Any]:
+        self.trial_failure = None
         result = self.ops.execute(action, state)
-        self.prefix.append(action.id)
+        if self.host is None or result["ok"]:
+            self.prefix.append(action.id)
+        elif self.trial_failure:
+            result["status"] = self.trial_failure
+        self._feasibility.clear()
         if result["ok"] and (vid := self.pool.bound_view(self.focus, action)) is not None:
             self.opened[action.parameters["index"]] = vid
             self.used_tokens = self.trial_tokens

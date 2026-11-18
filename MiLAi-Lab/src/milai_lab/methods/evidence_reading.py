@@ -840,7 +840,9 @@ def pack_candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
             "date": item.get("date"), "visibility": item.get("visibility", "visible"),
             "can_expand_context": bool(item.get("context_source_ranges")),
             **({"evidence_representation": copy.deepcopy(item["evidence_representation"])}
-               if "evidence_representation" in item else {})}
+               if "evidence_representation" in item else {}),
+            **({"navigation_excerpt": copy.deepcopy(item["navigation_excerpt"])}
+               if "navigation_excerpt" in item and item.get("body_delivered") is not False else {})}
 
 
 

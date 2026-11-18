@@ -1,0 +1,17 @@
+{
+  "dataset_release": "memory_control_v1_1",
+  "parent_release": "memory_control_v1",
+  "processing_version": "1.1.0",
+  "seed": 20261118,
+  "confirmation_fraction": 0.30,
+  "primary_budget": 2048,
+  "train_budget_variants": [1024, 4096],
+  "diagnostic_budgets": [1536, 3072],
+  "observation_protocol": "semantic_nav_v1",
+  "navigation_tokens_per_candidate": 64,
+  "delivery_protocol": "source_interval_union_v1",
+  "reader_protocol": "native_packet_reader_v1",
+  "option_seed": 20261118,
+  "data_root": "/cra/milai-datasets/memory_control_v1_1",
+  "parent_root": "/cra/milai-datasets/memory_control_v1"
+}

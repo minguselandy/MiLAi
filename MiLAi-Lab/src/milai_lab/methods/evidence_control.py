@@ -74,6 +74,7 @@ class EvidenceOperations:
         checkpoint: dict[str, Any] | None = None,
         source_directory_only: bool = False,
         material_protocol: str | None = None,
+        delivery_projection: Callable[[dict[int, dict[str, Any]]], list[dict[str, Any]]] | None = None,
         view_unit_selections: dict[str, list[list[str]]] | None = None,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
@@ -101,6 +102,7 @@ class EvidenceOperations:
         self.max_searches = max_searches
         self.search_attempts: set[tuple[str, int]] = set()
         self.fits_materials = fits_materials
+        self.delivery_projection = delivery_projection
         self.attempted: set[tuple[int, bool]] = set()
         self.searched = False
         self.view_capacity = view_capacity
@@ -663,7 +665,7 @@ class EvidenceOperations:
                 for limit in self.search_batch_sizes if (text, limit) not in self.search_attempts]
 
     def _deliver(self, state: MemoryControlState) -> None:
-        state.visible_evidence = project_packs(list(self.opened.values()), list(self.opened))
+        state.visible_evidence = self.project_delivery(self.opened)
         if self.delivery_selection:
             retrieved = self.retrieved_scopes()
             state.observed_materials = [{"item_index": i,
@@ -682,7 +684,17 @@ class EvidenceOperations:
     def fits_delivery(self, items: dict[int, dict[str, Any]]) -> bool:
         if self.fits_materials is not None:
             return self.fits_materials(items)
-        return self.fits(project_packs(list(items.values()), list(items)))
+        return self.fits(self.project_delivery(items))
+
+    def project_delivery(self, items: dict[int, dict[str, Any]]) -> list[dict[str, Any]]:
+        if self.delivery_projection is not None:
+            return self.delivery_projection(items)
+        return project_packs(list(items.values()), list(items))
+
+    def open_bound_read(self, index: int, expand: bool) -> dict[str, Any]:
+        """Resolve the original binding through the exact Source opening path."""
+        return open_evidence_packs(self.service, [self.materials[index]],
+                                   expand_context=expand, refresh_current=True)[0]
 
     @staticmethod
     def candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
@@ -807,8 +819,7 @@ class EvidenceOperations:
                         "fixed_history_pool": True}])
                 self.materials[i] = next(p for p in packs if p["record_id"] == target["record_id"]
                                         and p["revision"] == target["revision"])
-            item = open_evidence_packs(self.service, [self.materials[i]],
-                                      expand_context=expand, refresh_current=True)[0]
+            item = self.open_bound_read(i, expand)
             if self.delivery_selection:
                 self.observed[i] = item
             trial = {**self.opened, i: item}
@@ -933,4 +944,4 @@ class EvidenceOperations:
     def reader_evidence(self) -> list[dict[str, Any]]:
         """Recheck visibility on delivery, including after a later same-request forget."""
         actual = open_evidence_packs(self.service, list(self.opened.values()), refresh_current=True)
-        return project_packs(actual, list(self.opened))
+        return self.project_delivery(dict(zip(self.opened, actual, strict=True)))
