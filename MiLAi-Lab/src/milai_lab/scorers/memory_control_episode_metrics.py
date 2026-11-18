@@ -177,7 +177,17 @@ def paired_comparison(
     if len(seed_labels) > 1 and len(set(seed_labels)) != len(seed_labels):
         raise ValueError("Distinct fitted seed IDs are required for multi-seed aggregation")
     registered: dict[str, dict[str, list[int]]] = defaultdict(lambda: defaultdict(list))
+    declared_unavailable = population.get("predeclared_unevaluable_tasks", {})
     for row in population["tasks"]:
+        if str(row["task_id"]) in declared_unavailable:
+            tid = row["task_id"]
+            if not all(
+                arm.get(tid, {}).get("status") == "action_failed"
+                and arm[tid].get("failure_reason") == declared_unavailable[str(tid)]
+                for arm in [baseline, *policy_runs]
+            ):
+                raise ValueError("The preregistered non-evaluable task status must be preserved")
+            continue
         registered[row["dataset"]][row["native_group"]].append(row["task_id"])
 
     def quality(records: dict[int, dict[str, Any]], ids: list[int], source: str) -> list[float]:
@@ -285,6 +295,8 @@ def paired_comparison(
     )
     return {
         "role": population["role"],
+        "configured_tasks": len(population["tasks"]),
+        "predeclared_unevaluable_tasks": len(declared_unavailable),
         "model_seeds": seed_labels,
         "quality_delta_points": point_quality,
         "quality_interval_95": quality_ci,

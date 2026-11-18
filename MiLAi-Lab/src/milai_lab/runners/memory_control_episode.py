@@ -100,6 +100,16 @@ def lock_episode_population(
                     take_group(dataset)
         if not cohort or len({row["dataset"] for row in cohort}) != len(source_rows):
             raise ValueError("Target does not admit a group from every available source")
+        cohort_ids = {row["task_id"] for row in cohort}
+        unavailable = {
+            str(task_id): "invalid_options"
+            for task_id, in db.execute("""
+                SELECT task_id FROM anomalies
+                WHERE dataset='personamem_v2'
+                  AND reason IN ('null_incorrect_option','offline_field_incorrect_answers')
+            """)
+            if task_id in cohort_ids
+        }
         population = {
             "protocol": EVALUATION_PROTOCOL,
             "role": role,
@@ -121,6 +131,7 @@ def lock_episode_population(
             "quality_noninferiority_points": 1.0,
             "reader_input_savings_floor": 0.15,
             "tasks": cohort,
+            "predeclared_unevaluable_tasks": unavailable,
             "task_counts": dict(Counter(row["dataset"] for row in cohort)),
         }
         write_json(output, population)
