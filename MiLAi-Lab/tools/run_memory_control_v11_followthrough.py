@@ -52,6 +52,7 @@ class Followthrough:
         first_gpu, second_gpu = args.gpus
         self.gpus = first_gpu, second_gpu
         self.features = args.features.resolve()
+        self.branch_workers: int = args.branch_workers
         self.core = args.core_run
         self.policy_states = "v11-policy-shared-seed11"
         self.policy_outcomes = "v11-policy-outcomes-shared-seed11"
@@ -175,6 +176,8 @@ class Followthrough:
         ]
         for key, value in kwargs.items():
             command += ["--" + key.replace("_", "-"), str(value)]
+        if action == "prepare-outcomes":
+            command += ["--branch-workers", str(self.branch_workers)]
         return command
 
     def drain_outcomes(self, run: str, *, seal: bool) -> None:
@@ -372,9 +375,9 @@ class Followthrough:
 
     def fit_models(self, models: Sequence[str], stage: str, seed: int) -> None:
         commands = [
-            command
+            candidate
             for model in models
-            if (command := self.fit_command(model, stage, seed)) is not None
+            if (candidate := self.fit_command(model, stage, seed)) is not None
         ]
         for start in range(0, len(commands), len(self.gpus)):
             active = commands[start : start + len(self.gpus)]
@@ -664,9 +667,12 @@ def main() -> None:
     parser.add_argument("--features", type=Path, required=True)
     parser.add_argument("--gpus", type=int, nargs=2, required=True)
     parser.add_argument("--core-run", required=True)
+    parser.add_argument("--branch-workers", type=int, default=1)
     args = parser.parse_args()
     if len(set(args.gpus)) != 2 or min(args.gpus) < 0:
         parser.error("two distinct physical GPUs are required")
+    if args.branch_workers <= 0:
+        parser.error("branch preparation requires at least one worker")
     with (args.root / ".v11-followthrough.lock").open("a") as guard:
         fcntl.flock(guard.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
         execution = Followthrough(args)

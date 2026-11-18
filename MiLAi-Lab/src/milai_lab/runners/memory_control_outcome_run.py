@@ -8,8 +8,10 @@ import sqlite3
 import time
 from collections import Counter, defaultdict, deque
 from collections.abc import Callable, Iterator
-from contextlib import closing
+from concurrent.futures import Future, ProcessPoolExecutor
+from contextlib import ExitStack, closing
 from dataclasses import asdict
+from multiprocessing import get_context
 from pathlib import Path
 from typing import Any
 
@@ -56,6 +58,11 @@ STATE_SUBSAMPLING = (
 METERING = "native_vllm_shared_ledger_v1"
 SAMPLER = "native_group_source_caps_balanced_strata_v3"
 Chooser = Callable[[MemoryControlState, list[MemoryAction]], str]
+BranchJob = tuple[int, str, int]
+OutcomeRow = tuple[int | str | bytes, ...]
+PreparedBatch = tuple[list[OutcomeRow], Counter[str]]
+PreflightCache = dict[tuple[tuple[str, ...], str], tuple[int, bool | None, str | None]]
+_worker_dataset: MemoryControlDataset | None = None
 
 
 def comparison_protocol(dataset: MemoryControlDataset) -> dict[str, Any]:
@@ -412,6 +419,84 @@ def cold_dev_states(
     return selected, missing
 
 
+def _prepare_outcome_rows(
+    dataset: MemoryControlDataset,
+    db: sqlite3.Connection,
+    sid: int,
+    stratum: str,
+    run_id: str,
+    baseline: dict[str, Any],
+    session: CorpusExecution,
+    jobs: list[BranchJob],
+) -> PreparedBatch:
+    rows: list[OutcomeRow] = []
+    statuses: Counter[str] = Counter()
+    for repeat, action, seed in jobs:
+        status, data, costs = prepare_one(dataset, db, sid, action, baseline, session, seed)
+        stages = {
+            "reader_wire": data.get("reader_wire"),
+            "capacity": data.get("capacity"),
+            "reason": data.get("reason"),
+            "source_aliases": data.get("source_aliases"),
+            "delta": data.get("delta"),
+            "control_trace": data.get("trace"),
+        }
+        rows.append(
+            (
+                sid,
+                action,
+                run_id,
+                repeat,
+                packed(data["bound"]),
+                stratum,
+                seed,
+                READER_PROTOCOL,
+                status,
+                status,
+                packed(data.get("next_state")),
+                packed(data.get("terminal_state")),
+                packed(data.get("first_step_material")),
+                packed(data.get("delivered_material")),
+                packed(stages),
+                packed(costs),
+            )
+        )
+        statuses[status] += 1
+    return rows, statuses
+
+
+def _init_branch_worker(
+    path: Path,
+    observation: str,
+    dataset_run_id: str,
+    protocol: dict[str, Any],
+) -> None:
+    global _worker_dataset
+    dataset = MemoryControlDataset(path, require_complete=False, observation_protocol=observation)
+    if dataset.run_id != dataset_run_id or comparison_protocol(dataset) != protocol:
+        raise ValueError("The branch worker dataset or Reader protocol changed")
+    _worker_dataset = dataset
+
+
+def _prepare_outcome_worker(
+    sid: int,
+    stratum: str,
+    run_id: str,
+    role: str,
+    baseline: dict[str, Any],
+    preflight: PreflightCache,
+    jobs: list[BranchJob],
+) -> PreparedBatch:
+    dataset = _worker_dataset
+    assert dataset is not None
+    with closing(connect(dataset.path)) as db:
+        row, session, _ = dataset.replay(db, sid)
+        if row["experiment_role"] != role:
+            raise ValueError(f"Outcome preparation requires the registered {role} role")
+        session.shared_preflight = preflight
+        return _prepare_outcome_rows(dataset, db, sid, stratum, run_id, baseline, session, jobs)
+
+
 def prepare_outcomes(
     dataset: MemoryControlDataset,
     run_id: str,
@@ -423,11 +508,15 @@ def prepare_outcomes(
     suggestions: list[tuple[str, Chooser]],
     policy_pool: str | None = None,
     dev_plan: Path | None = None,
+    branch_workers: int = 1,
 ) -> dict[str, Any]:
     if dataset.host is None or dataset.revision is None or limit <= 0:
         raise ValueError("Use the revised dataset for actual Reader outcomes")
+    if branch_workers <= 0:
+        raise ValueError("Branch preparation requires at least one worker")
     if dev_plan and (state_ids or explicit_actions or policy_pool):
         raise ValueError("DEV outcome evaluation uses only its declared cold SEARCH states")
+    started = time.perf_counter()
     role = "dev" if dev_plan else "train"
     declaration = {
         "role": role,
@@ -442,7 +531,7 @@ def prepare_outcomes(
                         else "policy" if policy_pool else "core"),
         "policy_pool": policy_pool,
     }
-    with closing(connect(dataset.path, writable=True)) as db:
+    with closing(connect(dataset.path, writable=True)) as db, ExitStack() as workers:
         if dev_plan:
             population = read_json(dev_plan)
             dev_states, missing = cold_dev_states(db, dataset, population)
@@ -490,58 +579,9 @@ def prepare_outcomes(
         rng = random.Random(seed + len(used))  # noqa: S311 -- declared branch order
         repeats = set(rng.sample([sid for sid, _ in selected], round(0.1 * len(selected))))
         statuses: Counter[str] = Counter()
-        for sid, stratum in selected:
-            with closing(connect(dataset.path)) as db_read:
-                state, session, actions = dataset.replay(db_read, sid)
-                if state["experiment_role"] != role:
-                    raise ValueError(f"Outcome preparation requires the registered {role} role")
-                session.shared_preflight = {}
-                baseline = session.online(session.feasible_menu(actions))
-                branches = explicit_actions or choose_actions(
-                    session, actions, [choose for _, choose in suggestions], rng
-                )
-                if not set(branches) <= {a.id for a in actions} or len(set(branches)) != len(
-                    branches
-                ):
-                    raise ValueError("Outcome action IDs must be unique actual bindings")
-                built = []
-                for repeat in range(2 if sid in repeats else 1):
-                    ordered = list(branches)
-                    rng.shuffle(ordered)
-                    repeat_seed = (seed + sid * 31 + repeat) % (2**31 - 1)
-                    for action in ordered:
-                        status, data, costs = prepare_one(
-                            dataset, db_read, sid, action, baseline, session, repeat_seed
-                        )
-                        stages = {
-                            "reader_wire": data.get("reader_wire"),
-                            "capacity": data.get("capacity"),
-                            "reason": data.get("reason"),
-                            "source_aliases": data.get("source_aliases"),
-                            "delta": data.get("delta"),
-                            "control_trace": data.get("trace"),
-                        }
-                        built.append(
-                            (
-                                sid,
-                                action,
-                                run_id,
-                                repeat,
-                                packed(data["bound"]),
-                                stratum,
-                                repeat_seed,
-                                READER_PROTOCOL,
-                                status,
-                                status,
-                                packed(data.get("next_state")),
-                                packed(data.get("terminal_state")),
-                                packed(data.get("first_step_material")),
-                                packed(data.get("delivered_material")),
-                                packed(stages),
-                                packed(costs),
-                            )
-                        )
-                        statuses[status] += 1
+
+        def save(batch: PreparedBatch) -> None:
+            rows, counts = batch
             with db:
                 db.executemany(
                     """
@@ -551,16 +591,65 @@ def prepare_outcomes(
                         terminal_state,first_step_material,delivered_material,task_result,costs
                     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                 """,
-                    built,
+                    rows,
                 )
-        return {
-            "run_id": run_id,
-            "states": len(selected),
-            "repeated_states": len(repeats),
-            "outcomes_by_status": dict(statuses),
-            "reader_requests": 0,
-            "comparison_protocol": declaration["comparison_protocol"],
-        }
+            statuses.update(counts)
+
+        pool = None
+        if branch_workers > 1 and selected:
+            pool = workers.enter_context(
+                ProcessPoolExecutor(
+                    max_workers=branch_workers,
+                    mp_context=get_context("spawn"),
+                    initializer=_init_branch_worker,
+                    initargs=(dataset.path, dataset.observation_protocol, dataset.run_id,
+                              declaration["comparison_protocol"]),
+                )
+            )
+        pending: deque[Future[PreparedBatch]] = deque()
+        choosers = [choose for _, choose in suggestions]
+        for sid, stratum in selected:
+            with closing(connect(dataset.path)) as db_read:
+                state, session, actions = dataset.replay(db_read, sid)
+                if state["experiment_role"] != role:
+                    raise ValueError(f"Outcome preparation requires the registered {role} role")
+                preflight: PreflightCache = {}
+                session.shared_preflight = preflight
+                baseline = session.online(session.feasible_menu(actions))
+                branches = explicit_actions or choose_actions(session, actions, choosers, rng)
+                if not set(branches) <= {a.id for a in actions} or len(set(branches)) != len(
+                    branches
+                ):
+                    raise ValueError("Outcome action IDs must be unique actual bindings")
+                jobs: list[BranchJob] = []
+                for repeat in range(2 if sid in repeats else 1):
+                    ordered = list(branches)
+                    rng.shuffle(ordered)
+                    repeat_seed = (seed + sid * 31 + repeat) % (2**31 - 1)
+                    jobs.extend((repeat, action, repeat_seed) for action in ordered)
+                if pool is None:
+                    save(_prepare_outcome_rows(
+                        dataset, db_read, sid, stratum, run_id, baseline, session, jobs
+                    ))
+                    continue
+            # Model proposals and RNG stay in the parent. Commit futures in selection order.
+            pending.append(pool.submit(
+                _prepare_outcome_worker, sid, stratum, run_id, role, baseline, preflight, jobs
+            ))
+            if len(pending) >= 2 * branch_workers:
+                save(pending.popleft().result())
+        while pending:
+            save(pending.popleft().result())
+    return {
+        "run_id": run_id,
+        "states": len(selected),
+        "repeated_states": len(repeats),
+        "outcomes_by_status": dict(statuses),
+        "reader_requests": 0,
+        "comparison_protocol": declaration["comparison_protocol"],
+        "branch_workers": branch_workers,
+        "preparation_wall_seconds": time.perf_counter() - started,
+    }
 
 
 def request_reader(

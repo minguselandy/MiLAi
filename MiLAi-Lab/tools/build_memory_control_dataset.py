@@ -411,7 +411,8 @@ def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
             result = prepare_outcomes(dataset, args.run_id, limit=args.state_limit,
                                       state_ids=args.state_id, explicit_actions=args.action,
                                       seed=args.seed, suggestions=suggestions,
-                                      policy_pool=args.policy_pool, dev_plan=args.dev_plan)
+                                      policy_pool=args.policy_pool, dev_plan=args.dev_plan,
+                                      branch_workers=args.branch_workers)
         elif command == "execute-outcomes":
             result = execute_outcomes(dataset, args.run_id, limit=args.limit)
         else:
@@ -525,6 +526,8 @@ def main() -> int:
                                  help="Use the registered DEV cohort for held branch evaluation")
     prepare_outcome.add_argument("--device", default="cpu")
     prepare_outcome.add_argument("--seed", type=int, default=20261118)
+    prepare_outcome.add_argument("--branch-workers", type=int, default=1,
+                                 help="CPU processes for local branch preparation")
     execute_outcome = sub.add_parser("execute-outcomes", help="Use the original Reader ledger")
     execute_outcome.add_argument("--run-id", required=True)
     execute_outcome.add_argument("--limit", type=int, required=True)

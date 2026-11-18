@@ -20,6 +20,7 @@ from milai_lab.methods.memory_control import (
 from milai_lab.methods.memory_control_dataset import StateIndex
 from milai_lab.methods.small_control_learning import state_loss
 from milai_lab.runners.memory_control_episode import PolicyMenu
+from milai_lab.scorers.memory_control_episode_metrics import _shared_request_quality_delta
 
 
 def test_literal_delivery_preserves_gaps_and_access_scope() -> None:
@@ -180,3 +181,25 @@ def test_held_dev_outcomes_cannot_be_loaded_as_training_supervision() -> None:
         with pytest.raises(ValueError, match="frozen train"):
             run_protocols(db, ("held",), "semantic_nav_v1")
         assert run_protocols(db, ("held",), "semantic_nav_v1", role="dev") == [declaration]
+
+
+def test_shared_request_sensitivity_preserves_musique_pair_sufficiency() -> None:
+    def episode(prompt: str, answerable: bool, sufficient: bool, f1: float) -> dict:
+        return {
+            "reader_wire": {"messages": [prompt], "seed": 11},
+            "grade": {
+                "native_metrics": {
+                    "gold_answerable": answerable,
+                    "sufficiency_correct": sufficient,
+                    "answer_f1": f1,
+                    "answer_em": 0.0,
+                    "support_f1": 0.0,
+                }
+            },
+        }
+
+    left = {1: episode("expanded", True, True, 0.8), 2: episode("shared", False, True, 0.0)}
+    right = {1: episode("focus", True, True, 0.4), 2: episode("shared", False, False, 0.0)}
+    assert _shared_request_quality_delta("musique_full", [1, 2], left, right) == pytest.approx(0.2)
+    right[1]["reader_wire"] = left[1]["reader_wire"]
+    assert _shared_request_quality_delta("musique_full", [1, 2], left, right) == 0.0

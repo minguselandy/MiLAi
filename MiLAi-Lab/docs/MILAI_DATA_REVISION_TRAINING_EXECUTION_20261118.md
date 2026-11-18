@@ -154,6 +154,20 @@ B1 相对 B0 高 20.67 个原生组质量点，配对 95% 区间为 [13.52, 28.4
 基线仍按完整 DEV605 选取。收据为 `dev-completed-musiques-200x5.json` 与
 `dev-first-persona-pairs-B0-B1.json`。
 
+在这 100 个 MuSiQue 原生对上，B2、B3 相对 B1 的原始分差为 −2.19、+0.49 点。
+新增同请求敏感性分析，在完整 Reader 请求相同的任务上，依次把两次实测回复用于两臂，
+并按原规则重算 MuSiQue 原生对的充分性门控分。两项分差均为 0。B1 相对 B0 的 +20.67 点
+和 B4 相对 B1 的 −4.99 点保持，两个对照的 200 个请求均有实际变化。该结果补充原始计分，
+沿用原先冻结的基线选择和确认判据。收据为 `dev-musiques-shared-wire-quality-sensitivity.json`。
+
+PersonaMem 首 200 个登记位置上，B0、B1、B2 各已提交 200 个原生评分。其中 199 个任务
+组成 69 个完整原生组。B1 相对 B0 高 6.53 点，95% 区间为 [3.09, 10.33]。
+B2 相对 B1 的 200 个请求均有实际变化，配对准确率差为 0.00 点，
+区间为 [−3.54, 3.38]，每任务的平均 Reader input token 由 1,410.66 增至 1,961.13。
+条件扩读的后续分析优先考察同一 before state 下有实际输入差异的 R2/R3 对，
+并保留各预算层的全体抽样结果。收据为
+`dev-persona-200-position-read-precision-sensitivity.json`。
+
 主 DEV 的 B0 到 B4 在共享 Reader 租约下分块提交。605 个任务的正式结果、B* 选择、
 24,000 个 core 状态上的正式 O、12,000 个策略到达状态上的 P、参数匹配和三种子确认继续
 由各自的实际训练、评分与请求收据证明。当前 12 个分支只用于确认执行闭环和训练消费。
@@ -169,6 +183,15 @@ B1 相对 B0 高 20.67 个原生组质量点，配对 95% 区间为 [13.52, 28.4
 仍保留原样。另在其中 119 个分层选取的 QASPER／PersonaMem 原生组各真实重放一对
 R2/R3，固定续程后 104 对请求不同、15 对汇合到同一请求。该回放只准备请求。
 详见 `core-sampling-24000-native-audit.json` 和 `core-focus-context-wire-contrast-audit.json`。
+
+用三个来源各 12 个真实 TRAIN 状态验证本地分支并行准备。固定 72 条分支的本地准备从
+79.75 秒降至 25.42 秒。再用两个已训练的 W 检查点，在一次性 SQLite 副本上分别运行
+冻结串行入口和四进程入口。两次各生成 180 条真实准备分支，含 4 个重复状态。
+除各自实测用时外，运行声明、写入顺序、动作、种子、材料、Reader 请求和可行性逐项一致。
+入口墙时从 150.75 秒降至 56.03 秒，两次均未发起 Reader 请求。正式 core 和 P 的
+准备入口采用四个 CPU 进程，模型推荐、采样和 SQLite 写入仍由主进程按顺序完成。
+该加速测量覆盖分支准备。收据为 `branch-preparation-cpu-parallel-benchmark-v1.json` 和
+`branch-preparation-cli-validation-v1.json`。
 
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，

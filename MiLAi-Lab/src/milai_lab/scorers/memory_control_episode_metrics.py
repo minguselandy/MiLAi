@@ -141,6 +141,42 @@ def summarize(root: Path) -> dict[str, Any]:
     }
 
 
+def _same_reader_wire(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    wire = left.get("reader_wire")
+    return isinstance(wire, dict) and bool(wire) and wire == right.get("reader_wire")
+
+
+def _shared_request_quality_delta(
+    source: str,
+    ids: list[int],
+    left: dict[int, dict[str, Any]],
+    right: dict[int, dict[str, Any]],
+) -> float:
+    shared = [_same_reader_wire(left[i], right[i]) for i in ids]
+    if all(shared):
+        return 0.0
+    a = [left[i]["grade"]["native_metrics"] for i in ids]
+    b = [right[i]["grade"]["native_metrics"] for i in ids]
+    key = QUALITY_AXES[source]
+    if source != MUSIQUE:
+        return sum(
+            float(x[key]) - float(y[key])
+            for x, y, same in zip(a, b, shared, strict=True)
+            if not same
+        )
+    if not any(shared):
+        return musique_pair(a)[key] - musique_pair(b)[key]
+    # Re-score the whole native pair with either measured shared reply on both sides.
+    # This retains its sufficiency gate when just one of the two contexts is shared.
+    p = shared.index(True)
+    deltas = []
+    for grade in (a[p], b[p]):
+        first, second = a.copy(), b.copy()
+        first[p] = second[p] = grade
+        deltas.append(musique_pair(first)[key] - musique_pair(second)[key])
+    return fmean(deltas)
+
+
 def paired_comparison(
     policy_roots: Sequence[Path],
     baseline_root: Path | Sequence[Path],
@@ -191,8 +227,11 @@ def paired_comparison(
         raise ValueError("Multi-seed baseline arms must match the fitted policy seed IDs")
     wires: dict[str, Counter[str]] = defaultdict(Counter)
     baseline_by_seed = dict(zip(baseline_seeds, baselines, strict=True))
-    for policy, model_seed in zip(policy_runs, seed_labels, strict=True):
-        baseline = baselines[0] if len(baselines) == 1 else baseline_by_seed[model_seed]
+    seed_pairs = [
+        (policy, baselines[0] if len(baselines) == 1 else baseline_by_seed[model_seed])
+        for policy, model_seed in zip(policy_runs, seed_labels, strict=True)
+    ]
+    for policy, baseline in seed_pairs:
         for tid in policy.keys() & baseline.keys():
             left, right = policy[tid], baseline[tid]
             if "grade" not in left or "grade" not in right:
@@ -201,7 +240,7 @@ def paired_comparison(
             if not isinstance(a, dict) or not isinstance(b, dict):
                 continue
             counts = wires[left["dataset"]]
-            if a != b:
+            if not _same_reader_wire(left, right):
                 counts["different_requests"] += 1
                 continue
             counts["identical_requests"] += 1
@@ -242,7 +281,7 @@ def paired_comparison(
         ]
 
     # Each row remains one independent cluster, regardless of task count or model seed count.
-    paired: dict[str, list[tuple[float, float, int, float, float, int]]] = defaultdict(list)
+    paired: dict[str, list[tuple[float, float, int, float, float, int, float]]] = defaultdict(list)
     baseline_n = len(baselines)
     for source, groups in registered.items():
         for ids in groups.values():
@@ -258,50 +297,78 @@ def paired_comparison(
                     fmean(sum(row) for row in peer_cost[baseline_n:]) if cost_n else 0.0,
                     fmean(sum(row) for row in peer_cost[:baseline_n]) if cost_n else 0.0,
                     cost_n,
+                    (
+                        fmean(
+                            _shared_request_quality_delta(source, ids, a, b)
+                            for a, b in seed_pairs
+                        )
+                        if quality_n
+                        else 0.0
+                    ),
                 )
             )
 
     def aggregate(
-        grouped: dict[str, list[tuple[float, float, int, float, float, int]]],
-    ) -> tuple[float | None, float | None, dict[str, dict[str, Any]]]:
+        grouped: dict[str, list[tuple[float, float, int, float, float, int, float]]],
+    ) -> tuple[float | None, float | None, float | None, dict[str, dict[str, Any]]]:
         components: dict[str, dict[str, Any]] = {}
         for source, clusters in grouped.items():
-            policy_q, baseline_q, qn, policy_c, baseline_c, cn = map(
+            policy_q, baseline_q, qn, policy_c, baseline_c, cn, shared_delta = map(
                 sum, zip(*clusters, strict=True)
             )
             components[source] = {
                 "quality_delta": 100 * (policy_q - baseline_q) / qn if qn else None,
+                "shared_request_quality_delta": 100 * shared_delta / qn if qn else None,
                 "policy_input_tokens": policy_c / cn if cn else None,
                 "baseline_input_tokens": baseline_c / cn if cn else None,
                 "quality_units": int(qn),
                 "cost_tasks": int(cn),
             }
         if not set(SOURCES) <= components.keys():
-            return None, None, components
+            return None, None, None, components
         score = (
             fmean(m["quality_delta"] for m in components.values())
             if all(m["quality_units"] for m in components.values())
             else None
         )
         savings = None
+        sensitivity = (
+            fmean(m["shared_request_quality_delta"] for m in components.values())
+            if all(m["quality_units"] for m in components.values())
+            else None
+        )
         if all(m["cost_tasks"] for m in components.values()):
             denom = fmean(m["baseline_input_tokens"] for m in components.values())
             if denom > 0:
                 savings = 1 - fmean(m["policy_input_tokens"] for m in components.values()) / denom
-        return score, savings, components
+        return score, savings, sensitivity, components
 
-    point_quality, point_cost, strata = aggregate(paired)
+    point_quality, point_cost, point_sensitivity, strata = aggregate(paired)
     rng = random.Random(seed)  # noqa: S311 -- predeclared native-group bootstrap
-    quality_draws, cost_draws = [], []
+    quality_draws, cost_draws, sensitivity_draws = [], [], []
+    source_draws: dict[str, list[float]] = defaultdict(list)
+    shared_source_draws: dict[str, list[float]] = defaultdict(list)
     for _ in range(repeats):
         sample = {source: rng.choices(groups, k=len(groups)) for source, groups in paired.items()}
-        q, c, _ = aggregate(sample)
+        q, c, sensitivity, points = aggregate(sample)
         if q is not None:
             quality_draws.append(q)
         if c is not None:
             cost_draws.append(c)
+        if sensitivity is not None:
+            sensitivity_draws.append(sensitivity)
+        for source, point in points.items():
+            if point["quality_delta"] is not None:
+                source_draws[source].append(point["quality_delta"])
+                shared_source_draws[source].append(point["shared_request_quality_delta"])
     quality_ci = [percentiles(quality_draws, p) for p in (0.025, 0.975)] if quality_draws else None
     cost_ci = [percentiles(cost_draws, p) for p in (0.025, 0.975)] if cost_draws else None
+    for source, component in strata.items():
+        for key, draws in (
+            ("quality_interval_95", source_draws[source]),
+            ("shared_request_quality_interval_95", shared_source_draws[source]),
+        ):
+            component[key] = [percentiles(draws, p) for p in (0.025, 0.975)] if draws else None
     full = set(strata) == set(SOURCES) and all(
         s["quality_units"]
         == (
@@ -337,6 +404,14 @@ def paired_comparison(
         "reader_input_token_savings": point_cost,
         "token_savings_interval_95": cost_ci,
         "source_strata": strata,
+        "shared_request_sensitivity": {
+            "method": "literal_equal_wire_share_observed_replies_v1",
+            "quality_delta_points": point_sensitivity,
+            "quality_interval_95": (
+                [percentiles(sensitivity_draws, p) for p in (0.025, 0.975)]
+                if sensitivity_draws else None
+            ),
+        },
         "scored_request_equality_by_source": dict(wires),
         "independent_groups": {k: len(v) for k, v in registered.items()},
         "repeats": repeats,
