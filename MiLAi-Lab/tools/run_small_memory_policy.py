@@ -1097,6 +1097,12 @@ def main() -> None:
     compare.add_argument("--output", type=Path, required=True)
     compare.add_argument("--bootstrap-repeats", type=int, default=2000)
     compare.add_argument("--seed", type=int, default=20261118)
+    factorial = sub.add_parser("compare-observations")
+    factorial.add_argument("--arms", nargs=4, type=Path, required=True,
+                           metavar=("M0N0", "M0N1", "M1N0", "M1N1"))
+    factorial.add_argument("--output", type=Path, required=True)
+    factorial.add_argument("--bootstrap-repeats", type=int, default=2000)
+    factorial.add_argument("--seed", type=int, default=20261118)
     select_baseline_parser = sub.add_parser("select-baseline")
     select_baseline_parser.add_argument("--candidate", action="append", type=Path, required=True)
     select_baseline_parser.add_argument("--output", type=Path, required=True)
@@ -1295,6 +1301,12 @@ def main() -> None:
 
         write_json(args.output, paired_comparison(
             args.policy_run, args.baseline_run, repeats=args.bootstrap_repeats, seed=args.seed))
+        return
+    if args.command == "compare-observations":
+        from milai_lab.scorers.memory_control_episode_metrics import observation_factorial
+
+        write_json(args.output, observation_factorial(
+            args.arms, repeats=args.bootstrap_repeats, seed=args.seed))
         return
     if args.command == "collect-policy-states":
         import fcntl

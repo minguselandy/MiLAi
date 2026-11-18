@@ -383,3 +383,147 @@ def select_baseline(runs: Sequence[Path]) -> dict[str, Any]:
         "common_scored_tasks": sum(len(ids) for ids in complete_groups.values()),
         "common_source_groups": len(complete_groups),
     }
+
+
+def observation_factorial(
+    roots: Sequence[Path],
+    *,
+    repeats: int = 2000,
+    seed: int = 20261118,
+) -> dict[str, Any]:
+    """Matched navigation and architecture effects on the native quality metric."""
+    expected = (
+        ("object_mlp", "metadata_v1"),
+        ("object_mlp", "semantic_nav_v1"),
+        ("latent_pointer", "metadata_v1"),
+        ("latent_pointer", "semantic_nav_v1"),
+    )
+    if len(roots) != len(expected) or repeats < 1:
+        raise ValueError("Provide (M0N0, M0N1, M1N0, M1N1) and positive bootstrap repetitions")
+    loaded = [input_result(root) for root in roots]
+    first = loaded[0][0]
+    population = first["population"]
+    stage_fields = (
+        "dataset_run_id",
+        "supervision_mode",
+        "sampling",
+        "seed",
+        "epochs",
+        "steps",
+        "batch_states",
+        "learning_rate",
+        "eligible_states",
+    )
+    reference_fit = None
+    reference_config = None
+    for (protocol, _), (architecture, observation) in zip(loaded, expected, strict=True):
+        comparison = {k: v for k, v in protocol["comparison"].items() if k != "observation"}
+        reference = {k: v for k, v in first["comparison"].items() if k != "observation"}
+        if protocol["population"] != population or comparison != reference:
+            raise ValueError("Factorial comparisons require the same tasks, runtime and Reader")
+        arm = protocol["arm"]
+        if (
+            arm["policy"] != "checkpoint"
+            or arm["observation_protocol"] != observation
+            or arm["stop"] != "fixed"
+            or arm["precision"] != first["arm"]["precision"]
+            or arm["reads"] != first["arm"]["reads"]
+        ):
+            raise ValueError("Use the matched weak policy stop and precision across all four arms")
+        checkpoint = Path(arm["checkpoint"])
+        config = read_json(checkpoint / "config.json")
+        if config["object_architecture"] != architecture:
+            raise ValueError("Actual checkpoint architecture disagrees with the matrix position")
+        common_config = {k: v for k, v in config.items() if k != "object_architecture"}
+        if reference_config is None:
+            reference_config = common_config
+        elif common_config != reference_config:
+            raise ValueError("Factorial encoder and head settings differ outside architecture")
+        run_path = next(
+            (
+                parent / "run.json"
+                for parent in (checkpoint.parent, checkpoint.parent.parent)
+                if (parent / "run.json").is_file()
+            ),
+            None,
+        )
+        if run_path is None:
+            raise ValueError("Factorial comparison needs actual training receipts")
+        fit = read_json(run_path)
+        declared = {k: fit["contract"][k] for k in stage_fields}
+        if (fit["status"] != "COMPLETED" or declared["supervision_mode"] != "weak"
+                or checkpoint.name != "checkpoint"):
+            raise ValueError("Use full completed weak fits")
+        if reference_fit is None:
+            reference_fit = declared
+        elif reference_fit != declared:
+            raise ValueError("Weak training coverage, updates, optimizer recipe or seed differ")
+
+    registered: dict[tuple[str, str], list[int]] = defaultdict(list)
+    for task in population["tasks"]:
+        registered[task["dataset"], task["native_group"]].append(task["task_id"])
+    clusters: dict[str, list[tuple[int, list[float]]]] = defaultdict(list)
+    excluded: Counter[str] = Counter()
+    for (source, _), ids in registered.items():
+        if any(
+            any(tid not in outcomes or "grade" not in outcomes[tid] for tid in ids)
+            for _, outcomes in loaded
+        ):
+            excluded[source] += 1
+            continue
+        results = [
+            [outcomes[tid]["grade"]["native_metrics"] for tid in ids] for _, outcomes in loaded
+        ]
+        qualities = (
+            [musique_pair(rows)[QUALITY_AXES[source]] for rows in results]
+            if source == MUSIQUE
+            else [sum(row[QUALITY_AXES[source]] for row in rows) for rows in results]
+        )
+        clusters[source].append((1 if source == MUSIQUE else len(ids), qualities))
+    if set(clusters) != set(SOURCES):
+        raise ValueError("All three sources need paired native group measurements")
+
+    def macro(data: dict[str, list[tuple[int, list[float]]]]) -> list[float]:
+        return [
+            100
+            * fmean(
+                sum(quality[i] for _, quality in rows) / sum(n for n, _ in rows)
+                for rows in data.values()
+            )
+            for i in range(4)
+        ]
+
+    def effects(points: list[float]) -> dict[str, float]:
+        a, b, c, d = points
+        return {
+            "navigation_on_M0": b - a,
+            "navigation_on_M1": d - c,
+            "attention_with_N0": c - a,
+            "attention_with_N1": d - b,
+            "interaction": (d - b) - (c - a),
+        }
+
+    point = macro(clusters)
+    rng = random.Random(seed)  # noqa: S311 -- declared paired native-group bootstrap
+    draws: dict[str, list[float]] = defaultdict(list)
+    for _ in range(repeats):
+        values = effects(
+            macro({source: rng.choices(rows, k=len(rows)) for source, rows in clusters.items()})
+        )
+        for key, value in values.items():
+            draws[key].append(value)
+    assert reference_fit is not None
+    return {
+        "role": population["role"],
+        "model_seed": reference_fit["seed"],
+        "source_macro_by_arm": dict(zip(("M0N0", "M0N1", "M1N0", "M1N1"), point, strict=True)),
+        "effect_points": effects(point),
+        "intervals_95": {
+            k: [percentiles(v, 0.025), percentiles(v, 0.975)] for k, v in draws.items()
+        },
+        "paired_native_groups": {s: len(rows) for s, rows in clusters.items()},
+        "unpaired_missing_groups": dict(excluded),
+        "reader_resources": {str(root): summarize(root)["sources"] for root in roots},
+        "bootstrap_repeats": repeats,
+        "bootstrap_seed": seed,
+    }
