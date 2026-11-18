@@ -293,6 +293,10 @@ def prepare_packets(args: Any) -> None:
                  "rules4": lambda: RulesMemoryPolicy(reads=4), "empty": EmptyPolicy}
     models = {name: SmallControlModel.load(Path(path), device=args.device)
               for name, path in args.checkpoint}
+    base_cache_bytes = getattr(args, "base_encoding_cache_bytes", 0)
+    if base_cache_bytes:
+        for model in models.values():
+            model.configure_base_encoding_cache(base_cache_bytes)
     prior_overrides = {}
     if prior_margin is not None:
         for name, model in models.items():
@@ -339,6 +343,10 @@ def prepare_packets(args: Any) -> None:
         **({"initial_decision_index": initial_index, "captured_prefix_steps_consumed": True,
             "prefix_measurements_inherited_not_current_latency": True} if initial_index else {}),
         **({"inference_prior_overrides": prior_overrides} if prior_overrides else {}),
+        **({"base_encoding_cache_bytes": base_cache_bytes,
+            "base_encoding_cache_scope": "Cold per original task; current-input-only; "
+                "frozen base encoding, full current workspace recomputed"}
+           if base_cache_bytes else {}),
         "execution_contract": "stable_material_indices_search_scope_sync_v2",
         "material_formation": (("whole_paragraph_v1_R2_adjacent_turns_R3"
                                 if getattr(args, "evidence_context_turn_radius", 0)
@@ -377,6 +385,8 @@ def prepare_packets(args: Any) -> None:
                     case = {"family": history["source_group"], "event_id": key, "case_key": key,
                         "request_id": request["id"], "choices": {}, "branches": []}
                     for name in names:
+                        if base_cache_bytes and name in models:
+                            models[name].clear_base_encoding_cache()
                         profile = (ComputeProfile() if getattr(args, "profile_retrieval", False)
                                    else None)
                         retrieval_tick, retrieval_cpu = time.perf_counter(), time.process_time()
@@ -475,6 +485,9 @@ def prepare_packets(args: Any) -> None:
         run.update(wall_seconds=time.perf_counter()-tick, cpu_seconds=time.process_time()-cpu,
             model_counters={name: model.counters for name, model in
                             {**models, **historical, **cosine}.items()})
+        if base_cache_bytes:
+            run["base_encoding_cache_counters"] = {
+                name: model.base_encoding_cache_report() for name, model in models.items()}
         write_json(args.output / "run.json", run)
 
 

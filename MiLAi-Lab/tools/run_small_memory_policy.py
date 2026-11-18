@@ -904,6 +904,8 @@ def main() -> None:
                                 help="Resume this captured decision; consumed prefix uses budget")
     native_collect.add_argument("--inference-prior-margin", type=float,
                                 help="Inference prior override; saved weights unchanged")
+    native_collect.add_argument("--base-encoding-cache-bytes", type=int, default=0,
+                                help="Opt-in bounded frozen base-vector cache; cold per task")
     native_score = sub.add_parser("native-score")
     native_score.add_argument("--readouts", type=Path, required=True)
     native_score.add_argument("--controls", type=Path, required=True)

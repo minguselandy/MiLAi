@@ -128,6 +128,9 @@ def build_action_head(width: int, hidden: int, *, set_interaction: bool = False,
 
 
 class SmallControlModel:
+    _base_encoding_cache: Any = None
+    _base_encoder_versions: Any = None
+
     def __init__(self, config: SmallControlConfig, *, device: str = "cpu") -> None:
         import torch
         from transformers import AutoModel, AutoTokenizer
@@ -218,17 +221,102 @@ class SmallControlModel:
         self.encoder.to(self.device)
         self.counters: dict[str, int] = dict(forwards=0, input_tokens=0, padded_tokens=0,
                                             texts=0, chunked_texts=0, chunks=0, joint_sequences=0)
+        self._base_encoding_cache = None
+        self._base_encoder_versions = None
+
+    def configure_base_encoding_cache(self, max_bytes: int = 0) -> None:
+        """Runtime-only optimization; old checkpoints and defaults stay unchanged."""
+        from milai_lab.methods.base_encoding_cache import BaseEncodingCache
+
+        if type(max_bytes) is not int or max_bytes < 0:
+            raise ValueError("Base encoding cache bytes must be a nonnegative integer")
+        self._base_encoding_cache = None
+        self._base_encoder_versions = None
+        if max_bytes:
+            if (self.config.adaptation != "frozen" or self.config.family == "decoder"
+                    or self.config.readout == "joint"):
+                raise ValueError("Base encoding cache requires a frozen independent encoder")
+            self._base_encoding_cache = BaseEncodingCache(max_bytes)
+
+    def clear_base_encoding_cache(self) -> None:
+        if self._base_encoding_cache is not None:
+            self._base_encoding_cache.clear()
+
+    def base_encoding_cache_report(self) -> dict[str, Any] | None:
+        return (self._base_encoding_cache.report()
+                if self._base_encoding_cache is not None else None)
+
+    def _check_base_encoder(self) -> None:
+        if self._base_encoding_cache is None:
+            return
+        if (self.config.adaptation != "frozen" or self.config.family == "decoder"
+                or self.config.readout == "joint" or self.encoder.training
+                or any(p.requires_grad for p in self.encoder.parameters())):
+            self.clear_base_encoding_cache()
+            raise ValueError("Base encoding cache requires an unchanged frozen eval encoder")
+        # Native tensor mutation versions detect optimizer/load_state_dict changes;
+        # these are runtime versions, not hashes or replacement fingerprints.
+        versions = (self.config, tuple((id(p), p._version, p.device, p.dtype)
+                                       for p in (*self.encoder.parameters(),
+                                                 *self.encoder.buffers())))
+        if versions != self._base_encoder_versions:
+            self.clear_base_encoding_cache()
+            self._base_encoder_versions = versions
 
     def parameters(self) -> list[Any]:
         return [p for module in (self.encoder, self.head)
                 for p in module.parameters() if p.requires_grad]
 
     def train(self, mode: bool = True) -> None:
+        if mode:
+            self.clear_base_encoding_cache()
         self.encoder.train(mode and self.config.adaptation != "frozen")
         self.head.train(mode)
 
     def encode(self, texts: list[str], *, prefixes: list[str] | None = None,
                text_role: str = "query") -> Any:
+        cache = self._base_encoding_cache
+        if cache is None:
+            return self._encode_uncached(texts, prefixes=prefixes, text_role=text_role)
+        self._check_base_encoder()
+        if cache.active is None:
+            with cache.scope():
+                return self._encode_cached(texts, prefixes=prefixes, text_role=text_role)
+        return self._encode_cached(texts, prefixes=prefixes, text_role=text_role)
+
+    def _encode_cached(self, texts: list[str], *, prefixes: list[str] | None,
+                       text_role: str) -> Any:
+        import torch
+
+        if prefixes is not None and len(prefixes) != len(texts):
+            raise ValueError("A conditional encoding needs one actual prefix per text")
+        if text_role not in {"query", "passage"}:
+            raise ValueError("Encoder text role must be query or passage")
+        cache = self._base_encoding_cache
+        missing: dict[tuple[str, str, str], list[int]] = {}
+        result: list[Any] = [None] * len(texts)
+        for index, text in enumerate(texts):
+            key = (text_role, prefixes[index] if prefixes else "", text)
+            value = cache.get(key)
+            if value is not None:
+                result[index] = value
+            else:
+                if key in missing:
+                    cache.counters["same_call_reuses"] += 1
+                missing.setdefault(key, []).append(index)
+        if missing:
+            keys = list(missing)
+            vectors = self._encode_uncached([k[2] for k in keys],
+                prefixes=[k[1] for k in keys] if prefixes is not None else None,
+                text_role=text_role)
+            for key, vector in zip(keys, vectors, strict=True):
+                cache.put(key, vector)
+                for index in missing[key]:
+                    result[index] = vector
+        return torch.stack(result)
+
+    def _encode_uncached(self, texts: list[str], *, prefixes: list[str] | None = None,
+                         text_role: str = "query") -> Any:
         import torch
         import torch.nn.functional as F  # type: ignore[import-not-found]
 
@@ -289,6 +377,13 @@ class SmallControlModel:
         return F.normalize(summed / counts, dim=-1)
 
     def features(self, online: list[dict[str, Any]]) -> tuple[Any, Any, Any, list[int]]:
+        if self._base_encoding_cache is None:
+            return self._features_uncached(online)
+        self._check_base_encoder()
+        with self._base_encoding_cache.scope():
+            return self._features_uncached(online)
+
+    def _features_uncached(self, online: list[dict[str, Any]]) -> tuple[Any, Any, Any, list[int]]:
         import torch
 
         if self.config.readout == "joint":
