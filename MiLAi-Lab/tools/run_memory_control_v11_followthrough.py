@@ -53,6 +53,7 @@ class Followthrough:
         self.gpus = first_gpu, second_gpu
         self.features = args.features.resolve()
         self.branch_workers: int = args.branch_workers
+        self.share_checkpoint_encoder: bool = args.share_checkpoint_encoder
         self.core = args.core_run
         self.policy_states = "v11-policy-shared-seed11"
         self.policy_outcomes = "v11-policy-outcomes-shared-seed11"
@@ -178,6 +179,8 @@ class Followthrough:
             command += ["--" + key.replace("_", "-"), str(value)]
         if action == "prepare-outcomes":
             command += ["--branch-workers", str(self.branch_workers)]
+            if self.share_checkpoint_encoder:
+                command += ["--share-checkpoint-encoder"]
         return command
 
     def drain_outcomes(self, run: str, *, seal: bool) -> None:
@@ -668,6 +671,7 @@ def main() -> None:
     parser.add_argument("--gpus", type=int, nargs=2, required=True)
     parser.add_argument("--core-run", required=True)
     parser.add_argument("--branch-workers", type=int, default=1)
+    parser.add_argument("--share-checkpoint-encoder", action="store_true")
     args = parser.parse_args()
     if len(set(args.gpus)) != 2 or min(args.gpus) < 0:
         parser.error("two distinct physical GPUs are required")

@@ -8,6 +8,7 @@ inputs explicitly. Neither layout certifies semantic sufficiency.
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -567,9 +568,61 @@ class SmallControlModel:
         self.train(False)
         with torch.no_grad():
             states, actions, owners, _ = self.features([online])
-            logits = self.with_prior(self.head(states, actions, owners), online)
-            scores = logits.float().cpu().tolist()
+            return self._score_features(online, states, actions, owners)
+
+    def _score_features(
+        self, online: dict[str, Any], states: Any, actions: Any, owners: Any,
+    ) -> PolicyScores:
+        logits = self.with_prior(self.head(states, actions, owners), online)
+        scores = logits.float().cpu().tolist()
         return PolicyScores([a["id"] for a in online["actions"]], scores)
+
+    def bind_shared_object_scorer(
+        self, peer: SmallControlModel,
+    ) -> Callable[[dict[str, Any]], tuple[PolicyScores, PolicyScores]]:
+        """Bind two separately loaded heads to one identical frozen object encoder."""
+        import torch
+
+        fields = (
+            "backbone", "chunk_tokens", "encode_batch_size", "projection_version",
+            "maximum_memory_objects", "object_feature_layout",
+        )
+        for model in (self, peer):
+            if (model.config.family, model.config.adaptation, model.config.readout) != (
+                "encoder", "frozen", "objects",
+            ) or any(parameter.requires_grad for parameter in model.encoder.parameters()):
+                raise ValueError("Shared recommendations require frozen object encoders")
+        if (
+            self.device != peer.device
+            or any(getattr(self.config, key) != getattr(peer.config, key) for key in fields)
+            or getattr(self, "batch_tokens_by_length", False)
+            != getattr(peer, "batch_tokens_by_length", False)
+            or type(self.encoder) is not type(peer.encoder)
+            or self.encoder.config.to_dict() != peer.encoder.config.to_dict()
+        ):
+            raise ValueError("Shared recommendations require the same encoder configuration")
+        left = getattr(self.tokenizer, "backend_tokenizer", None)
+        right = getattr(peer.tokenizer, "backend_tokenizer", None)
+        if left is None or right is None or left.to_str() != right.to_str():
+            raise ValueError("Shared recommendations require the same fast tokenizer")
+        actual, other = self.encoder.state_dict(), peer.encoder.state_dict()
+        if actual.keys() != other.keys() or any(
+            value.dtype != other[key].dtype or not torch.equal(value, other[key])
+            for key, value in actual.items()
+        ):
+            raise ValueError("Shared recommendations require identical encoder tensors")
+
+        def score(online: dict[str, Any]) -> tuple[PolicyScores, PolicyScores]:
+            self.train(False)
+            peer.train(False)
+            with torch.no_grad():
+                state, actions, owners, _ = self.features([online])
+                return (
+                    self._score_features(online, state, actions, owners),
+                    peer._score_features(online, state, actions, owners),
+                )
+
+        return score
 
     def save(self, root: Path) -> None:
         import torch

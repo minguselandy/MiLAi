@@ -155,10 +155,10 @@ def sample_cases(
         )
     cases = dataset.rows([item["state_id"] for item in selected])
     sampled_projection(cases, audit)
-    for meta, case in zip(selected, cases, strict=True):
-        meta["object_count"] = case["object_count"]
-        meta["actions"] = len(case["actions"])
-        meta["known_weak_actions"] = sum(case["offline_supervision"]["weak_evidence_known_mask"])
+    for meta, sampled in zip(selected, cases, strict=True):
+        meta["object_count"] = sampled["object_count"]
+        meta["actions"] = len(sampled["actions"])
+        meta["known_weak_actions"] = sum(sampled["offline_supervision"]["weak_evidence_known_mask"])
         if meta["case"] in {"figure_only", "unknown_snippet"}:
             audit.check(
                 meta["known_weak_actions"] == 0,
@@ -383,6 +383,8 @@ def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
         return 0
     if command in {"prepare-outcomes", "execute-outcomes", "score-outcomes"}:
         from milai_lab.runners.memory_control_outcome_run import (
+            Chooser,
+            JointChooser,
             execute_outcomes,
             prepare_outcomes,
             score_outcomes,
@@ -393,26 +395,58 @@ def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
         dataset = MemoryControlDataset(db_path, require_complete=False)
         if command == "prepare-outcomes":
             from milai_lab.methods.control_observation import control_input
-            from milai_lab.methods.memory_control import FixedContextMemoryPolicy
+            from milai_lab.methods.memory_control import (
+                FixedContextMemoryPolicy,
+                MemoryAction,
+                MemoryControlState,
+            )
             from milai_lab.methods.small_control_model import SmallControlModel
 
             if (len(args.checkpoint) > 2 or (args.action and not args.state_id)
                     or (args.policy_pool and args.state_id)):
                 raise ValueError("Use at most two checkpoints or explicit diagnostic actions")
-            suggestions = [("fixed_context4", FixedContextMemoryPolicy().choose)]
+            if args.share_checkpoint_encoder and len(args.checkpoint) != 2:
+                raise ValueError("Provide two checkpoints for shared recommendation encoding")
+            fixed = FixedContextMemoryPolicy()
+            suggestions: list[tuple[str, Chooser]] = [("fixed_context4", fixed.choose)]
+            models: list[SmallControlModel] = []
             for path in args.checkpoint:
                 model = SmallControlModel.load(path, device=args.device)
+                models.append(model)
 
-                def recommend(state: Any, actions: Any, policy: Any = model) -> str:
+                def recommend(
+                    state: MemoryControlState, actions: list[MemoryAction],
+                    policy: SmallControlModel = model,
+                ) -> str:
                     scored = policy.score(control_input(state, actions))
                     return max(zip(scored.scores, scored.action_ids, strict=True))[1]
 
                 suggestions.append((str(path.resolve()), recommend))
+            joint: JointChooser | None = None
+            if args.share_checkpoint_encoder:
+                first, second = models
+                shared_scores = first.bind_shared_object_scorer(second)
+
+                def recommend_together(
+                    state: MemoryControlState, actions: list[MemoryAction],
+                ) -> list[str]:
+                    rules_action = fixed.choose(state, actions)
+                    scored = shared_scores(control_input(state, actions))
+                    return [
+                        rules_action,
+                        *(max(zip(item.scores, item.action_ids, strict=True))[1]
+                          for item in scored),
+                    ]
+
+                joint = recommend_together
             result = prepare_outcomes(dataset, args.run_id, limit=args.state_limit,
                                       state_ids=args.state_id, explicit_actions=args.action,
                                       seed=args.seed, suggestions=suggestions,
                                       policy_pool=args.policy_pool, dev_plan=args.dev_plan,
-                                      branch_workers=args.branch_workers)
+                                      branch_workers=args.branch_workers, joint_suggestions=joint)
+            result["recommendation_encoder_forwards"] = [
+                model.counters["forwards"] for model in models
+            ]
         elif command == "execute-outcomes":
             result = execute_outcomes(dataset, args.run_id, limit=args.limit)
         else:
@@ -521,6 +555,8 @@ def main() -> int:
     prepare_outcome.add_argument("--state-id", type=int, action="append", default=[])
     prepare_outcome.add_argument("--action", action="append", default=[])
     prepare_outcome.add_argument("--checkpoint", type=Path, action="append", default=[])
+    prepare_outcome.add_argument("--share-checkpoint-encoder", action="store_true",
+                                 help="Share the encoding of a matched frozen checkpoint pair")
     prepare_outcome.add_argument("--policy-pool")
     prepare_outcome.add_argument("--dev-plan", type=Path,
                                  help="Use the registered DEV cohort for held branch evaluation")

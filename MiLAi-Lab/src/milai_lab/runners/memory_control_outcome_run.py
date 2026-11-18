@@ -58,6 +58,7 @@ STATE_SUBSAMPLING = (
 METERING = "native_vllm_shared_ledger_v1"
 SAMPLER = "native_group_source_caps_balanced_strata_v3"
 Chooser = Callable[[MemoryControlState, list[MemoryAction]], str]
+JointChooser = Callable[[MemoryControlState, list[MemoryAction]], list[str]]
 BranchJob = tuple[int, str, int]
 OutcomeRow = tuple[int | str | bytes, ...]
 PreparedBatch = tuple[list[OutcomeRow], Counter[str]]
@@ -243,11 +244,17 @@ def choose_actions(
     actions: list[MemoryAction],
     suggestions: list[Chooser],
     rng: random.Random,
+    *,
+    joint_suggestions: JointChooser | None = None,
 ) -> list[str]:
     viable = session.feasible_menu(actions)
     bounds = {a.id: a for a in viable}
     reads = [a for a in viable if a.kind == "READ"]
-    chosen = dict.fromkeys(["handoff", *(policy(session.state, viable) for policy in suggestions)])
+    recommended = (
+        joint_suggestions(session.state, viable) if joint_suggestions is not None
+        else [policy(session.state, viable) for policy in suggestions]
+    )
+    chosen = dict.fromkeys(["handoff", *recommended])
     context_pairs = [
         (a.id, f"read_{a.parameters['index']}")
         for a in reads
@@ -509,6 +516,7 @@ def prepare_outcomes(
     policy_pool: str | None = None,
     dev_plan: Path | None = None,
     branch_workers: int = 1,
+    joint_suggestions: JointChooser | None = None,
 ) -> dict[str, Any]:
     if dataset.host is None or dataset.revision is None or limit <= 0:
         raise ValueError("Use the revised dataset for actual Reader outcomes")
@@ -531,6 +539,8 @@ def prepare_outcomes(
                         else "policy" if policy_pool else "core"),
         "policy_pool": policy_pool,
     }
+    if joint_suggestions is not None:
+        declaration["recommendation_encoding"] = "shared_frozen_encoder_v1"
     with closing(connect(dataset.path, writable=True)) as db, ExitStack() as workers:
         if dev_plan:
             population = read_json(dev_plan)
@@ -616,7 +626,9 @@ def prepare_outcomes(
                 preflight: PreflightCache = {}
                 session.shared_preflight = preflight
                 baseline = session.online(session.feasible_menu(actions))
-                branches = explicit_actions or choose_actions(session, actions, choosers, rng)
+                branches = explicit_actions or choose_actions(
+                    session, actions, choosers, rng, joint_suggestions=joint_suggestions
+                )
                 if not set(branches) <= {a.id for a in actions} or len(set(branches)) != len(
                     branches
                 ):
