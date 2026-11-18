@@ -1,4 +1,43 @@
-# CURRENT 2026-11-18: memory compute v2 ACTIVE; D02basecachemeasured/S22defaultOFF
+# CURRENT 2026-11-18: memory compute v2 ACTIVE; P05naturalclosed/P06preflight/C12costsignal
+
+LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v46.json.
+P05S03inherited4releasedTRAINQASPERpapers actual8firsts CLOSED0fail0unknown28440tokens/U0.
+186Sources reopenedbodies/roles/origins/rev1 equal onownedreadonlybackups; allS03packet/wires
+unchanged. LegacyASCIIbodycost correctedUTF8only. Firstprepv1string-mapTypeErrorkept, v2fixed.
+FourSourcecriteria+8blindmapping frozenbeforeReader, all8semanticjudgments frozenbefore native/
+methodtables. EachR2/R3=3T0F1U(Bprojectaware,noqualifiedindependentgradeupgrade), notwinner.
+Unknowns M005training/evaluationexplicitness andM007interlingua/success/adequacy qualifications
+kept, notFalseorpost-score repaired. NativeanswerfieldF1 .238095R2/.180556R3separate, nofake
+paragraphEvidenceF1. R3material7045vs4182(+68.46%); actualHTTPinput8553vs5690/output6444vs7753/
+total14997vs13443. NewcallwallsumR3 43.023vsR2 51.101s(counterexamplekept, notendtoend/latencywin).
+All4pairedunknownassignmentmeanbounds[-.25,.25], notformalCI or8independentsources. R3dropsone
+R2Sourcein2roots after4READfailseach; oldbeforeonlyinventorywall differs. Notpureprecision.
+P06S22 finite16actualcopiedbranch executions from4EXACTcommon beforestates/4roots:2legal
+same-indexREADprecision pairs/state, firstretrievalpair+uniformrandompair(50%quota)=8pairs.
+SEARCHprefix0consumed, READ1/HANDOFF2with8totalbudget; fullmenubindings/role/revisionchecked,
+R2/R3IDs/displaytargetsremainactual. All16READopened, all8wiresdifferent,182..765materialtokens.
+NoReader/qualitylabels/fitsadmittedforP06; do notcall8pairs8uniquestates orscalephysicaldifferences.
+C12CPUall256C06states64roots:compiledcostprefs0;164native&B-agreedsuccessdifferent-material
+pairs in99states41roots. Raw/literal savedusabletop hascheaperobservedagreed-successalternative
+in33states23roots. Diagnostic only, notdeploymentoracle savings/qualitycalibration upgrade.
+33bothnewHTTPpairs lowerUTF8material->lowerinputall33, butlowertotalReaderusageonly17/33;
+outputcoststochastic, reusedmissingcostnot0. Next separatelybounded actualmaterialcostaux
+supervision withqualityrank/value/masks/exposurecontrols; do notreuseoldlegacyASCIIprefs or
+trainFALSE-cheap pairs. NoC12fits orroutechangeadmitted, defaultquality-priorityAUNCHANGED.
+D02oldmetadata1652663+P05Reader1721111 TERMINAL/actualabsent; D02last1 andP05prep4costsettled/
+readback; native8 compute1.514CPU/94.873wallauto once,28440known/chargedtokens/U0.
+New8P05/P06/C12localclosedscopes alsoSETTLEDONCE/readback; noownlivejobs.
+Failedprepv1fullCPU/wall/manualreview/import/serverGPU/wholeIO/energy/money UNKNOWNnot0;
+oldC06UNKNOWN/9295reservation retained; originalledgeronly/no busyload/secondledger/counterreset.
+S22implementation/checkpoints/oldtrainingdata unchanged; no repeatedpackage testsfordoc/artifact
+analysis. PrivateSource/controls/reviews/answers/DBsignored. No protectedbodies/Product/Archive/
+permissions/default/push/merge changes. SHA/fingerprintsOFF. Fullgoal/G1/G2/G3 INCOMPLETE;
+P/D reliableheterogeneousoutcomes/D1yieldgates/2ownstate+oldpoolreplay/3seeds/nestedrepresentations/
+power/newCONFIRM/transfer/finaldelivery remain; nofinishatpilot/data/module/cacheengineering.
+
+The following v45 and earlier blocks are historical observations.
+
+# PREVIOUS 2026-11-18: memory compute v2 ACTIVE; D02basecachemeasured/S22defaultOFF
 
 LATEST authority: /data/milai-experiments/20261117-memory-compute-control/current-state-v45.json.
 D02fixed8C11actualM1trajectories literalinput audit exactlyreproduced1933texts/549946tokens/

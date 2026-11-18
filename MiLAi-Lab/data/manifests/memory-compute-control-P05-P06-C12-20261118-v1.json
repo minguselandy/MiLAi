@@ -1,0 +1,183 @@
+{
+  "schema": "memory_compute_control_progress_v1",
+  "status": "ACTIVE_INCOMPLETE",
+  "artifact_root": "/data/milai-experiments/20261117-memory-compute-control",
+  "latest_state": "current-state-v46.json",
+  "previous_manifest": "memory-compute-control-D02-base-encoding-cache-20261118-v1.json",
+  "source": "S22/b84e00e7",
+  "implementation_source_changed": false,
+  "rollback_commit": "aa865cea",
+  "P05": {
+    "source": "S03 saved complete policies, S22/b84e00e7 first-only runtime",
+    "roots": 4,
+    "positions": 8,
+    "new_firsts": 8,
+    "new_known_tokens": 28440,
+    "failed_firsts": 0,
+    "unknown_executions": 0,
+    "new_unknown_usage_delta": 0,
+    "frozen_B_summary": {
+      "fixed_r2_4": {
+        "true": 3,
+        "false": 0,
+        "unknown": 1
+      },
+      "fixed_context4": {
+        "true": 3,
+        "false": 0,
+        "unknown": 1
+      }
+    },
+    "native_literal_answer_F1": {
+      "fixed_r2_4": 0.23809523809523808,
+      "fixed_context4": 0.18055555555555555
+    },
+    "all4_paired_unknown_assignment_mean_delta_bounds_R3_minus_R2": [
+      -0.25,
+      0.25
+    ],
+    "resources": {
+      "fixed_r2_4": {
+        "material_UTF8_tokens": 4182,
+        "new_Reader_input_tokens": 5690,
+        "new_Reader_output_tokens_including_reasoning": 7753,
+        "sum_four_actual_new_Reader_call_wall_seconds_not_endtoend": 51.10051322542131,
+        "new_Reader_total_tokens": 13443
+      },
+      "fixed_context4": {
+        "material_UTF8_tokens": 7045,
+        "new_Reader_input_tokens": 8553,
+        "new_Reader_output_tokens_including_reasoning": 6444,
+        "sum_four_actual_new_Reader_call_wall_seconds_not_endtoend": 43.022932707332075,
+        "new_Reader_total_tokens": 14997
+      }
+    },
+    "R3_material_increase_fraction": 0.6846006695361071,
+    "R3_new_Reader_total_token_increase_fraction": 0.11559919660789997,
+    "before_pairing_limit": "All4initial menus match, source/task state matches except originalmeasured source_inventory_wall_seconds. Originalvalueskept; fixedpoliciesignoretimer. Not exactly samebefore or a pure single upgrade.",
+    "trajectory_limit": "R3drops an R2 source in2/4roots after4failedREADs per affectedtrajectory; fullpolicy mixes precision and later target choice, not monotone information addition.",
+    "semantic_limit": "B project-aware, not independently qualified naturaltruth calibration. Two uncertain cases concern training/evaluation wording and hypothesis-to-fact/translation adequacy qualification; neither coerced false nor repaired aftermethodtable. NativeF1lexical matches are not semantic completion labels. No evidenceparagraphF1."
+  },
+  "P06": {
+    "source_roots": 4,
+    "unique_actual_common_before_states": 4,
+    "same_object_R2_R3_pairs": 8,
+    "actual_independent_branch_executions": 16,
+    "uniform_random_object_pairs": 4,
+    "wire_different_pairs": 8,
+    "all_reads_successful": true,
+    "material_UTF8_range": [
+      182,
+      765
+    ],
+    "Reader_calls": 0,
+    "current_cycle_extra_Reader_admission": false,
+    "scope": "READ precision intervention then HANDOFF after one commonSEARCH; samecandidateindex but actual IDs/displaytargets retained.4states/4roots, not8independentstates. Physicaldifference only, noqualitylabels."
+  },
+  "C12": {
+    "states": 256,
+    "roots": 64,
+    "old_cost_preferences_total": 0,
+    "agreed_success_cost_differing_pairs": 164,
+    "states_with_signal": 99,
+    "roots_with_signal": 41
+  },
+  "C12_warm_top_counts": {
+    "dual_raw_bound_prior": {
+      "states_with_observed_cheaper_agreed_success": 33,
+      "roots": 23,
+      "total_material_reduction_over_correlated_states_not_deployment_savings": 13892
+    },
+    "literal_offered_prior": {
+      "states_with_observed_cheaper_agreed_success": 33,
+      "roots": 23,
+      "total_material_reduction_over_correlated_states_not_deployment_savings": 13892
+    }
+  },
+  "C12_HTTP_material_check": {
+    "both_new_known_input_pairs": 33,
+    "lower_material_also_lower_HTTP_input_pairs": 33,
+    "both_new_known_total_token_pairs": 33,
+    "lower_material_also_lower_HTTP_total_pairs": 17,
+    "scope": "Only bothactuallynew measuredcalls; reusedmissingHTTPcost neverzero. Materialaxis does not guarantee lowergeneratedtokens/totalReadercost, letalonecompletecontroller/lifecycle latency."
+  },
+  "artifacts": {
+    "P05_card": "P05-natural-context-readout-card-v1.json",
+    "P05_prepared": "P05-natural-QASPER4-prepared-v2",
+    "P05_source_criteria": "P05-source-criteria-before-firsts-v1.json",
+    "P05_before_pairing": "P05-original-before-pairing-audit-v1.json",
+    "P05_material_decomposition": "P05-pre-output-policy-material-decomposition-v1.json",
+    "P05_firsts": "P05-natural-QASPER4-firsts-v1",
+    "P05_blind_inputs": "P05-blind-first-review-inputs-v1.json",
+    "P05_frozen_reviews": "P05-blind-reviews-frozen-v1.json",
+    "P05_scored": "P05-natural-context-scored-v1.json",
+    "P05_closed": "P05-natural-context-closed-review-v1.json",
+    "P05_metric_protocol": "P05-bind-and-score-firsts-v1.py",
+    "P05_preparation_failure": "P05-preparation-v1-failure-note.json",
+    "official_evaluator": "P05-official-qasper-evaluator-v1.py",
+    "official_source": "P05-official-evaluator-source-v1.json",
+    "P06_card": "P06-same-object-upgrade-card-v1.json",
+    "P06_prepared": "P06-QASPER4-same-object-upgrade-preflight-v1",
+    "P06_review": "P06-same-object-preflight-review-v1.json",
+    "C12_card": "C12-success-tie-cost-signal-card-v1.json",
+    "C12_audit": "C12-success-tie-cost-signal-audit-v1.json"
+  },
+  "costs": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "D02_last_metadata_scope_receipt": "D02-after-time-scope-clarification-cost-v1.json",
+    "D02_last_metadata_status": "SETTLED_ONCE_AND_READ_BACK",
+    "P05_preparation4_receipt": "P05-before-eight-firsts-cost-v1.json",
+    "P05_preparation4_status": "SETTLED_ONCE_AND_READ_BACK",
+    "P05_native_phase": "camc_P05_QASPER4_fixed_R2_R3_firsts_v1",
+    "P05_native_auto_compute": {
+      "cpu_seconds": 1.5138117930000003,
+      "wall_seconds": 94.87348719127476,
+      "runs": 1
+    },
+    "P05_native_known_and_charged_tokens": 28440,
+    "P05_new_unknown_usage_delta": 0,
+    "new_local8_status": "TERMINAL_COSTS_SETTLED_NO_CLIENT_CALLS",
+    "new_local8_state": "P05-after-cycle-cost-state-v1.json",
+    "new_local8_receipt": "P05-after-cycle-cost-v1.json",
+    "no_native_or_nested_P06_16branch_rebill": true,
+    "old_S03_preparation_not_rebilled": true,
+    "C06_old_unknown_usage_delta": 1,
+    "C06_unknown_reservation_retained": 9295,
+    "failedpreparation_fullCPU_wall_manualreview_imports_serverGPU_wholeIO_energy_money": "UNKNOWN_NOT_ZERO",
+    "no_busy_budget_load_newledger_or_token_counter_reset": true
+  },
+  "live_jobs": [],
+  "validation": {
+    "actual_Source_body_role_origin_revision_checks": 186,
+    "P05_actual_complete_policies_inherited": 8,
+    "P05_full_task_wire_first_binding": 8,
+    "P05_all_semantic_grades_frozen_before_native_or_method_scores": true,
+    "P06_actual_common_before_states": 4,
+    "P06_independent_branch_executions": 16,
+    "P06_uniform_random_pair_quota": 0.5,
+    "P06_prefix_budget_not_reset": true,
+    "C12_all256rows_native_reviewed_inputs_masks_and_costs_bound": true,
+    "official_evaluator": "PrimaryconnectedGitHub fetch_file+content inspected, fullfilebytes equal priorinspectedpubliccopy; returnedSHAmetadata ignored/noSHAvalidation.",
+    "no_new_implementation_source_or_repeated_tests": true,
+    "private_raw_sources_controls_answers_reviews_DBs_ignored": true
+  },
+  "next_action": "Do not expandP05/P06 Readercalls or fitmaterial-only contrasts under thesecards. Develop a separately bounded success-tie cost auxiliary objective from actualobserved UTF8 material costs, only on native&B-agreed success, while retainingqualityrank/value/unknownmasks/usable-start and equal-exposure weak controls. Keep defaultrouteA; only an explicitlater singleprotocolrevision before newconfirmation may select routeB, and it must assess qualitynoninferiority plus full costs with the strong base-cache/simplebaselines. No oldnegative relabel or metricwinner switch. Next define exact masked/source-balanced cost-rank component and numericalwindow checks, then a NEWfiniteM0/M1 matched-exposure design(usable trainedstarts, weak/quality-only/quality+cost), not moreC07/C11updates. Include cheap fixedread quotas/semanticcontrols withsame cachepermissions. Costaxis isactualmaterial only, notpromisedtotalusage/latency. P06Reader remainsunadmitted; 4states/4roots not8independentstates. Keep reliability/ownstate2rounds/replay/3seeds/power/newconfirm/transfer/full delivery. Revalidate onlycostwait1830355(actualR40B1648312), neverrestartoldP05Reader1721111 orD02wait1652663: bothterminal.",
+  "remaining_full_goal": [
+    "Reliable outcome calibration and honest unknown/failure treatment before D1 scaling; C06 complete256states64roots remains B provisional, J02fixed-code ability gate failed.",
+    "Heterogeneous general Source/partialView/fullView/refresh tradeoffs, strong cheap rule/query controls, usable explicitV3M0/M1 starts and actual matched outcome training; P03rawSource cheaper counterexample retained.",
+    "P precision and D revision/refresh contribution under same actual information and complete costs; controlled projection/enum proof alone is insufficient.",
+    "Two actual own-state label/train/deploy rounds, equal-exposure old-pool controls and replay; old488own observations are unlabelled, not round1.",
+    "Finalcandidate three training seeds, frozen strong simple baselines, source/group power, genuinely new independent confirmation firsts.",
+    "SecondReader/external task/budget/scale transfer and complete method/model/config/data/reproduction/cost/negative-result deliverables.",
+    "Conditional F/A/X only after measured bottleneck and separate bounded admission.",
+    "Plan representation/capacity work remains: trained nested64/128/256-dimensional and1/2/4-group representations with fullprecision reference, actual64/128/256+candidate pools and budgets; no arbitrary untrained truncation claim. D1 targets500–1000naturalroots and>=2k reliable comparisonstates are yield-gated, not satisfied by correlated pairs."
+  ],
+  "G1_G2_G3": "NOT_ESTABLISHED",
+  "default_route": "A_unchanged",
+  "protected_bodies_opened": false,
+  "sha_validation": false,
+  "replacement_fingerprints": false,
+  "public_Product_Archive_defaults_permissions_changed": false,
+  "push_or_merge": false,
+  "remote_checked": false
+}
