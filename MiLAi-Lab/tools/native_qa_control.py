@@ -3,11 +3,12 @@ from __future__ import annotations
 
 import copy
 import json
+import math
 import os
 import time
 from collections.abc import Callable
 from contextlib import nullcontext
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from functools import partial
 from itertools import combinations
 from pathlib import Path
@@ -213,7 +214,67 @@ def historical_policy(model: Any) -> MemoryPolicy:
                             "shared_actions")
 
 
+def captured_control_start(
+    root: Path, history_id: str, request_id: str, event_id: str, query: str, *,
+    policy: str = "rules4", decision_index: int = 0,
+) -> tuple[dict[str, Any], int, list[dict[str, Any]]]:
+    """Restore an actual before, retaining consumed prefix steps and task identity.
+
+    Prefix measurements belong to the earlier captured execution. They are not
+    new latency or additional policy calls for the resumed condition.
+    """
+    if type(decision_index) is not int or decision_index < 0:
+        raise ValueError("Initial decision index must be a nonnegative integer")
+    snapshots = read_jsonl(root / "banks" / history_id /
+                          f"{request_id}-{policy}-checkpoints.jsonl")
+    if decision_index >= len(snapshots):
+        raise ValueError("Requested captured initial decision is unavailable")
+    initial = snapshots[decision_index]
+    decision = initial["decision"]
+    if initial["event_id"] != event_id or decision["before"]["task"]["request"] != query:
+        raise ValueError("Captured initial observation belongs to another task")
+    step = decision["step"]
+    if type(step) is not int or step < 0:
+        raise ValueError("Captured initial decision has an invalid logical step")
+    if not step:
+        return initial, 0, []
+    trajectory_path = root / "trajectories.json"
+    matches = [t for t in read_json(trajectory_path)
+               if t["event_id"] == event_id and t["policy"] == policy]
+    if len(matches) != 1:
+        raise ValueError("Captured prefix requires one original task/policy trajectory")
+    prefix = copy.deepcopy(matches[0]["trace"]["trace"][:step])
+    if len(prefix) != step or [e["step"] for e in prefix] != list(range(step)):
+        raise ValueError("Captured prefix does not cover every consumed control step")
+    if any(e["before"]["task"] != decision["before"]["task"] for e in prefix):
+        raise ValueError("Captured prefix belongs to a different task contract")
+    last = prefix[-1]
+    actions = [a for a in last["actions"] if a["id"] == last["selected"]]
+    if len(actions) != 1 or "result" not in last or decision["before"]["last_result"] != {
+        "action": actions[0], **last["result"]
+    }:
+        raise ValueError("Captured before does not follow the recorded prefix result")
+    for event in prefix:
+        event["captured_selection_mode"] = event["selection_mode"]
+        event["selection_mode"] = "captured_common_prefix"
+        event["inherited_prefix"] = True
+        event["prefix_source"] = str(trajectory_path)
+        event["measurement_scope"] = "Original captured prefix; not current invocation latency"
+    return initial, step, prefix
+
+
 def prepare_packets(args: Any) -> None:
+    initial_index = getattr(args, "initial_decision_index", 0)
+    if type(initial_index) is not int or initial_index < 0:
+        raise ValueError("Initial decision index must be a nonnegative integer")
+    if initial_index and args.initial_states_from is None:
+        raise ValueError("A later initial decision requires a captured common prefix")
+    prior_margin = getattr(args, "inference_prior_margin", None)
+    if prior_margin is not None and (
+        type(prior_margin) not in {int, float} or not math.isfinite(prior_margin)
+        or prior_margin < 0 or not args.checkpoint
+    ):
+        raise ValueError("Prior override requires checkpoints and a finite nonnegative value")
     import torch  # type: ignore[import-not-found]
 
     torch.set_num_threads(4)
@@ -232,6 +293,16 @@ def prepare_packets(args: Any) -> None:
                  "rules4": lambda: RulesMemoryPolicy(reads=4), "empty": EmptyPolicy}
     models = {name: SmallControlModel.load(Path(path), device=args.device)
               for name, path in args.checkpoint}
+    prior_overrides = {}
+    if prior_margin is not None:
+        for name, model in models.items():
+            stored = asdict(model.config)
+            if model.config.prior_policy == "none":
+                raise ValueError("Cannot override a model without a declared policy prior")
+            model.config = replace(model.config, prior_margin=float(prior_margin))
+            prior_overrides[name] = {"stored_config": stored,
+                                     "effective_config": asdict(model.config),
+                                     "weights_changed": False}
     historical: dict[str, Any] = {}
     historical_configs = {}
     if args.historical_checkpoint:
@@ -265,6 +336,9 @@ def prepare_packets(args: Any) -> None:
         "reused_source_banks": str(args.reuse_banks) if args.reuse_banks else None,
         "initial_states_from": str(args.initial_states_from) if args.initial_states_from else None,
         "initial_policy": getattr(args, "initial_policy", "rules4"),
+        **({"initial_decision_index": initial_index, "captured_prefix_steps_consumed": True,
+            "prefix_measurements_inherited_not_current_latency": True} if initial_index else {}),
+        **({"inference_prior_overrides": prior_overrides} if prior_overrides else {}),
         "execution_contract": "stable_material_indices_search_scope_sync_v2",
         "material_formation": (("whole_paragraph_v1_R2_adjacent_turns_R3"
                                 if getattr(args, "evidence_context_turn_radius", 0)
@@ -306,13 +380,22 @@ def prepare_packets(args: Any) -> None:
                         profile = (ComputeProfile() if getattr(args, "profile_retrieval", False)
                                    else None)
                         retrieval_tick, retrieval_cpu = time.perf_counter(), time.process_time()
-                        initial = (read_jsonl(args.initial_states_from / "banks" / history["id"] /
-                            (f"{request['id']}-{getattr(args, 'initial_policy', 'rules4')}"
-                             "-checkpoints.jsonl"))[0]
-                            if args.initial_states_from else None)
-                        if initial is not None and initial["decision"]["before"]["task"][
-                                "request"] != request["query"]:
-                            raise ValueError("Captured initial observation belongs to another task")
+                        initial, start_step, prefix = (captured_control_start(
+                            args.initial_states_from, history["id"], request["id"], key,
+                            request["query"], policy=getattr(args, "initial_policy", "rules4"),
+                            decision_index=initial_index) if args.initial_states_from
+                            else (None, 0, []))
+                        if start_step and start_step >= args.control_steps:
+                            raise ValueError("Captured prefix leaves no policy control budget")
+                        if initial is not None:
+                            task = initial["decision"]["before"]["task"]
+                            if (task.get("retrieval_request") != request["retrieval_request"]
+                                    or task.get("query_time") != "2026-11-17"
+                                    or task.get("calendar_context") != "Asia/Shanghai"):
+                                raise ValueError("Captured task contract differs from the request")
+                        if start_step:
+                            run.setdefault("captured_prefix_steps_by_task", {})[key] = start_step
+                            run["prefix_measurements_inherited_not_current_latency"] = True
                         with profile.span("source_inventory") if profile else nullcontext():
                             state, operations = environment(service, request, capacity,
                                 args.material_tokens, state=MemoryControlState(**copy.deepcopy(
@@ -350,7 +433,8 @@ def prepare_packets(args: Any) -> None:
                                     stream.write(json.dumps(saved, ensure_ascii=False) + "\n")
 
                         trace = run_memory_control(state, policy, operations,
-                            max_steps=args.control_steps, record=capture, profile=profile)
+                            max_steps=args.control_steps, record=capture, profile=profile,
+                            start_step=start_step, prefix_trace=prefix)
                         with profile.span("evidence_packaging") if profile else nullcontext():
                             packet, delivered = actual_packet(operations, mapping)
                         with profile.span("reader_request_capacity") if profile else nullcontext():

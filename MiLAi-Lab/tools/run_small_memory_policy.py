@@ -895,6 +895,10 @@ def main() -> None:
                                 help="Same captured cold rules4 state/checkpoint for every method")
     native_collect.add_argument("--initial-policy", default="rules4",
                                 help="Named captured method supplying the actual common cold state")
+    native_collect.add_argument("--initial-decision-index", type=int, default=0,
+                                help="Resume this captured decision; consumed prefix uses budget")
+    native_collect.add_argument("--inference-prior-margin", type=float,
+                                help="Inference prior override; saved weights unchanged")
     native_score = sub.add_parser("native-score")
     native_score.add_argument("--readouts", type=Path, required=True)
     native_score.add_argument("--controls", type=Path, required=True)
