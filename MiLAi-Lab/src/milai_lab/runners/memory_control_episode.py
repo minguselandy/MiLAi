@@ -155,13 +155,16 @@ class PolicyMenu:
         ):
             return handoff.id
         options = actions
-        if self.precision != "learned":
-            options = [
-                a
-                for a in actions
-                if a.kind != "READ"
-                or bool(a.parameters.get("expand_context")) == (self.precision == "R3")
-            ]
+        if self.precision == "R2":
+            options = [a for a in actions if a.kind != "READ"
+                       or not a.parameters.get("expand_context")]
+        elif self.precision == "R3":
+            expandable = {
+                a.parameters.get("index") for a in actions
+                if a.kind == "READ" and a.parameters.get("expand_context")
+            }
+            options = [a for a in actions if a.kind != "READ" or a.parameters.get("expand_context")
+                       or a.parameters.get("index") not in expandable]
         if self.read_limit is not None:
             # A weakly supervised model ranks only available reads under the public stop rule.
             options = [a for a in options if a.kind == "READ"]

@@ -10,12 +10,14 @@ from collections import Counter, defaultdict, deque
 from collections.abc import Callable, Iterator
 from contextlib import closing
 from dataclasses import asdict
+from pathlib import Path
 from typing import Any
 
 import httpx
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
 from milai_lab.datasets.memory_control_reader_task import reader_task
+from milai_lab.datasets.memory_control_report import read_json
 from milai_lab.datasets.memory_control_store import connect, dumps, get_meta, packed, unpack
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, http_budget_scope
 from milai_lab.methods.dataset_control_states import CONTINUATION, task_annotation
@@ -380,6 +382,36 @@ def prepare_one(
     return ("prepared" if first_ok and plan.feasible is True else "action_failed", data, new_costs)
 
 
+def cold_dev_states(
+    db: sqlite3.Connection, dataset: MemoryControlDataset, population: dict[str, Any],
+) -> tuple[list[int], list[int]]:
+    if population.get("role") != "dev" or population.get("dataset_run_id") != dataset.run_id:
+        raise ValueError("Readout validation requires the registered DEV population")
+    selected: list[int] = []
+    missing: list[int] = []
+    for task in population["tasks"]:
+        tid = task["task_id"]
+        row = db.execute("""
+            SELECT t.id,t.dataset,t.native_group,s.id AS state_id
+            FROM experiment_tasks t LEFT JOIN states s ON s.task_id=t.id AND s.prefix=?
+            AND EXISTS (
+                SELECT 1 FROM state_variants v WHERE v.state_id=s.id AND v.material_budget=?
+            )
+            WHERE t.id=? AND t.experiment_role='dev'
+            ORDER BY s.id
+        """, (packed(["search"]), population["material_budget"], tid)).fetchall()
+        if len(row) != 1 or any(row[0][key] != task[key] for key in ("dataset", "native_group")):
+            raise ValueError(f"Registered DEV identity or unique SEARCH state changed for {tid}")
+        sid = row[0]["state_id"]
+        if sid is None:
+            missing.append(tid)
+        else:
+            selected.append(sid)
+    if not selected or len(set(selected)) != len(selected):
+        raise ValueError("Readout validation needs distinct, available DEV states")
+    return selected, missing
+
+
 def prepare_outcomes(
     dataset: MemoryControlDataset,
     run_id: str,
@@ -390,11 +422,15 @@ def prepare_outcomes(
     seed: int,
     suggestions: list[tuple[str, Chooser]],
     policy_pool: str | None = None,
+    dev_plan: Path | None = None,
 ) -> dict[str, Any]:
-    if dataset.host is None or dataset.revision is None:
+    if dataset.host is None or dataset.revision is None or limit <= 0:
         raise ValueError("Use the revised dataset for actual Reader outcomes")
+    if dev_plan and (state_ids or explicit_actions or policy_pool):
+        raise ValueError("DEV outcome evaluation uses only its declared cold SEARCH states")
+    role = "dev" if dev_plan else "train"
     declaration = {
-        "role": "train",
+        "role": role,
         "comparison_protocol": comparison_protocol(dataset),
         "observation_protocol": dataset.observation_protocol,
         "selection_seed": seed,
@@ -402,10 +438,19 @@ def prepare_outcomes(
         "dataset_run_id": dataset.run_id,
         "sealed": False,
         "recommendations": [name for name, _ in suggestions],
-        "sample_kind": "explicit_diagnostic" if state_ids else "policy" if policy_pool else "core",
+        "sample_kind": ("dev" if dev_plan else "explicit_diagnostic" if state_ids
+                        else "policy" if policy_pool else "core"),
         "policy_pool": policy_pool,
     }
     with closing(connect(dataset.path, writable=True)) as db:
+        if dev_plan:
+            population = read_json(dev_plan)
+            dev_states, missing = cold_dev_states(db, dataset, population)
+            declaration.update(
+                dev_plan=str(dev_plan.resolve()),
+                registered_dev_states=dev_states,
+                unavailable_dev_tasks=missing,
+            )
         with db:
             previous = db.execute(
                 "SELECT config FROM outcome_runs WHERE run_id=?", (run_id,)
@@ -422,7 +467,9 @@ def prepare_outcomes(
                 "SELECT DISTINCT state_id FROM action_outcomes WHERE run_id=?", (run_id,)
             )
         }
-        if policy_pool:
+        if dev_plan:
+            selected = [(sid, "dev_cold_search") for sid in dev_states if sid not in used][:limit]
+        elif policy_pool:
             pool_ids = [
                 (sid, source)
                 for sid, source in db.execute(
@@ -446,8 +493,8 @@ def prepare_outcomes(
         for sid, stratum in selected:
             with closing(connect(dataset.path)) as db_read:
                 state, session, actions = dataset.replay(db_read, sid)
-                if state["experiment_role"] != "train":
-                    raise ValueError("Core outcome preparation permits only TRAIN groups")
+                if state["experiment_role"] != role:
+                    raise ValueError(f"Outcome preparation requires the registered {role} role")
                 session.shared_preflight = {}
                 baseline = session.online(session.feasible_menu(actions))
                 branches = explicit_actions or choose_actions(
@@ -698,6 +745,9 @@ def score_outcomes(
         declaration = json.loads(declared[0])
         if declaration["comparison_protocol"] != comparison_protocol(dataset):
             raise ValueError("Scoring requires the original Reader task codec")
+        role = declaration.get("role")
+        if role not in {"train", "dev"}:
+            raise ValueError("Only TRAIN and DEV branch scoring is available")
         rows = db.execute(
             """
             SELECT o.state_id,o.action_id,o.repeat_index,o.task_result,
@@ -705,9 +755,9 @@ def score_outcomes(
             FROM action_outcomes o JOIN states s ON s.id=o.state_id
             JOIN experiment_tasks t ON t.id=s.task_id
             WHERE o.run_id=? AND o.execution_status='reader_completed'
-                  AND t.experiment_role='train' ORDER BY t.id,o.rowid
+                  AND t.experiment_role=? ORDER BY t.id,o.rowid
         """,
-            (run_id,),
+            (run_id, role),
         ).fetchall()
         last_task = None
         for branch in rows:
@@ -788,6 +838,12 @@ def score_outcomes(
                 raise ValueError("Outcome run still contains unissued or unscored branches")
             if not statuses.get("ingested"):
                 raise ValueError("No actual scored branches in outcome run")
+            if role == "dev" and {
+                row[0] for row in db.execute(
+                    "SELECT DISTINCT state_id FROM action_outcomes WHERE run_id=?", (run_id,)
+                )
+            } != set(declaration["registered_dev_states"]):
+                raise ValueError("DEV outcome sealing requires every available registered state")
             declaration["sealed"] = True
             with db:
                 db.execute(

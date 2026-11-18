@@ -38,6 +38,7 @@ class MemoryControlDataset:
     def __init__(
         self, path: Path, *, require_complete: bool = True,
         observation_protocol: str | None = None, outcome_runs: tuple[str, ...] = (),
+        outcome_role: str = "train",
     ) -> None:
         self.path = path / DB_NAME if path.is_dir() else path
         with closing(connect(self.path)) as db:
@@ -66,8 +67,13 @@ class MemoryControlDataset:
                 raise ValueError("Actual branch supervision requires the revised dataset")
             if len(set(outcome_runs)) != len(outcome_runs):
                 raise ValueError("Select each outcome run only once")
+            if outcome_role not in {"train", "dev"} or (outcome_role == "dev" and not outcome_runs):
+                raise ValueError("DEV outcome evaluation needs separate declared outcome runs")
             self.outcome_runs = outcome_runs
-            self.outcome_declarations = run_protocols(db, outcome_runs, self.observation_protocol)
+            self.outcome_role = outcome_role
+            self.outcome_declarations = run_protocols(
+                db, outcome_runs, self.observation_protocol, role=outcome_role
+            )
         self.reader = tokenize_path(self.tokenizers["reader"]["path"])
         self.material_limit = self.config["views"]["reader_material_tokens"]
         self.host = (DatasetReader(Path(self.config["views"]["reader_config"]))
@@ -110,6 +116,8 @@ class MemoryControlDataset:
         assert self.revision is not None
         outcome_ids = set()
         if self.outcome_runs and trainable:
+            if role != self.outcome_role:
+                return []
             outcome_ids = {s for s, run in db.execute("""
                 SELECT DISTINCT state_id,run_id FROM action_outcomes
                 WHERE execution_status='ingested' AND training_quality IS NOT NULL
@@ -263,6 +271,8 @@ class MemoryControlDataset:
                 if ((scope["role"] == "excluded" and not allow_excluded)
                         or (self.revision and scope["role"] not in {"train", "dev"})):
                     raise ValueError("State is outside the permitted supervision roles")
+                if self.outcome_runs and scope["role"] != self.outcome_role:
+                    raise ValueError("State is outside the loaded outcome role")
                 by_root[scope[0]].append(state_id)
             ready = {}
             for root, group in by_root.items():
@@ -382,6 +392,8 @@ class MemoryControlDataset:
                 """, (sid,)).fetchone()
                 if row is None:
                     raise ValueError("Unknown or protected state in feature-linked training batch")
+                if self.outcome_runs and row["experiment_role"] != self.outcome_role:
+                    raise ValueError("State is outside the loaded outcome role")
                 menu = unpack(row["actions"])
                 values = self._feasible_labels(menu, unpack(row["evidence"]),
                                                unpack(row["action_feasibility"]))

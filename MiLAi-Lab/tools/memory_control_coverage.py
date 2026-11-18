@@ -10,13 +10,14 @@ import resource
 import time
 from collections import Counter, defaultdict, deque
 from collections.abc import Iterator
-from contextlib import nullcontext
+from contextlib import closing, nullcontext
 from dataclasses import asdict
 from itertools import groupby, islice
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 from milai_lab.datasets.memory_control_report import write_json
+from milai_lab.datasets.memory_control_store import connect
 from milai_lab.methods.frozen_feature_store import FrozenFeatureStore, batches, prefetch_rows
 from milai_lab.methods.small_control_learning import state_loss, weak_evidence_targets
 from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
@@ -31,8 +32,7 @@ if TYPE_CHECKING:
     from milai_lab.methods.memory_control_dataset import MemoryControlDataset, StateIndex
 
 
-def coverage_batches(index: list[StateIndex], batch: int, seed: int) -> Iterator[list[int]]:
-    rng = random.Random(seed)  # noqa: S311 -- predeclared reproducible coverage
+def _group_order(index: list[StateIndex], rng: random.Random) -> Iterator[StateIndex]:
     groups = defaultdict(list)
     for row in index:
         groups[(row.dataset, row.group)].append(row)
@@ -42,15 +42,69 @@ def coverage_batches(index: list[StateIndex], batch: int, seed: int) -> Iterator
     rng.shuffle(queues)
     ring = deque(queues)
     while ring:
-        window = []
-        for _ in range(batch):
-            if not ring:
-                break
-            group = ring.popleft()
-            window.append(group.pop())
-            if group:
-                ring.append(group)
+        group = ring.popleft()
+        yield group.pop()
+        if group:
+            ring.append(group)
+
+
+def coverage_batches(
+    index: list[StateIndex],
+    batch: int,
+    seed: int,
+    *,
+    policy_ids: set[int] | None = None,
+) -> Iterator[list[int]]:
+    rng = random.Random(seed)  # noqa: S311 -- predeclared reproducible coverage
+    if policy_ids is None:
+        ordered = _group_order(index, rng)
+    else:
+        core = [row for row in index if row.id not in policy_ids]
+        policy = [row for row in index if row.id in policy_ids]
+        if not core or not policy:
+            raise ValueError("Mixed coverage needs both core and policy-reached states")
+        exposures = max(len(core), len(policy))
+
+        def repeated(rows: list[StateIndex]) -> Iterator[StateIndex]:
+            for start in range(0, exposures, len(rows)):
+                yield from islice(_group_order(rows, rng), exposures - start)
+
+        ordered = (
+            row for pair in zip(repeated(core), repeated(policy), strict=True) for row in pair
+        )
+    while window := list(islice(ordered, batch)):
         yield [row.id for row in sorted(window, key=lambda item: item.bucket)]
+
+
+def _policy_pool_ids(dataset: MemoryControlDataset, index: list[StateIndex]) -> set[int]:
+    pools: dict[str, set[int]] = {"core": set(), "policy": set()}
+    with closing(connect(dataset.path)) as db:
+        for run, declaration in zip(
+            dataset.outcome_runs, dataset.outcome_declarations, strict=True
+        ):
+            kind = declaration.get("sample_kind")
+            if kind not in pools:
+                raise ValueError("Mixed coverage requires sealed core and policy outcome runs")
+            pools[kind].update(
+                row[0]
+                for row in db.execute(
+                    """
+                SELECT DISTINCT state_id FROM action_outcomes WHERE run_id=?
+                AND execution_status='ingested' AND training_quality IS NOT NULL
+            """,
+                    (run,),
+                )
+            )
+    core, policy = pools["core"], pools["policy"]
+    if (
+        not core
+        or not policy
+        or core & policy
+        or core | policy != {row.id for row in index}
+        or policy != {row.id for row in index if row.recipe == "policy_reached"}
+    ):
+        raise ValueError("Mixed coverage requires disjoint, eligible core and policy-state pools")
+    return policy
 
 
 def stage_features(
@@ -164,6 +218,32 @@ def offline_evaluation(
                         stats["correct_pairs"] += (
                             delta > 0 if pair["outcome"] == "left" else delta < 0
                         )
+                measured = {
+                    a: v for a, v in sup.get("observed_values", {}).items() if v is not None
+                }
+                if measured:
+                    probs = local.sigmoid().tolist()
+                    stats["observed_values"] += len(measured)
+                    stats["value_error_squared_sum"] += sum(
+                        (probs[i] - measured[action]) ** 2
+                        for i, action in enumerate(action_ids)
+                        if action in measured
+                    )
+                    choice = action_ids[max(range(n), key=local_values.__getitem__)]
+                    stats["choices_with_observed_value"] += choice in measured
+                    if choice in measured:
+                        stats["observed_choice_regret_sum"] += (
+                            max(measured.values()) - measured[choice]
+                        )
+                    for pair in sup.get("success_cost_preferences", []):
+                        delta = (
+                            local_values[action_ids.index(pair["left"])]
+                            - local_values[action_ids.index(pair["right"])]
+                        )
+                        stats["success_cost_pairs"] += 1
+                        stats["correct_success_cost_pairs"] += (
+                            delta > 0 if pair["outcome"] == "left" else delta < 0
+                        )
                 if stream is not None:
                     record = {
                         "sample_id": row["sample_id"],
@@ -181,6 +261,15 @@ def offline_evaluation(
             "weak_average_precision": average_precision(values[source]),
             "known_weak_actions": len(values[source]),
         }
+        if stats["observed_values"]:
+            witnessed = stats["choices_with_observed_value"]
+            result[source].update(
+                observed_value_brier=stats["value_error_squared_sum"] / stats["observed_values"],
+                observed_choice_coverage=witnessed / stats["states"],
+                observed_choice_mean_regret=(
+                    stats["observed_choice_regret_sum"] / witnessed if witnessed else None
+                ),
+            )
     return {
         "by_dataset": result,
         "states": len(index),
@@ -217,9 +306,13 @@ def train_coverage(
     dev = [] if args.skip_offline_dev else dataset.index("dev", trainable=True)
     if not train:
         raise ValueError("No eligible states in the selected supervision")
+    policy_ids = _policy_pool_ids(dataset, train) if args.balance_policy_outcomes else None
+    states_per_epoch = (
+        len(train) if policy_ids is None else 2 * max(len(policy_ids), len(train) - len(policy_ids))
+    )
     if not args.resume:
         args.output.mkdir(parents=True, exist_ok=False)
-    per_epoch = math.ceil(len(train) / args.batch_states)
+    per_epoch = math.ceil(states_per_epoch / args.batch_states)
     total_steps = per_epoch * args.epochs
     limit = min(total_steps, args.steps) if args.steps is not None else total_steps
     if limit <= 0:
@@ -253,6 +346,12 @@ def train_coverage(
         "initialize_from": str(args.initialize_from.resolve()) if args.initialize_from else None,
         "feature_store": str(args.feature_store.resolve()) if args.feature_store else None,
     }
+    if policy_ids is not None:
+        contract.update(
+            sampling="coverage_equal_core_policy_v1",
+            policy_states=sorted(policy_ids),
+            state_exposures_per_epoch=states_per_epoch,
+        )
     model = (
         SmallControlModel.load(args.initialize_from, device=args.device)
         if args.initialize_from is not None
@@ -350,7 +449,9 @@ def train_coverage(
             if count <= 0:
                 break
             offset = max(0, min(count, initial_step - first))
-            schedule = coverage_batches(train, args.batch_states, args.seed + epoch)
+            schedule = coverage_batches(
+                train, args.batch_states, args.seed + epoch, policy_ids=policy_ids
+            )
             for prior in islice(schedule, offset):
                 covered.update(prior)
             for batch_no, (ids, rows, batch_wait) in enumerate(
@@ -462,6 +563,7 @@ def train_coverage(
         groups: Counter[str] = Counter()
         task_seen = defaultdict(set)
         budget_exposure: Counter[int] = Counter()
+        pool_exposures: dict[str, Counter[str]] = defaultdict(Counter)
         for sid, n in covered.items():
             row = index_by_id[sid]
             exposure[row.dataset]["unique_states"] += 1
@@ -470,6 +572,11 @@ def train_coverage(
             groups[f"{row.dataset}/{row.group}"] += n
             task_seen[row.dataset].add(row.task)
             budget_exposure[row.budget] += n
+            if policy_ids is not None:
+                pool = pool_exposures["policy" if sid in policy_ids else "core"]
+                pool["unique_states"] += 1
+                pool["state_exposures"] += n
+                pool["repeat_exposures"] += n - 1
         for source in exposure:
             exposure[source]["unique_tasks"] = len(task_seen[source])
             exposure[source]["independent_groups"] = sum(g.startswith(source + "/") for g in groups)
@@ -479,6 +586,7 @@ def train_coverage(
                 "by_dataset": exposure,
                 "by_group_exposures": groups,
                 "by_budget_exposures": budget_exposure,
+                **({"by_outcome_pool": pool_exposures} if policy_ids is not None else {}),
                 "full_epochs": limit // per_epoch,
                 "total_states_exposed": sum(covered.values()),
                 "eligible_states": len(train),

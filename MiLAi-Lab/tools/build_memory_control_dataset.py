@@ -411,7 +411,7 @@ def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
             result = prepare_outcomes(dataset, args.run_id, limit=args.state_limit,
                                       state_ids=args.state_id, explicit_actions=args.action,
                                       seed=args.seed, suggestions=suggestions,
-                                      policy_pool=args.policy_pool)
+                                      policy_pool=args.policy_pool, dev_plan=args.dev_plan)
         elif command == "execute-outcomes":
             result = execute_outcomes(dataset, args.run_id, limit=args.limit)
         else:
@@ -521,6 +521,8 @@ def main() -> int:
     prepare_outcome.add_argument("--action", action="append", default=[])
     prepare_outcome.add_argument("--checkpoint", type=Path, action="append", default=[])
     prepare_outcome.add_argument("--policy-pool")
+    prepare_outcome.add_argument("--dev-plan", type=Path,
+                                 help="Use the registered DEV cohort for held branch evaluation")
     prepare_outcome.add_argument("--device", default="cpu")
     prepare_outcome.add_argument("--seed", type=int, default=20261118)
     execute_outcome = sub.add_parser("execute-outcomes", help="Use the original Reader ledger")

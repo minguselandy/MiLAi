@@ -307,7 +307,7 @@ def train(args: argparse.Namespace) -> None:
         train_coverage(args, config, dataset, RecoveryParameters)
         return
     if (args.epochs is not None or args.feature_store is not None or args.prepare_features_only
-            or args.supervision_mode != "weak" or args.outcome_run):
+            or args.supervision_mode != "weak" or args.outcome_run or args.balance_policy_outcomes):
         raise ValueError("Coverage options require the V1.1 SQLite package")
     args.steps = 200 if args.steps is None else args.steps
     declared_windows = None
@@ -827,6 +827,8 @@ def evaluate_saved(args: argparse.Namespace) -> None:
 
     torch.set_num_threads(args.threads)
     if args.episode_plan:
+        if args.dev_outcome_run:
+            raise ValueError("Held branch supervision is used only for offline evaluation")
         from milai_lab.runners.memory_control_episode import evaluate_episodes
         from milai_lab.scorers.memory_control_episode_metrics import summarize
 
@@ -861,13 +863,18 @@ def evaluate_saved(args: argparse.Namespace) -> None:
     if args.data.is_dir() or args.data.suffix == ".sqlite3":
         from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 
-        dataset = MemoryControlDataset(args.data,
-                                       observation_protocol=fit_run.get("observation_protocol"))
+        dataset = MemoryControlDataset(
+            args.data, observation_protocol=fit_run.get("observation_protocol"),
+            outcome_runs=tuple(args.dev_outcome_run),
+            outcome_role="dev" if args.dev_outcome_run else "train",
+        )
         if dataset.revision:
             from memory_control_coverage import offline_evaluation
             from milai_lab.methods.frozen_feature_store import FrozenFeatureStore
 
             index = dataset.index("dev", trainable=True)
+            if not index:
+                raise ValueError("No eligible DEV states in the selected evaluation protocol")
             if set(fit_run["fitted_groups"]) & {f"{r.dataset}/{r.group}" for r in index}:
                 raise ValueError("Development source groups overlap the fitted sources")
             model = SmallControlModel.load(args.checkpoint, device=args.device)
@@ -882,10 +889,13 @@ def evaluate_saved(args: argparse.Namespace) -> None:
             write_json(args.output / "run.json", {"status": "COMPLETED", "pid": os.getpid(),
                 "checkpoint": str(args.checkpoint.resolve()), "data": str(args.data.resolve()),
                 "source_overlap": 0, "model_counters": model.counters, "reader_calls": 0,
+                "dev_outcome_runs": args.dev_outcome_run,
                 "states": result["states"], "groups": result["groups"]})
             return
         rows = dataset.rows([row.id for row in dataset.index("validation")])
     else:
+        if args.dev_outcome_run:
+            raise ValueError("Held branch evaluation requires the V1.1 SQLite package")
         rows = read_jsonl(args.data)
     if "fitted_groups" in fit_run:
         training_groups = set(fit_run["fitted_groups"])
@@ -972,6 +982,8 @@ def main() -> None:
     fitting.add_argument("--epochs", type=int, help="Full V1.1 coverage epochs, default 3")
     fitting.add_argument("--supervision-mode", choices=["weak", "outcome"], default="weak")
     fitting.add_argument("--outcome-run", action="append", default=[])
+    fitting.add_argument("--balance-policy-outcomes", action="store_true",
+                         help="Cover both sealed pools with equal core and reached-state exposure")
     fitting.add_argument("--observation-protocol", choices=["metadata_v1", "semantic_nav_v1"])
     fitting.add_argument("--feature-store", type=Path)
     fitting.add_argument("--feature-store-read-only", action="store_true")
@@ -1072,6 +1084,7 @@ def main() -> None:
     evaluation.add_argument("--batch-states", type=int, default=16)
     evaluation.add_argument("--loader-workers", type=int, default=2)
     evaluation.add_argument("--feature-store", type=Path)
+    evaluation.add_argument("--dev-outcome-run", action="append", default=[])
     evaluation.add_argument("--episode-plan", type=Path)
     evaluation.add_argument("--registered-arm")
     evaluation.add_argument("--baseline", choices=["B0", "B1", "B2", "B3", "B4", "G"])
@@ -1093,7 +1106,7 @@ def main() -> None:
     lock_eval.add_argument("--baseline-selection", type=Path)
     compare = sub.add_parser("compare-episodes")
     compare.add_argument("--policy-run", type=Path, action="append", required=True)
-    compare.add_argument("--baseline-run", type=Path, required=True)
+    compare.add_argument("--baseline-run", type=Path, action="append", required=True)
     compare.add_argument("--output", type=Path, required=True)
     compare.add_argument("--bootstrap-repeats", type=int, default=2000)
     compare.add_argument("--seed", type=int, default=20261118)
@@ -1113,6 +1126,8 @@ def main() -> None:
     collect_reached.add_argument("--output", type=Path, required=True)
     collect_reached.add_argument("--target-states", type=int, default=12000)
     collect_reached.add_argument("--task-limit", type=int)
+    collect_reached.add_argument("--balance-sources", action="store_true",
+                                 help="Rotate native groups within the declared source mix")
     collect_reached.add_argument("--seed", type=int, default=20261118)
     collect_reached.add_argument("--device", default="cpu")
     collect_reached.add_argument("--threads", type=int, default=4)
@@ -1320,7 +1335,7 @@ def main() -> None:
             fcntl.flock(guard.fileno(), fcntl.LOCK_EX)
             collect(args.data, args.run_id, args.checkpoint, args.output,
                     target_states=args.target_states, task_limit=args.task_limit,
-                    seed=args.seed, device=args.device)
+                    seed=args.seed, device=args.device, balance_sources=args.balance_sources)
         return
     if args.command == "initialize":
         initialize_model(args)

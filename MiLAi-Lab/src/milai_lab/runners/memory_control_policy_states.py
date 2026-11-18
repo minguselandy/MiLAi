@@ -5,7 +5,8 @@ from __future__ import annotations
 import json
 import random
 import time
-from collections import Counter
+from collections import Counter, defaultdict
+from collections.abc import Iterator
 from contextlib import closing
 from dataclasses import asdict
 from pathlib import Path
@@ -19,7 +20,7 @@ from milai_lab.methods.dataset_revision_states import Variant, diagnostics, writ
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, run_memory_control
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.runners.memory_control_episode import make_policy, start_cold
-from milai_lab.runners.memory_control_outcome_run import group_round_robin
+from milai_lab.runners.memory_control_outcome_run import DEFAULT_STATE_QUOTAS, group_round_robin
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS policy_state_runs (
@@ -46,6 +47,24 @@ class RandomLegal:
 
     def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
         return self.rng.choice(actions).id
+
+
+def _source_balanced_order(
+    available: list[tuple[int, str, set[str]]], rng: random.Random,
+) -> Iterator[tuple[int, set[str]]]:
+    by_source: dict[str, list[tuple[int, str, set[str]]]] = defaultdict(list)
+    for row in available:
+        by_source[row[1].partition("/")[0]].append(row)
+    queues = {source: group_round_robin(rows, rng) for source, rows in by_source.items()}
+    visits: Counter[str] = Counter()
+    while queues:
+        source = min(queues, key=lambda name: (visits[name] / DEFAULT_STATE_QUOTAS[name], name))
+        item = next(queues[source], None)
+        if item is None:
+            del queues[source]
+        else:
+            visits[source] += 1
+            yield item
 
 
 def stopped_checkpoints(paths: list[Path]) -> list[dict[str, Any]]:
@@ -84,6 +103,7 @@ def collect(
     task_limit: int | None,
     seed: int,
     device: str,
+    balance_sources: bool = False,
 ) -> dict[str, Any]:
     if target_states <= 0 or (task_limit is not None and task_limit <= 0):
         raise ValueError("Collection counts must be positive")
@@ -103,6 +123,8 @@ def collect(
         "policy_rotation": list(order),
         "target_states": target_states,
     }
+    if balance_sources:
+        declaration["source_task_rotation"] = dict(DEFAULT_STATE_QUOTAS)
     wall, cpu = time.perf_counter(), time.process_time()
     with closing(connect(dataset.path, writable=True)) as db:
         db.executescript(SCHEMA)
@@ -123,7 +145,11 @@ def collect(
             WHERE experiment_role='train' ORDER BY dataset,native_group,id
         """)
         ]
-        candidates = group_round_robin(available, random.Random(seed))  # noqa: S311
+        rng = random.Random(seed)  # noqa: S311 -- registered task order
+        candidates = (
+            _source_balanced_order(available, rng) if balance_sources
+            else group_round_robin(available, rng)
+        )
         processed = {
             tid
             for (tid,) in db.execute(
@@ -144,6 +170,7 @@ def collect(
             budget = revision["primary_budget"]
             steps = dataset.config["states"]["control_steps"]
             session, _ = start_cold(dataset, db, task, budget)
+            session.shared_preflight = {}
             if not session.take(next(a for a in session.menu(steps) if a.kind == "SEARCH")):
                 raise ValueError("Cannot collect a policy state after failed SEARCH")
             source = order[sequence % len(order)]
@@ -152,7 +179,8 @@ def collect(
                 session.state, policy, session, max_steps=steps, start_step=1
             )
             # Replay the selected trajectory and only then open offline evidence labels.
-            fresh, _ = start_cold(dataset, db, task, budget)
+            fresh = dataset.start_task(db, task, session.pool, session.focus, budget)
+            fresh.shared_preflight = session.shared_preflight
             fresh.take(next(a for a in fresh.menu(steps) if a.kind == "SEARCH"))
             gold = task_annotation(db, task)
             if task["dataset"] == MUSIQUE:
@@ -223,6 +251,19 @@ def collect(
                     (run_id, tid, source, packed(result)),
                 )
             sampled += 1
+        by_source_policy = [
+            dict(row) for row in db.execute("""
+                SELECT t.dataset,v.source_policy,count(*) AS states,
+                       count(DISTINCT t.id) AS tasks,count(DISTINCT t.native_group) AS native_groups
+                FROM policy_state_visits v JOIN states s ON s.id=v.state_id
+                JOIN experiment_tasks t ON t.id=s.task_id WHERE v.run_id=?
+                GROUP BY t.dataset,v.source_policy ORDER BY t.dataset,v.source_policy
+            """, (run_id,))
+        ]
+        attempted = dict(db.execute("""
+            SELECT source_policy,count(*) FROM policy_collection_tasks WHERE run_id=?
+            GROUP BY source_policy
+        """, (run_id,)))
     receipt = {
         "run_id": run_id,
         "status": "COMPLETE" if states == target_states else "PARTIAL",
@@ -230,6 +271,8 @@ def collect(
         "target_states": target_states,
         "new_states": dict(newly_added),
         "new_episodes": sampled,
+        "cumulative_states_by_source_policy": by_source_policy,
+        "cumulative_episode_attempts_by_policy": attempted,
         "reader_requests": 0,
         "optimizer_updates": 0,
         "wall_seconds": time.perf_counter() - wall,

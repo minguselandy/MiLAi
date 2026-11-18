@@ -85,6 +85,8 @@ def run_protocols(
     db: sqlite3.Connection,
     run_ids: tuple[str, ...],
     observation: str,
+    *,
+    role: str = "train",
 ) -> list[dict[str, Any]]:
     declarations = []
     for run in run_ids:
@@ -93,12 +95,12 @@ def run_protocols(
             raise ValueError(f"Unknown outcome run {run}")
         declaration = json.loads(row[0])
         if (
-            declaration.get("role") != "train"
+            declaration.get("role") != role
             or declaration.get("sealed") is not True
             or declaration.get("observation_protocol") != observation
             or "comparison_protocol" not in declaration
         ):
-            raise ValueError(f"Outcome run {run} is outside this frozen training protocol")
+            raise ValueError(f"Outcome run {run} is outside the frozen {role} protocol")
         declarations.append(declaration)
     if declarations and any(
         x["comparison_protocol"] != declarations[0]["comparison_protocol"] for x in declarations

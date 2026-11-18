@@ -143,17 +143,18 @@ def summarize(root: Path) -> dict[str, Any]:
 
 def paired_comparison(
     policy_roots: Sequence[Path],
-    baseline_root: Path,
+    baseline_root: Path | Sequence[Path],
     *,
     repeats: int = 2000,
     seed: int = 20261118,
 ) -> dict[str, Any]:
-    if not policy_roots or repeats < 1:
+    baseline_paths = [baseline_root] if isinstance(baseline_root, Path) else list(baseline_root)
+    if not policy_roots or not baseline_paths or repeats < 1:
         raise ValueError("Provide actual policy runs and a positive bootstrap count")
-    base_protocol, baseline = input_result(baseline_root)
+    base_protocol, first_baseline = input_result(baseline_paths[0])
     population = base_protocol["population"]
-    policy_runs, seed_labels = [], []
-    for path in policy_roots:
+
+    def read_peer(path: Path) -> tuple[dict[int, dict[str, Any]], int | None]:
         protocol, predictions = input_result(path)
         if protocol["population"] != population:
             raise ValueError("Use the same frozen native groups and tasks in all compared runs")
@@ -172,10 +173,22 @@ def paired_comparison(
             base_protocol["comparison"][key] != protocol["comparison"][key] for key in reader_keys
         ):
             raise ValueError("Comparative Reader, delivery or scorer settings changed")
-        policy_runs.append(predictions)
-        seed_labels.append(protocol["arm"].get("seed"))
+        return predictions, protocol["arm"].get("seed")
+
+    policy_runs, seed_labels = zip(*(read_peer(path) for path in policy_roots), strict=True)
     if len(seed_labels) > 1 and len(set(seed_labels)) != len(seed_labels):
         raise ValueError("Distinct fitted seed IDs are required for multi-seed aggregation")
+    baselines, baseline_seeds = zip(
+        (first_baseline, base_protocol["arm"].get("seed")),
+        *(read_peer(path) for path in baseline_paths[1:]),
+        strict=True,
+    )
+    if len(baselines) > 1 and (
+        len(set(baseline_seeds)) != len(baselines)
+        or None in baseline_seeds
+        or set(baseline_seeds) != set(seed_labels)
+    ):
+        raise ValueError("Multi-seed baseline arms must match the fitted policy seed IDs")
     registered: dict[str, dict[str, list[int]]] = defaultdict(lambda: defaultdict(list))
     declared_unavailable = population.get("predeclared_unevaluable_tasks", {})
     for row in population["tasks"]:
@@ -184,7 +197,7 @@ def paired_comparison(
             if not all(
                 arm.get(tid, {}).get("status") == "action_failed"
                 and arm[tid].get("failure_reason") == declared_unavailable[str(tid)]
-                for arm in [baseline, *policy_runs]
+                for arm in [*baselines, *policy_runs]
             ):
                 raise ValueError("The preregistered non-evaluable task status must be preserved")
             continue
@@ -210,19 +223,20 @@ def paired_comparison(
 
     # Each row remains one independent cluster, regardless of task count or model seed count.
     paired: dict[str, list[tuple[float, float, int, float, float, int]]] = defaultdict(list)
+    baseline_n = len(baselines)
     for source, groups in registered.items():
         for ids in groups.values():
-            peer_quality = [quality(arm, ids, source) for arm in [baseline, *policy_runs]]
-            peer_cost = [input_tokens(arm, ids) for arm in [baseline, *policy_runs]]
+            peer_quality = [quality(arm, ids, source) for arm in [*baselines, *policy_runs]]
+            peer_cost = [input_tokens(arm, ids) for arm in [*baselines, *policy_runs]]
             quality_n = len(peer_quality[0]) if all(peer_quality) else 0
             cost_n = len(ids) if all(len(row) == len(ids) for row in peer_cost) else 0
             paired[source].append(
                 (
-                    fmean(sum(row) for row in peer_quality[1:]) if quality_n else 0.0,
-                    sum(peer_quality[0]) if quality_n else 0.0,
+                    fmean(sum(row) for row in peer_quality[baseline_n:]) if quality_n else 0.0,
+                    fmean(sum(row) for row in peer_quality[:baseline_n]) if quality_n else 0.0,
                     quality_n,
-                    fmean(sum(row) for row in peer_cost[1:]) if cost_n else 0.0,
-                    sum(peer_cost[0]) if cost_n else 0.0,
+                    fmean(sum(row) for row in peer_cost[baseline_n:]) if cost_n else 0.0,
+                    fmean(sum(row) for row in peer_cost[:baseline_n]) if cost_n else 0.0,
                     cost_n,
                 )
             )
@@ -297,7 +311,7 @@ def paired_comparison(
         "role": population["role"],
         "configured_tasks": len(population["tasks"]),
         "predeclared_unevaluable_tasks": len(declared_unavailable),
-        "model_seeds": seed_labels,
+        "model_seeds": list(seed_labels),
         "quality_delta_points": point_quality,
         "quality_interval_95": quality_ci,
         "reader_input_token_savings": point_cost,
@@ -310,7 +324,10 @@ def paired_comparison(
         "quality_path_supported": quality_supported,
         "cost_path_supported": cost_supported,
         "seed_summaries": [summarize(path) for path in policy_roots],
-        "baseline": summarize(baseline_root),
+        "baseline": (summarize(baseline_paths[0]) if len(baselines) == 1 else {
+            "model_seeds": list(baseline_seeds),
+            "seed_summaries": [summarize(path) for path in baseline_paths],
+        }),
     }
 
 

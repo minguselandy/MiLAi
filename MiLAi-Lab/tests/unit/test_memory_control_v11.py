@@ -1,16 +1,25 @@
 from __future__ import annotations
 
 import sqlite3
+from collections import Counter
 from contextlib import closing
 
 import pytest
 
-from milai_lab.datasets.memory_control_outcomes import outcome_supervision
+from memory_control_coverage import coverage_batches
+from milai_lab.datasets.memory_control_outcomes import outcome_supervision, run_protocols
 from milai_lab.datasets.memory_control_revision import REVISION_SCHEMA
-from milai_lab.datasets.memory_control_store import SCHEMA, packed
+from milai_lab.datasets.memory_control_store import SCHEMA, dumps, packed
 from milai_lab.memory.source_materials import read_original_materials
 from milai_lab.methods.literal_delivery_union import literal_delivery
+from milai_lab.methods.memory_control import (
+    FixedContextMemoryPolicy,
+    MemoryAction,
+    MemoryControlState,
+)
+from milai_lab.methods.memory_control_dataset import StateIndex
 from milai_lab.methods.small_control_learning import state_loss
+from milai_lab.runners.memory_control_episode import PolicyMenu
 
 
 def test_literal_delivery_preserves_gaps_and_access_scope() -> None:
@@ -92,3 +101,43 @@ def test_completed_repeat_pairs_only_and_scaled_loss() -> None:
         assert float(loss.detach()) == pytest.approx(float(torch.log(torch.tensor(2.0))) * 0.2)
         loss.backward()
         assert scores.grad.tolist()[2:] == [0.0, 0.0]
+
+
+def test_mixed_coverage_preserves_unique_rows_and_reports_equal_draws() -> None:
+    index = [StateIndex(i, "source", f"group-{i}", i, "recipe", (0, i)) for i in range(7)]
+    policy_ids = {5, 6}
+    regular = list(coverage_batches(index, 3, 11))
+    assert Counter(row for batch in regular for row in batch) == Counter(range(7))
+    mixed = list(coverage_batches(index, 3, 11, policy_ids=policy_ids))
+    assert list(map(len, mixed)) == [3, 3, 3, 1]
+    assert mixed == list(coverage_batches(index, 3, 11, policy_ids=policy_ids))
+    counts = Counter(row for batch in mixed for row in batch)
+    assert all(counts[i] == 1 for i in range(5))
+    assert counts[5] + counts[6] == 5 and min(counts[5], counts[6]) == 2
+
+
+def test_fixed_r3_preserves_a_candidate_when_only_r2_is_feasible() -> None:
+    menu = PolicyMenu(FixedContextMemoryPolicy(), read_limit=4, precision="R3")
+    state = MemoryControlState(
+        task={}, budget={"successful_reads": 0, "remaining_control_steps": 3}
+    )
+    focus = MemoryAction("read_0", "READ", "candidate", {"index": 0})
+    context = MemoryAction("context_0", "READ", "candidate", {"index": 0, "expand_context": True})
+    handoff = MemoryAction("handoff", "HANDOFF", "")
+    assert menu.choose(state, [focus, handoff]) == focus.id
+    assert menu.choose(state, [focus, context, handoff]) == context.id
+
+
+def test_held_dev_outcomes_cannot_be_loaded_as_training_supervision() -> None:
+    declaration = {
+        "role": "dev",
+        "sealed": True,
+        "observation_protocol": "semantic_nav_v1",
+        "comparison_protocol": {"continuation": "fixed_context"},
+    }
+    with closing(sqlite3.connect(":memory:")) as db:
+        db.executescript(SCHEMA + REVISION_SCHEMA)
+        db.execute("INSERT INTO outcome_runs VALUES (?,?)", ("held", dumps(declaration)))
+        with pytest.raises(ValueError, match="frozen train"):
+            run_protocols(db, ("held",), "semantic_nav_v1")
+        assert run_protocols(db, ("held",), "semantic_nav_v1", role="dev") == [declaration]
