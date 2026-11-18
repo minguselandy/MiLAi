@@ -15,6 +15,7 @@ from typing import Any
 import httpx
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
+from milai_lab.datasets.memory_control_reader_task import reader_task
 from milai_lab.datasets.memory_control_store import connect, dumps, packed, unpack
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, http_budget_scope
 from milai_lab.methods.dataset_control_states import CONTINUATION, task_annotation
@@ -25,7 +26,6 @@ from milai_lab.methods.dataset_reader import (
     READER_PROTOCOL,
     TEMPERATURE,
     DatasetReader,
-    reader_task,
 )
 from milai_lab.methods.evidence_control import controlled_reader_packet
 from milai_lab.methods.memory_control import (
@@ -73,6 +73,19 @@ def comparison_protocol(dataset: MemoryControlDataset) -> dict[str, Any]:
         "observation": dataset.observation_protocol,
         "scorer": SCORER_VERSION,
         "native_reference_sources": NATIVE_SCORER_SOURCES,
+    }
+
+
+def remaining_reader_capacity(budget: Any) -> dict[str, int | None]:
+    state = budget.state
+    limits = state["limits"]
+    return {
+        "requests_remaining": limits["generation_requests"] - state["generation_requests"]
+        if limits["generation_requests"] is not None
+        else None,
+        "tokens_remaining": limits["generation_tokens"] - state["generation"]["charged_tokens"]
+        if limits["generation_tokens"] is not None
+        else None,
     }
 
 
@@ -635,6 +648,7 @@ def execute_outcomes(
             "reader_requests": budget.state["generation_requests"] - before,
             "outcomes_by_status": dict(outcome_counts),
             "metering": METERING,
+            "ledger_remaining_at_release": remaining_reader_capacity(budget),
         }
 
 

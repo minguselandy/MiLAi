@@ -11,6 +11,7 @@ from typing import Any, cast
 
 from tokenizers import Tokenizer  # type: ignore[import-untyped]
 
+from milai_lab.datasets.memory_control_reader_task import ReaderTask
 from milai_lab.datasets.memory_control_store import body_text, unpack
 from milai_lab.datasets.memory_control_views import SourceObject, Span, literal_view
 from milai_lab.memory.retrieval import SourceSearchCache
@@ -18,7 +19,7 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.memory.source_materials import read_original_materials
 from milai_lab.methods.control_observation import control_input
 from milai_lab.methods.corpus_navigation import excerpt, query_terms
-from milai_lab.methods.dataset_reader import DatasetReader, PacketPlan, ReaderTask
+from milai_lab.methods.dataset_reader import DatasetReader, PacketPlan
 from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
 from milai_lab.methods.literal_delivery_union import (
     DELIVERY_PROTOCOL,

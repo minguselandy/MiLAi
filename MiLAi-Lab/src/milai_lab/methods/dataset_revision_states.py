@@ -17,6 +17,7 @@ from typing import Any
 from tokenizers import Tokenizer  # type: ignore[import-untyped]
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE
+from milai_lab.datasets.memory_control_reader_task import reader_task
 from milai_lab.datasets.memory_control_report import write_json
 from milai_lab.datasets.memory_control_store import connect, get_meta, packed, set_meta, unpack
 from milai_lab.datasets.memory_control_views import tokenize_path
@@ -31,7 +32,7 @@ from milai_lab.methods.dataset_control_states import (
     task_prefix_states,
 )
 from milai_lab.methods.dataset_corpus_runtime import CorpusExecution, CorpusPool
-from milai_lab.methods.dataset_reader import DatasetReader, reader_task
+from milai_lab.methods.dataset_reader import DatasetReader
 from milai_lab.methods.memory_control import MemoryAction
 
 PROTOCOL = "milai_static_source_only_v1_1"

@@ -269,7 +269,8 @@ def paired_comparison(
         for source, s in strata.items()
     )
     confirmed = (
-        population["role"] == "confirm" and full
+        population["role"] == "confirm"
+        and full
         and set(seed_labels) == set(population["confirmation_seeds"])
     )
     quality_supported = bool(confirmed and quality_ci and quality_ci[0] > 0)
@@ -298,4 +299,75 @@ def paired_comparison(
         "cost_path_supported": cost_supported,
         "seed_summaries": [summarize(path) for path in policy_roots],
         "baseline": summarize(baseline_root),
+    }
+
+
+def select_baseline(runs: Sequence[Path]) -> dict[str, Any]:
+    """Pick the strongest baseline on a common, already executed DEV population."""
+    loaded = [input_result(path) for path in runs]
+    if not loaded:
+        raise ValueError("Actual DEV baseline runs are required")
+    plan = loaded[0][0]["population"]
+    if plan["role"] != "dev" or any(proto["population"] != plan for proto, _ in loaded):
+        raise ValueError("Baseline selection requires the same registered DEV tasks")
+    names = [proto["arm"]["policy"] for proto, _ in loaded]
+    if len(names) != 5 or set(names) != {"B0", "B1", "B2", "B3", "B4"}:
+        raise ValueError("Use all five deployable baseline conditions")
+    for _, episodes in loaded:
+        if any(task["task_id"] not in episodes for task in plan["tasks"]):
+            raise ValueError("All baseline task positions must be terminal before selection")
+        if any(
+            row["status"] in {"not_issued_budget", "ready", "dispatching", "reader_completed"}
+            for row in episodes.values()
+        ):
+            raise ValueError("Baseline selection requires terminal Reader/scoring status")
+    complete_groups: dict[tuple[str, str], list[int]] = defaultdict(list)
+    group_tasks: dict[tuple[str, str], list[int]] = defaultdict(list)
+    for row in plan["tasks"]:
+        group_tasks[row["dataset"], row["native_group"]].append(row["task_id"])
+    for key, ids in group_tasks.items():
+        if all("grade" in episodes[tid] for _, episodes in loaded for tid in ids):
+            complete_groups[key] = ids
+    if {source for source, _ in complete_groups} != set(SOURCES):
+        raise ValueError("Baseline selection requires comparable outcomes for all three sources")
+    results = []
+    for path, (protocol, episodes) in zip(runs, loaded, strict=True):
+        grouped_quality: dict[str, list[float]] = defaultdict(list)
+        grouped_costs: dict[str, list[int]] = defaultdict(list)
+        for (source, _), ids in complete_groups.items():
+            rows = [episodes[tid] for tid in ids]
+            native = [row["grade"]["native_metrics"] for row in rows]
+            axis = QUALITY_AXES[source]
+            if source == MUSIQUE:
+                grouped_quality[source].append(musique_pair(native)[axis])
+            else:
+                grouped_quality[source].extend(row[axis] for row in native)
+            grouped_costs[source].extend(row["costs"]["reader_input_tokens"] for row in rows)
+        score = 100 * fmean(fmean(grouped_quality[source]) for source in SOURCES)
+        cost = fmean(fmean(grouped_costs[source]) for source in SOURCES)
+        results.append(
+            {
+                "arm": protocol["arm"],
+                "run": str(path.resolve()),
+                "macro_quality_points": score,
+                "macro_reader_input_tokens": cost,
+            }
+        )
+    ordered = sorted(
+        results,
+        key=lambda row: (
+            -row["macro_quality_points"],
+            row["macro_reader_input_tokens"],
+            row["arm"]["policy"],
+        ),
+    )
+    return {
+        "role": "dev",
+        "dataset_run_id": plan["dataset_run_id"],
+        "selected": ordered[0],
+        "selection": "highest_source_macro_quality_then_lowest_macro_input_tokens",
+        "baseline_ranking": ordered,
+        "registered_tasks": len(plan["tasks"]),
+        "common_scored_tasks": sum(len(ids) for ids in complete_groups.values()),
+        "common_source_groups": len(complete_groups),
     }

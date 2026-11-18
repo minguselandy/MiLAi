@@ -1089,12 +1089,17 @@ def main() -> None:
     lock_eval.add_argument("--seed", type=int, default=20261118)
     lock_eval.add_argument("--budget", type=int, default=2048)
     lock_eval.add_argument("--arms-file", type=Path)
+    lock_eval.add_argument("--include-checkpoint", action="append", type=Path, default=[])
+    lock_eval.add_argument("--baseline-selection", type=Path)
     compare = sub.add_parser("compare-episodes")
     compare.add_argument("--policy-run", type=Path, action="append", required=True)
     compare.add_argument("--baseline-run", type=Path, required=True)
     compare.add_argument("--output", type=Path, required=True)
     compare.add_argument("--bootstrap-repeats", type=int, default=2000)
     compare.add_argument("--seed", type=int, default=20261118)
+    select_baseline_parser = sub.add_parser("select-baseline")
+    select_baseline_parser.add_argument("--candidate", action="append", type=Path, required=True)
+    select_baseline_parser.add_argument("--output", type=Path, required=True)
     collect_reached = sub.add_parser("collect-policy-states")
     collect_reached.add_argument("--data", type=Path, required=True)
     collect_reached.add_argument("--run-id", required=True)
@@ -1255,12 +1260,34 @@ def main() -> None:
     if args.command == "lock-evaluation":
         from milai_lab.runners.memory_control_episode import lock_episode_population
 
+        arms = read_json(args.arms_file) if args.arms_file else []
+        for path in args.include_checkpoint:
+            fit = read_json(checkpoint_run(path))
+            contract = fit["contract"]
+            if args.role == "confirm" and fit["status"] != "COMPLETED":
+                raise ValueError("Confirmation requires terminal completed training arms")
+            arms.append({
+                "name": path.parent.name, "policy": "checkpoint", "checkpoint": str(path.resolve()),
+                "seed": contract["seed"], "observation_protocol": contract["observation_protocol"],
+                "reads": 4, "precision": "learned",
+                "stop": "fixed" if contract["supervision_mode"] == "weak" else "learned",
+            })
+        if args.baseline_selection:
+            best = read_json(args.baseline_selection)["selected"]
+            arms.append({**best["arm"], "name": "B*"})
+        if len({a["name"] for a in arms}) != len(arms):
+            raise ValueError("Choose unique registered evaluation arm names")
         lock_episode_population(
             args.data, args.output, role=args.role,
             target_tasks=args.target_tasks or (600 if args.role == "dev" else 1500),
-            seed=args.seed, allowed_arms=read_json(args.arms_file) if args.arms_file else [],
+            seed=args.seed, allowed_arms=arms,
             budget=args.budget,
         )
+        return
+    if args.command == "select-baseline":
+        from milai_lab.scorers.memory_control_episode_metrics import select_baseline
+
+        write_json(args.output, select_baseline(args.candidate))
         return
     if args.command == "compare-episodes":
         from milai_lab.scorers.memory_control_episode_metrics import paired_comparison

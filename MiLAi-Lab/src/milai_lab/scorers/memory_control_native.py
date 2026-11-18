@@ -10,7 +10,7 @@ from collections.abc import Sequence
 from typing import Any
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
-from milai_lab.methods.dataset_reader import ReaderTask
+from milai_lab.datasets.memory_control_reader_task import ReaderTask
 
 SCORER_VERSION = "native_memory_control_v1"
 NATIVE_SCORER_SOURCES = {

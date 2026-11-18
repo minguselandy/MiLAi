@@ -11,12 +11,12 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from milai_lab.datasets.memory_control_reader_task import reader_task
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import connect, get_meta
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, http_budget_scope
 from milai_lab.methods.dataset_control_states import task_annotation
 from milai_lab.methods.dataset_corpus_runtime import CorpusExecution, CorpusPool
-from milai_lab.methods.dataset_reader import reader_task
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     FixedMemoryPolicy,
@@ -30,7 +30,11 @@ from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
 from milai_lab.methods.small_memory_policy import EncoderCosineMemoryPolicy, SmallMemoryPolicy
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, ownership_client_configs
-from milai_lab.runners.memory_control_outcome_run import comparison_protocol, request_reader
+from milai_lab.runners.memory_control_outcome_run import (
+    comparison_protocol,
+    remaining_reader_capacity,
+    request_reader,
+)
 from milai_lab.scorers.memory_control_native import score_answer
 
 EVALUATION_PROTOCOL = "memory_control_v11_native_episode_v1"
@@ -352,7 +356,6 @@ def evaluate_episodes(
     train_sources_disjoint(arm, population["tasks"])
     host, revision = dataset.host, dataset.revision
     assert host is not None and revision is not None
-    policy, model = make_policy(dataset, arm, device)
     output.mkdir(parents=True, exist_ok=True)
     protocol = {"population": population, "comparison": comparison_protocol(dataset), "arm": arm}
     protocol_path = output / "protocol.json"
@@ -375,6 +378,7 @@ def evaluate_episodes(
     ):
         if budget is None:
             raise ValueError("Static evaluation requires the shared Reader ledger")
+        policy, model = make_policy(dataset, arm, device)
         before = budget.state["generation_requests"]
         with VLLMClient(
             VLLMConfig(**host.settings["host"]), budget=budget, capacity=host.capacity
@@ -429,6 +433,7 @@ def evaluate_episodes(
                 write_json(result_path, record)
                 counts[record["status"]] += 1
         charged_requests = budget.state["generation_requests"] - before
+        remaining = remaining_reader_capacity(budget)
     receipt = {
         "status": "COMPLETED"
         if sum(counts.values()) == len(population["tasks"]) and not counts.get("not_issued_budget")
@@ -438,6 +443,7 @@ def evaluate_episodes(
         "independent_groups": len({(t["dataset"], t["native_group"]) for t in population["tasks"]}),
         "reader_requests_this_invocation": charged_requests,
         "reader_attempts_this_invocation": attempted,
+        "ledger_remaining_at_release": remaining,
         "optimizer_updates": 0,
         "wall_seconds": time.perf_counter() - wall,
         "cpu_seconds": time.process_time() - cpu,

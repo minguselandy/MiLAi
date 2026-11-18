@@ -13,10 +13,11 @@ from typing import Any
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA
 from milai_lab.datasets.memory_control_outcomes import outcome_supervision, run_protocols
+from milai_lab.datasets.memory_control_reader_task import reader_task
 from milai_lab.datasets.memory_control_store import DB_NAME, connect, get_meta, unpack
 from milai_lab.datasets.memory_control_views import tokenize_path
 from milai_lab.methods.dataset_corpus_runtime import CorpusExecution, CorpusPool
-from milai_lab.methods.dataset_reader import DatasetReader, reader_task
+from milai_lab.methods.dataset_reader import DatasetReader
 from milai_lab.methods.memory_control import MemoryAction
 
 
