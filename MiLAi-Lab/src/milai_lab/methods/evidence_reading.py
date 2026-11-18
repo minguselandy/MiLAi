@@ -801,6 +801,30 @@ def project_packs(
                 alias: sources.get((binding["source_ref"], binding["source_revision"]),
                                    "support_not_opened")
                 for alias, binding in projected["source_bindings"].items()}
+    selections = {f"e{index}": item for item, index in zip(items, indices, strict=True)
+                  if item["kind"] == "query_structure"
+                  and item.get("body_delivered") is not False
+                  and "reader_unit_selection" in item}
+    if selections:
+        from milai_lab.methods.query_structure_projection import project_structure_units
+
+        for position, projected in enumerate(result):
+            original = selections.get(projected["label"])
+            if original is None:
+                continue
+            selection = original["reader_unit_selection"]
+            if (not isinstance(selection, dict)
+                    or selection.get("parent_id") != original["id"]
+                    or type(selection.get("parent_revision")) is not int
+                    or selection["parent_revision"] != original["revision"]):
+                raise ValueError("Reader unit selection belongs to a different parent View")
+            nodes = selection.get("nodes")
+            if not isinstance(nodes, list):
+                raise ValueError("Reader unit selection requires a literal node list")
+            # Parent opening is the caller's common lifecycle operation. This
+            # projection happens after full provenance/alias normalization, so
+            # unused metadata can be omitted without hiding invalid parents.
+            result[position] = project_structure_units(projected, nodes)
     return result
 
 
