@@ -116,6 +116,12 @@ N1 相对 N0 的来源等权 Top-1 命中差为 −6.32 个百分点，按来源
 交换两个冻结 M0 头的输入观测也在这 14,607 个状态上执行。交换后的离线 AP 留在
 `m0-weak-cross-*/result.json`，供定位训练观测与推理观测不一致的影响。
 
+M1/N0 于 03:39 完成三轮全覆盖、6,066 次真实更新和 776,154 次状态曝光。控制头权重
+L2 变化为 51.915，训练和离线 DEV 共用 5,965.20 秒。末轮离线 AP 在 MuSiQue、
+QASPER、Persona 上分别为 0.1949、0.1505、0.1150。M1/N1 已沿同一冻结训练路线
+从 N1 特征缓存启动。实际覆盖和检查点见 `M1-W-N0-seed11/coverage.json` 和
+`M1-W-N0-seed11/checkpoint`。
+
 宽 M0/N1 已完成三轮、6,066 次更新和 776,154 次状态曝光。M0/N0 末轮头与其初始化头
 在固定停止和相同合法候选下，各完成 7 个 DEV 任务和 7 次 Reader 请求。训练头在该小样本
 的来源等权宏分高 16.67 点，等权 Reader input token 高 24.2%。质量差全部来自 MuSiQue
@@ -164,13 +170,20 @@ PersonaMem 首 200 个登记位置上，B0、B1、B2 各已提交 200 个原生�
 组成 69 个完整原生组。B1 相对 B0 高 6.53 点，95% 区间为 [3.09, 10.33]。
 B2 相对 B1 的 200 个请求均有实际变化，配对准确率差为 0.00 点，
 区间为 [−3.54, 3.38]，每任务的平均 Reader input token 由 1,410.66 增至 1,961.13。
+同一批 Persona 请求上，B3 与 B1 的请求逐项相同。其原始准确率差为 −1.51 点，
+复用实测回复后的差为 0。
 条件扩读的后续分析优先考察同一 before state 下有实际输入差异的 R2/R3 对，
 并保留各预算层的全体抽样结果。收据为
 `dev-persona-200-position-read-precision-sensitivity.json`。
 
+Gold 材料诊断 `G` 在正式 B0 到 B4 完成并登记 B* 后，从同一 DEV605 人群发起实际 Reader
+请求并独立出具原生质量和成本。协调状态见 `gold-dev-coordinator.json`。
+
 主 DEV 的 B0 到 B4 在共享 Reader 租约下分块提交。605 个任务的正式结果、B* 选择、
 24,000 个 core 状态上的正式 O、12,000 个策略到达状态上的 P、参数匹配和三种子确认继续
-由各自的实际训练、评分与请求收据证明。当前 12 个分支只用于确认执行闭环和训练消费。
+由各自的实际训练、评分与请求收据证明。已入库的 12 个同状态诊断分支和 16 个策略到达
+诊断分支用于验证执行闭环和训练消费。
+03:44 已回收 2,100 个正式 DEV 位置的终态收据，B0 为 500 个，B1 到 B4 各 400 个。
 首次 3,000 状态的抽样在 Reader 派发前冻结。MuSiQue／QASPER／Persona 数量为
 2,000／625／375，覆盖 2,964 个任务和 2,689 个原生组。分层得到 1,200 个代表性样本、
 375 个可行 R2/R3 配对样本、600 个停止或预算边界样本、227 个探索样本，另有 598 个
@@ -192,6 +205,8 @@ R2/R3，固定续程后 104 对请求不同、15 对汇合到同一请求。该�
 准备入口采用四个 CPU 进程，模型推荐、采样和 SQLite 写入仍由主进程按顺序完成。
 该加速测量覆盖分支准备。收据为 `branch-preparation-cpu-parallel-benchmark-v1.json` 和
 `branch-preparation-cli-validation-v1.json`。
+03:37 核对两条等待协调器及实际数据库后，将 core 和 P 冻结到 `4e3bb0c7`。
+交接收据为 `outcome-coordinator-v3-handoff.json`，其中记录新进程及正式分支登记为空。
 
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
@@ -234,9 +249,7 @@ MILAI_CONFIG=configs/datasets/memory_control_v1_1.json
   --run-id v11-reader-closure --seal
 ```
 
-启动脚本 `launch-W-seed11.sh`、`launch-dev-baselines.sh`、`launch-core-and-O.py`
-和 `launch-WO-dev.py`
-保存正式调用参数。Core 协调器核对两臂 W 的完整覆盖、检查点和相同数据顺序后才开始采集。
-运行中的
-既有作业由其真实进程和收据确认。Reader 仍使用原共享台账，记录的局部计算成本可在各段
-关闭后从对应收据核对。
+运行根中的 `launch-W-seed11.sh`、`launch-dev-baselines.sh`、`launch-core-and-O.py`、
+`launch-WO-dev.py` 和 `launch-G-dev.py` 保存正式调用参数。Core 协调器核对两臂 W
+的完整覆盖、检查点和相同数据顺序后开始采集。运行状态由实际进程和收据确认。Reader
+使用原共享台账，局部计算成本可在各段关闭后从对应收据核对。
