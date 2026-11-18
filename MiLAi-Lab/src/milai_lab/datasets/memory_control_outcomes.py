@@ -12,7 +12,7 @@ from typing import Any
 
 from milai_lab.datasets.memory_control_store import unpack
 
-PAIR_PROTOCOL = "same_reader_repeat_v1"
+OUTCOME_SUPERVISION_PROTOCOL = "same_before_literal_wire_pool_v2"
 COST_AXIS = "reader_input_tokens"
 
 
@@ -24,6 +24,9 @@ def outcome_supervision(
 ) -> dict[str, Any]:
     observations: dict[str, dict[tuple[str, int], tuple[float, bool, int | None]]] = defaultdict(
         dict
+    )
+    request_groups: dict[tuple[str, int], list[tuple[dict[str, Any], list[str]]]] = defaultdict(
+        list
     )
     query = """
         SELECT * FROM action_outcomes
@@ -37,11 +40,39 @@ def outcome_supervision(
         value = float(row["training_quality"])
         measured = unpack(row["costs"]).get(COST_AXIS) if row["costs"] else None
         cost = measured if type(measured) is int and measured >= 0 else None
-        observations[action][row["run_id"], row["repeat_index"]] = (
+        repeat = (row["run_id"], row["repeat_index"])
+        observations[action][repeat] = (
             value,
             row["success_witness"] == 1 and value == 1.0,
             cost,
         )
+        result = unpack(row["task_result"]) if row["task_result"] else None
+        wire = result.get("reader_wire") if isinstance(result, dict) else None
+        if isinstance(wire, dict) and wire:
+            grouped = request_groups[repeat]
+            for existing, actions in grouped:
+                if wire == existing:
+                    actions.append(action)
+                    break
+            else:
+                grouped.append((wire, [action]))
+
+    # Conditional quality is shared when different actions send the same full request.
+    # Pool the actual readouts in each repeat. Keep action-local cost receipts and witnesses.
+    pooled_requests = 0
+    disagreeing_requests = 0
+    for repeat, grouped in request_groups.items():
+        for _, actions in grouped:
+            if len(actions) < 2:
+                continue
+            observed = [observations[action][repeat][0] for action in actions]
+            pooled_requests += 1
+            disagreeing_requests += min(observed) != max(observed)
+            quality = fmean(observed)
+            for action in actions:
+                _, witness, cost = observations[action][repeat]
+                observations[action][repeat] = quality, witness and quality == 1.0, cost
+
     values, witnesses, costs = {}, {}, {}
     for action, repeated in observations.items():
         values[action] = fmean(x[0] for x in repeated.values())
@@ -78,6 +109,8 @@ def outcome_supervision(
         "success_cost_witness_values": witnesses,
         "success_cost_preferences": cost_pairs,
         "repeat_pair_conflicts": conflicts,
+        "pooled_reader_request_groups": pooled_requests,
+        "pooled_reader_request_groups_with_quality_disagreement": disagreeing_requests,
     }
 
 

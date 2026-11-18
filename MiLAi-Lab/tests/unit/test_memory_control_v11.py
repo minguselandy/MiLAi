@@ -103,6 +103,45 @@ def test_completed_repeat_pairs_only_and_scaled_loss() -> None:
         assert scores.grad.tolist()[2:] == [0.0, 0.0]
 
 
+def test_outcome_preferences_pool_only_matching_requests_in_each_repeat() -> None:
+    with closing(sqlite3.connect(":memory:")) as db:
+        db.row_factory = sqlite3.Row
+        db.executescript(SCHEMA + REVISION_SCHEMA)
+        for action, repeat, content, quality, cost in (
+            ("read", 0, "shared", 1.0, 45),
+            ("context", 0, "shared", 0.0, 45),
+            ("handoff", 0, "separate", 0.25, 20),
+            ("read", 1, "shared", 1.0, 44),
+            ("context", 1, "shared", 1.0, 44),
+        ):
+            db.execute(
+                """
+                INSERT INTO action_outcomes
+                (state_id,action_id,run_id,repeat_index,reader_protocol,execution_status,
+                 training_quality,success_witness,costs,task_result)
+                VALUES (1,?,'shared',?,'v1','ingested',?,?,?,?)
+            """,
+                (
+                    action,
+                    repeat,
+                    quality,
+                    quality == 1.0,
+                    packed({"reader_input_tokens": cost}),
+                    packed({"reader_wire": {"seed": 123 + repeat, "messages": [content]}}),
+                ),
+            )
+        result = outcome_supervision(db, 1, {"read", "context", "handoff"}, ("shared",))
+        assert result["observed_values"] == {"read": 0.75, "context": 0.75, "handoff": 0.25}
+        assert result["pooled_reader_request_groups"] == 2
+        assert result["pooled_reader_request_groups_with_quality_disagreement"] == 1
+        assert result["preferences"] == [
+            {"left": "context", "right": "handoff", "outcome": "left"},
+            {"left": "handoff", "right": "read", "outcome": "right"},
+        ]
+        assert result["success_cost_preferences"] == []
+        assert result["success_cost_witness_values"]["read"] == 0.0
+
+
 def test_mixed_coverage_preserves_unique_rows_and_reports_equal_draws() -> None:
     index = [StateIndex(i, "source", f"group-{i}", i, "recipe", (0, i)) for i in range(7)]
     policy_ids = {5, 6}

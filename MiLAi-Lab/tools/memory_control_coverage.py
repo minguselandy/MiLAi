@@ -16,6 +16,7 @@ from itertools import groupby, islice
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+from milai_lab.datasets.memory_control_outcomes import OUTCOME_SUPERVISION_PROTOCOL
 from milai_lab.datasets.memory_control_report import write_json
 from milai_lab.datasets.memory_control_store import connect
 from milai_lab.methods.frozen_feature_store import FrozenFeatureStore, batches, prefetch_rows
@@ -222,6 +223,10 @@ def offline_evaluation(
                     a: v for a, v in sup.get("observed_values", {}).items() if v is not None
                 }
                 if measured:
+                    stats["pooled_reader_request_groups"] += sup["pooled_reader_request_groups"]
+                    stats["pooled_reader_request_groups_with_quality_disagreement"] += sup[
+                        "pooled_reader_request_groups_with_quality_disagreement"
+                    ]
                     probs = local.sigmoid().tolist()
                     stats["observed_values"] += len(measured)
                     stats["value_error_squared_sum"] += sum(
@@ -346,6 +351,8 @@ def train_coverage(
         "initialize_from": str(args.initialize_from.resolve()) if args.initialize_from else None,
         "feature_store": str(args.feature_store.resolve()) if args.feature_store else None,
     }
+    if args.outcome_run:
+        contract["outcome_supervision_protocol"] = OUTCOME_SUPERVISION_PROTOCOL
     if policy_ids is not None:
         contract.update(
             sampling="coverage_equal_core_policy_v1",

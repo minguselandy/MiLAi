@@ -16,6 +16,7 @@ from contextlib import ExitStack, closing
 from pathlib import Path
 from typing import Any
 
+from milai_lab.datasets.memory_control_outcomes import OUTCOME_SUPERVISION_PROTOCOL
 from milai_lab.datasets.memory_control_report import read_json, write_json
 
 LAB = Path(__file__).resolve().parents[1]
@@ -466,7 +467,9 @@ class Followthrough:
         self.wait_receipts(w[2:], "launch-wide-W.sh", training=True)
         contracts = [self.require_fit(name) for name in o]
         if self.outcome_counts(self.core)[::2] != (24_000, True) or any(
-            run["outcome_runs"] != [self.core] for run in contracts
+            run["outcome_runs"] != [self.core]
+            or run.get("outcome_supervision_protocol") != OUTCOME_SUPERVISION_PROTOCOL
+            for run in contracts
         ):
             raise ValueError("Seed-11 outcome fits require the shared 24,000-state sealed core")
         self.backbone = contracts[0]["config"]["backbone"]
@@ -551,6 +554,7 @@ class Followthrough:
             "dataset_run_id",
             "observation_protocol",
             "supervision_mode",
+            "outcome_supervision_protocol",
             "outcome_runs",
             "sampling",
             "batch_states",
@@ -559,9 +563,14 @@ class Followthrough:
             "learning_rate",
             "bf16",
         )
+        seed11_contracts = {
+            f"{model}-{stage}": self.require_fit(run_name(model, stage, 11))
+            for model in MODELS
+            for stage in ("W", "O", "P")
+        }
         recipes = {
             f"{model}-{stage}": {
-                key: self.require_fit(run_name(model, stage, 11))[key] for key in recipe_fields
+                key: seed11_contracts[f"{model}-{stage}"].get(key) for key in recipe_fields
             }
             for model in MODELS
             for stage in ("W", "O", "P")
@@ -583,11 +592,13 @@ class Followthrough:
                 self.fit_models(MODELS, stage, seed)
                 for model in MODELS:
                     contract = self.require_fit(run_name(model, stage, seed))
-                    if {key: contract[key] for key in recipe_fields} != recipes[f"{model}-{stage}"]:
+                    if {key: contract.get(key) for key in recipe_fields} != recipes[
+                        f"{model}-{stage}"
+                    ]:
                         raise ValueError(
                             f"Training recipe changed for {run_name(model, stage, seed)}"
                         )
-                    original = self.require_fit(run_name(model, stage, 11))
+                    original = seed11_contracts[f"{model}-{stage}"]
                     for key in ("eligible_states", "steps", "policy_states", "outcome_protocols"):
                         if contract.get(key) != original.get(key):
                             raise ValueError(
