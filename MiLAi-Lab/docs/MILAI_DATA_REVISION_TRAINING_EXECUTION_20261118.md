@@ -365,6 +365,14 @@ TRAIN 任务、2,690 个原生组。原两批的 27,882 条分支绑定复核一
 接入与继续派发沿原登记顺序执行。见
 `core-9000-parallel-preparation/formal-boundary-handoff.json`。
 
+13:16，第三批在副本中完成 3,000 个状态、14,004 条待发分支，其中 300 个状态有重复测量。
+全量核对了登记顺序、TRAIN 角色和实际 Reader 请求种子。用仍在收件的正式第二批快照
+做接入验证时，整批接入在前置评分条件处被拒，副本的分支数量及状态保持一致。第三批准备
+用时 2,252.71 秒，与正式第二批派发重叠。见 `core-9000-parallel-preparation/receipt.json`
+和同目录的 `full-staged-tranche-audit.json`。
+13:20，第二批已收回 7,800 条回复。109 个关闭窗口合计 21,764 条服务端计量回复，见
+`core-dispatch-accounting-109-windows.json`。
+
 首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
 时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
 主线重试间隔。首个 M1 窗口已收回 20 个位置。见
@@ -426,6 +434,25 @@ READ 分数最大绝对差为 1.79e-7。三个固定停止条件在 QASPER 上�
 请求下的服务波动实测。见
 `core-first3000-O-pilot/fixed-control-probe/musique-shared-wire-repeated-reader-audit.json`。
 
+同一增量检查点的四个停止与精度条件也收齐了 PersonaMem 的 40 题、12 个原生组。
+固定停止下，R2、学习精度和可行即 R3 的准确率分别为 15.0%、10.0%、27.5%。R3 相对
+R2 高 12.50 点，分组 95% 区间为 [2.08, 26.67]，每题平均多 405.30 个实测 Reader 输入
+token。学习停止与学习精度得到 15.0%。见
+`core-first3000-O-pilot/fixed-control-probe/personamem-complete-fixed-control-stratum.json`。
+
+同一 M1 检查点保留学习精度，单独改为固定停止的完整 120 题对照已收齐。相对学习停止，
+宏质量差为 −3.25 点，分组 95% 区间为 [−8.64, 2.01]，Reader 输入节省 6.86%，区间为
+[−0.04%, 12.62%]。QASPER 的完整交付从 7 题降至 3 题，停止时一个合法 READ 可补全的情形
+由 6 次增至 24 次。见 `core-first3000-O-pilot/fixed-control-probe/completed-stop-only-contrast.json`。
+
+13:20，三个固定停止臂均收齐 120 题。在固定停止下，可行即 R3 相对学习精度的宏质量
+高 7.09 点，分组 95% 区间为 [0.85, 13.04]，Reader 输入增加 21.98%。R3 相对 R2 高
+5.11 点，区间为 [−0.17, 10.77]，输入增加 33.30%。QASPER 的完整对齐证据交付在
+R2、学习精度、R3 三臂分别为 1、3、11 题。将同请求上的测量差归零后，R3 相对学习精度
+高 6.78 点，区间为 [0.59, 12.65]。见
+`core-first3000-O-pilot/fixed-control-probe/actual-control-status.json` 和同目录的
+`complete-fixed-control-native-evidence.json`。
+
 证据诊断从已结束的实际 episode 读取成功 READ、原文区间和已送出的 Reader 请求，再核对
 标注集覆盖。开场可达性使用逐个可行 READ 的区间并集。停止机会使用实际 HANDOFF 菜单中
 一个合法 READ 的增量。120 题诊断中，QASPER 有 34 题提供完整对齐的文本标注集。
@@ -439,6 +466,28 @@ HANDOFF 分别为 7 和 6 次。见 `core-first3000-O-pilot/dev120-native-eviden
 45 个实际结果训练质量为零。PersonaMem 的 G 完整交付参考片段 86 次，其中 45 个结果
 得零分。这一分层保留各来源标注定义和实际评分。见 `dev605-native-evidence-audit.json`
 与 `dev605-gold-native-evidence-audit.json`。
+
+未训练预算诊断沿用同一 120 个登记任务、B* 和两个增量 O 检查点。实际训练状态和首批
+3,000 个已评分 core 状态只覆盖 1,024、2,048、4,096。1,536 和 3,072 使用真实冷启动
+重建候选可行菜单、动作和交付。每个预算以原 2,048 结果配对。同一任务、同一策略臂的
+完整请求逐项一致时绑定既有实际回复，改变的请求使用原 Reader 租约。报告单列各回复的
+采集来源，并按原生组计算配对区间。见 `core-first3000-O-pilot/held-budget-generalization`
+中的 `design.json`、`train-role-and-outcome-budget-audit.json` 和 `paired-scorer-parity.json`。
+
+未训练预算的 720 条轨迹全部准备完成。逐题比较完整请求后，567 个位置可共用同一请求
+的回复，其中 563 个绑定 2,048 的回复，4 个绑定另一未训练预算的回复。153 条请求进入
+送读，分别为 M0 增量 O 的 51 条、M1 增量 O 的 100 条和 B* 的
+2 条。QASPER 的 40 题开场合法菜单逐项相同。M0 的 34 个有完整映射标注的任务中，
+1,536、2,048、3,072 的完整交付分别为 10、14、16 题。这些是实际轨迹和材料结果。
+逐回复的配对来自随后独立的 Reader 读出。见同运行目录的 `preparation-receipt.json`、
+`local-decision-and-evidence-audit.json` 和 `reader-status.json`。
+
+首窗的 20 个 M0、1,536 请求均返回服务端计量结果并完成评分。请求与准备结果逐项相同，
+与同题 2,048 请求逐题不同。合计 29,063 input token、1,429 output token，队列接续时
+新增模型准备为 0。见同运行目录的 `first-fresh-window-verification.json`。
+
+第三批 core 与未训练预算重放的本地准备在原台账分别结算一次。计量范围为实际准备的
+CPU 时间及 CUDA 分配墙时。见 `third-core-and-held-preparation-settlement.json`。
 
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
@@ -563,6 +612,9 @@ MILAI_O_PILOT="$MILAI_RUN/core-first3000-O-pilot"
   --run "$MILAI_O_PILOT/incremental-O-dev/M0-O3000" \
   --run "$MILAI_O_PILOT/dev-probe-reference/dev-main-B1" \
   --output "$MILAI_O_PILOT/dev120-native-evidence-audit.json"
+"$MILAI_PY" tools/report_memory_control_budget_transfer.py \
+  --root "$MILAI_O_PILOT/held-budget-generalization" \
+  --output "$MILAI_O_PILOT/held-budget-generalization/readout-report.json"
 ```
 
 运行根中的 `launch-W-seed11.sh`、`launch-dev-baselines.sh`、`launch-core-and-O.py`、
