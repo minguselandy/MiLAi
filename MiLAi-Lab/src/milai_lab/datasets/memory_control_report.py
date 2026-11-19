@@ -15,10 +15,13 @@ def read_json(path: Path, default: Any = None) -> Any:
     return json.loads(path.read_text()) if path.is_file() else default
 
 
-def write_json(path: Path, value: Any) -> None:
+def write_json(path: Path, value: Any, *, indent: int | None = 2) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     part = path.with_name(path.name + ".part")
-    part.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+    part.write_text(json.dumps(
+        value, ensure_ascii=False, indent=indent, separators=(",", ":") if indent is None else None,
+        allow_nan=False,
+    ) + "\n")
     part.replace(path)
 
 

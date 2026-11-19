@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import fcntl
 import json
 import random
 import sqlite3
@@ -444,6 +445,64 @@ def score_episode(
         record["status"] = grader["status"]
 
 
+def _prepare_episode_batch(
+    dataset: MemoryControlDataset,
+    db: sqlite3.Connection,
+    population: dict[str, Any],
+    arm: dict[str, Any],
+    episodes: Path,
+    *,
+    device: str,
+    limit: int | None,
+) -> tuple[list[tuple[sqlite3.Row, Path]], Counter[str], SmallControlModel | None, int]:
+    ready: list[tuple[sqlite3.Row, Path]] = []
+    counts: Counter[str] = Counter()
+    policy: MemoryPolicy | None = None
+    model = None
+    prepared = 0
+    for row in population["tasks"]:
+        tid = row["task_id"]
+        path = episodes / f"{tid}.json"
+        record = read_json(path)
+        if record is not None:
+            if any(record[k] != row[k] for k in ("task_id", "dataset", "native_group")):
+                raise ValueError("Saved episode identity differs from the registered task")
+            if record["status"] == "dispatching":
+                record["status"] = "reader_interrupted"
+                write_json(path, record, indent=None)
+            if record["status"] not in {"ready", "not_issued_budget", "reader_completed"}:
+                counts[record["status"]] += 1
+                continue
+        if limit is not None and len(ready) >= limit:
+            break
+        task = db.execute("SELECT * FROM experiment_tasks WHERE id=?", (tid,)).fetchone()
+        if (
+            task is None
+            or task["experiment_role"] != population["role"]
+            or any(task[k] != row[k] for k in ("dataset", "native_group"))
+        ):
+            raise ValueError("Registered task identity or role changed")
+        seed = (population["seed"] + tid) % (2**31 - 1)
+        if record is None:
+            if policy is None:
+                policy, model = make_policy(dataset, arm, device)
+            record = episode_before_reader(
+                dataset, db, task, arm, policy, model, population["material_budget"], seed
+            )
+            write_json(path, record, indent=None)
+            prepared += 1
+        if record["status"] in {"ready", "not_issued_budget"}:
+            if record["reader_wire"]["seed"] != seed:
+                raise ValueError("Saved Reader request seed differs from the registered task seed")
+            ready.append((task, path))
+            continue
+        if record["status"] == "reader_completed":
+            score_episode(dataset, db, task, record)
+            write_json(path, record, indent=None)
+        counts[record["status"]] += 1
+    return ready, counts, model, prepared
+
+
 def evaluate_episodes(
     data: Path,
     manifest: Path,
@@ -464,101 +523,91 @@ def evaluate_episodes(
     if dataset.run_id != population["dataset_run_id"]:
         raise ValueError("Registered population belongs to a different dataset run")
     train_sources_disjoint(arm, population["tasks"])
-    host, revision = dataset.host, dataset.revision
-    assert host is not None and revision is not None
+    host = dataset.host
+    assert host is not None and dataset.revision is not None
     output.mkdir(parents=True, exist_ok=True)
     protocol = {"population": population, "comparison": comparison_protocol(dataset), "arm": arm}
     protocol_path = output / "protocol.json"
-    if protocol_path.exists():
-        if protocol != read_json(protocol_path):
-            raise ValueError("Saved episode protocol or task group membership changed")
-    else:
-        write_json(protocol_path, protocol)
     episodes = output / "episodes"
-    episodes.mkdir(exist_ok=True)
     attempted = 0
+    charged_requests = 0
+    remaining = None
+    reader_scope_wall = 0.0
     wall, cpu = time.perf_counter(), time.process_time()
-    counts: Counter[str] = Counter()
     with (
+        (output / ".episode-writer.lock").open("ab") as writer,
         closing(connect(dataset.path)) as db,
-        http_budget_scope(
-            host.settings,
-            client_configs=ownership_client_configs(host.settings),
-        ) as budget,
     ):
-        if budget is None:
-            raise ValueError("Static evaluation requires the shared Reader ledger")
-        policy, model = make_policy(dataset, arm, device)
-        before = budget.state["generation_requests"]
-        with VLLMClient(
-            VLLMConfig(**host.settings["host"]), budget=budget, capacity=host.capacity
-        ) as client:
-            for row in population["tasks"]:
-                tid = row["task_id"]
-                result_path = episodes / f"{tid}.json"
-                record = read_json(result_path, None)
-                if record is not None:
-                    if record["status"] == "dispatching":
-                        record["status"] = "reader_interrupted"
-                        write_json(result_path, record)
-                    if record["status"] not in {"not_issued_budget", "reader_completed"}:
-                        counts[record["status"]] += 1
-                        continue
-                if max_reader_requests is not None and attempted >= max_reader_requests:
-                    break
-                task = db.execute("SELECT * FROM experiment_tasks WHERE id=?", (tid,)).fetchone()
-                if (
-                    task is None
-                    or task["experiment_role"] != population["role"]
-                    or any(task[k] != row[k] for k in ("dataset", "native_group"))
-                ):
-                    raise ValueError("Registered task identity or role changed")
-                if record is None:
-                    seed = (population["seed"] + tid) % (2**31 - 1)
-                    record = episode_before_reader(
-                        dataset, db, task, arm, policy, model, population["material_budget"], seed
-                    )
-                if record["status"] in {"ready", "not_issued_budget"}:
-                    record["status"] = "dispatching"
-                    write_json(result_path, record)
-                    try:
-                        reader_result, cost = request_reader(
-                            client, host, record["reader_wire"], record["capacity"]
+        fcntl.flock(writer.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if protocol_path.exists():
+            if protocol != read_json(protocol_path):
+                raise ValueError("Saved episode protocol or task group membership changed")
+        else:
+            write_json(protocol_path, protocol)
+        episodes.mkdir(exist_ok=True)
+        ready, counts, model, prepared = _prepare_episode_batch(
+            dataset, db, population, arm, episodes, device=device, limit=max_reader_requests,
+        )
+        if ready:
+            dispatched: list[tuple[sqlite3.Row, Path]] = []
+            reader_started = time.perf_counter()
+            with http_budget_scope(
+                host.settings, client_configs=ownership_client_configs(host.settings),
+            ) as budget:
+                if budget is None:
+                    raise ValueError("Static evaluation requires the shared Reader ledger")
+                before = budget.state["generation_requests"]
+                with VLLMClient(
+                    VLLMConfig(**host.settings["host"]), budget=budget, capacity=host.capacity
+                ) as client:
+                    for task, path in ready:
+                        record = read_json(path)
+                        record["status"] = "dispatching"
+                        write_json(path, record, indent=None)
+                        try:
+                            reader_result, cost = request_reader(
+                                client, host, record["reader_wire"], record["capacity"]
+                            )
+                        except BudgetExceeded:
+                            record["status"] = "not_issued_budget"
+                            write_json(path, record, indent=None)
+                            counts["not_issued_budget"] += 1
+                            break
+                        record["reader_result"] = reader_result
+                        record["costs"].update(cost)
+                        record["status"] = reader_result["status"]
+                        attempted += bool(cost["reader_request_attempted"])
+                        record["costs"]["episode_wall_ms"] = (
+                            record["costs"]["episode_local_wall_ms"] + cost["reader_client_wall_ms"]
                         )
-                    except BudgetExceeded:
-                        record["status"] = "not_issued_budget"
-                        write_json(result_path, record)
-                        counts["not_issued_budget"] += 1
-                        break
-                    record["reader_result"] = reader_result
-                    record["costs"].update(cost)
-                    record["status"] = reader_result["status"]
-                    attempted += bool(cost["reader_request_attempted"])
-                    record["costs"]["episode_wall_ms"] = (
-                        record["costs"]["episode_local_wall_ms"] + cost["reader_client_wall_ms"]
-                    )
-                    write_json(result_path, record)
+                        write_json(path, record, indent=None)
+                        dispatched.append((task, path))
+                charged_requests = budget.state["generation_requests"] - before
+                remaining = remaining_reader_capacity(budget)
+            reader_scope_wall = time.perf_counter() - reader_started
+            for task, path in dispatched:
+                record = read_json(path)
                 if record["status"] == "reader_completed":
                     score_episode(dataset, db, task, record)
-                write_json(result_path, record)
+                    write_json(path, record, indent=None)
                 counts[record["status"]] += 1
-        charged_requests = budget.state["generation_requests"] - before
-        remaining = remaining_reader_capacity(budget)
-    receipt = {
-        "status": "COMPLETED"
-        if sum(counts.values()) == len(population["tasks"]) and not counts.get("not_issued_budget")
-        else "PARTIAL",
-        "by_episode_status": counts,
-        "configured_tasks": len(population["tasks"]),
-        "independent_groups": len({(t["dataset"], t["native_group"]) for t in population["tasks"]}),
-        "reader_requests_this_invocation": charged_requests,
-        "reader_attempts_this_invocation": attempted,
-        "ledger_remaining_at_release": remaining,
-        "optimizer_updates": 0,
-        "wall_seconds": time.perf_counter() - wall,
-        "cpu_seconds": time.process_time() - cpu,
-        "encoder_work_this_invocation": model.counters if model else None,
-        "episode_results": str(episodes),
-    }
-    write_json(output / "run.json", receipt)
-    return receipt
+        tasks = population["tasks"]
+        complete = sum(counts.values()) == len(tasks) and not counts.get("not_issued_budget")
+        receipt = {
+            "status": "COMPLETED" if complete else "PARTIAL",
+            "by_episode_status": counts,
+            "configured_tasks": len(tasks),
+            "independent_groups": len({(t["dataset"], t["native_group"]) for t in tasks}),
+            "reader_requests_this_invocation": charged_requests,
+            "reader_attempts_this_invocation": attempted,
+            "prepared_episodes_this_invocation": prepared,
+            "reader_scope_wall_seconds": reader_scope_wall,
+            "ledger_remaining_at_release": remaining,
+            "optimizer_updates": 0,
+            "wall_seconds": time.perf_counter() - wall,
+            "cpu_seconds": time.process_time() - cpu,
+            "encoder_work_this_invocation": model.counters if model else None,
+            "episode_results": str(episodes),
+        }
+        write_json(output / "run.json", receipt)
+        return receipt

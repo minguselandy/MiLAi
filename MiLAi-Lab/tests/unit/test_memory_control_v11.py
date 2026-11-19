@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import sqlite3
 from collections import Counter
-from contextlib import closing
+from contextlib import closing, contextmanager, nullcontext
+from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -19,6 +21,7 @@ from milai_lab.methods.memory_control import (
 )
 from milai_lab.methods.memory_control_dataset import StateIndex
 from milai_lab.methods.small_control_learning import state_loss
+from milai_lab.runners import memory_control_episode as episode
 from milai_lab.runners.memory_control_episode import PolicyMenu
 from milai_lab.runners.memory_control_policy_states import _assign_policies
 from milai_lab.scorers.memory_control_episode_metrics import _shared_request_quality_delta
@@ -186,6 +189,102 @@ def test_fixed_r3_preserves_a_candidate_when_only_r2_is_feasible() -> None:
     handoff = MemoryAction("handoff", "HANDOFF", "")
     assert menu.choose(state, [focus, handoff]) == focus.id
     assert menu.choose(state, [focus, context, handoff]) == context.id
+
+
+def test_episode_batch_resumes_ready_and_collected_records(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    data = tmp_path / "data.sqlite3"
+    with closing(sqlite3.connect(data)) as db, db:
+        db.execute("CREATE TABLE experiment_tasks(id, dataset, native_group, experiment_role)")
+        db.executemany("INSERT INTO experiment_tasks VALUES (?, 'source', 'group', 'dev')",
+                       [(task,) for task in (1, 2, 3)])
+    task_rows = [{"task_id": task, "dataset": "source", "native_group": "group"}
+                 for task in (1, 2, 3)]
+    manifest = tmp_path / "manifest.json"
+    episode.write_json(manifest, {
+        "protocol": episode.EVALUATION_PROTOCOL, "dataset_run_id": "release", "role": "dev",
+        "seed": 42, "material_budget": 2048, "tasks": task_rows,
+    })
+    output = tmp_path / "readout"
+    arm = {"policy": "B1", "observation_protocol": "semantic_nav_v1"}
+    host = SimpleNamespace(settings={"host": {}}, capacity=None)
+    dataset = SimpleNamespace(path=data, run_id="release", host=host, revision={})
+    monkeypatch.setattr(episode, "MemoryControlDataset", lambda *a, **kw: dataset)
+    monkeypatch.setattr(episode, "comparison_protocol", lambda _: {})
+    monkeypatch.setattr(episode, "make_policy", lambda *a: (object(), None))
+    monkeypatch.setattr(episode, "ownership_client_configs", lambda _: ())
+    monkeypatch.setattr(episode, "VLLMConfig", lambda **kw: None)
+    monkeypatch.setattr(episode, "VLLMClient", lambda *a, **kw: nullcontext(None))
+    monkeypatch.setattr(
+        episode, "remaining_reader_capacity", lambda _: {"requests_remaining": None},
+    )
+    busy = True
+    owned = False
+    budget = SimpleNamespace(state={"generation_requests": 0})
+    prepared: list[int] = []
+    requests: list[int] = []
+    scored: list[int] = []
+
+    @contextmanager
+    def lease(*args, **kwargs):
+        nonlocal owned
+        if busy:
+            raise RuntimeError("HTTP_OWNER_BUSY")
+        owned = True
+        try:
+            yield budget
+        finally:
+            owned = False
+
+    def prepare(_dataset, _db, task, _arm, _policy, _model, _material, seed):
+        assert not owned
+        prepared.append(task["id"])
+        return {**task_rows[task["id"] - 1], "status": "ready", "reader_wire": {"seed": seed},
+                "capacity": {}, "costs": {"episode_local_wall_ms": 1.0}}
+
+    def request(_client, _host, wire, _capacity):
+        assert owned
+        requests.append(wire["seed"])
+        budget.state["generation_requests"] += 1
+        return {"status": "reader_completed"}, {
+            "reader_request_attempted": True, "reader_client_wall_ms": 2.0,
+        }
+
+    def score(_dataset, _db, task, record):
+        assert not owned
+        scored.append(task["id"])
+        record["status"] = "scored"
+
+    monkeypatch.setattr(episode, "http_budget_scope", lease)
+    monkeypatch.setattr(episode, "episode_before_reader", prepare)
+    monkeypatch.setattr(episode, "request_reader", request)
+    monkeypatch.setattr(episode, "score_episode", score)
+
+    def execute() -> dict:
+        return episode.evaluate_episodes(data, manifest, arm, output, device="cpu",
+                                         max_reader_requests=1)
+
+    with pytest.raises(RuntimeError, match="HTTP_OWNER_BUSY"):
+        execute()
+    result_path = output / "episodes/1.json"
+    assert len(result_path.read_text().splitlines()) == 1
+    assert episode.read_json(result_path)["status"] == "ready"
+    assert prepared == [1] and requests == []
+
+    busy = False
+    first = execute()
+    assert first["status"] == "PARTIAL" and first["prepared_episodes_this_invocation"] == 0
+    assert first["reader_requests_this_invocation"] == 1
+    assert requests == [43] and scored == [1] and prepared == [1]
+
+    for row, status in zip(task_rows[1:], ("reader_completed", "dispatching"), strict=True):
+        episode.write_json(output / f"episodes/{row['task_id']}.json", {**row, "status": status})
+    busy = True
+    last = execute()
+    assert last["status"] == "COMPLETED" and last["reader_requests_this_invocation"] == 0
+    assert last["by_episode_status"] == {"scored": 2, "reader_interrupted": 1}
+    assert requests == [43] and scored == [1, 2]
 
 
 def test_held_dev_outcomes_cannot_be_loaded_as_training_supervision() -> None:
