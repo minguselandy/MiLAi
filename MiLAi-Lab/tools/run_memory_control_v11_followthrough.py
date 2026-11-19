@@ -344,7 +344,38 @@ class Followthrough:
         self.run(command, "prepare-held-dev-outcomes", gpu=self.gpus[0])
         self.drain_outcomes(self.dev_outcomes, seal=True)
 
+    def held_dev_feature_args(self) -> list[str]:
+        evidence = self.root / "dev-outcome-ahead-prepare"
+        proof = read_json(evidence / "feature-cache-receipt.json", {})
+        if proof.get("status") != "VERIFIED_REGISTERED_DEV_CACHE_EQUIVALENCE":
+            return []
+        inputs = read_json(evidence / "input-audit.json", {})
+        states = inputs.get("registered_state_order", [])
+        if (
+            not states or proof.get("role") != "dev"
+            or len(states) != proof.get("registered_dev_states")
+            or proof.get("data") != str(self.data) or proof.get("dev_plan") != str(self.dev_plan)
+            or proof.get("feature_store") != str(self.features)
+            or not all((self.features / p).is_file()
+                       for p in ("features.json", "vectors.f32", "offsets.sqlite3"))
+        ):
+            return []
+        with closing(sqlite3.connect(self.data.as_uri() + "?mode=ro", uri=True)) as db:
+            row = db.execute(
+                "SELECT config FROM outcome_runs WHERE run_id=?", (self.dev_outcomes,)
+            ).fetchone()
+        declaration = json.loads(row[0]) if row else {}
+        if (
+            declaration.get("sealed") is not True
+            or declaration.get("role") != "dev"
+            or declaration.get("registered_dev_states") != states
+            or declaration.get("dataset_run_id") != proof.get("dataset_run_id")
+        ):
+            return []
+        return ["--feature-store", str(self.features)]
+
     def evaluate_outcome_epochs(self, models: Sequence[str], stage: str, seed: int) -> None:
+        feature_args = self.held_dev_feature_args()
         for model in models:
             name = run_name(model, stage, seed)
             contract = self.require_fit(name)
@@ -370,6 +401,7 @@ class Followthrough:
                         "cuda:0",
                         "--threads",
                         "2",
+                        *feature_args,
                     ],
                     output.name,
                     gpu=self.gpus[0],
