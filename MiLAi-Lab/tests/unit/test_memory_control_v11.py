@@ -265,6 +265,13 @@ def test_episode_batch_resumes_ready_and_collected_records(
         return episode.evaluate_episodes(data, manifest, arm, output, device="cpu",
                                          max_reader_requests=1)
 
+    preflight = episode.evaluate_episodes(data, manifest, arm, output, device="cpu",
+                                          max_reader_requests=1, prepare_only=True)
+    assert preflight["status"] == "PARTIAL_EPISODE_PREPARATION"
+    assert preflight["by_episode_status"] == {"ready": 1}
+    assert preflight["reader_requests_this_invocation"] == 0
+    assert not (output / "run.json").exists()
+
     with pytest.raises(RuntimeError, match="HTTP_OWNER_BUSY"):
         execute()
     result_path = output / "episodes/1.json"
@@ -281,6 +288,11 @@ def test_episode_batch_resumes_ready_and_collected_records(
     for row, status in zip(task_rows[1:], ("reader_completed", "dispatching"), strict=True):
         episode.write_json(output / f"episodes/{row['task_id']}.json", {**row, "status": status})
     busy = True
+    preserved = [p.read_bytes() for p in sorted((output / "episodes").glob("*.json"))]
+    audit = episode.evaluate_episodes(data, manifest, arm, output, device="cpu", prepare_only=True)
+    assert audit["status"] == "PREPARED_EPISODES" and len(scored) == 1
+    assert preserved == [p.read_bytes() for p in sorted((output / "episodes").glob("*.json"))]
+    assert episode.read_json(output / "run.json") == first
     last = execute()
     assert last["status"] == "COMPLETED" and last["reader_requests_this_invocation"] == 0
     assert last["by_episode_status"] == {"scored": 2, "reader_interrupted": 1}

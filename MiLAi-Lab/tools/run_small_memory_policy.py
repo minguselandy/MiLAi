@@ -826,6 +826,8 @@ def evaluate_saved(args: argparse.Namespace) -> None:
     import torch
 
     torch.set_num_threads(args.threads)
+    if args.prepare_episodes_only and not args.episode_plan:
+        raise ValueError("Episode preparation requires a registered episode plan")
     if args.episode_plan:
         if args.dev_outcome_run:
             raise ValueError("Held branch supervision is used only for offline evaluation")
@@ -853,8 +855,10 @@ def evaluate_saved(args: argparse.Namespace) -> None:
             if args.checkpoint:
                 arm.update(checkpoint=str(args.checkpoint.resolve()), seed=contract.get("seed"))
         evaluate_episodes(args.data, args.episode_plan, arm, args.output, device=args.device,
-                          max_reader_requests=args.max_reader_requests)
-        write_json(args.output / "native-summary.json", summarize(args.output))
+                          max_reader_requests=args.max_reader_requests,
+                          prepare_only=args.prepare_episodes_only)
+        if not args.prepare_episodes_only:
+            write_json(args.output / "native-summary.json", summarize(args.output))
         return
     if not args.checkpoint:
         raise ValueError("The offline evaluator requires an actual checkpoint")
@@ -1086,6 +1090,8 @@ def main() -> None:
     evaluation.add_argument("--feature-store", type=Path)
     evaluation.add_argument("--dev-outcome-run", action="append", default=[])
     evaluation.add_argument("--episode-plan", type=Path)
+    evaluation.add_argument("--prepare-episodes-only", action="store_true",
+                            help="Build registered episode requests locally for later dispatch")
     evaluation.add_argument("--registered-arm")
     evaluation.add_argument("--baseline", choices=["B0", "B1", "B2", "B3", "B4", "G"])
     evaluation.add_argument("--arm-name")

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import fcntl
 import json
+import os
 import random
 import sqlite3
 import time
@@ -454,6 +455,7 @@ def _prepare_episode_batch(
     *,
     device: str,
     limit: int | None,
+    prepare_only: bool = False,
 ) -> tuple[list[tuple[sqlite3.Row, Path]], Counter[str], SmallControlModel | None, int]:
     ready: list[tuple[sqlite3.Row, Path]] = []
     counts: Counter[str] = Counter()
@@ -467,6 +469,9 @@ def _prepare_episode_batch(
         if record is not None:
             if any(record[k] != row[k] for k in ("task_id", "dataset", "native_group")):
                 raise ValueError("Saved episode identity differs from the registered task")
+            if prepare_only and record["status"] != "ready":
+                counts[record["status"]] += 1
+                continue
             if record["status"] == "dispatching":
                 record["status"] = "reader_interrupted"
                 write_json(path, record, indent=None)
@@ -511,6 +516,7 @@ def evaluate_episodes(
     *,
     device: str,
     max_reader_requests: int | None = None,
+    prepare_only: bool = False,
 ) -> dict[str, Any]:
     population = read_json(manifest)
     if population["protocol"] != EVALUATION_PROTOCOL:
@@ -547,7 +553,26 @@ def evaluate_episodes(
         episodes.mkdir(exist_ok=True)
         ready, counts, model, prepared = _prepare_episode_batch(
             dataset, db, population, arm, episodes, device=device, limit=max_reader_requests,
+            prepare_only=prepare_only,
         )
+        tasks = population["tasks"]
+        if prepare_only:
+            counts["ready"] += len(ready)
+            complete = sum(counts.values()) == len(tasks)
+            preparation_receipt = {
+                "status": "PREPARED_EPISODES" if complete else "PARTIAL_EPISODE_PREPARATION",
+                "pid": os.getpid(), "by_episode_status": counts, "configured_tasks": len(tasks),
+                "prepared_episodes_this_invocation": prepared,
+                "reader_requests_this_invocation": 0, "reader_attempts_this_invocation": 0,
+                "optimizer_updates": 0, "wall_seconds": time.perf_counter() - wall,
+                "cpu_seconds": time.process_time() - cpu,
+                "encoder_work_this_invocation": model.counters if model else None,
+                "episode_results": str(episodes),
+            }
+            with (output / "episode-preparation-invocations.jsonl").open("a") as journal:
+                journal.write(json.dumps(preparation_receipt, allow_nan=False) + "\n")
+            write_json(output / "episode-preparation.json", preparation_receipt)
+            return preparation_receipt
         if ready:
             dispatched: list[tuple[sqlite3.Row, Path]] = []
             reader_started = time.perf_counter()
@@ -591,7 +616,6 @@ def evaluate_episodes(
                     score_episode(dataset, db, task, record)
                     write_json(path, record, indent=None)
                 counts[record["status"]] += 1
-        tasks = population["tasks"]
         complete = sum(counts.values()) == len(tasks) and not counts.get("not_issued_budget")
         receipt = {
             "status": "COMPLETED" if complete else "PARTIAL",
