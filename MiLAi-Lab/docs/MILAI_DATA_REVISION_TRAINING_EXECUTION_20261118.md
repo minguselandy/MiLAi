@@ -339,6 +339,14 @@ M0 的第 72 步真实恢复文件也可重建最终导出和覆盖，追加优�
 再次逐项核对。交接点为 13,964 条入库分支、1,800 条已收回 Reader 回复和
 12,118 条已准备分支，交接后继续第二批派发。见 `core-warm-recovery-handoff.json`。
 
+11:44 对账核对了正式 core 的 81 个已关闭派发窗口。16,164 条已完成回复均有窗口收据和
+服务端 token 计量，共 16,901,850 input token、988,832 output token。该快照含首批
+13,964 条入库分支和第二批 2,200 条已完成回复。见 `core-dispatch-accounting-audit.json`。
+11:54 对两个已准备批次逐项核对预先登记的采样顺序、TRAIN 角色、预算及分层。每批为
+3,000 个不同状态，均有 300 个状态实际准备了重复测量。两批合并后 MuSiQue、QASPER、
+PersonaMem 分别覆盖 3,812、803、65 个原生组。PersonaMem 的 65 个组在两批均有任务，
+后续分组分析采用原生组身份。见 `core-first6000-realized-roster-audit.json`。
+
 首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
 时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
 主线重试间隔。首个 M1 窗口已收回 20 个位置。见
@@ -351,6 +359,26 @@ token 节省 30.31%，分组 95% 区间为 [26.93%, 34.00%]，宏质量差为 �
 输入节省点估计为 6.84%。这组读出用于首批阶段诊断，完整 O 的训练与读出沿正式矩阵进行。
 见 `core-first3000-O-pilot/incremental-O-dev/M0-O3000/against-W.json` 和同目录
 `against-B-star.json`。
+
+对同一 120 题逐条核对在线读取轨迹。M0 增量 O 在 MuSiQue、QASPER、PersonaMem 的
+平均成功读取数分别为 1.30、3.35、1.33，W/N1 对应为 4.00、3.83、4.00。三源的
+平均 Reader 输入相对 W/N1 均降低。QASPER 相对 B* 的平均输入从 1,060 增至
+1,758 token。该分来源结果与整体节省同时成立。见
+`core-first3000-O-pilot/M0-O3000-reading-trajectory-audit.json`。
+
+12:01，M1 收齐同一批 120 个位置，每轮 20 次实际 Reader 请求，共六轮。相对自身 W/N1，
+M1 增量 O 的宏质量差为 −6.66 点，分组 95% 区间为 [−13.05, −0.68]。输入 token 节省
+6.46%，区间为 [−1.08%, 13.15%]。相对 B*，宏质量低 9.51 点，输入 token 多 26.24%。
+在同一批任务上直接配对两个增量 O，M1 相对 M0 的宏质量差为 −4.03 点，区间为
+[−12.05, 4.41]，输入 token 多 35.51%，区间为 [22.20%, 52.05%]。见
+`core-first3000-O-pilot/incremental-O-dev/M1-O3000/against-W.json`、同目录
+`against-B-star.json` 和 `core-first3000-O-pilot/M1-O3000-against-M0-O3000.json`。
+
+M1 相对自身 W/N1 的分差在 MuSiQue、QASPER、PersonaMem 分别为 −7.51、−14.97、
++2.50 点。QASPER 的平均成功读取数从 3.90 增至 5.68，成功 R3 读取从 2.63 降至 1.03，
+40 个任务中有 25 个以预算耗尽结束。增量 O 使用学习停止，W 使用固定四次读上限。
+它们在这批单种子诊断上同时改变训练阶段和停止方式。见
+`core-first3000-O-pilot/M1-O3000-reading-trajectory-audit.json`。
 
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
@@ -370,9 +398,28 @@ token 节省 30.31%，分组 95% 区间为 [26.93%, 34.00%]，宏质量差为 �
 `v11-policy-closure-conditional-read-contrasts.json`。
 
 后续协调器以已结束的 seed 11 O 训练和整任务 DEV 结果为依赖。公共 P 池按来源轮转原生组，
-以真实策略轨迹去重，目标为 12,000 个 TRAIN 状态。P 每轮覆盖两池的全部可训练状态，
-仅在较小的池内补充真实状态的重复曝光，使 core 和 P 各占一半。收据记录真实曝光和
-重复次数。另从固定 605 个 DEV 任务登记各自唯一的冷 SEARCH 状态，真实 Reader 结果供
+以真实策略轨迹去重，目标为 12,000 个 TRAIN 状态。
+
+枚举 43,901 个合格 TRAIN 任务时，旧全局策略轮转与来源权重的周期叠加，导致 1,460 个
+PersonaMem 任务中规则策略分配为 0。新的 P 采集入口在各来源内部轮转 M0、M1、规则和随机策略，
+完整名单为 PersonaMem 分配 146 个规则和 146 个随机策略任务。任务及原生组顺序逐项保持一致。
+用增量 O 的实际检查点在独立副本上执行相同的 120 个 TRAIN 任务，分别于第 60 个任务续跑。
+旧轮转收集 326 个去重状态，取其中前 24 个准备 119 个分支。新轮转收集 332 个去重状态，
+取前 24 个准备 117 个分支，三个来源均运行了四种策略。按 M0、M1、规则、随机顺序，
+尝试任务数为 48、48、13、11，去重后状态数为 86、140、48、58。另用旧入口登记并执行
+一个真实任务，再由新入口续跑，核对原全局轮转和登记配置。以上预演共发起 0 次 Reader
+请求。见
+`policy-arrival-preflight/preflight-receipt.json`、
+`policy-arrival-by-source-preflight/train-task-roster-audit.json` 和同目录 `preflight-receipt.json`。
+
+P 每轮覆盖两池的全部可训练状态，仅在较小的池内补充真实状态的重复曝光，使 core 和 P
+各占一半。对独立副本中 8 个已评分 core 状态与 4 个已评分策略到达状态，从实际增量 O
+检查点完成 3 次优化更新。两池各实际曝光 24 次，重复曝光分别为 16 和 20 次。见
+`policy-mixed-exposure-rehearsal/rehearsal-receipt.json`。11:51 核对正式 P 与冷 DEV 分支登记
+为空后，等待中的 P 和确认协调器启用 `4a5a1475`。core 在原进程中继续派发。见
+`followthrough-source-policy-rotation-handoff.json`。
+
+另从固定 605 个 DEV 任务登记各自唯一的冷 SEARCH 状态，真实 Reader 结果供
 O/P 各轮检查点评分。该 outcome 角色与 TRAIN loaders 隔离。seed 11 的 O-scratch、
 未训练头、宽 M0、固定停止与固定精度对照完成后冻结配方，再用同一训练公共池执行
 seed 29/47。三个 seed 都有实际检查点后才登记最终确认组和 22 个比较臂。该流程的
