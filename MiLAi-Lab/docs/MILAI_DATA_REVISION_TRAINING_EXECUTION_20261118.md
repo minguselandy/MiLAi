@@ -322,6 +322,36 @@ P 和确认协调器在等待正式 O 时启用 `ecb2be49`。确认入口核对�
 交接和实测见 `followthrough-durable-confirmation-handoff.json` 与
 `confirm-literal-prerequisite-rehearsal.json`。
 
+首批 O 的真实检查点副本复现了旧入口续训时丢失 W 初始化路径的问题。修复从原训练收据
+恢复 W 路径，在改写任何训练收据前核对恢复文件中的完整训练配方和已提交步序。A100 上用
+首批真实 outcome 做 M1 bf16 确定性回放，在第 26 步结束独立训练进程，从第 24 步的
+持久检查点恢复到第 28 步。累计 3,512 次状态曝光，续训本次仅计 4 次更新，回滚的
+两条旧日志按原字节保留。结果与连续训练的参数张量、优化器、调度器、随机状态和逐步
+loss 逐项相同，第 24 步中间检查点也给出相同动作分数。错误的 W 路径在改写收据前被拒绝。
+M0 的第 72 步真实恢复文件也可重建最终导出和覆盖，追加优化器更新为 0。见
+`warm-outcome-legacy-resume-reproduction.json`、`warm-outcome-interruption-rehearsal.json`
+和 `warm-outcome-final-step-reclosure-rehearsal.json`。
+
+仍在等待正式 O 的 P 和确认协调器已启用 `a14ca073`。启动训练前依据进程参数绑定实际
+输出目录，已有进程存活时等待其产物，已完成的训练按完整覆盖核对。中断且已有持久
+恢复文件的阶段用原配方续训。P 交接实测见 `followthrough-warm-recovery-handoff.json`。
+正式 core 随后在 11:27 的空闲租约边界接入同一源码，已提交的 6,000 个状态及其顺序
+再次逐项核对。交接点为 13,964 条入库分支、1,800 条已收回 Reader 回复和
+12,118 条已准备分支，交接后继续第二批派发。见 `core-warm-recovery-handoff.json`。
+
+首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
+时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
+主线重试间隔。首个 M1 窗口已收回 20 个位置。见
+`core-first3000-O-pilot/windowed-reader-handoff.json` 及同目录的
+`windowed-dev-reader-invocations.jsonl`。
+
+M0 随后收齐增量探索读出的 120 个位置，覆盖 43 个原生组。相对自身 W/N1，输入
+token 节省 30.31%，分组 95% 区间为 [26.93%, 34.00%]，宏质量差为 −0.16 点，
+区间为 [−5.00, 4.96]。相对 B* 的质量差为 −5.49 点，区间为 [−14.35, 2.29]，
+输入节省点估计为 6.84%。这组读出用于首批阶段诊断，完整 O 的训练与读出沿正式矩阵进行。
+见 `core-first3000-O-pilot/incremental-O-dev/M0-O3000/against-W.json` 和同目录
+`against-B-star.json`。
+
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
 在 4 个状态上完成 1 次实际参数更新，控制头 L2 变化 0.007288。宽 M0 W 和该诊断更新的
