@@ -7,6 +7,26 @@ V1.1 的公开工作路径为 `/cra/milai-datasets/memory_control_v1_1`，实际
 `/data/milai-experiments/20261118-memory-control-v11/dataset`。这里使用路径、原生组、
 发布版本、提交和运行编号登记来源。SHA、校验和及替代内容指纹的校验关闭。
 
+## 提交时的状态
+
+快照时间为 2026-11-19 22:06 CST。V1.1 在 V1 发布提交 `dead0383` 上加入静态交付
+适配、原生评分、角色隔离的监督加载、分组配对统计以及可续跑的分支队列。分支准备和
+Reader 派发分别记录，用原台账结算实测调用与算力。滚动准备按登记顺序接入，既有请求
+与回包保留原绑定。
+
+| 阶段 | 已验证的产物与当前状态 |
+|---|---|
+| W | seed 11 的 M0 和 M1 均完成 3 轮覆盖训练，各有 6,066 次实际优化更新。 |
+| 正式 core | 接入 15,000/24,000 个状态。前四批 55,958 条分支已评分，第五批已收回 3,168 条回复。第六、七批已准备完毕。 |
+| O 输入 | 24,000 个登记状态的冻结特征全部就绪。正式训练等待完整 core 封存。 |
+| DEV 对照 | 605 个冷 SEARCH 状态的 2,990 条待发分支已原子接入。两路未训练对照各计划 605 题，本地队列分别生成了 533 和 502 条。 |
+| P 和确认 | 后续协调器已启动，等待正式 O 以及其完整 DEV 读出。确认保持原定三种子与原生组隔离。 |
+
+两种未训练预算的六组配对已完成，153 条不同请求均有真实评分。1,536 预算下 M0、M1
+的 Reader 输入分别减少 11.57% 和 11.31%，对应宏质量差的区间均跨零。实测与作用域
+核对见下文对应阶段。变更通过 41 项定向单元测试、Ruff、包与工具依赖边界检查。变更
+涉及的 episode runner 通过类型检查，训练 CLI 与修改前保有相同的既有类型诊断。
+
 ## 数据和交付
 
 | 来源 | TRAIN 任务 | 独立 TRAIN 组 | 修订 TRAIN 状态 | 至少一个可行已知 READ 的状态 |
@@ -443,6 +463,21 @@ TRAIN 任务、2,690 个原生组。原两批的 27,882 条分支绑定复核一
 见 `dev-outcome-ahead-prepare/feature-cache-receipt.json`、同目录的
 `followthrough-cache-handoff.json` 和 `dev-ahead-compute-settlement.json`。
 
+21:48，第七批的 3,000 个状态和 14,006 条待发分支准备完成。滚动队列等待第六、七批
+依次接入。21:51 按最近 20 个关闭 Reader 窗口测得实际吞吐为每秒 1.26 条，包含窗口间
+实际等待。资源报告按来源和批次保留提供方计量、Reader 客户端延迟及缺失计量位置。
+见 `core-21000-parallel-preparation/receipt.json` 和 `current-core-reader-resource-profile.json`。
+
+按最终交付的原生证据，对前四批的正式 R3/R2 配对做分层。QASPER 的 2,700 对中有
+47 对仅 R3 完整覆盖证据，质量差 +26.07 点，分组 95% 区间 [13.22, 38.75]，平均多用
+524 个输入 token。两侧都完整覆盖的 824 对，质量差为 −1.00 点。PersonaMem 有
+61 对只在 R3 完整覆盖，质量差 +5.15 点，区间 [−7.35, 16.93]。见
+`core-official-expansion-evidence-audit/actual-expansion-evidence-and-quality.json`。
+
+两路未训练对照使用各自真实 W 初始检查点和正式 605 题 DEV 计划。新增
+`--prepare-episodes-only` 入口在本地重放固定停止轨迹并登记原始请求，准备收据与正式
+评测收据分别保存。正式评测沿原队列派发待发请求。实现与作用域测试冻结为 `95db41d0`。
+
 首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
 时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
 主线重试间隔。首个 M1 窗口已收回 20 个位置。见
@@ -722,6 +757,13 @@ CUDA_VISIBLE_DEVICES=2 "$MILAI_PY" tools/prepare_memory_control_registered_featu
   --feature-store /dev/shm/milai-v11-features-N1 --output "$MILAI_RUN/core-feature-prewarm-replay" \
   --checkpoint "$MILAI_RUN/M0-W-N1-seed11/checkpoint" \
   --checkpoint "$MILAI_RUN/M1-W-N1-seed11/checkpoint"
+
+CUDA_VISIBLE_DEVICES=2 "$MILAI_PY" tools/run_small_memory_policy.py evaluate \
+  --data "$MILAI_RUN/dataset/memory_control.sqlite3" \
+  --episode-plan "$MILAI_RUN/dev-population-v1.json" --prepare-episodes-only \
+  --checkpoint "$MILAI_RUN/M0-W-N1-seed11/checkpoints/initial" \
+  --arm-name M0-untrained --stop fixed --precision learned --device cuda:0 --threads 2 \
+  --output "$MILAI_RUN/untrained-control-preparation/replay-M0"
 
 MILAI_O_PILOT="$MILAI_RUN/core-first3000-O-pilot"
 "$MILAI_PY" tools/report_memory_control_episode_evidence.py --data "$MILAI_DB" \
