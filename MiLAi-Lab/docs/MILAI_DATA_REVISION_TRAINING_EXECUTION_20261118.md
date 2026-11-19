@@ -373,6 +373,18 @@ TRAIN 任务、2,690 个原生组。原两批的 27,882 条分支绑定复核一
 13:20，第二批已收回 7,800 条回复。109 个关闭窗口合计 21,764 条服务端计量回复，见
 `core-dispatch-accounting-109-windows.json`。
 
+13:33，滚动准备从第三批已核对的实体副本开始第四批。以登记名单的边界确定每批大小、
+状态顺序和来源配额，最多预备正式接入位置之后的两个批次。对第四批的实体 SQLite
+副本逐项核对，继承的 41,886 条分支与父副本一致，首 326 个新增状态及 1,504 条待发
+分支保持已登记顺序。13:39 在原 Reader 租约的空闲边界交接正式协调器。后续各批均在
+上一批评分后按同一入口接入。见 `core-12000-parallel-preparation/live-prefix-audit.json`
+和 `core-rolling-integration/formal-boundary-handoff.json`。
+`stage-core-ahead.py` 使用 `71f8a98b` 的入口维护准备队列。每个完成的实测准备调用由
+`settle-rolling-core-preparation.py` 在原台账单独结算。
+13:49，正式 core 的 116 个关闭窗口合计 23,164 条回复，其中 600 条在本次交接后关闭。
+当时第二批已收回 9,265 条由提供方计量的回复。见 `core-dispatch-accounting-116-windows.json`。
+14:00，第二批已收回 10,073 条回复，第四批副本已准备 2,244 个状态。
+
 首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
 时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
 主线重试间隔。首个 M1 窗口已收回 20 个位置。见
@@ -453,6 +465,12 @@ R2、学习精度、R3 三臂分别为 1、3、11 题。将同请求上的测量
 `core-first3000-O-pilot/fixed-control-probe/actual-control-status.json` 和同目录的
 `complete-fixed-control-native-evidence.json`。
 
+将 QASPER 的实际差异按完整原生标注证据的交付变化分层。相对学习精度，R3 新取得完整
+证据的 8 题平均质量高 34.13 点，每题多用 804 个 Reader 输入 token。两臂均未完整
+交付的 23 题平均高 1.69 点，新增 527 个输入 token。有 5 题缺少可映射的完整标注，
+该层平均质量差为 −26.23 点，新增 656 个输入 token。见
+`core-first3000-O-pilot/fixed-control-probe/precision-evidence-and-cost-transitions.json`。
+
 证据诊断从已结束的实际 episode 读取成功 READ、原文区间和已送出的 Reader 请求，再核对
 标注集覆盖。开场可达性使用逐个可行 READ 的区间并集。停止机会使用实际 HANDOFF 菜单中
 一个合法 READ 的增量。120 题诊断中，QASPER 有 34 题提供完整对齐的文本标注集。
@@ -485,6 +503,38 @@ HANDOFF 分别为 7 和 6 次。见 `core-first3000-O-pilot/dev120-native-eviden
 首窗的 20 个 M0、1,536 请求均返回服务端计量结果并完成评分。请求与准备结果逐项相同，
 与同题 2,048 请求逐题不同。合计 29,063 input token、1,429 output token，队列接续时
 新增模型准备为 0。见同运行目录的 `first-fresh-window-verification.json`。
+
+B* 的 120 题跨预算配对已收齐。1,536 预算改变了两道 PersonaMem 题的请求。两条新
+请求均完成原生评分，两题各自的质量与 2,048 参考预算一致，实测输入分别少 44 和
+439 token。3,072 的 120 条请求均与参考预算逐项相同，使用同请求的真实回复。见
+`complete-baseline-held-budget-readout.json`。
+
+逐题追踪共同读取前缀后的首次分歧。M0 在 QASPER 上各有 25 条轨迹随预算改变。在
+1,536 预算下，其中 24 条的首次分歧发生在参考动作已离开合法菜单时。在 3,072 预算下，
+24 条的首次分歧来自更高预算才允许的动作。这一核对使用实际冷启动轨迹和完整动作绑定。
+见 `first-budget-divergence-audit.json`。
+
+M0 的 1,536 预算完成 120 题配对，其中 26 条新请求、94 条逐项相同的参考请求。相对
+2,048，宏质量差为 −2.20 点，分组 95% 区间 [−6.32, 0.26]。Reader 输入节省 11.57%，
+区间 [8.02%, 15.34%]。QASPER 平均实际输入由 1,758 降至 1,382 token，四题失去完整
+标注证据。见 `complete-paired-arms/M0-O3000-1536.json` 和
+`qasper-evidence-quality-M0-O3000-1536.json`。
+
+M0 的 3,072 预算也完成全 120 题配对。相对 2,048，宏质量差为 −1.49 点，分组 95%
+区间 [−5.36, 0.86]，Reader 输入增加 16.64%。直接比较两个未训练预算，3,072 相对
+1,536 的宏质量高 0.71 点，区间 [−0.25, 2.30]，Reader 输入增加 31.90%，区间
+[21.42%, 41.17%]。见 `complete-paired-arms/M0-O3000-3072.json` 和
+`M0-direct-3072-versus-1536.json`。
+
+14:00，两个增量模型和 B* 的六个跨预算对照全部完成，各覆盖 120 题和 43 个原生组。
+M1 的 1,536 预算相对 2,048 的宏质量差为 −0.84 点，分组 95% 区间 [−5.58, 3.00]，
+Reader 输入节省 11.31%。3,072 预算的宏质量差为 +0.32 点，区间 [−4.02, 4.95]，
+Reader 输入增加 10.15%。M1 和 M0 的质量预算响应差在两个未训练预算上分别为
++1.36 和 +1.81 点，区间均跨零。见 `readout-report.json` 和 `model-budget-interaction.json`。
+
+153 条新请求均已完成原生评分与提供方计量，合计 322,430 input token、7,072 output
+token。逐臂复算结果与完整报告的配对统计逐项相同。563 个相同请求绑定 2,048 的真实回复，
+4 个绑定另一未训练预算的真实回复。见 `complete-readout-audit.json`。
 
 第三批 core 与未训练预算重放的本地准备在原台账分别结算一次。计量范围为实际准备的
 CPU 时间及 CUDA 分配墙时。见 `third-core-and-held-preparation-settlement.json`。
