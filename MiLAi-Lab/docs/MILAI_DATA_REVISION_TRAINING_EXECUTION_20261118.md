@@ -349,6 +349,21 @@ PersonaMem 分别覆盖 3,812、803、65 个原生组。PersonaMem 的 65 个组
 12:25 的下一次对账覆盖 92 个关闭窗口，共 18,364 条服务端计量回复，其中第二批为
 4,400 条。累计 19,255,900 input token、1,119,273 output token。见
 `core-dispatch-accounting-92-windows.json`。
+12:54 对账覆盖 101 个关闭窗口，共 20,164 条收据对应回复。打开的窗口另有 77 条
+已完成回复。第二批累计收回 6,277 条。见 `core-dispatch-accounting-101-windows.json`。
+
+第二批派发期间，使用同一冻结入口和两个 W/N1 检查点在独立副本上准备第三批。
+对 3,000 个计划状态的派生标签、候选绑定、导航和原文区间逐项比较，涉及 2,954 个
+TRAIN 任务、2,690 个原生组。原两批的 27,882 条分支绑定复核一致。12:50，副本已准备
+958 个第三批状态。接入入口在独立副本上把 24 个实际状态的 112 条待发分支一次入库，
+行内容和顺序逐项相同。改变源对象时拒绝接入，改动最后一条分支的请求种子时整批回滚。
+再次运行确认没有重复写入。见 `core-9000-parallel-preparation/status.json`、同目录的
+`literal-input-audit.json` 和 `adoption-rehearsal/verification.json`。
+
+12:53 在 core 等待原 Reader 租约且无派发子进程的边界完成协调器交接。边界已有 6,000 个
+状态，新进程接续第二批派发。第三批安排在第二批评分后用 `191300c6` 的工具复核与接入。
+接入与继续派发沿原登记顺序执行。见
+`core-9000-parallel-preparation/formal-boundary-handoff.json`。
 
 首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
 时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
@@ -404,6 +419,26 @@ READ 分数最大绝对差为 1.79e-7。三个固定停止条件在 QASPER 上�
 `core-first3000-O-pilot/fixed-control-probe/first-window-receipt.json`、同目录
 `closed-windows.jsonl`、`preparation-compute-settlement.json`、`actual-control-status.json`
 和 `followthrough-staged-episode-handoff.json`。
+
+固定停止的三个精度臂均已收齐 MuSiQue 的 40 题、20 个原生对。120 次实际响应使用的
+终端请求在同题上逐项相同，三臂 Reader 输入均为 40,583 token。固定 R2 与 R3 的
+重复调用在 9 题上出现原生评分字段差异，其中 1 个原生对的聚合分不同。该分层提供相同
+请求下的服务波动实测。见
+`core-first3000-O-pilot/fixed-control-probe/musique-shared-wire-repeated-reader-audit.json`。
+
+证据诊断从已结束的实际 episode 读取成功 READ、原文区间和已送出的 Reader 请求，再核对
+标注集覆盖。开场可达性使用逐个可行 READ 的区间并集。停止机会使用实际 HANDOFF 菜单中
+一个合法 READ 的增量。120 题诊断中，QASPER 有 34 题提供完整对齐的文本标注集。
+M1 的 W/N1 和增量 O 开场均有 32 题的菜单并集覆盖标注，最终完整交付从 18 题降至
+7 题，配对中有 13 题仅 W 完整交付、2 题仅增量 O 完整交付。对应一个合法 READ 可补全的
+HANDOFF 分别为 7 和 6 次。见 `core-first3000-O-pilot/dev120-native-evidence-audit.json`。
+
+相同入口核对了完整 DEV605 的五个基线、四个 W 观测条件及单列的 G。PersonaMem 的
+187 个有映射片段的任务中，部署臂的开场菜单并集有 86 个可覆盖片段。M0 的 N0 和 N1
+完整交付为 22、11 个，M1 为 24、8 个。QASPER 的 G 完整交付标注集 155 次，其中
+45 个实际结果训练质量为零。PersonaMem 的 G 完整交付参考片段 86 次，其中 45 个结果
+得零分。这一分层保留各来源标注定义和实际评分。见 `dev605-native-evidence-audit.json`
+与 `dev605-gold-native-evidence-audit.json`。
 
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
@@ -519,6 +554,15 @@ MILAI_CONFIG=configs/datasets/memory_control_v1_1.json
   --run-id v11-reader-closure --seal
 "$MILAI_PY" tools/report_memory_control_outcome_contrasts.py --data "$MILAI_DB" \
   --run-id v11-reader-closure --output "$MILAI_RUN/v11-reader-closure-conditional-read-contrasts.json"
+
+MILAI_O_PILOT="$MILAI_RUN/core-first3000-O-pilot"
+"$MILAI_PY" tools/report_memory_control_episode_evidence.py --data "$MILAI_DB" \
+  --run "$MILAI_O_PILOT/dev-probe-reference/M1-W-N1-seed11-DEV" \
+  --run "$MILAI_O_PILOT/incremental-O-dev/M1-O3000" \
+  --run "$MILAI_O_PILOT/dev-probe-reference/M0-W-N1-seed11-DEV" \
+  --run "$MILAI_O_PILOT/incremental-O-dev/M0-O3000" \
+  --run "$MILAI_O_PILOT/dev-probe-reference/dev-main-B1" \
+  --output "$MILAI_O_PILOT/dev120-native-evidence-audit.json"
 ```
 
 运行根中的 `launch-W-seed11.sh`、`launch-dev-baselines.sh`、`launch-core-and-O.py`、
