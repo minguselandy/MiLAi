@@ -141,6 +141,15 @@ M0/N1 相对 M0/N0 的分差为 −4.01 点，95% 区间为 [−10.66, 3.07]；
 M1/N1 已完成首轮 2,022 个更新并进入第二轮。首轮离线 DEV 弱证据 AP 按 MuSiQue、
 QASPER、Persona 顺序为 0.1953、0.1278、0.0876。原生来源明细见
 `M1-W-N1-seed11/dev-epoch-1.json`。
+M1/N1 随后完成 6,066 次实际更新和 776,154 次状态曝光，头参数 L2 变化为 63.05。
+编码器前向为 0，训练调用耗时 10,956.02 秒，已在原共享台账结算一次。见
+`M1-W-N1-seed11/coverage.json` 和 `M1-W-N1-compute-settlement.json`。
+
+seed 11 W 的四臂正式 DEV 各完成 605 个位置。M0/N0、M0/N1、M1/N0、M1/N1 的
+三来源等权宏分依次为 27.15、23.38、26.65、24.65。N1 对 M0 的配对差为 −3.77 点，
+95% 区间为 [−6.91, −0.41]，对 M1 的差为 −2.00 点，区间为 [−5.37, 1.36]。
+关注模型交互的点估计为 +1.77 点，区间为 [−3.08, 6.56]。固定任务分层与资源完整收据为
+`dev-weak-2x2-effect.json`。
 
 宽 M0/N1 已完成三轮、6,066 次更新和 776,154 次状态曝光。M0/N0 末轮头与其初始化头
 在固定停止和相同合法候选下，各完成 7 个 DEV 任务和 7 次 Reader 请求。训练头在该小样本
@@ -213,6 +222,9 @@ Gold 材料诊断 `G` 在正式 B0 到 B4 完成并登记 B* 后，从同一 DEV
 首次调用的冻结 CLI 仅登记 B0 到 B4，G 在参数解析时退出，请求数为 0。已核对后切到
 支持 G 的 `500ee850` 冻结入口，首批 100 个位置已收回。原始日志和交接见
 `gold-dev-source-correction.json`。
+G 随后完成全部 605 个位置。相对 B* 的三来源宏分高 13.65 点，95% 区间为
+[9.76, 17.75]，MuSiQue、QASPER、PersonaMem 分别高 24.62、9.90、6.44 点。
+分来源质量、实际输入 token 与固定原生配对见 `dev-gold-vs-B-star-v1.json`。
 
 主 DEV 的 B0 到 B4 在共享 Reader 租约下分块提交。605 个任务的正式结果、B* 选择、
 24,000 个 core 状态上的正式 O、12,000 个策略到达状态上的 P、参数匹配和三种子确认继续
@@ -272,6 +284,43 @@ R2/R3，固定续程后 104 对请求不同、15 对汇合到同一请求。该�
 新入口逐项比较编码器配置、词表与实际参数张量，并各自运行原有控制头。
 收据为 `core-proposal-encoding-pair-benchmark-v1.json`、`shared-proposal-cli-validation-v1.json`
 和 `outcome-coordinator-shared-encoder-handoff.json`。
+
+正式 core 的首批 3,000 个状态于 10:16 完成评分并入库，覆盖 2,964 个任务和 2,689 个
+原生组。13,964 次实际调用全部计量，其中 55 个格式失败保留在评分收据里。
+Reader client 用时 9,720.53 秒，合计 14,583,861 input token 和 857,634 output token。
+实际 loader 为全部状态提供 value 监督，1,106 个状态有方向偏好，1,278 个有双成功成本
+偏好。205 个同请求组中有 27 组出现原始质量差异，29 个偏好对在重复测量中出现方向冲突。
+见 `core-first3000-supervision-and-cost-audit.json`。
+
+在首批实际分支上，QASPER 的 R3 相对 R2 为 +0.25 质量点，原生组 95% 区间为
+[−1.21, 1.64]，每个匹配状态的加权平均增加约 370 个 input token。
+PersonaMem 的对应差为 −0.33 点，区间 [−2.90, 2.31]，增加约 255 个 token。
+配对保留终端请求等同性，沿用固定的后续策略。见 `core-first3000-conditional-read-contrasts.json`。
+
+在独立 SQLite 副本上逐项核对首批 3,000 个状态的入库顺序与已登记抽样，随后封存实际
+首批结果并训练增量 O。M0 与 M1 均由各自完整 W/N1 初始化，各完成 3 轮、72 次更新和
+9,000 次状态曝光，头参数 L2 变化分别为 2.76 和 2.24。M0 追加了首批仍需的冻结向量，
+M1 直接复用实际缓存，编码器前向为 0。两个增量检查点使用从已冻结 DEV605 中按原生组
+抽出的 120 个位置进行探索性读出，每来源各 40 个。正式 core 继续累计至 24,000 个状态。
+训练收据见 `core-first3000-O-pilot/pilot-execution.json`，读出状态与清单见同目录
+`v11-followthrough.json` 和 `dev-probe-population.json`。
+
+core 批次续跑现保存有序状态名单、重复安排和与分支行一起提交的随机游标。
+对旧入口的只读复放表明，假设首批已有 437 个状态，重新抽样的 2,563 个余量中有
+2,512 个不属于原首批余量。新入口在独立副本上实际准备了 30 个状态。在提交 7 个状态后
+终止进程，再从保存游标完成余量，120 条分支的绑定、材料、请求和写入顺序均逐项复现；
+提前封存也被拒绝。见 `core-previous-partial-resampling-audit.json` 和
+`core-preparation-interruption-rehearsal.json`。
+第二批准备完成后，已落盘的 6,000 个状态及抽样来源与登记名单逐项核对。10:55 在原
+协调器等待租约且没有执行子进程时交接到新入口。交接点共有 13,964 条入库分支和
+13,918 条已准备分支。新协调器从第二批派发环节接续，收据为
+`core-durable-batch-handoff.json`。
+
+P 和确认协调器在等待正式 O 时启用 `ecb2be49`。确认入口核对阶段初始化路径、实际优化
+步序、覆盖和 checkpoint 配置，并逐项比较锁定的 roster 及 22 个臂文件绑定。
+复核使用三个已完成的真 W/N1 检查点，在 DEV605 上往返重建清单并检出同名替换权重路径。
+交接和实测见 `followthrough-durable-confirmation-handoff.json` 与
+`confirm-literal-prerequisite-rehearsal.json`。
 
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
