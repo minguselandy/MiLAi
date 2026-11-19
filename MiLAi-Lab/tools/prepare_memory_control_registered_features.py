@@ -176,6 +176,11 @@ def main() -> None:
     root.mkdir(parents=True, exist_ok=True)
     with (root / ".feature-preparation.lock").open("ab") as guard:
         fcntl.flock(guard.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        receipt = root / "receipt.json"
+        if receipt.exists():
+            raise FileExistsError(
+                "Use a new output directory for another feature preparation receipt"
+            )
         write_json(root / "status.json", {
             "status": "WARMING_REGISTERED_CORE_FEATURES", "pid": os.getpid(),
         })
@@ -186,9 +191,9 @@ def main() -> None:
                 "status": "STOPPED", "pid": os.getpid(), "reason": f"{type(exc).__name__}: {exc}",
             })
             raise
-        write_json(root / "receipt.json", result)
+        write_json(receipt, result)
         write_json(root / "status.json", {"status": result["status"], "pid": os.getpid(),
-                                          "receipt": str(root / "receipt.json")})
+                                          "receipt": str(receipt)})
         print(result["status"], result["registered_states"], result["new_registered_states"])
 
 

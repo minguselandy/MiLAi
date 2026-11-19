@@ -269,6 +269,13 @@ R2/R3，固定续程后 104 对请求不同、15 对汇合到同一请求。该�
 追加了因策略实际到达的四个状态，新增状态按根、任务、状态排序。见
 `core-24000-frozen-feature-coverage-audit.json` 和 `outcome-feature-append-preflight.json`。
 
+14:14，用原冻结编码器补齐了这 1,838 个状态。原 273,325 条缓存索引逐项一致，10 条旧
+向量探针也按字节复核。两路 W 检查点各打开 24,000 个状态，以 18 个实际状态产生 735 个
+有限动作评分，编码器前向为 0。对整个登记集合逐项扫描了 520,901,376 个有限 float32
+值，并用正式的覆盖调度器核对全名单条件下每轮 188 个窗口。正式 O 的训练集合仍由封存后
+实际可用评分确定。见 `core-24000-feature-prewarm/receipt.json` 和同目录的
+`full-bank-read-only-schedule-check.json`。
+
 宽 M0 从完整 W/N1 初始化，M1 从 W/N1 第一轮检查点初始化，两者使用封存的
 `v11-reader-closure` 真实 outcome 做 O 缓存演练。两臂各覆盖 3 个状态、3 轮，
 各完成 3 次 GPU bf16 更新，实际编码器前向均为 0。头参数 L2 变化分别为 0.3532 和
@@ -384,6 +391,32 @@ TRAIN 任务、2,690 个原生组。原两批的 27,882 条分支绑定复核一
 13:49，正式 core 的 116 个关闭窗口合计 23,164 条回复，其中 600 条在本次交接后关闭。
 当时第二批已收回 9,265 条由提供方计量的回复。见 `core-dispatch-accounting-116-windows.json`。
 14:00，第二批已收回 10,073 条回复，第四批副本已准备 2,244 个状态。
+
+14:10，第四批的 3,000 个状态与 14,072 条待发分支全部在副本中准备完成，准备墙时
+2,173.16 秒，已在原台账结算。滚动队列等待第三批与第四批按评分边界依次接入。见
+`core-12000-parallel-preparation/receipt.json`、同目录的 `compute-settlement.json` 和
+`core-staging-coordinator.json`。
+
+14:13 取得正式第二批的独立快照。用正式评分器处理了其中已返回的 11,000 条真实回复，
+覆盖 2,372 个第二批状态。保留 MuSiQue 的 35 条格式失败，完成原生计量与评分映射。
+原始回复、计量和待发分支逐项保持。提前封存和读取未接入第三批的对照均被拒绝。原弱
+缓存缺失的 231 个第二批状态中，184 个已经取得真实可用值监督，其中 90 个有成功见证。
+见 `core-second-tranche-shadow-scoring/native-score-audit.json` 和同目录的
+`actual-supervision-density.json`、`early-seal-and-future-scope-guard.json`。
+
+在同一快照的第二批内，以同一状态、绑定和重复种子配对。QASPER 有 530 对 R3/R2
+两侧均已评分。R3 的平均训练质量差为 −0.15 点，分组 95% 区间 [−2.37, 2.15]，平均
+多用 399 个 Reader 输入 token。PersonaMem 有 331 对，质量差为 −3.15 点，区间
+[−7.09, 0.49]，平均多用 260 个输入 token。见同目录的
+`registered-second-tranche-outcome-contrasts.json`。
+
+全量缓存预备、缓存只读核对、副本原生评分和监督核对已分别在原台账结算。缓存预备
+实测墙时 175.90 秒，副本原生评分墙时 13.39 秒。四个范围的新增 Reader 请求均为 0。
+见 `core-readiness-compute-settlement.json`。
+
+14:25，正式 core 对账覆盖 129 个关闭窗口，共 25,764 条回复。该快照另有当前窗口的
+188 条原始回复已写入待评分队列，第二批累计收回 11,988 条。见
+`core-dispatch-accounting-129-windows.json`。
 
 首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
 时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
@@ -653,6 +686,17 @@ MILAI_CONFIG=configs/datasets/memory_control_v1_1.json
   --run-id v11-reader-closure --seal
 "$MILAI_PY" tools/report_memory_control_outcome_contrasts.py --data "$MILAI_DB" \
   --run-id v11-reader-closure --output "$MILAI_RUN/v11-reader-closure-conditional-read-contrasts.json"
+"$MILAI_PY" tools/report_memory_control_outcome_contrasts.py \
+  --data /dev/shm/milai-v11-second-core-score-probe/scored/memory_control.sqlite3 \
+  --run-id v11-core-shared-seed11 --roster "$MILAI_RUN/core-sampling-24000-native-audit.json" \
+  --block 2 --output "$MILAI_RUN/core-second-tranche-shadow-scoring/replay-outcome-contrasts.json"
+
+CUDA_VISIBLE_DEVICES=2 "$MILAI_PY" tools/prepare_memory_control_registered_features.py \
+  --data "$MILAI_RUN/dataset/memory_control.sqlite3" \
+  --roster "$MILAI_RUN/core-sampling-24000-native-audit.json" \
+  --feature-store /dev/shm/milai-v11-features-N1 --output "$MILAI_RUN/core-feature-prewarm-replay" \
+  --checkpoint "$MILAI_RUN/M0-W-N1-seed11/checkpoint" \
+  --checkpoint "$MILAI_RUN/M1-W-N1-seed11/checkpoint"
 
 MILAI_O_PILOT="$MILAI_RUN/core-first3000-O-pilot"
 "$MILAI_PY" tools/report_memory_control_episode_evidence.py --data "$MILAI_DB" \

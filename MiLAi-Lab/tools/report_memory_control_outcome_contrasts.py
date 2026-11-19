@@ -14,7 +14,7 @@ from pathlib import Path
 from statistics import fmean
 from typing import Any
 
-from milai_lab.datasets.memory_control_report import write_json
+from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import connect, unpack
 from milai_lab.scorers.memory_control_episode_metrics import percentiles
 
@@ -154,7 +154,14 @@ def _summarize(pairs: list[Pair], repeats: int, seed: int) -> dict[str, Any]:
     }
 
 
-def report(db: sqlite3.Connection, run_id: str, *, repeats: int, seed: int) -> dict[str, Any]:
+def report(
+    db: sqlite3.Connection,
+    run_id: str,
+    *,
+    repeats: int,
+    seed: int,
+    state_ids: set[int] | None = None,
+) -> dict[str, Any]:
     row = db.execute("SELECT config FROM outcome_runs WHERE run_id=?", (run_id,)).fetchone()
     if row is None:
         raise ValueError(f"Unknown outcome run {run_id}")
@@ -162,6 +169,9 @@ def report(db: sqlite3.Connection, run_id: str, *, repeats: int, seed: int) -> d
     role = declaration["role"]
     if role not in {"train", "dev"}:
         raise ValueError("Branch contrasts require a declared TRAIN or DEV run")
+    if state_ids is not None and not state_ids:
+        raise ValueError("A scoped branch report requires a nonempty state selection")
+    selected_ids = json.dumps(sorted(state_ids)) if state_ids is not None else None
     rows = db.execute(
         """
         SELECT o.state_id,o.action_id,o.repeat_index,o.branch_seed,o.bound_action,
@@ -170,9 +180,10 @@ def report(db: sqlite3.Connection, run_id: str, *, repeats: int, seed: int) -> d
         FROM action_outcomes o JOIN states s ON s.id=o.state_id
         JOIN experiment_tasks t ON t.id=s.task_id
         JOIN state_variants v ON v.state_id=s.id
-        WHERE o.run_id=? ORDER BY o.state_id,o.repeat_index,o.action_id
+        WHERE o.run_id=? AND (? IS NULL OR o.state_id IN (SELECT value FROM json_each(?)))
+        ORDER BY o.state_id,o.repeat_index,o.action_id
     """,
-        (run_id,),
+        (run_id, selected_ids, selected_ids),
     )
     axes = ("R3_minus_R2", "READ_minus_HANDOFF")
     contrasts: dict[str, dict[str, list[Pair]]] = defaultdict(lambda: {a: [] for a in axes})
@@ -211,6 +222,8 @@ def report(db: sqlite3.Connection, run_id: str, *, repeats: int, seed: int) -> d
             )
             if focus is not None:
                 source["R3_minus_R2"].append(Pair.compare(before, read, focus))
+    if state_ids is not None and observed_states != state_ids:
+        raise ValueError("The scoped report includes states outside the prepared outcome run")
     by_source = {}
     for source_name, axes_by_source in sorted(contrasts.items()):
         entries = {}
@@ -255,12 +268,30 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--bootstrap-repeats", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=20261118)
+    parser.add_argument("--roster", type=Path)
+    parser.add_argument("--block", type=int)
     args = parser.parse_args()
     if args.bootstrap_repeats < 1:
         parser.error("use a positive bootstrap repeat count")
+    if (args.roster is None) != (args.block is None):
+        parser.error("supply --roster and --block together")
+    states = None
+    if args.roster is not None:
+        from stage_memory_control_core_batch import registered_tranche
+
+        roster = read_json(args.roster)
+        if not 1 <= args.block <= len(roster["batches"]):
+            parser.error("block must refer to a registered tranche")
+        prefix = sum(block["count"] for block in roster["batches"][:args.block - 1])
+        _, selected, _ = registered_tranche(roster, prefix)
+        states = {sid for sid, _ in selected}
     with closing(connect(args.data)) as db:
         db.execute("BEGIN")
-        result = report(db, args.run_id, repeats=args.bootstrap_repeats, seed=args.seed)
+        result = report(
+            db, args.run_id, repeats=args.bootstrap_repeats, seed=args.seed, state_ids=states,
+        )
+    if args.roster is not None:
+        result["registered_tranche"] = {"roster": str(args.roster.resolve()), "block": args.block}
     write_json(args.output, result)
     print(f"Paired outcome report at {args.output}")
 
