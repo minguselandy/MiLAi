@@ -6,7 +6,7 @@ import json
 import random
 import time
 from collections import Counter, defaultdict
-from collections.abc import Iterator
+from collections.abc import Iterable, Iterator
 from contextlib import closing
 from dataclasses import asdict
 from pathlib import Path
@@ -21,6 +21,8 @@ from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, r
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.runners.memory_control_episode import make_policy, start_cold
 from milai_lab.runners.memory_control_outcome_run import DEFAULT_STATE_QUOTAS, group_round_robin
+
+POLICY_ROTATION = ("M0", "M1", "rules", "M0", "M1", "M0", "M1", "random", "M0", "M1")
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS policy_state_runs (
@@ -65,6 +67,19 @@ def _source_balanced_order(
         else:
             visits[source] += 1
             yield item
+
+
+def _assign_policies(
+    candidates: Iterable[tuple[int, set[str]]], sources: dict[int, str] | None,
+) -> Iterator[tuple[int, int, str]]:
+    visits: Counter[str] = Counter()
+    for sequence, (tid, _) in enumerate(candidates):
+        position = sequence
+        if sources is not None:
+            corpus = sources[tid]
+            position = visits[corpus]
+            visits[corpus] += 1
+        yield sequence, tid, POLICY_ROTATION[position % len(POLICY_ROTATION)]
 
 
 def stopped_checkpoints(paths: list[Path]) -> list[dict[str, Any]]:
@@ -114,13 +129,12 @@ def collect(
     arms = stopped_checkpoints(paths)
     rules = {"name": "rules", "policy": "B3"}
     policies = {arm["name"]: make_policy(dataset, arm, device)[0] for arm in [*arms, rules]}
-    order = ("M0", "M1", "rules", "M0", "M1", "M0", "M1", "random", "M0", "M1")
     declaration = {
         "dataset_run_id": dataset.run_id,
         "arms": arms,
         "seed": seed,
         "budget": revision["primary_budget"],
-        "policy_rotation": list(order),
+        "policy_rotation": list(POLICY_ROTATION),
         "target_states": target_states,
     }
     if balance_sources:
@@ -132,7 +146,13 @@ def collect(
             saved = db.execute(
                 "SELECT config FROM policy_state_runs WHERE run_id=?", (run_id,)
             ).fetchone()
-            if saved and json.loads(saved[0]) != declaration:
+            registered = json.loads(saved[0]) if saved else None
+            per_source = balance_sources and (
+                registered is None or registered.get("policy_rotation_scope") == "source"
+            )
+            if per_source:
+                declaration["policy_rotation_scope"] = "source"
+            if registered is not None and registered != declaration:
                 raise ValueError("Policy collection registration changed")
             if not saved:
                 db.execute(
@@ -161,7 +181,8 @@ def collect(
         ).fetchone()[0]
         sampled = 0
         newly_added: Counter[str] = Counter()
-        for sequence, (tid, _) in enumerate(candidates):
+        sources = {tid: key.partition("/")[0] for tid, key, _ in available} if per_source else None
+        for sequence, tid, source in _assign_policies(candidates, sources):
             if states >= target_states or sampled == task_limit:
                 break
             if tid in processed:
@@ -173,7 +194,6 @@ def collect(
             session.shared_preflight = {}
             if not session.take(next(a for a in session.menu(steps) if a.kind == "SEARCH")):
                 raise ValueError("Cannot collect a policy state after failed SEARCH")
-            source = order[sequence % len(order)]
             policy = RandomLegal(seed + sequence) if source == "random" else policies[source]
             result = run_memory_control(
                 session.state, policy, session, max_steps=steps, start_step=1
