@@ -17,15 +17,16 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 from milai_lab.datasets.memory_control_outcomes import OUTCOME_SUPERVISION_PROTOCOL
-from milai_lab.datasets.memory_control_report import write_json
+from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import connect
 from milai_lab.methods.frozen_feature_store import FrozenFeatureStore, batches, prefetch_rows
 from milai_lab.methods.small_control_learning import state_loss, weak_evidence_targets
 from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
 from training_recovery import (
+    apply_training_state,
+    load_training_state,
     make_scheduler,
     record_training_invocation,
-    restore_training_state,
     save_training_state,
 )
 
@@ -300,8 +301,11 @@ def train_coverage(
         raise ValueError("Coverage requires object features and positive epoch/batch sizes")
     if bool(args.outcome_run) != (args.supervision_mode == "outcome"):
         raise ValueError("Select sealed outcome runs exactly when using outcome supervision")
-    if args.resume is not None and args.initialize_from is not None:
-        raise ValueError("Choose recovery or stage initialization")
+    initialization = args.initialize_from
+    if args.resume is not None and initialization is None:
+        prior = read_json(args.output / "run.json", {}).get("contract", {})
+        if prior.get("initialize_from") is not None:
+            initialization = Path(prior["initialize_from"])
     if args.feature_store and config.prior_policy != "none":
         raise ValueError("Feature-only batches require the no-prior policy")
     if args.bf16 and not args.device.startswith("cuda"):
@@ -348,7 +352,7 @@ def train_coverage(
         "offline_dev": not args.skip_offline_dev,
         "bucket_encoder_lengths": args.bucket_encoder_lengths,
         "deterministic": args.deterministic,
-        "initialize_from": str(args.initialize_from.resolve()) if args.initialize_from else None,
+        "initialize_from": str(initialization.resolve()) if initialization else None,
         "feature_store": str(args.feature_store.resolve()) if args.feature_store else None,
     }
     if args.outcome_run:
@@ -359,16 +363,43 @@ def train_coverage(
             policy_states=sorted(policy_ids),
             state_exposures_per_epoch=states_per_epoch,
         )
+    steps_file = args.output / "steps.jsonl"
+    prior_lines: list[bytes] = []
+    resume_state = None
+    initial_step = 0
+    if args.resume is not None:
+        resume_state = load_training_state(args.resume, contract=contract)
+        progress = resume_state["progress"]
+        initial_step = progress["step"]
+        if type(initial_step) is not int or not 0 <= initial_step <= limit:
+            raise ValueError("Recovery optimizer position is outside the declared run")
+        if initial_step and progress["epoch"] != (initial_step - 1) // per_epoch + 1:
+            raise ValueError("Recovery epoch does not match its optimizer position")
+        if steps_file.is_file():
+            prior_lines = steps_file.read_bytes().splitlines(keepends=True)
+        if len(prior_lines) < initial_step:
+            raise ValueError("Recovery requires the optimizer journal through its saved position")
+        for index, line in enumerate(prior_lines[:initial_step]):
+            record = json.loads(line)
+            batch_size = min(
+                args.batch_states, states_per_epoch - (index % per_epoch) * args.batch_states
+            )
+            if (
+                not line.endswith(b"\n") or record["step"] != index + 1
+                or record["epoch"] != index // per_epoch + 1
+                or record["states"] != batch_size
+            ):
+                raise ValueError("Recorded optimizer prefix does not match the coverage schedule")
     model = (
-        SmallControlModel.load(args.initialize_from, device=args.device)
-        if args.initialize_from is not None
+        SmallControlModel.load(initialization, device=args.device)
+        if initialization is not None
         else SmallControlModel(config, device=args.device)
     )
     if asdict(model.config) != asdict(config):
         raise ValueError("Starting checkpoint model and codec do not match the coverage recipe")
     model.batch_tokens_by_length = args.bucket_encoder_lengths
     cache = FrozenFeatureStore(args.feature_store, dataset, model) if args.feature_store else None
-    updates, initial_step, seen_this_invocation = 0, 0, 0
+    updates, seen_this_invocation = 0, 0
     prep = None
     status = "RUNNING"
     write_json(
@@ -411,12 +442,9 @@ def train_coverage(
             mode="warmup-cosine",
         )
         recovery = recovery_type(model)
-        state = (
-            restore_training_state(args.resume, recovery, optimizer, scheduler, contract=contract)
-            if args.resume
-            else {"step": 0}
-        )
-        initial_step = state["step"]
+        if resume_state is not None:
+            apply_training_state(resume_state, recovery, optimizer, scheduler)
+            del resume_state
         initial_head = {
             key: tensor.detach().clone() for key, tensor in model.head.state_dict().items()
         }
@@ -434,17 +462,17 @@ def train_coverage(
                         cache=cache,
                     ),
                 )
-        steps_file = args.output / "steps.jsonl"
-        if args.resume and steps_file.exists():
-            records = [json.loads(line) for line in steps_file.read_text().splitlines()]
-            if any(r["step"] > initial_step for r in records):
-                write_json(
-                    args.output / f"rolled-back-after-{initial_step}-{os.getpid()}.json",
-                    [r for r in records if r["step"] > initial_step],
-                )
-                steps_file.write_text(
-                    "".join(json.dumps(r) + "\n" for r in records if r["step"] <= initial_step)
-                )
+        if len(prior_lines) > initial_step:
+            tail = args.output / f"rolled-back-after-{initial_step}-{os.getpid()}.jsonl"
+            tail.write_bytes(b"".join(prior_lines[initial_step:]))
+            replacement = steps_file.with_suffix(".jsonl.part")
+            replacement.write_bytes(b"".join(prior_lines[:initial_step]))
+            replacement.replace(steps_file)
+        if initial_step and (
+            initial_step % per_epoch == 0 or initial_step == limit
+            or initial_step in args.checkpoint_steps
+        ):
+            model.save(args.output / "checkpoints" / f"step-{initial_step:06d}")
         covered: Counter[int] = Counter()
         if model.device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(model.device)
@@ -545,9 +573,11 @@ def train_coverage(
                 if step == args.interrupt_after:
                     status = "INTERRUPTED"
                     return
-            if offset < count and dev:
+            evaluation = args.output / f"dev-epoch-{epoch + 1}.json"
+            recover_epoch_evaluation = initial_step == first + count and not evaluation.exists()
+            if dev and (offset < count or recover_epoch_evaluation):
                 write_json(
-                    args.output / f"dev-epoch-{epoch + 1}.json",
+                    evaluation,
                     offline_evaluation(
                         model,
                         dataset,

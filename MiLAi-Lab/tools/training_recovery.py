@@ -98,9 +98,9 @@ def save_training_state(path: Path, model: Any, optimizer: Any, scheduler: Any,
     temporary.replace(path)
 
 
-def restore_training_state(path: Path, model: Any, optimizer: Any, scheduler: Any,
-                           *, contract: dict[str, Any],
-                           data: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+def load_training_state(path: Path, *, contract: dict[str, Any],
+                        data: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+    """Validate local checkpoint evidence before changing run artifacts or RNG."""
     import torch
 
     state = torch.load(path, map_location="cpu", weights_only=False)
@@ -121,6 +121,14 @@ def restore_training_state(path: Path, model: Any, optimizer: Any, scheduler: An
                     if schema == "bounded-training-state-v2" else state["contract"] == contract)
     if not recipe_equal:
         raise ValueError("Recovery requires the original data IDs, sampling and training recipe")
+    return cast(dict[str, Any], state)
+
+
+def apply_training_state(state: dict[str, Any], model: Any, optimizer: Any,
+                         scheduler: Any) -> dict[str, Any]:
+    """Install validated optimizer, parameter and RNG state."""
+    import torch
+
     model.load_state_dict(state["model"])
     optimizer.load_state_dict(state["optimizer"])
     scheduler.load_state_dict(state["scheduler"])
@@ -129,3 +137,10 @@ def restore_training_state(path: Path, model: Any, optimizer: Any, scheduler: An
     if state["cuda_rng"]:
         torch.cuda.set_rng_state_all(state["cuda_rng"])
     return cast(dict[str, Any], state["progress"])
+
+
+def restore_training_state(path: Path, model: Any, optimizer: Any, scheduler: Any,
+                           *, contract: dict[str, Any],
+                           data: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+    state = load_training_state(path, contract=contract, data=data)
+    return apply_training_state(state, model, optimizer, scheduler)

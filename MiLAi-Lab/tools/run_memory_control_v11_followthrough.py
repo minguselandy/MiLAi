@@ -46,6 +46,38 @@ def active_script(path: Path) -> bool:
     return False
 
 
+def active_training_pids(output: Path) -> list[int]:
+    """Find live trainers by the actual directory they were asked to write."""
+    target = output.resolve()
+    matches = []
+    for process in Path("/proc").iterdir():
+        if not process.name.isdigit():
+            continue
+        try:
+            argv = (process / "cmdline").read_bytes().split(b"\0")
+            if (
+                len(argv) < 4 or argv[2] != b"train"
+                or Path(os.fsdecode(argv[1])).name != Path(FIT).name
+            ):
+                continue
+            for index, arg in enumerate(argv[3:], 3):
+                if arg == b"--output" and index + 1 < len(argv):
+                    raw = argv[index + 1]
+                elif arg.startswith(b"--output="):
+                    raw = arg.split(b"=", 1)[1]
+                else:
+                    continue
+                path = Path(os.fsdecode(raw))
+                if not path.is_absolute():
+                    path = (process / "cwd").readlink() / path
+                if path.resolve() == target:
+                    matches.append(int(process.name))
+                break
+        except OSError:
+            continue
+    return sorted(matches)
+
+
 class Followthrough:
     def __init__(self, args: argparse.Namespace) -> None:
         self.root = args.root.resolve()
@@ -351,9 +383,13 @@ class Followthrough:
     ) -> tuple[str, list[str]] | None:
         name = run_name(model, stage, seed)
         run_root = self.root / name
-        if (run_root / "run.json").exists():
+        status = read_json(run_root / "run.json", {}).get("status")
+        if status == "COMPLETED":
             self.require_fit(name)
             return None
+        resume = run_root / "recovery.pt" if run_root.exists() else None
+        if resume is not None and not resume.is_file():
+            raise ValueError(f"Existing fit has no saved optimizer state at {run_root}")
         width = "6544" if model == "M0-wide" else "1024"
         architecture = "latent_pointer" if model == "M1" else "object_mlp"
         cmd = [
@@ -407,6 +443,8 @@ class Followthrough:
             prior = run_name(model, "O" if stage == "P" else "W", seed)
             self.require_fit(prior)
             cmd += ["--initialize-from", str(self.root / prior / "checkpoint")]
+        if resume is not None:
+            cmd += ["--resume", str(resume)]
         return name, cmd
 
     def prepare_policy_features(self) -> None:
@@ -423,11 +461,20 @@ class Followthrough:
         _, cmd = template
         cmd[cmd.index("--output") + 1] = str(output)
         cmd.remove("--feature-store-read-only")
+        if "--resume" in cmd:
+            resume_index = cmd.index("--resume")
+            del cmd[resume_index:resume_index + 2]
         self.run([*cmd, "--prepare-features-only"], name, gpu=self.gpus[0])
         if read_json(output / "run.json").get("status") != "FEATURES_PREPARED":
             raise RuntimeError("Policy feature preparation did not finish")
 
     def fit_models(self, models: Sequence[str], stage: str, seed: int) -> None:
+        names = [run_name(model, stage, seed) for model in models]
+        while existing := {
+            name: pids for name in names if (pids := active_training_pids(self.root / name))
+        }:
+            self.status("WAITING_FOR_EXISTING_FITS", children=existing)
+            time.sleep(30)
         commands = [
             candidate
             for model in models
