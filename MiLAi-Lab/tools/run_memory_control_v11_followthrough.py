@@ -18,6 +18,7 @@ from typing import Any
 
 from milai_lab.datasets.memory_control_outcomes import OUTCOME_SUPERVISION_PROTOCOL
 from milai_lab.datasets.memory_control_report import read_json, write_json
+from milai_lab.runners.memory_control_episode import checkpoint_episode_arm, episode_population
 
 LAB = Path(__file__).resolve().parents[1]
 FIT = "tools/run_small_memory_policy.py"
@@ -148,13 +149,63 @@ class Followthrough:
             or not (folder / "checkpoint" / "weights.pt").is_file()
         ):
             raise ValueError(f"Missing a completed, full-coverage fit at {folder}")
-        return dict(run["contract"])
+        contract = dict(run["contract"])
+        if read_json(folder / "checkpoint" / "config.json", {}) != contract["config"]:
+            raise ValueError(f"Final checkpoint configuration differs from the fit at {folder}")
+        steps = 0
+        exposures = 0
+        with (folder / "steps.jsonl").open(encoding="utf-8") as stream:
+            for steps, line in enumerate(stream, 1):
+                record = json.loads(line)
+                if record["step"] != steps or not 0 < record["states"] <= contract["batch_states"]:
+                    raise ValueError(f"Invalid optimizer step sequence at {folder}")
+                exposures += record["states"]
+        expected = contract.get("state_exposures_per_epoch", len(contract["eligible_states"]))
+        if (
+            steps != contract["steps"]
+            or exposures != coverage["total_states_exposed"]
+            or exposures != expected * contract["epochs"]
+        ):
+            raise ValueError(f"Optimizer updates or observed coverage differ at {folder}")
+        if contract["sampling"] == "coverage_equal_core_policy_v1":
+            pools = coverage["by_outcome_pool"]
+            if (
+                pools["core"]["state_exposures"] != pools["policy"]["state_exposures"]
+                or pools["core"]["state_exposures"] + pools["policy"]["state_exposures"]
+                != exposures
+            ):
+                raise ValueError(f"Policy and core exposures differ at {folder}")
+        return contract
+
+    def confirmation_fit(self, model: str, stage: str, seed: int) -> dict[str, Any]:
+        name = run_name(model, stage, seed)
+        fit = self.require_fit(name)
+        previous = {"O": "W", "P": "O"}.get(stage)
+        initial = (
+            str((self.root / run_name(model, previous, seed) / "checkpoint").resolve())
+            if previous else None
+        )
+        outcomes = {"W": [], "O": [self.core], "P": [self.core, self.policy_outcomes]}[stage]
+        sampling = (
+            "coverage_equal_core_policy_v1"
+            if stage == "P" else "coverage_without_replacement_v1"
+        )
+        if (
+            fit["seed"] != seed or fit["observation_protocol"] != "semantic_nav_v1"
+            or fit["data"] != str(self.data)
+            or fit["initialize_from"] != initial or fit["outcome_runs"] != outcomes
+            or fit["supervision_mode"] != ("weak" if stage == "W" else "outcome")
+            or fit["sampling"] != sampling
+        ):
+            raise ValueError(f"Confirmation requires the recorded W, O or P ancestry for {name}")
+        return fit
 
     def outcome_counts(self, run: str) -> tuple[int, int, bool]:
         with closing(sqlite3.connect(self.data.as_uri() + "?mode=ro", uri=True)) as db:
             total, pending = db.execute(
                 """
-                SELECT count(DISTINCT state_id),count(*) FILTER(WHERE execution_status='prepared')
+                SELECT count(DISTINCT state_id),
+                       count(*) FILTER(WHERE execution_status IN ('prepared','dispatching'))
                 FROM action_outcomes WHERE run_id=?
             """,
                 (run,),
@@ -567,10 +618,19 @@ class Followthrough:
             "microbatch_states",
             "epochs",
             "learning_rate",
+            "head_learning_rate",
             "bf16",
+            "deterministic",
+            "bucket_encoder_lengths",
+            "offline_dev",
         )
         seed11_contracts = {
-            f"{model}-{stage}": self.require_fit(run_name(model, stage, 11))
+            f"{model}-{stage}": self.confirmation_fit(model, stage, 11)
+            for model in MODELS
+            for stage in ("W", "O", "P")
+        }
+        contracts = {
+            run_name(model, stage, 11): seed11_contracts[f"{model}-{stage}"]
             for model in MODELS
             for stage in ("W", "O", "P")
         }
@@ -597,7 +657,9 @@ class Followthrough:
             for stage in ("W", "O", "P"):
                 self.fit_models(MODELS, stage, seed)
                 for model in MODELS:
-                    contract = self.require_fit(run_name(model, stage, seed))
+                    name = run_name(model, stage, seed)
+                    contract = self.confirmation_fit(model, stage, seed)
+                    contracts[name] = contract
                     if {key: contract.get(key) for key in recipe_fields} != recipes[
                         f"{model}-{stage}"
                     ]:
@@ -619,6 +681,12 @@ class Followthrough:
             for model in (MODELS if stage == "P" else MODELS[:2])
         ]
         plan = self.root / "v11-confirmation-plan.json"
+        arms = [
+            checkpoint_episode_arm(self.root / name / "checkpoint", contracts[name])
+            for name in checkpoints
+        ]
+        arms.append({**frozen["baseline"]["arm"], "name": "B*"})
+        target_tasks, selection_seed, material_budget = 1500, 20261118, 2048
         if not plan.is_file():
             command = [
                 FIT,
@@ -630,16 +698,24 @@ class Followthrough:
                 "--role",
                 "confirm",
                 "--target-tasks",
-                "1500",
+                str(target_tasks),
+                "--seed",
+                str(selection_seed),
+                "--budget",
+                str(material_budget),
                 "--baseline-selection",
                 str(self.dev_baseline),
             ]
             for name in checkpoints:
                 command += ["--include-checkpoint", str(self.root / name / "checkpoint")]
             self.run(command, "lock-confirm")
-        names = [arm["name"] for arm in read_json(plan)["arms"]]
-        if names != [*checkpoints, "B*"]:
-            raise ValueError("The frozen confirmation matrix does not match the three-seed recipe")
+        expected = episode_population(
+            self.data, role="confirm", target_tasks=target_tasks, seed=selection_seed,
+            allowed_arms=arms, budget=material_budget,
+        )
+        if read_json(plan) != expected:
+            raise ValueError("The frozen confirmation roster or arm bindings changed")
+        names = [arm["name"] for arm in arms]
         target = self.root / "v11-confirmation"
         self.evaluate(
             [(name, ["--registered-arm", name]) for name in names], plan, scope=target.name

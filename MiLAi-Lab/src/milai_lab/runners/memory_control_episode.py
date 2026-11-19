@@ -48,9 +48,21 @@ EVALUATION_PROTOCOL = "memory_control_v11_native_episode_v1"
 BASELINES = ("B0", "B1", "B2", "B3", "B4")
 
 
-def lock_episode_population(
+def checkpoint_episode_arm(checkpoint: Path, contract: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "name": checkpoint.parent.name,
+        "policy": "checkpoint",
+        "checkpoint": str(checkpoint.resolve()),
+        "seed": contract["seed"],
+        "observation_protocol": contract["observation_protocol"],
+        "reads": 4,
+        "precision": "learned",
+        "stop": "fixed" if contract["supervision_mode"] == "weak" else "learned",
+    }
+
+
+def episode_population(
     data_path: Path,
-    output: Path,
     *,
     role: str,
     target_tasks: int,
@@ -58,8 +70,8 @@ def lock_episode_population(
     allowed_arms: list[dict[str, Any]],
     budget: int = 2048,
 ) -> dict[str, Any]:
-    if output.exists() or role not in {"dev", "confirm"} or min(target_tasks, budget) <= 0:
-        raise ValueError("Choose a new manifest, evaluation role and positive target/budget")
+    if role not in {"dev", "confirm"} or min(target_tasks, budget) <= 0:
+        raise ValueError("Choose an evaluation role and positive target/budget")
     if role == "confirm" and (budget != 2048 or not allowed_arms):
         raise ValueError("Main confirmation freezes its configurations at the reference budget")
     with closing(connect(data_path)) as db:
@@ -134,7 +146,26 @@ def lock_episode_population(
             "predeclared_unevaluable_tasks": unavailable,
             "task_counts": dict(Counter(row["dataset"] for row in cohort)),
         }
-        write_json(output, population)
+    return population
+
+
+def lock_episode_population(
+    data_path: Path,
+    output: Path,
+    *,
+    role: str,
+    target_tasks: int,
+    seed: int,
+    allowed_arms: list[dict[str, Any]],
+    budget: int = 2048,
+) -> dict[str, Any]:
+    if output.exists():
+        raise ValueError("Choose a new evaluation manifest")
+    population = episode_population(
+        data_path, role=role, target_tasks=target_tasks, seed=seed,
+        allowed_arms=allowed_arms, budget=budget,
+    )
+    write_json(output, population)
     return population
 
 

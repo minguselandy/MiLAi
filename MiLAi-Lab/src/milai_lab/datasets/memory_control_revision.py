@@ -14,6 +14,20 @@ from typing import Any
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import DB_NAME, connect, get_meta, set_meta, unpack
 
+OUTCOME_PREPARATION_SCHEMA = """
+CREATE TABLE IF NOT EXISTS outcome_preparation_batches (
+    run_id TEXT NOT NULL REFERENCES outcome_runs(run_id),
+    admitted_before INTEGER NOT NULL CHECK (admitted_before >= 0),
+    state_count INTEGER NOT NULL CHECK (state_count > 0),
+    prepared_count INTEGER NOT NULL CHECK (prepared_count BETWEEN 0 AND state_count),
+    plan BLOB NOT NULL,
+    rng_state BLOB NOT NULL,
+    PRIMARY KEY (run_id, admitted_before)
+);
+CREATE UNIQUE INDEX IF NOT EXISTS outcome_open_preparation_batch
+    ON outcome_preparation_batches (run_id) WHERE prepared_count < state_count;
+"""
+
 REVISION_SCHEMA = """
 CREATE TABLE experiment_groups (
     dataset TEXT NOT NULL, native_group TEXT NOT NULL,
@@ -171,6 +185,7 @@ def derive(parent: Path, root: Path, revision: dict[str, Any], role_file: Path) 
         with closing(connect(temporary, writable=True)) as db:
             source.backup(db)
             db.executescript(REVISION_SCHEMA)
+            db.executescript(OUTCOME_PREPARATION_SCHEMA)
             db.executemany("INSERT INTO experiment_groups VALUES (?,?,?,?,?)", groups)
             set_meta(db, "derivation", config)
             set_meta(db, "parent_run_id", get_meta(source, "run_id"))

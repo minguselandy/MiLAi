@@ -1280,20 +1280,17 @@ def main() -> None:
         help="Manifest of exact saved decision file/indices, instead of the fixed K/O prefix")
     args = parser.parse_args()
     if args.command == "lock-evaluation":
-        from milai_lab.runners.memory_control_episode import lock_episode_population
+        from milai_lab.runners.memory_control_episode import (
+            checkpoint_episode_arm,
+            lock_episode_population,
+        )
 
         arms = read_json(args.arms_file) if args.arms_file else []
         for path in args.include_checkpoint:
             fit = read_json(checkpoint_run(path))
-            contract = fit["contract"]
             if args.role == "confirm" and fit["status"] != "COMPLETED":
                 raise ValueError("Confirmation requires terminal completed training arms")
-            arms.append({
-                "name": path.parent.name, "policy": "checkpoint", "checkpoint": str(path.resolve()),
-                "seed": contract["seed"], "observation_protocol": contract["observation_protocol"],
-                "reads": 4, "precision": "learned",
-                "stop": "fixed" if contract["supervision_mode"] == "weak" else "learned",
-            })
+            arms.append(checkpoint_episode_arm(path, fit["contract"]))
         if args.baseline_selection:
             best = read_json(args.baseline_selection)["selected"]
             arms.append({**best["arm"], "name": "B*"})

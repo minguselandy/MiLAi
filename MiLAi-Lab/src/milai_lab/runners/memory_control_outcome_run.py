@@ -20,6 +20,7 @@ import httpx
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
 from milai_lab.datasets.memory_control_reader_task import reader_task
 from milai_lab.datasets.memory_control_report import read_json
+from milai_lab.datasets.memory_control_revision import OUTCOME_PREPARATION_SCHEMA
 from milai_lab.datasets.memory_control_store import connect, dumps, get_meta, packed, unpack
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, http_budget_scope
 from milai_lab.methods.dataset_control_states import CONTINUATION, task_annotation
@@ -542,6 +543,7 @@ def prepare_outcomes(
     if joint_suggestions is not None:
         declaration["recommendation_encoding"] = "shared_frozen_encoder_v1"
     with closing(connect(dataset.path, writable=True)) as db, ExitStack() as workers:
+        db.executescript(OUTCOME_PREPARATION_SCHEMA)
         if dev_plan:
             population = read_json(dev_plan)
             dev_states, missing = cold_dev_states(db, dataset, population)
@@ -566,31 +568,63 @@ def prepare_outcomes(
                 "SELECT DISTINCT state_id FROM action_outcomes WHERE run_id=?", (run_id,)
             )
         }
-        if dev_plan:
-            selected = [(sid, "dev_cold_search") for sid in dev_states if sid not in used][:limit]
-        elif policy_pool:
-            pool_ids = [
-                (sid, source)
-                for sid, source in db.execute(
-                    """
-                SELECT state_id,source_policy FROM policy_state_visits WHERE run_id=? ORDER BY 1
+        requested_ids = list(dict.fromkeys(state_ids))
+        scope = {"requested_state_ids": requested_ids, "explicit_actions": explicit_actions}
+        scheduled: list[tuple[int, str]]
+        pending_plan = db.execute(
+            """
+            SELECT admitted_before,prepared_count,plan,rng_state
+            FROM outcome_preparation_batches WHERE run_id=? AND prepared_count < state_count
             """,
-                    (policy_pool,),
-                )
-                if sid not in used
-            ]
-            selected = pool_ids[:limit]
-        elif state_ids:
-            selected = [
-                (sid, "caller_bound") for sid in dict.fromkeys(state_ids) if sid not in used
-            ]
-        else:
-            selected = select_states(db, used, limit, seed)
+            (run_id,),
+        ).fetchone()
         rng = random.Random(seed + len(used))  # noqa: S311 -- declared branch order
-        repeats = set(rng.sample([sid for sid, _ in selected], round(0.1 * len(selected))))
+        if pending_plan is not None:
+            batch_start = pending_plan["admitted_before"]
+            cursor = pending_plan["prepared_count"]
+            plan = unpack(pending_plan["plan"])
+            if scope != plan["scope"]:
+                raise ValueError("Resume the stored preparation batch with its original bindings")
+            scheduled = [(sid, origin) for sid, origin in plan["states"]]
+            scheduled_ids = [sid for sid, _ in scheduled]
+            if (len(used) != batch_start + cursor
+                    or used.intersection(scheduled_ids) != set(scheduled_ids[:cursor])):
+                raise ValueError("Prepared states do not match the stored batch cursor")
+            repeats = set(plan["repeats"])
+            version, values, gauss = unpack(pending_plan["rng_state"])
+            rng.setstate((version, tuple(values), gauss))
+        else:
+            batch_start, cursor = len(used), 0
+            if dev_plan:
+                scheduled = [
+                    (sid, "dev_cold_search") for sid in dev_states if sid not in used
+                ][:limit]
+            elif policy_pool:
+                scheduled = [
+                    (sid, source) for sid, source in db.execute("""
+                        SELECT state_id,source_policy FROM policy_state_visits
+                        WHERE run_id=? ORDER BY 1
+                    """, (policy_pool,)) if sid not in used
+                ][:limit]
+            elif state_ids:
+                scheduled = [
+                    (sid, "caller_bound") for sid in requested_ids
+                    if sid not in used
+                ]
+            else:
+                scheduled = select_states(db, used, limit, seed)
+            repeats = set(rng.sample([sid for sid, _ in scheduled], round(0.1 * len(scheduled))))
+            if scheduled:
+                plan = {"scope": scope, "states": scheduled, "repeats": sorted(repeats)}
+                with db:
+                    db.execute(
+                        "INSERT INTO outcome_preparation_batches VALUES (?,?,?,0,?,?)",
+                        (run_id, batch_start, len(scheduled), packed(plan), packed(rng.getstate())),
+                    )
+        selected = scheduled[cursor:] if state_ids else scheduled[cursor:cursor + limit]
         statuses: Counter[str] = Counter()
 
-        def save(batch: PreparedBatch) -> None:
+        def save(batch: PreparedBatch, position: int, random_state: bytes) -> None:
             rows, counts = batch
             with db:
                 db.executemany(
@@ -603,6 +637,15 @@ def prepare_outcomes(
                 """,
                     rows,
                 )
+                advanced = db.execute(
+                    """
+                    UPDATE outcome_preparation_batches SET prepared_count=?,rng_state=?
+                    WHERE run_id=? AND admitted_before=? AND prepared_count=?
+                    """,
+                    (position + 1, random_state, run_id, batch_start, position),
+                )
+                if advanced.rowcount != 1:
+                    raise ValueError("Another writer changed the preparation batch cursor")
             statuses.update(counts)
 
         pool = None
@@ -616,9 +659,14 @@ def prepare_outcomes(
                               declaration["comparison_protocol"]),
                 )
             )
-        pending: deque[Future[PreparedBatch]] = deque()
+        pending: deque[tuple[int, bytes, Future[PreparedBatch]]] = deque()
+
+        def commit_next() -> None:
+            position, random_state, future = pending.popleft()
+            save(future.result(), position, random_state)
+
         choosers = [choose for _, choose in suggestions]
-        for sid, stratum in selected:
+        for position, (sid, stratum) in enumerate(selected, start=cursor):
             with closing(connect(dataset.path)) as db_read:
                 state, session, actions = dataset.replay(db_read, sid)
                 if state["experiment_role"] != role:
@@ -639,23 +687,32 @@ def prepare_outcomes(
                     rng.shuffle(ordered)
                     repeat_seed = (seed + sid * 31 + repeat) % (2**31 - 1)
                     jobs.extend((repeat, action, repeat_seed) for action in ordered)
+                random_state = packed(rng.getstate())
                 if pool is None:
-                    save(_prepare_outcome_rows(
-                        dataset, db_read, sid, stratum, run_id, baseline, session, jobs
-                    ))
+                    save(
+                        _prepare_outcome_rows(
+                            dataset, db_read, sid, stratum, run_id, baseline, session, jobs
+                        ),
+                        position, random_state,
+                    )
                     continue
             # Model proposals and RNG stay in the parent. Commit futures in selection order.
-            pending.append(pool.submit(
+            future = pool.submit(
                 _prepare_outcome_worker, sid, stratum, run_id, role, baseline, preflight, jobs
-            ))
+            )
+            pending.append((position, random_state, future))
             if len(pending) >= 2 * branch_workers:
-                save(pending.popleft().result())
+                commit_next()
         while pending:
-            save(pending.popleft().result())
+            commit_next()
     return {
         "run_id": run_id,
         "states": len(selected),
-        "repeated_states": len(repeats),
+        "repeated_states": sum(sid in repeats for sid, _ in selected),
+        "preparation_batch": {
+            "admitted_before": batch_start, "state_count": len(scheduled),
+            "resumed_from": cursor, "prepared_count": cursor + len(selected),
+        },
         "outcomes_by_status": dict(statuses),
         "reader_requests": 0,
         "comparison_protocol": declaration["comparison_protocol"],
@@ -765,7 +822,7 @@ def execute_outcomes(
         outcome_counts: Counter[str] = Counter()
         # A saved in-flight marker with no response is distinct from an unissued branch.
         with db:
-            db.execute(
+            interrupted = db.execute(
                 """
                 UPDATE action_outcomes SET execution_status='reader_interrupted',
                     reader_status='unknown_after_interruption' WHERE run_id=?
@@ -773,6 +830,8 @@ def execute_outcomes(
             """,
                 (run_id,),
             )
+            if interrupted.rowcount:
+                outcome_counts["reader_interrupted"] += interrupted.rowcount
         with VLLMClient(
             VLLMConfig(**host.settings["host"]), budget=budget, capacity=host.capacity
         ) as client:
@@ -849,6 +908,15 @@ def score_outcomes(
         role = declaration.get("role")
         if role not in {"train", "dev"}:
             raise ValueError("Only TRAIN and DEV branch scoring is available")
+        if seal and db.execute(
+            "SELECT 1 FROM sqlite_schema WHERE type='table' AND name='outcome_preparation_batches'"
+        ).fetchone() and db.execute(
+            """
+            SELECT 1 FROM outcome_preparation_batches
+            WHERE run_id=? AND prepared_count < state_count
+            """, (run_id,),
+        ).fetchone():
+            raise ValueError("Outcome run still contains an unfinished preparation batch")
         rows = db.execute(
             """
             SELECT o.state_id,o.action_id,o.repeat_index,o.task_result,
