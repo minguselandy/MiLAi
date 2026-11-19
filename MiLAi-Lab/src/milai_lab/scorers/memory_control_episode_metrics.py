@@ -225,6 +225,58 @@ def paired_comparison(
         or set(baseline_seeds) != set(seed_labels)
     ):
         raise ValueError("Multi-seed baseline arms must match the fitted policy seed IDs")
+    metrics = _paired_metrics(
+        population, policy_runs, baselines, seed_labels, baseline_seeds, repeats=repeats, seed=seed,
+    )
+    return {
+        **metrics,
+        "seed_summaries": [summarize(path) for path in policy_roots],
+        "baseline": (summarize(baseline_paths[0]) if len(baselines) == 1 else {
+            "model_seeds": list(baseline_seeds),
+            "seed_summaries": [summarize(path) for path in baseline_paths],
+        }),
+    }
+
+
+def paired_budget_response_metrics(
+    reference_protocol: dict[str, Any],
+    held_protocol: dict[str, Any],
+    reference: dict[int, dict[str, Any]],
+    observed_for_held: dict[int, dict[str, Any]],
+    *,
+    repeats: int = 2000,
+    seed: int = 20261118,
+) -> dict[str, Any]:
+    """Pair observed replies for one DEV arm across a reference and held material budget."""
+    base = reference_protocol["population"]
+    held = held_protocol["population"]
+    base_budget, held_budget = base["material_budget"], held["material_budget"]
+    if (
+        base["role"] != "dev" or repeats < 1
+        or any(type(budget) is not int or budget < 1 for budget in (base_budget, held_budget))
+        or held_budget == base_budget or {**base, "material_budget": held_budget} != held
+        or reference_protocol["comparison"] != held_protocol["comparison"]
+        or reference_protocol["arm"] != held_protocol["arm"]
+    ):
+        raise ValueError("A held-budget comparison requires the same DEV arm and task declaration")
+    model_seed = reference_protocol["arm"].get("seed")
+    metrics = _paired_metrics(
+        held, (observed_for_held,), (reference,), (model_seed,), (model_seed,), repeats=repeats,
+        seed=seed,
+    )
+    return {**metrics, "reference_budget": base_budget, "held_budget": held_budget}
+
+
+def _paired_metrics(
+    population: dict[str, Any],
+    policy_runs: Sequence[dict[int, dict[str, Any]]],
+    baselines: Sequence[dict[int, dict[str, Any]]],
+    seed_labels: Sequence[int | None],
+    baseline_seeds: Sequence[int | None],
+    *,
+    repeats: int,
+    seed: int,
+) -> dict[str, Any]:
     wires: dict[str, Counter[str]] = defaultdict(Counter)
     baseline_by_seed = dict(zip(baseline_seeds, baselines, strict=True))
     seed_pairs = [
@@ -419,11 +471,6 @@ def paired_comparison(
         "paired_measurements_complete": full,
         "quality_path_supported": quality_supported,
         "cost_path_supported": cost_supported,
-        "seed_summaries": [summarize(path) for path in policy_roots],
-        "baseline": (summarize(baseline_paths[0]) if len(baselines) == 1 else {
-            "model_seeds": list(baseline_seeds),
-            "seed_summaries": [summarize(path) for path in baseline_paths],
-        }),
     }
 
 
