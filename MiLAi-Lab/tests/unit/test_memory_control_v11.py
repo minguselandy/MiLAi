@@ -20,6 +20,7 @@ from milai_lab.methods.memory_control import (
 from milai_lab.methods.memory_control_dataset import StateIndex
 from milai_lab.methods.small_control_learning import state_loss
 from milai_lab.runners.memory_control_episode import PolicyMenu
+from milai_lab.runners.memory_control_policy_states import _assign_policies
 from milai_lab.scorers.memory_control_episode_metrics import _shared_request_quality_delta
 
 
@@ -154,6 +155,25 @@ def test_mixed_coverage_preserves_unique_rows_and_reports_equal_draws() -> None:
     counts = Counter(row for batch in mixed for row in batch)
     assert all(counts[i] == 1 for i in range(5))
     assert counts[5] + counts[6] == 5 and min(counts[5], counts[6]) == 2
+
+
+def test_policy_rotation_does_not_alias_with_the_alternating_source_order() -> None:
+    task_ids = range(100, 120)
+    candidates: list[tuple[int, set[str]]] = [(task, set()) for task in task_ids]
+    sources = ("source_a", "source_b")
+    by_task = {task: sources[task % len(sources)] for task in task_ids}
+
+    assigned = list(_assign_policies(candidates, by_task))
+    assert [(sequence, task) for sequence, task, _ in assigned] == list(enumerate(task_ids))
+    for source in sources:
+        counts = Counter(policy for _, task, policy in assigned if by_task[task] == source)
+        assert counts == {"M0": 4, "M1": 4, "rules": 1, "random": 1}
+
+    legacy = list(_assign_policies(candidates, None))
+    legacy_exploration = [
+        (sequence, policy) for sequence, _, policy in legacy if policy in {"rules", "random"}
+    ]
+    assert legacy_exploration == [(2, "rules"), (7, "random"), (12, "rules"), (17, "random")]
 
 
 def test_fixed_r3_preserves_a_candidate_when_only_r2_is_feasible() -> None:
