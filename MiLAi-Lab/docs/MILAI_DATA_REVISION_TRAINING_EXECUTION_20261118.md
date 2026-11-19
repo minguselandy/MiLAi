@@ -346,6 +346,9 @@ M0 的第 72 步真实恢复文件也可重建最终导出和覆盖，追加优�
 3,000 个不同状态，均有 300 个状态实际准备了重复测量。两批合并后 MuSiQue、QASPER、
 PersonaMem 分别覆盖 3,812、803、65 个原生组。PersonaMem 的 65 个组在两批均有任务，
 后续分组分析采用原生组身份。见 `core-first6000-realized-roster-audit.json`。
+12:25 的下一次对账覆盖 92 个关闭窗口，共 18,364 条服务端计量回复，其中第二批为
+4,400 条。累计 19,255,900 input token、1,119,273 output token。见
+`core-dispatch-accounting-92-windows.json`。
 
 首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
 时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
@@ -379,6 +382,28 @@ M1 相对自身 W/N1 的分差在 MuSiQue、QASPER、PersonaMem 分别为 −7.5
 40 个任务中有 25 个以预算耗尽结束。增量 O 使用学习停止，W 使用固定四次读上限。
 它们在这批单种子诊断上同时改变训练阶段和停止方式。见
 `core-first3000-O-pilot/M1-O3000-reading-trajectory-audit.json`。
+
+在原 120 个 DEV 任务上，用同一个 M1 增量 O 检查点执行固定停止下的学习精度、固定
+R2 和可行即 R3，共准备 360 条真实在线轨迹。开场状态及实际候选菜单与原学习停止臂
+逐项相同。每来源抽四个不同原生组的首个状态，移除 HANDOFF 后最佳 READ 绑定均保持，
+READ 分数最大绝对差为 1.79e-7。三个固定停止条件在 QASPER 上的平均材料 token 分别
+为 1,124、815、1,687。MuSiQue 的三个条件在 40 题上形成逐项相同的终端请求。见
+`core-first3000-O-pilot/fixed-control-probe/preparation-receipt.json`。
+
+在先前的完整 DEV 收据上核对了本地执行和 Reader 客户端时间。M1 增量 O 每题的平均值
+分别为 2.57 秒和 1.39 秒。对 603 份真实轨迹收据以相同字段重序列化，逐项核对解析值，
+各臂字节数减少 36% 至 39%。新版入口在申请原 Reader 租约前持久保存待发请求，释放后评分。
+当前 episode 文件沿用相同路径和 JSON 字段，逐次保留待发、派发、已回复和评分状态。见
+`static-episode-storage-and-lease-audit.json`。
+
+正式 CLI 在 core 持有原租约时保存了首批 5 个固定停止请求。接续使用相同请求，取得
+5 条服务端计量回复并评分，本次新增准备数为 0，Reader 租约用时 5.11 秒。逐项核对
+请求、冷启动路径与独立预演。12:22，等待中的 P 和确认协调器接入 `c02af089`。增量
+对照的下一窗新增 20 条回复，租约用时 17.07 秒，累计完成 25 个位置。360 条独立预演
+和首批 5 个现场请求的本地准备成本在原台账各结算一次。后续窗口轮换三个固定停止臂。见
+`core-first3000-O-pilot/fixed-control-probe/first-window-receipt.json`、同目录
+`closed-windows.jsonl`、`preparation-compute-settlement.json`、`actual-control-status.json`
+和 `followthrough-staged-episode-handoff.json`。
 
 4 个真正由策略到达的 TRAIN 诊断状态上的 16 个分支已经全部执行并评分。Reader
 计量为 15,611 input token、742 output token。随后从已有 O 检查点初始化，
@@ -424,6 +449,11 @@ O/P 各轮检查点评分。该 outcome 角色与 TRAIN loaders 隔离。seed 11
 未训练头、宽 M0、固定停止与固定精度对照完成后冻结配方，再用同一训练公共池执行
 seed 29/47。三个 seed 都有实际检查点后才登记最终确认组和 22 个比较臂。该流程的
 实际执行状态记录在 `v11-followthrough.json`。
+
+以冻结 B* 通过实际确认组分配器只读核对名额。1,500 个位置包含 MuSiQue 650 题／325 组、
+QASPER 266 题／75 组、PersonaMem 584 题／220 组，保留了每个入选组的全体任务。
+按 22 个臂计算为 33,000 个计划位置。这次核对只访问角色和原生组元数据。见
+`v11-confirm-roster-capacity-audit.json`。
 
 ## 外部静态转移评估
 
