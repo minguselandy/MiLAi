@@ -418,6 +418,31 @@ TRAIN 任务、2,690 个原生组。原两批的 27,882 条分支绑定复核一
 188 条原始回复已写入待评分队列，第二批累计收回 11,988 条。见
 `core-dispatch-accounting-129-windows.json`。
 
+21:11，第三、四、五批已按评分边界接入。正式 core 达到 15,000 个登记状态，前四批
+55,958 条分支已评分入库。对三次滚动接入复核了 14,004、14,072、14,045 条实际分支的
+动作绑定、随机种子、首步与终端材料以及原始 Reader 请求字段。第五批开始实际派发。
+第六批已准备完毕，第七批开始滚动准备。见 `core-15000-formal-admission-audit.json`。
+
+在前四批完整已评分状态上，QASPER 的 2,700 对 R3/R2 配对给出 +0.38 点训练质量差，
+分组 95% 区间 [−0.54, 1.30]，平均多用 357.47 个 Reader 输入 token。PersonaMem 的
+1,671 对给出 −0.05 点，区间 [−1.51, 1.34]，平均多用 260.87 个输入 token。
+21:23 的 286 个关闭窗口合计 56,758 条实际回复。见
+`core-first12000-official-outcome-contrasts.json` 和 `core-dispatch-accounting-286-windows.json`。
+
+每轮 O/P 离线验证使用原 DEV 计划下的 605 个冷 SEARCH 状态，覆盖 222 个原生组。
+提前直接登记时 SQLite 写锁拒绝了注册。随后在独立副本上用实际 W 检查点生成全部
+2,990 条分支，验证原子接入、逐项保持和重复执行的幂等性。真实接入事务用时 3.73 秒，
+所有分支处于待发状态。提前启动的 DEV 派发协调器等待完整 core 封存，再使用原 Reader
+租约。DEV 结果保持独立角色。见 `dev-outcome-ahead-prepare` 下的 `preparation-receipt.json`、
+`adoption-rehearsal.json`、`live-adoption-receipt.json` 和 `deferred-reader-status.json`。
+
+该 DEV 集合补齐了 47 条冻结特征。两路实际 W 头的最高分动作各自与在线编码在 605 个
+状态上逐项一致，每路比较了 28,583 个动作评分。双路特征与评分的实测墙时从 87.80 秒
+降至 0.57 秒。后续只对已封存且登记一致的 DEV 阶段使用这个缓存。协调器首次接续因缺少
+`PYTHONPATH` 退出，补齐归档源码路径后恢复等待上游。准备与缓存对照在原台账分别结算。
+见 `dev-outcome-ahead-prepare/feature-cache-receipt.json`、同目录的
+`followthrough-cache-handoff.json` 和 `dev-ahead-compute-settlement.json`。
+
 首批增量 O 的 M1 读出在原台账上竞争租约后，独立读出协调器在等待且无执行子进程
 时接续。沿用已登记的 120 个位置和原始台账，每轮最多 20 个请求，释放租约后让出一个
 主线重试间隔。首个 M1 窗口已收回 20 个位置。见
