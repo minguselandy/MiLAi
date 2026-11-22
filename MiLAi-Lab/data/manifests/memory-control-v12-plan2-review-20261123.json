@@ -22,7 +22,17 @@
     "independent_readback": "plan2-native-confirmation-full-readback.json",
     "independent_readback_source": "verify-native-confirmation-readback.py",
     "final_compute_settlement": "plan2-confirmation-final-native-compute-settlement.json",
-    "acceptance_receipt": "plan2-final-local-acceptance-evidence.json"
+    "acceptance_receipt": "plan2-final-local-acceptance-evidence.json",
+    "B4_first_action_and_complete_request_differences": "plan2-B4-first-path-divergence.json",
+    "sealed_D_paired_measurements": "plan2-D-final-reader-coverage.json",
+    "sealed_P_A_paired_measurements": "plan2-P-A-sealed-native-matched-first-and-terminal-evidence.json",
+    "sealed_P_B_paired_measurements": "plan2-P-B-full-sealed-native-paired-evidence.json",
+    "absolute_DEV605_results": "plan2-absolute-closed-dev605-results.json",
+    "paired_P_and_R_only_DEV_results": "D-policy-comparisons.json",
+    "training_compute_by_seed_and_architecture": "plan2-native-three-seed-fit-resource-comparison.json",
+    "held_budget_trajectories_and_common_menu": "plan2-native-held-budget-full-transfer-verification.json",
+    "conditional_exploration_evidence": "plan2-conditional-exploration-post-policy-evidence-readback.json",
+    "terminal_reader_ledger_reconciliation": "plan2-native-confirmation-terminal-reader-ledger-reconciliation.json"
   },
   "executed_source_snapshots": [
     {
@@ -86,7 +96,27 @@
   "development": {
     "distinct_C_union_D_states": 24000,
     "distinct_P_states": 12000,
-    "formal_conditions_including_W": 34
+    "formal_conditions_including_W": 34,
+    "held_budget_transfer": {
+      "reference_material_budget": 2048,
+      "held_material_budgets": [
+        1536,
+        3072
+      ],
+      "questions_per_arm": 114,
+      "native_groups": 39,
+      "arms": [
+        "M0",
+        "M1",
+        "B*"
+      ],
+      "paid_reader_requests": 684,
+      "registration_slot_cap": 720,
+      "common_menu_arms": [
+        "M0",
+        "M1"
+      ]
+    }
   },
   "confirmation": {
     "status": "CONFIRM_COMPLETE",
@@ -194,6 +224,27 @@
       "tools/run_memory_control_v11_followthrough.py",
       "tools/run_memory_control_v12_followthrough.py",
       "tools/report_memory_control_plan2_baselines.py"
-    ]
+    ],
+    "offline_reproduction_using_review_source": {
+      "status": "REVIEW_SOURCE_REPRODUCED_NATIVE_CONFIRMATION",
+      "source_commit": "955a42ca6594dbd9d788440aba519d05229cfde1",
+      "receipt_relative_to_run_root": "plan2-review-branch-native-confirmation-readback-receipt.json",
+      "resource_settlement_relative_to_run_root": "plan2-review-branch-native-confirmation-compute-settlement.json",
+      "loaded_modules_from_review_source": 91,
+      "archives_by_scope": {
+        "primary": 13,
+        "repeat": 13
+      },
+      "literal_equal_readback_fields": 15,
+      "reader_requests": 0,
+      "sha_validation": false
+    }
+  },
+  "published_training_report": {
+    "repository": "minguselandy/MiLAi",
+    "branch": "report/memory-control-v12-training-20261122",
+    "commit": "35e1803ed413fd17fb587ff1c9db32f92acd7815",
+    "path": "MiLAi-Lab/docs/MILAI_MEMORY_CONTROL_V12_PLAN2_FINAL_RESULTS.md",
+    "literal_remote_text_verified": true
   }
 }
