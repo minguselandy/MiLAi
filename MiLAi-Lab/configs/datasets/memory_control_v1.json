@@ -1,0 +1,71 @@
+{
+  "dataset_release": "memory_control_v1",
+  "processing_version": "1.0.0",
+  "seed": 20261118,
+  "data_root": "/cra/milai-datasets/memory_control_v1",
+  "sources": {
+    "musique_full": {
+      "release": "v1.0",
+      "revision": "922ac98f19a201998dbdae6d7f2887a5258dbdeb",
+      "attribution": "Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot and Ashish Sabharwal",
+      "homepage": "https://github.com/StonyBrookNLP/musique",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "url": "https://drive.usercontent.google.com/download?id=1tGdADlNjWFaHLeZZGShh2IRcpO6Lv24h&export=download&confirm=t",
+      "archive": "musique_data_v1.0.zip",
+      "declared_archive_bytes": 272049578,
+      "members": {
+        "train": "data/musique_full_v1.0_train.jsonl",
+        "dev": "data/musique_full_v1.0_dev.jsonl"
+      },
+      "declared_tasks": {"train": 39876, "dev": 4834}
+    },
+    "qasper": {
+      "release": "v0.3",
+      "revision": "fdc9d8214fbab5dd782958601db4d678e6934a54",
+      "attribution": "Pradeep Dasigi, Kyle Lo, Iz Beltagy, Arman Cohan, Noah A. Smith and Matt Gardner",
+      "homepage": "https://huggingface.co/datasets/allenai/qasper",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "loader_license": "Apache-2.0",
+      "url": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+      "archive": "qasper-train-dev-v0.3.tgz",
+      "declared_archive_bytes": 10835856,
+      "members": {"train": "qasper-train-v0.3.json", "validation": "qasper-dev-v0.3.json"},
+      "declared_tasks": {"train": 2593, "validation": 1005},
+      "declared_groups": {"train": 888, "validation": 281}
+    },
+    "personamem_v2": {
+      "revision": "ed956dea41521fc4499acbc63f966e0fd3c053ba",
+      "homepage": "https://huggingface.co/datasets/bowen-upenn/PersonaMem-v2",
+      "attribution": "Bowen Jiang and the PersonaMem-v2 authors",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "base": "https://huggingface.co/datasets/bowen-upenn/PersonaMem-v2/resolve",
+      "members": {"train": "benchmark/text/train.csv", "validation": "benchmark/text/val.csv"},
+      "declared_tasks": {"train": 18500, "validation": 2600},
+      "declared_tasks_approximate": true,
+      "history_variant": "text_32k",
+      "observation_setting": "milai_dialogue_only_v1"
+    }
+  },
+  "views": {
+    "preserve_source_boundaries": true,
+    "page_reader_tokens": 768,
+    "native_focus_reader_tokens": 1000,
+    "reader_material_tokens": 2048,
+    "reader_config": "/data/milai-experiments/20261117-memory-compute-control/S02-reader-config-v1.json",
+    "encoder_config": "/data/milai-experiments/20261117-memory-compute-control/T10-object-mlp-warm-seed0-v1/checkpoint/config.json",
+    "encoder_model": "intfloat/multilingual-e5-small"
+  },
+  "states": {
+    "max_states_per_task": 3,
+    "random_source_fraction": 0.35,
+    "source_sampling": "balanced_by_dataset_then_group",
+    "candidate_limit": 32,
+    "control_steps": 8,
+    "short_control_steps": 4
+  },
+  "supervision": {
+    "separate_weak_and_executed": true,
+    "unknown_outcome": null,
+    "clean_split_policy": "validation_priority_exclude_overlapping_train_groups"
+  }
+}

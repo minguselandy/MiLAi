@@ -8,6 +8,7 @@ import json
 import random
 import time
 from collections import Counter
+from collections.abc import Callable
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,7 @@ from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     MemoryAction,
     MemoryControlState,
+    MemoryPolicy,
     RulesMemoryPolicy,
     run_memory_control,
 )
@@ -47,12 +49,13 @@ class QueryOnceContextPolicy(FixedContextMemoryPolicy):
         return selected
 
 
-def continuation_policy(name: str) -> Any:
-    return {
-        "rules": RulesMemoryPolicy,
-        "fixed_context": FixedContextMemoryPolicy,
-        "query_once_context": QueryOnceContextPolicy,
-    }[name](reads=4)
+def continuation_policy(name: str) -> MemoryPolicy:
+    factories: dict[str, Callable[[], MemoryPolicy]] = {
+        "rules": lambda: RulesMemoryPolicy(reads=4),
+        "fixed_context": lambda: FixedContextMemoryPolicy(reads=4),
+        "query_once_context": lambda: QueryOnceContextPolicy(reads=4),
+    }
+    return factories[name]()
 
 
 def baseline(event: dict[str, Any], policy_name: str = "rules") -> str:
@@ -127,11 +130,13 @@ def execute_branch(
     continuation_steps: int,
     terminal_handoff: str = "rules",
     policy_name: str = "rules",
+    *,
+    policy_factory: Callable[[], MemoryPolicy] | None = None,
 ) -> dict[str, Any]:
     """Keep the finite allowance; let the shared policy select acquired material at the boundary."""
     state = MemoryControlState(**copy.deepcopy(before))
     remaining = before["budget"]["remaining_control_steps"]
-    policy = continuation_policy(policy_name)
+    policy = policy_factory() if policy_factory is not None else continuation_policy(policy_name)
 
     class TerminalPolicy:
         def choose(self, current: MemoryControlState, actions: list[MemoryAction]) -> str:
@@ -163,6 +168,8 @@ def execute_branch(
         raise ValueError("Branch changed the actual before or nominated binding")
     result["terminal_handoff"] = terminal_handoff
     result["continuation_policy"] = policy_name
+    if policy_factory is not None:
+        result["continuation_policy_calls"] = getattr(policy, "calls", None)
     return result
 
 
@@ -240,7 +247,9 @@ def main() -> None:
         "scope": "Actual same-before full bindings and bounded ordinary continuation. "
         "Reference witness is an offline proxy; no Host success labels generated here.",
     }
-    cases, rows, cells = [], [], []
+    cases: list[dict[str, Any]] = []
+    rows: list[dict[str, Any]] = []
+    cells: list[dict[str, Any]] = []
     coverage: Counter[str] = Counter()
     try:
         for family_index, history, request in units:

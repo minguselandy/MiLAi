@@ -13,6 +13,7 @@ from jsonschema import Draft202012Validator
 from milai_lab.memory.dependency_groups import select_support_routes, support_status
 from milai_lab.memory.edit_units import read_revision_evidence
 from milai_lab.memory.external_support import inspect_external_unit
+from milai_lab.memory.literal_projection import expand_literal_maps, project_literal_maps
 from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.retrieval import flat_bm25_rank, merge_candidates
 from milai_lab.memory.service import MemoryService
@@ -20,7 +21,11 @@ from milai_lab.memory.working_set import material_ref, plan_delivery
 from milai_lab.methods.dependency_memory import query_support
 from milai_lab.methods.edit_maintenance import parse_object
 from milai_lab.methods.edit_memory import EditMemory
-from milai_lab.methods.source_ranges import SourceRangeBudget, source_range_packs
+from milai_lab.methods.source_ranges import (
+    SourceRangeBudget,
+    evidence_unit_packs,
+    source_range_packs,
+)
 
 
 def unit_closure(state: dict[str, Any], unit_id: str) -> tuple[list[str], list[dict[str, Any]]]:
@@ -88,6 +93,8 @@ def build_evidence_packs(
     dependency_selections: dict[str, Any] | None = None,
     source_range_budget: SourceRangeBudget | None = None,
     source_range_limit: int = 16,
+    evidence_units: bool = False,
+    evidence_context_turn_radius: int = 0,
 ) -> list[dict[str, Any]]:
     """Split only the captured pool; default to complete exchanges with prior context.
 
@@ -96,12 +103,21 @@ def build_evidence_packs(
     An explicit range budget instead ranks literal fragments inside this same pool,
     with adjacent same-Source ranges as context and a declared candidate limit.
     """
+    if evidence_units and source_range_budget is not None:
+        raise ValueError("Choose whole evidence units or token ranges explicitly")
+    if evidence_context_turn_radius and not evidence_units:
+        raise ValueError("Evidence context radius requires explicit evidence-unit formation")
     source_packs = []
     retrieved_ids = {item["id"] for item in originals}
     additional = (service.read_source_materials([
         item for item in source_scope["materials"] if item["id"] not in retrieved_ids
     ]) if source_scope is not None else [])
     for material in [*originals, *additional]:
+        if evidence_units:
+            source_packs.extend(evidence_unit_packs(material,
+                scope_only=material["id"] not in retrieved_ids,
+                context_turn_radius=evidence_context_turn_radius))
+            continue
         if source_range_budget is not None:
             source_packs.extend(source_range_packs(material, source_range_budget,
                 scope_only=material["id"] not in retrieved_ids))
@@ -389,6 +405,8 @@ def open_evidence_packs(
             if expand_context:
                 item["source_ranges"] = item.get("context_source_ranges", item["source_ranges"])
                 item["turn_range"] = item.get("context_turn_range", item["turn_range"])
+                if "evidence_representation" in item:
+                    item["evidence_representation"]["level"] = "R3"
             actual = service.read_source_materials([item])[0]
             focus = {span["source_ref"] for span in item.get(
                 "focus_source_ranges", item["source_ranges"])}
@@ -630,6 +648,40 @@ SOURCE_REUSE_INSTRUCTIONS = (
 )
 
 
+def project_view_tables(evidence: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Opt-in literal map tables; raw text, rules, roles, clocks and locators survive exactly."""
+    paths = (("interpretation", "nodes"), ("interpretation", "rules"),
+             ("source_locations",), ("source_metadata", "by_alias"))
+    result = []
+    for item in evidence:
+        if item["kind"] != "query_structure" or "literal_map_tables" in item:
+            result.append(copy.deepcopy(item))
+            continue
+        projected, encoded = project_literal_maps(item, paths)
+        if encoded:
+            projected["literal_map_tables"] = {"format": "map_columns_v1", "paths": encoded,
+                "instructions": "Keys align with rows; rows follow non-shared columns. "
+                    "Merge shared fields with each row; all literal values, identities "
+                    "and order remain unchanged."}
+        result.append(projected if encoded and len(json.dumps(projected, ensure_ascii=False)) <
+                      len(json.dumps(item, ensure_ascii=False)) else copy.deepcopy(item))
+    return result
+
+
+def expand_view_tables(evidence: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Recover an opted-in Reader representation, preserving every original field and type."""
+    result = []
+    for item in evidence:
+        plain = copy.deepcopy(item)
+        encoding = plain.pop("literal_map_tables", None)
+        if encoding is not None:
+            if encoding["format"] != "map_columns_v1":
+                raise ValueError("Unknown View table representation")
+            plain = expand_literal_maps(plain, encoding["paths"])
+        result.append(plain)
+    return result
+
+
 def project_packs(
     items: list[dict[str, Any]], indices: list[int], *, compact_view_bindings: bool = False,
 ) -> list[dict[str, Any]]:
@@ -749,6 +801,30 @@ def project_packs(
                 alias: sources.get((binding["source_ref"], binding["source_revision"]),
                                    "support_not_opened")
                 for alias, binding in projected["source_bindings"].items()}
+    selections = {f"e{index}": item for item, index in zip(items, indices, strict=True)
+                  if item["kind"] == "query_structure"
+                  and item.get("body_delivered") is not False
+                  and "reader_unit_selection" in item}
+    if selections:
+        from milai_lab.methods.query_structure_projection import project_structure_units
+
+        for position, projected in enumerate(result):
+            original = selections.get(projected["label"])
+            if original is None:
+                continue
+            selection = original["reader_unit_selection"]
+            if (not isinstance(selection, dict)
+                    or selection.get("parent_id") != original["id"]
+                    or type(selection.get("parent_revision")) is not int
+                    or selection["parent_revision"] != original["revision"]):
+                raise ValueError("Reader unit selection belongs to a different parent View")
+            nodes = selection.get("nodes")
+            if not isinstance(nodes, list):
+                raise ValueError("Reader unit selection requires a literal node list")
+            # Parent opening is the caller's common lifecycle operation. This
+            # projection happens after full provenance/alias normalization, so
+            # unused metadata can be omitted without hiding invalid parents.
+            result[position] = project_structure_units(projected, nodes)
     return result
 
 
@@ -762,7 +838,11 @@ def pack_candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
                and item.get("body_delivered") is not False else {}),
             "excerpt": text[:160], "excerpt_truncated": len(text) > 160,
             "date": item.get("date"), "visibility": item.get("visibility", "visible"),
-            "can_expand_context": bool(item.get("context_source_ranges"))}
+            "can_expand_context": bool(item.get("context_source_ranges")),
+            **({"evidence_representation": copy.deepcopy(item["evidence_representation"])}
+               if "evidence_representation" in item else {}),
+            **({"navigation_excerpt": copy.deepcopy(item["navigation_excerpt"])}
+               if "navigation_excerpt" in item and item.get("body_delivered") is not False else {})}
 
 
 

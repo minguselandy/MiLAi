@@ -38,12 +38,18 @@ def reusable_readout(
     prior: list[tuple[Path, dict[str, Any], dict[str, Any]]],
     *, share_identical_packets: bool = False,
 ) -> tuple[Path, dict[str, Any]] | None:
-    """Reuse a closed first outcome only for the identical actual conditional Host wire."""
+    """Reuse a closed first, including an explicitly unknown interrupted outcome.
+
+    A missing result after a dispatched request is not permission to generate a
+    replacement. RUNNING records remain ineligible: closing an interrupted first
+    requires separate evidence that its producer stopped and accounting survived.
+    """
     for path, record, wire in prior:
         if (
-            record["status"] in {"COMPLETED", "FAILED"}
+            record["status"] in {"COMPLETED", "FAILED", "UNKNOWN"}
             and record["family"] == case["family"]
-            and record["event_id"] == case["event_id"]
+            and record.get("response_event_id", record["event_id"]) == case.get(
+                "response_event_id", case["event_id"])
             and (share_identical_packets or record["action"] == branch["action"])
             and wire == branch["readout_request"]
         ):
@@ -100,6 +106,7 @@ def main() -> None:
         "planned_policy_positions": sum(len(case["choices"]) for case in cases),
         "closed_readouts": 0,
         "failed_readouts": 0,
+        "unknown_readouts": 0,
         "chat_invocations": 0,
         "reused_readouts": 0,
         "reuse_source": str(args.reuse_readouts.resolve()) if args.reuse_readouts else None,
@@ -150,6 +157,8 @@ def main() -> None:
                             "status": "RUNNING",
                             "family": case["family"],
                             "event_id": case["event_id"],
+                            **({"response_event_id": case["response_event_id"]}
+                               if "response_event_id" in case else {}),
                             "request_id": case["request_id"],
                             "policies": branch["policies"],
                             "action": branch["action"],
@@ -223,14 +232,15 @@ def main() -> None:
                             )
                             write_json(path, record)
                         if (args.share_identical_packets
-                                and record["status"] in {"COMPLETED", "FAILED"}):
+                                and record["status"] in {"COMPLETED", "FAILED", "UNKNOWN"}):
                             prior.append((path, record, request))
                         for policy in branch["policies"]:
                             paths.setdefault(policy, {})[case.get("case_key", case["family"])] = (
                                 str(path.resolve())
                             )
                         run["closed_readouts"] += 1
-                        run["failed_readouts"] += record["status"] != "COMPLETED"
+                        run["failed_readouts"] += record["status"] not in {"COMPLETED", "UNKNOWN"}
+                        run["unknown_readouts"] += record["status"] == "UNKNOWN"
                         write_json(args.output / "readout-paths.json", paths)
                         write_json(args.output / "run.json", run)
                         print(
@@ -253,7 +263,8 @@ def main() -> None:
                             raise RuntimeError(
                                 "Unconfirmed usage retained; no additional requests dispatched"
                             )
-            run["status"] = "COMPLETED_WITH_FAILURES" if run["failed_readouts"] else "COMPLETED"
+            run["status"] = ("COMPLETED_WITH_FAILURES"
+                             if run["failed_readouts"] or run["unknown_readouts"] else "COMPLETED")
         except BaseException as error:
             run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
             raise

@@ -63,6 +63,31 @@ def merge_source_ranges(ranges: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return result
 
 
+def subtract_source_ranges(
+    ranges: list[dict[str, Any]], covered: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Subtract half-open intervals within the same Source revision."""
+    by_source: dict[tuple[str, int], list[tuple[int, int]]] = {}
+    for span in merge_source_ranges(covered):
+        key = (span["source_ref"], span["source_revision"])
+        by_source.setdefault(key, []).append((span["start"], span["end"]))
+    result = []
+    for span in merge_source_ranges(ranges):
+        key = (span["source_ref"], span["source_revision"])
+        cursor, end = span["start"], span["end"]
+        for left, right in by_source.get(key, []):
+            if left >= end:
+                break
+            if right <= cursor:
+                continue
+            if left > cursor:
+                result.append({**span, "start": cursor, "end": left})
+            cursor = max(right, cursor)
+        if cursor < end:
+            result.append({**span, "start": cursor})
+    return result
+
+
 def _reader_diagnostics(view: dict[str, Any]) -> None:
     """Keep the old Reader's semantic clock information and explicit unknowns.
 

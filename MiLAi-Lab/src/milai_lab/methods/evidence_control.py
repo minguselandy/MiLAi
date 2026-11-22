@@ -72,12 +72,28 @@ class EvidenceOperations:
         source_observation: SourceObservationBudget | None = None,
         delivery_selection: bool = False,
         checkpoint: dict[str, Any] | None = None,
+        source_directory_only: bool = False,
+        material_protocol: str | None = None,
+        delivery_projection: Callable[[dict[int, dict[str, Any]]], list[dict[str, Any]]] | None = None,
+        view_unit_selections: dict[str, list[list[str]]] | None = None,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
         self.materials: list[dict[str, Any]] = []
         self.opened: dict[int, dict[str, Any]] = {}
         self.delivery_selection = delivery_selection
+        self.view_unit_selections = copy.deepcopy(view_unit_selections or {})
+        if self.view_unit_selections and (not internal_views or not delivery_selection):
+            raise ValueError("View unit choices require internal Views and delivery tracking")
+        for slot, groups in self.view_unit_selections.items():
+            if (slot not in structure_slots(view_capacity) or not isinstance(groups, list)
+                    or not groups or any(not isinstance(group, list) or not group
+                    or any(not isinstance(node, str) or not node for node in group)
+                    for group in groups)):
+                raise ValueError("View unit choices require finite, nonempty node groups")
+        self.view_unit_attempts: set[tuple[str, int, tuple[str, ...], bool]] = set()
+        if source_directory_only and source_observation is not None:
+            raise ValueError("Directory-only observation cannot page unseen source bodies")
         self.observed: dict[int, dict[str, Any]] = {}
         self.delivered_view_slots: dict[str, int] = {}
         self.known_materials = known_materials or []
@@ -86,6 +102,7 @@ class EvidenceOperations:
         self.max_searches = max_searches
         self.search_attempts: set[tuple[str, int]] = set()
         self.fits_materials = fits_materials
+        self.delivery_projection = delivery_projection
         self.attempted: set[tuple[int, bool]] = set()
         self.searched = False
         self.view_capacity = view_capacity
@@ -105,6 +122,10 @@ class EvidenceOperations:
             **({"internal_views": False} if not internal_views else {}),
             **({"view_updates": False} if not view_updates else {}),
             **({"exclude_given_requests": True} if exclude_given_requests else {}),
+            **({"source_directory_only": True} if source_directory_only else {}),
+            **({"material_protocol": material_protocol} if material_protocol else {}),
+            **({"view_unit_selections": self.view_unit_selections}
+               if self.view_unit_selections else {}),
         }
         if checkpoint is not None:
             self.restore_checkpoint(checkpoint, source_observation)
@@ -154,7 +175,8 @@ class EvidenceOperations:
             source_discovery=feed["query"], bound_source_lookups=len(bound_refs),
             **({"deferred_source_lookups": len(deferred_lookups)} if deferred_lookups else {}))
         state.new_events = [{"source_ref": e["event_id"], "role": e["role"],
-            "content": body_text(e), "origin": e.get("origin"),
+            **({"content": body_text(e)} if not source_directory_only else {}),
+            "origin": e.get("origin"),
             **{key: e[key] for key in ("capture_context", "calendar_context") if key in e},
             "delivery": "controller_observation; Reader uses visible_evidence",
             "reported_at": e.get("occurred_at"), "captured_at": e["observed_at"]}
@@ -183,7 +205,9 @@ class EvidenceOperations:
             observed_source_attempts=sorted(self.observed_source_attempts),
             source_pages=self.source_pages.checkpoint() if self.source_pages else None,
             **({"excluded_source_refs": self.excluded_source_refs}
-               if self.excluded_source_refs else {}))
+               if self.excluded_source_refs else {}),
+            **({"view_unit_attempts": sorted(self.view_unit_attempts)}
+               if self.view_unit_selections else {}))
         return copy.deepcopy(values)
 
     def restore_checkpoint(self, saved: dict[str, Any],
@@ -198,6 +222,8 @@ class EvidenceOperations:
         self.search_attempts = {(query, limit) for query, limit in saved["search_attempts"]}
         self.attempted = {(index, expand) for index, expand in saved["attempted"]}
         self.used = set(saved["used"])
+        self.view_unit_attempts = {(identity, revision, tuple(nodes), replace)
+            for identity, revision, nodes, replace in saved.get("view_unit_attempts", [])}
         self.refreshed_inputs = {(slot, tuple(refs), replace)
                                 for slot, refs, replace in saved["refreshed_inputs"]}
         self.observed_source_attempts = {(ref, start, end)
@@ -361,6 +387,50 @@ class EvidenceOperations:
                     {"observed_source": span}))
         return actions
 
+    def delivered_view_nodes(self, slot: str, view: dict[str, Any]) -> set[str]:
+        """Actual delivered precision, not everything the controller has opened."""
+        index = self.delivered_view_slots.get(slot)
+        prior = self.opened.get(index) if index is not None else None
+        if (prior is None or prior.get("id") != view["id"]
+                or prior.get("revision") != view["revision"]
+                or prior.get("body_delivered") is False):
+            return set()
+        if "reader_unit_selection" in prior:
+            return set(prior["reader_unit_selection"]["nodes"])
+        return set(view.get("structure", {}).get("nodes", {}))
+
+    def unit_view_actions(self, slot: str, view: dict[str, Any], suffix: str,
+                          ) -> list[MemoryAction]:
+        """Finite public node groups, expanded monotonically within one parent."""
+        nodes = list(view.get("structure", {}).get("nodes", {}))
+        if not nodes:
+            return []
+        current = self.delivered_view_nodes(slot, view)
+        if current == set(nodes):
+            return []
+        choices: list[tuple[str, list[str] | None]] = [("use_view" + suffix, None)]
+        seen = {tuple(nodes)}
+        for number, group in enumerate(self.view_unit_selections[slot]):
+            if not set(group) <= set(nodes) or set(group) <= current:
+                continue
+            requested = [node for node in nodes if node in current or node in group]
+            if tuple(requested) not in seen:
+                choices.append((f"view_units{suffix}_{number}", requested))
+                seen.add(tuple(requested))
+        result = []
+        for identity, requested_nodes in choices:
+            bound = requested_nodes if requested_nodes is not None else nodes
+            for replace_delivery in (False, True):
+                attempted = (view["id"], view["revision"], tuple(bound), replace_delivery)
+                if attempted in self.view_unit_attempts:
+                    continue
+                parameters = {"slot": slot, "view_revision": view["revision"],
+                    **({"view_nodes": requested_nodes} if requested_nodes is not None else {}),
+                    **({"replace_delivery": True} if replace_delivery else {})}
+                result.append(MemoryAction(identity + ("_only" if replace_delivery else ""),
+                    "USE_VIEW", view["id"], parameters))
+        return result
+
     def actions(self, state: MemoryControlState) -> list[MemoryAction]:
         self.refresh_visibility(state)
         actions = []
@@ -420,7 +490,11 @@ class EvidenceOperations:
             view = self.views.get(slot)
             meta = next((v for v in state.views if v["slot"] == slot), None)
             suffix = "" if self.view_capacity == 1 else "_" + slot
-            if view and slot not in self.used and meta and meta["visibility"] == "visible":
+            if view and meta and meta["visibility"] == "visible" and (
+                slot in self.view_unit_selections
+            ):
+                actions.extend(self.unit_view_actions(slot, view, suffix))
+            elif view and slot not in self.used and meta and meta["visibility"] == "visible":
                 actions.append(MemoryAction("use_view" + suffix, "USE_VIEW", view["id"],
                                             {"slot": slot}))
                 if self.delivery_selection:
@@ -591,14 +665,14 @@ class EvidenceOperations:
                 for limit in self.search_batch_sizes if (text, limit) not in self.search_attempts]
 
     def _deliver(self, state: MemoryControlState) -> None:
-        state.visible_evidence = project_packs(list(self.opened.values()), list(self.opened))
+        state.visible_evidence = self.project_delivery(self.opened)
         if self.delivery_selection:
             retrieved = self.retrieved_scopes()
             state.observed_materials = [{"item_index": i,
                 "selected": self.opened.get(i) == item,
                 **{key: copy.deepcopy(item[key]) for key in (
                     "kind", "id", "revision", "version_view", "visibility", "body_delivered",
-                    "source_ranges", "source_bindings") if key in item}}
+                    "source_ranges", "source_bindings", "evidence_representation") if key in item}}
                 for i, item in self.observed.items()]
             state.retrieved_scopes = [{"item_index": i,
                 "source_ranges": copy.deepcopy(item["source_ranges"]),
@@ -610,7 +684,17 @@ class EvidenceOperations:
     def fits_delivery(self, items: dict[int, dict[str, Any]]) -> bool:
         if self.fits_materials is not None:
             return self.fits_materials(items)
-        return self.fits(project_packs(list(items.values()), list(items)))
+        return self.fits(self.project_delivery(items))
+
+    def project_delivery(self, items: dict[int, dict[str, Any]]) -> list[dict[str, Any]]:
+        if self.delivery_projection is not None:
+            return self.delivery_projection(items)
+        return project_packs(list(items.values()), list(items))
+
+    def open_bound_read(self, index: int, expand: bool) -> dict[str, Any]:
+        """Resolve the original binding through the exact Source opening path."""
+        return open_evidence_packs(self.service, [self.materials[index]],
+                                   expand_context=expand, refresh_current=True)[0]
 
     @staticmethod
     def candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
@@ -638,7 +722,19 @@ class EvidenceOperations:
                     **({"retrieved_scope_indices": narrowed} if narrowed else {})}
         if action.kind == "SEARCH":
             if self.search_pool is None:
-                self.materials = self.internal_pool(self.load_pool())
+                found = self.internal_pool(self.load_pool())
+                if not self.materials:
+                    self.materials = found
+                else:
+                    fixed_pool_keys = {(item["kind"], item.get("id", item.get("record_id")),
+                                        item.get("revision"), item.get("version_view"))
+                                       for item in self.materials}
+                    for item in found:
+                        fixed_pool_key = (item["kind"], item.get("id", item.get("record_id")),
+                                          item.get("revision"), item.get("version_view"))
+                        if fixed_pool_key not in fixed_pool_keys:
+                            self.materials.append(item)
+                            fixed_pool_keys.add(fixed_pool_key)
             else:
                 parameters = action.parameters
                 if "query_from" not in parameters:
@@ -670,6 +766,8 @@ class EvidenceOperations:
                                         for i, item in enumerate(self.materials)
                                         if i not in self.acquired
                                         and not item.get("source_observation_read")]
+            if self.delivery_selection:
+                self._deliver(state)
             return {"ok": True, "status": "searched", "candidates": len(self.materials),
                     **action.parameters,
                     **({"query": query} if self.search_pool is not None else {}),
@@ -721,8 +819,7 @@ class EvidenceOperations:
                         "fixed_history_pool": True}])
                 self.materials[i] = next(p for p in packs if p["record_id"] == target["record_id"]
                                         and p["revision"] == target["revision"])
-            item = open_evidence_packs(self.service, [self.materials[i]],
-                                      expand_context=expand, refresh_current=True)[0]
+            item = self.open_bound_read(i, expand)
             if self.delivery_selection:
                 self.observed[i] = item
             trial = {**self.opened, i: item}
@@ -748,6 +845,37 @@ class EvidenceOperations:
         if action.kind == "USE_VIEW" and self.internal_views:
             slot = action.parameters.get("slot", "current")
             item = self.view_observation(state)[slot]
+            if "view_nodes" in action.parameters and slot not in self.view_unit_selections:
+                raise ValueError("View unit delivery is not enabled for this slot")
+            if slot in self.view_unit_selections:
+                if (action.target != self.views[slot]["id"]
+                        or type(action.parameters.get("view_revision")) is not int
+                        or action.parameters["view_revision"] != self.views[slot]["revision"]):
+                    raise ValueError("View unit action belongs to a different parent revision")
+                nodes = list(self.views[slot]["structure"]["nodes"])
+                requested = action.parameters.get("view_nodes", nodes)
+                if (not isinstance(requested, list) or not requested
+                        or any(not isinstance(node, str) for node in requested)
+                        or not set(requested) <= set(nodes)
+                        or not self.delivered_view_nodes(slot, self.views[slot]) <= set(requested)):
+                    raise ValueError("View unit action requires a valid monotone node binding")
+                self.view_unit_attempts.add((item["id"], self.views[slot]["revision"],
+                    tuple(requested), bool(action.parameters.get("replace_delivery"))))
+                if item.get("body_delivered") is not False:
+                    from milai_lab.methods.query_structure_projection import project_structure_units
+
+                    item["query_time"] = state.task["query_time"]
+                    selected = project_structure_units(project_packs([item], [-1])[0], requested)
+                    chosen = list(selected["interpretation"]["nodes"])
+                    partial = len(chosen) != len(nodes)
+                    if partial:
+                        item["reader_unit_selection"] = {"parent_id": item["id"],
+                            "parent_revision": item["revision"], "nodes": chosen}
+                    item["evidence_representation"] = {"formation": "whole_connected_units_v1",
+                        "level": "partial_view" if partial else "full_view",
+                        "selected_nodes": chosen, "parent_node_count": len(nodes),
+                        "controller_opened_full_parent": True,
+                        "semantic_completeness": "not_certified"}
             self.used.add(slot)
             if self.view_updates and self.view_capacity > 1:
                 touch_structure(self.service, slot)
@@ -816,4 +944,4 @@ class EvidenceOperations:
     def reader_evidence(self) -> list[dict[str, Any]]:
         """Recheck visibility on delivery, including after a later same-request forget."""
         actual = open_evidence_packs(self.service, list(self.opened.values()), refresh_current=True)
-        return project_packs(actual, list(self.opened))
+        return self.project_delivery(dict(zip(self.opened, actual, strict=True)))

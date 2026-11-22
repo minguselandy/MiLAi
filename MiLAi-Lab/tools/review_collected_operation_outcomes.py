@@ -14,6 +14,7 @@ import jsonschema
 
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import http_budget_scope
+from milai_lab.memory.evidence_quotes import quote_in_text
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.contextual_scoring import _judge
@@ -138,14 +139,15 @@ def delivered_quote(quote: str, evidence: list[dict[str, Any]]) -> bool:
     source prose; removing it is allowed only if the remaining literal text is
     actually present in that cited delivered item, not in a reference annotation.
     """
-    if any(quote in source["content"] for item in evidence for source in item["evidence"]):
+    if any(quote_in_text(quote, source["content"])
+           for item in evidence for source in item["evidence"]):
         return True
     citation = re.search(r"\s*(?:\[(e\d+)\]|\((e\d+)\))\s*$", quote)
     if citation is None:
         return False
     literal = quote[:citation.start()].rstrip()
     label = citation.group(1) or citation.group(2)
-    return bool(literal) and any(literal in source["content"] for item in evidence
+    return bool(literal) and any(quote_in_text(literal, source["content"]) for item in evidence
         if item.get("label") == label for source in item["evidence"])
 
 

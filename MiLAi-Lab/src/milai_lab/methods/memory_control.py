@@ -4,9 +4,11 @@ from __future__ import annotations
 import copy
 import time
 from collections.abc import Callable
+from contextlib import nullcontext
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Protocol
 
+from milai_lab.harness.compute_profile import ComputeProfile
 from milai_lab.methods.evidence_selection import (
     interpretation_handoff,
     interpretation_only,
@@ -50,10 +52,13 @@ class MemoryControlState:
     observed_materials: list[dict[str, Any]] | None = None
     observed_evidence: list[dict[str, Any]] | None = None
     retrieved_scopes: list[dict[str, Any]] | None = None
+    navigation_upgrades: dict[int, dict[str, Any]] | None = None
+    control_numeric: dict[str, Any] | None = None
 
     def project(self) -> dict[str, Any]:
         result = asdict(self)
-        for key in ("observed_materials", "observed_evidence", "retrieved_scopes"):
+        for key in ("observed_materials", "observed_evidence", "retrieved_scopes",
+                    "navigation_upgrades", "control_numeric"):
             if result[key] is None:
                 del result[key]
         return result
@@ -77,6 +82,7 @@ def run_memory_control(
     intervention: FirstActionIntervention | None = None,
     start_step: int = 0,
     prefix_trace: list[dict[str, Any]] | None = None,
+    profile: ComputeProfile | None = None,
 ) -> dict[str, Any]:
     """Each next decision sees the completed operation, never a predicted result."""
     reason = "budget_exhausted"
@@ -86,11 +92,13 @@ def run_memory_control(
                             reader_capacity_reserved=True)
         if not can_continue():
             break
-        actions = operations.actions(state)
+        with profile.span("action_menu") if profile else nullcontext():
+            actions = operations.actions(state)
         if not actions:
             reason = "no_available_operation"
             break
-        before = state.project()
+        with profile.span("observation_projection") if profile else nullcontext():
+            before = state.project()
         event: dict[str, Any] = {"event": "memory_control_step", "step": step, "before": before,
                                 "actions": [asdict(a) for a in actions]}
         record({"phase": "decision_input", **copy.deepcopy(event)})
@@ -109,8 +117,12 @@ def run_memory_control(
             selection_mode = ("intervention_first_action" if relative_step == 0
                               else "intervention_handoff")
         else:
-            selected = actions[0].id if forced else policy.choose(state, actions)
-            selection_mode = "only_available_action" if forced else "policy"
+            with profile.span("forced_selection" if forced else "policy") if (
+                profile is not None
+            ) else nullcontext():
+                selected = actions[0].id if forced else policy.choose(state, actions)
+            selection_mode = ("only_available_action" if forced else
+                              getattr(policy, "selection_mode", "policy"))
         # The sole action boundary binds the returned ID to actual supplied parameters.
         action = next((a for a in actions if a.id == selected), None)
         if action is None:
@@ -126,7 +138,8 @@ def run_memory_control(
                 trace.append(event)
                 break
         started = time.perf_counter()
-        result = operations.execute(action, state)
+        with profile.span("operation_" + action.kind) if profile else nullcontext():
+            result = operations.execute(action, state)
         state.last_result = {"action": asdict(action), **result}
         event.update(result=copy.deepcopy(result),
                      operation_wall_seconds=time.perf_counter() - started)
@@ -153,7 +166,8 @@ class FixedMemoryPolicy:
                     and not action.parameters.get("history_directory")
                     and "source_observation_cursor" not in action.parameters
                     and "observed_source" not in action.parameters
-                    and len(state.visible_evidence) < self.reads):
+                    and state.budget.get("successful_reads", len(state.visible_evidence))
+                    < self.reads):
                 return action.id
         return next(a.id for a in actions if a.kind == "HANDOFF")
 
@@ -168,7 +182,7 @@ class FixedContextMemoryPolicy:
         search = next((a for a in actions if a.kind == "SEARCH"), None)
         if search is not None:
             return search.id
-        if len(state.visible_evidence) < self.reads:
+        if state.budget.get("successful_reads", len(state.visible_evidence)) < self.reads:
             for expanded in (True, False):
                 read = next((a for a in actions if a.kind == "READ"
                     and bool(a.parameters.get("expand_context")) == expanded
@@ -227,6 +241,48 @@ class OneShotMemoryPolicy:
         }:
             return next(a.id for a in actions if a.kind == "HANDOFF")
         return FixedMemoryPolicy(self.reads).choose(state, actions)
+
+
+@dataclass
+class TeacherContinuationPolicy:
+    """One learned decision followed by a frozen, bounded teacher continuation.
+
+    This is an explicit routing condition on the common executor, not a model
+    failure fallback. Actual budget movement, including forced steps, controls
+    the cadence. A HANDOFF still terminates through the normal action boundary.
+    """
+
+    learner: MemoryPolicy
+    teacher_factory: Callable[[], MemoryPolicy]
+    continuation_steps: int = 2
+    selection_mode: str = field(default="policy", init=False)
+    learned_calls: int = field(default=0, init=False)
+    teacher_calls: int = field(default=0, init=False)
+    _state: MemoryControlState | None = field(default=None, init=False, repr=False)
+    _next_learned_remaining: int | None = field(default=None, init=False, repr=False)
+    _teacher: MemoryPolicy | None = field(default=None, init=False, repr=False)
+
+    def __post_init__(self) -> None:
+        if self.continuation_steps < 0:
+            raise ValueError("Teacher continuation steps must be nonnegative")
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        remaining = state.budget["remaining_control_steps"]
+        if self._state is not state:
+            self._state = state
+            self._next_learned_remaining = None
+            self._teacher = None
+        if self._next_learned_remaining is None or remaining <= self._next_learned_remaining:
+            self.selection_mode = "policy"
+            selected = self.learner.choose(state, actions)
+            self.learned_calls += 1
+            self._next_learned_remaining = remaining - self.continuation_steps - 1
+            self._teacher = self.teacher_factory()
+            return selected
+        assert self._teacher is not None
+        self.selection_mode = "frozen_continuation"
+        self.teacher_calls += 1
+        return self._teacher.choose(state, actions)
 
 
 @dataclass

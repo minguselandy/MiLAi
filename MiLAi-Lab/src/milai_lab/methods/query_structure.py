@@ -119,6 +119,11 @@ def _sources_valid(service: MemoryService, bindings: dict[str, Any]) -> bool:
 
 def open_structure(service: MemoryService, item: dict[str, Any]) -> dict[str, Any]:
     """Recheck actual visibility when the common Reader opens the cached view."""
+    if item.get("body_delivered") is False:
+        # A previous visibility refresh already reduced this item to a tombstone.
+        # Reopening it stays unavailable; it cannot recover erased producer bindings.
+        return {key: copy.deepcopy(item[key]) for key in (
+            "kind", "id", "visibility", "body_delivered") if key in item}
     sources = {}
     for alias, binding in item["source_bindings"].items():
         source = service.source(binding["source_ref"])

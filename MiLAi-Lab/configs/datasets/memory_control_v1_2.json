@@ -1,0 +1,12 @@
+{
+  "dataset_release": "memory_control_v1_2",
+  "parent_release": "memory_control_v1_1",
+  "processing_version": "1.2.0",
+  "data_root": "/cra/milai-datasets/memory_control_v1_2",
+  "parent_root": "/cra/milai-datasets/memory_control_v1_1",
+  "observation_protocol": "semantic_nav_delta_v2",
+  "navigation_tokens_per_candidate": 64,
+  "numeric_schema": "control_numeric_v1",
+  "role_policy": "inherit_registered_native_groups",
+  "sha_validation": false
+}

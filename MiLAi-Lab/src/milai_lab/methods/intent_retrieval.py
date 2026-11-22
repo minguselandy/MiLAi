@@ -70,13 +70,17 @@ def material_binding(item: dict[str, Any]) -> dict[str, Any]:
 
 def retrieval_packet(
     key: str, items: list[dict[str, Any]], indices: list[int], positions: list[int],
-    reason: str, usage: dict[str, Any], *, ok: bool = True,
+    reason: str, usage: dict[str, Any], *, ok: bool = True, view_tables: bool = False,
 ) -> dict[str, Any]:
     """One full return representation for read admission and final delivery."""
     evidence = project_packs(items, indices, compact_view_bindings=True)
     references = dict(zip(indices, positions, strict=True))
     for row in evidence:
         row["ref"] = material_ref(key, references[int(row["label"][1:])])
+    if view_tables:
+        from milai_lab.methods.evidence_reading import project_view_tables
+
+        evidence = project_view_tables(evidence)
     return {"ok": ok, "schema": "milai_retrieval_result_v1", "evidence": evidence,
             "termination_reason": reason, "usage": usage}
 
@@ -85,6 +89,7 @@ def delivery_packet_fits(
     key: str, items: dict[int, dict[str, Any]], *, steps: int, known_count: int,
     return_limit: int, return_tokens: Callable[[dict[str, Any]], int],
     intervention: bool = False,
+    view_tables: bool = False,
 ) -> bool:
     """Admit the complete return packet under every possible termination label."""
     usage = {"control_steps": steps, "known_reference_reads": known_count,
@@ -95,7 +100,8 @@ def delivery_packet_fits(
     if intervention:
         reasons += ("intervention_handoff",)
     return all(return_tokens(retrieval_packet(
-        key, list(items.values()), list(items), list(range(len(items))), reason, usage, ok=False))
+        key, list(items.values()), list(items), list(range(len(items))), reason, usage, ok=False,
+        view_tables=view_tables))
         <= return_limit for reason in reasons)
 
 
@@ -114,6 +120,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  control_excluded_source_refs: tuple[str, ...] = (),
                  control_source_ranges: SourceRangeBudget | None = None,
                  return_envelope: Callable[[dict[str, Any]], Any] | None = None,
+                 view_tables: bool = False,
                  **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.retrieval_interface = retrieval_interface
@@ -128,6 +135,11 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         self.control_excluded_source_refs = control_excluded_source_refs
         self.control_source_ranges = control_source_ranges
         self.return_envelope = return_envelope
+        if type(view_tables) is not bool:
+            raise ValueError("View table presentation must be explicitly true or false")
+        self.view_tables = view_tables
+        if view_tables:
+            self.policy["view_tables"] = True
         self.policy["retrieval_interface"] = retrieval_interface
         if control_exclude_given_requests:
             self.policy["exclude_given_requests"] = True
@@ -273,6 +285,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                     if request.limits.max_control_steps is not None else self.control_steps)
         saved: dict[str, Any] = {"schema": "milai_retrieval_snapshot_v1", "status": "started",
                                 "request": request.project(), "return_limit": return_limit}
+        if self.view_tables:
+            saved["view_tables"] = True
         self.service.store.put(namespace(self.service), key, saved, index=False)
         checkpoint = self.replay_control_checkpoint
         known = copy.deepcopy(checkpoint["operations"]["known_materials"]) if checkpoint else []
@@ -350,7 +364,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             # stays in the trace, so elapsed-time digits cannot displace evidence.
             return delivery_packet_fits(key, items, steps=steps, known_count=len(known),
                 return_limit=return_limit, return_tokens=self.return_tokens,
-                intervention=self.control_intervention is not None)
+                intervention=self.control_intervention is not None, view_tables=self.view_tables)
 
         operations = EvidenceOperations(self.service, state,
             load_pool=lambda: search_pool(request.query, self.source_top_k),
@@ -367,6 +381,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             internal_views=self.control_internal_views,
             source_observation=self.control_source_observation,
             delivery_selection=self.control_delivery_selection,
+            material_protocol="view_tables_v1" if self.view_tables else None,
             checkpoint=checkpoint["operations"] if checkpoint else None)
         if self.control_delivery_selection:
             state.budget["acquisition_reads_remaining"] = self.read_allowance(config)[
@@ -481,7 +496,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         actual = open_evidence_packs(self.service, [saved["materials"][i] for i in positions])
         packet = retrieval_packet(key, actual, [labels[i] for i in positions], positions,
             saved["reason"], saved["usage"],
-            ok=saved.get("ok", saved["reason"] != "operation_outcome_unknown"))
+            ok=saved.get("ok", saved["reason"] != "operation_outcome_unknown"),
+            view_tables=saved.get("view_tables", False))
         if self.return_tokens(packet) > saved["return_limit"]:
             raise FunctionalRejection("RETRIEVAL_RETURN_ENVELOPE_EXCEEDS_LIMIT")
         return packet

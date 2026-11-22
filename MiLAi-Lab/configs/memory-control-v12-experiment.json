@@ -1,0 +1,64 @@
+{
+  "version": "milai_v12_plan1_20261119",
+  "seeds": [11, 29, 47],
+  "training": {
+    "eligible_state_weighting": ["g0", "g1"],
+    "effective_batch_states": 128,
+    "initial_microbatch_states": {"object_mlp": 16, "latent_pointer": 8},
+    "bf16": true,
+    "w": {"epochs": 3, "learning_rate": 0.0003},
+    "o": {"epochs": 3, "max_epochs_if_registered": 6, "learning_rate": 0.0001},
+    "p": {"epochs": 3, "rounds": 2, "learning_rate": 0.00005}
+  },
+  "policy": {
+    "cost_token_unit": 2048,
+    "default_lambda": 0.05,
+    "lambda_candidates": [0.0, 0.05, 0.10],
+    "handoff_utility_threshold": 0.0,
+    "reference_short_decisions": 2,
+    "parameter_matching_relative_tolerance": 0.01
+  },
+  "evaluation": {
+    "primary_material_budget": 2048,
+    "train_material_budgets": [1024, 2048, 4096],
+    "untrained_material_budgets": [1536, 3072],
+    "quality_noninferiority_points": 1.0,
+    "input_saving_point_target": 0.15,
+    "input_saving_ci_lower_strict_floor": 0.0,
+    "native_group_bootstrap_repeats": 5000,
+    "joint_power_target": 0.80,
+    "planning_quality_difference": 0.0,
+    "planning_input_saving": 0.20
+  },
+  "data_targets": {
+    "core": 24000,
+    "incremental": {"qasper": 3600, "personamem_v2": 1800, "musique_full": 600},
+    "incremental_repeat_fraction": 0.20,
+    "states_per_policy_round": 6000,
+    "policy_repeat_fraction": 0.10,
+    "continuation_audit": 3000
+  },
+  "dev_allocation": {
+    "positions_per_condition": 605,
+    "representation_and_weighting": 6,
+    "outcome_objective_and_representation": 5,
+    "m1_and_wide_w_and_o": 4,
+    "early_o_epoch": 3,
+    "additional_lambda": 2,
+    "policy_rounds": 6,
+    "matched_core_replay": 1,
+    "matched_initialization": 1,
+    "additional_seeds_final": 6,
+    "repeat_slots": 2057,
+    "untrained_budget_slots": 720,
+    "reserve_slots": 653
+  },
+  "new_reader_request_slot_limits": {
+    "incremental": 21600,
+    "policy": 66000,
+    "dev": 24000,
+    "confirmation_example": 21450,
+    "continuation_audit_conditional": 18000
+  },
+  "sha_validation": false
+}

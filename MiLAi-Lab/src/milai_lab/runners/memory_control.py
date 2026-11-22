@@ -78,7 +78,7 @@ def memory_policy(
     config: dict[str, Any], budget: RunBudget, *,
     call: Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]],
     admit: Callable[[], None], record: Callable[[dict[str, Any]], None],
-    models: dict[tuple[Any, ...], NativeDecision] | None = None,
+    models: dict[tuple[Any, ...], Any] | None = None,
 ) -> MemoryPolicy:
     if config.get("routing") == "handoff_only":
         unrestricted = {key: value for key, value in config.items() if key != "routing"}
@@ -105,6 +105,45 @@ def memory_policy(
         generative = GenerativeMemoryPolicy(call, config.get("state_projection", "full"))
         return (OneShotMemoryPolicy(generative, config.get("reads", 4))
                 if config.get("routing") == "one_shot" else generative)
+    if kind == "small":
+        if config.get("state_projection", "full") != "full":
+            raise ValueError("Small control v1 requires its full legal observation projection")
+        from milai_lab.methods.small_control_model import SmallControlModel
+        from milai_lab.methods.small_memory_policy import SmallMemoryPolicy
+
+        class MeteredScorer:
+            def score(self, online: dict[str, Any]) -> Any:
+                admit()
+                key = ("small", str(Path(config["checkpoint"]).resolve()),
+                       config.get("device", "cpu"))
+                cache = models if models is not None else local_models
+                if key not in cache:
+                    wall, cpu = time.perf_counter(), time.process_time()
+                    cache[key] = SmallControlModel.load(Path(config["checkpoint"]),
+                                                        device=config.get("device", "cpu"))
+                    measures = {"loads": 1, "wall_seconds": time.perf_counter() - wall,
+                                "cpu_seconds": time.process_time() - cpu}
+                    record({"event": "memory_control_model_load", "backend": "small",
+                            "checkpoint": config["checkpoint"], **measures})
+                    budget.record_compute("small_memory_control_load", measures)
+                model = cache[key]
+                before = dict(model.counters)
+                wall, cpu = time.perf_counter(), time.process_time()
+                try:
+                    result = model.score(online)
+                    record({"event": "memory_control_model_result", "input": online,
+                            "result": asdict(result)})
+                    return result
+                finally:
+                    budget.record_compute("small_memory_control", {
+                        "wall_seconds": time.perf_counter() - wall,
+                        "cpu_seconds": time.process_time() - cpu,
+                        **{name: value - before[name] for name, value in model.counters.items()}})
+
+        local_models: dict[tuple[Any, ...], Any] = {}
+        learned_small = SmallMemoryPolicy(MeteredScorer(), record)
+        return (OneShotMemoryPolicy(learned_small, config.get("reads", 4))
+                if config.get("routing") == "one_shot" else learned_small)
     if kind not in {"laya", "linear"}:
         raise ValueError(f"Unknown memory control policy: {kind}")
     model_key = (kind, str(Path(config["checkpoint"]).resolve()),

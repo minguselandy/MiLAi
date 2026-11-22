@@ -2949,6 +2949,8 @@ def message(
                         "view_builder", "generated")
                     memory_options["control_internal_views"] = control.get("internal_views", True)
                     if settings.get("retrieval_tool"):
+                        if control.get("view_tables", False):
+                            memory_options["view_tables"] = control["view_tables"]
                         memory_options["control_delivery_selection"] = control.get(
                             "delivery_selection", False)
                         memory_options["control_exclude_given_requests"] = control.get(

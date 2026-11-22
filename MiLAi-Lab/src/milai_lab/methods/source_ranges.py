@@ -2,10 +2,64 @@
 from __future__ import annotations
 
 import json
+import re
 from bisect import bisect_right
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
+from itertools import pairwise
 from typing import Any
+
+
+def evidence_unit_packs(material: dict[str, Any], *,
+                        scope_only: bool = False,
+                        context_turn_radius: int = 0) -> list[dict[str, Any]]:
+    """R2 whole paragraphs, R3 captured turn or declared adjacent captured turns.
+
+    Paragraph boundaries are a frozen extractive formation rule, not a semantic
+    sufficiency certificate. An oversized paragraph stays whole and may fail
+    delivery. Qualifiers in other paragraphs require an actual context READ.
+    Context stays within this material's captured session/pool; no new search,
+    later arrival or unchecked outside source is added to the expansion.
+    Whitespace remains covered; no tokenizer boundary cuts a negation or number.
+    """
+    if type(context_turn_radius) is not int or context_turn_radius < 0:
+        raise ValueError("Evidence context radius must be a nonnegative integer")
+    packs = []
+    turns = json.loads(material["text"])
+    for ordinal, turn in enumerate(turns):
+        text, base = turn["content"], turn["range"][0]
+        boundaries = [0, *[match.end() for match in re.finditer(r"\n[ \t]*\n", text)], len(text)]
+        boundaries = list(dict.fromkeys(boundaries))
+        intervals = list(pairwise(boundaries)) or [(0, 0)]
+        turn_range = [material["turn_range"][0] + ordinal,
+                      material["turn_range"][0] + ordinal + 1]
+        context_start = max(0, ordinal - context_turn_radius)
+        context_end = min(len(turns), ordinal + context_turn_radius + 1)
+        context_spans = [{"source_ref": source["source_ref"],
+            "source_revision": source["source_revision"],
+            "start": source["range"][0], "end": source["range"][1]}
+            for source in turns[context_start:context_end]]
+        for left, right in intervals:
+            span = {"source_ref": turn["source_ref"],
+                    "source_revision": turn["source_revision"],
+                    "start": base + left, "end": base + right}
+            focused = {**turn, "content": text[left:right],
+                       "range": [span["start"], span["end"]]}
+            packs.append({**material,
+                "id": f"{material['id']}:unit:{ordinal}:{span['start']}:{span['end']}",
+                "source_ranges": [span], "focus_source_ranges": [span],
+                "context_source_ranges": context_spans, "turn_range": turn_range,
+                "context_turn_range": [material["turn_range"][0] + context_start,
+                                       material["turn_range"][0] + context_end],
+                "text": json.dumps([focused], ensure_ascii=False),
+                "index_text": focused["content"], "pack_kind": "paragraph_evidence_unit_v1",
+                "evidence_representation": {"formation": "whole_paragraph_v1", "level": "R2",
+                    "context_level": "R3", "source_ranges": [span],
+                    "context_ranges": context_spans,
+                    **({"context_turn_radius": context_turn_radius}
+                       if context_turn_radius else {})},
+                "scope_only": scope_only})
+    return packs
 
 
 @dataclass(frozen=True)

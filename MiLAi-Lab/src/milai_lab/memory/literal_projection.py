@@ -69,6 +69,66 @@ _OBSERVATION_INSTRUCTIONS = (
 )
 
 
+def project_literal_maps(
+    record: dict[str, Any], paths: tuple[tuple[str, ...], ...],
+) -> tuple[dict[str, Any], list[list[str]]]:
+    """Share fields of homogeneous object maps, keeping key and column order.
+
+    Values stay literal, including nested table-shaped producer data. Only the
+    returned explicit paths are encoded; no source text or semantic field is parsed.
+    """
+    result = copy.deepcopy(record)
+    encoded = []
+    for path in paths:
+        parent = result
+        for key in path[:-1]:
+            value = parent.get(key)
+            if not isinstance(value, dict):
+                parent = {}
+                break
+            parent = value
+        objects = parent.get(path[-1])
+        if (not isinstance(objects, dict) or len(objects) < 2
+                or not all(isinstance(value, dict) for value in objects.values())):
+            continue
+        values = list(objects.values())
+        columns = list(values[0])
+        if not all(list(value) == columns for value in values):
+            continue
+        # JSON literal equality distinguishes true/1 and null/missing, and keeps
+        # nested producer field order. These are full values, not fingerprints.
+        shared = {key: values[0][key] for key in columns if all(
+            json.dumps(value[key], ensure_ascii=False, allow_nan=False) ==
+            json.dumps(values[0][key], ensure_ascii=False, allow_nan=False) for value in values)}
+        table = {"keys": list(objects), "columns": columns, "shared": shared,
+                 "rows": [[value[key] for key in columns if key not in shared] for value in values]}
+        if len(json.dumps(table, ensure_ascii=False)) >= len(json.dumps(
+            objects, ensure_ascii=False
+        )):
+            continue
+        parent[path[-1]] = table
+        encoded.append(list(path))
+    return result, encoded
+
+
+def expand_literal_maps(record: dict[str, Any], paths: list[list[str]]) -> dict[str, Any]:
+    """Restore only the explicitly encoded maps, without traversing literal producer values."""
+    result = copy.deepcopy(record)
+    for path in paths:
+        parent = result
+        for key in path[:-1]:
+            parent = parent[key]
+        table = parent[path[-1]]
+        variable = [key for key in table["columns"] if key not in table["shared"]]
+        restored = {}
+        for key, row in zip(table["keys"], table["rows"], strict=True):
+            fields = dict(zip(variable, row, strict=True))
+            restored[key] = {column: table["shared"][column] if column in table["shared"]
+                             else fields[column] for column in table["columns"]}
+        parent[path[-1]] = restored
+    return result
+
+
 def observation_object(state: dict[str, Any] | str) -> dict[str, Any]:
     """Decode the explicit JSON-text input condition without interpreting source text."""
     return cast(dict[str, Any], json.loads(state)) if isinstance(state, str) else state

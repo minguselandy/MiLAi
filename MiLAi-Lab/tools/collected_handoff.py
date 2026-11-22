@@ -32,6 +32,7 @@ def replay_collected_prefix(
     capacity: HostCapacity,
     on_state: Callable[..., None] | None = None,
     target_step: int | None = None,
+    bank_override: Path | None = None,
 ) -> Iterator[tuple[EvidenceOperations, MemoryControlState]]:
     """Reexecute the recorded READ prefix once, without copying or repairing the Store.
 
@@ -40,7 +41,7 @@ def replay_collected_prefix(
     Source revocation/revision or changed observations fail the actual replay.
     """
     root = collection / "banks" / history["id"]
-    bank = resolve_source_bank(root)
+    bank = resolve_source_bank(root) if bank_override is None else bank_override
     request_id = branch["event_id"].rsplit("/", 2)[1]
     events = read_jsonl(root / f"{request_id}-operations.jsonl")
     mapping = read_json(root / "source-map.json")["mapping"]
