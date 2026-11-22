@@ -9,7 +9,6 @@ from contextlib import closing
 from pathlib import Path
 from typing import Any
 
-from milai_lab.datasets.memory_control_episode_archive import episode_packet_exists
 from milai_lab.datasets.memory_control_normalize import MUSIQUE
 from milai_lab.datasets.memory_control_report import read_json
 from milai_lab.datasets.memory_control_store import connect, get_meta
@@ -41,7 +40,7 @@ def confirmation_capacity(
         )
         exposed.update(
             (task["dataset"], task["native_group"]) for task in population["tasks"]
-            if complete or episode_packet_exists(path / "episodes" / f"{task['task_id']}.json")
+            if complete or (path / "episodes" / f"{task['task_id']}.json").is_file()
         )
     eligible: dict[str, list[tuple[str, int]]] = defaultdict(list)
     with closing(connect(data)) as db:

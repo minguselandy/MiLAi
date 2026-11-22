@@ -334,92 +334,15 @@ def dispatch_delta(
     )
 
 
-def reader_peer_state(status_file: Path) -> tuple[tuple[int, int, str | None], str] | None:
-    try:
-        state = read_json(status_file, {})
-        pid, status = state.get("pid"), state.get("status")
-        if type(pid) is not int or pid <= 0 or not isinstance(status, str):
-            return None
-        fields = (Path("/proc") / str(pid) / "stat").read_text().rsplit(")", 1)[1].split()
-        if fields[0] in {"X", "Z"}:
-            return None
-        return (pid, int(fields[19]), state.get("stage")), status
-    except (OSError, AttributeError, IndexError, ValueError):
-        return None
-
-
-def reader_peer_is_waiting(status: str) -> bool:
-    return status == "WAITING_FOR_READER" or status.endswith("_WAITING_FOR_SHARED_READER")
-
-
-def observed_reader_holder(lease: Path) -> int | None:
-    identity = lease.stat()
-    key = f"{os.major(identity.st_dev):02x}:{os.minor(identity.st_dev):02x}:{identity.st_ino}"
-    for row in Path("/proc/locks").read_text().splitlines():
-        fields = row.split()
-        if len(fields) >= 6 and fields[1:4] == ["FLOCK", "ADVISORY", "WRITE"] and fields[5] == key:
-            return int(fields[4])
-    return None
-
-
-def wait_for_reader_turn(
-    defer: float, peer_status: Path, peer_yield_seconds: float, lease: Path,
-) -> dict[str, Any] | None:
-    """Retain the normal pause and give a waiting peer one bounded turn at the existing lock."""
-    began = time.monotonic()
-    peer = None
-    holder = None
-    while True:
-        state = reader_peer_state(peer_status)
-        if peer is None and state and reader_peer_is_waiting(state[1]):
-            peer = state[0]
-        if peer is not None:
-            if (not state or state[0] != peer or
-                    not (reader_peer_is_waiting(state[1]) or state[1] == "RUNNING")):
-                reason = "PEER_CHANGED_OR_ENDED"
-                break
-            try:
-                holder = observed_reader_holder(lease)
-            except OSError:
-                reason = "READER_LEASE_OBSERVATION_UNAVAILABLE"
-                break
-            if holder is not None:
-                reason = "READER_LEASE_ACQUIRED"
-                break
-        limit = max(defer, peer_yield_seconds) if peer is not None else defer
-        remaining = began + limit - time.monotonic()
-        if remaining <= 0:
-            reason = "YIELD_LIMIT_REACHED"
-            break
-        time.sleep(min(1, remaining))
-    minimum_remaining = began + defer - time.monotonic()
-    if minimum_remaining > 0:
-        time.sleep(minimum_remaining)
-    if peer is None:
-        return None
-    elapsed = time.monotonic() - began
-    return {
-        "status": reason, "peer_pid": peer[0], "peer_start_ticks": peer[1],
-        "peer_stage": peer[2], "observed_reader_holder_pid": holder,
-        "yield_seconds": elapsed, "extra_yield_seconds": max(0.0, elapsed - defer),
-    }
-
-
 def dispatch_outcome_run(
     root: Path, data: Path, observation: str, publish: Any, *,
     run_id: str, share_runs: tuple[str, ...], label: str,
     slots: int, window: int, defer: float,
-    reader_peer_status: Path | None = None, reader_peer_yield_seconds: float = 60.0,
 ) -> None:
     dataset = MemoryControlDataset(data, observation_protocol=observation)
     journal = root / f"{label}-dispatch-invocations.jsonl"
     windows = journal.read_text().splitlines() if journal.is_file() else []
     calls = sum(json.loads(line)["reader_requests"] for line in windows)
-    lease = None
-    if reader_peer_status is not None:
-        assert dataset.host is not None
-        ledger = Path(dataset.host.settings["budget_path"]).resolve()
-        lease = ledger.with_name(ledger.name + ".http-owner.lock")
     waiting = False
     while True:
         _, counts, _ = branch_state(data, run_id)
@@ -456,20 +379,4 @@ def dispatch_outcome_run(
             raise RuntimeError("Reader window made no durable branch progress")
         publish(f"{label}_READER_WINDOW_CLOSED", pending=remaining, recorded_requests=calls)
         if remaining:
-            if reader_peer_status is None or lease is None:
-                time.sleep(defer)
-            else:
-                event = wait_for_reader_turn(
-                    defer, reader_peer_status, reader_peer_yield_seconds, lease,
-                )
-                if event is not None:
-                    event.update(
-                        recorded_requests=calls, pending=remaining, observed_at=time.time(),
-                    )
-                    try:
-                        with (root / f"{label}-reader-peer-yields.jsonl").open(
-                            "a", encoding="utf-8",
-                        ) as output:
-                            output.write(json.dumps(event, allow_nan=False) + "\n")
-                    except OSError as error:
-                        print(f"Reader turn observation could not be recorded: {error}", flush=True)
+            time.sleep(defer)

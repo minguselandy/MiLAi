@@ -40,11 +40,8 @@ def run_registered_readout(args: argparse.Namespace) -> None:
     registered_arm = getattr(args, "registered_arm", None)
     inline_readout = getattr(args, "inline_readout", False)
     prepare_only = getattr(args, "prepare_only", False)
-    require_prepared = getattr(args, "require_prepared", False)
     if prepare_only and inline_readout:
         raise ValueError("Local preparation requires the staged readout schedule")
-    if require_prepared and (prepare_only or inline_readout):
-        raise ValueError("Prepared packets require a staged Reader-only invocation")
     held = args.command == "dispatch-held-budget-arm"
     repeated = args.command == "dispatch-dev-repeat-arm"
     scope = ("HELD_BUDGET" if held else "DEV_REPEAT" if repeated
@@ -86,17 +83,14 @@ def run_registered_readout(args: argparse.Namespace) -> None:
     prepare = args.output / "episode-preparation.json"
     with (args.output / ".dev-dispatch.lock").open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        prepared = (not (prepare_only or inline_readout)
-                    and read_json(prepare, {}).get("status") == "PREPARED_EPISODES")
-        if (require_prepared and not prepared
-                and read_json(args.output / "run.json", {}).get("status") != "COMPLETED"):
-            raise ValueError("Reader-only dispatch needs the completed local episode preparation")
         write_json(status, {"status": f"ADMITTED_{scope}_DISPATCH", "pid": os.getpid()})
         dataset = MemoryControlDataset(
             args.data, observation_protocol=arm["observation_protocol"],
             numeric_observation=contract.get("config", {}).get("numeric_mode", "off") != "off",
         )
-        if prepare_only or (not inline_readout and not require_prepared and not prepared):
+        if prepare_only or (
+            not inline_readout and read_json(prepare, {}).get("status") != "PREPARED_EPISODES"
+        ):
             write_json(status, {"status": f"PREPARING_{scope}", "pid": os.getpid()})
             preparation = evaluate_episodes(
                 args.data, args.plan, arm, args.output, device=args.device, prepare_only=True,
@@ -114,7 +108,7 @@ def run_registered_readout(args: argparse.Namespace) -> None:
                     args.data, args.plan, arm, args.output,
                     device=args.device, max_reader_requests=args.window,
                     prepared_dataset=dataset,
-                    inline_readout=inline_readout, require_prepared=require_prepared,
+                    inline_readout=inline_readout,
                 )
             except HttpOwnershipError as error:
                 if str(error) != "HTTP_OWNER_BUSY":
@@ -329,8 +323,6 @@ def main() -> None:
     dispatch.add_argument("--inline-readout", action="store_true")
     dispatch.add_argument("--prepare-only", action="store_true",
                           help="Materialize staged DEV episodes for the registered arm")
-    dispatch.add_argument("--require-prepared", action="store_true",
-                          help="Read already prepared DEV episodes without local model work")
     dispatch.add_argument("--archive-episodes", action="store_true")
     dispatch.add_argument("--weighting-baseline", type=Path)
     dispatch.add_argument("--weighting-selection", type=Path)
@@ -420,18 +412,8 @@ def main() -> None:
     policy.add_argument("--dataset-config", type=Path, required=True)
     policy.add_argument("--gpu", type=int, required=True)
     policy.add_argument("--workers", type=int, default=4)
-    policy.add_argument("--p-b-workers", type=int,
-                        help="Override the branch preparation worker count for P-B")
     policy.add_argument("--window", type=int, default=40)
     policy.add_argument("--branch-window", type=int, default=80)
-    policy.add_argument("--reader-peer-status", type=Path,
-                        help="Native status receipt of a peer sharing the original Reader lease")
-    policy.add_argument("--reader-peer-yield-seconds", type=float, default=60.0,
-                        help="Bound the total pause when the registered peer is waiting")
-    policy.add_argument(
-        "--overlap-local-preparation", action="store_true",
-        help="Fit and prepare the next arm while an independent Reader reads the current arm",
-    )
     seed_stage = commands.add_parser("fit-registered-seeds")
     seed_stage.add_argument("--root", type=Path, required=True)
     seed_stage.add_argument("--dataset-config", type=Path, required=True)
@@ -502,8 +484,6 @@ def main() -> None:
 
         if args.gpu < 0 or min(args.workers, args.window, args.branch_window) < 1:
             raise ValueError("Provide an allocated GPU and positive policy scheduling bounds")
-        if not 0 < args.reader_peer_yield_seconds < float("inf"):
-            raise ValueError("Provide a finite positive Reader peer yield interval")
         run_policy_stage(args)
     elif args.command == "fit-registered-seeds":
         from memory_control_seed_stage import fit_registered_seeds

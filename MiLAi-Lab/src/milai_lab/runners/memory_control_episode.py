@@ -549,7 +549,6 @@ def _prepare_episode_batch(
     device: str,
     limit: int | None,
     prepare_only: bool = False,
-    require_prepared: bool = False,
     known_policy: tuple[MemoryPolicy, SmallControlModel | None] | None = None,
 ) -> tuple[list[tuple[sqlite3.Row, Path]], Counter[str], SmallControlModel | None, int]:
     ready: list[tuple[sqlite3.Row, Path]] = []
@@ -584,8 +583,6 @@ def _prepare_episode_batch(
             raise ValueError("Registered task identity or role changed")
         seed = (population["seed"] + tid) % (2**31 - 1)
         if record is None:
-            if require_prepared:
-                raise ValueError(f"Missing prepared episode packet for registered task {tid}")
             if policy is None:
                 policy, model = make_policy(dataset, arm, device)
             record = episode_before_reader(
@@ -715,15 +712,12 @@ def evaluate_episodes(
     prepare_only: bool = False,
     prepared_dataset: MemoryControlDataset | None = None,
     inline_readout: bool = False,
-    require_prepared: bool = False,
 ) -> dict[str, Any]:
     population = read_json(manifest)
     if population["protocol"] != EVALUATION_PROTOCOL:
         raise ValueError("Invalid registered episode protocol")
     if prepare_only and inline_readout:
         raise ValueError("Inline readout is one continuous execution and Reader measurement")
-    if require_prepared and (prepare_only or inline_readout):
-        raise ValueError("Prepared packets require a staged Reader-only invocation")
     if arm["policy"] == "G" and population["role"] != "dev":
         raise ValueError("Gold-guided execution is an isolated development diagnostic")
     if population["role"] == "confirm" and arm not in population["arms"]:
@@ -787,7 +781,7 @@ def evaluate_episodes(
             return receipt
         ready, counts, model, prepared = _prepare_episode_batch(
             dataset, db, population, arm, episodes, device=device, limit=max_reader_requests,
-            prepare_only=prepare_only, require_prepared=require_prepared,
+            prepare_only=prepare_only,
         )
         tasks = population["tasks"]
         if prepare_only:

@@ -31,7 +31,7 @@ from milai_lab.datasets.memory_control_episode_archive import (
 from milai_lab.datasets.memory_control_outcomes import outcome_supervision
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_revision import OUTCOME_PREPARATION_SCHEMA, REVISION_SCHEMA
-from milai_lab.datasets.memory_control_store import SCHEMA, dumps, packed, set_meta, unpack
+from milai_lab.datasets.memory_control_store import SCHEMA, dumps, packed, unpack
 from milai_lab.datasets.memory_control_views import SourceObject
 from milai_lab.memory.reader_projection import subtract_source_ranges
 from milai_lab.methods.control_numeric import ACTION_WIDTH, STATE_WIDTH
@@ -45,7 +45,6 @@ from milai_lab.methods.small_memory_policy import PolicyScores, SmallMemoryPolic
 from milai_lab.runners import memory_control_outcome_run
 from milai_lab.runners.memory_control_common_menu import _without_budget_inputs
 from milai_lab.runners.memory_control_confirmation import (
-    confirmation_capacity,
     confirmation_repeat_population,
     plan_confirmation_power,
 )
@@ -633,47 +632,6 @@ def test_confirmation_repeat_keeps_native_groups_and_original_cap(tmp_path: Path
     assert repeat["tasks"] == [row for row in tasks if row["native_group"] == group]
 
 
-def test_confirmation_capacity_excludes_the_whole_group_after_partial_compaction(
-    tmp_path: Path,
-) -> None:
-    data = tmp_path / "dataset.sqlite3"
-    groups = [(1, "qasper", "exposed-paper"), (2, "qasper", "fresh-paper"),
-              (3, "musique_full", "original-pair"), (4, "personamem_v2", "persona")]
-    with closing(sqlite3.connect(data)) as db:
-        db.executescript(SCHEMA + REVISION_SCHEMA)
-        set_meta(db, "run_id", "confirmation-capacity")
-        db.executemany(
-            "INSERT INTO roots(id,dataset,native_group,raw_path,location) "
-            "VALUES (?,?,?,'test','test')",
-            groups,
-        )
-        db.executemany(
-            "INSERT INTO experiment_groups VALUES (?,?,'confirm','test',1)",
-            [(source, group) for _, source, group in groups],
-        )
-        db.executemany(
-            "INSERT INTO tasks(id,root_id,split,source_row,native_id,query,setting,clean_role) "
-            "VALUES (?,?,'test',0,'native','query','setting','confirm')",
-            [(1, 1), (2, 1), (3, 2), (4, 3), (5, 3), (6, 4)],
-        )
-        db.commit()
-
-    historical = tmp_path / "historical"
-    tasks = [{"task_id": task, "dataset": "qasper", "native_group": "exposed-paper"}
-             for task in (1, 2)]
-    write_json(historical / "protocol.json", {"population": {"role": "confirm", "tasks": tasks}})
-    write_json(historical / "run.json", {"status": "PARTIAL", "by_episode_status": {"scored": 1}})
-    packet = historical / "episodes" / "1.json"
-    write_json(packet, {**tasks[0], "status": "scored"})
-    before = confirmation_capacity(data, 6, 11, [historical])
-    assert before["excluded_exposed_native_groups"] == [("qasper", "exposed-paper")]
-    assert before["actual_tasks"] == 4
-
-    assert compact_scored_episode_packets(historical)["packets_compacted"] == 1
-    assert packet.with_suffix(".json.gz").is_file() and not packet.exists()
-    assert confirmation_capacity(data, 6, 11, [historical]) == before
-
-
 def test_online_sampling_distinguishes_model_votes_from_coverage() -> None:
     branches = ["handoff", "read_2", "context_2"]
     measured = {"handoff", "read_2"}
@@ -768,198 +726,6 @@ def test_confirmation_keeps_the_accepted_window_if_compaction_fails(
     ))
     assert attempts == [output]
     assert read_json(output / "dispatch-invocations.jsonl") == window
-
-
-@pytest.mark.parametrize(
-    ("waiting", "holder_at", "changes_at", "seconds", "reason"),
-    [
-        (False, None, None, 20, None),
-        (True, 8, None, 20, "READER_LEASE_ACQUIRED"),
-        (True, 42, None, 42, "READER_LEASE_ACQUIRED"),
-        (True, None, None, 60, "YIELD_LIMIT_REACHED"),
-        (True, None, 35, 35, "PEER_CHANGED_OR_ENDED"),
-    ],
-)
-def test_reader_yield_preserves_default_pause_and_bounds_a_waiting_peers_turn(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, waiting: bool, holder_at: int | None,
-    changes_at: int | None, seconds: int, reason: str | None,
-) -> None:
-    import memory_control_outcome_stage as stage
-
-    elapsed = 0.0
-
-    def advance(delay: float) -> None:
-        nonlocal elapsed
-        elapsed += delay
-
-    def state(_path):
-        if not waiting or (changes_at is not None and elapsed >= changes_at):
-            return None
-        return (11, 222, "native-readout"), "WAITING_FOR_READER" if elapsed < 30 else "RUNNING"
-
-    monkeypatch.setattr(stage.time, "monotonic", lambda: elapsed)
-    monkeypatch.setattr(stage.time, "sleep", advance)
-    monkeypatch.setattr(stage, "reader_peer_state", state)
-    monkeypatch.setattr(
-        stage, "observed_reader_holder",
-        lambda _path: 12 if holder_at is not None and elapsed >= holder_at else None,
-    )
-    result = stage.wait_for_reader_turn(20, tmp_path / "peer.json", 60, tmp_path / "lease")
-    assert elapsed == seconds
-    if reason is None:
-        assert result is None
-    else:
-        assert result is not None and result["status"] == reason and result["peer_pid"] == 11
-        assert result["extra_yield_seconds"] == seconds - 20
-        assert result["observed_reader_holder_pid"] == (12 if holder_at is not None else None)
-
-
-def test_observed_reader_holder_reads_the_existing_kernel_lease(tmp_path: Path) -> None:
-    import fcntl
-    import os
-
-    from memory_control_outcome_stage import observed_reader_holder
-
-    path = tmp_path / "test-lease"
-    with path.open("a") as lease:
-        fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        assert observed_reader_holder(path) == os.getpid()
-    assert observed_reader_holder(path) is None
-
-
-def test_prepared_episode_reader_refuses_missing_local_packet(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    from milai_lab.runners import memory_control_episode
-
-    def unexpected_model(*_args, **_kwargs):
-        pytest.fail("A Reader-only window attempted local model work")
-
-    monkeypatch.setattr(memory_control_episode, "make_policy", unexpected_model)
-    tasks = [{"task_id": tid, "dataset": "qasper", "native_group": "one"} for tid in (1, 2)]
-    population = {"tasks": tasks, "role": "dev", "seed": 31}
-    with closing(sqlite3.connect(":memory:")) as db:
-        db.row_factory = sqlite3.Row
-        db.execute("CREATE TABLE experiment_tasks (id, dataset, native_group, experiment_role)")
-        db.executemany(
-            "INSERT INTO experiment_tasks VALUES (?, 'qasper', 'one', 'dev')", [(1,), (2,)])
-        write_json(tmp_path / "1.json", {
-            **tasks[0], "status": "ready", "reader_wire": {"seed": 32},
-        })
-        with pytest.raises(ValueError, match=r"Missing prepared episode packet.*task 2"):
-            memory_control_episode._prepare_episode_batch(
-                None, db, population, {}, tmp_path, device="cpu", limit=2, require_prepared=True,
-            )
-        assert not (tmp_path / "2.json").exists()
-        write_json(tmp_path / "2.json", {
-            **tasks[1], "status": "ready", "reader_wire": {"seed": 33},
-        })
-        ready, counts, model, prepared = memory_control_episode._prepare_episode_batch(
-            None, db, population, {}, tmp_path, device="cpu", limit=2, require_prepared=True,
-        )
-    assert [path.name for _, path in ready] == ["1.json", "2.json"]
-    assert not counts and model is None and prepared == 0
-
-
-@pytest.mark.parametrize(("overlap", "mismatch"), [(False, False), (True, False), (True, True)])
-def test_policy_stage_only_overlaps_the_next_local_arm(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, overlap: bool, mismatch: bool,
-) -> None:
-    from threading import Event
-
-    import memory_control_policy_stage as policy
-
-    labels = [f"D-{model}-P-A-seed11" for model in policy.ARCHITECTURES]
-    started = {tag: Event() for tag in labels}
-    staged, readouts = [], []
-    prior = {model: tmp_path / model for model in policy.ARCHITECTURES}
-    monkeypatch.setattr(policy, "selected_candidate", lambda path: {"checkpoint": str(path)})
-    monkeypatch.setattr(policy, "select_checkpoint", lambda paths: {"dev_run": str(paths[0])})
-
-    class Fits:
-        root, gpu, window, seed = tmp_path, 3, 40, 11
-
-        def __init__(self, *_args, **_kwargs):
-            self.matrix = {}
-            self.inputs = {"data": str(tmp_path / "data"), "observation_protocol": "metadata_v1",
-                           "training_outcomes": ["R"]}
-            self.publish = lambda *_args, **_kwargs: None
-
-        def fit(self, name, *args, **kwargs):
-            assert kwargs["outcome_runs"] == ["R", "P-A"]
-            assert kwargs["balance_policy"] and kwargs["temporary_recovery"]
-            started[name].set()
-            return {"contract": {
-                "eligible_states": [7, 8], "policy_states": [8], "state_exposures_per_epoch": 2,
-                "steps": 3 if mismatch and name == labels[1] else 2,
-            }}
-
-        def dispatch(self, checkpoint, name, value, *, prepare_only=False, require_prepared=False):
-            assert checkpoint == self.root / name / "checkpoint" and value == 0.0
-            if prepare_only:
-                staged.append(name)
-            else:
-                assert require_prepared == overlap
-                i = labels.index(name)
-                if overlap:
-                    assert name in staged
-                    if i + 1 < len(labels):
-                        assert started[labels[i + 1]].wait(5)
-                if i == 0:
-                    assert started[labels[1]].is_set() == overlap
-                    assert not started[labels[2]].is_set()
-                readouts.append(name)
-            return self.root / (name + "-DEV")
-
-    monkeypatch.setattr(policy, "OutcomeFits", Fits)
-    stage = policy.PolicyStage(
-        Fits(), {"utility_lambda": 0.0, "objective": "u0-reset",
-                 "arm": {"selected_checkpoint": str(tmp_path / "W")}},
-        tmp_path / "config.json", 120, 4, overlap_local_preparation=overlap,
-    )
-    if mismatch:
-        with pytest.raises(ValueError, match="do not share their measured pools and exposure"):
-            stage.fit_and_read_arms("P-A", prior, ["R", "P-A"])
-        assert readouts == labels[:1] and not started[labels[2]].is_set()
-    else:
-        fits, selections = stage.fit_and_read_arms("P-A", prior, ["R", "P-A"])
-        assert tuple(fits) == tuple(selections) == policy.ARCHITECTURES
-        assert readouts == labels and staged == (labels if overlap else [])
-        assert all(path.is_file() for path in selections.values())
-
-
-@pytest.mark.parametrize(("phase", "override", "expected"), [
-    ("P-A", 8, 4), ("P-B", 8, 8), ("P-B", None, 4),
-])
-def test_policy_round_uses_the_registered_worker_override_only_for_p_b(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
-    phase: str, override: int | None, expected: int,
-) -> None:
-    import memory_control_policy_stage as policy
-
-    fit = SimpleNamespace(root=tmp_path, seed=11, inputs={
-        "data": str(tmp_path / "database"), "observation_protocol": "metadata_v1",
-        "training_outcomes": ["R"],
-    }, matrix={"data_targets": {
-        "states_per_policy_round": 1, "policy_repeat_fraction": .10, "incremental": {"qasper": 1},
-    }})
-    recipe = {"utility_lambda": 0., "arm": {"selected_checkpoint": str(tmp_path / "W")}}
-    stage = policy.PolicyStage(fit, recipe, tmp_path / "config.json", 120, 4, p_b_workers=override)
-    write_json(tmp_path / f"{phase}-policy-states.json", {
-        "status": "COMPLETE", "actual_states_by_source": {"qasper": 1}, "distinct_states": 1,
-        "configuration": {"excluded_outcome_runs": ["R"]}, "source_shortfalls": {"qasper": 0},
-    })
-    declaration = {"sealed": True, "policy_pool": f"v12-policy-reached-{phase.lower()}",
-                   "comparison_protocol": {"continuation": {"kind": "reference-short"}}}
-    complete = (declaration, {"ingested": 3}, 1)
-    records = iter([({}, {}, 0), complete, complete])
-    monkeypatch.setattr(policy, "branch_state", lambda *_: next(records))
-    commands = []
-    monkeypatch.setattr(stage, "build", lambda *args, **_kwargs: commands.append(args))
-    stage.collect_round(phase, {"M0": tmp_path / "M0", "M1": tmp_path / "M1"}, ["R"], 15)
-    command, = commands
-    assert command[0] == "prepare-outcomes"
-    assert command[command.index("--branch-workers") + 1] == str(expected)
 
 
 def test_completed_training_preserves_epoch_weights_and_releases_rolling_recovery(
