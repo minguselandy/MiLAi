@@ -1,8 +1,8 @@
-# MiLAi V1.2 PLAN-2 最终报告
+# MiLAi V1.2 PLAN-2 训练与独立确认终态
 
-独立确认覆盖 1,500 题与 620 个原生组。重复测量覆盖 150 题与 58 个完整组。主读出实付 19,500 次 Reader 请求，重复实付 1,950 次。同一冻结采集池用于三个实际训练种子。SHA 校验关闭。
+三种子、三架构的 18 次 W/O 拟合及独立确认已完成。主确认覆盖 1,500 题和 620 个原生组，重复测量覆盖 150 题和 58 个完整组。主读出实付 19,500 次 Reader 请求，重复实付 1,950 次。三个训练种子共享同一冻结采集池。SHA 校验关闭。
 
-## 四项结论
+## 预登记确认结论
 
 | 命题 | 状态 | 宏质量差及 95% 区间，分 | 相对节省及 95% 区间 | Holm 调整 p |
 | --- | --- | --- | --- | --- |
@@ -48,18 +48,113 @@
 
 各来源计量覆盖、TTFT、动作、重复诊断及原生窗口的 CPU 与墙时保留在可复查收据内。GPU 指标来自已采样区间。
 
-[原生正式结果](/data/milai-experiments/20261119-memory-control-v12/E-confirmation-results.json) [全量复算](/data/milai-experiments/20261119-memory-control-v12/plan2-native-confirmation-full-readback.json) [资源结算](/data/milai-experiments/20261119-memory-control-v12/plan2-confirmation-final-native-compute-settlement.json) [功效登记](/data/milai-experiments/20261119-memory-control-v12/E-confirmation-power.json)
+## 训练与冻结配方
 
-## 开发与训练证据
+种子 11、29、47 各完成 M0、M1 和参数配平宽 M0 的 W 与 O 拟合。每次 W 拟合为 258,718 个不同状态、三轮 776,154 次曝光和 6,066 次更新。每次 O 拟合为 24,000 个不同状态、三轮 72,000 次曝光和 564 次更新。按实际优化器步累计墙时，M1 为配平宽 M0 的 4.78–5.00 倍（W）和 2.14–2.20 倍（O）。旧 M0 O、M1 O 的 DEV605 和独立登记的 2,990 条旧 held DEV 均已结算。
 
-C∪D 含 24,000 个不同状态，两轮 P 含 12,000 个不同状态。本次共核对 34 个含 W 的正式 DEV 条件。冻结终态为 O。
+五个新 O 对照覆盖 U0-reset、U1、U2、真实数值的直接对照和从头初始化。以 O01 为参照时，可选目标仅 U0-reset。真实数值臂相对 O01 的宏质量差为 −2.46 分，95% 区间为［−5.41，+0.43］，未通过 −1 分质量下界。冻结配方使用 G1、N0、`dual_semantic_v2`、missing、U0-reset 和第三轮 O。missing 指新增数值通道缺失。三个 λ 条件均未通过开发效率门槛，按预登记规则取宏质量最高的 λ=0。
 
-[开发门槛](/data/milai-experiments/20261119-memory-control-v12/plan2-development-gates-native-readback.json) [V1.1 与 W](/data/milai-experiments/20261119-memory-control-v12/plan2-baselines.json) [三种子 DEV](/data/milai-experiments/20261119-memory-control-v12/plan2-native-all-three-seed-architecture-paired-DEV605.json) [P 与 R-only 的冻结选择](/data/milai-experiments/20261119-memory-control-v12/D-policy-stage-complete.json) [实验矩阵](/data/milai-experiments/20261119-memory-control-v12/experiment-matrix.json) [checkpoint 索引](/data/milai-experiments/20261119-memory-control-v12/selected-checkpoints.json)
+P-A 和 P-B 各按同一 reference-short 协议测量一个共享 6,000 状态池。混池与 R-only 分别从同一 O 起点连续训练，各累计 288,000 次曝光和 2,250 次更新。M0 P-B 通过等曝光 R-only 比较，P-B 对 O 的质量下界未通过，三架构共同冻结为 O。M0 按预登记的开发质量回退规则成为主架构。
 
-## 离线复算命令
+| 同题配对 | 宏质量差及 95% 区间，分 | 输入节省及 95% 区间 |
+| --- | --- | --- |
+| 旧 M0 O 对匹配 W | -8.89 [-12.30, -5.50] | +14.78% [+11.88%, +17.63%] |
+| 旧 M1 O 对匹配 W | -7.21 [-11.09, -3.33] | -5.67% [-8.19%, -3.28%] |
+| 旧 M0 O 对 B* | -11.97 [-15.47, -8.56] | -18.89% [-22.88%, -14.54%] |
+| 旧 M1 O 对 B* | -9.02 [-12.71, -5.34] | -46.50% [-50.15%, -42.88%] |
+| M0 P-B 对等曝光 R-only | +3.18 [+0.55, +5.89] | -6.18% [-7.95%, -4.52%] |
+| M0 P-B 对共同 O | +0.60 [-2.58, +3.83] | +4.91% [+2.47%, +7.30%] |
+
+## 封存数据、配对和请求分账
+
+| 封存池 | 不同 before | 封存分支位置 | 实付 Reader | 复用回包 |
+| --- | --- | --- | --- | --- |
+| C | 24,000 | 112,015 | 0 | 112,015 |
+| D | 6,000 | 18,656 | 7,809 | 10,847 |
+| P-A | 6,000 | 28,201 | 27,624 | 577 |
+| P-B | 6,000 | 28,999 | 28,463 | 536 |
+
+D 按 QASPER 3,600、PersonaMem 1,800、MuSiQue 600 封存。C∪D 共 24,000 个不同 before。D 的共同 repeat 中，读取与 HANDOFF 有 11,456 个实测有质量的配对，R2 与 R3 有 4,267 个，其中 435 个精度配对终端完整请求相同。两轮 P 共 12,000 个不同 before，每轮每来源 2,000 个。重复确认的 1,950 个位置均维持完整请求负载并使用新 Reader seed。
+
+下表沿用计划中扣除初始六个 W 的口径，上限 129,420 个登记槽位。旧 V1.1 缺口独立结算。主确认输入和输出分别为 29,689,610 与 1,086,898 token，重复分别为 3,178,133 与 97,214 token。主读出保留 79 个原生格式失败，重复保留 2 个。原生读出中的 cached token、TTFT 和 CPU 运行队列等待留作未知。
+
+| 范围 | 实付 Reader 请求 |
+| --- | --- |
+| 28 项后续正式 DEV605 | 16,940 |
+| 实现闭环备用 | 31 |
+| D | 7,809 |
+| P-A | 27,624 |
+| P-B | 28,463 |
+| DEV 重测 | 2,050 |
+| 未见预算 DEV | 684 |
+| 独立确认主读出 | 19,500 |
+| 独立确认重测 | 1,950 |
+| 合计 | 105,051 |
+
+## 正式 DEV605 与固定参照
+
+34 个正式 DEV 条件与 6 个去重参照均覆盖 605 题、222 个原生组。每格依次给出原生质量分与每题 Reader 输入 token。宏值按三来源等权计算。确认结果使用独立角色和冻结条件。
+
+| 原生条件 | MuSiQue | PersonaMem | QASPER | 三源宏值 | 失败 |
+| --- | --- | --- | --- | --- | --- |
+| `dev-main-B1` | 20.84 / 1,071.57 | 26.24 / 1,407.72 | 32.31 / 1,006.79 | 26.46 / 1,162.03 | 0 |
+| `M0-W-N1-seed11-DEV` | 15.11 / 1,058.19 | 24.26 / 1,774.56 | 30.77 / 2,030.53 | 23.38 / 1,621.10 | 2 |
+| `M0-O-N1-seed11-DEV` | 0.69 / 990.98 | 22.28 / 2,196.23 | 20.49 / 957.29 | 14.49 / 1,381.50 | 0 |
+| `M1-W-N1-seed11-DEV` | 17.95 / 1,022.55 | 22.28 / 1,751.15 | 33.73 / 2,059.69 | 24.65 / 1,611.13 | 2 |
+| `M1-O-N1-seed11-DEV` | 2.08 / 1,415.16 | 26.24 / 2,319.81 | 24.01 / 1,372.32 | 17.45 / 1,702.43 | 2 |
+| `M0-W-N0-seed11-DEV` | 19.12 / 1,066.27 | 26.24 / 1,905.12 | 36.09 / 2,110.24 | 27.15 / 1,693.88 | 0 |
+| `B1-M0-W-N1-G1-seed11-DEV` | 12.23 / 1,040.43 | 23.76 / 1,975.75 | 34.73 / 2,122.55 | 23.57 / 1,712.91 | 3 |
+| `B2-M0-W-N2-seed11-DEV` | 11.24 / 1,021.89 | 23.27 / 2,004.56 | 34.85 / 2,078.90 | 23.12 / 1,701.79 | 4 |
+| `B3-M0-W-dual-raw-seed11-DEV` | 15.91 / 1,051.07 | 25.25 / 1,963.08 | 33.60 / 2,130.10 | 24.92 / 1,714.75 | 5 |
+| `B3-M0-W-dual-semantic-seed11-DEV` | 18.31 / 1,074.28 | 24.75 / 1,980.94 | 37.56 / 2,074.38 | 26.87 / 1,709.86 | 3 |
+| `B4-M0-W-missing-seed11-DEV` | 16.29 / 1,065.84 | 24.26 / 1,979.40 | 36.35 / 2,073.00 | 25.63 / 1,706.08 | 1 |
+| `B4-M0-W-real-seed11-DEV` | 13.21 / 1,103.71 | 22.28 / 1,432.44 | 36.22 / 1,958.15 | 23.90 / 1,498.10 | 2 |
+| `C-M0-O-u0-reset-seed11-DEV` | 12.60 / 1,607.60 | 21.29 / 1,453.71 | 33.62 / 1,966.06 | 22.50 / 1,675.79 | 1 |
+| `C-M0-O-u1-seed11-DEV` | 9.47 / 1,612.74 | 20.79 / 1,759.07 | 36.02 / 1,992.38 | 22.10 / 1,788.06 | 4 |
+| `C-M0-O-u2-seed11-DEV` | 11.21 / 1,612.01 | 24.26 / 1,468.14 | 33.08 / 1,967.54 | 22.85 / 1,682.56 | 1 |
+| `C-M0-O-direct-representation-u0-reset-seed11-DEV` | 7.75 / 1,371.87 | 22.28 / 909.19 | 30.09 / 1,179.47 | 20.04 / 1,153.51 | 1 |
+| `C-M0-O-scratch-seed11-DEV` | 8.33 / 1,127.34 | 21.78 / 714.44 | 25.80 / 1,079.99 | 18.64 / 973.92 | 1 |
+| `D-M1-W-seed11-DEV` | 17.93 / 1,065.49 | 25.74 / 1,992.53 | 34.83 / 2,079.39 | 26.17 / 1,712.47 | 3 |
+| `D-M1-O-seed11-DEV` | 9.20 / 1,602.26 | 25.74 / 1,941.50 | 25.86 / 1,214.62 | 20.27 / 1,586.13 | 1 |
+| `D-wide-M0-W-seed11-DEV` | 15.22 / 1,064.70 | 24.26 / 1,981.84 | 36.03 / 2,079.85 | 25.17 / 1,708.79 | 3 |
+| `D-wide-M0-O-seed11-DEV` | 8.01 / 1,354.08 | 24.26 / 847.92 | 35.03 / 1,943.92 | 22.43 / 1,381.97 | 1 |
+| `C-M0-O-u0-reset-seed11-epoch1-DEV` | 7.46 / 1,519.49 | 23.27 / 1,611.49 | 34.10 / 1,650.12 | 21.61 / 1,593.70 | 1 |
+| `D-M1-O-seed11-epoch1-DEV` | 7.50 / 729.77 | 21.78 / 1,260.58 | 32.16 / 1,289.25 | 20.48 / 1,093.20 | 3 |
+| `D-wide-M0-O-seed11-epoch1-DEV` | 10.46 / 807.46 | 22.28 / 942.25 | 34.51 / 1,763.84 | 22.42 / 1,171.18 | 1 |
+| `C-M0-O-u0-reset-seed11-lambda-0.00-DEV` | 10.35 / 1,609.87 | 22.28 / 1,522.14 | 35.05 / 1,980.47 | 22.56 / 1,704.16 | 4 |
+| `C-M0-O-u0-reset-seed11-lambda-0.10-DEV` | 10.58 / 1,610.92 | 21.78 / 1,391.54 | 33.40 / 1,887.74 | 21.92 / 1,630.07 | 2 |
+| `D-M0-P-A-seed11-DEV` | 14.53 / 1,596.48 | 21.78 / 1,050.28 | 35.32 / 2,188.92 | 23.88 / 1,611.89 | 4 |
+| `D-M1-P-A-seed11-DEV` | 4.61 / 1,439.92 | 23.27 / 1,122.53 | 34.22 / 1,566.70 | 20.70 / 1,376.38 | 0 |
+| `D-wide-M0-P-A-seed11-DEV` | 8.21 / 1,194.86 | 20.30 / 1,358.48 | 32.57 / 1,969.70 | 20.36 / 1,507.68 | 1 |
+| `D-M0-P-B-seed11-DEV` | 13.66 / 1,493.57 | 22.28 / 1,210.11 | 33.55 / 2,157.59 | 23.16 / 1,620.42 | 0 |
+| `D-M1-P-B-seed11-DEV` | 5.65 / 966.07 | 20.30 / 1,203.33 | 33.09 / 1,776.52 | 19.68 / 1,315.30 | 3 |
+| `D-wide-M0-P-B-seed11-DEV` | 3.89 / 988.00 | 24.75 / 1,228.21 | 31.00 / 1,781.59 | 19.88 / 1,332.60 | 0 |
+| `D-M0-P-B-core-replay-seed11-DEV` | 3.56 / 1,500.65 | 21.78 / 922.45 | 34.62 / 2,155.35 | 19.99 / 1,526.15 | 2 |
+| `E-M0-matched-initialization-seed11-DEV` | 1.76 / 516.79 | 20.79 / 551.54 | 17.53 / 637.38 | 13.36 / 568.57 | 2 |
+| `E-M0-O-seed29-DEV` | 17.39 / 1,627.62 | 21.78 / 1,211.84 | 35.01 / 1,929.51 | 24.73 / 1,589.66 | 2 |
+| `E-M1-O-seed29-DEV` | 3.41 / 1,460.80 | 24.26 / 2,348.48 | 28.95 / 1,261.31 | 18.88 / 1,690.19 | 2 |
+| `E-wide-M0-O-seed29-DEV` | 10.55 / 1,397.33 | 23.76 / 884.14 | 33.16 / 1,942.86 | 22.49 / 1,408.11 | 0 |
+| `E-M0-O-seed47-DEV` | 18.15 / 1,613.73 | 21.78 / 1,136.25 | 34.30 / 1,996.14 | 24.75 / 1,582.04 | 1 |
+| `E-M1-O-seed47-DEV` | 1.66 / 1,456.93 | 21.29 / 2,372.21 | 31.37 / 1,480.86 | 18.11 / 1,770.00 | 1 |
+| `E-wide-M0-O-seed47-DEV` | 2.54 / 1,381.69 | 22.77 / 848.47 | 30.52 / 1,811.03 | 18.61 / 1,347.06 | 0 |
+
+## 证据边界
+
+固定短续行与实际策略抽查保留了 2 个来自不同原生组的 DEV 精度排序反转，两个比较的后续决策长度都有变化。同 h=2 审计保持条件登记，原生登记运行数为 0。N2 迁移和动态控制计算路由在本轮未达到启用门槛。确认在当前冻结采集池与实际来源上估计效应，登记规模下规划联合功效为 13.0%，全部新鲜容量的敏感性情景为 20.5%。
+
+## 证据与离线复算
+
+以下文件名相对于原实验运行目录。实验矩阵和开发检查点索引为 `experiment-matrix.json` 与 `selected-checkpoints.json`。完整旧 O、封存配对和正式 DEV 分别见 `plan2-baselines.json`、`plan2-D-final-reader-coverage.json` 与 `plan2-absolute-closed-dev605-results.json`。三种子训练开销见 `plan2-native-three-seed-fit-resource-comparison.json`。两轮 P 配对、Reader 台账和计量结算分别见 `D-policy-comparisons.json`、`plan2-native-confirmation-terminal-reader-ledger-reconciliation.json` 与 `plan2-confirmation-final-native-compute-settlement.json`。
+
+正式出数为 `E-confirmation-results.json`。独立全量复算收据为 `plan2-native-confirmation-full-readback.json`，覆盖 26 份原生归档及四项判定。实跑确认源码以 `b3abbb66` 为基底，覆盖 `2d91d00f` 的确认容量实现及对应测试文件。
+
+复算需在原登记运行目录所在机器访问封存归档与现有验证环境。`PLAN2_RUN_ROOT` 指登记的实验运行根，`PLAN2_PYTHON` 指该环境的 Python 3.11 解释器。命令使用本地归档，独立复算收据的新增 Reader 请求为 0。
 
 ```sh
-cd /data/milai-experiments/20261119-memory-control-v12/source-2d91d00f/MiLAi-Lab
-export PYTHONPATH=src:tools CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
-/data/milai-experiments/20261116-small-memory-control/verification-env-v1/bin/python /data/milai-experiments/20261119-memory-control-v12/verify-native-confirmation-readback.py --root /data/milai-experiments/20261119-memory-control-v12 --phase complete --wait-seconds 0 --output /tmp/milai-plan2-confirmation-readback.json
+cd "$PLAN2_RUN_ROOT/source-2d91d00f/MiLAi-Lab"
+plan2_output_dir=$(mktemp -d)
+PYTHONPATH=src:tools CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+  "$PLAN2_PYTHON" "$PLAN2_RUN_ROOT/verify-native-confirmation-readback.py" \
+  --root "$PLAN2_RUN_ROOT" --phase complete --wait-seconds 0 \
+  --output "$plan2_output_dir/confirmation-readback.json"
 ```
