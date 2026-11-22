@@ -13,7 +13,6 @@ from memory_control_outcome_fits import OutcomeFits
 from memory_control_outcome_stage import wait_json_dependency
 from memory_control_policy_stage import ARCHITECTURES
 from memory_control_representation_screen import freeze_choice
-from milai_lab.datasets.memory_control_episode_archive import EPISODE_COMPACTION_REPORT
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.runners.memory_control_confirmation import (
     confirmation_capacity,
@@ -31,7 +30,6 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     paired_comparison,
     paired_inline_latency,
     paired_repeat_measurements,
-    summarize_inline_policy_load,
 )
 
 
@@ -206,17 +204,14 @@ def execute_confirmation(
             requests[label] += sum(row["reader_requests_this_invocation"] for row in entries)
             if requests[label] > slots * len(population["arms"]) or sum(requests.values()) > cap:
                 raise RuntimeError("Actual confirmation requests exceed their registered slots")
-            load = summarize_inline_policy_load(population, episodes, entries)
             windows[label][name] = {
                 "completed_reader_windows": len(entries),
-                "policy_load_ms": load["total_policy_load_ms"],
+                "policy_load_ms": sum(row["policy_load_ms_this_invocation"] for row in entries),
                 "reader_scope_wall_seconds": sum(
                     row["reader_scope_wall_seconds"] for row in entries
                 ),
                 "process_wall_seconds": sum(row["wall_seconds"] for row in entries),
                 "process_cpu_seconds": sum(row["cpu_seconds"] for row in entries),
-                "episode_compaction": read_json(out / EPISODE_COMPACTION_REPORT, {}),
-                "inline_policy_load": load,
             }
             ran[label][name] = str(out)
     return {"runs": ran, "reader_requests_by_scope": requests, "window_resources": windows}
@@ -263,20 +258,9 @@ def summarize_confirmation(
     input_supported = (supported("deployment", efficiency["token_savings_interval_95"], 0.0)
                        and quality_noninferior
                        and saving is not None and saving >= 0.15)
-    loads = {}
-    resources = receipt.get("window_resources", {}).get("primary", {})
-    timed_arms = [f"{main}-seed{value}" for value in seeds] + ["B*"]
-    for name in timed_arms:
-        load = resources.get(name, {}).get("inline_policy_load", {})
-        loads[Path(primary[name])] = (
-            load["policy_load_ms_per_eligible_task"] if load.get("policy_load_records_complete")
-            and load.get("reader_attempts_reconciled") else None
-        )
     latency = paired_inline_latency(
         paths(main), Path(primary["B*"]), repeats=fit.repeats, seed=fit.bootstrap_seed,
-        policy_load_ms_per_task=loads,
     )
-    total_latency = latency["with_amortized_policy_load"]
     noise = {
         name: paired_repeat_measurements(
             Path(primary[name]), Path(run), repeats=fit.repeats, seed=fit.bootstrap_seed,
@@ -300,9 +284,9 @@ def summarize_confirmation(
             ),
             "reader_input_efficiency_supported": input_supported,
             "acceleration_supported": bool(
-                quality_noninferior and total_latency["paired_latency_complete"]
-                and total_latency["latency_saving_interval_95"] is not None
-                and total_latency["latency_saving_interval_95"][0] > 0.0
+                quality_noninferior and latency["paired_latency_complete"]
+                and latency["latency_saving_interval_95"] is not None
+                and latency["latency_saving_interval_95"][0] > 0.0
             ),
         },
         **receipt, "sha_validation": False,

@@ -14,11 +14,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from milai_lab.datasets.memory_control_episode_archive import (
-    episode_packet_exists,
-    read_archived_episodes,
-    read_episode_packet,
-)
+from milai_lab.datasets.memory_control_episode_archive import read_archived_episodes
 from milai_lab.datasets.memory_control_normalize import MUSIQUE
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import DB_NAME, connect, get_meta
@@ -559,7 +555,7 @@ def _prepare_episode_batch(
     for row in population["tasks"]:
         tid = row["task_id"]
         path = episodes / f"{tid}.json"
-        record = read_episode_packet(path)
+        record = read_json(path)
         if record is not None:
             if any(record[k] != row[k] for k in ("task_id", "dataset", "native_group")):
                 raise ValueError("Saved episode identity differs from the registered task")
@@ -655,7 +651,7 @@ def _readout_inline(
                 if limit is not None and len(dispatched) >= limit:
                     break
                 saved = episodes / f"{item['task_id']}.json"
-                if not episode_packet_exists(saved) and policy is None:
+                if not saved.is_file() and policy is None:
                     loading = time.perf_counter()
                     policy = make_policy(dataset, arm, device)
                     policy_load_ms = (time.perf_counter() - loading) * 1000

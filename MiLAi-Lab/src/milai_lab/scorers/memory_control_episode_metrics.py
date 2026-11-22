@@ -5,15 +5,12 @@ from __future__ import annotations
 import math
 import random
 from collections import Counter, defaultdict
-from collections.abc import Mapping, Sequence
+from collections.abc import Sequence
 from pathlib import Path
 from statistics import fmean, stdev
 from typing import Any
 
-from milai_lab.datasets.memory_control_episode_archive import (
-    read_archived_episodes,
-    read_episode_packet,
-)
+from milai_lab.datasets.memory_control_episode_archive import read_archived_episodes
 from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
 from milai_lab.datasets.memory_control_report import read_json
 from milai_lab.scorers.memory_control_native import musique_pair
@@ -109,7 +106,7 @@ def input_result(
     received = {}
     try:
         for task in tasks:
-            row = read_episode_packet(root / "episodes" / f"{task['task_id']}.json")
+            row = read_json(root / "episodes" / f"{task['task_id']}.json")
             if row is not None:
                 if any(row[k] != task[k] for k in ("task_id", "dataset", "native_group")):
                     raise ValueError("Saved episode and frozen group allocation disagree")
@@ -410,73 +407,10 @@ def paired_repeat_measurements(
     return {**output, "reader_repeat_bindings": dict(wires), "adds_independent_groups": False}
 
 
-def summarize_inline_policy_load(
-    population: dict[str, Any],
-    episodes: dict[int, dict[str, Any]],
-    windows: Sequence[dict[str, Any]],
-) -> dict[str, Any]:
-    """Report measured inline task timing and amortize actual policy loads over the fixed cohort."""
-    registered = {row["task_id"] for row in population["tasks"]}
-    if registered != episodes.keys() or len(registered) != len(population["tasks"]):
-        raise ValueError("The inline timing roster must reproduce all registered task positions")
-    unavailable = population.get("predeclared_unevaluable_tasks", {})
-    eligible = {tid for tid in registered if str(tid) not in unavailable}
-    timed = []
-    for tid in sorted(eligible):
-        row = episodes[tid]
-        costs = row.get("costs", {})
-        value = costs.get("episode_live_readout_ms")
-        if (row["status"] in {"scored", "scored_format_failure"}
-                and costs.get("reader_request_attempted") is True
-                and type(value) in (int, float) and math.isfinite(value) and value > 0):
-            timed.append(float(value))
-
-    have_loads = bool(windows)
-    load_values = []
-    attempts = []
-    for window in windows:
-        value = window.get("policy_load_ms_this_invocation")
-        if (window.get("readout_schedule") == "inline"
-                and type(value) in (int, float) and math.isfinite(value) and value >= 0):
-            load_values.append(float(value))
-        else:
-            have_loads = False
-        attempted = window.get("reader_attempts_this_invocation")
-        if type(attempted) is int and attempted >= 0:
-            attempts.append(attempted)
-    episode_attempts = sum(row.get("costs", {}).get("reader_request_attempted") is True
-                           for row in episodes.values())
-    logged_attempts = sum(attempts) if windows and len(attempts) == len(windows) else None
-    total_load = sum(load_values) if have_loads else None
-    loads = sum(value > 0 for value in load_values) if have_loads else None
-    load_per_task = total_load / len(eligible) if total_load is not None and eligible else None
-    complete = bool(eligible) and len(timed) == len(eligible)
-    inline_mean = fmean(timed) if timed else None
-    return {
-        "registered_tasks": len(registered), "eligible_tasks": len(eligible),
-        "timed_live_reader_tasks": len(timed), "inline_timings_complete": complete,
-        "live_task_wall_ms": {
-            "mean": inline_mean,
-            "p50": percentiles(timed, .50) if timed else None,
-            "p95": percentiles(timed, .95) if timed else None,
-        },
-        "policy_load_records_complete": have_loads,
-        "logged_reader_attempts": logged_attempts, "episode_reader_attempts": episode_attempts,
-        "reader_attempts_reconciled": logged_attempts == episode_attempts,
-        "policy_load_count": loads, "total_policy_load_ms": total_load,
-        "eligible_tasks_per_policy_load": len(eligible) / loads if loads else None,
-        "policy_load_ms_per_eligible_task": load_per_task,
-        "mean_live_task_wall_ms_with_amortized_policy_load": (
-            inline_mean + load_per_task if complete and load_per_task is not None else None
-        ),
-    }
-
-
 def paired_inline_latency(
     policy: Sequence[Path], baseline: Path, *, repeats: int, seed: int,
-    policy_load_ms_per_task: Mapping[Path, float | None] | None = None,
 ) -> dict[str, Any]:
-    """Use common native-group draws for observed task latency and optional setup offsets."""
+    """Bootstrap continuously timed local-execution-to-Reader latency by native group."""
     import numpy as np
 
     if not policy or repeats < 1:
@@ -501,13 +435,10 @@ def paired_inline_latency(
         found = []
         for tid in ids:
             row = rows.get(tid, {})
-            costs = row.get("costs", {})
-            value = costs.get("episode_live_readout_ms")
+            value = row.get("costs", {}).get("episode_live_readout_ms")
             if (
                 row.get("status") not in {"scored", "scored_format_failure"}
                 or type(value) not in (float, int) or not math.isfinite(value) or value <= 0
-                or (policy_load_ms_per_task is not None
-                    and costs.get("reader_request_attempted") is not True)
             ):
                 return []
             found.append(float(value))
@@ -542,20 +473,6 @@ def paired_inline_latency(
     }
     if len(seeds) > 1:
         output["interval_conditioned_on_model_seeds"] = seeds
-    offsets: list[float | None] = []
-    if policy_load_ms_per_task is not None:
-        for path in (*policy, baseline):
-            value = policy_load_ms_per_task.get(path)
-            offsets.append(float(value) if type(value) in (int, float)
-                           and math.isfinite(value) and value >= 0 else None)
-        eligible_offsets = complete and None not in offsets
-        output["with_amortized_policy_load"] = {
-            "scope": "live_task_wall_plus_recorded_policy_load_per_eligible_task",
-            "candidate_policy_load_ms_per_task": offsets[:-1],
-            "baseline_policy_load_ms_per_task": offsets[-1],
-            "paired_latency_complete": eligible_offsets,
-            "latency_saving": None, "latency_saving_interval_95": None,
-        }
     if set(counts) != set(SOURCES) or any(not profiles[source] for source in SOURCES):
         if len(seeds) > 1:
             output["by_seed"] = [
@@ -572,44 +489,31 @@ def paired_inline_latency(
         sample = rng.integers(0, len(arrays), size=(repeats, len(arrays)))
         totals = arrays[sample, :].sum(axis=1)
         cluster_draws += totals[:, :-1] / totals[:, -1:]
-    seed_draws = np.random.default_rng(seed + 1).integers(
-        0, len(seeds), size=(repeats, len(seeds)),
-    ) if len(seeds) > 1 else None
-
-    def summarize_latency(totals: Any, draws: Any) -> dict[str, Any]:
-        per_seed = 1 - totals[:-1] / totals[-1]
-        per_seed_draws = 1 - draws[:, :-1] / draws[:, -1:]
-        result = {
-            "candidate_macro_latency_ms": float(totals[:-1].mean() / len(SOURCES)),
-            "baseline_macro_latency_ms": float(totals[-1] / len(SOURCES)),
-            "latency_saving": float(per_seed.mean()),
-            "latency_saving_interval_95": np.quantile(
-                per_seed_draws.mean(axis=1), [0.025, 0.975],
-            ).tolist(),
-        }
-        if seed_draws is not None:
-            intervals = np.quantile(per_seed_draws, [0.025, 0.975], axis=0).T.tolist()
-            joint = per_seed_draws[np.arange(repeats)[:, None], seed_draws].mean(axis=1)
-            result.update({
-                "by_seed": [
-                    {"model_seed": label, "latency_saving": float(value),
-                     "latency_saving_interval_95": interval}
-                    for label, value, interval in zip(seeds, per_seed, intervals, strict=True)
-                ],
-                "seed_spread": _observed_seed_spread(per_seed.tolist()),
-                "seed_and_group_sensitivity": {
-                    "latency_saving_interval_95": np.quantile(joint, [0.025, 0.975]).tolist(),
-                },
-            })
-        return result
-
-    output.update(summarize_latency(base, cluster_draws))
-    if (amortized := output.get("with_amortized_policy_load")) and amortized[
-        "paired_latency_complete"
-    ]:
-        # Each macro is the sum of source means. The measured setup per task is fixed per arm.
-        setup = len(SOURCES) * np.asarray(offsets, dtype=float)
-        amortized.update(summarize_latency(base + setup, cluster_draws + setup))
+    per_seed = 1 - base[:-1] / base[-1]
+    per_seed_draws = 1 - cluster_draws[:, :-1] / cluster_draws[:, -1:]
+    output.update({
+        "latency_saving": float(per_seed.mean()),
+        "latency_saving_interval_95": np.quantile(
+            per_seed_draws.mean(axis=1), [0.025, 0.975],
+        ).tolist(),
+    })
+    if len(seeds) > 1:
+        intervals = np.quantile(per_seed_draws, [0.025, 0.975], axis=0).T.tolist()
+        seed_draws = np.random.default_rng(seed + 1).integers(
+            0, len(seeds), size=(repeats, len(seeds)),
+        )
+        joint = per_seed_draws[np.arange(repeats)[:, None], seed_draws].mean(axis=1)
+        output.update({
+            "by_seed": [
+                {"model_seed": label, "latency_saving": float(value),
+                 "latency_saving_interval_95": interval}
+                for label, value, interval in zip(seeds, per_seed, intervals, strict=True)
+            ],
+            "seed_spread": _observed_seed_spread(per_seed.tolist()),
+            "seed_and_group_sensitivity": {
+                "latency_saving_interval_95": np.quantile(joint, [0.025, 0.975]).tolist(),
+            },
+        })
     return output
 
 

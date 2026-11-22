@@ -13,11 +13,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from milai_lab.datasets.memory_control_episode_archive import (
-    EPISODE_COMPACTION_REPORT,
-    archive_completed_readout,
-    compact_scored_episode_packets,
-)
+from milai_lab.datasets.memory_control_episode_archive import archive_completed_readout
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.harness.contextual_artifacts import http_budget_scope
 from milai_lab.harness.http_ownership import HttpOwnershipError
@@ -39,9 +35,6 @@ def run_registered_readout(args: argparse.Namespace) -> None:
     population = read_json(args.plan)
     registered_arm = getattr(args, "registered_arm", None)
     inline_readout = getattr(args, "inline_readout", False)
-    prepare_only = getattr(args, "prepare_only", False)
-    if prepare_only and inline_readout:
-        raise ValueError("Local preparation requires the staged readout schedule")
     held = args.command == "dispatch-held-budget-arm"
     repeated = args.command == "dispatch-dev-repeat-arm"
     scope = ("HELD_BUDGET" if held else "DEV_REPEAT" if repeated
@@ -88,19 +81,12 @@ def run_registered_readout(args: argparse.Namespace) -> None:
             args.data, observation_protocol=arm["observation_protocol"],
             numeric_observation=contract.get("config", {}).get("numeric_mode", "off") != "off",
         )
-        if prepare_only or (
-            not inline_readout and read_json(prepare, {}).get("status") != "PREPARED_EPISODES"
-        ):
+        if not inline_readout and read_json(prepare, {}).get("status") != "PREPARED_EPISODES":
             write_json(status, {"status": f"PREPARING_{scope}", "pid": os.getpid()})
-            preparation = evaluate_episodes(
+            evaluate_episodes(
                 args.data, args.plan, arm, args.output, device=args.device, prepare_only=True,
                 prepared_dataset=dataset,
             )
-            if prepare_only:
-                write_json(status, preparation)
-                if preparation["status"] != "PREPARED_EPISODES":
-                    raise RuntimeError(f"Incomplete local preparation in {args.output}")
-                return
         waiting = False
         while True:
             try:
@@ -122,18 +108,6 @@ def run_registered_readout(args: argparse.Namespace) -> None:
             with journal.open("a", encoding="utf-8") as events:
                 events.write(json.dumps(receipt, allow_nan=False) + "\n")
             write_json(status, {"pid": os.getpid(), **receipt})
-            if scope == "CONFIRMATION" and receipt["status"] == "PARTIAL":
-                try:
-                    compaction = compact_scored_episode_packets(args.output)
-                    path = args.output / EPISODE_COMPACTION_REPORT
-                    previous = read_json(path, {})
-                    write_json(path, {
-                        **{key: previous.get(key, 0) + value for key, value in compaction.items()},
-                        "windows": previous.get("windows", 0) + 1,
-                        "sha_validation": False,
-                    })
-                except OSError as error:
-                    print(f"Scored episode packets could not be compacted: {error}", flush=True)
             if receipt["status"] == "COMPLETED":
                 write_json(args.output / "native-summary.json", summarize(args.output))
                 archive = scope in {"CONFIRMATION", "DEV_REPEAT"}
@@ -321,8 +295,6 @@ def main() -> None:
     dispatch.add_argument("--utility-lambda", type=float, choices=[0.0, 0.05, 0.10])
     dispatch.add_argument("--device", default="cpu")
     dispatch.add_argument("--inline-readout", action="store_true")
-    dispatch.add_argument("--prepare-only", action="store_true",
-                          help="Materialize staged DEV episodes for the registered arm")
     dispatch.add_argument("--archive-episodes", action="store_true")
     dispatch.add_argument("--weighting-baseline", type=Path)
     dispatch.add_argument("--weighting-selection", type=Path)
@@ -396,17 +368,7 @@ def main() -> None:
     fitting.add_argument("--root", type=Path, required=True)
     fitting.add_argument("--baseline-selection", type=Path, required=True)
     fitting.add_argument("--gpu", type=int, required=True)
-    fitting.add_argument("--dev-preparation-gpu", type=int,
-                         help="Prepare later objective DEV arms on a second allocated GPU")
     fitting.add_argument("--window", type=int, default=40)
-    features = commands.add_parser("prepare-policy-features")
-    for name in ("data", "collection", "checkpoint", "feature-store", "output"):
-        features.add_argument("--" + name, type=Path, required=True)
-    features.add_argument("--raw-feature-store", type=Path)
-    features.add_argument("--device", default="cpu")
-    features.add_argument("--threads", type=int, default=2)
-    features.add_argument("--loader-workers", type=int, default=4)
-    features.add_argument("--feature-batch-states", type=int, default=32)
     policy = commands.add_parser("run-policy-stage")
     policy.add_argument("--root", type=Path, required=True)
     policy.add_argument("--dataset-config", type=Path, required=True)
@@ -469,16 +431,9 @@ def main() -> None:
     elif args.command == "fit-outcome-objectives":
         from memory_control_outcome_fits import run_outcome_fits
 
-        if (args.gpu < 0 or args.window < 1 or (args.dev_preparation_gpu is not None
-                and (args.dev_preparation_gpu < 0 or args.dev_preparation_gpu == args.gpu))):
+        if args.gpu < 0 or args.window < 1:
             raise ValueError("Provide allocated compute and a positive DEV window")
         run_outcome_fits(args)
-    elif args.command == "prepare-policy-features":
-        from memory_control_policy_stage import prepare_policy_features
-
-        if min(args.threads, args.loader_workers, args.feature_batch_states) < 1:
-            raise ValueError("Feature preparation needs positive thread, worker and batch sizes")
-        prepare_policy_features(args)
     elif args.command == "run-policy-stage":
         from memory_control_policy_stage import run_policy_stage
 

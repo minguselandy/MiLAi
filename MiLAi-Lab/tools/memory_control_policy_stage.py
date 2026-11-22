@@ -4,12 +4,7 @@ from __future__ import annotations
 
 import argparse
 import fcntl
-import json
 import os
-import time
-from collections import Counter
-from concurrent.futures import ThreadPoolExecutor
-from contextlib import closing
 from pathlib import Path
 from typing import Any
 
@@ -17,82 +12,13 @@ from memory_control_outcome_fits import OutcomeFits, object_model_flags
 from memory_control_outcome_stage import branch_state, dispatch_outcome_run, wait_json_dependency
 from memory_control_representation_screen import freeze_choice, wait_for_running_fit
 from milai_lab.datasets.memory_control_report import read_json, write_json
-from milai_lab.datasets.memory_control_store import connect
-from milai_lab.methods.frozen_feature_store import FrozenFeatureStore
-from milai_lab.methods.memory_control_dataset import MemoryControlDataset, StateIndex
-from milai_lab.methods.small_control_model import SmallControlModel
 from milai_lab.runners.memory_control_checkpoint_selection import (
     select_checkpoint,
     selected_candidate,
     training_receipt,
 )
-from milai_lab.runners.memory_control_episode import checkpoint_contract
 
 ARCHITECTURES = ("M0", "M1", "wide-M0")
-
-
-def prepare_policy_features(args: argparse.Namespace) -> None:
-    """Prepare the reached TRAIN inputs independently of their Reader measurements."""
-    import torch  # type: ignore[import-not-found]
-
-    wall, cpu = time.perf_counter(), time.process_time()
-    collection = read_json(args.collection, {})
-    if collection.get("status") != "COMPLETE" and not collection.get("exhausted_before_target"):
-        raise ValueError("Feature preparation needs a closed reached-state collection")
-    declaration = collection["configuration"]
-    checkpoint = args.checkpoint.resolve()
-    contract = checkpoint_contract(checkpoint)
-    observation = contract["observation_protocol"]
-    if not any(Path(arm["checkpoint"]).resolve() == checkpoint
-               and arm["observation_protocol"] == observation for arm in declaration["arms"]):
-        raise ValueError("Feature preparation needs a checkpoint from the registered collection")
-    dataset = MemoryControlDataset(
-        args.data, observation_protocol=observation,
-        numeric_observation=contract["config"].get("numeric_mode", "off") != "off",
-    )
-    if (not dataset.revision
-            or dataset.run_id != declaration["dataset_run_id"]
-            or dataset.run_id != contract["dataset_run_id"]):
-        raise ValueError("Feature preparation and reached states must use the same dataset release")
-    run = collection["run_id"]
-    with closing(connect(dataset.path)) as db:
-        db.execute("BEGIN")
-        saved = db.execute("SELECT config FROM policy_state_runs WHERE run_id=?", (run,)).fetchone()
-        if not saved or json.loads(saved[0]) != declaration:
-            raise ValueError("The durable policy registration differs from the collection receipt")
-        rows = db.execute("""
-            SELECT s.id,t.dataset,t.native_group,t.root_id,s.recipe,s.task_id,
-                   s.object_count,s.encoder_length_bucket,x.material_budget
-            FROM policy_state_visits v JOIN states s ON s.id=v.state_id
-            JOIN experiment_tasks t ON t.id=s.task_id
-            JOIN state_variants x ON x.state_id=s.id
-            WHERE v.run_id=? AND t.experiment_role='train' ORDER BY t.root_id,s.id
-        """, (run,)).fetchall()
-        if not rows or len(rows) != collection["distinct_states"]:
-            raise ValueError("The reached-state receipt differs from the durable TRAIN roster")
-    index = [StateIndex(
-        row["id"], row["dataset"], row["native_group"], row["root_id"], row["recipe"],
-        (row["object_count"] // 8, row["encoder_length_bucket"]),
-        row["task_id"], row["material_budget"],
-    ) for row in rows]
-    torch.set_num_threads(args.threads)
-    model = SmallControlModel.load(checkpoint, device=args.device)
-    model.batch_tokens_by_length = True
-    cache = FrozenFeatureStore(args.feature_store, dataset, model, raw_store=args.raw_feature_store)
-    prepared = cache.prepare(dataset, model, index, cpu_workers=args.loader_workers,
-                             states_per_batch=args.feature_batch_states)
-    write_json(args.output, {
-        "status": "FEATURES_PREPARED", "pid": os.getpid(), "policy_pool": run,
-        "collection": str(args.collection.resolve()), "dataset_run_id": dataset.run_id,
-        "observation_protocol": observation, "checkpoint": str(checkpoint),
-        "feature_store": str(args.feature_store.resolve()),
-        "raw_feature_store": (str(args.raw_feature_store.resolve())
-                              if args.raw_feature_store else None),
-        "train_states": len(index), "by_source": dict(Counter(row.dataset for row in index)),
-        "device": str(model.device), "feature_preparation": prepared,
-        "reader_requests": 0, "optimizer_updates": 0, "sha_validation": False,
-        "wall_seconds": time.perf_counter() - wall, "cpu_seconds": time.process_time() - cpu,
-    })
 
 
 def usable_development_gain(comparison: dict[str, Any]) -> bool:
@@ -119,9 +45,7 @@ class PolicyStage:
         self.core_pool = fit.inputs["training_outcomes"]
         self.weak_m0 = Path(self.arm["selected_checkpoint"])
 
-    def weak_fit(
-        self, name: str, config: dict[str, Any], *, temporary_recovery: bool = False,
-    ) -> Path:
+    def weak_fit(self, name: str, config: dict[str, Any]) -> Path:
         folder = self.root / name
         stage = self.fit.matrix["training"]
         weak = stage["w"]
@@ -141,8 +65,6 @@ class PolicyStage:
             ]
             if stage["bf16"]:
                 cmd.append("--bf16")
-            if temporary_recovery:
-                cmd.append("--temporary-recovery")
             if folder.exists():
                 recovery = folder / "recovery.pt"
                 if not recovery.is_file():
@@ -236,36 +158,6 @@ class PolicyStage:
             label=label, cuda=cuda,
         )
 
-    def prepare_reached_cache(self, phase: str, receipt: Path, checkpoint: Path) -> Path:
-        output = self.root / f"{phase}-policy-features.json"
-        existing = read_json(output, {})
-        raw_store = self.arm.get("raw")
-        if existing.get("status") == "FEATURES_PREPARED":
-            expected_raw = str(Path(raw_store).resolve()) if raw_store else None
-            if (existing["collection"] != str(receipt.resolve())
-                    or existing["checkpoint"] != str(checkpoint.resolve())
-                    or existing["raw_feature_store"] != expected_raw
-                    or existing["feature_store"] != str(Path(self.arm["features"]).resolve())):
-                raise ValueError(f"{phase} feature receipt binds a different collection or cache")
-            return output
-        status = self.root / f"{phase}-policy-features-status.json"
-
-        def publish(name: str, **fields: Any) -> None:
-            write_json(status, {"status": name, "pid": os.getpid(), "gpu": self.fit.gpu, **fields})
-
-        worker = OutcomeFits(self.root, self.fit.gpu, self.fit.window, self.fit.matrix,
-                             self.fit.inputs, publish, seed=self.seed)
-        raw = ["--raw-feature-store", raw_store] if raw_store else []
-        worker.command(
-            "tools/run_memory_control_v12_followthrough.py", "prepare-policy-features",
-            "--data", str(self.data), "--collection", str(receipt), "--checkpoint", str(checkpoint),
-            "--feature-store", self.arm["features"], *raw, "--output", str(output),
-            "--device", "cuda:0", "--threads", "2", "--loader-workers", "4",
-            label=f"{phase}-prepare-policy-features",
-        )
-        publish("FEATURES_PREPARED", receipt=str(output))
-        return output
-
     def collect_round(
         self, phase: str, selections: dict[str, Path], prior_outcomes: list[str], seed: int,
     ) -> tuple[str, dict[str, Any]]:
@@ -312,33 +204,21 @@ class PolicyStage:
         if declaration["comparison_protocol"]["continuation"]["kind"] != "reference-short":
             raise ValueError("Only reference-short measured targets can enter formal P replay")
         if not declaration.get("sealed"):
-            checkpoint = Path(selected_candidate(selections["M0"])["checkpoint"])
-            with ThreadPoolExecutor(max_workers=1) as worker:
-                preparation = worker.submit(
-                    self.prepare_reached_cache, phase, receipt_path, checkpoint,
-                )
-                dispatch_outcome_run(
-                    self.root, self.data, self.observation, self.fit.publish, run_id=outcomes,
-                    share_runs=tuple(prior_outcomes), label=phase, slots=slots,
-                    window=self.window, defer=20,
-                )
-                self.build(
-                    "score-outcomes", "--run-id", outcomes, "--seal", label=phase + "-score-seal",
-                )
-                try:
-                    preparation.result()
-                except RuntimeError as error:
-                    self.fit.publish("POLICY_FEATURES_PREPARATION_DEFERRED_TO_FIT",
-                                     phase_name=phase, detail=str(error))
+            dispatch_outcome_run(
+                self.root, self.data, self.observation, self.fit.publish, run_id=outcomes,
+                share_runs=tuple(prior_outcomes), label=phase, slots=slots,
+                window=self.window, defer=20,
+            )
+            self.build(
+                "score-outcomes", "--run-id", outcomes, "--seal", label=phase + "-score-seal",
+            )
         sealed, final, measured = branch_state(self.data, outcomes)
         if not sealed.get("sealed") or measured != actual or not final.get("ingested"):
             raise ValueError(f"{phase} did not produce sealed measured outcomes")
-        features = self.root / f"{phase}-policy-features.json"
         return outcomes, {
             "policy_collection": str(receipt_path), "new_before_states": measured,
             "branch_slots": slots, "outcome_statuses": final,
             "target_states": target, "source_shortfalls": collection["source_shortfalls"],
-            **({"feature_preparation": str(features)} if features.is_file() else {}),
         }
 
     def run(self) -> None:

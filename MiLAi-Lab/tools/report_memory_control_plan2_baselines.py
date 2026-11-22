@@ -6,7 +6,6 @@ import argparse
 import json
 from collections import Counter, defaultdict
 from contextlib import closing
-from itertools import zip_longest
 from pathlib import Path
 from statistics import fmean
 from typing import Any
@@ -134,57 +133,6 @@ def trace(
     return counts, reads, ranges
 
 
-def first_decision_divergence(
-    missing: dict[str, Any], real: dict[str, Any],
-) -> tuple[str, int | None, str]:
-    """Locate the first different bound choice on a literally shared before and menu."""
-    a, b = ((r.get("control") or {}).get("trace", []) for r in (missing, real))
-    if not a or not b:
-        return "trace_unavailable", None, "unknown"
-    read_already = False
-    for left, right in zip_longest(a, b):
-        phase = "later" if read_already else "before_or_at_first_read"
-        if left is None or right is None or left["step"] != right["step"]:
-            return "unaligned_trace_step", None, phase
-        step = left["step"]
-        if left["before"] != right["before"]:
-            return "before_state_diverged", step, phase
-        if left["actions"] != right["actions"]:
-            return "legal_menu_diverged", step, phase
-        menu = {option["id"]: option for option in left["actions"]}
-        first, second = menu[left["selected"]], menu[right["selected"]]
-        if first == second:
-            read_already |= first["kind"] == "READ"
-            continue
-        kinds = first["kind"], second["kind"]
-        if kinds == ("READ", "READ"):
-            a_params, b_params = first["parameters"], second["parameters"]
-            if a_params["index"] != b_params["index"]:
-                return "different_read_candidate", step, phase
-            expanded_before = bool(a_params.get("expand_context"))
-            expanded_after = bool(b_params.get("expand_context"))
-            if expanded_before != expanded_after:
-                return ("R3_to_R2" if expanded_before else "R2_to_R3"), step, phase
-        if kinds == ("READ", "HANDOFF"):
-            return "READ_to_HANDOFF", step, phase
-        if kinds == ("HANDOFF", "READ"):
-            return "HANDOFF_to_READ", step, phase
-        return "other_choice_on_common_menu", step, phase
-    same_wire = missing.get("reader_wire") == real.get("reader_wire")
-    return ("same_path_same_request" if same_wire else "same_path_changed_request"), None, "none"
-
-
-def paired_provider_inputs(left: dict[str, Any], right: dict[str, Any]) -> tuple[int, int] | None:
-    result = []
-    for episode in (left, right):
-        cost = episode.get("costs", {})
-        tokens = cost.get("reader_input_tokens")
-        if (cost.get("reader_usage_source") != "provider" or type(tokens) is not int or tokens < 0):
-            return None
-        result.append(tokens)
-    return result[0], result[1]
-
-
 def numeric_behavior(reference: Path, candidate: Path) -> dict[str, Any]:
     a, missing = input_result(reference)
     b, real = input_result(candidate)
@@ -193,9 +141,6 @@ def numeric_behavior(reference: Path, candidate: Path) -> dict[str, Any]:
     summary: dict[str, dict[str, Counter[str]]] = defaultdict(lambda: defaultdict(Counter))
     group_summary: dict[str, dict[str, Counter[str]]] = defaultdict(lambda: defaultdict(Counter))
     by_group: dict[tuple[str, str], list[int]] = defaultdict(list)
-    first_by_source: dict[str, dict[str, Counter[str]]] = defaultdict(lambda: defaultdict(Counter))
-    first_by_group: dict[str, dict[str, Counter[str]]] = defaultdict(lambda: defaultdict(Counter))
-    paired_cost_tasks: Counter[str] = Counter()
     for row in a["population"]["tasks"]:
         tid, source, group = (row[k] for k in ("task_id", "dataset", "native_group"))
         by_group[source, group].append(tid)
@@ -230,20 +175,6 @@ def numeric_behavior(reference: Path, candidate: Path) -> dict[str, Any]:
             axis["missing"].update(before)
             axis["real"].update(after)
             axis["paired"].update(changed)
-        divergence, step, phase = first_decision_divergence(left, right)
-        tokens = paired_provider_inputs(left, right)
-        paired_cost_tasks[source] += tokens is not None
-        for axes in (first_by_source[source], first_by_group[f"{source}/{group}"]):
-            cell = axes[divergence]
-            cell["tasks"] += 1
-            cell[f"phase/{phase}"] += 1
-            if step is not None:
-                cell[f"step/{step}"] += 1
-            cell["complete_request_changed"] += lw != rw
-            if tokens is not None:
-                before_tokens, after_tokens = tokens
-                cell["provider_input_pairs"] += 1
-                cell["real_minus_missing_provider_input_sum"] += after_tokens - before_tokens
     quality = {}
     for (source, group), ids in by_group.items():
         points = [_primary_group_quality(
@@ -256,19 +187,8 @@ def numeric_behavior(reference: Path, candidate: Path) -> dict[str, Any]:
             "real_minus_missing": 100 * (fmean(points[1]) - fmean(points[0]))
             if all(points) else None,
         }
-    kinds = sorted({kind for groups in first_by_source.values() for kind in groups})
-    macro_input_delta = {
-        kind: fmean(groups.get(kind, {}).get("real_minus_missing_provider_input_sum", 0)
-                    / paired_cost_tasks[source] for source, groups in first_by_source.items())
-        for kind in kinds
-    } if all(paired_cost_tasks.values()) else None
     return {"by_source": summary, "by_native_group": group_summary,
-            "native_quality_points_by_group": quality,
-            "first_path_divergence": {
-                "by_source": first_by_source, "by_native_group": first_by_group,
-                "paired_provider_input_tasks_by_source": paired_cost_tasks,
-                "source_macro_provider_input_delta_contribution": macro_input_delta,
-            }}
+            "native_quality_points_by_group": quality}
 
 
 def paired(candidate: Path, reference: Path, draws: int, seed: int) -> dict[str, Any]:

@@ -7,7 +7,6 @@ import fcntl
 import os
 import subprocess
 import sys
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
 
@@ -151,7 +150,6 @@ class OutcomeFits:
         self, name: str, objective: str, arm: dict[str, Any], initial: Path, *,
         stage_name: str = "o", outcome_runs: list[str] | None = None,
         balance_policy: bool = False, replay_exposures: int | None = None,
-        temporary_recovery: bool = False,
     ) -> dict[str, Any]:
         model = read_json(initial / "config.json")
         representation = (model["object_feature_layout"], model["numeric_mode"])
@@ -180,8 +178,6 @@ class OutcomeFits:
             ]
             if train["bf16"]:
                 cmd.append("--bf16")
-            if temporary_recovery:
-                cmd.append("--temporary-recovery")
             if balance_policy:
                 cmd.append("--balance-policy-outcomes")
             if replay_exposures is not None:
@@ -220,68 +216,24 @@ class OutcomeFits:
             raise ValueError(f"Completed outcome fit differs from its frozen recipe: {name}")
         return fitted
 
-    def dispatch(
-        self, checkpoint: Path, tag: str, value: float | None, *, prepare_only: bool = False,
-    ) -> Path:
+    def dispatch(self, checkpoint: Path, tag: str, value: float | None) -> Path:
         output = self.root / (tag + "-DEV")
         if read_json(output / "run.json", {}).get("status") != "COMPLETED":
             utility = ["--utility-lambda", str(value)] if value is not None else []
-            mode = "--prepare-only" if prepare_only else "--archive-episodes"
             self.command(
                 "tools/run_memory_control_v12_followthrough.py", "dispatch-dev",
                 "--data", self.inputs["data"], "--plan", str(self.plan),
                 "--checkpoint", str(checkpoint), "--arm-name", tag, "--slots", str(self.slots),
                 *utility, "--window", str(self.window),
-                "--output", str(output), "--device", "cuda:0", mode,
-                label=tag + ("-prepare" if prepare_only else "-reader"),
+                "--output", str(output), "--device", "cuda:0", "--archive-episodes",
+                label=tag + "-reader",
             )
-            if prepare_only:
-                return output
         protocol, results = input_result(output)
         if (protocol["population"] != read_json(self.plan)
                 or len(results) != self.slots or protocol["arm"].get("utility_lambda") != value
                 or Path(protocol["arm"]["checkpoint"]) != checkpoint.resolve()):
             raise ValueError("Outcome DEV readout has a different registered condition")
         return output
-
-    def objective_readouts(
-        self, runs: dict[str, str], value: float, preparation_gpu: int | None,
-    ) -> dict[str, Path]:
-        checkpoints = {key: self.root / tag / "checkpoint" for key, tag in runs.items()}
-        if preparation_gpu is None:
-            return {key: self.dispatch(checkpoints[key], tag, value) for key, tag in runs.items()}
-
-        status = self.root / "outcome-dev-preparation-status.json"
-
-        def publish(phase: str, **fields: Any) -> None:
-            write_json(status, {"status": phase, "pid": os.getpid(), "gpu": preparation_gpu,
-                                **fields})
-
-        auxiliary = OutcomeFits(self.root, preparation_gpu, self.window, self.matrix,
-                                self.inputs, publish, seed=self.seed)
-
-        def prepare(key: str) -> None:
-            tag = runs[key]
-            output = auxiliary.dispatch(checkpoints[key], tag, value, prepare_only=True)
-            publish("PREPARED_DEV_ARM", arm=tag, output=str(output))
-
-        results = {}
-        with ThreadPoolExecutor(max_workers=1) as worker:
-            preparing = {key: worker.submit(prepare, key) for key in list(runs)[1:]}
-            try:
-                for key, tag in runs.items():
-                    if key in preparing:
-                        try:
-                            preparing[key].result()
-                        except RuntimeError as error:
-                            self.publish("DEV_PREPARATION_RESUMING_ON_PRIMARY", arm=tag,
-                                         preparation_gpu=preparation_gpu, detail=str(error))
-                    results[key] = self.dispatch(checkpoints[key], tag, value)
-            finally:
-                for future in preparing.values():
-                    future.cancel()
-        publish("OBJECTIVE_DEV_PREPARATION_COMPLETE", arms=list(results))
-        return results
 
     def compare(self, candidate: Path, reference: Path) -> dict[str, Any]:
         return compare_dev(candidate, reference, self.bootstrap_seed, self.repeats)
@@ -340,7 +292,7 @@ class OutcomeFits:
                 "reader_requests": 0, "sha_validation": False,
             })
 
-    def run(self, baseline: Path, *, preparation_gpu: int | None = None) -> None:
+    def run(self, baseline: Path) -> None:
         reference, alternative = self.inputs["selected"], self.inputs["direct_alternative"]
         if (reference["numeric"], alternative["numeric"]) != ("missing", "real"):
             raise ValueError("The objective block requires the missing W trunk and real W peer")
@@ -362,7 +314,8 @@ class OutcomeFits:
                 raise ValueError("Objective ablations differ in matched training populations")
             verify_matched_initial(self.root / runs["u0-reset"], self.root / runs[k])
         self.report_c_only_contrast(self.root / runs["u2"], c_default)
-        terminals = self.objective_readouts(runs, c_default, preparation_gpu)
+        terminals = {k: self.dispatch(self.root / v / "checkpoint", v, c_default)
+                     for k, v in runs.items()}
         comparisons = {
             f"{candidate}_vs_{control}": self.compare(terminals[candidate], terminals[control])
             for candidate, control in (("u1", "u0-reset"), ("u2", "u0-reset"), ("u2", "u1"))
@@ -479,13 +432,7 @@ def run_outcome_fits(args: argparse.Namespace) -> None:
             if inputs.get("status") != "SEALED_OUTCOME_INPUTS_READY":
                 raise ValueError("Formal fitting requires the sealed core and incremental inputs")
             runner = OutcomeFits(root, args.gpu, args.window, matrix, inputs, publish)
-            if args.dev_preparation_gpu is not None:
-                freeze_choice(root / "outcome-dev-preparation-registration.json", {
-                    "primary_gpu": args.gpu, "preparation_gpu": args.dev_preparation_gpu,
-                    "reader_order": list(OBJECTIVES), "auxiliary_preparation": list(OBJECTIVES[1:]),
-                    "reader_requests_during_preparation": 0, "sha_validation": False,
-                })
-            runner.run(Path(bstar["run"]), preparation_gpu=args.dev_preparation_gpu)
+            runner.run(Path(bstar["run"]))
             publish("DEV_COMPLETE", selection=str(root / "C-outcome-recipe-selection.json"))
         except Exception as error:
             publish("STOPPED", error=type(error).__name__, detail=str(error))
