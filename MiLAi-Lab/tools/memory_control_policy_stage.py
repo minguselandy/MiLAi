@@ -4,7 +4,12 @@ from __future__ import annotations
 
 import argparse
 import fcntl
+import json
 import os
+import time
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing, nullcontext
 from pathlib import Path
 from typing import Any
 
@@ -12,13 +17,82 @@ from memory_control_outcome_fits import OutcomeFits, object_model_flags
 from memory_control_outcome_stage import branch_state, dispatch_outcome_run, wait_json_dependency
 from memory_control_representation_screen import freeze_choice, wait_for_running_fit
 from milai_lab.datasets.memory_control_report import read_json, write_json
+from milai_lab.datasets.memory_control_store import connect
+from milai_lab.methods.frozen_feature_store import FrozenFeatureStore
+from milai_lab.methods.memory_control_dataset import MemoryControlDataset, StateIndex
+from milai_lab.methods.small_control_model import SmallControlModel
 from milai_lab.runners.memory_control_checkpoint_selection import (
     select_checkpoint,
     selected_candidate,
     training_receipt,
 )
+from milai_lab.runners.memory_control_episode import checkpoint_contract
 
 ARCHITECTURES = ("M0", "M1", "wide-M0")
+
+
+def prepare_policy_features(args: argparse.Namespace) -> None:
+    """Prepare the reached TRAIN inputs independently of their Reader measurements."""
+    import torch  # type: ignore[import-not-found]
+
+    wall, cpu = time.perf_counter(), time.process_time()
+    collection = read_json(args.collection, {})
+    if collection.get("status") != "COMPLETE" and not collection.get("exhausted_before_target"):
+        raise ValueError("Feature preparation needs a closed reached-state collection")
+    declaration = collection["configuration"]
+    checkpoint = args.checkpoint.resolve()
+    contract = checkpoint_contract(checkpoint)
+    observation = contract["observation_protocol"]
+    if not any(Path(arm["checkpoint"]).resolve() == checkpoint
+               and arm["observation_protocol"] == observation for arm in declaration["arms"]):
+        raise ValueError("Feature preparation needs a checkpoint from the registered collection")
+    dataset = MemoryControlDataset(
+        args.data, observation_protocol=observation,
+        numeric_observation=contract["config"].get("numeric_mode", "off") != "off",
+    )
+    if (not dataset.revision
+            or dataset.run_id != declaration["dataset_run_id"]
+            or dataset.run_id != contract["dataset_run_id"]):
+        raise ValueError("Feature preparation and reached states must use the same dataset release")
+    run = collection["run_id"]
+    with closing(connect(dataset.path)) as db:
+        db.execute("BEGIN")
+        saved = db.execute("SELECT config FROM policy_state_runs WHERE run_id=?", (run,)).fetchone()
+        if not saved or json.loads(saved[0]) != declaration:
+            raise ValueError("The durable policy registration differs from the collection receipt")
+        rows = db.execute("""
+            SELECT s.id,t.dataset,t.native_group,t.root_id,s.recipe,s.task_id,
+                   s.object_count,s.encoder_length_bucket,x.material_budget
+            FROM policy_state_visits v JOIN states s ON s.id=v.state_id
+            JOIN experiment_tasks t ON t.id=s.task_id
+            JOIN state_variants x ON x.state_id=s.id
+            WHERE v.run_id=? AND t.experiment_role='train' ORDER BY t.root_id,s.id
+        """, (run,)).fetchall()
+        if not rows or len(rows) != collection["distinct_states"]:
+            raise ValueError("The reached-state receipt differs from the durable TRAIN roster")
+    index = [StateIndex(
+        row["id"], row["dataset"], row["native_group"], row["root_id"], row["recipe"],
+        (row["object_count"] // 8, row["encoder_length_bucket"]),
+        row["task_id"], row["material_budget"],
+    ) for row in rows]
+    torch.set_num_threads(args.threads)
+    model = SmallControlModel.load(checkpoint, device=args.device)
+    model.batch_tokens_by_length = True
+    cache = FrozenFeatureStore(args.feature_store, dataset, model, raw_store=args.raw_feature_store)
+    prepared = cache.prepare(dataset, model, index, cpu_workers=args.loader_workers,
+                             states_per_batch=args.feature_batch_states)
+    write_json(args.output, {
+        "status": "FEATURES_PREPARED", "pid": os.getpid(), "policy_pool": run,
+        "collection": str(args.collection.resolve()), "dataset_run_id": dataset.run_id,
+        "observation_protocol": observation, "checkpoint": str(checkpoint),
+        "feature_store": str(args.feature_store.resolve()),
+        "raw_feature_store": (str(args.raw_feature_store.resolve())
+                              if args.raw_feature_store else None),
+        "train_states": len(index), "by_source": dict(Counter(row.dataset for row in index)),
+        "device": str(model.device), "feature_preparation": prepared,
+        "reader_requests": 0, "optimizer_updates": 0, "sha_validation": False,
+        "wall_seconds": time.perf_counter() - wall, "cpu_seconds": time.process_time() - cpu,
+    })
 
 
 def usable_development_gain(comparison: dict[str, Any]) -> bool:
@@ -32,20 +106,30 @@ def usable_development_gain(comparison: dict[str, Any]) -> bool:
 class PolicyStage:
     def __init__(
         self, fit: OutcomeFits, recipe: dict[str, Any], dataset_config: Path, window: int,
-        branch_workers: int,
+        branch_workers: int, *, overlap_local_preparation: bool = False,
+        reader_peer_status: Path | None = None, reader_peer_yield_seconds: float = 60.0,
+        p_b_workers: int | None = None,
     ) -> None:
+        if p_b_workers is not None and p_b_workers < 1:
+            raise ValueError("P-B branch preparation requires a positive worker count")
         self.fit, self.recipe = fit, recipe
         self.root = fit.root
         self.data = Path(fit.inputs["data"])
         self.config = dataset_config
         self.window, self.branch_workers = window, branch_workers
+        self.p_b_workers = branch_workers if p_b_workers is None else p_b_workers
+        self.overlap_local_preparation = overlap_local_preparation
+        self.reader_peer_status = reader_peer_status
+        self.reader_peer_yield_seconds = reader_peer_yield_seconds
         self.seed, self.value = fit.seed, recipe["utility_lambda"]
         self.observation = fit.inputs["observation_protocol"]
         self.arm = recipe["arm"]
         self.core_pool = fit.inputs["training_outcomes"]
         self.weak_m0 = Path(self.arm["selected_checkpoint"])
 
-    def weak_fit(self, name: str, config: dict[str, Any]) -> Path:
+    def weak_fit(
+        self, name: str, config: dict[str, Any], *, temporary_recovery: bool = False,
+    ) -> Path:
         folder = self.root / name
         stage = self.fit.matrix["training"]
         weak = stage["w"]
@@ -65,6 +149,8 @@ class PolicyStage:
             ]
             if stage["bf16"]:
                 cmd.append("--bf16")
+            if temporary_recovery:
+                cmd.append("--temporary-recovery")
             if folder.exists():
                 recovery = folder / "recovery.pt"
                 if not recovery.is_file():
@@ -158,6 +244,36 @@ class PolicyStage:
             label=label, cuda=cuda,
         )
 
+    def prepare_reached_cache(self, phase: str, receipt: Path, checkpoint: Path) -> Path:
+        output = self.root / f"{phase}-policy-features.json"
+        existing = read_json(output, {})
+        raw_store = self.arm.get("raw")
+        if existing.get("status") == "FEATURES_PREPARED":
+            expected_raw = str(Path(raw_store).resolve()) if raw_store else None
+            if (existing["collection"] != str(receipt.resolve())
+                    or existing["checkpoint"] != str(checkpoint.resolve())
+                    or existing["raw_feature_store"] != expected_raw
+                    or existing["feature_store"] != str(Path(self.arm["features"]).resolve())):
+                raise ValueError(f"{phase} feature receipt binds a different collection or cache")
+            return output
+        status = self.root / f"{phase}-policy-features-status.json"
+
+        def publish(name: str, **fields: Any) -> None:
+            write_json(status, {"status": name, "pid": os.getpid(), "gpu": self.fit.gpu, **fields})
+
+        worker = OutcomeFits(self.root, self.fit.gpu, self.fit.window, self.fit.matrix,
+                             self.fit.inputs, publish, seed=self.seed)
+        raw = ["--raw-feature-store", raw_store] if raw_store else []
+        worker.command(
+            "tools/run_memory_control_v12_followthrough.py", "prepare-policy-features",
+            "--data", str(self.data), "--collection", str(receipt), "--checkpoint", str(checkpoint),
+            "--feature-store", self.arm["features"], *raw, "--output", str(output),
+            "--device", "cuda:0", "--threads", "2", "--loader-workers", "4",
+            label=f"{phase}-prepare-policy-features",
+        )
+        publish("FEATURES_PREPARED", receipt=str(output))
+        return output
+
     def collect_round(
         self, phase: str, selections: dict[str, Path], prior_outcomes: list[str], seed: int,
     ) -> tuple[str, dict[str, Any]]:
@@ -188,12 +304,13 @@ class PolicyStage:
             raise ValueError(f"{phase} is missing a required reached-state source or registration")
         declaration, statuses, states = branch_state(self.data, outcomes)
         if not declaration.get("sealed") and states < actual:
+            branch_workers = self.p_b_workers if phase == "P-B" else self.branch_workers
             self.build(
                 "prepare-outcomes", "--run-id", outcomes, "--policy-pool", pool,
                 "--state-limit", str(actual), "--seed", str(seed),
                 "--recommendation-selection", str(selections["M0"]),
                 "--recommendation-selection", str(selections["M1"]), "--share-checkpoint-encoder",
-                "--device", "cuda:0", "--branch-workers", str(self.branch_workers),
+                "--device", "cuda:0", "--branch-workers", str(branch_workers),
                 label=phase + "-prepare-policy-outcomes", cuda=True,
             )
             declaration, statuses, states = branch_state(self.data, outcomes)
@@ -204,22 +321,89 @@ class PolicyStage:
         if declaration["comparison_protocol"]["continuation"]["kind"] != "reference-short":
             raise ValueError("Only reference-short measured targets can enter formal P replay")
         if not declaration.get("sealed"):
-            dispatch_outcome_run(
-                self.root, self.data, self.observation, self.fit.publish, run_id=outcomes,
-                share_runs=tuple(prior_outcomes), label=phase, slots=slots,
-                window=self.window, defer=20,
-            )
-            self.build(
-                "score-outcomes", "--run-id", outcomes, "--seal", label=phase + "-score-seal",
-            )
+            checkpoint = Path(selected_candidate(selections["M0"])["checkpoint"])
+            with ThreadPoolExecutor(max_workers=1) as worker:
+                preparation = worker.submit(
+                    self.prepare_reached_cache, phase, receipt_path, checkpoint,
+                )
+                dispatch_outcome_run(
+                    self.root, self.data, self.observation, self.fit.publish, run_id=outcomes,
+                    share_runs=tuple(prior_outcomes), label=phase, slots=slots,
+                    window=self.window, defer=20,
+                    reader_peer_status=self.reader_peer_status,
+                    reader_peer_yield_seconds=self.reader_peer_yield_seconds,
+                )
+                self.build(
+                    "score-outcomes", "--run-id", outcomes, "--seal", label=phase + "-score-seal",
+                )
+                try:
+                    preparation.result()
+                except RuntimeError as error:
+                    self.fit.publish("POLICY_FEATURES_PREPARATION_DEFERRED_TO_FIT",
+                                     phase_name=phase, detail=str(error))
         sealed, final, measured = branch_state(self.data, outcomes)
         if not sealed.get("sealed") or measured != actual or not final.get("ingested"):
             raise ValueError(f"{phase} did not produce sealed measured outcomes")
+        features = self.root / f"{phase}-policy-features.json"
         return outcomes, {
             "policy_collection": str(receipt_path), "new_before_states": measured,
             "branch_slots": slots, "outcome_statuses": final,
             "target_states": target, "source_shortfalls": collection["source_shortfalls"],
+            **({"feature_preparation": str(features)} if features.is_file() else {}),
         }
+
+    def fit_and_read_arms(
+        self, phase: str, previous: dict[str, Path], outcomes: list[str],
+    ) -> tuple[dict[str, Any], dict[str, Path]]:
+        """Overlap one upcoming fit and DEV preparation with the current independent Reader."""
+        overlap = self.overlap_local_preparation
+        local = self.fit
+        if overlap:
+            status = self.root / f"D-{phase}-local-preparation-status.json"
+
+            def publish(event: str, **fields: Any) -> None:
+                write_json(status, {
+                    "status": event, "pid": os.getpid(), "gpu": self.fit.gpu, **fields,
+                })
+
+            local = OutcomeFits(self.root, self.fit.gpu, self.fit.window, self.fit.matrix,
+                                self.fit.inputs, publish, seed=self.seed)
+
+        def prepare(model: str) -> tuple[str, dict[str, Any]]:
+            initial = Path(selected_candidate(previous[model])["checkpoint"])
+            name = f"D-{model}-{phase}-seed{self.seed}"
+            fitted = local.fit(
+                name, self.recipe["objective"], self.arm, initial, stage_name="p",
+                outcome_runs=outcomes, balance_policy=True, temporary_recovery=True,
+            )
+            if overlap:
+                output = local.dispatch(self.root / name / "checkpoint", name, self.value,
+                                        prepare_only=True)
+                local.publish("PREPARED_POLICY_DEV", arm=name, output=str(output))
+            return name, fitted["contract"]
+
+        fits, selections = {}, {}
+        matched_fields = ("eligible_states", "policy_states", "state_exposures_per_epoch", "steps")
+        with (ThreadPoolExecutor(max_workers=1) if overlap else nullcontext()) as worker:
+            pending = worker.submit(prepare, ARCHITECTURES[0]) if worker else None
+            try:
+                for i, model in enumerate(ARCHITECTURES):
+                    name, contract = pending.result() if pending else prepare(model)
+                    if fits and any(contract[key] != fits["M0"][key] for key in matched_fields):
+                        raise ValueError(
+                            "Policy fits do not share their measured pools and exposure"
+                        )
+                    fits[model] = contract
+                    if worker and i + 1 < len(ARCHITECTURES):
+                        pending = worker.submit(prepare, ARCHITECTURES[i + 1])
+                    result = self.fit.dispatch(self.root / name / "checkpoint", name, self.value,
+                                               require_prepared=overlap)
+                    selections[model] = self.root / f"D-{model}-selected-{phase}.json"
+                    freeze_choice(selections[model], select_checkpoint([result]))
+            finally:
+                if pending:
+                    pending.cancel()
+        return fits, selections
 
     def run(self) -> None:
         previous = self.architecture_o()
@@ -235,27 +419,13 @@ class PolicyStage:
                 self.fit.matrix["new_reader_request_slot_limits"]["policy"]
             ):
                 raise ValueError("Policy branch totals exceed the common P allocation")
-            fits, selections = {}, {}
-            for model in ARCHITECTURES:
-                initial = Path(selected_candidate(previous[model])["checkpoint"])
-                name = f"D-{model}-{phase}-seed{self.seed}"
-                fitted = self.fit.fit(
-                    name, self.recipe["objective"], self.arm, initial, stage_name="p",
-                    outcome_runs=prior_outcomes, balance_policy=True,
-                )
-                fits[model] = fitted["contract"]
-                result = self.fit.dispatch(self.root / name / "checkpoint", name, self.value)
-                selections[model] = self.root / f"D-{model}-selected-{phase}.json"
-                freeze_choice(selections[model], select_checkpoint([result]))
+            fits, selections = self.fit_and_read_arms(phase, previous, prior_outcomes)
             ref = fits["M0"]
-            keys = ("eligible_states", "policy_states", "state_exposures_per_epoch", "steps")
-            if any(a[k] != ref[k] for a in fits.values() for k in keys):
-                raise ValueError("Policy fits do not share their measured pools and exposure")
             exposure = ref["state_exposures_per_epoch"]
             ctl = f"D-M0-{phase}-core-replay-seed{self.seed}"
             matched = self.fit.fit(
                 ctl, self.recipe["objective"], self.arm, core_checkpoint, stage_name="p",
-                outcome_runs=self.core_pool, replay_exposures=exposure,
+                outcome_runs=self.core_pool, replay_exposures=exposure, temporary_recovery=True,
             )["contract"]
             replay_fields = (
                 "steps", "epochs", "steps_per_epoch", "state_exposures_per_epoch",
@@ -374,8 +544,14 @@ def run_policy_stage(args: argparse.Namespace) -> None:
                     or inputs.get("status") != "SEALED_OUTCOME_INPUTS_READY"):
                 raise ValueError("Policy comparisons require the selected actual outcome stage")
             runner = OutcomeFits(root, args.gpu, args.window, matrix, inputs, publish)
-            PolicyStage(runner, recipe, args.dataset_config.resolve(strict=True),
-                        args.branch_window, args.workers).run()
+            PolicyStage(
+                runner, recipe, args.dataset_config.resolve(strict=True), args.branch_window,
+                args.workers,
+                overlap_local_preparation=getattr(args, "overlap_local_preparation", False),
+                reader_peer_status=getattr(args, "reader_peer_status", None),
+                reader_peer_yield_seconds=getattr(args, "reader_peer_yield_seconds", 60.0),
+                p_b_workers=getattr(args, "p_b_workers", None),
+            ).run()
             publish("DEV_COMPLETE", selection=str(root / "D-policy-stage-complete.json"))
         except Exception as error:
             publish("STOPPED", error=type(error).__name__, detail=str(error))

@@ -146,12 +146,14 @@ def fit_registered_seeds(args: argparse.Namespace) -> None:
                 for model in ARCHITECTURES:
                     config = read_json(weak[model] / "config.json")
                     prefix = f"E-{model}"
-                    model_w = stage.weak_fit(f"{prefix}-W-seed{seed}", config)
+                    model_w = stage.weak_fit(
+                        f"{prefix}-W-seed{seed}", config, temporary_recovery=True,
+                    )
                     same_training_schedule(model_w, weak[model])
                     weak_models[seed][model] = str(model_w)
                     warm = fit.initialize(model_w, "selected", prefix=prefix + "-O")
                     name = f"{prefix}-O-seed{seed}"
-                    fit.fit(name, objective, arm, warm)
+                    fit.fit(name, objective, arm, warm, temporary_recovery=True)
                     current = frozen_epoch_checkpoint(root / name, stage_o[model]["epoch"])
                     same_training_schedule(current, Path(stage_o[model]["checkpoint"]))
                     if final_stage == "P-B":
@@ -161,6 +163,7 @@ def fit_registered_seeds(args: argparse.Namespace) -> None:
                                 name, objective, arm, current, stage_name="p",
                                 outcome_runs=rounds[phase]["all_training_outcomes"],
                                 balance_policy=True,
+                                temporary_recovery=True,
                             )
                             current = frozen_epoch_checkpoint(root / name, reference["epoch"])
                             same_training_schedule(current, Path(reference["checkpoint"]))

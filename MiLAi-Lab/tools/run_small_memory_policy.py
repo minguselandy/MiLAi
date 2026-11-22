@@ -328,7 +328,8 @@ def train(args: argparse.Namespace) -> None:
             or args.supervision_mode != "weak" or args.outcome_run or args.balance_policy_outcomes
             or args.dev_outcome_run or args.objective != "u0-legacy" or args.numeric_mode != "off"
             or args.source_weighting is not None or args.replay_exposures is not None
-            or args.raw_feature_store is not None or args.freeze_evidence_head):
+            or args.raw_feature_store is not None or args.freeze_evidence_head
+            or getattr(args, "temporary_recovery", False)):
         raise ValueError("Coverage options require the V1.1 SQLite package")
     args.steps = 200 if args.steps is None else args.steps
     declared_windows = None
@@ -1089,6 +1090,8 @@ def main() -> None:
                                   BOUND_VIEW_UNITS_V3],
                          default="control-observation-v1")
     fitting.add_argument("--resume", type=Path)
+    fitting.add_argument("--temporary-recovery", action="store_true",
+                         help="Release rolling recovery after durable coverage completion")
     fitting.add_argument("--initialize-from", type=Path,
                          help="New optimizer/stage from a matching usable starting checkpoint")
     fitting.add_argument("--initialize-from-selection", type=Path)

@@ -11,6 +11,7 @@ import json
 from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from typing import Any
 
 from milai_lab.methods.control_observation import (
@@ -730,12 +731,19 @@ class SmallControlModel:
         import torch
 
         root.mkdir(parents=True, exist_ok=True)
-        (root / "config.json").write_text(json.dumps(asdict(self.config), indent=2))
         adapted = {name for name, p in self.encoder.named_parameters() if p.requires_grad}
-        torch.save({"encoder": {k: v.detach().cpu() for k, v in self.encoder.state_dict().items()
-                                if self.config.adaptation != "lora" or k in adapted}
-                    if self.config.adaptation != "frozen" else None,
-                    "head": self.head.state_dict()}, root / "weights.pt")
+        weights = {
+            "encoder": {k: v.detach().cpu() for k, v in self.encoder.state_dict().items()
+                        if self.config.adaptation != "lora" or k in adapted}
+            if self.config.adaptation != "frozen" else None,
+            "head": self.head.state_dict(),
+        }
+        with TemporaryDirectory(dir=root, prefix=".checkpoint-") as staging:
+            temporary = Path(staging)
+            (temporary / "config.json").write_text(json.dumps(asdict(self.config), indent=2))
+            torch.save(weights, temporary / "weights.pt")
+            (temporary / "weights.pt").replace(root / "weights.pt")
+            (temporary / "config.json").replace(root / "config.json")
 
     @classmethod
     def load(cls, root: Path, *, device: str = "cpu") -> SmallControlModel:

@@ -12,8 +12,10 @@ from collections import Counter, defaultdict, deque
 from collections.abc import Iterator
 from contextlib import closing, nullcontext
 from dataclasses import asdict
+from filecmp import cmp
 from itertools import groupby, islice
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, Any
 
 from milai_lab.datasets.memory_control_outcomes import (
@@ -41,6 +43,76 @@ from training_recovery import (
 
 if TYPE_CHECKING:
     from milai_lab.methods.memory_control_dataset import MemoryControlDataset, StateIndex
+
+
+def compact_completed_training(root: Path) -> None:
+    """Retain each inference checkpoint and release a declared rolling recovery file."""
+    wall, cpu = time.perf_counter(), time.process_time()
+    run = read_json(root / "run.json")
+    coverage = read_json(root / "coverage.json")
+    if (run["status"] != "COMPLETED" or not coverage["full_coverage"]
+            or run.get("recovery_lifetime") != "until_completion"):
+        raise ValueError("Storage release requires a completed fit with temporary recovery")
+    steps = run["contract"]["steps_per_epoch"]
+    epochs = run["contract"]["epochs"]
+    final_step = run["final_step"]
+    if final_step != steps * epochs or final_step != coverage["total_optimizer_updates"]:
+        raise ValueError("Completed storage requires the full declared optimizer schedule")
+    checkpoints = root / "checkpoints"
+    canonical = root / "checkpoint"
+    numbered = checkpoints / f"step-{final_step:06d}"
+    epoch_checkpoints = [checkpoints / f"step-{steps * epoch:06d}"
+                         for epoch in range(1, epochs + 1)]
+    published = [canonical, checkpoints / "initial", *sorted(checkpoints.glob("step-*"))]
+    if not set(epoch_checkpoints) <= set(published) or any(
+        not (path / name).is_file() for path in published for name in ("config.json", "weights.pt")
+    ):
+        raise ValueError("Storage release requires all declared epoch checkpoints")
+
+    terminal = canonical / "weights.pt"
+    snapshot = numbered / "weights.pt"
+    repacked = 0
+    if not terminal.samefile(snapshot) and cmp(terminal, snapshot, shallow=False):
+        before = terminal.stat()
+        try:
+            with TemporaryDirectory(dir=canonical, prefix=".terminal-") as staging:
+                alias = Path(staging) / "weights.pt"
+                os.link(snapshot, alias)
+                alias.replace(terminal)
+            repacked = before.st_blocks * 512 if before.st_nlink == 1 else 0
+        except OSError as error:
+            print(f"Completed weights could not share storage: {error}", flush=True)
+
+    # Keep rolling recovery available until the final receipts and snapshots are durable.
+    paths = [*root.glob("*.json"), *root.glob("*.jsonl")]
+    paths.extend(folder / name for folder in published for name in ("config.json", "weights.pt"))
+    for path in paths:
+        with path.open("rb") as stream:
+            os.fsync(stream.fileno())
+    for directory in [*published, checkpoints, root]:
+        fd = os.open(directory, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+    recovery = root / "recovery.pt"
+    retired = 0
+    if recovery.is_file():
+        info = recovery.stat()
+        recovery.unlink()
+        retired = info.st_blocks * 512 if info.st_nlink == 1 else 0
+    receipt_path = root / "checkpoint-storage.json"
+    prior = read_json(receipt_path, {})
+    write_json(receipt_path, {
+        "status": "COMPLETED_STORAGE_COMPACTED", "final_step": final_step,
+        "retained_epoch_checkpoints": [str(path) for path in epoch_checkpoints],
+        "terminal_weights_shared": terminal.samefile(snapshot),
+        "released_terminal_copy_bytes": prior.get("released_terminal_copy_bytes", 0) + repacked,
+        "released_recovery_bytes": prior.get("released_recovery_bytes", 0) + retired,
+        "wall_seconds_this_invocation": time.perf_counter() - wall,
+        "cpu_seconds_this_invocation": time.process_time() - cpu,
+        "sha_validation": False,
+    })
 
 
 def _group_order(index: list[StateIndex], rng: random.Random) -> Iterator[StateIndex]:
@@ -913,7 +985,14 @@ def train_coverage(
                 "trainable_parameters": sum(p.numel() for p in model.parameters()),
                 "encoder_work": model.counters,
                 "device": str(model.device),
+                **({"recovery_lifetime": "until_completion"}
+                   if getattr(args, "temporary_recovery", False) else {}),
                 **measures,
             },
             measures,
         )
+    if status == "COMPLETED" and getattr(args, "temporary_recovery", False):
+        try:
+            compact_completed_training(args.output)
+        except (OSError, ValueError) as error:
+            print(f"Completed training storage could not be compacted: {error}", flush=True)

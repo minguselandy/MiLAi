@@ -13,7 +13,11 @@ import time
 from pathlib import Path
 from typing import Any
 
-from milai_lab.datasets.memory_control_episode_archive import archive_completed_readout
+from milai_lab.datasets.memory_control_episode_archive import (
+    EPISODE_COMPACTION_REPORT,
+    archive_completed_readout,
+    compact_scored_episode_packets,
+)
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.harness.contextual_artifacts import http_budget_scope
 from milai_lab.harness.http_ownership import HttpOwnershipError
@@ -36,8 +40,11 @@ def run_registered_readout(args: argparse.Namespace) -> None:
     registered_arm = getattr(args, "registered_arm", None)
     inline_readout = getattr(args, "inline_readout", False)
     prepare_only = getattr(args, "prepare_only", False)
+    require_prepared = getattr(args, "require_prepared", False)
     if prepare_only and inline_readout:
         raise ValueError("Local preparation requires the staged readout schedule")
+    if require_prepared and (prepare_only or inline_readout):
+        raise ValueError("Prepared packets require a staged Reader-only invocation")
     held = args.command == "dispatch-held-budget-arm"
     repeated = args.command == "dispatch-dev-repeat-arm"
     scope = ("HELD_BUDGET" if held else "DEV_REPEAT" if repeated
@@ -79,14 +86,17 @@ def run_registered_readout(args: argparse.Namespace) -> None:
     prepare = args.output / "episode-preparation.json"
     with (args.output / ".dev-dispatch.lock").open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        prepared = (not (prepare_only or inline_readout)
+                    and read_json(prepare, {}).get("status") == "PREPARED_EPISODES")
+        if (require_prepared and not prepared
+                and read_json(args.output / "run.json", {}).get("status") != "COMPLETED"):
+            raise ValueError("Reader-only dispatch needs the completed local episode preparation")
         write_json(status, {"status": f"ADMITTED_{scope}_DISPATCH", "pid": os.getpid()})
         dataset = MemoryControlDataset(
             args.data, observation_protocol=arm["observation_protocol"],
             numeric_observation=contract.get("config", {}).get("numeric_mode", "off") != "off",
         )
-        if prepare_only or (
-            not inline_readout and read_json(prepare, {}).get("status") != "PREPARED_EPISODES"
-        ):
+        if prepare_only or (not inline_readout and not require_prepared and not prepared):
             write_json(status, {"status": f"PREPARING_{scope}", "pid": os.getpid()})
             preparation = evaluate_episodes(
                 args.data, args.plan, arm, args.output, device=args.device, prepare_only=True,
@@ -104,7 +114,7 @@ def run_registered_readout(args: argparse.Namespace) -> None:
                     args.data, args.plan, arm, args.output,
                     device=args.device, max_reader_requests=args.window,
                     prepared_dataset=dataset,
-                    inline_readout=inline_readout,
+                    inline_readout=inline_readout, require_prepared=require_prepared,
                 )
             except HttpOwnershipError as error:
                 if str(error) != "HTTP_OWNER_BUSY":
@@ -118,6 +128,18 @@ def run_registered_readout(args: argparse.Namespace) -> None:
             with journal.open("a", encoding="utf-8") as events:
                 events.write(json.dumps(receipt, allow_nan=False) + "\n")
             write_json(status, {"pid": os.getpid(), **receipt})
+            if scope == "CONFIRMATION" and receipt["status"] == "PARTIAL":
+                try:
+                    compaction = compact_scored_episode_packets(args.output)
+                    path = args.output / EPISODE_COMPACTION_REPORT
+                    previous = read_json(path, {})
+                    write_json(path, {
+                        **{key: previous.get(key, 0) + value for key, value in compaction.items()},
+                        "windows": previous.get("windows", 0) + 1,
+                        "sha_validation": False,
+                    })
+                except OSError as error:
+                    print(f"Scored episode packets could not be compacted: {error}", flush=True)
             if receipt["status"] == "COMPLETED":
                 write_json(args.output / "native-summary.json", summarize(args.output))
                 archive = scope in {"CONFIRMATION", "DEV_REPEAT"}
@@ -307,6 +329,8 @@ def main() -> None:
     dispatch.add_argument("--inline-readout", action="store_true")
     dispatch.add_argument("--prepare-only", action="store_true",
                           help="Materialize staged DEV episodes for the registered arm")
+    dispatch.add_argument("--require-prepared", action="store_true",
+                          help="Read already prepared DEV episodes without local model work")
     dispatch.add_argument("--archive-episodes", action="store_true")
     dispatch.add_argument("--weighting-baseline", type=Path)
     dispatch.add_argument("--weighting-selection", type=Path)
@@ -383,13 +407,31 @@ def main() -> None:
     fitting.add_argument("--dev-preparation-gpu", type=int,
                          help="Prepare later objective DEV arms on a second allocated GPU")
     fitting.add_argument("--window", type=int, default=40)
+    features = commands.add_parser("prepare-policy-features")
+    for name in ("data", "collection", "checkpoint", "feature-store", "output"):
+        features.add_argument("--" + name, type=Path, required=True)
+    features.add_argument("--raw-feature-store", type=Path)
+    features.add_argument("--device", default="cpu")
+    features.add_argument("--threads", type=int, default=2)
+    features.add_argument("--loader-workers", type=int, default=4)
+    features.add_argument("--feature-batch-states", type=int, default=32)
     policy = commands.add_parser("run-policy-stage")
     policy.add_argument("--root", type=Path, required=True)
     policy.add_argument("--dataset-config", type=Path, required=True)
     policy.add_argument("--gpu", type=int, required=True)
     policy.add_argument("--workers", type=int, default=4)
+    policy.add_argument("--p-b-workers", type=int,
+                        help="Override the branch preparation worker count for P-B")
     policy.add_argument("--window", type=int, default=40)
     policy.add_argument("--branch-window", type=int, default=80)
+    policy.add_argument("--reader-peer-status", type=Path,
+                        help="Native status receipt of a peer sharing the original Reader lease")
+    policy.add_argument("--reader-peer-yield-seconds", type=float, default=60.0,
+                        help="Bound the total pause when the registered peer is waiting")
+    policy.add_argument(
+        "--overlap-local-preparation", action="store_true",
+        help="Fit and prepare the next arm while an independent Reader reads the current arm",
+    )
     seed_stage = commands.add_parser("fit-registered-seeds")
     seed_stage.add_argument("--root", type=Path, required=True)
     seed_stage.add_argument("--dataset-config", type=Path, required=True)
@@ -449,11 +491,19 @@ def main() -> None:
                 and (args.dev_preparation_gpu < 0 or args.dev_preparation_gpu == args.gpu))):
             raise ValueError("Provide allocated compute and a positive DEV window")
         run_outcome_fits(args)
+    elif args.command == "prepare-policy-features":
+        from memory_control_policy_stage import prepare_policy_features
+
+        if min(args.threads, args.loader_workers, args.feature_batch_states) < 1:
+            raise ValueError("Feature preparation needs positive thread, worker and batch sizes")
+        prepare_policy_features(args)
     elif args.command == "run-policy-stage":
         from memory_control_policy_stage import run_policy_stage
 
         if args.gpu < 0 or min(args.workers, args.window, args.branch_window) < 1:
             raise ValueError("Provide an allocated GPU and positive policy scheduling bounds")
+        if not 0 < args.reader_peer_yield_seconds < float("inf"):
+            raise ValueError("Provide a finite positive Reader peer yield interval")
         run_policy_stage(args)
     elif args.command == "fit-registered-seeds":
         from memory_control_seed_stage import fit_registered_seeds

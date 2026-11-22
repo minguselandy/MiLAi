@@ -9,6 +9,7 @@ from types import SimpleNamespace
 import pytest
 
 from memory_control_coverage import coverage_batches
+from milai_lab.datasets.memory_control_episode_archive import compact_scored_episode_packets
 from milai_lab.datasets.memory_control_outcomes import outcome_supervision, run_protocols
 from milai_lab.datasets.memory_control_revision import REVISION_SCHEMA
 from milai_lab.datasets.memory_control_store import SCHEMA, dumps, packed
@@ -285,14 +286,17 @@ def test_episode_batch_resumes_ready_and_collected_records(
     assert first["status"] == "PARTIAL" and first["prepared_episodes_this_invocation"] == 0
     assert first["reader_requests_this_invocation"] == 1
     assert requests == [43] and scored == [1] and prepared == [1]
+    assert compact_scored_episode_packets(output)["packets_compacted"] == 1
+    assert not result_path.exists()
+    assert result_path.with_suffix(".json.gz").is_file()
 
     for row, status in zip(task_rows[1:], ("reader_completed", "dispatching"), strict=True):
         episode.write_json(output / f"episodes/{row['task_id']}.json", {**row, "status": status})
     busy = True
-    preserved = [p.read_bytes() for p in sorted((output / "episodes").glob("*.json"))]
+    preserved = [p.read_bytes() for p in sorted((output / "episodes").iterdir())]
     audit = episode.evaluate_episodes(data, manifest, arm, output, device="cpu", prepare_only=True)
     assert audit["status"] == "PREPARED_EPISODES" and len(scored) == 1
-    assert preserved == [p.read_bytes() for p in sorted((output / "episodes").glob("*.json"))]
+    assert preserved == [p.read_bytes() for p in sorted((output / "episodes").iterdir())]
     assert episode.read_json(output / "run.json") == first
     last = execute()
     assert last["status"] == "COMPLETED" and last["reader_requests_this_invocation"] == 0

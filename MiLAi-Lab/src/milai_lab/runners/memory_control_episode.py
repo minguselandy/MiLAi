@@ -14,7 +14,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from milai_lab.datasets.memory_control_episode_archive import read_archived_episodes
+from milai_lab.datasets.memory_control_episode_archive import (
+    episode_packet_exists,
+    read_archived_episodes,
+    read_episode_packet,
+)
 from milai_lab.datasets.memory_control_normalize import MUSIQUE
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import DB_NAME, connect, get_meta
@@ -545,6 +549,7 @@ def _prepare_episode_batch(
     device: str,
     limit: int | None,
     prepare_only: bool = False,
+    require_prepared: bool = False,
     known_policy: tuple[MemoryPolicy, SmallControlModel | None] | None = None,
 ) -> tuple[list[tuple[sqlite3.Row, Path]], Counter[str], SmallControlModel | None, int]:
     ready: list[tuple[sqlite3.Row, Path]] = []
@@ -555,7 +560,7 @@ def _prepare_episode_batch(
     for row in population["tasks"]:
         tid = row["task_id"]
         path = episodes / f"{tid}.json"
-        record = read_json(path)
+        record = read_episode_packet(path)
         if record is not None:
             if any(record[k] != row[k] for k in ("task_id", "dataset", "native_group")):
                 raise ValueError("Saved episode identity differs from the registered task")
@@ -579,6 +584,8 @@ def _prepare_episode_batch(
             raise ValueError("Registered task identity or role changed")
         seed = (population["seed"] + tid) % (2**31 - 1)
         if record is None:
+            if require_prepared:
+                raise ValueError(f"Missing prepared episode packet for registered task {tid}")
             if policy is None:
                 policy, model = make_policy(dataset, arm, device)
             record = episode_before_reader(
@@ -651,7 +658,7 @@ def _readout_inline(
                 if limit is not None and len(dispatched) >= limit:
                     break
                 saved = episodes / f"{item['task_id']}.json"
-                if not saved.is_file() and policy is None:
+                if not episode_packet_exists(saved) and policy is None:
                     loading = time.perf_counter()
                     policy = make_policy(dataset, arm, device)
                     policy_load_ms = (time.perf_counter() - loading) * 1000
@@ -708,12 +715,15 @@ def evaluate_episodes(
     prepare_only: bool = False,
     prepared_dataset: MemoryControlDataset | None = None,
     inline_readout: bool = False,
+    require_prepared: bool = False,
 ) -> dict[str, Any]:
     population = read_json(manifest)
     if population["protocol"] != EVALUATION_PROTOCOL:
         raise ValueError("Invalid registered episode protocol")
     if prepare_only and inline_readout:
         raise ValueError("Inline readout is one continuous execution and Reader measurement")
+    if require_prepared and (prepare_only or inline_readout):
+        raise ValueError("Prepared packets require a staged Reader-only invocation")
     if arm["policy"] == "G" and population["role"] != "dev":
         raise ValueError("Gold-guided execution is an isolated development diagnostic")
     if population["role"] == "confirm" and arm not in population["arms"]:
@@ -777,7 +787,7 @@ def evaluate_episodes(
             return receipt
         ready, counts, model, prepared = _prepare_episode_batch(
             dataset, db, population, arm, episodes, device=device, limit=max_reader_requests,
-            prepare_only=prepare_only,
+            prepare_only=prepare_only, require_prepared=require_prepared,
         )
         tasks = population["tasks"]
         if prepare_only:

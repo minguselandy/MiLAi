@@ -151,6 +151,7 @@ class OutcomeFits:
         self, name: str, objective: str, arm: dict[str, Any], initial: Path, *,
         stage_name: str = "o", outcome_runs: list[str] | None = None,
         balance_policy: bool = False, replay_exposures: int | None = None,
+        temporary_recovery: bool = False,
     ) -> dict[str, Any]:
         model = read_json(initial / "config.json")
         representation = (model["object_feature_layout"], model["numeric_mode"])
@@ -179,6 +180,8 @@ class OutcomeFits:
             ]
             if train["bf16"]:
                 cmd.append("--bf16")
+            if temporary_recovery:
+                cmd.append("--temporary-recovery")
             if balance_policy:
                 cmd.append("--balance-policy-outcomes")
             if replay_exposures is not None:
@@ -219,18 +222,23 @@ class OutcomeFits:
 
     def dispatch(
         self, checkpoint: Path, tag: str, value: float | None, *, prepare_only: bool = False,
+        require_prepared: bool = False,
     ) -> Path:
+        if prepare_only and require_prepared:
+            raise ValueError("Prepare or read the registered DEV packets in one invocation")
         output = self.root / (tag + "-DEV")
         if read_json(output / "run.json", {}).get("status") != "COMPLETED":
             utility = ["--utility-lambda", str(value)] if value is not None else []
             mode = "--prepare-only" if prepare_only else "--archive-episodes"
+            staged = ["--require-prepared"] if require_prepared else []
             self.command(
                 "tools/run_memory_control_v12_followthrough.py", "dispatch-dev",
                 "--data", self.inputs["data"], "--plan", str(self.plan),
                 "--checkpoint", str(checkpoint), "--arm-name", tag, "--slots", str(self.slots),
                 *utility, "--window", str(self.window),
-                "--output", str(output), "--device", "cuda:0", mode,
-                label=tag + ("-prepare" if prepare_only else "-reader"),
+                "--output", str(output), "--device", "cpu" if require_prepared else "cuda:0",
+                mode, *staged, label=tag + ("-prepare" if prepare_only else "-reader"),
+                cuda=not require_prepared,
             )
             if prepare_only:
                 return output
