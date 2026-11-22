@@ -1,0 +1,199 @@
+{
+  "experiment": "MiLAi memory control V1.2 PLAN-2",
+  "status": "READY_FOR_REVIEW",
+  "sha_validation": false,
+  "run_root": "/data/milai-experiments/20261119-memory-control-v12",
+  "report_relative_to_lab": "docs/MILAI_MEMORY_CONTROL_V12_PLAN2_FINAL_RESULTS.md",
+  "evidence_relative_to_run_root": {
+    "experiment_matrix": "experiment-matrix.json",
+    "selected_development_checkpoints": "selected-checkpoints.json",
+    "native_job_registrations": "plan2-downstream-jobs.json",
+    "legacy_and_W_baselines": "plan2-baselines.json",
+    "registered_C_and_D_pairs": "O-registered-data.json",
+    "development_gates": "plan2-development-gates-native-readback.json",
+    "policy_exposure_and_final_stage_selection": "D-policy-stage-complete.json",
+    "D_and_P_resources": "plan2-D-P-closed-resource-readback.json",
+    "registered_seed_inputs": "E-three-seed-inputs.json",
+    "primary_plan": "E-confirmation-plan.json",
+    "repeat_plan": "E-confirmation-repeat-plan.json",
+    "registered_power": "E-confirmation-power.json",
+    "native_state": "confirmation-stage-status.json",
+    "native_result": "E-confirmation-results.json",
+    "independent_readback": "plan2-native-confirmation-full-readback.json",
+    "independent_readback_source": "verify-native-confirmation-readback.py",
+    "final_compute_settlement": "plan2-confirmation-final-native-compute-settlement.json",
+    "acceptance_receipt": "plan2-final-local-acceptance-evidence.json"
+  },
+  "executed_source_snapshots": [
+    {
+      "stage": "D",
+      "source_root_relative_to_run_root": "source-94643421/MiLAi-Lab",
+      "review_commit": "1c83c146088210b4c0c490fc8219741f5f2b4cc6"
+    },
+    {
+      "stage": "fit-outcome-objectives",
+      "source_root_relative_to_run_root": "source-f766d944/MiLAi-Lab",
+      "review_commit": "a8d6d46215c9ea02603b7cb51697d331cec4b987"
+    },
+    {
+      "stage": "run-policy-stage",
+      "source_root_relative_to_run_root": "source-7b76d84a/MiLAi-Lab",
+      "review_commit": "493f3389de35c244d0d0d852ac541c2c06e68ec6"
+    },
+    {
+      "stage": "fit-registered-seeds",
+      "source_root_relative_to_run_root": "source-09f06084/MiLAi-Lab",
+      "review_commit": "a4aaff4549f3bbce2087213759241cecf2e8d25b"
+    },
+    {
+      "stage": "run-held-budget-stage",
+      "source_root_relative_to_run_root": "source-2f921753/MiLAi-Lab",
+      "review_commit": "96d163b7fb7ded7047b2fcb3b2c2f9db012ff484"
+    },
+    {
+      "stage": "run-confirmation-stage",
+      "source_root_relative_to_run_root": "source-2d91d00f/MiLAi-Lab",
+      "review_commit": "32e6728ce32bb983dc278fcf53317d19a9acae25"
+    }
+  ],
+  "confirmation_source_assembly": {
+    "base_revision": "b3abbb66",
+    "overlay_revision": "2d91d00f",
+    "overlay_paths_relative_to_lab": [
+      "src/milai_lab/runners/memory_control_confirmation.py",
+      "tests/unit/test_memory_control_v12.py"
+    ],
+    "original_composite_review_commit": "32e6728ce32bb983dc278fcf53317d19a9acae25"
+  },
+  "recipe": {
+    "source_relative_to_run_root": "E-frozen-seed11-recipe.json",
+    "main_architecture": "M0",
+    "stage": "O",
+    "objective": "u0-reset",
+    "numeric_mode": "missing",
+    "feature_layout": "dual_semantic_v2",
+    "utility_lambda": 0.0,
+    "registered_training_seeds": [
+      11,
+      29,
+      47
+    ],
+    "outcome_runs": [
+      "v12-core-shared-seed11",
+      "v12-delta-pairs-seed11"
+    ]
+  },
+  "development": {
+    "distinct_C_union_D_states": 24000,
+    "distinct_P_states": 12000,
+    "formal_conditions_including_W": 34
+  },
+  "confirmation": {
+    "status": "CONFIRM_COMPLETE",
+    "native_coordinator_pid": 826277,
+    "primary_questions": 1500,
+    "repeat_questions": 150,
+    "arms": [
+      {
+        "name": "M0-seed11",
+        "seed": 11,
+        "checkpoint": "C-M0-O-u0-reset-seed11/checkpoint"
+      },
+      {
+        "name": "M1-seed11",
+        "seed": 11,
+        "checkpoint": "D-M1-O-seed11/checkpoint"
+      },
+      {
+        "name": "wide-M0-seed11",
+        "seed": 11,
+        "checkpoint": "D-wide-M0-O-seed11/checkpoint"
+      },
+      {
+        "name": "M0-W-seed11",
+        "seed": 11,
+        "checkpoint": "B4-M0-W-missing-seed11/checkpoint"
+      },
+      {
+        "name": "M0-seed29",
+        "seed": 29,
+        "checkpoint": "E-M0-O-seed29/checkpoint"
+      },
+      {
+        "name": "M1-seed29",
+        "seed": 29,
+        "checkpoint": "E-M1-O-seed29/checkpoint"
+      },
+      {
+        "name": "wide-M0-seed29",
+        "seed": 29,
+        "checkpoint": "E-wide-M0-O-seed29/checkpoint"
+      },
+      {
+        "name": "M0-W-seed29",
+        "seed": 29,
+        "checkpoint": "E-M0-W-seed29/checkpoint"
+      },
+      {
+        "name": "M0-seed47",
+        "seed": 47,
+        "checkpoint": "E-M0-O-seed47/checkpoint"
+      },
+      {
+        "name": "M1-seed47",
+        "seed": 47,
+        "checkpoint": "E-M1-O-seed47/checkpoint"
+      },
+      {
+        "name": "wide-M0-seed47",
+        "seed": 47,
+        "checkpoint": "E-wide-M0-O-seed47/checkpoint"
+      },
+      {
+        "name": "M0-W-seed47",
+        "seed": 47,
+        "checkpoint": "E-M0-W-seed47/checkpoint"
+      },
+      {
+        "name": "B*",
+        "policy": "B1"
+      }
+    ],
+    "paid_reader_requests": {
+      "primary": 19500,
+      "repeat": 1950
+    },
+    "repeat_bindings": {
+      "same_payload_new_seed": 1950
+    },
+    "modeled_joint_power": {
+      "registered": 0.13,
+      "hypothetical_full_fresh_pool": 0.205
+    },
+    "formal_conclusions": {
+      "training_supported": "NOT_ESTABLISHED",
+      "architecture_supported": "NOT_ESTABLISHED",
+      "reader_input_efficiency_supported": "NOT_ESTABLISHED",
+      "acceleration_supported": "NOT_ESTABLISHED"
+    }
+  },
+  "review_validation": {
+    "production_source_and_config_comparison": "Literal file content against each executed source directory",
+    "test_setup": "The b3abbb66 V1.2 test file with the deployed overlay capacity regression and its required imports. The original overlay test file is preserved in the confirmation snapshot commit.",
+    "pytest_suites_relative_to_lab": [
+      "tests/unit/test_memory_control_v12.py",
+      "tests/unit/test_literal_training_recovery.py",
+      "tests/unit/test_native_reached_branches.py",
+      "tests/unit/test_native_reference_qa.py",
+      "tests/unit/test_success_cost_loss.py"
+    ],
+    "pytest_passed": 61,
+    "cli_help_checked_relative_to_lab": [
+      "tools/build_memory_control_dataset.py",
+      "tools/run_small_memory_policy.py",
+      "tools/run_memory_control_v11_followthrough.py",
+      "tools/run_memory_control_v12_followthrough.py",
+      "tools/report_memory_control_plan2_baselines.py"
+    ]
+  }
+}

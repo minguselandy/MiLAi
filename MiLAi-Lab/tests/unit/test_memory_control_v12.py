@@ -12,7 +12,6 @@ import pytest
 from tokenizers import Tokenizer, models, pre_tokenizers
 
 from memory_control_coverage import (
-    compact_completed_training,
     exposure_source_weights,
     record_action_calibration,
     source_weights,
@@ -40,7 +39,6 @@ from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.memory_control_dataset import StateIndex
 from milai_lab.methods.memory_object_policy import build_object_head, object_semantic_texts
 from milai_lab.methods.small_control_learning import paired_state_losses
-from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
 from milai_lab.methods.small_memory_policy import PolicyScores, SmallMemoryPolicy
 from milai_lab.runners import memory_control_outcome_run
 from milai_lab.runners.memory_control_common_menu import _without_budget_inputs
@@ -673,7 +671,6 @@ def test_confirmation_capacity_excludes_the_whole_group_after_partial_compaction
     assert packet.with_suffix(".json.gz").is_file() and not packet.exists()
     assert confirmation_capacity(data, 6, 11, [historical]) == before
 
-
 def test_online_sampling_distinguishes_model_votes_from_coverage() -> None:
     branches = ["handoff", "read_2", "context_2"]
     measured = {"handoff", "read_2"}
@@ -768,208 +765,6 @@ def test_confirmation_keeps_the_accepted_window_if_compaction_fails(
     ))
     assert attempts == [output]
     assert read_json(output / "dispatch-invocations.jsonl") == window
-
-
-@pytest.mark.parametrize(
-    ("waiting", "holder_at", "changes_at", "seconds", "reason"),
-    [
-        (False, None, None, 20, None),
-        (True, 8, None, 20, "READER_LEASE_ACQUIRED"),
-        (True, 42, None, 42, "READER_LEASE_ACQUIRED"),
-        (True, None, None, 60, "YIELD_LIMIT_REACHED"),
-        (True, None, 35, 35, "PEER_CHANGED_OR_ENDED"),
-    ],
-)
-def test_reader_yield_preserves_default_pause_and_bounds_a_waiting_peers_turn(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, waiting: bool, holder_at: int | None,
-    changes_at: int | None, seconds: int, reason: str | None,
-) -> None:
-    import memory_control_outcome_stage as stage
-
-    elapsed = 0.0
-
-    def advance(delay: float) -> None:
-        nonlocal elapsed
-        elapsed += delay
-
-    def state(_path):
-        if not waiting or (changes_at is not None and elapsed >= changes_at):
-            return None
-        return (11, 222, "native-readout"), "WAITING_FOR_READER" if elapsed < 30 else "RUNNING"
-
-    monkeypatch.setattr(stage.time, "monotonic", lambda: elapsed)
-    monkeypatch.setattr(stage.time, "sleep", advance)
-    monkeypatch.setattr(stage, "reader_peer_state", state)
-    monkeypatch.setattr(
-        stage, "observed_reader_holder",
-        lambda _path: 12 if holder_at is not None and elapsed >= holder_at else None,
-    )
-    result = stage.wait_for_reader_turn(20, tmp_path / "peer.json", 60, tmp_path / "lease")
-    assert elapsed == seconds
-    if reason is None:
-        assert result is None
-    else:
-        assert result is not None and result["status"] == reason and result["peer_pid"] == 11
-        assert result["extra_yield_seconds"] == seconds - 20
-        assert result["observed_reader_holder_pid"] == (12 if holder_at is not None else None)
-
-
-def test_observed_reader_holder_reads_the_existing_kernel_lease(tmp_path: Path) -> None:
-    import fcntl
-    import os
-
-    from memory_control_outcome_stage import observed_reader_holder
-
-    path = tmp_path / "test-lease"
-    with path.open("a") as lease:
-        fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        assert observed_reader_holder(path) == os.getpid()
-    assert observed_reader_holder(path) is None
-
-
-def test_prepared_episode_reader_refuses_missing_local_packet(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    from milai_lab.runners import memory_control_episode
-
-    def unexpected_model(*_args, **_kwargs):
-        pytest.fail("A Reader-only window attempted local model work")
-
-    monkeypatch.setattr(memory_control_episode, "make_policy", unexpected_model)
-    tasks = [{"task_id": tid, "dataset": "qasper", "native_group": "one"} for tid in (1, 2)]
-    population = {"tasks": tasks, "role": "dev", "seed": 31}
-    with closing(sqlite3.connect(":memory:")) as db:
-        db.row_factory = sqlite3.Row
-        db.execute("CREATE TABLE experiment_tasks (id, dataset, native_group, experiment_role)")
-        db.executemany(
-            "INSERT INTO experiment_tasks VALUES (?, 'qasper', 'one', 'dev')", [(1,), (2,)])
-        write_json(tmp_path / "1.json", {
-            **tasks[0], "status": "ready", "reader_wire": {"seed": 32},
-        })
-        with pytest.raises(ValueError, match=r"Missing prepared episode packet.*task 2"):
-            memory_control_episode._prepare_episode_batch(
-                None, db, population, {}, tmp_path, device="cpu", limit=2, require_prepared=True,
-            )
-        assert not (tmp_path / "2.json").exists()
-        write_json(tmp_path / "2.json", {
-            **tasks[1], "status": "ready", "reader_wire": {"seed": 33},
-        })
-        ready, counts, model, prepared = memory_control_episode._prepare_episode_batch(
-            None, db, population, {}, tmp_path, device="cpu", limit=2, require_prepared=True,
-        )
-    assert [path.name for _, path in ready] == ["1.json", "2.json"]
-    assert not counts and model is None and prepared == 0
-
-
-@pytest.mark.parametrize(("overlap", "mismatch"), [(False, False), (True, False), (True, True)])
-def test_policy_stage_only_overlaps_the_next_local_arm(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, overlap: bool, mismatch: bool,
-) -> None:
-    from threading import Event
-
-    import memory_control_policy_stage as policy
-
-    labels = [f"D-{model}-P-A-seed11" for model in policy.ARCHITECTURES]
-    started = {tag: Event() for tag in labels}
-    staged, readouts = [], []
-    prior = {model: tmp_path / model for model in policy.ARCHITECTURES}
-    monkeypatch.setattr(policy, "selected_candidate", lambda path: {"checkpoint": str(path)})
-    monkeypatch.setattr(policy, "select_checkpoint", lambda paths: {"dev_run": str(paths[0])})
-
-    class Fits:
-        root, gpu, window, seed = tmp_path, 3, 40, 11
-
-        def __init__(self, *_args, **_kwargs):
-            self.matrix = {}
-            self.inputs = {"data": str(tmp_path / "data"), "observation_protocol": "metadata_v1",
-                           "training_outcomes": ["R"]}
-            self.publish = lambda *_args, **_kwargs: None
-
-        def fit(self, name, *args, **kwargs):
-            assert kwargs["outcome_runs"] == ["R", "P-A"]
-            assert kwargs["balance_policy"] and kwargs["temporary_recovery"]
-            started[name].set()
-            return {"contract": {
-                "eligible_states": [7, 8], "policy_states": [8], "state_exposures_per_epoch": 2,
-                "steps": 3 if mismatch and name == labels[1] else 2,
-            }}
-
-        def dispatch(self, checkpoint, name, value, *, prepare_only=False, require_prepared=False):
-            assert checkpoint == self.root / name / "checkpoint" and value == 0.0
-            if prepare_only:
-                staged.append(name)
-            else:
-                assert require_prepared == overlap
-                i = labels.index(name)
-                if overlap:
-                    assert name in staged
-                    if i + 1 < len(labels):
-                        assert started[labels[i + 1]].wait(5)
-                if i == 0:
-                    assert started[labels[1]].is_set() == overlap
-                    assert not started[labels[2]].is_set()
-                readouts.append(name)
-            return self.root / (name + "-DEV")
-
-    monkeypatch.setattr(policy, "OutcomeFits", Fits)
-    stage = policy.PolicyStage(
-        Fits(), {"utility_lambda": 0.0, "objective": "u0-reset",
-                 "arm": {"selected_checkpoint": str(tmp_path / "W")}},
-        tmp_path / "config.json", 120, 4, overlap_local_preparation=overlap,
-    )
-    if mismatch:
-        with pytest.raises(ValueError, match="do not share their measured pools and exposure"):
-            stage.fit_and_read_arms("P-A", prior, ["R", "P-A"])
-        assert readouts == labels[:1] and not started[labels[2]].is_set()
-    else:
-        fits, selections = stage.fit_and_read_arms("P-A", prior, ["R", "P-A"])
-        assert tuple(fits) == tuple(selections) == policy.ARCHITECTURES
-        assert readouts == labels and staged == (labels if overlap else [])
-        assert all(path.is_file() for path in selections.values())
-
-
-def test_completed_training_preserves_epoch_weights_and_releases_rolling_recovery(
-    tmp_path: Path,
-) -> None:
-    torch = pytest.importorskip("torch")
-    model = SimpleNamespace(
-        config=SmallControlConfig("sentence", "already-initialized"),
-        encoder=torch.nn.Linear(1, 1),
-        head=torch.nn.Linear(1, 1),
-    )
-    steps = tmp_path / "checkpoints"
-    first, last = steps / "step-000002", steps / "step-000004"
-    canonical = tmp_path / "checkpoint"
-    for path in (steps / "initial", first, last, canonical):
-        SmallControlModel.save(model, path)
-    original = (last / "weights.pt").read_bytes()
-    recovery = tmp_path / "recovery.pt"
-    recovery.write_bytes(b"rolling optimizer state")
-    run = {
-        "status": "INTERRUPTED", "final_step": 4, "recovery_lifetime": "until_completion",
-        "contract": {"steps_per_epoch": 2, "epochs": 2},
-    }
-    write_json(tmp_path / "run.json", run)
-    write_json(tmp_path / "coverage.json", {"full_coverage": True, "total_optimizer_updates": 4})
-    with pytest.raises(ValueError, match="requires a completed fit"):
-        compact_completed_training(tmp_path)
-    assert recovery.is_file()
-
-    run["status"] = "COMPLETED"
-    write_json(tmp_path / "run.json", run)
-    compact_completed_training(tmp_path)
-    assert not recovery.exists()
-    assert (canonical / "weights.pt").samefile(last / "weights.pt")
-    receipt = read_json(tmp_path / "checkpoint-storage.json")
-    assert receipt["retained_epoch_checkpoints"] == [str(first), str(last)]
-    assert receipt["released_recovery_bytes"] > 0
-    assert receipt["released_terminal_copy_bytes"] > 0
-
-    with torch.no_grad():
-        model.head.weight.add_(1)
-    SmallControlModel.save(model, canonical)
-    assert (last / "weights.pt").read_bytes() == original
-    assert (canonical / "weights.pt").read_bytes() != original
 
 
 def test_confirmation_quality_support_does_not_impute_missing_cost(
