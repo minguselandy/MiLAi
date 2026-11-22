@@ -13,6 +13,7 @@ from pathlib import Path
 from statistics import fmean
 from typing import Any
 
+from milai_lab.datasets.memory_control_episode_archive import read_archived_episodes
 from milai_lab.datasets.memory_control_normalize import MUSIQUE
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import connect, get_meta
@@ -234,6 +235,10 @@ def evidence_report(
     expected = "prepared or terminal" if include_prepared_dev else "terminal"
     wall, cpu = time.perf_counter(), time.process_time()
     reference = next(iter(names.values()))
+    archives = {
+        root: records for root in roots
+        if (records := read_archived_episodes(root, population["tasks"])) is not None
+    }
     with closing(connect(data)) as db:
         if population["dataset_run_id"] != get_meta(db, "run_id"):
             raise ValueError("Episode cohort belongs to another dataset release")
@@ -256,7 +261,19 @@ def evidence_report(
             evidence = evidence_for(source, gold, pool)
             observed = {}
             for root, name in names.items():
-                record = read_json(root / "episodes" / f"{tid}.json")
+                if root in archives:
+                    record = archives[root][tid]
+                else:
+                    try:
+                        record = read_json(root / "episodes" / f"{tid}.json")
+                    except FileNotFoundError:
+                        record = None
+                    if record is None:
+                        # A completed run can publish its archive during this audit.
+                        records = read_archived_episodes(root, population["tasks"])
+                        if records is not None:
+                            archives[root] = records
+                            record = records[tid]
                 if not record or record["status"] not in allowed or (
                     record["task_id"], record["dataset"], record["native_group"]
                 ) != (tid, source, group):

@@ -71,7 +71,8 @@ def outcome_union(data: Path, runs: tuple[str, str]) -> dict[str, Any]:
             """, runs)],
             "distinct_scored_state_actions": db.execute("""
                 SELECT count(*) FROM (SELECT DISTINCT state_id,action_id FROM action_outcomes
-                WHERE run_id IN (?,?) AND execution_status='ingested' AND training_quality IS NOT NULL)
+                WHERE run_id IN (?,?) AND execution_status='ingested'
+                  AND training_quality IS NOT NULL)
             """, runs).fetchone()[0],
             "new_scored_state_actions_in_D": db.execute("""
                 SELECT count(*) FROM (
@@ -224,7 +225,9 @@ def run_outcome_stage(args: argparse.Namespace) -> None:
             if selected["phase"] != "B4" or any(a["observation"] != observation for a in arms):
                 raise ValueError("The selected W arms do not match the replayed before protocol")
             legacy_proposals = root / "D-train-online-proposals.json"
-            proposals = root / "D-ranked-train-proposals.json" if args.ranked_delta else legacy_proposals
+            proposals = (
+                root / "D-ranked-train-proposals.json" if args.ranked_delta else legacy_proposals
+            )
             branch_plan = root / "D-incremental-branch-plan.json"
             quotas = root / "D-source-targets.json"
             freeze_choice(quotas, targets["incremental"])
@@ -237,20 +240,23 @@ def run_outcome_stage(args: argparse.Namespace) -> None:
                     *protocol_flags,
                 ]
                 if args.ranked_delta:
-                    prior = (await_adopted_proposals(legacy_proposals, args.adopt_proposal_worker, publish)
+                    prior = (await_adopted_proposals(
+                                 legacy_proposals, args.adopt_proposal_worker, publish,
+                             )
                              if args.adopt_proposal_worker
                              else legacy_proposals if legacy_proposals.is_file() else None)
                     flags.extend((
                         "--ranked-source-targets", str(quotas),
-                        "--feature-store", arms[0]["features"], "--raw-feature-store", arms[0]["raw"],
+                        "--feature-store", arms[0]["features"],
+                        "--raw-feature-store", arms[0]["raw"],
                         "--progress-output", str(root / "D-ranked-proposal-progress.json"),
                     ))
                     if prior is not None:
                         flags.extend(("--prior-proposals", str(prior)))
                 else:
                     flags.extend(("--states-per-source", str(max(targets["incremental"].values()))))
-                build("propose-train-actions", flags,
-                      "D-ranked-proposals" if args.ranked_delta else "D-online-proposals", cuda=True)
+                step = "D-ranked-proposals" if args.ranked_delta else "D-online-proposals"
+                build("propose-train-actions", flags, step, cuda=True)
             if not branch_plan.exists():
                 build("lock-branch-plan", [
                     "--core-run", CORE, "--kind", "incremental_pair", "--output", str(branch_plan),
@@ -260,10 +266,13 @@ def run_outcome_stage(args: argparse.Namespace) -> None:
                 ], "D-freeze-branch-plan")
             planned = read_json(branch_plan)
             slots, rows = planned["request_slots"], planned["distinct_before_states"]
+            incorrect_ranked = args.ranked_delta and planned.get("proposal_protocol") != (
+                RANKED_PROPOSALS
+            )
             if (planned["core_run"] != CORE or planned["source_targets"] != targets["incremental"]
                     or planned["observation_protocol"] != observation or planned["seed"] != seed
                     or not 1 <= slots <= cap or rows > sum(targets["incremental"].values())
-                    or (args.ranked_delta and planned.get("proposal_protocol") != RANKED_PROPOSALS)):
+                    or incorrect_ranked):
                 raise ValueError("The registered increment plan differs or exceeds its slots")
             delta, statuses, states = branch_state(data, DELTA)
             if not delta.get("sealed"):

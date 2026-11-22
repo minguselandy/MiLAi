@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import random
 import sqlite3
 import time
@@ -10,12 +11,14 @@ from collections import Counter, defaultdict
 from collections.abc import Iterable, Iterator
 from contextlib import closing
 from dataclasses import asdict
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE
+from milai_lab.datasets.memory_control_outcomes import run_protocols
 from milai_lab.datasets.memory_control_report import write_json
-from milai_lab.datasets.memory_control_store import connect, dumps, packed
+from milai_lab.datasets.memory_control_store import connect, dumps, packed, unpack
 from milai_lab.methods.dataset_control_states import evidence_for, plan_state, task_annotation
 from milai_lab.methods.dataset_revision_states import Variant, diagnostics, write_variant
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, run_memory_control
@@ -162,6 +165,7 @@ def collect(
     balance_sources: bool = False,
     utility_lambda: float | None = None,
     rotate_train_budgets: bool = False,
+    exclude_outcome_runs: tuple[str, ...] = (),
 ) -> dict[str, Any]:
     if target_states <= 0 or (task_limit is not None and task_limit <= 0):
         raise ValueError("Collection counts must be positive")
@@ -174,8 +178,8 @@ def collect(
     if revision is None:
         raise ValueError("Policy state aggregation requires V1.1")
     v12 = dataset.control_release is not None
-    if rotate_train_budgets and not v12:
-        raise ValueError("Native-group TRAIN budget rotation requires the V1.2 release")
+    if (rotate_train_budgets or exclude_outcome_runs) and not v12:
+        raise ValueError("Registered TRAIN budget rotation and exclusions require V1.2")
     arms = stopped_checkpoints(
         paths, observation=dataset.observation_protocol,
         dataset_run_id=dataset.run_id if v12 else None, utility_lambda=utility_lambda,
@@ -195,6 +199,17 @@ def collect(
     wall, cpu = time.perf_counter(), time.process_time()
     with closing(connect(dataset.path, writable=True)) as db:
         db.executescript(SCHEMA)
+        excluded_ids: set[int] = set()
+        if exclude_outcome_runs:
+            run_protocols(db, exclude_outcome_runs, dataset.observation_protocol)
+            declaration["excluded_outcome_runs"] = list(exclude_outcome_runs)
+            excluded_ids.update(sid for (sid,) in db.execute("""
+                SELECT DISTINCT state_id FROM action_outcomes
+                WHERE run_id IN (SELECT value FROM json_each(?))
+            """, (dumps(exclude_outcome_runs),)))
+            excluded_ids.update(sid for (sid,) in db.execute(
+                "SELECT state_id FROM policy_state_visits WHERE run_id=?", (run_id,),
+            ))
         budgets = {}
         if rotate_train_budgets:
             budgets = inherited_budget_rotation(db, revision, seed)
@@ -306,11 +321,13 @@ def collect(
                         raise ValueError(
                             "Policy collection replay changed its actual decision input"
                         )
-                    duplicate = db.execute(
+                    duplicates = db.execute(
                         """
-                        SELECT 1 FROM states s JOIN state_variants v ON v.state_id=s.id
+                        SELECT s.id,s.actions,v.action_feasibility
+                        FROM states s JOIN state_variants v ON v.state_id=s.id
                         WHERE s.task_id=? AND v.material_budget=? AND s.control_steps=?
                           AND s.prefix=? AND s.candidates=? AND (? OR v.observation_protocol=?)
+                        ORDER BY s.id
                     """,
                         (
                             tid,
@@ -321,29 +338,40 @@ def collect(
                             v12,
                             revision["observation_protocol"],
                         ),
-                    ).fetchone()
-                    if duplicate is None:
-                        planned = plan_state(
-                            task,
-                            fresh,
-                            raw,
-                            evidence,
-                            steps,
-                            "policy_reached",
-                            "policy_reached",
-                            dataset.tokenizers["encoder"]["maximum_memory_objects"],
-                        )
-                        feature = Variant(
-                            planned,
-                            None,
-                            packed(exact),
-                            packed(diagnostics(fresh, raw, evidence, exact)),
-                        )
-                        sid = write_variant(db, feature, budget, revision)
+                    ).fetchall()
+                    existing = duplicates[0] if duplicates else None
+                    revisit = (next((r for r in duplicates if r["id"] in excluded_ids), None)
+                               if exclude_outcome_runs else existing)
+                    if exclude_outcome_runs and revisit is not None:
+                        result.setdefault("revisited_before", []).append({
+                            "state_id": revisit["id"], "online_step": event["step"],
+                            "selected": event["selected"],
+                        })
+                    if revisit is None:
+                        if existing is not None:
+                            if (unpack(existing["actions"]) != [asdict(a) for a in raw]
+                                    or unpack(existing["action_feasibility"]) !=
+                                    [list(pair) for pair in exact]):
+                                raise ValueError("Existing before has a different action binding")
+                            sid = existing["id"]
+                            result.setdefault("existing_snapshot_adopted", []).append(sid)
+                        else:
+                            planned = plan_state(
+                                task, fresh, raw, evidence, steps, "policy_reached",
+                                "policy_reached",
+                                dataset.tokenizers["encoder"]["maximum_memory_objects"],
+                            )
+                            feature = Variant(
+                                planned, None, packed(exact),
+                                packed(diagnostics(fresh, raw, evidence, exact)),
+                            )
+                            sid = write_variant(db, feature, budget, revision)
                         db.execute(
                             "INSERT INTO policy_state_visits VALUES (?,?,?,?)",
                             (run_id, sid, source, event["step"]),
                         )
+                        if exclude_outcome_runs:
+                            excluded_ids.add(sid)
                         newly_added[source] += 1
                         by_source[dataset_name] += 1
                         states += 1
@@ -361,6 +389,13 @@ def collect(
                     (run_id, tid, source, packed(result)),
                 )
             sampled += 1
+            if exclude_outcome_runs and sampled % 20 == 0:
+                write_json(output.with_name(output.stem + "-progress.json"), {
+                    "pid": os.getpid(), "observed_at": datetime.now(UTC).isoformat(),
+                    "visited_states": states, "target": target_states, "by_source": by_source,
+                    "new_task_trajectories": sampled, "wall_seconds": time.perf_counter() - wall,
+                    "sha_validation": False,
+                })
         by_source_policy = [
             dict(row) for row in db.execute("""
                 SELECT t.dataset,v.source_policy,count(*) AS states,
@@ -383,6 +418,16 @@ def collect(
                 GROUP BY t.dataset,x.material_budget ORDER BY t.dataset,x.material_budget
             """, (run_id,))
         ]
+        revisits: Counter[str] = Counter()
+        adopted: Counter[str] = Counter()
+        if exclude_outcome_runs:
+            for source, body in db.execute("""
+                SELECT t.dataset,c.trajectory FROM policy_collection_tasks c
+                JOIN experiment_tasks t ON t.id=c.task_id WHERE c.run_id=?
+            """, (run_id,)):
+                trajectory = unpack(body)
+                revisits[source] += len(trajectory.get("revisited_before", ()))
+                adopted[source] += len(trajectory.get("existing_snapshot_adopted", ()))
     receipt = {
         "run_id": run_id,
         "status": "COMPLETE" if states == target_states else "PARTIAL",
@@ -394,6 +439,14 @@ def collect(
         "cumulative_episode_attempts_by_policy": attempted,
         "cumulative_states_by_source_budget": source_budgets,
         **({"actual_states_by_source": dict(by_source)} if v12 else {}),
+        **({
+            "source_shortfalls": {s: count - by_source[s] for s, count in
+                                  (source_targets or {}).items()},
+            "exhausted_before_target": states < target_states and task_limit is None,
+            "revisits_to_excluded_pools_by_source": dict(revisits),
+            "new_pool_members_using_existing_snapshots": dict(adopted),
+            "sha_validation": False,
+        } if exclude_outcome_runs else {}),
         "reader_requests": 0,
         "optimizer_updates": 0,
         "wall_seconds": time.perf_counter() - wall,

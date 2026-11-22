@@ -43,7 +43,8 @@ def same_training_schedule(candidate: Path, reference: Path) -> None:
         "config", "source_weighting", "source_weights", "policy_states",
         "supervision_mode", "objective", "epochs", "steps_per_epoch", "steps",
         "batch_states", "microbatch_states", "learning_rate", "optimizer",
-        "state_exposures_per_epoch", "sampling",
+        "state_exposures_per_epoch", "sampling", "replay_weighting", "replay_required_sources",
+        "frozen_evidence_head",
     )
     if any(r["status"] != "COMPLETED" for r in train) or any(
         train[0]["contract"].get(k) != train[1]["contract"].get(k) for k in keys
@@ -70,9 +71,10 @@ def fit_registered_seeds(args: argparse.Namespace) -> None:
                 or matrix["sha_validation"] is not False
             ):
                 raise ValueError("Additional seeds differ from the frozen DEV reservation")
-            freeze_choice(root / "seed-stage-registration.json", {
+            freeze_choice(root / "seed-stage-plan2-registration.json", {
                 "seeds": seeds, "new_dev_positions": 7 * allocation["positions_per_condition"],
-                "main_architecture": "M0", "gpu": args.gpu, "sha_validation": False,
+                "main_architecture_from": "frozen_seed11_development",
+                "gpu": args.gpu, "sha_validation": False,
             })
             finished = wait_json_dependency(
                 root / "D-policy-stage-complete.json", root / "policy-stage-status.json",
@@ -87,7 +89,11 @@ def fit_registered_seeds(args: argparse.Namespace) -> None:
                 raise ValueError("Additional seeds differ from the selected policy/outcome recipe")
             rounds = finished["rounds"]
             value, objective = recipe["utility_lambda"], recipe["objective"]
-            arm = inputs["selected"]
+            arm = recipe["arm"]
+            primary = finished["primary_model_selection"]["architecture"]
+            final_stage = finished["final_stage"]
+            if primary not in ARCHITECTURES or final_stage not in {"O", "P-B"}:
+                raise ValueError("Seed reproduction needs a common frozen final stage and main arm")
             weak: dict[str, Path] = {}
             stage_o, stage_a, stage_b = {}, {}, {}
             for model in ARCHITECTURES:
@@ -100,39 +106,55 @@ def fit_registered_seeds(args: argparse.Namespace) -> None:
                     selected_candidate(Path(rounds[stage]["selected_checkpoints"][model]))
                     for stage in ("P-A", "P-B")
                 ]
+            base_fit = OutcomeFits(root, args.gpu, args.window, matrix, inputs, publish, seed=11)
+            initial_origin = training_receipt(weak["M0"]).parent / "checkpoints/initial"
+            matched = base_fit.initialize(
+                initial_origin, "pre-W", prefix="E-M0", export_initial=True,
+            )
+            warm = read_json(training_receipt(Path(stage_o["M0"]["checkpoint"])))[
+                "contract"
+            ]["initialize_from"]
+            verify_shared_fresh_outputs(Path(warm), matched)
+            initial_dev = base_fit.dispatch(matched, "E-M0-matched-initialization-seed11", value)
             recipe_path = root / "E-frozen-seed11-recipe.json"
             freeze_choice(recipe_path, {
+                "status": "RECIPE_FROZEN",
                 "weak": {k: str(v) for k, v in weak.items()},
                 "outcome": stage_o, "policy_a": stage_a, "policy_b": stage_b,
                 "policy_a_outcomes": rounds["P-A"]["all_training_outcomes"],
                 "policy_b_outcomes": rounds["P-B"]["all_training_outcomes"],
-                "objective": objective, "utility_lambda": value, "main_architecture": "M0",
+                "objective": objective, "utility_lambda": value, "main_architecture": primary,
+                "final_stage": final_stage, "arm": arm,
+                "training_outcomes": inputs["training_outcomes"],
+                "confirmation_paths": {
+                    "training": "quality_superiority", "architecture": "quality_superiority",
+                    "deployment": "quality_noninferiority_and_input_savings",
+                },
                 "sha_validation": False,
             })
-            initializations: dict[int, str] = {}
-            final_models: dict[int, dict[str, dict[str, Any]]] = {11: stage_b}
-            initial_dev = None
+            final_models: dict[int, dict[str, dict[str, Any]]] = {
+                11: stage_b if final_stage == "P-B" else stage_o,
+            }
+            weak_models: dict[int, dict[str, str]] = {11: {k: str(v) for k, v in weak.items()}}
             for seed in seeds:
+                if seed == 11:
+                    continue
                 fit = OutcomeFits(root, args.gpu, args.window, matrix, inputs, publish, seed=seed)
-                main_w = weak["M0"]
-                main_o = Path(stage_o["M0"]["checkpoint"])
-                if seed != 11:
-                    config_path = args.dataset_config.resolve(strict=True)
-                    stage = PolicyStage(fit, recipe, config_path, 80, 1)
-                    models = {}
-                    for model in ARCHITECTURES:
-                        config = read_json(weak[model] / "config.json")
-                        prefix = f"E-{model}"
-                        model_w = stage.weak_fit(f"{prefix}-W-seed{seed}", config)
-                        same_training_schedule(model_w, weak[model])
-                        warm = fit.initialize(model_w, "selected", prefix=prefix + "-O")
-                        name = f"{prefix}-O-seed{seed}"
-                        fit.fit(name, objective, arm, warm)
-                        model_o = frozen_epoch_checkpoint(root / name, stage_o[model]["epoch"])
-                        same_training_schedule(model_o, Path(stage_o[model]["checkpoint"]))
-                        if model == "M0":
-                            main_w, main_o = model_w, model_o
-                        current = model_o
+                config_path = args.dataset_config.resolve(strict=True)
+                stage = PolicyStage(fit, recipe, config_path, 80, 1)
+                models, weak_models[seed] = {}, {}
+                for model in ARCHITECTURES:
+                    config = read_json(weak[model] / "config.json")
+                    prefix = f"E-{model}"
+                    model_w = stage.weak_fit(f"{prefix}-W-seed{seed}", config)
+                    same_training_schedule(model_w, weak[model])
+                    weak_models[seed][model] = str(model_w)
+                    warm = fit.initialize(model_w, "selected", prefix=prefix + "-O")
+                    name = f"{prefix}-O-seed{seed}"
+                    fit.fit(name, objective, arm, warm)
+                    current = frozen_epoch_checkpoint(root / name, stage_o[model]["epoch"])
+                    same_training_schedule(current, Path(stage_o[model]["checkpoint"]))
+                    if final_stage == "P-B":
                         for phase, reference in (("P-A", stage_a[model]), ("P-B", stage_b[model])):
                             name = f"{prefix}-{phase}-seed{seed}"
                             fit.fit(
@@ -142,27 +164,22 @@ def fit_registered_seeds(args: argparse.Namespace) -> None:
                             )
                             current = frozen_epoch_checkpoint(root / name, reference["epoch"])
                             same_training_schedule(current, Path(reference["checkpoint"]))
-                        measured = fit.dispatch(current, name, value)
-                        models[model] = {
-                            "checkpoint": str(current), "dev_run": str(measured), "seed": seed,
-                        }
-                    final_models[seed] = models
-                origin = training_receipt(main_w).parent / "checkpoints/initial"
-                matched = fit.initialize(origin, "pre-W", prefix="E-M0", export_initial=True)
-                warm = read_json(training_receipt(main_o))["contract"]["initialize_from"]
-                verify_shared_fresh_outputs(Path(warm), matched)
-                initializations[seed] = str(matched)
-                if seed == 11:
-                    initial_dev = str(
-                        fit.dispatch(matched, "E-M0-matched-initialization-seed11", value),
-                    )
+                    measured = fit.dispatch(current, name, value)
+                    models[model] = {
+                        "checkpoint": str(current), "dev_run": str(measured), "seed": seed,
+                    }
+                final_models[seed] = models
             ready = root / "E-three-seed-inputs.json"
             freeze_choice(ready, {
                 "status": "THREE_SEED_DEV_READY", "seeds": seeds, "final_models": {
                     str(k): v for k, v in final_models.items()
                 },
-                "matched_initialization": {str(k): v for k, v in initializations.items()},
-                "seed11_initialization_dev_run": initial_dev, "frozen_recipe": str(recipe_path),
+                "weak_models": {str(seed): models for seed, models in weak_models.items()},
+                "seed11_weak_dev_run": architecture["weak_readouts"][primary],
+                "seed11_initialization_dev_run": str(initial_dev),
+                "frozen_recipe": str(recipe_path),
+                "main_architecture": primary, "final_stage": final_stage,
+                "statistical_scope": "training_replication_using_the_same_frozen_acquisition_pools",
                 "utility_lambda": value, "objective": objective, "sha_validation": False,
             })
             publish("THREE_SEED_DEV_READY", inputs=str(ready))

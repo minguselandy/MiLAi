@@ -25,16 +25,21 @@ from milai_lab.runners.memory_control_episode import (
     lock_episode_population,
 )
 from milai_lab.scorers.memory_control_episode_metrics import (
+    holm_adjust,
     input_result,
     paired_comparison,
     paired_inline_latency,
     paired_repeat_measurements,
+    summarize_inline_policy_load,
 )
 
 
 def confirmation_arms(data: dict[str, Any], baseline: dict[str, Any]) -> list[dict[str, Any]]:
     arms = []
     value, seeds = data["utility_lambda"], data["seeds"]
+    main = data["main_architecture"]
+    if main not in ARCHITECTURES:
+        raise ValueError("Confirmation requires its frozen main architecture")
     for seed in seeds:
         label = str(seed)
         for model in ARCHITECTURES:
@@ -46,13 +51,12 @@ def confirmation_arms(data: dict[str, Any], baseline: dict[str, Any]) -> list[di
                 **checkpoint_episode_arm(checkpoint, contract), "name": f"{model}-seed{seed}",
                 "utility_lambda": value,
             })
-        initial = Path(data["matched_initialization"][label])
-        contract = checkpoint_contract(initial)
-        if contract["seed"] != seed or contract["supervision_mode"] != "initialization":
-            raise ValueError("Confirmation needs the exact matched pre-W architecture and seed")
+        weak = Path(data["weak_models"][label][main])
+        contract = checkpoint_contract(weak)
+        if contract["seed"] != seed or contract["supervision_mode"] != "weak":
+            raise ValueError("Confirmation needs the actual matched W policy and seed")
         arms.append({
-            **checkpoint_episode_arm(initial, contract), "name": f"M0-matched-init-seed{seed}",
-            "utility_lambda": value,
+            **checkpoint_episode_arm(weak, contract), "name": f"{main}-W-seed{seed}",
         })
     arms.append({**baseline["arm"], "name": "B*"})
     return arms
@@ -104,17 +108,18 @@ def prepare_confirmation(
         def power(policy: list[Path], reference: Path | list[Path]) -> dict[str, Any]:
             return plan_confirmation_power(
                 capacity, policy, reference, draws=args.draws, repeats=fit.repeats,
-                analysis_seed=args.seed + 1, primary_comparisons=3,
+                analysis_seed=args.seed + 1, primary_comparisons=3, holm_plan=True,
             )
 
-        efficiency = power(paths("M0"), Path(baseline["run"]))
-        training = power(paths("M0"), Path(three["seed11_initialization_dev_run"]))
+        main = three["main_architecture"]
+        efficiency = power(paths(main), Path(baseline["run"]))
+        training = power(paths(main), Path(three["seed11_weak_dev_run"]))
         architecture = power(paths("M1"), paths("wide-M0"))
         freeze_choice(power_file, {
             **efficiency, "training_superiority_planning": training,
             "architecture_planning": architecture,
             "registered_maximum_tasks": maximum_tasks, "registered_reader_slot_cap": cap,
-            "training_planning_baseline_scope": "actual_seed11_pre_W_DEV_readout",
+            "training_planning_baseline_scope": "actual_seed11_W_DEV_readout_used_as_common_proxy",
             "insufficient_joint_power_at_registered_cap": not efficiency[
                 "planned_alternative_passes"
             ],
@@ -139,6 +144,7 @@ def execute_confirmation(
     root = fit.root
     ran: dict[str, dict[str, str]] = {}
     requests: dict[str, int] = {}
+    windows: dict[str, dict[str, Any]] = {}
     for label, plan_path in (("primary", primary), ("repeat", secondary)):
         population = read_json(plan_path)
         slots = len(population["tasks"])
@@ -147,18 +153,46 @@ def execute_confirmation(
             continue
         ran[label] = {}
         requests[label] = 0
-        for arm in population["arms"]:
-            name = arm["name"]
-            out = scope / name
-            if read_json(out / "run.json", {}).get("status") != "COMPLETED":
+        windows[label] = {}
+        arms = population["arms"]
+        freeze_choice(scope / "dispatch-order.json", {
+            "seed": population["seed"], "model_order": [arm["name"] for arm in arms],
+            "procedure": "cyclically_rotated_one_inline_reader_window_per_arm",
+            "window": min(fit.window, slots), "sha_validation": False,
+        })
+        while True:
+            incomplete = [arm for arm in arms if read_json(
+                scope / arm["name"] / "run.json", {},
+            ).get("status") != "COMPLETED"]
+            if not incomplete:
+                break
+            logged = {
+                arm["name"]: len(journal.read_text().splitlines()) if journal.exists() else 0
+                for arm in incomplete
+                for journal in (scope / arm["name"] / "dispatch-invocations.jsonl",)
+            }
+            round_index = min(logged.values())
+            index = (population["seed"] + round_index) % len(arms)
+            order = arms[index:] + arms[:index]
+            for arm in order:
+                name = arm["name"]
+                if logged.get(name) != round_index:
+                    continue
+                out = scope / name
                 fit.command(
                     "tools/run_memory_control_v12_followthrough.py", "dispatch-confirmation-arm",
                     "--data", fit.inputs["data"], "--plan", str(plan_path),
                     "--registered-arm", name, "--slots", str(slots), "--output", str(out),
                     "--window", str(min(fit.window, slots)), "--device", "cuda:0",
-                    "--inline-readout",
+                    "--inline-readout", "--single-window",
                     label=f"E-confirmation-{label}-{name}",
                 )
+                journal = out / "dispatch-invocations.jsonl"
+                if not journal.exists() or len(journal.read_text().splitlines()) <= round_index:
+                    raise RuntimeError(f"Confirmation window made no durable progress: {out}")
+        for arm in population["arms"]:
+            name = arm["name"]
+            out = scope / name
             protocol, episodes = input_result(out)
             if (
                 protocol["arm"] != arm or protocol["population"] != population
@@ -167,17 +201,27 @@ def execute_confirmation(
             ):
                 raise ValueError(f"Actual confirmation readout differs from its registry: {out}")
             journal = out / "dispatch-invocations.jsonl"
-            requests[label] += sum(
-                json.loads(line)["reader_requests_this_invocation"]
-                for line in journal.read_text().splitlines()
-            )
+            entries = [json.loads(line) for line in journal.read_text().splitlines()]
+            requests[label] += sum(row["reader_requests_this_invocation"] for row in entries)
             if requests[label] > slots * len(population["arms"]) or sum(requests.values()) > cap:
                 raise RuntimeError("Actual confirmation requests exceed their registered slots")
+            windows[label][name] = {
+                "completed_reader_windows": len(entries),
+                "policy_load_ms": sum(row["policy_load_ms_this_invocation"] for row in entries),
+                "reader_scope_wall_seconds": sum(
+                    row["reader_scope_wall_seconds"] for row in entries
+                ),
+                "process_wall_seconds": sum(row["wall_seconds"] for row in entries),
+                "process_cpu_seconds": sum(row["cpu_seconds"] for row in entries),
+                "inline_policy_load": summarize_inline_policy_load(population, episodes, entries),
+            }
             ran[label][name] = str(out)
-    return {"runs": ran, "reader_requests_by_scope": requests}
+    return {"runs": ran, "reader_requests_by_scope": requests, "window_resources": windows}
 
 
-def summarize_confirmation(fit: OutcomeFits, receipt: dict[str, Any]) -> dict[str, Any]:
+def summarize_confirmation(
+    fit: OutcomeFits, receipt: dict[str, Any], main: str,
+) -> dict[str, Any]:
     primary = receipt["runs"]["primary"]
     seeds = fit.matrix["seeds"]
 
@@ -191,11 +235,33 @@ def summarize_confirmation(fit: OutcomeFits, receipt: dict[str, Any]) -> dict[st
             left, right, repeats=fit.repeats, seed=fit.bootstrap_seed, primary_comparisons=3,
         )
 
-    training = compare(paths("M0"), paths("M0-matched-init"))
+    training = compare(paths(main), paths(f"{main}-W"))
     architecture = compare(paths("M1"), paths("wide-M0"))
-    efficiency = compare(paths("M0"), Path(primary["B*"]))
+    efficiency = compare(paths(main), Path(primary["B*"]))
+    efficiency_p = efficiency["one_sided_centered_pvalues"]
+    noninferiority, positive = (
+        efficiency_p["quality_noninferiority"], efficiency_p["positive_input_savings"],
+    )
+    raw_p = {
+        "training": training["one_sided_centered_pvalues"]["quality_superiority"],
+        "architecture": architecture["one_sided_centered_pvalues"]["quality_superiority"],
+        "deployment": max(noninferiority, positive)
+        if noninferiority is not None and positive is not None else None,
+    }
+    adjusted = holm_adjust(raw_p)
+
+    def supported(key: str, ci: list[float] | None, boundary: float) -> bool:
+        p = adjusted[key]
+        return bool(p is not None and p <= .025 and ci and ci[0] > boundary)
+
+    saving = efficiency["reader_input_token_savings"]
+    quality = efficiency["quality_interval_95"]
+    quality_noninferior = quality is not None and quality[0] >= -1.0
+    input_supported = (supported("deployment", efficiency["token_savings_interval_95"], 0.0)
+                       and quality_noninferior
+                       and saving is not None and saving >= 0.15)
     latency = paired_inline_latency(
-        paths("M0"), Path(primary["B*"]), repeats=fit.repeats, seed=fit.bootstrap_seed,
+        paths(main), Path(primary["B*"]), repeats=fit.repeats, seed=fit.bootstrap_seed,
     )
     noise = {
         name: paired_repeat_measurements(
@@ -208,16 +274,19 @@ def summarize_confirmation(fit: OutcomeFits, receipt: dict[str, Any]) -> dict[st
         "primary_architecture": architecture, "primary_efficiency": efficiency,
         "inline_end_to_end_latency": latency,
         "repeat_measurement_diagnostics": noise,
-        "comparisons_adjustment": "three_comparison_bonferroni_family_intervals",
+        "main_architecture": main,
+        "comparisons_adjustment": {
+            "method": "holm_on_null_centered_one_sided_cluster_bootstrap",
+            "family_alpha": .025, "raw": raw_p, "adjusted": adjusted,
+        },
         "conclusions": {
-            "training_supported": training["quality_path_supported"],
-            "architecture_supported": bool(
-                architecture["quality_path_supported"]
-                or architecture["quality_preserving_cost_advantage_supported"]
+            "training_supported": supported("training", training["quality_interval_95"], 0.0),
+            "architecture_supported": supported(
+                "architecture", architecture["quality_interval_95"], 0.0,
             ),
-            "reader_input_efficiency_supported": efficiency["cost_path_supported"],
+            "reader_input_efficiency_supported": input_supported,
             "acceleration_supported": bool(
-                efficiency["cost_path_supported"] and latency["paired_latency_complete"]
+                quality_noninferior and latency["paired_latency_complete"]
                 and latency["latency_saving_interval_95"] is not None
                 and latency["latency_saving_interval_95"][0] > 0.0
             ),
@@ -239,9 +308,11 @@ def run_confirmation_stage(args: argparse.Namespace) -> None:
             matrix = read_json(root / "experiment-matrix.json")["config"]
             cap = matrix["new_reader_request_slot_limits"]["confirmation_example"]
             baseline = read_json(args.baseline_selection)["selected"]
-            freeze_choice(root / "confirmation-stage-registration.json", {
+            freeze_choice(root / "confirmation-stage-plan2-registration.json", {
                 "gpu": args.gpu, "cap": cap, "seeds": matrix["seeds"], "sampling_seed": args.seed,
                 "primary_comparisons": 3, "simulation_draws": args.draws,
+                "family_adjustment": "holm_alpha_0.025",
+                "arm_structure": "three_final_architectures_and_matching_primary_W_by_seed_plus_B*",
                 "role": "confirm", "sha_validation": False,
             })
             ready = wait_json_dependency(
@@ -251,12 +322,22 @@ def run_confirmation_stage(args: argparse.Namespace) -> None:
             if (ready["status"] != "THREE_SEED_DEV_READY"
                     or matrix.get("sha_validation") is not False):
                 raise ValueError("Confirmation needs the complete registered DEV seed inputs")
+            recipe = read_json(Path(ready["frozen_recipe"]))
+            if (recipe.get("status") != "RECIPE_FROZEN"
+                    or any(recipe[k] != ready[k] for k in (
+                        "main_architecture", "final_stage", "utility_lambda", "objective",
+                    ))
+                    or recipe.get("confirmation_paths") != {
+                        "training": "quality_superiority", "architecture": "quality_superiority",
+                        "deployment": "quality_noninferiority_and_input_savings",
+                    }):
+                raise ValueError("Confirmation must use the frozen seed-11 comparison paths")
             inputs = read_json(root / "O-registered-data.json")
             fit = OutcomeFits(root, args.gpu, args.window, matrix, inputs, publish)
             primary, repeats = prepare_confirmation(args, fit, ready, baseline)
             receipt = execute_confirmation(fit, primary, repeats, cap)
             results = root / "E-confirmation-results.json"
-            freeze_choice(results, summarize_confirmation(fit, receipt))
+            freeze_choice(results, summarize_confirmation(fit, receipt, ready["main_architecture"]))
             publish("CONFIRM_COMPLETE", results=str(results))
         except Exception as error:
             publish("STOPPED", error=type(error).__name__, detail=str(error))

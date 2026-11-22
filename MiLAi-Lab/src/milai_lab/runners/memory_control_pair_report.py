@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
+import json
+import math
 import sqlite3
 from collections import Counter, defaultdict
 from contextlib import closing
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from itertools import combinations
+from pathlib import Path
 from statistics import fmean
 from typing import Any
 
@@ -20,8 +24,10 @@ from milai_lab.datasets.memory_control_store import connect, unpack
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.runners.memory_control_outcome_run import (
     _reader_measurement,
+    _shared_reader_result,
     common_continuation_entries,
 )
+from milai_lab.scorers.memory_control_episode_metrics import percentiles
 
 
 @dataclass(frozen=True)
@@ -71,6 +77,213 @@ def _arm_wire_pairs(
             if left.seed == right.seed and (kind := pair_kind(left.binding, right.binding)):
                 pairs[a, b, repeat] = kind, left.wire == right.wire
     return pairs
+
+
+def _record_reader_cost(
+    counts: Counter[str], latency: dict[str, list[float]], costs: dict[str, Any], *,
+    repeated: bool, reused: bool,
+) -> None:
+    if reused or costs.get("reader_request_attempted") is not True:
+        return
+    counts["physical_reader/attempted_branches"] += 1
+    counts["physical_reader/attempted_additional_repeat_branches"] += repeated
+    for axis in ("reader_wall_ms", "reader_client_wall_ms"):
+        value = costs.get(axis)
+        if type(value) in {float, int} and math.isfinite(value) and value >= 0:
+            latency.setdefault(axis, []).append(float(value))
+    usage = costs.get("reader_usage_source")
+    if usage not in {"provider", "local_tokenizer"}:
+        counts["physical_reader/attempted_without_usage_receipt"] += 1
+        return
+    for axis in ("reader_input_tokens", "reader_output_tokens", "reader_cached_tokens"):
+        value = costs.get(axis)
+        if type(value) is int and value >= 0:
+            counts[f"physical_reader/{usage}/{axis}"] += value
+            counts[f"physical_reader/{usage}/{axis}_measurements"] += 1
+
+
+def _reader_latency_summary(latency: dict[str, list[float]]) -> dict[str, Any]:
+    return {
+        axis: {"measurements": len(values), "mean": fmean(values),
+               "p50": percentiles(values, .50), "p95": percentiles(values, .95)}
+        for axis, values in latency.items() if values
+    }
+
+
+def _registered_before_coverage(
+    db: sqlite3.Connection, run: str, entry: dict[str, Any], measure_from: set[str],
+    latency: dict[str, list[float]],
+) -> tuple[Counter[str], int]:
+    state_id = entry["state_id"]
+    state = db.execute("""
+        SELECT s.task_id, s.actions, v.material_budget, t.dataset, t.native_group
+        FROM states AS s JOIN state_variants AS v ON s.id=v.state_id
+        JOIN experiment_tasks AS t ON s.task_id=t.id
+        WHERE s.id=? AND t.experiment_role='train'
+    """, (state_id,)).fetchone()
+    attributes = ("dataset", "native_group", "material_budget")
+    if state is None or any(state[key] != entry[key] for key in attributes):
+        raise ValueError("The registered before no longer has its TRAIN source, group and budget")
+    actions = entry["actions"]
+    menus = {action["id"]: action for action in unpack(state["actions"])}
+    if not actions or len(set(actions)) != len(actions) or not set(actions) <= menus.keys():
+        raise ValueError("The registered roster differs from the stored before menu")
+    repeats = range(entry["repeats"])
+    expected = {(action, repeat) for action in actions for repeat in repeats}
+    counts: Counter[str] = Counter(registered_states=1, scheduled_branches=len(expected))
+    counts["scheduled_additional_repeat_branches"] = len(expected) - len(actions)
+    if entry["repeats"] > 1:
+        counts["states_with_registered_repeats"] += 1
+    rows = db.execute("""
+        SELECT run_id,state_id,action_id,repeat_index,branch_seed,bound_action,task_result,
+               execution_status,scoring_status,training_quality,costs FROM action_outcomes
+        WHERE run_id=? AND state_id=? ORDER BY rowid
+    """, (run, state_id)).fetchall()
+    branches = {(row["action_id"], row["repeat_index"]): _outcome(row) for row in rows}
+    if not branches.keys() <= expected:
+        raise ValueError("The outcome run contains branches outside its registered repeats")
+    counts["branches_not_yet_prepared"] += len(expected) - len(branches)
+    counts["states_fully_prepared"] += branches.keys() == expected
+    first_measurements = {b.measurement for (_, repeat), b in branches.items()
+                          if repeat == 0 and b.measurement is not None}
+    additional_measurements = {b.measurement for (_, repeat), b in branches.items()
+                               if repeat > 0 and b.measurement is not None}
+    counts["independent_ingested_measurements"] += len(first_measurements | additional_measurements)
+    counts["independent_additional_ingested_measurements"] += len(
+        additional_measurements - first_measurements
+    )
+    pending_groups: dict[tuple[int, int | None], list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        action, repeat = row["action_id"], row["repeat_index"]
+        branch = branches[action, repeat]
+        if branch.binding and branch.binding.get("id", action) != action:
+            raise ValueError("A persisted branch has a different first action binding")
+        status = row["execution_status"]
+        counts[f"status/{status}"] += 1
+        if row["scoring_status"]:
+            counts[f"scoring_status/{row['scoring_status']}"] += 1
+        costs = unpack(row["costs"]) if row["costs"] else {}
+        counts["recorded_request_attempt_branches"] += costs.get("reader_request_attempted") is True
+        reused = branch.stages.get("reader_measurement_reused") is True
+        counts["reader_responses_reused"] += reused
+        _record_reader_cost(counts, latency, costs, repeated=repeat > 0, reused=reused)
+        counts["ingested_known_quality"] += branch.quality is not None
+        counts["ingested_known_provider_input"] += branch.tokens is not None
+        if status != "prepared":
+            continue
+        if branch.wire is None:
+            raise ValueError("A prepared branch has no compatible Reader request")
+        if _shared_reader_result(db, row, branch.stages, measure_from) is not None:
+            counts["prepared_branches_with_exact_saved_response"] += 1
+        else:
+            group = pending_groups[repeat, branch.seed]
+            counts["prepared_branches_without_exact_saved_response"] += 1
+            if branch.wire not in group:
+                group.append(branch.wire)
+                counts["distinct_pending_requests_without_saved_response"] += 1
+
+    for left, right in combinations(actions, 2):
+        kind = pair_kind(menus[left], menus[right])
+        if not kind:
+            continue
+        counts[f"{kind}/scheduled_action_pairs"] += 1
+        for repeat in repeats:
+            counts[f"{kind}/scheduled_pair_repeats"] += 1
+            one, two = branches.get((left, repeat)), branches.get((right, repeat))
+            if one is None or two is None:
+                continue
+            counts[f"{kind}/local_pair_repeats"] += 1
+            has_wires = one.wire is not None and two.wire is not None and one.seed == two.seed
+            if has_wires:
+                counts[f"{kind}/terminal_request_pairs"] += 1
+                counts[f"{kind}/identical_terminal_requests"] += one.wire == two.wire
+                quality_known = one.quality is not None and two.quality is not None
+                cost_known = one.tokens is not None and two.tokens is not None
+                counts[f"{kind}/observed_quality_pair_repeats"] += quality_known
+                counts[f"{kind}/observed_provider_cost_pair_repeats"] += cost_known
+    return counts, int(state["task_id"])
+
+
+def registered_pair_coverage(
+    dataset: MemoryControlDataset, run: str, share_runs: tuple[str, ...] = (),
+) -> dict[str, Any]:
+    """Audit a registered TRAIN roster from one read snapshot, including pending response reuse."""
+    by_cell: dict[tuple[str, int], Counter[str]] = defaultdict(Counter)
+    by_task: dict[tuple[str, int], set[int]] = defaultdict(set)
+    by_group: dict[tuple[str, int], set[str]] = defaultdict(set)
+    latency: dict[tuple[str, int], dict[str, list[float]]] = defaultdict(dict)
+    totals: Counter[str] = Counter()
+    with closing(connect(dataset.path)) as db:
+        db.execute("BEGIN")
+        observed_at = datetime.now(UTC).isoformat()
+        saved = db.execute("SELECT config FROM outcome_runs WHERE run_id=?", (run,)).fetchone()
+        if saved is None or not dataset.control_release:
+            raise ValueError("Coverage reporting needs a registered derived-release outcome run")
+        declaration = json.loads(saved[0])
+        if (declaration.get("role") != "train"
+                or declaration.get("observation_protocol") != dataset.observation_protocol
+                or declaration.get("dataset_run_id") != dataset.run_id
+                or not declaration.get("branch_plan")):
+            raise ValueError("Coverage reporting needs a registered TRAIN branch plan")
+        contract = declaration["comparison_protocol"]
+        fields = contract.keys() - {"observation", "continuation"}
+        for origin in share_runs:
+            saved = db.execute(
+                "SELECT config FROM outcome_runs WHERE run_id=?", (origin,),
+            ).fetchone()
+            peer = json.loads(saved[0]) if saved else {}
+            if (peer.get("role") != "train" or peer.get("sealed") is not True
+                    or any(peer.get("comparison_protocol", {}).get(field) != contract[field]
+                           for field in fields)):
+                raise ValueError(f"Incompatible saved measurement source {origin}")
+        path = Path(declaration["branch_plan"])
+        plan = json.loads(path.read_text())
+        if (plan["dataset_run_id"] != dataset.run_id
+                or plan["observation_protocol"] != dataset.observation_protocol):
+            raise ValueError("The registered branch path belongs to a different release")
+        entries = plan["states"]
+        ids = {entry["state_id"] for entry in entries}
+        if len(ids) != len(entries) or len(ids) != declaration["registered_state_count"]:
+            raise ValueError("The registered before roster differs from the durable release")
+        stored = {state_id for state_id, in db.execute(
+            "SELECT DISTINCT state_id FROM action_outcomes WHERE run_id=?", (run,),
+        )}
+        if not stored <= ids or (declaration["sealed"] and stored != ids):
+            raise ValueError("The outcome run differs from its registered before roster")
+        for entry in entries:
+            cell = entry["dataset"], entry["material_budget"]
+            counts, task = _registered_before_coverage(
+                db, run, entry, {run, *share_runs}, latency[cell],
+            )
+            totals.update(counts)
+            by_cell[cell].update(counts)
+            by_task[cell].add(task)
+            by_group[cell].add(entry["native_group"])
+    if totals["scheduled_branches"] != declaration["declared_branch_slots"]:
+        raise ValueError("The registered branch denominator changed")
+    if declaration["sealed"] and totals["branches_not_yet_prepared"]:
+        raise ValueError("A sealed outcome run is missing registered branch repeats")
+    all_latency: dict[str, list[float]] = defaultdict(list)
+    for timings in latency.values():
+        for axis, values in timings.items():
+            all_latency[axis].extend(values)
+    return {
+        "run_id": run, "branch_plan": str(path), "sealed": declaration["sealed"],
+        "observed_at": observed_at,
+        "share_runs": list(share_runs), "totals": dict(totals),
+        "physical_reader_latency_ms": _reader_latency_summary(all_latency),
+        "registered_native_tasks": len({task for tasks in by_task.values() for task in tasks}),
+        "registered_native_groups": len({
+            (source, group) for (source, _), groups in by_group.items() for group in groups
+        }),
+        "by_source_and_material_budget": [
+            {"source": source, "material_budget": budget, "tasks": len(by_task[source, budget]),
+             "native_groups": len(by_group[source, budget]), **by_cell[source, budget],
+             "physical_reader_latency_ms": _reader_latency_summary(latency[source, budget])}
+            for source, budget in sorted(by_cell)
+        ],
+        "reader_requests": 0, "sha_validation": False,
+    }
 
 
 def _same_first_action(left: _Outcome, right: _Outcome) -> None:

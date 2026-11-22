@@ -16,6 +16,7 @@ from milai_lab.runners.memory_control_episode import allocate_native_groups
 from milai_lab.scorers.memory_control_episode_metrics import (
     SOURCES,
     _primary_group_quality,
+    centered_bootstrap_pvalue,
     input_result,
     matching_derived_dev,
 )
@@ -32,9 +33,14 @@ def confirmation_capacity(
         population = protocol["population"]
         if population["role"] != "confirm":
             raise ValueError("Supply protected historical readout roots for exposure accounting")
+        archived = read_json(path / "episode-archive.json", {})
+        complete = read_json(path / "run.json", {}).get("status") == "COMPLETED" or (
+            archived.get("status") == "ARCHIVED_COMPLETED_EPISODES"
+            and archived.get("episodes") == len(population["tasks"])
+        )
         exposed.update(
             (task["dataset"], task["native_group"]) for task in population["tasks"]
-            if (path / "episodes" / f"{task['task_id']}.json").is_file()
+            if complete or (path / "episodes" / f"{task['task_id']}.json").is_file()
         )
     eligible: dict[str, list[tuple[str, int]]] = defaultdict(list)
     with closing(connect(data)) as db:
@@ -128,6 +134,7 @@ def plan_confirmation_power(
     repeats: int,
     analysis_seed: int,
     primary_comparisons: int,
+    holm_plan: bool = False,
 ) -> dict[str, Any]:
     """Sample clustered DEV residuals into the candidate fresh source/group allocation."""
     import numpy as np
@@ -218,6 +225,19 @@ def plan_confirmation_power(
     conservative_quality, conservative_savings = float(min(dev_quality)), float(min(dev_savings))
     superiority_passes = advantage_passes = 0
     alpha = 0.025 / primary_comparisons
+    interval_alpha = 0.025 if holm_plan else alpha
+
+    def fits_family(
+        quality_test: tuple[Any, float], cost_test: tuple[Any, float] | None = None,
+    ) -> bool:
+        if not holm_plan:
+            return True
+        # First Holm rank is conservative for unknown sibling effects.
+        q_draws, q_estimate = quality_test
+        q_p = centered_bootstrap_pvalue(q_draws, q_estimate, 0.0 if cost_test is None else -1.0)
+        cost_p = centered_bootstrap_pvalue(*cost_test, 0.0) if cost_test is not None else 0
+        return bool(max(q_p, cost_p) <= alpha)
+
     for _ in range(draws):
         seed_draw = rng.integers(0, len(policy), size=len(policy))
         reference = np.zeros(3)
@@ -240,18 +260,30 @@ def plan_confirmation_power(
             bootstrap[:, 0] += (simulated[sample, 0] * q_w).sum(axis=1) / q_w.sum(axis=1)
             for axis in (1, 2):
                 bootstrap[:, axis] += (simulated[sample, axis] * c_w).sum(axis=1) / c_w.sum(axis=1)
-        q_point = np.quantile(bootstrap[:, 0] / len(SOURCES), alpha)
+        q_distribution = bootstrap[:, 0] / len(SOURCES)
+        input_distribution = 1 - bootstrap[:, 1] / bootstrap[:, 2]
+        q_point = np.quantile(q_distribution, interval_alpha)
         input_point = 1 - reference[1] / reference[2]
-        input_low = np.quantile(1 - bootstrap[:, 1] / bootstrap[:, 2], alpha)
-        superiority_passes += bool(q_point + conservative_quality > 0.0)
+        input_low = np.quantile(input_distribution, interval_alpha)
+        observed_q = reference[0] / len(SOURCES)
+        quality_at_dev = (q_distribution + conservative_quality, observed_q + conservative_quality)
+        cost_at_dev = (
+            input_distribution + conservative_savings, input_point + conservative_savings,
+        )
+        superiority_passes += bool(q_point + conservative_quality > 0.0
+                                   and fits_family(quality_at_dev))
         advantage_passes += bool(
             q_point + conservative_quality >= -1.0
             and input_low + conservative_savings > 0.0
+            and fits_family(quality_at_dev, cost_at_dev)
         )
         for quality, saving in alternatives:
             passes[quality, saving] += bool(
                 q_point + quality >= -1.0 and input_point + saving >= 0.15
-                and input_low + saving > 0.0
+                and input_low + saving > 0.0 and fits_family(
+                    (q_distribution + quality, observed_q + quality),
+                    (input_distribution + saving, input_point + saving),
+                )
             )
     return {
         "design": "stratified_native_group_dev_residual_simulation",
@@ -275,6 +307,10 @@ def plan_confirmation_power(
             "quality_preserving_cost_advantage_probability": advantage_passes / draws,
         },
         "primary_comparisons": primary_comparisons, "lower_quantile": alpha,
+        **({"family_power_method": "null_centered_bootstrap_at_first_rank_holm_cutoff",
+            "holm_planning_bound": "first_rank_guarantees_rejection_for_any_companion_pvalues",
+            "family_alpha": 0.025}
+           if holm_plan else {}),
         "target_pass_probability": 0.80,
         "planned_alternative_passes": passes[0.0, 0.20] / draws >= 0.80,
         "scenarios": [

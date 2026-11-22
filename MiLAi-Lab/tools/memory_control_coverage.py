@@ -22,6 +22,7 @@ from milai_lab.datasets.memory_control_outcomes import (
 )
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import connect
+from milai_lab.methods.control_numeric import MATERIAL_UNIT
 from milai_lab.methods.frozen_feature_store import FrozenFeatureStore, batches, prefetch_rows
 from milai_lab.methods.small_control_learning import (
     PAIRED_OBJECTIVES,
@@ -104,6 +105,30 @@ def source_weights(index: list[StateIndex], mode: str) -> dict[str, float]:
     return {source: len(index) / (len(counts) * count) for source, count in counts.items()}
 
 
+def exposure_source_weights(
+    index: list[StateIndex], windows: list[list[int]], *, policy_ids: set[int] | None,
+    expected_sources: set[str],
+) -> dict[int, float]:
+    """Give each source equal total mass in each pool, despite uneven repeat counts."""
+    exposures = Counter(sid for window in windows for sid in window)
+    pools = [[row for row in index if policy_ids is None or row.id not in policy_ids]]
+    if policy_ids is not None:
+        pools.append([row for row in index if row.id in policy_ids])
+    if exposures.keys() != {row.id for row in index}:
+        raise ValueError("The registered replay schedule must cover every state")
+    result = {}
+    for pool in pools:
+        counts = Counter(row.dataset for row in pool)
+        if counts.keys() != expected_sources:
+            raise ValueError("A registered replay pool lacks a required source")
+        pool_exposures = sum(exposures[row.id] for row in pool)
+        for row in pool:
+            result[row.id] = pool_exposures / (
+                len(expected_sources) * counts[row.dataset] * exposures[row.id]
+            )
+    return result
+
+
 def _policy_pool_ids(dataset: MemoryControlDataset, index: list[StateIndex]) -> set[int]:
     pools: dict[str, set[int]] = {"core": set(), "policy": set()}
     with closing(connect(dataset.path)) as db:
@@ -131,7 +156,6 @@ def _policy_pool_ids(dataset: MemoryControlDataset, index: list[StateIndex]) -> 
         or not policy
         or core & policy
         or core | policy != {row.id for row in index}
-        or policy != {row.id for row in index if row.recipe == "policy_reached"}
     ):
         raise ValueError("Mixed coverage requires disjoint, eligible core and policy-state pools")
     return policy
@@ -188,6 +212,54 @@ def average_precision(scores: list[tuple[float, bool]]) -> float | None:
     return ap
 
 
+def record_action_calibration(
+    groups: dict[str, Counter[str]],
+    actions: list[dict[str, Any]],
+    quality: list[float],
+    cost_units: list[float],
+    known_quality: dict[str, float],
+    known_cost: dict[str, float],
+    top: int,
+) -> None:
+    for i, (action, q, units) in enumerate(zip(actions, quality, cost_units, strict=True)):
+        kind = action["kind"]
+        if kind == "READ":
+            kind = "R3" if action["parameters"].get("expand_context") else "R2"
+        record = groups.setdefault(kind, Counter())
+        aid = action["id"]
+        record["offered"] += 1
+        record["selected"] += i == top
+        if (observed := known_quality.get(aid)) is not None:
+            record["quality_measured"] += 1
+            record["selected_quality_measured"] += i == top
+            record["quality_prediction_sum"] += q
+            record["quality_target_sum"] += observed
+            record["quality_error_squared_sum"] += (q - observed) ** 2
+        if (tokens := known_cost.get(aid)) is not None:
+            predicted = units * MATERIAL_UNIT
+            record["provider_input_measured"] += 1
+            record["selected_provider_input_measured"] += i == top
+            record["input_prediction_sum"] += predicted
+            record["input_target_sum"] += tokens
+            record["input_error_absolute_sum"] += abs(predicted - tokens)
+
+
+def summarize_action_calibration(record: Counter[str]) -> dict[str, int | float | None]:
+    q, c = record["quality_measured"], record["provider_input_measured"]
+    return {
+        **{key: record[key] for key in (
+            "offered", "selected", "quality_measured", "provider_input_measured",
+            "selected_quality_measured", "selected_provider_input_measured",
+        )},
+        "quality_predicted_mean": record["quality_prediction_sum"] / q if q else None,
+        "quality_observed_mean": record["quality_target_sum"] / q if q else None,
+        "quality_mse": record["quality_error_squared_sum"] / q if q else None,
+        "input_tokens_predicted_mean": record["input_prediction_sum"] / c if c else None,
+        "input_tokens_observed_mean": record["input_target_sum"] / c if c else None,
+        "input_tokens_mae": record["input_error_absolute_sum"] / c if c else None,
+    }
+
+
 def offline_evaluation(
     model: SmallControlModel,
     dataset: MemoryControlDataset,
@@ -203,6 +275,7 @@ def offline_evaluation(
 
     model.train(False)
     metrics: dict[str, Counter[str]] = defaultdict(Counter)
+    calibration: dict[str, dict[str, Counter[str]]] = defaultdict(dict)
     values: dict[str, list[tuple[float, bool]]] = defaultdict(list)
     start = time.perf_counter()
     with torch.no_grad(), predictions.open("x") if predictions else nullcontext() as stream:
@@ -223,19 +296,22 @@ def offline_evaluation(
                 sup = row["offline_supervision"]
                 action_ids = [a["id"] for a in row["actions"]]
                 span = slice(offset, offset + n)
+                cost_values = None
                 if model.config.quality_cost:
                     local = scores.quality_logits[span]
                     cost = scores.cost_units[span]
                     parts = paired_state_losses(local, cost, action_ids, sup, objective)
                     loss = sum(parts.values()) if parts else None
                     deployment = (local.sigmoid() - model.utility_lambda * cost).tolist()
+                    cost_values = cost.float().tolist()
                 else:
                     local = model.with_prior(scores[span], row)
                     loss = state_loss(local, action_ids, sup)
                     deployment = local.float().tolist()
                 local_values = local.float().tolist()
                 offset += n
-                stats = metrics[row["provenance"]["dataset"]]
+                source = row["provenance"]["dataset"]
+                stats = metrics[source]
                 stats["states"] += 1
                 if loss is not None:
                     stats["loss_sum"] += float(loss)
@@ -265,22 +341,32 @@ def offline_evaluation(
                 measured = {
                     a: v for a, v in sup.get("observed_values", {}).items() if v is not None
                 }
+                probs, top = [], None
+                if cost_values is not None or measured:
+                    probs = local.sigmoid().tolist()
+                    top = max(range(n), key=lambda i: (
+                        deployment[i], model.config.quality_cost and
+                        row["actions"][i]["kind"] == "HANDOFF",
+                    ))
+                if cost_values is not None:
+                    assert top is not None
+                    record_action_calibration(
+                        calibration[source], row["actions"], probs, cost_values, measured,
+                        sup.get("outcome_cost_tokens", {}), top,
+                    )
                 if measured:
+                    assert top is not None
                     stats["pooled_reader_request_groups"] += sup["pooled_reader_request_groups"]
                     stats["pooled_reader_request_groups_with_quality_disagreement"] += sup[
                         "pooled_reader_request_groups_with_quality_disagreement"
                     ]
-                    probs = local.sigmoid().tolist()
                     stats["observed_values"] += len(measured)
                     stats["value_error_squared_sum"] += sum(
                         (probs[i] - measured[action]) ** 2
                         for i, action in enumerate(action_ids)
                         if action in measured
                     )
-                    choice = action_ids[max(range(n), key=lambda i: (
-                        deployment[i], model.config.quality_cost and
-                        row["actions"][i]["kind"] == "HANDOFF",
-                    ))]
+                    choice = action_ids[top]
                     stats["choices_with_observed_value"] += choice in measured
                     if choice in measured:
                         stats["observed_choice_regret_sum"] += (
@@ -311,6 +397,8 @@ def offline_evaluation(
                         "scores": local_values,
                         "choice": action_ids[max(range(n), key=local_values.__getitem__)],
                     }
+                    if cost_values is not None and top is not None:
+                        record["deployment_choice"] = action_ids[top]
                     stream.write(json.dumps(record) + "\n")
     result = {}
     for source, stats in metrics.items():
@@ -331,6 +419,14 @@ def offline_evaluation(
             )
     return {
         "by_dataset": result,
+        **({"outcome_calibration": {
+            "utility_lambda": model.utility_lambda,
+            "by_dataset_and_action": {
+                source: {kind: summarize_action_calibration(counts)
+                         for kind, counts in sorted(groups.items())}
+                for source, groups in sorted(calibration.items())
+            },
+        }} if calibration else {}),
         "states": len(index),
         "groups": len({(r.dataset, r.group) for r in index}),
         "tasks": len({r.task for r in index}),
@@ -361,6 +457,9 @@ def train_coverage(
         raise ValueError("The training objective must match the registered prediction heads")
     if config.quality_cost and (args.supervision_mode != "outcome" or not dataset.paired_outcomes):
         raise ValueError("Quality/cost training requires paired, actually scored outcome runs")
+    freeze_evidence = getattr(args, "freeze_evidence_head", False)
+    if freeze_evidence and not config.quality_cost:
+        raise ValueError("A migrated evidence readout belongs only to the paired Q/C head")
     if config.numeric_mode == "real" and not dataset.control_release:
         raise ValueError("Real numeric observations require the registered V1.2 release")
     initialization = args.initialize_from
@@ -389,6 +488,10 @@ def train_coverage(
     policy_ids = _policy_pool_ids(dataset, train) if args.balance_policy_outcomes else None
     replay_exposures = getattr(args, "replay_exposures", None)
     source_weighting = getattr(args, "source_weighting", None)
+    weighted_replay = config.quality_cost and source_weighting == "g1" and (
+        policy_ids is not None or replay_exposures is not None
+    )
+    expected_sources = set(dataset.config["sources"]) if weighted_replay else set()
     weights = source_weights(train, source_weighting or "g0")
     by_id_weights = {row.id: weights[row.dataset] for row in train}
     if replay_exposures is not None and (policy_ids is not None or replay_exposures < len(train)):
@@ -441,6 +544,8 @@ def train_coverage(
         contract["raw_feature_store"] = str(raw_store.resolve())
     if config.quality_cost:
         contract["objective"] = objective
+    if freeze_evidence:
+        contract["frozen_evidence_head"] = True
     if dev_dataset is not None:
         contract["dev_outcome_runs"] = list(dev_dataset.outcome_runs)
     if source_weighting is not None:
@@ -460,6 +565,9 @@ def train_coverage(
             policy_states=sorted(policy_ids),
             state_exposures_per_epoch=states_per_epoch,
         )
+    if weighted_replay:
+        contract["replay_weighting"] = "source_macro_per_pool_inverse_actual_repeat"
+        contract["replay_required_sources"] = sorted(expected_sources)
     steps_file = args.output / "steps.jsonl"
     prior_lines: list[bytes] = []
     resume_state = None
@@ -494,6 +602,8 @@ def train_coverage(
     )
     if asdict(model.config) != asdict(config):
         raise ValueError("Starting checkpoint model and codec do not match the coverage recipe")
+    if freeze_evidence:
+        model.head.evidence_output.requires_grad_(False)
     model.batch_tokens_by_length = args.bucket_encoder_lengths
     cache = (
         FrozenFeatureStore(args.feature_store, dataset, model, raw_store=raw_store)
@@ -525,7 +635,7 @@ def train_coverage(
             return
         params = [
             {
-                "params": list(model.head.parameters()),
+                "params": [p for p in model.head.parameters() if p.requires_grad],
                 "lr": args.head_learning_rate or args.learning_rate,
             }
         ]
@@ -589,6 +699,14 @@ def train_coverage(
                 train, args.batch_states, args.seed + epoch, policy_ids=policy_ids,
                 replay_exposures=replay_exposures,
             )
+            epoch_exposures = None
+            if weighted_replay:
+                windows = list(schedule)
+                by_id_weights = exposure_source_weights(
+                    train, windows, policy_ids=policy_ids, expected_sources=expected_sources,
+                )
+                epoch_exposures = Counter(sid for window in windows[:count] for sid in window)
+                schedule = iter(windows)
             for prior in islice(schedule, offset):
                 covered.update(prior)
             for batch_no, (ids, rows, batch_wait) in enumerate(
@@ -698,6 +816,13 @@ def train_coverage(
                 if step == args.interrupt_after:
                     status = "INTERRUPTED"
                     return
+            if epoch_exposures is not None:
+                write_json(args.output / f"replay-exposure-epoch-{epoch + 1}.json", {
+                    "epoch": epoch + 1, "completed_updates": count,
+                    "state_exposure_counts": dict(sorted(epoch_exposures.items())),
+                    "source_macro_weighting": contract["replay_weighting"],
+                    "total_exposures": sum(epoch_exposures.values()), "sha_validation": False,
+                }, indent=None)
             evaluation = args.output / f"dev-epoch-{epoch + 1}.json"
             recover_epoch_evaluation = initial_step == first + count and not evaluation.exists()
             if dev and (offset < count or recover_epoch_evaluation):

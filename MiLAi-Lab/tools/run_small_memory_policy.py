@@ -328,7 +328,7 @@ def train(args: argparse.Namespace) -> None:
             or args.supervision_mode != "weak" or args.outcome_run or args.balance_policy_outcomes
             or args.dev_outcome_run or args.objective != "u0-legacy" or args.numeric_mode != "off"
             or args.source_weighting is not None or args.replay_exposures is not None
-            or args.raw_feature_store is not None):
+            or args.raw_feature_store is not None or args.freeze_evidence_head):
         raise ValueError("Coverage options require the V1.1 SQLite package")
     args.steps = 200 if args.steps is None else args.steps
     declared_windows = None
@@ -1092,6 +1092,8 @@ def main() -> None:
     fitting.add_argument("--initialize-from", type=Path,
                          help="New optimizer/stage from a matching usable starting checkpoint")
     fitting.add_argument("--initialize-from-selection", type=Path)
+    fitting.add_argument("--freeze-evidence-head", action="store_true",
+                         help="Keep migrated weak readout weights outside the paired optimizer")
     fitting.add_argument("--interrupt-after", type=int)
     fitting.add_argument("--profile", action="store_true")
     fitting.add_argument("--readout", choices=["dual", "joint", "objects"], default="dual")
@@ -1226,6 +1228,8 @@ def main() -> None:
                                  help="Rotate native groups within the declared source mix")
     collect_reached.add_argument("--rotate-train-budgets", action="store_true",
                                  help="Use inherited TRAIN budget assignments by native group")
+    collect_reached.add_argument("--exclude-outcome-run", action="append", default=[],
+                                 help="Deduplicate reached states against these sealed TRAIN pools")
     collect_reached.add_argument("--seed", type=int, default=20261118)
     collect_reached.add_argument("--device", default="cpu")
     collect_reached.add_argument("--threads", type=int, default=4)
@@ -1454,7 +1458,8 @@ def main() -> None:
             collect(args.data, args.run_id, checkpoints, args.output,
                     target_states=args.target_states, task_limit=args.task_limit,
                     seed=args.seed, device=args.device, balance_sources=args.balance_sources,
-                    utility_lambda=utility_lambda, rotate_train_budgets=args.rotate_train_budgets)
+                    utility_lambda=utility_lambda, rotate_train_budgets=args.rotate_train_budgets,
+                    exclude_outcome_runs=tuple(args.exclude_outcome_run))
         return
     if args.command == "initialize":
         initialize_model(args)

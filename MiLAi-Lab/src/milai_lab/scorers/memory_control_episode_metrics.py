@@ -23,11 +23,16 @@ RESOURCE_AXES = (
     "reader_output_tokens",
     "reader_cached_tokens",
     "reader_wall_ms",
+    "reader_client_wall_ms",
+    "reader_ttft_ms",
     "episode_wall_ms",
     "episode_live_readout_ms",
+    "episode_local_wall_ms",
+    "episode_local_cpu_ms",
     "preflight_wall_ms",
     "controller_wall_ms",
     "read_operation_wall_ms",
+    "search_wall_ms",
     "pool_and_bm25_wall_ms",
     "materialization_and_wire_wall_ms",
     "navigation_tokens",
@@ -48,6 +53,34 @@ def percentiles(values: list[float], probability: float) -> float:
     index = (len(ordered) - 1) * probability
     lower, upper = math.floor(index), math.ceil(index)
     return ordered[lower] + (ordered[upper] - ordered[lower]) * (index - lower)
+
+
+def centered_bootstrap_pvalue(
+    draws: Sequence[float], point: float, null_boundary: float,
+) -> float:
+    """One-sided upper-tail test from paired bootstrap draws centered on the null."""
+    if not len(draws):
+        raise ValueError("A centered bootstrap test requires actual resamples")
+    tail = sum(draw - point >= point - null_boundary for draw in draws)
+    return (1 + tail) / (1 + len(draws))
+
+
+def holm_adjust(pvalues: dict[str, float | None]) -> dict[str, float | None]:
+    ordered = sorted(pvalues, key=lambda key: (
+        1.0 if pvalues[key] is None else pvalues[key], key,
+    ))
+    adjusted: dict[str, float | None] = {}
+    largest = 0.0
+    for i, key in enumerate(ordered):
+        p = pvalues[key]
+        if p is None:
+            adjusted[key] = None
+            continue
+        if not 0.0 <= p <= 1.0:
+            raise ValueError("A Holm family requires valid one-sided p values")
+        largest = max(largest, min(1.0, p * (len(ordered) - i)))
+        adjusted[key] = largest
+    return adjusted
 
 
 def _observed_seed_spread(values: Sequence[float | None]) -> dict[str, Any]:
@@ -341,7 +374,7 @@ def paired_repeat_measurements(
     population = base["population"]
     subset = child["population"]
     if (
-        population["role"] != "confirm" or subset["role"] != "confirm"
+        population["role"] not in {"confirm", "dev"} or subset["role"] != population["role"]
         or not subset.get("measurement_repeat_of") or population["seed"] == subset["seed"]
         or any(population[key] != subset[key] for key in ("dataset_run_id", "material_budget"))
         or base["arm"] != child["arm"] or base["comparison"] != child["comparison"]
@@ -372,6 +405,59 @@ def paired_repeat_measurements(
         ) else "identical_wire" if a == b else "other_payload_change"
         wires[key] += 1
     return {**output, "reader_repeat_bindings": dict(wires), "adds_independent_groups": False}
+
+
+def summarize_inline_policy_load(
+    population: dict[str, Any],
+    episodes: dict[int, dict[str, Any]],
+    windows: Sequence[dict[str, Any]],
+) -> dict[str, Any]:
+    """Report measured inline task timing and amortize actual policy loads over the fixed cohort."""
+    registered = {row["task_id"] for row in population["tasks"]}
+    if registered != episodes.keys() or len(registered) != len(population["tasks"]):
+        raise ValueError("The inline timing roster must reproduce all registered task positions")
+    unavailable = population.get("predeclared_unevaluable_tasks", {})
+    eligible = {tid for tid in registered if str(tid) not in unavailable}
+    timed = []
+    for tid in sorted(eligible):
+        row = episodes[tid]
+        costs = row.get("costs", {})
+        value = costs.get("episode_live_readout_ms")
+        if (row["status"] in {"scored", "scored_format_failure"}
+                and costs.get("reader_request_attempted") is True
+                and type(value) in (int, float) and math.isfinite(value) and value > 0):
+            timed.append(float(value))
+
+    have_loads = bool(windows)
+    load_values = []
+    for window in windows:
+        value = window.get("policy_load_ms_this_invocation")
+        if (window.get("readout_schedule") == "inline"
+                and type(value) in (int, float) and math.isfinite(value) and value >= 0):
+            load_values.append(float(value))
+        else:
+            have_loads = False
+    total_load = sum(load_values) if have_loads else None
+    loads = sum(value > 0 for value in load_values) if have_loads else None
+    load_per_task = total_load / len(eligible) if total_load is not None and eligible else None
+    complete = bool(eligible) and len(timed) == len(eligible)
+    inline_mean = fmean(timed) if timed else None
+    return {
+        "registered_tasks": len(registered), "eligible_tasks": len(eligible),
+        "timed_live_reader_tasks": len(timed), "inline_timings_complete": complete,
+        "live_task_wall_ms": {
+            "mean": inline_mean,
+            "p50": percentiles(timed, .50) if timed else None,
+            "p95": percentiles(timed, .95) if timed else None,
+        },
+        "policy_load_records_complete": have_loads,
+        "policy_load_count": loads, "total_policy_load_ms": total_load,
+        "eligible_tasks_per_policy_load": len(eligible) / loads if loads else None,
+        "policy_load_ms_per_eligible_task": load_per_task,
+        "mean_live_task_wall_ms_with_amortized_policy_load": (
+            inline_mean + load_per_task if complete and load_per_task is not None else None
+        ),
+    }
 
 
 def paired_inline_latency(
@@ -765,6 +851,17 @@ def _paired_metrics(
         and quality_complete
         and set(seed_labels) == set(population["confirmation_seeds"])
     )
+    centered = None
+    if population["role"] == "confirm":
+        centered = {
+            "quality_superiority": centered_bootstrap_pvalue(quality_draws, point_quality, 0.0)
+            if confirmed and point_quality is not None else None,
+            "quality_noninferiority": centered_bootstrap_pvalue(
+                quality_draws, point_quality, -population["quality_noninferiority_points"],
+            ) if confirmed and point_quality is not None else None,
+            "positive_input_savings": centered_bootstrap_pvalue(cost_draws, point_cost, 0.0)
+            if confirmed and cost_complete and point_cost is not None else None,
+        }
     quality_supported = bool(confirmed and family_quality and family_quality[0] > 0)
     cost_advantage_supported = bool(
         confirmed and cost_complete
@@ -817,6 +914,7 @@ def _paired_metrics(
         "quality_path_supported": quality_supported,
         "quality_preserving_cost_advantage_supported": cost_advantage_supported,
         "cost_path_supported": cost_supported,
+        **({"one_sided_centered_pvalues": centered} if centered is not None else {}),
         **({"interval_conditioned_on_model_seeds": list(seed_labels),
             "by_seed": seed_outputs,
             "seed_spread": {

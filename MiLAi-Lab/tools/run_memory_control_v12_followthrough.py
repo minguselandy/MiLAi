@@ -21,6 +21,7 @@ from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.methods.memory_object_policy import build_object_head
 from milai_lab.methods.small_control_model import SmallControlModel
 from milai_lab.providers.contextual_vllm import ownership_client_configs
+from milai_lab.runners.memory_control_checkpoint_selection import training_receipt
 from milai_lab.runners.memory_control_episode import (
     checkpoint_contract,
     checkpoint_episode_arm,
@@ -34,14 +35,23 @@ def run_registered_readout(args: argparse.Namespace) -> None:
     population = read_json(args.plan)
     registered_arm = getattr(args, "registered_arm", None)
     inline_readout = getattr(args, "inline_readout", False)
+    prepare_only = getattr(args, "prepare_only", False)
+    if prepare_only and inline_readout:
+        raise ValueError("Local preparation requires the staged readout schedule")
     held = args.command == "dispatch-held-budget-arm"
-    scope = "HELD_BUDGET" if held else "CONFIRMATION" if registered_arm is not None else "DEV"
+    repeated = args.command == "dispatch-dev-repeat-arm"
+    scope = ("HELD_BUDGET" if held else "DEV_REPEAT" if repeated
+             else "CONFIRMATION" if registered_arm is not None else "DEV")
     if len(population["tasks"]) != args.slots:
         raise ValueError("Dispatch requires the exact recorded task slot count")
     if registered_arm is not None:
         if held:
             if population["role"] != "dev" or not population.get("held_budget_diagnostic"):
                 raise ValueError("Held-budget dispatch needs the registered DEV diagnostic scope")
+        elif repeated:
+            if (population["role"] != "dev" or not population.get("dev_repeat_registration")
+                    or not population.get("measurement_repeat_of")):
+                raise ValueError("DEV repeats require the registered task and arm subset")
         elif (
             population["role"] != "confirm" or not population.get("capacity_registration")
             or not population.get("power_registration") or not population.get("confirmation_slots")
@@ -74,12 +84,19 @@ def run_registered_readout(args: argparse.Namespace) -> None:
             args.data, observation_protocol=arm["observation_protocol"],
             numeric_observation=contract.get("config", {}).get("numeric_mode", "off") != "off",
         )
-        if not inline_readout and read_json(prepare, {}).get("status") != "PREPARED_EPISODES":
+        if prepare_only or (
+            not inline_readout and read_json(prepare, {}).get("status") != "PREPARED_EPISODES"
+        ):
             write_json(status, {"status": f"PREPARING_{scope}", "pid": os.getpid()})
-            evaluate_episodes(
+            preparation = evaluate_episodes(
                 args.data, args.plan, arm, args.output, device=args.device, prepare_only=True,
                 prepared_dataset=dataset,
             )
+            if prepare_only:
+                write_json(status, preparation)
+                if preparation["status"] != "PREPARED_EPISODES":
+                    raise RuntimeError(f"Incomplete local preparation in {args.output}")
+                return
         waiting = False
         while True:
             try:
@@ -103,7 +120,8 @@ def run_registered_readout(args: argparse.Namespace) -> None:
             write_json(status, {"pid": os.getpid(), **receipt})
             if receipt["status"] == "COMPLETED":
                 write_json(args.output / "native-summary.json", summarize(args.output))
-                if scope == "CONFIRMATION":
+                archive = scope in {"CONFIRMATION", "DEV_REPEAT"}
+                if archive or getattr(args, "archive_episodes", False):
                     try:
                         archive_completed_readout(args.output)
                     except (OSError, subprocess.CalledProcessError, tarfile.TarError) as error:
@@ -115,6 +133,8 @@ def run_registered_readout(args: argparse.Namespace) -> None:
                 return
             if not receipt["reader_requests_this_invocation"]:
                 raise RuntimeError(f"{scope} dispatch made no progress in its registered window")
+            if getattr(args, "single_window", False):
+                return
             time.sleep(args.yield_seconds)
 
 
@@ -171,6 +191,9 @@ def match_object_heads(checkpoint: Path, device: str) -> dict[str, Any]:
         raise ValueError("Parameter matching requires the locked object readout")
     encoder_width = model.encoder.config.hidden_size
     width = encoder_width * (1 if c.object_feature_layout == "literal_v1" else 2)
+    freeze_evidence = read_json(training_receipt(checkpoint))["contract"].get(
+        "frozen_evidence_head", False,
+    )
 
     def count(architecture: str, feedforward: int) -> int:
         head = build_object_head(
@@ -178,6 +201,8 @@ def match_object_heads(checkpoint: Path, device: str) -> dict[str, Any]:
             slots=c.object_slots, blocks=c.object_blocks, ffn_width=feedforward,
             dropout=c.object_dropout, numeric=c.numeric_mode != "off", quality_cost=c.quality_cost,
         )
+        if freeze_evidence:
+            head.evidence_output.requires_grad_(False)
         return int(sum(p.numel() for p in head.parameters() if p.requires_grad))
 
     ordinary = count("object_mlp", c.object_ffn_width)
@@ -191,6 +216,7 @@ def match_object_heads(checkpoint: Path, device: str) -> dict[str, Any]:
     return {
         "checkpoint": str(checkpoint.resolve()), "object_feature_layout": c.object_feature_layout,
         "numeric_mode": c.numeric_mode, "quality_cost": c.quality_cost,
+        "frozen_evidence_head": freeze_evidence,
         "trainable_parameters": {"M0": ordinary, "M1": attention, "wide_M0": matched},
         "wide_M0_ffn_width": wider, "ordinary_ffn_width": c.object_ffn_width,
         "wide_relative_parameter_difference": deviation,
@@ -279,9 +305,14 @@ def main() -> None:
     dispatch.add_argument("--utility-lambda", type=float, choices=[0.0, 0.05, 0.10])
     dispatch.add_argument("--device", default="cpu")
     dispatch.add_argument("--inline-readout", action="store_true")
+    dispatch.add_argument("--prepare-only", action="store_true",
+                          help="Materialize staged DEV episodes for the registered arm")
+    dispatch.add_argument("--archive-episodes", action="store_true")
     dispatch.add_argument("--weighting-baseline", type=Path)
     dispatch.add_argument("--weighting-selection", type=Path)
-    for command in ("dispatch-confirmation-arm", "dispatch-held-budget-arm"):
+    for command in (
+        "dispatch-confirmation-arm", "dispatch-held-budget-arm", "dispatch-dev-repeat-arm",
+    ):
         registered_dispatch = commands.add_parser(command)
         for name in ("data", "plan", "output"):
             registered_dispatch.add_argument("--" + name, type=Path, required=True)
@@ -292,6 +323,8 @@ def main() -> None:
         registered_dispatch.add_argument("--busy-retry-seconds", type=float, default=1)
         registered_dispatch.add_argument("--device", default="cpu")
         registered_dispatch.add_argument("--inline-readout", action="store_true")
+        if command == "dispatch-confirmation-arm":
+            registered_dispatch.add_argument("--single-window", action="store_true")
     weighting = commands.add_parser("select-source-weighting")
     weighting.add_argument("--g0", type=Path, required=True)
     weighting.add_argument("--g1", type=Path, required=True)
@@ -342,11 +375,13 @@ def main() -> None:
     outcome.add_argument("--yield-seconds", type=float, default=20)
     outcome.add_argument("--ranked-delta", action="store_true")
     outcome.add_argument("--adopt-proposal-worker", type=Path,
-                         help="Recorded source and process identity for the in-progress W proposals")
+                         help="Recorded process identity for the in-progress W proposals")
     fitting = commands.add_parser("fit-outcome-objectives")
     fitting.add_argument("--root", type=Path, required=True)
     fitting.add_argument("--baseline-selection", type=Path, required=True)
     fitting.add_argument("--gpu", type=int, required=True)
+    fitting.add_argument("--dev-preparation-gpu", type=int,
+                         help="Prepare later objective DEV arms on a second allocated GPU")
     fitting.add_argument("--window", type=int, default=40)
     policy = commands.add_parser("run-policy-stage")
     policy.add_argument("--root", type=Path, required=True)
@@ -389,7 +424,8 @@ def main() -> None:
                 or min(args.yield_seconds, args.busy_retry_seconds) <= 0):
             raise ValueError("Use matched selection outputs and a positive Reader lease interval")
         run_registered_readout(args)
-    elif args.command in {"dispatch-confirmation-arm", "dispatch-held-budget-arm"}:
+    elif args.command in {"dispatch-confirmation-arm", "dispatch-held-budget-arm",
+                          "dispatch-dev-repeat-arm"}:
         if min(args.yield_seconds, args.busy_retry_seconds) <= 0:
             raise ValueError("A registered arm needs positive Reader lease intervals")
         run_registered_readout(args)
@@ -409,7 +445,8 @@ def main() -> None:
     elif args.command == "fit-outcome-objectives":
         from memory_control_outcome_fits import run_outcome_fits
 
-        if args.gpu < 0 or args.window < 1:
+        if (args.gpu < 0 or args.window < 1 or (args.dev_preparation_gpu is not None
+                and (args.dev_preparation_gpu < 0 or args.dev_preparation_gpu == args.gpu))):
             raise ValueError("Provide allocated compute and a positive DEV window")
         run_outcome_fits(args)
     elif args.command == "run-policy-stage":

@@ -428,6 +428,13 @@ def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
         dataset = MemoryControlDataset(db_path, observation_protocol=args.observation_protocol)
         write_json(args.output, pair_information_report(dataset, args.run_id, args.peer_run))
         return 0
+    if command == "report-pair-coverage":
+        from milai_lab.runners.memory_control_pair_report import registered_pair_coverage
+
+        dataset = MemoryControlDataset(db_path, observation_protocol=args.observation_protocol)
+        coverage = registered_pair_coverage(dataset, args.run_id, tuple(args.share_reader_run))
+        write_json(args.output, coverage)
+        return 0
     if command == "revise":
         derive(args.parent or Path(config["parent_root"]), root, config, args.roles)
         print(f"Roles frozen in {db_path}")
@@ -608,7 +615,7 @@ def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
                 share_reader_runs=tuple(args.share_reader_run),
             )
         else:
-            result = score_outcomes(dataset, args.run_id, seal=args.seal)
+            result = score_outcomes(dataset, args.run_id, seal=args.seal, limit=args.limit)
         output = root / "reports" / "outcomes" / args.run_id / (
             f"{command}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}.json"
         )
@@ -737,6 +744,10 @@ def main() -> int:
     pairs.add_argument("--run-id", required=True)
     pairs.add_argument("--peer-run")
     pairs.add_argument("--output", type=Path, required=True)
+    pair_coverage = sub.add_parser("report-pair-coverage", help="Audit registered TRAIN branches")
+    pair_coverage.add_argument("--run-id", required=True)
+    pair_coverage.add_argument("--share-reader-run", action="append", default=[])
+    pair_coverage.add_argument("--output", type=Path, required=True)
     audit_train = sub.add_parser("audit-train", help="Measure role and weak-supervision coverage")
     audit_train.add_argument("--parent-states", action="store_true")
     observations = sub.add_parser("build-observations", help="Regenerate V1.1 states and labels")
@@ -771,8 +782,11 @@ def main() -> int:
     score_outcome = sub.add_parser("score-outcomes", help="Score and ingest completed Reader calls")
     score_outcome.add_argument("--run-id", required=True)
     score_outcome.add_argument("--seal", action="store_true")
+    score_outcome.add_argument("--limit", type=int,
+                               help="Score up to N replies from states without pending branches")
     for command in (
         prepare_outcome, execute_outcome, score_outcome, rebind, delta_plan, proposals, pairs,
+        pair_coverage,
     ):
         command.add_argument("--observation-protocol", choices=(
             "metadata_v1", "semantic_nav_v1", "semantic_nav_delta_v2",
@@ -787,6 +801,8 @@ def main() -> int:
     args = parser.parse_args()
     config = read_json(args.config)
     root = (args.root or Path(config["data_root"])).resolve()
+    if args.command == "report-pair-coverage":
+        return stage(args, root, config)
     root.mkdir(parents=True, exist_ok=True)
     (root / "reports").mkdir(exist_ok=True)
     name = ".outcomes.lock" if args.command in {

@@ -21,7 +21,11 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     input_result,
     matching_derived_dev,
     paired_budget_response_metrics,
+    paired_repeat_measurements,
 )
+
+DEV_REPEAT_ARMS = ("u0-reset", "u1", "u2", "real", "scratch",
+                   "M0-final", "M1-final", "wide-M0-final", "main-W", "B*")
 
 
 def select_diagnostic_cohort(
@@ -41,6 +45,94 @@ def select_diagnostic_cohort(
     raise ValueError("The budget diagnostic cannot preserve complete groups across the sources")
 
 
+def register_dev_repeats(root: Path, cap: int) -> Path:
+    population = read_json(root / "dev-population-v12.json")
+    preferred_seed = population["seed"] + 104729
+    cohort = select_diagnostic_cohort(
+        population, maximum_tasks=cap // len(DEV_REPEAT_ARMS), seed=preferred_seed,
+    )
+    path = root / "dev-repeat-diagnostic" / "registration.json"
+    freeze_choice(path, {
+        "role": "dev", "seed": preferred_seed, "task_roster": cohort, "arms": list(DEV_REPEAT_ARMS),
+        "reader_slots": len(cohort) * len(DEV_REPEAT_ARMS), "cap": cap,
+        "sha_validation": False,
+    })
+    return path
+
+
+def run_dev_repeats(
+    fit: OutcomeFits, registration: Path, completed: dict[str, Any], baseline: Path,
+) -> Path:
+    root = fit.root
+    scope = registration.parent
+    reg = read_json(registration)
+    roster = reg["task_roster"]
+    first = read_json(root / "dev-population-v12.json")
+    outcomes = read_json(root / "C-direct-control-comparisons.json")
+    reads = {
+        **read_json(root / "C-objective-selection.json")["dev_runs"],
+        "real": outcomes["real_dev"], "scratch": outcomes["scratch_dev"],
+        **{
+            f"{arch}-final": selected_candidate(Path(path))["dev_run"]
+            for arch, path in completed["selected_checkpoints"].items()
+        },
+        "main-W": read_json(root / "D-architecture-O.json")["weak_readouts"][
+            completed["primary_model_selection"]["architecture"]
+        ],
+        "B*": str(baseline),
+    }
+    if set(reads) != set(reg["arms"]) or reg["reader_slots"] > reg["cap"]:
+        raise ValueError("The DEV repeat conditions differ from their registered design")
+    ids = {str(task["task_id"]) for task in roster}
+    calls = 0
+    reports = {}
+    by_run: dict[Path, str] = {}
+    for name in reg["arms"]:
+        base = Path(reads[name]).resolve()
+        if duplicate := by_run.get(base):
+            reports[name] = {
+                **reports[duplicate], "actual_reader_requests": 0, "shares_repeat_with": duplicate,
+            }
+            continue
+        protocol = read_json(base / "protocol.json")
+        population, arm = protocol["population"], protocol["arm"]
+        if population != first and not matching_derived_dev(population, first):
+            raise ValueError("DEV repeats require the same native tasks as the original evaluation")
+        run = scope / ("B-star" if name == "B*" else name)
+        plan = run / "population.json"
+        freeze_choice(plan, {
+            **population, "seed": reg["seed"], "tasks": roster, "target_tasks": len(roster),
+            "task_counts": dict(Counter(row["dataset"] for row in roster)), "arms": [arm],
+            "predeclared_unevaluable_tasks": {
+                k: v for k, v in population.get("predeclared_unevaluable_tasks", {}).items()
+                if k in ids
+            },
+            "dev_repeat_registration": str(registration), "measurement_repeat_of": str(base),
+        })
+        if read_json(run / "run.json", {}).get("status") != "COMPLETED":
+            fit.command(
+                "tools/run_memory_control_v12_followthrough.py", "dispatch-dev-repeat-arm",
+                "--data", population["dataset_path"], "--plan", str(plan),
+                "--registered-arm", arm["name"], "--slots", str(len(roster)), "--output", str(run),
+                "--window", str(min(fit.window, len(roster))), "--device", "cuda:0",
+                label=f"DEV-repeat-{run.name}",
+            )
+        journal = run / "dispatch-invocations.jsonl"
+        used = sum(json.loads(line)["reader_requests_this_invocation"]
+                   for line in journal.read_text().splitlines())
+        calls += used
+        if used > len(roster) or calls > reg["cap"]:
+            raise ValueError("DEV repeats exceeded their registered Reader slots")
+        reports[name] = {
+            **paired_repeat_measurements(base, run, repeats=fit.repeats, seed=fit.bootstrap_seed),
+            "actual_reader_requests": used, "primary": str(base), "repeat": str(run),
+        }
+        by_run[base] = name
+    path = scope / "results.json"
+    freeze_choice(path, {"reader_requests": calls, "by_arm": reports, "sha_validation": False})
+    return path
+
+
 def run_held_budget_stage(args: argparse.Namespace) -> None:
     root: Path = args.root.resolve()
     status = root / "held-budget-stage-status.json"
@@ -58,6 +150,7 @@ def run_held_budget_stage(args: argparse.Namespace) -> None:
             cap = matrix["dev_allocation"]["untrained_budget_slots"]
             if held != [1536, 3072] or matrix["sha_validation"] is not False:
                 raise ValueError("The held-budget schedule differs from the registered scope")
+            repeat_registry = register_dev_repeats(root, matrix["dev_allocation"]["repeat_slots"])
             finished = wait_json_dependency(
                 root / "D-policy-stage-complete.json", root / "policy-stage-status.json",
                 root, publish, "WAITING_FOR_FROZEN_POLICY_DEV",
@@ -161,7 +254,9 @@ def run_held_budget_stage(args: argparse.Namespace) -> None:
                 "actual_reader_requests": calls, "by_arm": reports,
                 "role": "dev", "sha_validation": False,
             })
-            publish("DEV_BUDGET_TRANSFER_COMPLETE", results=str(report))
+            repeats = run_dev_repeats(fit, repeat_registry, finished, runs["B*"])
+            publish("DEV_BUDGET_TRANSFER_AND_REPEATS_COMPLETE", results=str(report),
+                    dev_repeat_results=str(repeats))
         except Exception as error:
             publish("STOPPED", error=type(error).__name__, detail=str(error))
             raise

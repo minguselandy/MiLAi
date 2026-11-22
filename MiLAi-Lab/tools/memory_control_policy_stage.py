@@ -21,6 +21,14 @@ from milai_lab.runners.memory_control_checkpoint_selection import (
 ARCHITECTURES = ("M0", "M1", "wide-M0")
 
 
+def usable_development_gain(comparison: dict[str, Any]) -> bool:
+    quality = comparison["quality_interval_95"]
+    saving = comparison["token_savings_interval_95"]
+    return bool(quality is not None and (
+        quality[0] > 0 or (quality[0] >= -1 and saving is not None and saving[0] > 0)
+    ))
+
+
 class PolicyStage:
     def __init__(
         self, fit: OutcomeFits, recipe: dict[str, Any], dataset_config: Path, window: int,
@@ -33,7 +41,7 @@ class PolicyStage:
         self.window, self.branch_workers = window, branch_workers
         self.seed, self.value = fit.seed, recipe["utility_lambda"]
         self.observation = fit.inputs["observation_protocol"]
-        self.arm = fit.inputs["selected"]
+        self.arm = recipe["arm"]
         self.core_pool = fit.inputs["training_outcomes"]
         self.weak_m0 = Path(self.arm["selected_checkpoint"])
 
@@ -127,7 +135,11 @@ class PolicyStage:
                 run / f"checkpoints/step-{epoch1:06d}", name + "-epoch1", self.value,
             )
             selections[label] = self.root / (prefix + "-selected-O.json")
-            freeze_choice(selections[label], select_checkpoint([early, end]))
+            freeze_choice(selections[label], select_checkpoint([end]))
+            freeze_choice(self.root / (prefix + "-O-epoch-diagnostic.json"), {
+                "epoch1": str(early), "terminal": str(end),
+                "terminal_vs_epoch1": self.fit.compare(end, early),
+            })
         if counts["M0"] != sizing["trainable_parameters"]["M0"]:
             raise ValueError("The selected M0 O checkpoint differs from the parameter registry")
         freeze_choice(self.root / "D-architecture-O.json", {
@@ -154,23 +166,31 @@ class PolicyStage:
         targets = self.fit.matrix["data_targets"]
         target = targets["states_per_policy_round"]
         receipt_path = self.root / f"{phase}-policy-states.json"
-        if read_json(receipt_path, {}).get("status") != "COMPLETE":
+        collection = read_json(receipt_path, {})
+        if collection.get("status") != "COMPLETE" and not collection.get("exhausted_before_target"):
+            exclusions = [part for run in prior_outcomes for part in ("--exclude-outcome-run", run)]
             self.fit.command(
                 "tools/run_small_memory_policy.py", "collect-policy-states",
                 "--data", str(self.data), "--run-id", pool, "--output", str(receipt_path),
                 "--selection", str(selections["M0"]), "--selection", str(selections["M1"]),
                 "--target-states", str(target), "--seed", str(seed),
                 "--device", "cuda:0", "--threads", "2", "--rotate-train-budgets",
+                *exclusions,
                 label=phase + "-collect-policy-states",
             )
         collection = read_json(receipt_path)
-        if collection.get("status") != "COMPLETE" or collection["distinct_states"] != target:
-            raise ValueError(f"{phase} has a reached-state shortfall; inspect {receipt_path}")
+        actual = collection["distinct_states"]
+        expected_source = set(targets["incremental"])
+        if (not 1 <= actual <= target
+                or (actual < target and not collection.get("exhausted_before_target"))
+                or set(collection["actual_states_by_source"]) != expected_source
+                or collection["configuration"]["excluded_outcome_runs"] != prior_outcomes):
+            raise ValueError(f"{phase} is missing a required reached-state source or registration")
         declaration, statuses, states = branch_state(self.data, outcomes)
-        if not declaration.get("sealed") and states < target:
+        if not declaration.get("sealed") and states < actual:
             self.build(
                 "prepare-outcomes", "--run-id", outcomes, "--policy-pool", pool,
-                "--state-limit", str(target), "--seed", str(seed),
+                "--state-limit", str(actual), "--seed", str(seed),
                 "--recommendation-selection", str(selections["M0"]),
                 "--recommendation-selection", str(selections["M1"]), "--share-checkpoint-encoder",
                 "--device", "cuda:0", "--branch-workers", str(self.branch_workers),
@@ -178,8 +198,8 @@ class PolicyStage:
             )
             declaration, statuses, states = branch_state(self.data, outcomes)
         slots = sum(statuses.values())
-        cap = 5 * (target + round(target * targets["policy_repeat_fraction"]))
-        if states != target or not 1 <= slots <= cap or declaration.get("policy_pool") != pool:
+        cap = 5 * (actual + round(actual * targets["policy_repeat_fraction"]))
+        if states != actual or not 1 <= slots <= cap or declaration.get("policy_pool") != pool:
             raise ValueError(f"{phase} policy branches differ from the registered pool or capacity")
         if declaration["comparison_protocol"]["continuation"]["kind"] != "reference-short":
             raise ValueError("Only reference-short measured targets can enter formal P replay")
@@ -193,11 +213,12 @@ class PolicyStage:
                 "score-outcomes", "--run-id", outcomes, "--seal", label=phase + "-score-seal",
             )
         sealed, final, measured = branch_state(self.data, outcomes)
-        if not sealed.get("sealed") or measured != target or not final.get("ingested"):
+        if not sealed.get("sealed") or measured != actual or not final.get("ingested"):
             raise ValueError(f"{phase} did not produce sealed measured outcomes")
         return outcomes, {
             "policy_collection": str(receipt_path), "new_before_states": measured,
             "branch_slots": slots, "outcome_statuses": final,
+            "target_states": target, "source_shortfalls": collection["source_shortfalls"],
         }
 
     def run(self) -> None:
@@ -236,7 +257,11 @@ class PolicyStage:
                 ctl, self.recipe["objective"], self.arm, core_checkpoint, stage_name="p",
                 outcome_runs=self.core_pool, replay_exposures=exposure,
             )["contract"]
-            if matched["steps"] != ref["steps"] or matched["batch_states"] != ref["batch_states"]:
+            replay_fields = (
+                "steps", "epochs", "steps_per_epoch", "state_exposures_per_epoch",
+                "batch_states", "learning_rate", "optimizer", "replay_weighting",
+            )
+            if any(matched[k] != ref[k] for k in replay_fields):
                 raise ValueError("The core-only replay does not match policy updates")
             core_checkpoint = self.root / ctl / "checkpoint"
             report.update({
@@ -269,15 +294,46 @@ class PolicyStage:
                 "P_A_vs_selected_O": self.fit.compare(a, o),
                 "P_B_vs_P_A": self.fit.compare(b, a),
             }
+        versus_replay = self.fit.compare(final_m0, replay)
+        versus_outcome = self.fit.compare(
+            final_m0, Path(selected_candidate(selected_o["M0"])["dev_run"]),
+        )
         freeze_choice(self.root / "D-policy-comparisons.json", {
             "phase_readouts": stage_comparisons,
-            "M0_policy_vs_matched_core_replay": self.fit.compare(final_m0, replay),
+            "M0_policy_vs_matched_core_replay": versus_replay,
+            "M0_policy_vs_outcome": versus_outcome,
             "M1_vs_parameter_matched_M0": self.fit.compare(final_m1, final_wide),
         })
+        use_policy = all(usable_development_gain(c) for c in (versus_replay, versus_outcome))
+        final_stage, final_selections = ("P-B", previous) if use_policy else ("O", selected_o)
+        baseline = Path(self.recipe["strong_baseline"])
+        absolute = {label: selected_candidate(final_selections[label]) for label in ARCHITECTURES}
+        versus_baseline = {
+            label: self.fit.compare(Path(row["dev_run"]), baseline)
+            for label, row in absolute.items()
+        }
+        qualified = [
+            label for label in ARCHITECTURES
+            if (ci := versus_baseline[label]["quality_interval_95"]) is not None
+            and ci[0] >= -1 and absolute[label]["reader_input_tokens"] is not None
+        ]
+        if qualified:
+            main = min(qualified, key=lambda label: (
+                absolute[label]["reader_input_tokens"], -absolute[label]["quality_points"],
+            ))
+        else:
+            main = max(ARCHITECTURES, key=lambda label: absolute[label]["quality_points"])
         freeze_choice(self.root / "D-policy-stage-complete.json", {
             "status": "DEV_COMPLETE", "seed": self.seed, "utility_lambda": self.value,
             "objective": self.recipe["objective"], "rounds": phase_reports,
-            "selected_checkpoints": {k: str(v) for k, v in previous.items()},
+            "selected_checkpoints": {k: str(v) for k, v in final_selections.items()},
+            "primary_model_selection": {
+                "architecture": main, "eligible_vs_b_star": qualified,
+                "comparison_by_architecture": versus_baseline,
+                "rule": "lowest_input_after_quality_screen_else_highest_quality",
+            },
+            "final_stage": final_stage,
+            "final_stage_rule": "P_B_gain_vs_same_O_and_matched_R_only_else_shared_O",
             "sha_validation": False,
         })
 

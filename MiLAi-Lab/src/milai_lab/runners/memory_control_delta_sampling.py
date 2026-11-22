@@ -165,7 +165,7 @@ def ranked_train_proposals(
 
     if (not dataset.control_release or len(checkpoints) != 2 or not targets
             or any(type(n) is not int or n < 1 for n in targets.values())):
-        raise ValueError("Ranked proposal acquisition requires two W checkpoints and source targets")
+        raise ValueError("Ranked acquisition requires two W checkpoints and source targets")
     started, cpu = time.perf_counter(), time.process_time()
     models = []
     for path in checkpoints:
@@ -294,14 +294,16 @@ def ranked_train_proposals(
                 timings["cache_load_seconds"] += time.perf_counter() - tick
                 tick = time.perf_counter()
                 logits = [
-                    m.predict(states, actions, owners, rows, numerics=numeric).float().cpu().tolist()
+                    m.predict(states, actions, owners, rows, numerics=numeric)
+                    .float().cpu().tolist()
                     for m in models
                 ]
                 pos = 0
                 for sid, n in zip(window, lengths, strict=True):
                     menu = [MemoryAction(**a) for a in menus[sid]]
+                    action_ids = [a.id for a in menu]
                     results[sid].update(
-                        votes=[_ranked_vote(PolicyScores([a.id for a in menu], v[pos:pos + n]), menu)
+                        votes=[_ranked_vote(PolicyScores(action_ids, v[pos:pos + n]), menu)
                                for v in logits],
                         score_origin="shared_frozen_features",
                     )
@@ -415,7 +417,7 @@ def register_ranked_delta(
                 raise ValueError("D reservoir must contain distinct registered core TRAIN states")
             votes = item["votes"]
             options, disagreement = _candidate_interventions(row, votes)
-            for option, vote in zip(options, votes):
+            for option, vote in zip(options, votes, strict=False):
                 option["priority"] = (disagreement or
                                       vote["best_legal_read"] not in measured[sid])
             metadata[sid] = {
@@ -452,10 +454,12 @@ def register_ranked_delta(
                 if sid in selected:
                     continue
                 row = metadata[sid]
-                assigned = (first_proposer + disagreements) % 2 if row["candidate_disagreement"] else 0
+                assigned = (
+                    (first_proposer + disagreements) % 2 if row["candidate_disagreement"] else 0
+                )
                 option = row["options"][assigned]
-                if (stratum == "online_priority" and not option.get("priority")
-                        or stratum == "evidence_opportunity" and not option["opportunity"]):
+                if ((stratum == "online_priority" and not option.get("priority"))
+                        or (stratum == "evidence_opportunity" and not option["opportunity"])):
                     continue
                 if row["candidate_disagreement"]:
                     allocation[assigned] += 1
@@ -474,18 +478,21 @@ def register_ranked_delta(
                 remaining -= 1
         strata[source] = dict(frequencies)
         assignments[source] = {
-            "first_proposer": first_proposer, "assigned_checkpoints": [allocation[i] for i in (0, 1)],
+            "first_proposer": first_proposer,
+            "assigned_checkpoints": [allocation[i] for i in (0, 1)],
         }
         shortfalls[source] = target - sum(frequencies.values())
     if not selected:
         raise ValueError("No TRAIN states could be selected from the core")
     states, repeat_target = _match_repeats(selected, rng, fraction=0.2)
     return {
-        "protocol": BRANCH_PLAN_PROTOCOL, "kind": "incremental_pair", "dataset_run_id": dataset.run_id,
+        "protocol": BRANCH_PLAN_PROTOCOL, "kind": "incremental_pair",
+        "dataset_run_id": dataset.run_id,
         "observation_protocol": dataset.observation_protocol, "seed": seed, "core_run": core_run,
         "source_targets": quotas, "actual_strata_by_source": strata, "states": states,
         "source_shortfalls": shortfalls, "online_proposals": str(proposal_path.resolve()),
-        "proposer_checkpoint_paths": proposals["checkpoints"], "disagreement_assignment": assignments,
+        "proposer_checkpoint_paths": proposals["checkpoints"],
+        "disagreement_assignment": assignments,
         "distinct_before_states": len(states), "repeat_states": repeat_target,
         "request_slots": sum(len(r["actions"]) * r["repeats"] for r in states),
         "proposal_protocol": RANKED_PROPOSALS, "registered_before_first_response": True,

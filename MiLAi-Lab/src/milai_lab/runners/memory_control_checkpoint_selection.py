@@ -29,6 +29,7 @@ def training_receipt(checkpoint: Path) -> Path:
 
 def select_checkpoint(
     candidates: Sequence[Path], *, baseline: Path | None = None,
+    lambda_tie_order: Sequence[float] | None = None,
 ) -> dict[str, Any]:
     """Apply the registered epoch or lambda comparison to actual complete DEV readouts."""
     if not candidates or len(candidates) > (3 if baseline is not None else 2):
@@ -107,6 +108,10 @@ def select_checkpoint(
             )
         eligible = [row for row in rows if row["quality_constraint_met"]
                     and row["reader_input_tokens"] is not None]
+        if lambda_tie_order is not None and (
+            len(lambda_tie_order) != 3 or set(lambda_tie_order) != {0.0, 0.05, 0.10}
+        ):
+            raise ValueError("Declare one tie order for the three registered lambda points")
         if eligible:
             winner = min(eligible, key=lambda row: (
                 row["reader_input_tokens"], -row["quality_points"], row["utility_lambda"],
@@ -115,6 +120,19 @@ def select_checkpoint(
         else:
             winner = min(rows, key=quality_order)
             reason = "highest_dev_quality_without_established_quality_constraint"
+        if lambda_tie_order is not None:
+            pool = eligible or rows
+            if eligible:
+                optimum = min(row["reader_input_tokens"] for row in pool)
+                pool = [row for row in pool if row["reader_input_tokens"] <= optimum + 1e-8]
+            quality = max(row["quality_points"] for row in pool)
+            pool = [row for row in pool if row["quality_points"] >= quality - 1e-8]
+            if not eligible and (costs := [row["reader_input_tokens"] for row in pool
+                                           if row["reader_input_tokens"] is not None]):
+                cutoff = min(costs) + 1e-8
+                pool = [row for row in pool if row["reader_input_tokens"] is not None
+                        and row["reader_input_tokens"] <= cutoff]
+            winner = min(pool, key=lambda row: lambda_tie_order.index(row["utility_lambda"]))
     return {
         "status": "SELECTED_DEV_CHECKPOINT", "role": "dev", "selection_rule": reason,
         "selected_checkpoint": winner["checkpoint"], "selected": winner, "candidates": rows,
