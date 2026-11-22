@@ -1157,9 +1157,13 @@ def score_outcomes(
     run_id: str,
     *,
     seal: bool,
+    limit: int | None = None,
 ) -> dict[str, Any]:
+    if limit is not None and (limit < 1 or seal):
+        raise ValueError("A bounded scoring tranche requires a positive limit and an open run")
     if dataset.revision is None:
         raise ValueError("Use a revised outcome database")
+    started, cpu = time.perf_counter(), time.process_time()
     with closing(connect(dataset.path, writable=True)) as db:
         declared = db.execute(
             "SELECT config FROM outcome_runs WHERE run_id=?", (run_id,)
@@ -1188,10 +1192,18 @@ def score_outcomes(
             FROM action_outcomes o JOIN states s ON s.id=o.state_id
             JOIN experiment_tasks t ON t.id=s.task_id
             WHERE o.run_id=? AND o.execution_status='reader_completed'
-                  AND t.experiment_role=? ORDER BY t.id,o.rowid
+                  AND t.experiment_role=?
+                  AND (?=0 OR NOT EXISTS (
+                      SELECT 1 FROM action_outcomes waiting
+                      WHERE waiting.run_id=o.run_id AND waiting.state_id=o.state_id
+                        AND waiting.execution_status IN ('prepared','dispatching')
+                  ))
+            ORDER BY t.id,o.rowid LIMIT ?
         """,
-            (run_id, role),
+            (run_id, role, int(limit is not None), limit if limit is not None else -1),
         ).fetchall()
+        # Keep completed replies reusable until all scheduled branches at their before state finish.
+        errors = 0
         last_task = None
         for branch in rows:
             if last_task != branch["task_id"]:
@@ -1234,6 +1246,7 @@ def score_outcomes(
                     """,
                         (type(exc).__name__, packed({**stages, "score_error": str(exc)}), *key),
                     )
+                errors += 1
                 continue
             with db:
                 db.execute(
@@ -1302,4 +1315,8 @@ def score_outcomes(
             "tasks": actionable[2],
             "optimizer_updates": 0,
             "reader_requests_in_scoring": 0,
+            "scored_this_invocation": len(rows) - errors,
+            "scorer_errors_this_invocation": errors,
+            "scoring_wall_seconds": time.perf_counter() - started,
+            "scoring_cpu_seconds": time.process_time() - cpu,
         }

@@ -615,7 +615,7 @@ def stage(args: argparse.Namespace, root: Path, config: dict[str, Any]) -> int:
                 share_reader_runs=tuple(args.share_reader_run),
             )
         else:
-            result = score_outcomes(dataset, args.run_id, seal=args.seal)
+            result = score_outcomes(dataset, args.run_id, seal=args.seal, limit=args.limit)
         output = root / "reports" / "outcomes" / args.run_id / (
             f"{command}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}.json"
         )
@@ -782,6 +782,8 @@ def main() -> int:
     score_outcome = sub.add_parser("score-outcomes", help="Score and ingest completed Reader calls")
     score_outcome.add_argument("--run-id", required=True)
     score_outcome.add_argument("--seal", action="store_true")
+    score_outcome.add_argument("--limit", type=int,
+                               help="Score up to N replies from states without pending branches")
     for command in (
         prepare_outcome, execute_outcome, score_outcome, rebind, delta_plan, proposals, pairs,
         pair_coverage,
