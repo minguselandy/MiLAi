@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import fcntl
+import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -74,38 +75,61 @@ def freeze(root, seed):
 def evidence_fit(root, initial, seed):
     parent = json_file(initial.parent / "run.json")
     base = parent["contract"]
-    if parent["status"] != "completed" or not parent["reload_scores_equal"] or base["probe"]:
-        raise ValueError("Need the verified complete initial evidence fit")
+    if (
+        parent["status"] != "completed"
+        or not parent.get("reload_scores_equal")
+        or base["probe"]
+        or base["seed"] != 11
+        or base["supervision_mode"] != "evidence"
+        or base.get("parent") is not None
+        or not (initial / "control.pt").is_file()
+    ):
+        raise ValueError("Need the complete, reloaded seed11 evidence fit")
+    controller = json_file(initial / "controller.json")
+    backbone = Path(controller["backbone"])
     out = root / "weights" / f"s1-f{seed}"
     metrics = root / "gte" / f"s1-f{seed}"
-    comparable = (
-        "input",
-        "full_population",
-        "observation_protocol",
-        "selected_per_epoch",
-        "epochs",
-        "object_batch",
-        "effective_batch",
-        "lr",
-        "supervision_mode",
-        "mixed_precision",
-        "source_inventory",
-        "updates",
-        "source_weights",
-    )
-    if (out / "run.json").exists():
-        previous = json_file(out / "run.json")
-        contract = previous["contract"]
-        if contract["seed"] != seed or any(contract[k] != base[k] for k in comparable):
-            raise ValueError("Existing evidence fit has a different frozen recipe or inventory")
-        if (
-            previous["status"] == "completed"
-            and previous["reload_scores_equal"]
-            and (out / "checkpoint/control.pt").is_file()
-            and (metrics / "run.json").is_file()
-            and previous == json_file(metrics / "run.json")
-        ):
-            return out / "checkpoint"
+
+    def recipe(contract):
+        return {
+            key: value for key, value in contract.items() if key not in {"seed", "fitted_groups"}
+        }
+
+    def reusable():
+        if not (out / "run.json").is_file():
+            return False
+        result = json_file(out / "run.json")
+        contract = result["contract"]
+        if contract["seed"] != seed or recipe(contract) != recipe(base):
+            raise ValueError("Evidence fit changed the frozen recipe or inventory")
+        identity = result.get("fit_identity")
+        if identity and not backbone.samefile(identity["backbone"]):
+            raise ValueError("Evidence fit uses a different foundation backbone")
+        if result["status"] != "completed":
+            return False
+        saved = json_file(out / "checkpoint/controller.json")
+        if not backbone.samefile(saved["backbone"]) or {
+            k: v for k, v in saved.items() if k != "backbone"
+        } != {k: v for k, v in controller.items() if k != "backbone"}:
+            raise ValueError(
+                "Completed evidence controller differs from the frozen backbone or configuration"
+            )
+        if not result.get("reload_scores_equal") or not (out / "checkpoint/control.pt").is_file():
+            raise ValueError("Incomplete published evidence checkpoint")
+        try:
+            return result == json_file(metrics / "run.json")
+        except (FileNotFoundError, json.JSONDecodeError):
+            return False
+
+    if reusable():
+        return out / "checkpoint"
+    flags = []
+    for key, flag in (
+        ("frozen_native_root_order", "--evidence-order-map"),
+        ("frozen_native_root_master", "--evidence-master"),
+    ):
+        if key in base:
+            flags += [flag, base[key]]
     run(
         "pretrained_control_train",
         "--objective",
@@ -113,7 +137,7 @@ def evidence_fit(root, initial, seed):
         "--data",
         base["input"],
         "--backbone",
-        json_file(initial / "controller.json")["backbone"],
+        controller["backbone"],
         "--output",
         out,
         "--metrics",
@@ -128,15 +152,18 @@ def evidence_fit(root, initial, seed):
         base["effective_batch"],
         "--seed",
         seed,
+        "--device",
+        {"bf16": "cuda", "float32": "cpu"}[base["mixed_precision"]],
+        *flags,
     )
-    result = json_file(out / "run.json")
-    if (
-        result["status"] != "completed"
-        or not result["reload_scores_equal"]
-        or any(result["contract"][k] != base[k] for k in comparable)
-    ):
-        raise ValueError("Repeat changed the initial fit recipe or input")
+    if not reusable():
+        raise ValueError("Repeat did not publish its verified evidence checkpoint")
     return out / "checkpoint"
+
+
+def evidence_only(args):
+    """Prepare the shared initializers independently of outcome fits and policy selection."""
+    return {seed: str(evidence_fit(args.root.resolve(), args.s1, seed)) for seed in (29, 47)}
 
 
 def whole_group_roster(parent, cap, selection_seed, parent_path):
@@ -385,6 +412,12 @@ if __name__ == "__main__":
     parser.add_argument("--acquisition-seed", type=int, choices=[11], default=11)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("freeze")
+    prefix = sub.add_parser(
+        "evidence-only", help="Prepare the shared seed29/47 evidence initializations"
+    )
+    prefix.add_argument(
+        "--s1", type=Path, required=True, help="Completed original seed11 evidence checkpoint"
+    )
     refit = sub.add_parser("repeat")
     refit.add_argument("--weights", type=Path, required=True)
     refit.add_argument("--s1", type=Path, required=True)
@@ -394,6 +427,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.command == "freeze":
         freeze(args.root.resolve(), args.acquisition_seed)
+    elif args.command == "evidence-only":
+        print(json.dumps(evidence_only(args)), flush=True)
     else:
         with (args.root / ".frozen-data-repeats.lock").open("a") as owner:
             fcntl.flock(owner, fcntl.LOCK_EX | fcntl.LOCK_NB)

@@ -117,3 +117,14 @@ For a separately rebuilt evidence DB, set `REBUILT_EVIDENCE` to that SQLite file
 The optional fitter argument resolves the frozen order against the rebuilt DB before shuffling. Model inputs use their original legal features. The loader translates rebuilt local task and row numbers into the frozen addresses for sampling and exposure accounting. An existing fit continues to use its registered input and configuration.
 
 The order file occupies 1,476,130 bytes. An independent 4,354,048-byte SQLite address table reversed all 119,394 physical addresses while referencing the original frozen payloads. The full native-key alignment, all normalized training payloads and all 119,394 seed-11 sampler positions matched. The isolated test exercises changed address assignments. A new raw-data regeneration can verify its own outputs with the same alignment command. The receipts are `gte/s1-native-task-key-inventory.json` and `gte/native-root-order-verification.json`.
+
+### Shared fitting-seed prefixes
+
+After seed 11 has closed its complete S1 fit and both initial shared 2k outcome fits, a spare fit-only GPU window can prepare the evidence initializations for optimization seeds 29 and 47. The standalone command runs them serially from the original generic backbone on the same frozen evidence population. The production scheduler reserves this window after both warm fits. The initializer itself only needs the completed S1 declaration, foundation model and frozen evidence. Each output is a newly fitted model. This command performs zero Reader evaluations and selects no method or checkpoint on TUNE or fresh groups.
+
+```bash
+"$PYTHON" tools/repeat_memory_control_v13_finalists.py --root "$R" evidence-only \
+    --s1 "$R/weights/s1/checkpoint"
+```
+
+The full S4 repeat later reuses the same `weights/s1-f29` and `weights/s1-f47` checkpoints once their controller configuration, backbone, frozen recipe, complete exposure and matching metric receipts are verified. Frozen-feedback outcome refits and readouts follow the 24k development selection. Precomputing evidence initializations provides no evidence of seed stability until those comparisons run.
