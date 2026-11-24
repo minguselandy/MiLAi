@@ -29,8 +29,14 @@ prepare)
         git -C "$source_dir" checkout -q --detach FETCH_HEAD
     fi
     patch="$project/configs/memory_control_v13/qrag_ref_40gb.patch"
-    if ! git -C "$source_dir" apply --reverse --check "$patch" 2>/dev/null; then
-        git -C "$source_dir" apply "$patch"
+    eval_patch="$project/configs/memory_control_v13/qrag_ref_terminal_actors.patch"
+    if git -C "$source_dir" apply --reverse --check "$eval_patch" 2>/dev/null; then
+        git -C "$source_dir" apply --reverse --check --exclude=eval_retriever.py "$patch"
+    else
+        if ! git -C "$source_dir" apply --reverse --check "$patch" 2>/dev/null; then
+            git -C "$source_dir" apply "$patch"
+        fi
+        git -C "$source_dir" apply "$eval_patch"
     fi
     # The upstream local loader reads just these two members of the V1 archive.
     unzip -jn "$official_zip" 'data/musique_ans_v1.0_train.jsonl' 'data/musique_ans_v1.0_dev.jsonl' -d "$assets/musique"
@@ -69,22 +75,33 @@ evaluate)
     trained=$(realpath "${2:?provide upstream run directory containing config.yaml}")
     exec {evaluation_lock}>"$trained/.retrieval-evaluation.lock"
     flock "$evaluation_lock"
-    if [[ ! -s "$trained/reference-result.json" ]]; then
+    # Old single-actor summaries do not close the three-actor retrieval contrast.
+    if ! python3 -c 'from pathlib import Path; import json,sys; p=Path(sys.argv[1]); sys.exit(0 if p.is_file() and "native_retrieval" in json.loads(p.read_text()) else 1)' "$trained/reference-result.json"; then
         python3 "$project/scripts/qrag_ref_result.py" --prepare-terminal --run "$trained"
         if [[ ! -e "$assets/musique-tune300/roster.json" || ! -e "$assets/e5-large/config.json" ]]; then
             "$project/scripts/qrag_reference.sh" prepare
         fi
-        python3 "$project/scripts/qrag_ref_result.py" --begin-validation --run "$trained"
+        export PYTHONPATH="$project/scripts${PYTHONPATH:+:$PYTHONPATH}"
+        python3 "$project/scripts/qrag_ref_retrieval.py" register --run "$trained" \
+            --base "$model/model.safetensors" --initial-index "$result_dir/zero-update-actor-source.json"
         cd "$source_dir"
-        /usr/bin/time -q -f '{"elapsed_seconds":%e,"cpu_user_seconds":%U,"cpu_sys_seconds":%S,"max_rss_kib":%M,"exit_code":%x}' \
-            -a -o "$trained/validation-resource.jsonl" python3 -u eval_retriever.py \
-            "pretrained_path=$trained" num_samples=-1 +envs.max_steps=4
+        for stage in initial best final; do
+            directory="$trained/retrieval/$stage"
+            if python3 "$project/scripts/qrag_ref_retrieval.py" check-stage --directory "$directory" --roster "$result_dir/fixed-dev-roster.json"; then
+                continue
+            fi
+            python3 "$project/scripts/qrag_ref_result.py" --begin-validation --run "$directory" --roster "$result_dir/fixed-dev-roster.json"
+            /usr/bin/time -q -f '{"elapsed_seconds":%e,"cpu_user_seconds":%U,"cpu_sys_seconds":%S,"max_rss_kib":%M,"exit_code":%x}' \
+                -a -o "$directory/validation-resource.jsonl" python3 -u eval_retriever.py \
+                "pretrained_path=$directory" "+ref_binding=$directory/actor-binding.json" \
+                num_samples=-1 +envs.max_steps=4
+        done
         timing_args=()
         if [[ -s "$experiment/initial-schedule.json" ]]; then
             timing_args+=(--schedule "$experiment/initial-schedule.json")
         fi
         python3 "$project/scripts/qrag_ref_result.py" "${timing_args[@]}" --run "$trained" \
-            --roster "$assets/musique-tune300/roster.json"
+            --roster "$result_dir/fixed-dev-roster.json"
     fi
     # An attached mirror may still be verifying the last atomic checkpoint after fit exit.
     if [[ -e "$trained/retained-actors/.writer.lock" ]]; then

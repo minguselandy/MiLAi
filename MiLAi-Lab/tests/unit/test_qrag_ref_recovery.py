@@ -26,7 +26,7 @@ def test_terminal_rehydration_and_interrupted_evaluation(tmp_path, monkeypatch):
     curve = [
         {
             "optimizer_updates": i,
-            "gt_dev_return": 1 if i == 400 else 0.5,
+            "gt_dev_return": 1 if i == 400 else 0.25 if i == 10000 else 0.5,
             "gt_train_return": 0.5,
             "elapsed_seconds": i + 2,
             "critic_transitions": i * 96 + 12,
@@ -73,15 +73,81 @@ def test_terminal_rehydration_and_interrupted_evaluation(tmp_path, monkeypatch):
     settle.begin_validation(run)
     assert packets.read_bytes().endswith(b"}\n")
     assert list(run.glob("eval_seed42.interrupted-tail-*"))
-    with packets.open("a") as f:
-        for i in range(1, 300):
-            f.write(json.dumps({"id": str(i), "em": 1, "f1": 1, "return": 1}) + "\n")
     roster = tmp_path / "roster.json"
     roster.write_text(
         json.dumps({"groups": [str(i) for i in range(300)], "n": 300, "role": "TUNE"})
     )
-    (run / "validation-resource.jsonl").write_text('{"exit_code":0,"elapsed_seconds":3}\n')
+    common = {
+        "seed": 42,
+        "groups": 300,
+        "max_steps": 4,
+        "dataset": "musique",
+        "feedback": "GroundTruthFeedback",
+        "never_terminate": False,
+        "penalize_extra_steps": False,
+        "per_fact_reward": 0.0,
+        "completion_reward": 1.0,
+        "reader_calls": 0,
+    }
+    # A selected early peak and a real final drop must remain distinguishable.
+    for stage, step, n in (("initial", 0, 150), ("best", 400, 300), ("final", 10000, 75)):
+        d = run / "retrieval" / stage
+        d.mkdir(parents=True)
+        (d / "actor-binding.json").write_text(
+            json.dumps({"stage": stage, "optimizer_updates": step})
+        )
+        (d / "native-protocol.json").write_text(
+            json.dumps(
+                {"stage": stage, "optimizer_updates": step, "actor_origin": {}, "common": common}
+            )
+        )
+        records = [
+            {
+                "id": str(i),
+                "f1": int(i < n),
+                "em": int(i < n),
+                "return": int(i < n),
+                "sf_idx": [0],
+                "pred_idx": [0] if i < n else [1],
+            }
+            for i in range(300)
+        ]
+        (d / "eval_seed42.jsonl").write_text("".join(json.dumps(r) + "\n" for r in records))
+        (d / "validation-launches.jsonl").write_text('{"started_ns":1}\n')
+        (d / "validation-resource.jsonl").write_text('{"exit_code":0,"elapsed_seconds":3}\n')
     result = settle.summarize(run, roster, [])
     assert result["fit_duration_scope"].startswith("Lower bound")
     assert result["best_actor_support_f1"] == 1
     assert result["evaluated_groups"] == 300
+    comparison = result["native_retrieval"]
+    assert comparison["all_three_gt_readbacks_agree"]
+    assert comparison["observed_pattern"] == "selected_best_gain_with_final_degradation"
+    assert (
+        comparison["best_improved_both_support_metrics"]
+        and comparison["final_regressed_both_support_metrics"]
+    )
+    assert comparison["sustained_gain_on_fixed_tune"] == "not_established"
+    paired = comparison["paired_differences"]["final_minus_initial"]["support_f1"]
+    assert (paired["mean_delta"], paired["regressed"], paired["tied"]) == (-0.25, 75, 225)
+    assert result["retrieval_validation_settled_invocations"] == 3
+    assert result["one_gpu_retrieval_job_hours"] == pytest.approx(9 / 3600)
+    final_rows = run / "retrieval/final/eval_seed42.jsonl"
+    complete = [json.loads(line) for line in final_rows.read_text().splitlines()]
+    for item in complete:
+        hit = int(int(item["id"]) < 225)
+        item.update(f1=hit, em=hit, pred_idx=[0] if hit else [1])
+        item["return"] = hit
+    final_rows.write_text("".join(json.dumps(v) + "\n" for v in complete))
+    stale = settle.summarize(run, roster, [])["native_retrieval"]
+    assert stale["observed_pattern"] == "unestablished_logged_GT_readback_disagreement"
+    for row in curve[-5:]:
+        row["gt_dev_return"] = 0.75
+    curve_file.write_text("".join(json.dumps(v) + "\n" for v in curve))
+    sustained = settle.summarize(run, roster, [])["native_retrieval"]
+    assert sustained["sustained_gain_on_fixed_tune"] == "observed"
+    final_protocol = run / "retrieval/final/native-protocol.json"
+    protocol = json.loads(final_protocol.read_text())
+    protocol["common"]["max_steps"] = 5
+    final_protocol.write_text(json.dumps(protocol))
+    with pytest.raises(ValueError, match="Retrieval settings"):
+        settle.summarize(run, roster, [])

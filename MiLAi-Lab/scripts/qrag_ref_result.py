@@ -5,7 +5,6 @@ import fcntl
 import json
 import os
 import select
-import statistics
 import subprocess
 import time
 from pathlib import Path
@@ -129,8 +128,19 @@ def repair_tail(path):
     return rows, discarded
 
 
-def begin_validation(run):
+def begin_validation(run, roster=None):
     rows, discarded = repair_tail(run / "eval_seed42.jsonl")
+    if rows and roster is not None:
+        from qrag_ref_retrieval import grade_row
+
+        expected = set(json.loads(roster.read_text())["groups"])
+        seen = set()
+        for line in (run / "eval_seed42.jsonl").read_text().splitlines():
+            row = json.loads(line)
+            if row["id"] not in expected or row["id"] in seen:
+                raise ValueError("Retained native retrieval row violates the fixed roster")
+            grade_row(row)
+            seen.add(row["id"])
     _, resource_loss = repair_tail(run / "validation-resource.jsonl")
     _, launch_loss = repair_tail(run / "validation-launches.jsonl")
     # A reboot may interrupt the evaluator before GNU time can settle the attempt.
@@ -151,13 +161,13 @@ def begin_validation(run):
         os.fsync(launches.fileno())
 
 
-def plot_curve(run, curve):
+def plot_curve(run, curve, actors):
     from matplotlib.backends.backend_agg import FigureCanvasAgg
     from matplotlib.figure import Figure
 
-    fig = Figure(figsize=(7.2, 4.2), layout="constrained")
+    fig = Figure(figsize=(10.2, 4.3), layout="constrained")
     FigureCanvasAgg(fig)
-    ax = fig.subplots()
+    ax, score = fig.subplots(1, 2, gridspec_kw={"width_ratios": [2.0, 1.0]})
     xs = [r["optimizer_updates"] for r in curve]
     ax.plot(xs, [r["gt_train_return"] for r in curve], color="0.62", label="Train")
     ax.plot(xs, [r["gt_dev_return"] for r in curve], color="#126782", label="Fixed dev (300)")
@@ -166,7 +176,28 @@ def plot_curve(run, curve):
         ylabel="Mean GT episode return",
         title="Q-RAG Reference · MuSiQue-Ans",
     )
+    ax.axhline(curve[0]["gt_dev_return"], color="0.45", linestyle=":", label="Initial dev")
     ax.legend()
+    stages = ("initial", "best", "final")
+    for offset, name, label, color in (
+        (-0.18, "support_f1", "Support F1", "#126782"),
+        (0.18, "support_coverage_em", "Coverage EM", "#d07936"),
+    ):
+        score.bar(
+            [i + offset for i in range(3)],
+            [actors[k]["means"][name] for k in stages],
+            width=0.34,
+            color=color,
+            label=label,
+        )
+    score.set(
+        xticks=range(3),
+        xticklabels=["Initial", "Best", "Final"],
+        ylim=(0, 1),
+        title="Native retrieval · same 300",
+        ylabel="Mean score",
+    )
+    score.legend()
     fig.savefig(run / "reference-learning-curve.png", dpi=160)
 
 
@@ -239,13 +270,10 @@ def finalize_after_pid(run, pid, start_ticks):
 
 def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
     curve = complete_curve(run)
-    rows = [json.loads(line) for line in (run / "eval_seed42.jsonl").read_text().splitlines()]
-    frozen = json.loads(roster.read_text())
-    groups = set(frozen["groups"])
-    if len(groups) != 300 or frozen["n"] != 300 or frozen["role"] != "TUNE":
-        raise ValueError("Final retrieval requires the frozen 300-source REF TUNE roster")
-    if len(rows) != len(groups) or {r["id"] for r in rows} != groups:
-        raise ValueError("Retrieval validation coverage differs from the frozen roster")
+    from qrag_ref_retrieval import paired_evaluation
+
+    native = paired_evaluation(run, json.loads(roster.read_text()), curve)
+    actors = native["actors"]
     settled = run.parent / "fit-resource.json"
     if not settled.is_file() and (run.parent / "terminal-process-window.json").is_file():
         settled = run.parent / "terminal-process-window.json"
@@ -267,16 +295,19 @@ def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
         }
         time_scope = "Lower bound from the completed curve and last durable live observation"
 
-    validation_attempts = [
-        json.loads(line) for line in (run / "validation-resource.jsonl").read_text().splitlines()
-    ]
-    evaluation_resource = validation_attempts[-1]
-    if fit_resource.get("exit_code") not in {None, 0} or evaluation_resource["exit_code"] != 0:
-        raise ValueError("Training or retrieval evaluator returned an error")
-    evaluation_seconds = sum(r["elapsed_seconds"] for r in validation_attempts)
-    launches = run / "validation-launches.jsonl"
-    n_launched = len(launches.read_text().splitlines()) if launches.is_file() else None
-    unsettled = max(0, n_launched - len(validation_attempts)) if n_launched is not None else None
+    if fit_resource.get("exit_code") not in {None, 0}:
+        raise ValueError("The reference fit returned an error")
+    resources = [row["resource"] for row in actors.values()]
+    evaluation_hours = sum(r["one_gpu_job_hours"] for r in resources)
+    n_attempts = sum(r["settled_invocations"] for r in resources)
+    n_launched = (
+        sum(r["launches"] for r in resources)
+        if all(r["launches"] is not None for r in resources)
+        else None
+    )
+    unsettled = (
+        sum(r["unsettled_invocations"] for r in resources) if n_launched is not None else None
+    )
     intervals = []
     for path in schedules:
         schedule = json.loads(path.read_text())
@@ -300,8 +331,9 @@ def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
         "one_gpu_fit_wall_hours_minus_recorded_parking": (fit_resource["elapsed_seconds"] - paused)
         / 3600,
         "matching_recorded_park_intervals": merged,
-        "one_gpu_retrieval_job_hours": evaluation_seconds / 3600,
-        "retrieval_validation_settled_invocations": len(validation_attempts),
+        "one_gpu_retrieval_job_hours": evaluation_hours,
+        "native_retrieval": native,
+        "retrieval_validation_settled_invocations": n_attempts,
         "retrieval_validation_launches": n_launched,
         "unsettled_validation_invocations": unsettled,
         "validation_duration_scope": "settled invocations"
@@ -311,15 +343,15 @@ def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
         "reference": "official MuSiQue-Ans GT/PQN with fixed TUNE retrieval validation",
         "optimizer_updates": curve[-1]["optimizer_updates"],
         "critic_transitions": curve[-1]["critic_transitions"],
-        "evaluated_groups": len(groups),
+        "evaluated_groups": 300,
         "training_clock_seconds_to_final_validation": curve[-1]["elapsed_seconds"],
         "peak_gpu_allocated_bytes": max(r["peak_gpu_allocated_bytes"] for r in curve),
         "initial_dev_gt_return": curve[0]["gt_dev_return"],
         "final_dev_gt_return": curve[-1]["gt_dev_return"],
         "best_dev_gt_return": max(r["gt_dev_return"] for r in curve),
-        "best_actor_support_f1": statistics.mean(r["f1"] for r in rows),
-        "best_actor_support_em": statistics.mean(r["em"] for r in rows),
-        "best_actor_gt_return": statistics.mean(r["return"] for r in rows),
+        "best_actor_support_f1": actors["best"]["means"]["support_f1"],
+        "best_actor_support_em": actors["best"]["means"]["support_coverage_em"],
+        "best_actor_gt_return": actors["best"]["means"]["gt_return"],
     }
 
 
@@ -341,14 +373,14 @@ if __name__ == "__main__":
         archive_terminal(args.run, args.archive_terminal)
         raise SystemExit(0)
     if args.prepare_terminal:
-        prepare_terminal(args.run)
+        prepare_terminal(args.run, need_best=False)
         raise SystemExit(0)
     if args.begin_validation:
-        begin_validation(args.run)
+        begin_validation(args.run, args.roster)
         raise SystemExit(0)
     if args.roster is None:
         parser.error("Summary requires --roster")
     result = summarize(args.run, args.roster, args.schedule)
-    plot_curve(args.run, complete_curve(args.run))
+    plot_curve(args.run, complete_curve(args.run), result["native_retrieval"]["actors"])
     write_receipt(args.run / "reference-result.json", result)
     print(json.dumps(result, indent=2))

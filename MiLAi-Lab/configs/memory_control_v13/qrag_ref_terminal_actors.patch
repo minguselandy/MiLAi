@@ -1,0 +1,32 @@
+--- a/eval_retriever.py
++++ b/eval_retriever.py
+@@ -183,15 +183,22 @@
+     # -----------------------------------------------------------------------
+     agent = PQN(cfg.algo)
+ 
+-    ckpt_filename = "model_last.pt" if cfg.use_last else "model_best.pt"
+-    ckpt_path = os.path.join(cfg.get("checkpoint_dir", cfg.pretrained_path), ckpt_filename)
+-    if not os.path.exists(ckpt_path):
+-        raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
+-
+-    agent.load(ckpt_path, strict=True)
++    binding_path = cfg.get("ref_binding")
++    if binding_path:
++        from qrag_ref_retrieval import load_bound_actor, record_protocol
++        with open(binding_path) as handle:
++            binding = json.load(handle)
++        witness = load_bound_actor(agent, binding)
++    else:
++        ckpt_filename = "model_last.pt" if cfg.use_last else "model_best.pt"
++        ckpt_path = os.path.join(cfg.get("checkpoint_dir", cfg.pretrained_path), ckpt_filename)
++        if not os.path.isfile(ckpt_path):
++            raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
++        agent.load(ckpt_path, strict=True)
+     agent.eval()
+-
+     env_test: QAEnv = instantiate(cfg.envs.test_env)
++    if binding_path:
++        record_protocol(cfg, env_test, binding, witness)
+ 
+     max_samples = len(env_test.dataset)
+     if not (0 < cfg.num_samples <= max_samples):
