@@ -682,19 +682,53 @@ def _prepare_episode_batch(
 
 
 def _issue_episode(
-    client: VLLMClient, host: DatasetReader, path: Path, *, live_started: float | None = None,
+    client: VLLMClient,
+    host: DatasetReader,
+    path: Path,
+    *,
+    live_started: float | None = None,
+    metered_budget: Any = None,
+    invocation_id: str | None = None,
 ) -> bool | None:
     record = read_json(path)
     record["status"] = "dispatching"
-    write_json(path, record, indent=None)
+    if metered_budget is not None:
+        record["reader_charge"] = {
+            "invocation_id": invocation_id,
+            "ledger_before": metered_budget.state["generation_requests"],
+            "ledger_after": None,
+            "origin": "local_generation_reservation",
+        }
+
+    def persist() -> None:
+        write_json(path, record, indent=None)
+        if metered_budget is not None:
+            with path.open("rb") as saved:
+                os.fsync(saved.fileno())
+
+    def reserved() -> None:
+        # Native transport emitted its request event after reserving the shared budget.
+        record["reader_charge"]["ledger_after"] = metered_budget.state["generation_requests"]
+        record["costs"]["reader_request_attempted"] = True
+        persist()
+
+    persist()
     try:
         reader_result, cost = request_reader(
-            client, host, record["reader_wire"], record["capacity"],
+            client,
+            host,
+            record["reader_wire"],
+            record["capacity"],
+            **({"on_metered_request": reserved} if metered_budget is not None else {}),
         )
     except BudgetExceeded:
         record["status"] = "not_issued_budget"
-        write_json(path, record, indent=None)
+        if metered_budget is not None:
+            record["reader_charge"]["ledger_after"] = metered_budget.state["generation_requests"]
+        persist()
         return None
+    if metered_budget is not None:
+        record["reader_charge"]["ledger_after"] = metered_budget.state["generation_requests"]
     record["reader_result"] = reader_result
     record["costs"].update(cost)
     record["status"] = reader_result["status"]
@@ -703,13 +737,22 @@ def _issue_episode(
     )
     if live_started is not None and cost["reader_request_attempted"]:
         record["costs"]["episode_live_readout_ms"] = (time.perf_counter() - live_started) * 1000
-    write_json(path, record, indent=None)
+    persist()
     return bool(cost["reader_request_attempted"])
 
 
 def _readout_inline(
-    dataset: MemoryControlDataset, db: sqlite3.Connection, population: dict[str, Any],
-    arm: dict[str, Any], episodes: Path, *, device: str, limit: int | None,
+    dataset: MemoryControlDataset,
+    db: sqlite3.Connection,
+    population: dict[str, Any],
+    arm: dict[str, Any],
+    episodes: Path,
+    *,
+    device: str,
+    limit: int | None,
+    task_span: tuple[int, int] | None = None,
+    invocation_id: str | None = None,
+    max_paid_requests: int | None = None,
 ) -> dict[str, Any]:
     """Time a full task from actual local execution to its live Reader reply."""
     host = dataset.host
@@ -721,12 +764,14 @@ def _readout_inline(
     counts: Counter[str] = Counter()
     dispatched: list[tuple[sqlite3.Row, Path]] = []
     policy: tuple[MemoryPolicy, CountedController | None] | None = None
-    tasks = population["tasks"]
+    roster = population["tasks"]
+    tasks = roster[slice(*task_span)] if task_span is not None else roster
     prepared = attempted = 0
     wall, cpu = time.perf_counter(), time.process_time()
     policy_load_ms = 0.0
     with http_budget_scope(
-        host.settings, client_configs=ownership_client_configs(host.settings),
+        host.settings,
+        client_configs=ownership_client_configs(host.settings),
     ) as budget:
         if budget is None:
             raise ValueError("Inline evaluation requires the shared Reader ledger")
@@ -734,7 +779,9 @@ def _readout_inline(
         if meter:
             engine_start = timing.snapshot(host.settings["host"])
         with VLLMClient(
-            VLLMConfig(**host.settings["host"]), budget=budget, capacity=host.capacity,
+            VLLMConfig(**host.settings["host"]),
+            budget=budget,
+            capacity=host.capacity,
         ) as client:
             for item in tasks:
                 if limit is not None and len(dispatched) >= limit:
@@ -746,15 +793,33 @@ def _readout_inline(
                     policy_load_ms = (time.perf_counter() - loading) * 1000
                 tick = time.perf_counter()
                 ready, local, _, fresh = _prepare_episode_batch(
-                    dataset, db, {**population, "tasks": [item]}, arm, episodes,
-                    device=device, limit=1, known_policy=policy,
+                    dataset,
+                    db,
+                    {**population, "tasks": [item]},
+                    arm,
+                    episodes,
+                    device=device,
+                    limit=1,
+                    known_policy=policy,
                 )
                 counts.update(local)
                 prepared += fresh
                 if not ready:
                     continue
                 task, path = ready[0]
-                sent = _issue_episode(client, host, path, live_started=tick if fresh else None)
+                if (
+                    max_paid_requests is not None
+                    and budget.state["generation_requests"] - before >= max_paid_requests
+                ):
+                    counts["not_issued_budget"] += 1
+                    break
+                sent = _issue_episode(
+                    client,
+                    host,
+                    path,
+                    live_started=tick if fresh else None,
+                    **({"metered_budget": budget, "invocation_id": invocation_id} if meter else {}),
+                )
                 if sent is None:
                     counts["not_issued_budget"] += 1
                     break
@@ -775,22 +840,64 @@ def _readout_inline(
             write_json(path, record, indent=None)
         counts[record["status"]] += 1
     model = policy[1] if policy else None
-    complete = sum(counts.values()) == len(tasks) and not counts.get("not_issued_budget")
+    prefix_complete = sum(counts.values()) == len(tasks) and not counts.get("not_issued_budget")
+    complete = prefix_complete
+    if task_span is not None:
+        complete = prefix_complete and task_span[1] == len(roster)
+        if complete:
+            # Check predecessor packets once when the final registered block closes.
+            for item in roster[: task_span[0]]:
+                prior = read_episode_packet(episodes / f"{item['task_id']}.json")
+                if (
+                    not prior
+                    or any(prior[k] != item[k] for k in ("task_id", "dataset", "native_group"))
+                    or prior["status"]
+                    not in {
+                        "scored",
+                        "scored_format_failure",
+                        "scorer_error",
+                        "reader_error",
+                        "reader_interrupted",
+                        "action_failed",
+                    }
+                ):
+                    complete = False
+                    break
+                counts[prior["status"]] += 1
     return {
+        **(
+            {"v13_task_span": list(task_span), "window_complete": prefix_complete}
+            if task_span is not None
+            else {}
+        ),
+        **({"invocation_id": invocation_id} if invocation_id else {}),
         "status": "COMPLETED" if complete else "PARTIAL",
-        "by_episode_status": counts, "configured_tasks": len(tasks),
-        "independent_groups": len({(t["dataset"], t["native_group"]) for t in tasks}),
+        "by_episode_status": counts,
+        "configured_tasks": len(roster),
+        "independent_groups": len({(t["dataset"], t["native_group"]) for t in roster}),
         "reader_requests_this_invocation": charged_requests,
-        "reader_attempts_this_invocation": attempted, "prepared_episodes_this_invocation": prepared,
-        "reader_scope_wall_seconds": reader_scope_wall, "ledger_remaining_at_release": remaining,
-        "optimizer_updates": 0, "wall_seconds": time.perf_counter() - wall,
+        "reader_attempts_this_invocation": attempted,
+        "prepared_episodes_this_invocation": prepared,
+        "reader_scope_wall_seconds": reader_scope_wall,
+        "ledger_remaining_at_release": remaining,
+        "optimizer_updates": 0,
+        "wall_seconds": time.perf_counter() - wall,
         "cpu_seconds": time.process_time() - cpu,
         "encoder_work_this_invocation": model.counters if model else None,
         "policy_load_ms_this_invocation": policy_load_ms,
-        "readout_schedule": "inline", "episode_results": str(episodes),
-        **({"reader_engine": timing.interval(
-            engine_start, engine_end, charged_requests, observed_costs,
-        )} if meter else {}),
+        "readout_schedule": "inline",
+        "episode_results": str(episodes),
+        **(
+            {
+                "reader_engine": timing.interval(
+                    engine_start, engine_end, charged_requests, observed_costs
+                ),
+                "ledger_before": before,
+                "ledger_after": before + charged_requests,
+            }
+            if meter
+            else {}
+        ),
     }
 
 
@@ -805,8 +912,18 @@ def evaluate_episodes(
     prepare_only: bool = False,
     prepared_dataset: MemoryControlDataset | None = None,
     inline_readout: bool = False,
+    task_span: tuple[int, int] | None = None,
+    invocation_id: str | None = None,
+    max_paid_requests: int | None = None,
 ) -> dict[str, Any]:
     population = read_json(manifest)
+    if population.get("v13_dispatch") and (task_span is None or not invocation_id):
+        raise ValueError("This fresh population requires its registered interleaved dispatcher")
+    if max_paid_requests is not None and max_paid_requests < 0:
+        raise ValueError("Negative window budget")
+    if task_span is not None and (not inline_readout or not 0 <= task_span[0] < task_span[1]
+                                 <= len(population["tasks"])):
+        raise ValueError("Invalid inline roster window")
     if population["protocol"] != EVALUATION_PROTOCOL:
         raise ValueError("Invalid registered episode protocol")
     if prepare_only and inline_readout:
@@ -869,6 +986,8 @@ def evaluate_episodes(
         if inline_readout:
             receipt = _readout_inline(
                 dataset, db, population, arm, episodes, device=device, limit=max_reader_requests,
+                task_span=task_span, invocation_id=invocation_id,
+                max_paid_requests=max_paid_requests,
             )
             write_json(output / "run.json", receipt)
             return receipt

@@ -16,6 +16,7 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     percentiles,
 )
 from milai_lab.scorers.memory_control_native import musique_pair
+from report_memory_control_v13_project_cost import readout_charge_evidence, window_records
 
 
 def measured(values):
@@ -58,6 +59,38 @@ def annotation_diagnostics(groups):
     }
 
 
+def action_counts(packet):
+    trace = packet.get("control", {}).get("trace")
+    prefix = packet.get("actual_cold_prefix", [])
+    if trace is None:
+        return None
+    common_search = int(bool(prefix) and prefix[0] == "search")
+    counts = dict(
+        operations=common_search + len(trace),
+        common_search=common_search,
+        reads=0,
+        handoffs=0,
+        repeated_object_reads=0,
+        r3_after_r2=0,
+    )
+    opened = {}
+    for step in trace:
+        choice = next((a for a in step["actions"] if a["id"] == step["selected"]), None)
+        if choice is None:
+            return None
+        if choice["kind"] == "HANDOFF":
+            counts["handoffs"] += 1
+        if choice["kind"] != "READ" or not step.get("result", {}).get("ok", False):
+            continue
+        index = choice["parameters"]["index"]
+        expanded = bool(choice["parameters"].get("expand_context"))
+        counts["reads"] += 1
+        counts["repeated_object_reads"] += index in opened
+        counts["r3_after_r2"] += expanded and opened.get(index) is False
+        opened[index] = expanded
+    return counts
+
+
 def summarize_run(path):
     closed = json.loads((path / "run.json").read_text())
     if closed["status"] != "COMPLETED":
@@ -69,9 +102,14 @@ def summarize_run(path):
     groups = defaultdict(list)
     costs = defaultdict(list)
     statuses = Counter()
+    operations = defaultdict(list)
     unavailable = pop.get("predeclared_unevaluable_tasks", {})
     for r in episodes.values():
         statuses[r["status"]] += 1
+        counts = action_counts(r)
+        if counts is not None:
+            for axis, number in counts.items():
+                operations[axis].append(number)
         if str(r["task_id"]) not in unavailable:
             groups[r["dataset"], r["native_group"]].append(r)
         for k in (
@@ -120,11 +158,23 @@ def summarize_run(path):
             mean=fmean(scores) if scores else None,
             full_range=[sum(scores) / total, (sum(scores) + unknown) / total],
         )
-    windows = [json.loads(line) for line in (path / "windows.jsonl").read_text().splitlines()]
-    calls = sum(w["reader_requests_this_invocation"] for w in windows)
-    load_ms = sum(w["policy_load_ms_this_invocation"] for w in windows)
+    windows, partial_log = window_records(path / "windows.jsonl")
+    billing, _ = readout_charge_evidence(windows, episodes)
+    calls = billing["settled_new_requests"]
+    loads = [w.get("policy_load_ms_this_invocation") for w in windows]
+    load_known = sum(v for v in loads if v is not None)
+    load_complete = (
+        all(v is not None for v in loads)
+        and not partial_log
+        and not billing["packet_only_new_requests"]
+    )
+    load_ms = load_known if load_complete else None
     eligible_times = costs["episode_live_readout_ms"]
-    load_per_attempt = load_ms / calls if calls else None
+    load_per_attempt = (
+        load_ms / calls
+        if calls and load_ms is not None and not billing["unknown_charge_records"]
+        else None
+    )
     times = [t + load_per_attempt for t in eligible_times] if load_per_attempt is not None else []
     return dict(
         path=str(path.resolve()),
@@ -146,6 +196,14 @@ def summarize_run(path):
         status=dict(statuses),
         predeclared_unscorable=len(unavailable),
         actual_reader_calls=calls,
+        reader_charge_coverage=dict(billing),
+        reader_charge_lower_bound_only=bool(billing["unknown_charge_records"] or partial_log),
+        bounded_window_ledger_coverage_complete=not bool(
+            billing["window_charges_without_bounded_slots"]
+        ),
+        known_policy_load_ms=load_known,
+        policy_load_complete=load_complete,
+        action_counts={k: measured(v) for k, v in operations.items()},
         policy_load_ms=load_ms,
         policy_load_ms_per_attempt=load_per_attempt,
         live_readout_plus_load_ms=measured(times),

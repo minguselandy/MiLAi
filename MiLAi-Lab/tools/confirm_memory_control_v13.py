@@ -13,6 +13,7 @@ from statistics import fmean
 
 import numpy as np
 
+from dispatch_memory_control_v13 import dispatch, order_contract, schedule
 from milai_lab.datasets.memory_control_store import connect, get_meta
 from milai_lab.runners.memory_control_confirmation import (
     InsufficientDevGroups,
@@ -359,7 +360,10 @@ def register(args):
         * len(population["tasks"])
         for key, peer in peers.items()
     }
+    order = order_contract(arms, getattr(args, "window_tasks", 16), args.seed + 17)
+    population["v13_dispatch"] = order
     registration = {
+        "dispatch": order,
         "comparison_first_slots": comparison_slots,
         "families": families,
         "final": final,
@@ -396,6 +400,7 @@ def register(args):
         out.mkdir()
         save(out / "population.json", population)
         save(out / "registration.json", registration)
+        save(out / "dispatch-schedule.json", schedule(order, len(population["tasks"])))
         for arm in arms:
             save(out / (registration["run_directories"][arm["name"]] + ".json"), arm)
         out.rename(args.output)
@@ -448,6 +453,11 @@ def measured_savings(pop, policy_costs, baseline_costs, repeats, seed):
 
 def readout(args):
     reg, pop = [read(args.registration / p) for p in ("registration.json", "population.json")]
+    schedule_status = None
+    if pop.get("v13_dispatch"):
+        schedule_status = read(args.runs / "dispatch-summary.json")
+        if schedule_status["status"] != "COMPLETED":
+            raise ValueError("Complete the frozen interleaved dispatch before formal readout")
     by_arm = {}
     resources = {}
     for arm in pop["arms"]:
@@ -574,7 +584,13 @@ def readout(args):
         ),
         "earlier_sampling_and_reader_variation": "Not estimated by these fit-seed comparisons",
         "observed_resources_by_arm": resources,
-        "unique_reader_calls": actual_calls,
+        "unique_reader_calls": (
+            None
+            if any(r["reader_charge_lower_bound_only"] for r in resources.values())
+            else actual_calls
+        ),
+        "known_reader_calls": actual_calls,
+        "interleaved_dispatch": schedule_status,
         "registered_maximum_calls": reg["max_reader_calls"],
     }
     save(args.output, result)
@@ -596,10 +612,16 @@ if __name__ == "__main__":
     reg.add_argument("--selection", type=Path, required=True)
     reg.add_argument("--reader-cap", type=int, required=True)
     reg.add_argument("--cost-unit", choices=COST_FIELDS, default="local_gpu_seconds")
+    reg.add_argument("--window-tasks", type=int, default=16)
     reg.add_argument("--quality-mde", type=float, default=1.0)
     reg.add_argument("--draws", type=int, default=250)
     reg.add_argument("--power-repeats", type=int, default=500)
     reg.add_argument("--bootstrap-repeats", type=int, default=5000)
+    dispatch_cli = sub.add_parser("dispatch")
+    dispatch_cli.add_argument("--registration", type=Path, required=True)
+    dispatch_cli.add_argument("--runs", type=Path, required=True)
+    dispatch_cli.add_argument("--device", default="cuda")
+    dispatch_cli.add_argument("--limit-windows", type=int)
     result = sub.add_parser("readout")
     result.add_argument("--registration", type=Path, required=True)
     result.add_argument("--runs", type=Path, required=True)
@@ -619,5 +641,9 @@ if __name__ == "__main__":
         )
     elif args.command == "register":
         register(args)
+    elif args.command == "dispatch":
+        if args.limit_windows is not None and args.limit_windows < 1:
+            cli.error("--limit-windows must be positive")
+        print(json.dumps(dispatch(args), indent=2))
     else:
         readout(args)

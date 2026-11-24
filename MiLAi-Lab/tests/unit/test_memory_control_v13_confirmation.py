@@ -263,3 +263,16 @@ def test_actual_cost_weights_the_registered_workload(native_fixture):
     assert stats["baseline_total_mean_across_fits"] == 32.0
     assert stats["savings"] == pytest.approx(0.25)
     assert stats["equal_source_weighted_savings_sensitivity"] == pytest.approx(1 / 6)
+
+
+def test_restart_preserves_scored_and_does_not_reissue_unknown_dispatch(tmp_path):
+    from milai_lab.runners.memory_control_episode import _prepare_episode_batch
+
+    tasks = [{"dataset": "qasper", "native_group": "fixture", "task_id": i} for i in (1, 2)]
+    for row, status in zip(tasks, ("scored", "dispatching"), strict=True):
+        (tmp_path / f"{row['task_id']}.json").write_text(json.dumps({**row, "status": status}))
+    ready, counts, _, prepared = _prepare_episode_batch(
+        None, None, {"tasks": tasks}, {}, tmp_path, device="cpu", limit=None
+    )
+    assert not ready and prepared == 0 and counts == {"scored": 1, "reader_interrupted": 1}
+    assert json.loads((tmp_path / "2.json").read_text())["status"] == "reader_interrupted"

@@ -53,7 +53,16 @@ python3 tools/confirm_memory_control_v13.py register \
     --output "$registration"
 ```
 
-Use the generated `population.json` and each numbered arm JSON with the normal V13 episode evaluator. The required run subdirectory for each arm appears in `registration.json`. The `readout` command accepts only closed registered runs, retains failed-call costs and reports unknown engineering evidence when the total meter is missing.
+The registration freezes the complete `dispatch-schedule.json` together with the roster and arms. `--window-tasks` sets the task count per block and defaults to 16. Within every block all arms receive the identical ordered task slice. A seeded balanced Latin-square order rotates each arm through early and late positions, with reversed successive squares for an odd arm count. Each selected native group remains intact for scoring and resampling. The final block can be shorter.
+
+After model selection, `dispatch` executes each registered window through the native evaluator. The same command resumes a partial campaign. `--limit-windows N` returns at a window boundary. The dispatcher reconciles the native window ledger before recovering a lost schedule cursor. Per-packet reservation intervals recover local charges after a crash inside a window. An interrupted call with an unknown charge remains marked and counts conservatively against the dispatch cap. Local ledger slots and provider response IDs have separate totals. Recovered partial windows keep missing load, timing and vLLM measurements unknown.
+
+```bash
+python3 tools/confirm_memory_control_v13.py dispatch \
+    --registration "$registration" --runs "$confirm_runs" --device cuda
+```
+
+The run directory contains chronological slot receipts and native invocation logs. The final dispatch summary records dataset setup, per-arm positions, policy loads, phase waits and driver/native execution durations, plus p50/p95 elapsed spans across contemporaneous arm blocks. These scopes overlap. The `readout` command requires closed scheduled runs, retains paid failures and reports unknown engineering evidence when the total meter is missing.
 
 ```bash
 python3 tools/confirm_memory_control_v13.py readout \
