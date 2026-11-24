@@ -26,7 +26,7 @@ Each compressed pack in `packs/` contains one legal root, the action bindings, m
 
 For the 2k–6k mechanism stage, both arms use a common pool seed, frozen rule continuation, the same candidate window, and `--exclude-roots-from` pointing to warm. The active arm supplies its warm checkpoint to `--sampler-checkpoint`. A compatible earlier arm can be passed as `--reuse-from`; whole Reader requests, native task, seed and protocol must match. Each round directory owns its own `--calls` quota. To obtain checkpoints at 6k, 12k and 24k after 2k warm, the incremental quotas are 4k, 6k and 12k. Natural online rounds take their arm's preceding checkpoint via `--continuation-checkpoint`. The training driver reads the `continuation_policy_id` for every label.
 
-The dual-tower online trainer accepts `--backbone`, `--output`, `--calls` and `--cost-scale`. Use the common TRAIN cost normalization frozen for all arms. Evaluation uses the `qrag_milai` policy and its saved `control.pt` and `controller.json` directory through the shared episode runner, with `environment=qrag_milai_v13`.
+The formal dual-tower trainer accepts `--backbone`, `--output`, `--calls` and `--host-cost-scale`. Use the common TRAIN cost normalization frozen for all arms. Evaluation uses the `qrag_milai` policy and its saved `control.pt` and `controller.json` directory through the shared episode runner, with `environment=qrag_milai_v13`.
 
 ## Embedding backbone retrieval
 
@@ -81,13 +81,13 @@ env CUDA_VISIBLE_DEVICES=3 PYTHONPATH=src HF_HOME="$root/staging/qr/hf-cache" HF
 
 ## Formal QR scheduling and storage
 
-The seed-11 online job waits for the shared 2,000-call warm round and the 48-call pilot. From MiLAi-Lab, use the pilot's Python/CUDA environment and run
+The seed-11 online job uses the frozen TRAIN Host-only cost unit and the completed QR resource pilot. From MiLAi-Lab, use the pilot's Python/CUDA environment and run
 
 ```bash
 python tools/run_qrag_milai_after_warm.py --root /cra/milai-experiments/v13-qrag --calls 12000
 ```
 
-The supervisor records both live producer leases in `qr-11/launch.json`, computes the shared warm median and replaces itself with the online trainer. Compact episode summaries, per-update measurements and launch state live in `qr-11/`. During the disk capacity constraint `qr-11/receipts` links to `staging/qr/formal-receipts`, which holds raw Reader responses and replayable action transitions on the temporary mount. Evaluation weights and their native TRAIN group bindings live in `staging/qr/formal/checkpoint-{calls}`. The fitted-group roster and an optional arm `feedback_calls` binding are checked by the `qrag_milai` backend before evaluation. The temporary mount requires migration for long-term retention.
+The supervisor records its validated cost unit in `qr-11/launch.json` and replaces itself with the online trainer. QR reads `frozen-host-cost-scale.json`, the median terminal prompt-token count under the fixed pi₀ Host protocol, derived from TRAIN without Reader calls. It takes no branch feedback or cost labels from the paired arms. The trainer waits for its explicit QR phase before allocating the towers. Compact episode summaries, per-update measurements and launch state live in `qr-11/`. The logical `qr-11/receipts` points to durable `qr-11/native-receipts` for raw terminal responses and replayable action transitions. Evaluation weights and their native TRAIN group bindings live in `staging/qr/formal/checkpoint-{calls}`. The fitted-group roster and an optional arm `feedback_calls` binding are checked by the `qrag_milai` backend before evaluation. The formal checkpoint alias resolves to the durable study weight directory.
 
 The formal learning-rate horizon covers 24k exposures so the 12k weights are comparable when training continues. Its length is computed before fitting from the TRAIN group roster, batch size and the 6k/12k/24k boundaries under one charged request per member. For seed 11 and batch 32 this gives 422 planned updates. AdamW uses a 5% linear warmup and linear decay to 10% of the 5e-6 peak. Actual update counts, learning rates and quality-observed transitions are recorded independently. Exploration temperature stays fixed at 0.005. The resource pilot used constant 5e-6.
 

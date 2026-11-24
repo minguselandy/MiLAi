@@ -69,44 +69,62 @@ def measured(out):
     )
 
 
+def checkpoint_grid(common, checkpoint):
+    checkpoint = checkpoint.resolve()
+    if not (checkpoint / "control.pt").is_file():
+        raise FileNotFoundError(checkpoint / "control.pt")
+    if (checkpoint / "training.json").is_file():
+        contract = json.loads((checkpoint / "training.json").read_text())
+        if (
+            not contract.get("fitted_groups")
+            or contract["supervision_mode"] != "online_pqn_terminal"
+        ):
+            raise ValueError("QR grid requires an online native-outcome checkpoint")
+        family = f"qr-seed{contract['seed']}-{contract['calls']}-lambda"
+        settings = dict(policy="qrag_milai", feedback_calls=contract["calls"])
+    else:
+        info = json.loads((checkpoint.parent / "run.json").read_text())
+        contract = info["contract"]
+        if info["status"] != "completed" or not info["reload_scores_equal"] or contract["probe"]:
+            raise ValueError("Outcome grid requires a complete trained and reloaded checkpoint")
+        family = checkpoint.parent.name + "-lambda"
+        settings = dict(policy="pretrained_checkpoint")
+    candidates = []
+    for penalty in (0.0, 0.02, 0.05, 0.1, 0.2):
+        name = f"{family}-{penalty:.2f}"
+        arm = dict(
+            common,
+            **settings,
+            name=name,
+            utility_lambda=penalty,
+            checkpoint=str(checkpoint),
+            seed=contract["seed"],
+        )
+        candidates.append((name, arm))
+    return family, candidates
+
+
 def main(args):
     common = dict(environment="qrag_milai_v13", observation_protocol="semantic_nav_delta_v2")
-    families = {
-        "rule": list(
-            fixed_grid(common, [("B1", 2, None), ("B1", 4, None), ("B2", 4, None), ("B3", 4, None)])
-        ),
-        "gte": list(
+    if args.family == "checkpoint":
+        if args.checkpoint is None:
+            raise ValueError("Checkpoint calibration requires --checkpoint")
+        family, candidates = checkpoint_grid(common, args.checkpoint)
+    elif args.family == "gte":
+        if args.backbone is None:
+            raise ValueError("Native relevance grid requires --backbone")
+        family = "gte-batch8"
+        candidates = list(
             fixed_grid(
                 dict(common, backbone=str(args.backbone.resolve()), object_batch=8),
                 [("gte_relevance", r, level) for r in (2, 4) for level in ("R2", "R3")],
             )
-        ),
-    }
-    if args.family == "checkpoint":
-        if args.checkpoint is None:
-            raise ValueError("Checkpoint calibration requires --checkpoint")
-        checkpoint = args.checkpoint.resolve()
-        contract = json.loads((checkpoint.parent / "run.json").read_text())["contract"]
-        family = checkpoint.parent.name + "-lambda"
-        candidates = []
-        for penalty in (0.0, 0.02, 0.05, 0.1, 0.2):
-            name = f"{family}-{penalty:.2f}"
-            candidates.append(
-                (
-                    name,
-                    dict(
-                        common,
-                        name=name,
-                        policy="pretrained_checkpoint",
-                        utility_lambda=penalty,
-                        checkpoint=str(checkpoint),
-                        seed=contract["seed"],
-                    ),
-                )
-            )
+        )
     else:
-        family = "gte-batch8" if args.family == "gte" else args.family
-        candidates = families[args.family]
+        family = "rule"
+        candidates = list(
+            fixed_grid(common, [("B1", 2, None), ("B1", 4, None), ("B2", 4, None), ("B3", 4, None)])
+        )
     out = args.root / "baselines"
     calibration = args.root / "rosters/calibration-2048.json"
     rule = (
@@ -127,7 +145,7 @@ def main(args):
         dict(selected=chosen, criterion=rule, candidates=rows),
     )
     arm = dict(candidates)[chosen]
-    for cohort in ("curve", "tune"):
+    for cohort in args.selected_readouts:
         evaluate(args, arm, cohort, args.root / f"rosters/{cohort}-2048.json")
 
 
@@ -137,8 +155,15 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data", type=Path, default=Path("/cra/milai-datasets/memory_control_v1_2")
     )
-    parser.add_argument("--backbone", type=Path, required=True)
+    parser.add_argument("--backbone", type=Path)
     parser.add_argument("--family", choices=("rule", "gte", "checkpoint"), required=True)
     parser.add_argument("--checkpoint", type=Path)
+    parser.add_argument(
+        "--selected-readouts",
+        nargs="+",
+        choices=("curve", "tune"),
+        default=("curve", "tune"),
+        help="Natural DEV populations for the frozen choice",
+    )
     parser.add_argument("--device", default="cuda")
     main(parser.parse_args())

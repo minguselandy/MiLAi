@@ -50,6 +50,37 @@ def exposure(directory):
 
 
 def collect(args, directory, calls, stage, mode, prior=None, sampler=None, shared=None):
+    progress_file = directory / "progress.json"
+    if progress_file.is_file() and json_file(progress_file).get("state") == "complete":
+        config = json_file(directory / "round.json")
+        expected = {
+            "seed": args.acquisition_seed,
+            "pool_seed": args.acquisition_seed * 100 + stage,
+            "round": stage,
+            "sampler": mode,
+            "candidate_window": args.recipe["eligible_pool_window"],
+            "material_budget": args.recipe["memory_budget_tokens"],
+            "environment": args.recipe["environment"],
+            "observation": args.recipe["observation"],
+            "utility_lambda": args.recipe["utility_lambda"],
+            "continuation_mode": "full_episode",
+            "continuation_policy_id": str(prior.resolve()) if prior else "pi0-fixedcontext-4",
+            "sampling_checkpoint": str(sampler.resolve()) if sampler else None,
+        }
+        warm_config = json_file(args.warm / "round.json")
+        if (
+            any(config.get(k) != v for k, v in expected.items())
+            or config["dataset_run"] != warm_config["dataset_run"]
+            or config["reader"] != warm_config["reader"]
+            or config.get("reuse_from", []) != ([str(shared.resolve())] if shared else [])
+            or config.get("exclude_roots_from", [])
+            != ([str(args.warm.resolve())] if stage == 1 else [])
+            or json_file(progress_file)["complete_packs"]
+            != len(list((directory / "packs").glob("*.json.gz")))
+            or exposure(directory) != calls
+        ):
+            raise ValueError(f"Closed acquisition differs from the frozen round at {directory}")
+        return
     flags = []
     if prior:
         flags += ["--continuation-checkpoint", prior]
@@ -102,6 +133,12 @@ def fit(args, name, data, parent, objective, scale):
             or c["probe"]
         ):
             raise RuntimeError(f"Prior fit does not match stage {name}")
+        if getattr(args, "cost_identity", None) is not None:
+            from milai_lab.methods.control_cost_scale import require_same_host_cost_scale
+
+            if not c.get("scale_source"):
+                raise ValueError(f"Prior fit has no TRAIN Host calibration source at {path}")
+            require_same_host_cost_scale(c["scale_source"], args.cost_identity)
         if info["status"] == "completed":
             if not info["reload_scores_equal"] or not (path / "checkpoint/control.pt").is_file():
                 raise RuntimeError(f"Final weights missing for {name}")
@@ -125,8 +162,11 @@ def fit(args, name, data, parent, objective, scale):
         metrics,
         "--seed",
         args.fit_seed,
-        "--warm-packs",
-        args.warm / "packs",
+        *(
+            ["--cost-scale-report", args.cost_scale_report]
+            if getattr(args, "cost_scale_report", None)
+            else ["--warm-packs", args.warm / "packs"]
+        ),
         "--epochs",
         args.recipe["fit"]["epochs"],
         "--batch",
@@ -186,26 +226,53 @@ def round_matrix(args):
         or json_file(args.curve)["material_budget"] != args.recipe["memory_budget_tokens"]
     ):
         raise ValueError("Warm exposures, native environment or DEV budget differ from the recipe")
-    scale_samples = []
-    for path in (args.warm / "packs").glob("*.json.gz"):
-        with gzip.open(path) as f:
-            scale_samples.extend(
-                o["future_cost"] for o in json.load(f)["outcomes"] if o["future_cost_observed"]
-            )
-    scale = max(1.0, statistics.median(scale_samples))
     tag = f"a{args.acquisition_seed}-f{args.fit_seed}"
-    publish(
-        args.root / "fits" / f"{tag}-cost-scale.json",
-        dict(
+    if report := args.recipe.get("cost_scale_report"):
+        from milai_lab.methods.control_cost_scale import load_host_cost_scale
+
+        args.cost_scale_report = (args.root / report).resolve()
+        scale, source = load_host_cost_scale(
+            args.cost_scale_report,
+            dataset_run_id=warm_contract["dataset_run"],
+            budget=args.recipe["memory_budget_tokens"],
+        )
+        args.cost_identity = source
+        registration = dict(scale=scale, source=source, reader_requests=0)
+        original = args.root / "fits" / f"{tag}-cost-scale.json"
+        if original.exists():
+            from milai_lab.methods.control_cost_scale import require_same_host_cost_scale
+
+            registered = json_file(original)
+            if registered.get("scale") != scale or registered.get("reader_requests") != 0:
+                raise ValueError("Saved run used a different normalization")
+            require_same_host_cost_scale(registered["source"], source)
+            registration = registered
+    else:
+        # Retain the measured-outcome unit used by earlier explicitly registered trials.
+        scale_samples = []
+        for path in (args.warm / "packs").glob("*.json.gz"):
+            with gzip.open(path) as f:
+                scale_samples.extend(
+                    o["future_cost"] for o in json.load(f)["outcomes"] if o["future_cost_observed"]
+                )
+        scale = max(1.0, statistics.median(scale_samples))
+        registration = dict(
             training_source=str(args.warm),
             future_cost_median=scale,
             observed_action_count=len(scale_samples),
-        ),
-    )
+        )
+    publish(args.root / "fits" / f"{tag}-cost-scale.json", registration)
     publish(args.root / "fits" / f"{tag}-recipe.json", args.recipe)
-    warm_paired = fit(args, tag + "-warm-paired", args.warm, args.s1, "paired", scale)
-    warm_direct = fit(args, tag + "-warm-direct", args.warm, args.s1, "direct", scale)
-    prior = {"DQ": warm_direct, "PQ-U": warm_paired, "PQ-A": warm_paired}
+    selected = args.refit_method or ("DQ", "PQ-U", "PQ-A")
+    warm_models = {}
+    prior = {}
+    for method in selected:
+        objective = "direct" if method == "DQ" else "paired"
+        if objective not in warm_models:
+            warm_models[objective] = fit(
+                args, f"{tag}-warm-{objective}", args.warm, args.s1, objective, scale
+            )
+        prior[method] = warm_models[objective]
     fits = {method: [args.s1.parent, initial.parent] for method, initial in prior.items()}
     rollouts = {method: [args.warm] for method in prior}
     previous = args.recipe["warm_feedback_calls"]
@@ -215,7 +282,10 @@ def round_matrix(args):
         if point > args.until:
             break
         pools = {}
+        needed = {"PQ-U" if method == "DQ" else method for method in prior}
         for method, mode in (("PQ-U", "uniform"), ("PQ-A", "structured")):
+            if method not in needed:
+                continue
             data = args.root / "collection" / f"a{args.acquisition_seed}-{method}-{point}"
             if args.frozen_data:
                 contract = json_file(data / "round.json")
@@ -243,14 +313,16 @@ def round_matrix(args):
             prior[method] = fit(
                 args,
                 name,
-                pools.get(method, pools["PQ-U"]),
+                pools["PQ-U" if method == "DQ" else method],
                 prior[method],
                 "direct" if method == "DQ" else "paired",
                 scale,
             )
+            if args.refit_only:
+                continue
             evaluate(args, name, prior[method])
             fits[method].append(prior[method].parent)
-            rollouts[method].append(pools.get(method, pools["PQ-U"]))
+            rollouts[method].append(pools["PQ-U" if method == "DQ" else method])
             record_point(
                 Namespace(
                     evaluation=args.root / "eval" / name,
@@ -287,8 +359,23 @@ if __name__ == "__main__":
         action="store_true",
         help="Reuse the recorded acquisition seed and its actual continuation targets",
     )
+    parser.add_argument(
+        "--refit-method",
+        choices=("DQ", "PQ-U", "PQ-A"),
+        action="append",
+        help="Limit frozen-data repeat fitting to preselected methods",
+    )
+    parser.add_argument(
+        "--refit-only",
+        action="store_true",
+        help="Fit the frozen-data chain; defer readouts to selected registered arms",
+    )
     parser.add_argument("--until", type=int, required=True)
     args = parser.parse_args()
+    if (args.refit_method or args.refit_only) and not args.frozen_data:
+        parser.error("A partial method matrix requires immutable frozen acquisition data")
+    if args.refit_method and len(set(args.refit_method)) != len(args.refit_method):
+        parser.error("Specify each repeated method only once")
     args.recipe = json_file(args.config)
     controls = [args.recipe["warm_feedback_calls"], *args.recipe["feedback_checkpoints"]]
     if (

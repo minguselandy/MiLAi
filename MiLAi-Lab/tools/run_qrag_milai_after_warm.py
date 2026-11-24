@@ -1,13 +1,11 @@
-"""Launch online QR after the shared warm data and measured resource pilot finish."""
+"""Launch online QR with its frozen Host-only cost unit under the study phase scheduler."""
 
 from __future__ import annotations
 
 import argparse
 import fcntl
-import gzip
 import json
 import os
-import statistics
 import sys
 import time
 from pathlib import Path
@@ -37,7 +35,7 @@ def main():
     p.add_argument("--calls", type=int, choices=(12000, 24000), default=12000)
     args = p.parse_args()
     root = args.root.resolve()
-    warm = root / f"warm-{args.seed}"
+    report = root / "frozen-host-cost-scale.json"
     pilot = root / "qr-s0"
     pilot_weights = root / "staging/qr/s0/checkpoint-48"
     output = root / f"qr-{args.seed}"
@@ -56,40 +54,39 @@ def main():
         part.replace(note)
 
     while True:
-        paid = read(warm / "progress.json").get("feedback_calls", 0)
-        warm_live, pilot_live = running(warm), running(pilot)
-        warm_done = paid == 2000 and not warm_live
-        pilot_done = (pilot_weights / "control.pt").is_file() and (
-            read(pilot_weights / "training.json").get("calls") == 48
+        pilot_live = running(pilot)
+        binding = read(pilot_weights / "training.json")
+        pilot_done = (pilot_weights / "control.pt").is_file() and binding.get("calls") == 48
+        status = dict(
+            pid=os.getpid(),
+            observed_ns=time.time_ns(),
+            pilot_owner_live=pilot_live,
+            pilot_checkpoint_complete=pilot_done,
+            host_cost_unit_path=str(report),
+            host_cost_unit_ready=False,
+            phase_unit="qr",
         )
-        status = {
-            "pid": os.getpid(),
-            "observed_ns": time.time_ns(),
-            "warm_calls": paid,
-            "warm_owner_live": warm_live,
-            "pilot_owner_live": pilot_live,
-            "pilot_checkpoint_complete": pilot_done,
-        }
-        save(status)
-        if warm_done and pilot_done:
-            break
-        if (not warm_done and not warm_live) or (not pilot_done and not pilot_live):
-            raise RuntimeError("Upstream owner exited before the required artifacts were complete")
-        time.sleep(30)
+        if report.is_file() and pilot_done:
+            try:
+                from milai_lab.methods.control_cost_scale import load_host_cost_scale
 
-    costs = []
-    for path in sorted((warm / "packs").glob("*.json.gz")):
-        with gzip.open(path) as f:
-            row = json.load(f)
-        if (
-            row["split_role"],
-            row["collection_round"],
-            row["acquisition_method"],
-            row["continuation_mode"],
-        ) != ("train", 0, "uniform", "full_episode"):
-            raise ValueError("The QR cost unit requires common uniform warm TRAIN packs")
-        costs.extend(o["future_cost"] for o in row["outcomes"] if o["future_cost_observed"])
-    scale = max(1.0, statistics.median(costs))
+                scale, _ = load_host_cost_scale(
+                    report, dataset_run_id=binding["dataset_run_id"], budget=2048
+                )
+            except (ValueError, KeyError, TypeError, ImportError) as error:
+                status["validation_error"] = str(error)
+            else:
+                status.update(
+                    host_cost_unit_ready=True,
+                    cost_scale=scale,
+                    cost_statistic="median_host_terminal_prompt_tokens",
+                )
+        save(status)
+        if status["host_cost_unit_ready"]:
+            break
+        if not pilot_done and not pilot_live:
+            raise RuntimeError("QR resource pilot exited before its checkpoint was published")
+        time.sleep(15)
     params = [
         "-u",
         "-m",
@@ -106,10 +103,10 @@ def main():
         str(args.seed),
         "--calls",
         str(args.calls),
-        "--cost-scale",
-        str(scale),
+        "--host-cost-scale",
+        str(report),
     ]
-    save(dict(status, measured_warm_costs=len(costs), cost_scale=scale, training_command=params))
+    save(dict(status, training_command=params))
     os.execv(sys.executable, [sys.executable, *params])  # noqa: S606 -- current Python, bound args
 
 

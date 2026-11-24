@@ -196,6 +196,17 @@ def train(args):
         invocation_ns = time.time_ns()
         torch.manual_seed(args.seed)
         dataset = MemoryControlDataset(args.dataset)
+        scale_source = None
+        if args.host_cost_scale is not None:
+            from milai_lab.methods.control_cost_scale import load_host_cost_scale
+
+            args.cost_scale, scale_source = load_host_cost_scale(
+                args.host_cost_scale, dataset_run_id=dataset.run_id, budget=args.budget
+            )
+        elif args.calls >= 6000:
+            raise ValueError(
+                "Formal QR requires the frozen, zero-Reader TRAIN Host cost-unit report"
+            )
         args.output.mkdir(parents=True, exist_ok=True)
         model = QragDualControl(
             args.backbone, device=args.device, cost_scale=args.cost_scale
@@ -212,7 +223,7 @@ def train(args):
     cfg = {
         k: str(v.resolve()) if isinstance(v, Path) else v
         for k, v in vars(args).items()
-        if k not in {"calls"}
+        if k not in {"calls", "host_cost_scale"}
     }
     schedule_calls = 24000 if args.calls >= 6000 else 0
     with closing(connect(dataset.path)) as db:
@@ -220,6 +231,7 @@ def train(args):
             planned_updates(db, args.seed, args.batch, schedule_calls) if schedule_calls else 0
         )
     cfg.update(
+        cost_scale_source=scale_source,
         planned_updates=schedule_updates,
         schedule_calls=schedule_calls,
         lr_schedule="pqn_warmup_linear_5pct" if schedule_updates else "constant_pilot",
@@ -237,7 +249,13 @@ def train(args):
     )
     with (args.output / ".lock").open("a") as owner, closing(connect(dataset.path)) as db:
         fcntl.flock(owner, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        if (old := read_json(args.output / "run.json")) and old != cfg:
+        old = read_json(args.output / "run.json")
+        if old and scale_source is not None:
+            from milai_lab.methods.control_cost_scale import require_same_host_cost_scale
+
+            require_same_host_cost_scale(old.get("cost_scale_source"), scale_source)
+            cfg["cost_scale_source"] = old["cost_scale_source"]
+        if old and old != cfg:
             raise ValueError(
                 "QR resume requires unchanged seed, base model, Reader and optimization"
             )
@@ -485,12 +503,25 @@ def main():
     p.add_argument("--device", default="cuda")
     p.add_argument("--lr", type=float, default=5e-6)
     p.add_argument("--alpha", type=float, default=0.005)
-    p.add_argument("--cost-scale", type=float, required=True)
+    cost = p.add_mutually_exclusive_group(required=True)
+    cost.add_argument(
+        "--cost-scale", type=float, help="Explicit scale for resource pilot measurements"
+    )
+    cost.add_argument(
+        "--host-cost-scale", type=Path, help="Frozen TRAIN Host cost-unit report for formal QR"
+    )
     p.add_argument("--td-lambda", type=float, default=0.6)
     p.add_argument("--utility-lambda", type=float, default=0.05)
     args = p.parse_args()
     if (
-        min(args.budget, args.batch, args.calls, args.cost_scale, args.alpha) <= 0
+        min(
+            args.budget,
+            args.batch,
+            args.calls,
+            args.cost_scale if args.cost_scale is not None else 1.0,
+            args.alpha,
+        )
+        <= 0
         or not 0 <= args.td_lambda <= 1
     ):
         p.error("Invalid resource or PQN hyperparameter")

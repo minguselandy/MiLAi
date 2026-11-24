@@ -16,6 +16,11 @@ from pathlib import Path
 
 import torch
 
+from milai_lab.methods.control_cost_scale import (
+    HOST_COST_STATISTIC,
+    load_host_cost_scale,
+    require_same_host_cost_scale,
+)
 from milai_lab.methods.pretrained_control import PretrainedControl
 from milai_lab.methods.pretrained_objective import group_weights, root_loss
 from milai_lab.runners.pretrained_fit_closeout import finish_verified, fit_owner, write_json
@@ -188,8 +193,35 @@ def fit_locked(args):
     parent_run = args.initialize.parent / "run.json" if args.initialize else None
     parent_contract = json.loads(parent_run.read_text())["contract"] if parent_run else {}
     scale_source = parent_contract.get("scale_source")
+    report_path = getattr(args, "cost_scale_report", None)
+    if report_path and args.objective == "evidence":
+        raise ValueError("Host cost normalization applies at the outcome fit")
     if args.objective != "evidence":
-        if args.warm_packs:
+        if report_path or (scale_source and scale_source.get("statistic") == HOST_COST_STATISTIC):
+            if args.warm_packs:
+                raise ValueError(
+                    "A Host-normalized parent cannot switch to paid-feedback normalization"
+                )
+            path = report_path or Path(scale_source["report"])
+            scale, new_source = load_host_cost_scale(path)
+            for directory in args.data:
+                protocol = json.loads((directory.parent / "round.json").read_text())
+                if (
+                    new_source["dataset_run_id"] != protocol["dataset_run"]
+                    or new_source["memory_budget_tokens"] != protocol["material_budget"]
+                    or new_source["observation"] != protocol["observation"]
+                    or new_source["reader_model"] != protocol["reader"]["model_revision"]
+                    or new_source["max_operations"] != protocol["environment"]["max_operations"]
+                ):
+                    raise ValueError("Cost scale and collected branch protocol differ")
+            if scale_source:
+                require_same_host_cost_scale(scale_source, new_source)
+                if model.cost_scale != scale:
+                    raise ValueError("Parent checkpoint value scales disagree")
+            else:
+                scale_source = new_source
+            model.cost_scale = scale
+        elif args.warm_packs:
             costs = []
             for file in sorted(args.warm_packs.glob("*.json.gz")):
                 with gzip.open(file) as handle:
@@ -215,7 +247,9 @@ def fit_locked(args):
                 statistic="median_observed_future_cost",
             )
         elif not scale_source:
-            raise ValueError("First outcome fit requires --warm-packs from shared uniform TRAIN")
+            raise ValueError(
+                "First outcome fit requires --cost-scale-report or a legacy --warm-packs source"
+            )
     model.train()
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=args.lr, weight_decay=0.01, fused=args.device.startswith("cuda")
@@ -271,6 +305,14 @@ def fit_locked(args):
     previous = json.loads(run_path.read_text()) if run_path.is_file() else {}
     if previous:
         prior = dict(previous["contract"])
+        previous_scale = prior.get("scale_source") or {}
+        current_scale = contract.get("scale_source") or {}
+        if (
+            previous_scale.get("statistic") == HOST_COST_STATISTIC
+            and current_scale.get("statistic") == HOST_COST_STATISTIC
+        ):
+            require_same_host_cost_scale(previous_scale, current_scale)
+            contract["scale_source"] = prior["scale_source"]
         if previous["status"] == "completed":
             prior["fitted_groups"] = contract["fitted_groups"]
         if prior != contract or previous["status"] not in {"completed", "running"}:
@@ -278,7 +320,10 @@ def fit_locked(args):
     elif path.exists() or rolling.exists():
         raise ValueError("Artifacts without an original run declaration cannot be adopted")
     identity = previous.get("fit_identity", {"id": time.time_ns(), "backbone": str(model.backbone)})
-    if identity["backbone"] != str(model.backbone):
+    declared_backbone = Path(identity["backbone"])
+    if str(declared_backbone) != str(model.backbone) and (
+        not declared_backbone.is_dir() or not declared_backbone.samefile(model.backbone)
+    ):
         raise ValueError("Backbone differs from the declared fit")
     if not metrics.samefile(args.output) and (metrics / "run.json").exists():
         try:
@@ -539,8 +584,10 @@ if __name__ == "__main__":
     p.add_argument("--lr", type=float, default=1e-5)
     p.add_argument("--device", default="cuda")
     p.add_argument("--object-batch", type=int, default=8)
-    p.add_argument(
-        "--warm-packs", type=Path, help="Common frozen 2k warm package for cost normalization"
+    scale = p.add_mutually_exclusive_group()
+    scale.add_argument(
+        "--cost-scale-report", type=Path, help="Frozen TRAIN Host terminal prompt sizes"
     )
+    scale.add_argument("--warm-packs", type=Path, help="Legacy median future-cost normalization")
     p.add_argument("--save-every", type=int, default=256)
     fit(p.parse_args())

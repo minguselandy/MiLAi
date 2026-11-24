@@ -128,7 +128,9 @@ def point(args):
         fit_paths=[str(p.resolve()) for p in args.fits],
         qr_path=str(args.qr) if args.qr else None,
     )
-    args.output.write_text(json.dumps(out, indent=2, allow_nan=False) + "\n")
+    pending = args.output.with_suffix(".tmp")
+    pending.write_text(json.dumps(out, indent=2, allow_nan=False) + "\n")
+    pending.replace(args.output)
 
 
 def plot(args):
@@ -138,8 +140,15 @@ def plot(args):
     import matplotlib.pyplot as plt
 
     rows = [read(p) for p in args.points]
-    ref = rows[0]["cohort"]
-    if any(r["cohort"] != ref for r in rows):
+    baselines = (
+        [d for d in read(args.baselines) if d["arm"]["policy"] != "G"] if args.baselines else []
+    )
+    cohorts = [r["cohort"] for r in rows]
+    cohorts.extend(read(Path(d["path"]) / "protocol.json")["population"] for d in baselines)
+    if not cohorts:
+        raise ValueError("Supply at least one measured checkpoint or deployable baseline")
+    ref = cohorts[0]
+    if ref.get("v13_role") != "curve" or any(cohort != ref for cohort in cohorts):
         raise ValueError(
             "All plotted checkpoints must share the same tasks, budgets and Reader seeds"
         )
@@ -149,12 +158,30 @@ def plot(args):
         series.setdefault(key, []).append(r)
     if any(len({r["usage"]["exposure"] for r in group}) != len(group) for group in series.values()):
         raise ValueError("Duplicate checkpoint inside a series")
+    baseline_labels = {}
+    for d in baselines:
+        a = d["arm"]
+        if a["policy"] == "gte_relevance":
+            label = f"GTE relevance ({a['reads']} reads, {a['precision']})"
+        elif a["policy"] == "B1":
+            label = f"BM25 ({a['reads']} reads)"
+        else:
+            label = a["name"]
+        baseline_labels[a["name"]] = label
+    tasks = ref["tasks"]
+    groups = {(t["dataset"], t["native_group"]) for t in tasks}
+    cohort_title = (
+        f"Natural DEV ({len(tasks)} tasks, {len(groups)} native groups, "
+        f"{ref['material_budget']:,} memory tokens)"
+    )
     args.output.mkdir(parents=True, exist_ok=True)
     for field, unit in (
         ("exposure", "Training feedback calls exposed to each arm"),
         ("tokens", "Training feedback input + output tokens (same Reader)"),
         ("acquisition_and_fit_gpu_hours", "Controller GPU-hours during fits and collection"),
     ):
+        if not rows:
+            break
         fig, axes = plt.subplots(2, 2, sharex=True, figsize=(10, 7.5), layout="constrained")
         for ax, axis in zip(
             axes.flat, ("Macro", "musique_full", "qasper", "personamem_v2"), strict=True
@@ -178,11 +205,27 @@ def plot(args):
                     label=f"{label[0]} (a{label[1]}/f{label[2]})",
                 )
                 ax.vlines(x, [v[0] for v in bounds], [v[1] for v in bounds], linewidth=2)
+            for position, d in enumerate(baselines):
+                bound = (
+                    d["macro_range_points"]
+                    if axis == "Macro"
+                    else [100 * v for v in d["native"][axis]["full_range"]]
+                )
+                ax.axhline(
+                    bound[0],
+                    color=f"C{position + len(series)}",
+                    linewidth=1,
+                    linestyle="--",
+                    label=baseline_labels[d["arm"]["name"]],
+                )
+                if bound[0] != bound[1]:
+                    ax.axhspan(bound[0], bound[1], alpha=0.12, color=f"C{position + len(series)}")
             ax.set_title(axis)
             ax.grid(alpha=0.2)
             ax.set_ylabel("Native quality (points)")
             ax.ticklabel_format(axis="x", style="sci", scilimits=(0, 4))
         axes[0, 0].legend(fontsize=8)
+        fig.suptitle(cohort_title)
         fig.supxlabel(unit)
         fig.savefig(args.output / (field + ".pdf"))
         plt.close(fig)
@@ -198,18 +241,30 @@ def plot(args):
         ("deployment-latency", (("p50", "End-to-end p50 (ms)"), ("p95", "End-to-end p95 (ms)"))),
     ):
         fig, axes = plt.subplots(
-            1, len(dimensions), figsize=(4.3 * len(dimensions), 4.2), layout="constrained"
+            1,
+            len(dimensions),
+            sharey=True,
+            figsize=(4.3 * len(dimensions), 4.2),
+            layout="constrained",
         )
-        for ax, (field, title) in zip(axes, dimensions, strict=True):
-            for label, group in sorted(series.items()):
+        for ax, (field, axis_label) in zip(axes, dimensions, strict=True):
+            data = [
+                (
+                    f"{label[0]} (a{label[1]}/f{label[2]})",
+                    [r["deployment"] for r in sorted(group, key=lambda v: v["usage"]["exposure"])],
+                    "o-",
+                )
+                for label, group in sorted(series.items())
+            ]
+            data.extend((baseline_labels[d["arm"]["name"]], [d], "D") for d in baselines)
+            for position, (label, group, style) in enumerate(data):
                 xs, ys = [], []
-                for r in sorted(group, key=lambda v: v["usage"]["exposure"]):
-                    d = r["deployment"]
+                for d in group:
                     if field in ("p50", "p95"):
                         stat = d["live_readout_plus_load_ms"]
                         val = stat[field] if stat["n"] == d["actual_reader_calls"] else None
                     else:
-                        stat = d["resources"][field]
+                        stat = d["resources"].get(field, {"n": 0})
                         val = (
                             stat["total"] / stat["n"]
                             if stat["n"] and stat["n"] == d["actual_reader_calls"]
@@ -218,12 +273,16 @@ def plot(args):
                     if val is not None:
                         xs.append(val)
                         ys.append(d["macro_range_points"][0])
-                ax.plot(xs, ys, "o-", label=f"{label[0]} (a{label[1]}/f{label[2]})")
-            ax.set_xlabel(title)
-            ax.set_ylabel("Macro quality lower bound (points)")
+                if xs:
+                    ax.plot(xs, ys, style, label=label, color=f"C{position % 10}")
+            ax.set_xlabel(axis_label)
+            if ax is axes[0]:
+                ax.set_ylabel("Macro quality lower bound (points)")
             ax.grid(alpha=0.2)
+        fig.suptitle(cohort_title)
         axes[0].legend(fontsize=8)
         fig.savefig(args.output / (filename + ".pdf"))
+        fig.savefig(args.output / (filename + ".png"), dpi=120)
         plt.close(fig)
 
 
@@ -242,7 +301,10 @@ if __name__ == "__main__":
     acc.add_argument("--fits", nargs="+", type=Path, default=[])
     acc.add_argument("--output", type=Path, required=True)
     drawing = sub.add_parser("plot")
-    drawing.add_argument("--points", nargs="+", type=Path, required=True)
+    drawing.add_argument("--points", nargs="*", type=Path, default=[])
+    drawing.add_argument(
+        "--baselines", type=Path, help="Measured deployment report on the same natural DEV tasks"
+    )
     drawing.add_argument("--output", type=Path, required=True)
     opts = p.parse_args()
     if opts.cmd == "point":

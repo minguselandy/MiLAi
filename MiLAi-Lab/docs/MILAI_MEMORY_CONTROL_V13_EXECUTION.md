@@ -67,7 +67,15 @@ QASPER 出现 1 次严格反转，即一个状态中读取优于停止，另一�
 | 冻结 GTE 两读 R2 | 12.00 | 25.79 | 16.00 | 17.93 | 122,269 | 1.00 / 1.55 |
 | 标注证据诊断策略 G | 23.07 | 37.57 | 22.00 | 27.55 | 91,061 | 0.70 / 1.95 |
 
-G 的读取选择使用离线证据标注，仅用于定位质量损失。对两个部署候选按来源配对重采样 5,000 次，冻结 GTE 相对 B1 的宏质量差为 −5.16 分，95% 区间 [−10.44, −0.31]；Reader 输入节省 32.74%，区间 [30.34%, 34.99%]。选择 2 次读取的冻结 GTE 在校准集上质量更高，在这批自然 DEV 题上则以质量换取较低 Reader 成本。605 题 TUNE 完整读出将用于实际基线选择。结果见 `natural-dev150-baseline-costs.json`、`natural-dev150-frozen_gte-vs-rule.json`。
+G 的读取选择使用离线证据标注，仅用于定位质量损失。对两个部署候选按来源配对重采样 5,000 次，冻结 GTE 相对 B1 的宏质量差为 −5.16 分，95% 区间 [−10.44, −0.31]；Reader 输入节省 32.74%，区间 [30.34%, 34.99%]。选择 2 次读取的冻结 GTE 在校准集上质量更高，在这批自然 DEV 题上则以质量换取较低 Reader 成本。605 题 TUNE 完整读出用于核对较大开发集上的基线表现。结果见 `natural-dev150-baseline-costs.json`、`natural-dev150-frozen_gte-vs-rule.json`。
+
+扩展到完整 TUNE 的 605 题、222 个原生组后，B1 宏质量为 25.57，冻结 GTE 为 23.71。GTE 相对 B1 的质量差为 −1.86 分，组配对 95% 区间 [−4.80, +1.05]。分来源差异主要出现在 MuSiQue（13.80 对 19.30）；QASPER 为 32.59 对 32.17，PersonaMem 为 24.75 对 25.25。此 TUNE 含上表的 150 题，对应原生组扩展读出。
+
+B1 与 GTE 的实付请求各 605 次，分别消耗 702,896 和 473,673 个 Reader 输入 tokens。GTE 节省 32.62%，区间 [31.54%, 33.65%]。其端到端 p50 从 1.079 秒降至 1.039 秒，p95 从 1.578 秒升至 1.791 秒，实际总墙钟也受评估期间负载影响。两种策略各有 1 个格式失败，均已计费并按原生协议处理。后续同骨干学习增益以冻结 GTE 为对照，实际基线还包括 B1 与独立训练的 QR。
+
+两种策略在 100 个 MuSiQue pair 上有 81 个同分，GTE 有 7 个更高、12 个更低。仅看可答成员，GTE 与 B1 的平均 answer F1 分别为 24.93、29.53；两个成员均判对充分性的比例分别为 26%、29%。计入 pair 门控后分别为 13.80、19.30。QASPER 有 41 题 GTE 更高、37 题更低，PersonaMem 有 8 题更高、9 题更低。按正、负差异分别保存绝对差最大和靠近中位数的原生组及其实际读序列，见 `natural-tune605-error-examples.json`。
+
+完整表和区间见 `natural-tune605-baseline-costs.json`、`natural-tune605-frozen_gte-vs-rule.json`。150 题部署成本图和延迟图已生成于 `figures-dev150-baselines/`，后续 6k/12k/24k 图在同组图上标注这些冻结基线。
 
 逐题重放还比较了完整证据集合的可达性。表中计数为在给定数量的 BM25 候选上，用全部合法 R2/R3 跨度的并集覆盖某一个完整标注集合的题数。这是施加材料预算与操作数限制前的上界。八候选一列已与 150 条实际 G 运行的逐题覆盖标记核对。其余两列只做离线检索诊断。
 
@@ -91,12 +99,15 @@ export TOKENIZERS_PARALLELISM=false
 export OMP_NUM_THREADS=1
 "$P" tools/run_memory_control_v13_evaluation.py register --data "$D/memory_control.sqlite3" --tune /data/milai-experiments/20261119-memory-control-v12/dev-population-v12.json --output "$R/rosters"
 "$P" tools/report_memory_control_v13_inventory.py --parent /cra/milai-datasets/memory_control_v1/memory_control.sqlite3 --derived "$D/memory_control.sqlite3" --historical-run '/data/milai-experiments/20261119-memory-control-v12/confirmation/primary/B*' --rosters "$R/rosters" --output "$R/inventory"
+HF_HUB_OFFLINE=1 "$P" tools/calibrate_memory_control_v13_cost_unit.py --output "$R/frozen-host-cost-scale.json"
 "$P" -m milai_lab.runners.control_policy_iteration --output "$R/warm-11" --calls 2000
 "$P" tools/report_memory_control_v13_feedback.py "$R/warm-11" --out "$R/warm-progress.json"
 CUDA_VISIBLE_DEVICES=3 "$P" tools/calibrate_memory_control_v13_baselines.py --root "$R" --backbone "$R/staging/gte/base" --family gte
 "$P" tools/calibrate_memory_control_v13_baselines.py --root "$R" --backbone "$R/staging/gte/base" --family rule --device cpu
 "$P" tools/diagnose_memory_control_v13_evidence.py --output "$R/evidence-diagnostic" collect --data "$D" --population "$R/rosters/curve-2048.json"
 ```
+
+正式 QR/DQ/PQ 的共同成本尺度来自 TRAIN 终端请求的 Host 计数。三源各预先均匀抽取最多 64 个不同原生组，每组选一个任务，用四读规则及 2,048 材料预算构建完整 Reader 请求，取其 prompt tokens 中位数。实测 192 个请求全部可计数，共同尺度为 **1,912 tokens**，见 `frozen-host-cost-scale.json`。该标量在无网络命名空间内生成，读取 Reader 回复的次数为 0。这样独立训练 QR 时无需读取 PQ 的付费分支数据。各已执行分支的实测未来成本标签和 0.1 损失权重继续按计划使用。早期 S0 诊断的旧成本尺度随原试验保留。
 
 完整分支从已执行的公共 SEARCH 开始，在最多六次操作、统一检索 32 个对象并保留前八个的条件下决策。每次终止登记真实 Reader 回包。MuSiQue 使用同一冻结策略独立运行另一成员，再用原生 pair 门控得分。训练未知质量保留 mask，调用账目包括 companion、重试和付费失败。
 
@@ -110,10 +121,12 @@ REF 与 GTE 的资源调整及具体训练命令分别见 `MILAI_MEMORY_CONTROL_
 CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config configs/memory_control_v13/feedback.json --root "$R" --weights "$R/staging/round-models" --s1 "$R/staging/gte/s1/checkpoint" --curve "$R/rosters/curve-2048.json" --until 12000
 ```
 
-这条命令依赖 S1 完成与 warm 达到额度。日志 `main-12k-scheduler.log` 记录了本次调度。到达 12k 后用开发结果决定 24k 及独立采集种子；冻结数据拟合可通过 `--frozen-data --fit-seed` 复用已测的同一采集历史。
+这条命令依赖 S1 完成与 warm 达到额度。日志 `main-12k-scheduler.log` 记录了本次调度。12k 后续作业已绑定实际运行中的 QR 与配对训练前置进程。见 `tools/settle_memory_control_v13_round.py`。在四种方法都取得相同自然 DEV 组的 6k/12k 结果后，按组计算配对差异并记录实际候选动作之间的实测收益差和费用，接续第二次冻结策略更新到 24k。随后生成五组曲线图，并在同一个 CALIBRATION 上对四个 24k 控制器使用相同的五点 λ 网格，选择后各自读出 TUNE。该续作业尚未开始追加 Reader 调用。
+
+冻结数据拟合可通过 `--frozen-data --fit-seed` 复用同一采集历史，`--refit-method` 只拟合最终选入比较的家族，`--refit-only` 保留各轮参数更新，把 Reader 调用留给指定的正式评估。独立采集种子的费用和拟合种子分开结算。
 
 ## 存储和未完成工作
 
-开始执行时持久卷 `/cra` 的普通可用空间为 0，物理剩余约 610 MiB。模型与大型中间件写入位于 `/cra/milai-experiments/v13-qrag/staging` 的专用 36 GiB tmpfs，上限从 24 GiB 调整为 36 GiB，为训练恢复文件原子替换预留空间。该目录目前仅跨进程保留，服务器重启会清空。持久卷后来出现额外物理空间，三套基础权重已保存到实验根的 `models/`，其中 GTE 交互模型、GTE embedding、E5-large 分别可读取 140、138、392 个张量。确认库的持久副本位于 `fresh-sources/native-confirm/memory_control.sqlite3`。复读结果见 `persistent-assets.json`。小型收据、数据角色与日志持续写入持久目录。REF 第 100 次更新时的最佳 actor 保存于 `ref/actor-archives/first-trained-best.zip`，恢复需同一持久目录下的 E5 基础模型。S1 训练路径已绑定到持久目录 `weights/s1`，DQ/PQ 的结果包及正式模型已分别指定持久目录 `collection`、`weights/round-models`。QR 正式训练原始收据与检查点已在首个正式账位前绑定到持久目录 `qr-11/native-receipts` 和 `weights/qr-11`。REF 工作检查点继续使用暂存卷，已发布 actor 的持久副本以及仍在进程内的状态分别记录。完整检查点归档和长期留存需要持久容量。
+开始执行时持久卷 `/cra` 的普通可用空间为 0，物理剩余约 610 MiB。模型与大型中间件写入位于 `/cra/milai-experiments/v13-qrag/staging` 的专用 36 GiB tmpfs，上限从 24 GiB 调整为 36 GiB，为训练恢复文件原子替换预留空间。该目录目前仅跨进程保留，服务器重启会清空。持久卷后来出现额外物理空间，三套基础权重已保存到实验根的 `models/`，其中 GTE 交互模型、GTE embedding、E5-large 分别可读取 140、138、392 个张量。确认库的持久副本位于 `fresh-sources/native-confirm/memory_control.sqlite3`。复读结果见 `persistent-assets.json`。小型收据、数据角色与日志持续写入持久目录。REF 第 100 次更新时的最佳 actor 保存于 `ref/actor-archives/first-trained-best.zip`，恢复需同一持久目录下的 E5 基础模型。S1 训练路径已绑定到持久目录 `weights/s1`，DQ/PQ 的结果包及正式模型已分别指定持久目录 `collection`、`weights/round-models`。QR 正式训练原始收据与检查点已在首个正式账位前绑定到持久目录 `qr-11/native-receipts` 和 `weights/qr-11`。REF 工作检查点继续使用暂存卷，已发布 actor 的持久副本以及仍在进程内的状态分别记录。QR 48 调用试验模型也已持久化在 `weights/qr-s0/checkpoint-48`，280 个训练张量与原件逐项相等。独立挂载命名空间中隐藏整个 staging 后，`tools/restore_memory_control_v13_paths.py --root "$R"` 重建了所需别名，复读得到 119,394 个训练根状态、S1 第 256 步及全部 QR 试验张量，未调用 Reader。记录见 `restored-controller-paths.log`。完整检查点归档和长期留存仍按实测容量调度。
 
 当前尚待完成正式 S1、REF 完整曲线、QR 和各配对臂 6k/12k/24k 学习曲线、冻结数据多种子、按结果触发的额外采样对照，以及最终独立确认。现阶段没有据此选择最终模型。
