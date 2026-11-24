@@ -54,6 +54,81 @@ def wait_for(root, seed, calls, owners):
         time.sleep(30)
 
 
+def wait_initial_fit(root, checkpoint, owner):
+    """Wait on the real trainer for this output. A replacement can retain the same fit."""
+    directory = checkpoint.parent
+
+    def matches(pid):
+        try:
+            args = Path(f"/proc/{pid}/cmdline").read_bytes().split(b"\0")
+            output = Path(os.fsdecode(args[args.index(b"--output") + 1]))
+            return (
+                b"milai_lab.runners.pretrained_control_train" in args
+                and args[args.index(b"--objective") + 1] == b"evidence"
+                and output.samefile(directory)
+                and ticks(pid) is not None
+            )
+        except (OSError, ValueError, IndexError):
+            return False
+
+    while True:
+        record = json_file(directory / "run.json")
+        if record["status"] == "completed":
+            if not record["reload_scores_equal"] or not (checkpoint / "control.pt").is_file():
+                raise ValueError("Completed evidence fit lacks its verified final checkpoint")
+            return
+        if not matches(owner):
+            owner = next(
+                (
+                    int(p.name)
+                    for p in Path("/proc").iterdir()
+                    if p.name.isdigit() and matches(int(p.name))
+                ),
+                None,
+            )
+            if owner is None:
+                raise RuntimeError("No running evidence fit owns the incomplete output")
+        write_json(
+            root / "main-study-status.json",
+            dict(
+                stage="waiting_for_evidence_fit",
+                study_pid=os.getpid(),
+                s1_owner=owner,
+                checkpoint=str(checkpoint),
+            ),
+        )
+        time.sleep(45)
+
+
+def qr_prefix(root, seed):
+    from evaluate_qrag_milai_checkpoints import producer_live
+
+    train = root / f"qr-{seed}"
+    while not all(point_path(root, "QR", seed, n).is_file() for n in (6000, 12000)):
+        with (train / ".curve.lock").open("a") as lease:
+            try:
+                fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                time.sleep(30)
+                continue
+        store = root / "staging/qr" / ("formal" if seed == 11 else f"formal-{seed}")
+        if (
+            not producer_live(train)
+            and not (store / "checkpoint-12000" / "training.json").is_file()
+        ):
+            invoke("run_qrag_milai_after_warm.py", "--root", root, "--seed", seed, "--calls", 12000)
+        invoke(
+            "evaluate_qrag_milai_checkpoints.py",
+            "--root",
+            root,
+            "--seed",
+            seed,
+            "--calls",
+            6000,
+            12000,
+        )
+
+
 def comparison(policy, baseline, repeats):
     result = paired_comparison([policy], baseline, repeats=repeats, seed=20261125)
     fields = (
@@ -250,9 +325,36 @@ def extend(args):
     root = args.root.resolve()
     with (root / f".extension-{args.seed}.lock").open("a") as guard:
         fcntl.flock(guard, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if args.drive_initial is not None:
+            if not all(
+                point_path(root, m, args.seed, 12000).is_file() for m in ("DQ", "PQ-U", "PQ-A")
+            ):
+                wait_initial_fit(root, args.s1, args.drive_initial)
+                write_json(
+                    root / "main-study-status.json",
+                    dict(stage="initial_12k_rounds", study_pid=os.getpid()),
+                )
+                invoke(
+                    "run_memory_control_v13_rounds.py",
+                    "--root",
+                    root,
+                    "--s1",
+                    args.s1,
+                    "--weights",
+                    args.weights,
+                    "--curve",
+                    root / "rosters/curve-2048.json",
+                    "--until",
+                    12000,
+                    "--acquisition-seed",
+                    args.seed,
+                    "--fit-seed",
+                    args.seed,
+                )
+            qr_prefix(root, args.seed)
         owners = {m: args.qr_owner if m == "QR" else args.paired_owner for m in METHODS}
         wait_for(root, args.seed, 12000, owners)
-        if args.paired_owner or args.qr_owner:
+        if args.drive_initial is not None or args.paired_owner or args.qr_owner:
             # A long fit can outlive code fixes. Run the settled stage from the
             # current worktree only after all four real 12k points are published.
             argv = [
@@ -379,6 +481,20 @@ def extend(args):
                 "--selected-readouts",
                 "tune",
             )
+        # Restrict the independent optimizer seeds to the development-selected
+        # outcome families. All paid acquisition packages remain those of seed 11.
+        invoke(
+            "repeat_memory_control_v13_finalists.py",
+            "--root",
+            root,
+            "--acquisition-seed",
+            args.seed,
+            "repeat",
+            "--weights",
+            args.weights,
+            "--s1",
+            args.s1,
+        )
 
 
 if __name__ == "__main__":
@@ -396,6 +512,12 @@ if __name__ == "__main__":
     run = sub.add_parser("extend")
     run.add_argument("--s1", type=Path, required=True)
     run.add_argument("--weights", type=Path, required=True)
+    run.add_argument(
+        "--drive-initial",
+        type=int,
+        metavar="S1_PID",
+        help="Own the 12k paired stage once this live evidence fit closes",
+    )
     run.add_argument("--paired-owner", type=int)
     run.add_argument("--qr-owner", type=int)
     run.add_argument(

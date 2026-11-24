@@ -335,7 +335,7 @@ def transfer(args):
     arm = json.loads(args.arm.read_text())
     conditions = [(2048, "frozen", arm)]
     if (
-        not args.budgets_only
+        not getattr(args, "budgets_only", False)
         and arm["policy"] in {"pretrained_checkpoint", "qrag_milai"}
         and arm.get("precision", "learned") == "learned"
     ):
@@ -415,7 +415,7 @@ if __name__ == "__main__":
     tr.add_argument(
         "--reference-run",
         type=Path,
-        help="Already completed identical 2,048-token arm on this curve roster",
+        help="Completed 2,048-token readout of this arm containing the same complete curve groups",
     )
     for p in (reg, ev, tr):
         p.add_argument("--data", type=Path, required=True)
