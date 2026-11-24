@@ -73,3 +73,9 @@ CUDA_VISIBLE_DEVICES='' PYTHONPATH=src python tools/report_memory_control_v13_re
   --arm "$R/baselines/curve/B1-4" --arm "$R/baselines/curve/gte_relevance-2-R2-batch8" \
   --output "$R/runtime-validation/warm-550-dev150-read-effects.json"
 ```
+
+## 正式检查点结算
+
+主研究的 `settle_memory_control_v13_round.py` 在真实 6k、12k、24k 曲线点闭合时自动调用同一个 CPU 重放入口。每个检查点只读当前轮的 PQ-U、PQ-A 新增包，各重放一次。对应的轮内曝光为 4,000、6,000、12,000。6k 校验共同 π₀；12k 和 24k 分别对照各自前一检查点的冻结策略身份。DQ 的粒度表引用 PQ-U 的原始结果，QR 单条在线轨迹的同 before 双粒度效果标为未测。
+
+桥接表同时检查 QR、DQ、PQ-U、PQ-A 及已冻结的规则和原生 GTE 六臂，使用相同自然 DEV 任务与预算。各阶段完整的原生组记录与来源区间保存在 `read-effects/a11-N.json`，其中 N 为累计曝光。`dev-review-a11-N.json` 的 `read_effects` 字段记录原目录、续跑身份、分母与按来源摘要。空分母、质量缺测和未来成本缺测分别保留，每轮新增 Reader 请求及控制器 GPU 使用均为零。

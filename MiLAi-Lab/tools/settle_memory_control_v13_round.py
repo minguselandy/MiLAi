@@ -246,6 +246,116 @@ def examples(policy, baseline):
     )
 
 
+def replay_read_effects(output, data, collections, deployments):
+    cmd = [
+        sys.executable,
+        str(Path(__file__).with_name("report_memory_control_v13_read_effects.py")),
+        "--data",
+        str(data),
+        "--output",
+        str(output),
+    ]
+    for option, paths in (("--collection", collections), ("--arm", deployments)):
+        for path in paths:
+            cmd.extend((option, str(path)))
+    subprocess.run(  # noqa: S603 -- fixed local entry and native paths
+        cmd,
+        check=True,
+        env=dict(
+            os.environ,
+            CUDA_VISIBLE_DEVICES="",
+            OMP_NUM_THREADS="1",
+            OPENBLAS_NUM_THREADS="1",
+            TOKENIZERS_PARALLELISM="false",
+        ),
+    )
+    return json_file(output)
+
+
+def settle_read_effects(root, seed, calls, points, paths):
+    """Measure only the current two acquisition rounds; DQ shares the uniform outcomes."""
+    stage, previous = {6000: (1, 2000), 12000: (2, 6000), 24000: (3, 12000)}[calls]
+    cohort = points["DQ"]["cohort"]
+    if cohort != json_file(root / "rosters/curve-2048.json"):
+        raise ValueError("Read-effect settlement requires the registered natural DEV roster")
+    if points["DQ"]["acquisition_paths"] != points["PQ-U"]["acquisition_paths"]:
+        raise ValueError("DQ requires its actual shared PQ-U outcomes")
+    collections = {}
+    train = {}
+    for method, sampler in (("PQ-U", "uniform"), ("PQ-A", "structured")):
+        directory = Path(points[method]["acquisition_paths"][-1]).resolve()
+        cfg = json_file(directory / "round.json")
+        progress = json_file(directory / "progress.json")
+        continuation = (
+            "pi0-fixedcontext-4"
+            if stage == 1
+            else str(
+                Path(
+                    json_file(point_path(root, method, seed, previous))["deployment"]["arm"][
+                        "checkpoint"
+                    ]
+                ).resolve()
+            )
+        )
+        recorded = cfg["continuation_policy_id"]
+        matches_continuation = (
+            recorded == continuation
+            if stage == 1
+            else Path(recorded).is_absolute() and Path(recorded).resolve() == Path(continuation)
+        )
+        if (
+            not matches_continuation
+            or cfg["round"] != stage
+            or cfg["seed"] != seed
+            or cfg["sampler"] != sampler
+            or cfg["material_budget"] != cohort["material_budget"]
+            or cfg["dataset_run"] != cohort["dataset_run_id"]
+            or progress.get("state") != "complete"
+            or progress["feedback_calls"] != calls - previous
+        ):
+            raise ValueError(f"{method} is not the closed current round of its own continuation")
+        collections[method] = directory
+        train[method] = dict(
+            directory=str(directory),
+            continuation=recorded,
+            round=stage,
+            round_feedback_exposure=progress["feedback_calls"],
+        )
+    methods = (*METHODS, "rule", "gte-batch8")
+    for method in methods:
+        proto = json_file(paths[method] / "protocol.json")
+        if proto["population"] != cohort or (
+            method in METHODS and proto["arm"] != points[method]["deployment"]["arm"]
+        ):
+            raise ValueError(f"Wrong method or DEV roster for bridge replay: {method}")
+    out = root / "read-effects" / f"a{seed}-{calls}.json"
+    result = replay_read_effects(
+        out, cohort["dataset_path"], collections.values(), (paths[m] for m in methods)
+    )
+    for (method, directory), item in zip(collections.items(), result["collections"], strict=True):
+        if (
+            Path(item["source_directory"]) != directory
+            or item["continuation"] != train[method]["continuation"]
+        ):
+            raise ValueError("Replayed a different TRAIN continuation")
+        train[method].update(root_count=item["root_count"], by_source=item["by_source"])
+    train["DQ"] = dict(same_outcomes_as="PQ-U", continuation=train["PQ-U"]["continuation"])
+    train["QR"] = dict(status="unmeasured_single_online_trajectory")
+    dev = {
+        m: {k: v for k, v in item.items() if k != "groups"}
+        for m, item in zip(methods, result["dev"], strict=True)
+    }
+    return dict(
+        report=str(out),
+        new_reader_requests=0,
+        controller_gpu_hours=0,
+        train_level_effects=train,
+        native_dev_bridge_effects=dev,
+        scope="Current observed TRAIN comparisons and matched natural DEV; "
+        "null values retain empty or masked denominators.",
+    )
+
+
 def settle(root, seed, calls, repeats):
     points = {m: json_file(point_path(root, m, seed, calls)) for m in METHODS}
     paths = {}
@@ -312,6 +422,7 @@ def settle(root, seed, calls, repeats):
         f"{candidate} vs {base}": examples(paths[candidate], paths[base])
         for candidate, base in (("PQ-U", "DQ"), ("PQ-A", "PQ-U"), ("DQ", "gte-batch8"))
     }
+    result["read_effects"] = settle_read_effects(root, seed, calls, points, paths)
     path = root / f"dev-review-a{seed}-{calls}.json"
     write_json(path, result)
     return result

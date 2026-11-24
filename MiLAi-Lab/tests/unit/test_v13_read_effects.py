@@ -52,3 +52,105 @@ def test_partial_or_unavailable_interval_does_not_complete_bridge(monkeypatch):
     assert not m.full_objects(m.ranges(env), pool, {5})
     env.ops.opened[1] = {**item, "source_ranges": [span(2, 4)], "unavailable_source_ranges": []}
     assert m.full_objects(m.ranges(env), pool, {5}) == {5}
+
+
+def test_settlement_uses_current_targets_and_six_matched_cpu_deployments(tmp_path, monkeypatch):
+    import json
+
+    import pytest
+
+    m = module(monkeypatch)
+    driver = importlib.import_module("settle_memory_control_v13_round")
+
+    def save(path, obj):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(obj))
+
+    cohort = {
+        "role": "dev",
+        "v13_role": "curve",
+        "material_budget": 2048,
+        "dataset_run_id": "r",
+        "tasks": [1, 2],
+        "dataset_path": str(tmp_path / "db"),
+    }
+    save(tmp_path / "rosters/curve-2048.json", cohort)
+    points = {}
+    paths = {}
+    for method in (*driver.METHODS, "rule", "gte-batch8"):
+        path = tmp_path / "eval" / method
+        arm = {"name": method, "environment": "qrag_milai_v13"}
+        save(
+            path / "protocol.json",
+            {"population": cohort, "comparison": {"reader": "frozen"}, "arm": arm},
+        )
+        save(path / "run.json", {"status": "COMPLETED"})
+        paths[method] = path
+        if method in driver.METHODS:
+            points[method] = dict(cohort=cohort, deployment={"arm": arm})
+    dirs = []
+    for method, sampler in (("PQ-U", "uniform"), ("PQ-A", "structured")):
+        path = tmp_path / "collection" / f"{method}-12000"
+        prev = tmp_path / "weights" / f"{method}-6000"
+        save(
+            driver.point_path(tmp_path, method, 11, 6000),
+            dict(deployment={"arm": {"checkpoint": str(prev)}}),
+        )
+        save(
+            path / "round.json",
+            dict(
+                continuation_mode="full_episode",
+                continuation_policy_id=str(prev),
+                dataset_run="r",
+                material_budget=2048,
+                round=2,
+                seed=11,
+                sampler=sampler,
+            ),
+        )
+        save(path / "progress.json", dict(state="complete", feedback_calls=6000))
+        points[method]["acquisition_paths"] = ["warm", f"{method}-six", str(path)]
+        dirs.append(path)
+    points["DQ"]["acquisition_paths"] = points["PQ-U"]["acquisition_paths"]
+    seen = []
+
+    def invoke(argv, *, check, env):
+        seen.append(argv)
+        assert check and env["CUDA_VISIBLE_DEVICES"] == ""
+        assert [v for i, v in enumerate(argv) if i and argv[i - 1] == "--collection"] == list(
+            map(str, dirs)
+        )
+        arms = [Path(v) for i, v in enumerate(argv) if i and argv[i - 1] == "--arm"]
+        assert set(arms) == set(paths.values())
+        out = Path(argv[argv.index("--output") + 1])
+        save(
+            out,
+            dict(
+                dataset_run="r",
+                new_reader_requests=0,
+                collections=[
+                    dict(
+                        source_directory=str(d),
+                        continuation=m.read_json(d / "round.json")["continuation_policy_id"],
+                        data_role="train",
+                        root_count=1,
+                        by_source={},
+                        observations=[],
+                    )
+                    for d in dirs
+                ],
+                dev=[dict(run=str(a), total_registered_tasks=2) for a in arms],
+            ),
+        )
+
+    monkeypatch.setattr(driver.subprocess, "run", invoke)
+    result = driver.settle_read_effects(tmp_path, 11, 12000, points, paths)
+    assert result["train_level_effects"]["DQ"]["same_outcomes_as"] == "PQ-U"
+    assert result["train_level_effects"]["QR"]["status"] == "unmeasured_single_online_trajectory"
+    assert len(result["native_dev_bridge_effects"]) == 6
+    cfg = m.read_json(dirs[1] / "round.json")
+    cfg["continuation_policy_id"] = str(tmp_path / "other-policy")
+    save(dirs[1] / "round.json", cfg)
+    with pytest.raises(ValueError, match="own continuation"):
+        driver.settle_read_effects(tmp_path, 11, 12000, points, paths)
+    assert len(seen) == 1
