@@ -63,7 +63,8 @@ def value_usage(rollouts, fits):
         fit_seconds += info["wall_seconds"]
         # The fit loop's perf_counter includes the parked interval; GPU memory stayed resident.
         if (
-            p.resolve() == (root / "weights/s1").resolve()
+            (root / "weights/s1").is_dir()
+            and p.samefile(root / "weights/s1")
             and phase.get("ended_ns")
             and phase.get("started_ns")
         ):
