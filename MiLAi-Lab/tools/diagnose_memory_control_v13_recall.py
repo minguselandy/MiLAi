@@ -6,13 +6,17 @@ import argparse
 import json
 from collections import Counter, defaultdict
 from contextlib import closing
+from itertools import pairwise
 from pathlib import Path
+from statistics import mean, median
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE
+from milai_lab.datasets.memory_control_report import write_json
 from milai_lab.datasets.memory_control_store import connect
 from milai_lab.methods.dataset_control_states import evidence_for, full_objects, task_annotation
 from milai_lab.methods.dataset_corpus_runtime import CorpusPool
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
+from milai_lab.runners.memory_control_episode import episode_before_reader, make_policy
 from milai_lab.scorers.memory_control_episode_metrics import QUALITY_AXES, input_result
 from milai_lab.scorers.memory_control_native import musique_pair
 
@@ -148,13 +152,230 @@ def diagnose(data, gold_run, arms):
     )
 
 
+def token_summary(rows):
+    tokens = [r["material_tokens"] for r in rows if r["host_ready"]]
+    return dict(
+        measured=len(tokens),
+        total=sum(tokens),
+        mean=mean(tokens) if tokens else None,
+        median=median(tokens) if tokens else None,
+        maximum=max(tokens, default=None),
+    )
+
+
+def coverage_summary(rows):
+    known = [r for r in rows if r["complete_annotation_sets"] > 0]
+    delivered = [r for r in known if r["delivered"] is True]
+    return dict(
+        registered_tasks=len(rows),
+        native_groups=len({r["group"] for r in rows}),
+        tasks_with_complete_annotation=len(known),
+        tasks_without_complete_annotation=len(rows) - len(known),
+        annotation_set_count=sum(r["complete_annotation_sets"] for r in known),
+        annotation_status_counts=dict(Counter(r["annotation_status"] for r in rows)),
+        available_before_budget=sum(r["reachable"] is True for r in known),
+        complete_sets_delivered_tasks=len(delivered),
+        delivered_over_known=(len(delivered) / len(known) if known else None),
+        delivered_over_all=(len(delivered) / len(rows) if rows else None),
+        nonready_host_requests=sum(not r["host_ready"] for r in rows),
+        known_delivery_status_unknown=sum(r["delivered"] is None for r in known),
+        material_tokens_all_ready=token_summary(rows),
+        material_tokens_known_ready=token_summary(known),
+        material_tokens_delivered=token_summary(delivered),
+    )
+
+
+def budget_changes(results):
+    changes = {}
+    both = {
+        (True, True): "retained",
+        (False, True): "gained",
+        (True, False): "lost",
+        (False, False): "neither",
+    }
+    for a, b in pairwise(sorted(results)):
+        counts = defaultdict(Counter)
+        for before, after in zip(results[a], results[b], strict=True):
+            if (before["task"], before["source"]) != (after["task"], after["source"]):
+                raise ValueError("Mismatched task in paired budgets")
+            category = both.get((before["delivered"], after["delivered"]), "unknown_or_unannotated")
+            counts[before["source"]][category] += 1
+        changes[f"{a}_to_{b}"] = {
+            source: {k: counter[k] for k in (*both.values(), "unknown_or_unannotated")}
+            for source, counter in counts.items()
+        }
+    return changes
+
+
+def budget_witnesses(data, gold_run, rosters):
+    protocol, paid = input_result(gold_run)
+    anchor = protocol["population"]
+    arm = protocol["arm"]
+    if (
+        arm["policy"] != "G"
+        or arm.get("environment") != "qrag_milai_v13"
+        or anchor["role"] != "dev"
+        or anchor.get("v13_role") != "curve"
+        or anchor["material_budget"] != 2048
+        or json.loads((gold_run / "run.json").read_text())["status"] != "COMPLETED"
+    ):
+        raise ValueError("Expected closed 2048 annotation-guided DEV curve readout")
+    budgets = (512, 1024, 2048)
+    for budget in budgets:
+        roster = json.loads((rosters / f"curve-{budget}.json").read_text())
+        if roster != {**anchor, "material_budget": budget}:
+            raise ValueError(
+                "Budget transfer requires identical registered DEV groups, tasks and protocol"
+            )
+    ids = [t["task_id"] for t in anchor["tasks"]]
+    if len(ids) != len(set(ids)) or set(ids) != set(paid):
+        raise ValueError("The paid anchor does not cover its whole native roster")
+    ds = MemoryControlDataset(data)
+    if (
+        ds.run_id != anchor["dataset_run_id"]
+        or ds.observation_protocol != arm["observation_protocol"]
+    ):
+        raise ValueError("G replay dataset or visible observation differs")
+    policy, model = make_policy(ds, arm, "cpu")
+    if model is not None:
+        raise ValueError("G replay must be an annotation-only policy")
+    results = {b: [] for b in budgets}
+    paid_ids = set()
+    with closing(connect(ds.path)) as db:
+        for spec in anchor["tasks"]:
+            tid = spec["task_id"]
+            t = db.execute(
+                "SELECT * FROM experiment_tasks WHERE id=? AND experiment_role='dev'", (tid,)
+            ).fetchone()
+            if t is None or (t["dataset"], t["native_group"]) != (
+                spec["dataset"],
+                spec["native_group"],
+            ):
+                raise ValueError("Native DEV role or group mismatch")
+            pool = CorpusPool(db, t["root_id"])
+            original = paid[tid]
+            provider = original.get("reader_result", {}).get("response", {}).get("id")
+            if (
+                not original["costs"].get("reader_request_attempted")
+                or not provider
+                or provider in paid_ids
+            ):
+                raise ValueError("Expected unique original Reader measurement per task")
+            paid_ids.add(provider)
+            for budget in budgets:
+                record = episode_before_reader(
+                    ds,
+                    db,
+                    t,
+                    arm,
+                    policy,
+                    model,
+                    budget,
+                    (anchor["seed"] + tid) % (2**31 - 1),
+                    pool=pool,
+                )
+                cov = record["annotation_coverage"]
+                historical = original["annotation_coverage"]
+                if any(
+                    cov[k] != historical[k]
+                    for k in (
+                        "annotation_status",
+                        "complete_evidence_sets",
+                        "available_before_budget",
+                    )
+                ):
+                    raise ValueError(
+                        "Annotation or pre-budget candidate pool changed across budgets"
+                    )
+                ready = record["status"] == "ready" and record["reader_wire"] is not None
+                count = record["costs"]["reader_material_tokens"]
+                if ready and not 0 <= count <= budget:
+                    raise ValueError("Host material budget exceeded")
+                if budget == 2048:
+                    if (
+                        not ready
+                        or any(
+                            record[k] != original[k]
+                            for k in (
+                                "task_id",
+                                "native_group",
+                                "dataset",
+                                "reader_wire",
+                                "delivered_material",
+                                "visible_source_aliases",
+                                "annotation_coverage",
+                                "actual_cold_prefix",
+                            )
+                        )
+                        or any(
+                            record["costs"][k] != original["costs"][k]
+                            for k in ("reader_material_tokens", "unique_source_chars")
+                        )
+                        or record["control"]["reason"] != original["control"]["reason"]
+                        or [e["selected"] for e in record["control"]["trace"]]
+                        != [e["selected"] for e in original["control"]["trace"]]
+                    ):
+                        raise ValueError(
+                            f"Host replay differs from paid G measurement on task {tid}"
+                        )
+                results[budget].append(
+                    dict(
+                        task=tid,
+                        source=t["dataset"],
+                        group=t["native_group"],
+                        annotation_status=cov["annotation_status"],
+                        complete_annotation_sets=cov["complete_evidence_sets"],
+                        reachable=cov["available_before_budget"],
+                        delivered=cov["delivered_complete_set"] if ready else None,
+                        host_ready=ready,
+                        material_tokens=count,
+                        operations=record["actual_cold_prefix"],
+                        terminal_reason=record["control"]["reason"],
+                        paid_anchor_id=provider if budget == 2048 else None,
+                    )
+                )
+    summaries = {}
+    for b, rows in results.items():
+        summaries[str(b)] = {
+            src: coverage_summary([r for r in rows if r["source"] == src])
+            for src in sorted({r["source"] for r in rows})
+        }
+    return dict(
+        dataset_run=ds.run_id,
+        role="dev_curve",
+        policy=arm,
+        anchor_path=str(gold_run.resolve()),
+        roster_folder=str(rosters.resolve()),
+        registered_tasks=len(ids),
+        native_groups=len({(t["dataset"], t["native_group"]) for t in anchor["tasks"]}),
+        exact_paid_anchor_matches=len(paid_ids),
+        new_reader_requests=0,
+        controller_gpu_hours=0,
+        source_summaries=summaries,
+        paired_budget_changes=budget_changes(results),
+        task_delivery=results,
+        scope="Observed delivery witnesses of the fixed annotation-guided policy. "
+        "Alternative policies may deliver other sets. Lower-budget QA is unmeasured.",
+    )
+
+
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--data", type=Path, required=True)
     p.add_argument("--gold-run", type=Path, required=True)
     p.add_argument("--arm", type=Path, action="append", default=[])
+    p.add_argument(
+        "--budget-rosters",
+        type=Path,
+        help="Replay G on the frozen 512/1024/2048 DEV curve rosters without Reader readout",
+    )
     p.add_argument("--output", type=Path, required=True)
     args = p.parse_args()
-    args.output.write_text(
-        json.dumps(diagnose(args.data, args.gold_run, args.arm), indent=2, allow_nan=False) + "\n"
+    if args.budget_rosters and args.arm:
+        p.error("--budget-rosters uses the registered G policy alone")
+    result = (
+        budget_witnesses(args.data, args.gold_run, args.budget_rosters)
+        if args.budget_rosters
+        else diagnose(args.data, args.gold_run, args.arm)
     )
+    write_json(args.output, result)

@@ -154,3 +154,40 @@ def test_settlement_uses_current_targets_and_six_matched_cpu_deployments(tmp_pat
     with pytest.raises(ValueError, match="own continuation"):
         driver.settle_read_effects(tmp_path, 11, 12000, points, paths)
     assert len(seen) == 1
+
+
+def test_budget_witness_preserves_unknown_and_tracks_exact_tasks(monkeypatch):
+    import pytest
+
+    module(monkeypatch)
+    m = importlib.import_module("diagnose_memory_control_v13_recall")
+    base = dict(
+        source="s",
+        group="g",
+        annotation_status="text",
+        complete_annotation_sets=1,
+        host_ready=True,
+        reachable=True,
+        material_tokens=123,
+    )
+    low = [
+        dict(base, task=1, delivered=True),
+        dict(base, task=2, delivered=False),
+        dict(base, task=3, delivered=None, complete_annotation_sets=0, annotation_status="missing"),
+    ]
+    high = [dict(low[0], delivered=False), dict(low[1], delivered=True), low[2]]
+    summary = m.coverage_summary(low)
+    assert summary["registered_tasks"] == 3 and summary["tasks_with_complete_annotation"] == 2
+    assert summary["complete_sets_delivered_tasks"] == 1 and summary["delivered_over_known"] == 0.5
+    assert summary["material_tokens_all_ready"]["total"] == 369
+    changes = m.budget_changes({512: low, 1024: high, 2048: high})
+    assert changes["512_to_1024"]["s"] == {
+        "retained": 0,
+        "gained": 1,
+        "lost": 1,
+        "neither": 0,
+        "unknown_or_unannotated": 1,
+    }
+    assert changes["1024_to_2048"]["s"]["lost"] == changes["1024_to_2048"]["s"]["gained"] == 0
+    with pytest.raises(ValueError, match="Mismatched task"):
+        m.budget_changes({512: low, 1024: list(reversed(high))})
