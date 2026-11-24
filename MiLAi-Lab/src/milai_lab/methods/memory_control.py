@@ -33,10 +33,10 @@ class FirstActionIntervention:
     """One actual bound action, then a bounded number of ordinary policy decisions."""
 
     first_action: MemoryAction
-    continuation_steps: int = 0
+    continuation_steps: int | None = 0
 
     def __post_init__(self) -> None:
-        if self.continuation_steps < 0:
+        if self.continuation_steps is not None and self.continuation_steps < 0:
             raise ValueError("Intervention continuation steps must be nonnegative")
 
 
@@ -55,10 +55,12 @@ class MemoryControlState:
     navigation_upgrades: dict[int, dict[str, Any]] | None = None
     control_numeric: dict[str, Any] | None = None
 
+    action_history: list[str] | None = None
+
     def project(self) -> dict[str, Any]:
         result = asdict(self)
         for key in ("observed_materials", "observed_evidence", "retrieved_scopes",
-                    "navigation_upgrades", "control_numeric"):
+                    "navigation_upgrades", "control_numeric", "action_history"):
             if result[key] is None:
                 del result[key]
         return result
@@ -106,7 +108,8 @@ def run_memory_control(
         forced = len(actions) == 1
         relative_step = step - start_step
         intervened = intervention is not None and (
-            relative_step == 0 or relative_step > intervention.continuation_steps)
+            relative_step == 0 or (intervention.continuation_steps is not None
+                                   and relative_step > intervention.continuation_steps))
         if intervened:
             assert intervention is not None
             requested = (intervention.first_action if relative_step == 0 else

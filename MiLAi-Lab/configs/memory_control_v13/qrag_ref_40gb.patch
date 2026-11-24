@@ -1,0 +1,270 @@
+diff --git a/envs/__init__.py b/envs/__init__.py
+--- a/envs/__init__.py
++++ b/envs/__init__.py
+@@ -1,12 +1,2 @@
+-from .dataloaders import (
+-    GlobalSet,
+-    RetrievalBabiLong,
+-    RetrievalMusique,
+-    RetrievalHotPotQA,
+-    RetrievalLongBench,
+-    Retrieval2WikiMultihopQA,
+-    NIAH,
+-    RetrievalRulerQA
+-)
++from .dataloaders.musique import RetrievalMusique
+ from .qa_dataset_adapter import QADatasetAdapter
+-from .combined_dataset import RetrievalCombinedTwo, RetrievalCombinedThree
+diff --git a/envs/dataloaders/__init__.py b/envs/dataloaders/__init__.py
+--- a/envs/dataloaders/__init__.py
++++ b/envs/dataloaders/__init__.py
+@@ -1,9 +1 @@
+-from .globalset import GlobalSet
+-from .babilong import RetrievalBabiLong
+-from .hotpotqa import RetrievalHotPotQA
+-from .musique import  RetrievalMusique
+-from .longbench import RetrievalLongBench
+-from .twowikimultihopqa import Retrieval2WikiMultihopQA
+-from .niah import NIAH
+-from .ruler_qa import RetrievalRulerQA
+-from . import babilong
++"""MuSiQue-only reference process."""
+diff --git a/envs/qa_env.py b/envs/qa_env.py
+--- a/envs/qa_env.py
++++ b/envs/qa_env.py
+@@ -2,7 +2,7 @@ import numpy as np
+ from collections import namedtuple
+ from typing import Tuple, Dict, List, Any, Union
+ import torch.utils
+-from nltk.probability import gt_demo
++
+ from envs.text_env import PositionProcessor, TextEnv
+ from transformers import PreTrainedTokenizer, PreTrainedTokenizerFast
+ from rl.feedback.feedback import AFeedbackModel
+diff --git a/eval_retriever.py b/eval_retriever.py
+--- a/eval_retriever.py
++++ b/eval_retriever.py
+@@ -184,7 +184,7 @@ def main(argv: List[str] | None = None) -> None:
+     agent = PQN(cfg.algo)
+ 
+     ckpt_filename = "model_last.pt" if cfg.use_last else "model_best.pt"
+-    ckpt_path = os.path.join(cfg.pretrained_path, ckpt_filename)
++    ckpt_path = os.path.join(cfg.get("checkpoint_dir", cfg.pretrained_path), ckpt_filename)
+     if not os.path.exists(ckpt_path):
+         raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
+ 
+diff --git a/rl/agents/pqn.py b/rl/agents/pqn.py
+--- a/rl/agents/pqn.py
++++ b/rl/agents/pqn.py
+@@ -131,16 +131,22 @@ class PQN(object):
+                     reward_batch: Tensor
+         ):
+             
+-            reward_batch = reward_batch.squeeze()
+-            
+-            qf_1, qf_2 = critic(state_batch, action_batch)
+-            qf_1, qf_2 = qf_1.squeeze(), qf_2.squeeze()
+-            # qf_loss = F.mse_loss(qf_1 + qf_2, reward_batch)   
+-            qf_loss = 0.5 * F.mse_loss(2 * qf_1, reward_batch) + 0.5 * F.mse_loss(2 * qf_2, reward_batch)   
+-            
+-            (qf_loss / self.accumulate_grads).backward()
+-
+-            return qf_loss
++            microbatch = int(self.config.pqn.hyperparams.critic_microbatch)
++            target = reward_batch.reshape(-1)
++            loss = target.new_zeros(())
++            for offset in range(0, target.numel(), microbatch):
++                rows = slice(offset, offset + microbatch)
++                states = TextMemory(*(v[rows] if v is not None else None for v in state_batch))
++                actions = TextMemoryItem(*(v[rows] if v is not None else None for v in action_batch))
++                q1, q2 = critic(states, actions)
++                expected = target[rows]
++                partial_loss = (
++                    F.mse_loss(2 * q1.reshape(-1), expected, reduction="sum")
++                    + F.mse_loss(2 * q2.reshape(-1), expected, reduction="sum")
++                ) / (2 * target.numel())
++                (partial_loss / self.accumulate_grads).backward()
++                loss += partial_loss.detach()
++            return loss
+         
+         return train_step
+ 
+@@ -332,25 +338,17 @@ class PQN(object):
+         # self.action_embed_target.train()
+ 
+     def save(self, checkpoint_path: str, verbose=False) -> None:
+-        """
+-        Save state of all networks, optimizer and scheduler into a single file
+-
+-        """
+-        os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
+-
++        # Greedy retrieval needs the policy state tower and online action tower.
++        # Preserve their exact fp32 weights. This is an evaluation checkpoint.
+         checkpoint = {
+-            "critic": self.critic.state_dict(),
++            "format": "qrag_reference_actor",
+             "policy": self.policy.state_dict(),
+-            "random_policy": self.random_policy.state_dict(),
+-            "v_net_target": self.v_net_target.state_dict(),
+-            "action_embed_target": self.action_embed_target.state_dict(),
+-            "critic_optim": self.critic_optim.state_dict(),
+-            "scheduler": self.scheduler.state_dict(),
+-            "alpha": self.alpha, #changes in training phase
++            "action_embed": self.critic.action_embed.state_dict(),
++            "alpha": self.alpha,
+         }
+-        torch.save(checkpoint, checkpoint_path)
+-        if verbose:
+-            print(f"[INFO] PQN checkpoint saved → {checkpoint_path}")
++        tmp_path = checkpoint_path + ".part"
++        torch.save(checkpoint, tmp_path)
++        os.replace(tmp_path, checkpoint_path)
+ 
+     def load(self, checkpoint_path: str, strict: bool = True, verbose=False) -> None:
+         """
+@@ -360,8 +358,13 @@ class PQN(object):
+         if not os.path.isfile(checkpoint_path):
+             raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
+ 
+-        checkpoint = torch.load(checkpoint_path, map_location=torch.get_default_device(), weights_only=False)
++        checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=False)
+ 
++        if checkpoint.get("format") == "qrag_reference_actor":
++            self.policy.load_state_dict(checkpoint["policy"], strict=True)
++            self.critic.action_embed.load_state_dict(checkpoint["action_embed"], strict=True)
++            self.alpha = checkpoint["alpha"]
++            return
+         self.critic.load_state_dict(checkpoint["critic"], strict=strict)
+         self.policy.load_state_dict(checkpoint["policy"], strict=strict)
+         # у random_policy обычно нет параметров, но на всякий случай
+diff --git a/rl/bert_predictor.py b/rl/bert_predictor.py
+--- a/rl/bert_predictor.py
++++ b/rl/bert_predictor.py
+@@ -48,9 +48,9 @@ class BertPredictor(nn.Module):
+         
+         assert attention_mask.shape[1] == input_ids.shape[1]
+  
+-        out = self.model.forward(
+-            input_ids, attention_mask, return_dict=False
+-        )[0]
++        with torch.autocast("cuda", dtype=torch.bfloat16):
++            out = self.model(input_ids, attention_mask, return_dict=False)[0]
++        out = out.float()
+ 
+         if self.n_output > 1:
+             prediction  = out[:, 1: self.n_output + 1]
+diff --git a/rl/feedback/__init__.py b/rl/feedback/__init__.py
+--- a/rl/feedback/__init__.py
++++ b/rl/feedback/__init__.py
+@@ -1,2 +1 @@
+ from .feedback import AFeedbackModel, GroundTruthFeedback, DummyFeedbackModel
+-from .llm_feedback import AnswerMetricFeedback, LLMGenerator #LLMJudgeFeedback,
+\ No newline at end of file
+diff --git a/train_q_rag.py b/train_q_rag.py
+--- a/train_q_rag.py
++++ b/train_q_rag.py
+@@ -1,4 +1,6 @@
+ import sys
++import json
++import time
+ import os
+ 
+ repo_dir = os.path.dirname(os.path.abspath("./"))
+@@ -22,8 +24,8 @@ from datetime import datetime
+ 
+ 
+ @torch.no_grad()
+-def evaluate(env_test, agent):
+-    s_t = env_test.reset()
++def evaluate(env_test, agent, sample):
++    s_t = env_test.reset(sample)
+     done_t = False
+     a_embeds_t, a_embeds_target_t = env_test.get_extra_embeds(agent.action_tokenizer, agent.critic.action_embed, agent.action_embed_target)
+     r_sum_t = 0
+@@ -88,8 +90,9 @@ env_config: DictConfig = cfg.envs
+ print("Embedder model:", agent_config.model.model_name)
+ 
+ # path to checkpoints and metric to determine the best model
+-ckpt_last_path = os.path.join(cfg.logger.log_dir, "model_last.pt")
+-ckpt_best_path = os.path.join(cfg.logger.log_dir, "model_best.pt")
++ckpt_last_path = os.path.join(cfg.checkpoint_dir, "model_last.pt")
++ckpt_best_path = os.path.join(cfg.checkpoint_dir, "model_best.pt")
++os.makedirs(cfg.checkpoint_dir, exist_ok=True)
+ best_eval_reward = -float("inf")
+ 
+ torch.set_default_device(cfg.device)
+@@ -100,6 +103,11 @@ set_all_seeds(cfg.seed)
+ # MAX_TOKEN_LENGTH["action"] = cfg.max_action_length
+ 
+ agent = PQN(agent_config)
++started = time.monotonic()
++probe = agent.critic.state_embed.model.encoder.layer[0].attention.self.query.weight
++probe_initial = probe[:32, :32].detach().clone()
++print("Reference precision:", torch.bfloat16, "master weights:", probe.dtype, flush=True)
++
+ 
+ # if bf16:
+ #     for m in [agent.critic, agent.policy, agent.random_policy,
+@@ -150,7 +158,17 @@ for it in progress_bar:
+         train_batch.reward, 
+         train_batch.not_done)
+     
+-    if it % eval_interval == 0:
++    if (it + 1) % cfg.accumulate_grads == 0:
++        updates = (it + 1) // cfg.accumulate_grads
++        if updates <= 3 or updates % 20 == 0:
++            with open(os.path.join(cfg.logger.log_dir, "optimizer-progress.jsonl"), "a") as progress:
++                progress.write(json.dumps({
++                    "optimizer_updates": updates, "elapsed_seconds": time.monotonic() - started,
++                    "backbone_probe_max_change": float((probe[:32, :32] - probe_initial).abs().max().item()),
++                    "loss": float(qf_loss), "peak_gpu_allocated_bytes": torch.cuda.max_memory_allocated(),
++                    "optimizer_moment_dtype": str(agent.critic_optim.state[probe]["exp_avg"].dtype),
++                }) + "\n")
++    if it % eval_interval == 0 or it + 1 == total_steps:
+ 
+         agent.eval()
+         
+@@ -158,8 +176,10 @@ for it in progress_bar:
+         writer.add_scalar("qf_loss", qf_loss, step)
+ 
+         r_eval = []
++        if len(env_test.dataset) != cfg.eval_episodes:
++            raise ValueError("REF validation requires its registered fixed dev roster")
+         for j in range(cfg.eval_episodes):
+-            r_eval.append(evaluate(env_test, agent))
++            r_eval.append(evaluate(env_test, agent, env_test.dataset[j]))
+             print(f"\reval prog: {len(r_eval)}/{cfg.eval_episodes}", end="")
+ 
+         writer.add_scalar("eval r_sum", np.mean(r_eval), step)
+@@ -170,7 +190,29 @@ for it in progress_bar:
+             'qf_loss': qf_loss,
+             'step': step,
+         })
+-        agent.save(ckpt_last_path)
++        if it + 1 == total_steps:
++            agent.save(ckpt_last_path)
++        optimizer_state = agent.critic_optim.state.get(probe, {})
++        metric = {
++            "rollout_iterations": it + 1,
++            "optimizer_updates": (it + 1) // cfg.accumulate_grads,
++            "official_logged_step": int(step),
++            "critic_transitions": (it + 1) * cfg.batch_size,
++            "gt_train_return": float(np.mean(train_rewards)),
++            "gt_dev_return": float(np.mean(r_eval)),
++            "dev_episodes": len(r_eval),
++            "loss": float(qf_loss),
++            "elapsed_seconds": time.monotonic() - started,
++            "peak_gpu_allocated_bytes": torch.cuda.max_memory_allocated(),
++            "peak_gpu_reserved_bytes": torch.cuda.max_memory_reserved(),
++            "backbone_probe_max_change": float((probe[:32, :32] - probe_initial).abs().max().item()),
++            "autocast_backbone_dtype": str(torch.bfloat16),
++            "backbone_dtype": str(probe.dtype),
++            "optimizer_moment_dtype": str(optimizer_state["exp_avg"].dtype) if optimizer_state else None,
++        }
++        with open(os.path.join(cfg.logger.tensorboard.log_dir, "reference-curve.jsonl"), "a") as curve:
++            curve.write(json.dumps(metric) + "\n")
++        print(json.dumps(metric), flush=True)
+         #torch.save(agent.state_dict(), ckpt_last_path)
+ 
+         mean_eval_reward = np.mean(r_eval)

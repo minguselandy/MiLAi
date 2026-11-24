@@ -336,7 +336,10 @@ def align_qasper(
     return {"evidence_kind": "caption_only" if figure else "text", **result}
 
 
-def qasper(db: sqlite3.Connection, path: Path, cfg: dict[str, Any], counts: dict[str, Any]) -> None:
+def qasper(
+    db: sqlite3.Connection, path: Path, cfg: dict[str, Any], counts: dict[str, Any],
+    *, groups: set[str] | None = None,
+) -> None:
     with tarfile.open(path) as archive:
         for split, name in cfg["members"].items():
             count = counts[QASPER][split]
@@ -345,6 +348,8 @@ def qasper(db: sqlite3.Connection, path: Path, cfg: dict[str, Any], counts: dict
                 raise ValueError(f"Missing QASPER member {name}")
             with stream:
                 papers = json.load(stream)
+            if groups is not None:
+                papers = {key: value for key, value in papers.items() if key in groups}
             count["raw_groups"] = len(papers)
             for paper_id, paper in papers.items():
                 root_id = root(
@@ -509,7 +514,10 @@ def persona_history(
     return root_id, history, normalize_history(history), mapping, ids
 
 
-def persona(db: sqlite3.Connection, raw: Path, cfg: dict[str, Any], counts: dict[str, Any]) -> None:
+def persona(
+    db: sqlite3.Connection, raw: Path, cfg: dict[str, Any], counts: dict[str, Any],
+    *, groups: set[str] | None = None,
+) -> None:
     histories: dict[str, tuple[int, History, History, list[int | None], dict[int, int]]] = {}
     rejected: dict[tuple[str, str], str] = {}
     for split, name in cfg["members"].items():
@@ -518,8 +526,10 @@ def persona(db: sqlite3.Connection, raw: Path, cfg: dict[str, Any], counts: dict
             continue
         personas, references = set(), set()
         for ordinal, entry in enumerate(csv_rows(raw / name)):
-            count["raw"] += 1
             account = entry["persona_id"]
+            if groups is not None and account not in groups:
+                continue
+            count["raw"] += 1
             link = entry["chat_history_32k_link"]
             references.add(link)
             personas.add(account)

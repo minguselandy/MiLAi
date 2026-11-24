@@ -1,0 +1,10 @@
+{
+  "name": "QR-12k-seed11",
+  "policy": "qrag_milai",
+  "checkpoint": "/cra/milai-experiments/v13-qrag/staging/qr/formal/checkpoint-12000",
+  "feedback_calls": 12000,
+  "seed": 11,
+  "utility_lambda": 0.05,
+  "environment": "qrag_milai_v13",
+  "observation_protocol": "semantic_nav_delta_v2"
+}

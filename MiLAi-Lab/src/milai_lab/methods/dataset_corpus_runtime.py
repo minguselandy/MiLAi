@@ -514,6 +514,8 @@ class CorpusExecution:
     def execute(self, action: MemoryAction, state: MemoryControlState) -> dict[str, Any]:
         self.trial_failure = None
         result = self.ops.execute(action, state)
+        if state.action_history is not None:
+            state.action_history.append(action.id)
         if self.host is None or result["ok"]:
             self.prefix.append(action.id)
         elif self.trial_failure:

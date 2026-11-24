@@ -50,6 +50,7 @@ class MemoryControlDataset:
             self.tokenizers = get_meta(db, "tokenizers")
             self.run_id = get_meta(db, "run_id")
             self.control_release = get_meta(db, "control_release")
+            self.confirm_only = bool(get_meta(db, "confirmation_only"))
             self.numeric_observation = (
                 self.control_release is not None if numeric_observation is None
                 else numeric_observation
@@ -65,7 +66,8 @@ class MemoryControlDataset:
             if require_complete and not get_meta(db, "build_done"):
                 raise ValueError("The dataset has not finished building")
             if self.revision and require_complete and not (
-                "all" in scopes or {"primary", "train_variants"} <= scopes
+                (self.confirm_only and scopes == {"confirm_cold"})
+                or "all" in scopes or {"primary", "train_variants"} <= scopes
             ):
                 raise ValueError("The revised primary and TRAIN budget scopes are still building")
             self.observation_protocol = observation_protocol or (
@@ -102,6 +104,8 @@ class MemoryControlDataset:
         )
 
     def index(self, role: str, *, trainable: bool = False) -> list[StateIndex]:
+        if self.confirm_only:
+            raise ValueError("Cold confirmation release has no fitting or selection states")
         if role not in {"train", "validation", "dev"}:
             raise ValueError("Select an explicit clean split")
         with closing(connect(self.path)) as db:
@@ -197,7 +201,7 @@ class MemoryControlDataset:
         source, query = row["dataset"], row["query"]
         if source != PERSONA:
             return ReaderTask(source, query)
-        if self.control_release and row["experiment_role"] != "confirm":
+        if self.control_release and (self.confirm_only or row["experiment_role"] != "confirm"):
             saved = db.execute(
                 "SELECT options,invalid_reason FROM public_reader_tasks WHERE task_id=?",
                 (task_id,),

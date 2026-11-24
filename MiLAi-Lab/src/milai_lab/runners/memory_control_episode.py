@@ -9,10 +9,11 @@ import random
 import sqlite3
 import time
 from collections import Counter, defaultdict, deque
+from collections.abc import Mapping
 from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol
 
 from milai_lab.datasets.memory_control_episode_archive import (
     episode_packet_exists,
@@ -278,6 +279,9 @@ class PolicyMenu:
         if self.precision == "R2":
             options = [a for a in actions if a.kind != "READ"
                        or not a.parameters.get("expand_context")]
+        elif self.precision == "R3_only":
+            options = [a for a in actions if a.kind != "READ"
+                       or a.parameters.get("expand_context")]
         elif self.precision == "R3":
             expandable = {
                 a.parameters.get("index") for a in actions
@@ -324,16 +328,43 @@ class GoldDiagnostic:
         return selected
 
 
+class CountedController(Protocol):
+    @property
+    def counters(self) -> Mapping[str, int | float]: ...
+
+
 def make_policy(
     dataset: MemoryControlDataset,
     arm: dict[str, Any],
     device: str,
-) -> tuple[MemoryPolicy, SmallControlModel | None]:
+) -> tuple[MemoryPolicy, CountedController | None]:
     reads = arm.get("reads", 4)
     if type(reads) is not int or reads < 1:
         raise ValueError("Policy read count must be positive")
     model = None
     name = arm["policy"]
+    if name in {"pretrained_checkpoint", "gte_relevance"}:
+        from milai_lab.methods.pretrained_control import (
+            NativeRelevancePolicy,
+            PretrainedControl,
+            PretrainedPolicy,
+        )
+        if name == "gte_relevance":
+            pretrained = PretrainedControl(
+                Path(arm["backbone"]), device=device, object_batch=arm.get("object_batch", 2)
+            ).eval()
+            policy_menu = PolicyMenu(
+                NativeRelevancePolicy(pretrained), reads, arm.get("precision", "R2")
+            )
+            return policy_menu, pretrained
+        pretrained = PretrainedControl.load(Path(arm["checkpoint"]), device=device)
+        policy = PretrainedPolicy(pretrained, arm["utility_lambda"])
+        return PolicyMenu(policy, precision=arm.get("precision", "learned")), pretrained
+    if name == "qrag_milai":
+        from milai_lab.methods.qrag_dual_control import QragDualControl, QragPolicy
+        model = QragDualControl.load(Path(arm["checkpoint"]), device=device)
+        return PolicyMenu(QragPolicy(model, arm.get("utility_lambda", .05)),
+                          precision=arm.get("precision", "learned")), model
     if name == "B0":
         return PolicyMenu(FixedMemoryPolicy(reads), allow_empty=True), None
     if name == "B1":
@@ -376,15 +407,19 @@ def start_cold(
     *,
     use_memory: bool = True,
     pool: CorpusPool | None = None,
+    v13: bool = False,
 ) -> tuple[CorpusExecution, dict[str, float]]:
     started = time.perf_counter()
     if pool is None or not use_memory:
         pool = CorpusPool(db, task["root_id"], load_sources=use_memory)
     focus = (
-        pool.rank(task["query"], dataset.config["states"]["candidate_limit"]) if use_memory else []
+        pool.rank(task["query"], 32 if v13 else dataset.config["states"]["candidate_limit"])
+        if use_memory else []
     )
     indexed = time.perf_counter()
-    execution = dataset.start_task(db, task, pool, focus, budget)
+    execution = dataset.start_task(db, task, pool, focus[:8] if v13 else focus, budget)
+    if v13:
+        execution.state.action_history = []
     return execution, {
         "pool_and_bm25_wall_ms": (indexed - started) * 1000,
         "navigation_and_admission_wall_ms": (time.perf_counter() - indexed) * 1000,
@@ -397,7 +432,7 @@ def episode_before_reader(
     task: sqlite3.Row,
     arm: dict[str, Any],
     policy: MemoryPolicy,
-    model: SmallControlModel | None,
+    model: CountedController | None,
     budget: int,
     seed: int,
     *,
@@ -406,14 +441,15 @@ def episode_before_reader(
     started, cpu = time.perf_counter(), time.process_time()
     counters = dict(model.counters) if model else {}
     session, costs = start_cold(dataset, db, task, budget, use_memory=arm["policy"] != "B0",
-                                pool=pool)
+                                pool=pool, v13=arm.get("environment") == "qrag_milai_v13")
     if arm["policy"] == "G":
         gold = task_annotation(db, task)
         if task["dataset"] == MUSIQUE:
             gold["object_locators"] = [(oid, json.loads(place)) for oid, place in db.execute(
                 "SELECT id,location FROM objects WHERE root_id=?", (task["root_id"],))]
         policy = GoldDiagnostic(session, evidence_for(task["dataset"], gold, session.pool))
-    steps = dataset.config["states"]["control_steps"]
+    v13 = arm.get("environment") == "qrag_milai_v13"
+    steps = 6 if v13 else dataset.config["states"]["control_steps"]
     initial = session.menu(steps)
     initial_state = session.online(initial)
     search_ms = 0.0
@@ -444,6 +480,10 @@ def episode_before_reader(
         episode_local_cpu_ms=(time.process_time() - cpu) * 1000,
     )
     if model:
+        if "forward_gpu_ms" in counters:
+            costs["controller_gpu_ms"] = (
+                model.counters["forward_gpu_ms"] - counters["forward_gpu_ms"]
+            )
         costs["encoder_input_tokens"] = model.counters["input_tokens"] - counters["input_tokens"]
         costs["encoder_padded_tokens"] = (
             model.counters["padded_tokens"] - counters["padded_tokens"]
@@ -453,10 +493,16 @@ def episode_before_reader(
     costs["navigation_tokens"] = (
         session.exposed_navigation_tokens(trace["trace"][0]["before"]) if trace["trace"] else 0
     )
+    invalid_termination = v13 and (trace["reason"] == "operation_outcome_unknown" or any(
+        not event.get("result", {}).get("ok", True) for event in trace["trace"]
+    ))
+    ready = packet.feasible is True and not invalid_termination
     return {
-        "status": "ready" if packet.feasible is True else "action_failed",
-        "failure_reason": packet.failure_reason,
-        "reader_wire": {**packet.wire, "seed": seed} if packet.wire else None,
+        "status": "ready" if ready else "action_failed",
+        "failure_reason": ("failed_control_operation" if invalid_termination
+                           else packet.failure_reason),
+        "reader_wire": ({**packet.wire, "seed": seed}
+                        if packet.wire and not invalid_termination else None),
         "capacity": packet.capacity,
         "costs": costs,
         "initial_state": initial_state,
@@ -488,9 +534,18 @@ def checkpoint_contract(path: Path) -> dict[str, Any]:
 
 
 def train_sources_disjoint(arm: dict[str, Any], records: list[dict[str, Any]]) -> None:
-    if arm["policy"] != "checkpoint":
+    if arm["policy"] == "qrag_milai":
+        contract = read_json(Path(arm["checkpoint"]) / "training.json")
+        if not contract or not contract.get("fitted_groups") or not contract.get("dataset_run_id"):
+            raise ValueError("QR requires its native TRAIN provenance")
+        exposure = contract.get("calls")
+        if (type(exposure) is not int or exposure <= 0
+                or arm.get("feedback_calls", exposure) != exposure):
+            raise ValueError("QR feedback exposure differs from the evaluation arm")
+    elif arm["policy"] in {"checkpoint", "pretrained_checkpoint"}:
+        contract = checkpoint_contract(Path(arm["checkpoint"]))
+    else:
         return
-    contract = checkpoint_contract(Path(arm["checkpoint"]))
     trained = set(contract.get("fitted_groups", []))
     if trained & {f"{task['dataset']}/{task['native_group']}" for task in records}:
         raise ValueError("Episode source groups intersect fitted source groups")
@@ -549,8 +604,8 @@ def _prepare_episode_batch(
     device: str,
     limit: int | None,
     prepare_only: bool = False,
-    known_policy: tuple[MemoryPolicy, SmallControlModel | None] | None = None,
-) -> tuple[list[tuple[sqlite3.Row, Path]], Counter[str], SmallControlModel | None, int]:
+    known_policy: tuple[MemoryPolicy, CountedController | None] | None = None,
+) -> tuple[list[tuple[sqlite3.Row, Path]], Counter[str], CountedController | None, int]:
     ready: list[tuple[sqlite3.Row, Path]] = []
     counts: Counter[str] = Counter()
     policy: MemoryPolicy | None
@@ -635,9 +690,13 @@ def _readout_inline(
     """Time a full task from actual local execution to its live Reader reply."""
     host = dataset.host
     assert host is not None
+    from milai_lab.runners import memory_control_reader_timing as timing
+
+    meter = arm.get("environment") == "qrag_milai_v13"
+    engine_start = engine_end = None
     counts: Counter[str] = Counter()
     dispatched: list[tuple[sqlite3.Row, Path]] = []
-    policy: tuple[MemoryPolicy, SmallControlModel | None] | None = None
+    policy: tuple[MemoryPolicy, CountedController | None] | None = None
     tasks = population["tasks"]
     prepared = attempted = 0
     wall, cpu = time.perf_counter(), time.process_time()
@@ -648,6 +707,8 @@ def _readout_inline(
         if budget is None:
             raise ValueError("Inline evaluation requires the shared Reader ledger")
         before = budget.state["generation_requests"]
+        if meter:
+            engine_start = timing.snapshot(host.settings["host"])
         with VLLMClient(
             VLLMConfig(**host.settings["host"]), budget=budget, capacity=host.capacity,
         ) as client:
@@ -677,9 +738,14 @@ def _readout_inline(
                 dispatched.append((task, path))
         charged_requests = budget.state["generation_requests"] - before
         remaining = remaining_reader_capacity(budget)
+        if meter:
+            engine_end = timing.snapshot(host.settings["host"])
     reader_scope_wall = time.perf_counter() - wall
+    observed_costs = []
     for task, path in dispatched:
         record = read_json(path)
+        if meter:
+            observed_costs.append(record["costs"])
         if record["status"] == "reader_completed":
             score_episode(dataset, db, task, record)
             write_json(path, record, indent=None)
@@ -698,6 +764,8 @@ def _readout_inline(
         "encoder_work_this_invocation": model.counters if model else None,
         "policy_load_ms_this_invocation": policy_load_ms,
         "readout_schedule": "inline", "episode_results": str(episodes),
+        **({"reader_engine": timing.interval(engine_start, engine_end, charged_requests, observed_costs)}
+           if meter else {}),
     }
 
 
@@ -722,7 +790,7 @@ def evaluate_episodes(
         raise ValueError("Gold-guided execution is an isolated development diagnostic")
     if population["role"] == "confirm" and arm not in population["arms"]:
         raise ValueError("Confirmation permits only the preregistered arm configuration")
-    numeric = (
+    numeric = arm.get("environment") == "qrag_milai_v13" or (
         read_json(Path(arm["checkpoint"]) / "config.json").get("numeric_mode", "off") != "off"
         if arm["policy"] == "checkpoint" else False
     )

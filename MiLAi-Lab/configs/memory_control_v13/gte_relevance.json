@@ -1,0 +1,9 @@
+{
+  "name": "GTE-relevance-four-reads",
+  "policy": "gte_relevance",
+  "backbone": "/cra/milai-experiments/v13-qrag/staging/gte/base",
+  "reads": 4,
+  "precision": "R2",
+  "environment": "qrag_milai_v13",
+  "observation_protocol": "semantic_nav_delta_v2"
+}

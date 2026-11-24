@@ -1,0 +1,64 @@
+# Q-RAG Reference on one A100 40GB
+
+The reference uses the standalone official MuSiQue-Ans recipe and its ground-truth support-fact feedback. Both state and action towers initialize from intfloat/multilingual-e5-large. The upstream loader opened 19,938 train and 2,417 dev questions from the V1 raw MuSiQue archive. For the retained experiment, its validation input is a frozen 300-question subset of official dev selected solely from V13 TUNE native IDs. No collection calls go to a Reader.
+
+| Setting | Reference | Q-RAG-MiLAi specification |
+| --- | --- | --- |
+| Observation and actions | Full document chunks, upstream chunk index | Legal previews, R2/R3 and HANDOFF |
+| Reward and termination | First completion of the facts earns the configured reward, training can continue through four steps | Terminal Reader once on normal handoff or hard limit, native Full pair scorer |
+| Optimization | Upstream parallel rollout, twin Q components, TD(λ) with γ=0.99, λ=0.6 and target EMA=0.02 | Native terminal quality with γ=1, explicit costs |
+| Evaluation | Ground-truth dev return curve, official retrieval F1 and support-set coverage | Paired native-group quality and total deployment cost |
+
+The upstream source version is `42358d78ac491843763b90677f07237471c97086`. The base encoder version is `3d7cfbdacd47fdda877c5cd8a79fbcc4f2a574f3`. The script selects versions without SHA verification. Reference train and dev exposure belong to the official benchmark. Its weights are kept separate from project-trained methods. [Official implementation](https://github.com/griver/Q-RAG/tree/42358d78ac491843763b90677f07237471c97086)
+
+## Local resource adaptations
+
+The patch under `configs/memory_control_v13` applies to the dedicated reference checkout. The upstream training loop, official config composition, TD targets, reward, action selection and target updates are retained. The patch restricts package imports to the MuSiQue GT path. This avoids loading vLLM into the training process. The selected environment uses PyTorch 2.7.0+cu126 and Transformers 4.52.3.
+
+Only encoder forward matmuls run under CUDA BF16 autocast. Outputs return to FP32 before pool/value calculations, and parameter and AdamW moment storage uses FP32. Eager execution avoids compiled-graph storage. The official 12-transition rollout and accumulation of eight are preserved. Each critic backward processes two transitions. Sum reduction over the original rollout matches the upstream sample weights even for a final partial microbatch. The official seed is 42. The schedule covers 10,000 updates with a validation every 100 updates and an added final validation. The curve counts actual critic transitions separately from optimizer updates. The bootstrap value after the final transition provides its next-state target.
+
+Actor checkpoints preserve exact policy-state and online-action tower tensors for greedy retrieval. Best and final actors are saved under the experiment asset root. Live optimizer and target weights participate in training. The compact actor does not support an exact training restart. A fresh run label starts a separate optimization. An interrupted run should retain its original logs and partial curve.
+
+## Validation exposure
+
+All 2,417 official Ans dev question IDs also occur in Full dev. The first run used the official random validation draws. We stopped it after 32 rollouts and four optimizer updates, before the second validation. The initial 300 observations had mean GT completion return 0.29. Replaying the initial upstream iteration with identical seeds and ID logging reproduced the observed mean and the independently reconstructed set of 284 distinct question IDs. Forty-four of the 295 candidate Full pairs were exposed in this validation. Its run log, cost and actor are retained. Its partial training is excluded from the retained curve.
+
+The retained run starts again from the general E5 weights. Every validation pass and the final support-fact retrieval evaluation use the same 300 TUNE native IDs. These IDs come from the host's role inventory via seeded selection. Both actual curve measurements and final retrieval metrics therefore apply to this fixed development subset. The official training data, GT behavior, TD and 10,000-update schedule are preserved. The role inventory and readback of the first validation must be kept with the experiment.
+
+## Reproduction
+
+Start in the MiLAi-Lab directory. The local experiment used the system CUDA Python environment with an isolated target for the smaller packages. The following installation assumes torch, transformers, accelerate, sentencepiece, protobuf, NumPy and their transitive dependencies are already present.
+
+```bash
+export PYTHONPATH=/data/milai-experiments/v13-ref-python
+python3 -m pip install --target "$PYTHONPATH" --no-deps --no-cache-dir \
+    hydra-core==1.3.2 omegaconf==2.3.0 antlr4-python3-runtime==4.9.3 \
+    rotary-embedding-torch==0.8.9 einops==0.8.1 sortedcontainers==2.4.0 \
+    tensorboard==2.20.0 tensorboard-data-server==0.7.2 markdown==3.8.2 werkzeug==3.1.3
+export REF_GPU=2 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4
+# Requires the V13 native-group role inventory to have been generated.
+scripts/qrag_reference.sh prepare
+scripts/qrag_reference.sh train official-musique-tune300-seed42
+```
+
+`MILAI_V13_ROOT` defaults to `/cra/milai-experiments/v13-qrag`. `MILAI_REF_ASSETS` defaults to its `staging/ref` directory. On this host the first run uses a temporary in-memory mount below `/cra` for the base weights, extracted data and checkpoints. A persistent copy of the base weights was verified at `/cra/milai-experiments/v13-qrag/models/multilingual-e5-large`. New downloads target this path through `MILAI_REF_BASE`. Small run records and source stay on the persistent volume. The compact best and final actors occupy about 9 GB combined. Provide persistent capacity to retain those model artifacts across a restart.
+
+After the run finishes, select the matching generated `config.yaml` in the run directory. The evaluator applies the same backbone precision and loads the selected best actor. Its per-question records include retrieved and reference support indices, episode return and retrieval metrics.
+
+```bash
+run=/cra/milai-experiments/v13-qrag/ref/official-musique-tune300-seed42
+trained=$(dirname "$(find "$run" -name config.yaml -print -quit)")
+scripts/qrag_reference.sh evaluate "$trained"
+```
+
+TensorBoard records and `reference-curve.jsonl` are under the generated run's `tb_logs` directory. `optimizer-progress.jsonl` contains early weight changes, observed optimizer moment dtype, memory and timings. Success requires the full curve and terminal retrieval evaluation. The actual run status and evaluation files determine the reported result.
+
+The interrupted pre-cutover actor at its first validation can be restored exactly from the public E5 weights and the durable local delta. A tensor-by-tensor reconstruction checked dtype and values for all 790 tensors. The delta occupies 12,682,821 bytes and the expanded actor occupies 4,483,665,967 bytes. The first run made four optimizer updates after that checkpoint. Those live optimizer steps appear in the cost but do not appear in the actor.
+
+```bash
+root=/cra/milai-experiments/v13-qrag
+python3 scripts/qrag_ref_actor_delta.py restore \
+    --actor "$root/staging/ref/checkpoints/official-musique-ans-seed42/model_best.pt" \
+    --base "$root/models/multilingual-e5-large/model.safetensors" \
+    --delta "$root/ref/official-musique-ans-seed42/initial-actor-delta.pt"
+```

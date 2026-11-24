@@ -1,0 +1,7 @@
+{
+  "name": "RULE-B1-four-reads",
+  "policy": "B1",
+  "reads": 4,
+  "environment": "qrag_milai_v13",
+  "observation_protocol": "semantic_nav_delta_v2"
+}

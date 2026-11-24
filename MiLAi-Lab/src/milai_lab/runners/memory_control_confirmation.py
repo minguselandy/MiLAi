@@ -136,6 +136,10 @@ def plan_confirmation_power(
     analysis_seed: int,
     primary_comparisons: int,
     holm_plan: bool = False,
+    cost_field: str = "reader_input_tokens",
+    minimum_quality_effect: float | None = None,
+    mask_unknown_quality: bool = False,
+    savings_null: float = 0.0,
 ) -> dict[str, Any]:
     """Sample clustered DEV residuals into the candidate fresh source/group allocation."""
     import numpy as np
@@ -182,12 +186,14 @@ def plan_confirmation_power(
             records_by_arm = [[records.get(t, {}) for t in ids]
                               for records in [*fixed_records, *(rows for _, rows in loaded)]]
             qualities = [
-                _primary_group_quality(source, records, failure_zero=True)
+                _primary_group_quality(source, records, failure_zero=not mask_unknown_quality)
                 for records in records_by_arm
             ]
-            costs = [[r.get("costs", {}).get("reader_input_tokens") for r in records]
+            costs = [[r.get("costs", {}).get(cost_field) for r in records]
                      for records in records_by_arm]
-            if not all(qualities) or not all(type(c) is int for row in costs for c in row):
+            if not all(qualities) or not all(
+                type(c) in (int, float) and np.isfinite(c) and c >= 0 for row in costs for c in row
+            ):
                 continue
             n = len(seeds)
             profiles[source].append((len(ids), [
@@ -224,7 +230,7 @@ def plan_confirmation_power(
     dev_quality = dev_points[:, 0] / len(SOURCES)
     dev_savings = 1 - dev_points[:, 1] / dev_points[:, 2]
     conservative_quality, conservative_savings = float(min(dev_quality)), float(min(dev_savings))
-    superiority_passes = advantage_passes = 0
+    superiority_passes = advantage_passes = minimum_effect_passes = 0
     alpha = 0.025 / primary_comparisons
     interval_alpha = 0.025 if holm_plan else alpha
 
@@ -236,7 +242,7 @@ def plan_confirmation_power(
         # First Holm rank is conservative for unknown sibling effects.
         q_draws, q_estimate = quality_test
         q_p = centered_bootstrap_pvalue(q_draws, q_estimate, 0.0 if cost_test is None else -1.0)
-        cost_p = centered_bootstrap_pvalue(*cost_test, 0.0) if cost_test is not None else 0
+        cost_p = centered_bootstrap_pvalue(*cost_test, savings_null) if cost_test is not None else 0
         return bool(max(q_p, cost_p) <= alpha)
 
     for _ in range(draws):
@@ -273,21 +279,28 @@ def plan_confirmation_power(
         )
         superiority_passes += bool(q_point + conservative_quality > 0.0
                                    and fits_family(quality_at_dev))
+        if minimum_quality_effect is not None:
+            effect = minimum_quality_effect
+            minimum_effect_passes += bool(q_point + effect > 0.0 and fits_family(
+                (q_distribution + effect, observed_q + effect)))
         advantage_passes += bool(
             q_point + conservative_quality >= -1.0
-            and input_low + conservative_savings > 0.0
+            and input_low + conservative_savings > savings_null
             and fits_family(quality_at_dev, cost_at_dev)
         )
         for quality, saving in alternatives:
             passes[quality, saving] += bool(
                 q_point + quality >= -1.0 and input_point + saving >= 0.15
-                and input_low + saving > 0.0 and fits_family(
+                and input_low + saving > savings_null and fits_family(
                     (q_distribution + quality, observed_q + quality),
                     (input_distribution + saving, input_point + saving),
                 )
             )
     return {
         "design": "stratified_native_group_dev_residual_simulation",
+        **({"cost_field": cost_field, "minimum_quality_effect_points": minimum_quality_effect,
+            "quality_power_at_minimum_effect": minimum_effect_passes / draws}
+           if minimum_quality_effect is not None else {}),
         "capacity_registration": {
             k: capacity[k] for k in ("dataset_run_id", "seed", "target_tasks", "selected_groups")
         },
