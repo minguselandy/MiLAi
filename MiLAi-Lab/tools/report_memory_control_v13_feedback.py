@@ -15,14 +15,44 @@ def load(path):
         return json.load(stream)
 
 
+def record_billed_tokens(counts, receipt):
+    # One response's provider usage covers one charged request. An unitemized
+    # retry or a local tokenizer estimate cannot price the entire ledger delta.
+    costs = receipt.get("costs", {})
+    if receipt.get("actual_requests") != 1 or costs.get("reader_usage_source") != "provider":
+        return
+    for axis in ("input", "output"):
+        value = costs.get(f"reader_{axis}_tokens")
+        if type(value) is int and value >= 0:
+            counts[axis + "_receipts"] += 1
+            counts[axis + "_tokens"] += value
+
+
+def billed_usage(counts, new_requests, unknown):
+    sides = {
+        axis: counts[axis + "_tokens"]
+        if not unknown and counts[axis + "_receipts"] == new_requests
+        else None
+        for axis in ("input", "output")
+    }
+    return dict(
+        billed_reader_calls=None if unknown else new_requests,
+        billed_reader_input_tokens=sides["input"],
+        billed_reader_output_tokens=sides["output"],
+        billed_reader_tokens=sum(sides.values()) if None not in sides.values() else None,
+    )
+
+
 def per_round(directory):
     contract = json.loads((directory / "round.json").read_text())
     by_kind = defaultdict(Counter)
     resources = defaultdict(Counter)
+    provider = Counter()
     statuses = Counter()
     charged = set()
     for path in sorted((directory / "receipts").glob("*.json.gz")):
         r = load(path)
+        record_billed_tokens(provider, r)
         k = "companion" if r["receipt_id"].startswith("companion_") else "branch"
         if "_repeat" in r["receipt_id"]:
             k += "_repeat"
@@ -128,6 +158,7 @@ def per_round(directory):
         by_receipt_kind=by_kind,
         receipt_status=statuses,
         resources=resources,
+        provider_billing_coverage=provider,
         source_coverage=populations,
         packs=len(ids),
         finite_measured_pool_gain_over_handoff={
@@ -148,16 +179,22 @@ def report(directories):
         paid.update(span)
         seen_dirs.add(directory.resolve())
         rows.append(row)
+    unique = {r["directory"]: r for r in rows}.values()
+    provider = Counter()
+    unknown = 0
+    for row in unique:
+        provider.update(row["provider_billing_coverage"])
+        unknown += sum(
+            k.get("unknown_request_count_receipts", 0) for k in row["by_receipt_kind"].values()
+        )
     return dict(
         rounds=rows,
         total_feedback_exposure=sum(
             k["exposure"] for r in rows for k in r["by_receipt_kind"].values()
         ),
         verified_unique_new_reader_requests=len(paid),
-        unknown_request_count_receipts_in_distinct_directories=sum(
-            sum(k.get("unknown_request_count_receipts", 0) for k in row["by_receipt_kind"].values())
-            for row in {r["directory"]: r for r in rows}.values()
-        ),
+        unknown_request_count_receipts_in_distinct_directories=unknown,
+        newly_billed_usage=billed_usage(provider, len(paid), unknown),
         exposure_scope=(
             "Supplied collection directories, including paid partial packages. "
             "Development readouts and QR online collection are metered separately."

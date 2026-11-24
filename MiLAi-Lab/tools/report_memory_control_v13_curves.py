@@ -5,7 +5,10 @@ from __future__ import annotations
 import argparse
 import gzip
 import json
+from collections import Counter
 from pathlib import Path
+
+from report_memory_control_v13_feedback import billed_usage, record_billed_tokens
 
 
 def read(path):
@@ -17,6 +20,8 @@ def qr_usage(directory, calls):
     boundary, last = next((p, u) for p, u in updates if u["feedback_calls"] == calls)
     last_position = int(boundary.stem)
     tokens, known, exposure, new, unknown = 0, 0, 0, 0, 0
+    provider = Counter()
+    paid = set()
     for path in (directory / "receipts").glob("*.json.gz"):
         position = int(path.name.split("_episode", 1)[1].split("_task", 1)[0])
         if position > last_position:
@@ -28,6 +33,12 @@ def qr_usage(directory, calls):
             unknown += 1
         else:
             new += r["actual_requests"]
+            if r["actual_requests"]:
+                span = range(r["ledger_before"], r["ledger_after"])
+                if len(span) != r["actual_requests"] or paid.intersection(span):
+                    raise ValueError("QR receipts disagree with their newly charged ledger slots")
+                paid.update(span)
+        record_billed_tokens(provider, r)
         if r["feedback_exposure"]:
             i, o = (r["costs"].get("reader_" + part + "_tokens") for part in ("input", "output"))
             if i is not None and o is not None:
@@ -40,8 +51,11 @@ def qr_usage(directory, calls):
         new_requests=new,
         unknown_new=unknown,
         tokens=tokens if known == exposure else None,
-        fit_gpu_hours=last["cumulative_fit_seconds"] / 3600,
-        acquisition_and_fit_gpu_hours=last["controller_gpu_residency_hours"],
+        **billed_usage(provider, new, unknown),
+        fit_gpu_hours=last["cumulative_fit_seconds"] / 3600
+        if last.get("cumulative_fit_seconds") is not None
+        else None,
+        acquisition_and_fit_gpu_hours=last.get("controller_gpu_residency_hours"),
     )
 
 
@@ -104,6 +118,7 @@ def value_usage(rollouts, fits):
         new_requests=accounting["verified_unique_new_reader_requests"],
         unknown_new=accounting["unknown_request_count_receipts_in_distinct_directories"],
         tokens=tokens if known == 2 * calls else None,
+        **accounting["newly_billed_usage"],
         fit_gpu_hours=fit_seconds / 3600,
         registered_fit_parking_hours=parked_seconds / 3600,
         fit_wall_hours_excluding_registered_parking=(fit_seconds - parked_seconds) / 3600,
@@ -190,19 +205,21 @@ def plot(args):
     )
     args.output.mkdir(parents=True, exist_ok=True)
     for field, unit in (
-        ("exposure", "Training feedback calls exposed to each arm"),
-        ("tokens", "Training feedback input + output tokens (same Reader)"),
+        ("exposure", "Feedback exposures, including imported measurements"),
+        ("billed_reader_calls", "New Reader calls in the arm's data, including shared warm"),
+        ("tokens", "Input + output tokens in exposed feedback (same Reader)"),
+        ("billed_reader_tokens", "Newly billed provider input + output tokens in the arm's data"),
         ("acquisition_and_fit_gpu_hours", "Controller GPU-hours during fits and collection"),
     ):
-        if not rows:
-            break
+        if not any(r["usage"].get(field) is not None for r in rows):
+            continue
         fig, axes = plt.subplots(2, 2, sharex=True, figsize=(10, 7.5), layout="constrained")
         for ax, axis in zip(
             axes.flat, ("Macro", "musique_full", "qasper", "personamem_v2"), strict=True
         ):
             for label, group in sorted(series.items()):
                 points = sorted(
-                    (r for r in group if r["usage"][field] is not None),
+                    (r for r in group if r["usage"].get(field) is not None),
                     key=lambda r: r["usage"]["exposure"],
                 )
                 x = [r["usage"][field] for r in points]

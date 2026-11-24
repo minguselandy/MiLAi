@@ -11,6 +11,47 @@ from types import SimpleNamespace
 import pytest
 
 
+def test_curve_billing_separates_shared_imported_and_unpriced_feedback(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    feedback = importlib.import_module("report_memory_control_v13_feedback")
+    (tmp_path / "receipts").mkdir()
+    (tmp_path / "round.json").write_text(
+        json.dumps(dict(round=0, sampler="uniform", continuation_policy_id="pi0"))
+    )
+
+    def record(name, actual, start, source):
+        item = dict(
+            receipt_id=name,
+            actual_requests=actual,
+            feedback_exposure=1 if actual is None else max(actual, 1),
+            ledger_before=start,
+            ledger_after=start + (actual or 0),
+            status="scored",
+            costs=dict(reader_usage_source=source, reader_input_tokens=100, reader_output_tokens=3),
+        )
+        with gzip.open(tmp_path / "receipts" / (name + ".json.gz"), "wt") as f:
+            json.dump(item, f)
+
+    record("paid", 1, 10, "provider")
+    record("imported", 0, 11, "provider")
+    shared = feedback.report([tmp_path, tmp_path])
+    assert shared["total_feedback_exposure"] == 4
+    assert shared["newly_billed_usage"] == dict(
+        billed_reader_calls=1,
+        billed_reader_input_tokens=100,
+        billed_reader_output_tokens=3,
+        billed_reader_tokens=103,
+    )
+    record("local_estimate", 1, 11, "local_tokenizer")
+    unpriced = feedback.report([tmp_path])["newly_billed_usage"]
+    assert unpriced["billed_reader_calls"] == 2 and unpriced["billed_reader_tokens"] is None
+    record("local_estimate", 2, 11, "provider")
+    retried = feedback.report([tmp_path])["newly_billed_usage"]
+    assert retried["billed_reader_calls"] == 3 and retried["billed_reader_tokens"] is None
+    record("unknown", None, 13, None)
+    assert feedback.report([tmp_path])["newly_billed_usage"]["billed_reader_calls"] is None
+
+
 def test_single_active_arm_frozen_refit_does_not_require_uniform_online_data(tmp_path, monkeypatch):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
     driver = importlib.import_module("run_memory_control_v13_rounds")

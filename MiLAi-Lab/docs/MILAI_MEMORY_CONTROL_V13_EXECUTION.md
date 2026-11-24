@@ -152,11 +152,13 @@ REF 与 GTE 的资源调整及具体训练命令分别见 `MILAI_MEMORY_CONTROL_
 
 核心反馈矩阵使用 `configs/memory_control_v13/feedback.json`。共同的 2,000 次 warm 反馈已闭合。12k 调度等待 S1 及原版参照阶段完成。调度完成后会先产出 6k，再产出 12k。同一固定池内 PQ-U 与 PQ-A 分别选择包，两臂从相同 warm 配对参数开始，DQ 在每轮重用 PQ-U 包。在新目标轮次继续训练上一轮参数。曲线表读取真实采集收据、拟合父链与同一批 DEV 完整运行记录。
 
+反馈效率按两种横轴读出。累计监督曝光包括从其他臂沿用的已付且请求一致的结果；新增实付调用与 provider 输入、输出 tokens 只计该臂数据目录实际发生的账位。两种口径都包含共同 warm，项目总账跨臂只计一次。DQ 沿用 PQ-U 整套结果包，额外生成标签的费用为零。后采集的臂可沿用先采集的请求，因此两臂新增费用的差异也受执行顺序影响。实际复读中，warm 的 2,000 次实付对应 2,483,899 个输入和 139,144 个输出 tokens，QR 试验的 48 次对应 47,146 个输入和 3,269 个输出 tokens。一组来自其他臂的已有回执提供了 4 次监督曝光，新增实付和 tokens 均为零。无法归属账位、仅有本地估算或一次回包不能覆盖全部收费尝试时，对应的实付统计保留未知。见 `runtime-validation/training-reader-billing.json`。
+
 ```bash
 CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config configs/memory_control_v13/feedback.json --root "$R" --weights "$R/staging/round-models" --s1 "$R/staging/gte/s1/checkpoint" --curve "$R/rosters/curve-2048.json" --until 12000
 ```
 
-这条命令依赖 S1 完成与 warm 达到额度。原等待任务已合并为独立的研究进程，状态和交接记录在 `main-study-status.json`、`main-study-handoff.json`。该进程核对原 S1 进程与持久 checkpoint 的实际就绪状态，再启动匹配的 12k 主矩阵；QR 的在线训练器和 6k/12k 曲线等待任务沿用各自原生 lease。12k 后续作业已绑定实际运行中的 QR 与配对训练前置进程。见 `tools/settle_memory_control_v13_round.py`。在四种方法都取得相同自然 DEV 组的 6k/12k 结果后，按组计算配对差异并记录实际候选动作之间的实测收益差和费用，接续第二次冻结策略更新到 24k。随后生成五组曲线图，并在同一个 CALIBRATION 上对四个 24k 控制器使用相同的五点 λ 网格，选择后各自读出 TUNE。该续作业尚未开始追加 Reader 调用。
+这条命令依赖 S1 完成与 warm 达到额度。独立研究进程的状态与交接记录在 `main-study-status.json`、`main-study-handoff.json`。该进程核对实际 S1 及持久 checkpoint，再启动 12k 主矩阵。QR 在线训练器与 6k/12k 曲线任务各自保有原生 lease。四种方法取得相同自然 DEV 组的 6k/12k 结果后，程序按组计算配对差异和实际候选动作的收益及费用，接续第二次冻结策略更新到 24k。随后绘制按反馈调用、tokens、训练 GPU 小时、部署资源和时延计量的曲线，在同一个 CALIBRATION 上对四个 24k 控制器使用相同的五点 λ 网格，各自选定 λ 后读出 TUNE。见 `tools/settle_memory_control_v13_round.py`。截至分时训练阶段，该续作业尚未追加 Reader 调用。
 
 冻结数据拟合可通过 `--frozen-data --fit-seed` 复用同一采集历史，`--refit-method` 只拟合最终选入比较的家族，`--refit-only` 保留各轮参数更新，把 Reader 调用留给指定的正式评估。独立采集种子的费用和拟合种子分开结算。
 
