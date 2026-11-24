@@ -16,6 +16,21 @@ AXES = {
 }
 
 
+# Each optional histogram is updated once when a request finishes on the frozen
+# engine. Per-iteration gauges can include another request still in flight.
+FINISHED_HISTOGRAMS = {
+    "request_queue_time_seconds": "queue_seconds",
+    "request_prefill_time_seconds": "prefill_seconds",
+    "request_decode_time_seconds": "decode_seconds",
+    "request_prefill_kv_computed_tokens": "computed_prompt_tokens",
+}
+OPTIONAL_AXES = {
+    f"vllm:{histogram}_{stat}": f"{axis}_{stat}"
+    for histogram, axis in FINISHED_HISTOGRAMS.items()
+    for stat in ("sum", "count")
+}
+
+
 def snapshot(host):
     # The research host exposes anonymous metrics beside the local Reader API.
     # Deployments without local vLLM metrics retain the separate client timing.
@@ -27,10 +42,11 @@ def snapshot(host):
         numbers = {}
         label = "model_name=" + json.dumps(host["model"])
         for line in response.text.splitlines():
-            axis = AXES.get(line.partition("{")[0])
+            metric = line.partition("{")[0]
+            axis = AXES.get(metric) or OPTIONAL_AXES.get(metric)
             if axis and label in line.partition("}")[0]:
                 numbers[axis] = numbers.get(axis, 0.0) + float(line.rsplit(None, 1)[-1])
-        if len(numbers) == len(AXES) and all(math.isfinite(v) for v in numbers.values()):
+        if set(AXES.values()) <= numbers.keys() and all(math.isfinite(v) for v in numbers.values()):
             return numbers
     except (httpx.HTTPError, ValueError):
         pass
@@ -47,13 +63,30 @@ def interval(before, after, charged, costs):
         for c in costs
     ):
         return unknown
-    delta = {k: after[k] - value for k, value in before.items()}
+    if not set(AXES.values()) <= (before.keys() & after.keys()):
+        return unknown
+    delta = {k: after[k] - before[k] for k in before.keys() & after.keys()}
     exact = (
         delta["completed"] == charged
         and delta["input_tokens"] == sum(c["reader_input_tokens"] for c in costs)
         and delta["output_tokens"] == sum(c["reader_output_tokens"] for c in costs)
         and delta["running_seconds"] >= 0
     )
-    if exact:
-        return {"vllm_running_seconds": delta["running_seconds"], "matched_requests": charged}
-    return unknown
+    if not exact:
+        return unknown
+    result = {"vllm_running_seconds": delta["running_seconds"], "matched_requests": charged}
+    for axis in FINISHED_HISTOGRAMS.values():
+        value = delta.get(axis + "_sum")
+        if (
+            delta.get(axis + "_count") != charged
+            or value is None
+            or not math.isfinite(value)
+            or value < 0
+        ):
+            continue
+        if axis == "computed_prompt_tokens":
+            if value > delta["input_tokens"] or value != int(value):
+                continue
+            result["vllm_cached_prompt_tokens"] = int(delta["input_tokens"] - value)
+        result["vllm_" + axis] = value
+    return result

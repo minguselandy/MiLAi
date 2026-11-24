@@ -291,7 +291,9 @@ def settle(root, seed, calls, repeats):
     for method, directory in (("PQ-U", uniform[-1]), ("PQ-A", active[-1])):
         row, _ = per_round(Path(directory))
         headroom[method] = dict(
-            pool=row["source_coverage"], measured=row["finite_measured_pool_gain_over_handoff"]
+            pool=row["source_coverage"],
+            measured=row["finite_measured_pool_gain_over_handoff"],
+            selection_exposure_by_source=row["selection_exposure_by_source"],
         )
     result = dict(
         phase="fixed_pool_mechanism" if calls == 6000 else "natural_policy_iteration",

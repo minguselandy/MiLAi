@@ -85,7 +85,21 @@ def value_usage(rollouts, fits):
             tokens += stat.get("exposed_total", 0)
             known += stat.get("exposed_observations", 0)
     calls = accounting["total_feedback_exposure"]
+    selection = {
+        key: sum(
+            values[key]
+            for rnd in accounting["rounds"]
+            for values in rnd["selection_exposure_by_source"].values()
+        )
+        for key in (
+            "reserved_uniform_exposure",
+            "fallback_uniform_exposure",
+            "positive_priority_exposure",
+        )
+    }
+    selection["unattributed_exposure"] = calls - sum(selection.values())
     return dict(
+        selection=selection,
         exposure=calls,
         new_requests=accounting["verified_unique_new_reader_requests"],
         unknown_new=accounting["unknown_request_count_receipts_in_distinct_directories"],

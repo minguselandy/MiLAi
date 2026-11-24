@@ -251,3 +251,44 @@ def test_registered_order_balances_slot_and_predecessor(arms, blocks, replicates
         positions.update((s["arm"], s["position"]) for s in row)
     assert len(positions) == arms**2 and set(positions.values()) == {replicates}
     assert len(pairs) == arms * (arms - 1) and set(pairs.values()) == {replicates}
+
+
+def test_completed_reader_components_need_matching_counts_and_provider_totals():
+    before = dict(
+        completed=10,
+        running_seconds=7.0,
+        input_tokens=100,
+        output_tokens=50,
+        prefill_seconds_count=10,
+        prefill_seconds_sum=3.0,
+        decode_seconds_count=10,
+        decode_seconds_sum=4.0,
+        computed_prompt_tokens_count=10,
+        computed_prompt_tokens_sum=90.0,
+    )
+    after = dict(
+        completed=12,
+        running_seconds=10.0,
+        input_tokens=132,
+        output_tokens=56,
+        prefill_seconds_count=12,
+        prefill_seconds_sum=4.0,
+        decode_seconds_count=11,
+        decode_seconds_sum=5.0,
+        computed_prompt_tokens_count=12,
+        computed_prompt_tokens_sum=112.0,
+    )
+    costs = [
+        dict(reader_usage_source="provider", reader_input_tokens=16, reader_output_tokens=3)
+    ] * 2
+    measured = timing.interval(before, after, 2, costs)
+    assert measured["vllm_running_seconds"] == 3.0 and measured["vllm_prefill_seconds"] == 1.0
+    assert "vllm_decode_seconds" not in measured and "vllm_queue_seconds" not in measured
+    assert (
+        measured["vllm_computed_prompt_tokens"] == 22
+        and measured["vllm_cached_prompt_tokens"] == 10
+    )
+    assert timing.interval(before, dict(after, output_tokens=57), 2, costs)["matched_requests"] == 0
+    assert "vllm_cached_prompt_tokens" not in timing.interval(
+        before, dict(after, computed_prompt_tokens_sum=130), 2, costs
+    )

@@ -9,6 +9,7 @@ from pathlib import Path
 from statistics import fmean
 
 from milai_lab.datasets.memory_control_normalize import MUSIQUE
+from milai_lab.runners.memory_control_reader_timing import FINISHED_HISTOGRAMS
 from milai_lab.scorers.memory_control_episode_metrics import (
     QUALITY_AXES,
     SOURCES,
@@ -219,6 +220,21 @@ def run_accounting(path, episodes):
         vllm_matched_requests=sum(
             w.get("reader_engine", {}).get("matched_requests", 0) for w in windows
         ),
+        vllm_components={
+            axis: {
+                "known_total": sum(v["vllm_" + axis] for v in observed),
+                "matched_requests": sum(v["matched_requests"] for v in observed),
+            }
+            for axis in (*FINISHED_HISTOGRAMS.values(), "cached_prompt_tokens")
+            if (
+                observed := [
+                    w["reader_engine"]
+                    for w in windows
+                    if w.get("reader_engine", {}).get("matched_requests", 0)
+                    and w["reader_engine"].get("vllm_" + axis) is not None
+                ]
+            )
+        },
         server_gpu_time=None,
         charged_currency=None,
     )

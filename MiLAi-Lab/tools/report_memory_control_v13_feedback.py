@@ -95,11 +95,36 @@ def per_round(directory):
                 pop["nonzero_deltas"] += ys[a] != ys[b]
     for source, pop in populations.items():
         pop["native_groups"] = len(groups[source])
+    selected = {}
+    close = directory / "progress.json"
+    if close.is_file():
+        settled = json.loads(close.read_text())
+        if settled.get("state") == "complete":
+            physical_exposure = sum(v["exposure"] for v in by_kind.values())
+            if settled["feedback_calls"] != physical_exposure or settled["complete_packs"] != len(
+                ids
+            ):
+                raise ValueError("Closed acquisition and observed receipts disagree")
+            selected = settled["by_source"]
+            attributed = sum(v["exposure"] for v in selected.values())
+            if attributed + settled["incomplete_or_unlinked_exposure"] != physical_exposure:
+                raise ValueError("Incomplete and complete package costs do not reconcile")
+            keys = (
+                "reserved_uniform_exposure",
+                "fallback_uniform_exposure",
+                "positive_priority_exposure",
+            )
+            if any(
+                sum(v[k] for k in keys) != v["exposure"] or any(v[k] < 0 for k in keys)
+                for v in selected.values()
+            ):
+                raise ValueError("Selection modes do not cover the paid package exposure")
     return dict(
         directory=str(directory.resolve()),
         round=contract["round"],
         continuation_policy=contract["continuation_policy_id"],
         sampler=contract["sampler"],
+        selection_exposure_by_source=selected,
         by_receipt_kind=by_kind,
         receipt_status=statuses,
         resources=resources,
