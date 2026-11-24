@@ -85,3 +85,35 @@ mkdir -p "$G"
 ```
 
 The formal normalizer comes from `frozen-host-cost-scale.json`. The `--warm-packs` normalization option remains available to reproduce historical S0 diagnostics whose scale used measured feedback costs. The formal change affects the unit for both the immediate and future terms in the value readout. The branch targets still measure the same future token costs.
+
+### Restoring the S1 input order
+
+The original native evidence and historical replay writers overlapped and resumed. SQLite allocated physical row addresses in arrival order. The epoch sampler shuffles relative positions within each group, so an independently regenerated table can require an address translation even with the same seed and legal root population.
+
+The frozen SQLite backup `gte/evidence.sqlite` preserves the exact running input. The lightweight `gte/frozen-native-root-order.jsonl.gz` separately records all 43,901 eligible native TRAIN tasks and the original training index traversal of the 119,394 labeled roots. The task key uses source, official split, native group, native ID, setting and official source row. In MuSiQue, each of 19,924 native pair IDs occurs twice. The original row ordinal distinguishes the two members. Each root adds its executed action prefix. The mapping is read exclusively by the offline sampler.
+
+To regenerate this registration from the stored backup, start in MiLAi-Lab with the environment defined above.
+
+```bash
+"$PYTHON" -m milai_lab.runners.control_evidence_order freeze \
+    --evidence "$R/gte/evidence.sqlite" --master /cra/milai-datasets/memory_control_v1_2 \
+    --output "$R/gte/frozen-native-root-order.jsonl.gz"
+```
+
+For a separately rebuilt evidence DB, set `REBUILT_EVIDENCE` to that SQLite file and `REBUILT_MASTER` to the matching native task database or dataset directory. The alignment command checks every task and prefix, compares each normalized model input and supervision payload with the backup, then writes and reads back a compact independent address index. Omitting `--reference-evidence` limits verification to the natural-key populations and order. Source or data revisions with ambiguous, missing, extra or mismatched roots need their own registration.
+
+```bash
+"$PYTHON" -m milai_lab.runners.control_evidence_order align \
+    --reference "$R/gte/frozen-native-root-order.jsonl.gz" \
+    --evidence "$REBUILT_EVIDENCE" --master "$REBUILT_MASTER" \
+    --reference-evidence "$R/gte/evidence.sqlite" --output "$R/gte/rebuilt-addresses.jsonl.gz"
+"$PYTHON" -m milai_lab.runners.pretrained_control_train --objective evidence \
+    --data "$REBUILT_EVIDENCE" --evidence-master "$REBUILT_MASTER" \
+    --evidence-order-map "$R/gte/frozen-native-root-order.jsonl.gz" \
+    --backbone "$R/models/gte-multilingual-reranker-base" \
+    --output "$R/weights/s1-rebuild" --metrics "$R/gte/s1-rebuild" --seed 11
+```
+
+The optional fitter argument resolves the frozen order against the rebuilt DB before shuffling. Model inputs use their original legal features. The loader translates rebuilt local task and row numbers into the frozen addresses for sampling and exposure accounting. An existing fit continues to use its registered input and configuration.
+
+The order file occupies 1,476,130 bytes. An independent 4,354,048-byte SQLite address table reversed all 119,394 physical addresses while referencing the original frozen payloads. The full native-key alignment, all normalized training payloads and all 119,394 seed-11 sampler positions matched. The isolated test exercises changed address assignments. A new raw-data regeneration can verify its own outputs with the same alignment command. The receipts are `gte/s1-native-task-key-inventory.json` and `gte/native-root-order-verification.json`.

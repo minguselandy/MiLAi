@@ -66,6 +66,7 @@ class TrainingRoots:
         self.target = None
         self.db = None
         self.files = []
+        self.addresses = {}
         if args.objective == "evidence":
             self.db = sqlite3.connect(f"file:{args.data}?mode=ro", uri=True)
             if not (
@@ -76,9 +77,12 @@ class TrainingRoots:
                 == 2
             ):
                 raise ValueError("Evidence population preparation is still running")
-            for key, source, group in self.db.execute("SELECT id,source,native_group FROM roots"):
-                self.groups[source][group].append(key)
+            self.index_evidence(
+                getattr(args, "evidence_order_map", None), getattr(args, "evidence_master", None)
+            )
         else:
+            if getattr(args, "evidence_order_map", None) or getattr(args, "evidence_master", None):
+                raise ValueError("Native root-order restoration applies to evidence inputs")
             roots = set()
             protocols = set()
             for directory in args.data:
@@ -106,8 +110,26 @@ class TrainingRoots:
         if not self.groups:
             raise ValueError("Empty TRAIN pool")
 
+    def index_evidence(self, order_path, master_path):
+        if order_path is None:
+            if master_path is not None:
+                raise ValueError("An explicit order-map master requires a frozen order map")
+            for key, source, group in self.db.execute("SELECT id,source,native_group FROM roots"):
+                self.groups[source][group].append(key)
+            return
+        from milai_lab.runners.control_evidence_order import align
+
+        _, _, addresses = align(self.db, order_path, master_path)
+        self.addresses = {a.frozen_row: a for a in addresses}
+        for a in addresses:
+            self.groups[a.source][a.group].append(a.frozen_row)
+
     def row(self, key):
         if self.db is not None:
+            if self.addresses:
+                from milai_lab.runners.control_evidence_order import read_canonical_row
+
+                return read_canonical_row(self.db, self.addresses[key])
             (data,) = self.db.execute("SELECT data FROM roots WHERE id=?", (key,)).fetchone()
             row = json.loads(zlib.decompress(data))
             history = row["root_state_id"][1:]
@@ -299,6 +321,8 @@ def fit_locked(args):
         "probe": bool(args.probe),
         "fitted_groups": sorted(fitted),
     }
+    if getattr(args, "evidence_order_map", None):
+        contract["frozen_native_root_order"] = str(args.evidence_order_map.resolve())
     rolling = args.output / "resume.pt"
     path = args.output / "checkpoint"
     run_path = args.output / "run.json"
@@ -571,6 +595,16 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--objective", choices=["evidence", "direct", "paired"], required=True)
     p.add_argument("--data", type=Path, nargs="+", required=True)
+    p.add_argument(
+        "--evidence-order-map",
+        type=Path,
+        help="Frozen native task and prefix order for a rebuilt evidence DB",
+    )
+    p.add_argument(
+        "--evidence-master",
+        type=Path,
+        help="Relocated rebuilt native task index for order alignment",
+    )
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--metrics", type=Path, help="Persistent directory for compact receipts")
     p.add_argument(
