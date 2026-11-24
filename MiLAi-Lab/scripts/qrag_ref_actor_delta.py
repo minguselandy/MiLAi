@@ -203,7 +203,14 @@ def compact_trained(checkpoint, base_path, output):
             with safe_open(base_path, framework="pt", device="cpu") as base:
                 write_xor_archive(dest, original, base)
         _, counts = read_xor_archive(tmp, base_path, expected=original)
+        with tmp.open("rb") as file:
+            os.fsync(file.fileno())
         tmp.replace(output)
+        fd = os.open(output.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
     finally:
         tmp.unlink(missing_ok=True)
     return {
@@ -221,12 +228,16 @@ def compact_trained(checkpoint, base_path, output):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=["compact", "restore"])
+    parser.add_argument("mode", choices=["compact", "restore", "verify"])
     parser.add_argument("--actor", type=Path, required=True)
     parser.add_argument("--base", type=Path, required=True)
     parser.add_argument("--delta", type=Path, required=True)
     args = parser.parse_args()
-    if args.mode == "compact":
+    if args.mode == "verify":
+        actor = torch.load(args.actor, mmap=True, map_location="cpu", weights_only=True)
+        _, counts = read_xor_archive(args.delta, args.base, expected=actor)
+        print(json.dumps({"exact_tensors_verified": sum(counts.values()), "tensor_modes": counts}))
+    elif args.mode == "compact":
         encode = compact_trained if args.delta.suffix == ".zip" else compact
         print(json.dumps(encode(args.actor, args.base, args.delta), indent=2))
     else:

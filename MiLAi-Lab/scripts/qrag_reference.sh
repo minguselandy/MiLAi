@@ -39,7 +39,7 @@ prepare)
         ln -s "$model" "$assets/e5-large"
     fi
     python3 "$project/scripts/qrag_ref_dev_roster.py" --roles "$experiment/inventory/native-groups.tsv.gz" \
-        --source "$assets/musique" --output "$assets/musique-tune300"
+        --source "$assets/musique" --output "$assets/musique-tune300" --frozen "$result_dir/fixed-dev-roster.json"
     for f in config.json tokenizer_config.json special_tokens_map.json sentencepiece.bpe.model tokenizer.json model.safetensors; do
         if [[ ! -s "$model/$f" ]]; then
             curl -fL --retry 3 --continue-at - -o "$model/$f.part" \
@@ -68,6 +68,11 @@ train)
 evaluate)
     trained=$(realpath "${2:?provide upstream run directory containing config.yaml}")
     if [[ ! -s "$trained/reference-result.json" ]]; then
+        python3 "$project/scripts/qrag_ref_result.py" --prepare-terminal --run "$trained"
+        if [[ ! -e "$assets/musique-tune300/roster.json" || ! -e "$assets/e5-large/config.json" ]]; then
+            "$project/scripts/qrag_reference.sh" prepare
+        fi
+        python3 "$project/scripts/qrag_ref_result.py" --begin-validation --run "$trained"
         cd "$source_dir"
         /usr/bin/time -q -f '{"elapsed_seconds":%e,"cpu_user_seconds":%U,"cpu_sys_seconds":%S,"max_rss_kib":%M,"exit_code":%x}' \
             -a -o "$trained/validation-resource.jsonl" python3 -u eval_retriever.py \
@@ -79,18 +84,12 @@ evaluate)
         python3 "$project/scripts/qrag_ref_result.py" "${timing_args[@]}" --run "$trained" \
             --roster "$assets/musique-tune300/roster.json"
     fi
-    checkpoint_dir=$(python3 -c 'import sys,yaml; print(yaml.safe_load(open(sys.argv[1]))["checkpoint_dir"])' "$trained/config.yaml")
-    mkdir -p "$trained/actors"
-    for selected in best last; do
-        dest="$trained/actors/$selected.zip"
-        receipt="$trained/actors/$selected.json"
-        if [[ ! -s "$dest" || ! -s "$receipt" ]]; then
-            OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 nice -n 8 python3 "$project/scripts/qrag_ref_actor_delta.py" compact \
-                --actor "$checkpoint_dir/model_$selected.pt" --base "$model/model.safetensors" \
-                --delta "$dest" > "$receipt.part"
-            mv "$receipt.part" "$receipt"
-        fi
-    done
+    # An attached mirror may still be verifying the last atomic checkpoint after fit exit.
+    if [[ -e "$trained/retained-actors/.writer.lock" ]]; then
+        flock "$trained/retained-actors/.writer.lock" true
+    fi
+    OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 nice -n 8 python3 "$project/scripts/qrag_ref_result.py" \
+        --run "$trained" --archive-terminal "$model/model.safetensors"
     cat "$trained/reference-result.json"
     ;;
 *)

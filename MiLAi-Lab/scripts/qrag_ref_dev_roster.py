@@ -8,13 +8,19 @@ import random
 from pathlib import Path
 
 
-def prepare(roles: Path, source: Path, output: Path, count: int) -> None:
-    with gzip.open(roles, "rt", newline="") as stream:
-        tune = {
-            r["native_group"]
-            for r in csv.DictReader(stream, delimiter="\t")
-            if r["source"] == "musique_full" and r["v13_role"] == "TUNE"
-        }
+def prepare(roles: Path, source: Path, output: Path, count: int, frozen: Path) -> None:
+    registered = json.loads(frozen.read_text()) if frozen.is_file() else None
+    if registered is not None:
+        tune = set(registered["groups"])
+        if registered["role"] != "TUNE" or registered["n"] != count or len(tune) != count:
+            raise ValueError("Invalid frozen REF validation roster")
+    else:
+        with gzip.open(roles, "rt", newline="") as stream:
+            tune = {
+                r["native_group"]
+                for r in csv.DictReader(stream, delimiter="\t")
+                if r["source"] == "musique_full" and r["v13_role"] == "TUNE"
+            }
     dev_name = "musique_ans_v1.0_dev.jsonl"
     with (source / dev_name).open() as stream:
         rows = {}
@@ -24,7 +30,9 @@ def prepare(roles: Path, source: Path, output: Path, count: int) -> None:
                 if group in rows:
                     raise ValueError("Duplicate native Ans group")
                 rows[group] = line
-    groups = sorted(random.Random(42).sample(sorted(rows), count))  # noqa: S311 -- reproducible native group roster
+    groups = sorted(rows) if registered else sorted(random.Random(42).sample(sorted(rows), count))  # noqa: S311 -- reproducible native group roster
+    if registered and groups != registered["groups"]:
+        raise ValueError("Original dev split does not resolve every frozen REF identity")
     output.mkdir(parents=True, exist_ok=True)
     roster = output / "roster.json"
     if roster.exists() and json.loads(roster.read_text())["groups"] != groups:
@@ -48,6 +56,8 @@ def prepare(roles: Path, source: Path, output: Path, count: int) -> None:
             indent=2,
         )
     )
+    if registered is None:
+        frozen.write_text(roster.read_text())
 
 
 if __name__ == "__main__":
@@ -55,5 +65,6 @@ if __name__ == "__main__":
     parser.add_argument("--roles", required=True, type=Path)
     parser.add_argument("--source", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--frozen", required=True, type=Path)
     args = parser.parse_args()
-    prepare(args.roles, args.source, args.output, 300)
+    prepare(args.roles, args.source, args.output, 300, args.frozen)
