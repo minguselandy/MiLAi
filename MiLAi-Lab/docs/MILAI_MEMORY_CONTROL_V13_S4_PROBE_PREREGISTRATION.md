@@ -77,3 +77,22 @@ PYTHONPATH=src python tools/run_memory_control_v13_rounds.py \
 ```
 
 另一个独立种子使用 47。高不确定性及 EVSI 费用按一次对照采集计算。当前独立种子入口只进行了临时文件与替代调度器的测试，验证了单个 warm、两臂不同的在线策略路径、组合计费和重复启动条件。实际训练/评估队列均未启动该入口。
+
+## 5. seed 11 的 warm Direct / Paired 早期读出
+
+2026-11-25 06:22（北京时间）冻结本项读出时，S1 仍在运行，两个 warm 检查点均未发布。固定同一 S1 父权重、seed 11、`warm-11/packs` 中 550 个 TRAIN 根的 2,000 次曝光、三次拟合遍历，以及 `pi0-fixedcontext-4` 完整续跑标签。只对 `a11-f11-warm-direct` 与 `a11-f11-warm-paired` 两个原生重载一致的完成模型执行读出。用已付 `evidence-diagnostic` 的 36 个 DEV 原生组，每来源 12 组，每组两个材料量相近的合法 before，各含同一候选 R2 和 HANDOFF。已有 156 个真实 Reader 返回。比较仅限这两个已测动作。
+
+对每个 before，质量轴使用 READ 减 HANDOFF 的原生质量差，净效用轴另扣 0.05 × 总成本差 / 1,912。总成本包含已知首步和未来成本。模型按四头均值择优，预测平局沿用原动作顺序。分别记录有限池 oracle 与所选动作的实测 regret，并报告 Paired 减 Direct。误停的分母为真增益严格正的 before；过读的分母为真增益严格负的 before；真平局计入零 regret，单列平局数。分来源报告计数和均值，再将三来源 regret 等权平均。误停和过读的合计为对应机会数加权比率。语义干预采用既有 scorer 的同组两 before 已读语义替换，保持 token 长度、任务、候选、数值特征和真实标签，报告原始/替换以及二者之差。两状态真增益乘积严格小于零才进入反转命中分母，两个预测符号须分别严格正确。
+
+登记时已知 72 个 before 的质量机会数为正 11、负 4、平 57，净效用为正 11、负 61、平 0。36 组中质量真反转只有 QASPER 1 组（Mu/Q/P 分别 0/1/0），净效用反转为 3 组（1/2/0）；无反转的来源报告未识别，不作 0% 命中处理。本读出不做阈值、λ、检查点或样本挑选。两模型实际闭合后按以下方式在 CPU 顺次执行，结果用于描述同数据目标的早期诊断，正式 QA 和采样效率结论仍取相应的完整检查点。
+
+```bash
+R=/cra/milai-experiments/v13-qrag
+for objective in direct paired; do
+  CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 \
+  TOKENIZERS_PARALLELISM=false PYTHONPATH=src python tools/diagnose_memory_control_v13_evidence.py \
+    --output "$R/evidence-diagnostic" score --device cpu --require-matched-continuation \
+    --utility-lambda 0.05 --checkpoint "$R/weights/round-models/a11-f11-warm-$objective/checkpoint" \
+    --result "$R/evidence-diagnostic/warm-11-$objective.json"
+done
+```
