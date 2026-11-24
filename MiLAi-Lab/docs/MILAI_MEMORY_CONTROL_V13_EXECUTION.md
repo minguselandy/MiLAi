@@ -205,6 +205,8 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config conf
 
 ## 存储和未完成工作
 
+11 月 25 日 06:06，`/cra` 的物理余量为 57.34 GiB，普通账户可用 7.32 GiB。按实际权重大小、单个拟合进程的临时峰值及 4 GiB 余量估算，seed11 的 12 个 GTE、3 个 QR 正式模型可容纳。若 S4 选入一个学习家族，估计还余 2.16–6.65 GiB。若两个入选家族均需拟合，保守情景的缺口为 0.38–7.16 GiB，取决于共享的 warm 拟合种类与最后的 REF 压缩量。独立采集等条件支出另列。该缺口会在正式选择后按实测文件与当时可用空间复核。[容量推算](/cra/milai-experiments/v13-qrag/storage-projection-20261125.json)
+
 精确复跑 S1 可直接使用冻结的 `gte/evidence.sqlite`。如果从原生数据重建 SQLite，插入顺序可能改变训练遍历。另存的 `gte/frozen-native-root-order.jsonl.gz` 用原生任务标识和已执行动作前缀定位根状态，大小为 1,476,130 字节。在单独的行地址表中反转全部 119,394 个地址后，原训练入口读回的完整监督载荷及 seed11 遍历顺序逐项一致。此验证复用冻结的文本载荷。对独立重建库进行逐行比较的命令及其适用范围见 `MILAI_MEMORY_CONTROL_V13_GTE.md`。
 
 开始执行时持久卷 `/cra` 的普通可用空间为 0，物理剩余约 610 MiB。模型与大型中间件写入位于 `/cra/milai-experiments/v13-qrag/staging` 的专用 36 GiB tmpfs，上限从 24 GiB 调整为 36 GiB，为训练恢复文件原子替换预留空间。该目录目前仅跨进程保留，服务器重启会清空。持久卷后来出现额外物理空间，三套基础权重已保存到实验根的 `models/`，其中 GTE 交互模型、GTE embedding、E5-large 分别可读取 140、138、392 个张量。确认库的持久副本位于 `fresh-sources/native-confirm/memory_control.sqlite3`。复读结果见 `persistent-assets.json`。小型收据、数据角色与日志持续写入持久目录。REF 第 100 次更新时的最佳 actor 保存于 `ref/actor-archives/first-trained-best.zip`，恢复需同一持久目录下的 E5 基础模型。S1 训练路径已绑定到持久目录 `weights/s1`，DQ/PQ 的结果包及正式模型已分别指定持久目录 `collection`、`weights/round-models`。QR 正式训练原始收据与检查点已在首个正式账位前绑定到持久目录 `qr-11/native-receipts` 和 `weights/qr-11`。REF 工作检查点继续使用暂存卷，已发布 actor 的持久副本以及仍在进程内的状态分别记录。QR 48 调用试验模型也已持久化在 `weights/qr-s0/checkpoint-48`，280 个训练张量与原件逐项相等。独立挂载命名空间中隐藏整个 staging 后，`tools/restore_memory_control_v13_paths.py --root "$R"` 重建了所需别名，复读得到 119,394 个训练根状态、S1 第 256 步及全部 QR 试验张量，未调用 Reader。记录见 `restored-controller-paths.log`。完整检查点归档和长期留存仍按实测容量调度。
