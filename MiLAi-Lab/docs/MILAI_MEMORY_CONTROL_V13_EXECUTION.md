@@ -28,7 +28,7 @@ V12 公开结果已分析 620 个确认组，其中包括全部 75 个 QASPER �
 | 评估链路 | B1 的早期计时运行覆盖曲线集 150 题，实付 150 次，宏质量 23.90。该次运行关闭了数值预检观察，正式比较采用统一的数值观察 | `rule-curve-2048/` |
 | 冻结 GTE 相关性 | R2、最多 4 读，在 99 题校准集实付 99 次，宏质量 24.54。这是预算规则选择的一个候选 | `gte-r2-reads4-cal/` |
 | 原版参考 | 单独使用 MuSiQue-Ans、双 E5-large、原版支持事实奖励与 PQN。300 个 TUNE 问题的平均 GT 回报由初始化的 0.286667 到第 100 次更新的 0.340000，完整配方为 10,000 次更新。第 100 次更新的 actor 已持久化为基于 E5 基础权重的差分归档，790 个张量经恢复后逐项相等 | `ref/official-musique-tune300-seed42/` |
-| 回归 | 带 PyTorch 的环境执行记忆控制及新增针对性测试，当前 86 项通过 | `v13-all-focused-regressions.log` |
+| 回归 | 带 PyTorch 的环境执行记忆控制及新增针对性测试，当前 101 项通过 | `v13-focused-phase-close.log` |
 
 S1 已在 GPU 3 启动。正式数据包含 119,394 个合格根状态，MuSiQue 110,133 个，QASPER 5,351 个，PersonaMem 3,910 个。所有根状态遍历一轮，共 3,732 次更新。首个正式更新检测到第 0 层注意力参数改变，逐更新曲线见 `gte/s1/curve.jsonl`。S1 的完整训练输入已固化为持久卷上的 `gte/evidence.sqlite`，复读确认覆盖两个准备阶段和全部 119,394 个根状态。初始分组排序的全轮检查发现，连续 71,516 个根状态没有 QASPER，连续 78,612 个没有 PersonaMem。该次拟合在 77 次更新、2,464 个根状态后退役，544.58 秒拟合开销计入 `gte/s1-initial-allocation/`。正式运行从相同预训练权重重新开始，按遍历窗口分散原生组，保留每条样本的一次曝光和来源权重。修正后两个最长间隔分别为 291 和 275。
 
@@ -56,6 +56,20 @@ QASPER 出现 1 次严格反转，即一个状态中读取优于停止，另一�
 同一 99 题上，固定 GTE 相关性策略的四个候选也各付费 99 次。冻结配置为 R2、两次读取、对象批次 8，校准宏质量 30.36 分。GTE 的候选成本见 `gte-calibration-costs.json`。对两次 R2 两读的完整校准读出做了逐题复核，全部 99 个请求的 payload 与 seed 相同，5 个任务的单题得分仍发生变化。正式评估将 Reader 随机性与拟合、采集种子分别处理。此处两表仅用于校准；最终效果由相同自然 DEV 和新确认组读出。
 
 每个来源的得分、用量、覆盖数见 `rule-calibration-costs.json`。选择依据见 `baselines/rule-selection.json`。
+
+## 共同 2k 反馈闭合
+
+初始训练数据含 550 个完整根状态，2,035 个逻辑测量回执。原生 Reader 账本对应 **2,000 次互不重叠的新请求**，其中 1,670 次为首动作分支、330 次为 MuSiQue companion。另有 35 次相同请求的兼容复用。所有实付回执均已绑定，未完成包占用、未知收费和未归属回执均为 0。DQ 与 PQ-U 后续可以复用同一套观测；对 PQ-U 和 PQ-A，各自计入这 2,000 次监督曝光，项目物理开销计一次。
+
+| 来源 | 完整根状态 | 不同原生组 | 实付反馈 | 有多个已测动作的根 | 终局质量随首动作改变的根 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| MuSiQue-Full | 330 | 330 | 1,320 | 330 | 45 |
+| QASPER | 166 | 160 | 469 | 132 | 56 |
+| PersonaMem | 54 | 35 | 211 | 53 | 9 |
+
+PersonaMem 占根状态 9.82%。三源每个原生组被选取的最大根状态数依次为 1、2、3。首批费用修正前的回执和前缀完整保留，修正后的 352 个包中，预计本臂曝光和预计新增调用均与逐包实扣吻合。已冻结两条机制臂共同的未标注 TRAIN 状态池，并扣除了 warm 占用的原生组名额。
+
+截至此阶段，整个 V13 目录结算 **5,104 次物理 Reader 请求**。其中 2,000 次属于共同 warm，48 次属于 QR 的 S0 试验，1 次属于 GTE S0 完整 episode，3,055 次属于开发读出、校准、机制诊断及前期运行。累计 provider 输入 5,643,485 tokens，输出 289,525 tokens；22 次格式失败保留了费用和对应原生评分。项目结算表为 `project-after-warm.json`，采集明细为 `warm-2000.json`，原生账本复核见 `runtime-validation/warm-2k-closure.json`。
 
 ## 冻结策略在自然 DEV 上的表现
 
@@ -113,9 +127,9 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/calibrate_memory_control_v13_baselines.py --ro
 
 反馈组包的 Q、未来成本与预定义动作比较保存在 `packs/`。对应真实反馈放在 `receipts/`，沿用共享 Reader 账本。报告对费用未知的回包单独计数。实际 Reader 输入、输出、控制器 GPU 毫秒、检索预处理及端到端 p50/p95 分项报告。端到端 GPU 服务成本需要能归属到本次调用的服务器计量数据。
 
-REF 与 GTE 的资源调整及具体训练命令分别见 `MILAI_MEMORY_CONTROL_V13_QRAG_REFERENCE.md` 和 `MILAI_MEMORY_CONTROL_V13_GTE.md`。服务器使用物理 GPU 2 训练 REF，GPU 3 训练项目控制器，GPU 0、1 提供既有冻结 Reader。启动阶段曾在四张物理 GPU 上并行进行训练和采集，此阶段墙钟和时延反映了实际共享服务条件。S1 第 256 次更新完成持久恢复点后，轮转调度在第 265 次更新处保存了两个训练进程的现场，转入 Reader 采集时段。当前 `initial-schedule.json` 标明时段及原进程。初始 uniform warm 和已登记的读出队列全部结束后恢复训练。工作进程驻留的显存、等待时间和活跃计算分别披露。`phase/phase.json` 当前仅接纳 Reader 与评估。初始读出关闭后先完成 REF 完整曲线和 S1。两者结算后，`tools/schedule_memory_control_v13_initial.py --advance` 会自动接纳正式 QR、DQ/PQ 及检查点评估，按任务单元分时执行。
+REF 与 GTE 的资源调整及具体训练命令分别见 `MILAI_MEMORY_CONTROL_V13_QRAG_REFERENCE.md` 和 `MILAI_MEMORY_CONTROL_V13_GTE.md`。服务器使用物理 GPU 2 训练 REF，GPU 3 训练项目控制器，GPU 0、1 提供既有冻结 Reader。启动阶段曾在四张物理 GPU 上并行进行训练和采集，此阶段墙钟和时延反映了实际共享服务条件。S1 第 256 次更新完成持久恢复点后，轮转调度在第 265 次更新处保存了两个训练进程的现场，转入 Reader 采集时段。`initial-schedule.json` 记录初始 Reader 阶段持续 3,480.79 秒。2026-11-25 02:31（北京时间）两个原进程已恢复，S1 沿同一次拟合从第 265 步实际继续更新。工作进程驻留的显存、等待时间和活跃计算分别披露。`phase/phase.json` 当前为训练时段，先完成 REF 完整曲线和 S1。两者结算后，`tools/schedule_memory_control_v13_initial.py --advance` 会自动接纳正式 QR、DQ/PQ 及检查点评估，按任务单元分时执行。
 
-核心反馈矩阵使用 `configs/memory_control_v13/feedback.json`。当前 12k 调度已启动，等待完整的 2,000 次共同 warm 反馈和 S1 最终检查点。调度完成后会先产出 6k，再产出 12k。同一固定池内 PQ-U 与 PQ-A 分别选择包，两臂从相同 warm 配对参数开始，DQ 在每轮重用 PQ-U 包。在新目标轮次继续训练上一轮参数。曲线表读取真实采集收据、拟合父链与同一批 DEV 完整运行记录。
+核心反馈矩阵使用 `configs/memory_control_v13/feedback.json`。共同的 2,000 次 warm 反馈已闭合。12k 调度等待 S1 及原版参照阶段完成。调度完成后会先产出 6k，再产出 12k。同一固定池内 PQ-U 与 PQ-A 分别选择包，两臂从相同 warm 配对参数开始，DQ 在每轮重用 PQ-U 包。在新目标轮次继续训练上一轮参数。曲线表读取真实采集收据、拟合父链与同一批 DEV 完整运行记录。
 
 ```bash
 CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config configs/memory_control_v13/feedback.json --root "$R" --weights "$R/staging/round-models" --s1 "$R/staging/gte/s1/checkpoint" --curve "$R/rosters/curve-2048.json" --until 12000
