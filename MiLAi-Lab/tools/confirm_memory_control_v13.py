@@ -9,7 +9,7 @@ import tempfile
 from collections import Counter, defaultdict
 from contextlib import closing
 from pathlib import Path
-from statistics import fmean
+from statistics import fmean, stdev
 
 import numpy as np
 
@@ -18,7 +18,9 @@ from milai_lab.datasets.memory_control_store import connect, get_meta
 from milai_lab.runners.memory_control_confirmation import (
     InsufficientDevGroups,
     confirmation_capacity,
+    full_tune_parent,
     plan_confirmation_power,
+    power_dev_records,
 )
 from milai_lab.runners.memory_control_episode import (
     checkpoint_contract,
@@ -26,14 +28,16 @@ from milai_lab.runners.memory_control_episode import (
     train_sources_disjoint,
 )
 from milai_lab.scorers.memory_control_episode_metrics import (
+    RESOURCE_AXES,
     SOURCES,
     centered_bootstrap_pvalue,
     holm_adjust,
     input_result,
     paired_comparison,
     paired_inline_latency,
+    percentiles,
 )
-from report_memory_control_v13_deployment import summarize_run
+from report_memory_control_v13_deployment import packet_measurements, summarize_run
 
 SEEDS = {11, 29, 47}
 COST_FIELDS = {"local_gpu_seconds": "total_local_gpu_seconds", "currency": "total_charged_currency"}
@@ -99,11 +103,88 @@ def checked_capacity(data, role_audit, packet_audit, target, seed, prior=()):
     return confirmation_capacity(data, target, seed, list(prior))
 
 
-def validate_dev_family(paths, *, final=False):
+def tune_support(selection, spec):
+    if not spec.get("tune_subset"):
+        return None, None
+    path = (selection.parent / spec["tune_subset"]).resolve()
+    roster = read(path)
+    full_tune_parent(roster)
+    return path, roster
+
+
+def projected_endpoints(protocol, packets):
+    """Calculate native quality bounds and per-task resource coverage on exactly the common rows."""
+    pop = protocol["population"]
+    measurement = packet_measurements(protocol["arm"], pop, packets, None)
+    excluded = pop.get("predeclared_unevaluable_tasks", {})
+    groups = defaultdict(set)
+    for task in pop["tasks"]:
+        if str(task["task_id"]) not in excluded:
+            groups[task["dataset"]].add(task["native_group"])
+    axes = {}
+    for key in dict.fromkeys((*RESOURCE_AXES, "controller_gpu_ms", *COST_FIELDS.values())):
+        values = [
+            v
+            for row in packets.values()
+            if type(v := row.get("costs", {}).get(key)) in (int, float)
+            and math.isfinite(v)
+            and v >= 0
+        ]
+        axes[key] = {
+            "measured": len(values),
+            "missing": len(packets) - len(values),
+            "known_sum": sum(values),
+            "total_if_complete": sum(values) if len(values) == len(packets) else None,
+            "p50": percentiles(values, 0.5) if values else None,
+            "p95": percentiles(values, 0.95) if values else None,
+        }
+    return {
+        "registered_tasks": len(packets),
+        "groups": sum(len(g) for g in groups.values()),
+        "eligible_groups_by_source": {s: len(g) for s, g in groups.items()},
+        "native": measurement["native"],
+        "macro_range_points": measurement["macro_range_points"],
+        "per_task_costs": axes,
+        "new_reader_calls_for_projection": 0,
+        "resource_scope": (
+            "Existing per-task measurements on the selected native groups. "
+            "Whole-window timings and physical charges are not prorated."
+        ),
+    }
+
+
+def fit_sensitivity(projections):
+    lower = [v["macro_range_points"][0] for v in projections]
+    upper = [v["macro_range_points"][1] for v in projections]
+    fully_observed = all(not src["unknown"] for v in projections for src in v["native"].values())
+    costs = {}
+    for key in projections[0]["per_task_costs"]:
+        totals = [v["per_task_costs"][key]["total_if_complete"] for v in projections]
+        known = [n for n in totals if n is not None]
+        costs[key] = {
+            "measured_fits": len(known),
+            "fits": len(totals),
+            "range_if_complete": [min(known), max(known)] if len(known) == len(totals) else None,
+        }
+    return {
+        "fit_seeds": [v["seed"] for v in projections],
+        "macro_bounds_envelope": [min(lower), max(upper)],
+        "quality_points_sample_sd_if_observed": stdev(lower)
+        if fully_observed and len(lower) > 1
+        else None,
+        "cost_totals_across_fits": costs,
+    }
+
+
+def validate_dev_family(paths, *, final=False, tune_subset=None):
+    common_roster = tune_subset
+    full_roster = full_tune_parent(tune_subset)
     if len(paths) not in ((3,) if final else (1, 3)):
         raise ValueError("Use three final fits and a fixed or three-fit comparator")
-    arms, means, bounds, backbones = [], [], [], set()
+    arms, bounds, backbones, projections = [], [], set(), []
+    selected = None
     family_contract = None
+    family_population = None
     for path in paths:
         protocol = read(path / "protocol.json")
         pop, arm = protocol["population"], protocol["arm"]
@@ -115,8 +196,15 @@ def validate_dev_family(paths, *, final=False):
             or arm.get("environment") != "qrag_milai_v13"
         ):
             raise ValueError("Final selection requires closed natural 2,048-token V13 TUNE runs")
+        if common_roster is None and family_population is not None and family_population != pop:
+            raise ValueError("Different fit-evaluation populations require an explicit TUNE subset")
+        family_population = pop
         recipe = {k: v for k, v in arm.items() if k not in {"checkpoint", "name", "seed"}}
         if arm["policy"] in {"pretrained_checkpoint", "qrag_milai"}:
+            if len(paths) == 1 and arm.get("seed") != 11:
+                raise ValueError(
+                    "A singleton learned ranking comparator must be its seed-11 deployment"
+                )
             ckpt = Path(arm["checkpoint"])
             contract = (
                 checkpoint_contract(ckpt)
@@ -148,10 +236,38 @@ def validate_dev_family(paths, *, final=False):
         if family_contract is not None and recipe != family_contract:
             raise ValueError("Fit-seed family differs in method, data or deployed readout")
         family_contract = recipe
-        measured = summarize_run(path)
-        lower, upper = measured["macro_range_points"]
-        bounds.append([lower, upper])
-        means.append(lower)
+        basis = len(paths) == 1 or arm.get("seed") == 11
+        if basis and (
+            pop.get("subset_kind") is not None or (full_roster is not None and pop != full_roster)
+        ):
+            raise ValueError(
+                "Baseline ranking requires the full parent TUNE run for fit 11 or fixed policy"
+            )
+        if common_roster is not None and pop not in (full_roster, common_roster):
+            raise ValueError("A fit readout uses neither its frozen subset nor its parent TUNE")
+        original = summarize_run(path) if basis or common_roster is None else None
+        if basis:
+            selected = {
+                "run": str(path),
+                "seed": arm.get("seed"),
+                "tasks": len(pop["tasks"]),
+                "groups": original["registered_groups"],
+                "macro_range_points": original["macro_range_points"],
+            }
+        if common_roster is None:
+            bounds.append(original["macro_range_points"])
+        else:
+            proto, records = power_dev_records(path, common_roster)
+            measured = projected_endpoints(proto, records)
+            projections.append(
+                {
+                    **measured,
+                    "seed": arm.get("seed"),
+                    "input_tasks": len(pop["tasks"]),
+                    "run": str(path),
+                }
+            )
+            bounds.append(measured["macro_range_points"])
         arms.append(arm)
     if len(arms) == 3 and {a.get("seed") for a in arms} != SEEDS:
         raise ValueError("Actual fitted seeds 11, 29 and 47 are required")
@@ -161,7 +277,16 @@ def validate_dev_family(paths, *, final=False):
         "arms": arms,
         "dev_runs": list(map(str, paths)),
         "quality_bounds_points": bounds,
-        "selection_score": fmean(means),
+        "selection_score": selected["macro_range_points"][0],
+        "selection_basis": selected,
+        **(
+            {
+                "common_fit_support": projections,
+                "fit_seed_sensitivity": fit_sensitivity(projections),
+            }
+            if projections
+            else {}
+        ),
         "backbone": next(iter(backbones), None),
     }
 
@@ -188,12 +313,14 @@ def select_peer(families, candidates, final, same):
     return min(valid, key=lambda k: (-families[k]["selection_score"], k))
 
 
-def cost_data(paths, field):
+def cost_data(paths, field, *, dev_roster=None):
     data = []
     for path in paths:
-        protocol, rows = input_result(path)
+        protocol, rows = (
+            power_dev_records(path, dev_roster) if dev_roster is not None else input_result(path)
+        )
         contract = protocol["comparison"].get("total_cost")
-        costs = {tid: row["costs"].get(field) for tid, row in rows.items()}
+        costs = {tid: row.get("costs", {}).get(field) for tid, row in rows.items()}
         unit = next(k for k, v in COST_FIELDS.items() if v == field)
         if (
             not contract
@@ -237,10 +364,26 @@ def register(args):
         raise ValueError("Positive simulation counts, cap and meaningful effect required")
     spec = read(args.selection)
     final = spec["final"]
+    subset_path, common_roster = tune_support(args.selection, spec)
     families = {
-        k: validate_dev_family([Path(p).resolve() for p in v], final=k == final)
+        k: validate_dev_family(
+            [Path(p).resolve() for p in v],
+            final=k == final,
+            tune_subset=common_roster,
+        )
         for k, v in spec["families"].items()
     }
+    selection_protocols = [
+        read(Path(info["selection_basis"]["run"]) / "protocol.json") for info in families.values()
+    ]
+    if any(
+        p["population"] != selection_protocols[0]["population"]
+        or p["comparison"] != selection_protocols[0]["comparison"]
+        for p in selection_protocols[1:]
+    ):
+        raise ValueError(
+            "All competing full TUNE ranking inputs must share their roster and Reader"
+        )
     peers = {
         k: select_peer(families, spec[k], final, k == "same_backbone")
         for k in ("same_backbone", "practical")
@@ -259,12 +402,14 @@ def register(args):
     for path in comparison_runs[1:]:
         proto = read(path / "protocol.json")
         if (
-            proto["population"] != leader_protocol["population"]
-            or proto["comparison"] != leader_protocol["comparison"]
-        ):
+            common_roster is None and proto["population"] != leader_protocol["population"]
+        ) or proto["comparison"] != leader_protocol["comparison"]:
             raise ValueError("Selected DEV evaluations must share the task allocation and Reader")
     field = COST_FIELDS[args.cost_unit]
-    measured_total = cost_data([*paths[final], *paths[peers["practical"]]], field) is not None
+    measured_total = (
+        cost_data([*paths[final], *paths[peers["practical"]]], field, dev_roster=common_roster)
+        is not None
+    )
     audits = (args.role_audit, args.packet_audit)
     prior = prior_v13_runs(args.data, args.role_audit, getattr(args, "prior_run", ()))
     capacities = []
@@ -298,6 +443,7 @@ def register(args):
                     mask_unknown_quality=True,
                     savings_null=0.15 if use_cost else 0.0,
                     total_workload_cost=use_cost,
+                    tune_subset=common_roster,
                 )
             except InsufficientDevGroups as exc:
                 projections[key] = {
@@ -369,6 +515,14 @@ def register(args):
         "final": final,
         "peers": peers,
         "dev_selection": spec,
+        "selection_rule": (
+            "Highest lower-bound native macro on the common full TUNE "
+            "seed-11 or fixed deployment run"
+        ),
+        "tune_subset": str(subset_path) if subset_path else None,
+        "fit_repeat_tasks": len(common_roster["tasks"])
+        if common_roster is not None
+        else len(leader_protocol["population"]["tasks"]),
         "quality_mde_points": args.quality_mde,
         "family_one_sided_alpha": FAMILY_ALPHA,
         "quality_noninferiority_points": 1,

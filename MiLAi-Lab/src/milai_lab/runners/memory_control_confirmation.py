@@ -20,6 +20,7 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     centered_bootstrap_pvalue,
     input_result,
     matching_derived_dev,
+    select_dev_records,
 )
 
 
@@ -130,6 +131,48 @@ def confirmation_repeat_population(
     }
 
 
+def full_tune_parent(roster: dict[str, Any] | None) -> dict[str, Any] | None:
+    if roster is None:
+        return None
+    kind = roster.get("subset_kind")
+    if kind is None:
+        parent = roster
+    elif kind == "frozen_fit_repeat" and roster.get("parent_tune_roster"):
+        parent = read_json(Path(roster["parent_tune_roster"]))
+    else:
+        raise ValueError("Unrecognized frozen fit-repeat cohort or missing parent TUNE roster")
+    if (not parent or parent.get("subset_kind") is not None or any(
+        p.get("role") != "dev" or p.get("v13_role") != "tune" or p.get("material_budget") != 2048
+        for p in (parent, roster)
+    )):
+        raise ValueError("Fit-repeat support and its parent must both be natural TUNE")
+    # Check ordered group membership and the public mask using only registered task metadata.
+    # This also validates a subset run whose own protocol never contained its omitted siblings.
+    if roster is not parent:
+        task_metadata = {t["task_id"]: t for t in parent["tasks"]}
+        select_dev_records({"population": parent}, task_metadata, roster)
+    return parent
+
+
+def power_dev_records(
+    path: Path, roster: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], dict[int, dict[str, Any]]]:
+    metadata_path = path / "protocol.json"
+    original = (read_json(metadata_path) or {}).get("population", {})
+    if original and (original.get("role") != "dev" or original.get("v13_role") == "calibration"):
+        raise ValueError("Confirmation power may read only natural TUNE or legacy DEV records")
+    if roster is None:
+        return input_result(path)
+    # Reject a wrong registration before accessing any episode packets.
+    if not original or original.get("v13_role") != "tune":
+        raise ValueError("Projected confirmation power requires natural TUNE runs")
+    parent = full_tune_parent(roster)
+    if original != roster and original != parent:
+        raise ValueError("A projected run must match the registered subset or its parent TUNE")
+    protocol, episodes = input_result(path)
+    return select_dev_records(protocol, episodes, roster)
+
+
 def plan_confirmation_power(
     capacity: dict[str, Any],
     policy: list[Path],
@@ -145,21 +188,25 @@ def plan_confirmation_power(
     mask_unknown_quality: bool = False,
     savings_null: float = 0.0,
     total_workload_cost: bool = False,
+    tune_subset: Path | dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Sample clustered DEV residuals into the candidate fresh source/group allocation."""
     import numpy as np
 
+    dev_roster = read_json(tune_subset) if isinstance(tune_subset, Path) else tune_subset
+    if tune_subset is not None and not isinstance(dev_roster, dict):
+        raise ValueError("Missing frozen TUNE subset declaration")
     if min(draws, repeats, primary_comparisons) <= 0 or len(policy) != 3:
         raise ValueError("Power uses three actual DEV seeds and positive simulation settings")
     baselines = [baseline] if isinstance(baseline, Path) else list(baseline)
     if len(baselines) not in {1, 3}:
         raise ValueError("Power requires one fixed or three seed-matched DEV baselines")
-    comparison_runs = [input_result(path) for path in baselines]
+    comparison_runs = [power_dev_records(path, dev_roster) for path in baselines]
     base_protocol = comparison_runs[0][0]
     population = base_protocol["population"]
     if population["role"] != "dev":
         raise ValueError("Review only DEV responses for power planning")
-    loaded = [input_result(path) for path in policy]
+    loaded = [power_dev_records(path, dev_roster) for path in policy]
     seeds = [protocol["arm"].get("seed") for protocol, _ in loaded]
     baseline_seeds = [protocol["arm"].get("seed") for protocol, _ in comparison_runs]
     if len(comparison_runs) == 3 and set(baseline_seeds) != set(seeds):
@@ -313,6 +360,9 @@ def plan_confirmation_power(
             )
     return {
         "design": "stratified_native_group_dev_residual_simulation",
+        **({"projected_dev_tasks": len(dev_roster["tasks"]), "projection_reader_requests": 0,
+            "projected_resource_field": cost_field}
+           if dev_roster is not None else {}),
         **({"cost_field": cost_field, "minimum_quality_effect_points": minimum_quality_effect,
             "quality_power_at_minimum_effect": minimum_effect_passes / draws}
            if minimum_quality_effect is not None else {}),

@@ -147,8 +147,7 @@ def test_final_fit_seed_must_match_its_checkpoint(tmp_path, monkeypatch):
         tool.validate_dev_family([run, run, run], final=True)
 
 
-def test_register_three_fits_and_one_shared_control(tmp_path, native_fixture):
-    tool, pop, arms, peer = native_fixture
+def fresh_fixture(tool, tmp_path, pop):
     fresh = tmp_path / "fresh.sqlite"
     with sqlite3.connect(fresh) as db:
         db.executescript("""
@@ -188,6 +187,12 @@ def test_register_three_fits_and_one_shared_control(tmp_path, native_fixture):
             "dataset_run_id": "test-fresh",
         },
     )
+    return fresh, role, packet
+
+
+def test_register_three_fits_and_one_shared_control(tmp_path, native_fixture):
+    tool, pop, arms, peer = native_fixture
+    fresh, role, packet = fresh_fixture(tool, tmp_path, pop)
     backbone = str(tmp_path / "base")
     runs = {}
     for arm in [*arms, peer]:
@@ -276,3 +281,221 @@ def test_restart_preserves_scored_and_does_not_reissue_unknown_dispatch(tmp_path
     )
     assert not ready and prepared == 0 and counts == {"scored": 1, "reader_interrupted": 1}
     assert json.loads((tmp_path / "2.json").read_text())["status"] == "reader_interrupted"
+
+
+def test_seed11_selection_and_seed_spread_use_their_registered_rosters(tmp_path, monkeypatch):
+    """Full-menu selection cannot inherit the enriched/depleted fit-repeat slice scores."""
+    import milai_lab.runners.memory_control_confirmation as planning
+
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    tool = importlib.import_module("confirm_memory_control_v13")
+    rows = []
+    for source in tool.SOURCES:
+        for group in ("a", "b", "outside"):
+            for _ in range(2 if source == "musique_full" else 1):
+                rows.append({"task_id": len(rows), "dataset": source, "native_group": group})
+    full = {
+        "tasks": rows,
+        "protocol": "fixture",
+        "role": "dev",
+        "v13_role": "tune",
+        "dataset_run_id": "fixture",
+        "seed": 42,
+        "primary_quality": "macro",
+        "material_budget": 2048,
+        "predeclared_unevaluable_tasks": {},
+    }
+    fullfile = tmp_path / "tune.json"
+    tool.save(fullfile, full)
+    child = {
+        **full,
+        "subset_kind": "frozen_fit_repeat",
+        "parent_tune_roster": str(fullfile),
+        "selection_seed": 913,
+        "tasks": [r for r in rows if r["native_group"] != "outside"],
+    }
+    childfile = tmp_path / "repeat.json"
+    tool.save(childfile, child)
+    _, scope = tool.tune_support(tmp_path / "method.json", {"tune_subset": "repeat.json"})
+    assert scope == child and tool.full_tune_parent(scope) == full
+    results = []
+    for label, seed, q in (("F", 11, 0.6), ("F", 29, 0.4), ("F", 47, 0.2), ("B", None, 0.5)):
+        run = tmp_path / f"{label}-{seed}"
+        (run / "episodes").mkdir(parents=True)
+        pop = full if seed in (11, None) else child
+        arm = {
+            "policy": "gte_relevance",
+            "backbone": str(tmp_path / "base"),
+            "environment": "qrag_milai_v13",
+            "name": run.name,
+            "observation_protocol": "semantic_nav_delta_v2",
+        }
+        if seed is not None:
+            ckpt = tmp_path / f"weights-{seed}" / "checkpoint"
+            ckpt.mkdir(parents=True)
+            (ckpt / "control.pt").touch()
+            tool.save(ckpt / "controller.json", {"backbone": str(tmp_path / "base")})
+            tool.save(
+                ckpt.parent / "run.json",
+                {
+                    "contract": {
+                        "seed": seed,
+                        "fitted_groups": ["qasper/training"],
+                        "supervision_mode": "paired",
+                        "observation_protocol": "semantic_nav_delta_v2",
+                        "input": "same-frozen-pack",
+                        "effective_batch": 32,
+                        "epochs": 3,
+                        "lr": 1e-5,
+                        "pair_weight": 0.2,
+                    }
+                },
+            )
+            arm.update(policy="pretrained_checkpoint", checkpoint=str(ckpt), seed=seed)
+            results.append(run)
+        meter = {
+            "unit": "local_gpu_seconds",
+            "includes": tool.COMPONENTS,
+            "measurement_protocol": "fixture",
+        }
+        tool.save(
+            run / "protocol.json",
+            {"population": pop, "arm": arm, "comparison": {"total_cost": meter}},
+        )
+        tool.save(run / "run.json", {"status": "COMPLETED"})
+        (run / "windows.jsonl").write_text(
+            json.dumps(
+                {
+                    "reader_requests_this_invocation": len(pop["tasks"]),
+                    "policy_load_ms_this_invocation": 0,
+                }
+            )
+            + "\n"
+        )
+        for r in pop["tasks"]:
+            quality = float(label == "F") if r["native_group"] == "outside" else q
+            measured = {
+                "reader_input_tokens": 7,
+                "episode_live_readout_ms": 1,
+                "reader_request_attempted": True,
+            }
+            if r["native_group"] != "outside":
+                measured["total_local_gpu_seconds"] = 2.0 if label == "F" else 3.0
+            tool.save(
+                run / "episodes" / f"{r['task_id']}.json",
+                {
+                    **r,
+                    "status": "scored",
+                    "costs": measured,
+                    "grade": {
+                        "native_metrics": {
+                            "accuracy": quality,
+                            "answer_f1": quality,
+                            "answer_em": quality,
+                            "support_f1": quality,
+                            "sufficiency_correct": True,
+                            "gold_answerable": r["task_id"] % 2 == 0,
+                        }
+                    },
+                },
+            )
+    base = tmp_path / "B-None"
+    family = tool.validate_dev_family(results, final=True, tune_subset=scope)
+    assert family["selection_score"] == pytest.approx(100 * (0.6 + 0.6 + 1) / 3)
+    assert [v[0] for v in family["quality_bounds_points"]] == pytest.approx([60, 40, 20])
+    assert [v["registered_tasks"] for v in family["common_fit_support"]] == [8, 8, 8]
+    assert [v["input_tasks"] for v in family["common_fit_support"]] == [12, 8, 8]
+    assert family["fit_seed_sensitivity"]["quality_points_sample_sd_if_observed"] == pytest.approx(
+        20.0
+    )
+    assert family["fit_seed_sensitivity"]["cost_totals_across_fits"]["reader_input_tokens"][
+        "range_if_complete"
+    ] == [56, 56]
+    assert tool.cost_data([base], "total_local_gpu_seconds") is None
+    assert tool.cost_data([base], "total_local_gpu_seconds", dev_roster=child) is not None
+    cap = {
+        "dataset_run_id": "dummy",
+        "seed": 11,
+        "target_tasks": 8,
+        "selected_groups": {
+            s: [{"native_group": g, "tasks": 2 if s == "musique_full" else 1} for g in ("a", "b")]
+            for s in tool.SOURCES
+        },
+    }
+    power = planning.plan_confirmation_power(
+        cap,
+        results,
+        base,
+        draws=2,
+        repeats=160,
+        analysis_seed=11,
+        primary_comparisons=2,
+        holm_plan=True,
+        tune_subset=childfile,
+        cost_field="total_local_gpu_seconds",
+    )
+    assert power["projected_dev_tasks"] == 8 and power["projection_reader_requests"] == 0
+    assert power["source_groups_used"] == {s: 2 for s in tool.SOURCES}
+    assert power["conservative_dev_design"]["seed_quality_delta_points"] == pytest.approx(
+        [10, -10, -30]
+    )
+    fresh, role, packet = fresh_fixture(tool, tmp_path, child)
+    selection = tmp_path / "selection.json"
+    tool.save(
+        selection,
+        {
+            "final": "F",
+            "families": {"F": list(map(str, results)), "B": [str(base)]},
+            "same_backbone": ["B"],
+            "practical": ["B"],
+            "tune_subset": str(childfile),
+        },
+    )
+    args = SimpleNamespace(
+        selection=selection,
+        data=fresh,
+        role_audit=role,
+        packet_audit=packet,
+        seed=11,
+        reader_cap=32,
+        quality_mde=1.0,
+        draws=2,
+        power_repeats=160,
+        bootstrap_repeats=160,
+        cost_unit="local_gpu_seconds",
+        output=tmp_path / "subset-registration",
+    )
+    tool.register(args)
+    registered = tool.read(args.output / "registration.json")
+    assert registered["fit_repeat_tasks"] == 8
+    assert registered["dev_total_cost_available"]
+    assert registered["families"]["F"]["selection_basis"]["tasks"] == 12
+    assert registered["families"]["F"]["selection_score"] == pytest.approx(
+        family["selection_score"]
+    )
+    assert registered["capacity_power_grid"][-1]["projections"]["practical"][
+        "dev_groups_available"
+    ] == {s: 2 for s in tool.SOURCES}
+    invalid = {**child, "tasks": child["tasks"][1:]}
+    with pytest.raises(ValueError, match="whole native groups"):
+        planning.power_dev_records(base, invalid)
+    original = tool.read(results[0] / "protocol.json")
+    tool.save(results[0] / "protocol.json", {**original, "population": child})
+    with pytest.raises(ValueError, match="full parent TUNE"):
+        tool.validate_dev_family(results, final=True, tune_subset=scope)
+
+
+@pytest.mark.parametrize(
+    ("role", "v13_role"), [("dev", "calibration"), ("confirm", "confirm_fresh")]
+)
+def test_power_rejects_wrong_role_before_opening_packets(tmp_path, monkeypatch, role, v13_role):
+    import milai_lab.runners.memory_control_confirmation as planning
+
+    (tmp_path / "protocol.json").write_text(
+        json.dumps({"population": {"role": role, "v13_role": v13_role}})
+    )
+    monkeypatch.setattr(
+        planning, "input_result", lambda *_: pytest.fail("opened out-of-role records")
+    )
+    with pytest.raises(ValueError, match="natural TUNE"):
+        planning.power_dev_records(tmp_path, {"role": "dev", "v13_role": "tune"})
