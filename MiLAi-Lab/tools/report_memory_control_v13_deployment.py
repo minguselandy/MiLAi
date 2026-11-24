@@ -14,6 +14,7 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     SOURCES,
     input_result,
     percentiles,
+    select_dev_records,
 )
 from milai_lab.scorers.memory_control_native import musique_pair
 from report_memory_control_v13_project_cost import readout_charge_evidence, window_records
@@ -80,7 +81,7 @@ def action_counts(packet):
             return None
         if choice["kind"] == "HANDOFF":
             counts["handoffs"] += 1
-        if choice["kind"] != "READ" or not step.get("result", {}).get("ok", False):
+        if choice["kind"] != "READ" or not (step.get("result") or {}).get("ok", False):
             continue
         index = choice["parameters"]["index"]
         expanded = bool(choice["parameters"].get("expand_context"))
@@ -91,14 +92,7 @@ def action_counts(packet):
     return counts
 
 
-def summarize_run(path):
-    closed = json.loads((path / "run.json").read_text())
-    if closed["status"] != "COMPLETED":
-        raise ValueError(f"Evaluation still open at {path}")
-    protocol, episodes = input_result(path)
-    pop = protocol["population"]
-    if len(pop["tasks"]) != len(episodes):
-        raise ValueError(f"Incomplete evaluation packets at {path}")
+def packet_measurements(arm, pop, episodes, load_per_attempt):
     groups = defaultdict(list)
     costs = defaultdict(list)
     statuses = Counter()
@@ -158,31 +152,17 @@ def summarize_run(path):
             mean=fmean(scores) if scores else None,
             full_range=[sum(scores) / total, (sum(scores) + unknown) / total],
         )
-    windows, partial_log = window_records(path / "windows.jsonl")
-    billing, _ = readout_charge_evidence(windows, episodes)
-    calls = billing["settled_new_requests"]
-    loads = [w.get("policy_load_ms_this_invocation") for w in windows]
-    load_known = sum(v for v in loads if v is not None)
-    load_complete = (
-        all(v is not None for v in loads)
-        and not partial_log
-        and not billing["packet_only_new_requests"]
+    times = (
+        [t + load_per_attempt for t in costs["episode_live_readout_ms"]]
+        if load_per_attempt is not None
+        else []
     )
-    load_ms = load_known if load_complete else None
-    eligible_times = costs["episode_live_readout_ms"]
-    load_per_attempt = (
-        load_ms / calls
-        if calls and load_ms is not None and not billing["unknown_charge_records"]
-        else None
-    )
-    times = [t + load_per_attempt for t in eligible_times] if load_per_attempt is not None else []
     return dict(
-        path=str(path.resolve()),
-        arm=protocol["arm"],
+        arm=arm,
         cohort=pop.get("v13_role", pop["role"]),
         **(
             {"annotation_diagnostics": annotation_diagnostics(groups)}
-            if protocol["arm"].get("policy") == "G"
+            if arm.get("policy") == "G"
             and all("annotation_coverage" in r for r in episodes.values())
             else {}
         ),
@@ -195,6 +175,30 @@ def summarize_run(path):
         ],
         status=dict(statuses),
         predeclared_unscorable=len(unavailable),
+        action_counts={k: measured(v) for k, v in operations.items()},
+        live_readout_plus_load_ms=measured(times),
+        resources={k: measured(v) for k, v in costs.items()},
+    )
+
+
+def run_accounting(path, episodes):
+    windows, partial_log = window_records(path / "windows.jsonl")
+    billing, _ = readout_charge_evidence(windows, episodes)
+    calls = billing["settled_new_requests"]
+    loads = [w.get("policy_load_ms_this_invocation") for w in windows]
+    load_known = sum(v for v in loads if v is not None)
+    load_complete = (
+        all(v is not None for v in loads)
+        and not partial_log
+        and not billing["packet_only_new_requests"]
+    )
+    load_ms = load_known if load_complete else None
+    load_per_attempt = (
+        load_ms / calls
+        if calls and load_ms is not None and not billing["unknown_charge_records"]
+        else None
+    )
+    return dict(
         actual_reader_calls=calls,
         reader_charge_coverage=dict(billing),
         reader_charge_lower_bound_only=bool(billing["unknown_charge_records"] or partial_log),
@@ -203,11 +207,8 @@ def summarize_run(path):
         ),
         known_policy_load_ms=load_known,
         policy_load_complete=load_complete,
-        action_counts={k: measured(v) for k, v in operations.items()},
         policy_load_ms=load_ms,
         policy_load_ms_per_attempt=load_per_attempt,
-        live_readout_plus_load_ms=measured(times),
-        resources={k: measured(v) for k, v in costs.items()},
         vllm_running_seconds=measured(
             [
                 w["reader_engine"]["vllm_running_seconds"]
@@ -220,6 +221,48 @@ def summarize_run(path):
         ),
         server_gpu_time=None,
         charged_currency=None,
+    )
+
+
+def summarize_run(path):
+    if json.loads((path / "run.json").read_text())["status"] != "COMPLETED":
+        raise ValueError(f"Evaluation still open at {path}")
+    protocol, episodes = input_result(path)
+    pop = protocol["population"]
+    if len(pop["tasks"]) != len(episodes):
+        raise ValueError(f"Incomplete evaluation packets at {path}")
+    billing = run_accounting(path, episodes)
+    results = packet_measurements(
+        protocol["arm"], pop, episodes, billing["policy_load_ms_per_attempt"]
+    )
+    return dict(path=str(path.resolve()), **results, **billing)
+
+
+def summarize_dev_subset(path, roster, arm, *, expected_comparison=None):
+    """Select entire groups from an already paid natural DEV run of this frozen policy."""
+    if json.loads((path / "run.json").read_text())["status"] != "COMPLETED":
+        raise ValueError("Reference readout is incomplete")
+    protocol, packets = input_result(path)
+    parent = protocol["population"]
+    if (
+        protocol.get("readout_schedule") != "inline"
+        or (expected_comparison is not None and protocol["comparison"] != expected_comparison)
+        or {k: v for k, v in protocol["arm"].items() if k != "name"}
+        != {k: v for k, v in arm.items() if k != "name"}
+    ):
+        raise ValueError("Reference readout differs from the bound policy or Reader")
+    _, selected = select_dev_records(protocol, packets, roster)
+    accounting = run_accounting(path, packets)
+    results = packet_measurements(arm, roster, selected, accounting["policy_load_ms_per_attempt"])
+    return dict(
+        kind="existing_dev_native_group_subset",
+        source_run=str(path.resolve()),
+        source_tasks=len(parent["tasks"]),
+        source_settled_calls=accounting["actual_reader_calls"],
+        source_policy_load_ms_per_attempt=accounting["policy_load_ms_per_attempt"],
+        new_reader_calls=0,
+        task_ids=list(selected),
+        **results,
     )
 
 

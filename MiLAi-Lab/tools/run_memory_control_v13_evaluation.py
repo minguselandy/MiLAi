@@ -335,7 +335,8 @@ def transfer(args):
     arm = json.loads(args.arm.read_text())
     conditions = [(2048, "frozen", arm)]
     if (
-        arm["policy"] in {"pretrained_checkpoint", "qrag_milai"}
+        not args.budgets_only
+        and arm["policy"] in {"pretrained_checkpoint", "qrag_milai"}
         and arm.get("precision", "learned") == "learned"
     ):
         conditions.extend((2048, level, dict(arm, precision=level)) for level in ("R2", "R3_only"))
@@ -350,20 +351,52 @@ def transfer(args):
             raise ValueError("Transfer arm differs from the frozen readout")
         save(peer.arm, policy)
         if budget == 2048 and level == "frozen" and args.reference_run is not None:
-            existing = json.loads((args.reference_run / "protocol.json").read_text())
-            if (
-                existing["population"] != json.loads(peer.population.read_text())
-                or existing["arm"] != arm
-                or existing.get("readout_schedule") != "inline"
-                or json.loads((args.reference_run / "run.json").read_text())["status"]
-                != "COMPLETED"
-            ):
-                raise ValueError("Reference readout differs from the exact frozen natural DEV arm")
+            from milai_lab.runners.memory_control_outcome_run import comparison_protocol
+            from report_memory_control_v13_deployment import summarize_dev_subset
+
+            source_dataset = MemoryControlDataset(
+                args.data, observation_protocol=DELTA_NAVIGATION, numeric_observation=True
+            )
+            measured = summarize_dev_subset(
+                args.reference_run,
+                json.loads(peer.population.read_text()),
+                arm,
+                expected_comparison=comparison_protocol(source_dataset),
+            )
+            # Keep the original packet root and identify the exact filtered observations.
+            # No second set of physical episode or billing receipts is created.
+            save(peer.output / "source-subset.json", measured)
             results[f"{budget}-{level}"] = str(args.reference_run.resolve())
         else:
             evaluate(peer)
             results[f"{budget}-{level}"] = str(peer.output.resolve())
     save(args.output / "readouts.json", results)
+    from milai_lab.scorers.memory_control_episode_metrics import (
+        input_result,
+        paired_budget_response_metrics,
+        paired_level_response_metrics,
+    )
+    from report_memory_control_v13_deployment import summarize_run
+
+    base, packets = input_result(Path(results["2048-frozen"]))
+    roster = json.loads((args.rosters / "curve-2048.json").read_text())
+    base = {**base, "population": roster, "arm": arm}
+    anchor = {t["task_id"]: packets[t["task_id"]] for t in roster["tasks"]}
+    comparisons = {}
+    for condition, path in results.items():
+        if condition == "2048-frozen":
+            continue
+        protocol, observed = input_result(Path(path))
+        metric = (
+            paired_level_response_metrics
+            if protocol["population"]["material_budget"] == 2048
+            else paired_budget_response_metrics
+        )
+        comparisons[condition] = dict(
+            contrast=metric(base, protocol, anchor, observed, repeats=5000, seed=20261125),
+            deployment=summarize_run(Path(path)),
+        )
+    save(args.output / "paired-responses.json", comparisons)
 
 
 if __name__ == "__main__":
@@ -374,6 +407,11 @@ if __name__ == "__main__":
     ev = sub.add_parser("evaluate")
     tr = sub.add_parser("transfer")
     tr.add_argument("--rosters", type=Path, required=True)
+    tr.add_argument(
+        "--budgets-only",
+        action="store_true",
+        help="Evaluate the frozen practical comparator only at the held budgets",
+    )
     tr.add_argument(
         "--reference-run",
         type=Path,

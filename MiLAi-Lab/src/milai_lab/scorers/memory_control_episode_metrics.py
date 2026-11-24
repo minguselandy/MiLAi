@@ -368,6 +368,45 @@ def matching_derived_dev(left: dict[str, Any], right: dict[str, Any]) -> bool:
     return parent_link and all(left.get(key) == right.get(key) for key in standardized)
 
 
+def select_dev_records(protocol, episodes, roster):
+    """Project a completed natural DEV allocation onto an ordered set of whole native groups."""
+    parent = protocol["population"]
+    if (
+        parent.get("role") != "dev"
+        or roster.get("role") != "dev"
+        or parent.get("v13_role") not in {"curve", "tune"}
+        or roster.get("v13_role") not in {"curve", "tune"}
+        or (roster.get("v13_role") == "tune" and parent.get("v13_role") != "tune")
+        or any(
+            parent.get(k) != roster.get(k)
+            for k in (
+                "protocol",
+                "dataset_run_id",
+                "seed",
+                "material_budget",
+                "primary_quality",
+                "terminal_quality_failures",
+            )
+        )
+    ):
+        raise ValueError("Cannot project a different role, dataset, budget or Reader seed")
+    if {task["task_id"] for task in parent["tasks"]} != episodes.keys():
+        raise ValueError("Reference run lacks registered task packets")
+    groups = {(t["dataset"], t["native_group"]) for t in roster["tasks"]}
+    admitted = [t for t in parent["tasks"] if (t["dataset"], t["native_group"]) in groups]
+    ids = [t["task_id"] for t in admitted]
+    if not ids or len(ids) != len(set(ids)) or admitted != roster["tasks"]:
+        raise ValueError("Reference does not contain the same ordered whole native groups")
+    exclusions = {
+        str(i): parent["predeclared_unevaluable_tasks"][str(i)]
+        for i in ids
+        if str(i) in parent.get("predeclared_unevaluable_tasks", {})
+    }
+    if exclusions != roster.get("predeclared_unevaluable_tasks", {}):
+        raise ValueError("Reference uses a different unscorable-task mask")
+    return {**protocol, "population": roster}, {i: episodes[i] for i in ids}
+
+
 def paired_repeat_measurements(
     primary: Path, repeated: Path, *, repeats: int, seed: int,
 ) -> dict[str, Any]:
@@ -640,6 +679,33 @@ def paired_budget_response_metrics(
         seed=seed,
     )
     return {**metrics, "reference_budget": base_budget, "held_budget": held_budget}
+
+
+def paired_level_response_metrics(
+    reference_protocol, fixed_protocol, reference, fixed, *, repeats=5000, seed=20261125
+):
+    """Compare the same frozen controller with one legal READ level restricted."""
+    base, constrained = reference_protocol["arm"], fixed_protocol["arm"]
+    level = constrained.get("precision")
+    if (
+        reference_protocol["population"]["role"] != "dev"
+        or level not in {"R2", "R3_only"}
+        or base.get("precision", "learned") != "learned"
+        or constrained != {**base, "precision": level}
+        or reference_protocol["population"] != fixed_protocol["population"]
+        or reference_protocol["comparison"] != fixed_protocol["comparison"]
+    ):
+        raise ValueError("A precision ablation requires one common natural DEV policy and menu")
+    label = base.get("seed")
+    return _paired_metrics(
+        reference_protocol["population"],
+        (fixed,),
+        (reference,),
+        (label,),
+        (label,),
+        repeats=repeats,
+        seed=seed,
+    )
 
 
 def _paired_metrics(
