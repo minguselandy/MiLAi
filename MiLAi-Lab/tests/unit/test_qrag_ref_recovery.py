@@ -192,3 +192,17 @@ def test_terminal_diagnostic_uses_matched_legal_edges_and_frozen_trigger(tmp_pat
     )
     assert fit["twice_q1"]["both_residuals_positive_fraction"] == 1.0
     assert fit["twice_q1"]["mean_residuals"] == [2.25, 2.0]
+
+
+def test_progress_reads_only_complete_validation_points(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "scripts"))
+    result = importlib.import_module("qrag_ref_result")
+    logs = tmp_path / "tb_logs"
+    logs.mkdir()
+    row = {"optimizer_updates": 0, "gt_train_return": 0.0, "gt_dev_return": 0.5}
+    path = logs / "reference-curve.jsonl"
+    path.write_bytes((json.dumps(row) + "\n" + '{"optimizer_updates":100').encode())
+    assert result.measured_curve(tmp_path) == [row]
+    assert path.read_bytes().endswith(b":100")
+    with pytest.raises(ValueError, match="incomplete"):
+        result.complete_curve(tmp_path)

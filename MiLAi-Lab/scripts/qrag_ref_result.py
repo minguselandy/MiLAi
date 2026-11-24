@@ -3,6 +3,7 @@
 import argparse
 import fcntl
 import json
+import math
 import os
 import select
 import subprocess
@@ -12,12 +13,23 @@ from pathlib import Path
 import yaml
 
 
+def measured_curve(run):
+    # An observer may read between the training process's write and final newline.
+    raw = (run / "tb_logs/reference-curve.jsonl").read_bytes()
+    complete = raw[: raw.rfind(b"\n") + 1]
+    rows = [json.loads(line) for line in complete.splitlines()]
+    if not rows or [r["optimizer_updates"] for r in rows] != list(range(0, 100 * len(rows), 100)):
+        raise ValueError("Expected the measured prefix of the official validation schedule")
+    if rows[-1]["optimizer_updates"] > 10_000 or any(
+        not math.isfinite(r[k]) for r in rows for k in ("gt_train_return", "gt_dev_return")
+    ):
+        raise ValueError("Invalid recorded REF return or step")
+    return rows
+
+
 def complete_curve(run):
-    curve = [
-        json.loads(line)
-        for line in (run / "tb_logs/reference-curve.jsonl").read_text().splitlines()
-    ]
-    if [r["optimizer_updates"] for r in curve] != list(range(0, 10001, 100)):
+    curve = measured_curve(run)
+    if curve[-1]["optimizer_updates"] != 10_000:
         raise ValueError("The official 10,000-update validation schedule is incomplete")
     return curve
 
@@ -161,6 +173,128 @@ def begin_validation(run, roster=None):
         os.fsync(launches.fileno())
 
 
+def draw_gt_history(ax, curve, train_label, dev_label, *, markers=False):
+    x = [r["optimizer_updates"] for r in curve]
+    train = ax.plot(
+        x,
+        [r["gt_train_return"] for r in curve],
+        color="#a65e26",
+        linewidth=1.9,
+        linestyle="--",
+        marker="s" if markers else None,
+        markerfacecolor="white",
+        markersize=6,
+        label=train_label,
+    )[0]
+    dev = ax.plot(
+        x,
+        [r["gt_dev_return"] for r in curve],
+        color="#126782",
+        linewidth=2.4,
+        marker="o" if markers else None,
+        markersize=5,
+        label=dev_label,
+    )[0]
+    return train, dev
+
+
+def plot_progress(run):
+    from matplotlib import font_manager, rc_context
+    from matplotlib.backends.backend_agg import FigureCanvasAgg
+    from matplotlib.figure import Figure
+    from matplotlib.ticker import MaxNLocator
+
+    curve = measured_curve(run)
+    latest = curve[-1]["optimizer_updates"]
+    installed = {f.name for f in font_manager.fontManager.ttflist}
+    font = next(
+        (n for n in ("Noto Sans CJK SC", "WenQuanYi Micro Hei", "SimHei") if n in installed), None
+    )
+    cn = font is not None
+    with rc_context({"font.family": font or "DejaVu Sans", "axes.unicode_minus": False}):
+        fig = Figure(figsize=(8.6, 4.9), facecolor="white")
+        FigureCanvasAgg(fig)
+        ax = fig.add_axes([0.09, 0.21, 0.86, 0.54])
+        fig.text(
+            0.09,
+            0.94,
+            "Q-RAG Reference  ·  MuSiQue-Ans",
+            fontsize=18,
+            weight="bold",
+            color="#1b2e39",
+            va="top",
+        )
+        cn_caption = (
+            f"已验证 {latest:,} / 10,000 次优化器更新 "
+            f"({latest / 100:.1f}%)  ·  {len(curve)} 个实测检查点"
+        )
+        en_caption = (
+            f"{latest:,} / 10,000 optimizer updates validated ({latest / 100:.1f}%)"
+            f" · {len(curve)} measured checkpoints"
+        )
+        caption = cn_caption if cn else en_caption
+        fig.text(0.09, 0.862, caption, fontsize=10.5, color="#455a64", va="top")
+        train, dev = draw_gt_history(
+            ax,
+            curve,
+            "训练平均 GT 回报" if cn else "Mean train GT return",
+            "DEV 全证据覆盖率" if cn else "DEV support coverage",
+            markers=True,
+        )
+        fig.legend(
+            handles=[train, dev],
+            loc="upper left",
+            bbox_to_anchor=(0.087, 0.807),
+            ncol=2,
+            frameon=False,
+            fontsize=10,
+            borderaxespad=0,
+            handlelength=2.6,
+        )
+        ax.set_axisbelow(True)
+        ax.grid(axis="y", color="#d6dfe2", linewidth=0.7)
+        ax.spines[["top", "right"]].set_visible(False)
+        for side in ("bottom", "left"):
+            ax.spines[side].set_color("#afbec4")
+        ax.tick_params(labelsize=10, color="#adbcc2", labelcolor="#3b505c")
+        ax.set_xlabel("优化器更新次数" if cn else "Optimizer updates", fontsize=11)
+        ax.set_ylabel("均值" if cn else "Mean", fontsize=11)
+        margin = max(1, latest * 0.023)
+        ax.set_xlim(-margin, max(latest, 1) + margin)
+        maxval = max(max(r["gt_train_return"], r["gt_dev_return"]) for r in curve)
+        top = min(1.0, max(0.1, math.ceil((maxval + 0.025) * 10) / 10))
+        ax.set_ylim(-0.025 * top, top)
+        ax.yaxis.set_major_locator(MaxNLocator(nbins=5))
+        if len(curve) <= 12:
+            ax.set_xticks([r["optimizer_updates"] for r in curve])
+        latest_score = curve[-1]["gt_dev_return"]
+        n = int(curve[-1].get("dev_episodes", 300))
+        ax.annotate(
+            f"{round(n * latest_score)}/{n}",
+            xy=(latest, latest_score),
+            xytext=(-6, 9 if latest_score < 0.91 * top else -14),
+            textcoords="offset points",
+            ha="right",
+            color="#07556a",
+            fontsize=9,
+        )
+        note = (
+            "训练回报在首次收齐证据时给分。额外读取会降低奖励。"
+            "DEV 指固定 300 题中收齐全部支持证据的比例。"
+            if cn
+            else (
+                "Training rewards penalize extra reads at first completion. "
+                "DEV measures full support coverage on the same 300 questions."
+            )
+        )
+        fig.text(0.09, 0.050, note, fontsize=9 if cn else 8.6, color="#455a64", va="bottom")
+        target = run / "reference-learning-curve-progress.png"
+        tmp = target.with_suffix(".part")
+        fig.savefig(tmp, dpi=165, format="png")
+        tmp.replace(target)
+    return target
+
+
 def plot_curve(run, curve, actors):
     from matplotlib.backends.backend_agg import FigureCanvasAgg
     from matplotlib.figure import Figure
@@ -168,9 +302,7 @@ def plot_curve(run, curve, actors):
     fig = Figure(figsize=(10.2, 4.3), layout="constrained")
     FigureCanvasAgg(fig)
     ax, score = fig.subplots(1, 2, gridspec_kw={"width_ratios": [2.0, 1.0]})
-    xs = [r["optimizer_updates"] for r in curve]
-    ax.plot(xs, [r["gt_train_return"] for r in curve], color="0.62", label="Train")
-    ax.plot(xs, [r["gt_dev_return"] for r in curve], color="#126782", label="Fixed dev (300)")
+    draw_gt_history(ax, curve, "Train (extra-read penalty)", "DEV coverage (300)")
     ax.set(
         xlabel="Optimizer updates",
         ylabel="Mean GT episode return",
@@ -401,6 +533,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", required=True, type=Path)
     parser.add_argument("--roster", type=Path)
+    parser.add_argument("--plot-progress", action="store_true")
     parser.add_argument("--prepare-terminal", action="store_true")
     parser.add_argument("--begin-validation", action="store_true")
     parser.add_argument("--archive-terminal", type=Path, metavar="BASE_SAFETENSORS")
@@ -408,6 +541,9 @@ if __name__ == "__main__":
     parser.add_argument("--follow-pid", type=int)
     parser.add_argument("--start-ticks", type=int)
     args = parser.parse_args()
+    if args.plot_progress:
+        print(plot_progress(args.run))
+        raise SystemExit(0)
     if args.follow_pid is not None:
         finalize_after_pid(args.run.resolve(), args.follow_pid, args.start_ticks)
         raise SystemExit(0)
