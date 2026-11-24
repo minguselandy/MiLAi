@@ -57,6 +57,28 @@ QASPER 出现 1 次严格反转，即一个状态中读取优于停止，另一�
 
 每个来源的得分、用量、覆盖数见 `rule-calibration-costs.json`。选择依据见 `baselines/rule-selection.json`。
 
+## 冻结策略在自然 DEV 上的表现
+
+在与 CALIBRATION 原生组互斥的 150 题曲线集上，B1 四读和冻结 GTE 两读各运行 150 个完整 episode。下表使用原生 MuSiQue pair、QASPER answer F1 和 PersonaMem MCQ 准确率。时延包含实际策略加载摊销。
+
+| 策略 | MuSiQue | QASPER | PersonaMem | 三源宏质量 | Reader 输入 tokens | 全题 p50 / p95 秒 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| B1 四读 | 16.00 | 29.27 | 24.00 | 23.09 | 181,788 | 1.59 / 2.32 |
+| 冻结 GTE 两读 R2 | 12.00 | 25.79 | 16.00 | 17.93 | 122,269 | 1.00 / 1.55 |
+| 标注证据诊断策略 G | 23.07 | 37.57 | 22.00 | 27.55 | 91,061 | 0.70 / 1.95 |
+
+G 的读取选择使用离线证据标注，仅用于定位质量损失。对两个部署候选按来源配对重采样 5,000 次，冻结 GTE 相对 B1 的宏质量差为 −5.16 分，95% 区间 [−10.44, −0.31]；Reader 输入节省 32.74%，区间 [30.34%, 34.99%]。选择 2 次读取的冻结 GTE 在校准集上质量更高，在这批自然 DEV 题上则以质量换取较低 Reader 成本。605 题 TUNE 完整读出将用于实际基线选择。结果见 `natural-dev150-baseline-costs.json`、`natural-dev150-frozen_gte-vs-rule.json`。
+
+逐题重放还比较了完整证据集合的可达性。表中计数为在给定数量的 BM25 候选上，用全部合法 R2/R3 跨度的并集覆盖某一个完整标注集合的题数。这是施加材料预算与操作数限制前的上界。八候选一列已与 150 条实际 G 运行的逐题覆盖标记核对。其余两列只做离线检索诊断。
+
+| 来源 | 有完整标注的题 | 前 8 | 前 16 | 前 32 | G 实际交付完整集合后原生质量 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| MuSiQue | 25 | 10 | 15 | 25 | 31.01 分，10 对 |
+| QASPER | 39 | 27 | 34 | 37 | 50.02 分，27 题 |
+| PersonaMem | 48 | 8 | 10 | 20 | 50.00 分，8 题 |
+
+在 48 道具备完整标注的 PersonaMem 题中，40 道的证据在八候选时不可达。QASPER 在八候选时有 27 道可达，B1 实际交付了其中 12 道的完整集合，冻结 GTE 交付了 8 道。由此可以分开考察召回缺口、控制器选择及给定已交付证据后的 Reader 表现。后续同骨干和采样主表沿用共同的八候选设置。重放产物见 `natural-dev150-reachability.json`。
+
 ## 采集、计量与复现
 
 ```bash
@@ -92,6 +114,6 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config conf
 
 ## 存储和未完成工作
 
-开始执行时持久卷 `/cra` 的普通可用空间为 0，物理剩余约 610 MiB。模型与大型中间件写入位于 `/cra/milai-experiments/v13-qrag/staging` 的专用 36 GiB tmpfs，上限从 24 GiB 调整为 36 GiB，为训练恢复文件原子替换预留空间。该目录目前仅跨进程保留，服务器重启会清空。持久卷后来出现额外物理空间，三套基础权重已保存到实验根的 `models/`，其中 GTE 交互模型、GTE embedding、E5-large 分别可读取 140、138、392 个张量。确认库的持久副本位于 `fresh-sources/native-confirm/memory_control.sqlite3`。复读结果见 `persistent-assets.json`。小型收据、数据角色与日志持续写入持久目录。REF 第 100 次更新时的最佳 actor 保存于 `ref/actor-archives/first-trained-best.zip`，恢复需同一持久目录下的 E5 基础模型。S1 训练路径已绑定到持久目录 `weights/s1`，DQ/PQ 的结果包及正式模型已分别指定持久目录 `collection`、`weights/round-models`。REF 工作检查点及 QR 正式训练的原始转移仍使用暂存卷。完整检查点归档和长期留存需要持久容量。
+开始执行时持久卷 `/cra` 的普通可用空间为 0，物理剩余约 610 MiB。模型与大型中间件写入位于 `/cra/milai-experiments/v13-qrag/staging` 的专用 36 GiB tmpfs，上限从 24 GiB 调整为 36 GiB，为训练恢复文件原子替换预留空间。该目录目前仅跨进程保留，服务器重启会清空。持久卷后来出现额外物理空间，三套基础权重已保存到实验根的 `models/`，其中 GTE 交互模型、GTE embedding、E5-large 分别可读取 140、138、392 个张量。确认库的持久副本位于 `fresh-sources/native-confirm/memory_control.sqlite3`。复读结果见 `persistent-assets.json`。小型收据、数据角色与日志持续写入持久目录。REF 第 100 次更新时的最佳 actor 保存于 `ref/actor-archives/first-trained-best.zip`，恢复需同一持久目录下的 E5 基础模型。S1 训练路径已绑定到持久目录 `weights/s1`，DQ/PQ 的结果包及正式模型已分别指定持久目录 `collection`、`weights/round-models`。QR 正式训练原始收据与检查点已在首个正式账位前绑定到持久目录 `qr-11/native-receipts` 和 `weights/qr-11`。REF 工作检查点继续使用暂存卷，已发布 actor 的持久副本以及仍在进程内的状态分别记录。完整检查点归档和长期留存需要持久容量。
 
 当前尚待完成正式 S1、REF 完整曲线、QR 和各配对臂 6k/12k/24k 学习曲线、冻结数据多种子、按结果触发的额外采样对照，以及最终独立确认。现阶段没有据此选择最终模型。
