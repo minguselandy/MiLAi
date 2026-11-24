@@ -836,6 +836,7 @@ def request_reader(
     host: DatasetReader,
     wire: dict[str, Any],
     capacity: dict[str, Any],
+    *, on_metered_request: Callable[[], None] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     event: dict[str, Any] = {}
     sent = False
@@ -844,7 +845,10 @@ def request_reader(
     def record(item: dict[str, Any]) -> None:
         nonlocal sent
         if item["event"] == "vllm_request":
+            became_sent = bool(item.get("request_sent", False)) and not sent
             sent |= item.get("request_sent", False)
+            if became_sent and on_metered_request is not None:
+                on_metered_request()
         if item["event"] in {"vllm_response", "vllm_error"}:
             event.update(
                 {

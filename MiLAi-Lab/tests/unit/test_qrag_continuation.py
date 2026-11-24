@@ -217,3 +217,93 @@ def test_phase_drains_online_group_before_admitting_reader(tmp_path):
     change.join(3)
     reader.join(3)
     assert state(gate)["allow"] == ["reader"] and reader_entered.is_set()
+
+
+def test_quote_distinguishes_cached_exposure_from_shared_physical_calls(tmp_path):
+    from milai_lab.runners.control_policy_iteration import Receipts, TerminalJob, write_gzip
+
+    wire = {"seed": 11, "messages": ["same terminal packet"]}
+    task = {"id": 1}
+    jobs = [TerminalJob(task, None, None, 11, "a"), TerminalJob(task, None, None, 11, "b")]
+    prepared = [({"reader_wire": wire}, True) for _ in jobs]
+    local = Receipts(tmp_path / "arm", None, None)
+    cost = local.quote(jobs, prepared)
+    assert cost == {
+        "independent_feedback_units": 1,
+        "expected_arm_exposure": 1,
+        "expected_new_requests": 1,
+        "exposure_upper_bound": 2,
+    }
+    peer = tmp_path / "peer"
+    for job in jobs:
+        write_gzip(
+            peer / (job.key + ".json.gz"),
+            dict(
+                task_id=1,
+                reader_wire=wire,
+                grade={"status": "scored"},
+                actual_requests=1,
+                feedback_exposure=1,
+            ),
+        )
+    reused = Receipts(tmp_path / "other_arm", None, None, [peer])
+    cost = reused.quote(jobs, prepared)
+    assert cost == {
+        "independent_feedback_units": 1,
+        "expected_arm_exposure": 2,
+        "expected_new_requests": 0,
+        "exposure_upper_bound": 2,
+    }
+
+
+def test_source_pool_caps_selected_roots_and_corrects_source_exposure():
+    import random
+    import sqlite3
+
+    from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
+    from milai_lab.runners.control_acquisition_pool import NativeRootPool
+
+    db = sqlite3.connect(":memory:")
+    db.execute("CREATE TABLE experiment_tasks (dataset,native_group,id,experiment_role,clean_role)")
+    source_rows = [
+        (s, f"g{g}", k * 1000 + g * 12 + i, "train", "train")
+        for k, s in enumerate((MUSIQUE, QASPER, PERSONA))
+        for g in range(20)
+        for i in range(12)
+    ]
+    db.executemany("INSERT INTO experiment_tasks VALUES (?,?,?,?,?)", source_rows)
+    pool = NativeRootPool(db)
+    # Every not-yet-selected task can enter a slate until that group exhausts its six slots.
+    assert len(pool.available[PERSONA]["g0"]) == 12
+    for i in range(6):
+        pool.accept(dict(source=PERSONA, native_group_id="g0", task_id=2000 + i))
+    assert "g0" not in pool.available[PERSONA]
+    for i in range(94):
+        slate, _ = pool.slate(8, random.Random(i))  # noqa: S311 -- repeatable pool test
+        s, g, t = slate[0]
+        pool.accept(dict(source=s, native_group_id=g, task_id=t))
+    assert pool.source_counts == {MUSIQUE: 60, QASPER: 30, PERSONA: 10}
+    db.close()
+
+
+def test_interrupted_paid_feedback_keeps_confirmed_charge_and_unknown_quality(tmp_path):
+    from milai_lab.datasets.memory_control_report import write_json
+    from milai_lab.runners.control_policy_iteration import Receipts, read_gzip
+
+    write_json(
+        tmp_path / "known.inflight",
+        {
+            "metered_request_recorded": True,
+            "feedback_exposure": 1,
+            "actual_requests": 1,
+            "ledger_before": 4,
+            "ledger_after": 5,
+        },
+    )
+    write_json(tmp_path / "uncertain.inflight", {"feedback_exposure": 0, "actual_requests": 0})
+    receipts = Receipts(tmp_path, None, None)
+    assert (receipts.calls, receipts.new_requests) == (2, 1)
+    known = read_gzip(receipts.path("known"))
+    unknown = read_gzip(receipts.path("uncertain"))
+    assert known["actual_requests"] == 1 and known["ledger_after"] == 5 and "grade" not in known
+    assert unknown["actual_requests"] is None and unknown["feedback_exposure"] == 1

@@ -226,7 +226,11 @@ def train(args):
         dataset_run_id=dataset.run_id,
         gamma=1.0,
         batch_unit="clean native task trajectories",
-        dtype="CUDA BF16 autocast, fp32 model and Adam state",
+        dtype=(
+            "CUDA BF16 autocast, fp32 model and Adam state"
+            if model.device.type == "cuda"
+            else "CPU fp32 model and Adam state"
+        ),
         checkpoint_type="evaluation_weights",
         raw_receipts_path=str(args.output.absolute() / "receipts"),
         native_episode_summaries_path=str((args.output / "episodes").resolve()),
