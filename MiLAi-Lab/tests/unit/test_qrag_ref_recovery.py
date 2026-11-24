@@ -151,3 +151,44 @@ def test_terminal_rehydration_and_interrupted_evaluation(tmp_path, monkeypatch):
     final_protocol.write_text(json.dumps(protocol))
     with pytest.raises(ValueError, match="Retrieval settings"):
         settle.summarize(run, roster, [])
+
+
+def test_terminal_diagnostic_uses_matched_legal_edges_and_frozen_trigger(tmp_path, monkeypatch):
+    import random
+
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "scripts"))
+    analysis = importlib.import_module("qrag_ref_td_diagnostic")
+    retrieval = importlib.import_module("qrag_ref_retrieval")
+    fact_ids = {1, 3}
+    sample = {"sf_idx": [1, 1, 3], "chunks": ["chunk"] * 8}
+    rng = random.Random(42)  # noqa: S311 -- deterministic fixture
+    prefix, pos, neg = analysis.prefix_pair(sample, rng)
+    assert len(set(prefix)) == 3 and pos not in prefix and neg not in prefix
+    assert (
+        not fact_ids <= set(prefix)
+        and fact_ids <= set(prefix) | {pos}
+        and not fact_ids <= set(prefix) | {neg}
+    )
+    assert analysis.prefix_pair({"sf_idx": [0, 1, 2, 3], "chunks": ["x"] * 4}, rng) is None
+    for label, gt in (("decline", 0.1), ("gain", 0.8)):
+        run = tmp_path / label
+        run.mkdir()
+        (run / "config.yaml").write_text("checkpoint_dir: /tmp/fixture-ref\nseed: 42")
+        curve = [
+            {"optimizer_updates": i, "gt_dev_return": (0.5 if i == 0 else gt)}
+            for i in range(0, 601, 100)
+        ]
+        retrieval.register(run, run / "optional-initial-index.json", tmp_path / "base", curve)
+        designs = [
+            json.loads((run / "retrieval" / s / "actor-binding.json").read_text())[
+                "terminal_td_probe"
+            ]
+            for s in retrieval.STAGES
+        ]
+        assert designs[0] == designs[1] == designs[2]
+        assert designs[0]["enabled"] == (label == "decline") and designs[0]["pairs"] == 32
+    fit = analysis.target_fit(
+        [{"twice_q1": [3.0, 2.0], "twice_q2": [2.0, 1.0], "terminal_rewards": [0.75, 0.0]}]
+    )
+    assert fit["twice_q1"]["both_residuals_positive_fraction"] == 1.0
+    assert fit["twice_q1"]["mean_residuals"] == [2.25, 2.0]

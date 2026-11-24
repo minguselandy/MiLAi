@@ -106,6 +106,18 @@ def register(run, initial_index, base, curve):
             or origin["envs"]["positions_processor"] != cfg["envs"]["positions_processor"]
         ):
             raise ValueError("Recorded zero-update origin and retained official E5 recipe differ")
+    # Predeclare the post-fit diagnostic only for a persisting GT drop on the
+    # fixed task roster. These TRAIN observations do not enter model selection.
+    initial_gt = curve[0]["gt_dev_return"]
+    design = {
+        "enabled": bool(
+            curve[-1]["gt_dev_return"] < initial_gt
+            and np.mean([r["gt_dev_return"] for r in curve[-5:]]) < initial_gt
+        ),
+        "seed": 20261125,
+        "pairs": 32,
+        "trigger": "Final GT and mean of final five GT validations both below initialization",
+    }
     spec = {
         "initial": (0, None, None),
         "best": (best["optimizer_updates"], "best", "best"),
@@ -125,6 +137,7 @@ def register(run, initial_index, base, curve):
             else None,
             "durable_archive": str(run / "actors" / f"{archive}.zip") if archive else None,
             "initial_source": initial if label == "initial" else None,
+            "terminal_td_probe": design,
         }
         metadata = directory / "actor-binding.json"
         if metadata.is_file() and read(metadata) != binding:
@@ -268,6 +281,60 @@ def attempts(directory):
     }
 
 
+def probe_summary(run, stage, binding, prior_design, prior_cases):
+    design = binding.get("terminal_td_probe")
+    if not design or not design["enabled"]:
+        return None, prior_design, prior_cases
+    file = run / "retrieval" / stage / "terminal-td-probe.json"
+    probe = read(file)
+    cases = [
+        (r["train_id"], r["prefix"], r["actions"], r["terminal_rewards"]) for r in probe["pairs"]
+    ]
+    if (
+        len(cases) != design["pairs"]
+        or probe["optimizer_steps"]
+        or probe["reader_calls"]
+        or probe["design"] != design
+        or probe["optimizer_updates"] != binding["optimizer_updates"]
+        or (prior_design is not None and prior_design != design)
+        or (prior_cases is not None and prior_cases != cases)
+    ):
+        raise ValueError("Terminal target diagnostic changed its matched source pairs or weights")
+    return (
+        {**{k: v for k, v in probe.items() if k != "pairs"}, "per_pair_result": str(file)},
+        design,
+        cases,
+    )
+
+
+def evaluation_q_summary(rows):
+    values = [
+        r
+        for r in rows
+        if len(r.get("q_values", [])) == len(r["pred_idx"])
+        and all(math.isfinite(q) for q in r["q_values"])
+    ]
+    if not values:
+        return {"observed": 0}
+    roots = [r["q_values"][0] for r in values]
+    gaps = []
+    for r in values:
+        gt = set(r["sf_idx"])
+        gaps.append(int(r["pred_idx"][0] in gt))
+    success = [r["q_values"][0] for r in values if r["return"]]
+    failure = [r["q_values"][0] for r in values if not r["return"]]
+    return {
+        "observed": len(values),
+        "missing_or_nonfinite": len(rows) - len(values),
+        "first_action_support_rate": float(np.mean(gaps)),
+        "chosen_root_q_median": float(np.median(roots)),
+        "chosen_root_q_sd": float(np.std(roots)),
+        "mean_root_q_on_completion": float(np.mean(success)) if success else None,
+        "mean_root_q_on_failure": float(np.mean(failure)) if failure else None,
+        "scope": "Deployed online scores of greedy selected TUNE chunks.",
+    }
+
+
 def paired_evaluation(run, roster, curve):
     ids = sorted(roster["groups"])
     if len(ids) != 300 or len(set(ids)) != 300 or roster["role"] != "TUNE" or roster["n"] != 300:
@@ -278,10 +345,16 @@ def paired_evaluation(run, roster, curve):
     common = None
     best = max(curve, key=lambda r: r["gt_dev_return"])
     checkpoints = {"initial": curve[0], "best": best, "final": curve[-1]}
+    prior_design = prior_cases = None
+    first_design = None
     for stage in STAGES:
         path = run / "retrieval" / stage
         witness = read(path / "native-protocol.json")
         binding = read(path / "actor-binding.json")
+        if stage == "initial":
+            first_design = binding.get("terminal_td_probe")
+        elif binding.get("terminal_td_probe") != first_design:
+            raise ValueError("Gradient probe trigger differs between actors")
         if (
             witness["stage"] != stage
             or binding["stage"] != stage
@@ -304,11 +377,27 @@ def paired_evaluation(run, roster, curve):
         values = np.asarray([grade_row(indexed[i]) for i in ids], dtype=np.float64)
         arrays[stage] = values
         means = dict(zip(SCORES, values.mean(axis=0).tolist(), strict=True))
+        probe, prior_design, prior_cases = probe_summary(
+            run, stage, binding, prior_design, prior_cases
+        )
+        resource = attempts(path)
+        probe_seconds = probe["assigned_gpu_seconds"] if probe else 0.0
+        resource.update(
+            measured_terminal_probe_gpu_seconds=probe_seconds,
+            one_gpu_retrieval_hours_excluding_probe=(
+                resource["one_gpu_job_hours"] - probe_seconds / 3600
+                if resource["unsettled_invocations"] == 0
+                and resource["one_gpu_job_hours"] >= probe_seconds / 3600
+                else None
+            ),
+        )
         reports[stage] = {
+            "terminal_gradient_probe": probe,
+            "chosen_online_q": evaluation_q_summary(items),
             "optimizer_updates": witness["optimizer_updates"],
             "means": means,
             "origin": witness["actor_origin"],
-            "resource": attempts(path),
+            "resource": resource,
             "matches_logged_gt_return": math.isclose(
                 means["gt_return"], checkpoints[stage]["gt_dev_return"], abs_tol=1e-8
             ),
@@ -413,6 +502,11 @@ def complete_stage(directory, roster):
         attempts(directory)
         cfg = read(directory / "actor-binding.json")
         rec = read(directory / "native-protocol.json")
+        if (
+            cfg.get("terminal_td_probe", {}).get("enabled")
+            and not (directory / "terminal-td-probe.json").is_file()
+        ):
+            return False
         if (cfg["stage"], cfg["optimizer_updates"]) != (rec["stage"], rec["optimizer_updates"]):
             return False
         records = [

@@ -268,6 +268,47 @@ def finalize_after_pid(run, pid, start_ticks):
         write_receipt(out, state)
 
 
+def failure_diagnostic_evidence(run, native, curve):
+    root = run.parent.parent.parent
+    cfg = yaml.safe_load((run / "config.yaml").read_text())
+    hyper = cfg.get("algo", {}).get("pqn", {}).get("hyperparams", {})
+    evidence = {
+        "data_and_environment": root / "ref/preflight.json",
+        "fixed_dev_menu_and_support_reachability": root / "ref/fixed-dev-gt-difficulty.json",
+        "matched_terminal_gradient_cpu_readback": root
+        / "ref/reboot-drill/terminal-gradient-implementation/summary.json",
+        "actual_optimizer_measurements": run / "optimizer-progress.jsonl",
+        "real_validation_curve": run / "tb_logs/reference-curve.jsonl",
+        "actual_fit_recipe": run / "config.yaml",
+        "upstream_td_returns_and_twin_mse": root / "reference/Q-RAG/rl/agents/pqn.py",
+        "upstream_feedback_and_termination": root / "reference/Q-RAG/rl/feedback/feedback.py",
+        "native_termination_witness": run / "retrieval/final/native-protocol.json",
+    }
+    probes = (
+        [json.loads(s) for s in evidence["actual_optimizer_measurements"].read_text().splitlines()]
+        if evidence["actual_optimizer_measurements"].is_file()
+        else []
+    )
+    measured = [r["backbone_probe_max_change"] for r in probes if "backbone_probe_max_change" in r]
+    return {
+        "references": {
+            key: {"path": str(path), "present": path.is_file()} for key, path in evidence.items()
+        },
+        "actual_fit_updates": curve[-1]["optimizer_updates"],
+        "observed_backbone_change": max(measured) if measured else None,
+        "observed_optimizer_moment_dtypes": sorted(
+            {str(r["optimizer_moment_dtype"]) for r in probes if r.get("optimizer_moment_dtype")}
+        ),
+        "pqn_parameters": {k: hyper.get(k) for k in ("gamma", "Lambda", "tau", "alpha")},
+        "terminal_stop": native["common_protocol"],
+        "matched_terminal_td_probe": native["actors"]["final"].get("terminal_gradient_probe")
+        is not None,
+        "historical_intermediate_ema_and_gradients": (
+            "Unavailable from the published inference actors"
+        ),
+    }
+
+
 def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
     curve = complete_curve(run)
     from qrag_ref_retrieval import paired_evaluation
@@ -333,6 +374,7 @@ def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
         "matching_recorded_park_intervals": merged,
         "one_gpu_retrieval_job_hours": evaluation_hours,
         "native_retrieval": native,
+        "failure_diagnostic_evidence": failure_diagnostic_evidence(run, native, curve),
         "retrieval_validation_settled_invocations": n_attempts,
         "retrieval_validation_launches": n_launched,
         "unsettled_validation_invocations": unsettled,

@@ -1,8 +1,6 @@
 --- a/eval_retriever.py
 +++ b/eval_retriever.py
-@@ -183,15 +183,22 @@
-     # -----------------------------------------------------------------------
-     agent = PQN(cfg.algo)
+@@ -185,11 +185,18 @@
  
 -    ckpt_filename = "model_last.pt" if cfg.use_last else "model_best.pt"
 -    ckpt_path = os.path.join(cfg.get("checkpoint_dir", cfg.pretrained_path), ckpt_filename)
@@ -28,5 +26,10 @@
 +    if binding_path:
 +        record_protocol(cfg, env_test, binding, witness)
  
-     max_samples = len(env_test.dataset)
-     if not (0 < cfg.num_samples <= max_samples):
+@@ -272,2 +279,6 @@
+     f.close()
++    if (binding_path and cfg.num_samples == max_samples
++            and binding.get("terminal_td_probe", {}).get("enabled")):
++        from qrag_ref_td_diagnostic import run_probe
++        run_probe(agent, cfg, binding)
+     #print(f'E[num_steps] = {np.mean(num_steps)}')
