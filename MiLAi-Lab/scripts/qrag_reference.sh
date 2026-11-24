@@ -67,6 +67,8 @@ train)
     ;;
 evaluate)
     trained=$(realpath "${2:?provide upstream run directory containing config.yaml}")
+    exec {evaluation_lock}>"$trained/.retrieval-evaluation.lock"
+    flock "$evaluation_lock"
     if [[ ! -s "$trained/reference-result.json" ]]; then
         python3 "$project/scripts/qrag_ref_result.py" --prepare-terminal --run "$trained"
         if [[ ! -e "$assets/musique-tune300/roster.json" || ! -e "$assets/e5-large/config.json" ]]; then

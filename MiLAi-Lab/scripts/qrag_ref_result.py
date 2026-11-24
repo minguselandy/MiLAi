@@ -1,9 +1,12 @@
 """Summarize the completed official optimizer schedule and fixed-roster retrieval evaluation."""
 
 import argparse
+import fcntl
 import json
 import os
+import select
 import statistics
+import subprocess
 import time
 from pathlib import Path
 
@@ -167,6 +170,73 @@ def plot_curve(run, curve):
     fig.savefig(run / "reference-learning-curve.png", dpi=160)
 
 
+def finalize_after_pid(run, pid, start_ticks):
+    """Wait on the exact existing trainer. Never restart training or signal it."""
+    if not start_ticks:
+        raise ValueError("A bound Linux process start tick is required")
+    out = run / "terminal-owner.json"
+    with (run / ".terminal-owner.lock").open("a") as owner:
+        fcntl.flock(owner, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fd = os.pidfd_open(pid)
+        try:
+            proc = Path(f"/proc/{pid}")
+            cmd = (proc / "cmdline").read_bytes().split(b"\0")
+            tick = int((proc / "stat").read_text().split()[21])
+            if (
+                tick != start_ticks
+                or b"train_q_rag.py" not in cmd
+                or os.fsencode("logger.log_dir=" + str(run.parent)) not in cmd
+            ):
+                raise ValueError("Finalizer cannot bind this process to the supplied training run")
+            state = {
+                "owner_pid": os.getpid(),
+                "session_id": os.getsid(0),
+                "trainer_pid": pid,
+                "trainer_start_ticks": tick,
+                "upstream_run": str(run),
+                "started_ns": time.time_ns(),
+                "phase": "waiting_for_training_exit",
+            }
+            write_receipt(out, state)
+            poller = select.poll()
+            poller.register(fd, select.POLLIN)
+            poller.poll()
+            elapsed = time.clock_gettime(time.CLOCK_BOOTTIME) - tick / os.sysconf("SC_CLK_TCK")
+        finally:
+            os.close(fd)
+        write_receipt(
+            run.parent / "terminal-process-window.json",
+            {
+                "pid": pid,
+                "elapsed_seconds": elapsed,
+                "exit_code": None,
+                "measurement": "Process start tick to finalizer pidfd exit notification",
+            },
+        )
+        try:
+            complete_curve(run)
+            state.update(phase="retrieval_validation", training_exit_ns=time.time_ns())
+            write_receipt(out, state)
+            launcher = Path(__file__).with_name("qrag_reference.sh")
+            with (run.parent / "retrieval-validation.log").open("a") as log:
+                subprocess.run(  # noqa: S603 -- local evaluator, fixed argv, no shell
+                    [str(launcher), "evaluate", str(run)],
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    check=True,
+                )
+            if not (run / "reference-result.json").is_file() or not all(
+                (run / "actors" / f"{kind}.json").is_file() for kind in ("best", "last")
+            ):
+                raise RuntimeError("Terminal summary or durable actor receipt missing")
+        except Exception as exc:
+            state.update(phase="incomplete", error_type=type(exc).__name__, detail=str(exc))
+            write_receipt(out, state)
+            raise
+        state.update(phase="completed", finished_ns=time.time_ns())
+        write_receipt(out, state)
+
+
 def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
     curve = complete_curve(run)
     rows = [json.loads(line) for line in (run / "eval_seed42.jsonl").read_text().splitlines()]
@@ -177,6 +247,8 @@ def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
     if len(rows) != len(groups) or {r["id"] for r in rows} != groups:
         raise ValueError("Retrieval validation coverage differs from the frozen roster")
     settled = run.parent / "fit-resource.json"
+    if not settled.is_file() and (run.parent / "terminal-process-window.json").is_file():
+        settled = run.parent / "terminal-process-window.json"
     if settled.is_file():
         fit_resource = json.loads(settled.read_text())
         time_scope = "Settled one-GPU process wall"
@@ -259,7 +331,12 @@ if __name__ == "__main__":
     parser.add_argument("--begin-validation", action="store_true")
     parser.add_argument("--archive-terminal", type=Path, metavar="BASE_SAFETENSORS")
     parser.add_argument("--schedule", type=Path, action="append", default=[])
+    parser.add_argument("--follow-pid", type=int)
+    parser.add_argument("--start-ticks", type=int)
     args = parser.parse_args()
+    if args.follow_pid is not None:
+        finalize_after_pid(args.run.resolve(), args.follow_pid, args.start_ticks)
+        raise SystemExit(0)
     if args.archive_terminal:
         archive_terminal(args.run, args.archive_terminal)
         raise SystemExit(0)
