@@ -5,6 +5,7 @@ from __future__ import annotations
 import fcntl
 import json
 import os
+import time
 from contextlib import ExitStack, contextmanager, suppress
 from pathlib import Path
 
@@ -13,6 +14,39 @@ def write_json(path, obj):
     tmp = path.with_suffix(".tmp")
     tmp.write_text(json.dumps(obj, indent=2, allow_nan=False))
     tmp.replace(path)
+
+
+@contextmanager
+def fit_window(output, device):
+    if not str(device).startswith("cuda"):
+        yield
+        return
+    directory = output / "fit-windows"
+    directory.mkdir(exist_ok=True)
+    started_ns = time.time_ns()
+    path = directory / f"{started_ns}-{os.getpid()}.json"
+    record = dict(
+        scope="single_gpu_fit_owner_wall",
+        device=str(device),
+        device_count=1,
+        cuda_visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
+        pid=os.getpid(),
+        started_ns=started_ns,
+        earlier_unmetered_fit=(output / "run.json").exists() and not any(directory.glob("*.json")),
+        state="running",
+    )
+    started = time.monotonic()
+    write_json(path, record)
+    try:
+        yield
+    except BaseException:
+        record["state"] = "failed"
+        raise
+    else:
+        record["state"] = "returned"
+    finally:
+        record.update(wall_seconds=time.monotonic() - started, ended_ns=time.time_ns())
+        write_json(path, record)
 
 
 @contextmanager

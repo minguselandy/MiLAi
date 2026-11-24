@@ -15,6 +15,26 @@ def read(path):
     return json.loads(path.read_text())
 
 
+def fit_window_usage(directory):
+    rows = [read(path) for path in sorted((directory / "fit-windows").glob("*.json"))]
+    closed = [
+        row
+        for row in rows
+        if row["state"] in {"returned", "failed"}
+        and row["device_count"] == 1
+        and row.get("wall_seconds", -1) >= 0
+    ]
+    return dict(
+        measured_hours=sum(row["wall_seconds"] for row in closed) / 3600,
+        complete=bool(rows)
+        and len(closed) == len(rows)
+        and not any(row["earlier_unmetered_fit"] for row in rows),
+        closed_invocations=len(closed),
+        failed_invocations=sum(row["state"] == "failed" for row in closed),
+        measurement_scopes=sorted({row["scope"] for row in rows}),
+    )
+
+
 def qr_usage(directory, calls):
     updates = [(p, read(p)) for p in sorted((directory / "updates").glob("*.json"))]
     boundary, last = next((p, u) for p, u in updates if u["feedback_calls"] == calls)
@@ -67,6 +87,7 @@ def value_usage(rollouts, fits):
         raise ValueError("Duplicate fit cost")
     fit_seconds = 0.0
     parked_seconds = 0.0
+    fit_windows = {}
     root = rollouts[0].resolve().parent
     phase_path = root / "initial-schedule.json"
     phase = read(phase_path) if phase_path.exists() else {}
@@ -75,6 +96,7 @@ def value_usage(rollouts, fits):
         if info["status"] != "completed" or not info["cuda_peak_bytes"]:
             raise ValueError("Expected a closed CUDA fit with measured time")
         fit_seconds += info["wall_seconds"]
+        fit_windows[str(p.resolve())] = fit_window_usage(p)
         # The fit loop's perf_counter includes the parked interval; GPU memory stayed resident.
         if (
             (root / "weights/s1").is_dir()
@@ -99,6 +121,11 @@ def value_usage(rollouts, fits):
             tokens += stat.get("exposed_total", 0)
             known += stat.get("exposed_observations", 0)
     calls = accounting["total_feedback_exposure"]
+    measured_fit_hours = (
+        sum(record["measured_hours"] for record in fit_windows.values())
+        if fit_windows and all(record["complete"] for record in fit_windows.values())
+        else None
+    )
     selection = {
         key: sum(
             values[key]
@@ -120,11 +147,13 @@ def value_usage(rollouts, fits):
         tokens=tokens if known == 2 * calls else None,
         **accounting["newly_billed_usage"],
         fit_gpu_hours=fit_seconds / 3600,
+        fit_job_window_gpu_hours=measured_fit_hours,
+        fit_job_windows=fit_windows,
         registered_fit_parking_hours=parked_seconds / 3600,
         fit_wall_hours_excluding_registered_parking=(fit_seconds - parked_seconds) / 3600,
         acquisition_and_fit_gpu_hours=None
-        if collect_hours is None
-        else collect_hours + fit_seconds / 3600,
+        if collect_hours is None or measured_fit_hours is None
+        else collect_hours + measured_fit_hours,
     )
 
 

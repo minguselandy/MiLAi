@@ -23,7 +23,12 @@ from milai_lab.methods.control_cost_scale import (
 )
 from milai_lab.methods.pretrained_control import PretrainedControl
 from milai_lab.methods.pretrained_objective import group_weights, root_loss
-from milai_lab.runners.pretrained_fit_closeout import finish_verified, fit_owner, write_json
+from milai_lab.runners.pretrained_fit_closeout import (
+    finish_verified,
+    fit_owner,
+    fit_window,
+    write_json,
+)
 
 
 def validate_terminal_pack(row):
@@ -187,7 +192,7 @@ class TrainingRoots:
 
 
 def fit(args):
-    with fit_owner(args.output, args.metrics or args.output):
+    with fit_owner(args.output, args.metrics or args.output), fit_window(args.output, args.device):
         fit_locked(args)
 
 
@@ -323,6 +328,8 @@ def fit_locked(args):
     }
     if getattr(args, "evidence_order_map", None):
         contract["frozen_native_root_order"] = str(args.evidence_order_map.resolve())
+        if getattr(args, "evidence_master", None):
+            contract["frozen_native_root_master"] = str(args.evidence_master.resolve())
     rolling = args.output / "resume.pt"
     path = args.output / "checkpoint"
     run_path = args.output / "run.json"

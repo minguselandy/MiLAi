@@ -1,8 +1,9 @@
 import json
+from pathlib import Path
 
 import pytest
 
-from milai_lab.runners.pretrained_fit_closeout import finish_verified, fit_owner
+from milai_lab.runners.pretrained_fit_closeout import finish_verified, fit_owner, fit_window
 
 
 def test_fit_ownership_includes_shared_metrics_and_output_alias(tmp_path):
@@ -17,6 +18,33 @@ def test_fit_ownership_includes_shared_metrics_and_output_alias(tmp_path):
             pass
     with fit_owner(first, metrics):
         pass
+
+
+def test_fit_hours_include_retries_and_flag_missing_history(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    from report_memory_control_v13_curves import fit_window_usage
+
+    with fit_window(tmp_path, "cpu"):
+        pass
+    assert not (tmp_path / "fit-windows").exists()
+    with pytest.raises(RuntimeError, match="interrupt"), fit_window(tmp_path, "cuda:0"):
+        assert not fit_window_usage(tmp_path)["complete"]
+        raise RuntimeError("interrupt")
+    (tmp_path / "run.json").write_text("{}")
+    with fit_window(tmp_path, "cuda:0"):
+        assert not fit_window_usage(tmp_path)["complete"]
+    result = fit_window_usage(tmp_path)
+    rows = [json.loads(p.read_text()) for p in (tmp_path / "fit-windows").glob("*.json")]
+    assert result["complete"] and result["closed_invocations"] == 2
+    assert result["failed_invocations"] == 1
+    assert result["measured_hours"] == sum(row["wall_seconds"] for row in rows) / 3600
+
+    earlier = tmp_path / "legacy"
+    earlier.mkdir()
+    (earlier / "run.json").write_text("{}")
+    with fit_window(earlier, "cuda:0"):
+        pass
+    assert not fit_window_usage(earlier)["complete"]
 
 
 def test_interrupted_publish_uses_original_probe_and_device(tmp_path):
