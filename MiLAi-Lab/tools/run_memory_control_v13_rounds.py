@@ -50,15 +50,17 @@ def exposure(directory):
 
 
 def collect(args, directory, calls, stage, mode, prior=None, sampler=None, shared=None):
+    pool_seed = args.acquisition_seed * 100 + stage if stage else None
+    window = args.recipe["eligible_pool_window"] if stage else 1
     progress_file = directory / "progress.json"
     if progress_file.is_file() and json_file(progress_file).get("state") == "complete":
         config = json_file(directory / "round.json")
         expected = {
             "seed": args.acquisition_seed,
-            "pool_seed": args.acquisition_seed * 100 + stage,
+            "pool_seed": pool_seed,
             "round": stage,
             "sampler": mode,
-            "candidate_window": args.recipe["eligible_pool_window"],
+            "candidate_window": window,
             "material_budget": args.recipe["memory_budget_tokens"],
             "environment": args.recipe["environment"],
             "observation": args.recipe["observation"],
@@ -81,7 +83,7 @@ def collect(args, directory, calls, stage, mode, prior=None, sampler=None, share
         ):
             raise ValueError(f"Closed acquisition differs from the frozen round at {directory}")
         return
-    flags = []
+    flags = ["--pool-seed", pool_seed] if pool_seed is not None else []
     if prior:
         flags += ["--continuation-checkpoint", prior]
     if sampler:
@@ -98,14 +100,12 @@ def collect(args, directory, calls, stage, mode, prior=None, sampler=None, share
         directory,
         "--seed",
         args.acquisition_seed,
-        "--pool-seed",
-        args.acquisition_seed * 100 + stage,
         "--round",
         stage,
         "--calls",
         calls,
         "--window",
-        args.recipe["eligible_pool_window"],
+        window,
         "--budget",
         args.recipe["memory_budget_tokens"],
         "--utility-lambda",
@@ -212,11 +212,241 @@ def evaluate(args, name, checkpoint):
     )
 
 
+def register_acquisition_repeat(args):
+    if (
+        args.acquisition_seed not in (29, 47)
+        or args.fit_seed != 11
+        or args.until != 12000
+        or args.frozen_data
+        or args.refit_only
+        or args.refit_method
+        or args.recipe["warm_feedback_calls"] != 2000
+        or list(args.recipe["feedback_checkpoints"])[:2] != [6000, 12000]
+        or not args.recipe.get("cost_scale_report")
+    ):
+        raise ValueError(
+            "Independent acquisition repeats require seed 29/47, fit 11, and the 2k/6k/12k recipe"
+        )
+    if not (args.s1 / "control.pt").is_file():
+        raise ValueError("Independent acquisition requires the frozen S1 checkpoint")
+    from milai_lab.methods.control_cost_scale import (
+        load_host_cost_scale,
+        require_same_host_cost_scale,
+    )
+
+    primary_warm = json_file(args.root / "warm-11/round.json")
+    paired = json_file(args.root / "fits/a11-f11-warm-paired/run.json")["contract"]
+    _, unit = load_host_cost_scale(
+        args.root / args.recipe["cost_scale_report"],
+        dataset_run_id=primary_warm["dataset_run"],
+        budget=args.recipe["memory_budget_tokens"],
+    )
+    require_same_host_cost_scale(paired["scale_source"], unit)
+    evidence = {}
+    previous_cohort = None
+    for n, phase in ((6000, "fixed_pool_mechanism"), (12000, "natural_policy_iteration")):
+        review_path = args.root / f"dev-review-a11-{n}.json"
+        review = json_file(review_path)
+        if (
+            review["phase"] != phase
+            or review["acquisition_seed"] != 11
+            or review["fitting_seed"] != 11
+            or review["cumulative_feedback_per_learning_arm"] != n
+        ):
+            raise ValueError("The repeat requires the bound seed-11 development comparisons")
+        points = {m: json_file(Path(review["checkpoints"][m])) for m in ("PQ-U", "PQ-A")}
+        paths = []
+        for m, p in points.items():
+            cohort = p["cohort"]
+            if (
+                p["method"] != m
+                or p["acquisition_seed"] != 11
+                or p["fit_seed"] != 11
+                or p["usage"]["exposure"] != n
+                or cohort != json_file(args.curve)
+                or cohort["role"] != "dev"
+                or cohort["v13_role"] != "curve"
+                or json_file(Path(p["deployment"]["path"]) / "run.json")["status"] != "COMPLETED"
+                or (previous_cohort is not None and cohort != previous_cohort)
+            ):
+                raise ValueError(
+                    "The two repeat-trigger points need the completed matched DEV roster and budget"
+                )
+            previous_cohort = cohort
+            paths.append([Path(x).resolve() for x in p["acquisition_paths"]])
+        if paths[0][0] != paths[1][0] or paths[0][0] != (args.root / "warm-11").resolve():
+            raise ValueError("Seed-11 samplers did not share their paid warm")
+        common = [json_file(x[1] / "mechanism-pool.json")["common_pool"] for x in paths]
+        if common[0] != common[1] or not Path(common[0]).is_file():
+            raise ValueError("Seed-11 mechanism samplers need the same frozen TRAIN pool")
+        contrast = review["quality_contrasts"]["PQ-A vs PQ-U"]
+        evidence[str(n)] = dict(
+            review=str(review_path),
+            comparison="PQ-A vs PQ-U",
+            phase=phase,
+            quality_delta_points=contrast["quality_delta_points"],
+            quality_interval_95=contrast["quality_interval_95"],
+            difference_range_given_unobserved=contrast["difference_range_given_unobserved"],
+            source_strata=contrast["source_strata"],
+            common_pool=common[0],
+        )
+    if (
+        Path(paired["parent"]).resolve() != args.s1.resolve()
+        or json_file(args.root / "fits/a11-f11-recipe.json") != args.recipe
+    ):
+        raise ValueError("Independent acquisition must retain the seed-11 S1 and frozen recipe")
+    registration = args.root / "repeats" / f"a{args.acquisition_seed}-f11-registration.json"
+    reason = getattr(args, "repeat_reason", None)
+    if reason is None and registration.exists():
+        reason = json_file(registration).get("reason")
+    publish(
+        registration,
+        dict(
+            acquisition_seed=args.acquisition_seed,
+            fit_seed=11,
+            methods=["PQ-U", "PQ-A"],
+            through=12000,
+            warm=str(args.warm),
+            exposure_cap_per_arm=12000,
+            new_physical_request_cap=22000,
+            evaluated_evidence=evidence,
+            trigger="explicit acquisition-repeat invocation",
+            reason=reason or "Replicate the registered fixed-pool and natural online comparisons",
+            evaluation_charged_separately=True,
+        ),
+    )
+
+
+def repeat_accounting(args, rollouts, point):
+    by_dir = {}
+    charged = set()
+    allowed_receipts = {(p / "receipts").resolve() for chain in rollouts.values() for p in chain}
+    for method in ("PQ-U", "PQ-A"):
+        for path in rollouts[method]:
+            key = str(path.resolve())
+            if key in by_dir:
+                continue
+            counts = dict(exposure=0, known_new_requests=0, unknown_request_receipts=0)
+            for receipt_path in (path / "receipts").glob("*.json.gz"):
+                with gzip.open(receipt_path) as stream:
+                    receipt = json.load(stream)
+                if origin := receipt.get("measurement_reused_from"):
+                    allowed = (
+                        {(args.warm / "receipts").resolve()}
+                        if path == args.warm
+                        else allowed_receipts
+                    )
+                    if Path(origin).parent.resolve() not in allowed:
+                        raise ValueError(
+                            "Independent acquisition cannot import another seed's supervision"
+                        )
+                if (
+                    receipt.get("reader_wire")
+                    and receipt["reader_wire"]["seed"] != args.acquisition_seed
+                ):
+                    raise ValueError("Reader seed differs from the independent acquisition")
+                counts["exposure"] += receipt["feedback_exposure"]
+                new = receipt["actual_requests"]
+                if new is None:
+                    counts["unknown_request_receipts"] += 1
+                elif new:
+                    positions = range(receipt["ledger_before"], receipt["ledger_after"])
+                    if len(positions) != new or charged.intersection(positions):
+                        raise ValueError("Duplicate or inconsistent physical repeat charges")
+                    charged.update(positions)
+                    counts["known_new_requests"] += new
+            by_dir[key] = counts
+    arm_exposure = {
+        m: sum(by_dir[str(p.resolve())]["exposure"] for p in rollouts[m]) for m in ("PQ-U", "PQ-A")
+    }
+    unknown = sum(d["unknown_request_receipts"] for d in by_dir.values())
+    if any(v != point for v in arm_exposure.values()) or len(charged) + unknown > 2 * point - 2000:
+        raise ValueError("Independent sampler repeat exceeds its registered training allowance")
+    ranges = []
+    for slot in sorted(charged):
+        if ranges and ranges[-1][1] == slot:
+            ranges[-1][1] = slot + 1
+        else:
+            ranges.append([slot, slot + 1])
+    publish(
+        args.root / "repeats" / f"a{args.acquisition_seed}-f11-accounting-{point}.json",
+        dict(
+            acquisition_seed=args.acquisition_seed,
+            fit_seed=11,
+            checkpoint=point,
+            per_arm_exposure=arm_exposure,
+            sum_arm_exposure=sum(arm_exposure.values()),
+            unique_known_physical_requests=len(charged),
+            unknown_request_receipts=unknown,
+            physical_upper_bound=len(charged) + unknown,
+            registered_physical_cap=2 * point - 2000,
+            unique_physical_ledger_intervals=ranges,
+            by_distinct_directory=by_dir,
+            evaluation_directories=[
+                str(args.root / "eval" / f"a{args.acquisition_seed}-f11-{m}-{n}")
+                for n in (6000, 12000)
+                if n <= point
+                for m in rollouts
+            ],
+            evaluation_charged_separately=True,
+        ),
+    )
+
+    if point == 12000:
+        destination = args.root / "repeats"
+        with (destination / ".combined.lock").open("a") as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            files = [destination / f"a{seed}-f11-accounting-12000.json" for seed in (29, 47)]
+            if all(f.is_file() for f in files):
+                records = [json_file(f) for f in files]
+                seen = set()
+                for record in records:
+                    for begin, end in record["unique_physical_ledger_intervals"]:
+                        span = range(begin, end)
+                        if seen.intersection(span):
+                            raise ValueError("Independent acquisition seeds share a paid request")
+                        seen.update(span)
+                ceiling = sum(r["physical_upper_bound"] for r in records)
+                total = sum(r["sum_arm_exposure"] for r in records)
+                if total != 48000 or ceiling > 44000:
+                    raise ValueError("Combined 29/47 training budget differs from its registration")
+                publish(
+                    destination / "acquisition-29-47-accounting.json",
+                    dict(
+                        seeds=[29, 47],
+                        fit_seed=11,
+                        arm_exposure=total,
+                        known_unique_new_requests=len(seen),
+                        physical_upper_bound=ceiling,
+                        maximum_physical_calls=44000,
+                        requested_additional_exposure_cap=48000,
+                        evaluation_charged_separately=True,
+                        accounting=[str(f) for f in files],
+                    ),
+                )
+
+
 def round_matrix(args):
     from report_memory_control_v13_curves import point as record_point
 
     args.warm = args.root / f"warm-{args.acquisition_seed}"
+    repeat = getattr(args, "acquisition_repeat", False)
+    if repeat:
+        register_acquisition_repeat(args)
+        collect(args, args.warm, 2000, 0, "uniform")
     warm_contract = json_file(args.warm / "round.json")
+    if repeat:
+        main_warm = json_file(args.root / "warm-11/round.json")
+        if (
+            warm_contract["seed"] != args.acquisition_seed
+            or warm_contract["round"] != 0
+            or warm_contract.get("reuse_from")
+            or warm_contract.get("exclude_roots_from")
+            or warm_contract["reader"] != main_warm["reader"]
+            or warm_contract["dataset_run"] != main_warm["dataset_run"]
+            or (args.warm.resolve() == (args.root / "warm-11").resolve())
+        ):
+            raise ValueError("A repeat must collect its own compatible seed-specific warm")
     if (
         exposure(args.warm) != args.recipe["warm_feedback_calls"]
         or warm_contract["environment"] != args.recipe["environment"]
@@ -263,7 +493,7 @@ def round_matrix(args):
         )
     publish(args.root / "fits" / f"{tag}-cost-scale.json", registration)
     publish(args.root / "fits" / f"{tag}-recipe.json", args.recipe)
-    selected = args.refit_method or ("DQ", "PQ-U", "PQ-A")
+    selected = ("PQ-U", "PQ-A") if repeat else (args.refit_method or ("DQ", "PQ-U", "PQ-A"))
     warm_models = {}
     prior = {}
     for method in selected:
@@ -337,6 +567,9 @@ def round_matrix(args):
                 )
             )
 
+        if repeat:
+            repeat_accounting(args, rollouts, point)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
@@ -354,6 +587,14 @@ if __name__ == "__main__":
     )
     parser.add_argument("--acquisition-seed", type=int, default=11)
     parser.add_argument("--fit-seed", type=int, default=11)
+    parser.add_argument(
+        "--acquisition-repeat",
+        action="store_true",
+        help="Run the conditional independent 29/47 acquisition protocols through 12k",
+    )
+    parser.add_argument(
+        "--repeat-reason", help="Optional development evidence motivating this repeat"
+    )
     parser.add_argument(
         "--frozen-data",
         action="store_true",
