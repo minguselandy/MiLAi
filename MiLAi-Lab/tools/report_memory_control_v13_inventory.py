@@ -23,7 +23,7 @@ def groups(roster):
     return {(t["dataset"], t["native_group"]) for t in roster["tasks"]}
 
 
-def export(parent, derived, historical_run, rosters, output):
+def export(parent, derived, historical_run, rosters, output, fresh=None, ref_exposure=None):
     output.mkdir(parents=True, exist_ok=True)
     confirmation = json.loads((historical_run / "protocol.json").read_text())["population"]
     run = json.loads((historical_run / "run.json").read_text())
@@ -56,6 +56,22 @@ def export(parent, derived, historical_run, rosters, output):
         parent_run = json.loads(
             v1.execute("SELECT value FROM metadata WHERE key='run_id'").fetchone()[0]
         )
+    fresh_groups = {}
+    ref_dev = set()
+    if fresh:
+        with readonly(fresh) as db:
+            fresh_groups = {
+                (s, g): n
+                for s, g, n in db.execute(
+                    "SELECT dataset,native_group,count(*) FROM experiment_tasks "
+                    "WHERE experiment_role='confirm' GROUP BY 1,2"
+                )
+            }
+        ref_dev = {
+            ("musique_full", g) for g in json.loads(ref_exposure.read_text())["sample_ids_in_order"]
+        }
+        if fresh_groups.keys() & (exposed | cal | tune | ref_dev):
+            raise ValueError("Fresh roster intersects prior outcome or validation exposure")
     dev_roster = cal | tune
     tally = Counter()
     with readonly(derived) as v12, gzip.open(output / "native-groups.tsv.gz", "wt") as stream:
@@ -91,6 +107,16 @@ def export(parent, derived, historical_run, rosters, output):
                 role, history = "TRAIN", origin
             elif prior == "dev":
                 role, history = "TUNE", "registered_dev"
+            elif key in fresh_groups:
+                if prior != "confirm" or not old_fresh or n != fresh_groups[key]:
+                    raise ValueError("Fresh cohort crossed inherited roles or split a native group")
+                role, history = "CONFIRM_FRESH", "historical_ledger_disjoint"
+            elif fresh and old_fresh:
+                role, history = (
+                    ("TUNE", "ref_validation")
+                    if key in ref_dev
+                    else ("RESERVED", "removed_by_fresh_registration")
+                )
             elif old_fresh:
                 role, history = "CONFIRM_CANDIDATE", "outside_completed_v12_confirmation"
             else:
@@ -101,6 +127,25 @@ def export(parent, derived, historical_run, rosters, output):
             tally[source, role, "groups"] += 1
             tally[source, role, "tasks"] += n
             tally[source, role, "excluded"] += ex
+        for (source, group), n in sorted(fresh_groups.items()):
+            if (source, group) in seen:
+                if (source, group) in (exposed | cal | tune):
+                    raise ValueError("Role overlap in fresh merge")
+                continue
+            writer.writerow(
+                [
+                    source,
+                    group,
+                    "external_test",
+                    "official_test_or_benchmark",
+                    "CONFIRM_FRESH",
+                    n,
+                    0,
+                    "historical_ledger_disjoint",
+                ]
+            )
+            tally[source, "CONFIRM_FRESH", "groups"] += 1
+            tally[source, "CONFIRM_FRESH", "tasks"] += n
         if (cal | tune | exposed) - seen:
             raise ValueError("Unknown roster group")
         inherited_run = json.loads(
@@ -136,8 +181,17 @@ def export(parent, derived, historical_run, rosters, output):
             "Inherited experiment roles, completed V12 confirmation roster and V13 calibration. "
             "Remaining groups require cross-study exposure reconciliation before confirmation."
         ),
+        fresh_database=str(fresh) if fresh else None,
+        ref_validation_exposure=str(ref_exposure) if ref_exposure else None,
         sha_validation=False,
     )
+    if fresh:
+        if sum(v["groups"] for v in records if v["role"] == "CONFIRM_FRESH") != len(fresh_groups):
+            raise ValueError("Not all registered fresh groups were assigned exclusively")
+        result["exposure_scope"] = (
+            "V1 roles, completed V12 readout, V13 split, historical project ledger scan "
+            "and actual REF validation exposure. Fresh eligibility is scoped to available records."
+        )
     (output / "inventory.json").write_text(json.dumps(result, indent=2) + "\n")
 
 
@@ -145,5 +199,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ("parent", "derived", "historical-run", "rosters", "output"):
         parser.add_argument("--" + key, required=True, type=Path)
+    parser.add_argument("--fresh", type=Path)
+    parser.add_argument("--ref-exposure", type=Path)
     args = parser.parse_args()
-    export(args.parent, args.derived, args.historical_run, args.rosters, args.output)
+    if bool(args.fresh) != bool(args.ref_exposure):
+        parser.error("Provide the fresh DB together with the replayed REF exposure")
+    export(
+        args.parent,
+        args.derived,
+        args.historical_run,
+        args.rosters,
+        args.output,
+        args.fresh,
+        args.ref_exposure,
+    )

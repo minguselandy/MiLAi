@@ -15,6 +15,7 @@ import numpy as np
 
 from milai_lab.datasets.memory_control_store import connect, get_meta
 from milai_lab.runners.memory_control_confirmation import (
+    InsufficientDevGroups,
     confirmation_capacity,
     plan_confirmation_power,
 )
@@ -47,11 +48,43 @@ def save(path, value):
     path.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
 
 
-def checked_capacity(data, role_audit, packet_audit, target, seed):
+def prior_v13_runs(data, role_audit, explicit=()):
+    """Reconcile any already-issued packets in this experiment before a new registration."""
+    root = role_audit.parent
+    if root.name == "fresh-sources":
+        root = root.parent
+    with closing(connect(data)) as db:
+        release = get_meta(db, "run_id")
+    runs = set(explicit)
+    for path in root.rglob("protocol.json"):
+        if (
+            not (path.parent / "episodes").is_dir()
+            and not (path.parent / "episode-archive.json").is_file()
+        ):
+            continue
+        population = read(path).get("population", {})
+        if (
+            isinstance(population, dict)
+            and population.get("role") == "confirm"
+            and population.get("dataset_run_id") == release
+        ):
+            runs.add(path.parent)
+    return sorted(runs)
+
+
+def checked_capacity(data, role_audit, packet_audit, target, seed, prior=()):
     role, packets = read(role_audit), read(packet_audit)
     with closing(connect(data)) as db:
         if not get_meta(db, "confirmation_only") or get_meta(db, "run_id") != role["run_id"]:
             raise ValueError("Mismatch between the fresh release and its role audit")
+        full_groups = dict(
+            db.execute(
+                "SELECT dataset,count(*) FROM experiment_groups "
+                "WHERE eligible_fresh_confirmation=1 GROUP BY dataset"
+            )
+        )
+        if full_groups != role["eligible_groups"]:
+            raise ValueError("Registered group capacity changed")
     if (
         packets["reader_calls"]
         or packets["fitting_states"]
@@ -62,12 +95,7 @@ def checked_capacity(data, role_audit, packet_audit, target, seed):
         raise ValueError("Fresh source overlap or cold preparation failed")
     if packets.get("dataset_run_id") != role["run_id"]:
         raise ValueError("Packet ledger check belongs to a different fresh release")
-    cap = confirmation_capacity(data, target, seed, [])
-    if {s: x["native_groups"] for s, x in cap["eligible_source_capacity"].items()} != role[
-        "eligible_groups"
-    ]:
-        raise ValueError("Registered group capacity changed")
-    return cap
+    return confirmation_capacity(data, target, seed, list(prior))
 
 
 def validate_dev_family(paths, *, final=False):
@@ -184,10 +212,10 @@ def cost_data(paths, field):
     return data
 
 
-def cap_candidate(data, audits, limit, arms, seed):
+def cap_candidate(data, audits, limit, arms, seed, prior):
     target = limit // arms
     while target > 0:
-        cap = checked_capacity(data, *audits, target, seed)
+        cap = checked_capacity(data, *audits, target, seed, prior)
         if cap["actual_tasks"] * arms <= limit:
             return cap
         target -= max(1, cap["actual_tasks"] - limit // arms)
@@ -237,13 +265,14 @@ def register(args):
     field = COST_FIELDS[args.cost_unit]
     measured_total = cost_data([*paths[final], *paths[peers["practical"]]], field) is not None
     audits = (args.role_audit, args.packet_audit)
+    prior = prior_v13_runs(args.data, args.role_audit, getattr(args, "prior_run", ()))
     capacities = []
     for fraction in (0.25, 0.5, 1.0):
         limit = int(args.reader_cap * fraction)
         if limit < 3 * len(arms):
             continue
         try:
-            cap = cap_candidate(args.data, audits, limit, len(arms), args.seed)
+            cap = cap_candidate(args.data, audits, limit, len(arms), args.seed, prior)
         except ValueError as exc:
             if "accommodate" in str(exc) or "every native source" in str(exc):
                 continue
@@ -253,20 +282,29 @@ def register(args):
         projections = {}
         for key, peer in peers.items():
             use_cost = key == "practical" and measured_total
-            power = plan_confirmation_power(
-                cap,
-                paths[final],
-                paths[peer],
-                draws=args.draws,
-                repeats=args.power_repeats,
-                primary_comparisons=2,
-                holm_plan=True,
-                analysis_seed=args.seed + 1,
-                cost_field=field if use_cost else "reader_input_tokens",
-                minimum_quality_effect=args.quality_mde,
-                mask_unknown_quality=True,
-                savings_null=0.15 if use_cost else 0.0,
-            )
+            try:
+                power = plan_confirmation_power(
+                    cap,
+                    paths[final],
+                    paths[peer],
+                    draws=args.draws,
+                    repeats=args.power_repeats,
+                    primary_comparisons=2,
+                    holm_plan=True,
+                    analysis_seed=args.seed + 1,
+                    cost_field=field if use_cost else "reader_input_tokens",
+                    minimum_quality_effect=args.quality_mde,
+                    mask_unknown_quality=True,
+                    savings_null=0.15 if use_cost else 0.0,
+                    total_workload_cost=use_cost,
+                )
+            except InsufficientDevGroups as exc:
+                projections[key] = {
+                    "superiority_power_at_mde": None,
+                    "joint_engineering_power_at_zero_quality_loss_20pct_true_savings": None,
+                    "unidentified_reason": str(exc),
+                }
+                continue
             projections[key] = {
                 "dev_groups_used": power["source_groups_used"],
                 "dev_groups_available": power["source_groups_available"],
@@ -286,7 +324,7 @@ def register(args):
             "joint_engineering_power_at_zero_quality_loss_20pct_true_savings"
         ]
         if (
-            projections["same_backbone"]["superiority_power_at_mde"] >= 0.8
+            (projections["same_backbone"]["superiority_power_at_mde"] or 0.0) >= 0.8
             and joint is not None
             and joint >= 0.8
         ):
@@ -300,6 +338,7 @@ def register(args):
         allowed_arms=arms,
         target_tasks=cap["target_tasks"],
         seed=args.seed,
+        excluded_groups={tuple(g) for g in cap["excluded_exposed_native_groups"]},
     )
     actual = Counter((r["dataset"], r["native_group"]) for r in population["tasks"])
     if actual != {
@@ -330,6 +369,7 @@ def register(args):
         "family_one_sided_alpha": FAMILY_ALPHA,
         "quality_noninferiority_points": 1,
         "required_total_savings": 0.15,
+        "cost_aggregation": "actual_registered_workload_total_averaged_across_fit_replicates",
         "cost_field": field,
         "cost_unit": args.cost_unit,
         "required_components": COMPONENTS,
@@ -362,12 +402,14 @@ def register(args):
 
 
 def measured_savings(pop, policy_costs, baseline_costs, repeats, seed):
-    """Equal-source mean cost ratio, resampling whole native groups within each source."""
+    """Sum measured deployment costs for the registered workload, preserving source task counts."""
     groups = defaultdict(lambda: defaultdict(list))
     for task in pop["tasks"]:
         groups[task["dataset"]][task["native_group"]].append(task["task_id"])
     rng = np.random.default_rng(seed)
     observed = np.zeros(2)
+    balanced = np.zeros(2)
+    source_costs = {}
     samples = np.zeros((repeats, 2))
     for source in SOURCES:
         clusters = []
@@ -379,16 +421,26 @@ def measured_savings(pop, policy_costs, baseline_costs, repeats, seed):
             clusters.append([*costs, len(ids)])
         x = np.array(clusters, float)
         totals = x.sum(axis=0)
-        observed += totals[:2] / totals[2]
+        observed += totals[:2]
+        balanced += totals[:2] / totals[2]
+        source_costs[source] = {
+            "policy_total_mean_across_fits": float(totals[0]),
+            "baseline_total_mean_across_fits": float(totals[1]),
+            "registered_tasks": int(totals[2]),
+        }
         draws = rng.integers(0, len(x), (repeats, len(x)))
         sums = x[draws].sum(axis=1)
-        samples += sums[:, :2] / sums[:, 2, None]
+        samples += totals[2] * sums[:, :2] / sums[:, 2, None]
     if observed[1] <= 0 or np.any(samples[:, 1] <= 0):
         return None
     savings = 1 - observed[0] / observed[1]
     draws = 1 - samples[:, 0] / samples[:, 1]
     return {
         "savings": float(savings),
+        "policy_total_mean_across_fits": float(observed[0]),
+        "baseline_total_mean_across_fits": float(observed[1]),
+        "by_source": source_costs,
+        "equal_source_weighted_savings_sensitivity": float(1 - balanced[0] / balanced[1]),
         "interval_95": np.quantile(draws, [0.025, 0.975]).tolist(),
         "p_savings_above_15pct": centered_bootstrap_pvalue(draws, savings, 0.15),
     }
@@ -444,6 +496,8 @@ def readout(args):
                 "paired_reader_input_complete",
                 "reader_input_token_savings",
                 "token_savings_interval_95",
+                "by_seed",
+                "seed_spread",
                 "seed_and_group_sensitivity",
             )
             if k in m
@@ -533,6 +587,7 @@ if __name__ == "__main__":
     reg = sub.add_parser("register")
     for p in (capacity, reg):
         p.add_argument("--data", type=Path, required=True)
+        p.add_argument("--prior-run", type=Path, action="append", default=[])
         p.add_argument("--role-audit", type=Path, required=True)
         p.add_argument("--packet-audit", type=Path, required=True)
         p.add_argument("--seed", type=int, default=20261125)
@@ -554,7 +609,12 @@ if __name__ == "__main__":
         save(
             args.output,
             checked_capacity(
-                args.data, args.role_audit, args.packet_audit, args.target_tasks, args.seed
+                args.data,
+                args.role_audit,
+                args.packet_audit,
+                args.target_tasks,
+                args.seed,
+                prior_v13_runs(args.data, args.role_audit, args.prior_run),
             ),
         )
     elif args.command == "register":

@@ -12,7 +12,7 @@
 | QASPER | 2,593 | 2,593 | 888 |
 | PersonaMem-v2 | 1,460 | 1,460 | 65 |
 
-库存、组级角色和排除数见 `inventory/inventory.json` 与 `inventory/native-groups.tsv.gz`。沿用 605 题、222 组的 DEV 作为 TUNE。在这批组内固定 150 题、54 组，用于反馈学习曲线。在其余 DEV 组中预先抽取 99 题、39 组用于 CALIBRATION。每个来源独立按完整原生组选取。512、1,024、2,048 三档预算使用相同任务和 Reader 种子。
+V1.2 初始库存见 `inventory/inventory.json`。合并独立评估库和 REF 暴露后的当前库存、每个原生组的角色与排除数见 `inventory-current/inventory.json` 与 `inventory-current/native-groups.tsv.gz`。沿用 605 题、222 组的 DEV 作为 TUNE。在这批组内固定 150 题、54 组，用于反馈学习曲线。在其余 DEV 组中预先抽取 99 题、39 组用于 CALIBRATION。每个来源独立按完整原生组选取。512、1,024、2,048 三档预算使用相同任务和 Reader 种子。
 
 V12 公开结果已分析 620 个确认组，其中包括全部 75 个 QASPER 论文和 220 个 PersonaMem 人物。对剩余 295 个 MuSiQue 候选组复核时发现，REF 初次验证从 Ans dev 抽取的 300 个位置触及 44 个候选组。已扣除这些组，并将 REF 后续验证固定在 300 个已曝光 TUNE 组。全量来源交集与初始抽样重放见 `ref/mu-exposure-reconciliation.json`。独立确认的来源扩展采用 QASPER 官方 test 及 PersonaMem-v2 的 text benchmark，用组标识对历史暴露做交叉核对。
 
@@ -27,14 +27,35 @@ V12 公开结果已分析 620 个确认组，其中包括全部 75 个 QASPER �
 | 同数据目标诊断 | DQ、PQ 使用相同 32 个已测根状态、69 个可比较动作对，各自完成全参更新和重载 | `gte/s0-objectives/` |
 | 评估链路 | B1 的早期计时运行覆盖曲线集 150 题，实付 150 次，宏质量 23.90。该次运行关闭了数值预检观察，正式比较采用统一的数值观察 | `rule-curve-2048/` |
 | 冻结 GTE 相关性 | R2、最多 4 读，在 99 题校准集实付 99 次，宏质量 24.54。这是预算规则选择的一个候选 | `gte-r2-reads4-cal/` |
-| 原版参考 | 单独使用 MuSiQue-Ans、双 E5-large、原版支持事实奖励与 PQN。TUNE 参考曲线起点的平均 GT 回报 0.287 | `ref/official-musique-tune300-seed42/` |
-| 回归 | 带 PyTorch 的环境执行记忆控制及新增针对性测试，当前 79 项通过 | `v13-regression-current.log` |
+| 原版参考 | 单独使用 MuSiQue-Ans、双 E5-large、原版支持事实奖励与 PQN。300 个 TUNE 问题的平均 GT 回报由初始化的 0.286667 到第 100 次更新的 0.340000，完整配方为 10,000 次更新。第 100 次更新的 actor 已持久化为基于 E5 基础权重的差分归档，790 个张量经恢复后逐项相等 | `ref/official-musique-tune300-seed42/` |
+| 回归 | 带 PyTorch 的环境执行记忆控制及新增针对性测试，当前 86 项通过 | `v13-all-focused-regressions.log` |
 
 S1 已在 GPU 3 启动。正式数据包含 119,394 个合格根状态，MuSiQue 110,133 个，QASPER 5,351 个，PersonaMem 3,910 个。所有根状态遍历一轮，共 3,732 次更新。首个正式更新检测到第 0 层注意力参数改变，逐更新曲线见 `gte/s1/curve.jsonl`。S1 的完整训练输入已固化为持久卷上的 `gte/evidence.sqlite`，复读确认覆盖两个准备阶段和全部 119,394 个根状态。初始分组排序的全轮检查发现，连续 71,516 个根状态没有 QASPER，连续 78,612 个没有 PersonaMem。该次拟合在 77 次更新、2,464 个根状态后退役，544.58 秒拟合开销计入 `gte/s1-initial-allocation/`。正式运行从相同预训练权重重新开始，按遍历窗口分散原生组，保留每条样本的一次曝光和来源权重。修正后两个最长间隔分别为 291 和 275。
 
 QR 的实时终局 PQN 诊断已完成 48 次实付 Reader 调用，其中包含 18 次 companion。30 条主轨迹均获得原生质量和未来成本，双塔均有可测参数变化，4 次 GPU 优化更新完成，检查点重载可对实际候选菜单评分。计量见 `qr-s0/verified-48.json`。
 
 B1 早期测量和 GTE 校准测量分别来自两批预先指定的任务。两者分别消耗 181,788/7,816 和 114,127/5,123 个 Reader 输入/输出 tokens。计入策略加载摊销后的端到端 p50/p95 分别为 1.09/1.70 秒和 1.58/2.36 秒。不同任务构成限制了横向解释。原生 GTE 初次校准使用对象 microbatch 2，正式校准统一显式登记为 8，两个设置的请求全部计入开发开销。原始成本表见 `initial-readout-costs.json`。99 题 B1 四读校准累计占用 Reader 租约 126.61 秒，实测 0.78 次/秒。冻结 GTE 两读、R2、对象批次 8 的 99 题轮次为 141.18 秒、0.70 次/秒。这些数值包括窗口内预处理和策略加载，未计入等待其他运行释放租约的时间。较新运行另记 vLLM RUNNING 阶段耗时，仅接纳已完成请求数及输入/输出 token 均与同窗口原始收据相符的增量。正式矩阵、同骨干提升、反馈效率与工程节省均需等对应检查点和同组在线读出。结果允许简化到 Direct-Q 或规则策略。
+
+## 已执行的证据条件诊断
+
+在 TUNE 预先指定的 36 个原生组中，每来源 12 组。对同一问题先读两个不同的 R2 对象，匹配剩余预算，然后测同一个候选相对 HANDOFF 的真实终局收益。每组四个主分支，另有 12 次 MuSiQue companion，实付 156 次。两状态的材料预算差中位数分别是 MuSiQue 5、QASPER 2、PersonaMem 3 tokens。全部 36 组的两个收益差都有观测。
+
+QASPER 出现 1 次严格反转，即一个状态中读取优于停止，另一个状态中读取劣于停止。MuSiQue 和 PersonaMem 各为 0 次。含零收益在内，两个状态的收益值发生变化的组数依次为 MuSiQue 2、QASPER 2、PersonaMem 0。结果位于 `evidence-diagnostic/native-reversals.json`。此次读侧菜单下主要变化的是已交付证据；未交付的已获取正文单独保留了字段，其独立作用仍缺少覆盖。这批样本中的反转稀少，对集合条件机制的判断需结合正式模型的诊断误差及自然任务表现。
+
+## 已冻结的规则基线
+
+四个规则候选各执行 99 题 CALIBRATION，共实付 396 次。预先约定在距本族最高宏质量 1 个百分点内的候选中，选择三来源端到端 p50 平均值最低者。B1 的四读规则入选。下表为同组实测，时延含策略加载摊销。冻结后的自然 DEV 评价另行计量。
+
+| 方法 | 宏质量，分 | 全题 p50，毫秒 | 全题 p95，毫秒 |
+| --- | ---: | ---: | ---: |
+| B1-2 | 20.97 | 955 | 1582 |
+| B1-4 | 28.03 | 1107 | 1935 |
+| B2-4 | 24.94 | 1105 | 1948 |
+| B3-4 | 27.47 | 1541 | 2139 |
+
+同一 99 题上，固定 GTE 相关性策略的四个候选也各付费 99 次。冻结配置为 R2、两次读取、对象批次 8，校准宏质量 30.36 分。GTE 的候选成本见 `gte-calibration-costs.json`。对两次 R2 两读的完整校准读出做了逐题复核，全部 99 个请求的 payload 与 seed 相同，5 个任务的单题得分仍发生变化。正式评估将 Reader 随机性与拟合、采集种子分别处理。此处两表仅用于校准；最终效果由相同自然 DEV 和新确认组读出。
+
+每个来源的得分、用量、覆盖数见 `rule-calibration-costs.json`。选择依据见 `baselines/rule-selection.json`。
 
 ## 采集、计量与复现
 
@@ -59,7 +80,7 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/calibrate_memory_control_v13_baselines.py --ro
 
 反馈组包的 Q、未来成本与预定义动作比较保存在 `packs/`。对应真实反馈放在 `receipts/`，沿用共享 Reader 账本。报告对费用未知的回包单独计数。实际 Reader 输入、输出、控制器 GPU 毫秒、检索预处理及端到端 p50/p95 分项报告。端到端 GPU 服务成本需要能归属到本次调用的服务器计量数据。
 
-REF 与 GTE 的资源调整及具体训练命令分别见 `MILAI_MEMORY_CONTROL_V13_QRAG_REFERENCE.md` 和 `MILAI_MEMORY_CONTROL_V13_GTE.md`。服务器使用物理 GPU 2 训练 REF，GPU 3 训练项目控制器，GPU 0、1 提供既有冻结 Reader。
+REF 与 GTE 的资源调整及具体训练命令分别见 `MILAI_MEMORY_CONTROL_V13_QRAG_REFERENCE.md` 和 `MILAI_MEMORY_CONTROL_V13_GTE.md`。服务器使用物理 GPU 2 训练 REF，GPU 3 训练项目控制器，GPU 0、1 提供既有冻结 Reader。启动阶段曾在四张物理 GPU 上并行进行训练和采集，此阶段墙钟和时延反映了实际共享服务条件。S1 第 256 次更新完成持久恢复点后，轮转调度在第 265 次更新处保存了两个训练进程的现场，转入 Reader 采集时段。当前 `initial-schedule.json` 标明时段及原进程。初始 uniform warm 和已登记的读出队列全部结束后恢复训练。工作进程驻留的显存、等待时间和活跃计算分别披露。`phase/phase.json` 当前仅接纳 Reader 与评估。初始读出关闭后先完成 REF 完整曲线和 S1。两者结算后，`tools/schedule_memory_control_v13_initial.py --advance` 会自动接纳正式 QR、DQ/PQ 及检查点评估，按任务单元分时执行。
 
 核心反馈矩阵使用 `configs/memory_control_v13/feedback.json`。当前 12k 调度已启动，等待完整的 2,000 次共同 warm 反馈和 S1 最终检查点。调度完成后会先产出 6k，再产出 12k。同一固定池内 PQ-U 与 PQ-A 分别选择包，两臂从相同 warm 配对参数开始，DQ 在每轮重用 PQ-U 包。在新目标轮次继续训练上一轮参数。曲线表读取真实采集收据、拟合父链与同一批 DEV 完整运行记录。
 
@@ -71,6 +92,6 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config conf
 
 ## 存储和未完成工作
 
-开始执行时持久卷 `/cra` 的普通可用空间为 0，物理剩余约 610 MiB。模型与大型中间件写入位于 `/cra/milai-experiments/v13-qrag/staging` 的专用 36 GiB tmpfs，上限从 24 GiB 调整为 36 GiB，为训练恢复文件原子替换预留空间。该目录目前仅跨进程保留，服务器重启会清空。持久卷后来出现额外物理空间，三套基础权重已保存到实验根的 `models/`，其中 GTE 交互模型、GTE embedding、E5-large 分别可读取 140、138、392 个张量。确认库的持久副本位于 `fresh-sources/native-confirm/memory_control.sqlite3`。复读结果见 `persistent-assets.json`。小型收据、数据角色与日志持续写入持久目录。QR 正式训练的原始转移、部分大型分支采集及模型拟合中间件仍可能位于暂存卷。完整检查点归档和长期留存需要持久容量。
+开始执行时持久卷 `/cra` 的普通可用空间为 0，物理剩余约 610 MiB。模型与大型中间件写入位于 `/cra/milai-experiments/v13-qrag/staging` 的专用 36 GiB tmpfs，上限从 24 GiB 调整为 36 GiB，为训练恢复文件原子替换预留空间。该目录目前仅跨进程保留，服务器重启会清空。持久卷后来出现额外物理空间，三套基础权重已保存到实验根的 `models/`，其中 GTE 交互模型、GTE embedding、E5-large 分别可读取 140、138、392 个张量。确认库的持久副本位于 `fresh-sources/native-confirm/memory_control.sqlite3`。复读结果见 `persistent-assets.json`。小型收据、数据角色与日志持续写入持久目录。REF 第 100 次更新时的最佳 actor 保存于 `ref/actor-archives/first-trained-best.zip`，恢复需同一持久目录下的 E5 基础模型。S1 训练路径已绑定到持久目录 `weights/s1`，DQ/PQ 的结果包及正式模型已分别指定持久目录 `collection`、`weights/round-models`。REF 工作检查点及 QR 正式训练的原始转移仍使用暂存卷。完整检查点归档和长期留存需要持久容量。
 
 当前尚待完成正式 S1、REF 完整曲线、QR 和各配对臂 6k/12k/24k 学习曲线、冻结数据多种子、按结果触发的额外采样对照，以及最终独立确认。现阶段没有据此选择最终模型。

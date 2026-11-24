@@ -92,3 +92,19 @@ The supervisor records both live producer leases in `qr-11/launch.json`, compute
 The formal learning-rate horizon covers 24k exposures so the 12k weights are comparable when training continues. Its length is computed before fitting from the TRAIN group roster, batch size and the 6k/12k/24k boundaries under one charged request per member. For seed 11 and batch 32 this gives 422 planned updates. AdamW uses a 5% linear warmup and linear decay to 10% of the 5e-6 peak. Actual update counts, learning rates and quality-observed transitions are recorded independently. Exploration temperature stays fixed at 0.005. The resource pilot used constant 5e-6.
 
 To check a saved formal checkpoint, run `tools/verify_qrag_milai_checkpoint.py --run /cra/milai-experiments/v13-qrag/qr-11 --checkpoint /cra/milai-experiments/v13-qrag/staging/qr/formal/checkpoint-12000` with the training Python environment. This resolves linked native measurements, detects overlap in receipt provenance, measures changes in both encoder towers, reloads the policy and compares its scores on the recorded live observation. The early 48-call pilot has a post-load score measurement and reconstructed native group bindings.
+
+At 12k, the trainer attempts to reserve space on the durable experiment volume for `qr-11/resume-12000.pt`. The archive stores the target towers, full Adam state, CPU/CUDA RNG state and immutable actor bindings. Available capacity determines whether it can also contain the online actor itself. The writer preserves 4 GiB of physical headroom and publishes the archive atomically. Its storage decision is recorded in `resume-storage.json`. Extending to 24k restores the optimizer and target network and checks the bound actor score before the first new trajectory. Limited capacity triggers deterministic replay of retained trajectories, with their observed actions and Reader requests checked against the replayed policy. Per-invocation residence and fit times retain the cost of replay while preserving already-published checkpoint metrics.
+
+The registered 6k and 12k evaluation watcher uses the same GPU3 training environment and this command from MiLAi-Lab.
+
+```bash
+python tools/evaluate_qrag_milai_checkpoints.py --root /cra/milai-experiments/v13-qrag --calls 6000 12000
+```
+
+It watches the actual producer, verifies each atomically published checkpoint, runs the frozen 150-task DEV roster, and writes the measured `qr-a11-f11-N.json` curve point under `curve-points/`. Its progress and subprocess output are in `qr-11/curve-status.json` and `qr-11/curve-worker.log`.
+
+## Shared GPU scheduling
+
+The experiment's `phase/phase.json` declares its current work units. QR waits for the explicit `qr` phase before allocating either tower. The same phase admits its terminal native group, any due optimizer update, checkpoint validation and registered evaluation windows. PQ collection uses `pq` for proposal scoring and full comparison packs; rule-only warm feedback uses `reader`. During strict mixed phases these operations execute sequentially. Independent fits can share their assigned cards in a fit-only phase. The controller may keep weights resident during waits, which is reflected in GPU residency hours.
+
+A scheduler transition first publishes `draining`, waits for existing admitted units and then publishes the new grant. The phase lease is acquired outside the existing metered Reader lease. Neither the scheduler nor the collector changes the shared vLLM service. For example, the scheduler's initial Reader phase is selected with `PYTHONPATH=src python tools/set_memory_control_v13_phase.py --root /cra/milai-experiments/v13-qrag --allow reader evaluate`. Phase decisions and any parallel resource override belong to the study scheduler.

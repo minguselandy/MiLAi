@@ -12,6 +12,7 @@ import sqlite3
 import time
 from collections import Counter, defaultdict
 from contextlib import ExitStack, closing, contextmanager
+from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
@@ -21,7 +22,8 @@ from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import connect
 from milai_lab.harness.contextual_artifacts import http_budget_scope
 from milai_lab.harness.http_ownership import HttpOwnershipError
-from milai_lab.methods.memory_control import FixedContextMemoryPolicy
+from milai_lab.methods.dataset_corpus_runtime import CorpusExecution
+from milai_lab.methods.memory_control import FixedContextMemoryPolicy, MemoryAction, MemoryPolicy
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, ownership_client_configs
 from milai_lab.runners.memory_control_episode import make_policy, score_episode
@@ -33,6 +35,7 @@ from milai_lab.runners.qrag_milai_env import (
     comparison_pack,
     outcome_label,
 )
+from milai_lab.runners.v13_phase import phase_directory, phase_unit
 
 
 def write_gzip(path: Path, value: dict) -> None:
@@ -145,6 +148,18 @@ def reader_lease(settings):
         yield budget
 
 
+@dataclass
+class TerminalJob:
+    task: sqlite3.Row
+    session: CorpusExecution
+    policy: MemoryPolicy
+    seed: int
+    key: str
+    first: MemoryAction | None = None
+    setup: dict | None = None
+    capture_transitions: bool = False
+
+
 class Receipts:
     """Use the existing HTTP budget for actual charges. Persist each terminal measurement once."""
 
@@ -179,25 +194,57 @@ class Receipts:
     def measure(
         self, task, session, policy, seed, key, first=None, setup=None, capture_transitions=False
     ):
-        path = self.path(key)
+        return self.measure_batch(
+            [TerminalJob(task, session, policy, seed, key, first, setup, capture_transitions)]
+        )[0]
+
+    def prepare(self, job):
+        path = self.path(job.key)
         if path.exists():
             saved = read_gzip(path)
-            if capture_transitions:
-                # QR can rebuild optimizer state from its deterministic history. A changed
-                # policy path must never silently inherit the previous actor's terminal label.
-                replay = collect_terminal(session, policy, seed, first, capture_transitions=True)
+            if job.capture_transitions:
+                # A changed actor cannot silently inherit the previous terminal label.
+                replay = collect_terminal(
+                    job.session, job.policy, job.seed, job.first, capture_transitions=True
+                )
                 if (
                     replay["reader_wire"] != saved["reader_wire"]
                     or replay["action_trace"] != saved["action_trace"]
                     or json.loads(json.dumps(replay["transitions"])) != saved["transitions"]
                 ):
-                    raise ValueError(f"Replayed online trajectory differs at {key}")
-            return saved
+                    raise ValueError(f"Replayed online trajectory differs at {job.key}")
+            return saved, False
         record = collect_terminal(
-            session, policy, seed, first, capture_transitions=capture_transitions
+            job.session,
+            job.policy,
+            job.seed,
+            job.first,
+            capture_transitions=job.capture_transitions,
         )
-        if setup:
-            record["costs"].update(setup)
+        if job.setup:
+            record["costs"].update(job.setup)
+        return record, True
+
+    def measure_batch(self, jobs):
+        # Complete all independent policy continuations before leasing the shared HTTP meter.
+        prepared = [self.prepare(job) for job in jobs]
+        with ExitStack() as owner:
+            ledger = None
+
+            def get_ledger(settings):
+                nonlocal ledger
+                if ledger is None:
+                    ledger = owner.enter_context(reader_lease(settings))
+                return ledger
+
+            return [
+                self.readout(job, record, get_ledger) if pending else record
+                for job, (record, pending) in zip(jobs, prepared, strict=True)
+            ]
+
+    def readout(self, job, record, get_ledger):
+        task, key = job.task, job.key
+        path = self.path(key)
         record.update(
             receipt_id=key,
             task_id=task["id"],
@@ -206,8 +253,10 @@ class Receipts:
             actual_requests=0,
         )
         if record["reader_wire"]:
-            available = [] if capture_transitions else self.by_task[task["id"]]
-            for previous in [*available, *(other / path.name for other in self.reuse_dirs)]:
+            available = [] if job.capture_transitions else self.by_task[task["id"]]
+            # Prefer the peer's registered observation of this precise action. Two
+            # paid observations can differ even for identical seed and Reader wire.
+            for previous in [*(other / path.name for other in self.reuse_dirs), *available]:
                 if not previous.is_file():
                     continue
                 prior = read_gzip(previous)
@@ -249,35 +298,37 @@ class Receipts:
                 self.by_task[task["id"]].append(path)
                 return record
             host = self.dataset.host
-            with reader_lease(host.settings) as ledger:
-                if ledger is None:
-                    raise ValueError("A metered Reader is required")
-                with VLLMClient(
-                    VLLMConfig(**host.settings["host"]), budget=ledger, capacity=host.capacity
-                ) as client:
-                    before = ledger.state["generation_requests"]
-                    marker = self.directory / (key + ".inflight")
-                    write_json(marker, record, indent=None)
-                    result, costs = request_reader(
-                        client, host, record["reader_wire"], record["capacity"]
-                    )
-                    delta = ledger.state["generation_requests"] - before
-                    record.update(
-                        reader_result=result,
-                        status=result["status"],
-                        feedback_exposure=delta,
-                        actual_requests=delta,
-                        ledger_before=before,
-                        ledger_after=before + delta,
-                    )
-                    record["costs"].update(costs)
-                    if result["status"] == "reader_completed":
-                        score_episode(self.dataset, self.db, task, record)
-                    write_gzip(path, record)
-                    marker.unlink()
-                    if record.get("grade"):
-                        self.by_task[task["id"]].append(path)
-                    self.calls += delta
+            lease_started = time.perf_counter()
+            ledger = get_ledger(host.settings)
+            record["costs"]["reader_lease_wait_ms"] = 1000 * (time.perf_counter() - lease_started)
+            if ledger is None:
+                raise ValueError("A metered Reader is required")
+            with VLLMClient(
+                VLLMConfig(**host.settings["host"]), budget=ledger, capacity=host.capacity
+            ) as client:
+                before = ledger.state["generation_requests"]
+                marker = self.directory / (key + ".inflight")
+                write_json(marker, record, indent=None)
+                result, costs = request_reader(
+                    client, host, record["reader_wire"], record["capacity"]
+                )
+                delta = ledger.state["generation_requests"] - before
+                record.update(
+                    reader_result=result,
+                    status=result["status"],
+                    feedback_exposure=delta,
+                    actual_requests=delta,
+                    ledger_before=before,
+                    ledger_after=before + delta,
+                )
+                record["costs"].update(costs)
+                if result["status"] == "reader_completed":
+                    score_episode(self.dataset, self.db, task, record)
+                write_gzip(path, record)
+                marker.unlink()
+                if record.get("grade"):
+                    self.by_task[task["id"]].append(path)
+                self.calls += delta
         else:
             write_gzip(path, record)
         return record
@@ -304,14 +355,13 @@ def acquire(dataset, db, receipts, proposal, policy, config, cap, repeat=None):
         uid += "_repeat" + str(repeat)
         seed += repeat + 1
     other = companion_task(db, task)
-    adjunct = None
+    jobs = []
     if other:
         key = f"companion_{other['id']}_{seed}"
         if not receipts.path(key).exists() and receipts.calls >= cap:
             return None
         session, _, setup = cold_root(dataset, db, other, budget)
-        adjunct = receipts.measure(other, session, policy, seed, key, setup=setup)
-    labels = []
+        jobs.append(TerminalJob(other, session, policy, seed, key, setup=setup))
     pool = None
     preflight = {}
     for action_id in pack.actions:
@@ -324,10 +374,15 @@ def acquire(dataset, db, receipts, proposal, policy, config, cap, repeat=None):
         if session.online(actions) != online:
             raise ValueError("Root replay changed the legal observation")
         bound = next(a for a in actions if a.id == action_id)
-        outcome = receipts.measure(task, session, policy, seed, key, bound, setup)
-        labels.append(
-            dict(outcome_label(task["dataset"], outcome, adjunct), first_action_id=action_id)
-        )
+        jobs.append(TerminalJob(task, session, policy, seed, key, bound, setup))
+    if sum(not receipts.path(job.key).exists() for job in jobs) > cap - receipts.calls:
+        return None
+    results = receipts.measure_batch(jobs)
+    adjunct = results.pop(0) if other is not None else None
+    labels = [
+        dict(outcome_label(task["dataset"], outcome, adjunct), first_action_id=aid)
+        for aid, outcome in zip(pack.actions, results, strict=True)
+    ]
     return dict(
         root_state_id=uid,
         task_id=task["id"],
@@ -365,14 +420,21 @@ def run(args):
     dataset = MemoryControlDataset(args.dataset)
     if not dataset.control_release or not dataset.host:
         raise ValueError("Use the revised native dataset and Reader")
-    policy, model = load_policy(
-        dataset, args.continuation_checkpoint, args.device, args.utility_lambda
+    gate = phase_directory(args.output)
+    unit = (
+        "pq"
+        if (args.continuation_checkpoint or args.sampler_checkpoint or args.round)
+        else "reader"
     )
-    sampler_model = (
-        load_policy(dataset, args.sampler_checkpoint, args.device, args.utility_lambda)[1]
-        if args.sampler_checkpoint and args.sampler_checkpoint != args.continuation_checkpoint
-        else model
-    )
+    with phase_unit(gate, unit):
+        policy, model = load_policy(
+            dataset, args.continuation_checkpoint, args.device, args.utility_lambda
+        )
+        sampler_model = (
+            load_policy(dataset, args.sampler_checkpoint, args.device, args.utility_lambda)[1]
+            if args.sampler_checkpoint and args.sampler_checkpoint != args.continuation_checkpoint
+            else model
+        )
     models = {id(m): m for m in (model, sampler_model) if m is not None}.values()
     setup_seconds = time.perf_counter() - started
     devices = {str(m.device) for m in models}
@@ -478,164 +540,174 @@ def run(args):
         wall = time.perf_counter()
         pending_path = args.output / "pending.json"
         while receipts.calls < args.calls:
-            marker = packs / f"{index:06d}.json.gz"
-            rng = random.Random(args.seed * 1000003 + index)  # noqa: S311 -- uniform exploration
-            if args.window == 1:
-                batch = [v for v in [next(order, None)] if v is not None]
-            else:
-                eligible_by_source = {
-                    src: [r for r in rows if r[2] not in used] for src, rows in pools.items()
-                }
-                active = [src for src in sorted(pools) if eligible_by_source[src]]
-                if not active:
-                    raise ValueError("Clean TRAIN pool exhausted")
-                weights = {MUSIQUE: 0.6, QASPER: 0.3, PERSONA: 0.1}
-                src = rng.choices(active, weights=[weights[s] for s in active])[0]
-                slate = eligible_by_source[src]
-                # Sample native groups first; otherwise long papers get proportionally more slots.
-                by_group = defaultdict(list)
-                for item in slate:
-                    by_group[item[1]].append(item)
-                groups = rng.sample(list(by_group), min(args.window, len(by_group)))
-                batch = [rng.choice(by_group[g]) for g in groups]
-            if (args.output / "unselected" / f"{index:06d}.json").exists():
-                index += 1
-                continue
-            if not batch:
-                raise ValueError("Clean TRAIN roster exhausted")
-            if marker.exists():
-                old_row = read_gzip(marker)
-                random_calls += old_row.get("random_exposure", 0)
-                used.add(old_row["task_id"])
-                index += 1
-                continue
-            # Windows contain common candidates. Condition on the sampled source so utilities
-            # cannot shift exposure toward cheap sources. The same pool seeds bind mechanism arms.
-            eligible = [row for row in batch if row[0] == batch[0][0]]
-            eligible_groups = len(eligible)
-            random_pick = args.sampler == "uniform" or random_calls < 0.25 * receipts.calls
-            if random_pick:
-                eligible = [rng.choice(eligible)]
-            candidates, priorities = [], []
-            for _, _, task_id in eligible:
-                proposal = candidate(
-                    dataset, db, task_id, args.budget, base_seed, policy, model, args.utility_lambda
-                )
-                task, _, online, pack = proposal
-                candidates.append(proposal)
-                net = (
-                    model_utilities(sampler_model, online, args.utility_lambda)
-                    if not random_pick
-                    else None
-                )
-                other = companion_task(db, task)
-                cost = len(pack.actions) + int(
-                    other is not None
-                    and not receipts.path(f"companion_{other['id']}_{args.seed}").exists()
-                )
-                priorities.append(
-                    sampler_priority(args.sampler, net, online, pack, cost)
-                    if not random_pick
-                    else 0
-                )
-            best = max(priorities)
-            selected = candidates[rng.choice([i for i, x in enumerate(priorities) if x == best])]
-            pending = read_json(pending_path)
-            if pending is not None and pending["window"] == index:
-                selected = candidate(
-                    dataset,
-                    db,
-                    pending["task"],
-                    args.budget,
-                    base_seed,
-                    policy,
-                    model,
-                    args.utility_lambda,
-                )
-                before, random_pick, best = (
-                    pending["before"],
-                    pending["random"],
-                    pending["priority"],
-                )
-            else:
-                before = receipts.calls
-                write_json(
-                    pending_path,
-                    dict(
-                        window=index,
-                        task=selected[0]["id"],
-                        before=before,
-                        random=random_pick,
-                        priority=best,
+            with phase_unit(gate, unit):
+                marker = packs / f"{index:06d}.json.gz"
+                rng = random.Random(args.seed * 1000003 + index)  # noqa: S311 -- uniform exploration
+                if args.window == 1:
+                    batch = [v for v in [next(order, None)] if v is not None]
+                else:
+                    eligible_by_source = {
+                        src: [r for r in rows if r[2] not in used] for src, rows in pools.items()
+                    }
+                    active = [src for src in sorted(pools) if eligible_by_source[src]]
+                    if not active:
+                        raise ValueError("Clean TRAIN pool exhausted")
+                    weights = {MUSIQUE: 0.6, QASPER: 0.3, PERSONA: 0.1}
+                    src = rng.choices(active, weights=[weights[s] for s in active])[0]
+                    slate = eligible_by_source[src]
+                    # Sample native groups before their tasks.
+                    by_group = defaultdict(list)
+                    for item in slate:
+                        by_group[item[1]].append(item)
+                    groups = rng.sample(list(by_group), min(args.window, len(by_group)))
+                    batch = [rng.choice(by_group[g]) for g in groups]
+                if (args.output / "unselected" / f"{index:06d}.json").exists():
+                    index += 1
+                    continue
+                if not batch:
+                    raise ValueError("Clean TRAIN roster exhausted")
+                if marker.exists():
+                    old_row = read_gzip(marker)
+                    random_calls += old_row.get("random_exposure", 0)
+                    used.add(old_row["task_id"])
+                    index += 1
+                    continue
+                # Condition on the sampled source.
+                # Shared pool seeds bind both mechanism arms.
+                eligible = [row for row in batch if row[0] == batch[0][0]]
+                eligible_groups = len(eligible)
+                random_pick = args.sampler == "uniform" or random_calls < 0.25 * receipts.calls
+                if random_pick:
+                    eligible = [rng.choice(eligible)]
+                candidates, priorities = [], []
+                for _, _, task_id in eligible:
+                    proposal = candidate(
+                        dataset,
+                        db,
+                        task_id,
+                        args.budget,
+                        base_seed,
+                        policy,
+                        model,
+                        args.utility_lambda,
+                    )
+                    task, _, online, pack = proposal
+                    candidates.append(proposal)
+                    net = (
+                        model_utilities(sampler_model, online, args.utility_lambda)
+                        if not random_pick
+                        else None
+                    )
+                    other = companion_task(db, task)
+                    cost = len(pack.actions) + int(
+                        other is not None
+                        and not receipts.path(f"companion_{other['id']}_{args.seed}").exists()
+                    )
+                    priorities.append(
+                        sampler_priority(args.sampler, net, online, pack, cost)
+                        if not random_pick
+                        else 0
+                    )
+                best = max(priorities)
+                selected = candidates[
+                    rng.choice([i for i, x in enumerate(priorities) if x == best])
+                ]
+                pending = read_json(pending_path)
+                if pending is not None and pending["window"] == index:
+                    selected = candidate(
+                        dataset,
+                        db,
+                        pending["task"],
+                        args.budget,
+                        base_seed,
+                        policy,
+                        model,
+                        args.utility_lambda,
+                    )
+                    before, random_pick, best = (
+                        pending["before"],
+                        pending["random"],
+                        pending["priority"],
+                    )
+                else:
+                    before = receipts.calls
+                    write_json(
+                        pending_path,
+                        dict(
+                            window=index,
+                            task=selected[0]["id"],
+                            before=before,
+                            random=random_pick,
+                            priority=best,
+                        ),
+                    )
+                task, prefix, _, pack = selected
+                uid = str(task["id"]) + "_" + "-".join(prefix)
+                keys = [uid + "_" + aid for aid in pack.actions]
+                companion = companion_task(db, task)
+                if companion:
+                    keys.append(f"companion_{companion['id']}_{args.seed}")
+                needed = sum(not receipts.path(key).exists() for key in keys)
+                if needed > args.calls - receipts.calls:
+                    # Keep each selected comparison pack intact at an exact checkpoint boundary.
+                    write_json(
+                        args.output / "unselected" / f"{index:06d}.json",
+                        dict(
+                            task=task["id"],
+                            expected_new_exposure=needed,
+                            remaining=args.calls - receipts.calls,
+                        ),
+                    )
+                    pending_path.unlink(missing_ok=True)
+                    record_costs(receipts.calls, index)
+                    index += 1
+                    continue
+                row = acquire(dataset, db, receipts, selected, policy, config, args.calls)
+                if row is None:
+                    write_json(
+                        args.output / "partial-pack.json",
+                        {
+                            "window": index,
+                            "task": selected[0]["id"],
+                            "paid_calls": receipts.calls,
+                            "reason": "checkpoint_budget",
+                            "pack_actions": selected[-1].actions,
+                        },
+                    )
+                    break
+                used.add(row["task_id"])
+                row.update(
+                    window=index,
+                    selection_priority=best,
+                    selection_kind=(
+                        "reserved_uniform"
+                        if random_pick
+                        else "uniform_zero_priority"
+                        if best == 0
+                        else "positive_priority"
                     ),
+                    eligible_group_count=eligible_groups,
+                    estimated_pending_exposure=needed,
+                    realized_new_exposure=receipts.calls - before,
+                    random_exposure=receipts.calls - before if random_pick else 0,
                 )
-            task, prefix, _, pack = selected
-            uid = str(task["id"]) + "_" + "-".join(prefix)
-            keys = [uid + "_" + aid for aid in pack.actions]
-            companion = companion_task(db, task)
-            if companion:
-                keys.append(f"companion_{companion['id']}_{args.seed}")
-            needed = sum(not receipts.path(key).exists() for key in keys)
-            if needed > args.calls - receipts.calls:
-                # Keep each selected comparison pack intact at an exact checkpoint boundary.
-                write_json(
-                    args.output / "unselected" / f"{index:06d}.json",
-                    dict(
-                        task=task["id"],
-                        expected_new_exposure=needed,
-                        remaining=args.calls - receipts.calls,
-                    ),
-                )
+                write_gzip(marker, row)
                 pending_path.unlink(missing_ok=True)
+                completed += 1
+                random_calls += row["random_exposure"]
                 record_costs(receipts.calls, index)
                 index += 1
-                continue
-            row = acquire(dataset, db, receipts, selected, policy, config, args.calls)
-            if row is None:
                 write_json(
-                    args.output / "partial-pack.json",
+                    args.output / "progress.json",
                     {
-                        "window": index,
-                        "task": selected[0]["id"],
-                        "paid_calls": receipts.calls,
-                        "reason": "checkpoint_budget",
-                        "pack_actions": selected[-1].actions,
+                        "complete_packs": completed,
+                        "feedback_calls": receipts.calls,
+                        "random_feedback_calls": receipts.calls
+                        if args.sampler == "uniform"
+                        else random_calls,
+                        "wall_seconds_this_invocation": time.perf_counter() - wall,
                     },
                 )
-                break
-            used.add(row["task_id"])
-            row.update(
-                window=index,
-                selection_priority=best,
-                selection_kind=(
-                    "reserved_uniform"
-                    if random_pick
-                    else "uniform_zero_priority"
-                    if best == 0
-                    else "positive_priority"
-                ),
-                eligible_group_count=eligible_groups,
-                estimated_pending_exposure=needed,
-                realized_new_exposure=receipts.calls - before,
-                random_exposure=receipts.calls - before if random_pick else 0,
-            )
-            write_gzip(marker, row)
-            pending_path.unlink(missing_ok=True)
-            completed += 1
-            random_calls += row["random_exposure"]
-            record_costs(receipts.calls, index)
-            index += 1
-            write_json(
-                args.output / "progress.json",
-                {
-                    "complete_packs": completed,
-                    "feedback_calls": receipts.calls,
-                    "random_feedback_calls": receipts.calls
-                    if args.sampler == "uniform"
-                    else random_calls,
-                    "wall_seconds_this_invocation": time.perf_counter() - wall,
-                },
-            )
         record_costs(receipts.calls, index, final=True)
         print(
             json.dumps(

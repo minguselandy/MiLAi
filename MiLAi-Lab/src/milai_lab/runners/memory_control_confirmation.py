@@ -23,6 +23,10 @@ from milai_lab.scorers.memory_control_episode_metrics import (
 )
 
 
+class InsufficientDevGroups(ValueError):
+    """DEV has too few observed native clusters for the planned variance simulation."""
+
+
 def confirmation_capacity(
     data: Path, target_tasks: int, seed: int, exposure_runs: list[Path],
 ) -> dict[str, Any]:
@@ -140,6 +144,7 @@ def plan_confirmation_power(
     minimum_quality_effect: float | None = None,
     mask_unknown_quality: bool = False,
     savings_null: float = 0.0,
+    total_workload_cost: bool = False,
 ) -> dict[str, Any]:
     """Sample clustered DEV residuals into the candidate fresh source/group allocation."""
     import numpy as np
@@ -191,9 +196,14 @@ def plan_confirmation_power(
             ]
             costs = [[r.get("costs", {}).get(cost_field) for r in records]
                      for records in records_by_arm]
-            if not all(qualities) or not all(
-                type(c) in (int, float) and np.isfinite(c) and c >= 0 for row in costs for c in row
-            ):
+            if cost_field == "reader_input_tokens":
+                measured = all(type(c) is int for row in costs for c in row)
+            else:
+                measured = all(
+                    type(c) in (int, float) and np.isfinite(c) and c >= 0
+                    for row in costs for c in row
+                )
+            if not all(qualities) or not measured:
                 continue
             n = len(seeds)
             profiles[source].append((len(ids), [
@@ -204,7 +214,9 @@ def plan_confirmation_power(
                 )
             ]))
     if set(profiles) != set(SOURCES) or any(len(values) < 2 for values in profiles.values()):
-        raise ValueError("Actual DEV outcomes need multiple measured groups per native source")
+        raise InsufficientDevGroups(
+            "Actual DEV outcomes need multiple measured groups per native source"
+        )
 
     alternatives = [(0.0, 0.20), (0.0, 0.15), (-0.5, 0.20), (-1.0, 0.20), (-2.0, 0.20)]
     passes: Counter[tuple[float, float]] = Counter()
@@ -220,13 +232,15 @@ def plan_confirmation_power(
                  for size in confirm_sizes[source]]
         for source, sizes in source_sizes.items()
     }
+    cost_mass = {s: float(confirm_sizes[s].sum()) if total_workload_cost else 1.0 for s in SOURCES}
     dev_points = np.zeros((len(seeds), 3))
     for source in SOURCES:
         sizes = source_sizes[source]
         q_weights = np.ones(len(sizes)) if source == MUSIQUE else sizes
         dev_points[:, 0] += np.average(arrays[source][:, :, 0], axis=0, weights=q_weights)
         for axis in (1, 2):
-            dev_points[:, axis] += np.average(arrays[source][:, :, axis], axis=0, weights=sizes)
+            dev_points[:, axis] += cost_mass[source] * np.average(
+                arrays[source][:, :, axis], axis=0, weights=sizes)
     dev_quality = dev_points[:, 0] / len(SOURCES)
     dev_savings = 1 - dev_points[:, 1] / dev_points[:, 2]
     conservative_quality, conservative_savings = float(min(dev_quality)), float(min(dev_savings))
@@ -260,13 +274,14 @@ def plan_confirmation_power(
             simulated[:, 0] -= np.average(all_seeds[:, 0], weights=raw_q_weights)
             simulated[:, 1] -= np.average(all_seeds[:, 1] - all_seeds[:, 2], weights=sizes)
             reference += [np.average(simulated[:, 0], weights=q_weights),
-                          np.average(simulated[:, 1], weights=target),
-                          np.average(simulated[:, 2], weights=target)]
+                          cost_mass[source] * np.average(simulated[:, 1], weights=target),
+                          cost_mass[source] * np.average(simulated[:, 2], weights=target)]
             sample = rng.integers(0, len(target), size=(repeats, len(target)))
             q_w, c_w = q_weights[sample], target[sample]
             bootstrap[:, 0] += (simulated[sample, 0] * q_w).sum(axis=1) / q_w.sum(axis=1)
             for axis in (1, 2):
-                bootstrap[:, axis] += (simulated[sample, axis] * c_w).sum(axis=1) / c_w.sum(axis=1)
+                means = (simulated[sample, axis] * c_w).sum(axis=1) / c_w.sum(axis=1)
+                bootstrap[:, axis] += cost_mass[source] * means
         q_distribution = bootstrap[:, 0] / len(SOURCES)
         input_distribution = 1 - bootstrap[:, 1] / bootstrap[:, 2]
         q_point = np.quantile(q_distribution, interval_alpha)

@@ -15,6 +15,7 @@ from milai_lab.datasets.memory_control_store import connect
 from milai_lab.methods.qrag_dual_control import QragDualControl
 from milai_lab.runners.control_policy_iteration import group_roster, read_gzip
 from milai_lab.runners.qrag_milai_env import outcome_label
+from milai_lab.runners.v13_phase import phase_directory, phase_unit
 
 
 def main():
@@ -23,6 +24,11 @@ def main():
     p.add_argument("--checkpoint", type=Path, required=True)
     p.add_argument("--device", default="cuda")
     args = p.parse_args()
+    with phase_unit(phase_directory(args.run), "qr"):
+        verify(args)
+
+
+def verify(args):
     cfg = read_json(args.run / "run.json")
     training = read_json(args.checkpoint / "training.json")
     snapshot = read_json(args.checkpoint / "controller.json")
@@ -30,10 +36,12 @@ def main():
     if data.is_dir():
         data = data / "memory_control.sqlite3"
     positions = defaultdict(dict)
+    ledger_slots = set()
     paid = claims = unknown_requests = 0
     groups = set()
     counts = Counter()
     metrics = Counter()
+    cost_sums, cost_counts = Counter(), Counter()
     probe = read_json(args.checkpoint / "score_probe.json")
     online = None
     minimum_probe_id = None
@@ -48,6 +56,24 @@ def main():
             continue
         position, task_id = int(match[2]), int(match[3])
         r = read_gzip(path)
+        if r["actual_requests"]:
+            interval = range(r["ledger_before"], r["ledger_after"])
+            if len(interval) != r["actual_requests"] or ledger_slots.intersection(interval):
+                raise ValueError("QR receipts overlap or disagree with metered exposure")
+            ledger_slots.update(interval)
+        for field in (
+            "reader_input_tokens",
+            "reader_output_tokens",
+            "reader_cached_tokens",
+            "controller_gpu_ms",
+            "reader_wall_ms",
+            "reader_lease_wait_ms",
+            "local_wall_ms",
+        ):
+            value = r["costs"].get(field)
+            if value is not None:
+                cost_sums[field] += value
+                cost_counts[field] += 1
         claims += r["feedback_exposure"]
         paid += r["actual_requests"] or 0
         unknown_requests += r["actual_requests"] is None
@@ -141,6 +167,8 @@ def main():
             completed_episodes=len(positions),
             fitted_native_groups=len(groups),
             measurements=dict(metrics),
+            measured_cost_sums=dict(cost_sums),
+            measured_cost_counts=dict(cost_counts),
             observed_terminations_and_steps=dict(counts),
             maximum_encoder_changes=changes,
             selected_action=online["actions"][utilities.argmax().item()]["id"],

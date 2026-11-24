@@ -54,7 +54,8 @@ train)
     run="$result_dir/$label"
     mkdir "$run"
     cd "$source_dir"
-    python3 -u train_q_rag.py envs=musique algo=pqn_e5_musique \
+    /usr/bin/time -q -f '{"elapsed_seconds":%e,"cpu_user_seconds":%U,"cpu_sys_seconds":%S,"max_rss_kib":%M,"exit_code":%x}' \
+        -o "$run/fit-resource.json" python3 -u train_q_rag.py envs=musique algo=pqn_e5_musique \
         "envs.data_path=$assets/musique-tune300" "algo.model.model_name=$model" \
         steps_count=10000 batch_size=12 accumulate_grads=8 eval_interval=100 \
         eval_episodes=300 seed=42 envs_parallel=1 max_action_length=110 \
@@ -65,11 +66,32 @@ train)
     "$project/scripts/qrag_reference.sh" evaluate "$trained" > "$run/retrieval-validation.log" 2>&1
     ;;
 evaluate)
-    trained=${2:?provide upstream run directory containing config.yaml}
-    cd "$source_dir"
-    python3 -u eval_retriever.py "pretrained_path=$trained" num_samples=-1 +envs.max_steps=4
-    python3 "$project/scripts/qrag_ref_result.py" --run "$trained" \
-        --roster "$assets/musique-tune300/roster.json"
+    trained=$(realpath "${2:?provide upstream run directory containing config.yaml}")
+    if [[ ! -s "$trained/reference-result.json" ]]; then
+        cd "$source_dir"
+        /usr/bin/time -q -f '{"elapsed_seconds":%e,"cpu_user_seconds":%U,"cpu_sys_seconds":%S,"max_rss_kib":%M,"exit_code":%x}' \
+            -a -o "$trained/validation-resource.jsonl" python3 -u eval_retriever.py \
+            "pretrained_path=$trained" num_samples=-1 +envs.max_steps=4
+        timing_args=()
+        if [[ -s "$experiment/initial-schedule.json" ]]; then
+            timing_args+=(--schedule "$experiment/initial-schedule.json")
+        fi
+        python3 "$project/scripts/qrag_ref_result.py" "${timing_args[@]}" --run "$trained" \
+            --roster "$assets/musique-tune300/roster.json"
+    fi
+    checkpoint_dir=$(python3 -c 'import sys,yaml; print(yaml.safe_load(open(sys.argv[1]))["checkpoint_dir"])' "$trained/config.yaml")
+    mkdir -p "$trained/actors"
+    for selected in best last; do
+        dest="$trained/actors/$selected.zip"
+        receipt="$trained/actors/$selected.json"
+        if [[ ! -s "$dest" || ! -s "$receipt" ]]; then
+            OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 nice -n 8 python3 "$project/scripts/qrag_ref_actor_delta.py" compact \
+                --actor "$checkpoint_dir/model_$selected.pt" --base "$model/model.safetensors" \
+                --delta "$dest" > "$receipt.part"
+            mv "$receipt.part" "$receipt"
+        fi
+    done
+    cat "$trained/reference-result.json"
     ;;
 *)
     echo "Usage: $0 prepare | train RUN_LABEL | evaluate UPSTREAM_RUN_DIR" >&2

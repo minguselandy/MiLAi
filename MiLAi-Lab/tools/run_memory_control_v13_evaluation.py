@@ -19,6 +19,7 @@ from milai_lab.runners.memory_control_episode import (
     episode_population,
     evaluate_episodes,
 )
+from milai_lab.runners.v13_phase import phase_directory, phase_unit
 from milai_lab.scorers.memory_control_episode_metrics import summarize
 
 
@@ -104,16 +105,18 @@ def evaluate(args):
     args.output.mkdir(parents=True, exist_ok=True)
     while True:
         try:
-            receipt = evaluate_episodes(
-                args.data,
-                args.population,
-                arm,
-                args.output,
-                device=args.device,
-                max_reader_requests=args.window,
-                inline_readout=True,
-                prepared_dataset=ds,
-            )
+            unit = "qr" if arm["policy"] == "qrag_milai" else "evaluate"
+            with phase_unit(phase_directory(args.output), unit):
+                receipt = evaluate_episodes(
+                    args.data,
+                    args.population,
+                    arm,
+                    args.output,
+                    device=args.device,
+                    max_reader_requests=args.window,
+                    inline_readout=True,
+                    prepared_dataset=ds,
+                )
         except HttpOwnershipError as exc:
             if str(exc) != "HTTP_OWNER_BUSY":
                 raise

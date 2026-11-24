@@ -42,7 +42,8 @@ def main():
     pilot_weights = root / "staging/qr/s0/checkpoint-48"
     output = root / f"qr-{args.seed}"
     output.mkdir(exist_ok=True)
-    receipts = root / "staging/qr/formal-receipts"
+    formal = root / "staging/qr" / ("formal" if args.seed == 11 else f"formal-{args.seed}")
+    receipts = formal.with_name(formal.name + "-receipts")
     receipts.mkdir(parents=True, exist_ok=True)
     link = output / "receipts"
     if not link.exists():
@@ -98,7 +99,7 @@ def main():
         "--output",
         str(output),
         "--checkpoint-root",
-        str(root / "staging/qr/formal"),
+        str(formal),
         "--batch",
         "32",
         "--seed",

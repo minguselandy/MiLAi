@@ -11,6 +11,7 @@ from pathlib import Path
 from milai_lab.datasets.memory_control_store import connect, get_meta, unpack
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.runners.qrag_milai_env import cold_root
+from milai_lab.scorers.memory_control_native import qasper_reference
 
 
 def audit(release, histories, contextual, native_databases):
@@ -100,6 +101,13 @@ def audit(release, histories, contextual, native_databases):
             pairs[group].append(unpack(blob)["answerable"])
         if any(sorted(answers) != [False, True] for answers in pairs.values()):
             raise ValueError("Missing answerability member in a protected native pair")
+        qasper_tasks = 0
+        for (blob,) in db.execute("""SELECT data FROM experiment_tasks t JOIN annotations a
+                                  ON a.task_id=t.id WHERE t.dataset='qasper'"""):
+            refs = unpack(blob)["answer_annotations"]
+            if not refs or not all(qasper_reference(ann["answer"])[0].strip() for ann in refs):
+                raise ValueError("A protected QASPER task lacks a usable native reference")
+            qasper_tasks += 1
         if db.execute("SELECT count(*) FROM states").fetchone()[0]:
             raise ValueError("Unexpected training states in the confirmation release")
     overlap = {s: len(exposed[s] & groups) for s, groups in selected.items()}
@@ -112,6 +120,7 @@ def audit(release, histories, contextual, native_databases):
         "cold_prepare_sources": cold_sources,
         "reader_calls": 0,
         "complete_mu_pairs": len(pairs),
+        "qasper_tasks_with_native_references": qasper_tasks,
         "fitting_states": 0,
         "historical_native_groups_by_source": {s: len(g) for s, g in exposed.items()},
         "current_release_group_overlap": overlap,

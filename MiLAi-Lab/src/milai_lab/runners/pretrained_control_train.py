@@ -18,12 +18,40 @@ import torch
 
 from milai_lab.methods.pretrained_control import PretrainedControl
 from milai_lab.methods.pretrained_objective import group_weights, root_loss
+from milai_lab.runners.pretrained_fit_closeout import finish_verified, fit_owner, write_json
 
 
-def write_json(path, obj):
-    tmp = path.with_suffix(".tmp")
-    tmp.write_text(json.dumps(obj, indent=2))
-    tmp.replace(path)
+def validate_terminal_pack(row):
+    if row["continuation_mode"] != "full_episode" or row["split_role"] != "train":
+        raise ValueError("Pack outside full TRAIN protocol")
+    terminal = {
+        "handoff",
+        "no_feasible_read",
+        "max_operations",
+        "budget_exhausted",
+        "material_budget_exhausted",
+    }
+    for result in row["outcomes"]:
+        has_quality = result["quality_observed"]
+        has_cost = result["future_cost_observed"]
+        if has_quality != (result["reader_quality"] is not None) or has_cost != (
+            result["future_cost"] is not None
+        ):
+            raise ValueError("Observed masks disagree with the supplied targets")
+        if (has_quality or has_cost) and (
+            result["termination_reason"] not in terminal or not result["reader_receipt_ids"]
+        ):
+            raise ValueError("Measured targets require a formal terminal Reader receipt")
+        if (
+            has_quality
+            and row["source"] == "musique_full"
+            and (
+                not result["companion_receipt_id"]
+                or not result["pair_metrics"]
+                or result["pair_metrics"]["group_answer_sufficiency_f1"] != result["reader_quality"]
+            )
+        ):
+            raise ValueError("MuSiQue quality requires the native pair and its companion receipt")
 
 
 class TrainingRoots:
@@ -52,8 +80,7 @@ class TrainingRoots:
                 for file in sorted(directory.glob("*.json.gz")):
                     with gzip.open(file) as handle:
                         row = json.load(handle)
-                    if row["continuation_mode"] != "full_episode" or row["split_role"] != "train":
-                        raise ValueError("Pack outside full TRAIN protocol")
+                    validate_terminal_pack(row)
                     key = row["root_state_id"]
                     if key in roots:
                         raise ValueError("Duplicate root within epoch")
@@ -133,6 +160,11 @@ class TrainingRoots:
 
 
 def fit(args):
+    with fit_owner(args.output, args.metrics or args.output):
+        fit_locked(args)
+
+
+def fit_locked(args):
     if args.objective == "evidence":
         if len(args.data) != 1:
             raise ValueError("One evidence database required")
@@ -162,6 +194,7 @@ def fit(args):
             for file in sorted(args.warm_packs.glob("*.json.gz")):
                 with gzip.open(file) as handle:
                     warm_row = json.load(handle)
+                validate_terminal_pack(warm_row)
                 if (
                     warm_row["split_role"] != "train"
                     or warm_row["collection_round"] != 0
@@ -214,7 +247,7 @@ def fit(args):
         "mixed_precision": "bf16" if args.device.startswith("cuda") else "float32",
         "optimizer_dtype": "float32",
         "cost_scale": model.cost_scale,
-        "target": roots.target,
+        "target": list(roots.target) if roots.target else None,
         "scale_source": scale_source,
         "source_inventory": {
             s: {"groups": len(groups), "roots": sum(map(len, groups.values()))}
@@ -233,15 +266,64 @@ def fit(args):
         "fitted_groups": sorted(fitted),
     }
     rolling = args.output / "resume.pt"
-    if (args.output / "checkpoint/controller.json").exists():
-        raise FileExistsError("Completed checkpoint exists")
+    path = args.output / "checkpoint"
+    run_path = args.output / "run.json"
+    previous = json.loads(run_path.read_text()) if run_path.is_file() else {}
+    if previous:
+        prior = dict(previous["contract"])
+        if previous["status"] == "completed":
+            prior["fitted_groups"] = contract["fitted_groups"]
+        if prior != contract or previous["status"] not in {"completed", "running"}:
+            raise ValueError("Existing fit identity differs from the requested schedule")
+    elif path.exists() or rolling.exists():
+        raise ValueError("Artifacts without an original run declaration cannot be adopted")
+    identity = previous.get("fit_identity", {"id": time.time_ns(), "backbone": str(model.backbone)})
+    if identity["backbone"] != str(model.backbone):
+        raise ValueError("Backbone differs from the declared fit")
+    if not metrics.samefile(args.output) and (metrics / "run.json").exists():
+        try:
+            m = json.loads((metrics / "run.json").read_text())
+        except json.JSONDecodeError:
+            if not previous:
+                raise
+            m = {}
+        if not previous or (m.get("fit_identity") and m["fit_identity"] != identity):
+            raise ValueError("Metrics belong to another fit")
+    if (path / "fit_completion.json").is_file():
+        del model, optimizer, scheduler
+        finish_verified(PretrainedControl, args.output, metrics, identity, contract, args.device)
+        return
+    if previous.get("status") == "completed":
+        if previous.get("fit_identity"):
+            raise ValueError("Completed fit lost its original checkpoint parity payload")
+        # Complete pre-journal receipts already record the original live-model reload.
+        if (
+            not previous.get("reload_scores_equal")
+            or previous["optimizer_updates"] != updates
+            or not (path / "control.pt").is_file()
+            or not (path / "controller.json").is_file()
+        ):
+            raise ValueError("Inconsistent completed legacy fit")
+        if not metrics.samefile(args.output):
+            write_json(metrics / "run.json", previous)
+        rolling.unlink(missing_ok=True)
+        return
+    if (
+        path.exists()
+        and previous.get("fit_identity")
+        and not previous.get("legacy_unjournaled_publish")
+    ):
+        raise ValueError("Published checkpoint is missing its completion probe")
     step = 0
     start = time.monotonic()
     counts, sources, task_ids = Counter(), Counter(), set()
     elapsed_before = 0.0
     if rolling.exists():
         saved = torch.load(rolling, map_location="cpu", weights_only=False, mmap=True)
-        if saved["contract"] != contract:
+        if (
+            json.loads(json.dumps(saved["contract"])) != contract
+            or saved.get("fit_identity", identity) != identity
+        ):
             raise ValueError("Resume protocol differs from original fit")
         model.load_state_dict(saved["model"])
         optimizer.load_state_dict(saved["optimizer"])
@@ -250,16 +332,20 @@ def fit(args):
         counts, sources, task_ids, fitted = saved["exposure"]
         torch.set_rng_state(saved["cpu_rng"])
         if args.device.startswith("cuda"):
-            torch.cuda.set_rng_state(saved["gpu_rng"])
+            torch.cuda.set_rng_state(saved["gpu_rng"], device=args.device)
         elapsed_before = saved["elapsed"]
         del saved
-    else:
-        write_json(args.output / "run.json", {"contract": contract, "status": "running"})
-    if metrics != args.output:
-        write_json(
-            metrics / "run.json",
-            {"contract": contract, "status": "running", "resumed_at_update": step},
-        )
+    running = {
+        "contract": contract,
+        "status": "running",
+        "fit_identity": identity,
+        "resumed_at_update": step,
+    }
+    if path.exists():
+        running["legacy_unjournaled_publish"] = True
+    write_json(run_path, running)
+    if not metrics.samefile(args.output):
+        write_json(metrics / "run.json", running)
     attempt = time.time_ns()
     resumed_at = step
     for ep in range(epochs):
@@ -372,13 +458,14 @@ def fit(args):
                     {
                         "model": model.state_dict(),
                         "optimizer": optimizer.state_dict(),
+                        "fit_identity": identity,
                         "scheduler": scheduler.state_dict(),
                         "step": n,
                         "contract": contract,
                         "exposure": (counts, sources, task_ids, fitted),
                         "elapsed": elapsed,
                         "cpu_rng": torch.get_rng_state(),
-                        "gpu_rng": torch.cuda.get_rng_state()
+                        "gpu_rng": torch.cuda.get_rng_state(device=args.device)
                         if args.device.startswith("cuda")
                         else None,
                     },
@@ -390,40 +477,49 @@ def fit(args):
     with torch.inference_mode():
         example = roots.row(order[-1][0])["online"]
         expected = torch.stack(model.score(example)).cpu()
-    model.save(path)
-    del optimizer, scheduler, model
-    reload = PretrainedControl.load(path, device=args.device)
-    with torch.inference_mode():
-        actual = torch.stack(reload.score(example)).cpu()
-    torch.testing.assert_close(actual, expected, rtol=0, atol=0)
-    contract["fitted_groups"] = sorted(fitted)
-    write_json(
-        args.output / "run.json",
-        {
-            "status": "completed",
-            "contract": contract,
-            "roots": counts["roots"],
-            "comparisons": counts["comparisons"],
-            "paired_loss_comparisons": counts["comparisons"] if args.objective == "paired" else 0,
-            "demo_steps": counts["demo_steps"],
-            "known_evidence_actions": counts["known_evidence_actions"],
-            "measured_quality_actions": counts["measured_quality_actions"],
-            "measured_cost_actions": counts["measured_cost_actions"],
-            "unique_tasks": len(task_ids),
-            "groups_including_parent": len(fitted),
-            "source_exposures": sources,
-            "optimizer_updates": updates,
-            "wall_seconds": elapsed,
-            "reload_scores_equal": True,
-            "cuda_peak_bytes": entry["cuda_peak_bytes"],
-            "encoder_input_tokens": counts["input_tokens"],
-            "encoder_padded_tokens": counts["padded_tokens"],
-            "encoder_forward_batches": counts["encoder_calls"],
-        },
+    summary = {
+        "contract": dict(contract, fitted_groups=sorted(fitted)),
+        "roots": counts["roots"],
+        "comparisons": counts["comparisons"],
+        "paired_loss_comparisons": counts["comparisons"] if args.objective == "paired" else 0,
+        "demo_steps": counts["demo_steps"],
+        "known_evidence_actions": counts["known_evidence_actions"],
+        "measured_quality_actions": counts["measured_quality_actions"],
+        "measured_cost_actions": counts["measured_cost_actions"],
+        "unique_tasks": len(task_ids),
+        "groups_including_parent": len(fitted),
+        "source_exposures": sources,
+        "optimizer_updates": updates,
+        "wall_seconds": elapsed,
+        "cuda_peak_bytes": entry["cuda_peak_bytes"],
+        "encoder_input_tokens": counts["input_tokens"],
+        "encoder_padded_tokens": counts["padded_tokens"],
+        "encoder_forward_batches": counts["encoder_calls"],
+    }
+    proof = dict(
+        fit_identity=identity,
+        contract=contract,
+        summary=summary,
+        online=example,
+        device_type=torch.device(args.device).type,
+        scores=expected.tolist(),
     )
-    if metrics != args.output:
-        (metrics / "run.json").write_bytes((args.output / "run.json").read_bytes())
-    rolling.unlink(missing_ok=True)
+    if path.exists():
+        # A legacy trainer interrupted after publishing had no parity payload. Only
+        # link it to this replay if every trained tensor agrees exactly.
+        original = torch.load(path / "control.pt", map_location="cpu", weights_only=True, mmap=True)
+        replayed = model.state_dict()
+        if original.keys() != replayed.keys() or any(
+            (original[k].dtype != v.dtype or not torch.equal(original[k], v.cpu()))
+            for k, v in replayed.items()
+        ):
+            raise ValueError("Existing pre-journal weights differ from the finite replay")
+        write_json(path / "fit_completion.json", proof)
+        write_json(run_path, running)
+    else:
+        model.save(path, completion=proof)
+    del optimizer, scheduler, model
+    finish_verified(PretrainedControl, args.output, metrics, identity, contract, args.device)
 
 
 if __name__ == "__main__":

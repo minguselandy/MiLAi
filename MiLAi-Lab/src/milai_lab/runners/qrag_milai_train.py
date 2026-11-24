@@ -20,11 +20,14 @@ from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.methods.qrag_dual_control import QragDualControl, QragPolicy, td_lambda
 from milai_lab.runners.control_policy_iteration import (
     Receipts,
+    TerminalJob,
     companion_task,
     group_roster,
     write_gzip,
 )
 from milai_lab.runners.qrag_milai_env import cold_root, outcome_label
+from milai_lab.runners.qrag_resume import restore_resume, save_resume
+from milai_lab.runners.v13_phase import phase_directory, phase_unit
 
 
 @torch.no_grad()
@@ -175,20 +178,37 @@ def learning_rate(base, step, total):
 def train(args):
     import copy
 
-    launched = time.perf_counter()
-    torch.manual_seed(args.seed)
-    dataset = MemoryControlDataset(args.dataset)
-    args.output.mkdir(parents=True, exist_ok=True)
-    model = QragDualControl(args.backbone, device=args.device, cost_scale=args.cost_scale).eval()
-    target = copy.deepcopy(model).requires_grad_(False).eval()
-    optimizer = torch.optim.AdamW(
-        model.parameters(),
-        lr=args.lr,
-        betas=(0.9, 0.98),
-        eps=1e-6,
-        weight_decay=0.001,
-        foreach=False,
-    )
+    gate = phase_directory(args.output, supervised_qr=True)
+
+    def report_wait(phase):
+        write_json(
+            args.output / "phase-wait.json",
+            {
+                "pid": os.getpid(),
+                "waiting_for": "qr",
+                "observed_ns": time.time_ns(),
+                "phase": phase,
+            },
+        )
+
+    with phase_unit(gate, "qr", waiting=report_wait):
+        launched = time.perf_counter()
+        invocation_ns = time.time_ns()
+        torch.manual_seed(args.seed)
+        dataset = MemoryControlDataset(args.dataset)
+        args.output.mkdir(parents=True, exist_ok=True)
+        model = QragDualControl(
+            args.backbone, device=args.device, cost_scale=args.cost_scale
+        ).eval()
+        target = copy.deepcopy(model).requires_grad_(False).eval()
+        optimizer = torch.optim.AdamW(
+            model.parameters(),
+            lr=args.lr,
+            betas=(0.9, 0.98),
+            eps=1e-6,
+            weight_decay=0.001,
+            foreach=False,
+        )
     cfg = {
         k: str(v.resolve()) if isinstance(v, Path) else v
         for k, v in vars(args).items()
@@ -208,113 +228,185 @@ def train(args):
         batch_unit="clean native task trajectories",
         dtype="CUDA BF16 autocast, fp32 model and Adam state",
         checkpoint_type="evaluation_weights",
-        raw_receipts_path=str((args.output / "receipts").resolve()),
+        raw_receipts_path=str(args.output.absolute() / "receipts"),
         native_episode_summaries_path=str((args.output / "episodes").resolve()),
     )
-    if (old := read_json(args.output / "run.json")) and old != cfg:
-        raise ValueError("QR resume requires unchanged seed, base model, Reader and optimization")
-    write_json(args.output / "run.json", cfg)
     with (args.output / ".lock").open("a") as owner, closing(connect(dataset.path)) as db:
         fcntl.flock(owner, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if (old := read_json(args.output / "run.json")) and old != cfg:
+            raise ValueError(
+                "QR resume requires unchanged seed, base model, Reader and optimization"
+            )
+        write_json(args.output / "run.json", cfg)
         receipts = Receipts(args.output / "receipts", dataset, db)
         episodes, total_calls, updates = [], 0, 0
         fitted_groups = set()
         started = time.perf_counter()
         cumulative_fit_seconds = 0.0
         train_positions = known_positions = 0
-        for position, (_, _, task_id) in enumerate(group_roster(db, args.seed)):
-            task = db.execute("SELECT * FROM experiment_tasks WHERE id=?", (task_id,)).fetchone()
-            other = companion_task(db, task)
-            # Keep complete MuSiQue pairs within the checkpoint allowance.
-            next_checkpoint = min(c for c in {6000, 12000, 24000, args.calls} if c > total_calls)
-            if other is not None and total_calls + 2 > next_checkpoint:
-                continue
-            measured = []
-            for row in [task, other] if other is not None else [task]:
-                actor = QragPolicy(
-                    model,
-                    args.utility_lambda,
-                    seed=args.seed + row["id"] + updates * 100003,
-                    alpha=args.alpha,
-                )
-                execution, _, setup = cold_root(dataset, db, row, args.budget)
-                key = f"step{updates}_episode{position}_task{row['id']}"
-                measured.append(
-                    receipts.measure(
-                        row, execution, actor, args.seed, key, setup=setup, capture_transitions=True
-                    )
-                )
-            total_calls += sum(r["feedback_exposure"] for r in measured)
-            label = outcome_label(
-                task["dataset"], measured[0], measured[1] if len(measured) > 1 else None
+        compute_dir = args.output / "compute"
+        prior = [read_json(p) for p in compute_dir.glob("*.json")]
+        earlier_incomplete = sum(not item["complete"] for item in prior)
+        prior_fit = sum(p["fit_seconds_this_invocation"] for p in prior)
+        prior_residence = sum(p["gpu_residency_hours_this_invocation"] for p in prior)
+
+        def meter(finished=False):
+            residence = (
+                (time.perf_counter() - launched) / 3600 if model.device.type == "cuda" else 0.0
             )
-            first = measured[0]
-            write_gzip(
-                args.output / "episodes" / f"{position:06d}.json.gz",
+            write_json(
+                compute_dir / f"{invocation_ns}.json",
                 {
-                    **label,
-                    "task_id": task["id"],
-                    "native_group_id": task["native_group"],
-                    "source": task["dataset"],
-                    "split_role": "train",
-                    "continuation_mode": "full_episode",
-                    "collection_policy_update": updates,
-                    "reader_exposure": sum(r["feedback_exposure"] for r in measured),
-                    "actual_new_calls": [r["actual_requests"] for r in measured],
+                    "invocation_started_ns": invocation_ns,
+                    "observed_through_ns": time.time_ns(),
+                    "through_calls": total_calls,
+                    "optimizer_updates": updates,
+                    "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+                    "gpu_residency_hours_this_invocation": residence,
+                    "fit_seconds_this_invocation": cumulative_fit_seconds,
+                    "complete": finished,
+                    "resume_state": restore_mode,
                 },
             )
-            costs = first["costs"]
-            reader_cost = (
-                costs["reader_input_tokens"] + costs["reader_output_tokens"]
-                if all(
-                    costs.get(k) is not None
-                    for k in ("reader_input_tokens", "reader_output_tokens")
+            return residence
+
+        initial_position = -1
+        store = args.checkpoint_root or args.output
+        with phase_unit(gate, "qr", waiting=report_wait):
+            restored = (
+                restore_resume(
+                    args.output, store / "checkpoint-12000", model, target, optimizer, cfg, receipts
                 )
+                if args.calls >= 12000
                 else None
             )
-            # Reader infra failures carry no invented task reward. The complete rollout, including
-            # forced actions, is the TD unit. Collector interruptions never synthesize a terminal.
-            if first["status"] not in {"action_failed", "incomplete", "reader_interrupted"}:
-                episodes.append((first["transitions"], label["reader_quality"], reader_cost))
-                if label["quality_observed"] or reader_cost is not None:
-                    fitted_groups.add(f"{task['dataset']}/{task['native_group']}")
-
-            at_checkpoint = total_calls in {6000, 12000, 24000, args.calls}
-            if len(episodes) >= args.batch or at_checkpoint:
-                tick = time.perf_counter()
-                actual_lr = learning_rate(args.lr, updates + 1, schedule_updates)
-                for group in optimizer.param_groups:
-                    group["lr"] = actual_lr
-                loss = update_batch(model, target, optimizer, episodes, args)
-                if model.device.type == "cuda":
-                    torch.cuda.synchronize(model.device)
-                fit_seconds = time.perf_counter() - tick
-                cumulative_fit_seconds += fit_seconds
-                train_positions += sum(
-                    len(r) for r, q, c in episodes if q is not None or c is not None
+        restore_mode = (
+            "restored_target_and_adam"
+            if restored
+            else ("verified_trajectory_replay" if prior else "initial_online_fit")
+        )
+        if restored:
+            initial_position = restored["through_roster_position"]
+            updates = restored["optimizer_updates"]
+            total_calls = restored["calls"]
+            fitted_groups = set(restored["fitted_groups"])
+            measured = read_json(args.output / "updates" / f"{initial_position:06d}.json")
+            train_positions = measured["cumulative_cost_or_quality_transitions"]
+            known_positions = measured["cumulative_quality_transitions"]
+            if receipts.calls < total_calls or measured["feedback_calls"] != total_calls:
+                raise ValueError(
+                    "Restored 12k training state lacks its feedback trajectory bindings"
                 )
-                known_positions += sum(len(r) for r, q, c in episodes if q is not None)
-
-                updates += loss is not None
-                write_json(
-                    args.output / "updates" / f"{position:06d}.json",
+            if args.calls == total_calls:
+                meter(finished=True)
+                return
+        meter()
+        for position, (_, _, task_id) in enumerate(group_roster(db, args.seed)):
+            if position <= initial_position:
+                continue
+            with phase_unit(gate, "qr", waiting=report_wait):
+                task = db.execute(
+                    "SELECT * FROM experiment_tasks WHERE id=?", (task_id,)
+                ).fetchone()
+                other = companion_task(db, task)
+                # Keep complete MuSiQue pairs within the checkpoint allowance.
+                next_checkpoint = min(
+                    c for c in {6000, 12000, 24000, args.calls} if c > total_calls
+                )
+                if other is not None and total_calls + 2 > next_checkpoint:
+                    continue
+                jobs = []
+                for row in [task, other] if other is not None else [task]:
+                    actor = QragPolicy(
+                        model,
+                        args.utility_lambda,
+                        seed=args.seed + row["id"] + updates * 100003,
+                        alpha=args.alpha,
+                    )
+                    execution, _, setup = cold_root(dataset, db, row, args.budget)
+                    key = f"step{updates}_episode{position}_task{row['id']}"
+                    jobs.append(
+                        TerminalJob(
+                            row,
+                            execution,
+                            actor,
+                            args.seed,
+                            key,
+                            setup=setup,
+                            capture_transitions=True,
+                        )
+                    )
+                measured = receipts.measure_batch(jobs)
+                total_calls += sum(r["feedback_exposure"] for r in measured)
+                label = outcome_label(
+                    task["dataset"], measured[0], measured[1] if len(measured) > 1 else None
+                )
+                first = measured[0]
+                write_gzip(
+                    args.output / "episodes" / f"{position:06d}.json.gz",
                     {
+                        **label,
+                        "task_id": task["id"],
+                        "native_group_id": task["native_group"],
+                        "source": task["dataset"],
+                        "split_role": "train",
+                        "continuation_mode": "full_episode",
+                        "collection_policy_update": updates,
+                        "reader_exposure": sum(r["feedback_exposure"] for r in measured),
+                        "actual_new_calls": [r["actual_requests"] for r in measured],
+                    },
+                )
+                costs = first["costs"]
+                reader_cost = (
+                    costs["reader_input_tokens"] + costs["reader_output_tokens"]
+                    if all(
+                        costs.get(k) is not None
+                        for k in ("reader_input_tokens", "reader_output_tokens")
+                    )
+                    else None
+                )
+                # Infrastructure failures mask task quality.
+                # TD uses full trajectories including forced actions.
+                if first["status"] not in {"action_failed", "incomplete", "reader_interrupted"}:
+                    episodes.append((first["transitions"], label["reader_quality"], reader_cost))
+                    if label["quality_observed"] or reader_cost is not None:
+                        fitted_groups.add(f"{task['dataset']}/{task['native_group']}")
+
+                at_checkpoint = total_calls in {6000, 12000, 24000, args.calls}
+                if len(episodes) >= args.batch or at_checkpoint:
+                    tick = time.perf_counter()
+                    actual_lr = learning_rate(args.lr, updates + 1, schedule_updates)
+                    for group in optimizer.param_groups:
+                        group["lr"] = actual_lr
+                    loss = update_batch(model, target, optimizer, episodes, args)
+                    if model.device.type == "cuda":
+                        torch.cuda.synchronize(model.device)
+                    fit_seconds = time.perf_counter() - tick
+                    cumulative_fit_seconds += fit_seconds
+                    train_positions += sum(
+                        len(r) for r, q, c in episodes if q is not None or c is not None
+                    )
+                    known_positions += sum(len(r) for r, q, c in episodes if q is not None)
+
+                    updates += loss is not None
+                    residence = meter()
+                    current_update = {
                         "feedback_calls": total_calls,
                         "updates": updates,
                         "loss": loss,
                         "learning_rate": actual_lr,
                         "tasks": len(episodes),
                         "known_quality": sum(q is not None for _, q, _ in episodes),
+                        "invocation_started_ns": invocation_ns,
+                        "observed_through_ns": time.time_ns(),
                         "wall_seconds": time.perf_counter() - started,
                         "fit_wall_seconds": fit_seconds,
-                        "cumulative_fit_seconds": cumulative_fit_seconds,
+                        "cumulative_fit_seconds": cumulative_fit_seconds + prior_fit,
                         "cumulative_cost_or_quality_transitions": train_positions,
                         "cumulative_quality_transitions": known_positions,
-                        "controller_gpu_residency_hours": (
-                            (time.perf_counter() - launched) / 3600
-                            if model.device.type == "cuda"
-                            else 0
-                        ),
+                        "controller_gpu_residency_hours": residence + prior_residence,
+                        "resume_state": restore_mode,
+                        "earlier_incomplete_compute_invocations": earlier_incomplete,
                         "controller_device": str(model.device),
                         "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
                         "actor_forward_gpu_ms": model.counters["forward_gpu_ms"],
@@ -325,23 +417,51 @@ def train(args):
                         "peak_gpu_bytes": torch.cuda.max_memory_allocated()
                         if model.device.type == "cuda"
                         else None,
-                    },
-                )
-                episodes = []
-                if at_checkpoint:
-                    checkpoint(
-                        model,
-                        (args.checkpoint_root or args.output) / f"checkpoint-{total_calls}",
-                        dataset,
-                        args,
-                        total_calls,
-                        updates,
-                        fitted_groups,
-                        first,
-                        position,
-                    )
-            if total_calls >= args.calls:
-                break
+                    }
+                    canonical = args.output / "updates" / f"{position:06d}.json"
+                    replaying_update = canonical.exists()
+                    if replaying_update:
+                        before = read_json(canonical)
+                        if any(
+                            before[k] != current_update[k]
+                            for k in ("updates", "feedback_calls", "known_quality", "tasks")
+                        ):
+                            raise ValueError("QR replay differs from the immutable original update")
+                    else:
+                        write_json(canonical, current_update)
+                    episodes = []
+                    if at_checkpoint:
+                        saving = time.perf_counter()
+                        checkpoint(
+                            model,
+                            (args.checkpoint_root or args.output) / f"checkpoint-{total_calls}",
+                            dataset,
+                            args,
+                            total_calls,
+                            updates,
+                            fitted_groups,
+                            first,
+                            position,
+                        )
+                        if total_calls == 12000:
+                            save_resume(
+                                args.output,
+                                store / "checkpoint-12000",
+                                model,
+                                target,
+                                optimizer,
+                                cfg,
+                            )
+                        if not replaying_update:
+                            current_update["checkpoint_wall_seconds"] = time.perf_counter() - saving
+                            current_update["controller_gpu_residency_hours"] = (
+                                meter() + prior_residence
+                            )
+                            current_update["observed_through_ns"] = time.time_ns()
+                            write_json(canonical, current_update)
+                if total_calls >= args.calls:
+                    break
+        meter(finished=total_calls == args.calls)
         if total_calls != args.calls:
             raise ValueError(
                 f"TRAIN roster exhausted at {total_calls} of {args.calls} requested feedback"

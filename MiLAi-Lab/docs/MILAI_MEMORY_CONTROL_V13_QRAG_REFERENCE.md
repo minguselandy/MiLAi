@@ -62,3 +62,11 @@ python3 scripts/qrag_ref_actor_delta.py restore \
     --base "$root/models/multilingual-e5-large/model.safetensors" \
     --delta "$root/ref/official-musique-ans-seed42/initial-actor-delta.pt"
 ```
+
+The original cutover occupied one GPU process for 195.5 seconds. The separate exposure replay spans approximately 118 seconds between log creation and final write, measured to one-second precision. These costs are separate from the retained fit. A completed retained fit reports its one-GPU process wall time, final retrieval job time, all validation points and a learning-curve PNG. A GPU process duration includes initialization and checkpoint I/O.
+
+At the first post-update validation, 100 optimizer updates had increased mean GT return from 0.286667 to 0.340000 on the same 300 TUNE questions. The backbone probe changed by 3.97e-5 and peak allocated GPU memory reached 29,108,853,760 bytes. The corresponding exact FP32 retrieval actor is durable at `/cra/milai-experiments/v13-qrag/ref/actor-archives/first-trained-best.zip`. A CPU-only 4 MiB blockwise XOR against the original E5 weights and DEFLATE reduced its storage from 4,483,665,967 to 1,844,242,617 bytes in 171.0 seconds. Readback verified 780 XOR tensors, eight literal tensors and two unchanged tensors against the actual actor. The measured archive ratio is specific to this checkpoint.
+
+To restore this trained actor, pass its ZIP path to `scripts/qrag_ref_actor_delta.py restore` with the same persistent base and an unused output `--actor` path. This checkpoint represents one early point of the 10,000-update schedule.
+
+The initial Reader phase parked the live REF and S1 processes with their allocations resident. The 100-update validation precedes that interval. `initial-schedule.json` supplies the REF PID, start and end of the hold. The terminal resource summary distinguishes full one-GPU process wall time from wall time excluding observed parking. The running training log's elapsed time includes this hold.

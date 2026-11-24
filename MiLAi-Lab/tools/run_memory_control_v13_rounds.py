@@ -27,9 +27,18 @@ def publish(path, obj):
 
 
 def run(module, *args):
-    subprocess.run(  # noqa: S603 -- fixed local entry point and argv, no shell
-        [sys.executable, "-m", "milai_lab.runners." + module, *map(str, args)], check=True
-    )
+    from contextlib import nullcontext
+
+    from milai_lab.runners.v13_phase import phase_directory, phase_unit
+
+    scope = nullcontext()
+    if module == "pretrained_control_train":
+        output = Path(args[args.index("--output") + 1])
+        scope = phase_unit(phase_directory(output), "fit")
+    with scope:
+        subprocess.run(  # noqa: S603 -- fixed local entry point and argv, no shell
+            [sys.executable, "-m", "milai_lab.runners." + module, *map(str, args)], check=True
+        )
 
 
 def exposure(directory):
@@ -96,7 +105,12 @@ def fit(args, name, data, parent, objective, scale):
         if info["status"] == "completed":
             if not info["reload_scores_equal"] or not (path / "checkpoint/control.pt").is_file():
                 raise RuntimeError(f"Final weights missing for {name}")
-            return path / "checkpoint"
+            try:
+                final_metrics = json_file(metrics / "run.json")
+            except (FileNotFoundError, json.JSONDecodeError):
+                final_metrics = None
+            if final_metrics == info:
+                return path / "checkpoint"
     run(
         "pretrained_control_train",
         "--objective",

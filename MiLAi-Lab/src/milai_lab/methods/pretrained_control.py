@@ -144,7 +144,7 @@ class PretrainedControl(nn.Module):
                 raise ValueError("Cost-aware policy requires exact Host READ preflight")
         return quality - utility_lambda * (future + future.new_tensor(immediate)[:, None])
 
-    def save(self, directory: Path):
+    def save(self, directory: Path, *, completion=None):
         directory.parent.mkdir(parents=True, exist_ok=True)
         if directory.exists():
             raise FileExistsError(directory)
@@ -163,6 +163,10 @@ class PretrainedControl(nn.Module):
                     }
                 )
             )
+            if completion is not None:
+                (pending / "fit_completion.json").write_text(
+                    json.dumps(completion, allow_nan=False)
+                )
             pending.rename(directory)
 
     @classmethod

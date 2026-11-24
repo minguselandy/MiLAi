@@ -493,11 +493,35 @@ def episode_before_reader(
     costs["navigation_tokens"] = (
         session.exposed_navigation_tokens(trace["trace"][0]["before"]) if trace["trace"] else 0
     )
+    annotation_coverage = {}
+    if v13 and isinstance(policy, GoldDiagnostic):
+        evidence = policy.evidence
+        focus_views = [session.pool.views[vid] for vid in session.focus]
+        candidate_ranges = [span for view in focus_views for span in view.ranges]
+        candidate_ranges.extend(
+            span for v in focus_views if v.context_id is not None
+            for span in session.pool.views[v.context_id].ranges
+        )
+        opened_ranges = [
+            span for vid in session.opened.values() for span in session.pool.views[vid].ranges
+        ]
+        available = full_objects(candidate_ranges, session.pool, evidence.positive)
+        delivered = full_objects(opened_ranges, session.pool, evidence.positive)
+        annotation_coverage = {"annotation_coverage": {
+            "annotation_status": evidence.marks, "complete_evidence_sets": len(evidence.sets),
+            "available_before_budget": (
+                any(g <= available for g in evidence.sets) if evidence.sets else None
+            ),
+            "delivered_complete_set": (
+                any(g <= delivered for g in evidence.sets) if evidence.sets else None
+            ),
+        }}
     invalid_termination = v13 and (trace["reason"] == "operation_outcome_unknown" or any(
         not event.get("result", {}).get("ok", True) for event in trace["trace"]
     ))
     ready = packet.feasible is True and not invalid_termination
     return {
+        **annotation_coverage,
         "status": "ready" if ready else "action_failed",
         "failure_reason": ("failed_control_operation" if invalid_termination
                            else packet.failure_reason),
@@ -764,8 +788,9 @@ def _readout_inline(
         "encoder_work_this_invocation": model.counters if model else None,
         "policy_load_ms_this_invocation": policy_load_ms,
         "readout_schedule": "inline", "episode_results": str(episodes),
-        **({"reader_engine": timing.interval(engine_start, engine_end, charged_requests, observed_costs)}
-           if meter else {}),
+        **({"reader_engine": timing.interval(
+            engine_start, engine_end, charged_requests, observed_costs,
+        )} if meter else {}),
     }
 
 

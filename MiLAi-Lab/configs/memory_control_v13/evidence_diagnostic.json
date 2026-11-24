@@ -1,0 +1,6 @@
+{
+  "name": "DEV-annotated-evidence-coverage",
+  "policy": "G",
+  "environment": "qrag_milai_v13",
+  "observation_protocol": "semantic_nav_delta_v2"
+}

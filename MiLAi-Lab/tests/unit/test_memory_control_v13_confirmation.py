@@ -4,13 +4,15 @@ from __future__ import annotations
 
 import importlib
 import json
+import sqlite3
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
 
-def test_real_packet_readout_two_comparisons(tmp_path, monkeypatch):
+@pytest.fixture
+def native_fixture(tmp_path, monkeypatch):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
     tool = importlib.import_module("confirm_memory_control_v13")
     arms = [{"name": f"fit-{k}", "seed": k} for k in (11, 29, 47)]
@@ -79,6 +81,11 @@ def test_real_packet_readout_two_comparisons(tmp_path, monkeypatch):
                     },
                 },
             )
+    return tool, pop, arms, peer
+
+
+def test_real_packet_readout_two_comparisons(tmp_path, native_fixture):
+    tool, pop, _, peer = native_fixture
     args = SimpleNamespace(registration=tmp_path, runs=tmp_path, output=tmp_path / "result.json")
     tool.readout(args)
     initial = tool.read(args.output)
@@ -138,3 +145,121 @@ def test_final_fit_seed_must_match_its_checkpoint(tmp_path, monkeypatch):
     )
     with pytest.raises(ValueError, match="Fit seed"):
         tool.validate_dev_family([run, run, run], final=True)
+
+
+def test_register_three_fits_and_one_shared_control(tmp_path, native_fixture):
+    tool, pop, arms, peer = native_fixture
+    fresh = tmp_path / "fresh.sqlite"
+    with sqlite3.connect(fresh) as db:
+        db.executescript("""
+            CREATE TABLE metadata(key TEXT PRIMARY KEY,value TEXT);
+            CREATE TABLE experiment_tasks(
+                id INTEGER, dataset TEXT, native_group TEXT, experiment_role TEXT);
+            CREATE TABLE experiment_groups(
+                dataset TEXT, native_group TEXT, eligible_fresh_confirmation INTEGER);
+            CREATE TABLE anomalies(task_id INTEGER,dataset TEXT,reason TEXT);
+        """)
+        for key, val in {
+            "confirmation_only": True,
+            "derivation": {"revision": {}},
+            "control_release": {"declared": True},
+            "run_id": "test-fresh",
+        }.items():
+            db.execute("INSERT INTO metadata VALUES(?,?)", (key, json.dumps(val)))
+        groups = set()
+        for t in pop["tasks"]:
+            group = "fresh-" + t["native_group"]
+            db.execute(
+                "INSERT INTO experiment_tasks VALUES(?,?,?,'confirm')",
+                (t["task_id"], t["dataset"], group),
+            )
+            groups.add((t["dataset"], group))
+        db.executemany("INSERT INTO experiment_groups VALUES(?,?,1)", groups)
+    role, packet = tmp_path / "role.json", tmp_path / "packet.json"
+    tool.save(role, {"eligible_groups": {s: 2 for s in tool.SOURCES}, "run_id": "test-fresh"})
+    tool.save(
+        packet,
+        {
+            "reader_calls": 0,
+            "fitting_states": 0,
+            "cold_prepare_sources": tool.SOURCES,
+            "current_release_group_overlap": {s: 0 for s in tool.SOURCES},
+            "physical_native_outcome_overlap": {s: 0 for s in tool.SOURCES},
+            "dataset_run_id": "test-fresh",
+        },
+    )
+    backbone = str(tmp_path / "base")
+    runs = {}
+    for arm in [*arms, peer]:
+        run = tmp_path / arm["name"]
+        cfg = tool.read(run / "protocol.json")
+        cfg["population"] = dict(pop, role="dev", v13_role="tune")
+        cfg["arm"].update(
+            environment="qrag_milai_v13", observation_protocol="semantic_nav_delta_v2"
+        )
+        if arm != peer:
+            ckpt = tmp_path / ("weights-" + arm["name"]) / "checkpoint"
+            ckpt.mkdir(parents=True)
+            (ckpt / "control.pt").touch()
+            tool.save(ckpt / "controller.json", {"backbone": backbone})
+            contract = {
+                "seed": arm["seed"],
+                "fitted_groups": ["qasper/train"],
+                "supervision_mode": "paired",
+                "observation_protocol": "semantic_nav_delta_v2",
+                "input": "frozen",
+                "effective_batch": 32,
+                "epochs": 3,
+                "lr": 1e-5,
+                "pair_weight": 0.2,
+            }
+            tool.save(ckpt.parent / "run.json", {"contract": contract})
+            cfg["arm"].update(policy="pretrained_checkpoint", checkpoint=str(ckpt))
+            runs.setdefault("F", []).append(str(run))
+        else:
+            cfg["arm"].update(policy="gte_relevance", backbone=backbone)
+            runs["B"] = [str(run)]
+        tool.save(run / "protocol.json", cfg)
+    selection = tmp_path / "selection.json"
+    tool.save(
+        selection, {"final": "F", "families": runs, "same_backbone": ["B"], "practical": ["B"]}
+    )
+    args = SimpleNamespace(
+        selection=selection,
+        data=fresh,
+        role_audit=role,
+        packet_audit=packet,
+        seed=11,
+        reader_cap=32,
+        quality_mde=1.0,
+        draws=2,
+        power_repeats=160,
+        bootstrap_repeats=160,
+        cost_unit="local_gpu_seconds",
+        output=tmp_path / "frozen",
+    )
+    tool.register(args)
+    result = tool.read(args.output / "registration.json")
+    assert result["reserved_first_calls"] == 32
+    assert result["comparison_first_slots"] == {"same_backbone": 32, "practical": 32}
+    assert not result["dev_total_cost_available"]
+    assert (
+        result["capacity_power_grid"][-1]["projections"]["same_backbone"][
+            "superiority_power_at_mde"
+        ]
+        == 1
+    )
+    assert len(tool.read(args.output / "population.json")["arms"]) == 4
+    assert not any(args.output.rglob("episodes"))
+
+
+def test_actual_cost_weights_the_registered_workload(native_fixture):
+    tool, pop, _, _ = native_fixture
+    # Mu accounts for four of eight tasks but only one of three source means.
+    base = {t["task_id"]: 4.0 for t in pop["tasks"]}
+    policy = {t["task_id"]: 2.0 if t["dataset"] == "musique_full" else 4.0 for t in pop["tasks"]}
+    stats = tool.measured_savings(pop, [policy], [base], 100, 1)
+    assert stats["policy_total_mean_across_fits"] == 24.0
+    assert stats["baseline_total_mean_across_fits"] == 32.0
+    assert stats["savings"] == pytest.approx(0.25)
+    assert stats["equal_source_weighted_savings_sensitivity"] == pytest.approx(1 / 6)

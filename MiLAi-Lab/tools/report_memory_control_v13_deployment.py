@@ -29,6 +29,35 @@ def measured(values):
     }
 
 
+def annotation_diagnostics(groups):
+    covered = defaultdict(Counter)
+    quality = defaultdict(list)
+    for (source, _), members in groups.items():
+        for row in members:
+            cov = row["annotation_coverage"]
+            if cov["delivered_complete_set"] is None:
+                covered[source]["unknown_or_no_annotated_set"] += 1
+                continue
+            covered[source]["tasks_with_annotated_set"] += 1
+            covered[source]["reachable_before_budget"] += cov["available_before_budget"]
+            covered[source]["delivered"] += cov["delivered_complete_set"]
+            if cov["delivered_complete_set"] and "grade" in row:
+                if source == MUSIQUE:
+                    if len(members) == 2 and all("grade" in r for r in members):
+                        metric = musique_pair([r["grade"]["native_metrics"] for r in members])
+                        quality[source].append(metric[QUALITY_AXES[source]])
+                else:
+                    quality[source].append(row["grade"]["native_metrics"][QUALITY_AXES[source]])
+    return {
+        s: dict(
+            counts,
+            measured_native_units=len(quality[s]),
+            quality_given_annotated_set=fmean(quality[s]) if quality[s] else None,
+        )
+        for s, counts in covered.items()
+    }
+
+
 def summarize_run(path):
     closed = json.loads((path / "run.json").read_text())
     if closed["status"] != "COMPLETED":
@@ -101,6 +130,12 @@ def summarize_run(path):
         path=str(path.resolve()),
         arm=protocol["arm"],
         cohort=pop.get("v13_role", pop["role"]),
+        **(
+            {"annotation_diagnostics": annotation_diagnostics(groups)}
+            if protocol["arm"].get("policy") == "G"
+            and all("annotation_coverage" in r for r in episodes.values())
+            else {}
+        ),
         registered_tasks=len(episodes),
         registered_groups=len({(t["dataset"], t["native_group"]) for t in pop["tasks"]}),
         material_budget=pop["material_budget"],

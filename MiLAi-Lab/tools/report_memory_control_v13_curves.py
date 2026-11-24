@@ -52,11 +52,22 @@ def value_usage(rollouts, fits):
     if len(set(p.resolve() for p in fits)) != len(fits):
         raise ValueError("Duplicate fit cost")
     fit_seconds = 0.0
+    parked_seconds = 0.0
+    root = rollouts[0].resolve().parent
+    phase_path = root / "initial-schedule.json"
+    phase = read(phase_path) if phase_path.exists() else {}
     for p in fits:
         info = read(p / "run.json")
         if info["status"] != "completed" or not info["cuda_peak_bytes"]:
             raise ValueError("Expected a closed CUDA fit with measured time")
         fit_seconds += info["wall_seconds"]
+        # The fit loop's perf_counter includes the parked interval; GPU memory stayed resident.
+        if (
+            p.resolve() == (root / "weights/s1").resolve()
+            and phase.get("ended_ns")
+            and phase.get("started_ns")
+        ):
+            parked_seconds += (phase["ended_ns"] - phase["started_ns"]) / 1e9
     collect_hours = 0.0
     for p in rollouts:
         coverage = [read(f) for f in (p / "compute").glob("*.json")]
@@ -79,6 +90,8 @@ def value_usage(rollouts, fits):
         unknown_new=accounting["unknown_request_count_receipts_in_distinct_directories"],
         tokens=tokens if known == 2 * calls else None,
         fit_gpu_hours=fit_seconds / 3600,
+        registered_fit_parking_hours=parked_seconds / 3600,
+        fit_wall_hours_excluding_registered_parking=(fit_seconds - parked_seconds) / 3600,
         acquisition_and_fit_gpu_hours=None
         if collect_hours is None
         else collect_hours + fit_seconds / 3600,
