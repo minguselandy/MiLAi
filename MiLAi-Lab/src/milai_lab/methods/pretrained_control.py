@@ -129,6 +129,11 @@ class PretrainedControl(nn.Module):
 
     def net_values(self, online: dict[str, Any], utility_lambda: float) -> Tensor:
         quality, future = self.score(online)
+        return self.net_from_scores(online, quality, future, utility_lambda)
+
+    def net_from_scores(
+        self, online, quality: Tensor, future: Tensor, utility_lambda: float
+    ) -> Tensor:
         if not utility_lambda:
             return quality
         _, features = numeric_rows(online)
