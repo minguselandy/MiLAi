@@ -39,7 +39,17 @@ V12 公开结果已分析 620 个确认组，其中包括全部 75 个 QASPER �
 | 原版参考 | 单独使用 MuSiQue-Ans、双 E5-large、原版支持事实奖励与 PQN。300 个 TUNE 问题的平均 GT 回报由初始化的 0.286667 到第 100 次更新的 0.340000，完整配方为 10,000 次更新。第 100 次更新的 actor 已持久化为基于 E5 基础权重的差分归档，790 个张量经恢复后逐项相等 | `ref/official-musique-tune300-seed42/` |
 | 回归 | 带 PyTorch 的环境执行记忆控制及新增针对性测试，当前 101 项通过 | `v13-focused-phase-close.log` |
 
-S1 已在 GPU 3 启动。正式数据包含 119,394 个合格根状态，MuSiQue 110,133 个，QASPER 5,351 个，PersonaMem 3,910 个。所有根状态遍历一轮，共 3,732 次更新。首个正式更新检测到第 0 层注意力参数改变，逐更新曲线见 `gte/s1/curve.jsonl`。S1 的完整训练输入已固化为持久卷上的 `gte/evidence.sqlite`，复读确认覆盖两个准备阶段和全部 119,394 个根状态。初始分组排序的全轮检查发现，连续 71,516 个根状态没有 QASPER，连续 78,612 个没有 PersonaMem。该次拟合在 77 次更新、2,464 个根状态后退役，544.58 秒拟合开销计入 `gte/s1-initial-allocation/`。正式运行从相同预训练权重重新开始，按遍历窗口分散原生组，保留每条样本的一次曝光和来源权重。修正后两个最长间隔分别为 291 和 275。
+11 月 25 日 07:57，GPU 3 上的 seed11 证据初始化完成一轮实际遍历，共 3,732 次更新。持久训练输入为 `gte/evidence.sqlite`。三源合计 43,183 题、20,806 个原生组、119,394 个根状态，包含 894,356 个已知证据动作标签和 28,446 步合法示范。当前 TRAIN 中另有 557 个 QASPER 任务、161 个 PersonaMem 任务未提供可用于 S1 的根状态。
+
+| 来源 | S1 实际任务 | S1 原生组 | 遍历的根状态 |
+| --- | ---: | ---: | ---: |
+| MuSiQue-Full | 39,848 | 19,924 对 | 110,133 |
+| QASPER | 2,036 | 817 篇 | 5,351 |
+| PersonaMem-v2 | 1,299 | 65 人 | 3,910 |
+
+最终模型含 306,375,945 个参数。156 个保存张量均为有限 FP32，重载后动作分数与训练结束现场逐项相等。拟合进程占用单卡的墙钟为 24,626.12 秒（6.84 小时），其中登记过的 Reader 轮转停放为 3,480.79 秒，扣除后为 5.87 小时。优化循环记录为 24,608.63 秒，含同一次停放。峰值 CUDA 分配为 8,666,696,704 字节。[完成收据](/cra/milai-experiments/v13-qrag/weights/s1/run.json) · [权重与样本复核](/cra/milai-experiments/v13-qrag/gte/s1/final-verification.json)
+
+首次分组排序曾导致连续 71,516 个根状态没有 QASPER、连续 78,612 个没有 PersonaMem。该次拟合在 77 次更新、2,464 个根状态后退役，544.58 秒开销另计入 `gte/s1-initial-allocation/`。正式运行从相同预训练权重重新开始，按遍历窗口分散原生组，保留每条样本的一次曝光和来源权重。修正后两个最长间隔分别为 291 和 275。逐更新曲线见 `gte/s1/curve.jsonl`。
 
 QR 的实时终局 PQN 诊断已完成 48 次实付 Reader 调用，其中包含 18 次 companion。30 条主轨迹均获得原生质量和未来成本，双塔均有可测参数变化，4 次 GPU 优化更新完成，检查点重载可对实际候选菜单评分。计量见 `qr-s0/verified-48.json`。
 
@@ -179,7 +189,7 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/calibrate_memory_control_v13_baselines.py --ro
 
 REF 与 GTE 的资源调整及具体训练命令分别见 `MILAI_MEMORY_CONTROL_V13_QRAG_REFERENCE.md` 和 `MILAI_MEMORY_CONTROL_V13_GTE.md`。服务器使用物理 GPU 2 训练 REF，GPU 3 训练项目控制器，GPU 0、1 提供既有冻结 Reader。启动阶段曾在四张物理 GPU 上并行进行训练和采集，此阶段墙钟和时延反映了实际共享服务条件。S1 第 256 次更新完成持久恢复点后，轮转调度在第 265 次更新处保存了两个训练进程的现场，转入 Reader 采集时段。`initial-schedule.json` 记录初始 Reader 阶段持续 3,480.79 秒。2026-11-25 02:31（北京时间）两个原进程已恢复，S1 沿同一次拟合从第 265 步实际继续更新。工作进程驻留的显存、等待时间和活跃计算分别披露。`phase/phase.json` 当前为训练时段，先完成 REF 完整曲线和 S1。两者结算后，`tools/schedule_memory_control_v13_initial.py --advance` 会自动接纳正式 QR、DQ/PQ 及检查点评估，按任务单元分时执行。
 
-核心反馈矩阵使用 `configs/memory_control_v13/feedback.json`。共同的 2,000 次 warm 反馈已闭合。12k 调度等待 S1 及原版参照阶段完成。调度完成后会先产出 6k，再产出 12k。同一固定池内 PQ-U 与 PQ-A 分别选择包，两臂从相同 warm 配对参数开始，DQ 在每轮重用 PQ-U 包。在新目标轮次继续训练上一轮参数。曲线表读取真实采集收据、拟合父链与同一批 DEV 完整运行记录。
+核心反馈矩阵使用 `configs/memory_control_v13/feedback.json`。共同的 2,000 次 warm 反馈已闭合。S1 完成后，研究进程于 07:58 在同一批 550 个包上启动 seed11 的 Direct-Q 拟合，并按顺序执行 Paired-Q 拟合。两者在训练时段内使用既有结果。新的 6k、12k 采集等待原版参照完整曲线。同一固定池内 PQ-U 与 PQ-A 分别选择包，两臂从相同 warm 配对参数开始，DQ 在每轮重用 PQ-U 包。曲线表读取真实采集收据、拟合父链与同一批 DEV 完整运行记录。
 
 反馈效率按两种横轴读出。累计监督曝光包括从其他臂沿用的已付且请求一致的结果；新增实付调用与 provider 输入、输出 tokens 只计该臂数据目录实际发生的账位。两种口径都包含共同 warm，项目总账跨臂只计一次。DQ 沿用 PQ-U 整套结果包，额外生成标签的费用为零。后采集的臂可沿用先采集的请求，因此两臂新增费用的差异也受执行顺序影响。实际复读中，warm 的 2,000 次实付对应 2,483,899 个输入和 139,144 个输出 tokens，QR 试验的 48 次对应 47,146 个输入和 3,269 个输出 tokens。一组来自其他臂的已有回执提供了 4 次监督曝光，新增实付和 tokens 均为零。无法归属账位、仅有本地估算或一次回包不能覆盖全部收费尝试时，对应的实付统计保留未知。见 `runtime-validation/training-reader-billing.json`。
 
@@ -211,4 +221,4 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config conf
 
 开始执行时持久卷 `/cra` 的普通可用空间为 0，物理剩余约 610 MiB。模型与大型中间件写入位于 `/cra/milai-experiments/v13-qrag/staging` 的专用 36 GiB tmpfs，上限从 24 GiB 调整为 36 GiB，为训练恢复文件原子替换预留空间。该目录目前仅跨进程保留，服务器重启会清空。持久卷后来出现额外物理空间，三套基础权重已保存到实验根的 `models/`，其中 GTE 交互模型、GTE embedding、E5-large 分别可读取 140、138、392 个张量。确认库的持久副本位于 `fresh-sources/native-confirm/memory_control.sqlite3`。复读结果见 `persistent-assets.json`。小型收据、数据角色与日志持续写入持久目录。REF 第 100 次更新时的最佳 actor 保存于 `ref/actor-archives/first-trained-best.zip`，恢复需同一持久目录下的 E5 基础模型。S1 训练路径已绑定到持久目录 `weights/s1`，DQ/PQ 的结果包及正式模型已分别指定持久目录 `collection`、`weights/round-models`。QR 正式训练原始收据与检查点已在首个正式账位前绑定到持久目录 `qr-11/native-receipts` 和 `weights/qr-11`。REF 工作检查点继续使用暂存卷，已发布 actor 的持久副本以及仍在进程内的状态分别记录。QR 48 调用试验模型也已持久化在 `weights/qr-s0/checkpoint-48`，280 个训练张量与原件逐项相等。独立挂载命名空间中隐藏整个 staging 后，`tools/restore_memory_control_v13_paths.py --root "$R"` 重建了所需别名，复读得到 119,394 个训练根状态、S1 第 256 步及全部 QR 试验张量，未调用 Reader。记录见 `restored-controller-paths.log`。完整检查点归档和长期留存仍按实测容量调度。
 
-当前尚待完成正式 S1、REF 完整曲线、QR 和各配对臂 6k/12k/24k 学习曲线、冻结数据多种子、按结果触发的额外采样对照，以及最终独立确认。现阶段没有据此选择最终模型。
+当前尚待 REF 完整曲线、QR 和各学习臂 6k/12k/24k 的实际学习曲线、冻结数据多种子、按结果触发的额外采样对照，以及最终独立确认。最终模型将在对应的完整开发读出后按预先确定的规则选择。
