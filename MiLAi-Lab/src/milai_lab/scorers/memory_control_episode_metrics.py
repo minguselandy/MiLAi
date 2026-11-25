@@ -1132,6 +1132,10 @@ def _paired_metrics(
             ("shared_request_quality_interval_95", shared_source_draws[source]),
         ):
             component[key] = [percentiles(draws, p) for p in (0.025, 0.975)] if draws else None
+        measured = wires.get(source)
+        if not measured or measured["unobserved_requests"]:
+            component["shared_request_quality_delta"] = None
+            component["shared_request_quality_interval_95"] = None
     complete_sources = set(strata) == set(SOURCES)
     quality_complete = complete_sources and all(
         s["quality_units"]

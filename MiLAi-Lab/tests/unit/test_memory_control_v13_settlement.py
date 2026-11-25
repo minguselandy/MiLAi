@@ -185,6 +185,104 @@ def test_single_active_arm_frozen_refit_does_not_require_uniform_online_data(tmp
     assert {(f[2], f[3]) for f in fits} == {("paired", 77)}
 
 
+def test_common_pool_comparison_closes_before_on_policy_collection(tmp_path, monkeypatch):
+    from milai_lab.datasets.memory_control_report import write_json
+
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    driver = importlib.import_module("run_memory_control_v13_rounds")
+    curves = importlib.import_module("report_memory_control_v13_curves")
+    deploy = importlib.import_module("report_memory_control_v13_deployment")
+    warm = tmp_path / "warm-11"
+    common = warm / "common-pool.json"
+    curve = tmp_path / "curve.json"
+    measured = tmp_path / "mechanism-a11-f11-6.json"
+    recipe = dict(
+        environment={"gamma": 1},
+        observation="legal",
+        memory_budget_tokens=30,
+        warm_feedback_calls=2,
+        feedback_checkpoints=[6, 12],
+    )
+    args = SimpleNamespace(
+        root=tmp_path,
+        s1=tmp_path / "s1/checkpoint",
+        weights=tmp_path / "weights",
+        curve=curve,
+        recipe=recipe,
+        fit_seed=11,
+        acquisition_seed=11,
+        until=12,
+        refit_method=None,
+        refit_only=False,
+        frozen_data=False,
+    )
+    write_json(common, {"tasks": [1, 2]})
+    write_json(curve, {"material_budget": 30})
+    write_json(
+        warm / "round.json",
+        dict(
+            environment=recipe["environment"],
+            observation="legal",
+            material_budget=30,
+            sampler="uniform",
+        ),
+    )
+    (warm / "packs").mkdir()
+    with gzip.open(warm / "packs/root.json.gz", "wt") as stream:
+        json.dump({"outcomes": [{"future_cost_observed": True, "future_cost": 10}]}, stream)
+    monkeypatch.setattr(driver, "exposure", lambda _: 2)
+    monkeypatch.setattr(driver, "evaluate", lambda *a: None)
+
+    def collect(args, path, calls, stage, mode, prior, sampler, shared):
+        if stage == 2:
+            assert driver.json_file(measured)["active_minus_uniform"] == {
+                "quality_delta_points": -2
+            }
+        write_json(
+            path / "round.json",
+            dict(
+                round=stage,
+                sampler=mode,
+                sampling_checkpoint=str(sampler) if sampler else None,
+                continuation_policy_id=str(prior) if prior else "pi0-fixedcontext-4",
+            ),
+        )
+        write_json(path / "mechanism-pool.json", {"common_pool": str(common)})
+
+    def fit(args, name, data, parent, objective, scale):
+        directory = args.weights / name
+        write_json(
+            directory / "run.json",
+            dict(status="completed", contract=dict(parent=str(parent), supervision_mode=objective)),
+        )
+        return directory / "checkpoint"
+
+    def save_point(record):
+        write_json(
+            record.output,
+            dict(
+                method=record.method,
+                cohort=driver.json_file(curve),
+                acquisition_paths=list(map(str, record.rollouts)),
+                fit_paths=list(map(str, record.fits)),
+                fit_seed=record.fit_seed,
+                acquisition_seed=record.acquisition_seed,
+                usage={"exposure": record.calls},
+                deployment={"path": str(record.evaluation)},
+            ),
+        )
+
+    monkeypatch.setattr(driver, "collect", collect)
+    monkeypatch.setattr(driver, "fit", fit)
+    monkeypatch.setattr(curves, "point", save_point)
+    monkeypatch.setattr(deploy, "paired_dev_contrast", lambda a, b, n: {"quality_delta_points": -2})
+    driver.round_matrix(args)
+    result = driver.json_file(measured)
+    assert result["later_collection_already_registered"] is False
+    assert result["common_pool"] == str(common) and result["additional_reader_calls"] == 0
+    assert (tmp_path / "collection/a11-PQ-A-12/round.json").is_file()
+
+
 def test_reader_cost_rejects_two_new_claims_on_the_same_ledger_slot(tmp_path, monkeypatch):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
     tool = importlib.import_module("report_memory_control_v13_project_cost")

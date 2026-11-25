@@ -14,6 +14,7 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     QUALITY_AXES,
     SOURCES,
     input_result,
+    paired_comparison,
     paired_inline_latency,
     percentiles,
     same_wire_dev_repeat,
@@ -254,6 +255,46 @@ def summarize_run(path):
         protocol["arm"], pop, episodes, billing["policy_load_ms_per_attempt"]
     )
     return dict(path=str(path.resolve()), **results, **billing)
+
+
+def paired_dev_contrast(candidate, baseline, repeats):
+    """Compare two completed DEV deployments on their common roster."""
+    left, right = Path(candidate["path"]), Path(baseline["path"])
+    for path in (left, right):
+        population = json.loads((path / "protocol.json").read_text())["population"]
+        if population["role"] != "dev" or population.get("v13_role") not in {"curve", "tune"}:
+            raise ValueError("The development contrast requires natural DEV deployments")
+        if json.loads((path / "run.json").read_text())["status"] != "COMPLETED":
+            raise ValueError("Both development deployments must be complete")
+    result = paired_comparison([left], right, repeats=repeats, seed=20261125)
+    fields = (
+        "configured_tasks",
+        "independent_groups",
+        "paired_measurements_complete",
+        "quality_delta_points",
+        "quality_interval_95",
+        "reader_input_token_savings",
+        "token_savings_interval_95",
+        "source_strata",
+        "shared_request_sensitivity",
+        "scored_request_equality_by_source",
+    )
+    contrast = {key: result[key] for key in fields}
+    contrast["end_to_end_latency"] = paired_inline_latency(
+        [left],
+        right,
+        repeats=repeats,
+        seed=20261125,
+        policy_load_ms_per_task={
+            left: candidate["policy_load_ms_per_attempt"],
+            right: baseline["policy_load_ms_per_attempt"],
+        },
+    )
+    lo, hi = candidate["macro_range_points"]
+    base_lo, base_hi = baseline["macro_range_points"]
+    contrast["difference_range_given_unobserved"] = [lo - base_hi, hi - base_lo]
+    contrast["quality_observations_complete"] = lo == hi and base_lo == base_hi
+    return contrast
 
 
 def summarize_dev_subset(path, roster, arm, *, expected_comparison=None):

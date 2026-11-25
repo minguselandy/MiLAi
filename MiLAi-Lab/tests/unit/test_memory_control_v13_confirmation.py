@@ -94,6 +94,9 @@ def test_real_packet_readout_two_comparisons(tmp_path, native_fixture):
     assert initial["unique_reader_calls"] == 32
     for contrast in initial["native_contrasts"].values():
         assert contrast["shared_request_sensitivity"]["quality_delta_points"] is None
+        assert all(
+            c["shared_request_quality_delta"] is None for c in contrast["source_strata"].values()
+        )
         assert (
             sum(
                 c["unobserved_requests"]

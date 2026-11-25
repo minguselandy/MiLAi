@@ -17,12 +17,10 @@ from milai_lab.datasets.memory_control_report import write_json
 from milai_lab.scorers.memory_control_episode_metrics import (
     QUALITY_AXES,
     input_result,
-    paired_comparison,
-    paired_inline_latency,
 )
 from milai_lab.scorers.memory_control_native import musique_pair
 from report_memory_control_v13_curves import read_curve_point
-from report_memory_control_v13_deployment import summarize_run
+from report_memory_control_v13_deployment import paired_dev_contrast, summarize_run
 from report_memory_control_v13_feedback import per_round
 from run_memory_control_v13_rounds import json_file
 
@@ -129,22 +127,6 @@ def qr_prefix(root, seed):
             6000,
             12000,
         )
-
-
-def comparison(policy, baseline, repeats):
-    result = paired_comparison([policy], baseline, repeats=repeats, seed=20261125)
-    fields = (
-        "configured_tasks",
-        "independent_groups",
-        "paired_measurements_complete",
-        "quality_delta_points",
-        "quality_interval_95",
-        "reader_input_token_savings",
-        "token_savings_interval_95",
-        "source_strata",
-        "shared_request_sensitivity",
-    )
-    return {field: result[field] for field in fields}
 
 
 def examples(policy, baseline):
@@ -401,18 +383,9 @@ def settle(root, seed, calls, repeats):
         ("QR", "rule"),
         ("PQ-A", "rule"),
     ):
-        result = comparison(paths[candidate], paths[base], repeats)
-        result["end_to_end_latency"] = paired_inline_latency(
-            [paths[candidate]], paths[base], repeats=repeats, seed=20261125,
-            policy_load_ms_per_task={
-                paths[m]: deployment[m]["policy_load_ms_per_attempt"] for m in (candidate, base)
-            },
+        contrasts[f"{candidate} vs {base}"] = paired_dev_contrast(
+            deployment[candidate], deployment[base], repeats
         )
-        left = deployment[candidate]["macro_range_points"]
-        right = deployment[base]["macro_range_points"]
-        result["difference_range_given_unobserved"] = [left[0] - right[1], left[1] - right[0]]
-        result["quality_observations_complete"] = left[0] == left[1] and right[0] == right[1]
-        contrasts[f"{candidate} vs {base}"] = result
     headroom = {}
     for method, directory in (("PQ-U", uniform[-1]), ("PQ-A", active[-1])):
         row, _ = per_round(Path(directory))

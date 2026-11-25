@@ -437,6 +437,75 @@ def repeat_accounting(args, rollouts, point):
                 )
 
 
+def record_mechanism_comparison(args, tag, point):
+    from milai_lab.datasets.memory_control_report import write_json
+    from report_memory_control_v13_deployment import paired_dev_contrast
+
+    checkpoints = {
+        method: args.root / "curve-points" / f"{tag}-{method}-{point}.json"
+        for method in ("PQ-U", "PQ-A")
+    }
+    records = {method: json_file(path) for method, path in checkpoints.items()}
+    common = set()
+    parents = set()
+    roster = json_file(args.curve)
+    for method, sampler in (("PQ-U", "uniform"), ("PQ-A", "structured")):
+        row = records[method]
+        warm, collection = map(Path, row["acquisition_paths"])
+        contract = json_file(collection / "round.json")
+        parent = Path(row["fit_paths"][-2]) / "checkpoint"
+        fit = json_file(Path(row["fit_paths"][-1]) / "run.json")
+        if (
+            row["method"] != method
+            or row["cohort"] != roster
+            or row["usage"]["exposure"] != point
+            or row["fit_seed"] != args.fit_seed
+            or row["acquisition_seed"] != args.acquisition_seed
+            or warm.resolve() != args.warm.resolve()
+            or contract["round"] != 1
+            or contract["sampler"] != sampler
+            or contract["continuation_policy_id"] != "pi0-fixedcontext-4"
+            or fit["status"] != "completed"
+            or fit["contract"]["supervision_mode"] != "paired"
+            or Path(fit["contract"]["parent"]).resolve() != parent.resolve()
+            or (method == "PQ-A" and contract["sampling_checkpoint"] != str(parent.resolve()))
+        ):
+            raise ValueError("Mechanism comparison requires the matched fixed-pool checkpoints")
+        parents.add(parent.resolve())
+        common.add(Path(json_file(collection / "mechanism-pool.json")["common_pool"]).resolve())
+    if len(parents) != 1 or len(common) != 1 or not next(iter(common)).is_file():
+        raise ValueError(
+            "Mechanism policies must share their initialization and registered TRAIN pool"
+        )
+    output = args.root / f"mechanism-{tag}-{point}.json"
+    report = dict(
+        phase="fixed_pool_mechanism",
+        acquisition_seed=args.acquisition_seed,
+        fit_seed=args.fit_seed,
+        cumulative_feedback_per_arm=point,
+        common_warm=str(args.warm.resolve()),
+        common_pool=str(common.pop()),
+        common_initializer=str(parents.pop()),
+        continuation="pi0-fixedcontext-4",
+        checkpoints={m: str(path) for m, path in checkpoints.items()},
+        training_usage={m: r["usage"] for m, r in records.items()},
+        active_minus_uniform=paired_dev_contrast(
+            records["PQ-A"]["deployment"], records["PQ-U"]["deployment"], 5000
+        ),
+        additional_reader_calls=0,
+    )
+    prior = json_file(output) if output.is_file() else {}
+    if all(prior.get(k) == v for k, v in report.items()):
+        return
+    report["later_collection_already_registered"] = any(
+        (args.root / "collection" / f"a{args.acquisition_seed}-{m}-{n}" / "round.json").is_file()
+        for n in args.recipe["feedback_checkpoints"]
+        if n > point
+        for m in records
+    )
+    write_json(output, report)
+
+
 def round_matrix(args):
     from report_memory_control_v13_curves import point as record_point
 
@@ -578,6 +647,13 @@ def round_matrix(args):
                 )
             )
 
+        if (
+            stage == 1
+            and not args.frozen_data
+            and not args.refit_only
+            and {"PQ-A", "PQ-U"} <= prior.keys()
+        ):
+            record_mechanism_comparison(args, tag, point)
         if repeat:
             repeat_accounting(args, rollouts, point)
 
