@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import gzip
 import json
 from collections import Counter
@@ -191,6 +192,79 @@ def point(args):
     pending.replace(args.output)
 
 
+def export_cost_table(directory, points, baselines):
+    """Write the measurements behind the curves. Empty cells retain unmeasured quantities."""
+    training_axes = {
+        "exposure": "training_feedback_exposures",
+        "tokens": "training_exposed_reader_tokens",
+        "billed_reader_calls": "training_billed_reader_calls",
+        "billed_reader_input_tokens": "training_billed_reader_input_tokens",
+        "billed_reader_output_tokens": "training_billed_reader_output_tokens",
+        "fit_job_window_gpu_hours": "training_fit_job_gpu_hours",
+        "acquisition_and_fit_gpu_hours": "training_collection_and_fit_controller_gpu_hours",
+    }
+    records = []
+    deployments = [
+        (row["method"], row["acquisition_seed"], row["fit_seed"], row["usage"], row["deployment"])
+        for row in sorted(
+            points,
+            key=lambda p: (
+                p["method"],
+                p["acquisition_seed"],
+                p["fit_seed"],
+                p["usage"]["exposure"],
+            ),
+        )
+    ]
+    # These fixed controls use no new V13 training feedback or fit GPU-hours.
+    for d in baselines:
+        deployments.append((d["arm"]["name"], None, None, dict.fromkeys(training_axes, 0), d))
+    for method, acq, seed, usage, d in deployments:
+        row = dict(method=method, acquisition_seed=acq, fit_seed=seed)
+        row.update({column: usage.get(axis) for axis, column in training_axes.items()})
+        row.update(
+            dev_tasks=d["registered_tasks"],
+            dev_native_groups=d["registered_groups"],
+            material_budget_tokens=d["material_budget"],
+            macro_quality_lower_points=d["macro_range_points"][0],
+            macro_quality_upper_points=d["macro_range_points"][1],
+        )
+        for source in ("musique_full", "qasper", "personamem_v2"):
+            observed = d["native"][source]
+            low, high = observed["full_range"]
+            row[source + "_quality_lower_points"] = 100 * low
+            row[source + "_quality_upper_points"] = 100 * high
+            row[source + "_unobserved_units"] = observed["unknown"]
+        row["dev_known_new_reader_calls"] = d["actual_reader_calls"]
+        row["dev_reader_charge_lower_bound_only"] = d.get("reader_charge_lower_bound_only")
+        for axis in (
+            "reader_input_tokens",
+            "reader_output_tokens",
+            "controller_gpu_ms",
+            "pool_and_bm25_wall_ms",
+            "navigation_and_admission_wall_ms",
+        ):
+            stat = d["resources"].get(axis, {})
+            row["dev_" + axis + "_observed_tasks"] = stat.get("n", 0)
+            row["dev_" + axis + "_observed_total"] = stat.get("total") if stat.get("n") else None
+        latency = d["live_readout_plus_load_ms"]
+        row.update(
+            dev_latency_observed_tasks=latency["n"],
+            dev_p50_with_load_ms=latency["p50"],
+            dev_p95_with_load_ms=latency["p95"],
+            deployment_path=d["path"],
+        )
+        records.append(row)
+    if records:
+        path = directory / "checkpoint-costs.csv"
+        tmp = path.with_suffix(".tmp")
+        with tmp.open("w", encoding="utf-8", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(records[0]))
+            writer.writeheader()
+            writer.writerows(records)
+        tmp.replace(path)
+
+
 def plot(args):
     import matplotlib
 
@@ -233,6 +307,7 @@ def plot(args):
         f"{ref['material_budget']:,} memory tokens)"
     )
     args.output.mkdir(parents=True, exist_ok=True)
+    export_cost_table(args.output, rows, baselines)
     for field, unit in (
         ("exposure", "Feedback exposures, including imported measurements"),
         ("billed_reader_calls", "New Reader calls in the arm's data, including shared warm"),

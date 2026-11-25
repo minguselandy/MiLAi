@@ -74,7 +74,7 @@ S1 第 256 步和第 3,732 步分别在自然 DEV150 冷启动后对相同 R2 �
 | PersonaMem | 14 / 10 | 0.6137 | 0.6815 | 0.6101 | 0.7881 |
 | 等来源平均 | 75 / 42 | 0.7211 | 0.7885 | 0.7431 | 0.8724 |
 
-终态相对第 256 步的 AUC 差为 +0.1292，按来源配对重采样原生组的 95% 区间为 [+0.0776, +0.1794]。相对 BM25 为 +0.1513 [+0.0914, +0.2113]，相对冻结 GTE 为 +0.0839 [+0.0220, +0.1465]。QASPER 和 PersonaMem 的终态点估计均超过冻结 GTE，各自有 8 篇论文、10 个 persona 提供可比较标签。MuSiQue 仍以冻结 GTE 排序最高。该结果支持将完整 S1 作为共同初始化。两次 DEV150 诊断均未发出 Reader 请求。[终态配对读出](/cra/milai-experiments/v13-qrag/gte/dev150-weak-s1-final/PAIRED-READOUT.md)
+终态相对第 256 步的 AUC 差为 +0.1292，按来源配对重采样原生组的 95% 区间为 [+0.0776, +0.1794]。相对 BM25 为 +0.1513 [+0.0914, +0.2113]，相对冻结 GTE 为 +0.0839 [+0.0220, +0.1465]。QASPER 和 PersonaMem 的终态点估计均超过冻结 GTE，各自有 8 篇论文、10 个 persona 提供可比较标签。MuSiQue 仍以冻结 GTE 排序最高。该结果支持将完整 S1 作为共同初始化。两次 DEV150 诊断均未发出 Reader 请求。[终态配对读出](/cra/milai-experiments/v13-qrag/gte/dev150-weak-s1-final/PAIRED-READOUT.md) · [分来源 AUC 与配对区间图](/cra/milai-experiments/v13-qrag/gte/dev150-weak-s1-final/s1-weak-evidence-auc.pdf)
 
 逐题连接实际首读可见，冻结 GTE 在 25 个 MuSiQue 可答成员上有 23 次首读命中弱正例，其中 20 对终局 pair 质量为零，17 对未通过充分性门控。B1 的对应计数是 16、13、10。单对象检索与完整证据组合之间的缺口可在 `musique-dev150-first-read-vs-pair.json` 中复查。终局答案质量的结论仍须由完整策略交付与原生 Reader 评分给出。
 
@@ -133,7 +133,7 @@ B1 与 GTE 的实付请求各 605 次，分别消耗 702,896 和 473,673 个 Rea
 
 两种策略在 100 个 MuSiQue pair 上有 81 个同分，GTE 有 7 个更高、12 个更低。仅看可答成员，GTE 与 B1 的平均 answer F1 分别为 24.93、29.53；两个成员均判对充分性的比例分别为 26%、29%。计入 pair 门控后分别为 13.80、19.30。QASPER 有 41 题 GTE 更高、37 题更低，PersonaMem 有 8 题更高、9 题更低。按正、负差异分别保存绝对差最大和靠近中位数的原生组及其实际读序列，见 `natural-tune605-error-examples.json`。
 
-完整表和区间见 `natural-tune605-baseline-costs.json`、`natural-tune605-frozen_gte-vs-rule.json`。150 题部署成本图和延迟图已生成于 `figures-dev150-baselines/`，后续 6k/12k/24k 图在同组图上标注这些冻结基线。
+完整 TUNE605 表和区间见 `natural-tune605-baseline-costs.json`、`natural-tune605-frozen_gte-vs-rule.json`。150 题部署图与 CSV 来自同一批实际读出。CSV 的每行对应一个策略和检查点，来源质量以百分点记录，输入输出 tokens、控制器 GPU 毫秒、检索预处理耗时分别列出观测总量与覆盖题数。空单元格表示该值缺测。冻结基线的训练栏为零，仅代表本轮无需新增控制训练。后续 6k/12k/24k 绘图调用会从同组的实测检查点生成相同格式的成本表。[DEV150 冻结基线实测成本表](/cra/milai-experiments/v13-qrag/figures-dev150-baselines/checkpoint-costs.csv)
 
 逐题重放还比较了完整证据集合的可达性。表中计数为在给定数量的 BM25 候选上，用全部合法 R2/R3 跨度的并集覆盖某一个完整标注集合的题数。这是施加材料预算与操作数限制前的上界。八候选一列已与 150 条实际 G 运行的逐题覆盖标记核对。其余两列只做离线检索诊断。
 
