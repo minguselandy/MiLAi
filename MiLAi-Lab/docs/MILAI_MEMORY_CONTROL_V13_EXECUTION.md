@@ -189,7 +189,14 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/calibrate_memory_control_v13_baselines.py --ro
 
 REF 与 GTE 的资源调整及具体训练命令分别见 `MILAI_MEMORY_CONTROL_V13_QRAG_REFERENCE.md` 和 `MILAI_MEMORY_CONTROL_V13_GTE.md`。服务器使用物理 GPU 2 训练 REF，GPU 3 训练项目控制器，GPU 0、1 提供既有冻结 Reader。启动阶段曾在四张物理 GPU 上并行进行训练和采集，此阶段墙钟和时延反映了实际共享服务条件。S1 第 256 次更新完成持久恢复点后，轮转调度在第 265 次更新处保存了两个训练进程的现场，转入 Reader 采集时段。`initial-schedule.json` 记录初始 Reader 阶段持续 3,480.79 秒。2026-11-25 02:31（北京时间）两个原进程已恢复，S1 沿同一次拟合从第 265 步实际继续更新。工作进程驻留的显存、等待时间和活跃计算分别披露。`phase/phase.json` 当前为训练时段，先完成 REF 完整曲线和 S1。两者结算后，`tools/schedule_memory_control_v13_initial.py --advance` 会自动接纳正式 QR、DQ/PQ 及检查点评估，按任务单元分时执行。
 
-核心反馈矩阵使用 `configs/memory_control_v13/feedback.json`。共同的 2,000 次 warm 反馈已闭合。S1 完成后，研究进程于 07:58 在同一批 550 个包上启动 seed11 的 Direct-Q 拟合，并按顺序执行 Paired-Q 拟合。两者在训练时段内使用既有结果。新的 6k、12k 采集等待原版参照完整曲线。同一固定池内 PQ-U 与 PQ-A 分别选择包，两臂从相同 warm 配对参数开始，DQ 在每轮重用 PQ-U 包。曲线表读取真实采集收据、拟合父链与同一批 DEV 完整运行记录。
+核心反馈矩阵使用 `configs/memory_control_v13/feedback.json`。seed11 的两份 warm 拟合均已完成。它们从同一 S1 权重出发，在 2,000 次共同反馈产生的 550 个包上各遍历 3 次，根状态曝光各为 1,650 次。两份拟合的训练合同逐项比较，仅监督模式与配对损失权重不同。它们对相同末尾探针的输出有别，各自重载后的输出与现场完全相等。
+
+| seed11 warm 模型 | 更新 | 有质量/成本标签的动作曝光 | 可比较的动作对曝光 | 纳入配对损失的动作对曝光 | 配对权重 | 单卡拟合作业秒数 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Direct-Q | 54 | 5,115 / 5,115 | 3,465 | 0 | 0 | 339.61 |
+| Paired-Q | 54 | 5,115 / 5,115 | 3,465 | 3,465 | 0.2 | 354.33 |
+
+新的 6k、12k 采集等待原版参照完整曲线。PQ-U 与 PQ-A 将从同一个已训练的 warm Paired-Q 模型出发，在固定池内分别选包；DQ 后续继续重用 PQ-U 包。成本表分别记录监督曝光与新增收费调用。[2k 同数据拟合明细](/cra/milai-experiments/v13-qrag/warm-11/matched-controller-fits.json)
 
 反馈效率按两种横轴读出。累计监督曝光包括从其他臂沿用的已付且请求一致的结果；新增实付调用与 provider 输入、输出 tokens 只计该臂数据目录实际发生的账位。两种口径都包含共同 warm，项目总账跨臂只计一次。DQ 沿用 PQ-U 整套结果包，额外生成标签的费用为零。后采集的臂可沿用先采集的请求，因此两臂新增费用的差异也受执行顺序影响。实际复读中，warm 的 2,000 次实付对应 2,483,899 个输入和 139,144 个输出 tokens，QR 试验的 48 次对应 47,146 个输入和 3,269 个输出 tokens。一组来自其他臂的已有回执提供了 4 次监督曝光，新增实付和 tokens 均为零。无法归属账位、仅有本地估算或一次回包不能覆盖全部收费尝试时，对应的实付统计保留未知。见 `runtime-validation/training-reader-billing.json`。
 
@@ -202,6 +209,8 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config conf
 冻结数据拟合可通过 `--frozen-data --fit-seed` 复用同一采集历史，`--refit-method` 只拟合最终选入比较的家族，`--refit-only` 保留各轮参数更新，把 Reader 调用留给指定的正式评估。独立采集种子的费用和拟合种子分开结算。
 
 ## 拟合重复、粒度消融与未训练预算
+
+08:10，两份 seed11 warm 模型均已闭合，正式分支采集正在等待 Reader 时段。GPU 3 在这一训练空窗开始预计算种子 29、47 的共享证据初始化。两次按顺序从原生 GTE 出发，各使用相同冻结 SQLite 及 seed11 的完整证据配方。种子 29 已产生真实更新。这里只提前执行会被最终家族共用的证据训练，方法选择只使用 seed11。终局结果包的重复拟合及泛化读出仍在 24k 选择后进行。若最终未采用某份初始化，其计算量列为已发生的试验开销。[空窗运行声明](/cra/milai-experiments/v13-qrag/gte/evidence-prefix-residency.json)
 
 24k 校准关闭后，`tools/repeat_memory_control_v13_finalists.py` 在同一完整 TUNE605 上选择拟合复核家族。最终候选由 DQ、PQ-U、PQ-A 中宏质量下界最高者担任，精确同分依次优先 DQ、PQ-U、PQ-A。与之对比的同骨干控制从其余训练方法及冻结 GTE 中按同一质量规约预选，实际基线从 RULE、冻结 GTE、QR 中选择。各方法均使用已登记的校准机会。选择只读取开发数据，并保存全部候选的原生质量和选择依据。
 
