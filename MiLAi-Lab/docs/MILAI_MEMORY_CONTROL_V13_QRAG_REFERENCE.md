@@ -91,7 +91,7 @@ The fitted run’s original validation and update logs supply the committed pref
 
 The first actual training-state snapshot measured 11,907,170,951 bytes. An independent A100 restored it and executed the next eight native rollouts (96 critic transitions). Both runs measured loss 12.08664608001709 and a maximum backbone-probe change of 9.313225746154785e−09 at update 2. The check took 77.06 GPU-seconds and issued zero Reader requests. It left the production weights, progress logs and selected actors untouched. The result is in the replacement run’s `native-restart-probe.json`.
 
-When the replay finishes, its report will add the old interrupted fit, superseded initial validation, exposure reconstruction, interrupted actor readback and measured restart checks to the replacement fit and its three native evaluation stages. Their six recorded ancillary windows currently sum to 21.6552 assigned GPU-hours. Failed retrieval invocations contribute time. The shared initialization is counted once in the three-actor evaluation, including its failed first attempt. The cost table retains each underlying receipt and the one-second precision of the exposure reconstruction interval.
+When the replay finishes, its report will add the old interrupted fit, superseded initial validation, exposure reconstruction, interrupted actor readback, the fixed-ranking control and measured restart checks to the replacement fit and its three native evaluation stages. Their seven recorded ancillary windows currently sum to 21.6897 assigned GPU-hours. Failed retrieval invocations contribute time. The shared initialization is counted once in the three-actor evaluation, including its failed first attempt. The cost table retains each underlying receipt and the one-second precision of the exposure reconstruction interval.
 
 The retained run is `ref/official-musique-tune300-seed42/Nov25_00-48-23_QRAG_musique` below the persistent experiment root. `retained-actors/index.json` points to the last atomically published and losslessly verified retrieval actors. The observer reads the existing training process and its published files. It holds an immutable hardlink during encoding, verifies reconstructed tensor bytes and replaces the persistent index only after the checkpoint receipt is durable. It retains the latest best, the final last when available, and the separate update-100 measurement. An interrupted encode leaves the previous indexed version available.
 
@@ -137,4 +137,21 @@ To refresh the in-progress plot in the saved upstream run directory, execute the
 
 ```bash
 python3 scripts/qrag_ref_result.py --run "$trained" --plot-progress
+```
+
+## Fixed first-step ranking control
+
+The evaluation freezes each actor’s initial online Q scores for the question and all chunks. It executes the resulting ranking in the same native environment with the original completion stop and four-read limit. Each actor's cold first action and maximum score must match the recorded dynamic trajectory on every registered question. The paired results describe the interrupted winner selected on this same exposed TUNE roster. Full trajectories, cold rankings and joint-bootstrap contrasts are stored under the interrupted run's `cold-ranking-control/` directory. The single GPU process covered both actors in 124.19 seconds.
+
+Run the following from MiLAi-Lab using the reference Python environment. This writes the reproduction separately from the original evaluation.
+
+```bash
+R=/cra/milai-experiments/v13-qrag
+A="$R/ref/official-musique-tune300-seed42/Nov25_00-48-23_QRAG_musique"
+I="$R/ref/official-musique-tune300-seed42-replay-20261126/Nov26_01-06-20_QRAG_musique/retrieval/initial"
+export CUDA_VISIBLE_DEVICES=3 TORCH_COMPILE_DISABLE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export HF_HOME="$R/staging/ref/cache/hf" TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=2 MKL_NUM_THREADS=2
+PYTHONPATH="$R/reference/Q-RAG:/data/milai-experiments/v13-ref-python" python3 scripts/qrag_ref_cold_ranking.py \
+  --source "$R/reference/Q-RAG" --roster "$R/ref/fixed-dev-roster.json" \
+  --initial "$I" --trained "$A/interrupted-best-retrieval" --output "$A/cold-ranking-reproduction"
 ```

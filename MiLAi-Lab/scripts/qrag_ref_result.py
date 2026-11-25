@@ -473,13 +473,20 @@ def ancillary_resources(run):
                 source=str(window if window.is_file() else lineage_file),
             )
         )
-        costs = old / "interrupted-best-retrieval/validation-resource.jsonl"
-        if costs.is_file():
+        for label, costs in (
+            (
+                "interrupted actor retrieval on fixed TUNE",
+                old / "interrupted-best-retrieval/validation-resource.jsonl",
+            ),
+            ("cold-ranking control on fixed TUNE", old / "cold-ranking-control/gpu-process.jsonl"),
+        ):
+            if not costs.is_file():
+                continue
             with costs.open() as stream:
                 settled = [json.loads(line) for line in stream if line.endswith("\n")]
             items.append(
                 dict(
-                    scope="interrupted actor retrieval on fixed TUNE",
+                    scope=label,
                     seconds=sum(row["elapsed_seconds"] for row in settled),
                     settled_attempts=len(settled),
                     source=str(costs),

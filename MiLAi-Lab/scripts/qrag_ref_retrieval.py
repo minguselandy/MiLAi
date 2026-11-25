@@ -228,7 +228,7 @@ def verify_common(common):
         raise ValueError("Native retrieval differs from the registered GT protocol")
 
 
-def record_protocol(cfg, env, binding, witness):
+def retrieval_protocol(cfg, env):
     feedback = env.feedback_model
     common = {
         "seed": int(cfg.seed),
@@ -251,6 +251,11 @@ def record_protocol(cfg, env, binding, witness):
         "state_chunk_tokens": int(cfg.algo.pqn.hyperparams.max_action_length_in_memory),
     }
     verify_common(common)
+    return common
+
+
+def record_protocol(cfg, env, binding, witness):
+    common = retrieval_protocol(cfg, env)
     if common["seed"] != binding["seed"]:
         raise ValueError("Selection seed differs between actor and evaluator")
     destination = Path(cfg.pretrained_path) / "native-protocol.json"
