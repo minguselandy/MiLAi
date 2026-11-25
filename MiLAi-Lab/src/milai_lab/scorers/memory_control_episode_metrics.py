@@ -681,6 +681,88 @@ def paired_budget_response_metrics(
     return {**metrics, "reference_budget": base_budget, "held_budget": held_budget}
 
 
+def cold_level_coverage(population, reference, level, fixed=None):
+    """Audit the fixed-level mask on the observed first menu after the common SEARCH."""
+    if level not in {"R2", "R3_only"}:
+        raise ValueError("Expected a strict READ level")
+    counts = defaultdict(Counter)
+    groups = defaultdict(list)
+    for task in population["tasks"]:
+        tid, source = task["task_id"], task["dataset"]
+        if str(tid) in population.get("predeclared_unevaluable_tasks", {}):
+            continue
+        trace = reference.get(tid, {}).get("control", {}).get("trace", [])
+        first = trace[0] if trace else {}
+        menu = first.get("actions", [])
+        category = "unobserved"
+        matched = first.get("before", {}).get("action_history") == ["search"]
+        if fixed is not None:
+            peer = fixed.get(tid, {}).get("control", {}).get("trace", [])
+            matched = bool(
+                matched
+                and peer
+                and peer[0].get("actions") == menu
+                and peer[0].get("before") == first.get("before")
+            )
+        if matched and menu:
+            reads = [a["parameters"] for a in menu if a["kind"] == "READ"]
+            full = {p["index"] for p in reads}
+            allowed = {
+                p["index"] for p in reads if bool(p.get("expand_context")) == (level == "R3_only")
+            }
+            if not full:
+                category = "no_read_before_mask"
+            elif not allowed:
+                category = "no_objects"
+            elif allowed == full:
+                category = "all_objects"
+            else:
+                category = "some_objects"
+            counts[source]["original_read_objects"] += len(full)
+            counts[source]["allowed_read_objects"] += len(allowed)
+            if full and not allowed and {a["kind"] for a in menu} == {"READ", "HANDOFF"}:
+                counts[source]["handoff_only_after_mask"] += 1
+                if fixed is not None and peer[0]["selected"] != next(
+                    a["id"] for a in menu if a["kind"] == "HANDOFF"
+                ):
+                    raise ValueError("Strict level replay selected an unavailable READ")
+        counts[source][category] += 1
+        groups[source, task["native_group"]].append((category, tid))
+
+    strata = defaultdict(lambda: defaultdict(Counter))
+    for (source, _), members in groups.items():
+        labels = {category for category, _ in members}
+        label = next(iter(labels)) if len(labels) == 1 else "mixed_native_group"
+        if "unobserved" in labels:
+            label = "unobserved"
+        cell = strata[source][label]
+        cell["native_groups"] += 1
+        cell["tasks"] += len(members)
+        if fixed is not None and label != "unobserved":
+            scores = [
+                _primary_group_quality(
+                    source, [arm.get(t, {}) for _, t in members], failure_zero=False
+                )
+                for arm in (reference, fixed)
+            ]
+            if all(scores):
+                cell["paired_units"] += len(scores[0])
+                cell["fixed_minus_learned_sum"] += sum(scores[1]) - sum(scores[0])
+    for cells in strata.values():
+        for cell in cells.values():
+            if fixed is not None:
+                delta = cell.pop("fixed_minus_learned_sum", 0)
+                cell["fixed_minus_learned_quality_points"] = (
+                    100 * delta / cell["paired_units"] if cell["paired_units"] else None
+                )
+    return dict(
+        level=level,
+        tasks_by_source=counts,
+        whole_group_strata=strata,
+        scope="Post-SEARCH menu coverage by whole native group. Later paths can diverge.",
+    )
+
+
 def paired_level_response_metrics(
     reference_protocol, fixed_protocol, reference, fixed, *, repeats=5000, seed=20261125
 ):
@@ -697,7 +779,7 @@ def paired_level_response_metrics(
     ):
         raise ValueError("A precision ablation requires one common natural DEV policy and menu")
     label = base.get("seed")
-    return _paired_metrics(
+    result = _paired_metrics(
         reference_protocol["population"],
         (fixed,),
         (reference,),
@@ -706,6 +788,10 @@ def paired_level_response_metrics(
         repeats=repeats,
         seed=seed,
     )
+    result["cold_level_coverage"] = cold_level_coverage(
+        reference_protocol["population"], reference, level, fixed
+    )
+    return result
 
 
 def _paired_metrics(

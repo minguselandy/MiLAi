@@ -191,3 +191,52 @@ def test_budget_witness_preserves_unknown_and_tracks_exact_tasks(monkeypatch):
     assert changes["1024_to_2048"]["s"]["lost"] == changes["1024_to_2048"]["s"]["gained"] == 0
     with pytest.raises(ValueError, match="Mismatched task"):
         m.budget_changes({512: low, 1024: list(reversed(high))})
+
+
+def test_strict_grain_accounts_for_object_loss_before_subgroup_quality():
+    from milai_lab.scorers.memory_control_episode_metrics import cold_level_coverage
+
+    pop = {
+        "tasks": [
+            {"dataset": "qasper", "task_id": 1, "native_group": "paper"},
+            {"dataset": "qasper", "task_id": 2, "native_group": "paper"},
+        ]
+    }
+
+    def packet(levels, decision, f1):
+        actions = [{"id": "handoff", "kind": "HANDOFF", "parameters": {}}]
+        actions += [{"id": "read_0", "kind": "READ", "parameters": {"index": 0}}]
+        if levels == 2:
+            actions += [
+                {
+                    "id": "context_0",
+                    "kind": "READ",
+                    "parameters": {"index": 0, "expand_context": True},
+                }
+            ]
+        return {
+            "grade": {"native_metrics": {"answer_f1": f1}},
+            "control": {
+                "trace": [
+                    {
+                        "before": {"action_history": ["search"]},
+                        "actions": actions,
+                        "selected": decision,
+                    }
+                ]
+            },
+        }
+
+    ref = {1: packet(1, "read_0", 0.6), 2: packet(2, "context_0", 0.4)}
+    fixed = {1: packet(1, "handoff", 0.2), 2: packet(2, "context_0", 0.6)}
+    out = cold_level_coverage(pop, ref, "R3_only", fixed)
+    n = out["tasks_by_source"]["qasper"]
+    assert n["handoff_only_after_mask"] == n["all_objects"] == 1
+    mixed = out["whole_group_strata"]["qasper"]["mixed_native_group"]
+    assert (mixed["native_groups"], mixed["tasks"], mixed["paired_units"]) == (1, 2, 2)
+    assert abs(mixed["fixed_minus_learned_quality_points"] + 10) < 1e-8
+    fixed[1]["control"]["trace"] = []
+    unseen = cold_level_coverage(pop, ref, "R3_only", fixed)["whole_group_strata"]["qasper"][
+        "unobserved"
+    ]
+    assert unseen["tasks"] == 2 and unseen["fixed_minus_learned_quality_points"] is None

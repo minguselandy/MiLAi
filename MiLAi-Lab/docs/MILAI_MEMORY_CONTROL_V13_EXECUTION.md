@@ -255,6 +255,16 @@ CUDA_VISIBLE_DEVICES=3 "$P" tools/run_memory_control_v13_rounds.py --config conf
 
 每个最终候选在冻结的自然 DEV150 上测试严格固定 R2、固定 R3、512 与 1,024 材料预算，预选实际基线在相同任务上也测两个未训练预算。2,048 锚点从已付完整 TUNE 运行中提取，逐项核验策略、Reader、种子、预算及完整组成员；费用仍归原运行。允许忽略仅用于展示的臂名称；实际 checkpoint 和行为配置须一致。
 
+在正式粒度消融之前，对照 B1 和冻结 GTE 已付的 150 份轨迹，逐题核对公共 SEARCH 后的完整原始状态和合法菜单。固定 R2 在所有题上保留原八个对象。严格固定 R3 同时限制了能读取的对象，实际冷启动覆盖如下。
+
+| 来源 | 严格 R3 可选对象 / 原对象 | 仍可读全部对象的题 | 组内每题均保留全部对象 | 只剩 HANDOFF 的题 |
+| --- | ---: | ---: | ---: | ---: |
+| MuSiQue-Full | 0/400 | 0/50 | 0/25 对 | 50/50 |
+| QASPER | 297/400 | 6/50 | 0/12 篇 | 0/50 |
+| PersonaMem-v2 | 399/400 | 49/50 | 16/17 人 | 0/50 |
+
+因此，MuSiQue 的严格 R3 对照测量强制空材料交付的部署后果。QASPER 的 6 个菜单完整题分散在部分题目失去对象的论文内。正式读出保留全队列和分来源的配对结果，同时按整个原生组的首菜单覆盖报告机会数、实测质量分母和固定策略减自适应策略的描述性差异。该分层只约束首菜单；后续路径由实际动作决定。统计现有菜单新增 Reader 调用为零。[原始菜单覆盖记录](/cra/milai-experiments/v13-qrag/natural-dev150-fixed-grain-availability.json)
+
 证据语义交换的正式误差以对应模型训练目标的冻结续跑为准。DQ 与 PQ-U 重用同一个均匀采集目标，PQ-A 单独使用其冻结策略；同一份完整请求的单题返回可以沿用，MuSiQue 在每种新 continuation 下重新取得 companion 后评分。质量与部署净效用分别报告有限动作池遗憾和误停。作为已完成的诊断，已有 pi₀ 36 组在共同尺度 1,912、λ=0.05 下，MuSiQue、QASPER、PersonaMem 各有 1、2、0 组发生严格净效用反转，额外 Reader 调用为 0。
 
 上述 24k 选择、S4 新拟合和正式盲测均依赖真实后续结果。已付的源报表引用见 `natural-tune605-baseline-costs.json` 和 `tune605-matched-curve-subset.json`；独立采集及噪声校准的条件协议见 `MILAI_MEMORY_CONTROL_V13_S4_PROBE_PREREGISTRATION.md`。
