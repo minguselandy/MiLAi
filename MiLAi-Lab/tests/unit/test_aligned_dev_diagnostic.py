@@ -309,3 +309,53 @@ def test_failed_new_companion_masks_all_four_pair_targets_but_charges_attempt(tr
     assert summary["actual_new_requests"] == 3 and summary["feedback_calls"] == 5
     assert summary["by_kind"]["companion"]["masked_single_task_results"] == 1
     assert summary["masked_quality_labels"] == 4 and summary["masked_future_cost_labels"] == 0
+
+
+def test_overread_signed_errors_cost_mask_and_zero_denominator(monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    tool = importlib.import_module("diagnose_memory_control_v13_evidence")
+    # Observed quality gap +.1, total cost gap 300, lambda .05 and scale 100: utility -.05.
+    labels = {
+        "r": dict(
+            quality_observed=True,
+            reader_quality=0.6,
+            immediate_cost=120,
+            future_cost=230,
+            future_cost_observed=True,
+        ),
+        "handoff": dict(
+            quality_observed=True,
+            reader_quality=0.5,
+            immediate_cost=0,
+            future_cost=50,
+            future_cost_observed=True,
+        ),
+    }
+    truth = tool.native_deltas(labels, "r", 0.05, 100)
+    a = tool.overread_error_terms(truth, 0.08, 0.03, True)
+    assert a == pytest.approx(
+        dict(net_gain_error=0.08, quality_gain_error=-0.02, cost_underestimate_contribution=0.1)
+    )
+    b = tool.overread_error_terms(truth, 0.30, 0.10, True)
+    assert b == pytest.approx(
+        dict(net_gain_error=0.15, quality_gain_error=0.20, cost_underestimate_contribution=-0.05)
+    )
+    summary = tool.summarize_overreads([a, b])
+    assert summary["n"] == 2
+    assert summary["mean"] == pytest.approx(
+        {
+            "net_gain_error": 0.115,
+            "quality_gain_error": 0.09,
+            "cost_underestimate_contribution": 0.025,
+        }
+    )
+    assert tool.overread_error_terms(truth, 0.08, 0, False) is None
+    assert tool.overread_error_terms(truth, 0.08, 0, True)["net_gain_error"] == pytest.approx(0.05)
+    assert tool.overread_error_terms({"quality": 0, "utility": 0}, 0.1, 0.1, True) is None
+    labels["r"]["future_cost_observed"] = False
+    assert (
+        tool.overread_error_terms(tool.native_deltas(labels, "r", 0.05, 100), 0.3, 0.1, True)
+        is None
+    )
+    empty = tool.summarize_overreads([])
+    assert empty["n"] == 0 and all(x is None for x in empty["mean"].values())

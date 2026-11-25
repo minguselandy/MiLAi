@@ -694,6 +694,32 @@ def collect(args):
     return collect_reference(args)
 
 
+def overread_error_terms(measured, quality_delta, utility_delta, chooses_read):
+    """Signed errors in utility units, conditional on an observed costly wrong READ."""
+    if "utility" not in measured or measured["utility"] >= 0 or not chooses_read:
+        return None
+    quality_error = quality_delta - measured["quality"]
+    actual_penalty = measured["quality"] - measured["utility"]
+    predicted_penalty = quality_delta - utility_delta
+    return {
+        "net_gain_error": utility_delta - measured["utility"],
+        "quality_gain_error": quality_error,
+        "cost_underestimate_contribution": actual_penalty - predicted_penalty,
+    }
+
+
+def summarize_overreads(rows):
+    import math
+
+    fields = ("net_gain_error", "quality_gain_error", "cost_underestimate_contribution")
+    means = {field: (fmean(r[field] for r in rows) if rows else None) for field in fields}
+    if rows and not math.isclose(
+        means[fields[0]], means[fields[1]] + means[fields[2]], abs_tol=1e-12, rel_tol=1e-9
+    ):
+        raise ValueError("Net gain error disagrees with its quality and cost terms")
+    return {"n": len(rows), "mean": means}
+
+
 def score(args):
     import math
 
@@ -717,6 +743,7 @@ def score(args):
         )
     model = PretrainedControl.load(args.checkpoint, device=args.device).eval()
     measures = defaultdict(lambda: defaultdict(list))
+    overreads = defaultdict(lambda: defaultdict(list))
     with torch.inference_mode():
         for file in sorted((args.output / "pairs").glob("*.json.gz")):
             row = read_gzip(file)
@@ -744,14 +771,17 @@ def score(args):
                     if clean_tokens is not None and tokens != clean_tokens:
                         raise ValueError("Evidence replacement changed the controller input length")
                     clean_tokens = tokens
+                    quality_delta = float((quality[read].mean() - quality[stop].mean()).item())
                     for axis, truth in gains.items():
-                        heads = (
-                            quality
-                            if axis == "quality"
-                            else model.net_from_scores(online, quality, future, penalty)
-                        )
-                        delta = float((heads[read].mean() - heads[stop].mean()).item())
+                        delta = quality_delta
+                        if axis == "utility":
+                            net = model.net_from_scores(online, quality, future, penalty)
+                            delta = float((net[read].mean() - net[stop].mean()).item())
                         prefers_read = delta > 0 or (delta == 0 and read < stop)
+                        if axis == "utility":
+                            terms = overread_error_terms(gains, quality_delta, delta, prefers_read)
+                            if terms is not None:
+                                overreads[row["dataset"]][mode].append(terms)
                         key = mode if axis == "quality" else mode + "_utility"
                         predictions[axis, mode].append(delta)
                         stats[key + "_absolute_delta_error"].append(abs(delta - truth))
@@ -786,6 +816,17 @@ def score(args):
         cost_scale=model.cost_scale,
         utility_lambda=penalty,
         action_space="observed candidate versus HANDOFF; ties follow current menu order",
+        overread_utility_error=(
+            {
+                src: {
+                    mode: summarize_overreads(overreads[src][mode])
+                    for mode in ("original", "swapped")
+                }
+                for src in measures
+            }
+            if penalty is not None
+            else None
+        ),
         sources={
             s: {k: {"mean": fmean(v), "n": len(v)} for k, v in axes.items()}
             for s, axes in measures.items()
