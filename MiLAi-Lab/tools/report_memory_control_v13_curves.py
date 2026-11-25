@@ -383,6 +383,7 @@ def plot(args):
             layout="constrained",
         )
         for ax, (field, axis_label) in zip(axes, dimensions, strict=True):
+            latency = field in ("p50", "p95")
             data = [
                 (
                     f"{label[0]} (a{label[1]}/f{label[2]})",
@@ -395,19 +396,11 @@ def plot(args):
             for position, (label, group, style) in enumerate(data):
                 xs, ys = [], []
                 for d in group:
-                    if field in ("p50", "p95"):
-                        stat = d["live_readout_plus_load_ms"]
-                        val = stat[field] if stat["n"] == d["actual_reader_calls"] else None
-                    else:
-                        stat = d["resources"].get(field, {"n": 0})
-                        val = (
-                            stat["total"] / stat["n"]
-                            if stat["n"] and stat["n"] == d["actual_reader_calls"]
-                            else None
-                        )
-                    if val is not None:
-                        xs.append(val)
-                        ys.append(d["macro_range_points"][0])
+                    stat = d["live_readout_plus_load_ms"] if latency else d["resources"].get(field)
+                    if not stat or not stat["n"] or stat["n"] != d["registered_tasks"]:
+                        continue
+                    xs.append(stat[field] if latency else stat["total"] / stat["n"])
+                    ys.append(d["macro_range_points"][0])
                 if xs:
                     ax.plot(xs, ys, style, label=label, color=f"C{position % 10}")
             ax.set_xlabel(axis_label)

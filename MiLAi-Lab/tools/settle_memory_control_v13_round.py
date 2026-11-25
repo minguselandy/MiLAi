@@ -18,6 +18,7 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     QUALITY_AXES,
     input_result,
     paired_comparison,
+    paired_inline_latency,
 )
 from milai_lab.scorers.memory_control_native import musique_pair
 from report_memory_control_v13_deployment import summarize_run
@@ -400,6 +401,12 @@ def settle(root, seed, calls, repeats):
         ("PQ-A", "rule"),
     ):
         result = comparison(paths[candidate], paths[base], repeats)
+        result["end_to_end_latency"] = paired_inline_latency(
+            [paths[candidate]], paths[base], repeats=repeats, seed=20261125,
+            policy_load_ms_per_task={
+                paths[m]: deployment[m]["policy_load_ms_per_attempt"] for m in (candidate, base)
+            },
+        )
         left = deployment[candidate]["macro_range_points"]
         right = deployment[base]["macro_range_points"]
         result["difference_range_given_unobserved"] = [left[0] - right[1], left[1] - right[0]]

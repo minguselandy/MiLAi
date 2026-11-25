@@ -514,14 +514,21 @@ def summarize_inline_policy_load(
 def paired_inline_latency(
     policy: Sequence[Path], baseline: Path, *, repeats: int, seed: int,
     policy_load_ms_per_task: Mapping[Path, float | None] | None = None,
+    dev_roster: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Use common native-group draws for observed task latency and optional setup offsets."""
     import numpy as np
 
     if not policy or repeats < 1:
         raise ValueError("Use actual paired policies and a positive latency resample count")
-    reference, baseline_records = input_result(baseline)
-    loaded = [input_result(path) for path in policy]
+    def read_run(path: Path):
+        protocol, records = input_result(path)
+        if dev_roster is not None:
+            return select_dev_records(protocol, records, dev_roster)
+        return protocol, records
+
+    reference, baseline_records = read_run(baseline)
+    loaded = [read_run(path) for path in policy]
     population = reference["population"]
     keys = set(reference["comparison"]) - {"observation", "continuation"}
     for protocol, _ in [(reference, baseline_records), *loaded]:

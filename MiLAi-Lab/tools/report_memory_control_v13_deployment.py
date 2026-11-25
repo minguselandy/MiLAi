@@ -14,6 +14,7 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     QUALITY_AXES,
     SOURCES,
     input_result,
+    paired_inline_latency,
     percentiles,
     select_dev_records,
 )
@@ -286,7 +287,26 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("runs", nargs="+", type=Path)
     p.add_argument("--output", required=True, type=Path)
+    p.add_argument("--latency-baseline", type=Path, help="Reference run for paired task latency")
+    p.add_argument("--dev-roster", type=Path, help="Whole DEV groups for the latency comparison")
     args = p.parse_args()
-    args.output.write_text(
-        json.dumps([summarize_run(path) for path in args.runs], indent=2, allow_nan=False) + "\n"
-    )
+    if args.dev_roster and not args.latency_baseline:
+        p.error("--dev-roster requires --latency-baseline")
+    if args.latency_baseline:
+        offsets = {
+            path: summarize_run(path)["policy_load_ms_per_attempt"]
+            for path in [*args.runs, args.latency_baseline]
+        }
+        report = paired_inline_latency(
+            args.runs, args.latency_baseline, repeats=5000, seed=20261125,
+            policy_load_ms_per_task=offsets,
+            dev_roster=json.loads(args.dev_roster.read_text()) if args.dev_roster else None,
+        )
+        report.update(
+            candidate_runs=[str(path) for path in args.runs],
+            baseline_run=str(args.latency_baseline),
+            dev_roster=str(args.dev_roster) if args.dev_roster else None,
+        )
+    else:
+        report = [summarize_run(path) for path in args.runs]
+    args.output.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
