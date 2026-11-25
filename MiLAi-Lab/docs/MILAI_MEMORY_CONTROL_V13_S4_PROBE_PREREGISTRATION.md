@@ -96,3 +96,18 @@ for objective in direct paired; do
     --result "$R/evidence-diagnostic/warm-11-$objective.json"
 done
 ```
+
+### 已执行的 warm 读出
+
+两份真实检查点均经过 54 次 AdamW 更新、1,650 次训练根曝光及原生权重重载比对。既有 score 入口在 CPU 上依次读取两份权重，使用同一 36 组、72 个已测 before。新增 Reader 请求为 0。下表的 regret 是两个已测动作中的机会损失，三来源等权，数值越小越好。质量轴按预测质量排序，净效用轴按固定 λ 的预测净效用排序；误停与过读分别以有益 READ 与有益 HANDOFF 的实际机会数为分母。
+
+| 真值轴与语义输入 | Direct regret | Paired regret | Paired 减 Direct | 误停 Direct / Paired | 过读 Direct / Paired | 两侧反转均正确 Direct / Paired |
+| --- | ---: | ---: | ---: | --- | --- | --- |
+| 质量，原始 | 0.049242 | 0.049242 | 0 | 0/11，0/11 | 4/4，4/4 | 0/1，0/1 |
+| 质量，替换 | 0.049242 | 0.049242 | 0 | 0/11，0/11 | 4/4，4/4 | 0/1，0/1 |
+| 净效用，原始 | 0.082082 | 0.083122 | +0.001039 | 0/11，0/11 | 52/61，55/61 | 1/3，1/3 |
+| 净效用，替换 | 0.082007 | 0.083717 | +0.001709 | 0/11，0/11 | 51/61，55/61 | 0/3，0/3 |
+
+两模型都读取了所有 11 个真增益为正的 before。原始净效用下，Persona 的过读为 Direct 20/24、Paired 23/24；其余两来源的实测 regret 和误停/过读计数均相同。替换语义使 Direct 的宏净效用 regret 减少 0.000075，Paired 增加 0.000595，两模型都失去了原来命中的那一个 QASPER 效用反转。质量反转仅有 QASPER 1 组；效用反转仅有 MuSiQue 1 组、QASPER 2 组。这个已暴露的小诊断未显示早期配对目标优势，语义替换也没有一致地恶化宏 regret。原生完整策略收益、反馈效率与后续轮次仍须用注册的实际读出检验。
+
+逐来源数值、有限分母及权重路径见 `/cra/milai-experiments/v13-qrag/evidence-diagnostic/warm-11-direct-vs-paired.json`，两次原始读出为同目录下的 `warm-11-direct.json` 与 `warm-11-paired.json`。
