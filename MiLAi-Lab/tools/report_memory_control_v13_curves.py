@@ -6,6 +6,7 @@ import argparse
 import csv
 import gzip
 import json
+import math
 from collections import Counter
 from pathlib import Path
 
@@ -36,9 +37,62 @@ def fit_window_usage(directory):
     )
 
 
+def collection_window_usage(directory):
+    cfg = read(directory / "round.json")
+    rows = [read(p) for p in sorted((directory / "compute").glob("*.json"))]
+    learned = (
+        cfg.get("sampling_checkpoint") or cfg["continuation_policy_id"] != "pi0-fixedcontext-4"
+    )
+    observed = []
+    incomplete = 0
+    for row in rows:
+        measured = row.get("controller_gpu_residency_hours")
+        devices = row.get("controller_devices")
+        cpu_only = (
+            not learned if devices is None else all(d.split(":")[0] == "cpu" for d in devices)
+        )
+        if measured is not None:
+            if not math.isfinite(measured) or measured < 0 or (cpu_only and measured != 0):
+                raise ValueError("Collection device and measured GPU residency disagree")
+            observed.append(measured)
+        elif cpu_only:
+            observed.append(0.0)
+        if not cpu_only and (measured is None or not row.get("complete_invocation")):
+            incomplete += 1
+    return dict(
+        measured_hours=sum(observed) if observed or not learned else None,
+        complete=(bool(rows) or not learned) and incomplete == 0,
+        recorded_invocations=len(rows),
+        unfinished_invocations=sum(not r.get("complete_invocation") for r in rows),
+        incomplete_gpu_windows=incomplete,
+    )
+
+
+def qr_boundary(directory, calls):
+    for path in sorted((directory / "updates").glob("*.json")):
+        update = read(path)
+        if update["feedback_calls"] == calls:
+            return path, update
+    raise FileNotFoundError(f"No QR update at {calls} calls under {directory}")
+
+
+def qr_gpu_usage(update):
+    residence = update.get("controller_gpu_residency_hours")
+    if residence is not None and (not math.isfinite(residence) or residence < 0):
+        raise ValueError("Invalid QR controller residency")
+    incomplete = update.get("earlier_incomplete_compute_invocations")
+    cpu_only = update.get("controller_device", "").split(":")[0] == "cpu" and residence == 0
+    complete = residence is not None and (incomplete == 0 or cpu_only)
+    return dict(
+        acquisition_and_fit_gpu_hours=residence if complete else None,
+        observed_acquisition_and_fit_gpu_hours=residence,
+        controller_gpu_hours_complete=complete,
+        earlier_incomplete_compute_invocations=incomplete,
+    )
+
+
 def qr_usage(directory, calls):
-    updates = [(p, read(p)) for p in sorted((directory / "updates").glob("*.json"))]
-    boundary, last = next((p, u) for p, u in updates if u["feedback_calls"] == calls)
+    boundary, last = qr_boundary(directory, calls)
     last_position = int(boundary.stem)
     tokens, known, exposure, new, unknown = 0, 0, 0, 0, 0
     provider = Counter()
@@ -76,7 +130,35 @@ def qr_usage(directory, calls):
         fit_gpu_hours=last["cumulative_fit_seconds"] / 3600
         if last.get("cumulative_fit_seconds") is not None
         else None,
-        acquisition_and_fit_gpu_hours=last.get("controller_gpu_residency_hours"),
+        **qr_gpu_usage(last),
+    )
+
+
+def value_gpu_usage(rollouts, fits):
+    fit_windows = {str(p.resolve()): fit_window_usage(p) for p in fits}
+    collection_windows = {str(p.resolve()): collection_window_usage(p) for p in rollouts}
+    fit_hours = sum(window["measured_hours"] for window in fit_windows.values())
+    fit_complete = bool(fit_windows) and all(w["complete"] for w in fit_windows.values())
+    observed = [
+        window["measured_hours"] for window in fit_windows.values() if window["closed_invocations"]
+    ] + [
+        window["measured_hours"]
+        for window in collection_windows.values()
+        if window["measured_hours"] is not None
+    ]
+    known_hours = sum(observed) if observed else None
+    complete = (
+        fit_complete
+        and bool(collection_windows)
+        and all(w["complete"] for w in collection_windows.values())
+    )
+    return dict(
+        fit_job_window_gpu_hours=fit_hours if fit_complete else None,
+        fit_job_windows=fit_windows,
+        collection_gpu_windows=collection_windows,
+        observed_acquisition_and_fit_gpu_hours=known_hours,
+        controller_gpu_hours_complete=complete,
+        acquisition_and_fit_gpu_hours=known_hours if complete else None,
     )
 
 
@@ -88,7 +170,6 @@ def value_usage(rollouts, fits):
         raise ValueError("Duplicate fit cost")
     fit_seconds = 0.0
     parked_seconds = 0.0
-    fit_windows = {}
     root = rollouts[0].resolve().parent
     phase_path = root / "initial-schedule.json"
     phase = read(phase_path) if phase_path.exists() else {}
@@ -97,7 +178,6 @@ def value_usage(rollouts, fits):
         if info["status"] != "completed" or not info["cuda_peak_bytes"]:
             raise ValueError("Expected a closed CUDA fit with measured time")
         fit_seconds += info["wall_seconds"]
-        fit_windows[str(p.resolve())] = fit_window_usage(p)
         # The fit loop's perf_counter includes the parked interval; GPU memory stayed resident.
         if (
             (root / "weights/s1").is_dir()
@@ -106,15 +186,6 @@ def value_usage(rollouts, fits):
             and phase.get("started_ns")
         ):
             parked_seconds += (phase["ended_ns"] - phase["started_ns"]) / 1e9
-    collect_hours = 0.0
-    for p in rollouts:
-        coverage = [read(f) for f in (p / "compute").glob("*.json")]
-        if not coverage:
-            cfg = read(p / "round.json")
-            if cfg["sampling_checkpoint"] or cfg["continuation_policy_id"] != "pi0-fixedcontext-4":
-                collect_hours = None
-                break
-        collect_hours += sum(v["controller_gpu_residency_hours"] for v in coverage)
     tokens = known = 0
     for rnd in accounting["rounds"]:
         for axis in ("reader_input_tokens", "reader_output_tokens"):
@@ -122,11 +193,6 @@ def value_usage(rollouts, fits):
             tokens += stat.get("exposed_total", 0)
             known += stat.get("exposed_observations", 0)
     calls = accounting["total_feedback_exposure"]
-    measured_fit_hours = (
-        sum(record["measured_hours"] for record in fit_windows.values())
-        if fit_windows and all(record["complete"] for record in fit_windows.values())
-        else None
-    )
     selection = {
         key: sum(
             values[key]
@@ -148,13 +214,9 @@ def value_usage(rollouts, fits):
         tokens=tokens if known == 2 * calls else None,
         **accounting["newly_billed_usage"],
         fit_gpu_hours=fit_seconds / 3600,
-        fit_job_window_gpu_hours=measured_fit_hours,
-        fit_job_windows=fit_windows,
         registered_fit_parking_hours=parked_seconds / 3600,
         fit_wall_hours_excluding_registered_parking=(fit_seconds - parked_seconds) / 3600,
-        acquisition_and_fit_gpu_hours=None
-        if collect_hours is None or measured_fit_hours is None
-        else collect_hours + measured_fit_hours,
+        **value_gpu_usage(rollouts, fits),
     )
 
 
@@ -200,7 +262,9 @@ def export_cost_table(directory, points, baselines):
         "billed_reader_calls": "training_billed_reader_calls",
         "billed_reader_input_tokens": "training_billed_reader_input_tokens",
         "billed_reader_output_tokens": "training_billed_reader_output_tokens",
+        "fit_gpu_hours": "training_reported_fit_loop_wall_hours",
         "fit_job_window_gpu_hours": "training_fit_job_gpu_hours",
+        "observed_acquisition_and_fit_gpu_hours": "training_observed_controller_gpu_hours",
         "acquisition_and_fit_gpu_hours": "training_collection_and_fit_controller_gpu_hours",
     }
     records = []
@@ -222,6 +286,9 @@ def export_cost_table(directory, points, baselines):
     for method, acq, seed, usage, d in deployments:
         row = dict(method=method, acquisition_seed=acq, fit_seed=seed)
         row.update({column: usage.get(axis) for axis, column in training_axes.items()})
+        row["training_controller_gpu_hours_complete"] = (
+            True if acq is None else usage.get("controller_gpu_hours_complete")
+        )
         row.update(
             dev_tasks=d["registered_tasks"],
             dev_native_groups=d["registered_groups"],
@@ -265,13 +332,45 @@ def export_cost_table(directory, points, baselines):
         tmp.replace(path)
 
 
+def read_curve_point(path):
+    row = read(path)
+    usage = row["usage"]
+    if "controller_gpu_hours_complete" in usage:
+        return row
+    # Legacy points stored a number even when an earlier GPU meter stopped mid-run.
+    # Reconstruct coverage from timing receipts without reloading outcomes or models.
+    saved = usage.get("acquisition_and_fit_gpu_hours")
+    usage.update(
+        observed_acquisition_and_fit_gpu_hours=saved,
+        acquisition_and_fit_gpu_hours=None,
+        controller_gpu_hours_complete=False,
+    )
+    if row.get("qr_path"):
+        try:
+            _, update = qr_boundary(Path(row["qr_path"]), usage["exposure"])
+        except FileNotFoundError:
+            return row
+        usage.update(qr_gpu_usage(update))
+    elif row.get("acquisition_paths") and row.get("fit_paths"):
+        rollouts = [Path(p) for p in row["acquisition_paths"]]
+        fits = [Path(p) for p in row["fit_paths"]]
+        if all((p / "round.json").is_file() for p in rollouts) and all(
+            (p / "fit-windows").is_dir() for p in fits
+        ):
+            usage.update(value_gpu_usage(rollouts, fits))
+    if saved is not None and not usage["controller_gpu_hours_complete"]:
+        measured = usage.get("observed_acquisition_and_fit_gpu_hours")
+        usage["observed_acquisition_and_fit_gpu_hours"] = max(saved, measured or 0)
+    return row
+
+
 def plot(args):
     import matplotlib
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    rows = [read(p) for p in args.points]
+    rows = [read_curve_point(p) for p in args.points]
     baselines = (
         [d for d in read(args.baselines) if d["arm"]["policy"] != "G"] if args.baselines else []
     )
@@ -313,9 +412,11 @@ def plot(args):
         ("billed_reader_calls", "New Reader calls in the arm's data, including shared warm"),
         ("tokens", "Input + output tokens in exposed feedback (same Reader)"),
         ("billed_reader_tokens", "Newly billed provider input + output tokens in the arm's data"),
+        ("fit_job_window_gpu_hours", "GPU-hours in dedicated controller fitting jobs"),
         ("acquisition_and_fit_gpu_hours", "Controller GPU-hours during fits and collection"),
     ):
         if not any(r["usage"].get(field) is not None for r in rows):
+            (args.output / (field + ".pdf")).unlink(missing_ok=True)
             continue
         fig, axes = plt.subplots(2, 2, sharex=True, figsize=(10, 7.5), layout="constrained")
         for ax, axis in zip(
@@ -326,6 +427,8 @@ def plot(args):
                     (r for r in group if r["usage"].get(field) is not None),
                     key=lambda r: r["usage"]["exposure"],
                 )
+                if not points:
+                    continue
                 x = [r["usage"][field] for r in points]
                 bounds = [
                     r["deployment"]["macro_range_points"]

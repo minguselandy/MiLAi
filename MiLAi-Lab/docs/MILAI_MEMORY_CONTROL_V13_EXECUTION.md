@@ -226,6 +226,10 @@ PYTHONPATH=src python tools/report_memory_control_v13_deployment.py \
 
 GTE 的优化循环耗时保存在每个拟合的 `run.json`。正式反馈曲线的训练 GPU 小时另按单卡作业时段计量，涵盖输入准备、模型加载、优化、保存与回读，并累计有结束时刻的失败重试。后续拟合在取得运行权后开始计时；已运行的 S1 用原 PID 的内核启动时刻至退出事件计时，保留期间登记过的 Reader 轮转等待。每份时段的口径及覆盖保存在相应权重目录的 `fit-windows/`，缺少历史时段时，完整拟合小时保留未知。与采集阶段的控制器驻留时长相加后，可比较各方法占用单卡的实测时间；跨方法同时驻留的区间会重合。部署时的控制器前向 GPU 毫秒、Reader 服务时长和端到端时延另算。
 
+按闭合的作业时段重算，seed11 共用的 S1 拟合占用 6.84059 单卡小时。2k 的 Direct-Q 和 Paired-Q 分别追加 0.09434、0.09842 小时。计入各自的完整前缀后分别为 **6.93493、6.93901 小时**；两条前缀共同实际占用 **7.03335 小时**，S1 计一次。共同 π₀ 采集有三个运行窗口，均未加载神经控制器，控制器 GPU 占用为零，其中两个窗口在重启前没有关闭记录。原版参照、Reader 和其他试验开销另行计量。[2k 前缀成本复算](/cra/milai-experiments/v13-qrag/runtime-validation/through-warm-controller-gpu-accounting.json)
+
+正式成本 CSV 同时列出原生优化循环记录的墙钟、专门拟合作业占用的 GPU 小时，以及采集与拟合合计的控制器 GPU 小时。神经采集或 QR 的较早 GPU 窗口中断时，保留最后观测到的下界，完整总量留空。质量对 GPU 小时的图只采用覆盖完整的对应测量。QR 的在线优化与采集共用进程，其原生更新用时和整体 GPU 驻留可分别计量；早期 48 调用试验缺少这两项记录。
+
 ```bash
 export PYTHONPATH=src
 export R=/cra/milai-experiments/v13-qrag

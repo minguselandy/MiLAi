@@ -779,6 +779,7 @@ def run(args):
         if config_path.exists() and read_json(config_path) != config:
             raise ValueError("Use a separate directory for each frozen round")
         write_json(config_path, config)
+        record_costs(None, None)  # Setup is metered before the first pack or any resumed window.
         reuse_dirs = []
         donors = [*args.reuse_from]
         if args.shared_warm:

@@ -21,6 +21,7 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     paired_inline_latency,
 )
 from milai_lab.scorers.memory_control_native import musique_pair
+from report_memory_control_v13_curves import read_curve_point
 from report_memory_control_v13_deployment import summarize_run
 from report_memory_control_v13_feedback import per_round
 from run_memory_control_v13_rounds import json_file
@@ -366,7 +367,7 @@ def early_overread(root, seed, points=None):
 
 
 def settle(root, seed, calls, repeats):
-    points = {m: json_file(point_path(root, m, seed, calls)) for m in METHODS}
+    points = {m: read_curve_point(point_path(root, m, seed, calls)) for m in METHODS}
     paths = {}
     deployment = {}
     for method, record in points.items():

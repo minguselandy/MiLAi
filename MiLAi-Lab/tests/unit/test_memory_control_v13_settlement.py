@@ -52,6 +52,81 @@ def test_curve_billing_separates_shared_imported_and_unpriced_feedback(tmp_path,
     assert feedback.report([tmp_path])["newly_billed_usage"]["billed_reader_calls"] is None
 
 
+def test_curve_gpu_hours_preserve_interrupted_windows_as_lower_bounds(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    curves = importlib.import_module("report_memory_control_v13_curves")
+    fit, rollout = tmp_path / "fit", tmp_path / "rollout"
+    (fit / "fit-windows").mkdir(parents=True)
+    (rollout / "compute").mkdir(parents=True)
+    (fit / "fit-windows/fit.json").write_text(
+        json.dumps(
+            dict(
+                state="returned",
+                device_count=1,
+                wall_seconds=3600,
+                earlier_unmetered_fit=False,
+                scope="single_gpu_fit_process_lifetime",
+            )
+        )
+    )
+    (rollout / "round.json").write_text(
+        json.dumps(
+            dict(
+                sampling_checkpoint="warm",
+                continuation_policy_id="pi0-fixedcontext-4",
+            )
+        )
+    )
+    unfinished = rollout / "compute/first.json"
+    unfinished.write_text(
+        json.dumps(
+            dict(
+                controller_devices=["cuda:0"],
+                controller_gpu_residency_hours=0.25,
+                complete_invocation=False,
+            )
+        )
+    )
+    (rollout / "compute/second.json").write_text(
+        json.dumps(
+            dict(
+                controller_devices=["cuda:0"],
+                controller_gpu_residency_hours=0.5,
+                complete_invocation=True,
+            )
+        )
+    )
+    legacy = tmp_path / "point.json"
+    legacy.write_text(
+        json.dumps(
+            dict(
+                usage={"acquisition_and_fit_gpu_hours": 1.75},
+                acquisition_paths=[str(rollout)],
+                fit_paths=[str(fit)],
+            )
+        )
+    )
+    usage = curves.read_curve_point(legacy)["usage"]
+    assert usage["observed_acquisition_and_fit_gpu_hours"] == 1.75
+    assert usage["acquisition_and_fit_gpu_hours"] is None
+    assert usage["fit_job_window_gpu_hours"] == 1
+    unfinished.write_text(
+        json.dumps(
+            dict(
+                controller_devices=["cpu"],
+                controller_gpu_residency_hours=0,
+                complete_invocation=False,
+            )
+        )
+    )
+    assert curves.value_gpu_usage([rollout], [fit])["acquisition_and_fit_gpu_hours"] == 1.5
+    update = dict(controller_gpu_residency_hours=2, earlier_incomplete_compute_invocations=1)
+    assert curves.qr_gpu_usage(update)["acquisition_and_fit_gpu_hours"] is None
+    assert curves.qr_gpu_usage(update)["observed_acquisition_and_fit_gpu_hours"] == 2
+    update["earlier_incomplete_compute_invocations"] = 0
+    assert curves.qr_gpu_usage(update)["acquisition_and_fit_gpu_hours"] == 2
+
+
 def test_single_active_arm_frozen_refit_does_not_require_uniform_online_data(tmp_path, monkeypatch):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
     driver = importlib.import_module("run_memory_control_v13_rounds")
