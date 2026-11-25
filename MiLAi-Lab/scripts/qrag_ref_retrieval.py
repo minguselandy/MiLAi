@@ -352,6 +352,44 @@ def evaluation_q_summary(rows):
     }
 
 
+def read_path_summary(indexed, initial=None):
+    """Count support actually delivered by each prefix of recorded greedy retrievals."""
+    curves = []
+    rows = list(indexed.values())
+    for reads in range(1, 5):
+        counts = [
+            (len(set(r["pred_idx"][:reads]) & set(r["sf_idx"])), len(set(r["sf_idx"])))
+            for r in rows
+        ]
+        curves.append(
+            {
+                "reads_up_to": reads,
+                "questions": len(rows),
+                "questions_with_a_support": sum(found > 0 for found, _ in counts),
+                "questions_with_all_supports": sum(found == total for found, total in counts),
+                "mean_support_recall": float(np.mean([found / total for found, total in counts])),
+            }
+        )
+    report = {"observed_prefixes": curves}
+    if initial is not None:
+        if indexed.keys() != initial.keys() or any(
+            set(r["sf_idx"]) != set(initial[q]["sf_idx"]) for q, r in indexed.items()
+        ):
+            raise ValueError("First-read contrast requires matching questions and support sets")
+        matched = [q for q, r in indexed.items() if r["pred_idx"][0] == initial[q]["pred_idx"][0]]
+        report["same_first_object"] = {
+            "questions": len(matched),
+            "initial_complete": sum(int(initial[q]["em"]) for q in matched),
+            "actor_complete": sum(int(indexed[q]["em"]) for q in matched),
+            "mean_paired_f1_difference": (
+                float(np.mean([indexed[q]["f1"] - initial[q]["f1"] for q in matched]))
+                if matched
+                else None
+            ),
+        }
+    return report
+
+
 def paired_evaluation(run, roster, curve):
     ids = sorted(roster["groups"])
     if len(ids) != 300 or len(set(ids)) != 300 or roster["role"] != "TUNE" or roster["n"] != 300:
@@ -364,6 +402,7 @@ def paired_evaluation(run, roster, curve):
     checkpoints = {"initial": curve[0], "best": best, "final": curve[-1]}
     prior_design = prior_cases = None
     first_design = None
+    initial_rows = None
     for stage in STAGES:
         path = run / "retrieval" / stage
         witness = read(path / "native-protocol.json")
@@ -409,6 +448,7 @@ def paired_evaluation(run, roster, curve):
             ),
         )
         reports[stage] = {
+            "read_path": read_path_summary(indexed, initial_rows),
             "terminal_gradient_probe": probe,
             "chosen_online_q": evaluation_q_summary(items),
             "optimizer_updates": witness["optimizer_updates"],
@@ -419,6 +459,8 @@ def paired_evaluation(run, roster, curve):
                 means["gt_return"], checkpoints[stage]["gt_dev_return"], abs_tol=1e-8
             ),
         }
+        if stage == "initial":
+            initial_rows = indexed
     draws = np.random.default_rng(20261125).integers(0, len(ids), (5000, len(ids)))
     pairs = {}
     per_question = [
