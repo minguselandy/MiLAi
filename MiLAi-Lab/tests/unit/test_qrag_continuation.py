@@ -76,6 +76,28 @@ def test_td_boundaries_lambda_endpoints():
     torch.testing.assert_close(td_lambda(r[:2], v[:2], ended[:2], 1), torch.tensor([0.4, 0.4]))
 
 
+def test_masked_qr_batch_leaves_the_rollout_actor_in_eval_mode():
+    torch = pytest.importorskip("torch")
+    from milai_lab.runners.qrag_milai_train import update_batch
+
+    model = torch.nn.Sequential(torch.nn.Dropout(0.5), torch.nn.Linear(8, 2)).eval()
+    optimizer = torch.optim.AdamW(model.parameters())
+    inputs = torch.ones(1, 8)
+    with torch.inference_mode():
+        expected = model(inputs)
+    rng = torch.get_rng_state().clone()
+    versions = [p._version for p in model.parameters()]
+    assert (
+        update_batch(model, None, optimizer, [([{"action_id": "handoff"}], None, None)], None)
+        is None
+    )
+    assert not model.training and not optimizer.state
+    with torch.inference_mode():
+        assert torch.equal(expected, model(inputs))
+    assert torch.equal(rng, torch.get_rng_state())
+    assert [p._version for p in model.parameters()] == versions
+
+
 def test_structured_margin_uses_whole_pack_cost():
     import numpy as np
 

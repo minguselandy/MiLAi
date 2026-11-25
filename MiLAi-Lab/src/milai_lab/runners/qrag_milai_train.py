@@ -69,11 +69,12 @@ def targets(target, records, quality, reader_cost, coefficient, alpha, penalty):
 
 
 def update_batch(model, target, optimizer, episodes, args):
-    model.train()
     optimizer.zero_grad(set_to_none=True)
     used = [(r, q, c) for r, q, c in episodes if r and (q is not None or c is not None)]
     if not used:
+        model.eval()
         return None
+    model.train()
     loss_sum = 0.0
     for rows, quality, cost in used:
         qualities, costs = targets(
