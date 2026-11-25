@@ -296,6 +296,92 @@ def verify_closed_warm(args):
     )
 
 
+def replay_shared_warm(args):
+    """Price real mechanism packs when the two MuSiQue members exchange roles."""
+    cfg = read_json(args.warm / "round.json")
+    if (
+        cfg["round"] != 0
+        or cfg["continuation_policy_id"] != "pi0-fixedcontext-4"
+        or read_json(args.warm / "progress.json")["state"] != "complete"
+    ):
+        raise ValueError("Expected a closed pi0 warm round")
+    dataset = MemoryControlDataset(args.dataset)
+    if dataset.run_id != cfg["dataset_run"]:
+        raise ValueError("Wrong native dataset for these warm measurements")
+    seed = cfg["seed"]
+    pool_seed = seed * 100 + 1
+    policy = FixedContextMemoryPolicy(4)
+    source = args.warm.resolve() / "receipts"
+    windows = []
+    with (
+        closing(connect(dataset.path)) as db,
+        tempfile.TemporaryDirectory(dir=args.output.parent) as tmp,
+        patch(
+            "milai_lab.runners.control_policy_iteration.reader_lease",
+            side_effect=AssertionError("Offline measurement replay reached the Reader"),
+        ),
+    ):
+        pool = NativeRootPool(db)
+        for path in sorted((args.warm / "packs").glob("*.json.gz")):
+            pool.accept(read_gzip(path))
+        warm_groups = set(pool.group_counts)
+        empty = Receipts(Path(tmp) / "empty", dataset, db)
+        credited = Receipts(Path(tmp) / "credited", dataset, db, credited_dir=source)
+        peer = Receipts(Path(tmp) / "peer", dataset, db, [source])
+        for i in range(args.shared_warm_windows):
+            rng = slate_rng(seed, pool_seed, i, warm=False)
+            batch, _ = pool.slate(8, rng)
+            src, group, tid = rng.choice(batch)
+            pool.accept(dict(source=src, native_group_id=group, task_id=tid))
+            if src != MUSIQUE or (src, group) not in warm_groups:
+                continue
+            proposal = candidate(
+                dataset,
+                db,
+                tid,
+                cfg["material_budget"],
+                pool_seed,
+                policy,
+                None,
+                cfg["utility_lambda"],
+            )
+            jobs, prepared, original = plan_pack(dataset, db, empty, proposal, policy, cfg)
+            row = dict(window=i, task_id=tid, native_group=group, without_history=original)
+            for name, receipts in (("credited_warm", credited), ("other_arm", peer)):
+                quote = receipts.quote(jobs, prepared)
+                hits = []
+                for job, (record, pending) in zip(jobs, prepared, strict=True):
+                    match = receipts.match(job, record, peer=True)
+                    if match:
+                        _, prior, origin = match
+                        (replay,) = receipts.measure_batch(
+                            [job], [(dict(record, costs=dict(record["costs"])), pending)]
+                        )
+                        if (
+                            replay["reader_result"] != prior["reader_result"]
+                            or replay["grade"]["native_metrics"] != prior["grade"]["native_metrics"]
+                        ):
+                            raise ValueError("Reused response or rescored native metrics differ")
+                        hits.append(
+                            dict(key=job.key, origin=origin, exposure=replay["feedback_exposure"])
+                        )
+                row[name] = dict(quote=quote, matched=hits)
+            windows.append(row)
+        write_json(
+            args.output,
+            dict(
+                scope="Unbilled fixed-pi0 TRAIN uniform draws, without end-of-budget rejections.",
+                uniform_windows=args.shared_warm_windows,
+                seed=seed,
+                pool_seed=pool_seed,
+                eligible_role_reversals=windows,
+                actual_new_reader_calls=credited.new_requests + peer.new_requests,
+                credited_prefix_new_exposures=credited.calls,
+                peer_only_new_exposures=peer.calls,
+            ),
+        )
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--warm", type=Path, required=True)
@@ -306,7 +392,16 @@ def main():
     p.add_argument("--head-checkpoint", type=Path)
     p.add_argument("--policy-window-only", action="store_true")
     p.add_argument("--verify-closed-warm", action="store_true")
+    p.add_argument(
+        "--shared-warm-windows", type=int, help="Replay warm-overlapping uniform TRAIN windows"
+    )
     args = p.parse_args()
+    if args.shared_warm_windows is not None:
+        if args.shared_warm_windows < 1:
+            p.error("--shared-warm-windows requires a positive count")
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        replay_shared_warm(args)
+        return
     if args.verify_closed_warm:
         verify_closed_warm(args)
         return

@@ -167,22 +167,46 @@ class TerminalJob:
 class Receipts:
     """Use the existing HTTP budget for actual charges. Persist each terminal measurement once."""
 
-    def __init__(self, directory: Path, dataset, db, reuse_dirs=()):
+    def __init__(self, directory: Path, dataset, db, reuse_dirs=(), *, credited_dir=None):
+        directory = directory.resolve()
         self.directory, self.dataset, self.db = directory, dataset, db
         directory.mkdir(parents=True, exist_ok=True)
         self.calls = 0
         self.new_requests = 0
-        self.reuse_dirs = tuple(reuse_dirs)
+        self.reuse_dirs = tuple(folder.resolve() for folder in reuse_dirs)
+        if credited_dir is not None:
+            credited_dir = credited_dir.resolve()
         self.by_task = defaultdict(list)
-        self.imported = set()
+        self.peer_by_task = defaultdict(list)
+        self.credited_by_task = defaultdict(list)
+        self.exposed_origins = set()
         for path in directory.glob("*.json.gz"):
             record = read_gzip(path)
             self.calls += record["feedback_exposure"]
             self.new_requests += record["actual_requests"] or 0
             if record.get("grade"):
                 self.by_task[record["task_id"]].append(path)
+                if record.get("actual_requests") == 1:
+                    self.exposed_origins.add(str(path))
             if record.get("measurement_reused_from"):
-                self.imported.add(record["measurement_reused_from"])
+                self.exposed_origins.add(str(Path(record["measurement_reused_from"]).resolve()))
+        # A warm receipt has already consumed this arm's cumulative budget. Peer
+        # receipts are newly exposed to this arm unless it already owns their origin.
+        known_folders = [*self.reuse_dirs]
+        if credited_dir is not None:
+            known_folders.append(credited_dir)
+        for folder in known_folders:
+            for path in sorted(folder.glob("*.json.gz")):
+                prior = read_gzip(path)
+                if not prior.get("grade"):
+                    continue
+                if folder == credited_dir:
+                    self.credited_by_task[prior["task_id"]].append(path)
+                    self.exposed_origins.add(
+                        str(Path(prior.get("measurement_reused_from") or path).resolve())
+                    )
+                else:
+                    self.peer_by_task[prior["task_id"]].append(path)
         # An interruption between dispatch and receipt is an unknown paid exposure.
         for path in directory.glob("*.inflight"):
             if not self.path(path.stem).exists():
@@ -255,9 +279,18 @@ class Receipts:
             ]
 
     def match(self, job, record, *, peer):
-        local = [] if job.capture_transitions else self.by_task[job.task["id"]]
+        task_id = job.task["id"]
+        local = (
+            []
+            if job.capture_transitions
+            else [
+                *sorted(self.by_task[task_id]),
+                *self.credited_by_task[task_id],
+            ]
+        )
         foreign = [folder / self.path(job.key).name for folder in self.reuse_dirs] if peer else []
-        for path in [*foreign, *local]:
+        alternatives = self.peer_by_task[task_id] if peer and not job.capture_transitions else []
+        for path in dict.fromkeys([*foreign, *local, *alternatives]):
             if not path.is_file():
                 continue
             prior = read_gzip(path)
@@ -267,7 +300,11 @@ class Receipts:
                 and prior["task_id"] == job.task["id"]
                 and (prior.get("actual_requests") == 1 or prior.get("measurement_reused_from"))
             ):
-                return path, prior, prior.get("measurement_reused_from") or str(path)
+                return (
+                    path,
+                    prior,
+                    str(Path(prior.get("measurement_reused_from") or path).resolve()),
+                )
         return None
 
     def quote(self, jobs, prepared):
@@ -275,7 +312,7 @@ class Receipts:
         # The score uses an arm-local counterfactual so a peer's selections are never
         # supplied to the ranking rule. Imported observations still count as exposures.
         seen = []
-        imported = self.imported.copy()
+        newly_imported = set()
         independent = physical = exposed = upper = 0
         for job, (record, pending) in zip(jobs, prepared, strict=True):
             wire = record["reader_wire"]
@@ -288,8 +325,20 @@ class Receipts:
             match = self.match(job, record, peer=True)
             if match:
                 path, _, origin = match
-                charge = int(path.parent != self.directory and origin not in imported)
-                imported.add(origin)
+                # Earlier jobs in this pack will have populated the arm's local
+                # cache. Only an exact peer action takes precedence over that cache.
+                if (
+                    duplicate
+                    and path.parent in self.reuse_dirs
+                    and path.name != self.path(job.key).name
+                ):
+                    continue
+                charge = int(
+                    path.parent != self.directory
+                    and origin not in self.exposed_origins
+                    and origin not in newly_imported
+                )
+                newly_imported.add(origin)
                 exposed += charge
                 upper += charge
             else:
@@ -320,9 +369,9 @@ class Receipts:
             if match:
                 previous, prior, origin = match
                 imported_exposure = int(
-                    previous.parent != self.directory and origin not in self.imported
+                    previous.parent != self.directory and origin not in self.exposed_origins
                 )
-                self.imported.add(origin)
+                self.exposed_origins.add(origin)
                 record.update(
                     reader_result=prior["reader_result"],
                     status=prior["status"],
@@ -392,6 +441,8 @@ class Receipts:
                 marker.unlink()
                 if record.get("grade"):
                     self.by_task[task["id"]].append(path)
+                    if delta == 1:
+                        self.exposed_origins.add(str(path))
                 self.calls += delta
                 self.new_requests += delta
         else:
@@ -634,6 +685,11 @@ def load_policy(dataset, path, device, penalty):
 def run(args):
     started = time.perf_counter()
     invocation = time.time_ns()
+    excluded = list(args.exclude_roots_from)
+    if args.shared_warm:
+        if args.round != 1 or args.continuation_checkpoint:
+            raise ValueError("A shared warm prefix belongs to the common pi0 mechanism round")
+        excluded = [args.shared_warm, *excluded]
     dataset = MemoryControlDataset(args.dataset)
     if not dataset.control_release or not dataset.host:
         raise ValueError("Use the revised native dataset and Reader")
@@ -712,8 +768,10 @@ def run(args):
     )
     if args.reuse_from:
         config["reuse_from"] = [str(d.resolve()) for d in args.reuse_from]
-    if args.exclude_roots_from:
-        config["exclude_roots_from"] = [str(d.resolve()) for d in args.exclude_roots_from]
+    if excluded:
+        config["exclude_roots_from"] = [str(d.resolve()) for d in excluded]
+    if args.shared_warm:
+        config["shared_warm"] = str(args.shared_warm.resolve())
     args.output.mkdir(parents=True, exist_ok=True)
     with (args.output / ".lock").open("a") as owner, closing(connect(dataset.path)) as db:
         fcntl.flock(owner, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -722,7 +780,10 @@ def run(args):
             raise ValueError("Use a separate directory for each frozen round")
         write_json(config_path, config)
         reuse_dirs = []
-        for directory in args.reuse_from:
+        donors = [*args.reuse_from]
+        if args.shared_warm:
+            donors.append(args.shared_warm)
+        for directory in donors:
             prior = read_json(directory / "round.json")
             if prior is None or any(
                 prior[k] != config[k]
@@ -737,23 +798,34 @@ def run(args):
                 )
             ):
                 raise ValueError("Incompatible comparison-pack measurement source")
-            reuse_dirs.append(directory / "receipts")
-        receipts = Receipts(args.output / "receipts", dataset, db, reuse_dirs)
+            if directory == args.shared_warm:
+                if (
+                    prior["round"] != 0
+                    or prior["sampler"] != "uniform"
+                    or read_json(directory / "progress.json", {}).get("state") != "complete"
+                ):
+                    raise ValueError("Expected a closed uniform warm prefix")
+            else:
+                reuse_dirs.append(directory.resolve() / "receipts")
+        receipts = Receipts(
+            args.output / "receipts", dataset, db, reuse_dirs,
+            credited_dir=args.shared_warm.resolve() / "receipts" if args.shared_warm else None,
+        )
         packs = args.output / "packs"
         packs.mkdir(exist_ok=True)
         base_seed = args.pool_seed if args.pool_seed is not None else args.seed
         pool = NativeRootPool(db)
         spending = ExplorationBudget()
         seen_receipts = set()
-        for directory in args.exclude_roots_from:
+        for directory in excluded:
             for f in sorted((directory / "packs").glob("*.json.gz")):
                 row = read_gzip(f)
                 if row["split_role"] != "train":
                     raise ValueError("The mechanism pool may inherit only TRAIN exposure")
                 pool.accept(row)
-        if args.round == 1 and args.exclude_roots_from:
+        if args.round == 1 and excluded:
             # Bind the exact same unlabeled TRAIN pool for both mechanism arms.
-            baseline = args.exclude_roots_from[0]
+            baseline = excluded[0]
             common = bind_mechanism_pool(baseline, base_seed, pool, config)
             write_json(
                 args.output / "mechanism-pool.json",
@@ -971,6 +1043,7 @@ def main():
     p.add_argument("--budget", type=int, default=2048)
     p.add_argument("--window", type=int, default=1)
     p.add_argument("--exclude-roots-from", action="append", type=Path, default=[])
+    p.add_argument("--shared-warm", type=Path, help="Credited pi0 measurements and warm roots")
     p.add_argument("--reuse-from", action="append", type=Path, default=[])
     p.add_argument("--continuation-checkpoint", type=Path)
     p.add_argument("--sampler-checkpoint", type=Path)

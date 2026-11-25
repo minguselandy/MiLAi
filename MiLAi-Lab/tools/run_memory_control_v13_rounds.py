@@ -53,6 +53,17 @@ def collect(args, directory, calls, stage, mode, prior=None, sampler=None, share
     pool_seed = args.acquisition_seed * 100 + stage if stage else None
     window = args.recipe["eligible_pool_window"] if stage else 1
     progress_file = directory / "progress.json"
+    warm_option = "--shared-warm"
+    if stage == 1:
+        prefixes = {
+            json_file(path / "round.json").get("shared_warm")
+            for path in (shared, directory)
+            if path and (path / "round.json").is_file()
+        }
+        if prefixes == {None}:
+            warm_option = "--exclude-roots-from"  # Retain a legacy mechanism contract.
+        elif prefixes and prefixes != {str(args.warm.resolve())}:
+            raise ValueError("Mechanism arms disagree about their credited warm history")
     if progress_file.is_file() and json_file(progress_file).get("state") == "complete":
         config = json_file(directory / "round.json")
         expected = {
@@ -91,7 +102,7 @@ def collect(args, directory, calls, stage, mode, prior=None, sampler=None, share
     if shared:
         flags += ["--reuse-from", shared]
     if stage == 1:
-        flags += ["--exclude-roots-from", args.warm]
+        flags += [warm_option, args.warm]
     run(
         "control_policy_iteration",
         "--dataset",

@@ -123,6 +123,76 @@ def test_registered_peer_action_precedes_equivalent_prior_wire(tmp_path, monkeyp
     assert receipt["actual_requests"] == 0 and receipt["feedback_exposure"] == 1
 
 
+def test_shared_warm_and_peer_aliases_quote_and_charge_each_measurement_once(tmp_path, monkeypatch):
+    from milai_lab.runners import control_policy_iteration as it
+
+    warm, peer, local = (tmp_path / name for name in ("warm", "peer", "local"))
+    wire = {"messages": ["packet"], "seed": 11}
+    for directory, key, tid in (
+        (warm, "warm-branch", 1),
+        (peer, "a", 2),
+        (peer, "b", 2),
+        (peer, "peer-branch", 3),
+    ):
+        it.write_gzip(
+            directory / (key + ".json.gz"),
+            dict(
+                task_id=tid,
+                status="scored",
+                reader_wire=wire,
+                reader_result=key,
+                grade={"score": 1},
+                feedback_exposure=1,
+                actual_requests=1,
+                costs={},
+            ),
+        )
+    warm_origin = warm / "warm-branch.json.gz"
+    it.write_gzip(
+        peer / "peer-copy.json.gz",
+        dict(
+            it.read_gzip(warm_origin),
+            actual_requests=0,
+            measurement_reused_from=str(warm_origin),
+        ),
+    )
+    monkeypatch.setattr(it, "score_episode", lambda ds, db, task, r: r.update(grade={"score": 1}))
+    receipts = it.Receipts(local, None, None, [peer], credited_dir=warm)
+    tasks_and_keys = [
+        (1, "companion"),
+        (1, "peer-copy"),
+        (2, "b"),
+        (2, "alternate"),
+        (2, "a"),
+        (3, "other"),
+    ]
+    jobs = [
+        it.TerminalJob({"id": tid, "native_group": "g"}, None, None, 11, key)
+        for tid, key in tasks_and_keys
+    ]
+    prepared = [({"reader_wire": wire, "costs": {}}, True) for _ in jobs]
+    assert receipts.quote(jobs, prepared) == dict(
+        independent_feedback_units=2,
+        expected_arm_exposure=3,
+        expected_new_requests=0,
+        exposure_upper_bound=3,
+    )
+    rows = receipts.measure_batch(jobs, prepared)
+    assert [r["reader_result"] for r in rows] == [
+        "warm-branch",
+        "warm-branch",
+        "b",
+        "b",
+        "a",
+        "peer-branch",
+    ]
+    assert [r["feedback_exposure"] for r in rows] == [0, 0, 1, 0, 1, 1]
+    restored = it.Receipts(local, None, None, [peer], credited_dir=warm)
+    assert (restored.calls, restored.new_requests) == (3, 0)
+    other_seed = {"reader_wire": {**wire, "seed": 12}}
+    assert restored.quote(jobs[:1], [(other_seed, True)])["expected_new_requests"] == 1
+
+
 def test_12k_resume_preserves_actor_target_optimizer_and_rng(tmp_path, monkeypatch):
     torch = pytest.importorskip("torch")
     from milai_lab.datasets.memory_control_report import read_json, write_json
