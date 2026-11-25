@@ -356,6 +356,14 @@ def settle_read_effects(root, seed, calls, points, paths):
     )
 
 
+def early_overread(root, seed, points=None):
+    from memory_control_v13_overread import OBJECTIVES, settle_overread
+
+    if points is None:
+        points = {m: json_file(point_path(root, m, seed, 6000)) for m in OBJECTIVES}
+    return settle_overread(root, seed, points)
+
+
 def settle(root, seed, calls, repeats):
     points = {m: json_file(point_path(root, m, seed, calls)) for m in METHODS}
     paths = {}
@@ -423,6 +431,8 @@ def settle(root, seed, calls, repeats):
         for candidate, base in (("PQ-U", "DQ"), ("PQ-A", "PQ-U"), ("DQ", "gte-batch8"))
     }
     result["read_effects"] = settle_read_effects(root, seed, calls, points, paths)
+    if calls == 6000 and seed == 11:
+        result["warm_to_6k_overread"] = str(early_overread(root, seed, points))
     path = root / f"dev-review-a{seed}-{calls}.json"
     write_json(path, result)
     return result
@@ -616,6 +626,9 @@ if __name__ == "__main__":
     p.add_argument("--seed", type=int, default=11)
     p.add_argument("--repeats", type=int, default=5000)
     sub = p.add_subparsers(dest="mode", required=True)
+    sub.add_parser(
+        "overread", help="Run registered CPU diagnostic once DQ/PQ-U 6k points are closed"
+    )
     report = sub.add_parser("report")
     report.add_argument("--calls", type=int, required=True, choices=(6000, 12000, 24000))
     cases = sub.add_parser("examples")
@@ -637,7 +650,9 @@ if __name__ == "__main__":
         "--plot-python", default=sys.executable, help="Python interpreter with Matplotlib available"
     )
     args = p.parse_args()
-    if args.mode == "report":
+    if args.mode == "overread":
+        print(early_overread(args.root.resolve(), args.seed))
+    elif args.mode == "report":
         settle(args.root, args.seed, args.calls, args.repeats)
     elif args.mode == "examples":
         write_json(args.output, examples(args.policy, args.baseline))
