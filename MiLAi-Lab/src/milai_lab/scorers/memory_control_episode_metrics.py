@@ -407,6 +407,103 @@ def select_dev_records(protocol, episodes, roster):
     return {**protocol, "population": roster}, {i: episodes[i] for i in ids}
 
 
+def same_wire_dev_repeat(
+    primary: Path, repeated: Path, roster: dict[str, Any], *, repeats: int, seed: int
+) -> dict[str, Any]:
+    """Measure fixed-policy Reader variation using two distinct paid replies to each DEV input."""
+    paths = (primary, repeated)
+    protocols = [read_json(p / "protocol.json") for p in paths]
+    if (
+        repeats < 1
+        or roster.get("role") != "dev"
+        or any(
+            not p
+            or p["population"].get("role") != "dev"
+            or p["population"].get("v13_role") not in {"curve", "tune"}
+            for p in protocols
+        )
+        or any(read_json(p / "run.json", {}).get("status") != "COMPLETED" for p in paths)
+        or {k: v for k, v in protocols[0]["arm"].items() if k != "name"}
+        != {k: v for k, v in protocols[1]["arm"].items() if k != "name"}
+        or protocols[0]["comparison"] != protocols[1]["comparison"]
+    ):
+        raise ValueError("Use two closed natural DEV runs of the same policy and Reader")
+    first, later = [select_dev_records(*input_result(path), roster)[1] for path in paths]
+    provider_ids = set()
+    groups: dict[tuple[str, str], list[int]] = defaultdict(list)
+    for tid, before in first.items():
+        after = later[tid]
+        if not _same_reader_wire(before, after):
+            raise ValueError(f"Reader input or decoding seed changed on task {tid}")
+        for row in (before, after):
+            response = (row.get("reader_result") or {}).get("response") or {}
+            identity = response.get("id")
+            if (
+                not isinstance(identity, str)
+                or not identity
+                or identity in provider_ids
+                or row.get("costs", {}).get("reader_request_attempted") is not True
+            ):
+                raise ValueError("A same-wire repeat requires distinct measured provider replies")
+            provider_ids.add(identity)
+        if str(tid) not in roster.get("predeclared_unevaluable_tasks", {}):
+            groups[before["dataset"], before["native_group"]].append(tid)
+    scores: dict[str, list[tuple[float, float]]] = defaultdict(list)
+    changed_groups = Counter()
+    observed_groups = Counter()
+    for (source, _), ids in groups.items():
+        left, right = [
+            _primary_group_quality(
+                source,
+                [rows[i] for i in ids],
+                failure_zero=bool(roster.get("terminal_quality_failures")),
+            )
+            for rows in (first, later)
+        ]
+        if left and right:
+            pairs = list(zip(left, right, strict=True))
+            scores[source].extend(pairs)
+            observed_groups[source] += 1
+            changed_groups[source] += any(a != b for a, b in pairs)
+    model_seed = protocols[0]["arm"].get("seed")
+    metrics = _paired_metrics(
+        roster, [later], [first], [model_seed], [model_seed], repeats=repeats, seed=seed
+    )
+    source_quality = {}
+    for source in metrics["independent_groups"]:
+        pairs = scores[source]
+        source_quality[source] = {
+            "paired_native_units": len(pairs),
+            "paired_native_groups": observed_groups[source],
+            "changed_native_groups": changed_groups[source],
+            "second_higher": sum(b > a for a, b in pairs),
+            "second_lower": sum(b < a for a, b in pairs),
+            "second_minus_first_points": 100 * fmean(b - a for a, b in pairs) if pairs else None,
+        }
+    return {
+        "first_run": str(primary),
+        "second_run": str(repeated),
+        "new_reader_calls": 0,
+        "distinct_observed_provider_responses": len(provider_ids),
+        "adds_independent_groups": False,
+        "source_quality": source_quality,
+        **{
+            k: metrics[k]
+            for k in (
+                "configured_tasks",
+                "independent_groups",
+                "quality_delta_points",
+                "quality_interval_95",
+                "paired_quality_complete",
+                "shared_request_sensitivity",
+                "scored_request_equality_by_source",
+                "repeats",
+                "bootstrap_seed",
+            )
+        },
+    }
+
+
 def paired_repeat_measurements(
     primary: Path, repeated: Path, *, repeats: int, seed: int,
 ) -> dict[str, Any]:
@@ -830,9 +927,10 @@ def _paired_metrics(
             if "grade" not in left or "grade" not in right:
                 continue
             a, b = left.get("reader_wire"), right.get("reader_wire")
-            if not isinstance(a, dict) or not isinstance(b, dict):
-                continue
             counts = wires[left["dataset"]]
+            if not isinstance(a, dict) or not a or not isinstance(b, dict) or not b:
+                counts["unobserved_requests"] += 1
+                continue
             if not _same_reader_wire(left, right):
                 counts["different_requests"] += 1
                 continue
@@ -1085,6 +1183,9 @@ def _paired_metrics(
         output["token_savings_interval_95"] = (
             [percentiles(cost_per_seed, p) for p in (0.025, 0.975)] if cost_per_seed else None
         )
+    scored_wires_complete = bool(wires) and not any(
+        c["unobserved_requests"] for c in wires.values()
+    )
     return {
         "role": population["role"],
         "configured_tasks": len(population["tasks"]),
@@ -1097,10 +1198,11 @@ def _paired_metrics(
         "source_strata": strata,
         "shared_request_sensitivity": {
             "method": "literal_equal_wire_share_observed_replies_v1",
-            "quality_delta_points": point_sensitivity,
+            "scored_task_pair_wire_coverage_complete": scored_wires_complete,
+            "quality_delta_points": point_sensitivity if scored_wires_complete else None,
             "quality_interval_95": (
                 [percentiles(sensitivity_draws, p) for p in (0.025, 0.975)]
-                if sensitivity_draws else None
+                if sensitivity_draws and scored_wires_complete else None
             ),
         },
         "scored_request_equality_by_source": dict(wires),

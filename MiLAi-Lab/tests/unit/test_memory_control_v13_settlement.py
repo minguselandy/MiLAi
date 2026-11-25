@@ -313,6 +313,33 @@ def test_projections_require_unchanged_seed_and_whole_source_groups():
     assert bound["population"]["v13_role"] == "curve" and subset == packets
 
 
+def test_same_wire_repeat_requires_separate_actual_responses(tmp_path, monkeypatch):
+    from milai_lab.scorers import memory_control_episode_metrics as metrics
+
+    task = dict(dataset="qasper", native_group="paper", task_id=1)
+    pop = dict(role="dev", v13_role="curve", tasks=[task], dataset_run_id="release", seed=11)
+    proto = dict(arm={"policy": "fixed"}, comparison={}, population=pop)
+    original, repeat = tmp_path / "first", tmp_path / "second"
+    records = {}
+    for path in (original, repeat):
+        path.mkdir()
+        (path / "protocol.json").write_text(json.dumps(proto))
+        (path / "run.json").write_text(json.dumps({"status": "COMPLETED"}))
+        records[path] = {
+            **task,
+            "reader_wire": {"seed": 11},
+            "costs": {"reader_request_attempted": True},
+            "reader_result": {"response": {"id": "replayed-response"}},
+        }
+    monkeypatch.setattr(metrics, "input_result", lambda p: (proto, {1: records[p]}))
+    with pytest.raises(ValueError, match="distinct measured provider replies"):
+        metrics.same_wire_dev_repeat(original, repeat, pop, repeats=5, seed=1)
+    records[repeat]["reader_result"]["response"]["id"] = "another-response"
+    records[repeat]["reader_wire"]["seed"] = 12
+    with pytest.raises(ValueError, match="Reader input or decoding seed changed"):
+        metrics.same_wire_dev_repeat(original, repeat, pop, repeats=5, seed=1)
+
+
 def test_selected_repeats_keep_fit_and_acquisition_randomness_separate(tmp_path, monkeypatch):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
     tool = importlib.import_module("repeat_memory_control_v13_finalists")

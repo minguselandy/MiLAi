@@ -663,6 +663,8 @@ def readout(args):
                 "independent_groups",
                 "paired_quality_complete",
                 "paired_reader_input_complete",
+                "shared_request_sensitivity",
+                "scored_request_equality_by_source",
                 "reader_input_token_savings",
                 "token_savings_interval_95",
                 "by_seed",

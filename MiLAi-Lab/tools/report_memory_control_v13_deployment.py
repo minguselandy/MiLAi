@@ -16,6 +16,7 @@ from milai_lab.scorers.memory_control_episode_metrics import (
     input_result,
     paired_inline_latency,
     percentiles,
+    same_wire_dev_repeat,
     select_dev_records,
 )
 from milai_lab.scorers.memory_control_native import musique_pair
@@ -287,12 +288,28 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("runs", nargs="+", type=Path)
     p.add_argument("--output", required=True, type=Path)
-    p.add_argument("--latency-baseline", type=Path, help="Reference run for paired task latency")
-    p.add_argument("--dev-roster", type=Path, help="Whole DEV groups for the latency comparison")
+    comparison = p.add_mutually_exclusive_group()
+    comparison.add_argument(
+        "--latency-baseline", type=Path, help="Reference run for paired task latency"
+    )
+    comparison.add_argument(
+        "--repeat-of", type=Path, help="First paid run of the same DEV policy and wires"
+    )
+    p.add_argument("--dev-roster", type=Path, help="Whole DEV groups for the comparison")
     args = p.parse_args()
-    if args.dev_roster and not args.latency_baseline:
-        p.error("--dev-roster requires --latency-baseline")
-    if args.latency_baseline:
+    if args.dev_roster and not (args.latency_baseline or args.repeat_of):
+        p.error("--dev-roster requires a paired comparison")
+    if args.repeat_of:
+        if not args.dev_roster or len(args.runs) != 1:
+            p.error("--repeat-of requires one repeated run and its --dev-roster")
+        report = same_wire_dev_repeat(
+            args.repeat_of,
+            args.runs[0],
+            json.loads(args.dev_roster.read_text()),
+            repeats=5000,
+            seed=20261125,
+        )
+    elif args.latency_baseline:
         offsets = {
             path: summarize_run(path)["policy_load_ms_per_attempt"]
             for path in [*args.runs, args.latency_baseline]

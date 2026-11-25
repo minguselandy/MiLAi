@@ -92,6 +92,15 @@ def test_real_packet_readout_two_comparisons(tmp_path, native_fixture):
     assert initial["findings"] == {"same_backbone": "supported", "practical": "unidentified"}
     assert initial["measured_total_cost"] is None
     assert initial["unique_reader_calls"] == 32
+    for contrast in initial["native_contrasts"].values():
+        assert contrast["shared_request_sensitivity"]["quality_delta_points"] is None
+        assert (
+            sum(
+                c["unobserved_requests"]
+                for c in contrast["scored_request_equality_by_source"].values()
+            )
+            == 24
+        )
     for a in pop["arms"]:
         run = tmp_path / a["name"]
         proto = tool.read(run / "protocol.json")
@@ -103,12 +112,17 @@ def test_real_packet_readout_two_comparisons(tmp_path, native_fixture):
         tool.save(run / "protocol.json", proto)
         for f in (run / "episodes").glob("*.json"):
             row = tool.read(f)
+            row["reader_wire"] = {"task": row["task_id"], "seed": 42}
             row["costs"]["total_local_gpu_seconds"] = 3.0 if a != peer else 4.0
             tool.save(f, row)
     tool.readout(args)
     measured = tool.read(args.output)
     assert measured["measured_total_cost"]["interval_95"] == pytest.approx([0.25, 0.25])
     assert measured["findings"]["practical"] == "supported"
+    for contrast in measured["native_contrasts"].values():
+        assert contrast["quality_delta_points"] > 0
+        assert contrast["shared_request_sensitivity"]["quality_delta_points"] == 0
+        assert contrast["shared_request_sensitivity"]["scored_task_pair_wire_coverage_complete"]
     lost = tmp_path / "fit-29" / "episodes" / "0.json"
     row = tool.read(lost)
     row.pop("grade")
