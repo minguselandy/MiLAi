@@ -131,21 +131,28 @@ PY
     trained=$(dirname "$(find "$run" -name config.yaml -print -quit)")
     "$project/scripts/qrag_reference.sh" evaluate "$trained" > "$run/retrieval-validation.log" 2>&1
     ;;
-evaluate)
+initial|evaluate)
     trained=$(realpath "${2:?provide upstream run directory containing config.yaml}")
     exec {evaluation_lock}>"$trained/.retrieval-evaluation.lock"
     flock "$evaluation_lock"
     # Old single-actor summaries do not close the three-actor retrieval contrast.
     if ! python3 -c 'from pathlib import Path; import json,sys; p=Path(sys.argv[1]); sys.exit(0 if p.is_file() and "native_retrieval" in json.loads(p.read_text()) else 1)' "$trained/reference-result.json"; then
-        python3 "$project/scripts/qrag_ref_result.py" --prepare-terminal --run "$trained"
+        stages=(initial best final)
+        register_args=()
+        if [[ "$1" == initial ]]; then
+            stages=(initial)
+            register_args+=(--initial-only)
+        else
+            python3 "$project/scripts/qrag_ref_result.py" --prepare-terminal --run "$trained"
+        fi
         if [[ ! -e "$assets/musique-tune300/roster.json" || ! -e "$assets/e5-large/config.json" ]]; then
             "$project/scripts/qrag_reference.sh" prepare
         fi
         export PYTHONPATH="$project/scripts${PYTHONPATH:+:$PYTHONPATH}"
-        python3 "$project/scripts/qrag_ref_retrieval.py" register --run "$trained" \
+        python3 "$project/scripts/qrag_ref_retrieval.py" register "${register_args[@]}" --run "$trained" \
             --base "$model/model.safetensors" --initial-index "$result_dir/zero-update-actor-source.json"
         cd "$source_dir"
-        for stage in initial best final; do
+        for stage in "${stages[@]}"; do
             directory="$trained/retrieval/$stage"
             if python3 "$project/scripts/qrag_ref_retrieval.py" check-stage --directory "$directory" --roster "$result_dir/fixed-dev-roster.json"; then
                 continue
@@ -156,6 +163,9 @@ evaluate)
                 "pretrained_path=$directory" "+ref_binding=$directory/actor-binding.json" \
                 num_samples=-1 +envs.max_steps=4
         done
+        if [[ "$1" == initial ]]; then
+            exit 0
+        fi
         timing_args=()
         if [[ -s "$experiment/initial-schedule.json" ]]; then
             timing_args+=(--schedule "$experiment/initial-schedule.json")
@@ -172,7 +182,7 @@ evaluate)
     cat "$trained/reference-result.json"
     ;;
 *)
-    echo "Usage: $0 prepare | train RUN_LABEL | resume RUN_LABEL | evaluate UPSTREAM_RUN_DIR" >&2
+    echo "Usage: $0 prepare | train RUN_LABEL | resume RUN_LABEL | initial RUN_DIR | evaluate RUN_DIR" >&2
     exit 2
     ;;
 esac

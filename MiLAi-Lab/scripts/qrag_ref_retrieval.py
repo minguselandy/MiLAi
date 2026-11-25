@@ -33,14 +33,14 @@ def attest_initial_weights(actor, base):
     from safetensors import safe_open
 
     counts = {}
-    with safe_open(base, framework="pt", device="cpu") as original:
+    with torch.device("cpu"), safe_open(base, framework="pt", device="cpu") as original:
         for tower, prefix in PREFIX.items():
             found = set()
             for name, tensor in actor[tower].items():
                 key = name.removeprefix(prefix)
                 if not key.startswith(("embeddings.", "encoder.")):
                     continue
-                expected = original.get_tensor(key)
+                expected = original.get_tensor(key).cpu()
                 if tensor.dtype != expected.dtype or not torch.equal(
                     tensor.detach().cpu(), expected
                 ):
@@ -83,7 +83,7 @@ def attest_saved_initial(archive, base, run, receipt):
     }
 
 
-def register(run, initial_index, base, curve):
+def register(run, initial_index, base, curve, *, initial_only=False):
     cfg_path = run / "config.yaml"
     cfg = yaml.safe_load(cfg_path.read_text())
     best = max(curve, key=lambda r: r["gt_dev_return"])
@@ -123,6 +123,9 @@ def register(run, initial_index, base, curve):
         "best": (best["optimizer_updates"], "best", "best"),
         "final": (curve[-1]["optimizer_updates"], "last", "last"),
     }
+    if initial_only:
+        spec = {"initial": spec["initial"]}
+        design = dict(design, enabled=False, awaiting_terminal_curve=True)
     for label, (step, native, archive) in spec.items():
         directory = run / "retrieval" / label
         directory.mkdir(parents=True, exist_ok=True)
@@ -139,13 +142,23 @@ def register(run, initial_index, base, curve):
             "initial_source": initial if label == "initial" else None,
             "terminal_td_probe": design,
         }
-        metadata = directory / "actor-binding.json"
-        if metadata.is_file() and read(metadata) != binding:
-            raise ValueError("Terminal evaluation already bound to another actor")
         if (directory / "config.yaml").is_file() and (
             directory / "config.yaml"
         ).read_bytes() != cfg_path.read_bytes():
             raise ValueError("Saved evaluation changed the official training configuration")
+        metadata = directory / "actor-binding.json"
+        if metadata.is_file() and read(metadata) != binding:
+            old = read(metadata)
+            old_design = old.get("terminal_td_probe", {})
+            if label != "initial" or dict(old, terminal_td_probe=design) != binding:
+                raise ValueError("Terminal evaluation already bound to another actor")
+            if initial_only and not old_design.get("awaiting_terminal_curve"):
+                # The complete run already resolved the predeclared TRAIN probe.
+                continue
+            if not old_design.get("awaiting_terminal_curve") or any(
+                old_design.get(key) != design[key] for key in ("seed", "pairs", "trigger")
+            ):
+                raise ValueError("Initial evaluation has a different diagnostic protocol")
         (directory / "config.yaml").write_bytes(cfg_path.read_bytes())
         save(metadata, binding)
 
@@ -160,10 +173,13 @@ def load_bound_actor(agent, binding):
             raise ValueError("The initial E5 attestation requires official single-output pooling")
         source = binding["initial_source"]
         if source["source_kind"] == "recorded_zero_update_actor":
-            delta = torch.load(source["archive"], map_location="cpu", weights_only=True, mmap=True)
-            if delta["format"] != "qrag_e5_actor_delta_v1":
-                raise ValueError("Invalid initial actor delta")
-            actor = assemble(delta, base)
+            with torch.device("cpu"):
+                delta = torch.load(
+                    source["archive"], map_location="cpu", weights_only=True, mmap=True
+                )
+                if delta["format"] != "qrag_e5_actor_delta_v1":
+                    raise ValueError("Invalid initial actor delta")
+                actor = assemble(delta, base)
             agent.policy.load_state_dict(actor["policy"], strict=True)
             agent.critic.action_embed.load_state_dict(actor["action_embed"], strict=True)
             agent.alpha = actor["alpha"]
@@ -187,7 +203,8 @@ def load_bound_actor(agent, binding):
     receipt = read(archived.with_suffix(".json"))
     if receipt["optimizer_updates"] != binding["optimizer_updates"]:
         raise ValueError("Durable actor does not match its scheduled update")
-    actor, _ = read_xor_archive(archived, base)
+    with torch.device("cpu"):
+        actor, _ = read_xor_archive(archived, base)
     agent.policy.load_state_dict(actor["policy"], strict=True)
     agent.critic.action_embed.load_state_dict(actor["action_embed"], strict=True)
     agent.alpha = actor["alpha"]
@@ -521,6 +538,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     prepare = sub.add_parser("register")
+    prepare.add_argument("--initial-only", action="store_true")
     for key in ("run", "base", "initial-index"):
         prepare.add_argument("--" + key, type=Path, required=True)
     capture = sub.add_parser("attest-initial")
@@ -538,6 +556,11 @@ if __name__ == "__main__":
         raise SystemExit(0)
     if args.command == "check-stage":
         raise SystemExit(0 if complete_stage(args.directory, args.roster) else 1)
-    from qrag_ref_result import complete_curve
+    from qrag_ref_result import complete_curve, measured_curve
 
-    register(args.run.resolve(), args.initial_index, args.base, complete_curve(args.run))
+    curve = measured_curve(args.run) if args.initial_only else complete_curve(args.run)
+    if not curve:
+        raise ValueError("The measured initialization is required")
+    register(
+        args.run.resolve(), args.initial_index, args.base, curve, initial_only=args.initial_only
+    )

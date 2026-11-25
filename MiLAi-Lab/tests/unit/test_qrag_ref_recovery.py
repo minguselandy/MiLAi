@@ -178,7 +178,15 @@ def test_terminal_diagnostic_uses_matched_legal_edges_and_frozen_trigger(tmp_pat
             {"optimizer_updates": i, "gt_dev_return": (0.5 if i == 0 else gt)}
             for i in range(0, 601, 100)
         ]
-        retrieval.register(run, run / "optional-initial-index.json", tmp_path / "base", curve)
+        inputs = run, run / "optional-initial-index.json", tmp_path / "base"
+        retrieval.register(*inputs, curve[:1], initial_only=True)
+        initial = run / "retrieval/initial/actor-binding.json"
+        assert json.loads(initial.read_text())["terminal_td_probe"]["awaiting_terminal_curve"]
+        assert not (run / "retrieval/best").exists() and not (run / "retrieval/final").exists()
+        retrieval.register(*inputs, curve)
+        sealed = initial.read_bytes()
+        retrieval.register(*inputs, curve[:1], initial_only=True)
+        assert initial.read_bytes() == sealed
         designs = [
             json.loads((run / "retrieval" / s / "actor-binding.json").read_text())[
                 "terminal_td_probe"
