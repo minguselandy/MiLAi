@@ -441,6 +441,63 @@ def failure_diagnostic_evidence(run, native, curve):
     }
 
 
+def ancillary_resources(run):
+    """Other recorded GPU job windows in this fit lineage, excluding its three actor passes."""
+    items = []
+    ref_root = run.parent.parent
+    lineage_file = ref_root / "active-fit.json"
+    lineage = json.loads(lineage_file.read_text()) if lineage_file.is_file() else {}
+    cutover = ref_root / "precutover-resource-summary.json"
+    if cutover.is_file() and str(run.resolve()) in (
+        lineage.get("original_run"),
+        lineage.get("replacement_run"),
+    ):
+        prior = json.loads(cutover.read_text())
+        for field, scope in (
+            ("stopped_original_one_gpu_process_wall_seconds", "superseded initial validation"),
+            ("exposure_replay_one_gpu_log_interval_seconds", prior["replay_interval_basis"]),
+        ):
+            items.append(dict(scope=scope, seconds=prior[field], source=str(cutover)))
+    if lineage.get("replacement_run") == str(run.resolve()):
+        old = Path(lineage["original_run"])
+        window = old.parent / "terminal-process-window.json"
+        previous = (
+            json.loads(window.read_text())
+            if window.is_file()
+            else lineage.get("original_process_window", {})
+        )
+        items.append(
+            dict(
+                scope="interrupted prior fit including parking",
+                seconds=previous.get("elapsed_seconds"),
+                source=str(window if window.is_file() else lineage_file),
+            )
+        )
+        costs = old / "interrupted-best-retrieval/validation-resource.jsonl"
+        if costs.is_file():
+            with costs.open() as stream:
+                settled = [json.loads(line) for line in stream if line.endswith("\n")]
+            items.append(
+                dict(
+                    scope="interrupted actor retrieval on fixed TUNE",
+                    seconds=sum(row["elapsed_seconds"] for row in settled),
+                    settled_attempts=len(settled),
+                    source=str(costs),
+                )
+            )
+    for probe_file in sorted(run.glob("native-restart-probe*.json")):
+        probe = json.loads(probe_file.read_text())
+        items.append(
+            dict(
+                scope="independent native restart replay",
+                seconds=probe["one_gpu_wall_seconds"],
+                source=str(probe_file),
+            )
+        )
+    known = sum(row["seconds"] for row in items if row["seconds"] is not None)
+    return {"windows": items, "known_gpu_job_hours": known / 3600}
+
+
 def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
     curve = complete_curve(run)
     from qrag_ref_retrieval import paired_evaluation
@@ -497,7 +554,14 @@ def summarize(run: Path, roster: Path, schedules: list[Path]) -> dict:
         else:
             merged.append((start, end))
     paused = sum(end - start for start, end in merged) / 1e9
+    ancillary = ancillary_resources(run)
     return {
+        "other_recorded_ref_costs": ancillary,
+        "known_ref_gpu_job_hours_including_prior_work": (
+            fit_resource["elapsed_seconds"] / 3600
+            + evaluation_hours
+            + ancillary["known_gpu_job_hours"]
+        ),
         "fit_duration_scope": time_scope,
         "one_gpu_training_job_hours": fit_resource["elapsed_seconds"] / 3600,
         "recorded_parked_seconds": paused,

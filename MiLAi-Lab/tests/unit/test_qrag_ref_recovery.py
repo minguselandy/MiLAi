@@ -214,3 +214,31 @@ def test_progress_reads_only_complete_validation_points(tmp_path, monkeypatch):
     assert path.read_bytes().endswith(b":100")
     with pytest.raises(ValueError, match="incomplete"):
         result.complete_curve(tmp_path)
+
+
+def test_recorded_extra_costs_include_failed_jobs_and_exclude_shared_initial(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "scripts"))
+    result = importlib.import_module("qrag_ref_result")
+    earlier = tmp_path / "original/run"
+    readout = earlier / "interrupted-best-retrieval/validation-resource.jsonl"
+    readout.parent.mkdir(parents=True)
+    readout.write_text(
+        '{"elapsed_seconds":5,"exit_code":1}\n{"elapsed_seconds":12,"exit_code":0}\n'
+    )
+    run = tmp_path / "repeat/run"
+    initial = run / "retrieval/initial/validation-resource.jsonl"
+    initial.parent.mkdir(parents=True)
+    initial.write_text('{"elapsed_seconds":77,"exit_code":0}\n')
+    (tmp_path / "active-fit.json").write_text(
+        json.dumps(
+            dict(
+                original_run=str(earlier),
+                replacement_run=str(run),
+                original_process_window={"elapsed_seconds": 3600},
+            )
+        )
+    )
+    (run / "native-restart-probe.json").write_text('{"one_gpu_wall_seconds":7}')
+    stats = result.ancillary_resources(run)
+    assert stats["known_gpu_job_hours"] == pytest.approx((3600 + 5 + 12 + 7) / 3600)
+    assert all(row["source"] != str(initial) for row in stats["windows"])
