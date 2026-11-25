@@ -107,6 +107,8 @@ An existing live run can reattach its single file observer with `scripts/qrag_re
 
 The current terminal owner uses an independent process session with its logs on persistent storage. Its `terminal-owner.json` binds the trainer PID and Linux start tick; it waits on a pidfd. When the original process exits, it settles the wall interval, requires the full validation curve, then invokes the registered retrieval evaluation with a file lock. It does not replace the training process. The transient session survives the launching shell's exit. Host-reboot recovery uses the persistent files and explicit evaluation entry point above.
 
+The update-250 rolling checkpoint occupied 14,096,823,847 bytes. A second A100 restored it and replayed ten optimizer updates (960 real critic transitions). At update 260, the uninterrupted and recovered runs both measured TD loss 0.01728883385658264 and backbone-probe change 0.00010340847074985504. The replay consumed 229.78 GPU-seconds and zero Reader requests. These observations are recorded in `native-restart-probe-u250.json`. Together, the two recovery checks used 306.84 GPU-seconds.
+
 ## Terminal actor comparison
 
 The fixed initialization was measured during the replay on a second A100. Use `scripts/qrag_reference.sh initial RUN_DIR` to evaluate this frozen actor before training closes. This path creates only the initial stage. The standard terminal registration still requires the complete curve to name the best and final actors and decide the TRAIN gradient diagnostic. When that decision is available, compatible initial rows are reused. The native evaluation reads only the missing rows and any required conditional probe.

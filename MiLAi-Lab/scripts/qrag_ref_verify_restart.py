@@ -1,4 +1,4 @@
-"""Read-only replay of the next native optimizer update from a trusted local REF snapshot."""
+"""Replay a trusted REF snapshot to the next logged update without changing the fit."""
 
 import argparse
 import json
@@ -17,6 +17,7 @@ from qrag_ref_fit_state import restore
 def verify(directory, state, source):
     sys.path.insert(0, str(source))
     from envs.parallel_env import ParallelTextEnv
+    from eval_retriever import evaluate_episode
     from rl.agents.pqn import PQN
 
     cfg = OmegaConf.load(directory / "config.yaml")
@@ -31,7 +32,7 @@ def verify(directory, state, source):
     probe = agent.critic.state_embed.model.encoder.layer[0].attention.self.query.weight
     initial = probe[:32, :32].detach().clone()
     env = instantiate(cfg.envs.env)
-    instantiate(cfg.envs.test_env)
+    validation_env = instantiate(cfg.envs.test_env)
     parallel = ParallelTextEnv(
         [env] + [env.copy() for _ in range(cfg.envs_parallel - 1)],
         state_tokenizer=agent.state_tokenizer,
@@ -47,7 +48,8 @@ def verify(directory, state, source):
         raise ValueError("No later uninterrupted measurement is available yet")
     count = expected["optimizer_updates"]
     iterations = (count - restored) * cfg.accumulate_grads
-    for _ in range(iterations):
+    validation_episodes = 0
+    for it in range(next_it, next_it + iterations):
         agent.train()
         states, _, data = parallel.rollout(
             cfg.batch_size, states, agent, random=(step < 2 * cfg.learning_start)
@@ -56,6 +58,11 @@ def verify(directory, state, source):
         loss = agent.update(
             data.state, data.action, data.next_state, data.q_values, data.reward, data.not_done
         )
+        if it % (cfg.eval_interval * cfg.accumulate_grads) == 0:
+            agent.eval()
+            for i in range(cfg.eval_episodes):
+                evaluate_episode(validation_env, agent, validation_env.dataset[i])
+            validation_episodes += cfg.eval_episodes
     observed = dict(
         loss=float(loss),
         backbone_probe_max_change=float((probe[:32, :32] - initial).abs().max().item()),
@@ -65,6 +72,7 @@ def verify(directory, state, source):
         replayed_optimizer_updates=count - restored,
         compared_update=count,
         training_transitions=cfg.batch_size * iterations,
+        replayed_validation_episodes=validation_episodes,
         uninterrupted={k: expected[k] for k in observed},
         recovered=observed,
         measured_fields_equal=all(v == expected[k] for k, v in observed.items()),
