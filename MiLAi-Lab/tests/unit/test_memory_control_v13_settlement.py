@@ -389,6 +389,33 @@ def test_finite_observed_utility_includes_future_and_known_immediate_cost(monkey
     assert tool.native_deltas(labels, "read", 0.05, 100.0) == {}
 
 
+def test_sampling_signal_counts_regret_mass_and_common_direction_errors(monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    tool = importlib.import_module("diagnose_memory_control_v13_evidence")
+    observed = {"source": "qasper", "native_group": "paper"}
+    flagged = dict(
+        observed,
+        numerator=0.2,
+        finite_pair_regret=0.1,
+        native_net_gap=-0.1,
+        head_net_gaps=[-0.2, -0.1, 0.3, 0.4],
+    )
+    missed = dict(
+        observed,
+        numerator=0.0,
+        finite_pair_regret=0.9,
+        native_net_gap=-0.9,
+        head_net_gaps=[0.2, 0.3, 0.4, 0.4],
+    )
+    report = tool.summarize_sampling_signal([flagged, missed])
+    assert report["native_groups"] == 1 and report["positive_regret_states"] == 2
+    assert (
+        report["flagged_positive_regret_states"] == report["unflagged_errors_all_heads_wrong"] == 1
+    )
+    assert report["fraction_of_regret_flagged"] == pytest.approx(0.1)
+    assert tool.summarize_sampling_signal([])["fraction_of_regret_flagged"] is None
+
+
 def test_projections_require_unchanged_seed_and_whole_source_groups():
     from milai_lab.scorers.memory_control_episode_metrics import select_dev_records
 

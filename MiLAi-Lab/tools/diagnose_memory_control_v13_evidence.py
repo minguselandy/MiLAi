@@ -720,12 +720,35 @@ def summarize_overreads(rows):
     return {"n": len(rows), "mean": means}
 
 
+def summarize_sampling_signal(rows):
+    flagged = [r for r in rows if r["numerator"] > 0]
+    missed = [r for r in rows if r["numerator"] == 0 and r["finite_pair_regret"] > 0]
+    regret = sum(r["finite_pair_regret"] for r in rows)
+    flagged_regret = sum(r["finite_pair_regret"] for r in flagged)
+    return {
+        "observed_states": len(rows),
+        "native_groups": len({(r["source"], r["native_group"]) for r in rows}),
+        "positive_numerator_states": len(flagged),
+        "positive_regret_states": sum(r["finite_pair_regret"] > 0 for r in rows),
+        "flagged_positive_regret_states": sum(r["finite_pair_regret"] > 0 for r in flagged),
+        "unflagged_positive_regret_states": len(missed),
+        "unflagged_errors_all_heads_wrong": sum(
+            all(gap * r["native_net_gap"] < 0 for gap in r["head_net_gaps"]) for r in missed
+        ),
+        "finite_pair_regret_sum": regret,
+        "flagged_regret_sum": flagged_regret,
+        "fraction_of_regret_flagged": flagged_regret / regret if regret else None,
+    }
+
+
 def score(args):
     import math
 
     import torch
 
     from milai_lab.methods.pretrained_control import PretrainedControl
+    from milai_lab.runners.control_policy_iteration import sampler_priority
+    from milai_lab.runners.qrag_milai_env import ComparisonPack
 
     penalty = args.utility_lambda
     if penalty is not None and (not math.isfinite(penalty) or penalty < 0):
@@ -744,6 +767,7 @@ def score(args):
     model = PretrainedControl.load(args.checkpoint, device=args.device).eval()
     measures = defaultdict(lambda: defaultdict(list))
     overreads = defaultdict(lambda: defaultdict(list))
+    signal = defaultdict(list)
     with torch.inference_mode():
         for file in sorted((args.output / "pairs").glob("*.json.gz")):
             row = read_gzip(file)
@@ -778,16 +802,43 @@ def score(args):
                             net = model.net_from_scores(online, quality, future, penalty)
                             delta = float((net[read].mean() - net[stop].mean()).item())
                         prefers_read = delta > 0 or (delta == 0 and read < stop)
+                        regret = max(0.0, truth) - (truth if prefers_read else 0.0)
                         if axis == "utility":
                             terms = overread_error_terms(gains, quality_delta, delta, prefers_read)
                             if terms is not None:
                                 overreads[row["dataset"]][mode].append(terms)
+                            if mode == "original" and matched:
+                                pair = (candidate, "handoff")
+                                values = net.detach().float().cpu().numpy()
+                                if values.shape != (len(online["actions"]), 4):
+                                    raise ValueError(
+                                        "Expected four net-utility heads per legal action"
+                                    )
+                                numerator = sampler_priority(
+                                    "structured",
+                                    values,
+                                    online,
+                                    ComparisonPack(pair, (pair,), ()),
+                                    1,
+                                )
+                                signal[row["dataset"]].append(
+                                    dict(
+                                        source=row["dataset"],
+                                        native_group=row["native_group"],
+                                        task_id=row["task_id"],
+                                        before_index=i,
+                                        read_action=candidate,
+                                        head_net_gaps=(values[read] - values[stop]).tolist(),
+                                        native_net_gap=truth,
+                                        prefers_read=prefers_read,
+                                        numerator=numerator,
+                                        finite_pair_regret=regret,
+                                    )
+                                )
                         key = mode if axis == "quality" else mode + "_utility"
                         predictions[axis, mode].append(delta)
                         stats[key + "_absolute_delta_error"].append(abs(delta - truth))
-                        stats[key + "_two_action_regret"].append(
-                            max(0.0, truth) - (truth if prefers_read else 0.0)
-                        )
+                        stats[key + "_two_action_regret"].append(regret)
                         if truth > 0:
                             stats[key + "_stop_on_profitable_read"].append(int(not prefers_read))
                         elif truth < 0:
@@ -832,7 +883,17 @@ def score(args):
             for s, axes in measures.items()
         },
     )
-    args.result.write_text(json.dumps(summary, indent=2, allow_nan=False) + "\n")
+    if matched and penalty is not None:
+        rows = [r for src in measures for r in signal[src]]
+        summary["pair_sampling_signal"] = dict(
+            scope="Original observed READ/HANDOFF pairs with unit price; no package selection.",
+            device=str(model.device),
+            new_reader_calls=0,
+            pooled=summarize_sampling_signal(rows),
+            by_source={s: summarize_sampling_signal(signal[s]) for s in measures},
+            rows=rows,
+        )
+    write_json(args.result, summary)
 
 
 if __name__ == "__main__":

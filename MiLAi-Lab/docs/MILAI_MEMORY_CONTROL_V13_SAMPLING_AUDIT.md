@@ -21,6 +21,30 @@
 
 上述压力测试与 S0 窗口试算用于检验调度机制。判断采样收益仍需共用 pi₀ 的 6k 读出、各臂自身策略的 12k/24k 读出，以及计划规定的独立采集复核。
 
+### 2k 模型的四头分歧覆盖了哪些决策错误
+
+在已冻结的 36 个 TUNE 诊断组上，用正式结构化采样将采用的 seed11 Paired-Q 预热权重和 CUDA 推理精度，评估 72 个原始读取前状态。每个状态只比较预先指定的 READ 与 HANDOFF。保留相同的 π₀、λ=0.05 和成本尺度 1,912。对四个头各自的 READ 减 HANDOFF 净效用差，调用采样器的原实现，将单对比较的计价参数置一，计算原公式的分子 `max(0, IQR − |median|)`。决策取四头均值，平分时沿用菜单顺序。表中的错误表示所选动作在已执行的两动作池中有正的净效用遗憾。
+
+| 来源 | 读取前状态 / 原生组 | 分子为正的状态 | 有决策错误的状态 | 分子为正且有错误 | 这些状态占全部实测遗憾 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| MuSiQue-Full | 24 / 12 | 0 | 16 | 0 | 0.00% |
+| QASPER | 24 / 12 | 1 | 16 | 1 | 4.18% |
+| PersonaMem | 24 / 12 | 5 | 23 | 4 | 4.33% |
+| 合计 | 72 / 36 | 6 | 55 | 5 | 3.17% |
+
+6 个分子为正的状态来自 4 个原生组。55 次错误均为过读，11 个实测净收益为正的状态均选择了读。其余 50 次过读的分子为零，四个头在每一次都预测读取净收益为正，而实际净收益为负。正分子覆盖的遗憾总和为 0.18949，全体为 5.98476。该结果表明，预热模型在这些指定比较上常出现四头同方向的错误。正式采样还会取整包多个比较的最大值、计入完整反馈成本，并保留随机曝光；6k 的同池比较将测量这些机制共同产生的效果。
+
+实际重算核对了 144 条主分支及 12 条 companion 付费回执、每个原生分数、实际 token 成本和逐头分数对应的分位数。推理使用 19.77 单卡秒，包含模型加载及原有的等长证据替换读出，新增 Reader 调用为零。逐状态结果在 `evidence-diagnostic/warm-11-sampler-signal-cuda.json` 的 `pair_sampling_signal`，设备窗口在同目录的 `warm-11-sampler-signal-gpu-cost.jsonl`。
+
+```bash
+R=/cra/milai-experiments/v13-qrag
+D="$R/evidence-diagnostic"
+CUDA_VISIBLE_DEVICES=3 HF_HUB_OFFLINE=1 PYTHONPATH=src python tools/diagnose_memory_control_v13_evidence.py \
+  --output "$D" score --checkpoint "$R/weights/round-models/a11-f11-warm-paired/checkpoint" \
+  --device cuda --utility-lambda 0.05 --require-matched-continuation \
+  --result "$D/warm-11-sampler-signal-reproduction.json"
+```
+
 ### 共同 warm 已付请求在 6k 机制阶段的复用
 
 在冻结 TRAIN 池上重放 seed11 的前 600 个均匀抽样窗口，有 6 个窗口会选中共同 warm 已采 MuSiQue 对的另一成员。按共同 π₀ 构造这 6 个完整包，共得到 24 个待执行请求。其中 12 个与 warm 的成功付费记录具有完全相同的任务、Reader 输入和种子。每包有一个当前 companion 与既有主分支匹配，另有一个当前主分支与既有 companion 匹配。原先仅按回执文件名查找外部数据，且未将共同 warm 的测量带入新轮，这些请求会被再次报价。
