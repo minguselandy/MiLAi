@@ -209,6 +209,16 @@ def verify_score(raw, checkpoint, round_id):
         raise ValueError("Score does not match the frozen checkpoint, target and utility unit")
 
 
+def has_error_split(raw):
+    split = raw.get("overread_utility_error")
+    return (
+        isinstance(split, dict)
+        and bool(split)
+        and set(split) == set(raw.get("sources", {}))
+        and all(set(modes) == {"original", "swapped"} for modes in split.values())
+    )
+
+
 def cpu_score(directory, checkpoint, path):
     env = dict(
         os.environ,
@@ -350,13 +360,13 @@ def settle_overread(root, seed, points):
             )
             output = dest / f"{obj}.json.gz"
             record = read_gzip(output) if output.is_file() else {}
-            if record.get("binding") != binding:
+            if record.get("binding") != binding or not has_error_split(record.get("score", {})):
                 with tempfile.TemporaryDirectory(dir=dest) as tmp:
                     path = Path(tmp) / "score.json"
                     cpu_score(directory, checkpoint, path)
                     raw = read_json(path)
                     verify_score(raw, checkpoint, 1)
-                    if raw.get("overread_utility_error") is None:
+                    if not has_error_split(raw):
                         raise ValueError("Missing 6k error split")
                     write_gzip(output, dict(binding=binding, score=raw))
             else:

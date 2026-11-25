@@ -772,7 +772,9 @@ if __name__ == "__main__":
     )
     reg.add_argument("--selection", type=Path, required=True)
     reg.add_argument(
-        "--reader-cap", type=int, help="Defaults to remaining fresh tasks × unique deployed arms"
+        "--reader-cap",
+        type=int,
+        help="Defaults to remaining fresh tasks times unique deployed arms",
     )
     reg.add_argument("--cost-unit", choices=COST_FIELDS, default="local_gpu_seconds")
     reg.add_argument("--window-tasks", type=int, default=16)
