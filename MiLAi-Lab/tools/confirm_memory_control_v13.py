@@ -351,16 +351,12 @@ def cap_candidate(data, audits, limit, arms, seed, prior):
 
 
 def register(args):
-    if (
-        min(
-            args.reader_cap,
-            args.draws,
-            args.power_repeats,
-            args.bootstrap_repeats,
-            args.quality_mde,
-        )
-        <= 0
-    ):
+    if min(
+        args.draws,
+        args.power_repeats,
+        args.bootstrap_repeats,
+        args.quality_mde,
+    ) <= 0 or (args.reader_cap is not None and args.reader_cap <= 0):
         raise ValueError("Positive simulation counts, cap and meaningful effect required")
     spec = read(args.selection)
     final = spec["final"]
@@ -412,9 +408,13 @@ def register(args):
     )
     audits = (args.role_audit, args.packet_audit)
     prior = prior_v13_runs(args.data, args.role_audit, getattr(args, "prior_run", ()))
+    reader_cap = args.reader_cap
+    if reader_cap is None:
+        inventory = checked_capacity(args.data, *audits, None, args.seed, prior)
+        reader_cap = inventory["actual_tasks"] * len(arms)
     capacities = []
     for fraction in (0.25, 0.5, 1.0):
-        limit = int(args.reader_cap * fraction)
+        limit = int(reader_cap * fraction)
         if limit < 3 * len(arms):
             continue
         try:
@@ -536,7 +536,12 @@ def register(args):
         "simulated_draws": args.draws,
         "power_repeats": args.power_repeats,
         "analysis_seed": args.seed + 1,
-        "max_reader_calls": args.reader_cap,
+        "max_reader_calls": reader_cap,
+        "reader_cap_source": (
+            "remaining_fresh_tasks_times_unique_deployments"
+            if args.reader_cap is None
+            else "explicit"
+        ),
         "reserved_first_calls": len(arms) * len(population["tasks"]),
         "power_policy": (
             "first grid point with joint engineering and quality power >=0.80, "
@@ -762,9 +767,13 @@ if __name__ == "__main__":
         p.add_argument("--packet-audit", type=Path, required=True)
         p.add_argument("--seed", type=int, default=20261125)
         p.add_argument("--output", type=Path, required=True)
-    capacity.add_argument("--target-tasks", type=int, required=True)
+    capacity.add_argument(
+        "--target-tasks", type=int, help="Defaults to all remaining eligible tasks"
+    )
     reg.add_argument("--selection", type=Path, required=True)
-    reg.add_argument("--reader-cap", type=int, required=True)
+    reg.add_argument(
+        "--reader-cap", type=int, help="Defaults to remaining fresh tasks × unique deployed arms"
+    )
     reg.add_argument("--cost-unit", choices=COST_FIELDS, default="local_gpu_seconds")
     reg.add_argument("--window-tasks", type=int, default=16)
     reg.add_argument("--quality-mde", type=float, default=1.0)

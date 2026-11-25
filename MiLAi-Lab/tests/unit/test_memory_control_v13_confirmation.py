@@ -256,6 +256,24 @@ def test_register_three_fits_and_one_shared_control(tmp_path, native_fixture):
     )
     assert len(tool.read(args.output / "population.json")["arms"]) == 4
     assert not any(args.output.rglob("episodes"))
+    # Two comparisons share the fixed baseline. An exposed MuSiQue pair consumes both members.
+    prior = tmp_path / "already-used"
+    prior.mkdir()
+    member = next(
+        t
+        for t in tool.read(args.output / "population.json")["tasks"]
+        if t["dataset"] == "musique_full"
+    )
+    tool.save(prior / "protocol.json", {"population": {"role": "confirm", "tasks": [member]}})
+    tool.save(prior / "run.json", {"status": "COMPLETED"})
+    args.prior_run = [prior]
+    args.reader_cap = None
+    args.output = tmp_path / "inventory-frozen"
+    tool.register(args)
+    derived = tool.read(args.output / "registration.json")
+    assert derived["max_reader_calls"] == 4 * (8 - 2)
+    assert derived["reader_cap_source"] == "remaining_fresh_tasks_times_unique_deployments"
+    assert derived["reserved_first_calls"] <= derived["max_reader_calls"]
 
 
 def test_actual_cost_weights_the_registered_workload(native_fixture):

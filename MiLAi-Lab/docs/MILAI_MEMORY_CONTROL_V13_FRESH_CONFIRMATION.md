@@ -44,13 +44,19 @@ The default minimum meaningful same-backbone quality effect is one macro percent
 
 Two one-sided primary tests share the Holm family at 0.025. The first tests positive native macro quality gain against the chosen same-backbone control. The engineering test requires quality delta above −1 percentage point and total cost savings above 15% relative to the DEV-selected practical baseline. Its raw p-value is the maximum of the two component p-values. Point estimates, paired intervals and missing-quality bounds accompany the decisions. End-to-end latency, vLLM RUNNING duration, controller measurements and Reader tokens retain their own units and coverage. The primary savings ratio uses the sum of measured costs on the registered task workload, averaged over fit replicates. Group draws keep the original task count of each source as its cost weight. The result also includes absolute totals by source and an equal-source-weighted sensitivity. The primary total-cost test can use a complete measured local GPU-second or currency field with an explicit common measurement scope covering Reader, controller, retrieval and preprocessing. Currency measurements require a common currency code.
 
-After final TUNE runs and the selection file exist, an invocation has the following form. The Reader cap and the three output directories are supplied by the parent experiment. The registration command does not contact the Reader.
+After final TUNE runs and the S4 selection file exist, registration can derive its Reader ceiling from the remaining eligible task count times the number of unique deployed configurations. Exposure of one member excludes its whole native group. A deployment shared by both primary comparisons counts once. An explicit `--reader-cap` still sets an external budget. Both paths use the same preregistered 25%, 50%, 100% whole-group power grid and record the origin of the ceiling. Registration issues zero Reader requests. Reader retries and paid failures count against the registered cap during dispatch.
+
+The release was checked again with networking disabled on November 26. Its metadata still contained 6,065 eligible tasks across 610 native groups. With four unique deployments, that inventory would give a ceiling of 24,260 calls; with seven, 42,455. These examples are conditional capacity, not a selected roster or an incurred charge. The actual method roster and DEV variance are pending.
 
 ```bash
 root=/cra/milai-experiments/v13-qrag
 export PYTHONPATH=src
+selection="$root/s4/selection.json"
+registration="$root/s4/confirmation-registration"
+confirm_runs="$root/fresh-confirmation-runs"
+confirmation_result="$root/s4/confirmation-result.json"
 python3 tools/confirm_memory_control_v13.py register \
-    --selection "$selection" --reader-cap "$reader_cap" --cost-unit local_gpu_seconds \
+    --selection "$selection" --cost-unit local_gpu_seconds \
     --data "$root/fresh-sources/native-confirm/memory_control.sqlite3" \
     --role-audit "$root/fresh-sources/final-source-role-audit.json" \
     --packet-audit "$root/fresh-sources/final-packet-ledger-audit.json" \

@@ -29,9 +29,9 @@ class InsufficientDevGroups(ValueError):
 
 
 def confirmation_capacity(
-    data: Path, target_tasks: int, seed: int, exposure_runs: list[Path],
+    data: Path, target_tasks: int | None, seed: int, exposure_runs: list[Path],
 ) -> dict[str, Any]:
-    if target_tasks <= 0:
+    if target_tasks is not None and target_tasks <= 0:
         raise ValueError("Provide a positive confirmation capacity target")
     exposed: set[tuple[str, str]] = set()
     for path in exposure_runs:
@@ -63,6 +63,8 @@ def confirmation_capacity(
         raise ValueError("The fresh confirmation registry lacks a native source")
     selected: dict[str, list[tuple[str, int]]] = defaultdict(list)
     sizes = {source: dict(groups) for source, groups in eligible.items()}
+    if target_tasks is None:
+        target_tasks = sum(sum(groups.values()) for groups in sizes.values())
     for source, group in allocate_native_groups(sizes, target_tasks, seed):
         selected[source].append((group, sizes[source][group]))
     if set(selected) != set(SOURCES):
