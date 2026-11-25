@@ -73,6 +73,24 @@ The initial Reader phase parked the live REF and S1 processes with their allocat
 
 ## Restart and staging recovery
 
+The first full-length attempt exited on November 25 after 4,160 logged optimizer updates and 42 recorded validation passes (initialization through update 4,100). Its process window was 77,226.23 seconds, including the previously registered 3,480.79-second hold. The operating-system exit code is unknown. Its best development actor, from update 3,700, completed 200 of the registered 300 questions. Its inference weights and logs remain under the original run label.
+
+On November 26, the separate `official-musique-tune300-seed42-replay-20261126` attempt started again from the public E5 weights and seed 42. The training configuration and DEV roster are identical after accounting for output paths. The initialized actor completed 86/300 questions. The first three recorded losses and backbone probes equal those of the interrupted run. `ref/active-fit.json` binds the two attempts and records their separate expenses. The helper for phase grants now watches the replacement run’s terminal result.
+
+For an opt-in training restart, set `MILAI_REF_TRAIN_STATE` to a private local `.zst` file before calling `train`. The trainer saves at optimizer update 1 and subsequently every 250 complete updates. A rolling snapshot contains online and target modules, AdamW, scheduler, exploration temperature, rollout memory and environment state, pending train-reward history, progress positions and random generators. A hard link retains the corresponding best inference actor. A failed attempt can be resumed on the same frozen data, configuration and host using the original label and state path:
+
+```bash
+export PYTHONPATH=/data/milai-experiments/v13-ref-python
+export REF_GPU=2 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4
+export MILAI_REF_BASE=/cra/milai-experiments/v13-qrag/staging/ref/e5-large
+export MILAI_REF_TRAIN_STATE=/cra/milai-experiments/v13-qrag/staging/ref/fit-recovery/seed42.pt.zst
+scripts/qrag_reference.sh resume official-musique-tune300-seed42-replay-20261126
+```
+
+The fitted run’s original validation and update logs supply the committed prefix. Resume archives later lines before replaying those updates. The launcher checks for a live trainer and preserves attempt resource records. The data and model paths in the saved configuration must still resolve to their original contents. This host uses a separate on-demand 48 GiB tmpfs under `/cra` for training-state compression and restoration. It survives training-process exit and is volatile across host reboot. The selected inference actors are archived separately on persistent storage. SHA validation is disabled.
+
+The first actual training-state snapshot measured 11,907,170,951 bytes. An independent A100 restored it and executed the next eight native rollouts (96 critic transitions). Both runs measured loss 12.08664608001709 and a maximum backbone-probe change of 9.313225746154785e−09 at update 2. The check took 77.06 GPU-seconds and issued zero Reader requests. It left the production weights, progress logs and selected actors untouched. The result is in the replacement run’s `native-restart-probe.json`.
+
 The retained run is `ref/official-musique-tune300-seed42/Nov25_00-48-23_QRAG_musique` below the persistent experiment root. `retained-actors/index.json` points to the last atomically published and losslessly verified retrieval actors. The observer reads the existing training process and its published files. It holds an immutable hardlink during encoding, verifies reconstructed tensor bytes and replaces the persistent index only after the checkpoint receipt is durable. It retains the latest best, the final last when available, and the separate update-100 measurement. An interrupted encode leaves the previous indexed version available.
 
 `retained-actors/live-resource.json` records the most recent observed process/CPU wall time, scheduling interval, optimizer evidence and durable actor step. The original run had logged 140 optimizer updates when parked; its best inference actor was at update 100. The live training state includes the optimizer moments, EMA target towers, rollout state, random generators and pending accumulated gradients. The original process exposes evaluation actors through its file interface. Its optimizer state cannot be restored exactly from those files. After a host loss during fitting, reproducing the full official schedule requires a separate run from the original E5 initialization. Preserve the interrupted run's elapsed resources and partial curve.

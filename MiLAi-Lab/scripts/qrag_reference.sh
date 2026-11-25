@@ -18,6 +18,7 @@ export TRANSFORMERS_OFFLINE=1
 export HF_HOME="$assets/cache/hf"
 export TORCHINDUCTOR_CACHE_DIR="$assets/cache/torchinductor"
 export TRITON_CACHE_DIR="$assets/cache/triton"
+export PYTHONPATH="$project/scripts${PYTHONPATH:+:$PYTHONPATH}"
 
 case "${1:-}" in
 prepare)
@@ -30,13 +31,21 @@ prepare)
     fi
     patch="$project/configs/memory_control_v13/qrag_ref_40gb.patch"
     eval_patch="$project/configs/memory_control_v13/qrag_ref_terminal_actors.patch"
+    restart_patch="$project/configs/memory_control_v13/qrag_ref_fit_state.patch"
+    extra_checks=()
+    if git -C "$source_dir" apply --unidiff-zero --reverse --check "$restart_patch" 2>/dev/null; then
+        extra_checks+=(--exclude=train_q_rag.py)
+    fi
     if git -C "$source_dir" apply --reverse --check "$eval_patch" 2>/dev/null; then
-        git -C "$source_dir" apply --reverse --check --exclude=eval_retriever.py "$patch"
+        git -C "$source_dir" apply --reverse --check "${extra_checks[@]}" --exclude=eval_retriever.py "$patch"
     else
         if ! git -C "$source_dir" apply --reverse --check "$patch" 2>/dev/null; then
             git -C "$source_dir" apply "$patch"
         fi
         git -C "$source_dir" apply "$eval_patch"
+    fi
+    if ! git -C "$source_dir" apply --unidiff-zero --reverse --check "$restart_patch" 2>/dev/null; then
+        git -C "$source_dir" apply --unidiff-zero "$restart_patch"
     fi
     # The upstream local loader reads just these two members of the V1 archive.
     unzip -jn "$official_zip" 'data/musique_ans_v1.0_train.jsonl' 'data/musique_ans_v1.0_dev.jsonl' -d "$assets/musique"
@@ -54,20 +63,71 @@ prepare)
         fi
     done
     ;;
-train)
+train|resume)
     label=${2:?provide new run label}
     mkdir -p "$result_dir"
     run="$result_dir/$label"
-    mkdir "$run"
+    if [[ "$1" == train ]]; then
+        mkdir "$run"
+        unset MILAI_REF_RESUME_RUN
+        if [[ -n "${MILAI_REF_TRAIN_STATE:-}" && -e "$MILAI_REF_TRAIN_STATE" ]]; then
+            echo "Choose an unused training-state path for a fresh run" >&2
+            exit 1
+        fi
+    else
+        : "${MILAI_REF_TRAIN_STATE:?resume requires the matching native training checkpoint}"
+        [[ -s "$MILAI_REF_TRAIN_STATE" ]]
+        mapfile -t configs < <(find "$run" -mindepth 2 -maxdepth 2 -name config.yaml)
+        [[ ${#configs[@]} -eq 1 ]]
+        export MILAI_REF_RESUME_RUN
+        MILAI_REF_RESUME_RUN=$(dirname "${configs[0]}")
+    fi
+    exec {fit_lock}>"$run/.native-fit.lock"
+    flock -n "$fit_lock" || { echo "This reference fit already has an owner" >&2; exit 1; }
+    if [[ "$1" == resume ]]; then
+        # Earlier launches did not hold this lock. Check the exact native owner as well.
+        python3 - "$run" <<'PY'
+import os, sys
+from pathlib import Path
+binding = os.fsencode("logger.log_dir=" + str(Path(sys.argv[1]).resolve()))
+for proc in Path("/proc").iterdir():
+    if proc.name.isdigit():
+        try:
+            args = (proc / "cmdline").read_bytes().split(b"\0")
+        except (FileNotFoundError, PermissionError, ProcessLookupError):
+            continue
+        if b"train_q_rag.py" in args and binding in args:
+            raise SystemExit(f"Native trainer {proc.name} still owns this run")
+PY
+        if python3 - "$MILAI_REF_RESUME_RUN" <<'PYEOF'
+import sys
+from pathlib import Path
+from qrag_ref_result import measured_curve
+curve = measured_curve(Path(sys.argv[1]))
+sys.exit(0 if curve and curve[-1]["optimizer_updates"] == 10000 else 1)
+PYEOF
+        then
+            exec "$project/scripts/qrag_reference.sh" evaluate "$MILAI_REF_RESUME_RUN"
+        fi
+    fi
     cd "$source_dir"
-    /usr/bin/time -q -f '{"elapsed_seconds":%e,"cpu_user_seconds":%U,"cpu_sys_seconds":%S,"max_rss_kib":%M,"exit_code":%x}' \
-        -o "$run/fit-resource.json" python3 -u train_q_rag.py envs=musique algo=pqn_e5_musique \
+    /usr/bin/time -a -q -f '{"elapsed_seconds":%e,"cpu_user_seconds":%U,"cpu_sys_seconds":%S,"max_rss_kib":%M,"exit_code":%x}' \
+        -o "$run/fit-attempts.jsonl" python3 -u train_q_rag.py envs=musique algo=pqn_e5_musique \
         "envs.data_path=$assets/musique-tune300" "algo.model.model_name=$model" \
         steps_count=10000 batch_size=12 accumulate_grads=8 eval_interval=100 \
         eval_episodes=300 seed=42 envs_parallel=1 max_action_length=110 \
         max_action_length_in_memory=110 +algo.pqn.hyperparams.critic_microbatch=2 \
         "logger.log_dir=$run" "+checkpoint_dir=$assets/checkpoints/$label" \
-        > "$run/training.log" 2>&1
+        >> "$run/training.log" 2>&1
+    python3 - "$run" <<'PY'
+import json, sys
+from pathlib import Path
+run = Path(sys.argv[1])
+rows = [json.loads(line) for line in (run / "fit-attempts.jsonl").read_text().splitlines()]
+total = {key: sum(row[key] for row in rows) for key in ("elapsed_seconds", "cpu_user_seconds", "cpu_sys_seconds")}
+total.update(max_rss_kib=max(row["max_rss_kib"] for row in rows), exit_code=rows[-1]["exit_code"], measured_attempts=len(rows))
+(run / "fit-resource.json").write_text(json.dumps(total) + "\n")
+PY
     trained=$(dirname "$(find "$run" -name config.yaml -print -quit)")
     "$project/scripts/qrag_reference.sh" evaluate "$trained" > "$run/retrieval-validation.log" 2>&1
     ;;
@@ -112,7 +172,7 @@ evaluate)
     cat "$trained/reference-result.json"
     ;;
 *)
-    echo "Usage: $0 prepare | train RUN_LABEL | evaluate UPSTREAM_RUN_DIR" >&2
+    echo "Usage: $0 prepare | train RUN_LABEL | resume RUN_LABEL | evaluate UPSTREAM_RUN_DIR" >&2
     exit 2
     ;;
 esac

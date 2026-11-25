@@ -61,7 +61,16 @@ def watch(args):
     index = read(archive / "index.json")
     if index:
         if (index["pid"], index["start_ticks"]) != (args.pid, start):
-            raise ValueError("A previous REF incarnation owns this mirror")
+            resumed = read(run / "fit-resumed.json")
+            if (resumed.get("pid"), resumed.get("start_ticks"), resumed.get("run")) != (
+                args.pid,
+                start,
+                str(run),
+            ):
+                raise ValueError("A previous REF incarnation owns this mirror")
+            durable(archive / f"index-before-{args.pid}.json", index)
+            index.update(pid=args.pid, start_ticks=start)
+            durable(archive / "index.json", index)
     else:
         index = {
             "pid": args.pid,

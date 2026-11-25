@@ -1,0 +1,29 @@
+--- a/train_q_rag.py
++++ b/train_q_rag.py
+@@ -4,0 +5 @@
++from pathlib import Path
+@@ -62 +63 @@
+-        cfg.logger.log_dir = os.path.join(cfg.logger.log_dir, dir_name)
++        cfg.logger.log_dir = os.environ.get("MILAI_REF_RESUME_RUN") or os.path.join(cfg.logger.log_dir, dir_name)
+@@ -85 +86,2 @@
+-OmegaConf.save(config=cfg, f=config_save_path, resolve=False)
++if not os.environ.get("MILAI_REF_RESUME_RUN"):
++    OmegaConf.save(config=cfg, f=config_save_path, resolve=False)
+@@ -143,0 +146,11 @@
++
++state_path = os.environ.get("MILAI_REF_TRAIN_STATE")
++if state_path:
++    from qrag_ref_fit_state import restore, save
++    state_path = Path(state_path)
++    if os.environ.get("MILAI_REF_RESUME_RUN"):
++        next_it, step, states_list, train_rewards, best_eval_reward, previous_elapsed = restore(
++            state_path, cfg, agent, parallel_env)
++        started -= previous_elapsed
++        progress_bar.close()
++        progress_bar = tqdm(range(next_it, total_steps), initial=next_it, total=total_steps, desc="Training")
+@@ -226,0 +240,5 @@
++    if state_path and (it + 1) % cfg.accumulate_grads == 0 and it + 1 < total_steps:
++        completed = (it + 1) // cfg.accumulate_grads
++        if completed == 1 or completed % 250 == 0:
++            save(state_path, cfg, agent, parallel_env, states_list, it + 1, step,
++                 train_rewards, best_eval_reward, time.monotonic() - started)
