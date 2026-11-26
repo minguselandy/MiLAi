@@ -492,15 +492,36 @@ def ancillary_resources(run):
                     source=str(costs),
                 )
             )
-    for probe_file in sorted(run.glob("native-restart-probe*.json")):
-        probe = json.loads(probe_file.read_text())
-        items.append(
-            dict(
-                scope="independent native restart replay",
-                seconds=probe["one_gpu_wall_seconds"],
-                source=str(probe_file),
+    # Whole-process meters include failed attempts, even if no replay result was written.
+    probe_reports = {p.stem: p for p in run.glob("native-restart-probe*.json")}
+    process_meters = {
+        p.name.removesuffix(".resources.jsonl"): p
+        for p in run.glob("native-restart-probe*.resources.jsonl")
+    }
+    for name in sorted(probe_reports.keys() | process_meters.keys()):
+        if name in process_meters:
+            path = process_meters[name]
+            with path.open() as stream:
+                attempts = [json.loads(line) for line in stream if line.endswith("\n")]
+            if attempts:
+                items.append(
+                    dict(
+                        scope="independent restart replay process",
+                        source=str(path),
+                        seconds=sum(row["elapsed_seconds"] for row in attempts),
+                        settled_attempts=len(attempts),
+                    )
+                )
+                continue
+        if name in probe_reports:
+            path = probe_reports[name]
+            items.append(
+                dict(
+                    scope="independent native restart replay",
+                    source=str(path),
+                    seconds=json.loads(path.read_text())["one_gpu_wall_seconds"],
+                )
             )
-        )
     known = sum(row["seconds"] for row in items if row["seconds"] is not None)
     return {"windows": items, "known_gpu_job_hours": known / 3600}
 

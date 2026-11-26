@@ -91,7 +91,7 @@ The fitted run’s original validation and update logs supply the committed pref
 
 The first actual training-state snapshot measured 11,907,170,951 bytes. An independent A100 restored it and executed the next eight native rollouts (96 critic transitions). Both runs measured loss 12.08664608001709 and a maximum backbone-probe change of 9.313225746154785e−09 at update 2. The check took 77.06 GPU-seconds and issued zero Reader requests. It left the production weights, progress logs and selected actors untouched. The result is in the replacement run’s `native-restart-probe.json`.
 
-When the replay finishes, its report will add the old interrupted fit, superseded initial validation, exposure reconstruction, interrupted actor readback, the fixed-ranking control and measured restart checks to the replacement fit and its three native evaluation stages. Their seven recorded ancillary windows currently sum to 21.6897 assigned GPU-hours. Failed retrieval invocations contribute time. The shared initialization is counted once in the three-actor evaluation, including its failed first attempt. The cost table retains each underlying receipt and the one-second precision of the exposure reconstruction interval.
+When the replay finishes, its report will add the old interrupted fit, superseded initial validation, exposure reconstruction, interrupted actor readback, the fixed-ranking control and measured restart checks to the replacement fit and its three native evaluation stages. Their eight recorded ancillary windows currently sum to 21.8247 assigned GPU-hours. Failed retrieval invocations contribute time. The shared initialization is counted once in the three-actor evaluation, including its failed first attempt. The cost table retains each underlying receipt and the one-second precision of the exposure reconstruction interval.
 
 The retained run is `ref/official-musique-tune300-seed42/Nov25_00-48-23_QRAG_musique` below the persistent experiment root. `retained-actors/index.json` points to the last atomically published and losslessly verified retrieval actors. The observer reads the existing training process and its published files. It holds an immutable hardlink during encoding, verifies reconstructed tensor bytes and replaces the persistent index only after the checkpoint receipt is durable. It retains the latest best, the final last when available, and the separate update-100 measurement. An interrupted encode leaves the previous indexed version available.
 
@@ -110,6 +110,23 @@ An existing live run can reattach its single file observer with `scripts/qrag_re
 The current terminal owner uses an independent process session with its logs on persistent storage. Its `terminal-owner.json` binds the trainer PID and Linux start tick; it waits on a pidfd. When the original process exits, it settles the wall interval, requires the full validation curve, then invokes the registered retrieval evaluation with a file lock. It does not replace the training process. The transient session survives the launching shell's exit. Host-reboot recovery uses the persistent files and explicit evaluation entry point above.
 
 The update-250 rolling checkpoint occupied 14,096,823,847 bytes. A second A100 restored it and replayed ten optimizer updates (960 real critic transitions). At update 260, the uninterrupted and recovered runs both measured TD loss 0.01728883385658264 and backbone-probe change 0.00010340847074985504. The replay consumed 229.78 GPU-seconds and zero Reader requests. These observations are recorded in `native-restart-probe-u250.json`. Together, the two recovery checks used 306.84 GPU-seconds.
+
+A later check restored the 2,000-update state on a second A100. The saved best return was 188/300. The next native rollout crossed the scheduled validation boundary. On the fixed 300 questions, the restored run completed 184, reproduced the prior training-reward average of 0.8181578885213331 and matched all nine recorded fields for this validation. After 20 replayed updates and 1,920 critic transitions, the TD loss (0.06012219190597534) and maximum backbone-probe change (0.0011577941477298737) agreed exactly with the uninterrupted run at update 2,020. This replay used zero Reader requests. Verification did not rewind the production outputs or train the production model. The in-process window measured 478.26 seconds; the measured whole-process window was 486.08 seconds. The cost table charges the latter once. Receipts are `native-restart-probe-u2000.json` and `native-restart-probe-u2000.resources.jsonl` in the replay run.
+
+To check a retained rolling state, use its matching run and wait until the run has a later native optimizer record. The comparison uses the recorded rollout coordinate for each crossed validation. A distinct output stem preserves each check alongside its measured process attempt(s).
+
+```bash
+R=/cra/milai-experiments/v13-qrag
+run="$R/ref/official-musique-tune300-seed42-replay-20261126/Nov26_01-06-20_QRAG_musique"
+stem="$run/native-restart-probe-boundary-reproduction"
+export CUDA_VISIBLE_DEVICES=3 TORCH_COMPILE_DISABLE=1 TOKENIZERS_PARALLELISM=false
+export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4
+export HF_HOME="$R/staging/ref/cache/hf" PYTHONPATH="scripts:/data/milai-experiments/v13-ref-python"
+/usr/bin/time -a -q -f '{"elapsed_seconds":%e,"exit_code":%x}' -o "$stem.resources.jsonl" \
+    python3 scripts/qrag_ref_verify_restart.py --run "$run" \
+    --state "$R/staging/ref/fit-recovery/seed42.pt.zst" --source "$R/reference/Q-RAG" \
+    --output "$stem.json"
+```
 
 ## Terminal actor comparison
 

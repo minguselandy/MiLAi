@@ -242,3 +242,11 @@ def test_recorded_extra_costs_include_failed_jobs_and_exclude_shared_initial(tmp
     stats = result.ancillary_resources(run)
     assert stats["known_gpu_job_hours"] == pytest.approx((3600 + 5 + 12 + 7) / 3600)
     assert all(row["source"] != str(initial) for row in stats["windows"])
+    (run / "native-restart-probe.resources.jsonl").write_text(
+        '{"elapsed_seconds":3,"exit_code":1}\n{"elapsed_seconds":9,"exit_code":0}\n'
+    )
+    (run / "native-restart-probe-no-result.resources.jsonl").write_text(
+        '{"elapsed_seconds":4,"exit_code":1}\n'
+    )
+    stats = result.ancillary_resources(run)
+    assert stats["known_gpu_job_hours"] == pytest.approx((3600 + 5 + 12 + 3 + 9 + 4) / 3600)
