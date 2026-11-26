@@ -60,6 +60,38 @@ New fits acquire exclusive filesystem locks for both their checkpoint directory 
 
 The first persistent S1 recovery file contained 3,677,074,147 bytes at optimizer and scheduler update 256. A CPU load verified 156 model tensors, FP32 Adam moments for 156 tensors, 8,192 root exposures, and the CPU and CUDA generator states. The existing scheduling owner controls the live S1 process on this host. Fit-active GPU time can be derived from its recorded running intervals. The trainer's monotonic elapsed time includes time spent suspended.
 
+### Gradients on measured training data
+
+The gradient check uses the S1 parent and the first actual seed-11 warm Paired-Q optimizer window. Its 32 roots represent 21 MuSiQue-Full pairs and 11 QASPER papers. The legal menus contain 226 actions, 96 measured outcomes and 64 observed action comparisons, four of which have nonzero reliability. The model and optimizer receive no updates. An independent calculation uses the clipped residual derivative of Huber loss and the source, group, observed-action, paired-comparison and bootstrap-head weights. Its largest absolute error against the native output gradients is 5.174e−10. Both root-weight calculations give identical FP32 coefficients.
+
+Two passes replay the same stochastic forward at every root. Each pass performs 78 encoder forwards. The first accumulates the 32 weighted root gradients as in training. The second uses one backward pass on the entire weighted batch, or repeats the first reduction as a numerical control. The relative L2 difference is normalized by the first pass's gradient norm across all 156 tensors (306,375,945 parameters), before clipping. The declared tolerance is 1e−5.
+
+| GPU BF16 setting | Relative gradient L2 difference | Largest component difference | Declared tolerance |
+| --- | ---: | ---: | --- |
+| Native, per-root and whole-batch backward | 3.361e−4 | 3.042e−5 | Exceeded |
+| Native, two per-root backwards | 4.916e−4 | 6.356e−5 | Exceeded |
+| Deterministic algorithms, per-root and whole-batch backward | 7.926e−8 | 2.235e−8 | Met |
+
+The native repeat exhibits numerical variation of the same order as the change in reduction. Deterministic execution verifies the weighted reduction on this batch. The native runs retain their measured discrepancies and unsuccessful exit status. A separate deterministic process reproduced all reported gradient differences and root bindings exactly. The four allocated GPU process windows, including both above-tolerance runs, took 33.70, 25.51, 29.02 and 41.21 seconds, totaling 129.44 GPU-seconds. Reproduction commands follow. The only data inputs are the frozen TRAIN packs and fitted weights. Use a fresh result filename on each invocation.
+
+```bash
+R=/cra/milai-experiments/v13-qrag
+P=/data/milai-experiments/20261116-small-memory-control/verification-env-v1/bin/python
+export PYTHONPATH=src:tools HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false
+export HF_HOME="$R/staging/gte/hf-cache" OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=2
+inputs=(--fit "$R/weights/round-models/a11-f11-warm-paired" --packs "$R/warm-11/packs")
+CUDA_VISIBLE_DEVICES=3 "$P" tools/verify_memory_control_v13_gradient.py "${inputs[@]}" \
+    --output "$R/gte/native-gradient-recheck.json"
+CUDA_VISIBLE_DEVICES=3 "$P" tools/verify_memory_control_v13_gradient.py "${inputs[@]}" \
+    --repeat-streaming --output "$R/gte/native-repeat-recheck.json"
+CUDA_VISIBLE_DEVICES=3 CUBLAS_WORKSPACE_CONFIG=:4096:8 "$P" tools/verify_memory_control_v13_gradient.py \
+    "${inputs[@]}" --deterministic --output "$R/gte/deterministic-gradient-recheck.json"
+CUDA_VISIBLE_DEVICES='' "$P" tools/verify_memory_control_v13_gradient.py "${inputs[@]}" \
+    --object-tiling --device cpu --output "$R/gte/object-tiling-recheck.json"
+```
+
+The CPU FP32 check separately varies the object partition inside a complete state. Within each source it selects the smallest eligible dense padded workload, with at least two objects and at most 8,192 padded tokens. It verifies identical token IDs, object owners and resolution indices for both partitions. Dropout is disabled in both passes. Encoding one object at a time took nine, two and five forwards for the selected MuSiQue, QASPER and PersonaMem roots. Dense scoring took one forward for each complete menu. Relative parameter-gradient differences were 7.40e−7, 1.39e−7 and 6.02e−7 respectively. Maximum score difference over the three menus was 1.1921e−7. The PersonaMem menu had nine legal actions sharing five encoded sequences. This CPU check took 128.81 wall-seconds. Per-root records and GPU process costs are in `gte/warm-object-tiling.json` and `gte/warm-native-gradient-comparison.json`.
+
 ## Input boundary and cost units
 
 The frozen S1 database has 119,394 task fields matching the original TRAIN query and fixed public read goal. Among them, 76,211 contain delivered evidence and zero contain nonempty acquired-only evidence. The 120,005 observed source handles inside delivered records use request-local evidence aliases. Group identity controls offline weighting and bootstrap membership. Successful-path supervision uses the teacher's legal previous actions as state history.
