@@ -20,6 +20,18 @@ def slate_rng(acquisition_seed, pool_seed, index, *, warm):
     return random.Random(seed)  # noqa: S311 -- seeded TRAIN selection
 
 
+def ranked_sources(available, counts):
+    """Rank eligible sources by the Persona ceiling and the remaining Mu/Q root deficit."""
+    next_total = sum(counts.values()) + 1
+    sources = [s for s in available if s != PERSONA or counts[PERSONA] + 1 <= next_total // 10]
+    non_persona = counts[MUSIQUE] + counts[QASPER] + 1
+    deficits = {
+        MUSIQUE: 2 * non_persona / 3 - counts[MUSIQUE],
+        QASPER: non_persona / 3 - counts[QASPER],
+    }
+    return sorted(sources, key=lambda s: (s == PERSONA, deficits.get(s, 0)), reverse=True)
+
+
 class NativeRootPool:
     def __init__(self, db):
         self.available = defaultdict(lambda: defaultdict(list))
@@ -50,20 +62,9 @@ class NativeRootPool:
             del self.available[source][group]
 
     def slate(self, window, rng, *, boundary_slot=0):
-        count = sum(self.source_counts.values()) + 1
-        sources = [k for k, v in self.available.items() if v]
-        # Enforce the maximum on realized before states. A preserved legacy prefix can
-        # temporarily exceed ten percent: its next Persona slot waits until it fits.
-        if self.source_counts[PERSONA] + 1 > count // 10:
-            sources = [s for s in sources if s != PERSONA]
+        sources = ranked_sources([k for k, v in self.available.items() if v], self.source_counts)
         if not sources:
             raise ValueError("No eligible clean TRAIN group remains under source and native caps")
-        non_persona = self.source_counts[MUSIQUE] + self.source_counts[QASPER] + 1
-        deficits = {
-            MUSIQUE: 2 * non_persona / 3 - self.source_counts[MUSIQUE],
-            QASPER: non_persona / 3 - self.source_counts[QASPER],
-        }
-        sources.sort(key=lambda src: (src == PERSONA, deficits.get(src, 0)), reverse=True)
         source = sources[boundary_slot % len(sources)]
         choices = self.available[source]
         groups = rng.sample(list(choices), min(window, len(choices)))

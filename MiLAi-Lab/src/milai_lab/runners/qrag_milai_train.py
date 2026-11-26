@@ -19,10 +19,12 @@ from milai_lab.datasets.memory_control_store import connect
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.methods.qrag_dual_control import QragDualControl, QragPolicy, td_lambda
 from milai_lab.runners.control_policy_iteration import (
+    QR_CHECKPOINTS,
+    QR_ROSTER_VERSION,
     Receipts,
     TerminalJob,
     companion_task,
-    group_roster,
+    qr_roster_positions,
     write_gzip,
 )
 from milai_lab.runners.qrag_milai_env import cold_root, outcome_label
@@ -101,12 +103,25 @@ def update_batch(model, target, optimizer, episodes, args):
     return loss_sum
 
 
-def checkpoint(model, directory, dataset, args, calls, updates, fitted_groups, probe, position):
+def checkpoint(
+    model,
+    directory,
+    dataset,
+    args,
+    calls,
+    updates,
+    fitted_groups,
+    probe,
+    position,
+    *,
+    roster_version=None,
+):
     if directory.is_dir():
         prior = read_json(directory / "training.json", {})
         if (
             prior.get("calls") != calls
             or prior.get("dataset_run_id") != dataset.run_id
+            or prior.get("roster_version") != roster_version
             or (prior.get("seed") != args.seed or not (directory / "control.pt").is_file())
         ):
             raise ValueError("Existing QR checkpoint has a different binding")
@@ -137,6 +152,7 @@ def checkpoint(model, directory, dataset, args, calls, updates, fitted_groups, p
             "dataset_run_id": dataset.run_id,
             "observation_protocol": dataset.observation_protocol,
             "supervision_mode": "online_pqn_terminal",
+            **({"roster_version": roster_version} if roster_version else {}),
             "fitted_groups": sorted(fitted_groups),
             "calls": calls,
             "through_roster_position": position,
@@ -149,22 +165,30 @@ def checkpoint(model, directory, dataset, args, calls, updates, fitted_groups, p
     tmp.rename(directory)
 
 
-def planned_updates(db, seed, batch, limit):
-    """Predeclare a full successful-call schedule from TRAIN source/group metadata."""
+def successful_call_schedule(db, seed, batch, limit, *, staged):
+    """Project complete native trajectories and optimizer windows without reading outcomes."""
     windows = pending = calls = 0
-    for source, _, _ in group_roster(db, seed):
-        checkpoint_calls = min(v for v in {6000, 12000, 24000, limit} if v > calls)
+    sources = {}
+    roster = qr_roster_positions(db, seed, lambda: calls, limit, staged=staged)
+    for _, (source, _, _) in roster:
+        checkpoint_calls = min(v for v in {*QR_CHECKPOINTS, limit} if v > calls)
         needed = 2 if source == MUSIQUE else 1
         if calls + needed > checkpoint_calls:
             continue
+        counts = sources.setdefault(str(checkpoint_calls), {})
+        counts[source] = counts.get(source, 0) + 1
         calls += needed
         pending += 1
         if pending == batch or calls == checkpoint_calls:
             windows += 1
             pending = 0
         if calls == limit:
-            return windows
+            return {"optimizer_updates": windows, "primary_roots_by_round": sources}
     raise ValueError("TRAIN population cannot provide the declared schedule")
+
+
+def planned_updates(db, seed, batch, limit, *, staged=False):
+    return successful_call_schedule(db, seed, batch, limit, staged=staged)["optimizer_updates"]
 
 
 def learning_rate(base, step, total):
@@ -227,10 +251,21 @@ def train(args):
         if k not in {"calls", "host_cost_scale"}
     }
     schedule_calls = 24000 if args.calls >= 6000 else 0
-    with closing(connect(dataset.path)) as db:
-        schedule_updates = (
-            planned_updates(db, args.seed, args.batch, schedule_calls) if schedule_calls else 0
-        )
+    registered = read_json(args.output / "run.json")
+    staged = bool(schedule_calls) and (
+        registered is None or registered.get("roster_version") == QR_ROSTER_VERSION
+    )
+    if staged:
+        cfg["roster_version"] = QR_ROSTER_VERSION
+    schedule_updates = 0
+    if schedule_calls:
+        with closing(connect(dataset.path)) as db:
+            projection = successful_call_schedule(
+                db, args.seed, args.batch, schedule_calls, staged=staged
+            )
+        schedule_updates = projection["optimizer_updates"]
+        if staged:
+            cfg["successful_call_projection"] = projection
     cfg.update(
         cost_scale_source=scale_source,
         planned_updates=schedule_updates,
@@ -324,18 +359,22 @@ def train(args):
                 meter(finished=True)
                 return
         meter()
-        for position, (_, _, task_id) in enumerate(group_roster(db, args.seed)):
-            if position <= initial_position:
-                continue
+        roster = qr_roster_positions(
+            db,
+            args.seed,
+            lambda: total_calls,
+            args.calls,
+            staged=staged,
+            after_position=initial_position,
+        )
+        for position, (_, _, task_id) in roster:
             with phase_unit(gate, "qr", waiting=report_wait):
                 task = db.execute(
                     "SELECT * FROM experiment_tasks WHERE id=?", (task_id,)
                 ).fetchone()
                 other = companion_task(db, task)
                 # Keep complete MuSiQue pairs within the checkpoint allowance.
-                next_checkpoint = min(
-                    c for c in {6000, 12000, 24000, args.calls} if c > total_calls
-                )
+                next_checkpoint = min(c for c in {*QR_CHECKPOINTS, args.calls} if c > total_calls)
                 if other is not None and total_calls + 2 > next_checkpoint:
                     continue
                 jobs = []
@@ -361,6 +400,8 @@ def train(args):
                     )
                 measured = receipts.measure_batch(jobs)
                 total_calls += sum(r["feedback_exposure"] for r in measured)
+                if total_calls > next_checkpoint:
+                    raise ValueError(f"QR receipts crossed the {next_checkpoint}-feedback boundary")
                 label = outcome_label(
                     task["dataset"], measured[0], measured[1] if len(measured) > 1 else None
                 )
@@ -395,7 +436,7 @@ def train(args):
                     if label["quality_observed"] or reader_cost is not None:
                         fitted_groups.add(f"{task['dataset']}/{task['native_group']}")
 
-                at_checkpoint = total_calls in {6000, 12000, 24000, args.calls}
+                at_checkpoint = total_calls in {*QR_CHECKPOINTS, args.calls}
                 if len(episodes) >= args.batch or at_checkpoint:
                     tick = time.perf_counter()
                     actual_lr = learning_rate(args.lr, updates + 1, schedule_updates)
@@ -465,6 +506,7 @@ def train(args):
                             fitted_groups,
                             first,
                             position,
+                            roster_version=cfg.get("roster_version"),
                         )
                         if total_calls == 12000:
                             save_resume(

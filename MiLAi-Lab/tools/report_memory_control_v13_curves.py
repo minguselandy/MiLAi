@@ -121,7 +121,23 @@ def qr_usage(directory, calls):
                 tokens += i + o
     if exposure != calls:
         raise ValueError("QR update and trajectory receipts disagree at checkpoint")
+    verification_file = directory / f"verified-{calls}.json"
+    coverage = (
+        read(verification_file).get("source_exposure_by_feedback_round")
+        if verification_file.is_file()
+        else None
+    )
+    if coverage is not None:
+        rows = [row for stage in coverage.values() for row in stage.values()]
+        totals = (
+            sum(row["primary_exposures"] + row["companion_exposures"] for row in rows),
+            sum(row["known_new_requests"] for row in rows),
+            sum(row["unknown_charge_receipts"] for row in rows),
+        )
+        if totals != (exposure, new, unknown):
+            raise ValueError("Per-source QR exposure or billing disagrees with trajectory receipts")
     return dict(
+        source_exposure_by_feedback_round=coverage,
         exposure=exposure,
         new_requests=new,
         unknown_new=unknown,

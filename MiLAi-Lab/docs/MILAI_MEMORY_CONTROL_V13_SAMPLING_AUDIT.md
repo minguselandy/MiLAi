@@ -21,6 +21,31 @@
 
 上述压力测试与 S0 窗口试算用于检验调度机制。判断采样收益仍需共用 pi₀ 的 6k 读出、各臂自身策略的 12k/24k 读出，以及计划规定的独立采集复核。
 
+### 在线 QR 的分轮来源覆盖
+
+48 调用试验沿用其已执行的名单。用已保存的轨迹与原生 TRAIN 组逐一核对，实际有 30 条主轨迹，其中 MuSiQue 为 18 条、QASPER 和 PersonaMem 各 6 条。MuSiQue 另付 18 次 companion，三源的实际收费因此为 36、6、6 次。
+
+初版 QR 名单在整个 24k 计划中共用一套组上限。按 seed11 和每条终端请求都成功收费的条件重放，12k→24k 的主轨迹会是 MuSiQue 5,875 条、QASPER 250 条、PersonaMem 0 条。Persona 的 65 个组在前两段已耗尽整张名单的 390 个槽位。正式新采集因此在实际累计收费达到 6k、12k 时重新建立当轮的原生组名单。每轮按组打乱顺序，先轮过不同组，再使用组内余下的真实任务。每题在同一轮最多作为主任务一次。Persona 在该轮每个前缀的主任务占比最多 10%，剩余名额按 MuSiQue 与 QASPER 的 2:1 目标分配；库存或成对计费边界决定可用来源。跨轮再次遇到任务时，由当时的在线模型重新执行并记录真实反馈。
+
+| 区间 | MuSiQue 主轨迹 | QASPER 主轨迹 | PersonaMem 主轨迹 | MuSiQue companion | 本段反馈额度 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 0→6k | 2,250 | 1,125 | 375 | 2,250 | 6,000 |
+| 6k→12k | 2,250 | 1,125 | 375 | 2,250 | 6,000 |
+| 12k→24k | 4,644 | 2,322 | 390 | 4,644 | 12,000 |
+
+表中是冻结 TRAIN 库存上的成功调用推算。后两段预计再次作为主任务运行的问题数，按 Mu/Q/P 分别为 133/632/110 和 486/1,516/177，已在各段主轨迹中计入。相同 batch32 及检查点收尾规则下，对应 466 个计划优化窗口。新正式运行将名单版本和该推算写入训练合同。每个已关闭检查点另按实际回执报告逐轮各来源主轨迹、不同原生组、组内最大次数、主任务与 companion 曝光、实付及未知收费。已有试验按各自原合同复现。对 12k 断点重入进行了两项名单核对：按成功调用推算时，余下全部位置与连续运行一致；另在 207 个位置模拟不计费，按实际曝光切换轮次后，恢复的余下位置也一致。此次核对的新增 Reader 调用为零。原始计数和重放说明在 `runtime-validation/qr-round-source-exposure.json`。对已冻结的均匀机制池另重放前 600 个窗口，候选、组数和最终抽取的任务均与原实现一致。正式 QR 进程已在首个请求前加载新规则，交接见 `qr-11/round-roster-handoff.json`。
+
+```bash
+PYTHONPATH=src python - <<'PYCODE'
+from contextlib import closing
+from pathlib import Path
+from milai_lab.datasets.memory_control_store import connect
+from milai_lab.runners.qrag_milai_train import successful_call_schedule
+with closing(connect(Path("/cra/milai-datasets/memory_control_v1_2/memory_control.sqlite3"))) as db:
+    print(successful_call_schedule(db, seed=11, batch=32, limit=24000, staged=True))
+PYCODE
+```
+
 ### 2k 模型的四头分歧覆盖了哪些决策错误
 
 在已冻结的 36 个 TUNE 诊断组上，用正式结构化采样将采用的 seed11 Paired-Q 预热权重和 CUDA 推理精度，评估 72 个原始读取前状态。每个状态只比较预先指定的 READ 与 HANDOFF。保留相同的 π₀、λ=0.05 和成本尺度 1,912。对四个头各自的 READ 减 HANDOFF 净效用差，调用采样器的原实现，将单对比较的计价参数置一，计算原公式的分子 `max(0, IQR − |median|)`。决策取四头均值，平分时沿用菜单顺序。表中的错误表示所选动作在已执行的两动作池中有正的净效用遗憾。

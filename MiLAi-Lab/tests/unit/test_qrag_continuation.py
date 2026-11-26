@@ -378,6 +378,65 @@ def test_source_pool_caps_selected_roots_and_corrects_source_exposure():
     db.close()
 
 
+def test_qr_round_roster_uses_actual_exposure_and_restores_the_same_suffix():
+    import sqlite3
+    from collections import Counter
+    from contextlib import closing
+
+    from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
+    from milai_lab.runners.control_policy_iteration import qr_roster_positions
+
+    limits = (80, 160, 320)
+    with closing(sqlite3.connect(":memory:")) as db:
+        db.row_factory = sqlite3.Row
+        db.execute(
+            "CREATE TABLE experiment_tasks(id INTEGER PRIMARY KEY, dataset, native_group, "
+            "experiment_role, clean_role)"
+        )
+        for src, groups, tasks in ((MUSIQUE, 120, 2), (QASPER, 20, 6), (PERSONA, 1, 12)):
+            db.executemany(
+                "INSERT INTO experiment_tasks VALUES (NULL,?,?, 'train','train')",
+                [(src, str(g)) for g in range(groups) for _ in range(tasks)],
+            )
+
+        def replay(start=0, after=-1):
+            paid = start
+            rows = []
+            visits = Counter()
+            counts = Counter()
+            stages = Counter()
+            roster = qr_roster_positions(
+                db,
+                11,
+                lambda: paid,
+                limits[-1],
+                staged=True,
+                after_position=after,
+                checkpoints=limits,
+            )
+            for pos, (src, group, tid) in roster:
+                boundary = next(n for n in limits if n > paid)
+                stages[boundary] += 1
+                counts[boundary, src] += 1
+                visits[boundary, src, group] += 1
+                assert counts[boundary, PERSONA] <= stages[boundary] // 10
+                assert visits[boundary, src, group] <= (4 if src == MUSIQUE else 6)
+                charge = 0 if pos % 17 == 0 else 1 + int(src == MUSIQUE)
+                paid += charge
+                assert paid <= boundary
+                rows.append((boundary, pos, src, tid, charge))
+            assert paid == limits[-1]
+            return rows
+
+        rows = replay()
+        for boundary in limits:
+            part = [x for x in rows if x[0] == boundary]
+            assert len({x[3] for x in part}) == len(part)
+            assert any(x[2] == PERSONA for x in part)
+        saved_position = max(x[1] for x in rows if x[0] == 160)
+        assert replay(160, saved_position) == [x for x in rows if x[0] == 320]
+
+
 def test_interrupted_paid_feedback_keeps_confirmed_charge_and_unknown_quality(tmp_path):
     from milai_lab.datasets.memory_control_report import write_json
     from milai_lab.runners.control_policy_iteration import Receipts, read_gzip

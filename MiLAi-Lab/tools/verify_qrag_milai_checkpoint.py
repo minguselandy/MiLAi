@@ -10,10 +10,16 @@ from pathlib import Path
 import torch
 from safetensors import safe_open
 
+from milai_lab.datasets.memory_control_normalize import MUSIQUE, PERSONA, QASPER
 from milai_lab.datasets.memory_control_report import read_json, write_json
 from milai_lab.datasets.memory_control_store import connect
 from milai_lab.methods.qrag_dual_control import QragDualControl
-from milai_lab.runners.control_policy_iteration import group_roster, read_gzip
+from milai_lab.runners.control_policy_iteration import (
+    QR_CHECKPOINTS,
+    QR_ROSTER_VERSION,
+    qr_roster_positions,
+    read_gzip,
+)
 from milai_lab.runners.qrag_milai_env import outcome_label
 from milai_lab.runners.v13_phase import phase_directory, phase_unit
 
@@ -28,9 +34,87 @@ def main():
         verify(args)
 
 
+def verify_positions(db, cfg, bound, positions):
+    """Reconstruct primary and companion roles from actual charges and the bound TRAIN roster."""
+    groups = set()
+    metrics = Counter()
+    counts = defaultdict(Counter)
+    visits = defaultdict(Counter)
+    seen_primary = set()
+    spent = checked = 0
+    last = max(positions)
+    version = cfg.get("roster_version")
+    if version not in (None, QR_ROSTER_VERSION):
+        raise ValueError("Unknown QR TRAIN roster version")
+    staged = version == QR_ROSTER_VERSION
+    roster = qr_roster_positions(db, cfg["seed"], lambda: spent, bound, staged=staged)
+    for i, (source, group, primary) in roster:
+        if i > last:
+            break
+        if i not in positions:
+            if staged:
+                raise ValueError(f"Missing primary trajectory receipts for QR position {i}")
+            continue
+        checked += 1
+        boundary = min(n for n in {*QR_CHECKPOINTS, bound} if n > spent)
+        receipts = positions[i].copy()
+        first = receipts.pop(primary)
+        if len(receipts) != int(source == MUSIQUE):
+            raise ValueError("QR primary and companion roles disagree with the native question")
+        other = next(iter(receipts.values()), None)
+        if first["native_group_id"] != group or (other and other["native_group_id"] != group):
+            raise ValueError("QR receipts do not belong to their registered native group")
+        profile = counts[boundary, source]
+        visits[boundary, source][group] += 1
+        profile["primary_trajectories"] += 1
+        profile["previously_visited_primary_tasks"] += primary in seen_primary
+        seen_primary.add(primary)
+        for role, receipt in (("primary", first), ("companion", other)):
+            if receipt is None:
+                continue
+            amount = receipt["feedback_exposure"]
+            spent += amount
+            profile[role + "_exposures"] += amount
+            profile["known_new_requests"] += receipt["actual_requests"] or 0
+            profile["unknown_charge_receipts"] += receipt["actual_requests"] is None
+        if spent > boundary:
+            raise ValueError("Online feedback crossed its bound before a complete checkpoint")
+        y = outcome_label(source, first, other)
+        if y["quality_observed"] or y["future_cost_observed"]:
+            groups.add(f"{source}/{group}")
+        metrics["native_quality_observed"] += y["quality_observed"]
+        metrics["future_cost_observed"] += y["future_cost_observed"]
+    if spent != bound or checked != len(positions):
+        raise ValueError("QR roster replay and checkpoint receipts disagree")
+    coverage = {}
+    for boundary in sorted({n for n, source in counts}):
+        coverage[str(boundary)] = {}
+        for source in (MUSIQUE, QASPER, PERSONA):
+            profile = counts[boundary, source]
+            group_visits = visits[boundary, source]
+            coverage[str(boundary)][source] = {
+                **{
+                    k: profile[k]
+                    for k in (
+                        "primary_trajectories",
+                        "previously_visited_primary_tasks",
+                        "primary_exposures",
+                        "companion_exposures",
+                        "known_new_requests",
+                        "unknown_charge_receipts",
+                    )
+                },
+                "native_primary_groups": len(group_visits),
+                "maximum_primaries_per_group": max(group_visits.values(), default=0),
+            }
+    return groups, metrics, coverage
+
+
 def verify(args):
     cfg = read_json(args.run / "run.json")
     training = read_json(args.checkpoint / "training.json")
+    if training.get("roster_version") != cfg.get("roster_version"):
+        raise ValueError("Checkpoint and acquisition used different QR TRAIN rosters")
     snapshot = read_json(args.checkpoint / "controller.json")
     data = Path(cfg["dataset"])
     if data.is_dir():
@@ -38,9 +122,7 @@ def verify(args):
     positions = defaultdict(dict)
     ledger_slots = set()
     paid = claims = unknown_requests = 0
-    groups = set()
     counts = Counter()
-    metrics = Counter()
     cost_sums, cost_counts = Counter(), Counter()
     probe = read_json(args.checkpoint / "score_probe.json")
     online = None
@@ -81,6 +163,8 @@ def verify(args):
             assert t["action_id"] in {a["id"] for a in t["online"]["actions"]}
         counts[r["termination_reason"]] += 1
         counts["control_decisions"] += len(r["transitions"])
+        if task_id in positions[position]:
+            raise ValueError("Duplicate QR task receipt at a roster position")
         positions[position][task_id] = {
             k: r[k]
             for k in (
@@ -92,6 +176,8 @@ def verify(args):
                 "status",
                 "receipt_id",
                 "native_group_id",
+                "feedback_exposure",
+                "actual_requests",
             )
             if k in r
         }
@@ -103,22 +189,7 @@ def verify(args):
             online = r["transitions"][0]["online"]
     db = connect(data)
     try:
-        for i, (source, group, primary) in enumerate(group_roster(db, cfg["seed"])):
-            if i not in positions:
-                if i > max(positions):
-                    break
-                continue
-            rec = positions[i].copy()
-            first = rec.pop(primary)
-            other = next(iter(rec.values()), None)
-            assert first["native_group_id"] == group and (
-                not other or other["native_group_id"] == group
-            )
-            y = outcome_label(source, first, other)
-            if y["quality_observed"] or y["future_cost_observed"]:
-                groups.add(f"{source}/{group}")
-            metrics["native_quality_observed"] += y["quality_observed"]
-            metrics["future_cost_observed"] += y["future_cost_observed"]
+        groups, metrics, coverage = verify_positions(db, cfg, training["calls"], positions)
     finally:
         db.close()
     if claims != training["calls"]:
@@ -166,6 +237,7 @@ def verify(args):
             feedback_exposure=claims,
             completed_episodes=len(positions),
             fitted_native_groups=len(groups),
+            source_exposure_by_feedback_round=coverage,
             measurements=dict(metrics),
             measured_cost_sums=dict(cost_sums),
             measured_cost_counts=dict(cost_counts),

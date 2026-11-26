@@ -26,7 +26,12 @@ from milai_lab.methods.dataset_corpus_runtime import CorpusExecution
 from milai_lab.methods.memory_control import FixedContextMemoryPolicy, MemoryAction, MemoryPolicy
 from milai_lab.methods.memory_control_dataset import MemoryControlDataset
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, ownership_client_configs
-from milai_lab.runners.control_acquisition_pool import ExplorationBudget, NativeRootPool, slate_rng
+from milai_lab.runners.control_acquisition_pool import (
+    ExplorationBudget,
+    NativeRootPool,
+    ranked_sources,
+    slate_rng,
+)
 from milai_lab.runners.memory_control_episode import make_policy, score_episode
 from milai_lab.runners.memory_control_outcome_run import comparison_protocol, request_reader
 from milai_lab.runners.qrag_milai_env import (
@@ -52,7 +57,7 @@ def read_gzip(path: Path) -> dict:
         return json.load(stream)
 
 
-def group_roster(db: sqlite3.Connection, seed: int):
+def group_roster(db: sqlite3.Connection, seed: int, *, remaining_feedback=None):
     """Group-first TRAIN sampling; one before per task in this round, at most 4/6 per group."""
     rng = random.Random(seed)  # noqa: S311 -- registered acquisition seed
     grouped: dict[str, dict[str, list[int]]] = defaultdict(lambda: defaultdict(list))
@@ -73,12 +78,54 @@ def group_roster(db: sqlite3.Connection, seed: int):
     weights = {MUSIQUE: 0.6, QASPER: 0.3, PERSONA: 0.1}
     while True:
         active = sorted(k for k in weights if cursors[k] < len(queues[k]))
+        if remaining_feedback is not None:
+            remaining = remaining_feedback()
+            if remaining <= 0:
+                return
+            if remaining == 1:
+                active = [s for s in active if s != MUSIQUE]
+            active = ranked_sources(active, cursors)
         if not active:
             return
-        source = rng.choices(active, weights=[weights[k] for k in active])[0]
+        source = (
+            rng.choices(active, weights=[weights[k] for k in active])[0]
+            if remaining_feedback is None
+            else active[0]
+        )
         group, task = queues[source][cursors[source]]
         cursors[source] += 1
         yield source, group, task
+
+
+QR_ROSTER_VERSION = "group_first_per_feedback_round_v1"
+QR_CHECKPOINTS = (6000, 12000, 24000)
+
+
+def qr_roster_positions(
+    db, seed, exposure, limit, *, staged, after_position=-1, checkpoints=QR_CHECKPOINTS
+):
+    """Yield stable receipt positions; new rounds start on actual cumulative feedback boundaries."""
+    if not staged:
+        for pos, item in enumerate(group_roster(db, seed)):
+            if pos > after_position:
+                yield pos, item
+        return
+    if after_position >= 0 and exposure() not in {*checkpoints, limit}:
+        raise ValueError("Resuming a staged QR roster requires a complete feedback boundary")
+    pos = after_position
+    for stage, boundary in enumerate(sorted({n for n in checkpoints if n < limit} | {limit}), 1):
+        if exposure() >= boundary:
+            continue
+        round_seed = slate_rng(seed, stage, 0, warm=False).getrandbits(64)
+        for item in group_roster(
+            db, round_seed, remaining_feedback=lambda stop=boundary: stop - exposure()
+        ):
+            pos += 1
+            yield pos, item
+        if exposure() < boundary:
+            raise ValueError(
+                f"Eligible TRAIN roots exhausted at {exposure()} of {boundary} feedback units"
+            )
 
 
 def model_utilities(model, online: dict, penalty: float):
