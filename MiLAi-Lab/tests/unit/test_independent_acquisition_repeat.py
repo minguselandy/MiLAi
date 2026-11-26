@@ -120,27 +120,74 @@ def test_repeat_uses_one_new_warm_two_arms_shared_pi0_and_distinct_online_polici
     evals = []
     points = []
     budgets = []
+    contrasts = []
+
+    mechanism = args.root / "mechanism-a29-f11-6000.json"
+    common_pool = args.warm / "mechanism-pool-2901.json.gz"
 
     def collect(a, directory, calls, stage, mode, prior=None, sampler=None, shared=None):
+        if stage == 2:
+            review = driver.json_file(mechanism)
+            assert review["later_collection_already_registered"] is False
+            assert review["active_minus_uniform"] == {"quality_delta_points": -1.25}
         collected.append((directory, calls, stage, mode, prior, sampler, shared))
-        if stage == 0:
-            dump(
-                directory / "round.json",
-                dict(
-                    dataset_run="ds",
-                    reader="reader",
-                    environment=a.recipe["environment"],
-                    material_budget=2048,
-                    observation="legal",
-                    seed=29,
-                    round=0,
-                    sampler="uniform",
-                ),
-            )
+        dump(
+            directory / "round.json",
+            dict(
+                dataset_run="ds",
+                reader="reader",
+                environment=a.recipe["environment"],
+                material_budget=2048,
+                observation="legal",
+                seed=a.acquisition_seed,
+                round=stage,
+                sampler=mode,
+                continuation_policy_id=str(prior) if prior else "pi0-fixedcontext-4",
+                sampling_checkpoint=str(sampler) if sampler else None,
+            ),
+        )
+        if stage == 1:
+            if not common_pool.is_file():
+                with gzip.open(common_pool, "wt") as stream:
+                    json.dump({"dataset_run": "ds", "seed": 2901, "available": {}}, stream)
+            dump(directory / "mechanism-pool.json", {"common_pool": str(common_pool)})
 
     def fit(a, name, data, parent, objective, scale):
         fits.append((name, data, parent, objective))
-        return a.weights / name / "checkpoint"
+        directory = a.weights / name
+        dump(
+            directory / "run.json",
+            dict(
+                status="completed",
+                contract={
+                    "parent": str(parent),
+                    "supervision_mode": objective,
+                },
+            ),
+        )
+        return directory / "checkpoint"
+
+    def publish_point(point):
+        points.append(point)
+        dump(
+            point.output,
+            dict(
+                method=point.method,
+                cohort=driver.json_file(args.curve),
+                acquisition_seed=point.acquisition_seed,
+                fit_seed=point.fit_seed,
+                acquisition_paths=list(map(str, point.rollouts)),
+                fit_paths=list(map(str, point.fits)),
+                usage={"exposure": point.calls},
+                deployment={"path": str(point.evaluation)},
+            ),
+        )
+
+    def contrast(active, uniform, repeats):
+        assert Path(active["path"]).name == "a29-f11-PQ-A-6000"
+        assert Path(uniform["path"]).name == "a29-f11-PQ-U-6000"
+        contrasts.append(repeats)
+        return {"quality_delta_points": -1.25}
 
     monkeypatch.setattr(driver, "collect", collect)
     monkeypatch.setattr(driver, "fit", fit)
@@ -149,7 +196,8 @@ def test_repeat_uses_one_new_warm_two_arms_shared_pi0_and_distinct_online_polici
     monkeypatch.setattr(driver, "repeat_accounting", lambda a, r, n: budgets.append(n))
     import report_memory_control_v13_curves
 
-    monkeypatch.setattr(report_memory_control_v13_curves, "point", lambda p: points.append(p))
+    monkeypatch.setattr(report_memory_control_v13_curves, "point", publish_point)
+    monkeypatch.setattr("report_memory_control_v13_deployment.paired_dev_contrast", contrast)
     driver.round_matrix(args)
     assert [v[1] for v in collected] == [2000, 4000, 4000, 6000, 6000]
     assert [v[3] for v in collected] == [
@@ -171,6 +219,11 @@ def test_repeat_uses_one_new_warm_two_arms_shared_pi0_and_distinct_online_polici
     assert collected[4][4] == collected[4][5] == args.weights / "a29-f11-PQ-A-6000/checkpoint"
     assert len(fits) == 5 and all(x[3] == "paired" for x in fits)
     assert len(evals) == len(points) == 4 and budgets == [6000, 12000]
+    review = driver.json_file(mechanism)
+    assert (review["acquisition_seed"], review["fit_seed"]) == (29, 11)
+    assert review["common_pool"] == str(common_pool)
+    assert review["common_warm"] == str(args.warm)
+    assert review["additional_reader_calls"] == 0 and contrasts == [5000]
     registration = driver.json_file(tmp_path / "repeats/a29-f11-registration.json")
     assert registration["evaluated_evidence"]["6000"]["quality_delta_points"] < 0
 

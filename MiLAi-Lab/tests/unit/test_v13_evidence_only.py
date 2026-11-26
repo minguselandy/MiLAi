@@ -149,6 +149,6 @@ def test_unclosed_parents_and_wrong_repeats_are_rejected(tmp_path, monkeypatch):
     write(out / "run.json", r)
     (tmp_path / "other").mkdir()
     write(out / "checkpoint/controller.json", dict(config, backbone=str(tmp_path / "other")))
-    with pytest.raises(ValueError, match="foundation|backbone"):
+    with pytest.raises(ValueError, match="frozen backbone"):
         repeats.evidence_fit(args.root, args.s1, 29)
     assert len(calls) == 2

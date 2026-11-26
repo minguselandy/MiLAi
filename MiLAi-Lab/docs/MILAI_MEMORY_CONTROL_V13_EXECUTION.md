@@ -64,7 +64,7 @@ V12 公开结果已分析 620 个确认组，其中包括全部 75 个 QASPER �
 | 评估链路 | B1 的早期计时运行覆盖曲线集 150 题，实付 150 次，宏质量 23.90。该次运行关闭了数值预检观察，正式比较采用统一的数值观察 | `rule-curve-2048/` |
 | 冻结 GTE 相关性 | R2、最多 4 读，在 99 题校准集实付 99 次，宏质量 24.54。这是预算规则选择的一个候选 | `gte-r2-reads4-cal/` |
 | 原版参考 | 单独使用 MuSiQue-Ans、双 E5-large、原版支持事实奖励与 PQN。300 个 TUNE 问题的平均 GT 回报由初始化的 0.286667 到第 100 次更新的 0.340000，完整配方为 10,000 次更新。第 100 次更新的 actor 已持久化为基于 E5 基础权重的差分归档，790 个张量经恢复后逐项相等 | `ref/official-musique-tune300-seed42/` |
-| 回归 | 带 PyTorch 的环境执行记忆控制及新增针对性测试，当前 101 项通过 | `v13-focused-phase-close.log` |
+| 分支回归 | 11 月 26 日在禁网 CPU 环境中联跑相对 review 版本变更的 15 个测试模块及 V11/V12 回归，114 项通过。78 个变更 Python 文件通过 Ruff，仓库边界扫描覆盖 9,020 个跟踪路径，发现 0 项 | `runtime-validation/current-branch-unit-regressions-after-fixture.log`、`runtime-validation/current-branch-ruff.log`、`runtime-validation/current-source-boundaries.json` |
 
 11 月 25 日 07:57，GPU 3 上的 seed11 证据初始化完成一轮实际遍历，共 3,732 次更新。持久训练输入为 `gte/evidence.sqlite`。三源合计 43,183 题、20,806 个原生组、119,394 个根状态，包含 894,356 个已知证据动作标签和 28,446 步合法示范。当前 TRAIN 中另有 557 个 QASPER 任务、161 个 PersonaMem 任务未提供可用于 S1 的根状态。
 
@@ -166,6 +166,8 @@ PersonaMem 占根状态 9.82%。三源每个原生组被选取的最大根状态
 在首批 600 个均匀抽样窗口的离线重放中，有 6 个 MuSiQue 对交换了主成员和 companion。24 个合法终端请求中，12 个与共同 warm 的付费请求完全相同。两臂均可复用这些响应，已有的 2,000 次额度已包含其费用。对 12 个响应逐一重算单题原生分数均与原记录相同。全包预计新增反馈从 24 次降至 12 次，本次核对的实际新增调用为零。正式 6k 采集与原生 pair 质量仍待测量。[逐包复用及两臂计费核对](MILAI_MEMORY_CONTROL_V13_SAMPLING_AUDIT.md#共同-warm-已付请求在-6k-机制阶段的复用)
 
 截至此阶段，整个 V13 目录结算 **5,104 次物理 Reader 请求**。其中 2,000 次属于共同 warm，48 次属于 QR 的 S0 试验，1 次属于 GTE S0 完整 episode，3,055 次属于开发读出、校准、机制诊断及前期运行。累计 provider 输入 5,643,485 tokens，输出 289,525 tokens；22 次格式失败保留了费用和对应原生评分。项目结算表为 `project-after-warm.json`，采集明细为 `warm-2000.json`，原生账本复核见 `runtime-validation/warm-2k-closure.json`。
+
+11 月 26 日从生产回执重新结算，确认 5,104 个不同的 provider 响应，输入和输出用量分别为 5,643,485 和 289,525 tokens。2,204 个原生账位有逐槽边界，另有 2,900 次早期调用通过运行窗口结算。账本另列 204 条复用，其中 156 条来自已付 π₀ 诊断的复读。QR 试验的核验目录保留了来源覆盖报告，临时回执链接已清理；实际计费只读取原生产目录。[本次总账](/cra/milai-experiments/v13-qrag/runtime-validation/current-branch-reader-accounting.json)
 
 ## 冻结策略在自然 DEV 上的表现
 
